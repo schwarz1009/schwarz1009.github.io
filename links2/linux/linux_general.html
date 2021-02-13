@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux 公式 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<!--
+<p><a href="linuxlinks.html">Linuxリンク集（公式）</a></p>
+<p><a href="linuxlinks2.html">Linuxリンク集２（管理）</a></p>
+<p><a href="linuxlinks3.html">Linuxリンク集３（技術情報）</a></p>
+<p><a href="linuxlinks4.html">Linuxリンク集４（プログラミング）</a></p>
+<p><a href="linuxlinks5.html">Linuxリンク集５（アーキテクチャ）</a></p>
+<p><a href="linuxlinks6.html">Linuxリンク集６（アプリケーション）</a></p>
+<p><a href="linuxlinks7.html">Linuxリンク集７（デスクトップ）</a></p>
+<p><a href="linuxlinks8.html">Linuxリンク集８（X11）</a></p>
+<p><a href="linuxlinks9.html">Linuxリンク集９（技術詳細）</a></p>
+<p><a href="linuxlinks10.html">Linuxリンク集１０（その他）</a></p>
+<p><a href="windowslinks.html">Windowsリンク集</a></p>
+<p><a href="itcompanylinks.html">IT企業・商用ソフトリンク集</a></p>
+<p><a href="softwarelinks.html">ソフトとサービスのリンク集</a></p>
+<p><a href="hardwarelinks.html">ハードウェアのリンク集</a></p>
+
+<p><a href="bunkeilinks.html">文系のリンク集</a></p>
+<p><a href="rikeilinks.html">理系のリンク集</a></p>
+
+<p><a href="artlinks.html">芸術・音楽のリンク集</a></p>
+<p><a href="peoplelinks.html">人々のリンク集（偉人）</a></p>
+<p><a href="technologylinks.html">技術のリンク集</a></p>
+<p><a href="societylinks.html">社会のリンク集</a></p>
+<p><a href="bloglinks.html">ブログ・ツイッターのリンク集</a></p>
+<p><a href="piano.html">ピアノ入門</a></p>
+<p><a href="farm.html">農業入門</a></p>
+<p><a href="culture.html">世界の文化入門</a></p>
+<p><a href="human.html">人間一般入門</a></p>
+<p><a href="english.html">英会話入門</a></p>
+<p><a href="nofollow.html">NoFollowプログラミング言語</a></p>
+<p><a href="robot.html">人間頭脳型ロボット</a></p>
+-->
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<!--
+<h1 class="close">リンク集</h1>
+-->
+<h1>Linux 公式</h1>
+<p>Linux関係の世界観です。今のところ、ショボい内容ですが。</p>
+<div id="toc"></div>
+<div class="page_links">
+<h1>ページ移動</h1>
+<p>このページの内容は<a href="linux_unix_os.html">UNIX管理（１．OS設計）</a>に移動しました。</p>
+
+<!--
+<h1 class="close">公式</h1>
+-->
+<!--
+<h1>とりあえずこれだけ読んどけば何とかなる！</h1>
+<p>とりあえずこれだけ読んどけばなんとかなる、という文書は多い。僕は以下の2つをお勧めする。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/">Debian 管理者ハンドブック</a> - Linuxについて何も知らないよ、という人向け。</li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/ja">Gentoo AMD64 Handbook</a> - Gentoo Linuxのインストールを通じてUNIXのシステム管理の方法を知りたいという人向け。</li>
+</ul>
+<p>UNIXのことぐらい知っているよ、という人は、Linuxカーネルの仕組みを解説したThe Linux Kernelを読むことをお勧めする。日本語訳もあります。</p>
+<ul>
+<li><a href="http://en.tldp.org/LDP/tlk/tlk.html">The Linux Kernel</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-images/frame.html">The Linux Kernel日本語訳</a></li>
+</ul>
+<p>難しすぎる、量が多すぎる、と言う方は、まさに僕の書いたこの文章がお勧め。だが、結構それでも難しいという人がたくさん居ると思う。Googleの検索結果はあまり参考にならない（古い情報や馬鹿が多すぎる）ので、色んなところでリンクされている定番サイトを見るのをお勧めする。ディストリビューションや公式のマニュアルを見るのも良いが、Red HatカスタマーポータルとArchWikiは内容が良いので見てみても良いだろう。</p>
+<ul>
+<li><a href="https://access.redhat.com/">Red Hat Customer Portal</a> - 右上の地球アイコンから日本語を選べます。</li>
+<li><a href="https://wiki.archlinux.jp/">ArchWiki</a></li>
+</ul>
+<p>簡単なディストリビューションの紹介は以下のサイトにある。</p>
+<ul>
+<li><a href="https://distrowatch.com/">distrowatch.com</a></li>
+</ul>
+<p>あるいは、僕個人の意見としては、@ITとgihyo.jpがお勧め。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/">@IT</a></li>
+<li><a href="http://gihyo.jp/">gihyo.jp</a></li>
+</ul>
+<p>あるいは、個人サイトやブログはたくさんあって網羅できない。自分で検索してほしい。検索していると、qiitaがかかることが多い。だが、僕が思うにqiitaの内容はあまり良くない。みんなの知っていることを共有することはできるが、品質が高くない。</p>
+<ul>
+<li><a href="https://qiita.com/trend">Qiita</a></li>
+</ul>
+<p>灯台元暮らしというが、意外なことにJF Projectに賢い内容が多いので、疑わず参考にしてほしい。</p>
+<ul>
+<li><a href="https://linuxjf.osdn.jp/">Linux JF (Japanese FAQ) Project.</a></li>
+</ul>
+<p>我こそは、と思う方は、</p>
+<ul>
+<li><a href="http://www.tldp.org/guides.html">Linux Documentation Project Guides</a></li>
+<li><a href="http://www.tldp.org/HOWTO/HOWTO-INDEX/index.html">LDP HOWTO-INDEX</a></li>
+</ul>
+<p>を参照しても良いだろう。英語でも頑張って読めば良いさ。そうさ。ハハハ…。</p>
+<p>無駄に<!--[英会話教室]-->英会話教室で何年も学習しても、こんなページすら読めない自分が不甲斐ない。上のJF Projctに翻訳があるのでそこに頼っても良いかもしれない。英語の勉強にはなる。</p>
+-->
+<!--
+<h1>公式</h1>
+<p>各プロジェクトの公式サイト</p>
+<p>Linuxカーネル</p>
+<ul>
+<li><a href="https://www.kernel.org/">Kernel.org</a></li>
+</ul>
+<p>GNU / FSF</p>
+<ul>
+<li><a href="https://www.gnu.org/home.ja.html">GNU Project</a></li>
+<li><a href="http://www.fsf.org/">FSF.org</a></li>
+</ul>
+<p>GNOME</p>
+<ul>
+<li><a href="https://www.gnome.org/">GNOME.org</a></li>
+</ul>
+<p>KDE</p>
+<ul>
+<li><a href="https://www.kde.org/">KDE.org</a></li>
+</ul>
+<p>Debian</p>
+<ul>
+<li><a href="https://www.debian.org/index.ja.html">Debian -- ユニバーサルオペレーティングシステム</a></li>
+</ul>
+<p>Ubuntu</p>
+<ul>
+<li><a href="http://www.ubuntu.com/">Ubuntu.com</a></li>
+</ul>
+<p>Fedora</p>
+<ul>
+<li><a href="https://getfedora.org/ja/">Fedora</a></li>
+</ul>
+<p>openSUSE</p>
+<ul>
+<li><a href="https://www.opensuse.org/">www.openSUSE.org</a></li>
+</ul>
+<p>Gentoo Linux</p>
+<ul>
+<li><a href="https://www.gentoo.org/">Gentoo.org</a></li>
+</ul>
+<p>Linux Mint</p>
+<ul>
+<li><a href="https://www.linuxmint.com/">Linux Mint</a></li>
+</ul>
+<p>Arch Linux</p>
+<ul>
+<li><a href="https://www.archlinux.org/">Arch Linux</a></li>
+</ul>
+
+<h1>ドキュメント</h1>
+<p>Linux全般</p>
+<ul>
+<li><a href="http://www.tldp.org/">Linux Documentation Project</a></li>
+</ul>
+<p>JF/JM/xjman</p>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/">JF Project</a></li>
+<li><a href="http://linuxjm.osdn.jp/">JM Project</a></li>
+<li><a href="http://linuxjm.osdn.jp/INDEX/">JM インデックス</a></li>
+<li><a href="http://xjman.dsl.gr.jp/index.html">X Japanese Documentation Project</a></li>
+</ul>
+<p>Debian</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/">Debian 管理者ハンドブック</a></li>
+<li><a href="https://www.debian.org/doc/index.ja.html">Debian -- ユーザ文書</a></li>
+</ul>
+<p>Ubuntu</p>
+<ul>
+<li><a href="https://help.ubuntu.com/">Official Ubuntu Documentation</a></li>
+</ul>
+<p>Fedora</p>
+<ul>
+<li><a href="https://docs.fedoraproject.org/ja-JP/index.html">Fedora に関する文書</a></li>
+</ul>
+<p>openSUSE</p>
+<ul>
+<li><a href="https://en.opensuse.org/Portal:Documentation">Portal:Documentation</a></li>
+<li><a href="https://doc.opensuse.org/">doc.opensuse.org</a></li>
+</ul>
+<p>Linux Mint</p>
+<ul>
+<li><a href="http://linuxmint-jp.net/documentation.html">Linux Mint ユーザーズガイド</a></li>
+<li><a href="https://www.linuxmint.com/documentation.php">User Guides</a></li>
+</ul>
+<p>Gentoo Linux</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:Main_Page/ja">ハンドブック:メインページ</a></li>
+</ul>
+<p>GNOME</p>
+<ul>
+<li><a href="https://help.gnome.org/">GNOME Library</a></li>
+<li><a href="https://help.gnome.org/users/gnome-help/stable/">GNOME ヘルプ</a></li>
+</ul>
+<p>KDE</p>
+<ul>
+<li><a href="https://docs.kde.org/">KDE Documentation</a></li>
+<li><a href="https://userbase.kde.org/Welcome_to_KDE_UserBase/ja">KDE UserBase へようこそ</a></li>
+</ul>
+<p>Linux From Scratch</p>
+<ul>
+<li><a href="http://www.linuxfromscratch.org/">Linux From Scratch</a></li>
+<li><a href="http://lfsbookja.osdn.jp/">LFSブック日本語版 (lfsbookja)</a></li>
+<li><a href="https://osdn.jp/projects/lfsbookja/">LFSブック日本語版 プロジェクト日本語トップページ - OSDN</a></li>
+</ul>
+<p>個人サイト</p>
+<ul>
+<li><a href="http://www.bookshelf.jp/">Emacs 電子書棚</a></li>
+</ul>
+<h1>Wiki</h1>
+<p>GNOME</p>
+<ul>
+<li><a href="https://wiki.gnome.org/Home">GNOME Wiki</a></li>
+</ul>
+<p>KDE</p>
+<ul>
+<li><a href="https://wiki.kde.org/">KDE Wikis</a></li>
+</ul>
+<p>Fedora</p>
+<ul>
+<li><a href="https://fedoraproject.org/wiki/Fedora_Project_Wiki">Fedora Project Wiki</a></li>
+<li><a href="https://fedoraproject.org/wiki/Fedora_Project_Wiki/ja">Fedora Project Wiki/ja</a></li>
+</ul>
+<p>openSUSE</p>
+<ul>
+<li><a href="https://ja.opensuse.org/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8">ja.openSUSE.org</a></li>
+</ul>
+<p>Gentoo Linux</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Main_Page">Gentoo Wiki</a></li>
+</ul>
+<p>Arch Linux</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/">ArchWiki</a></li>
+</ul>
+<h1>開発</h1>
+<p>GNOME</p>
+<ul>
+<li><a href="https://www.gnome.org/get-involved/">Get Involved</a></li>
+<li><a href="https://wiki.gnome.org/Newcomers/">Newcomers guide</a></li>
+</ul>
+<p>KDE</p>
+<ul>
+<li><a href="https://techbase.kde.org/Welcome_to_KDE_TechBase">KDE TechBase</a></li>
+<li><a href="https://techbase.kde.org/Welcome_to_KDE_TechBase/ja">Welcome to KDE TechBase/ja</a></li>
+<li><a href="https://techbase.kde.org/Getting_Started/ja">始めましょう</a></li>
+</ul>
+<p>Cinnamon/Linux Mint</p>
+<ul>
+<li><a href="http://developer.linuxmint.com/">Mint Developer Center</a></li>
+</ul>
+<p>Mozilla</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/">Mozilla Developer Network</a></li>
+</ul>
+<h1>ソフトウェア・パッケージ</h1>
+<p>GCC</p>
+<ul>
+<li><a href="https://gcc.gnu.org/">GCC</a></li>
+</ul>
+<p>X.Org</p>
+<ul>
+<li><a href="https://www.x.org/wiki/">X.Org</a></li>
+</ul>
+<p>Mozilla Firefox</p>
+<ul>
+<li><a href="https://www.mozilla.org/ja/firefox/new/">Firefox</a></li>
+<li><a href="https://support.mozilla.org/ja/">Mozilla サポート</a></li>
+</ul>
+<p>LibreOffice</p>
+<ul>
+<li><a href="https://ja.libreoffice.org/">LibreOffice</a></li>
+<li><a href="https://ja.libreoffice.org/get-help/documentation/">LibreOfficeユーザーガイド</a></li>
+<li><a href="https://wiki.documentfoundation.org/Documentation/Publications">Wikiのユーザーガイドのページ</a></li>
+<li><a href="https://help.libreoffice.org/Main_Page">LibreOffice Help</a></li>
+</ul>
+<p>MATE</p>
+<ul>
+<li><a href="http://mate-desktop.org/">MATE</a></li>
+</ul>
+<h1>ソフトウェア・ソースコード</h1>
+<p>Linuxカーネル</p>
+<ul>
+<li><a href="https://git.kernel.org/cgit/">git.kernel.org</a></li>
+</ul>
+<p>GNOME</p>
+<ul>
+<li><a href="https://git.gnome.org/browse/">git.GNOME.org</a></li>
+</ul>
+<p>KDE</p>
+<ul>
+<li><a href="https://github.com/KDE">KDE github</a></li>
+<li><a href="https://quickgit.kde.org/">KDE QuickGit</a></li>
+</ul>
+<p>coreutils</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git">coreutils.git</a></li>
+</ul>
+-->
+<!--
+<h1>ライセンス</h1>
+<p>ライセンスなど</p>
+<ul>
+<li><a href="https://www.gnu.org/licenses/licenses.html">ライセンス - GNUプロジェクト</a></li>
+<li><a href="https://www.gnu.org/licenses/gpl-3.0.ja.html">GNU一般公衆ライセンス（原文・英語）</a></li>
+<li><a href="https://osdn.jp/projects/opensource/wiki/licenses%252FGNU_General_Public_License_version_3.0">GPL非公式日本語訳 バージョン3</a></li>
+<li><a href="https://osdn.jp/projects/opensource/wiki/licenses%2FGNU_General_Public_License">GPL非公式日本語訳 バージョン2</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_General_Public_License">GNU General Public License - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%94%E3%83%BC%E3%83%AC%E3%83%95%E3%83%88">コピーレフト - Wikipedia</a></li>
+</ul>
+-->
+
+<!--
+<h2>クリエイティブ・コモンズの文書を引用することは可能</h2>
+<p>クリエイティブ・コモンズはたまに継承ライセンスがついていることがありますが、著作権法上認められている「引用」の場合においては、それを超えた利用が可能です。</p>
+<p>WikipediaやGenoo Wikiなど、CC-BY-SAのライセンスの文書の場合でも、一部の引用であればその条文を超えて利用することができます。</p>
+<p><a href="https://creativecommons.jp/faq/#b6">FAQ　よくある質問と回答 - クリエイティブ・コモンズ・ジャパン</a>より。</p>
+<blockquote class="inyou1">
+<p>“6. CCライセンスを付けることで「著作権の制限」に関する規定の適用に影響はありますか？</p>
+<p>いいえ。</p>
+<p>日本では、著作権法第30条から第50条までに「著作権の制限」に関する規定が設けられており、「私的使用のための複製」「引用」等、所定の場合に限って著作権者から許諾を得ずに作品の利用ができることが規定されています。これらの著作権法上認められている利用は、ライセンスの影響は全く受けません。</p>
+<p>例えば、「非営利」の条件があるCCライセンスのついた作品を利用する際、著作権法上規定されている「引用」に該当すれば、仮に営利を目的とする利用でも認められることとなります。この点を明確にするために、我々のライセンスには、「本ライセンスによってあなたのフェア・ユースその他の権利が影響を受けることはまったくありません」との条項が設けられています。”</p>
+</blockquote>
+<p>僕のこのホームページの文章は、Gentoo Wikiのような文書の引用はそのままリンクを付けて引用しているが、ArchWikiから転載したソフト百科やLFSのブックの転載などは、引用の範囲を超えるため、クリエイティブ・コモンズやGFDLのライセンスで再許諾している。</p>
+-->
+
+<!--
+<h1>ユーザー会・日本のプロジェクトなど</h1>
+<p>GNOME</p>
+<ul>
+<li><a href="http://www.gnome.gr.jp/">日本GNOMEユーザー会</a></li>
+</ul>
+<p>KDE</p>
+<ul>
+<li><a href="https://jp.kde.org/">日本 KDE ユーザ会</a></li>
+</ul>
+<p>Debian</p>
+<ul>
+<li><a href="http://www.debian.or.jp/">Debian JP Project</a></li>
+</ul>
+<p>Ubuntu</p>
+<ul>
+<li><a href="https://www.ubuntulinux.jp/">Ubuntu Japanese Team</a></li>
+<li><a href="https://wiki.ubuntulinux.jp/">Ubuntu Japanese Wiki</a></li>
+</ul>
+<p>openSUSE</p>
+<ul>
+<li><a href="http://www.geeko.jp/">Geeko World</a></li>
+<li><a href="http://wiki.geeko.jp/index.php?%E6%97%A5%E6%9C%ACopenSUSE%E3%83%A6%E3%83%BC%E3%82%B6%E4%BC%9A">日本openSUSEユーザ会</a></li>
+</ul>
+<p>Gentoo</p>
+<ul>
+<li><a href="http://www.gentoo.jp/">GentooJP</a></li>
+</ul>
+<p>Linux Mint</p>
+<ul>
+<li><a href="http://linuxmint-jp.net/">Linux Mint Japan</a></li>
+</ul>
+<h1>プログラミング言語</h1>
+<p>Vala</p>
+<ul>
+<li><a href="https://wiki.gnome.org/Projects/Vala">Vala</a></li>
+<li><a href="https://wiki.gnome.org/Projects/Vala/Tutorial">Vala Tutorial</a></li>
+</ul>
+<p>Perl6</p>
+<ul>
+<li><a href="http://ja.perl6intro.com/">Perl6入門</a></li>
+</ul>
+<h1>紹介・入門サイト</h1>
+<p>ふうせんさんのサイト</p>
+<ul>
+<li><a href="http://installlinux.jimdo.com/">Linux を入れよう</a></li>
+<li><a href="http://balloon-aka-fu-sen.tumblr.com/">ふうせんさんのブログ</a></li>
+</ul>
+<h1>ブログ</h1>
+<p>GNOME</p>
+<ul>
+<li><a href="http://mikeforce.net/">Mikeforce::Homepage</a></li>
+</ul>
+<p>Mono</p>
+<ul>
+<li><a href="http://atsushieno.hatenablog.com/">ものがたり</a></li>
+</ul>
+<h1>Planet</h1>
+<p>Planet (ブログのまとめ読みみたいなもの）</p>
+<ul>
+<li><a href="http://www.planetplanet.org/">Planet Planet</a></li>
+<li><a href="http://planet.gnome.org/">Planet GNOME</a></li>
+<li><a href="http://planet.debian.net/">Planet Debian</a></li>
+</ul>
+<h1>ニュース・速報サイト</h1>
+<p>Ubuntu</p>
+<ul>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe">Ubuntu Weekly Recipe - gihyo.jp</a></li>
+<li><a href="http://gihyo.jp/admin/clip/01/ubuntu-topics">Ubuntu Weekly Topics - gihyo.jp</a></li>
+</ul>
+<p>コンピュータ全般（日本）</p>
+<ul>
+<li><a href="http://japan.cnet.com/">CNET Japan</a></li>
+<li><a href="http://www.itmedia.co.jp/news/">ITmedia</a></li>
+<li><a href="http://news.mynavi.jp/">マイナビニュース</a></li>
+<li><a href="http://www.atmarkit.co.jp/">＠IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/subtop/linux/">＠IT > Linux ＆ OSS</a></li>
+</ul>
+<p>Linux全般（海外）</p>
+<ul>
+<li><a href="http://lxer.com/">LXer</a></li>
+<li><a href="http://lwn.net/">LWN.net</a></li>
+<li><a href="http://www.linuxtoday.com/">Linux Today</a></li>
+<li><a href="https://www.linux.com/">Linux.com</a></li>
+</ul>
+<p>Linux全般（日本）</p>
+<ul>
+<li><a href="https://jp.linux.com/">jp.Linux.com</a></li>
+<li><a href="https://osdn.jp/magazine/">OSDN Magazine</a></li>
+<li><a href="http://gihyo.jp/admin/clip/01/linux_dt">Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>ディストリビューション（海外）</p>
+<ul>
+<li><a href="https://distrowatch.com/">DistroWatch.com</a></li>
+</ul>
+<h1>掲示板・SNS</h1>
+<p>コンピュータ一般（日本）</p>
+<ul>
+<li><a href="http://srad.jp/">スラド</a></li>
+</ul>
+<p>コンピュータ一般（海外）</p>
+<ul>
+<li><a href="https://slashdot.org/">Slashdot</a></li>
+<li><a href="http://www.osnews.com/">OSNews</a></li>
+</ul>
+<p>２ちゃんねる</p>
+<ul>
+<li><a href="http://hayabusa6.2ch.net/linux/">Linux＠2ch掲示板</a></li>
+<li><a href="https://www12.atwiki.jp/linux2ch/pages/1.html">2ch-Linux-Beginners</a></li>
+<li><a href="http://debian.fam.cx/">Debian GNU/Linux スレッドテンプレ</a></li>
+</ul>
+<p>その他</p>
+<ul>
+<li><a href="http://open2ch.net/menu/">おーぷん2ちゃんねる</a></li>
+</ul>
+<h1>書籍</h1>
+<p>MINIX本</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0-%E7%AC%AC3%E7%89%88-Andrew-S-Tanenbaum/dp/4894717697/ref=sr_1_6?s=books&ie=UTF8&qid=1471520868&sr=1-6">オペレーティングシステム 第3版</a></li>
+</ul>
+<p>自伝・オープンソースの思想</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%9D%E3%82%8C%E3%81%8C%E3%81%BC%E3%81%8F%E3%81%AB%E3%81%AF%E6%A5%BD%E3%81%97%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%8B%E3%82%89-%E5%85%A8%E4%B8%96%E7%95%8C%E3%82%92%E5%B7%BB%E3%81%8D%E8%BE%BC%E3%82%93%E3%81%A0%E3%83%AA%E3%83%8A%E3%83%83%E3%82%AF%E3%82%B9%E9%9D%A9%E5%91%BD%E3%81%AE%E7%9C%9F%E5%AE%9F-%E5%B0%8F%E3%83%97%E3%83%AD%E3%83%BB%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%AA%E3%83%BC%E3%83%8A%E3%82%B9-%E3%83%88%E3%83%BC%E3%83%90%E3%83%AB%E3%82%BA/dp/4796880011">それがぼくには楽しかったから 全世界を巻き込んだリナックス革命の真実</a></li>
+<li><a href="http://cruel.org/freeware/cathedral.html">伽藍とバザール</a></li>
+<li><a href="http://ascii.asciimw.jp/books/books/detail/4-7561-4281-8.shtml">フリーソフトウェアと自由な社会 - Richard M. Stallmanエッセイ集</a></li>
+<li><a href="https://www.amazon.co.jp/UNIX%E3%81%A8%E3%81%84%E3%81%86%E8%80%83%E3%81%88%E6%96%B9%E2%80%95%E3%81%9D%E3%81%AE%E8%A8%AD%E8%A8%88%E6%80%9D%E6%83%B3%E3%81%A8%E5%93%B2%E5%AD%A6-Mike-Gancarz/dp/4274064069">UNIXという考え方―その設計思想と哲学</a></li>
+</ul>
+<h1>会社</h1>
+<p>Red Hat</p>
+<ul>
+<li><a href="https://www.redhat.com/ja/global/japan">Red Hat</a></li>
+</ul>
+<p>SUSE</p>
+<ul>
+<li><a href="https://www.suse.com/ja-jp/">SUSE</a></li>
+</ul>
+<h1>個別の記事</h1>
+<p>Mozilla</p>
+<ul>
+<li><a href="http://cruel.org/jwz/nomo.html">辞職そして追悼。</a></li>
+<li><a href="http://cruel.org/jwz/aol.html">ネットスケープと aol.</a></li>
+<li><a href="http://cruel.org/jwz/aoltw.html">ネットスケープと aol/time-warner, パート2.</a></li>
+</ul>
+<p>Gentoo Linux</p>
+<ul>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-dist1/">ディストリビューションの作成: 第1回</a></li>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-dist2/">ディストリビューションの作成: 第2回</a></li>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-dist3/">ディストリビューションの作成、第3回</a></li>
+</ul>
+<h1>技術系サイト</h1>
+<p>IBM</p>
+<ul>
+<li><a href="http://www.ibm.com/developerworks/jp/linux/">IBM developerWorks 日本語版 : developerWorks Japan: Linux</a></li>
+</ul>
+<p>Fedora</p>
+<ul>
+<li><a href="https://fedoramagazine.org/">Fedora Magazine</a></li>
+</ul>
+<h1>その他</h1>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8">Wikipedia - フリー百科事典（コピーレフトな百科事典）</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Linux">Linux - Wikipedia</a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

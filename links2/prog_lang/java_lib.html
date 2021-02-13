@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Java関連の世界観３（クラスライブラリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３（クラスライブラリ）</h1>
+<p>Javaによるプログラミングに関する世界観３（クラスライブラリ）です。<a href="java.html">Javaの世界観１（言語）</a>や<a href="java_oop.html">Javaの世界観２（オブジェクト指向）</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>クラスライブラリ</h1>
+<h2>Javaのクラスライブラリは美しく個性的で完成されている</h2>
+<p>Javaのクラスライブラリは、ほとんどのプログラミングに必要なクラスやメソッド（関数）を網羅しており、「完成されている」ことで有名です。</p>
+<p>java.lang.Objectから階層的な「ツリー構造のクラスライブラリ」を形成しており、継承とインターフェースの実装で作られています。</p>
+<p>ほとんどのクラスがインスタンスのオブジェクトをnewして作ることで使用可能なほか、すでにあるクラスを自ら継承して、派生クラスとして自分独自の機能を追加した新しいクラスを作ることもできます。</p>
+<p>一度Javaのクラスライブラリを覚えると、他の言語のライブラリなどは覚える必要が無く、Java SE/EE/MEなどのスケーラブルなエンタープライズ機能やサブセットにも応用でき、プログラミングを行う上で「何でもできるリベラルな基本」を知ることができます。プログラミングを行う上で、先だって必要な「基礎の能力」が身に付くでしょう。</p>
+
+<h2>公式マニュアル</h2>
+<p>公式のマニュアル。Javaはとても完成されたクラスライブラリ（関数やデータ構造などの設計図であると同時に利用の仕組みである、クラスのライブラリ）があります。</p>
+<p>Microsoftの同様の技術として、.NET FrameworkとC#/VB.NETがあります。</p>
+<ul>
+<li><a href="http://docs.oracle.com/javase/jp/8/">バージョン8</a></li>
+<li><a href="http://docs.oracle.com/javase/jp/8/docs/api/">バージョン8 - API</a></li>
+<li><a href="http://docs.oracle.com/javase/jp/7/">バージョン7</a></li>
+<li><a href="http://docs.oracle.com/javase/jp/7/api/">バージョン7 - API</a></li>
+</ul>
+
+<h2>Javaのエディション</h2>
+<p>Javaには3つのエディションがある。</p>
+<table class="some_tables">
+<tr><th>エディション</th><th>解説</th></tr>
+<tr><td>Java SE</td><td>通常のJava</td></tr>
+<tr><td>Java EE</td><td>サーバー向けのJava。サーブレットなどの機能を含む。</td></tr>
+<tr><td>Java ME</td><td>組み込みなどに向けたJava。異なるセットを持ち、Java SEのいくらかの機能は実装しない。</td></tr>
+</table>
+<p>エディションごとにJDK（開発キット）とJRE（実行環境）がある。</p>
+
+<h2>パッケージ</h2>
+<p>パッケージ。Javaではさまざまなパッケージをimport文で読み込んで使うことができる。特に、標準クラスライブラリにはたくさんのJavaクラスが含まれている。Javaはこのクラスライブラリがとても汎用的で優れているために利用されることが多い。</p>
+<p>java.utilパッケージをインポートするには、以下のように記述する。</p>
+<pre class="prettyprint">
+import java.util.*;
+</pre>
+<p>java.langパッケージ内のpublicクラスとインターフェースは自動的に取り込まれる。すなわち、以下の宣言は自動的に行われる。</p>
+<pre class="prettyprint">
+import java.lang.*;
+</pre>
+<p>また、自分の書いたクラスをパッケージの一部にしたい場合は、以下のように記述する。</p>
+<pre class="prettyprint">
+package mytool;
+</pre>
+
+<h2>主なパッケージの一覧</h2>
+<ul>
+<li><a href="https://www.javainthebox.net/publication/200209JP26/preferences.html">Preferences API 入門 - 知っておくと便利なアプリケーション設定 API - JAVA PRESS Vol.26</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/weak.html">Java弱参照メモ(Hishidama's Java Weak reference Memo) - ひしだま's 技術メモページ</a></li>
+<li><a href="https://www.sejuku.net/blog/33252">【Java入門】リフレクションでメソッドの実行、フィールドの変更 | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+<li><a href="http://ash.jp/java/rmi.htm">RMIについて - ASH のホームページ</a></li>
+</ul>
+<p>javax.*パッケージは拡張機能。拡張機能は、Java SEのJDK（開発キット）やJRE（実行環境）には含まれない。</p>
+
+<h2>基本</h2>
+<table class="some_tables">
+<tr><th>クラス</th><th>解説</th></tr>
+<tr><td>java.lang.Object</td><td>全てのクラスの基盤となるクラス</td></tr>
+</table>
+
+<h1>API各ページ</h1>
+<p><a href="java_lib_io.html">Java（３A．入出力）</a></p>
+<p><a href="java_lib_list.html">Java（３B．コレクションと配列）</a></p>
+<p><a href="java_lib_string.html">Java（３C．文字列）</a></p>
+<p><a href="java_lib_thread.html">Java（３D．マルチスレッド）</a></p>
+<p><a href="java_lib_xml.html">Java（３E．XML）</a></p>
+<p><a href="java_lib_image.html">Java（３F．画像処理）</a></p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

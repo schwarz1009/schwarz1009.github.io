@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux カーネル開発（メモリ管理） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（メモリ管理）</h1>
+<p>Linuxのカーネルの開発に関する世界観（メモリ管理）です。<a href="linux_kernel.html">Linuxカーネル</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>基本</h1>
+<h2>プロセスとメモリ</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>プロセスには、付属するメモリ領域としてテキスト領域（プログラムそのもの）、スタック領域、ヒープ領域などが与えられる。</p>
+
+<h2>レジスタとメモリ</h2>
+<p>実際のところ、レジスタとはCPU内部の高速なメモリに過ぎません。ですが、レジスタは機械語で命令の処理に使われるため、小さく、少なく、そしてプログラムの実行にとって重要です。そのため、レジスタは少ない領域のものを、プロセスを切り替えるたびに「読み込んだり退避したり」します。</p>
+<p>これに対して、メモリは低速で、大容量です。このため、それぞれの領域に分割して、プロセスがそれぞれのアドレス空間を持ち、機械語の命令としてメモリにプロセスがアクセスしようとした時は、カーネルが仲介して論理アドレスを物理アドレスに翻訳するのです。</p>
+<p>そのため、コンテキストの切り替えは比較的容易です。ソフトウェアだけで実現できます。</p>
+<p>メモリ管理を行うためには、ハードウェアの機能を用いてカーネルが仲介し、論理アドレスをリニアアドレス・物理アドレスに変換します。この時、ハードウェアのセグメンテーション回路とページング回路を利用します。また、それぞれのメモリ領域はページと呼ばれる単位でカーネルによって管理されます。</p>
+
+<h2>仮想アドレス空間</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>また、メモリ領域については、カーネルがハードウェアのMMUという機構を上手く使うことで、プログラムが実際のメモリ領域（論理アドレスやリニアアドレスと呼ぶ）にアクセスした段階で、カーネルがそれを物理アドレスに翻訳する。</p>
+<p>このようにすることで、カーネルはメモリ領域を全てのプログラムに「個別に与える」ことができる。</p>
+<p>このような仕組みを「仮想アドレス空間」と呼ぶ。</p>
+
+<h2>ページアドレッシング</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>Linuxはメモリアドレスをページと呼ばれる小さな単位で管理している。</p>
+<p>Linuxでは効率化と使用メモリ領域の削減のために、三段階のページアドレッシングを採用しており、大きなものから順に、ページグローバルディレクトリがあり、その中にページミドルディレクトリがあり、その中にページテーブルがあり、ページテーブルにおいて実際のページ領域をマッピングする。</p>
+
+
+<h2>アドレス空間の構造</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>アドレス空間には、</p>
+<p>・テキスト領域（機械語のプログラムコードが入る）</p>
+<p>・ヒープ領域（mallocが管理する）</p>
+<p>・スタック領域（関数の引数やローカル変数）</p>
+<p>などがあり（ほかにデータ領域やBSS領域がある）、プロセスが作られると割り当てられる。</p>
+<p>基本的に、プロセスを実行すると、そのプロセスに対してテキスト領域、ヒープ領域、スタック領域が割り当てられることを知っておけば良い。</p>
+
+
+<h1>ハードウェアとアルゴリズム</h1>
+<h2>メモリ管理ユニット (MMU)</h2>
+<p>メモリ管理ユニット (MMU)はCPUのメモリへのアクセスを制御するハードウェア部品のひとつで、仮想アドレスを物理アドレスに変換したり、メモリ保護やキャッシュやバスを管理する機能がある。</p>
+<p>現代的なコンピュータでは、MMU内蔵のCPUとOSが連携して仮想記憶を実現している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%A2%E3%83%AA%E7%AE%A1%E7%90%86%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88">メモリ管理ユニット - Wikipedia</a></li>
+</ul>
+
+<h2>メモリ管理アルゴリズム</h2>
+<p>メモリ管理アルゴリズムについては以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/mopp/items/23f55bf8bf97e455000f">自作OSのから見たメモリ管理概論 - Qiita</a></li>
+</ul>
+
+<h2>Linuxカーネルのメモリ管理についての色んなこと</h2>
+<p>以下のスライドがとても参考になる。必見。</p>
+<ul>
+<li><a href="https://www.slideshare.net/NishiokaYusuke/linux-65414163">Linuxにおけるメモリ管理の基本 - SlideShare</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

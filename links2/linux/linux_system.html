@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux システム管理 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<!--
+<p><a href="linuxlinks.html">Linuxリンク集（公式）</a></p>
+<p><a href="linuxlinks2.html">Linuxリンク集２（管理）</a></p>
+<p><a href="linuxlinks3.html">Linuxリンク集３（技術情報）</a></p>
+<p><a href="linuxlinks4.html">Linuxリンク集４（プログラミング）</a></p>
+<p><a href="linuxlinks5.html">Linuxリンク集５（アーキテクチャ）</a></p>
+<p><a href="linuxlinks6.html">Linuxリンク集６（アプリケーション）</a></p>
+<p><a href="linuxlinks7.html">Linuxリンク集７（デスクトップ）</a></p>
+<p><a href="linuxlinks8.html">Linuxリンク集８（X11）</a></p>
+<p><a href="linuxlinks9.html">Linuxリンク集９（技術詳細）</a></p>
+<p><a href="linuxlinks10.html">Linuxリンク集１０（その他）</a></p>
+<p><a href="windowslinks.html">Windowsリンク集</a></p>
+<p><a href="itcompanylinks.html">IT企業・商用ソフトリンク集</a></p>
+<p><a href="softwarelinks.html">ソフトとサービスのリンク集</a></p>
+<p><a href="hardwarelinks.html">ハードウェアのリンク集</a></p>
+
+<p><a href="bunkeilinks.html">文系のリンク集</a></p>
+<p><a href="rikeilinks.html">理系のリンク集</a></p>
+
+<p><a href="artlinks.html">芸術・音楽のリンク集</a></p>
+<p><a href="peoplelinks.html">人々のリンク集（偉人）</a></p>
+<p><a href="technologylinks.html">技術のリンク集</a></p>
+<p><a href="societylinks.html">社会のリンク集</a></p>
+<p><a href="bloglinks.html">ブログ・ツイッターのリンク集</a></p>
+<p><a href="piano.html">ピアノ入門</a></p>
+<p><a href="farm.html">農業入門</a></p>
+<p><a href="culture.html">世界の文化入門</a></p>
+<p><a href="human.html">人間一般入門</a></p>
+<p><a href="english.html">英会話入門</a></p>
+<p><a href="nofollow.html">NoFollowプログラミング言語</a></p>
+<p><a href="robot.html">人間頭脳型ロボット</a></p>
+-->
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>Linuxシステムの基本</h1>
+<p>Linux関係の実践的世界観です。</p>
+<p>主に、検索して引っかかったサイトを載せているので、あまり内容を確かめずに載せています。</p>
+<p>間違いやおかしな見当違いのサイトが入っているかもしれませんが、無保証だと思って見てください。</p>
+<div id="toc"></div>
+<div class="page_links">
+<h1>ページを移動</h1>
+<p>このページはLinux関係の他のページに分割・移動しました。</p>
+<!--
+<h1>用語集</h1>
+<h2>Linux</h2>
+<p>OSの中核であるLinuxカーネル、あるいは、OSとしてのGNU/Linuxシステムのこと。</p>
+<h2>UNIX</h2>
+<p>AT&Tのベル研究所が開発した、C言語を用いたOSシステムのこと。</p>
+<h2>GNU</h2>
+<p>フリーなUNIXのクローンを開発することを目指しているプロジェクトのこと。</p>
+<h2>GNU/Linux</h2>
+<p>GNUのユーザーランドとLinuxカーネルを一緒にした、Unixライクなシステムのこと。</p>
+<h2>オープンソース</h2>
+<p>ソースコードが公開され、コピーや再配布が可能になっている（二次的著作物のコピーや再配布の制限を許さない場合もある）ソフトウェアのこと。</p>
+<h2>フリーソフトウェア</h2>
+<p>GNUの提唱する、自由にコピーや再配布が出来るソフトウェアのこと。</p>
+<h2>GPL</h2>
+<p>フリーソフトウェアのための、コピーレフトなライセンス。</p>
+<h2>X11</h2>
+<p>UNIXにおける、ウィンドウシステム。これによって、コマンドライン・インターフェースのUNIXでも、GUIによる操作を使用することが出来る。</p>
+-->
+
+<!--
+<h1>ディストリビューション紹介</h1>
+<h2>Debian</h2>
+<p>コミュニティによる、安定したディストリビューション。</p>
+<ul>
+<li><a href="https://www.debian.org/index.ja.html">Debian -- ユニバーサルオペレーティングシステム</a></li>
+</ul>
+<h2>Ubuntu</h2>
+<p>Debianをベースに、速いサイクルでのリリースを目指す、初心者向けのディストリビューション。</p>
+<ul>
+<li><a href="http://www.ubuntu.com/">Ubuntu.com</a></li>
+</ul>
+<h2>RHEL</h2>
+<p>Fedoraをベースに、会社であるRed Hatが開発する、エンタープライズ・クラスの安定性を持つ、有料のディストリビューション。</p>
+<ul>
+<li><a href="https://www.redhat.com/ja/global/japan">Red Hat</a></li>
+</ul>
+<h2>Fedora</h2>
+<p>Red Hatによる、コミュニティ主導の最先端の技術の搭載と開発を目指したディストリビューション。</p>
+<ul>
+<li><a href="https://getfedora.org/ja/">Fedora</a></li>
+</ul>
+<h2>openSUSE</h2>
+<p>SUSEと言う、Red Hatのライバル会社による、コミュニティ主導のディストリビューション。有料版もある。</p>
+<ul>
+<li><a href="https://www.opensuse.org/">www.openSUSE.org</a></li>
+</ul>
+<h2>Gentoo Linux</h2>
+<p>Portageと言う、ソースベースのパッケージ管理システムを搭載した、独特のディストリビューション。</p>
+<ul>
+<li><a href="https://www.gentoo.org/">Gentoo.org</a></li>
+</ul>
+<h2>Linux Mint</h2>
+<p>Ubuntuをベースに、使いやすくして、独自のMATEとCinnamonと言うデスクトップ環境を搭載したディストリビューション。</p>
+<ul>
+<li><a href="https://www.linuxmint.com/">Linux Mint</a></li>
+</ul>
+<h2>Arch Linux</h2>
+<p>ローリングリリースモデルを採用し、シンプル第一の概念で開発される、上級者向けのディストリビューション。</p>
+<ul>
+<li><a href="https://www.archlinux.org/">Arch Linux</a></li>
+</ul>
+<h2>CentOS</h2>
+<p>オープンソースのRHELのソースコードを再利用した、コミュニティによるRHELクローン。</p>
+<ul>
+<li><a href="https://www.centos.org/">CentOS</a></li>
+</ul>
+-->
+
+<!--
+<h1>ライセンス</h1>
+<h2>オープンソースの定義</h2>
+<p>Open Source Initiativeによるオープンソースの定義。</p>
+<ul>
+<li><a href="http://www.opensource.jp/osd/osd-japanese.html">オープンソースの定義</a></li>
+</ul>
+<h2>GPL/LGPL</h2>
+<p>GNUによるコピーレフトなライセンス。</p>
+<ul>
+<li><a href="https://www.gnu.org/licenses/licenses.html">ライセンス - GNUプロジェクト</a></li>
+<li><a href="https://www.gnu.org/licenses/gpl-3.0.ja.html">GNU一般公衆ライセンス（原文・英語）</a></li>
+<li><a href="https://osdn.jp/projects/opensource/wiki/licenses%252FGNU_General_Public_License_version_3.0">GPL非公式日本語訳 バージョン3</a></li>
+<li><a href="https://osdn.jp/projects/opensource/wiki/licenses%2FGNU_General_Public_License">GPL非公式日本語訳 バージョン2</a></li>
+</ul>
+<h2>MPL</h2>
+<p>Mozillaによるライセンス。</p>
+<h2>BSDライセンスなど</h2>
+<p>その他、オープンソースのライセンスは、BSDライセンスのようなコピーレフトでないものを含めて、たくさんあります。</p>
+-->
+
+<!--
+<h1>インストール</h1>
+<h2>インストール方法</h2>
+<p>Linuxのインストール方法。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_inst.html">Linux Tips［インストール／RPM］ - @IT</a></li>
+<li><a href="http://note.kurodigi.com/">クロの思考ノート</a></li>
+</ul>
+<p>高スペックなパソコンなら、VirtualBoxの仮想環境にインストールすることも出来ます。</p>
+<ul>
+<li><a href="http://pc-karuma.net/virtualbox/">VirtualBox の使い方と設定 - PC設定のカルマ</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1602/17/news030.html">VirtualBoxでLinuxのテスト環境を作ってみよう (1/3) - @IT</a></li>
+</ul>
+<h2>ISOイメージ</h2>
+<p>CD/DVDへのISOイメージのダウンロードと、その焼き方。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/243makeinstcd.html">LinuxのインストールCDを作成するには - @IT</a></li>
+</ul>
+<h2>パーティションの分け方</h2>
+<p>パーティションの分け方。簡単に言えば、/と/usrを分けると、/binなどは/に出来て、/usr/binなどは/usrに出来る。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0107/04/news001.html">パーティション分割／非分割のセオリー (1/2) - @IT</a></li>
+</ul>
+-->
+
+<!--
+<h1>設定</h1>
+<h2>設定ファイル</h2>
+<p>設定ファイル。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_setting.html">Linux Tips［環境設定］ - @IT</a></li>
+<li><a href="http://www.yoshinobrain.com/set.html">Linux入門 その４  設定ファイル - Yoshino Brain</a></li>
+<li><a href="http://net-newbie.com/linux/user/envfiles.html">環境ファイル - ネットワーク管理者（の卵）養成講座</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/config.html">システム設定ファイル - UNIX/Linux の部屋</a></li>
+</ul>
+<h2>ネットワーク</h2>
+<p>ネットワークの設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_net.html">Linux Tips［ネットワーク］ - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/series/1634/">ネットワーク管理の基本Tips - @IT</a></li>
+</ul>
+<h2>X11</h2>
+<p>X11の設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_x.html">Linux Tips［X Window System］ - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0807/31/news132.html">X Window System の仕組みと設定 (1/4) - @IT</a></li>
+<li><a href="http://xjman.dsl.gr.jp/index.html">X Japanese Documentation Project</a></li>
+<li><a href="https://wiki.archlinuxjp.org/index.php/Xorg">Xorg - ArchWiki</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-x-server-config-xorg.conf.html">C.3.3. xorg.conf ファイル - RHEL</a></li>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch07.ja.html">第7章 X Window システム - Debian</a></li>
+<li><a href="http://www14.plala.or.jp/campus-note/vine_linux/x/x_configure.html">X の設定 - Penguin's campus note</a></li>
+<li><a href="http://www.ne.jp/asahi/it/life/it/linux/linux_setting/xorg_conf.html">Xサーバ設定ファイルxorg.confを設定する - itLifeTips</a></li>
+</ul>
+<p>昔は、xorg.confはXF86Configという名前でした。</p>
+<ul>
+<li><a href="http://xjman.dsl.gr.jp/man/man5/XF86Config.5x.html">Manpage of XF86Config</a></li>
+<li><a href="ftp://www.x.org/pub/X11R6.8.2/doc/xorg.conf.5.html">xorg.conf(5x) manual page</a></li>
+</ul>
+<h2>ハードウェア</h2>
+<p>ハードウェアの設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_hard.html">Linux Tips［ハードウェア］ - @IT</a></li>
+</ul>
+<h2>印刷</h2>
+<p>印刷とプリンターの設定。</p>
+<h2>フォント</h2>
+<p>フォントの設定。</p>
+-->
+
+<!--
+<h1>システム</h1>
+<h2>rootユーザー</h2>
+<p>UNIXシステムの管理者ユーザー。システムを変え、破壊する権限を持つ。rootになるためには、su -を実行する。</p>
+<h2>ホームディレクトリ(~/)</h2>
+<p>ユーザーに与えられた、自由なディレクトリ。</p>
+<h2>端末とシェル</h2>
+<p>コマンドを入力し、実行するための、端末とシェルについて。</p>
+<p>$や%は一般ユーザーでの操作、#はrootユーザーでの操作。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0201/05/news002.html">コマンドオペレーションの魅力を再確認 - @IT</a></li>
+</ul>
+
+<h1>シェル</h1>
+<h2>基本</h2>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/series/3016/">“応用力”をつけるためのLinux再入門 - @IT</a></li>
+</ul>
+<h2>シェル</h2>
+<p>シェルとは、ライン入力からコマンドのプログラムを実行するソフトウェア。Linuxでは、標準的にbashが使われる。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_bash/man1/bash.1.html">Man page of BASH</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0203/12/news001.html">bashの便利な機能を使いこなそう (1/2) - @IT</a></li>
+</ul>
+<h2>PATH</h2>
+<p>PATHは環境変数。</p>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/Path.html">PATH HOWTO</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1605/09/news013.html">PATHを理解して、コマンドの在りかを探してみよう (1/3) - @IT</a></li>
+</ul>
+<h2>初期化ファイル</h2>
+<p>bashは、初期化設定ファイルを読み込みます。</p>
+<p>~/.bashrcはユーザーの設定で、シェルの起動時に毎回読み込まれる。</p>
+<p>~/.bash_profileはユーザーの設定で、ログイン時のシェル（ログインシェル）で一回だけ読み込まれる。</p>
+<p>/etc/profileは、システムの標準設定で、ログインシェルで読み込まれる。</p>
+<p>/etc/bashrcは、システムの標準設定で、シェルの起動時に毎回読み込まれる。</p>
+<h2>コマンド補完</h2>
+<p>途中まで打ち込んで、タブキーを押すと、コマンド補完が出来ます。</p>
+<h2>パイプとリダイレクト</h2>
+<p>コマンドを組み合わせて使うことが出来るパイプとリダイレクトについて。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1603/24/news018.html">パイプとリダイレクトでコマンドを組み合わせて実行しよう (1/4) - @IT</a></li>
+</ul>
+<h2>シェルスクリプト</h2>
+<p>bashでのシェルスクリプトについて。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0202/05/news001.html">bashで始めるシェルスクリプト基礎の基礎 (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/shellsindex.html">連載記事 「ステップ・バイ・ステップ・シェルスクリプト」 - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/smart_shell.html">連載記事 「スマートな紳士のためのシェルスクリプト」 - @IT</a></li>
+</ul>
+
+<h1>コマンド</h1>
+<h2>コマンド一覧</h2>
+<p>コマンド一覧。Linuxのコマンドの中で一番基本的なものは、coreutilsと言うパッケージに含まれていますが、さらに高度で便利なコマンドが沢山あります。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/">UNIXの部屋</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/series/3065/">Linux基本コマンドTips - @IT</a></li>
+<li><a href="http://linuxjf.osdn.jp/">JF Project</a></li>
+<li><a href="http://linuxjm.osdn.jp/">JM Project</a></li>
+<li><a href="http://linuxjm.osdn.jp/INDEX/">JM インデックス</a></li>
+<li><a href="http://net-newbie.com/linux/commands/index.html">ＵＮＩＸコマンド概説 - ネットワーク管理者（の卵）養成講座</a></li>
+<li><a href="http://www.yoshinobrain.com/linux2.html">Linux 入門   その２ - Yoshino Brain</a></li>
+</ul>
+
+<h2>man</h2>
+<p>マニュアルページを表示する。</p>
+<pre>
+man man
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?man">UNIXの部屋 コマンド検索: man</a></li>
+</ul>
+<h2>less</h2>
+<p>ファイルの中身を表示する。スクロールでファイルの全体を観覧出来る。</p>
+<pre>
+find / | less
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?less">UNIXの部屋 コマンド検索: less</a></li>
+</ul>
+<h2>ls</h2>
+<p>ディレクトリの中身のリスト（ファイル一覧）を表示する。</p>
+<pre>
+ls -Al
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?ls">UNIXの部屋 コマンド検索: ls</a></li>
+</ul>
+<h2>cd</h2>
+<p>現在のディレクトリを変更（移動）する。</p>
+<pre>
+cd ..
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cd">UNIXの部屋 コマンド検索: cd</a></li>
+</ul>
+<h2>mkdir</h2>
+<p>ディレクトリを新しく作成する。</p>
+<pre>
+mkdir -m 0755 test
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?mkdir">UNIXの部屋 コマンド検索: mkdir</a></li>
+</ul>
+<h2>cp</h2>
+<p>ファイルやディレクトリをコピーする。</p>
+<pre>
+cp -r hoge1 hoge2
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cp">UNIXの部屋 コマンド検索: cp</a></li>
+</ul>
+<h2>mv</h2>
+<p>ファイルやディレクトリを移動・名前変更する。</p>
+<pre>
+mv hoge1 hoge2
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?mv">UNIXの部屋 コマンド検索: mv</a></li>
+</ul>
+<h2>rm</h2>
+<p>ファイルやディレクトリを削除する。</p>
+<pre>
+rm hoge
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?rm">UNIXの部屋 コマンド検索: rm</a></li>
+</ul>
+<h2>cat</h2>
+<p>ファイルの中身を表示する。ファイルの全体をコマンドラインに出力する。</p>
+<pre>
+cat a.txt b.txt > c.txt
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cat">UNIXの部屋 コマンド検索: cat</a></li>
+</ul>
+<h2>ln</h2>
+<p>ファイルのリンク（ハードリンク・シンボリックリンク）を作る。</p>
+<pre>
+ln -s /usr/local/bin bin
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?ln">UNIXの部屋 コマンド検索: ln</a></li>
+</ul>
+<h2>ps</h2>
+<p>実行中のプロセス一覧を表示する。</p>
+<blockquote class="inyou1">
+<pre>
+$ ps
+ PID TTY          TIME CMD
+ 404 pts/1    00:00:00 bash
+ 460 pts/1    00:00:00 ps
+</pre>
+</blockquote>
+
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?ps">UNIXの部屋 コマンド検索: ps</a></li>
+</ul>
+<h2>kill/killall</h2>
+<p>プロセスを強制終了する。Ctrl+Cも使います。</p>
+<blockquote class="inyou1">
+<pre>
+$ cp /home/hoge/test1 /home/hoge/test2 &
+$ ps
+ PID TTY          TIME CMD
+ 404 pts/1    00:00:00 bash
+ 460 pts/1    00:00:00 ps
+ 480 pts/1    00:00:00 cp
+$ kill 480
+</pre>
+</blockquote>
+
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?kill">UNIXの部屋 コマンド検索: kill</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?killall">UNIXの部屋 コマンド検索: killall</a></li>
+</ul>
+<h2>find</h2>
+<p>ファイルを検索して一覧表示する。</p>
+<pre>
+find /
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?find">UNIXの部屋 コマンド検索: find</a></li>
+</ul>
+<h2>grep</h2>
+<p>特定の文字列を含む行を抽出する。</p>
+<pre>
+find . | grep keyword
+</pre>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?grep">UNIXの部屋 コマンド検索: grep</a></li>
+</ul>
+<h2>tar</h2>
+<p>アーカイブファイルを作成・展開する。</p>
+<blockquote class="inyou1">
+<pre>
+tar -zcvf xxxx.tar.gz directory
+tar -zxvf xxxx.tar.gz
+</pre>
+</blockquote>
+<p>xは展開、cは作成、tは表示、rは追加。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?tar">UNIXの部屋 コマンド検索: tar</a></li>
+</ul>
+<h2>ソースコード</h2>
+<p>もっと沢山のコマンドがありますが、coreutilsのgitで基本的なコマンドのコードを読むことが出来ます。</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git/tree/src">coreutils.git</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/js-foundation/0013">第13回　Linuxコマンドの基礎の基礎 - gihyo.jp</a></li>
+</ul>
+-->
+
+<!--
+<h1>ディレクトリ階層とファイルシステム</h1>
+<h2>基本</h2>
+<p>ディレクトリの階層構造。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man7/hier.7.html">Man page of HIER</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0108/07/news002.html">各ディレクトリの役割を知ろう（ルートディレクトリ編） (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0109/07/news002.html">各ディレクトリの役割を知ろう（サブディレクトリ編） (1/2) - @IT</a></li>
+</ul>
+<h2>/</h2>
+<p>ルートディレクトリ。</p>
+<h2>/home</h2>
+<p>ユーザーのホームディレクトリ。</p>
+<h2>/root</h2>
+<p>rootのホームディレクトリ。</p>
+<h2>/bin</h2>
+<p>OSの基本プログラム。アプリケーションのプログラムは/usr/binにあります。</p>
+<h2>/sbin</h2>
+<p>OSのシステムプログラム。アプリケーションのシステムプログラムは/usr/sbinにあります。</p>
+<h2>/usr</h2>
+<p>アプリケーションなどのファイル。あとで記述するように、さらに階層があります。</p>
+<h2>/etc</h2>
+<p>設定ファイル。使っていてもファイルのサイズが変化しないファイルを置く。</p>
+<h2>/var</h2>
+<p>ログなどの使っていて変化するファイルを置く。</p>
+<h2>/tmp</h2>
+<p>一時的なディレクトリ。</p>
+<h2>/dev</h2>
+<p>デバイスファイル。</p>
+<h2>/mnt</h2>
+<p>デバイスをマウントするためのディレクトリ。</p>
+<h2>/proc</h2>
+<p>システム情報。</p>
+<h2>/lib</h2>
+<p>共有ライブラリ。</p>
+<h2>/boot</h2>
+<p>OSのブート用ファイル。</p>
+
+<h2>/usr/bin</h2>
+<p>アプリケーションの基本プログラム。沢山のプログラムがあります。</p>
+<h2>/usr/sbin</h2>
+<p>アプリケーションのシステムプログラム。</p>
+<h2>/usr/lib</h2>
+<p>アプリケーションのライブラリ。</p>
+<h2>/usr/share</h2>
+<p>ドキュメントなど、アーキテクチャに依存しないファイル。</p>
+<h2>/usr/include</h2>
+<p>C言語用ヘッダファイル。</p>
+<h2>/usr/local</h2>
+<p>アプリケーションのローカルなインストール場所。</p>
+
+<h2>アプリケーションのインストール先の違い</h2>
+<p>アプリケーションのインストール先の違いは、以下のようになります。</p>
+<p>/bin と /sbin - システムの最低限の起動、操作、管理に必要なバイナリファイル。</p>
+<p>/usr/bin - 通常のアプリケーションのインストール先。パッケージ管理システムでインストールしたディストリビュータ公式の配布ファイルがインストールされる。</p>
+<p>/usr/local/bin - システムの管理者が、ソースコードをコンパイルしてインストールしたバイナリファイル。</p>
+<p>/opt - Google Chromeのように、ディストリビューション公式ではない配布ファイルや、オープンソースでない配布ファイルなど。システムによって/optディレクトリの用途が違う。</p>
+<p>/home/hoge/bin - hogeユーザーが自分で入れたバイナリファイル。</p>
+<p>最近はAppImageのように、ディストリビューションによらない、共通の簡単インストールの可能な仕組みも用意されています。Windowsのフリーソフトようにダウンロードして簡単に実行出来るようになっていくでしょう。</p>
+
+<h2>PATHを通す</h2>
+<p><a href="linuxlinks10.html">１０．コマンド・設定</a>に移動しました。</p>
+
+<h2>ファイルシステム</h2>
+<p>Linuxでは、様々なファイルシステムが利用出来ます。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/series/2376/">Linuxファイルシステム技術解説 - @IT</a></li>
+</ul>
+-->
+
+<!--
+<h1>サーバーとデーモン</h1>
+<h2>デーモン</h2>
+<p>コマンドで入力するのではなく、システムの最初から最後まで、起動しておいて常駐し、サービスのように恒常的に使われるプログラム。サーバーなどが多い。</p>
+<h2>ランレベルと起動スクリプト</h2>
+<p>OSをどのように起動するかを決めるシステム。</p>
+<p>起動スクリプトは、デーモンを起動するために使います。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/156whatrunlv.html">ランレベルとは - @IT</a></li>
+</ul>
+<h2>起動</h2>
+<p>Linuxの起動の流れ。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0204/02/news002.html">Linux起動の仕組みを理解しよう［init/inittab編］ (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0206/04/news001.html">Linux起動の仕組みを理解しよう［rcスクリプト編］ - @IT</a></li>
+</ul>
+-->
+
+<!--
+<h1>アプリケーションのインストールとパッケージ管理</h1>
+<h2>ソースからのコンパイルによるインストール</h2>
+<p>ソースからのインストールには、GNU式のパッケージだと、基本的に./configureとmakeとmake installを実行する。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/045instsrc.html">ソースファイルで配布されているプログラムをインストールするには - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/886usepaco.html">ソースからインストールしたアプリを管理するには - @IT</a></li>
+<li><a href="http://www.linux-beginner.com/linux_kihon79.html">ソースファイルからのインストール - Linux初心者の基礎知識</a></li>
+</ul>
+<h2>パッチを当てる方法</h2>
+<p>パッチを当てるには、patchコマンドを使う。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/505patch.html">ソースコードにパッチを当てるには - @IT</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Patch">patch - Wikipedia</a></li>
+</ul>
+-->
+<!--
+<h2>APT/Dpkg(DEB)</h2>
+<p>Debianのパッケージ管理ツール。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/">Debian 管理者ハンドブック</a></li>
+<li><a href="https://www.debian.org/doc/manuals/aptitude/index.ja.html">aptitude ユーザマニュアル</a></li>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/packaging-system.html">第 5 章 パッケージシステム、ツールと基本原則 - Debian</a></li>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/apt.html">第 6 章 メンテナンスと更新、APT ツール - Debian</a></li>
+</ul>
+-->
+<!--
+<h2>DNF/Yum</h2>
+<p>Fedoraのパッケージ管理ツール。</p>
+<ul>
+<li><a href="http://dnf.baseurl.org/">DNF</a></li>
+<li><a href="https://docs.fedoraproject.org/ja-JP/index.html">Fedora に関する文書 - Fedora</a></li>
+<li><a href="https://docs.fedoraproject.org/en-US/Fedora/24/html/System_Administrators_Guide/part-Package_Management.html">Part II. Package Management - Fedora</a></li>
+</ul>
+<h2>RPM</h2>
+<p>Red Hat系ディストリビューションの低レベルなパッケージ管理システム。</p>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/RPM-HOWTO.html">RPM HOWTO</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/rpm/man8/rpm.8.html">Manpage of RPM</a></li>
+<li><a href="https://docs.fedoraproject.org/en-US/Fedora/24/html/System_Administrators_Guide/ch-RPM.html">RPM - Fedora</a></li>
+</ul>
+-->
+<!--
+<h1>アプリケーション</h1>
+<h2>Emacs</h2>
+<p>Lispで拡張出来る、高機能テキストエディタ。</p>
+<h2>vi/vim</h2>
+<p>昔ながらのUNIXのテキストエディタ。</p>
+<h2>LibreOffice</h2>
+<p>オフィススイート。</p>
+<ul>
+<li><a href="https://ja.libreoffice.org/">LibreOffice</a></li>
+<li><a href="https://ja.libreoffice.org/get-help/documentation/">LibreOfficeユーザーガイド</a></li>
+<li><a href="https://wiki.documentfoundation.org/Documentation/Publications">Wikiのユーザーガイドのページ</a></li>
+<li><a href="https://help.libreoffice.org/Main_Page">LibreOffice Help</a></li>
+</ul>
+<h2>Firefox</h2>
+<p>MozillaによるWebブラウザ。</p>
+<ul>
+<li><a href="https://www.mozilla.org/ja/firefox/new/">Firefox</a></li>
+<li><a href="https://support.mozilla.org/ja/">Mozilla サポート</a></li>
+</ul>
+<h2>Sylpheed</h2>
+<p>メールソフト。</p>
+<h2>Evolution</h2>
+<p>グループウェアソフト。</p>
+<h2>Thunderbird</h2>
+<p>メールソフト。</p>
+
+<h2>GIMP</h2>
+<p>画像処理ソフト。</p>
+<h2>Mozc</h2>
+<p>かな漢字変換エンジン。</p>
+<h2>Anthy</h2>
+<p>かな漢字変換エンジン。</p>
+<h2>かな漢字(kkc)</h2>
+<p>かな漢字変換エンジン。</p>
+<h2>iBus</h2>
+<p>多言語入力ソフト。変換エンジンと一緒に使います。</p>
+<h2>Fcitx</h2>
+<p>多言語入力ソフト。</p>
+<h2>uim</h2>
+<p>多言語入力ソフト。</p>
+
+<h2>GNOME</h2>
+<p>巨大なデスクトップ環境。</p>
+<ul>
+<li><a href="https://www.gnome.org/">GNOME.org</a></li>
+<li><a href="https://help.gnome.org/">GNOME Library</a></li>
+<li><a href="https://help.gnome.org/users/gnome-help/stable/">GNOME ヘルプ</a></li>
+</ul>
+<h2>KDE</h2>
+<p>もう一つの巨大なデスクトップ環境。</p>
+<ul>
+<li><a href="https://www.kde.org/">KDE.org</a></li>
+<li><a href="https://docs.kde.org/">KDE Documentation</a></li>
+<li><a href="https://userbase.kde.org/Welcome_to_KDE_UserBase/ja">KDE UserBase へようこそ</a></li>
+</ul>
+<h2>Xfce</h2>
+<p>軽量でカスタマイズ性豊かなデスクトップ環境。</p>
+<h2>LXDE/LXQt</h2>
+<p>軽量さを第一に考えるデスクトップ環境。</p>
+<h2>MATE</h2>
+<p>昔のGNOME 2のフォーク。GNOME 3の操作性を嫌って生まれた。</p>
+<h2>Cinnamon</h2>
+<p>MATEとともに生まれた、新しいデスクトップ環境。</p>
+<h2>Enlightenment</h2>
+<p>ウィンドウマネージャ。</p>
+<h2>Window Maker</h2>
+<p>ウィンドウマネージャ。</p>
+<h2>Apache</h2>
+<p>Webサーバー。</p>
+<h2>Samba</h2>
+<p>Windowsネットワークとの接続が可能。</p>
+
+<h2>GTK+</h2>
+<p>X11のツールキット。ボタンやメニューなどが含まれる。GNOMEで採用。</p>
+<h2>Qt</h2>
+<p>X11のもう一つのツールキット。KDEで採用。見た目が美しい。</p>
+-->
+
+<!--
+<h1>カーネル</h1>
+<h2>Linuxカーネル</h2>
+<p>Linuxカーネルについて。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3-Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC3%E7%89%88-Daniel-Bovet/dp/487311313X">詳解 Linuxカーネル 第3版</a> - 昔第2版を買いましたが、全く読んでいません。</li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/watchindex.html">連載記事 「Linux Kernel Watch」 - @IT</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">オペレーティングシステム - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB">カーネル - Wikipedia</a></li>
+</ul>
+-->
+
+<!--
+<h1>GNUツールチェイン</h1>
+<h2>GCC</h2>
+<p>C/C++など、多言語に対応したフリーのコンパイラ集。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/GNU_gcc/man1/gcc.1.html">Man page of GCC</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/">GCC online documentation</a></li>
+<li><a href="http://www.asahi-net.or.jp/~wg5k-ickw/">私的 GNU マニュアル翻訳プロジェクト</a></li>
+</ul>
+<h2>GDB</h2>
+<p>デバッガ。</p>
+<ul>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb1.html">gcc+gdbによるプログラムのデバッグ 第1回 ステップ実行、変数の操作、ブレークポイント - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb2.html">gcc+gdbによるプログラムのデバッグ 第2回 変数の監視、バックトレース、その他のコマンド - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb3.html">gcc+gdbによるプログラムのデバッグ 第3回 gdbの便利な機能、デバッグの例 - RAT Portal Site</a></li>
+</ul>
+-->
+<!--
+<h1>個人的な設定・使い方など</h1>
+<h2>GNOME3 エクステンション</h2>
+<p>僕は、GNOME 3に以下のエクステンションを入れて使っています。</p>
+<p>GNOME 2/Windows XP風にする場合：</p>
+<ul>
+<li><a href="https://extensions.gnome.org/extension/6/applications-menu/">Applications Menu</a></li>
+<li><a href="https://extensions.gnome.org/extension/8/places-status-indicator/">Places Status Indicator</a></li>
+<li><a href="https://extensions.gnome.org/extension/602/window-list/">Window List</a></li>
+</ul>
+<p>Windows 7/10風にする場合：</p>
+<ul>
+<li><a href="https://extensions.gnome.org/extension/1160/dash-to-panel/">Dash to Panel</a></li>
+</ul>
+<p>追加で：</p>
+<ul>
+<li><a href="https://extensions.gnome.org/extension/1031/topicons/">TopIcons Plus</a></li>
+</ul>
+<p>詳しくは以下をご覧ください。</p>
+<ul>
+<li><a href="http://fedorajp.jimdo.com/%E5%88%9D%E6%9C%9F%E7%92%B0%E5%A2%83/">初期環境 - フェドラをつかおう</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0467?page=3">Ubuntu Weekly Recipe - 第467回　Ubuntu GNOME 17.04の変更点と，入門者向け情報（インストール，拡張機能の導入）</a></li>
+</ul>
+<p>ただし、僕はMATEとKDEを使います。それは、geditやNautilusなど、標準のアプリケーションの機能の問題です。</p>
+<p>エクステンションではありませんが、GNOME Tweak Toolは必須です。必ず入れましょう。最大化ボタンが復活するだけでなく、拡張機能の管理が出来るようになります。</p>
+-->
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

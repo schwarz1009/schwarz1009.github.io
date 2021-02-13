@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Visual Basic関連の世界観２（クラスライブラリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Visual Basicの世界観２（クラスライブラリ）</h1>
+<p>Visual Basicに関する世界観２（クラスライブラリ）です。<a href="vb.html">VB１</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/VisualBasic2010%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC-Perfect-Master-%E9%87%91%E5%9F%8E-%E4%BF%8A%E5%93%89/dp/4798031100">VisualBasic2010パーフェクトマスター (Perfect Master SERIES)</a>や<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>クラスライブラリ・API</h1>
+<p><a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考に執筆・引用しました。</p>
+<h2>文字列</h2>
+<p>文字列の処理はStringクラスから行える。</p>
+<table class="some_tables">
+<tr><th>メソッド</th><th>説明</th></tr>
+<tr><td>IndexOf</td><td>検索</td></tr>
+<tr><td>Contains</td><td>存在のチェック</td></tr>
+<tr><td>Replace</td><td>置換</td></tr>
+<tr><td>Split</td><td>分割</td></tr>
+<tr><td>Remove</td><td>削除</td></tr>
+<tr><td>Insert</td><td>挿入</td></tr>
+<tr><td>Join</td><td>連結</td></tr>
+</table>
+<p>などのメソッドから操作出来る。</p>
+
+<h2>ファイル</h2>
+<p>ファイル処理はIO.Fileクラスの各メソッドから行える。ディレクトリの処理はIO.Directoryクラス。</p>
+<p>File/Directoryクラスは、</p>
+<table class="some_tables">
+<tr><th>メソッド</th><th>説明</th></tr>
+<tr><td>Exists</td><td>存在確認</td></tr>
+<tr><td>Delete</td><td>削除</td></tr>
+<tr><td>Move</td><td>移動</td></tr>
+<tr><td>Copy</td><td>コピー</td></tr>
+<tr><td>RenameFile</td><td>名前変更</td></tr>
+</table>
+<p>などの操作が出来る。</p>
+<p>また、Directoryは</p>
+<table class="some_tables">
+<tr><th>メソッド</th><th>説明</th></tr>
+<tr><td>CreateDirectory</td><td>フォルダーの作成</td></tr>
+<tr><td>GetDirectories</td><td>フォルダー内の全てのフォルダーを取得</td></tr>
+<tr><td>GetFiles</td><td>フォルダー内の全てのファイルを取得</td></tr>
+</table>
+<p>などの操作が出来る。</p>
+
+<h2>テキストファイル</h2>
+<p>テキストファイルは、IO.File.OpenRead, IO.File.OpenText, IO.StreamReaderなどから読み込みが行なえる。</p>
+<p>一行ずつ読み込むためにはReadLineメソッド、一気に全部読み込むためにはReadToEndメソッドを使う。</p>
+<p>また、IO.File.OpenWrite, IO.File.AppnedText, IO.File.StreamWriterなどから書き込みが行える。</p>
+
+<h2>コモンダイアログ</h2>
+<p>また、コモンダイアログは、ファイルを開くダイアログがOpenFileDialog、名前をつけて保存するダイアログがSaveFileDialogコンポーネントから開くことができる。</p>
+<p>フォントの指定はFontDialog、色の指定はColorDialogから行える。</p>
+
+<h2>ネットワークソケット</h2>
+<p>まず、ソースコードの先頭に</p>
+<pre class="prettyprint lang-vb">
+Imports System.Net.Sockets
+</pre>
+<p>を追加する。</p>
+<p>ネットワーク上のコンピュータにTCP/IPで接続するには、</p>
+<pre class="prettyprint lang-vb">
+Dim client As New TcpClient
+</pre>
+<p>でクライアントを作って、</p>
+<pre class="prettyprint lang-vb">
+client.Connect("localhost", 80)
+</pre>
+<p>などとする。</p>
+<p>その後に、</p>
+<pre class="prettyprint lang-vb">
+Dim stream As NetworkStream = client.GetStream()
+</pre>
+<p>でストリームを取得できる。</p>
+<p>この状態で、</p>
+<pre class="prettyprint lang-vb">
+stream.Write(buffer, 0, buffer.Length)
+</pre>
+<p>した内容が、</p>
+<pre class="prettyprint lang-vb">
+stream.Read(data, 0, data.Length)
+</pre>
+<p>で返ってくる。bufferに送りたいデータを指定し、dataに送られた内容が入る。</p>
+<p>そして、</p>
+<pre class="prettyprint lang-vb">
+System.Text.Encoding.ASCII.GetString(data)
+</pre>
+<p>でテキストを得られる。</p>
+<p>サーバーを作りたい場合は、</p>
+<pre class="prettyprint lang-vb">
+server = New TcpListener(IPAddress.Loopback, 9000)
+</pre>
+<p>として、</p>
+<pre class="prettyprint lang-vb">
+server.Start()
+</pre>
+<p>とする。Stopで停止する。</p>
+<p>この時Threding.Thredクラスを利用してスレッドを作成すること。</p>
+<p>実際にクライアントからの接続待ちをする時は、AcceptTcpClientメソッドを呼び出した時で、サーバーがクライアントから接続を受けると、AcceptTcpClientメソッドから戻りTcpClientオブジェクトを取得できる。その上でストリームを取得してReadなどを行なえば良い。</p>
+<pre class="prettyprint lang-vb">
+Dim client As TcpClient = server.AcceptTcpClient()
+Dim stream As NetworkStream = client.GetStream()
+</pre>
+<p>ちなみに、Webサーバーに接続したい時は、ソースコードの先頭に</p>
+<pre class="prettyprint lang-vb">
+Imports System.Net
+</pre>
+<p>を追加し、WebClientクラスを使用する。OpenRead, DownloadFile, UploadFileなどのメソッドの他、クエリ文字列（URLの?の後に続く文字列）を操作するメソッドなどがある。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-vb.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

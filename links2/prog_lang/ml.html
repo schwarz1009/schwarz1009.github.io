@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>ML/OCamlの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ML/OCamlの世界観</h1>
+<p>ML/OCamlに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ML/OCaml</h1>
+<h2>ML/OCaml</h2>
+<p>関数型言語。MicrosoftがOCamlをベースとした.NET Framework用のF#をリリースしているが、それ以前からHaskellとともに「使える関数型言語」として有名である。</p>
+
+<h2>MLとOCamlの特徴</h2>
+<p>MLは関数型言語で、型推論などの機能を持つ。遅延評価ではなく先行評価をデフォルトの評価戦略とし、書き換え可能なレコード型を持つなど「純粋関数型でない」という特徴を持つ。</p>
+<p>OCamlはMLの各要素に加えて、オブジェクト指向的な要素を加えていることが大きな特徴。</p>
+<p>MLの関数定義は、</p>
+<pre>
+fun (関数名)(引数) = (内容);
+</pre>
+<p>となる。</p>
+
+<h2>Ocamlでオブジェクト指向</h2>
+<p>オブジェクト指向：<a href="https://ocaml.org/learn/tutorials/objects.ja.html">オブジェクト – OCaml</a>にサンプルコードがあります。</p>
+<p>インスタンス変数val mutable the_listはミュータブル（変更可能）であり、値を再代入できる。</p>
+<p>( [] : int list )は空のリストを表す。</p>
+<p>pushはプッシュでスタックを積む。popはポップでスタックから先頭の整数を取り出してそれを返す。peekはスタックに影響を及ぼさず先頭の要素を返す。sizeはスタックのサイズを返す。</p>
+<p>List.hdは先頭の要素を、List.tlは先頭の要素を取り除いたリストを、List.lengthはリストの長さを返す。</p>
+<p>::は要素とリストを組み合わせるconsの演算子で、@はリストとリストを連結するappendの演算子。</p>
+<p>&lt;-は割り当て演算子と呼ばれ、変更可能なインスタンス変数を更新する時に用いる。同じくレコード内の破壊可能フィールドの更新に用いる。</p>
+<p>詳しくは以下が参考になるかも。</p>
+<ul>
+<li><a href="http://ocaml.jp/?OCaml%E5%85%A5%E9%96%80%282%29">OCaml入門(2) - OCaml.jp</a></li>
+<li><a href="http://ocaml.jp/archive/ocaml-manual-3.06-ja/libref/List.html">Module List</a></li>
+</ul>
+
+
+<h1>リンク集全般</h1>
+<h2>OCaml</h2>
+<p>OCamlのチュートリアル。</p>
+<ul>
+<li><a href="http://ocaml.jp/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB">OCamlチュートリアル</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-ml.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

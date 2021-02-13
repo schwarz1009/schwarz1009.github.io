@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Node.js関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Node.jsの世界観</h1>
+<p>Node.jsに関する世界観です。<a href="javascript.html">JavaScript１（一般）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Node.js</h1>
+<h2>Node.jsとは</h2>
+<p>サーバーサイドのJavaScript技術。</p>
+<p>ChromeのJavaScriptエンジンV8を用いて、サーバーサイドのJavaScript環境を実現する。クライアントサイドだけではなく、サーバーサイドもJavaScriptで書ける。</p>
+<p>JavaScriptでビューを実現する技術にVue.jsなどがあるが、Node.jsとExpressを組み合わせることでRuby on Railsなどを完全に代替できる。</p>
+<p>また、<a href="../network/nginx.html">Nginx</a>と同様、ノンブロッキングI/Oとイベントループによるモデルを採用し、スレッドやプロセスを使わない。これにより、高速で軽量でメモリを大きく使用せずにWebサーバーを実現できる。</p>
+<ul>
+<li><a href="https://liginc.co.jp/web/programming/node-js/85318">いまアツいJavaScript！ゼロから始めるNode.js入門 5分で環境構築編 - 株式会社LIG</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/nodejs">基礎から学ぶNode.js - gihyo.jp</a></li>
+</ul>
+
+<h2>サンプルコード</h2>
+<p>公式の<a href="https://nodejs.org/ja/about/">Node.js とは | Node.js</a>にサンプルコードがあります。</p>
+<p>Node.jsでは、Apache/CGIやJavaサーブレットとは違い、コンテナとなるWebサーバもアプリケーションもどちらもまとめて実装する。</p>
+
+<h2>ノンブロッキングI/Oとイベント駆動</h2>
+<p>ノンブロッキングI/Oとイベント駆動の仕組みについては<a href="../network/nginx.html">Nginx</a>を参照のこと。</p>
+
+<h2>Express</h2>
+<p>Expressのインストールは以下のようにする。</p>
+<pre>
+npm install express
+</pre>
+<p>Expressを使うことで、ルーティング、リクエスト・レスポンス処理、scaffold作成機能、そしてMVCモデルによるフレームワーク開発が可能。</p>
+<p>ビュー層のテンプレート処理としては、テンプレート言語Jadeを使う。</p>
+
+<h2>MongoDB</h2>
+<p>バックエンドのデータベースとして、RDBMSのほか、NoSQLのひとつであるMongoDBを使うことができる。</p>
+<p>MongoDBはJavaScriptのオブジェクトを永続化するために使える。SQLと比べるとクエリの表現力は劣るが、分散処理による高いスケーラビリティ性能を発揮する。</p>
+
+<h1>アプリケーションスタック</h1>
+<h2>Express</h2>
+<p>Expressを使うことで、手軽にWebアプリケーションを開発できる。Railsと同様にコードというよりは「ワークフロー」なので、以下のリンクを参考に自分で取り組んでほしい。</p>
+<ul>
+<li><a href="http://gihyo.jp/dev/serial/01/nodejs/0003">第3回　Express.jsを使ったWebアプリケーションを構築：基礎から学ぶNode.js｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>MongoDB</h2>
+<p>MongoDBはドキュメント指向データベース。JSON構造をそのまま保存できる。Node.jsとの親和性が高い。</p>
+<ul>
+<li><a href="http://gihyo.jp/dev/serial/01/nodejs/0004">第4回　Node.jsアプリケーションとMongoDBの連携：基礎から学ぶNode.js｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>Heroku</h2>
+<p>Herokuはクラウドベースのアプリケーションホスティングサービス。Node.jsで作ったアプリケーションを簡単にデプロイできる。Java, Ruby, Pythonなどにも対応。</p>
+<ul>
+<li><a href="http://gihyo.jp/dev/serial/01/nodejs/0005">第5回　Node.jsアプリケーションをHerokuで動かす：基礎から学ぶNode.js｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>Node.js</h2>
+<p>サーバーサイドのJavaScript環境。クライアントサイドだけではなくサーバーサイドでもJavaScriptを使う。</p>
+<p>一部ではPHPやRubyよりも流行っている</p>
+
+<h1>リンク集全般</h1>
+<h2>Node.js</h2>
+<p>Node.jsはサーバーサイドで動くJavaScriptの実行環境。イベント駆動とノンブロッキング I/O モデルによって、高性能な動作が可能です。</p>
+<ul>
+<li><a href="http://nodejs.jp/nodejs.org_ja/">Node.js</a></li>
+<li><a href="https://liginc.co.jp/web/programming/node-js/85318">いまアツいJavaScript！ゼロから始めるNode.js入門～5分で環境構築編～</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/nodejs">基礎から学ぶNode.js - gihyo.jp</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1606/02/news034.html">Dev Basics／Keyword：Node.js - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1601/08/news040.html">Tech Basics／Keyword：Node.js - @IT</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

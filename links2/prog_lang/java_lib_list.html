@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Java関連の世界観３B（コレクションと配列） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３B（コレクションと配列）</h1>
+<p>Javaによるプログラミングに関する世界観３B（コレクションと配列）です。<a href="java_lib.html">Javaの世界観３（クラスライブラリ）</a>や<a href="java.html">Javaの世界観１（言語）</a>や<a href="java_oop.html">Javaの世界観２（オブジェクト指向）</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>コレクションと配列</h1>
+<h2>基本構造</h2>
+<table class="some_tables">
+<tr><th>構造</th><th>クラス</th><th>解説</th></tr>
+<tr><td>List</td><td>ArrayList, LinkedList</td><td>要素を順番付けして管理する。<br>ArrayListは取得が速い代わり編集が遅い。<br>LinkedListは取得が遅い代わり編集が速い。</tr>
+<tr><td>Map</td><td>HashMap, TreeMap</td><td>要素をキーと値をセットにして管理する。<br>TreeMapは自動ソートされる。</tr>
+<tr><td>Set</td><td>HashSet, TreeSet</td><td>要素を順番付けせずに管理する。<br>TreeSetは自動ソートされる。</tr>
+</table>
+<ul>
+<li><a href="https://java-reference.com/java_collection_compare.html">コレクションクラスの比較 - Javaちょこっとリファレンス</a></li>
+</ul>
+
+<h2>イテレータ</h2>
+<p>Iteratorインタフェースは、コレクション内の要素に順番にアクセスする手段を提供する。</p>
+<p>以下のようになる。</p>
+<pre class="prettyprint">
+for (Iterator i = c.iterator(); i.hasNext();) {
+    i.next();
+    i.remove();
+}
+</pre>
+<p>Iteratorインターフェースは、次の要素があるかどうかの確認であるhasNext()、次の要素を返すnext()、最後の要素を削除するremove()を使うことができる。</p>
+<p>Listインタフェースを実装したクラスの場合、機能を拡張したListIteratorを利用出来る。Iteratorは後方への順次アクセスのみをサポートしているが、ListIteratorは前方への順次アクセスもできる。また、Iteratorでは削除しかできないが、ListIteratorは追加・変更もできる。ListIteratorは現在位置を知らせるメソッドもある。</p>
+<ul>
+<li><a href="http://www.javaroad.jp/java_collection5.htm">Javaの道：コレクション・フレームワーク（５．Iteratorインタフェース）</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

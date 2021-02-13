@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>AltJS/TypeScript関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>AltJS/TypeScriptの世界観</h1>
+<p>AltJS/TypeScriptによるプログラミングに関する世界観です。</p>
+<p><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>AltJS</h1>
+<h2>JavaScript代替言語とは</h2>
+<p>JavaScript代替言語は、AltJSとして知られ、「ブラウザで動くJavaScriptをもっと別の言語で書きたい」というニーズにこたえている。</p>
+<p>たとえば、JavaScriptではプロトタイプベースの「とても特殊」なオブジェクト指向を用いるが、「C#やJavaのような静的型付けのクラスベースなオブジェクト指向開発がしたい」というニーズが、特に会社のシステム開発などでは多く見られる。この時、AltJSのTypeScriptを使うことができる。</p>
+<p>また、TypeScriptは単なるAltJSではなく、「JavaScriptフレームワークの採用言語」でもある。ここでは、GoogleやFacebookなどが作ったAngularやReact/Vue.jsのような「クライアントサイドでのフレームワーク」を用いた時に、TypeScriptを使うことになる。特にAngularでは全面的にTypeScriptが採用されており、Angularを使う開発者は必然的にTypeScriptを学ばざるを得ない。</p>
+
+<h2>TypeScriptの意味</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p><!--また、-->RubyやLaravelなどは、C++やJavaと同様のクラスベースのオブジェクト指向を行うが、JavaScriptでは、クラスベースではなくプロトタイプベースのオブジェクト指向を採用している。</p>
+<p>クラスのメンバ変数とメソッドを用いることなく、JavaScriptではプロトタイプを作成することでオブジェクト指向ができるが、従来のプログラミングとは異なるため、クラスベースのオブジェクト指向を行うためにTypeScriptと呼ばれる言語を用いる。</p>
+<p>また、C++やJavaには型がある（静的型付け）が、JavaScriptには型が無い（動的型付け）。</p>
+<p>動的型付けはプログラムの開発が簡単であるというメリットがあるが、多くの場合、静的型付けの方がプログラムの信頼性や保守性が向上し、たとえばプログラムとプログラムを結合した際にもバグがでることが少ない。</p>
+<p>このため、TypeScriptではJavaScriptにおいても静的型付けを実現できる。</p>
+<p>TypeScriptでは、TypeScript独自の型のチェックをした後で、TypeScriptコードがJavaScriptコードに変換される。</p>
+<p>以前のトレンドでは、RubyやPythonといった動的型付け言語が、プログラムの書きやすさといった点から流行していたが、最近は大規模なプログラム開発において静的型付けが再流行しており、RubyやPythonといった動的型付け言語でも、型アノテーションや型宣言ファイルを用いて、静的型解析を行うことが一般的になりつつある。</p>
+
+<h1>TypeScript</h1>
+<h2>TypeScript</h2>
+<p>Microsoftによる、JavaScriptの代替言語。</p>
+<p>JavaScriptがクラスベースではないプロトタイプベースのオブジェクト指向をするのに比べて、TypeScriptはクラスベースのオブジェクト指向を行うことが出来る。静的型付けであると考えて良い。</p>
+<p>GoogleによるDartと言う似たような言語プロジェクトもある。</p>
+
+<h2>型付けされた変数宣言</h2>
+<p>以下は<a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考に執筆・引用しました。</p>
+<p>基本的に、</p>
+<pre>
+var 変数 : 型 ;
+var 変数 : 型 = 値 ;
+</pre>
+<p>のように、変数名の後にコロンを付け、型名を記す。</p>
+<p>TypeScriptでは、JavaScriptのコードを変数の型を指定して記述しますが、型はコンパイル時にチェックされるだけで、生成されるJavaScriptコードは型を指定しない場合と全く同じです。注意してください。</p>
+<p>配列にも型を設定できるほか、型の別名であるエイリアスを使うことができる。列挙型やタプルも使うことができる。タプルは、配列の1つ1つの要素に型を指定したようなもので、データベースのレコードのように異なる値のセットを利用出来る。</p>
+<p>後日注記：また、TypeScriptでは単に変数や関数に型を指定できるだけではなく、class構文を使ったクラスベースのオブジェクト指向もできる。クラスベースはプロトタイプベースよりも劣ったものでは決してなく、class文を使った方がオブジェクトの要素や構造をすっきりと書ける。</p>
+
+<h2>TypeScriptの型</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/11より。</p>
+<p>TypeScriptについて勉強した。</p>
+<p>TypeScriptの型は、number, boolean, string, any, voidなどを使う。</p>
+<p>これを、変数なら変数名の後に、関数定義なら引数名やカッコの後ろに、コロンをつけて記述する。</p>
+<p>配列はnumber[]とする。</p>
+<p>オブジェクトの場合、interfaceを記述し、それぞれの要素に型名を記述し、名前を付けてDataなどとし、変数名の後に、このDataを付ける。</p>
+<p>この時、?を付けることで、あってもなくても構わない要素とすることができる。</p>
+<p>nullを許容するにはstring | nullとする。</p>
+<p>明示的にnullを許容しない限り、nullは許容されないため、nullチェックをする必要はない。</p>
+<p>そして、TypeScriptはJavaScriptのスーパーセットであり、JavaScriptモジュールを利用できるが、JavaScriptモジュールは当然ながらJavaScriptで書かれているため、型情報がない。</p>
+<p>このようなモジュールのために、型定義ファイル（型宣言ファイル）が利用できる。</p>
+<p>これはC言語のヘッダファイルのようなもので、関数などが型とともに記述されている。</p>
+<p>TypeScriptでは、npmでモジュールを導入する際に、モジュールだけでなく、型定義ファイルも追加的にインストールする。</p>
+<p>TypeScriptで書かれたtsファイルは、tscでjsにコンパイルする。</p>
+<p>たとえば、npx tscを使う。</p>
+<p>この際に型チェックが行われる。</p>
+<p>また、VS-Codeでは、コードを書いている際に、型が間違っている時にその部分を教えてくれる。</p>
+<p>以上は、以下の動画を見て、自分なりに書きました。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=FSTrSYwqhLg">TypeScript超入門 覚えることは9個だけ！ - YouTube</a></li>
+</ul>
+
+<h2>TypeScriptのクラス文</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/11より。</p>
+<p>TypeScriptでは、このほか、列挙型、タプル型、ジェネリクス型、可変長引数、などを利用できる。</p>
+<p>また、TypeScriptでのオブジェクト指向では、class文を用いて、クラスベースのオブジェクト指向が可能。</p>
+<p>クラスにはコンストラクタ、メソッド、プロパティがあり、継承やオーバーライドも可能。</p>
+<p>インスタンスをnewで生成でき、getやsetも使うことができる。</p>
+<p>そして、インターフェースを使うことで、メソッドやプロパティを必ず実装しなければならないように、強制できる。</p>
+<p>TypeScriptでは、インターフェースも型として扱われる。</p>
+<p>以上は、以下の書籍を参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+</ul>
+
+<h1>その他のAltJS</h1>
+<h2>Dart</h2>
+<p><a href="javascript_framework_dart.html">Dart</a>を参照のこと。</p>
+
+<h2>Elm</h2>
+<p><a href="elm.html">Elm</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>AltJS（TypeScript, Dart, Elm）</h2>
+<p>TypeScriptなどはJavaScriptでクラスベースの静的型付け言語を実現する</p>
+<p>TypeScriptではコンパイルされた後は型情報は残らず、コンパイルの時にチェックして通常のJavaScriptを吐く</p>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

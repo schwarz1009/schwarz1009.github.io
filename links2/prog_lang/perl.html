@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Perl関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div><h1>Perlの世界観</h1>
+<p>Perlによるプログラミングに関する世界観です。<a href="perl_cgi.html">Perl/CGI</a>も参照のこと。</p>
+<p><a href="http://www.tohoho-web.com/wwwperl.htm">とほほのperl入門</a>、<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考にしています。</p>
+
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Perlとは</h1>
+<h2>プログラミングの基本が分かる入門者のとびら</h2>
+<p>Perlは、インタープリタ式のスクリプト言語で、プログラミング入門者から熟練のプログラマまで、多くのプログラマに広く使われている言語です。</p>
+<p>実際のところ、「Perlを一度触るとプログラミングの基本が分かる」ということが言えます。</p>
+<p>プログラミングを行う上で、プログラミングとはどのようなものなのか、どのようにコードを書いて実行するのか、ということが分かりやすいため、「入門者向き」と言えます。</p>
+<p>PerlはUNIXのフィルターコマンドやシェルスクリプトやsedコマンドなどの考え方をベースとしているため、標準入出力やファイル処理など、Perlの教科書にはUNIXの用語が飛び交うこともしばしばです。そのため、UNIXの基本的な知識を知っていれば、習得の助けとなります。</p>
+<p>また、PerlはUNIXのフィルターコマンドと同様に、パイプなどで他のUNIXコマンドやシェルスクリプトと組み合わせて、Perlスクリプトを使えます。このため、「このコマンドで実行した結果を簡単に再処理したい」といった場合に、Perlで簡単なスクリプトを書いてその中に「はめこむ」といった使い方をすることができ、システム管理に役立ちます。</p>
+<p>C/C++言語などと違い、Perlには変数の型指定がなく、型はその場その場で動的に決まります。ですから、</p>
+<pre class="prettyprint">
+$sentence=("123"."567")x2;
+</pre>
+<p>として"123567123567"という文字列を作った後で、それを</p>
+<pre class="prettyprint">
+$sentence+=3;
+</pre>
+<p>などとし、「数値を文字列にし、その上でまた数値にする」といったことができます。</p>
+<p>Perlは正規表現も強力で、「リスト@listの中のisという文字列が含まれている要素を表示する」のようなことをパターンマッチングで処理することができます。</p>
+<p>正規表現は、たとえばログファイルやUNIXの設定ファイルのように、「ある一定の形式で書かれているテキストを整形する」場合に役に立ちます。これはUNIXでは多くの場合タブや空白で区切られており、場合によってはawkやsedなどでも処理できるところを、より高度にPerlで行うこともできます。</p>
+<p>PerlはUNIXと親和性が高く、UNIXシステムでは最初からインストールされていることがほとんどですが、Windowsからも使えます。ActiveState社のActivePerlとStrawberry Perlがあり、僕個人の意見ではStrawberry Perlがおすすめです。ActivePerlのように導入のためにアカウントを作成する必要が無く、msiファイルだけをダウンロードして実行することで簡単に導入でき、必要なバイナリはgccなども含めて全てインストールされるため、CPANのあらゆるモジュールを利用できます。僕もWindowsにおけるPerlはStrawberry Perlを使っています。</p>
+<ul>
+<li><a href="http://strawberryperl.com/">Strawberry Perl for Windows</a></li>
+<li><a href="https://tutorial.perlzemi.com/blog/20180808153368.html">Strawberry PerlをWindowsにインストールする - Perl入門ゼミ</a></li>
+</ul>
+
+<h2>ラリー・ウォールの遊び心がいっぱい</h2>
+<p>Perlの特徴として、Perlの作者のラリー・ウォールの遊び心がいっぱいである、ということが言えます。</p>
+<p>各所に面白くするための工夫が見られて、省略など多くの「多様なやり方」があります。</p>
+<p>UNIXとも親和性が高く、処理速度もスクリプト言語の中では高速なので、Perlの愛好家は今でもたくさんいます。</p>
+<p>最近はPythonやRubyなど新しい言語がどんどん増えていますが、彼らは「多様性よりも自然さ」を好み、「自然でない記述は書きづらくする」といったことを行っています。それが悪いわけでは全くありませんが、Perlの遊び心がPythonやRubyでは失われているように感じます。</p>
+
+<h2>Perlの言語的位置づけ</h2>
+<p>Perlは、UNIXでは古くから、あるプログラムとあるプログラムの間をノリのようにくっつけて取り持つ「グルー言語」として使われます。</p>
+<p>Perlは正規表現やファイル処理などを簡単に記述することができ、省略構文やデフォルト変数などを上手く使うことで、強力なテキスト処理・ファイル処理を行うことができます。</p>
+<p>こうした理由のため、grep, sed, awkなどでは簡単にできないような、決まりきった定型処理を巨大なテキストや膨大なファイルにバッチ処理のように行う時、シェルスクリプトなどの代わりにPerlを使って柔軟な自動処理を実現できます。</p>
+<p>また、Perlの正規表現は「ある決まりをもった構造的なデータの処理」を得意としており、そのためログファイル、メールヘッダ、設定ファイルなどを処理・加工することに適しています。</p>
+<p>要するに、「UNIXアドミニストレータが楽をするための言語」です。</p>
+<p>また、Perlは、Webサーバ上で動的なHTMLを自動生成するCGIと呼ばれる仕組みを開拓した存在です。CGIは昔はPerlで書かれたものが一般的でした。今ではHTMLの中にスクリプトを埋め込めるPHPが登場し、プロセス単位でプログラムを実行するPerl/CGIよりもサーバーの中でスレッドを作成するPHPやJavaサーブレットが登場したこともあり、Perlで新しく作られることは少なくなっていますが、インターネット上ではPerlで作られたフリーの配布スクリプトなどが今でも配布されています。こうしたPerl/CGIで書かれたCGIでWebプログラマへの道を志した人も多いと思います。</p>
+<p>しかしながら、Perlには欠点があります。それは、記号が多く、記述の自由度が高く、省略構文や他の言語にはない仕様が多いため、難読化されたような「他人には絶対に分からないような分かりづらい（そして醜い）コード」になることが多いのです。</p>
+<p>また、Perlのオブジェクト指向は後から追加されたものであり、PythonやRubyのオブジェクト指向に比べてエレガントでありません。</p>
+<p>また、今やWebサービスはWebフレームワークで開発することが一般的になっており、LaravelやRuby on RailsやDjangoなどが一般的です。特に、人工知能やデータサイエンスのためのライブラリが豊富なPythonを、Djangoと組み合わせてWebサービスを構築することが最近は増えています。クライアントサイドで使われていたJavaScriptを、Node.jsなどを用いてサーバーサイドで使うことも増えています。JavaScriptには欠点もありますが（数値型の種類が少なくクラスベースのオブジェクト指向でないなど）、TypeScriptなどを使うことで補うことができます。</p>
+<p>そのような理由で、Perlは既に旧来の言語になろうとしています。</p>
+<p>しかしながら、Perlには「言語仕様として面白い要素」がたくさんあります。また、昔はPythonではなくPerlがプログラミング初学者にとっておすすめの言語でした。そのため、プログラマを目指すのであれば、一度学んでおいて損はない言語です。古くからの言語であるため、書籍も多く、ラクダ本のような決定的バイブルもあり、入門的な書籍もたくさんあるため、初心者にとっては学びやすいでしょう。</p>
+
+
+<h1>主な用途</h1>
+<h2>簡単な処理スクリプト</h2>
+<p>sedやawkライクなスクリプト言語として、簡単な処理スクリプトに良く使われる。</p>
+<h2>正規表現の利用</h2>
+<p>正規表現を手軽に使うために良く使われる。</p>
+<h2>CGIやスクリプトの利用</h2>
+<p>サーバーサイドのPerl/CGIによるブラウザアプリケーションや、ネットで配布されている掲示板などのスクリプトの実行環境として良く使われる。</p>
+
+<h1>Perlの基本</h1>
+
+<h2>Perl</h2>
+<p>Perlについて。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Perl">Perl - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://perl5.git.perl.org/perl.git">git</a></li>
+</ul>
+
+<h2>入門</h2>
+<p>Perl言語の入門。</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/perlcodesample/">Perl学習サイト - サンプルコードPerl入門</a></li>
+<li><a href="http://www.kent-web.com/perl/">Perl基礎入門 | KentWeb</a></li>
+</ul>
+<h2>Perl/CGI</h2>
+<p>PerlはWebサーバーのCGIとして実行されることが多いです。</p>
+<ul>
+<li><a href="http://www.kent-web.com/perl/chap1.html">第1章 Perlの概要 - Perl基礎入門 - KentWeb</a></li>
+</ul>
+
+<h2>推奨されている記述</h2>
+<p>Perlでは、以下の二行を常に書くことが推奨されている。
+<pre class="prettyprint">
+use strict;
+use warnings;
+</pre>
+<p>strictは潜在的な問題をコンパイル時に調べる。warningsは警告を表示する。</p>
+
+<h2>シングルクォーテーションとダブルクォーテーション</h2>
+<p>Perlでは、文字列を</p>
+<pre class="prettyprint">
+'text'
+</pre>
+<p>とシングルクォーテーションで囲った場合、\'と\\を除いて変数や特殊文字の展開などがされないが、</p>
+<pre class="prettyprint">
+"$value\n"
+</pre>
+<p>とダブルクォーテーションで囲った場合は、変数や特殊文字の展開がされる。</p>
+<p>このため、変数の中身を表示したい時は</p>
+<pre class="prettyprint">
+print "$value\n";
+</pre>
+<p>のように実行する。</p>
+
+<h2>算術演算子</h2>
+<p>Perlの算術演算子には、+, -, *, /, %, **などがあるほか、インクリメント・デクリメント演算子である++や--もある。</p>
+
+<h1>変数</h1>
+<h2>変数と代入</h2>
+<p>Perlでは変数の頭に$をつけます。</p>
+<p>Perlでは数値や文字列のような単純なデータをスカラーデータと呼び、その変数をスカラー変数と呼ぶ。Perlにはスカラー変数、配列、連想配列（ハッシュ）の3つの変数が存在する。</p>
+
+<h2>配列とリスト</h2>
+<p>配列（リスト）には@をつけます。</p>
+<p>1..4のように書くと(1, 2, 3, 4)というリストを表す。また@array[1, 2, 3]と書くとリストの2, 3, 4番目の要素からなるスライスを作ることができる。添え字は0から始まり、$list[0]は一番目の要素を表す。逆からアクセスする時は$list[-1]などのように-1から始まる。</p>
+
+<h2>ハッシュ</h2>
+<p>ハッシュには%をつけます。</p>
+<p>リストでは[]を添え字に使うが、ハッシュでは{}を添え字に使う。@arrayの最初の要素は$array[0]となり、%hashのキーschwarzの値は$hash{'schwarz'}となる。値は重複してもよいがキーは重複できないため、同じキーに対する値の代入は追加ではなく上書きになる。</p>
+
+<h2>push/pop/shift/unshift</h2>
+<p>pushとpopはスタックをあつかうための関数。pushは配列の最後に要素を付け加え、popは配列の最後から要素を取り出す。</p>
+<p>また、shiftは配列の最初の要素を取り出し、unshiftは配列の最初に要素を追加する。</p>
+<p>pushとshiftを使うことで、スタックではなくキューを実現できる。</p>
+
+<h2>splice</h2>
+<p>また、配列の途中から要素を抜き出したり、要素を挿入するには、spliceという関数を使う。
+<p>spliceを上手く使うことで、配列が楽に操作できる。</p>
+
+<h2>reverse/sort</h2>
+<p>reverseはリストを逆順にする関数。</p>
+<p>sortはリストをソート（並び替え）する関数。</p>
+<p>リストを逆順でソートしたい場合は、sortしたリストに対してさらにreverseをかける。reverse(sort(@list))のようになる。
+
+<h2>srandとrand</h2>
+<p>rand関数を使うことで、乱数（ランダムな値）を発生させることができる。</p>
+<p>rand関数を使う前に、srand関数を使ってrand関数の初期化を行う。</p>
+<p>以下は僕の書いたコード。rand()は浮動小数点数を返すため、int()で型を変換している。</p>
+<pre class="prettyprint">
+for ($i = 0; $i &lt; 10; $i++) {
+  srand();
+  $x = int(rand(2));
+  if ($x == 0) {
+    print "攻撃が命中した！\n";
+  } elsif ($x == 1) {
+    print "攻撃は外れた！\n";
+  }
+}
+</pre>
+
+<h1>繰り返しと条件分岐</h1>
+<h2>forとwhile</h2>
+<p>繰り返しは、C言語と同じfor文を用いる。whileを使って繰り返しを行うこともできる。</p>
+<p>またuntil文やdo文を使うこともできる。次の繰り返しの前に何かを行いたい時はcontinueブロックに記述できる。リストの全要素に処理をかけたい時は、インデックスを用いずにforeach文を使う。</p>
+<p>foreach文はリストに対してひとつひとつの要素に繰り返し処理を行うことができる。また、ファイルハンドラを使うことでファイルの各行に処理を行うこともできる。</p>
+<p>foreach文のひとつひとつのインデックス変数は省略した場合$_からアクセスできる。またインデックス変数は複製ではなく別名であるため、要素を書き換えて代入するためにも使える。</p>
+<p>リストの全てに処理を行って別のリストを作りたい時はmap関数を使うのが便利。</p>
+<p>C言語におけるbreakはlast、continueはnextが同等の文に相当する。</p>
+
+<h2>if ～ elsif ～ else</h2>
+<p>条件式はif ～ elsif ～ elseで行う。</p>
+<p>unless文はif文と逆の意味で使える。</p>
+<p>条件式は==（等値）が=（代入）とは別の演算子であることに注意しよう。また条件式の範囲に注意。$x &gt;= 3と$x &gt; 3はまったく範囲が異なる。</p>
+
+<h1>ファイル入出力</h1>
+<p>「とほほのperl入門」を参考に執筆・引用しました。</p>
+
+<h2>ファイル入力</h2>
+<p>ファイル入力。</p>
+<pre class="prettyprint">
+open(IN, "data_file.txt") or die "$!";
+while ($x = &lt;IN&gt;) { print $x; }
+close(IN);
+</pre>
+<p>Perlではリストが入るべき場所に&lt;FILE&gt;と記述されていると、対応するファイルハンドルから全部の行を読み込む。またスカラーコンテキストで$x = &lt;IN&gt;と記述されているとファイルから一行読み込む。ファイルハンドルはopenで開き、closeで閉じる。</p>
+<p>ファイルではなくディレクトリを扱う場合は、opendir, readdir(DIR), closedirなどとする。ファイル一覧の取得にはglob関数も便利。</p>
+<p>また、$x = &lt;STDIN&gt;とすることで、標準入力から一行読み込める。代入されるコマンドライン入力行には改行が含まれているので、chomp関数を使って改行を取り除く。</p>
+<p>後日注記：or dieはエラー処理。ファイルが存在しなかった場合などに呼ばれる。</p>
+
+<h2>ファイル出力</h2>
+<p>ファイル出力。</p>
+<pre class="prettyprint">
+open(OUT, "> data_file.txt") or die "$!";
+print(OUT "メッセージ投稿１\n");
+close(OUT);
+</pre>
+<p>掲示板を作る時などは、スレッドを示すファイルにどんどん投稿のHTMLを追記していけば簡単に作れる。</p>
+<p>後日注記：ファイル名に&gt;を付加するだけで、書き込みオープンが実現できる。</p>
+
+
+<h1>サブルーチン</h1>
+<h2>サブルーチン</h2>
+<p>サブルーチンには&をつけます。</p>
+<p>Perlのサブルーチンでは、関数を呼び出した時に渡す引数は、サブルーチンの中では@_というリストに格納される。これを、$_[0]や$_[1]のようにアクセスできる。@_はサブルーチンの中のローカル変数で、参照はできるが代入はできない。与えられていない要素はundef（定義されていない）となる。</p>
+<p>サブルーチンの&は省略することもできます。</p>
+<p>my変数を用いると、その変数がサブルーチンの内部だけで使われるものであることを表すことができる。</p>
+
+<h2>requireとuse</h2>
+<p>別のファイルのサブルーチンを使うには、requireを使う。requireでファイルを読み込むと、ファイルの中に記述されたサブルーチンが使えるようになる。</p>
+<p>モジュールを使う時はuseを使う。</p>
+
+<h1>正規表現</h1>
+<p>Perlは強力な正規表現が使えることで有名。</p>
+<ul>
+<li><a href="http://www.kent-web.com/perl/chap7.html">第7章 正規表現 - KentWeb</a></li>
+</ul>
+
+<h2>正規表現の例</h2>
+<p><a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考に執筆しました。</p>
+<pre class="prettyprint">
+$str = 'whoever';
+if ($str =~ /who/) {
+    print "マッチしました。\n";
+else {
+    print "マッチしませんでした。\n";
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+マッチしました。
+</pre>
+<p>$&は特殊な変数で、マッチした範囲を取り出すことができる。パターンマッチを行うと自動的に設定される。</p>
+<pre class="prettyprint">
+$str = 'My age is 27.';
+if ($str =~ /\d+/) {
+    print "$& is the number.\n;
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+27 is the number.
+</pre>
+</blockquote>
+<p>以下は正規表現による置換の例：</p>
+<pre class="prettyprint">
+$str = "Who is he.\n";
+$str =~ s/he/she/;
+print $str;
+</pre>
+<p>このように、s///構文を使うことで簡単に正規表現による置換ができる。また、パターンの末尾に</p>
+<pre class="prettyprint">
+$str =~ s/he/she/g;
+</pre>
+<p>のように修飾子を付けることができる。</p>
+<table class="some_tables">
+<tr><th>修飾子</th><th>意味</th></tr>
+<tr><td>/g</td><td>繰り返してパターンマッチを行う</td></tr>
+<tr><td>/s</td><td>文字列を一行として扱う（.が改行にもマッチする）</td></tr>
+<tr><td>/m</td><td>文字列を複数行として扱う（改行を区切りとした複数行として扱う）</td></tr>
+</table>
+<p>また、tr///による置換を行うことで、大文字と小文字を変換したりすることができる。</p>
+<pre class="prettyprint">
+$str =~ tr/A-Za-z/a-zA-Z/;
+</pre>
+<p>ほかにも、HTMLタグを消したい場合などは以下のような正規表現が使える。</p>
+<pre class="prettyprint">
+$str =~ s/&lt;[^&gt;]*&gt;//g;
+</pre>
+<p>Perlではデフォルト引数$_を上手く使うことで、まったく変数を使わなくても、「それに対してそれを処理する」ような形で処理を行うこともできる。たとえば、</p>
+<pre class="prettyprint">
+while (&lt;STDIN&gt;) {
+    if(/^ID:/) {
+        print;
+    }
+}
+</pre>
+<p>などとできる。</p>
+<p>パターンを()でかこって、$1や$2などから複数のマッチした場所を後で使うこともできる。パターンマッチの中で置換する場合などは$1ではなく\1を使うことに注意。</p>
+<p>正規表現については<a href="../linux/regex.html">正規表現</a>のページを参照のこと。</p>
+
+<h2>joinとsplit</h2>
+<p><a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考に執筆しました。</p>
+<p>ちなみに、あるパターンで区切られている文字列をリストにしたい場合は、</p>
+<pre class="prettyprint">
+@score = split(/,/, '90,95,65');
+print "@score\n";
+</pre>
+<p>のようにする。これは,で区切られた文字列を複数の文字列にする。また、joinを使うことで、複数の文字列を1つに連結できる。</p>
+<pre class="prettyprint">
+print join(':', @array);
+</pre>
+<p>splitに//を与えた場合、1文字（1バイト）ずつ切り出したリストを作ってくれる。このため、以下のようにできる。</p>
+<pre class="prettyprint">
+$line = 'Hello, schwarz!';
+@array = split(//, $line);
+print join(':', @array);
+</pre>
+<p>実行結果：</p>
+<pre>
+H:e:l:l:o:,: :s:c:h:w:a:r:z:!
+</pre>
+
+
+<h1>リファレンス</h1>
+
+<h2>リファレンスの基本</h2>
+<p>リファレンスは、データに直接アクセスするのではなく、データの存在するメモリアドレスをスカラ値として定義する変数。</p>
+<ul>
+<li><a href="https://tutorial.perlzemi.com/blog/20100930127859.html">リファレンスと多次元データ構造 - Perl入門ゼミ</a></li>
+</ul>
+<p>リファレンスを作るためには、変数に\をつける。リファレンスはスカラー変数となる。</p>
+<pre class="prettyprint">
+@nums = (10, 20, 30);
+$ref1 = \@nums;
+$ref2 = $ref1;
+</pre>
+<p>$ref1と$ref2は同じ配列を指す。</p>
+<p>配列のリファレンスを作成するためには以下のように[]を使うことができる。</p>
+<pre class="prettyprint">
+$ref = [10, 20, 30];
+</pre>
+<p>デリファレンスを行うためには、@{配列のリファレンス}とする。リファレンスがスカラー変数の場合、{}を省略できる。</p>
+<ul>
+<li><a href="https://tutorial.perlzemi.com/blog/20180214151861.html">配列のリファレンス - Perl入門ゼミ</a></li>
+</ul>
+<p>配列ではなく、スカラー、ハッシュ、サブルーチンの場合は、</p>
+<pre class="prettyprint">
+\$scalar
+\%hash
+\&sub
+</pre>
+<p>として定義し、デリファレンスするためには
+<pre class="prettyprint">
+$$scalar_ref
+%$hash_ref
+&$sub_ref(1, 2)
+</pre>
+<p>などとする。</p>
+
+
+<h1>オブジェクト指向</h1>
+<h2>オブジェクト</h2>
+<p>リファレンスとパッケージを組み合わせることにより、Perlでオブジェクト指向プログラミングを行うことができる。</p>
+<p>オブジェクトを生成するにはbless関数を使う。コンストラクタは、blessされたリファレンスを返す。そしてコンストラクタ、アクセサ、メソッドは、第一引数にオブジェクトへのリファレンスを取る。</p>
+<p>第一引数にオブジェクトへのリファレンスを取るとは、たとえば以下のようなコードがあったとして、</p>
+<pre class="prettyprint">
+my $cat = Cat-&gt;new();
+$cat-&gt;mew();
+</pre>
+<p>とした時、Cat::mew()の第一引数が$catとなる（要するにCat::mew($cat)となる。）</p>
+<p>このCatは以下のように実装する。</p>
+<pre class="prettyprint">
+package Cat;
+
+sub new {
+  my $class = shift;
+  my $self = {
+        hello =&gt; 'mew',
+        @_,
+  };
+  return bless $self, $class;
+}
+
+sub mew {
+  my $self = shift;
+  
+  print $self-&gt;{hello};
+}
+1
+</pre>
+
+<h2>Object::Simple</h2>
+<p>以下のサイトでは、Object::Simpleというモジュールを用いて、オブジェクト指向を実現している。</p>
+<ul>
+<li><a href="https://tutorial.perlzemi.com/blog/20130305136248.html">オブジェクト指向入門 - Perl入門ゼミ</a></li>
+</ul>
+
+
+<h1>実行と評価</h1>
+<h2>system関数</h2>
+<p>system関数を使うことで、Linuxのシェル入力のように新しいプロセスを実行できる。</p>
+<ul>
+<li><a href="https://tutorial.perlzemi.com/blog/20180124151680.html">system関数 - 別プロセスを実行する - Perl入門ゼミ</a></li>
+</ul>
+<p>後日注記：プログラムの実行後の出力を得たい時は、バッククォートを使って`～`とする。</p>
+
+<h2>eval</h2>
+<p>evalを使うことで、文字列の格納された変数をPerlの文として実行できる。</p>
+
+<h1>ライブラリ集</h1>
+<h2>CPAN</h2>
+<p>Perlのライブラリやモジュール、Perlで書かれたソフトウェアのアーカイブ。</p>
+<ul>
+<li><a href="https://www.cpan.org/">CPAN</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>CGI</h2>
+<p><a href="perl_cgi.html">Perl/CGI</a>を参照のこと。</p>
+
+
+<h1>その他</h1>
+<h2>コンテキストによって変わる人間臭い言語</h2>
+<p>Perlの文法は文脈（コンテキスト）のよって変化する場合があり、このため「人間臭い言語」として知られている。たとえば、配列へ代入する場合はリストコンテキストで、スカラー変数へ代入する場合はスカラーコンテキストで評価される。一行ずつ読み出すか全体全てを読み出すかがコンテキストによって変わったりする。</p>
+<p>以下のコードは、ファイルハンドルFILEから1行読み出して変数$lineに代入する。</p>
+<pre class="prettyprint">
+$line = &lt;FILE&gt;;
+</pre>
+<p>以下のコードは、ファイルハンドルFILEからすべての行を読み込んで配列@textに代入する。</p>
+<pre class="prettyprint">
+@text = &lt;FILE&gt;;
+</pre>
+<p>後日注記：Perlには型がないが、変数が数値として扱われるか文字列として扱われるかはコンテキストによって決定する。</p>
+<p>（<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考に執筆・引用しました。）</p>
+
+<h2>準クロージャとしてのグローバル変数</h2>
+<p>Perlでは、グローバル変数を多用することで、オブジェクト指向を行わなくても、容易にデータの共有ができる。</p>
+<p>これは、RubyやJavaScriptにおける、クロージャと良く似ている。僕は、これを「グローバル変数による準クロージャ機能」と呼んで良いと思う。</p>
+<p>Perlでは、グローバルスコープに変数や関数の宣言が置かれるため、どの関数からも同じ変数を参照することができて、簡単かつ、プログラミング初心者が自分のコードを書く上で、分かりやすい。</p>
+<p>だが、これは小規模なスクリプト言語だからなせる業である。もっと大規模なプログラミングを行う上では、どの関数群がどの変数の宣言を共有するのか、きちんと分けて考えないといけない。そのためには、JavaやC++のような、名前空間やパッケージ、そしてオブジェクト指向のクラスとそのメンバとインスタンスの考え方の導入が必要である。</p>
+<p>これは、CとC++の関係にも言える。Cでは、さまざまな関数で同じ変数を共有するためには、グローバル変数を使うか、あるいは構造体のポインタを使う。プロトタイプ宣言はヘッダファイルに書かれている。だが、この方法では、開発者やその保守をする人が、プログラミングの実装の詳細について詳しく分かっていなければならない。JavaやC++のオブジェクト指向を使えば、それを隠蔽し、カプセル化することができる。</p>
+
+<h2>ラクダ本</h2>
+<p>Perlはプログラミング初心者に有用である。Perl作者のラリー・ウォールが書いた「プログラミングPerl」というラクダ本（オライリーの表紙がラクダなのでそのように呼ばれている）は、今でもプログラミング言語のバイブル的存在である。</p>
+
+<h2>Perl 6 (Raku)</h2>
+<p>新しいPerl。Perlの作者ラリー・ウォールが15年の歳月を経てリリースした伝説の新バージョン。</p>
+<p>ラリー・ウォールは、Perl 6と呼ばれるPerlの後継バージョンを15年考えて開発した。最近リリースはされたが、本質的なところはPerl 5の雰囲気が残っている。Parrotと呼ばれる「軽量プログラミング言語のための共通仮想マシン」も作られていたが、それはどうなったのか定かではない。だが、Perl陣営は今でも頑張っている、ということは言えるだろう。</p>
+<ul>
+<li><a href="https://perl6.org/">The Perl 6 Programming Language</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/perl-hackers-hub/003901">第39回　Perl 6の歩き方―15年越しでリリースされた新バージョン（1）：Perl Hackers Hub｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>Perl 6の正式名称はRakuに決定した。これにより、Perl 6がPerl 5の後継バージョンではなく別の言語であることが明確になった。名称の由来は日本語の「楽」からである。僕の憶測だが、おそらく「ラクダ」からつけたかったのではないかと思う。ラクダは楽だ。</p>
+
+<h1>サンプルコード</h1>
+<h2>簡単な計算プログラム</h2>
+<blockquote class="inyou2">
+<p>自分で作った簡単なプログラムです。攻撃力が10のキャラと、攻撃力が1だが「1ターンごとに攻撃力が1上がっていく」キャラが戦って、いつ上がっていく方のキャラが上回るか、を計算する。</p>
+<p>正確にいうと、「いつ上回るかを計算する」というより、その「上回っていく過程」を表示する。</p>
+</blockquote>
+<p><a href="rust.html">Rust</a>で書いたコードをPerlに移植しました。</p>
+<pre class="prettyprint">
+$x = 0;
+$y = 0;
+$count = 1;
+
+while ($count <= 100) {
+  $x += 10;
+  $y += $count;
+  print "$x\t$y\t$count\n";
+  $count++;
+}
+</pre>
+
+<h1>簡単な説明</h1>
+<h2>Perl</h2>
+<ul class="defaultlist list7">
+<li>Perl
+<ul>
+<li>Perl
+<ul>
+<li>シジル</li>
+<li>正規表現</li>
+<li>ファイル処理</li>
+<li>CGI
+<ul>
+<li>Perl/CGIは一時期インターネット上で猛威を振るっていた</li>
+</ul></li>
+<li>オブジェクト指向
+<ul>
+<li>記述は変だが、継承も委譲もできる強力なオブジェクト指向を備える</li>
+</ul></li>
+<li>リファレンス
+<ul>
+<li>Cで言うポインタ。\を使う。</li>
+</ul></li>
+<li>ライブラリ</li>
+<li>CPAN</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>シジル</h2>
+<p>$はスカラー変数、@はリスト、%はハッシュ、&はサブルーチン</p>
+
+<h2>正規表現</h2>
+<p>「=~」で簡単に正規表現処理ができる</p>
+
+<h2>ファイル処理</h2>
+<p>UNIXに慣れ親しんだ人なら直観的に使いやすいファイル処理を行える</p>
+
+<h1>リンク集全般</h1>
+<h2>Perl</h2>
+<p>Perl</p>
+<ul>
+<li><a href="http://www.kent-web.com/perl/">Perl基礎入門 - KentWeb</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/perl-hackers-hub">Perl Hackers Hub - gihyo.jp</a></li>
+</ul>
+
+<h2>Perlリファレンス</h2>
+<p>Perl</p>
+<ul>
+<li><a href="http://perldoc.jp/">perldoc.jp</a></li>
+</ul>
+
+<h1>書籍</h1>
+<h2>Perl</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

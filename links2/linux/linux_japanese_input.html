@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux 日本語入力 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux 日本語入力</h1>
+<p>Linuxの日本語入力に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>オープンソースかな漢字変換</h1>
+<h2>オープンソースかな漢字変換の変遷</h2>
+<p>オープンソースなかな漢字変換の変遷については、以下のPDFの資料が詳しい。</p>
+<ul>
+<li><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a></li>
+</ul>
+
+<h1>入力エンジン</h1>
+<h2>kinput2</h2>
+<p>kinput2+cannaの場合、.xinitrc（コマンドラインからstartxする場合）や.xsession（GUIのディスプレイマネージャからログインする場合）などにインプットエンジンの設定を記述する。</p>
+<pre>
+export XMODIFIERS=@im=kinput2
+kinput2 -canna &
+</pre>
+<ul>
+<li><a href="https://www.netlab.jp/ORCA/technical/input/install.html">インストール - kinput2・canna情報メニュー - 日医標準レセプトソフト - オープンソース・フロンティア - ネットワーク応用通信研究所</a></li>
+<li><a href="http://www.stex.phys.tohoku.ac.jp/~ohba/canna/node2.html">2 canna を使う最低限の設定と使い方 - cannaによる日本語入力</a></li>
+</ul>
+
+<h2>uim/IIIMF/SCIM</h2>
+<p>昔のLinuxは、kinput2+cannaやWnnを使うことが多かったが、その後、uim/IIIMF/SCIMなどの新しい次世代と呼ばれるフレームワークが生まれた。</p>
+<p>かな漢字変換エンジンも、cannaやWnnから新しいAnthyなどを採用するディストリビューションが増えた。</p>
+<ul>
+<li><a href="https://tkng.org/unixuser/200405/part4.html">最適な日本語入力環境を発掘せよ</a></li>
+</ul>
+
+<h2>iBus/Fcitx</h2>
+<p>最近のインプットメソッド（多言語入力エンジン）。Fedora/UbuntuなどのGNOMEなどで日本語入力を行う時は、iBusかFcitxのどちらかと、以下のかな漢字変換エンジンのどれかを組み合わせて使うのが一般的。</p>
+<p>現在のiBus/Fcitxの場合、パッケージマネージャからインストールすることで、簡単にインプットメソッドを導入出来る。iBusはGNOME 3と統合されているため、GNOMEなら簡単にインストールと設定を行うだけで日本語を入力できる。</p>
+
+<h1>昔のかな漢字変換エンジン</h1>
+<h2>Wnn/FreeWnn、Canna、ATOK-Xなど</h2>
+<p>昔あったかな漢字変換エンジンとしては、ワークステーションでも連文節変換をということで開発されたWnnとFreeWnn(1987年)、おバカな変換をするCanna(1990年)、商用のATOK-Xなどがあった。</p>
+
+<h2>SKK</h2>
+<p>特殊な入力方式をするかなかな漢字変換エンジン。SKKを使っているUNIXerには通が多い。</p>
+<ul>
+<li><a href="http://coexe.web.fc2.com/skkfep.html">SKK日本語入力FEP</a></li>
+</ul>
+<p>形態素解析をあえて使わないことで、実際に漢字をボールペンなどで筆記するのに近い入力を行うことができ、ミスが少なくなる。</p>
+
+<h1>今どきのかな漢字変換エンジン</h1>
+<h2>Anthy</h2>
+<p>かな漢字変換エンジン。コミュニティにより活発な開発がされていたが、現在では主要開発者による開発は終了している。</p>
+
+<h2>Mozc</h2>
+<p>かな漢字変換エンジン。グーグルによる日本語入力システム「Google 日本語入力」のオープンソース版として登場。</p>
+<p>後日注記：Googleによる日本語エンジンだが、今では多くのディストリビューションで標準。</p>
+
+<h2>libkkc</h2>
+<p>今どきのかな漢字変換エンジン。Fedoraで標準。</p>
+
+<h1>予測入力システム</h1>
+<h2>PRIME</h2>
+<p>昔からある予測入力システム。最近ではMozcを使うことでも予測入力が可能です。</p>
+
+<h1>コンソール</h1>
+<h2>端末での日本語入力</h2>
+<p>また、ターミナルで日本語入力がしたい時は、uim-anthyとuim-fepなどを試しましょう。「FEP」は昔のDOS時代のコンソールでの日本語入力ソフトの略称です。</p>
+<p>X11なら、昔ながらのkinput2-cannaの設定方法をtwmとかで学ぶ、というのもアリだと思います。</p>
+
+<h2>端末での日本語表示</h2>
+<p>ターミナルでの日本語表示が出来ない時は、コンソール（黒画面）ならjfbterm、X11のtwmのような環境ならrxvt-unicode（あるいはktermなど）、ページャならlvなどを試しましょう。</p>
+<p>後日注記：最近のLinuxでは、jfbtermではなくjのついていないfbtermを使う。Debian 10なら、（コンソールのみのインストールでも）初期インストールで最初から入っていて、設定もされているため、以下のコマンドを実行すれば日本語の表示ができる端末が起動できる。</p>
+<pre>
+$ fbterm
+</pre>
+<p>fbtermやuim-fepなどの詳しい設定方法（フォントの変更など）については以下を参照のこと。</p>
+<ul>
+<li><a href="https://server-setting.info/debian/debian-console-japanease.html">Debian(Ubuntu)で コンソールに日本語表示してみた&nbsp;|&nbsp;レンタルサーバー・自宅サーバー設定・構築のヒント</a></li>
+<li><a href="http://www.green-pen.jp/lang.html">Debian コンソール日本語環境を試してみた fbterm [Green-pen miyagi]</a></li>
+</ul>
+
+<h1>GNOME</h1>
+<h2>日本語入力 (iBus)</h2>
+<p>GNOMEの日本語入力は特殊で、分かっていないと難しく感じるかもしれない。GNOME3 & ibus-mozcの場合は、GNOMEはiBusが統合されているので、コントロールパネルから簡単に設定が可能。</p>
+<ul>
+<li><a href="https://blog.goo.ne.jp/psyna_hone/e/b30dc3a44d1cc7173f50e9aada82d848">Ubuntu GNOMEの日本語入力環境設定 - Hone.のたま～に戯言</a></li>
+</ul>
+<p>後日注記：最近はGNOME3における日本語入力も簡単になって、Ubuntuなどでは何も設定しなくても最初から使えるはず。そんなに気にすべきことはない。</p>
+
+<h2>日本語入力 (fcitx)</h2>
+<p>fcitxの場合は、fcitx-configtoolで設定する。以下の記事を参考にすると良いだろう。</p>
+<ul>
+<li><a href="http://note.kurodigi.com/fedora21-fcitx-anthy/">Fedora 21に日本語入力fcitx-anthyを導入する - クロの思考ノート</a></li>
+</ul>
+
+<h2>日本語入力 (uim)</h2>
+<p>uimは使えないので、Debianでuimなどが入っている場合は、ibusかfcitxに変えよう。uimでも使えると思うなら使っても良い。（僕の場合、入力の候補が思った場所に表示されないのが使えなかった。）</p>
+<p>後日注記：uimは必ずしも厄介者ではなく、さまざまな方式で開発されているLinuxのGUIアプリケーションでは汎用的に使える方である。Debianでuimが採用されているのはそのためで、KDE3派生のTrinityなどでも日本語入力ができる（昔のQtを使っているため。どこかで聞いた話であり、嘘かも）。</p>
+
+<h1>KDE</h1>
+<h2>im-chooserのインストール</h2>
+<p>KDEで日本語が入力できない場合は、im-chooserをインストールしよう。</p>
+<pre>
+$ sudo yum install im-chooser
+</pre>
+<p>自分は最近の情勢を良く知らないので、im-chooserから別のパッケージにもしかしたら変わっているかもしれない。（GNOMEではiBusを統合したため、im-chooserのインストールは必要ない。）</p>
+
+<h1>その他日本語環境</h1>
+<h2>iconvとnkf（文字コードの変換コマンド）</h2>
+<p>文字コードの変換は、iconvやnkfといったプログラムから行える。現在はiconvが標準的だが、nkfの方が古くて昔からある。</p>
+
+<h2>タイムゾーンやロケールの設定</h2>
+<p>タイムゾーンやロケールの設定、それから文字コードの扱い方については、<a href="linux_unix_timezone_locale.html">UNIXシステム管理７（タイムゾーンとロケール）</a>を参照のこと。</p>
+
+<h1>Linuxの日本語入力</h1>
+<h2>Linuxは日本語入力に大きな課題</h2>
+<p>僕がLinuxデスクトップを使っていて思うのは、「Linuxは日本語入力に大きな課題」があるということ。</p>
+<p>標準のGNOMEやGTKアプリケーションで入力できても、Atomなどでは入力できないこともあるし、そもそもきちんと動かなかったり、画面が点滅したり、入力候補が綺麗に表示されないこともある。</p>
+<p>「標準のgeditでは日本語が綺麗に表示されないからAtomを入れたら、そもそも日本語入力自体ができなかった」といった問題がある。</p>
+<p>欧米のLinuxユーザーにはどうでもいいことかもしれないが、日本人ユーザーにとってはLinuxデスクトップの日本語入力問題は大きな課題である。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

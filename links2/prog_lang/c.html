@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>C関連の世界観１（基本） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C言語の世界観（１．基本）</h1>
+<p>C言語によるプログラミングに関する世界観１（基本）です。<a href="cpp.html">C++</a>も参照のこと。</p>
+<p>ツール関係は<a href="c_cpp_tools.html">C/C++ツール</a>に移動しました。</p>
+<p>システムに依存する部分は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>や<a href="windows_programming.html">Windowsプログラミング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>主な用途</h1>
+<h2>OSの開発</h2>
+<p>C/C++は、UNIXやWindowsなどのOSの開発に良く使われる。特に、メモリの操作のような低レベルな処理が可能であることが大きい。</p>
+<h2>ネイティブアプリケーションの開発</h2>
+<p>UNIXやWindowsなどにおいて、ネイティブなアプリケーションの開発に良く使われる。</p>
+<h2>組み込み開発</h2>
+<p>テレビや自動車のような、組み込み機器のような分野で、良く使われる。ただ、最近は「一度書けばどこでも動く」と言う側面から、Javaが使われることも多い。</p>
+<h2>ゲームの開発</h2>
+<p>ゲーム機やゲームソフトの開発にも良く使われる。これはゲームのグラフィックス描画などで、高速な処理が必要だからである。<a href="opengl.html">OpenGL</a>が使われることもある。</p>
+
+<h1>C言語の特徴</h1>
+<h2>C言語はUNIXとともにある</h2>
+<p>C言語はそもそもUNIXというOSを書くために生まれた言語。当初からアセンブラを高い移植性でもっと綺麗に書くことを目標としているため、「綺麗なアセンブラ」のような言語である、という特徴がある。ポインタのようなアセンブラ由来の仕組みを採用し、メモリ管理は自分で行わなければならない。アセンブラ言語については<a href="assembly.html">アセンブラ</a>を参照のこと。</p>
+<p>そもそもがUNIXの言語であったため、UNIXというOSととても親和性が良い。UNIXのAPIであるopen/close/read/writeは、C言語のライブラリAPIにもそのまま考え方として受け継がれている。<a href="../linux/linux_api.html">LinuxのAPI</a>を参照のこと。</p>
+<p>また、Linuxではgccのように、C言語のコンパイラが無料かつオープンソースで用意されている、という点も挙げられる。Linuxでの開発は主にgccとmakeによって行う。Linuxディストリビューションを開発向けに導入するならば、こうした開発環境は必須である。Visual StudioをWindows向けに買うよりもコストが安く、入門者向けである。Linuxはソフトウェアのソースコードもオープンであるため、tarballを解凍してすぐに改造することができる。<a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>や<a href="c_cpp_tools.html">C/C++ツール</a>を参照のこと。</p>
+<p>だが、素のC言語では、コマンドラインでの手続き型プログラムの開発はできるが、オブジェクト指向のような「高度な機能」は用意されていない。この点は、<a href="cpp.html">C++</a>の機能を使う必要がある。また、GUIの開発を行うためには、Xサーバーやそれなりのライブラリを使用しなければならない。<a href="../linux/linux_x11.html">X11</a>、<a href="../linux/gnome.html">GNOME</a>、<a href="../linux/kde.html">KDE</a>を参照のこと。</p>
+
+<h2>Windows向けでもある</h2>
+<p>Windows開発では、C/C++、C#、VB.NETが使われることが多い。<a href="windows_programming.html">Windowsプログラミング</a>を参照のこと。</p>
+
+<h1>難点</h1>
+<h2>自力でメモリを管理しなければならない</h2>
+<p>C/C++言語は、Javaのようなガベージコレクション機能がないため、自分でメモリを管理しなければならない。</p>
+<p>そのため、malloc()やfree()のようなメモリ管理関数を使って、動的に管理する場合は、取得したメモリを自分で解放しなければならない。</p>
+<p>これは、OSのような基盤的プログラムでは、自分でメモリ管理が出来る、と言う意味で良い点だが、アプリケーションとなると、メモリリークの原因になってしまう。</p>
+<p>そのため、Javaのような最初からガベージコレクションが備わっている言語の方が、アプリケーションの開発の意味では作りやすいだろう。</p>
+<p>後日注記：逆に、手動で確保したメモリを解放するC/C++の方が、自分でやる代わり確実である、といった考え方もできる。Javaでは、参照がなくなったメモリ領域は自動で回収されるが、参照がある間メモリに残り続ける。C/C++では、自分の解放したい場合や状況に応じて、いつでもメモリを解放できる。</p>
+
+<h2>プラットフォーム依存性が高い</h2>
+<p>C/C++言語は、プラットフォーム依存性が高く、Windowsの環境ではWindows向けにしか開発出来ず、Linuxの環境ではLinux向けにしか開発出来ないところがある。</p>
+<p>この点でも、Javaのようなクロスプラットフォーム性が最初から意識されている言語よりも、作りにくいところがあるかもしれない。</p>
+
+<h2>コンパイルしなければならない</h2>
+<p>また、PythonやRubyのようなスクリプト言語から言うと、コンパイルしなければならない、という問題もある。</p>
+<p>特に、サーバーサイドで動く言語の場合、サーバーに対して実行ファイルをコピーするのは難しい。サーバーで動く環境向けにコンパイルするのは出来ないこともある。</p>
+<p>PerlやPHPのようなスクリプト言語なら、サーバーにコピーするのはテキスト形式のスクリプトでよく、手軽である。</p>
+<p>それから、Windows向けに配布する場合など、商用のコンパイラしかないことが考えられる。開発するために、有料でお金を出してコンパイラを買わなければならない。</p>
+<p>スクリプト言語なら、Windowsの場合はインタプリタをインストールしなければならないかもしれないが、UNIXやMacなどではスクリプトで簡単にコマンド一つで実行出来る。</p>
+
+<h2>ライブラリに頼らず、自分で全部作る必要がある</h2>
+<p>もちろんC/C++言語でもライブラリを使うことは出来るが、Javaや.NETのような最初から何でも揃っているライブラリがなかなか存在しない。</p>
+<p>元々、C/C++のプログラミングでは、ライブラリのような関数も含めて、全て自分たちで開発しなければならない、という風潮がある。</p>
+<p>もちろんC/C++の標準ライブラリも存在するが、たまに旧式の使ってはならない関数があったり、文字列をどうするのだと言った問題があったり、簡単に正規表現やネットワーク接続が出来ない、などの問題もある。</p>
+<p>Javaや.NET、スクリプト言語などでは、そうしたほとんどの良く使われる関数は最初からクラスライブラリとして揃っている。Javaを使う理由は、まさにそれが一番多いだろう。</p>
+
+<h1>良いところ</h1>
+<h2>Cが動く環境は多く、システムに低レベルレイヤーは絶対に必要</h2>
+<p>C言語が動く環境は多い。そのため、機能の少ない組み込み系の開発には良く使われる。</p>
+<p>それに、JavaやRubyはあくまでお遊びのプログラミング言語だ。なぜなら、コンピュータは機械語で動くから、C言語で書かれた何らかのプログラムが既に存在しなければ、JavaやRubyだって動かない。JavaやRubyでプログラミングしたくても、C言語で仮想マシンやインタプリタを作らなければ、動くはずはない。</p>
+<h2>スピードが速い</h2>
+<p>C/C++言語はコンパイル言語であるため、Javaや.NETに比べて速度が速い。ValaやRustもコンパイル言語だが、C/C++より高速にはならない。</p>
+<h2>機能が多い</h2>
+<p>特に、最新のC++には機能が多い。</p>
+<p>特に、スマートポインタのように、newとdeleteを使ってメモリを確保するだけではなく、安全かつ自動的にメモリを解放してくれる仕組みは最近存在する。</p>
+<ul>
+<li><a href="https://qiita.com/hmito/items/db3b14917120b285112f">C++11スマートポインタ入門 - Qiita</a></li>
+</ul>
+<p>テンプレートやジェネリックのような機能もC++にはある。</p>
+<p>だから、最新のC++を持ってすれば、Javaを使うべき領域は少なくなるかもしれない。</p>
+
+<h2>OS環境を書くための言語</h2>
+<p>C/C++は、「OSを書くための言語」であると言えます。ここで言うOSとは、カーネルやUNIXのユーザーランドだけではなく、Xサーバーやデスクトップ環境、デスクトップアプリケーションまでを含めたOSです。</p>
+<p>確かに、JavaやRubyでアプリケーションを開発した方が、生産性も高くきちんと動くでしょう。ですが、たとえばOfficeやWebブラウザのようなアプリケーションを作りたい場合、C/C++を使って作ります。</p>
+<p>WebブラウザやGUIアプリケーションまで含めた「オペレーティング環境」を作るための言語がC/C++です。そのため、既存のシステムを改良したり、オープンソースで開発に参加したい全てのプログラマが、低レベルなC/C++を習得する必要があります。</p>
+
+
+<h1>C言語による構造化プログラミング</h1>
+<p>C。出典：プログラミング言語C、<a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8%E2%80%95ANSI%E5%AF%BE%E5%BF%9C-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797307579">C言語プログラミングレッスン 入門編―ANSI対応 (SOFTBANK BOOKS)</a></p>
+
+<h2>機械でも分かるような手順を書く</h2>
+<p>C言語のプログラムは、その奇妙さから「何が書いてあるのか分からない」と言う人が多いです。</p>
+<p>ですが、基本的にプログラムというものは、「機械にも分かるような手順を書く」だけです。</p>
+<p>機械にでも分かる、というのは、機械には計算とメモリ操作しか分かりません。計算とレジスタやメモリの操作はアセンブリ言語で表現できますが、Cではそうしたものを「拡張」して、「構造化プログラミング」を行います。Cで書かれたプログラムは、原則アセンブリ言語にコンパイルされ、機械語に変換された状態でCPUが読み取って実行されます。</p>
+
+<h2>Cにおけるプログラミング</h2>
+<p>C言語でプログラムを書くということは、計算とメモリ入出力しかできないCPUプロセッサに対して、「制限された中で機械でも分かるように手順を書く」ということです。</p>
+<p>そう、Cのコードは手順にすぎません。それも、制約がかかった上での手順です。ですから、より分かりづらくなります。</p>
+<p>このC言語の入門を読むことで、そのコードを「どのように解読すれば良いか」が分かります。</p>
+<p>ですが、実際のところ、プログラミングで重要なのは、「記法」ではなく「目的」です。</p>
+<p>プログラムは、人間の頭脳がやっていることと同じことをします。ある特定の領域に記憶領域を確保し、その中に記憶を整理しながら、計算し、論理に基づいて判断し、ファイルの読み書きやネットワークの転送やグラフィックスの描画を行います。</p>
+<p>ここで、重要なのは、「人間の頭脳と同じことをできる」ということです。特に、プログラムは「自動的」に人間の頭脳と同じことをやります。「やっていることは人間のやっていることと全く同じ」なのです。</p>
+<p>そして、大切なのは、記法ではなく、目的です。そのプログラムが、コンピュータの資源（リソース）を使って、どのようなことをやるか、という「明確な目的」が必要です。</p>
+<p>プログラミングを学ぶ、ということは、決してプログラムを作るための記法を学ぶことだけではありません。プログラムの目的を明確化し、何をどのように行うかを考えながら、必要なリソースの処理と制御フローのアルゴリズムを考え、記法に落とし込んでいく、つまり「プログラミングとは、目的を明確化した上で、どのような手段で実現するかを考える」ということなのです。このために、C/C++やJavaのようなプログラミング言語があるのです。</p>
+
+
+<h1>ライブラリ</h1>
+<h2>標準Cライブラリ</h2>
+<p>Cの標準ライブラリ。Linuxではglibcが使われるが、Windowsや*BSDなどではそれぞれの実装を利用する。</p>
+<p>良く使うのは入出力ライブラリの中のprintf()など。入力ライブラリでは安全性とセキュリティに注意（誤ってポインタに変数の大きさ以上の入力を入れないこと）。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%A8%99%E6%BA%96C%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">標準Cライブラリ - Wikipedia</a></li>
+</ul>
+
+<h2>標準Cライブラリヘッダ一覧</h2>
+<!--
+<p><a href="https://ja.wikipedia.org/wiki/%E6%A8%99%E6%BA%96C%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">標準Cライブラリ - Wikipedia</a>にヘッダと関数の解説があります。</p>
+-->
+<p>以下のようなサイトから標準Cライブラリのヘッダ一覧を参照できます。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%A8%99%E6%BA%96C%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">標準Cライブラリ - Wikipedia</a></li>
+<li><a href="http://www.c-lang.org/detail/lib_header.html">C言語の標準ヘッダ一覧 - C言語</a></li>
+<li><a href="https://ja.cppreference.com/w/c/header">C標準ライブラリヘッダファイル - cppreference.com</a></li>
+</ul>
+
+
+<h1>コンテンツ</h1>
+<p>１．基本</p>
+<p><a href="c_data.html">２．データ構造</a></p>
+<p><a href="c_flow.html">３．制御フロー</a></p>
+<p><a href="c_pointer.html">４．ポインタ</a></p>
+<p><a href="c_io.html">５．入出力</a></p>
+
+<!--
+<h1>C言語の技法</h1>
+-->
+
+<h1>簡単な説明</h1>
+<h2>アセンブラ・C</h2>
+<ul class="defaultlist list7">
+<li>アセンブラ・C
+<ul>
+<li>アセンブラ
+<ul>
+<li>セグメント
+<ul>
+<li>命令やメモリのアドレスをセグメントとオフセットで相対的に指定する</li>
+</ul></li>
+<li>ニーモニック
+<ul>
+<li>電卓で演算したりするのと同じ感覚</li>
+</ul></li>
+<li>レジスタ
+<ul>
+<li>電卓に一時的な記憶領域を付けたのと同じ感覚</li>
+</ul></li>
+<li>マクロ</li>
+<li>DOS、DEBUGコマンド</li>
+<li>C</li>
+<li>UNIXシステムコール
+<ul>
+<li>ファイルディスクリプタ</li>
+<li>固定長入出力</li>
+<li>open, close, read, write</li>
+<li>fork, exec, exit, wait</li>
+<li>socket</li>
+</ul></li>
+<li>標準Cライブラリ（libc）
+<ul>
+<li>stdio
+<ul>
+<li>ファイル型のポインタ</li>
+<li>stdioバッファ</li>
+<li>ストリーム</li>
+<li>行単位入出力</li>
+<li>バイト単位入出力</li>
+<li>フォーマット入出力</li>
+</ul></li>
+<li>glibc</li>
+<li>musl</li>
+<li>NetBSD libc</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>ファイルディスクリプタ</h2>
+<p>ストリームを識別する指定子</p>
+<p>プロセスには標準入力、標準出力、標準エラー出力の3つのファイルディスクリプタが自動的に設定される</p>
+<p>これら以外に、ファイルをopenした場合やsocketを作った場合にもファイルディスクリプタが設定され、これらを用いてreadやwriteを行う</p>
+
+<h2>システムコールとstdio</h2>
+<p>システムコールのreadやwriteは、固定長入出力であり、「行単位」とか「文字・バイト単位」という入出力ができない。stdioではこうした便利な入出力関数が用意されている</p>
+<p>テキスト処理でよく使うやり方として、4096など固定長のバッファを作っておいて、一時的にバッファにコピーしながら処理をしていくというやり方がある。少しずつ処理をするので可変長の文字バッファを得る必要がなく、一度に確保するよりもメモリ使用量が抑えられる。Pythonなどでは同様の目的にジェネレータを使うこともできる</p>
+<p>getsは使ってはならない。確保したメモリ領域よりも大きな入力が行われた際に、バッファオーバーランを防ぐ手段がないからである。scanfも同様の理由で使うのはおすすめしない（scanfの場合は文字幅指定で回避できる）。同様に文字列をコピーするstrcpyも使用すべきでなく、strcpy_sを使うことが推奨される</p>
+
+<h2>stdioバッファ</h2>
+<p>stdioではバッファ処理を行うためシステムコール呼び出しよりも速度が速い</p>
+
+<h2>ファイル型のポインタ</h2>
+<p>ファイル型（FILE）のポインタはstdioでファイルを識別するのに使う</p>
+<p>FILEの中にはファイルディスクリプタやバッファの情報が格納されている。要するにラッパー</p>
+
+<h2>fork, exec. exit, wait</h2>
+<p>forkすると、forkした親プロセスと子プロセスが2つに分かれ、どちらも同じ場所からその後の処理に進む</p>
+<p>execすると、その時点でそのプロセスが上書きされ、新しいプロセスが実行される</p>
+<p>基本的にforkしてexecすることで新しいプロセスを実行する</p>
+
+
+<h1>サンプルコード</h1>
+<h2>ロボット</h2>
+<p>以下は自分の作った<a href="../programs/robot.html">ロボット</a>のコード。</p>
+<h3>その１</h3>
+<p>その１：</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct _obj {
+  int o;
+  int n;
+};
+
+void action(int* p, struct _obj *obj){
+  if(*p==0){
+    printf("[1] テレビは、つまらない\n");
+  }
+  else if(*p==1){
+    printf("[2] テレビは、面白い\n");
+  }
+  else if(*p==2){
+    printf("[3] パソコンは、つまらない\n");
+  }
+  else if(*p==3){
+    printf("[4] パソコンは、面白い\n");
+  }
+  else if(*p==4){
+    printf("[5] テレビやパソコンは、機械だ。\n");
+  }
+  else if(*p==5){
+    printf("[6] テレビやパソコンは、生き物ではない。\n");
+  }
+  else if(*p==6){
+    printf("[7] テレビって何なのだろう。\n");
+  }
+  else if(*p==7){
+    printf("[8] テレビとパソコンは好きだ。\n");
+  }
+  else if(*p==8){
+    printf("[9] テレビとパソコンは嫌いだ。\n");
+  }
+  else if(*p==9){
+    if(obj-&gt;n==0){
+      printf("[10] 比較すると、テレビの方が普通だ。\n");
+    }
+    else if(obj-&gt;n==1){
+      printf("[11] 比較すると、パソコンの方が普通だ。\n");
+    }
+  }
+  else if(*p==10){
+    if(obj-&gt;n==0){
+      printf("[12] テレビよりパソコンの方が普通かな。\n");
+      obj-&gt;n=1;
+    }
+    else if(obj-&gt;n==1){
+      printf("[13] パソコンよりテレビの方が普通かな。\n");
+      obj-&gt;n=0;
+    }
+  }
+  else if(*p==11){
+    if(obj-&gt;o==0){
+      printf("[14] リンゴが好きです。\n");
+    }
+    else if(obj-&gt;o==1){
+      printf("[15] みかんが好きです。\n");
+    }
+  }
+  else if(*p==12){
+    if(obj-&gt;o==0){
+      printf("[16] リンゴより、みかんが好きになりました。\n");
+      obj-&gt;o=1;
+    }
+    else if(obj-&gt;o==1){
+      printf("[17] みかんより、リンゴが好きになりました。\n");
+      obj-&gt;o=0;
+    }
+  }
+}
+
+int main(void){
+  int p;
+  struct _obj obj;
+  p=0;
+  obj.o=0;
+  obj.n=0;
+  while(1){
+    p=rand()%13;
+    action(&p, &obj);
+  }
+}
+</pre>
+<h3>その２</h3>
+<p>その２（<a href="http://qiita.com/schwarz1009/items/6fb34bc6834b3c111f03">Qiita</a>で、<a href="http://qiita.com/shiracamus">@shiracamus</a>という方と共同で作りました。）：</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+  int p;
+};
+
+int check1 (struct _obj *obj) {
+  if (obj->p == 0) {
+    return 1;
+  }
+  return 0;
+}
+int check2 (struct _obj *obj) {
+  if (obj->p == 1) {
+    return 1;
+  }
+  return 0;
+}
+void action1 (struct _obj *obj) {
+  printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+  printf("ここではアクション２をやります。\n");
+}
+
+struct brain {
+  int (*check)(struct _obj *obj);
+  void (*action)(struct _obj *obj);
+} brain[] = {
+  { check1, action1 },
+  { check2, action2 },
+  { NULL, NULL }
+};
+
+void doing (struct _obj *obj) {
+  struct brain *b;
+  for (b = brain; b->check; b++) {
+    if (b->check(obj)){
+      b->action(obj);
+    }
+  }
+}
+
+int main (void) {
+  struct _obj obj = { .p = 0 };
+  struct _obj obj2 = { .p = 1 };
+  while(1){
+    doing(&obj);
+    doing(&obj2);
+  }
+}
+</pre>
+
+<h2>簡単な計算プログラム</h2>
+<blockquote class="inyou2">
+<p>自分で作った簡単なプログラムです。攻撃力が10のキャラと、攻撃力が1だが「1ターンごとに攻撃力が1上がっていく」キャラが戦って、いつ上がっていく方のキャラが上回るか、を計算する。</p>
+<p>正確にいうと、「いつ上回るかを計算する」というより、その「上回っていく過程」を表示する。</p>
+</blockquote>
+<p><a href="rust.html">Rust</a>で書いたコードをCに移植しました。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+int main(void) {
+  int x;
+  int y;
+  int i;
+  
+  x = 0;
+  y = 0;
+  
+  for (i = 1; i <= 100; i++) {
+    x += 10;
+    y += i;
+    printf("%d\t%d\t%d\n", x, y, i);
+  }
+}
+</pre>
+
+<h2>お札の枚数を数えるプログラム</h2>
+<p>自分で作った指定された値段からお札の枚数を数えるプログラム。こういう小さなプログラムを書くのは楽しいです。みなさんにもプログラムの入門として、このようなプログラムを書いてみてはいかがでしょうか。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+int main(void){
+    int nedan = 98760;
+    int x = nedan;
+    int ichiman = 0;
+    int gosen = 0;
+    int sen = 0;
+    int gohyaku = 0;
+    int hyaku = 0;
+    int amari = 0;
+    while (x &gt;= 10000) {
+        x -= 10000;
+        ichiman++;
+    }
+    while (x &gt;= 5000) {
+        x -= 5000;
+        gosen++;
+    }
+    while (x &gt;= 1000) {
+        x -= 1000;
+        sen++;
+    }
+    while (x &gt;= 500) {
+        x -= 500;
+        gohyaku++;
+    }
+    while (x &gt;= 100) {
+        x -= 100;
+        hyaku++;
+    }
+    amari = x;
+    printf("%d円は一万円札%d枚、五千円札%d枚、千円札%d枚、五百円玉%dつ、百円玉%dつ、あまり%d円です。", nedan, ichiman, gosen, sen, gohyaku, hyaku, amari);
+}
+</pre>
+<p>オンラインでソースコードをコンパイル・実行できる<a href="https://paiza.io/ja/">Paiza.io</a>で開発しました。</p>
+
+<h2>coreutilsソースコード</h2>
+<p>coreutils（UNIXの汎用コマンド）のgitで基本的なコマンドのコードを読むことが出来ます。</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git/tree/src">coreutils.git</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/js-foundation/0013">第13回　Linuxコマンドの基礎の基礎 - gihyo.jp</a></li>
+</ul>
+
+
+<h1>関連ページ</h1>
+<h2>C/C++</h2>
+<p><a href="cpp.html">C++（１．オブジェクト指向）</a>, <a href="cpp_generics.html">C++（２．ジェネリック）</a>, <a href="cpp_stl_libs.html">C++（３．STL・ライブラリ）</a>から、「C++にオブジェクト指向の考え方をとり入れたスマートな言語」であるC++の情報が見れます。</p>
+<p><a href="c_cpp_tools.html">C/C++ツール</a>から、各プラットフォームのコンパイラ、開発ツール、ライブラリの情報が見れます。</p>
+<p><a href="assembly.html">アセンブリ言語</a>では、C言語の深層と深く関わっているアセンブリ言語とマシン語（機械語）の情報が見れます。</p>
+
+<h2>Windows</h2>
+<p><a href="windows_programming.html">Windows API</a>から、WindowsにおけるC/C++プログラミングのAPI（Windows APIと呼ばれる）の情報が見れます。</p>
+<p><a href="windows_programming2.html">MFC/ATL/COM/応用技術</a>から、WindowsにおけるC++をベースとした独自のラッパーライブラリやフレームワーク、応用技術の内容を見れます。</p>
+
+<h2>GNU/Linux</h2>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>から、GNUによって提供されているフリーソフトウェアの開発ツールが見れます。</p>
+<p><a href="debug.html">デバッグ（gdb）</a>から、GNUによるコマンドラインデバッガのgdbの情報が見れます。</p>
+<p><a href="../linux/linux_api.html">Linux システムコール・API</a>, <a href="../linux/linux_api2.html">Linux システムコール・API（２．プロセス）</a><!--, <a href="../linux/linux_api3.html">Linux システムコール・API（３．ネットワーク）</a>-->から、LinuxにおけるUNIXのシステムコール・ライブラリ変数のAPIが見れます。</p>
+<p><a href="../linux/linux_x11.html">Linux X11周辺</a>, <a href="../linux/gtk.html">GTK+</a>, <a href="../linux/qt.html">Qt</a>から、X11におけるGUIプログラミングの情報が見れます。</p>
+
+
+<h1>リンク集全般</h1>
+
+<h2>C言語</h2>
+<p>Cの入門。</p>
+<ul>
+<li><a href="http://www9.plala.or.jp/sgwr-t/">初心者のためのポイント学習Ｃ言語</a></li>
+<li><a href="http://merry.whitesnow.jp/SEMI_C/c_langtop.html">メリーおばさんのLinux講座 - Ｃ言語プログラミング入門</a></li>
+<li><a href="http://linuxc.info/">LinuxC</a></li>
+<li><a href="http://www5c.biglobe.ne.jp/~ecb/c/c00.html">C言語入門 - 目指せプログラマー！</a></li>
+<li><a href="http://www.atmarkit.co.jp/fcoding/index/c.html">目指せ！ Cプログラマ - @IT</a></li>
+</ul>
+
+<h2>Cリファレンス</h2>
+<p>C</p>
+<ul>
+<li><a href="http://www.orchid.co.jp/computer/cschool/cref.html">C言語関数リファレンス - C言語学習塾</a></li>
+<li><a href="https://mayonez.jp/topic/1751">C言語リファレンスサイト｜入門・開発で躓いたらココを見よう-Mayonez</a></li>
+</ul>
+
+<h2>Cサンプルコード集</h2>
+<p>サンプルコード集</p>
+<ul>
+<li><a href="http://webkaru.net/clang/program-examples/">C言語入門 - サンプルプログラム集 - Webプログラミング入門</a></li>
+<li><a href="http://saeki-ce.xsrv.jp/Cgengo.html">Ｃ言語サンプルプログラム（オープンソース）／佐伯英子技術士事務所（情報工学）</a></li>
+</ul>
+
+<h1>書籍</h1>
+<h2>C言語</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8%E2%80%95ANSI%E5%AF%BE%E5%BF%9C-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797307579">C言語プログラミングレッスン 入門編―ANSI対応 (SOFTBANK BOOKS)</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

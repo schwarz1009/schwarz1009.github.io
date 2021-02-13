@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>OpenGL関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>OpenGLの世界観</h1>
+<p>OpenGLによるグラフィックス処理に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>概要</h1>
+<h2>OpenGL</h2>
+<p>2D/3DグラフィックスのためのオープンなAPI。Windowsで言えばDirectXと同様の技術。</p>
+<p>最近はゲーム制作にはUnityという高度なフレームワークを使うが、それでも描画を独自に実装したいという用途は多い。</p>
+<p>APIがクロスプラットフォームであり、クロスプラットフォームなOpenGL対応ツールキットGLUTを使うことで、WindowsでもLinuxでも組み込み向けでも同じように作ることが出来る。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OpenGL">OpenGL - Wikipedia</a></li>
+<li><a href="http://tkengo.github.io/blog/2014/12/20/opengl-es-2-2d-knowledge-0/">独学で 1 ヶ月間 OpenGL を学んで得た基礎知識のまとめ ~ 2D 編 ~ · けんごのお屋敷</a></li>
+<li><a href="http://wisdom.sakura.ne.jp/system/opengl/gl1.html">OpenGLとは？ - OpenGL入門 - WisdomSoft（旧）</a></li>
+<li><a href="https://qiita.com/jamaican/items/ff785ecea31e9fbb1476">OpenGL について - Qiita</a></li>
+<li><a href="https://en.wikibooks.org/wiki/OpenGL_Programming">OpenGL Programming - Wikibooks</a></li>
+</ul>
+
+<h2>OpenGL ES</h2>
+<p>OpenGL for Embedded Systems。AndroidやiOSなどの携帯システムに対応したOpenGL。</p>
+
+<h1>OpenGLの実装</h1>
+<h2>Mesa 3D</h2>
+<p>OpenGLの実装の1つ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Mesa_3D">Mesa 3D - Wikipedia</a></li>
+</ul>
+
+<h2>Gallium3D</h2>
+<p>新しいGallium3DアーキテクチャはまもなくMesa 3Dを置き換えるとされている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gallium3D">Gallium3D - Wikipedia</a></li>
+</ul>
+
+<h2>OpenGLでの描画</h2>
+<p>OpenGLで描画を行う際、プロプライエタリなドライバー（NVidiaなど）を使う場合（アプリケーション→OpenGL→プロプライエタリドライバ）、Mesaを使う場合（アプリケーション→OpenGL→Mesa→ドライバ）、Gallium3Dを使う場合（アプリケーション→OpenGL→Mesa→Gallium3D→ドライバ）、Gallium3Dに加えてさらにgallivmやLLVMを挟む場合などがある。</p>
+<ul>
+<li><a href="https://qiita.com/maueki/items/8392decdd36c3fa19117">Linuxグラフィックスタック覚書 - Qiita</a></li>
+</ul>
+
+<h2>Linux/X11とOpenGL</h2>
+<p>GLXはOpenGLとX Window Systemをつなぐバインディング。</p>
+<p>Direct Rendering Infrastructure(DRI)はXクライアントがXサーバを経由せず、直接グラフィックアクセラレータにアクセスすることで、高速な描画を実現する仕様。Mesaが利用している。</p>
+<p>DRMはMesaではなくカーネルの機能で、DRIを実装するための技術。DRMを使うことで、クライアントが直接フレームバッファオブジェクトに描画できる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GLX">GLX - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E3%83%BB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%BB%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%83%81%E3%83%A3">ダイレクト・レンダリング・インフラストラクチャ - Wikipedia</a></li>
+</ul>
+
+<h1>Windows</h1>
+<h2>DirectX</h2>
+<p>DirectXはWindowsにおけるOpenGLと同様の技術。グラフィックス、ビデオ、3Dアニメーション、オーディオなどの分野をカバーする。</p>
+<p>Windowsにおけるゲームを開発するためにはこれを使用する。Microsoft謹製で、C#やXboxなどMicrosoftによる技術と相性が良い。</p>
+
+
+<h1>ゲーム開発</h1>
+<p><a href="games_devel.html">ゲーム開発</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>OpenGLでゲームを作るコツは、座標変換と配置と移動</h2>
+<p>僕は、OpenGLで3Dのゲームを作るコツは、座標変換と配置と移動ではないかと思います。</p>
+<p>たとえば、マリオカートのようなレースゲームを作る場合、まずコースやマップを作り、その上でコースの上にキャラクターを「配置」し、その上でプレイヤーの操作に応じて、キャラクターを「移動」させなければなりません。</p>
+<p>OpenGLには、座標変換の機能が多数あります。こうした座標変換の機能を使ったり、ワールドとキャラクターの3DCGの合成を行うことで、配置や移動を行います。また、同じキャラクターやワールドを別の角度から視認することもできます。</p>
+<p>僕は、ゲームを作るコツは、座標変換の機能を上手く使いながら、3DCGの配置と移動をどのようにし、どのように合成するか、ということではないかと思います。
+<p>そして、それ以上はデザインの問題になります。OpenGLではテクスチャと頂点によるポリゴンの描写が可能で、<a href="../art/blender.html">Blender</a>などの3Dモデリングソフトウェアを用いてポリゴンを作ることができます。</p>
+<!--<p>（ゲームプログラミングの経験はないため、トンチンカンなことを言っているかもしれません。）</p>-->
+<p>後日注記：3DCGを合成することで絵を配置することはできますが、実際には周りの場所と調和した見た目にしなければなりません。こうした時にシェーダを使うのではないかと、僕は勝手に思っています（実際は違うと思います）。</p>
+
+<h1>簡単な説明</h1>
+<h2>OpenGL</h2>
+<ul class="defaultlist list7">
+<li>3Dグラフィック
+<ul>
+<li>OpenGL
+<ul>
+<li>座標変換
+<ul>
+<li>さまざまな3Dの座標を変換する</li>
+<li>ワールド座標変換</li>
+<li>ビュー座標変換</li>
+<li>プロジェクション座標変換</li>
+<li>スクリーン座標変換</li>
+</ul></li>
+<li>シェーダ
+<ul>
+<li>描画に必要な処理を行う</li>
+<li>頂点の処理を行うバーテックスシェーダと、テクスチャの処理を行うフラグメントシェーダがある</li>
+<li>シェーダとは「陰をつけるもの」という意味</li>
+<li>陰をつけることでCGを3Dに見せる</li>
+</ul></li>
+<li>画像合成
+<ul>
+<li>3DCGの中でCGを配置したり動かしたりするためにプログラマが合成を行う</li>
+</ul></li>
+</ul></li>
+<li>DirectX</li>
+</ul></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

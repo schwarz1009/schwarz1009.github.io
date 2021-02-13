@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Flatpak/Snappy/AppImage - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Flatpak/Snappy/AppImage</h1>
+<p>Flatpakに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Flatpak</h1>
+<h2>Flatpakとは</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>最近ではシステムとアプリケーションをサンドボックス環境で分離する、Flatpakなどのパッケージ管理システムもある。</p>
+<p>このメリットは、クロスディストリビューションであること。</p>
+<p>従来のパッケージ管理システムにおいては、ひとつひとつのディストリビューションに対応するパッケージを用意する必要があった。</p>
+<p>Flatpakを用いることで、全てのバージョンのパッケージを、全てのディストリビューションに配布することができる。</p>
+
+<h2>Flatpak</h2>
+<p>Flatpakは、安定したOSのシステムを管理するパッケージ管理システムとは別の、「使いたいアプリケーションを簡単に導入してサンドボックス環境で仮想的に実行できる」パッケージ管理の新しい手法。</p>
+<p>たとえばGUIアプリケーションを導入したい時、OSのパッケージシステムで導入するといろいろと面倒くさいし、リポジトリ側の手間やコストもかかる。Flatpakを使うことで、手軽に最新のアプリケーションを導入できるし、最新に保ったり削除したりすることも簡単。</p>
+<p>Flatpakの使い方は以下を参照のこと。</p>
+<ul>
+<li><a href="https://linuxfan.info/flatpak-ubuntu">「Flatpak」でUbuntuに最新アプリをインストールする方法 | LFI</a></li>
+</ul>
+
+<h2>Flatpakの特徴</h2>
+<p>Flatpakの特徴は、サンドボックス環境に導入し、OSや他のアプリケーションからアプリケーションを隔離することができること。</p>
+<p>またクロスディストリビューション（どんなディストリビューションでも導入・実行できる）で、旧来のRPM/Dpkgとも共存できる。</p>
+<p>旧来のディストリビューションのパッケージメンテナが行っていた「それぞれのディストリビューション向けにパッケージを作る」という手間がなくなり、ひとつのパッケージを全てのディストリビューションに配布できる。</p>
+<p>また、ユーザーはディストリビューションの更新を待つ必要が無く、必要なバージョン（たとえば最新バージョン）のパッケージをインストールできる。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0513">第513回　新しいパッケージの仕組み，Flatpakを使用する：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+<li><a href="http://baker-street.jugem.jp/?eid=760">Linux Mint 19.x: 初心者のための Flatpak ガイド | 221B Baker Street</a></li>
+</ul>
+
+<h1>次世代アプリケーション配布</h1>
+<h2>AppImage/Flatpak/Snappy</h2>
+<p>AppImageは、今のディストリビューションごとに個別に配布が行われているパッケージではなく、どんなディストリビューションでも簡単にインストール出来る、共通のパッケージ管理・配布システム。</p>
+<ul>
+<li><a href="http://trans.trans-aid.jp/viewer/?id=49086">AppImage | wikipedia翻訳 - みんなの翻訳</a></li>
+</ul>
+<p>良く似たものに、FlatpakやSnappyがある。一人の開発者が全てのディストリビューション向けにアプリケーションを配布することが出来る。</p>
+<p>AppImageやFlatpakは本当は革命的な技術で、たとえばGIMPを試そうと思った時に、簡単にイメージをダウンロードしてすぐに起動したり、サンドボックス環境で仮想的に試したり、嫌ならすぐに削除したりできる。Windowsのフリーソフトにあるようなzipファイルを展開してexeを実行すれば起動する、という「手軽さ」を、よりスマートに実装した、という発想に近いのではないかと思う。</p>
+
+<h2>snapcraft / flathub</h2>
+<p>snapcraftとflathubは、SnappyとFlatpak向けのアプリケーションパッケージ配布サイト。簡単にコマンドからインストールできるほか、自動で最新版に更新される。</p>
+<ul>
+<li><a href="https://snapcraft.io/">Snapcraft - Snaps are universal Linux packages</a></li>
+<li><a href="https://flathub.org/">Flathub—An app store and build service for Linux</a></li>
+</ul>
+
+<h2>新しいアプリの導入はflatpakやsnapを使おう</h2>
+<p>従来のLinuxディストリビューションに慣れている方は実感できないかもしれませんが、新しいアプリケーションをLinuxで試したい時は、flatpakやsnapパッケージを使うようにしましょう。</p>
+<p>システムを壊す危険性も無く、簡単にアプリケーションを導入し、必要がなくなったらすぐに削除できます。</p>
+<p>たとえば、LibreOfficeもflatpakなどでパッケージを配布しています。以下を参照してください。</p>
+<ul>
+<li><a href="https://ja.libreoffice.org/download/flatpak/">FlatpackによるLibreOffice | LibreOffice - オフィススイートのルネサンス</a></li>
+<li><a href="https://ja.libreoffice.org/download/snap/">SnapによるLibreOffice | LibreOffice - オフィススイートのルネサンス</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

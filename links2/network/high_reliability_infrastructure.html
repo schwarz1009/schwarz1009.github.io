@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>高信頼システム・インフラ構築関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>高信頼システム・インフラの世界観</h1>
+<p>高信頼システム・インフラに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>クラスタ・スパコンの考え方</h1>
+<h2>ITインフラ用語</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/02/02より。</p>
+<p>レプリケーションは、データの複製を作ること。</p>
+<p>ジャーナリングは、ログや記録を取ること。</p>
+<p>ポーリングは、一定時間ごとに確認すること。</p>
+<p>割り込みは、処理の途中で別の処理が入ること。</p>
+<p>全体のスループットが悪い時、もっとも効率の悪い部分（ボトルの首）が、全体の円滑な流れを全て制限してしまうことを、ボトルネックと呼ぶ。</p>
+<p>冗長化とは、ある部分が故障しても別の部分を使うことで、耐障害性をはかる仕組み。</p>
+<p>この時、サーバがダウンしても別のサーバが代わりを務めることを、フェイルオーバと呼ぶ。</p>
+
+<h2>冗長化とは</h2>
+<p>データベースの勉強をしていると、「冗長構成の構築」という言葉が良く出てくる。</p>
+<p>どんなに破損があっても別の同じシステムが代わりを務められるようにし、信頼性を確保する。</p>
+
+<h2>高性能と高可用性</h2>
+<p>ハイパフォーマンスクラスターでは、全てのコンピュータで並列計算を行うことで、超高速・高性能な処理を行う。</p>
+<p>フェイルオーバとは、稼働中のあるシステムが故障したりダウンしたりしても、別の待機中のシステムが自動的にそのシステムの代わりを務めること。</p>
+<p>クラスターシステムでは、複数のコンピュータによる高性能・高スピードを追求する「スケーラビリティ」だけではなく、こうした冗長性である「リダンダンシー」も求められることが多い。</p>
+<p>スケーラビリティの例としてHPCなどのスパコン分野がある。リダンダンシーの例として高可用性クラスターがある。</p>
+
+<h2>負荷分散とロードバランサ</h2>
+<p>ロードバランサは、サーバの負荷を分散させる仕組み。ロードバランサは、クライアントからの要求を受け取って、それぞれのサーバに処理を割り振る。クライアントからは、ロードバランサがサーバであるかのように見える。</p>
+
+
+<h2>Linux/OSSを使った高信頼システム</h2>
+<!--
+<p>Linux/OSSを使った高信頼システムを構築するためにどうすれば良いか。</p>
+-->
+<p>LinuCのサイトから無料で教科書がダウンロードできる。ただし個人情報の入力が必要。</p>
+<ul>
+<li><a href="https://linuc.org/textbooks/system/">高信頼システム構築標準教科書 －仮想化と高可用性－ ダウンロード LinuC-3 304試験対応 | Linux技術者認定試験 リナック | LPI-Japan</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>高信頼性システム</h2>
+<ul class="defaultlist list7">
+<li>データベース
+<ul>
+<li>高信頼性システム
+<ul>
+<li>冗長化・高可用性</li>
+<li>HPC・スループット</li>
+<li>クラスタ</li>
+<li>分散システム</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>性能向上</h2>
+<ul class="defaultlist list7">
+<li>性能向上
+<ul>
+<li>ボトルネック
+<ul>
+<li>ネットワーク通信の性能は、瓶の首のように通信経路の中で一番狭くなっている部分に左右される</li>
+</ul></li>
+<li>スループット</li>
+<li>レイテンシ</li>
+</ul></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

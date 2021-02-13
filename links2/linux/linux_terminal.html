@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux 端末 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux 端末</h1>
+<p>Linuxの端末に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>端末とは</h1>
+<h2>端末</h2>
+<p>昔のコンピュータは、コンピュータそのものが高価かつ大型であったことから、今のように個人が専有する「パソコン」ではなく、ひとつの中央コンピュータに何台もの「端末」が繋がる形のコンピュータが一般的でした。</p>
+<p>それぞれの端末デバイスは、計算能力や記憶能力を持っておらず、端末が接続したひとつのコンピュータにだけ、計算処理装置や記憶処理装置があり、端末は主に入力と出力などの「操作と確認」を行うものでした。</p>
+<p>UNIXのようなマルチユーザー・マルチタスクのタイムシェアリングシステムで、コマンドライン操作を行うのは、この端末を中心とした入出力デバイスで行うのが基本となっています。たくさんのユーザーが同時にログインして、複数のタスクを同時に動かすのが前提となっています。</p>
+<p>端末には歴史があります。まず、UNIXの黎明期に使われていたのがテレタイプと呼ばれる端末で、出力はプリンター、入力は紙テープやタイプライターでした。</p>
+<p>UNIXでは端末のことを「tty」と呼びますが、これはテレタイプ（teletype）から来ています。</p>
+<p>その次に普及したのが、文字だけを表示できるモニタと、キーボードのキャラクタ端末・ダム端末です。モニタには文字しか表示できず、コンソール（黒画面の端末）のような画面で操作を行いました。</p>
+<p>その後に、ビットマップの点による画像を表示できる、ビットマップディスプレイ・X端末が普及しました。この頃から、GUIのアプリケーションを操作できるようになりました。</p>
+
+<h2>端末エミュレータ</h2>
+<p>現代のパソコンでは、それぞれのパソコンに計算装置と記憶装置が備わっており、ターミナルで使うのであっても、Xで使うのであっても、端末として特別なハードウェアは必要ありません。便宜上、コンソールやコマンドライン操作画面のことを端末と呼ぶことはあります。</p>
+<p>UNIXでは、端末を使ってコマンドラインのプログラムを操作しますが、この端末を現代のXでソフトウェアでエミュレートして再現したのが「端末エミュレータ」です。現代のLinuxでは、Xで端末エミュレータを使うか、あるいは黒画面の仮想コンソールで操作することで、コマンドライン操作を行います。</p>
+<p>Linuxでは、GNOMEやKDEのような「Windowsを模した統合デスクトップ環境」の上で、端末エミュレータを使ってコマンドライン操作を行うのが一般的です。</p>
+<p>このような経緯と設計があることから、UNIXは昔から、大量のタスクやリクエストを安定して壊れずにさばくのに向いています。FreeBSDなどのBSD系のUNIXは、昔からネットワークや大量のタスクをさばくのが得意で、Linuxでもこれは変わりません。UNIXではWindowsよりも早くからネットワークの機能も充実しており、そのため、LinuxやBSDなどのUNIXは今でもサーバーで標準的に使われます。逆に、WindowsのようにグラフィックスやGUI操作を前提として作られていないため、WindowsのようなGUIシステムは不得意で、現在でも、X11を使うのであっても端末エミュレータからコマンド操作をしなければ使えません。</p>
+
+<h1>Linuxをコマンドライン環境で使う時のTips</h1>
+<h2>仮想コンソール</h2>
+<p>仮想コンソール機能を使うことで、LinuxをDOSのような黒画面のコマンドライン環境で使っている時に、画面を複数使ってログインシェルを複数起動することが出来る。</p>
+<p>Alt+F1～F6で切り替えられる。Xからの切り替えはCtrl+Alt+F1～F6。</p>
+<p>また、X11のウィンドウシステムの画面はAlt+F7に設定されていることが多い。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/094virtualcon.html">複数のコンソールを切り替えて使うには - @IT</a></li>
+</ul>
+
+<h2>GNU Screen/tmux</h2>
+<p>GNU Screenはコンソールでもウィンドウシステムと同じように画面を作成・破棄できるソフトウェア。複数の端末でウィンドウシステムのように並列して作業することができる。</p>
+<p>後日注記：また、GNU Screenは起動元のプロセスが消えても処理を継続することができる機能があり、リモートからバッチ処理を行うような時にも使える。</p>
+<ul>
+<li><a href="https://note.crohaco.net/2015/gnu-screen-study/">GNU screen コマンド勉強録 - くろのて</a></li>
+</ul>
+<p>tmuxという新しいソフトウェアも開発されている模様。</p>
+<ul>
+<li><a href="https://qiita.com/nl0_blu/items/9d207a70ccc8467f7bab">tmuxを必要最低限で入門して使う - Qiita</a></li>
+</ul>
+
+
+<h1>端末系のコマンド</h1>
+<h2>ttyrec & ipbt</h2>
+<p>端末を録画再生するツール。</p>
+<ul>
+<li><a href="http://0xcc.net/unimag/4/">横着プログラミング 第4回: ttyrec: 端末を録画再生するツール</a></li>
+<li><a href="http://pooh.gr.jp/?p=9865">ttyrecでLinuxの操作ログを記録する ♡ – POOH.GR.JP</a></li>
+</ul>
+
+<h2>screen, dtach, tmux, byobu</h2>
+<p>仮想端末・スクリーンソフト。</p>
+<ul>
+<li><a href="https://qiita.com/kayama0fa/items/82d3ebab8bb297bdfd23">byobu導入+操作メモ - Qiita</a></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

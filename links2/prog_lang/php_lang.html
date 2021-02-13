@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>PHP関連の世界観（１．言語） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PHPの世界観（１．言語）</h1>
+<p>PHPによるプログラミングに関する世界観（１．言語）です。<a href="php.html">PHP</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考にしています。</p>
+
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>基本</h1>
+<h2>PHPは頻繁に更新されるコンテンツに使う</h2>
+<p>PHPを使うことで、HTMLファイルの中にPHPのコードを埋め込み、PHPの文法と機能を使ってHTMLデータを自動作成できます。</p>
+<p>ですが、どのような時に、PHPによる自動作成を行うべきなのでしょうか。静的なHTMLと動的なPHPをどのように使い分ければ良いのでしょうか。</p>
+<p>ひとつの目安として言えるのは、「頻繁に更新されるコンテンツ」の自動作成や加工のために、PHPを使う、という方法です。</p>
+<p>たとえば、Web掲示板、チャット、Wiki、あるいはECサイトなどは、不特定多数によって更新される、頻繁に最新の情報を自動作成する必要のあるサイトの例です。また、天気予報やニュースのようなページも、いちいちHTMLファイルを書き換えるのではなく、PHPで自動更新されるようにした方が楽に管理できます。</p>
+<p>不特定多数によって投稿が更新される以外にも、WebページとしてのPHPファイルの構成は変えないでおいて、「データだけを更新したい」といった場合にもPHPは使われます。これはブログサイトなどが言えるでしょう。</p>
+<p>また、入力フォームを受け取ったり、ログイン認証を行ったり、ユーザーに専用の管理画面を表示したり、などといった使い方もあります。また、Web画像加工ツールのように、PHPの関数を使いたいから使う、といった利用も可能です。</p>
+<p>ファイルの構成を変えずにデータだけを蓄積する上で、素のPHPを使うよりも、HTMLテンプレートを「ビュー」、データベースを「モデル」、処理や操作を「コントローラ」として、ルーティングの結果望みのページが自動作成されるようにする、「Webフレームワーク」という機能を使うこともできます。PHPなら<a href="php_framework_laravel.html">Laravel</a>、Pythonなら<a href="python_django.html">Django</a>、Rubyなら<a href="ruby_on_rails.html">Ruby on Rails</a>などがこれに当たります。</p>
+<p>PHPの利用が必要ない場合として、一度書いたらそのままで残るような普通のWebページが挙げられます。ですが、最近のWebページは高度に進化しており、<a href="../network/wordpress.html">WordPress</a>のようなCMSエンジンを使うことで、ブログライクなさまざまな機能（コメント投稿機能など）をWebページに持たせることができます。</p>
+
+<h2>PHPの基本</h2>
+<p>PHPのプログラムコードは、HTMLのソースファイルの中に「&lt;?php ～ ?&gt;」のコードを埋め込むことで行われます。出力するための関数で表示するPerl/CGIなどと違い、簡素な記述が可能となります。（echo関数を用いて表示することも可能。）</p>
+<p>PHPはPerlを参考に作られているため、変数名に$を付けるなど、良く似た点があります。</p>
+<p>HTMLに埋め込む形ではなく、PHPのコードだけを記載する場合は、文の最初から「&lt;?php ～」と始めれば良い。この時、空白の内容が出力されないように、「?&gt;」を付けないことが推奨されている。注意しておこう。</p>
+
+
+<h1>$_POSTと$_GET</h1>
+<h2>$_POST</h2>
+<p>$_POSTはあらかじめ定義された変数（スーパーグローバル変数）で、PHPがPOSTメソッドで受け渡されたデータが格納されている。</p>
+<p>ページの中で</p>
+<pre class="prettyprint">
+&lt;form method="post" action="receive.php"&gt;
+</pre>
+<p>と指定したフォームの変数が格納されている。「method="post"」という記述がそれを意味している。</p>
+<p>$_POSTの中に配列として全てのデータが入っているが、その中の一部を取り出す時は、キーによって配列内部のデータを参照する。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+&lt;textarea name="howto" cols="40" rows="4" maxlength="150"&gt;&lt;/textarea&gt;
+</pre>
+<p>なら、</p>
+<pre class="prettyprint">
+$_POST['howto']
+</pre>
+<p>という風にする。</p>
+<p>実際にはnl2br()関数を用いて改行を&lt;br&gt;タグに変える必要や、htmlspecialchars()関数を用いてHTMLの特殊文字を普通の文字に変換して&lt;script&gt;タグなどを無効化する必要がある。</p>
+
+<h2>$_GET</h2>
+<p>URLに含まれる文字を得たい場合は$_GETを使うこともできる。</p>
+<p>たとえば、</p>
+<pre>
+http://example.com/test.php?name=hoge
+</pre>
+<p>とアクセスした場合、</p>
+<pre class="prettyprint">
+$_GET['name']
+</pre>
+<p>にはhogeが格納される。</p>
+<p>getとpostはどちらもサーバーに変数を送ることができるが、一般的にgetはサーバーからデータを「取得する」場合、postはサーバーにデータを「投稿する場合」に使うことが推奨される。</p>
+
+<h2>$_FILES</h2>
+<p>ファイルのアップロードがPOSTから行われた時、この変数にファイルの情報が格納される。</p>
+
+<h1>PHPのセッション</h1>
+<h2>セッション</h2>
+<p>セッションはサーバーに一時的に保持されるデータで、ページをまたいでユーザーの情報を保持しておくことができる。ユーザーのログイン情報などを保持するために使われることが多い。</p>
+<p>Cookie（クッキー）はブラウザ側に保持されるが、セッションはサーバー側に保持される。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/4970">PHPでセッションを使う方法【初心者向け】 | TechAcademyマガジン</a></li>
+<li><a href="https://www.scollabo.com/banban/php/php_14.html">セッション管理/PHP入門 - 初心者のためのホームページ作り</a></li>
+</ul>
+
+<h2>$_COOKIE</h2>
+<p>HTTP Cookieの情報が格納される。セッションはWebサーバに保存されるが、クッキーはWebブラウザに保存される。クッキーはキーと値のペアでブラウザに保存され、毎回のリクエストでアプリケーションに送信される。</p>
+
+<h2>$_SERVER</h2>
+<p>Webサーバーの情報が格納されており、Webサーバのホスト名、IPアドレス、リクエストのプロトコル、リクエスト元のIPアドレス、リクエストのHTTPメソッド名などが含まれる。</p>
+<p>後日注記：$_SERVERはとてもよく使うグローバル変数であるため、中にある要素をよく確認しておこう。</p>
+
+<h1>PHP文法</h1>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。</p>
+<h2>変数のグローバルスコープとローカルスコープ</h2>
+<p>PHPにはブロックスコープはなく、PHPブロックの中はグローバルスコープとして扱われる。</p>
+<p>ローカルスコープは、関数やクラスの中で宣言した変数。関数外で使うことはできない。</p>
+<p>ローカルスコープ内でグローバルスコープに定義された変数を参照したい時は、globalキーワードを使う。</p>
+
+<h2>演算子</h2>
+<p>代入演算子=や、代数演算子+, -, *, /, %などが使える。++や--も可能。</p>
+<p>比較演算子は、==の場合型がキャストされて比較される。キャストしたくない場合は===を使用する。</p>
+
+<h1>配列</h1>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。</p>
+
+<h2>配列</h2>
+<p>配列の例：</p>
+<pre class="prettyprint">
+&lt;?php
+$names = array('assy', 'schwarz', 'zaidou',);
+echo $names[0], PHP_EOL;  // assy
+</pre>
+<p>後日注記：PHPでは配列の要素に種類の異なる型の要素を混ぜることができる。そのため、数値や文字列など異なる型の要素を同じ配列の中に詰め込むことができる。</p>
+
+<h2>連想配列</h2>
+<p>連想配列の例：</p>
+<pre class="prettyprint">
+&lt;?php
+$people_color = array('assy' =&gt; 'red', 'schwarz' =&gt; 'black', 'zaidou' =&gt; 'white',);
+echo $people_color['schwarz'], PHP_EOL;  // black
+</pre>
+<p>後日注記：PHPでは、添字配列と連想配列（ハッシュ）は同じものとして扱われる。よって、キーのない配列要素を混ぜることもできる。また、添字配列でなくても順番は保持される。</p>
+
+<h2>多次元配列</h2>
+<p>PHPでは、多次元配列は配列の中に配列を入れ込めば実現できる。$a[0][0]のようにアクセスできる。また、連想配列を要素に持つ連想配列$namesがあった場合、</p>
+<pre class="prettyprint">
+foreach ($names as $n =&gt; $v) {
+  echo "$n は {$v['age']} 歳で、{$v['count']} 人です", PHP_EOL;
+}
+</pre>
+<p>のようにアクセスすることもできる。</p>
+
+<h1>制御構造</h2>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。</p>
+
+<h2>if～elsif～else</h2>
+<p>if～elsif～else：</p>
+<pre>
+if (条件式1) {
+    文1
+} elsif (条件式2) {
+    文2
+} else {
+    文3
+}
+</pre>
+
+<h2>while</h2>
+<p>while：</p>
+<pre>
+while (条件式) {
+    文
+}
+</pre>
+
+<h2>for</h2>
+<p>for：</p>
+<pre>
+for (初期化式; 条件式; 反復式) {
+    文
+}
+</pre>
+
+<h2>foreach</h2>
+<p>foreach：</p>
+<pre>
+foreach (反復可能なデータ構造 as 要素) {
+    文
+}
+</pre>
+<p>foreachでは現在のキーを取得することもできる：</p>
+<pre>
+foreach (反復可能なデータ構造 as キー =&gt; 要素) {
+    文
+}
+</pre>
+<p>foreachでは、参照を用いることで、要素を一時的な変数にコピーするのではなく、元の要素を書き換えることができる：</p>
+<pre>
+foreach (反復可能なデータ構造 as &要素) {
+    文
+}
+</pre>
+
+<h1>関数</h1>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。</p>
+
+<h2>関数</h2>
+<p>関数の例：
+<pre class="prettyprint">
+&lt;?php
+function add($x, $y)
+{
+    $ans = $x + $y;
+    return $ans;
+}
+
+$z = add(4, 12);
+</pre>
+
+<h2>コールバック関数と可変関数</h2>
+<p>コールバック関数と可変関数は、関数に対して関数名を引数に指定して呼び出すことで、関数の中から引数を通じて関数を呼び出す仕組み。</p>
+<p>関数の中で、さまざまな場所から場合によって異なる関数を呼び出すことができる。</p>
+<p>コールバック関数は、たとえば$arが配列だったとして、array_map('strval', $ar);のようにする。この場合、配列のすべての要素を文字列型に変換する処理（strval関数）を、引数に与えられた配列のすべての要素に対してコールバック関数の処理を適用する関数であるarray_map()関数を使って記述している。</p>
+<p>また、関数func_callerの引数が$xだったとして、func_callerの中で$x();とし、関数funcAを定義し、func_caller('funcA');とこの関数を呼び出すことで、関数funcAを関数func_callerの内部の$x();から呼び出すことができる。これを可変関数と言う。</p>
+<p>後日注記：また、これら以外にも無名関数と呼ばれる機能もある。無名関数はクロージャのように使うこともできる。</p>
+
+<h1>その他</h1>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。</p>
+<h2>PHPでオブジェクト指向</h2>
+<p>PHPでオブジェクト指向プログラミングを行うことは可能だ。クラスやオブジェクトも完備され、標準でさまざまな機能が提供されており、C++/Javaに負けない高度なオブジェクト指向機能を使うことができる。</p>
+<p>オブジェクトの作成には「new」演算子を使い、メソッドの呼び出しには-&gt;を使う。たとえばデータベースへのアクセスにはPDOクラスのオブジェクトを作って行う。</p>
+
+<h2>例外</h2>
+<p>例外は、</p>
+<pre>
+throw new 例外クラス名();
+</pre>
+<p>で送出し、</p>
+<pre>
+try { 処理 } catch (例外クラス名 変数名) { 例外処理 }
+</pre>
+<p>で処理する。</p>
+
+<h2>参照</h2>
+<p>参照は以下のようになる：</p>
+<pre class="prettyprint">
+&lt;?php
+
+$a = 100;
+$b =& $a;
+$c = $a;
+</pre>
+<p>$aと$bは同じ領域を参照する。</p>
+<pre class="prettyprint">
+$b = 200;
+</pre>
+<p>とした場合、$aも200に変更される。</p>
+<p>後日注記：PHPではオブジェクトのインスタンス変数は特に何もしなくても参照型として扱われるため、関数の外で宣言されたオブジェクトを引数に与えた場合、関数の中から操作できる。=で代入しても、同じ場所を指す参照となるだけで複製はされない。明示的に複製するにはcloneが必要。</p>
+
+<h2>var_dump()</h2>
+<p>var_dump()は変数の詳細をダンプして表示する関数。たとえばbool型の変数などでecho文を用いると空白しか表示されないなどといった時に、変数の値の詳細な確認のために使うことができる。</p>
+
+<h1>サンプルコード</h1>
+<h2>PHPによる掲示板サンプル</h2>
+<p><a href="https://www.javadrive.jp/phpappli/keijiban/index4.html">完成版 - 掲示板 - PHPサンプルプログラム - Let'sプログラミング</a>に簡単な掲示板のサンプルがあります。</p>
+<p>投稿フォームの下に書き込みの処理（POSTが設定された時に実行される）と読み込みの処理があり、書き込み部分で$keijban_fileに出力したHTMLを読み込み部分でそのまま表示するようになっています。</p>
+<p>以下に、PHPによる掲示板のサンプルがあります。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/phpappli/keijiban/index4.html">完成版 - 掲示板 - PHPサンプルプログラム - Let'sプログラミング</a></li>
+<li><a href="http://www.dt30.net/gachinko/?p=507">PHPで掲示板を作ろう！ 掲示板の作成方法 その1 | ガチンコPHP塾</a></li>
+<li><a href="http://www.dt30.net/gachinko/?p=721">PHPで掲示板を作ろう!(データベース編) その1 データベースとは | ガチンコPHP塾</a></li>
+</ul>
+
+
+<h1>PHPの設定</h1>
+<h2>php.ini</h2>
+<p>php.iniはPHPの設定ファイル。Debianでは/etc/php5/cli/php.ini、CentOSでは/etc/php.iniにある。</p>
+<p>特に文字コードをUTF-8に設定し、mbstring.*の各種設定で日本語マルチバイト環境とUTF-8の設定をしよう。</p>
+<!--<p>具体例は<a href="../network/apache.html">Apacheの世界観</a>にあります。</p>-->
+<ul>
+<li><a href="https://webkaru.net/php/php-ini/">php.ini の設定 - PHP入門 - Webkaru</a></li>
+</ul>
+
+<h2>php-fpmとmod_php</h2>
+<p>mod_phpは従来からのApacheのPHPモジュール。</p>
+<p>FPMはFastCGI Process Managerのことで、PHPをFastCGIで動かすことのできる実装のひとつ。</p>
+<ul>
+<li><a href="https://www.php.net/manual/ja/install.fpm.php">PHP: FastCGI Process Manager (FPM) - Manual</a></li>
+</ul>
+<p>ApacheでPHPを動かす場合に、php-fpmとmod_phpでどのように違うかは以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/nikirom/items/7668eb1aa2db291df53f">apache2.4のphp-fpmとmod_phpの検証 - Qiita</a></li>
+</ul>
+<p>FastCGIについて詳しくは<a href="../network/fastcgi.html">FastCGIの世界観</a>を参照のこと。</p>
+
+
+<h1>PHPによる主なソフトウェア</h1>
+<h2>MediaWiki</h2>
+<p>Wikipediaで使われているWikiエンジン。</p>
+<p><a href="../network/web_tools.html">Webツール</a>も参照のこと。</p>
+
+<h2>WordPress</h2>
+<p>Webサイト作成フレームワーク。</p>
+<p><a href="../network/wordpress.html">WordPress</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>PHPはダメ言語と良く言われる</h2>
+<p>プログラマの間で、PHPを推す声は強いです。たとえば、Laravelのような優れたフレームワークがあることが、このような声の由来です。</p>
+<p>ですが、同時に、PHPはダメ言語と良く言われます。</p>
+<p>僕はその理由をあまり知りませんが、言語設計やセキュリティなどの理由から、最近はPHPは「仕事で使う機会は多いが、良い言語とは思わない」という人が増えています。</p>
+<p>本当のハッカーになりたいのであれば、Pythonを使いましょう。特にDjangoはWebフレームワークとしてとても優れています。</p>
+
+<h2>LAMPスタックの中核</h2>
+<p>PHPは、Linux + Apache + MySQL + PHP (Perl/Python)のLAMPスタックの中核に位置する言語です。</p>
+<p>軽量で簡単に作れて便利なLAMPスタックですが、最近はWordPressの登場やRuby on RailsをはじめとするWebフレームワークの進歩があり、LAMPをじかで使うことは少なくなっています。</p>
+
+<h2>扱う技術の豊富さはナンバーワン</h2>
+<p>PHPは、Web上のツールからスタートしたこともあり、「馬鹿な言語」だと言われることもあるが、HTML、XML、CSS、SQL、JavaScript、JSON、そしてMVCフレームワークやWordPressなど、その技術の豊富さはナンバーワンである。</p>
+<p>セキュリティなどの知らなければならない技術上の知識も多いし、HTTPサーバーやデータベースの常識も求められる。</p>
+<p>特に、たとえばバーチャルホストなど、Apacheの設定でさまざまな指定をすることが多く、とてもたくさんの技術がある。一部では、「人間と見分けがつかない」と言う人間が多い。</p>
+
+<h2>基本を押さえておくことは大切</h2>
+<p>Ruby on RailsやDjangoのようなWebフレームワークの時代において、PHPは既に必要のない技術なのでしょうか。</p>
+<p>それは間違いです。なぜなら、「基本を押さえておくことは大切」だからです。</p>
+<p>実際、Webフレームワークを使っていても、「このフレームワークでは簡単にできないけれど、自分でPHPコードを書けばすぐにできるような処理」というのはあると思います。</p>
+<p>また、Ruby on Railsのような技術は、新しい技術が生まれては消えていき、すぐに古いものになります。</p>
+<p>そうした時、PHPのような「基本となる技術のやり方」を知っておくと、長い間通用する「本当のスキル」というのが身につきます。</p>
+<p>PHPができなくてもRailsの開発はできるでしょうが、PHPができることで、RailsやWebの仕組みをより深く広い視点で、自分の「力」として見ることはできると思います。</p>
+<p>よって、Railsを勉強するのであっても、PHPを先に勉強しておくことは、とてもためになります。同じことを言いますが、Railsの理解がより深く、広いものになるでしょう。</p>
+
+<h2>PHP 8.0</h2>
+<p>PHP 8.0がリリースされましたが、今回の目玉はJITによる高速化です。PHPをネイティブコードにコンパイルして使いまわすことで、高速化されます。</p>
+<p><a href="https://qiita.com/rana_kualu/items/fe7998fbe773544d5d25">一部</a>では「PHP、これはもうコンパイル言語なのでは？」と言われています。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

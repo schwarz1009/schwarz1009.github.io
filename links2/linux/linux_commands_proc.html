@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXコマンド（応用３．プロセス） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXコマンド（応用３．プロセス）</h1>
+<p>UNIXやLinuxのコマンドに関する世界観（応用３．プロセス）です。<a href="linux_commands.html">UNIXコマンド（応用）</a>や<a href="linux_commands_beginner.html">UNIXコマンド（基本）</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>を参考にしています。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>psコマンド</h1>
+<h2>psコマンド</h2>
+<p>psはプロセス状態を表示するコマンド。killと一緒に使う。</p>
+<pre>
+ps [オプション]
+</pre>
+
+<h2>psの表示項目</h2>
+<p>表示項目については、PID（プロセスID）、TTY（プロセスに関連付けられた端末名）、TIME（累積利用CPU時間）、CMD（実行ファイル名）となる。</p>
+<p>状態は、D（割り込み不可能なスリープ状態）、R（実行中・実行可能状態）、S（割り込み可能なスリープ状態）、T（ジョブ制御中。トレース中もしくは停止中）、X（死んでいる状態）、Z（終了しているが親プロセスに回収されなかったゾンビ状態）となる。</p>
+<p>また、プロセス状態の負荷情報として、&lt;（優先順位が高い）、N（優先順位が低い）、s（セッションリーダー）、l（マルチスレッド化されたプロセス）、*（フォアグラウンド中のプロセス）となる。</p>
+<p>（「［改訂第3版］Linuxコマンドポケットリファレンス」を参考に執筆・引用しました。）</p>
+
+<h2>killコマンド</h2>
+<p>killはプロセスにシグナルを送るコマンド。</p>
+<pre>
+kill [オプション] プロセスID
+</pre>
+<p>たとえば、</p>
+<pre>
+$ kill -l
+（シグナル一覧が表示される）
+$ kill 4444
+（プロセスにシグナルを送って終了させる）
+</pre>
+
+<h2>nice</h2>
+<p>niceは実行優先度をつけてコマンドを実行するコマンド。</p>
+<pre>
+nice [オプション] [コマンド [引数 ...]]
+</pre>
+
+<h1>プロセス管理</h1>
+<h2>ps</h2>
+<p>プロセス状況を表示する。</p>
+
+
+<h2>pstree</h2>
+<p>プロセスの親子関係を分かりやすくツリー表示してくれる。</p>
+
+<h2>pgrep/pkill</h2>
+<p>プロセスIDを表示し、プロセスにシグナルを送信する。</p>
+
+<h2>pidof</h2>
+<p>実行しているコマンドのプロセスIDを表示する。</p>
+
+<h2>kill</h2>
+<p>プロセスを終了する。</p>
+
+<h2>killall</h2>
+<p>killallを使うと、プロセスを殺す時に、killのようなプロセスIDではなく、プロセスの名前で指定できる。同じ名前のプロセスは全部死ぬ。</p>
+<p>killを使うよりも使いやすいが、別のプロセスまで一緒に殺さないように注意しよう。</p>
+
+<h2>free/vmstat</h2>
+<p>freeは、空きメモリや利用中メモリを表示する。vmstatは、仮想メモリの統計情報を表示する。</p>
+<p>vmstatはサーバーのリソースをリアルタイムでモニタリングするのに使える。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

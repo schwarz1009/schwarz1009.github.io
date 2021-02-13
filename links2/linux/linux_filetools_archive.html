@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linuxアーカイブ・同期・デバイス処理 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linuxアーカイブ・同期・デバイス処理</h1>
+<p>Linuxのアーカイブ・同期・デバイス処理に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>ファイル操作</h1>
+<h2>deflate圧縮</h2>
+<p>deflate圧縮は、zipやgzipなどで使われている可逆データ圧縮アルゴリズム。</p>
+<p>可逆圧縮で、インターネットで広く使われている。圧縮は比較的高速で、伸長は非常に高速。</p>
+<p>日本人により考案されたLHAは、ほぼ同じアルゴリズムを使う。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Deflate">Deflate - Wikipedia</a></li>
+</ul>
+
+<h2>tar</h2>
+<p>tarを使うことで、ファイルをまとめて圧縮し、圧縮ファイルを作ることが出来る。また、圧縮ファイルから元のファイルを展開（解凍）することもできる。</p>
+<p>tarは複数のファイルをひとつのファイルにアーカイブするプログラム。gzipやbzip2を使用しており、それらのアルゴリズムに基づいてアーカイブを圧縮・解凍できる。</p>
+<ul>
+<li><a href="https://webkaru.net/linux/tar-command/">Linuxコマンド【 tar 】アーカイブの作成・展開 - Linux入門 - Webkaru</a></li>
+<li><a href="https://codezine.jp/unixdic/w/tar">tar - CodeZine（コードジン）</a></li>
+</ul>
+
+<h2>rsync</h2>
+<p>ディレクトリ間のファイルの同期を行う。</p>
+<p>rsyncを使うことで、データをディレクトリ間で同期することが出来ます。</p>
+<p>rsyncを使うと、ディレクトリの中で変更があったファイルだけを探し出し、新しいファイルだけをコピーできる。オプションでアーカイブモードを選択することで、サブディレクトリを再帰的に実行したり、ファイルの属性（パーミッション、タイムスタンプ、シンボリックリンク）をそのまま保持することができる。</p>
+<pre>
+$ rsync -av 同期元/ 同期先/
+</pre>
+<p>rsyncはシェルスクリプトにしてcronに指定することで、毎日夜に定期的に同期してくれるように設定することもできる。tarとの併用で、たまに全体のバックアップをとっても良いだろう。</p>
+<ul>
+<li><a href="https://jp.linux.com/news/linuxcom-exclusive/431401-lco2015070802">Rsyncを使ってファイルのバックアップをとる - Linux.com</a></li>
+<li><a href="https://www.virment.com/rsync-backup/">rsyncとシェルスクリプトを使った自動バックアップ環境の構築手順 - virtualiment</a></li>
+</ul>
+
+<h2>dumpとrestore</h2>
+<p>イメージ単位でファイルシステム全体をバックアップ・復旧できる。</p>
+<p>UNIXのバックアップツールとして最も一般的で最適だが、ファイルシステムの一部だけをバックアップしたり、複数のファイルシステムにまたがるディレクトリツリーをバックアップすることはできない。</p>
+<p>そのような場合にはtarやrsync, cpioを用いる。</p>
+<p>dumpとrestoreを使うのは、システム全体をバックアップ・復旧したい場合で、他にddコマンドなどがあり、ddコマンドは環境をまるごと複製する際に便利。システム管理者としては覚えておかなければならないコマンドである。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-backup">【概要を一通り】Linuxのバックアップについてのまとめ - エンジニアの入り口</a></li>
+<li><a href="https://www.freebsd.org/doc/ja_JP.eucJP/books/handbook/backup-basics.html">15.9. バックアップの基本 - FreeBSD ハンドブック</a></li>
+</ul>
+
+<!--
+<h2>Linuxのバックアップの基本</h2>
+<p>バックアップについて。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-backup">【概要を一通り】Linuxのバックアップについてのまとめ - エンジニアの入り口</a></li>
+</ul>
+-->
+
+<h2>gzip/gunzip</h2>
+<p>gzipアーカイブに圧縮・展開する。</p>
+<p>そもそもUNIXではcompressという圧縮コマンドを使っていたが、それで使われていたLZWは特許侵害の恐れがあり、GNUが安全・安心な代替として開発した。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gzip">gzip - Wikipedia</a></li>
+</ul>
+
+<h2>bzip2/bunzip2</h2>
+<p>bzip2アーカイブに圧縮・展開する。</p>
+<p>gzipよりも高い圧縮率を持つが、処理速度の点でgzipよりも劣っている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Bzip2">bzip2 - Wikipedia</a></li>
+</ul>
+
+<h2>cpio</h2>
+<p>cpio形式に圧縮・展開する。アーカイブへのコピーやアーカイブからのコピーができる。</p>
+<p>cpioよりもtarの方が良く知られている。RPMパッケージに採用されていることで有名。RPMパッケージはrpm2cpioコマンドでcpio形式に変換することができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Cpio">cpio - Wikipedia</a></li>
+</ul>
+
+<h2>unzip/lhasa/unrar</h2>
+<p>ZIP/LHA/RAR形式のアーカイブを展開する。</p>
+<p>たとえば、Windowsで圧縮したzip形式の圧縮ファイルを解凍したりするのに使う。</p>
+<p>暗号化されたzipを解凍したい場合は、zipcloakコマンドを使用する。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1809/21/news028.html">【 zipcloak 】コマンド――ZIPファイルの暗号化と暗号の解除を実行する：Linux基本コマンドTips（243） - ＠IT</a></li>
+</ul>
+<p>あるいは、zipの-eオプションやunzipの-Pオプションを使う。</p>
+<ul>
+<li><a href="https://qiita.com/snaka/items/b84d9c56a7b5dc8fc055">zip/unzipコマンドでパスワード付きZipの作成と展開 - Qiita</a></li>
+</ul>
+
+<h2>mktemp</h2>
+<p>一時ファイル・一時ディレクトリを作成する。</p>
+
+
+<h1>ハードウェア情報</h1>
+<h2>df</h2>
+<p>ディスクの使用容量を確認する。</p>
+<pre>
+$ df -h
+</pre>
+
+<h2>du</h2>
+<p>ファイルやディレクトリの使用容量を確認する。</p>
+<pre>
+$ du -h
+</pre>
+
+<h1>デバイス</h1>
+<h2>dd</h2>
+<p>ブロックファイルや変換形式を指定して、ファイルを変換してコピーする。</p>
+<p>ddコマンドでは、入力（if=/dev/sdb1など）と出力（of=/dev/sdb2など）を指定する。ここでデバイスを指定できるため、デバイスの内容をそのままコピーできる。</p>
+<p>用途としては、簡単なファイルの複製や、デバイスファイル（HDDやCD-ROM）からファイルへのコピー、ディスクイメージをデバイスに出力する際に利用できる。またKVMやXenの仮想イメージ作成にも利用できる。作成したイメージはファイルシステムの作成後に、mount(8)に「-o loop」をつけてマウントできる。</p>
+<p>デバイスをそのままイメージに出力したり、イメージからデバイスに出力したり、といった用途に使うことが多い。</p>
+
+<h2>lsattr/chattr</h2>
+<p>ext2/3/4のファイル属性を表示・変更する。追記専用、変更不可、安全な削除、復旧可能など、さまざまな機能が使える。</p>
+
+
+<h1>新技術</h1>
+<h2>zchunk/zsync & jigdo</h2>
+<p>zchunkは差分圧縮フォーマットで、zsyncは差分同期システム。</p>
+<p>ひとつのファイルを複数の「チャンク」に分割し、コピーする時は必要なチャンクだけを差分コピーすれば良い。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201812/26">2018年12月26日　Fedora，圧縮ファイルフォーマット「zchunk」を実装へ：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>Fedora 30でDNFがzchunkに対応した。zsyncはUbuntuなどの毎日更新されるテスト版（日本のミラーサーバーにミラーリングされない）を高率的にダウンロードするために、isoファイルの差分同期を行うために使える。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201812/26">2018年12月26日　Fedora，圧縮ファイルフォーマット「zchunk」を実装へ：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201904/03">2019年4月3日　Fedora 30がベータサイクルに，正式リリースは5月7日予定：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0141">第141回　UbuntuのインストールCD入手方法いろいろ（2）：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>ちなみに、Debianには昔からjigdoと呼ばれるパッケージのダウンロードシステムがある。パッケージを個別にダウンロードし、最後にCD形式にまとめる。</p>
+<ul>
+<li><a href="https://www.debian.org/CD/jigdo-cd/index.ja.html">jigdo をつかって Debian CD イメージをダウンロードする - Debian</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>ファイル名が文字化けした時はconvmv</h2>
+<p>特に、Windowsからzip圧縮ファイルを持ってきて展開した場合などに、ファイル名が文字化けすることがあります。</p>
+<p>この場合、convmvコマンドを使って、ファイル名を変換できます。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?convmv">convmvコマンドの使い方: UNIX/Linuxの部屋</a></li>
+</ul>
+
+<h1>コマンド一覧</h1>
+<h2>ファイルシステム</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>df</td>
+<td>ディスクの使用量（ハードウェア単位）を調べる。</td>
+</tr>
+<tr>
+<td>du</td>
+<td>ディスクの使用量（ディレクトリ単位）を調べる。</td>
+</tr>
+</table>
+
+<h2>圧縮・解凍</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>compress</td>
+<td>*.Z形式のファイルの圧縮・復元。</td>
+</tr>
+<tr>
+<td>gunzip</td>
+<td>*.gz形式の圧縮ファイルの復元。</td>
+</tr>
+<tr>
+<td>gzip</td>
+<td>*.gz形式のファイルの圧縮・復元。</td>
+</tr>
+<tr>
+<td>tar</td>
+<td>アーカイブの作成と復元を行う。</td>
+</tr>
+<tr>
+<td>uncompress</td>
+<td>*.Z形式の圧縮ファイルの復元。</td>
+</tr>
+<tr>
+<td>unzip</td>
+<td>*.zip形式の圧縮ファイルの復元。</td>
+</tr>
+<tr>
+<td>zcat</td>
+<td>圧縮ファイルの内容を表示する。</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>*.zip形式のファイルの圧縮。</td>
+</tr>
+</table>
+
+
+<h2>同期</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>rsync</td>
+<td>2つのディレクトリの同期をとる。完全にファイル内容を同じにしたい場合、バックアップを取りたい場合などに使える。<br>ただ間違えて同期してファイルが消えることがあるのでtarコマンドなどとの併用がおすすめ。</td>
+</tr>
+</table>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

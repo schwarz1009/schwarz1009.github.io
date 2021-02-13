@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXシステム管理４（ファイルシステム） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXシステム管理４（ファイルシステム）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観４（ファイルシステム）です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>ファイルシステムとは</h1>
+<h2>ファイルシステムの概要</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>Linuxでは、ファイルシステムはまずパーティションを作成し、その中にファイルシステムを作成し、それをマウントすることでディレクトリツリーとファイルを操作できる。</p>
+<p>/etc/fstabには、起動時にマウントされるファイルシステムボリュームの設定をする。</p>
+<p>Linuxのファイルシステムでは、VFSと呼ばれる仕組みによって、さまざまな別のファイルシステムを使うことができる。</p>
+<p>ブロック型のext2やジャーナリング（途中で強制終了しても壊れない）に対応したext3/ext4などがある。</p>
+<p>また、ReiserFSやXFSはB-Treeファイルシステムと知られる。</p>
+<p>ブロック型のext4ではなくデータベースと同様のインデックス技術を用いた高速な検索が可能。</p>
+<p>また、ZFSやBtrFSのようなコピーオンライトのファイルシステムでは、ファイルをコピーしてもほとんどのデータを共有データとし、書き換えられた時点で複製を作る（コピーオンライト）仕組みを採用している。</p>
+<p>これにより、データリソースを大幅な削減ができるほか、毎日スナップショットをとってもデータの大幅な利用に繋がらないため、いつでも好きな地点にスナップショットからデータを復旧させることができ、信頼性の確保に繋がる。</p>
+<p>ファイルシステム階層としては、基本的に/usrにはシステム全体で共有される、あまり頻繁に変更されないファイルを置く。</p>
+<p>/varには、頻繁に変更されるファイル、たとえばログやスプールファイルを置く。</p>
+<p>そして、/etcにはシステム管理者が設定する設定ファイルなどを置く。</p>
+<p>/usr/localは、/usrと同様だが、パッケージ管理システムではなく、システム管理者が手動で管理するmakeビルドのプログラムを置く。</p>
+<p>そして、/home/usernameにはユーザー個別のホームディレクトリが置かれる。</p>
+<p>これらは、所有者、所有グループ、その他のユーザーに対する、実行、読み込み、書き込みの許可権限であるパーミッションで守られる。</p>
+<p>しかしながら、特権ユーザーであるrootに莫大な権限があることが問題だったり、Webサーバなどのプロセスに権限を付加させたい場合などは、SELinuxなどのより強固なセキュアOSモジュールを使うこともできる。</p>
+
+<h2>ファイルシステムの基本</h2>
+<p>UNIXでは、ハードディスクやUSBメモリのようなストレージデバイスの中のデータは、ファイルシステムと呼ばれる決まりによって扱われる。</p>
+<p>ファイルシステムにおいては、全てのデータはファイルという単位で格納され、複数のファイルをひとつにまとめる（ひとつの場所に置いてまとめて管理する）ためにディレクトリと呼ばれるツリー構造の階層を作る。</p>
+<p>ディレクトリは、/（ルートディレクトリ）を一番上に、/usrや/homeや/etcなどの重要なディレクトリがある。<a href="linux_fhs.html">ファイルシステム階層</a>を参照のこと。</p>
+<p>ストレージデバイスがデバイスドライバによって認識されると、/devディレクトリにデバイスファイルができる。これは/dev/sdaのようになる（パーティションが区切られている場合は/dev/sda1や/dev/sda2のようになる）。デバイスファイルについては<a href="linux_devicefile.html">Linux デバイスファイル</a>を参照のこと。</p>
+<p>このデバイスファイルを、ext2のようなLinuxカーネルで使うことのできるファイルシステムにフォーマットすることで、このデバイスをマウントして使えるようになる。マウントとは、ブロック型デバイスファイルにアクセスするカーネルの機構であり、ext2ファイルシステムを一度作ってしまえば、そのデバイスは/以下のどこにディレクトリにもマウントすることができる。ファイルシステムを作ってマウントすることで、その中にファイルやディレクトリを作ったり、プログラムから読み書きしてデータを保存することが可能となる。ext2などのファイルシステムの詳細は<a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>を参照のこと。</p>
+<p>また、/dev/sdaxの最後のxはハードディスクを複数に分割するパーティションを意味する。パーティションはハードディスクを複数に分割する機能で、それぞれのパーティションを個別に別々のディレクトリにマウントすることができる。この時、それぞれのパーティションには別々のファイルシステムを構築できる（たとえば、/bootをext2で、/をext4で、といった具合）。パーティションはファイルシステムをフォーマットする前に、事前にfdiskなどで作る必要がある。</p>
+<p>Linuxでは、ファイルはコマンドに対して「ls /usr/bin」のように引数として与えることで、「/usr/binの中のファイルの一覧を表示しろ」という命令として使える。また、コマンドプログラムの中からは、open, write, read, closeのようなカーネルのシステムコールや、システムコールにバッファ操作など使いやすい機能を加えたlibcのライブラリ関数（stdio）からファイルを操作できる。<a href="linux_api.html">Linuxのシステムコール・APIに関する世界観</a>を参照のこと。</p>
+
+<h2>パーティションの分け方</h2>
+<p>パーティションの分け方。簡単に言えば、/と/usrを分けると、/binなどは/に出来て、/usr/binなどは/usrに出来る。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0107/04/news001.html">パーティション分割／非分割のセオリー (1/2) - @IT</a></li>
+</ul>
+
+
+<h1>ファイルシステム管理とマウント</h1>
+
+<h2>パーティション設定ファイル（/etc/fstab）</h2>
+<p>パーティションを記載する設定ファイル。ここに記述されたボリュームはOS起動時に自動的にマウントされる。</p>
+<p>NFSでネットワーク上にあるボリュームをマウントする場合も、同様に/etc/fstabを編集する。</p>
+
+<h2>マウント</h2>
+<p>マウントによって、デバイスをファイルシステムとして、ディレクトリとして使うことができる。</p>
+<p>UNIXではマウントという概念があり、ファイルシステムを作成したデバイスをデバイスファイルをとっかかりにマウントすることで、ディレクトリツリーにそのファイルシステムを追加し、ファイルシステムとしてその中のファイルを編集・操作することができるようになる。</p>
+
+<h2>パーティションの切り方</h2>
+<p>fdiskの場合は<a href="http://www.atmarkit.co.jp/ait/articles/1803/01/news034.html">【 fdisk 】コマンド――パーティションを作成、削除する - @IT</a>を参照のこと。</p>
+<p>最近ではpartedを代わりに使いますが、僕も昔はfdiskを使っていました。難しいようで慣れれば簡単です。対話的なcfdiskというプログラムもある。</p>
+<ul>
+<li><a href="http://kazmax.zpp.jp/linux_beginner/fdisk.html">Linux fdiskコマンドでパーティションを作成する - kazmax - Linuxで自宅サーバー</a></li>
+</ul>
+
+<h2>ext2, ext4ファイルシステムの作成方法</h2>
+<p>ファイルシステムの作成。</p>
+<p>基本的には以下のようにする。</p>
+<pre>
+# mkfs.ext2 /dev/sda2
+# mkfs.ext4 /dev/sda4
+</pre>
+<p>mkfs.ext2に-jオプションをつけると、ジャーナリングを有効にできる（ext3）。</p>
+
+<h2>スワップ領域とブートパーティション</h2>
+<p>スワップ領域は、メモリが足りなくなった時にハードディスクを代わりに使う機構で、急にメモリが必要になった時、もっとも使われていない領域をディスクに書き出し（スワップ、ページアウト）、メモリを開放する。512M程度が必要とされる。</p>
+<p>swapパーティションはfdiskなどでパーティションを作った上（ファイルシステムのタイプに"Linux Swap"を設定すること）で、以下のコマンドで作成する。</p>
+<pre>
+# mkswap /dev/sda3
+</pre>
+<p>また、以下でswap領域を有効にする。</p>
+<pre>
+# swapon /dev/sda3
+</pre>
+<p>また、ブートパーティションはカーネルやブートローダのファイルが置かれるパーティションで、伝統的にジャーナリングのないext2ファイルシステムで作る。</p>
+
+<h1>アーカイブと同期・NFS</h1>
+<h2>tar/rsyncでバックアップ</h2>
+<p>ファイルのバックアップを取りたい場合、さまざまな方法がある。</p>
+<p>まず、tarコマンドで全体のアーカイブを取る。全体のファイル容量が小さい場合や、全体をまるごとバックアップしたい場合に有効。</p>
+<p>次に、rsyncコマンドで同期する。ディレクトリ全体をミラーリングして、常に最新版にしたい場合、変更点が少ない場合に有効。</p>
+<p>あとは、cpコマンドで全てコピーするとか、dumpとrestoreを使うとかいう方法がある。</p>
+
+<h2>find/diffで更新日と差異をチェック</h2>
+<p>使えるコマンドとしては、diffで差分を取るとか、findを上手く使うことで「更新日が最近の10日以内のファイルを一覧する」といったことも出来る。</p>
+<p>特に、「どのフォルダで最新の更新をしたのか分からない」などといった場合は、findコマンドを上手く使おう。</p>
+<p>diffコマンドも、上手く使えば「どのファイルが変更されているのかを突き止める」といった場合に使える。どこを変更したのかまで分かる。だが、実行速度は遅い。</p>
+
+<h2>git</h2>
+<p>最近は、gitなどの便利なシステムもある。たとえばローカルのデータをgitにコミットし、GitHubのリポジトリにプッシュ（アップロード）し、職場の環境からプル（ダウンロード）することで、いつでも職場とローカルの同期を簡単に実現できる。とても便利なシステムだが、たまに誤動作したり良く分からないアーカイブの取り方をするので、慣れないと使い辛いかもしれない。gitはWindowsから使うこともできる。</p>
+<p>GitHubはリポジトリを公開する場合は無料だが、非公開にしたい場合は有料なため、ビジネス用のデータをアップロードすることは避けるべきである。ホームページのデータとか、オープンソースソフトウェアのプロジェクトのホスティングなどに使うことはできるが、公的・私的な利用をしたい場合は、Google Driveのようなオンラインストレージサービスを使おう。</p>
+
+<h2>NFS</h2>
+<p>NFS（ネットワークファイルシステム）を使うことで、ネットワーク上のファイルシステムをマウントすることもできる。この場合、普通のディレクトリと全く同じようにコマンドやプログラムからアクセスできる。</p>
+<p>詳細は<a href="../network/file_servers_nfs.html">NFSの世界観</a>にあります。</p>
+
+
+<h1>カーネルとファイルシステム</h1>
+<h2>カーネルのVFS</h2>
+<p>LinuxカーネルはVFS（仮想ファイルシステム）という仕組みを採用している。これにより、実際のファイルシステムが違っていても、プログラムは統一したインターフェースからシステムコールとしてファイルを操作することができる。</p>
+
+<h2>ジャーナリングの有無</h2>
+<p>ジャーナリングが備わったファイルシステムでは、突然システムが停止してもファイルシステムが壊れることがない。Ext2ではジャーナリングに対応していないが、Ext3/4ではジャーナリングに対応している。</p>
+
+<h2>Linuxのファイルシステム</h2>
+<p>Linuxのファイルシステム。基本的にExt4, ReiserFS, JFS, XFSなどがある。FreeBSDなどにはZFSと言うのも存在する。（ライセンスのGPLとの兼ね合いで、LinuxではZFSは基本的に対応していない。）</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0305/20/news002.html">Linuxファイルシステム技術解説（1） - @IT</a></li>
+</ul>
+
+<h2>さまざまなファイルシステム</h2>
+<p>ext2-4以外にも、</p>
+<table class="some_tables">
+<tr><th>ファイルシステム</th><th>解説</th></tr>
+<tr><td>btrfs</td><td>さまざまな機能があるがまだ未熟</td></tr>
+<tr><td>f2fs</td><td>フラッシュメモリ向け</td></tr>
+<tr><td>JFS</td><td>IBMの信頼できるファイルシステム</td></tr>
+<tr><td>ReiserFS</td><td>大量の小さなファイルがある場合向け</td></tr>
+<tr><td>XFS</td><td>堅牢でスケーラブル</td></tr>
+</table>
+<p>などの先進的なファイルシステムがあります。Windows向けのものとしてはvfat, NTFSなどがあります。</p>
+
+<h2>XFS</h2>
+<p>RHEL 7では標準のファイルシステムがXFSになったとのこと。結構メモリを食うらしい。</p>
+<ul>
+<li><a href="http://www.intellilink.co.jp/article/column/oss-rh02.html">今から始めるRHEL 7 第2回 標準ファイルシステムとなったXFS | NTTデータ先端技術株式会社</a></li>
+</ul>
+
+<h2>Btrfs</h2>
+<p>Btrfsは進歩の期待度が高い。将来デフォルトになるかもしれないそうだ。</p>
+<ul>
+<li><a href="https://qiita.com/sion_cojp/items/c8e015db39ddbf43012e">Linuxファイルシステムをまとめてみました - Qiita</a></li>
+</ul>
+
+<h2>ZFS</h2>
+<p>ZFSはLinuxではGPLとの兼ね合いで利用できないが、Btrfsの機能と良く似ているとのこと。</p>
+<p>後日注記：最近はLinuxでもZFSを利用することができる。ライセンス問題を何とか解決しているようである。詳しくは自分で調べてほしい。</p>
+
+<h1>ファイルシステムの管理と修復</h1>
+<h2>fsck</h2>
+<p>ファイルシステムの一貫性を調査し、修復するツール。OSがクラッシュするなど、正常にシャットダウンしなかった場合に再起動すると、場合によって自動で実行される。多くの場合、問題を修復する機能も備わっている。</p>
+<p>Windowsにおけるchkdskと同様のツールである。</p>
+
+<h1>論理ボリュームマネージャ</h1>
+<h2>LVM</h2>
+<p>LVMは論理ボリュームマネージャと呼ばれ、複数のストレージやパーティションを、ひとつの論理的なボリュームとして利用することのできる技術。</p>
+<p>たとえば、複数のハードディスクをひとつのパーティションとして扱ったりできる。</p>
+<p>また、ボリュームのサイズは拡大・縮小できるほか、後から装置を付け足して大きくすることもできる。</p>
+<p>しかしながら、間にLVMが入るので効率が落ちるという問題があり、壊れた時に修復が困難になるなどの問題もあるので、使う必要が無ければ使わない方がいい。</p>
+<ul>
+<li><a href="http://e-words.jp/w/LVM.html">LVM（Logical Volume Manager）とは - IT用語辞典 e-Words</a></li>
+<li><a href="https://emgr.jp/lvm/">LVM を個人が使う必要があるのか | 技術系管理職の基礎知識</a></li>
+</ul>
+
+<h1>新技術</h1>
+<h2>FUSE</h2>
+<p>FUSEは、ユーザー空間でファイルシステムのコードを実行出来るようにするシステム。たとえばGNOMEの仮想ファイルシステム機能（FTPなどにアクセスする）とか、Google DriveやGmailなどへアクセスするなどの用途がある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Filesystem_in_Userspace">Filesystem in Userspace - Wikipedia</a></li>
+</ul>
+
+<h2>AuFS/Overlayfs</h2>
+<p>AuFS/Overlayfsは、複数のディレクトリツリーを重ね合わせることのできるファイルシステム。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Overlayfs">Overlayfs - ArchWiki</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/linux_containers/0018">第18回　Linuxカーネルのコンテナ機能 [7] ─ overlayfs：LXCで学ぶコンテナ入門 －軽量仮想化環境を実現する技術｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Aufs">aufs - Wikipedia</a></li>
+</ul>
+
+
+<h1>別ページ</h1>
+<h2>ファイルシステムの詳細</h2>
+<p>さらなるファイルシステムの詳細については、<a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>を参照のこと。</p>
+
+<h2>ファイル関係のAPI</h2>
+<p>ファイルを操作するAPIについては、<a href="linux_api.html">Linuxのシステムコール・APIに関する世界観</a>を参照のこと。</p>
+
+<h2>ファイルシステム階層</h2>
+<p>ファイルシステム階層については、<a href="linux_fhs.html">ファイルシステム階層</a>を参照のこと。</p>
+
+<h2>特殊なディレクトリ</h2>
+<p>/dev<!--や/proc-->のような特殊なディレクトリとデバイスファイルについては、<a href="linux_devicefile.html">Linux デバイスファイル</a><!--や<a href="linux_kernel_proc.html">Linuxカーネル（プロセス）</a>-->を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

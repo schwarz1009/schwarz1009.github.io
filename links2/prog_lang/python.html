@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Python関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Pythonの世界観</h1>
+<p>Pythonによるプログラミングに関する世界観（基本）です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Pythonとは</h1>
+<h2>最初はPythonから入るべき</h2>
+<p>プログラマになりたいのであれば、Pythonから始めましょう。</p>
+<p>Google三大言語では、C/C++, Java, そしてPythonが「標準的言語」として言われています。その中でも、初心者向けでかつさまざまなユースケースで使われるのがPythonです。</p>
+<p>最近では、ちまたでもAIや機械学習のような技術のマスコミ報道が増えていますが、AIで使われる言語はPythonであることが多いのです。</p>
+<p>また、昔から、スーパーハッカーの間ではPythonを推す声が強いです。オープンソースの伽藍とバザールを書いたことで有名なエリック・レイモンドも、Pythonをすすめています。</p>
+<ul>
+<li><a href="https://cruel.org/freeware/hacker.html">How To Become A Hacker: Japanese - cruel.org</a></li>
+</ul>
+<p>PythonはWindowsでも使えますし、Linuxを使えばまさにハッカーの仲間入りです。ハッカーの標準言語であると同時にGoogleのお墨付き言語であり、Webでもデスクトップでも、あるいはシステム開発や人工知能にも対応できます。</p>
+<p>また、PythonにはITの最先端技術がつまっています。</p>
+<p>一部では、RubyやJavaScriptを推す声もありますが、「Rubyエンジニアにはいつか限界が来る」とか、「JavaScriptは一部の最先端をかけるギークにしか分からない」ということがあり、初心者にはおすすめできません。</p>
+<p>初心者、上級者、Linuxハッカーを目指すものは、間違いなくPythonをやるべきです。</p>
+<p>また、Pythonの文法はとてもシンプルで、習得しやすい簡素なものです。ですから、そんなにたくさんの時間をかけなくても習得できます。これがC++だったとしたら、きっと初心者はすぐに迷宮から抜け出せなくなって諦めてしまいます。また、Perlも同様にシンプルですが、クセが強いです。Perlハッカーになるならばそれで良いですが、変な記法や書き方を学んでしまって、おかしなコードを書くようになります。そもそも、Perlは明らかにおかしな言語です。引数を$_[0]で書くようになると、人類は終わりだと思います。</p>
+<p>Pythonをはじめる上で何から知れば良いかは永遠の課題だと思いますが、とりあえず公式のドキュメントを参照すると良いでしょう。Progateなどの初心者向けのサイトもあり、プログラミングのことを本当に何も知らない人には有益でしょう。また、WebフレームワークのDjangoを使えば、Webサービスの開発をいとも簡単に実現できるでしょう。GUIの開発はLinuxのGTKで行うことをおすすめします。</p>
+<ul>
+<li><a href="https://docs.python.jp/3/">Python 3.6.1 ドキュメント</a></li>
+<li><a href="https://docs.djangoproject.com/ja/2.2/">Django ドキュメント | Django</a></li>
+<li><a href="https://documents.mikeforce.net/PyGObject-Tutorial/html/index.html">Python GTK+ 3 チュートリアル</a></li>
+<li><a href="https://prog-8.com/">Progate</a></li>
+</ul>
+
+<h2>シンプルで何でも楽にできる</h2>
+<p>Pythonを一言で言えば、文法が簡素・シンプルで、何でも簡単で楽にできる言語だと言えます。</p>
+<p>特に、覚えるべき言語要素が少ないです。簡単に短時間に習得することができます。</p>
+<p>その代わり、できることは多いです。簡単に記述し、簡単に何でもできます。</p>
+<p>科学技術計算やAI・人工知能（ニューラルネットワーク・ディープラーニング・機械学習）に使われることが多いPythonですが、Webのサービスを作ったりGUIアプリケーションを作ったりする用途でもとても簡単にアプリケーションを作れます。</p>
+<p>ライバルのRubyと比べると、面白みの少ない言語です。Rubyは「楽しさ」を強調しており、プログラミングをすることの楽しさや面白さがありますが、Pythonは簡単なだけで、とてもつまらない言語です。</p>
+
+<h2>人工知能・AIのほか、GAFA関係で良く使われる</h2>
+<p>Pythonは、人工知能・AIで良く使われるほか、GAFA（Google, Amazon, Facebook, Apple）関係で良く使われます。</p>
+<p>特に、PythonはGoogleやFacebookなどの「アメリカの一流プラットフォーム」で使われることの多い、かっこいい言語です。</p>
+<p>人工知能やAIにおいて良く使われるのは、昔はLispでした（リスト構造のS式がプログラムとデータで共通に使われるため、「プログラムを操作するプログラム」を作りやすかった）が、最近はライブラリの整備状況などが考慮され、LispよりもPythonを使うことが増えました。</p>
+<p>Pythonは決して、つまらないだけの言語ではありません。言語仕様が簡素でシンプルなため、言語処理系の挙動や機能を把握することがしやすく、「Pythonのことを全て分かった一流ハッカー」になりやすい言語だと言えます。C++やJavaに比べても、覚えるべきことが少なく、誰でも当たり前に考えるように動いてくれます。</p>
+
+<h2>Pythonで我慢しなさい</h2>
+<p>初心者は、永遠の言語論争などを無視して、Pythonで我慢してコードを書きましょう。</p>
+<p>Pythonで書いていれば、そのうちプログラミングはできるようになります。</p>
+<p>おすすめなのは、Pythonならやはり人工知能・AIの開発です。<a href="../programs/robot.html">僕の書いたロボット</a>も参考にしてください。</p>
+<p>最初は、オブジェクト指向は「用意されているクラスを利用する」ものだと考えて、変数を定義し、変数に値を格納し、条件分岐をするところから始めましょう。そのうち、繰り返しや関数定義も覚えられると良いでしょう。</p>
+
+<h2>Pythonの練習にはUNIXのコマンドの再実装がおすすめ</h2>
+<p>Pythonの練習には、UNIXのコマンドの再実装がおすすめです。</p>
+<p>たとえば、grepコマンドやsortコマンドなどを、自分で作ってみましょう。楽しいし、勉強にも練習にもなると思います。</p>
+<p>その次は、具体的なデータベースのデータを用意し、そのデータを分析するAIを作ってみましょう。データは、自分で自動作成しても良いですし、郵便局からダウンロードできる郵便番号のデータなどを使うと良いでしょう。</p>
+<p>それ以降は、Webフレームワークの習得がおすすめです。特にDjangoを使ってミニブログ（ツイッターのようなサービス）を作ってみましょう。投稿機能やフォロー機能を一通り実装しましょう。</p>
+<p>GTK+やQtを使うことでX11によるGUIプログラミングもできます。僕はWebKitGTKを使ったタブブラウザや、Lispを実行できるテキストエディタ（もちろんLisp処理系もPythonで書く）を作ると良いと思います。</p>
+<p>ほかの分野として挙げられるのは、ネットワークサーバーです。HTTPのマルチスレッドサーバーを書いてみましょう。それくらいで、あとは応用が利きます。それぐらいができるようであれば、どんなプログラムでも開発できるようになるでしょう。</p>
+
+<h2>動的なくせに遅い</h2>
+<p>PythonやRubyのいいところは、動的なところです。型宣言をつけなくても、実行時に適当に解釈してくれます。</p>
+<p>Pythonは動的なインタープリタ言語で、何でも簡単ですが遅いです。全くスピードや性能を考えていないのでしょう。速さが必要な時にだけC言語を使う必要がありますが、あとはPythonで全て事が足ります。</p>
+<p>後日注記：Pythonの遅さはよく指摘されますが、実用においては問題ありません。今のパソコンで、普通の用途でPythonの低速さが問題になる場合はそう多くないでしょう。</p>
+
+<h2>僕のコーディングスタイルが間違っている件</h2>
+<p>今日知ったこととして、僕は作業所で仕事の合間にPythonチュートリアルを読んでいた。</p>
+<p>そこで、コーディングスタイルの話が出てきた。</p>
+<p>なんでも、Pythonでは「タブではなく空白4つでインデントを行う」ことが推奨されているとのこと。</p>
+<p>これに反して、僕のロボットのコードは、空白2つでインデントを行っている。</p>
+<p>これは、ひとえに、僕の勉強不足である。チュートリアルすら読んでいないことが分かって恥ずかしい限りである。</p>
+<p>空白2つでも問題なく動作はするが、新しいコードを書く時は空白4つを使おうと思う。</p>
+<p>Pythonチュートリアルは、簡単に読めてPythonの実際のやり方が分かる素晴らしい文書である。RustのBookなどにも「エンパワーメント」という概念が出てくるが、「概念を知ることで自由な能力をつける」という意味では最適であり、プログラマの最初に読むべきであると同時に熟練したプログラマにとっても最適な文書である。</p>
+<p>僕のように、「全てを順番通りに読むことが苦手」な人は、Pythonのチュートリアルをいきなり順番通り読むのではなく、まずどのような内容が書かれているかをざっと見て確認しながら、詳細を読み深めると良いと思う。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/index.html">Pythonチュートリアル</a></li>
+</ul>
+
+<h2>PythonをやるならAnaconda</h2>
+<p>Pythonをやる上で、使えるツールがAnacondaです。Pythonに加えてさまざまなパッケージがバンドルされており、WindowsやMacにおける初期導入におすすめ。僕もMacではAnacondaでPython 3を入れています。</p>
+<ul>
+<li><a href="https://www.python.jp/install/anaconda/index.html">Anaconda のインストール - python.jp</a></li>
+</ul>
+<p>テキストエディタはMicrosoftのVS-Codeがいいとよく言われますが、僕は全能エディタviの信者なのでMacではVimとVS-Codeを併用しています。WindowsではサクラエディタとEmacsライクなエディタxyzzyを併用しています。</p>
+
+<h1>YouTubeを使おう</h1>
+<h2>YouTubeでPythonを学ぼう</h2>
+<p>YouTubeには「プログラミング言語を学ぶ」という隠れた使い方がある。</p>
+<p>YouTubeで学ぶことの利点は二つあります。</p>
+<p>１．きちんと分かっているプログラマの方が動画で話しながら直接教えてくれるので、「プログラマがどのような考え方でプログラムを書いているのか」が分かる。</p>
+<p>２．コードを書いているところやソフトウェアをインストールしたり触ったりしているところが直接画面で見れるので、「プログラマがどのような方法でプログラムを書いているのか」が分かる。</p>
+<p>今の時代、書店にはたくさんのPython入門本が並んでいますが、IT系の書籍は値段が高額で、5,000円以上になることも少なくありません。そんな分厚い本を買っても、読めるわけがありません。YouTubeの動画なら、楽に見ることができて、「こんなに簡単なことを言っていたのか」ということが分かって面白く、「動画をただ見ているだけ」でいいので、さまざまなコードの入力作業を自分でしなければならない書籍による独学を行うよりも、続けやすいです。財布や時間と相談しながら、分からないことは動画で学ぶことをおすすめします。</p>
+
+<h1>Pythonの良いところ</h1>
+<h2>無料でオープンソースかつ、Windowsに簡単にインストールできる</h2>
+<p>Pythonの良いところは複数ありますが、まず、余計な費用もかからず、必要なプラットフォーム条件も少なく、無料でオープンソース、そしてWindowsに簡単にインストールできるほか、Linuxにはほとんどの場合標準でインストールされている、ということがあります。</p>
+<p>Visual Studioのように、高価な代金を払って専門のソフトウェアを購入する必要もなく、全部無料です。Perl/CGIやPHPのように、サーバーを構築して自宅サーバーを運営する必要もなく、Windowsでプログラミングを行い、ローカルな環境で実行することが多いため、Linuxの知識もサーバーの運営責任も必要ありません。</p>
+
+<h2>言語仕様がシンプルかつ、超高級言語</h2>
+<p>Pythonのもう一つの良いところは、言語仕様がシンプルで覚えやすく、また、Rubyと同じ動的オブジェクト指向スクリプト言語であり、「ほとんどの処理がとても短く簡単に実現できる」ということが言えます。</p>
+<p>C/C++のような冗長な記述は必要なく、Javaのように覚えるべきことがたくさんあるわけでもないため、簡単に習得できます。</p>
+
+<h2>機械学習という目的がはっきりしている</h2>
+<p>また、一番初心者にとっていい点が、「人工知能・AIや機械学習の用途に使う」という「プログラミングの目的」がはっきりしているところです。</p>
+<p>C/C++やJavaなどは、汎用的過ぎて目的がなく、結果「言語仕様を学ぶだけで、実際にモノを作らない」という結果になってしまいます。また、PHPやRubyには比較的はっきりとした「Webサービスを作る」という目的がありますが、いきなりWebサービスを外部に公開するのは、セキュリティや運営責任の観点から言って問題があります。</p>
+<p>Pythonは、機械学習というはっきりとした目標があるため、プログラミングの勉強を楽しく行うことができます。</p>
+<p>後日注記：しかしながら、僕はプログラミング初心者が人工知能から始めるのはおすすめしません。人工知能や機械学習は、プログラミングの中でも特殊な分野で、難しく、まったくプログラミングとは異なる数学的な考え方が必要だからです。初心者にはDjangoやRailsからWebサービスを構築することをおすすめします。</p>
+
+<h2>仕事にも趣味にも使える</h2>
+<p>Pythonの最後のメリットは、仕事にも趣味にも使える、ということです。</p>
+<p>エンジニアになることを将来的に目指すのであれば、PythonはJavaの次の新しいIT業界の主役言語です。世界シェアもJavaを抜いてNo.1になったはずです。Pythonができる人間は、日本国内でも活躍できるほか、海外や世界においても活躍できます。日本ローカルのRubyとはこの点が異なります。</p>
+<p>また、趣味でオープンソースソフトウェアを作るのであれば、PythonはLinux界でもっとも流行りの言語です。ペイントソフトのMyPaintやパッケージ管理システムのPortageなど多くのソフトウェアがPythonを使って作られています。</p>
+
+<h2>遅いところはC言語でカバー</h2>
+<p>Pythonは超高級言語であるため、なんでも簡単にできますが、その代わりパフォーマンスが悪いです。特に、C/C++と比べるとそこまで遅いと言われています。</p>
+<p>こうした点は、コア部分をC言語で書いてそれをPythonからインターフェースで利用する形でプログラムを書くと、C/C++に近い速度でプログラムを実行できます。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/extending/index.html">Python インタプリタの拡張と埋め込み</a></li>
+</ul>
+
+<h2>データサイエンティストになれる</h2>
+<p>また、Pythonの優れた点は、最近流行りの「データサイエンティスト」という職業になれる、ということがあります。</p>
+<p>このためには、統計・解析の知識や、R言語やSQLなどの知識も必要になります。</p>
+<p>特に、統計を勉強している数学部や社会学部の学生であれば、その学んだことをPythonで活かすことができると同時に、データサイエンティストになることで、高収入かつキャリアアップが実現できるでしょう。</p>
+
+<h2>とりあえずチュートリアルを最後まで読もう</h2>
+<p>まずは、公式のチュートリアルを最後まで読むことです。やる気を高めて頑張りましょう。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/index.html">Python チュートリアル</a></li>
+</ul>
+
+<h1>主な用途</h1>
+<h2>UNIX/Linuxでの中規模なシステムの開発</h2>
+<p>UNIXやLinuxでの、例えばPortageやYumなどのパッケージマネージャのような、中規模の基盤システムを開発するために良く使われる。</p>
+
+<h2>学習用途</h2>
+<p>プログラミングの学習用途や教育目的として良く使われる。特に、アメリカでは日本でのRubyがそのままアメリカでのPythonになっている。</p>
+
+<h2>機械学習・AIの最先端技術が豊富</h2>
+<p>また、最近になって増えてきた分野として、機械学習やAIの分野がある。Pythonはこれらの技術が豊富で、ライブラリなども多い。Pythonの機械学習はアメリカなどのネットでとても流行っていて、たとえば日本ローカルだが技術系SNSのQiitaでは「Python」のタグがトップになっている。（2位はJavaScript、3位はRuby、4位はRails。C/C++などははるかに下。もっと詳しく知りたい方はエンジニア向け知識学習サービス<a href="http://putiita.net/">Putiita - Qiitaのプチ良記事を集めたサービス</a>などにランキングがあるので参照のこと。）</p>
+<ul>
+<li><a href="https://qiita.com/kama-boko/items/9dce1bfcbb830a4108f9">プログラミング歴半年だけど、エンジニアが「知らないことを知る」ためのWEBサービス「Putiita」を作ったよ - Qiita</a></li>
+</ul>
+<p>（注記：良く見ていなかったのですが、公式のQiitaにもタグのランキングがありました。AWSなどのタグも上位に入っています。）</p>
+<p>機械学習のトピックについては<a href="https://qiita.com/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92">Qiitaの機械学習のタグ</a>を参照すると良いかもしれない。</p>
+
+<h1>学習環境の構築</h1>
+
+<h2>エディタにはVS-CodeとJupyter Notebookがおすすめ</h2>
+<p>Pythonを書くためのエディタとしては、MicrosoftのVS-Codeがおすすめです。Anaconda NavigatorからはPythonシェルだけではなくVS-Codeをクイックで起動できます（上の動画を参照のこと。）</p>
+<p>また、Jupyter Notebookを使うと、ブラウザからPythonを実行できます。これもAnaconda Navigatorからクイック起動できます。Jupyter Notebookは、たとえばPythonの入っていない入門者のパソコンなどで、Pythonコードの動き方などを簡単に試すような用途に使えると思います。</p>
+<p>Pythonシェル（Anacondaプロンプト）は対話式のインタープリタとして、コードを実行したければプロンプトで簡単に実行できます。最初はインタープリタでPythonの動きに慣れながら、開発するにしたがってVS-Codeによる*.pyファイルの編集に慣れていけばいいでしょう。*.pyファイルは</p>
+<pre>
+python study01.py
+</pre>
+<p>のようにコマンドから実行できます。</p>
+<p>また、Anacondaを使いたくない場合は、公式のPythonにIDLEと呼ばれる簡単な統合開発環境が付属しているのでそれを使ってください。</p>
+<p>Anacondaにはコンポーネントを管理する機能があり、新しいPythonに関連するコンポーネントはここから簡単にGUIで導入できます。一覧表示され更新も簡単です。</p>
+<p>VS-Codeでエラーが出た場合などには、コンポーネントが足りないことがあります。導入はpipを使ってコマンドから
+<pre>
+python -m pip install パッケージ名
+</pre>
+<p>とします。</p>
+
+<h1>Pythonの基本</h1>
+<h2>変数と定数</h2>
+<p>変数は$などの記号を付けず、=で代入できる。</p>
+<pre class="prettyprint">
+hello = 'Hello, World'
+print(hello)
+</pre>
+<p>後日注記：変数が「データの箱」として中身を変えることのために使うのに対し、定数は中身を変えないために使う。定数は円周率や消費税のように「数値を一か所に記述し、プログラマにとって目的を明確化し分かりやすくするために名前（ラベル）をつける」といったことのために用いる。</p>
+<p>後日注記：変数の定義や書き換えには=を使う。=は代入の場合に使い、等しいかどうか比較する時は==を使うことに注意。同じ変数は何度でも使えるし、代入すれば値を上書きすることもできる。</p>
+
+<h2>演算子</h2>
+<p>算術演算子には、+, -, *, /（実数除算の商）, //（整数除算の商）, %（整数除算の余り）、**（累乗）などがある。</p>
+<p>後日注記：数値型（int）と文字列型（str）など、型が違う場合は演算子の働きが異なる。たとえば1 + 2は3だが、"python" + "言語"は"python言語"となる。</p>
+
+<h1>Pythonの制御フロー</h1>
+
+<h2>if～else文（タブとインデントでブロックを記述する）</h2>
+<p>Pythonでは、タブと空白のインデントでブロックを記述する。たとえば、if～else文は以下のようになる。</p>
+<pre class="prettyprint">
+def test(x):
+    if (x &lt; 3):
+        return "less"
+    else:
+        return "more"
+
+print(test(5))
+</pre>
+<p>字下げが文法に含まれるのは賛否両論があるが、必ずある程度美しいコードになる、ということで、Linux界でPythonはとても流行っている。</p>
+<p>if文やfor文、def文やclass文などで、どこからがコードブロックや関数やクラスの続きであり、どこが終わりであるかは必ずインデントで指定する。また、慣習として、インデントは多くの場合半角スペース4つにすることになっている。</p>
+<p>また、if文で複数の条件を分岐する時にはelifを使う。</p>
+<ul>
+<li><a href="https://python.keicode.com/lang/control-basic-rule.php">基本的なルール - Python 入門</a></li>
+</ul>
+<p>後日注記：if文などの論理式を書く時は、等しいかどうか比較するには==を使う。大きさの比較には&lt;, &lt;=, &gt;, &gt;=などを使うほか、等しくないことを確かめたい時は!=を使う。また、and, or, notを使うことで論理演算も可能。型が一致するかどうかを確かめるにはisを使う。</p>
+<p>後日注記：if文の中にif文を使う時はネストしてスペース8つでインデントすればよい。インデントの位置によってコードの意味が全く違うものになるので、ifとelseは必ず同じ位置にインデントを揃えなければならない。elifを使うこともできる。また、if文の中で何もすることがない時はpassを使って明示的に「ここは飛ばす」と書くこともできる。</p>
+
+<h2>for文とwhile文</h2>
+<p>Pythonのfor文は特殊で、</p>
+<pre>
+for ループ変数 in 反復可能オブジェクト:
+</pre>
+<p>となる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+msg = 'Hello'
+
+for ch in msg:
+    print(ch)
+</pre>
+<p>となる。ここでは反復可能オブジェクトは文字列で、文字のひとつひとつ全てに対して処理を行う。</p>
+<p>文字列以外にも、リストなどからも反復できる。</p>
+<pre class="prettyprint">
+animals = ["犬", "猫", "鳥", "牛"]
+for name in animals:
+    print(name)
+</pre>
+<p>このように、Pythonでは他の言語におけるforeach文と同じことをfor文で行える。</p>
+<p>他の言語と同じように、回数を指定して繰り返すのであれば、range()関数を使う。</p>
+<pre class="prettyprint">
+for x in range(10):
+    print(f'{x}: Hello')
+</pre>
+<p>ちなみに、C言語などでも使われるwhile文も使える。これには</p>
+<pre>
+while 条件:
+</pre>
+<p>とすればいい。条件が満たされる間、繰り返しをし続ける。</p>
+<p>繰り返しを途中で抜けるのはbreak文、途中で処理を中断して次の繰り返しに行くにはcontinue文を使う。else節を使うことで繰り返し後に行いたい処理を書ける。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1905/10/news023.html">［Python入門］for文による繰り返し処理 (1/3)：Python入門 - ＠IT</a></li>
+</ul>
+
+<h2>辞書のループ</h2>
+<p>Pythonでは、辞書を以下のようにループさせると、キーだけを取り出す。</p>
+<pre class="prettyprint">
+dct = {"us": "English", "jp": "Japanese"}
+for k in dct:
+    print(k)
+</pre>
+<p>上記の例ではkにキーが代入されるため、出力されるのは</p>
+<pre>
+us
+jp
+</pre>
+<p>となる。値を代入したい場合は、</p>
+<pre class="prettyprint">
+dct = {"us": "English", "jp": "Japanese"}
+for k in dct:
+    print(dct[k])
+</pre>
+<p>とする。あるいは、items()を使えば以下のような書き方もできる。</p>
+<pre class="prettyprint">
+dct = {"us": "English", "jp": "Japanese"}
+for k, v in dct.items():
+    print(f"{k}: {v}")
+</pre>
+<p>他にも、keys()やvalues()などを使ってキーや値を取得することもできる。</p>
+
+<h2>関数</h2>
+<p>Pythonではdefで関数オブジェクトを作成できる。</p>
+<pre class="prettyprint">
+def add(x, y):
+    return x + y
+</pre>
+<p>呼び出す時は以下のようにする。</p>
+<pre class="prettyprint">
+print(add(11, 34))
+</pre>
+<p>（以上は<a href="https://python.keicode.com/lang/functions-basics.php">def による関数オブジェクトの作成 - Python 入門</a>を参考に執筆・引用しました。）</p>
+<p>後日注記：Pythonでは上から下へ順番にプログラムを実行するが、defで定義したメソッドは呼び出されるまで実行されない。またメソッド名の()の中に引数を書くことで、呼び出した時の具体的な値を関数の内部に渡すことができ、関数の内部でreturnを実行すると呼び出し元に戻り値を返すことができる。</p>
+
+<h2>別のファイルの関数を使う</h2>
+<p>別のファイルにある関数を使うには、importを使う。</p>
+<p>まず、print_values.pyを作って以下のように書く。</p>
+<pre class="prettyprint">
+def func_printv(x, y, z):
+    print(f"{x}, {y}, {z}")
+</pre>
+<p>次に、main.pyを作って次のように書く。</p>
+<pre class="prettyprint">
+import print_values
+
+print_values.func_printv(10, 2, 8)
+</pre>
+
+<h2>例外</h2>
+<p>Pythonでは、エラー処理のために例外を使うことができる。</p>
+<p>例外はraiseで自分で投げることもできる。キャッチしなかった場合は、その場で強制終了になる。</p>
+<p>例外をtry ～ exceptでキャッチした場合、tryブロックのどこかで例外が発生するとexceptブロックに強制的にジャンプし、exceptブロックの内容を実行した後で、その後の処理が行われる。</p>
+<p>Pythonのエラーには構文エラーと例外の二種類があり、例外は必ずしも致命的とは限らない。そのため、例外をキャッチしてそのまま処理を継続することも多くある。</p>
+<pre class="prettyprint">
+try:
+    if d == 0:
+        raise ZeroDivisionError
+except ZeroDivisionError as e:
+    print(e)
+</pre>
+
+<h2>if __name__ == "__main__":の意味</h2>
+<p>これは、そのスクリプトがコマンドラインで単独で実行された場合、__name__変数に__main__が代入されるので、その時に実行されることを意味している。要は、ライブラリとしてインポートされた場合ではなく、C言語のコマンドのようにコマンドラインから実行される時に実行される処理をここに書く。</p>
+<ul>
+<li><a href="http://azuuun-memorandum.hatenablog.com/entry/2015/05/09/002549">Python - if __name__ == '__main__': の意味 - ざっくりん雑記</a></li>
+</ul>
+
+<h1>オブジェクト指向</h1>
+<h2>オブジェクト指向とは</h2>
+<p>Pythonでいうオブジェクト指向は、オブジェクトを「自分自身」とし、メソッドを「自分自身を対象とする関数」とする。</p>
+<p>どんなメソッドを使うのであっても、そのメソッドは自分自身に対して行われる。</p>
+<p>後日注記：Pythonでは、データ（変数）とメソッド（関数）をひとつの関連するモジュールにまとめて、クラスにコード（たい焼きで言えば金型）を記述し、そのクラスをインスタンス（たい焼きで言えばひとつひとつのたい焼き）にして扱う。これをオブジェクト指向と呼ぶ。また、Pythonではクラスの中のデータとメソッドをアトリビュート（属性）と呼ぶ。</p>
+
+<h2>オブジェクト指向の概要</h2>
+<p>こんな感じになる。</p>
+<pre class="prettyprint">
+# クラス名は大文字で始める。
+class Text:
+
+    # コンストラクタ。クラスからインスタンスを作り出した時に実行される。
+    # 最初の引数selfは特別な引数で、オブジェクト自身を表す。
+    # 実際の引数は2番目から使われる。
+    def __init__(self, content):
+    
+        # メンバ変数はself.変数名となる。
+        # このクラス（ここではText)の全てのメソッドから、
+        # 同じメンバ変数（ここではself.buff）にアクセスできる。
+        self.buff = content
+        
+    def add(self, content):
+        self.buff = self.buff + content
+
+# Textを継承したPrintableTextを定義する。
+class PrintableText(Text):
+    def print_text(self):
+        print(self.buff)
+
+# インスタンスの作成。それぞれが異なるデータを保持する。
+text1 = PrintableText("hoge")
+text2 = PrintableText("foo")
+text2.add("bar")
+text1.print_text()
+</pre>
+
+<h2>クラスとメソッドを使う</h2>
+<p>まず、import文でモジュールを読み込む。</p>
+<pre class="prettyprint">
+import calendar
+</pre>
+<p>その後にクラスからオブジェクトを作成し、メソッドを実行する。</p>
+<pre class="prettyprint">
+my_cal = calendar.TextCalendar(6)
+my_cal_string = my_calendar.formatmonth(2020, 4)
+print(my_cal_string)
+</pre>
+<p>モジュール名をいちいち明記したくない時は、</p>
+<pre class="prettyprint">
+from calendar import TextCalendar
+</pre>
+<p>のようにfrom ～ import文を使う。</p>
+<p>あるいは、</p>
+<pre class="prettyprint">
+from calendar import *
+</pre>
+<p>としてもよい。</p>
+<ul>
+<li><a href="https://torina.top/detail/380/">Pythonで、月間カレンダーをつくる - naritoブログ</a></li>
+</ul>
+
+<h2>クラス</h2>
+<p>クラスを定義する時は、classキーワードを使う。</p>
+<p>・コンストラクタは__init__、デストラクタは__del__メソッドになる。</p>
+<p>・メソッドの第一引数はselfで、それぞれのインスタンスを指す（Java/C++のthisのようなもの）。第二引数からユーザー定義のパラメータが来る。</p>
+<p>・インスタンスの属性はself.nameのように「self.属性名」という形で表す。</p>
+<p>・クラスはモジュールに保存して、from ... importでインポートして使う。</p>
+<p>・インスタンスを生成するのは、クラス名と同じ名前のメソッドで、newは使わない。</p>
+<p>（以上は<a href="https://python.keicode.com/lang/oop-basics.php">クラス定義の基本 - Python 入門</a>を参考に執筆しました。）</p>
+
+<h2>継承</h2>
+<p>継承は</p>
+<pre class="prettyprint">
+class Batman(Human):
+</pre>
+<p>などのようにクラス名 (親クラス名)と指定する。</p>
+<p>後日注記：継承はプログラムコードの再利用性を高める。最初のうちは「なんのためにあるのか分からない」というオブジェクト指向だが、たくさんのコードを複数の人間が書くようになった時に、はじめて「オブジェクト指向で設計していてよかった」という悟りを得ることができる。</p>
+
+<h2>標準ライブラリ</h2>
+<p>Pythonの標準ライブラリには、さまざまなモジュールが用意されている。</p>
+<p>Pythonプログラムを書く上で、必ずしも自分で同じものを作らなくても、多くの機能が標準ライブラリにモジュールとして用意されているため、上手く使えば「三分ハッキング」のように簡単にプログラミングを行える。本当に三分でできるかは別として。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/index.html">Python 標準ライブラリ</a>
+</ul>
+
+<h1>Pythonのデータ構造</h1>
+<h2>型変換とinput関数</h2>
+<p>Pythonは動的だからといって、型を意識する必要が全くないわけではない。</p>
+<p>たとえば、文字列の中身を数値に変換して計算したり、入力したメッセージを数値に戻して演算し、その後に文字列と結合して出力したいような場合、必ず型変換が必要となる。</p>
+<pre class="prettyprint">
+input_value = input('二乗にしたい数を入力してね: ')
+int_value = int(input_value)
+result = int_value ** 2
+output_msg = input_value + 'の二乗は' + str(result) + 'だよ'
+print(output_msg)
+</pre>
+<p>後日注記：型変換を行う関数には、int(), float(), str()などがある。たとえば文字列を数値型や浮動小数点型に変換できる（逆も可能）。Pythonには他にも複素数型などがある。また、type()関数でその変数が何の型であるかを知ることができる。+のような演算子を使う場合、数値型の変数と文字列型の変数を加えるとエラーになる。必ず文字列型か数値型に変換すること。</p>
+
+<h2>タイプヒント</h2>
+<p>Python 3.5以降では、特に汎用的にモジュールなどを作って人に使ってほしい時などに、型アノテーションをつけることができるようになった。これをタイプヒントと言う。</p>
+<p>以下のように関数の引数や戻り値に型を明記できる。</p>
+<pre class="prettyprint">
+def add(x: int, y: int) -&gt; int:
+    return (x + y)
+</pre>
+<p>ジェネリクスやUnion型（いくつかの型を同時に許容するようにすること）も記述できる。</p>
+<p>しかしながら、Pythonではこうした型アノテーションをつけていても、実行時にはチェックされない。ただし、mypyというツールを使うことでチェックを行うことができる。</p>
+
+<h2>リストとタプル</h2>
+<p>リストとタプルは良く似ていて、どちらもC言語でいう配列のように使うことができる。さまざまなオブジェクトを混ぜて入れることが出来るのが特徴。</p>
+<p>リストとタプルの違いは、記法が違い、タプルはイミュータブル（変更できない＝オブジェクト要素を追加・変更・削除することができない）という特性を持つ。</p>
+<p>リストは[]を用いて記述するが、タプルは()を用いて（あるいはかっこをつけずに,だけで）記述する。</p>
+<pre class="prettyprint">
+l1 = ['test', 'hoge']   #リストの例
+t1 = ('test', 'hoge')   #タプルの例
+</pre>
+<p>値が変更できる変数のことを「ミュータブル」、変更できない変数のことを「イミュータブル」という。イミュータブルな変数束縛でも、値の参照自体は変えることが出来る。Rustや関数型言語などでも出てくる考え方なので注意しておこう。</p>
+<p>後日注記：たとえばPythonでは文字列の一部を変更することはできない。</p>
+
+<h2>辞書</h2>
+<p>Pythonでは、キーと値から成るハッシュテーブルのことを辞書と呼ぶ。</p>
+<pre class="prettyprint">
+animals = {'dog': '犬', 'cat': '猫'}
+print('dogは' + animals['dog'] + 'で、catは' + animals['cat'] + 'ですよ。')
+</pre>
+<p>後日注記：リストはlist型、辞書はdict型となる。また、リストの中に辞書を入れたり、辞書の中にリストを入れることもできる。異なる型の要素をミックスして複数入れることもできる。</p>
+
+<h1>文字列の関数と機能</h1>
+<h2>文字列の結合</h2>
+<p>文字列同士は+で結合できる（int型の+とは目的も機能も使い方も違う）。</p>
+<pre class="prettyprint">
+print("Tes" + "t")
+</pre>
+<p>printでは自動的に改行が付加されるが、付加したくない時はend=''という引数を追加する。</p>
+<pre class="prettyprint">
+print("Tes", end='')
+print("t")
+</pre>
+<p>文字列は、ダブルクオーテーション（"）で囲っても、シングルクオーテーション（'）で囲ってもいい。その代わり、"で囲った文字列は"で終わる必要がある。'～'の中には"を、"～"の中には'を含めることができるが、"～"の中に"を入れたい場合は\"のようにバックスラッシュでエスケープする必要がある。また、以下に示すようにr文字列やf文字列を使って\や"などの含めた文字列や内部で関数名を展開する文字列を書くこともできるし、複数行に渡って文字列を表すにはトリプルクォートを使う。</p>
+
+<h2>format関数</h2>
+<p>Pythonで変数の中身を表示するためには、フォーマット整形関数であるformatを使用する。</p>
+<pre class="prettyprint">
+x = 3
+y = 10
+print('{0}+{1}={2}'.format(x, y, x+y))
+</pre>
+<p>以下のサイトを参考に執筆・引用しました。</p>
+<ul>
+<li><a href="https://qiita.com/Morio/items/b79ead5f881e6551d9e1">【Python入門】format関数で文字列の書き方 - Qiita</a></li>
+</ul>
+
+<h2>f文字列とr文字列</h2>
+<p>また、上のformatと同じ用途に使えるものとして、f文字列がある。f文字列では、{}の中の変数が展開される。</p>
+<pre class="prettyprint">
+x = 3
+y = 10
+print(f'{x}+{y}={x+y}')
+</pre>
+<p>また、'（シングルクォート）の中では"（ダブルクォート）をそのまま書け、ダブルクォートの中ではシングルクォートをそのまま書けるが、シングルクォートの中で、シングルクォートを使ったり、ダブルクォートの中でダブルクォートを使ったりするためには、\（バックスラッシュ）をつける。</p>
+<p>ただし、Windowsのディレクトリパスなどで、バックスラッシュをそのまま使いたい場合は、raw文字列（r文字列）を使うと便利である。</p>
+<pre class="prettyprint">
+path_windows = r'C:\python'
+print(path_windows)
+</pre>
+<p>r文字列の中では、エスケープされた文字が付加的な意味を持たず、ただの文字として扱われる。</p>
+
+<h2>トリプルクォートとdocstring</h2>
+<p>また、ヒアドキュメントのように改行を含めた文字列を表現したい場合は、トリプルクォートと呼ばれる機能が使える。</p>
+<pre class="prettyprint">
+help_msg = '''
+このプログラムの使い方は、
+オプション1 : 説明1
+オプション2 : 説明2
+です。
+'''
+print(help_msg)
+</pre>
+<p>Pythonで自分以外のたくさんのユーザーが使うような関数を定義する場合、関数に説明をつける時に、docstringと呼ばれるドキュメントを作ることもある。この時、トリプルクォートを使う。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1912/06/news025.html">［Python入門］docstringの書き方：Python入門 - ＠IT</a></li>
+</ul>
+<p>後日注記：トリプルクォートは複数行の文字列に使うほか、複数行に渡るコメントを表現するためにも用いる（一行コメントは#を使う）。</p>
+
+<h2>文字列を操作する関数</h2>
+<p>文字列を操作する関数としては、よく使うものとして、</p>
+<table class="some_tables">
+<tr><th>関数</th><th>説明</th></tr>
+<tr><td>len()</td><td>文字数を求める</td></tr>
+<tr><td>in演算子</td><td>文字列の中に文字が含まれてるかどうかを調べる</td></tr>
+<tr><td>find()<br>rfind()<br>index()<br>rindex()</td><td>文字列の含まれている場所を求める</td></tr>
+<tr><td>split()</td><td>文字列を分割する</td></tr>
+<tr><td>join()</td><td>リストをひとつの文字列に結合する</td></tr>
+<tr><td>strip()<br>lstrip()<br>rstrip()</td><td>空白文字を削除する</td></tr>
+<tr><td>replace()</td><td>文字列を置換する</td></tr>
+</table>
+<p>などがある。Pythonでは文字列を変更することはできないため、「元の文字列をベースにして新しい文字列を作成する」といった動作になる。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1904/19/news027.html">［Python入門］文字列の操作 (1/4)：Python入門 - ＠IT</a></li>
+</ul>
+
+<h2>日本語文字コードを使う</h2>
+<p>PythonスクリプトでUTF-8を使うためには、行頭の部分を以下のように記述する。</p>
+<pre class="prettyprint">
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+</pre>
+<p>（<a href="http://osksn2.hep.sci.osaka-u.ac.jp/~taku/osx/python/encoding.html">Python でUTF-8, shift_jis, euc_jpなど日本語を使う方法 - Taku Yamanaka's Home Page</a>より引用。）</p>
+
+<h1>関数型言語の機能</h1>
+
+<h2>無名関数（ラムダ式）</h2>
+<p>Pythonでは、無名関数（ラムダ式）を使うことで、簡単なコードブロックであれば名前をつけなくてもブロックを変数に代入して実行すべきところで実行することができる。</p>
+<p>無名関数は以下のように記述する。</p>
+<pre>
+lambda 引数1, 引数2, ...: 式
+</pre>
+<p>ラムダ式は他の言語にもあるし、無名関数はC#では昔デリゲートと呼ばれていた。Rubyのブロックに近い。C言語でも関数ポインタを関数の引数に与えることはできる。</p>
+
+<h2>map/filter関数</h2>
+<p>map関数は、リストの各要素に処理を実行して、同じ長さのリストを返す。</p>
+<p>filter関数は、リストから条件に満たないものを削除する（フィルター）。</p>
+
+<h2>yield（ジェネレータ）</h2>
+<p>yieldは、for文のような繰り返し処理と組み合わせて使うことが多い機能で、returnがその場で関数の実行を終了して返り値を渡すのに対して、yieldは関数の途中で一時停止して、1つずつ値を返し続けることができる。</p>
+<p>for文で使う場合は、一度の繰り返しを行う時に、次のyieldの実行までを処理し、yieldで返された値をfor文のカウントごとに代入される変数に代入する。そして、次の繰り返しに進んだ時に、次のyieldまでを処理する。</p>
+<p>言葉で説明すると難しいが、繰り返しの中でさまざまな処理を行いたい場合に、知っておくと便利である。for文を使わずに、自分でnext()メソッドを実行することもできる。</p>
+<p>yieldはジェネレータと呼ばれる機能で、yieldがある関数はジェネレータ関数と呼ばれる。これをイテレータ（反復子）とともに用いることで、一回の繰り返しの呼び出しに対して、yieldまでを一回行うことができる。</p>
+<p>詳しくは以下のリンクが参考になる。また、PythonだけではなくC#でも使える。</p>
+<ul>
+<li><a href="http://ailaby.com/yield/">python の yield。サクッと理解するには return と比較 | コード７区</a></li>
+</ul>
+
+<h1>その他</h1>
+<h2>Pythonのデコレータ</h2>
+<p><a href="aspect.html">アスペクト指向</a>のように、Pythonでは単にbeforeのように「処理の前後に処理を行いたい」という場合、デコレータと呼ばれる機能を使うことができる。</p>
+
+<h2>Python 2と3には互換性がない</h2>
+<p>Python 3には後方互換性がない。たとえば、「print x」のような文は使えず、「print(x)」と書く必要がある。このため、YumをPython 3で書き直したDNFなどがLinux業界でも作られている。</p>
+
+<h1>応用</h1>
+<h2>Pythonでスクレイピングに挑戦</h2>
+<p>スクレイピングとは、Webページの情報を取得して自動で処理を実行する技術のこと。</p>
+<p>Pythonの練習にはスクレイピングが有効である。以下のページが参考になる。</p>
+<ul>
+<li><a href="https://dividable.net/python/python-scraping/">【保存版】Pythonでスクレイピングする方法を初心者向けに徹底解説！【サンプルコードあり】 | DAINOTE</a></li>
+<li><a href="https://www.sejuku.net/blog/51241">【初心者向け】PythonでWebスクレイピングをしてみよう!手順まとめ - 侍エンジニア塾ブログ</a></li>
+</ul>
+
+<h2>人工知能とAI</h2>
+<p><a href="ai.html">人工知能・AI</a>を参照のこと。</p>
+
+<h1>Python標準</h1>
+<h2>Python</h2>
+<p>Pythonについて。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Python">Python - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/python">git</a></li>
+</ul>
+
+<h2>公式ドキュメント</h2>
+<p>公式のドキュメント。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/">Python 3.8.1 ドキュメント</a></li>
+</ul>
+<p>何も分からない方は公式のチュートリアルを読みましょう。できれば本気で最後まで読みましょう。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/index.html">Python チュートリアル</a></li>
+</ul>
+
+<h1>Pythonの良いサイト</h1>
+<h2>@ITの連載</h2>
+<p>Pythonの良いサイトはたくさんありますが、@ITの以下の連載は50回以上連載記事が続いており、入門者におすすめです。Python以外にもAI・人工知能などの記事がたくさんあります。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/subtop/features/di/pybasic_index.html">Python入門 - ＠IT</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/subtop/features/di/all.html">Deep Insider 全記事一覧 - ＠IT</a></li>
+</ul>
+
+<h2>learnpython.org</h2>
+<p>Webのチュートリアルとしては、learnpython.orgがおすすめ。コードを見ながらすぐにWeb上で実行することができ、コードを書きかえれば即座に反映され、また各章の最後に問題があって、分からない時は正解を表示しながら、気楽にPythonの基本を学ぶことができる。Progateに近い感じ。説明は英文だが逆に簡単な英語の勉強になる。</p>
+<ul>
+<li><a href="https://www.learnpython.org/">Learn Python - Free Interactive Python Tutorial</a></li>
+</ul>
+<p>PythonだけではなくJavaやHTMLなどのコースもあり、とても内容が多い。</p>
+
+<h2>Pythonのおすすめ入門記事</h2>
+<p>以下のQiitaのPython入門がおすすめ。簡単にPythonの全トピックが分かる。</p>
+<ul>
+<li><a href="https://qiita.com/AI_Academy/items/b97b2178b4d10abe0adb">【初心者向け】無料でPythonの基本文法を5時間で学ぼう！ - Qiita</a></li>
+</ul>
+
+<h2>QiitaのPython/機械学習タグ</h2>
+<p>Pythonや機械学習の記事については、ネットには膨大な情報がありますが、それを大雑把に概観するためにはQiitaがおすすめです。特に、僕のまったく知らないような「機械学習の広大な専門領域」については、Qiitaに良い記事があるので、参考にしてください。</p>
+<ul>
+<li><a href="https://qiita.com/tags/python">Python - Qiita</a></li>
+<li><a href="https://qiita.com/tags/%e6%a9%9f%e6%a2%b0%e5%ad%a6%e7%bf%92">機械学習 - Qiita</a></li>
+<li><a href="https://qiita.com/tags/ai">AI - Qiita</a></li>
+<li><a href="https://qiita.com/tags/%e3%83%87%e3%82%a3%e3%83%bc%e3%83%97%e3%83%a9%e3%83%bc%e3%83%8b%e3%83%b3%e3%82%b0">ディープラーニング - Qiita</a></li>
+</ul>
+
+
+<h1>簡単な説明</h1>
+<h2>Python</h2>
+<ul class="defaultlist list7">
+<li>Python
+<ul>
+<li>Python
+<ul>
+<li>基本文法</li>
+<li>変数と定数</li>
+<li>リストとタプル</li>
+<li>辞書</li>
+<li>関数と制御構造</li>
+<li>format関数</li>
+<li>クラスとオブジェクト</li>
+<li>モジュールとインポート</li>
+<li>ライブラリ</li>
+<li>pip</li>
+<li>Anaconda</li>
+<li>高速化（JITコンパイルなど）</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>基本文法</h2>
+<p>インデントを文法として採用することで、「誰が書いても同じ美しいコード」になる</p>
+
+<h2>変数と定数</h2>
+<p>変数は変更可能、定数は変更不可能</p>
+
+<h2>リストとタプル</h2>
+<p>リストは変更可能、タプルは変更不可能</p>
+
+<h2>辞書</h2>
+<p>ほかの言語でいうハッシュのことをPythonでは辞書と呼ぶ</p>
+
+<h2>制御構造</h2>
+<p>for文は「反復可能オブジェクト」を渡す。数値のリストを処理するためにはrange()関数をfor文に与える必要がある。</p>
+
+<h2>format関数</h2>
+<p>format関数でフォーマット付き出力を行う。その他r文字列やf文字列などを使って生の文字列や書式付き文字列を表す。</p>
+
+<h2>クラスとオブジェクト</h2>
+<p>Pythonのインスタンスメソッドは第一引数がオブジェクト自身を表すselfであり、メソッドとして渡す引数は第二引数から与えられることに注意</p>
+<p>クラスをインスタンス化する時にnewは必要ない（クラス名のみ）</p>
+
+<h2>高速化</h2>
+<p>PyPyやNumbaやCythonを使うことで、低速であることで有名なPythonもある程度高速化できる</p>
+
+<h1>サンプルコード</h1>
+<h2>ロボット</h2>
+<p>以下は自分の作った<a href="../programs/robot.html">ロボット</a>のコード。</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+class Robot:
+    def __init__(self):
+        self.x = 0 # ここで状態記憶
+
+    def action(self):
+        # ここで反応
+        if self.x == 0:
+            print("考える")
+        
+        elif self.x == 1:
+            print("寝る")
+
+    def kanjou(self):
+        # ここでイベントループ
+        self.x = self.getEvent()
+    
+    def getEvent(self):
+        # ここでパターン認識（viewは見た景色の情報を返す。eは数値で、0は光、1は暗闇）
+        e = view()
+        return e
+
+    def mainloop(self):
+        while True:
+            self.kanjou()
+            self.action()
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+
+<h2>簡単な計算プログラム</h2>
+<blockquote class="inyou2">
+<p>自分で作った簡単なプログラムです。攻撃力が10のキャラと、攻撃力が1だが「1ターンごとに攻撃力が1上がっていく」キャラが戦って、いつ上がっていく方のキャラが上回るか、を計算する。</p>
+<p>正確にいうと、「いつ上回るかを計算する」というより、その「上回っていく過程」を表示する。</p>
+</blockquote>
+<p><a href="rust.html">Rust</a>で書いたコードをPythonに移植しました。</p>
+<pre class="prettyprint">
+x = 0
+y = 0
+count = 1
+
+while (count <= 100) :
+  x += 10
+  y += count
+  print("{0}\t{1}\t{2}".format(x, y, count))
+  count = count + 1
+</pre>
+
+<h1>開発ツール</h1>
+<h2>PyCharmを使おう</h2>
+<p>Pythonの開発をするには、ジェットブレインズ社のPyCharmが便利です。</p>
+<p>たとえば、コードの途中にブレークポイントを設定し、ある場所まで動かした上で停止させ、その時の変数の値を確認したりすることができます。</p>
+
+<h1>GTK+/GNOME</h1>
+<h2>Python GTK+ 3</h2>
+<p>PythonでGTK+アプリケーションを作る。</p>
+<ul>
+<li><a href="http://python-gtk-3-tutorial.readthedocs.io/en/latest/">The Python GTK+ 3 Tutorial</a> - 日本語訳もありますが、僕は英語で読むのをお勧めします。</li>
+<li><a href="https://documents.mikeforce.net/PyGObject-Tutorial/html/index.html">Python GTK+ 3 チュートリアル</a></li>
+</ul>
+
+<h1>さまざまな実装</h1>
+<h2>Jython</h2>
+<p>JavaによるPythonの実装。Javaコンポーネントを利用可能なため、Swing、AWT、SWTを使ったプログラムを書いたり出来る。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Jython">Jython - Wikipedia</a></li>
+</ul>
+
+<h2>IronPython</h2>
+<p>.NET FrameworkにおけるPythonの実装。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IronPython">IronPython - Wikipedia</a></li>
+</ul>
+
+<h1>Pythonの高速化</h1>
+<h2>PyPy</h2>
+<p>PyPyはPythonによって実装されたセルフホスティングなコンパイラ。正確にはPythonの低レベル向けのサブセットであるRPythonで実装されている。</p>
+<p>PyPyのメリットは、公式のCPythonよりもパフォーマンスが良いこと。JITコンパイル機能を主な開発目標としており、JITコンパイルによってCPythonよりも高速に動作する。場合によっては数十倍以上。</p>
+<ul>
+<li><a href="https://qiita.com/ta_ta_ta_miya/items/33253e9bcbb7034f088d">PyPyの基礎知識まとめ その1 - Qiita</a></li>
+</ul>
+
+<h2>Cython</h2>
+<p>CythonはPythonのコードをC/C++に変換することで高速化する。</p>
+<p>ただし、静的な型を明示するなどのコードの修正が必要になることもある。数十倍以上の高速化が期待できる。</p>
+<p>CythonやNumbaに言えることとして、プログラム全体をコンパイルするよりも、ボトルネックとなっている一部の処理だけにコンパイルをかけた方がはるかに高速化のメリットが高い。PyPyなども含め、場合によっては低速化することもあるため、重要な部分だけを高速化し、また静的コンパイルだけに頼るのではなくアルゴリズムの改善も行うことが必須条件。また、CPUではなくメモリやI/Oのアクセスには高速化のメリットを享受できないことがある。</p>
+<ul>
+<li><a href="https://qiita.com/pashango2/items/45cb85390193d97523ca">深入りしないCython入門  - Qiita</a></li>
+</ul>
+
+<h2>Numba</h2>
+<p>Numbaは、Pythonの関数ごとにJITコンパイルをかけることができる。コードの修正は最低限で、数十倍以上の高速化が期待できる。</p>
+<ul>
+<li><a href="https://qiita.com/toyolab/items/b5d95bd38b3c7c66b510">PythonコードをNumbaで高速化したときのメモ - Qiita</a></li>
+</ul>
+
+<h1>Rails風フレームワーク</h1>
+<h2>Django</h2>
+<p>Pythonによる、MVCのWebアプリケーションフレームワーク。</p>
+<p><a href="python_django.html">Django</a>を参照のこと。</p>
+
+<h2>Flask</h2>
+<p>Pythonによる「マイクロフレームワーク」と呼ばれる軽量なフレームワーク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Flask">Flask - Wikipedia</a></li>
+</ul>
+
+<h2>Bottle</h2>
+<p>Pythonによるマイクロフレームワーク。</p>
+<ul>
+<li><a href="https://qiita.com/masaibar/items/e3b6911aee6741037549">Python初心者がBottleを使ってみたら案外簡単に動いてくれた - Qiita</a></li>
+</ul>
+
+<h1>Webアプリケーションサーバ</h1>
+<h2>Zope</h2>
+<p>古くから存在するPythonによるWebアプリケーションサーバ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Zope">Zope - Wikipedia</a></li>
+</ul>
+
+<h1>マイクロコントローラ向け</h1>
+<h2>MicroPython</h2>
+<p>デスクトップ向けのCPythonよりも制限の厳しいマイクロコントローラで動くPython。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MicroPython">MicroPython - Wikipedia</a></li>
+</ul>
+
+<h1>パッケージ管理システム</h1>
+<h2>pip</h2>
+<p>pipはPythonのパッケージ管理ツール。パッケージのインストールが簡単にできる。</p>
+<ul>
+<li><a href="https://qiita.com/saitoxu/items/18e6a1c8c7840029147e">Pythonを使う上で欠かせないパッケージ管理システムpipの使い方 - Qiita</a></li>
+</ul>
+
+
+<h1>Pythonによる主なソフトウェア</h1>
+<h2>Portage</h2>
+<p>Portageは、Gentoo Linuxのパッケージ管理システム。</p>
+
+<h2>DNF/Yum</h2>
+<p>DNF/Yumは、Fedoraのパッケージ管理システム。</p>
+
+<h2>MyPaint</h2>
+<p>MyPaintは、オープンソースのペイントソフトウェア。</p>
+
+<h1>リンク集全般</h1>
+<h2>Python</h2>
+<ul>
+<li><a href="http://docs.python.jp/3/">Python 3.5.1 ドキュメント - Python</a></li>
+</ul>
+
+<h2>Pythonチュートリアル</h2>
+<p>Pythonのチュートリアル。</p>
+<ul>
+<li><a href="https://docs.python.jp/3/tutorial/index.html">Python チュートリアル</a></li>
+</ul>
+
+<h2>Python GTK+</h2>
+<p>PythonでGTK+3を使う。</p>
+<ul>
+<li><a href="https://documents.mikeforce.net/PyGObject-Tutorial/html/index.html">Python GTK+ 3 チュートリアル</a></li>
+</ul>
+
+<h2>Pythonリファレンス</h2>
+<p>Python</p>
+<ul>
+<li><a href="https://docs.python.jp/3/index.html">Python 3.6.5 ドキュメント</a></li>
+</ul>
+
+
+<h1>余談</h1>
+<h2>Pythonはヘビが好き</h2>
+<p>Pythonと言う単語は、英語では「ニシキヘビ」を意味する。また、Pythonの科学技術計算用のライブラリを含むディストリビューションには、Anaconda（アナコンダ）という名前がつけられている。</p>
+<p>これには、Pythonの作者がヘビが好きだったわけではなく、「空飛ぶモンティ・パイソン」と呼ばれるコメディ番組が元になっている。</p>
+<p>だが、現在ではPythonの公式マスコットはヘビになっている。</p>
+<p>Pythonのタブとインデントによるブロックの構文（オフサイドルール）には批判もあるが、元々はABCと呼ばれる教育用言語が元になっている。Pythonの作者グイド・ヴァンロッサムもABC言語の開発にかかわっていた。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

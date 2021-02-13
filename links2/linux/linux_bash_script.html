@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux シェル（Bash）２（シェルスクリプト） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux シェル（Bash）２（シェルスクリプト）</h1>
+<p>Linuxのシェル（Bash）に関する世界観２（シェルスクリプト）です。<a href="linux_bash.html">Bash１（シェル）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>シェルスクリプトの使い道</h1>
+<h2>簡単な定型処理やバッチ処理、コマンド行のメモに使える</h2>
+<p>シェルスクリプトは、簡単な定型処理やバッチ処理、そしてコマンド行のメモに使えます。</p>
+<p>たとえば、ホームページのデータを更新して、gitコミットし、lftpでサーバーに送信し、rsyncで同期し、tarでアーカイブしてコピーすると言った具合です。</p>
+<p>行をたくさん書く必要は必ずしも無く、コマンドのヒストリーをカーソルキーで参照するように、「数行だけ書かれたシェルスクリプト」を作って、それをbashから実行すれば、まるでWindowsでショートカットアイコンをダブルクリックするように、ひとつのアクションでコマンドを実行できます。シェルでは「./hoge.sh」と実行するか、GNOMEなどではダブルクリックで実行できます。</p>
+<p>lftpについては専用のスクリプト記法があるのでそれを参照すれば良いでしょう。<a href="../network/lftp.html">lftp</a>を参照のこと。他のUNIXコマンドについてはただそのコマンドを一行に書けばそれで実行できます。変数や条件分岐、繰り返しや関数呼び出しなどもできます。特に引数を指定してそれを変数として使えるようにスクリプトを書けば、状況によって別の処理を実行させられます。</p>
+<p>また、システムの内部では、bashやX11の初期化スクリプトや、デーモンやサービスを適切に実行させるRCスクリプト（SysV initの場合）でシェルスクリプトが使われているほか、automake/autoconfでもソフトウェアのコンパイル・インストールの際にシステムの構成をチェックして移植性を高めるためにシェルスクリプトが多用されています。またGentoo LinuxのPortageはPythonで書かれていますが、それぞれのパッケージのビルドやインストール情報を記述したebuildファイルはbashで書かれています。</p>
+<p>ファイルのバックアップなどは、きちんと端末で入力するとさまざまなコマンドを覚えなければなりませんが、面倒ならシェルスクリプトに一度書いてしまいましょう。何度でも手軽に使えます。シェルスクリプトの利用は強制ではないので、使いたいコマンドだけ好きに使ってください。</p>
+
+<h2>シェルスクリプトは上手く使おう</h2>
+<p>シェルスクリプトは、上手く使いましょう。</p>
+<p>たとえば、大事なファイルをUSBハードディスクにrsyncで同期しているとします。この時、対話型シェルでrsyncをかけると、コマンド行を間違えるかもしれません。ファイルが多いと、大変なことになります。</p>
+<p>こうした時に、「間違えることのないようにシェルスクリプトに記述して、それを実行する」といったことができます。</p>
+
+<h2>コマンドで実行できることはシェルスクリプトに書ける</h2>
+<p>シェルスクリプトは、シェルのスクリプトです。よって、シェルの中でコマンドで実行できることは、シェルスクリプトに書いて実行できます。「シェルにおけるコマンド実行は、シェルスクリプトに書くのと同じ」であるため、「シェルで自分が行うことは全てスクリプトに書ける」と言えます。</p>
+<p>たとえば、メールの送信は、sendmailコマンドをシェルスクリプトに記述することで可能です。</p>
+<ul>
+<li><a href="https://qiita.com/tiida26/items/3a2486a75132e159e4ea">メールを送信するシェルスクリプト - Qiita</a></li>
+<li><a href="https://qiita.com/richmikan@github/items/0aea653765e485e16945">シェルスクリプトでメール送信、「さようならnkf」編 - Qiita</a></li>
+</ul>
+<p>応用すれば、「何かのタイミングでメールを送信する」といったことも可能です。たとえばcronデーモンでスクリプトを定期実行したり、サーバーのCGIからエラーが発生した時にスクリプトを実行して、異常を感知した時にメールを管理者に送信する、といった用途が考えられます。</p>
+
+<h2>変数</h2>
+<pre class="prettyprint">
+#!/bin/bash
+VAR=Hello
+echo $VAR
+</pre>
+<p>シェルに引数を渡すには、シェルの後ろにスペースで区切って、引数を並べていきます。この引数が$1（第一引数）や$2（第二引数）としてスクリプトから操作できます。</p>
+
+
+<h2>関数</h2>
+<pre class="prettyprint">
+function hello()
+{
+    echo "Hello."
+}
+</pre>
+<p>functionは省略可能。</p>
+<pre class="prettyprint">
+hello()
+{
+    echo "Hello."
+}
+</pre>
+<p>関数を実行するには「関数の名前 引数」とする。引数を取る場合は、シェルスクリプトの引数と同様$1, $2, ...とアクセスできる。</p>
+
+<h2>Bashの記法</h2>
+<p>BashはCシェルと違い独特の記法がある。</p>
+<p>たとえば、if文やwhile文は</p>
+<pre class="prettyprint">
+if [ 式 ]; then
+    ～
+fi
+</pre>
+<p>や</p>
+<pre class="prettyprint">
+while [ 式 ]; do
+    ～
+done
+</pre>
+<p>のようにブラケットを使い、case文は閉じ括弧を使って</p>
+<pre class="prettyprint">
+case $A in
+    "a") echo a;;
+    "b") echo b;;
+esac
+</pre>
+<p>のように用いる。</p>
+<p>比較式も特殊であり、</p>
+<pre class="prettyprint">
+数値1 -eq 数値2
+</pre>
+<p>のように独自の短縮されたキーワードを使う。</p>
+<p>ifブロックを閉じるのはfi、caseブロックを閉じるのはesac、forブロックを閉じるのはdoneと、訳が分からない。</p>
+<p>まるでジョークのようだが、むしろbashで操作中にコマンドのような形で制御を行いたい、という視点から見ると逆にこれが良いのかもしれない。</p>
+<p>コマンドでls -aを打つ感覚で、</p>
+<pre class="prettyprint">
+if [ $A = $B ]; then
+    echo Hello
+fi
+</pre>
+<p>とか、</p>
+<pre class="prettyprint">
+if [ $var -eq 0 ]; then
+    echo "Don't use zero."
+fi
+</pre>
+<p>のように、「コマンドラインのコマンド行ライクなスクリプト記法」であると言える。</p>
+
+<h1>リンク集全般</h1>
+<h2>Bashシェルスクリプト</h2>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_bash/man1/bash.1.html">Man page of BASH</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0202/05/news001.html">bashで始めるシェルスクリプト基礎の基礎 (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/shellsindex.html">連載記事 「ステップ・バイ・ステップ・シェルスクリプト」 - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/smart_shell.html">連載記事 「スマートな紳士のためのシェルスクリプト」 - @IT</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

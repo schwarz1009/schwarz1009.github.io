@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXコマンド（応用２．システム） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXコマンド（応用２．システム）</h1>
+<p>UNIXやLinuxのコマンドに関する世界観（応用２．システム）です。<a href="linux_commands.html">UNIXコマンド（応用）</a>や<a href="linux_commands_beginner.html">UNIXコマンド（基本）</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>システム管理</h1>
+<h2>su -</h2>
+<p>rootユーザーになってシェルを実行する。</p>
+<pre>
+$ su -
+Password: (root のパスワードを入力)
+# (rootのシェルになった)
+</pre>
+<p>終了する時はexitを実行する。</p>
+<pre>
+# exit
+$ (ユーザーに戻る)
+</pre>
+
+<h2>sudo</h2>
+<p>そのコマンドだけをroot権限で実行出来る。僕はあまり好きではないが、使いやすさを考えてUbuntuでは標準である。</p>
+
+<h2>chroot</h2>
+<p>ルートディレクトリを変更してシェルを実行する。</p>
+<p>特に、ディストリビューションの手動によるインストールなどの際、マウントしたディレクトリに入る時などに使われる。</p>
+<p>Gentoo Linuxではハンドブックによるインストールの時の必須ツールである。</p>
+
+
+<h1>ファイルシステムデバイス</h1>
+<h2>df</h2>
+<p>ディスクの使用容量を確認する。<a href="linux_filetools_archive.html">Linux アーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+<h2>du</h2>
+<p>ファイルやディレクトリの使用容量を確認する。<a href="linux_filetools_archive.html">Linux アーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+<h2>edquota</h2>
+<p>ユーザのディスク利用容量を制限する。</p>
+
+<h2>hdpram/sdpram</h2>
+<p>ハードディスク・SCSIデバイスの情報を表示・設定する。</p>
+
+<h2>partx</h2>
+<p>パーティション情報を表示する。</p>
+
+<h1>ネットワーク操作</h1>
+
+<h2>lftp</h2>
+<p>FTPクライアント。コマンドでFTP操作が可能。</p>
+<p>詳細は<a href="../network/lftp.html">lftpの世界観</a>にあります。</p>
+
+<h2>wget</h2>
+<p>コマンドからURLを直接渡してファイルをダウンロードするためには、wgetを使うのが良い。</p>
+
+<h2>links/lynx/w3m</h2>
+<p>CUI環境でインターネットのWebページを見たい時には、linksやlynxやw3mのようなテキストブラウザが使える。</p>
+<p>特に、Gentoo Linuxのインストール時などにハンドブックを確認するのに有用だ。だが、英語でしか文字が表示出来ないCUI環境もあるので注意が必要だ。</p>
+
+<h2>curl</h2>
+<p>コマンドからHTTPリクエストができる。</p>
+
+<h2>telnet/ssh</h2>
+<p>リモートマシンにログインして、リモートでコマンド操作を行う。</p>
+
+<h2>ip/ifconfig/iwconfig</h2>
+<p>ネットワークインターフェースを設定する。低レベルなインターフェース。</p>
+
+<h1>ハードウェア情報</h1>
+
+<h2>lspci</h2>
+<p>PCIデバイス情報を確認するコマンド。</p>
+
+<h2>lsusb</h2>
+<p>USBデバイスを表示する。</p>
+
+<h2>lsscsi</h2>
+<p>SCSIデバイスを表示する。</p>
+
+<h2>lscpu</h2>
+<p>CPU情報を表示する。</p>
+
+<h2>lsblk</h2>
+<p>ブロックデバイス一覧を表示する。</p>
+
+<h2>/proc/cpuinfo, /proc/meminfo</h2>
+<p>cat /proc/cpuinfoでCPUの情報、cat /proc/meminfoでメモリの情報を確認できる。</p>
+
+<h2>busybox</h2>
+<p>ひとつのバイナリだけで小さく作られた、最低限の小さなUNIXコマンドを実行する。組み込みシステムなどで用いられる。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

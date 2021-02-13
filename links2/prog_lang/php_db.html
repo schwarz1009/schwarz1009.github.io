@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>PHP関連の世界観（４．データベース） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PHPの世界観（４．データベース）</h1>
+<p>PHPによるプログラミング（４．データベース）に関する世界観です。<a href="php.html">PHP</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>データベース</h1>
+<h2>PDOの主な関数</h2>
+<p>PDOをnewする時のコンストラクタ引数には、「データソース名」「ユーザー名（任意）」「パスワード（任意）」「接続オプション（任意）」を指定する。
+<pre class="prettyprint">
+$dbh = new PDO('mysql:host=localhost;dbname=db1', $user, $pass);
+</pre>
+<p>PDOの主な関数は以下。</p>
+<table class="some_tables">
+<tr><th>関数</th><th>説明</th></tr>
+<tr><td>PDO::query()</td><td>SQL文を即時に実行して結果を返す</td></tr>
+<tr><td>PDO::prepare()</td><td>execute()で実行されるSQL文の準備</td></tr>
+<tr><td>PDO::setAttribute()</td><td>データベースハンドルの属性を設定する<br>PDO::ATTR_ERRMODEはエラーレポートの設定で、<br>PDO::ERRMODE_EXCEPTIONは例外を投げる。<br>PDO::ATTR_EMULATE_PREPARESは、<br>プリペアドステートメントのエミュレーションの有効・無効。<br>詳しくは<a href="https://www.php.net/manual/ja/pdo.setattribute.php">PHP: PDO::setAttribute - Manual</a>を参照。</td></tr>
+<tr><td>PDOStatement::bindValue()</td><td>SQL文のプレースホルダに値を入れる</td></tr>
+<tr><td>PDOStatement::execute()</td><td>プリペアドステートメント（SQL文）の実行</td></tr>
+<tr><td>PDOStatement::fetchAll()</td><td>全ての要素を含む配列を返す</td></tr>
+</table>
+<p>（<a href="https://blog.codecamp.jp/programming-php-pdo-mysql-1">【モダンなPHP】PHPでPDOを使ってMySQLに接続する方法！ | CodeCampus</a>、<a href="https://qiita.com/mitsuru793/items/45b2452284e321c7a5a9">PDOを使ったPHPでのデータベース基本操作 - Qiita</a>を参考に執筆しました。）</p>
+
+<h2>プレースホルダの例</h2>
+<p>以下はプレースホルダの例。</p>
+<p>以下の?のところに変数の値が入る。</p>
+<pre class="prettyprint">
+$sql = "SELECT * FROM bbs WHERE id = ?"
+</pre>
+<p>これに対して、PHPでは</p>
+<pre>
+bindValue(何番目の?か, 当てはめる変数, 値の型)
+</pre>
+<p>として、?に値を設定する。たとえば、</p>
+<pre class="prettyprint">
+$stmt-&gt;bindValue(1, $id, PDO::PARAM_INT);
+</pre>
+のようにする。</p>
+<p>後日注記：プレースホルダはprepare()の時にbindValue()ではなくbindParam()を使うことで名前を付けて変換することもできる。プレースホルダ名には:idのように「:」をつけて表現する。</p>
+
+<h2>PDOの使い方</h2>
+<p>PDOオブジェクトの詳しい使い方については以下が参考になる。</p>
+<ul>
+<li><a href="https://blog.codecamp.jp/programming-php-pdo-mysql-1">【モダンなPHP】PHPでPDOを使ってMySQLに接続する方法！ | CodeCampus</a></li>
+<li><a href="https://qiita.com/mitsuru793/items/45b2452284e321c7a5a9">PDOを使ったPHPでのデータベース基本操作 - Qiita</a></li>
+</ul>
+
+<h2>MySQLとPHPの連携</h2>
+<p>PHPとMySQLの連携について。</p>
+<ul>
+<li><a href="http://www.phpbook.jp/tutorial/mysql/">MySQLへの接続 - PHPBook</a></li>
+</ul>
+<p><a href="../db/mysql.html">MySQL</a>も参照のこと。</p>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

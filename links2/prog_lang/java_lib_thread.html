@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Java関連の世界観３D（マルチスレッド） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３D（マルチスレッド）</h1>
+<p>Javaによるプログラミングに関する世界観３D（マルチスレッド）です。<a href="java_lib.html">Javaの世界観３（クラスライブラリ）</a>や<a href="java.html">Javaの世界観１（言語）</a>や<a href="java_oop.html">Javaの世界観２（オブジェクト指向）</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>マルチスレッド</h1>
+<h2>C++とJavaのマルチスレッド</h2>
+<p>C++では、C++11においてstd::threadが提供されるまで、標準のC++ではスレッドの概念がありませんでした。</p>
+<p>このため、C++でマルチスレッドプログラミングを行うには、UNIX系のpthreadなど、プラットフォーム依存のコードを書かなければいけませんでした。</p>
+<p>Javaでは、早くからスレッドの概念を導入し、標準のAPIとしてマルチスレッドアプリケーションを書くことができます。</p>
+
+<h2>マルチスレッドAPI</h2>
+<table class="some_tables">
+<tr><th>クラス</th><th>解説</th></tr>
+<tr><td>java.lang.Thread</td><td>マルチスレッド（クラス継承）</td></tr>
+<tr><td>java.lang.Runnable</td><td>マルチスレッド（インターフェース実装）</td></tr>
+</table>
+<ul>
+<li><a href="http://tech-blog.tsukaby.com/archives/192">Java初級者のための必須Java標準APIまとめと簡易解説 | つかびーの技術日記</a></li>
+<li><a href="http://java-code.jp/297">Threadクラス／Runnableインターフェイス | Javaコード入門</a></li>
+<li><a href="https://www.javadrive.jp/applet/thread/index3.html">Runnableインターフェース - スレッドの利用 - Javaアプレット入門</a></li>
+</ul>
+
+<h2>並列処理（マルチスレッド）</h2>
+<p>Javaのスレッドには、二通りのやり方がある。一つは、Threadクラスを継承する方法。もう一つは、Runnableインターフェースを実装する方法である。</p>
+<p>Threadクラスの継承は単純なプログラム向けだが、複雑なプログラムになってくるとRunnableインターフェースを実装する方法を使うこともある。</p>
+
+<h2>スレッドセーフ</h2>
+<p>スレッドセーフとは、マルチスレッドの処理にしても問題が無い並列処理のプログラムのこと。</p>
+<p>スレッドセーフにするためには、基本的にクラス変数やインスタンス変数を使わずローカル変数を使うことが推奨される。</p>
+<p>スレッドセーフにするには、操作をアトミック（単一不可分）にし、競り合い状態が発生しないようにしなければならない。このためにはメソッドにsynchronizedを付加してロックをしなければならない。</p>
+<p>詳しくは以下のページを参考のこと（上の文章は以下のサイトを参考にしました）。</p>
+<ul>
+<li><a href="https://qiita.com/ika_katsuo/items/95a61293abff3235c0be">スレッドセーフってなに（with Java） - Qiita</a></li>
+<li><a href="https://blog.j5ik2o.me/entry/20110130/1296367299">スレッドセーフにするために考えること 〜基礎編〜 - かとじゅんの技術日誌</a> - 詳しい。</li>
+<li><a href="https://teratail.com/questions/100167">Java - マルチスレッド、スレッドセーフがいまいちわからない｜teratail</a> - 分かりやすい。</li>
+</ul>
+
+<h2>スレッド関係のAPI</h2>
+<p>スレッド関係のAPIとしては、以下のようなものがある。</p>
+<p>Thread.sleep()：一定時間スレッドを休止する</p>
+<p>Thread.join()：スレッドの処理が終わるまで待機し、スレッドが終了した段階で処理を継続する</p>
+<p>Thread.interrupt()：処理中のスレッドに処理の中断を伝える（割り込みを行う）</p>
+<p>ポーリング（定期的な問い合わせ）、コールバック（終わった時に呼び出す）、データ共有用オブジェクト（オブジェクトを共有）を使うことで、処理結果を受け取ることができる。</p>
+<p>詳しくは以下のページを参考のこと（上の文章は以下のサイトを参考にしました）。</p>
+<ul>
+<li><a href="https://java2005.cis.k.hosei.ac.jp/materials/lecture26/multithreaded.html">マルチスレッドプログラミング - プログラミング演習 I, II (Java) - Hosei University</a></li>
+<li><a href="https://engineer-club.jp/java-thread">Javaのスレッド(Thread)を使いこなすコツを、基礎からしっかり伝授 - ENGINEER.CLUB（エンジニアクラブ）</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>JavaScript関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaScriptの世界観</h1>
+<p>JavaScriptによるプログラミングに関する世界観です。<!--<a href="javascript_dom_canvas.html">JavaScript２（DOM/Canvas）</a>、<a href="javascript_prototype.html">JavaScript３（プロトタイプチェーン）</a>、--><a href="javascript_framework.html">JavaScriptフレームワーク</a>や<a href="jquery.html">jQuery</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>JavaScriptの面白さ</h1>
+<h2>JavaScriptは単純明快</h2>
+<p>僕は、JavaScriptの面白さというのは、単純明快なオブジェクトの代入・呼び出しシステムである、ということではないかと思う。</p>
+<p>オブジェクトは単にPythonの辞書のような{ 名前1: 値, 名前2: 値 }といった初期化子で記述できるプロパティ（名前と値）の集団で、変数にオブジェクトを代入すると「オブジェクト名.プロパティ名」でアクセスできる。ブラケットを用いてobj['x']ともアクセスできる（obj.xと同じ）。</p>
+<p>変数に型はなく、どんな値あるいはオブジェクトも代入できる名前にすぎない。「オブジェクト名.新しいプロパティ名 = 値」で、いつでも新しいプロパティをオブジェクトに追加できる。</p>
+<p>関数も（特別に実行可能な）オブジェクトであり、関数を別の変数に代入して参照することも自由。</p>
+<p>コンストラクタは単に関数であり、プロトタイプとして「コンストラクタ関数.prototype.メソッド関数 = function(){}」のように、プロパティとして別のメソッド関数を所有してnewすればオブジェクトを操作するメソッドとなり、newでコンストラクタ関数を呼び出せばオブジェクト指向的なインスタンスの生成もできる。</p>
+<p>プロトタイプチェーンを使った継承や委譲も可能。</p>
+<p>このような単純明快さ、これがJavaScriptの好まれる理由ではないかと思う。</p>
+<p>また、ホストオブジェクトがクライアントサイドのWebブラウザなら、windowオブジェクトからDOMなどにアクセスできるという仕様も単純。同時にNode.jsなどを使えばサーバーサイドのホストオブジェクトも利用できて、そもそもがブラウザの拡張言語として設計されたために拡張性に優れている。拡張言語としての使いやすさから、GNOMEやAdobe製品でもスクリプト用途に採用されている。</p>
+<p>後日注記：つまり、JavaScriptにおいてはハッシュと構造体は同じものです。ここに目を付けたのは天才かもしれません。これらはJavaScriptでは、オブジェクトと呼ばれます。また、JavaScriptでは関数もオブジェクトです。関数は、通常の変数とまったく同じように、名前をつけて管理でき、関数の引数に関数オブジェクトとして渡すこともできます。クラスがJavaScriptにないのは、クラスは単なる関数とオブジェクトに過ぎないからです。</p>
+
+<h2>Web API</h2>
+<p>僕は、JavaScriptが勢力を増している理由は、Web APIの存在が大きいと思います。</p>
+<p>通常、GoogleやTwitterなどのWebサービスは、ページを人間が見て、人間が操作します。</p>
+<p>しかしながら、JavaScriptを使った「Web API」を使うことで、こうしたWebサービスの機能を、外側からプログラマブルに使うことができます。</p>
+<p>Web APIは、Google, Twitter, Facebookなどの大手Webサービスが提供していて、たとえばJSONやXMLの形式でデータを得ながら、JavaScriptによって外部から操作できます。</p>
+<p>Web APIを使うと、HTTPやJavaScript API、あるいはJavaScriptを単純にHTMLに埋め込む形の「ウィジェット」（ブログパーツ、ガジェット、プラグインなどとも呼ばれる）などを使って、たとえばGoogle翻訳でテキストを外国語に翻訳したり、Google Mapsの地図に独自にピンをつけて自分のWebサイトに案内図を表示したり、Twitterクライアントを作ったり、Twitterに定期的に自動でツイートするbotを作ったり、ということができます。Twitterの認証にはOAuthという認証技術を使います。</p>
+<p>APIの提供には、SOAPやRESTといった技術を用います。SOAPはネットワークで外部の関数を呼び出すRPCのように、リモートで手続きを呼び出しますが、RESTはHTTPでデータを送受信します。REST風のAPIをRESTfulと呼び、SOAPではXMLを、RESTではXMLのAtomあるいはJSONと関連します。</p>
+<p>このような「外部のWebサービスのサービス機能を利用する」という発想は、JavaScriptを大きく特徴付けられるものになっています。GoogleやTwitterのAPIを呼び出すことで、自分のWebサイトでそれらのサービスの機能を使えます。JavaScriptは時に「Web上のバーチャルマシン」と呼ばれることもあります。</p>
+<p>Web APIが用意されていなくても、HTMLを取得して解析する「スクレイピング」という技術を使えば、Webサイトの情報を処理できます。スクレイピングはプログラミング入門者には優しい課題で、Pythonを使ってスクレイピングを行うプログラミングの入門書なども出ています。昔ながらの「２ちゃんねる専用ブラウザ」も同様の技術であると言えるでしょう。</p>
+
+<h2>JavaScriptフレームワークの誕生</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/02/05より。</p>
+<p>JavaScriptと聞くと、僕のような昔の世代は、「Webページを読みづらくするお邪魔なスクリプト」と思う人がいるかもしれません。</p>
+<p>JavaScriptは、WebブラウザのNetscape社が開発した言語で、Webページをブラウザ上で書き換えたり、ブラウザに組み込まれた機能を使って、さまざまなことができるマクロ言語として、開発されました。</p>
+<p>当時、Javaと言えば、サン・マイクロシステムズによって開発された、Java言語が知られていました。</p>
+<p>Javaはさまざまな環境で動くオブジェクト指向言語でしたが、インターネットユーザーによく知られていたのが、アプレットと呼ばれる機能で、Webブラウザ上で描画領域を表示したり、アニメーションをしたり、HTMLでは簡単にできない計算処理ができました。</p>
+<p>アプレットから、Javaの存在を知った方も多いでしょう。</p>
+<p>また、当時はオブジェクト指向が大流行しており、C++に代わる新しい設計のJavaは大成功していました。</p>
+<p>JavaScriptは、このJavaの成功にあやかって、アプレットと同じようにブラウザ上で動く言語として、サンとネットスケープの業務提携から、JavaScriptという名前になりました。</p>
+<p>しかしながら、この2つは、名前が似ているだけで全く異なる言語です。</p>
+<p>Javaは、仮想マシンのサンドボックス環境で、ブラウザとは全く異なるVMの上で実行されます。</p>
+<p>これに対して、JavaScriptでは、ブラウザのHTMLをツリー構造にした、DOMツリーを直接操作でき、エンジンも完全にブラウザに組み込まれています。</p>
+<p>さて、そのようなJavaScriptですが、Webの世界では嫌われ者でした。</p>
+<p>ポップアップ広告を勝手に表示したり、ブラクラとしてブラウザをクラッシュさせたりなど、まともでない用途に使われることが多かったためです。</p>
+<p>もう少しマシな用途では、文字列を横スクロールさせたり、画面に雪を降らせたりなど、ほとんどが「ページを見づらくするだけ」だったのです。</p>
+<p>しかしながら、JavaScriptには潜在的な可能性があり、それに目を付けたのがGoogleです。</p>
+<p>Googleは、Google Mapsという地図アプリで、Ajaxと呼ばれる非同期通信技術を用いて、JavaScriptをふんだんに使った、GUIのウィンドウアプリケーションと同等の、使いやすいサービスを開発しました。</p>
+<p>これが「Ajaxブーム」を引き起こします。</p>
+<p>その後も、GoogleはGmailなど、多くのアプリケーションをJavaScriptで作成します。</p>
+<p>ここから、「JavaScriptは上手に使えば良いものである」と人々は気付き、従来PHPなどで行っていたことを、Ajaxを使えばインタラクティブにできると知られます。</p>
+<p>次のキーパーソンは、Railsです。</p>
+<p>RailsをはじめとするMVCフレームワークは、Webにとっての一種の革命で、モデル、ビュー、コントローラの構成で、繰り返しを排除し、設定より規約を守ることで、とても簡単にWebアプリケーションを開発できるようになりました。</p>
+<p>従来PHPなどで行っていたことが、RubyとRailsによってとても生産性が向上したのです。</p>
+<p>しかしながら、RailsのようなMVCフレームワークは、モデル、ビュー、コントローラを、全てサーバーサイドで処理していました。</p>
+<p>データベースを担当するモデルや、全体のコントロールを担当するコントローラは、確かにサーバーサイドの処理が必要ですが、HTMLを担当するビューについては、JavaScriptを上手く使うことで、クライアントサイドでも実現できるということが、次第に分かってきました。</p>
+<p>また、先のAjaxのように、Web業界が高度化し、JavaScriptアプリケーションが複雑になるにつれて、サーバーサイドのMVCフレームワークだけでなく、クライアントサイドのHTML/CSS/JavaScriptの環境でも、同様の生産性の高いフレームワークが要求されます。</p>
+<p>ここに登場したのが、React, Angular, Vue.jsをはじめとする、JavaScriptフレームワークです。</p>
+<p>はじめのうち優勢だったのはGoogleのフルスタックのAngularでしたが、今ではビューだけに特化したFacebookのReactが勝っています。</p>
+<p>また、簡単なテンプレート処理にも使えて、少しずつたくさんの機能を使えていける、Vue.jsは日本などのアジア地域で、Reactと同じくらい流行しています。</p>
+<p>これに加えて、サーバーサイドもJavaScriptで書いてやろうという、Node.jsも流行っています。</p>
+<p>JavaScriptは、DOMなどの事実上の標準APIについては、ECMAScriptのような形で、Netscapeの後継であるMozilla.orgなどが標準規格を定めていますが、サーバーサイドにはそれがありません。</p>
+<p>そのため、JavaScriptには標準のファイル操作APIもありません。</p>
+<p>そのため、CommonJSという規格があります。</p>
+<p>Node.jsはこのCommonJSに則り、サーバーサイドに必要なモジュールを提供しています。</p>
+<p>Node.jsは、たとえば、非同期のファイル操作APIなどを提供しています。</p>
+<ul>
+<li><a href="https://gihyo.jp/dev/serial/01/tech_community_site/0001">第1回　JavaScript／Node.jsのこれまでとこれから：教えて！ 最新技術―テックコミュニティの現場から｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h1>クライアントサイドの処理</h1>
+<h2>CGIとJavaScriptの違い</h2>
+<p>CGIでは、サーバー側でプログラムを実行し、その結果をブラウザに表示して、そこからサーバー側にリクエストを行う際でも、常にサーバー側（サーバーサイド）でプログラムが実行される。</p>
+<p>だが、JavaScriptは、HTMLのデータを受け取ってきた後で、ブラウザ側（クライアントサイド）でプログラムを実行する。</p>
+<p>JavaScriptでは、掲示板やSNSのようなプログラムではなく、グラフィックスやAjaxなどの技術を用いて、「豪華な見た目のWebサイト」を作ることができる。</p>
+
+<h2>JavaScript</h2>
+<p>クライアントサイド（Webブラウザ側）のプログラミングを書き込む技術・言語。</p>
+<!--<p><a href="../prog_lang/javascript.html">JavaScript（１．一般）</a>を参照のこと。</p>-->
+
+<h2>jQuery</h2>
+<p>JavaScriptをもっと簡単に、デザイナブルにしたようなフレームワーク。<a href="jquery.html">jQuery</a>を参照のこと。</p>
+
+<h2>Ajax</h2>
+<p>JavaScriptで動的なサーバーとの非同期通信を行う技術。Google Mapsなどが有名。</p>
+
+<h2>WebAssembly</h2>
+<p>WebAssemblyはWebブラウザでアセンブリ言語（機械語）を扱うことのできる技術。</p>
+<p>たとえばコンパイル言語のRustなどでWebAssemblyを使うことで、RustをWeb用途のプラットフォーム言語として使うことができる。</p>
+<ul>
+<li><a href="https://qiita.com/umamichi/items/c62d18b7ed81fdba63c2">WebAssemblyとは？～実際にC言語をブラウザで動かす～【2019年6月版】 - Qiita</a></li>
+</ul>
+
+<h1>JavaScriptの特徴</h1>
+<h2>JavaとJavaScriptは別物</h2>
+<p>JavaとJavaScriptは、同じ「Java」という名前を冠していますが、両者は別物です。</p>
+<p>元々JavaScriptはNetscapeによってブラウザ上でライブに実行されるスクリプトとして作られたもので、当初はLiveScriptという名前が付けられていましたが、当時Javaを開発していた会社であるSunとの業務提携により、Javaという名前をつけてJavaScriptという名称になりました。</p>
+<p>今ではNetscapeという会社は無くなり、後継のオープンソースなWebブラウザの開発元はMozilla.orgになりましたし、ECMAという標準化団体によってECMAScriptというJavaScriptの標準が定められていますが、Javaとは全く別の言語です。</p>
+
+<h2>JavaScriptはWebでは必須だが、機能などが貧弱な側面も</h2>
+<p>現在、JavaScriptはWebでは必須の言語となっています。それは、サーバーサイドではできないクライアントサイドの処理を行うために、必ずブラウザで用意されているのはJavaScriptだからです。</p>
+<p>ですが、ブラウザはそもそもHTMLをレンダリングして観覧するためのものであり、言語処理系がメインのソフトではありません。そのため、JavaScriptの機能は、他の言語に比べると貧弱で、性能や動作も遅いです。</p>
+
+<h2>最先端技術が多い</h2>
+<p>JavaScriptには、Webの最先端技術が多いです。特に、jQueryやNode.jsやVue.jsやReactが広く使われており、最近では必ずしも「機能が貧弱」であるとは言えず、むしろ「さまざまなAPIを使ってさまざまな高度なやり方ができる言語」になりました。</p>
+<p>JavaScriptと一言に言っても、どの技術を利用するかによって、記述される言語要素や概念が全く違うのです。</p>
+<p>JavaScriptは、最先端のWeb技術を学びたい「ギーク」には面白いでしょうが、一般のエンジニアにとっては、「今まで学んだJavaScriptの技術がもう古いものになっている」という状況になりかねません。</p>
+<p>よって、一部のJavaScriptオタクの間で（特にQiitaなどで）さまざまな技術知識を共有するだけで、実際の開発には実績がなく使えない、ということも多いです。</p>
+<p>ですが、もともとのJavaScriptは単純で、ホームページの作成などに使える、Webブラウザという名前の言語処理系が一番広く広まっている言語であり、また今一番熱い言語であると言えます。基本を知っておくことは無駄にはなりませんし、GoogleやFacebookなどの「超最先端企業」に勤めたいとか、最先端の研究がしたい人には、基本的な技術要素を知っておくと、IT業界のトレンドが良く分かるようになります。</p>
+
+
+<h1>主な用途</h1>
+<h2>リッチなWebサイトを作る</h2>
+<p>ブラウザ上で動くスクリプト言語であることから、Googleなどがしているように、ブラウザ上でリッチなWebアプリケーションを作るために使われる。</p>
+
+<h2>イベント駆動</h2>
+<p>JavaScriptでイベント駆動のプログラミングをすることで、サーバーの性能が高まるとされている。</p>
+<p>従来では他の言語が使われていた領域でも使われるようになってきている。</p>
+
+
+<h1>JavaScript</h1>
+<h2>入門</h2>
+<p>基本文法。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/fcoding/index/js.html">初心者のためのJavaScript入門 - @IT</a></li>
+</ul>
+
+<h2>Mozillaの入門が一番いい</h2>
+<p>JavaScriptを学ぶなら、ほとんど公式と言ってもいいぐらいのMozillaの情報があります。</p>
+<p>実際、JavaScriptをやりたいなら、Mozillaの入門が一番いいです。特に、以下に僕が記述する内容の中でも、ボタンやリンクからJavaScriptを実行する場合などは「HTMLの内部にJavaScriptを書くのは避けた方が良い」といったようなことが書かれており、自分が見てもきちんとMozillaの情報を読んだ方が良いと思います。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Learn/JavaScript/First_steps/What_is_JavaScript">JavaScript とは - ウェブ開発を学ぶ | MDN</a></li>
+</ul>
+<p>しかしながら、一部の内容が英語のままです。ただし、Google Chromeを使っている場合は、Googleの機械翻訳を使うことをおすすめします。Google翻訳は最近のAI技術の向上などにより、驚くほど質の高い日本語を吐いてくれます。</p>
+
+<h2>JavaScript入門</h2>
+<p>変数は値を入れる箱のこと。</p>
+<p>変数を宣言するにはletを使う。文字列は'～'あるいは"～"で囲んで表現する。</p>
+<pre class="prettyprint">
+let name = 'assy';
+</pre>
+<p>letは値を変えられる変数だが、constは値を変えることができない。</p>
+<p>変数の中身を参照するには、単に変数名を書けばよい。変数を左において=を用いると、変数の値を変えられる。</p>
+<pre class="prettyprint">
+let name2 = name;
+</pre>
+<p>変数の値を確認したいなら、console.log()という関数を使えば、コンソールに変数の値を出力できる。</p>
+<pre class="prettyprint">
+console.log(name);
+</pre>
+<p>constで宣言した変数の値を変えるとエラーとなる。</p>
+<pre class="prettyprint">
+const age = 10;
+age = 20; //エラー
+</pre>
+<p>また、配列は[var1, var2, var3]のように囲む。参照する時は変数名の後にインデックス番号をつけてarray[0]などとする。</pre>
+<pre class="prettyprint">
+let baka = ['hoge', 'hage', 'manuke'];
+console.log(baka[0]);
+</pre>
+<p>インデックス番号は0から始まることに注意。</p>
+<p>JavaScriptでは、キーと値からなるハッシュあるいは構造体のことをオブジェクトと呼ぶ。オブジェクトは、</p>
+<pre class="prettyprint">
+let family = { dad: 'andy', mam: 'kate' };
+</pre>
+<p>などとする。</p>
+<p>条件分岐はif文、反復文はwhile文で可能。また、関数はアロー記法とfunction記法がある。アロー記法を使う場合は、</p>
+<pre class="prettyprint">
+const loop_log = (text, c) =&gt; {
+    let i = 0;
+    while (i &lt; c) {
+        console.log(text);
+        i++;
+    }
+}
+
+loop_log('assy', 30);
+</pre>
+<p>などとする。関数はオブジェクトの中に入れることもできる。</p>
+<p>JavaScriptでWebブラウザの情報を取得するには、windowオブジェクトを使用する。</p>
+<p>たとえばブラウザの大きさを出力するには、</p>
+<pre class="prettyprint">
+console.log(window.innerWidth);
+console.log(window.innerHeight);
+</pre>
+<p>とする。</p>
+<p>documentオブジェクトは、HTMLの情報を取得することができる。</p>
+<p>たとえば、getElementsByTagName('button')とすればボタンを取得できる。ここで得られるボタンは配列の形になっているので、4つのボタンのうちの3番目を取得するには、インデックス番号をつけて配列として取得すればいい。</p>
+<p>getElementsByTagName()だけではなく、getElementById()を使えばIDから取得することもできる。こちらの方が便利。</p>
+<p>最後に、イベント。イベントリスナを使うことで、ドキュメントから取得したボタンに、イベントを関連付けられる。たとえば、クリックした時に関数を実行するのであれば、</p>
+<pre class="prettyprint">
+let btn = document.getElementById('hoge');
+btn.addEventListener('click', function () {
+  window.alert('hogeボタンを押しました');
+});
+</pre>
+<p>ちなみに、関数はアロー記法でもfunctionを使った記法でもどちらでも結構です。</p>
+<p>この説明で分からない方は、以下の動画で分かりやすく説明されているのでそちらをご覧ください。この入門はこの動画を見た上で自分なりに書いてみました。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=QCjFPSO96RU">【JavaScript超入門講座】わずか50分で知識ゼロから基礎をマスター！ （セイト先生のWeb・IT塾）</a></li>
+</ul>
+
+
+<h1>文法</h1>
+<h2>変数定義（var）</h2>
+<p>以下のようにvarで変数を使用できる。</p>
+<pre class="prettyprint">
+var name = "Assy";
+</pre>
+<p>後日注記：varによる変数定義は関数スコープであるため、ブロックの中で使った変数をブロックの外からアクセスできるが、これはバグの元になるため、ブロックスコープのletを使おう。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/5290">JavaScriptで変数を使う方法【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+
+<h2>変数定義（letとconst）</h2>
+<p>変数定義については、varの他にletやconstがある。varは関数スコープだが、letとconstはブロックスコープ。また、constは変更されない変数、すなわち定数を定義できる。</p>
+<pre class="prettyprint">
+let name = "Assy";
+</pre>
+<ul>
+<li><a href="https://techacademy.jp/magazine/14872">JavaScriptで書く「let,var,const」の違い・使い分け | TechAcademyマガジン</a></li>
+</ul>
+
+<h2>console.log</h2>
+<p>console.logで、デバッガのコンソールに値を表示できる。</p>
+<pre class="prettyprint">
+console.log("Assy");
+</pre>
+<p>あるいは、</p>
+<pre class="prettyprint">
+let name = "Assy";
+console.log(name);
+</pre>
+<ul>
+<li><a href="https://www.sejuku.net/blog/27205">デバッグに大活躍! JavaScriptのconsole.logで値を表示しよう | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+
+<h2>算術演算子</h2>
+<p>JavaScriptの標準的な算術演算子には+, -, *, /, %などがある。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators">算術演算子 - JavaScript | MDN</a></li>
+</ul>
+
+<h2>比較演算子</h2>
+<p>比較演算子は==など一通りそろっているが、==とは別に===がある。===と==の違いについては、==は型を変換して一致させる。===は型を変換しない。</p>
+<p>JavaScriptだけでなくPHPなど、Webサービス開発においてIDとパスワードの比較などでは数値にキャストするととんでもないことになることがあるので、基本的に===を使おう。</p>
+<ul>
+<li><a href="https://qiita.com/PianoScoreJP/items/e43d70ec188c6fed73ed">JavaScript 忘れがちな　=== と == の違い - Qiita</a></li>
+</ul>
+
+<h2>if文を使う</h2>
+<pre>
+if (条件) {
+    処理
+} else if (条件) { 
+    処理
+}
+</pre>
+<p>で可能。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/5411">JavaScriptでIF文を使って条件分岐させる方法【初心者向け】 - TechAcademyマガジン | 教育×テクノロジーのオンライン専門情報誌</a></li>
+</ul>
+
+<h2>for文を使う</h2>
+<pre>
+for (初期化式; 条件式; 反復式) {
+    繰り返し処理
+}
+</pre>
+<p>で可能。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/5481">JavaScriptでfor文を使ってループ処理する方法【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+
+<h2>関数定義</h2>
+<p>基本的に以下のように定義する。</p>
+<pre class="prettyprint">
+function test(money) {
+    var v = money - 10;
+    return v;
+}
+</pre>
+<p>そして、以下のように実行する。</p>
+<pre class="prettyprint">
+var x = test(100);
+</pre>
+<ul>
+<li><a href="https://blog.codecamp.jp/javascript-function-use">【初心者向け】簡単にJavaScriptの関数を使う方法 | CodeCampus</a></li>
+</ul>
+
+<h2>クロージャ</h2>
+<p>JavaScriptでは、関数定義を関数定義の中でも宣言できる。また、関数を宣言した場所と同一のスコープにある変数には関数の内部からアクセスできる。これをクロージャと呼ぶ。</p>
+<pre class="prettyprint">
+    let v = 0;
+    let limit = 500;
+    let step = 50;
+    
+    function func() {
+        if (v &gt; limit) {
+            v = 0;
+        }
+        
+        console.log(v);
+        
+        v += step;
+    }
+    
+    setInterval(func, 3000);
+</pre>
+<p>たとえば、out_funcの中でin_funcを定義する場合などに役に立つ。</p>
+
+<h2>リファレンス</h2>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://www.tohoho-web.com/js/">とほほのJavaScriptリファレンス</a></li>
+</ul>
+
+<h1>DOM</h1>
+<h2>DOM</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>ブラウザはHTMLをCSSなどと同時に解釈し、HTMLデータを内部的なツリー構造であるDOMツリーに変換する。</p>
+<p>DOMツリーはブラウザにおいては、JavaScriptと呼ばれる言語で操作することができる。</p>
+<p>JavaScriptによる操作は、クライアントのWebブラウザの内部で行われるため、クライアントサイドと呼ばれる。</p>
+
+<h2>DOMツリーとWindowオブジェクト</h2>
+<p>HTMLがブラウザに読み込まれると、HTMLの内容と同じツリー構造の「DOMツリー」が自動的に作られる。</p>
+<p>JavaScriptでは、このDOMツリーを操作することで、HTMLを操作できる。</p>
+<p>また、JavaScriptではあらかじめ用意されているWindowオブジェクトを使うことで、アラートボックスを出したり（window.alert関数）、HTMLの内容を取得・操作したり（window.documentプロパティ）、URL情報を取得したり（window.locationプロパティ）することができる。あらかじめ用意されている関数やオブジェクトはみんなWindowオブジェクトのプロパティである。このwindow.は省略することができる。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://qiita.com/tsukishimaao/items/39d22fd9178546d6cdeb">windowオブジェクト - Qiita</a></li>
+<li><a href="https://qiita.com/hththt/items/cc047e326994f440a17a">DOMのまとめ - Qiita</a></li>
+</ul>
+
+<h2>ノードの選択</h2>
+<p>以下は<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。</p>
+<p>ノードの選択の方法は、Document.getElementById()でIDから検索する、Element.getElementsByTagName()でタグ名から検索する（ワイルドカードとしての*も使用可）、HTMLDocument.getElementsByName()で名前（name属性）から検索する、HTMLElement.getElementsByClassName()でクラス名から検索する、などの方法がある。</p>
+<p>また、プロパティparentNodeで親ノード、childNodesで子ノードリスト、firstChildで最初の子ノード、lastChildで最後の子ノード、nextSiblingで次の子ノード、previousSiblingで1つ前の子ノードが取得できる。また空白や改行もテキストノードとして扱われる。HTMLを記述する際には可読性からタグごとに改行を入れるが、この改行部分に空白ノードが存在するため、firstChildとした時にまず空白ノードが取得される。注意すること。</p>
+<p>また、ノードを作成・追加・変更するには、Document.createElement()やDocument.createTextNode()でノードを作成する。Document.createComment()でコメントを作成する。</p>
+<p>注意点として、ノードを作成しただけではHTMLには何の変化もない。ノードをDOMツリーに追加してはじめてWebブラウザに表示される。最後の子要素に追加するにはNode.appendChild()、ある位置に追加するにはNode.insertBefore()を使う。変更する場合は取得したノードのプロパティを書き換えるか、Node.replaceChild()を使う。ノードの削除にはNode.removeChild()を使う。</p>
+<p>しかしながら、いちいちcreateElement()やappendChild()を使うのは面倒くさいので、HTMLElement.innerHTMLプロパティを使ってHTML文字列を取得・変更したり、textContentプロパティで子要素まで含めてテキスト部分だけを取得・変更することもできる。</p>
+
+<h2>イベント</h2>
+<p>DOMとともに使われるJavaScriptの機能がイベントです。</p>
+<p>イベントを使うことで、マウスのクリックやマウスポインタの要素の上への移動などを検出したり、感知してJavaScriptの関数を実行することができます。</p>
+<p>JavaScriptでイベントを用いることで、イベントドリブンプログラムが可能です。JavaScriptのイベントドリブンでは、「イベントハンドラ」あるいは「イベントリスナ」を用います。</p>
+<p>イベントハンドラは、たとえば上の例でいえば「onclick」です。これはマウスがクリックされた時に発生するイベントのイベントハンドラです（正確にはイベントハンドラがonclickで、イベントタイプがclick。マウスをクリックするとイベントclickがイベントハンドラ・イベントリスナに引数として与えられる）。これをHTMLに直接記述するか、DOM要素のプロパティに指定するか、あるいはdocument.getElementById()をした後にaddEventListener()を使ってイベントリスナを登録することで、イベントに関数を関連付けられます。</p>
+<pre class="prettyprint">
+var btn = document.getElementById('hoge');
+btn.addEventListener('click', function (e) {
+  ...
+}, false);
+</pre>
+<p>イベントとDOMを組み合わせて使うことで、たとえばマウスがクリックされた時に特定のHTML要素を表示する、といったことが可能です。</p>
+<p>たとえば、getElementById()で取得した特定の位置のHTML要素（エレメント）に、appendChild()で要素を追加したり、removeChild()で削除したり、innerHTMLでHTMLを挿入したり、といったことができます。</p>
+<p>CSSを使って、display: none;を使って隠された要素のスタイルを変えることで、表示・非表示を切り替える、という方法もあります。</p>
+<p>このような時に、CSSのセレクタを使うことで、position:absolute;で要素を絶対位置に表示したり、position:relative;である基準となる位置からの相対位置に表示したり、といったことができます。</p>
+<p>上手く使えば、はてなブログのようにブログの編集画面を表示・非表示したり、メニュー項目を表示したり、画像を大きく表示したり、×ボタンを押した時に非表示にしたり、といったこともできます。</p>
+<p>同じことは<a href="jquery.html">jQuery</a>や<a href="javascript_framework_vue_js.html">Vue.js</a>などのライブラリやフレームワークを用いても可能です。</p>
+
+<h1>Canvas</h1>
+<h2>canvas要素</h2>
+<p>canvas要素を使うことで、JavaScriptから図を描くことができる。</p>
+<ul>
+<li><a href="http://www.html5.jp/canvas/">Canvas - HTML5.JP</a></li>
+</ul>
+
+<h2>Canvasで時計を描く</h2>
+<p><a href="https://qiita.com/okuchan/items/3c6908c5c90e5a70deab">HTML5 の Canvas でアナログ時計を作ってみた - Qiita</a>にサンプルコードがある。</p>
+<!--
+<p>この例ではjQueryを使っているが、jQueryを使わなくてもDOMのように利用することも可能。<a href="http://www.html5.jp/canvas/how2.html">さまざまな図形を描く - Canvas - HTML5.JP</a>を参照のこと。</p>
+-->
+<p>この例では一部の記述にjQueryを使っている。jQueryを使わない例は<a href="http://www.html5.jp/canvas/how2.html">さまざまな図形を描く - Canvas - HTML5.JP</a>を参照のこと。</p>
+
+
+<h1>オブジェクト指向</h1>
+<h2>プロトタイプベースのオブジェクト指向</h2>
+<p>JavaScriptはプロトタイプベースでオブジェクト指向を行う。</p>
+<p>apllyメソッドやcallメソッドを使って「委譲」と呼ばれるオブジェクト指向を行うことが大きな特徴。</p>
+<p>JavaScriptでは、クラスベースではなく、プロトタイプベースの「委譲」と呼ばれるオブジェクト指向を行う。上手く使うことで、あるメソッドを任意のオブジェクトに適用して実行したり、あるオブジェクトのメソッドを別のオブジェクトに関連づけさせて実行させることができる（委譲）。場合場合によってさまざまなメソッドをさまざまなオブジェクトに対して実行したり、あとでオブジェクトに対するメソッドを変更・追加したりすることもできる。</p>
+
+<h2>コード例</h2>
+<p>基本的なコード例は、たとえばコンストラクタは、以下のようになる。</p>
+<pre class="prettyprint">
+function App(x, y, z)
+{
+  this.x = x;
+  this.y = y;
+  this.z = z;
+}
+</pre>
+<p>プロトタイプを以下のように宣言する。</p>
+<pre class="prettyprint">
+App.prototype.getinfo = function() {
+  var info = 'x :' + this.x + ', y:' + this.y + ', z :' + this.z;
+  return info;
+}
+</pre>
+<p>そして、以下のようにnewしてオブジェクトを作成する。</p>
+<pre class="prettyprint">
+var app_list = { new App(1, 4, 10), new App(3, 20, 8), new App(6, 8, 10) };
+</pre>
+<p>最後に、メソッドは以下のように取得できる。</p>
+<pre class="prettyprint">
+alert(app_list[0].getinfo());
+alert(app_list[1].getinfo());
+alert(app_list[2].getinfo());
+</pre>
+<p>まさに、関数（コンストラクタ）のprototypeに関数（メソッド）を追加し、その上でnewしてコンストラクタとメソッドをいっぺんに作り出すという風に、まるでプラモデルを組み立てるようにプログラムの開発をすることができる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-%E6%B2%B3%E6%9D%91-%E9%80%B2/dp/4798130648">おうちで学べるプログラミングのきほん</a>を参考にしながら自分でコードを書きました。）</p>
+
+<h2>プロトタイプチェーンの基本</h2>
+<p><a href="http://www.slideshare.net/yuka2py/javascript-23768378">最強オブジェクト指向言語 JavaScript 再入門！ - SlideShare</a>を参考に執筆しました。</p>
+<p>JavaScriptでは関数も第一級のオブジェクト。関数もオブジェクトとして扱われ、関数もオブジェクトのプロパティに格納することができる。JavaScriptではメソッドはただ参照されているだけに過ぎない。つまり、束縛されない。</p>
+<p>プロトタイプチェーンは要するに、「同じ変数名で変数を探していって、p.sayがあればそれを、なければp.__proto__.sayを、それもなければp.__proto__.__proto__.sayを探す、といった感じ。</p>
+<p>同じメソッドを持ったオブジェクトを量産するためには、「同じプロトタイプを所有する」ことで実現できる。たとえばobjB.__proto__とobjC.__proto__にどちらもobjAを代入して所有させれば、同じメソッドを別々のオブジェクトで共有できる。</p>
+<p>ただし、通常は__proto__ではなくprototypeとnewを使う。newは、オブジェクトの生成、継承、初期化を行うコンストラクタ関数を呼び出して、prototypeの内容を自動的に__proto__に代入するかのように動作する。prototypeとnewを使うことで、クラスを使わなくてもオブジェクトの量産が可能になる。要するに、prototypeの内容を作った上でnewを使えば、自動的にprototypeの内容に基づいたオブジェクトを量産できる。まさに、これはこれでオブジェクト指向である。</p>
+
+<h2>thisを使った委譲</h2>
+<p>callは、あるオブジェクトにあるメソッドを関連づけて呼び出すことができる。</p>
+<p>applyは、あるオブジェクトにあるメソッドを関連づけて呼び出すことができる。第二引数は配列で渡す。</p>
+<p>bindは、あるメソッドに対してあるオブジェクトをbindで関連づける。</p>
+
+<h1>応用技術</h1>
+<h2>Ajax</h2>
+<p><a href="ajax.html">Ajax</a>を参照のこと。</p>
+
+<h2>jQuery</h2>
+<p><a href="jquery.html">jQuery</a>を参照のこと。</p>
+
+<h2>Node.js</h2>
+<p><a href="node_js.html">Node.js</a>を参照のこと。</p>
+
+<h2>JavaScriptフレームワーク</h2>
+<p><a href="javascript_framework.html">JavaScriptフレームワーク</a>を参照のこと。</p>
+
+<h1>JavaScriptエンジン</h1>
+<h2>SpiderMonkey/Rhino</h2>
+<p>MozillaのJavaScriptエンジン。SpiderMonkeyはC/C++、RhinoはJavaで実装されている。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/About_JavaScript">JavaScript について | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/SpiderMonkey">SpiderMonkey | MDN</a></li>
+</ul>
+
+<h2>V8</h2>
+<p>Google Chromeで使われているJavaScriptエンジン。JavaScriptフレームワークでよくバックエンドとして使われている（Electronなど）。</p>
+
+<h2>JavaScriptCore</h2>
+<p>Safari（Apple）などのWebKitブラウザで使われているJavaScriptエンジン。</p>
+
+<h2>Chakra(JScript)</h2>
+<p>IEで使われているJavaScriptエンジン。</p>
+
+<h1>Microsoftの独自技術</h1>
+<h2>JScript/VBScript</h2>
+<p>MicrosoftによるJavaScriptの実装と、そのVB版。</p>
+
+<h2>WSH</h2>
+<p>WindowsでJScript/VBScriptを使ってスクリプトによる簡単なアプリケーションを作ることが出来る。</p>
+
+<h1>検証機能</h1>
+<h2>ブラウザの検証機能を使おう</h2>
+<p>JavaScriptを開発する上で、ブラウザの検証機能を上手く使いましょう。</p>
+<p>console.log()で出力した文字列や変数は、ブラウザの検証機能の中にあるコンソールに出力されます。</p>
+<p>このコンソールから、対話的にJavaScriptのコードを実行することもできます。</p>
+<p>console.logでは、文字列や変数を出力するだけではなく、配列やオブジェクトの要素を詳細フォーマットで出力することもでき、デバッグに役に立ちます。</p>
+
+<h1>ドキュメント</h1>
+<h2>MozillaのMDNがほぼ公式</h2>
+<p>JavaScriptには、公式のドキュメントのようなものはありませんが、MozillaのMDNがほとんど公式と言ってよいでしょう。JavaScriptだけではなく、HTML/CSSなどのWeb技術をやりたい人にとって準公式の情報源になります。困ったらMDNの記述に頼りましょう。</p>
+<p>また、ブラウザとして使う場合では、IEなんか使っていてはいけません。Google ChromeかMozilla Firefoxを使いましょう。開発のために使える機能がたくさんあります。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/">MDN Web Docs</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>クライアントサイドでもJavaScript以外で開発できるようなブラウザを</h2>
+<p>現在、WebデザイナーやWebアプリケーションエンジニアが使える言語は、サーバーサイドならPerlからRubyまでたくさんありますが、クライアントサイドではJavaScriptしかありません。</p>
+<p>僕は、クライアントサイドでも、JavaScript以外で開発できるような、そんなブラウザを作ってほしいと思います。</p>
+<p>GoogleのJavaScript代替言語にDartがありますが、これはJavaScriptと同じようにエンジンがGoogle Chromeに搭載されるという噂がありました。また、サーバーサイドでもDartが使えるようになるという声もありました。そのような世界になってほしいです。</p>
+
+<h1>簡単な説明</h1>
+<h2>JavaScript</h2>
+<ul class="defaultlist list7">
+<li>JavaScript
+<ul>
+<li>JavaScript
+<ul>
+<li>varとlet
+<ul>
+<li>varは関数スコープ、letはブロックスコープ</li>
+</ul></li>
+<li>関数呼び出し
+<ul>
+<li>リンクやボタンからJavaScriptを実行するにはonclickに関数を指定する</li>
+</ul></li>
+<li>windowオブジェクト
+<ul>
+<li>JavaScriptでは基本的にブラウザに用意されているwindowオブジェクトからブラウザやドキュメントを操作する</li>
+</ul></li>
+<li>DOM
+<ul>
+<li>HTMLはDOMと呼ばれるツリーで操作する</li>
+</ul></li>
+<li>プロトタイプチェーン</li>
+<li>クロージャ</li>
+<li>Ajax</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>JavaScript</h2>
+<p>JavaScriptはクライアントサイドのプログラミング言語</p>
+<p>Perl/PHPのようにサーバーサイドでHTMLを吐くために使うのではなく、ブラウザ上でHTMLを操作するために使う</p>
+<p>Perl/PHPが掲示板やブログを作るためにあるとするなら、JavaScriptはブラウザ上でインタラクティブな操作や処理を行うためにある</p>
+
+<h2>DOM</h2>
+<p>DOMではHTMLを「ノード」の階層構造として表現する</p>
+<p>ドキュメント要素を取得するには、たとえばgetElementByIdなどで行い、書き換えるにはinnerHTMLなどで行う</p>
+<p>最近はdocument.writeよりもinnerHTMLやinsertAdjacentHTMLやappendChildを使うべきだとされている</p>
+
+<h2>プロトタイプチェーン</h2>
+<p>クラスとはまた違う、「プロトタイプを作ってオブジェクトを量産する」かのようなオブジェクト指向のスタイル</p>
+<p>特に「委譲」と呼ばれる新しいオブジェクト指向の概念（あるオブジェクトの操作を別のオブジェクトにしてもらうようにお願いを立てる）がある</p>
+
+<h2>クロージャ</h2>
+<p>関数定義と同一スコープの変数に関数内部からアクセスできる</p>
+
+<h2>Ajax</h2>
+<p>Ajaxを使うことで、Google MapsのようにWebサービスでもGUI並みのインタラクティブな処理が可能となる</p>
+
+<h1>Web/JavaScript関連のスクリプト</h1>
+<h2>google-code-prettify</h2>
+<p>JavaScriptでソースコードを色づけしてくれる。</p>
+<ul>
+<li><a href="https://qiita.com/rico/items/1c64075a53cbe507c836">コード表示を綺麗に：シンタックスハイライトしたい - Qiita</a></li>
+<li><a href="https://github.com/google/code-prettify">google-code-prettify</a></li>
+</ul>
+<p>google-code-prettifyはテーマでシンタックスハイライトの色を変えられる。僕はSons of Obsidianテーマを使っている。</p>
+<ul>
+<li><a href="https://studiostyl.es/schemes/son-of-obsidian">Son of Obsidian | Studio Styles</a></li>
+</ul>
+
+<h2>js-cookie</h2>
+<p>Cookieを手軽に操作出来る。</p>
+<ul>
+<li><a href="https://github.com/js-cookie/js-cookie">js-cookie</a></li>
+</ul>
+
+<h2>MathJax</h2>
+<p>JavaScriptで数式を表示できる。</p>
+<ul>
+<li><a href="https://oku.edu.mie-u.ac.jp/~okumura/javascript/mathjax.html">MathJaxによる数式表示 - 奥村晴彦</a></li>
+<li><a href="http://easy-copy-mathjax.xxxx7.com/">Easy Copy MathJax</a></li>
+</ul>
+
+
+<h1>リンク集全般</h1>
+<h2>JavaScript</h2>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/fcoding/index/js.html">初心者のためのJavaScript入門 - @IT</a></li>
+</ul>
+
+<h2>JavaScriptリファレンス</h2>
+<p>JavaScript</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference">JavaScript リファレンス - JavaScript | MDN</a></li>
+<li><a href="http://www.htmq.com/js/">JavaScriptリファレンス（オブジェクト別） - HTMLクイックリファレンス</a></li>
+</ul>
+
+<h2>プロトタイプベースのオブジェクト指向</h2>
+<p>スライド。JavaScriptでは、クラスベースではなく、プロトタイプベースと呼ばれる独自のオブジェクト指向を行います。クラスはありません。</p>
+<ul>
+<li><a href="http://www.slideshare.net/yuka2py/javascript-23768378">最強オブジェクト指向言語 JavaScript 再入門！ - SlideShares</a></li>
+</ul>
+
+
+<h1>書籍</h1>
+<h2>JavaScript</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>vi - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_apps_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>vi</h1>
+<p>viに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>vi</h1>
+<!--<p>viの基本。自分なんかiと:qくらいしか知りません（恥ずかしいです）。--></p>
+<h2>viとは</h2>
+<p>viは、UNIXの標準的テキストエディタ。特に、サーバーなどの最小限のシステムで使われることが多い。（Emacsは、サーバーでは入っていない場合がある。）</p>
+<p>モードを切り替えることによって効率的な入力が可能。キーボードによるコマンド操作が豊富。</p>
+<p>そのありえないキーバインドから、UNIX界では「もっとも操作方法を覚えるのが難しいエディタ」として知られている。また、ラインエディタexをベースにしており、exのコマンドを使うことができる。これによって、さまざまなモードを切り替えながら、色んなことを簡単にできて入力や操作もしやすい最強のエディタとして知られている。</p>
+<p>Emacsとviはテキストエディタ界の二大勢力として宗教戦争をしている。僕は昔はvi派だったが、今はEmacs派。昔はviに拘っていたが、今はWindowsでxyzzy（EmacsライクなWindowsエディタ）を使うようになった。</p>
+<p>viの操作方法がどうしても覚えられないと言う人は、コマンドラインで使える小さなnanoと言うエディタがある。初心者が設定ファイルの編集をするには、nanoがおすすめ。</p>
+<ul>
+<li><a href="http://oxynotes.com/?p=3844">Linuxの鬼門、viエディタの基本的な操作方法と実用的なコマンド - OXY NOTES</a></li>
+<li><a href="http://www.ritsumei.ac.jp/~tomori/vi.html">viコマンド集 - Takayuki Omori Home Page</a></li>
+</ul>
+
+<h2>Vim公式のヘルプ</h2>
+<p>Vimを使うのであれば、公式のメインヘルプファイルを読みましょう。以下に日本語に訳されたページがあります。</p>
+<ul>
+<li><a href="https://vim-jp.org/vimdoc-ja/index.html">help - Vim日本語ドキュメント</a></li>
+</ul>
+
+<h2>ラインエディタex</h2>
+<p>viのようなビジュアルモードのテキストエディタが生まれる前、UNIXなどではラインエディタと呼ばれる、行番号を指定してその行だけを編集・プリントするエディタが使われていた。</p>
+<p>viのもとになったのは、ラインエディタex。viはexのビジュアルモードとして開発された。</p>
+<p>このラインエディタexは、今でも便利に使うことのできる高度な機能がたくさんある。viから、今でもexの機能を使うことができる。</p>
+<p>exの操作の基本は、アドレス指定とコマンド。exでは:[address]command[options]という形式でアドレスに続いてコマンドを付加する形式で操作を実行する。</p>
+<p>アドレス指定に使うアドレスシンボルは、たとえばx,yとすればx行からy行までを処理することを表す。0はファイルの先頭、$は最終行、%は全ての行、/pat/または?pat?はこれ以降またはこれ以前にpatにマッチする行となる。</p>
+
+<h2>viの基本操作</h2>
+<p>UNIX使いにとって、viを習得するのは絶対に必要である。</p>
+<table class="some_tables">
+<tr><th>コマンド</th><th>説明</th></tr>
+<tr><td>挿入モードに入る</td><td>i, a, o, O, A, Iのどれか。<br>コマンドによって現在位置の左、右、上、下などの挿入場所が違う。</td></tr>
+<tr><td>基本的移動</td><td>h（左）, j（下）, k（上）, l（右）。</td></tr>
+<tr><td>その他の移動</td><td>wで次の単語、bで前の単語。<br>0で行の先頭へ、$で行の終端へ。<br>Hで画面最上行先頭、Mで画面中央行の先頭、Lで画面最下行の先頭。</td></tr>
+<tr><td>ロールアップ</td><td>Ctrl+fで一画面下へ、Ctrl+bで一画面上へ<br>Ctrl+dで半画面下へ、Ctrl+uで半画面上へ。</td></tr>
+<tr><td>ヤンク</td><td>ヤンクとはバッファへのコピーのこと。<br>ylで一文字ヤンク, ywで一単語ヤンク、yyでカーソル行のヤンク。<br>複数行ヤンクしたい場合は3yyなどとする（3行ヤンク）。</td></tr>
+<tr><td>プット</td><td>pあるいはPでプット（バッファから貼り付け）。<br>pの場合、文字や単語はカーソル右に、行は行の下にプットされる。<br>Pの場合は逆。</td></tr>
+<tr><td>カット</td><td>xで一文字削除、dwで一単語削除、ddで一行削除。<br>ddなどで削除した内容はヤンクと同様バッファに入れられるため、pなどで貼り付けすることができる。</td></tr>
+<tr><td>検索</td><td>/文字列で下方に検索、?文字列で上方に検索、nで同方向に次の検索、Nで逆方向に次の検索。</td></tr>
+<tr><td>アンドゥ・リドゥ</td><td>.で直前の動作を繰り返し、uで直前のコマンドの取り消し、Uでカーソル行に行った編集の取り消し。</td></tr>
+</table>
+
+<p>また、:に続いてコマンドを入力することで、exコマンドが実行できる。</p>
+<table class="some_tables">
+<tr><th>exコマンド</th><th>説明</th></tr>
+<tr><td>:wq</td><td>保存して終了</td></tr>
+<tr><td>:q!</td><td>破棄して終了（!は問答無用でやれという意味）</td></tr>
+<tr><td>:w ファイル名</td><td>ファイルに保存</td></tr>
+<tr><td>:w! ファイル名</td><td>強制的に上書き</td></tr>
+<tr><td>:r ファイル名</td><td>カーソル位置にファイルを読み込む。</td></tr>
+<tr><td>:s/foo/bar</td><td>カーソル行の中の最初のfooをbarに置き換え。<br>このコマンドの最後に/gをつけると、カーソル内の全てに対して置換を行う。</td></tr>
+<tr><td>:%s/foo/bar/g</td><td>ファイル内の全てに対して置換を行う。<br>ある行からある行までの置換を行いたい時は、:2,100s/foo/bar/gのように行番号でアドレス指定を行う。</td></tr>
+</table>
+<p>以上は「<a href="https://www.amazon.co.jp/%E6%83%85%E5%A0%B1%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96-%E5%96%9C%E4%B9%85%E5%B7%9D-%E6%94%BF%E5%90%89/dp/4873613515">情報基礎概論 第4版 喜久川政吉・殿塚勲 共著（学術図書出版社）</a>」を参考に執筆しました。</p>
+
+<h2>検索と置換を使いこなそう</h2>
+<p>検索と置換のコマンドを上手く使うことで、どこからどこまでのどんなパターンに対して、正規表現による置換をかけることが出来る。</p>
+<p>ちなみに、記法として/以外の記号を使うことも出来る。</p>
+<p>:%s;/usr/bin;/usr/local/bin;g</p>
+<p>正規表現については<a href="regex.html">正規表現</a>を参照のこと。</p>
+
+<h2>便利な機能</h2>
+<p>:!commandでUNIXコマンドを実行できる。</p>
+<p>たとえば:96,99!sortなどとすれば96～99行目をソート（並び替え）する。このように、テキストブロックをUNIXのフィルタ処理にかけることもできる。</p>
+<p>文脈依存置換とは、あるパターンを探して、そのパターンを含む行が見つかったら、そのパターンとは別の文字列を置換することのできる構文。</p>
+<p>たとえば、疑似命令&lt;keycap&gt;を含む行に出現するEscだけをESCに変えるには、:g/&lt;keycap&gt;/s/Esc/ESC/gとする。</p>
+<p>詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。</p>
+
+<h1>vi実装</h1>
+<h2>nvi</h2>
+<p>軽量なviクローン。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/nvi">nvi - Wikipedia</a></li>
+</ul>
+
+<h2>Vim</h2>
+<p>viの改良版。Linuxでは多くの場合このvimを使う。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Vim">Vim - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/vim/vim">git</a></li>
+</ul>
+
+<h1>Vimの設定</h1>
+<h2>設定やプラグインの基本</h2>
+<p>以下のVIM USER MANUALの設定についての章は読んでおこう。設定やプラグインに関する基本的なことが記述されている。</p>
+<ul>
+<li><a href="https://vim-jp.org/vimdoc-ja/usr_05.html">設定の変更 - VIM USER MANUAL - Vim日本語ドキュメント</a></li>
+</ul>
+
+<h2>.vimrc</h2>
+<p>vimの設定は~/.vimrcにおいて行う。基本的な設定は以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/morikooooo/items/9fd41bcd8d1ce9170301">何も考えず~/.vimrcにこれを書くんだ！ 〜vim初心者によるvim初心者のためのvim入門〜 - Qiita</a></li>
+<li><a href="https://qiita.com/reireias/items/230c77b3ff5575832654">よく使われているvimrcの設定ランキング - Qiita</a></li>
+</ul>
+<p>特に、行番号を多用するvimerとして、行番号の表示設定は必須。</p>
+<pre>
+set number
+</pre>
+
+
+<h2>プラグイン</h2>
+<p>UNIXの場合~/.vim/plugin/がプラグインディレクトリになる。プラグインについては以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/reireias/items/5364dcaada1a5b88a206">よく使われているvimのプラグイン top20 - Qiita</a></li>
+<li><a href="https://qiita.com/reireias/items/beaa3bb0e299ae934217">オレ的vimプラグイン10選 - Qiita</a></li>
+</ul>
+
+<h2>シンタックスハイライト</h2>
+<p>基本的に、.vimrcに</p>
+<pre>
+syntax enable
+</pre>
+<p>と書いておけばよし。</p>
+<p>シンタックスハイライトについてはVIMリファレンスマニュアルに専用の文書があります。</p>
+<ul>
+<li><a href="https://vim-jp.org/vimdoc-ja/syntax.html">syntax - Vim日本語ドキュメント</a></li>
+</ul>
+
+<h2>GNU Grobal</h2>
+<p>Vimのプラグインとして僕がおすすめなのはGNU Grobal。関数が使われているところから関数の定義にジャンプしたりできる。これがないと、自分でヘッダファイルの中を探し回ることになってしまう。</p>
+<p>詳しくは<a href="../prog_lang/ctags.html">ctagsの世界観</a>を参照のこと。</p>
+
+
+<h1>簡単な説明</h1>
+<h2>Vim</h2>
+<p>移動はhjklで行う</p>
+<p>挿入モードに移動するにはiあるいはaなど。押した瞬間から文字入力が始まる。ESCでコマンドモードに戻る。</p>
+<p>検索は/hogeなど。</p>
+<p>正規表現による置換は:%s/foo/bar/gなど</p>
+<p>「:」で始まるコマンドはexコマンドという（viはラインエディタexのヴィジュアルモードとして開発された）</p>
+<p>文脈依存置換という面白い機能もある。その文脈における検索・置換ができる（たとえばhogeが含まれている行の中のfooをbarに置換する）。オライリーの「入門vi」に書いてあるので参考にしてほしい</p>
+<p>UNIXコマンドはviで使うと真価を発揮する。たとえば特定ブロックにsortをかけるなど</p>
+<p>外部sortコマンドは:1,20!sortなどで実行できる（1～20行目のブロックにsortコマンドをかける）が、内部sortコマンド:sortを使うこともできる</p>
+<p>vimを使う際は行番号だけは表示するように設定しよう。行番号が表示されないviは使えないから（ほとんどのアドレス指定が行番号）である。また、シンタックスハイライトもあると便利</p>
+<p>使い方はVim公式のヘルプを見よう</p>
+
+
+<h1>リンク集全般</h1>
+<h2>Vim</h2>
+<p>Linuxの標準的で入力や操作の効率の良いテキストエディタ。</p>
+<p>Vim</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/series/2643/">いまさら聞けないVim - @IT</a></li>
+<li><a href="http://qiita.com/okamos/items/c97970ab34ff55ff3167">Vim初心者に捧ぐ実践的入門 - Qiita</a></li>
+</ul>
+
+
+<h1>余談</h1>
+<h2>vi作者のビル・ジョイはカリスマハッカー</h2>
+<p>viは、BSDやcshの開発者の一人でSunでNFSやJavaの開発にも関わったとされる、ビル・ジョイが開発した。彼はUNIX界ではカリスマのように崇拝されている一人である。</p>
+<p>特にcshについては、今でも*BSD系のOSで標準的に使われている（cshを改良したtcshが使われていることが多い）。LinuxではBashを用いることが多いが、viも標準的に搭載されている。</p>
+<p>UNIXのエンジニアなどでは、cshなどのCシェルの使い方に慣れている方が多く、LinuxやMacなどでbashが使われていると嫌な顔をされることがある。cshはCライクな構文で知られ、Cライクな文法でシェルスクリプトを書くことができる。</p>
+
+<h1>コマンド一覧</h1>
+<h2>エディタ</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>vi</td>
+<td>テキストファイルを編集する。emacs派の人はそちらをお使いください。</td>
+</tr>
+</table>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

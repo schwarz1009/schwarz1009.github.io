@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux ネットワーク１（コマンド） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ネットワーク１（コマンド）</h1>
+<p>Linuxのサーバーとネットワークに関する世界観１（コマンド）です。<a href="linux_net2.html">Linuxネットワーク２（設定）</a>や<a href="linux_net_sysconfig.html">Linuxネットワーク設定A（sysconfig）</a>や<a href="linux_net_ifupdown.html">Linuxネットワーク設定B（ifupdown）</a>や<a href="../network/network.html">ネットワークの世界観</a>も参照してください。</p>
+<p>Web関連の項目は<a href="../network/web.html">Webの世界観</a>に分割しました。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Linuxネットワーク</h1>
+<h2>UNIXとネットワーク</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/14より。</p>
+<p>UNIXでは、伝統的にネットワーク色が強い。</p>
+<p>たとえば大学のワークステーションでは、telnetによるネットワークに繋がった別ホストへの接続や、NFSを使ったネットワーク上のファイルシステムのマウント、NISによるネットワーク上のログイン情報の共通化などが、DOSに比べて簡単にできる。</p>
+<p>この時、MIPSやAlphaなど、CPUアーキテクチャが異なるホストでも、基本的に構わない。</p>
+<p>ただし、異なるアーキテクチャのバイナリは別マシンでは当然ながら動かないことに注意。</p>
+<p>LinuxのようなUNIX系のOSはこのように、ネットワークでさまざまなマシンが繋がった時に、真価を発揮する。</p>
+
+<h2>ネットワークの基本コマンド</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>Linuxでは、traceroute, route, netstat, ifconfig, arp, nslookupなどのコマンドで、ネットワーク関連の操作を行うが、これらのコマンドの多くは型遅れとなっており、現在はiproute2パッケージを代わりに使う。</p>
+<p>また、ifconfigなどのコマンドは低レベルで強力だが使いづらいため、より上の高レベルな設定システム、たとえばDebianであればifupdownを用いて設定を行うことがデフォルトとなっている。</p>
+
+<h2>ネットワーク系のプログラム</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>Linux上におけるほかのネットワークプログラムとしては、リモートによる接続やリモートログインを行う、telnetやrlogin, sshのようなプログラムや、ネットワーク上でログイン情報を共通化するNIS/YP、ネットワーク上のファイルシステムをローカルにあるのと同じようにマウントできるNFSなどがある。</p>
+<p>NFS以外のネットワークファイルシステムに準ずるシステムとしては、サーバとの間でファイル転送を行うFTPや、Windowsネットワークを実装したSambaなどがある。</p>
+
+<h1>ソケットのAPI</h1>
+<h2>ソケットとは</h2>
+<p>ソケットはUNIXにおけるファイルAPI（open, write, read, close）と同様のネットワーク通信の実装である。</p>
+<p>TCP/IPの下位プロトコル（トランスポート層、UDP/TCP）の通信が行える。</p>
+<p>基本は、複数のソケットが互いに関係を持つと有効になる。一方に書き込むともう一方から出てくる。そのため、ハードウェアやシステム的なことを考えなくても、ファイルのAPIと同様に簡単にネットワーク通信が出来る。</p>
+<p>BSD系UNIXを起源とするAPIであり、そのためこのソケットのAPIは「BSD socket」などと呼ばれる。</p>
+<p>ソケットはファイルとして扱われる。そのため、通常のファイルと同じように、ファイルディスクリプタからストリームとして読み書きできる。</p>
+<p><a href="linux_kernel_socket.html">Linux カーネル（ソケット）</a>も参照のこと。</p>
+
+<h2>ソケット実例</h2>
+<p>ソケットプログラミングの実例は以下のようなページが参考になる。</p>
+<ul>
+<li><a href="http://www.turbolinux.com/solution_service/library/features/c_magazine/vol_11.html">Turbolinux関連書籍 - C MAGAZINE Linux programming Tips - 第11回　ソケットプログラミング道 - Turbolinux</a></li>
+</ul>
+
+<h1>コンテンツ</h1>
+<h2>ifconfig</h2>
+<p><a href="linux_net_ifconfig.html">ifconfig</a>を参照のこと。</p>
+
+<h2>netstat</h2>
+<p><a href="linux_net_netstat.html">netstat</a>を参照のこと。</p>
+<h2>route</h2>
+<p><a href="linux_net_route.html">route</a>を参照のこと。</p>
+<h2>iproute2由来のコマンド</h2>
+<p><a href="linux_net_iproute2.html">iproute2</a>を参照のこと。</p>
+<h2>サーバーのモニタリング</h2>
+<p><a href="linux_net_monitoring.html">モニタリング</a>を参照のこと。</p>
+
+<h1>便利なコマンド</h1>
+<h2>ping</h2>
+<p>実際にネットワークに接続できているか試したい時は、pingを実行することで、実際のサーバーにリクエストを送ることが出来る。</p>
+<pre>
+# ping -c 3 www.gentoo.org
+</pre>
+
+<h2>curl</h2>
+<p>curlはさまざまなプロトコルでデータを転送することのできるコマンド。生のHTTPリクエストができる。</p>
+<ul>
+<li><a href="https://qiita.com/yasuhiroki/items/a569d3371a66e365316f">curl コマンド 使い方メモ - Qiita</a> - <a href="https://ja.wikipedia.org/wiki/Jenkins">Jenkins</a>というツールのAPIを使っているようである。</li>
+<li><a href="https://qiita.com/bunty/items/758425773b2239feb9a7">curlコマンドでapiを叩く - Qiita</a></li>
+<li><a href="https://girigiribauer.com/archives/20170721/">改めて curl の使い方まとめ - ばうあーろぐ</a></li>
+<li><a href="https://hydrocul.github.io/wiki/commands/curl.html">curl コマンド | コマンドの使い方(Linux) | hydroculのメモ</a></li>
+</ul>
+
+<h2>その他知っておくべきコマンド</h2>
+<p><a href="https://qiita.com/ryuichi1208/items/eeb98d5a94d71c55aa34">最低限知っておくべきネットワーク系コマンド - Qiita</a>を参照のこと。</p>
+
+<h1>時刻同期</h1>
+<h2>NTPサーバと時刻同期</h2>
+<p>NTPを用いた時刻設定（タイムサーバとの同期）については以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/megu_ma/items/bb902740ee7de9ddd102">Linuxサーバの時刻設定手順とエラー（the NTP socket is in use, exiting） - Qiita</a></li>
+<li><a href="https://qiita.com/yuba/items/66d2d45a61b28737c098">Linux/UNIXサーバは立てたらまず時刻同期の設定 - Qiita</a></li>
+</ul>
+
+<h1>無線カードの設定</h1>
+<h2>iwconfig</h2>
+<p>iwconfigは無線カードの設定に使う。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1506/17/news024.html">無線LAN接続の設定を操作するには？ iwconfigコマンドの使い方：ネットワーク管理の基本Tips - ＠IT</a></li>
+</ul>
+
+<h1>MACアドレスの管理</h1>
+<!--
+<p>MACアドレスやトンネルに関するコマンド。</p>
+-->
+
+<h2>arp</h2>
+<p>IPアドレスとMACアドレスの対応などを管理するARPテーブルを確認・追加・削除できるコマンド。</p>
+<p>MACアドレスは個別の機器に振られている識別番号で、IPアドレスを指定されると、IPアドレスからMACアドレスに変換することで、各ネットワーク機器はその時のネットワーク経路を通じて、ルーティングを行う。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1710/26/news034.html">【 arp 】コマンド――ARPテーブルを管理する：Linux基本コマンドTips（155） - ＠IT</a></li>
+</ul>
+
+<h2>nameif</h2>
+<p>MACアドレスに基づいてネットワークインターフェースに名前をつけるコマンド。</p>
+<ul>
+<li><a href="https://kazmax.zpp.jp/cmd/n/nameif.8.html">nameif - システム管理コマンドの説明 - Linux コマンド集 一覧表</a></li>
+</ul>
+
+<h1>トンネリング</h1>
+<h2>トンネル</h2>
+<p>ip tunnelコマンドあるいはiptunnelコマンドは、IPトンネリングのコマンド。トンネルについては以下を参照のこと。</p>
+<ul>
+<li><a href="https://docs.oracle.com/cd/E26924_01/html/E25872/gepbe.html">IP トンネルの概要 - Oracle Solaris の管理: IP サービス</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AA%E3%83%B3%E3%82%B0">トンネリング - Wikipedia</a></li>
+</ul>
+
+
+<!--
+<h1>コマンド一覧</h1>
+-->
+<h1>コマンド一覧</h1>
+<!--
+<p><a href="http://www.21linux.com/archives/180network/">ネットワーク関係 - Linuxコマンド百科辞典</a>を参考に執筆しました。</p>
+-->
+<h2>ネットワーク</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>ftp</td>
+<td>FTPによるファイルの転送。</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td>現在のホストの情報の表示。</td>
+</tr>
+<tr>
+<td>mail</td>
+<td>メールの送受信。</td>
+</tr>
+<tr>
+<td>netstat</td>
+<td>現在のネットワーク状況の表示。高度なTCP/IPの情報を表示できる。</td>
+</tr>
+<tr>
+<td>ping</td>
+<td>指定のホストとの接続の確認。ネットワークが接続できているかの確認に使う。</td>
+</tr>
+<tr>
+<td>rcp</td>
+<td>リモート・システム間でのファイルのコピーを行う。</td>
+</tr>
+<tr>
+<td>rsh</td>
+<td>リモート・マシンにコマンドを送る。sshを代わりに使うことが多い。</td>
+</tr>
+<tr>
+<td>telnet</td>
+<td>リモート・マシンにログインする。sshを代わりに使うことが多い。</td>
+</tr>
+</table>
+
+<h2>リクエスト・ダウンロード</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>ping</td>
+<td>特定のホストとのパケットの送受信ができるかを調べる。ネットワークが接続できているかの確認に使う。</td>
+</tr>
+<tr>
+<td>wget</td>
+<td>ファイルのダウンロードを行う。ホームページの自動巡回のようなこともできる。</td>
+</tr>
+</table>
+
+<h2>ネットワーク情報確認・設定</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>arp</td>
+<td>ARPテーブルの表示・設定を行う。</td>
+</tr>
+<tr>
+<td>arping</td>
+<td>ARPリクエストをリモートホストに送信する。</td>
+</tr>
+<tr>
+<td>ifconfig</td>
+<td>ネットワークインタフェースの参照・設定・起動・停止。</td>
+</tr>
+<tr>
+<td>ifuser</td>
+<td>ネットワークインターフェイスからホストへの経路を確認する。</td>
+</tr>
+<tr>
+<td>iwconfig</td>
+<td>無線LANインタフェースの参照・設定。</td>
+</tr>
+<tr>
+<td>netstat</td>
+<td>ネットワーク関連の統計情報の表示。とても高機能。</td>
+</tr>
+<tr>
+<td>ntpdate</td>
+<td>タイムサーバを利用して時刻を設定。</td>
+</tr>
+<tr>
+<td>route</td>
+<td>ルーティング・テーブルを表示・設定。</td>
+</tr>
+<tr>
+<td>traceroute</td>
+<td>ネットワークの接続経路を表示。</td>
+</tr>
+<tr>
+<td>tcpdump</td>
+<td>ホストに入ってくるIPパケットなどの表示。</td>
+</tr>
+</table>
+
+<h2>DNS</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>dig</td>
+<td>ドメイン情報をDNSサーバーから取得する。</td>
+</tr>
+<tr>
+<td>host</td>
+<td>ホスト情報を検索する。</td>
+</tr>
+<tr>
+<td>nslookup</td>
+<td>対話的にDNSに問い合わせる。</td>
+</tr>
+<tr>
+<td>whois</td>
+<td>ネットワークの企業名や個人情報を調べる。</td>
+</tr>
+</table>
+
+
+
+<h1>関連ページ</h1>
+<h2>ネットワーク関係の設定ファイル</h2>
+<p><a href="linux_net2.html">Linuxネットワーク（２．設定）</a>を参照のこと。</p>
+
+<h1>余談</h1>
+
+<h2>英語が読めるなら！</h2>
+<p>英語がスラスラ読めるありえないあなたには以下がお勧め。</p>
+<ul>
+<li><a href="http://www.tldp.org/LDP/nag2/">Linux Network Administrators Guide</a></li>
+</ul>
+<p>そう、英語が読めないから僕らは苦労するんだよ…（トボトボ）。</p>
+
+<h2>ネットワークのコマンドを使えることはネットワークプログラミングに有効</h2>
+<p>僕が思うに、ネットワーク系のコマンドを使いこなせることは、ネットワークプログラミングを始めるにあたってとても有効です。</p>
+<p>コマンドでできることは、コードを記述してできることと変わりません。ネットワーク系のコマンドが使えることで、ソケットAPIやHTTPリクエストなどを用いたネットワークプログラミングができるようになります。</p>
+
+<h1>リンク集全般</h1>
+<h2>ネットワーク</h2>
+<p>Linux/UNIXでのネットワークプログラミング。</p>
+<ul>
+<li><a href="http://www.geekpage.jp/programming/linux-network/">Linuxネットワークプログラミング - Geekなぺーじ</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/net/">ネットワークプログラミングの基礎知識 - 68user's page</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

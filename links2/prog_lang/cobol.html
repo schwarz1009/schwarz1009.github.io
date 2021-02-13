@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>COBOLの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>COBOLの世界観</h1>
+<p>COBOLに関する世界観です。<a href="oldpl.html">昔の言語</a>や<a href="../hardware/mainframe.html">メインフレーム</a>や<a href="../hardware/old_computer.html">古いコンピュータ</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>COBOL</h1>
+<h2>COBOL</h2>
+<p>メインフレームの時代の言語。業務用・事務処理用に使われることが多い。</p>
+<ul>
+<li><a href="http://tallercolibri.com/">COBOLプログラミング入門</a></li>
+<li><a href="http://www16.plala.or.jp/hiyokogumi/top.html">サルでもわかるCOBOL入門</a></li>
+</ul>
+
+<h2>サンプルコード</h2>
+<h3>サンプルコード</h3>
+<p><a href="https://ja.wikipedia.org/wiki/COBOL">COBOL - Wikipedia</a>にサンプルコードがある。</p>
+<p>見出し部はIDENTIFICATION DIVISIONで、PROGRAM-IDが宣言されている。環境部はENVIRONMENT DIVISIONで、今回は存在しない。データ部はDATA DIVISIONで、WORKING-STORAGE SECTION（作業場所）ではプログラムで使用する全ての変数定義を行う。</p>
+<p>手続き部はPROCEDURE DIVISIONで、ここではPERFORM VARYING UNTIL文による繰り返しとEVALUATE文による多岐選択が行なわれている。また、DISPLAY文でメッセージを表示している。</p>
+<p>ほかにも、IF～THEN文（条件分岐、多岐選択）やPERFORM UNTIL文（繰り返し）やPERFORM TIMES文（回数が明確に分かっている場合に繰り返しに使う）が利用できる。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="http://tallercolibri.com/">COBOLプログラミング入門</a></li>
+</ul>
+
+<h3>サンプルコードその２</h3>
+<p>以下のページにサンプルコードがあります。</p>
+<ul>
+<li><a href="https://jpn.nec.com/sortkit/cobol_popup.html">COBOL サンプルプログラム: 高性能ソート・マージ SORTKIT | NEC</a></li>
+</ul>
+
+
+<h2>そもそもエンジニアではなく一般の事務系のユーザー向け</h2>
+<p>COBOLはそもそもエンジニアや科学者がプログラミングを行うためではなく、一般の事務系のユーザーをターゲットにしている。</p>
+<p>そのため、FORTRANのような科学技術計算には向いておらず、事務処理のための機能が多い。</p>
+<p>また、COBOLは企業や政府機関にとてもたくさんの過去の資産があることで有名である。</p>
+<p>60年もの間使われた老人のような言語である。</p>
+
+<h2>事務処理向けで英語に近い</h2>
+<p>COBOLは事務処理向けに開発されたこともあり、一般の事務系の職業の人間が使うことを意図しているため、文法が科学技術計算用のFORTRANなどと比べて、英語に近い。</p>
+<p>たとえば、</p>
+<pre>
+COMPUTE AGE = AGE + YEARS.
+</pre>
+<p>という命令は、英語のように以下のように書くことができる。</p>
+<pre>
+ADD YEARS TO AGE.
+</pre>
+<p>このようにCOBOLでは他の言語に比べて記述が冗長になりがちで、可読性が高いと言われているものの、簡単に書いたC言語の構文よりもたくさんの記述があって逆に見通しがし辛いことも多い。政府などには膨大な過去のCOBOLプログラムとデータがあるとされている。</p>
+
+<h2>COBOLからエクセルへ</h2>
+<p>Microsoftはエクセルという表計算ソフトを提供しており、現在はエクセルで簡単に事務計算ができるので、COBOLを使う機会はとても少ない。だが、政府や公官庁には膨大な過去のCOBOL資産があるとされている。「PROGRAM-ID」にプログラム識別名を記載するなど、さまざまな形式的記述が要求され、そうしたところがMS-Officeにも雰囲気として良く似ている。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

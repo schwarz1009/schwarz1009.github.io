@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>C#関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C#の世界観</h1>
+<p>C#に関する世界観です。<a href="dotnet.html">.NET</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>C#</h1>
+<h2>僕はC#が大好き</h2>
+<p>実際のところ、僕はC#が大好きである。</p>
+<p>そもそも、僕はDelphiが好きだった。昔、Delphi 6のフリー版を使ってOpenJaneなどをコンパイルし、その後にDelphi 7の有料版を買った。</p>
+<p>C#は、Microsoftが.NET Frameworkを開発した時に作った言語で、Delphiの主要な開発者を引き抜いて設計した。</p>
+<p>そのこともあってか、C#や.NET FrameworkにはDelphiの影響が随所にみられる。特にフォームデザイナーの仕様などはそれそのものである。</p>
+
+<h2>Javaを参考にした.NETの言語</h2>
+<p>C#はJavaを参考にした.NETの言語である。</p>
+<p>Javaとの違いは、プロパティの実現やデリゲート・無名関数、LINQ、yield returnなどもあるが、大きく違うのは、「WindowsのネイティブGUIに対応」したことと、「.NET Framerowkの上で動くVBやF#などの多様な言語を使える」ということである。</p>
+
+<h2>Windows.Forms</h2>
+<p>C#のWindows.Formsは、とても美しく、数学的である。JavaではSwingというPure JavaのGUIを使うが、ルック＆フィールがとても独自で個性的、悪く言えば醜い。C#やVB.NETを使えば、Windowsのネイティブなアプリケーションを開発できる。</p>
+<p>Windows.Formsは大人気で、「Windows APIやMFCに比べて分かりやすく、可読性も高く美しい」と評判である。Windows APIのメッセージループのコードなどがとにかく醜かったWindowsだが、C#によって一転とても美しいAPIに変わった。</p>
+
+<h2>.NETではVBやF#も使える</h2>
+<p>また、.NETではVBやF#、Managed C++を使うこともできる。これらは同じ.NET Frameworkのライブラリを使っていて、一度覚えれば他の言語でも同じように使える。</p>
+
+<h2>Windows以外にはmonoがある</h2>
+<p>Windows以外のプラットフォームとしてはmonoがある。monoでGTK#を使うことで、GTKでもC#でプログラミングを行うことができる。</p>
+
+<h2>UnityでもC#を使う</h2>
+<p>ゲームエンジンのUnityでも、monoを主要プラットフォームとしているためC#を用いてゲームプログラミングを行う。</p>
+
+<h2>とても洗練されたGUI開発ができる</h2>
+<p>実際のところ、C#とVisual Studioと.NETを使うことで、とても洗練されたGUIアプリケーション開発ができます。</p>
+<p>Microsoftは賢いです。特に、Visual StudioのフォームデザイナーとC#によるイベントドリブンを体験すると、感動します。本当に「最高のプログラミング環境」になります。</p>
+<p>僕が思うに、Delphiの開発メンバーを引き抜いたことが大きく貢献していると思います。C#は最高です。</p>
+
+<h2>その他の情報</h2>
+<p><a href="dotnet.html">.NET</a>にC#関係の内容があるので参照してください。</p>
+
+<h1>C#のイベント駆動</h1>
+<h2>イベントハンドラとデリゲート</h2>
+<p>イベントハンドラはデリゲートの1つで、C#におけるイベント駆動で、コールバック関数をイベントに追加するのに使う。</p>
+<p>デリゲートとは、関数を格納できる変数のこと。</p>
+<p>まず、以下のようなコードがあったとする。</p>
+<pre class="prettyprint">
+class Form1 : Form
+{
+    Button button1;
+    
+    ...
+}
+</pre>
+<p>ここで、以下のようなコールバック関数がある。</p>
+<pre class="prettyprint">
+    private void button1_Click(object sender, EventArgs e)
+    {
+       MessageBox.Show("Hello");
+    }
+</pre>
+<p>この時、以下のようにEventHandlerを用いてイベントを登録できる。</p>
+<pre class="prettyprint">
+    public Form1()
+    {
+        button1 = new Button()
+        {
+            Text = "クリックしてね",
+            Location = new Point(10, 10),
+            Size = new Size(160, 40),
+        };
+
+        // イベントハンドラを登録
+        button1.Click += new EventHandler(button1_Click);
+
+        this.Controls.Add(button1);
+    }
+</pre>
+<p>（<a href="http://home.a00.itscom.net/hatada/visual-studio/windows-forms/csforms01.html">Windows Forms入門 - Hatada's Home Page</a>と<a href="http://gomocool.net/gomokulog/?p=255">[C#]イベントハンドラとはなんぞや – gomokulog</a>を参考に執筆・編集して引用しました。）</p>
+
+<h1>自分で作ったコード</h1>
+<h2>タブブラウザ</h2>
+<p><a href="../../diary/26-notitled.html">26-日付の無い日記</a>より。</p>
+<p>タブブラウザ。</p>
+<pre class="prettyprint">
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication1
+{
+    public partial class Form1 : Form
+    {
+        public List&lt;WebBrowser&gt; alWebs;
+
+        public Form1()
+        {
+            InitializeComponent();
+            alWebs = new List&lt;WebBrowser&gt;();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            // タブコントロールに新しいタブとブラウザを作成する
+            WebBrowser web;
+            TabPage tabPageN;
+            
+            web = new WebBrowser();
+            alWebs.Add(web);
+            web.Dock = DockStyle.Fill;
+            
+            tabPageN = new TabPage();
+            tabPageN.Controls.Add(web);
+            tabControl1.Controls.Add(tabPageN);
+            
+            web.GoHome();
+        }
+    }
+}
+</pre>
+<p>デザイナの方では、toolStrip1、tabControl1、toolStripButton1、Form1を作ってください。</p>
+<!--<p>これはArrayListを使って作りましたが、本当はジェネリックなコレクションを使うこともできます。現在はそちらが推奨されています。</p>-->
+
+<h2>HTMLに行番号をつけるプログラム</h2>
+<p><a href="../../diary/26-notitled.html">26-日付の無い日記</a>より。</p>
+<p>この前自分で作った、&lt;p&gt;にid="行番号"をつけるプログラム。</p>
+<pre class="prettyprint">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Text.RegularExpressions;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            RepA("st.html");
+            RepA("pm.html");
+            RepA("tx.html");
+            RepA("hs.html");
+            RepA("mm.html");
+            RepA("sk.html");
+            RepA("lt.html");
+            RepA("cp.html");
+            RepA("sc.html");
+            RepA("etc.html");
+            RepA("hs2.html");
+            RepB("lt2.html");
+            RepB("sk2.html");
+            RepB("hs3.html");
+            RepB("cp2.html");
+            RepB("lg.html");
+            RepB("sc2.html");
+            RepB("tg.html");
+            RepB("ms.html");
+            RepB("etc2.html");
+            RepB("tg2.html");
+            RepB("sk3.html");
+            RepB("cp3.html");
+            RepB("lt3.html");
+            RepB("tx2.html");
+        }
+        static void RepA(string strin)
+        {
+            string str = "";
+            Encoding enc = Encoding.GetEncoding(932);
+            using (StreamReader r = new StreamReader(strin, enc))
+            {
+                string line;
+                int c = 0;
+                while ((line = r.ReadLine()) != null) // 1行ずつ読み出し。
+                {
+                    string mc;
+                    if (Regex.IsMatch(line, "----"))
+                    {
+                        mc = Regex.Replace(line, @"", "&lt;p id=\"" + (c + 1) + "\"&gt;");
+                        str += mc + "\n";
+                        c++;
+                    }
+                    else
+                    {
+                        mc = line;
+                        str += mc + "\n";
+                        c++;
+                    }
+                }
+            }
+            // ファイルにテキストを書き出し。
+            using (StreamWriter w = new StreamWriter(strin + ".o.html", false, enc))
+            {
+                w.WriteLine(str);
+            }
+        }
+
+        static void RepB(string strin)
+        {
+            string str = "";
+            Encoding enc = Encoding.GetEncoding(932);
+            using (StreamReader r = new StreamReader(strin, enc))
+            {
+                string line;
+                int c = 0;
+                while ((line = r.ReadLine()) != null) // 1行ずつ読み出し。
+                {
+                    string mc;
+                    if (Regex.IsMatch(line, "◇◇"))
+                    {
+                        mc = Regex.Replace(line, @"", "&lt;p id=\"" + (c + 1) + "\"&gt;");
+                        str += mc + "\n";
+                        c++;
+                    }
+                    else
+                    {
+                        mc = line;
+                        str += mc + "\n";
+                        c++;
+                    }
+                }
+            }
+            // ファイルにテキストを書き出し。
+            using (StreamWriter w = new StreamWriter(strin + ".o.html", false, enc))
+            {
+                w.WriteLine(str);
+            }
+        }
+    }
+}
+</pre>
+<p>Regexの使い方が馬鹿だ。</p>
+<p>あとは、僕はxyzzyを使う。</p>
+<p>正規表現のメモ。</p>
+<blockquote class="inyou2">
+<p>検索：&lt;p id="\(.*\)"&gt;----\n&lt;p&gt;\(.*\)</p>
+<p>検索：&lt;p id="\(.*\)"&gt;◇◇\n&lt;p&gt;\(.*\)</p>
+<p>置換：&lt;a href="tx2.html#\1"&gt;\2&lt;/a&gt;,\n</p>
+<p>検索：&lt;p&gt;[\n|].*$</p>
+<p>検索：&lt;p&gt;.*$</p>
+<p>検索：^\n$</p>
+<p>検索： ..:..</p>
+<p>----か◇◇で始まる行を、その行のpタグのid属性と次の行の内容でリンクに変換します。</p>
+</blockquote>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-vb.js"></script>
+<script type="text/javascript" src="../../js/lang-ml.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

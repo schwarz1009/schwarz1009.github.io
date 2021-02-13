@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Webフレームワーク関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Webフレームワーク関連の世界観</h1>
+<p>Webフレームワークに関する世界観です。</p>
+<p><a href="../prog_lang/php.html">PHP</a>や<a href="../prog_lang/javascript_framework.html">JavaScriptフレームワーク</a>や<a href="../prog_lang/java_framework.html">Java（Webフレームワーク）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Webフレームワーク</h1>
+<h2>Webフレームワークの意味</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p><!--これに対し、そもそも-->サーバでHTMLデータを返す際に、動的にサーバ側で処理を行うことをサーバサイドと呼ぶ。</p>
+<p>クライアントサイドではJavaScriptを用いるが、サーバサイドではPHPやRubyといった言語を用いることが一般的。</p>
+<p>実際は単にPHPやRubyを直接書くこともできるが、よりWebサービスの開発のために便利な機能を詰め込んだ、フレームワークというものを用いてサーバサイドの処理を記述する。</p>
+<p>PHPではLaravel, RubyではRuby on Railsといったフレームワークが知られている。</p>
+<p>しかしながら、クライアントサイドでJavaScriptを使いながら、サーバサイドでRailsを使うのは、言語が二種類あって非効率である。</p>
+<p>このため、サーバサイドでもJavaScriptを使うNode.jsといった「サーバサイドJavaScript」と呼ばれる仕組みもある。</p>
+<p>RailsやLaravelでは、MVCフレームワークと呼ばれるモデルで開発を行う。</p>
+<p>MVCフレームワークでは、まず外部からのリクエストを処理するルーティングと呼ばれる処理があり、そのルーティングによって、MVCのCに相当するコントローラのアクションに処理が移る。</p>
+<p>アクションでは、Mに相当するモデルによって、データベースとのやり取りを行い、Vに相当するビューによって、HTMLを動的に作成してブラウザに返す。</p>
+<p>従来はこのMVCの処理を全てサーバ側で行っていたが、ビューの処理はクライアントサイドだけでも行えることが最近分かってきたため、Vue.jsやReactといったビューに特化したJavaScriptフレームワークで、クライアントでビューの処理を行うことも一般的になってきている。</p>
+
+<h2>Webフレームワークとは</h2>
+<p>Ruby on Railsの登場を受けて、最近のWebアプリケーションやWebサービスの開発には、「フレームワーク」と呼ばれるものを用いて行う機会が増えてきた。</p>
+<p>Webフレームワークは各Web言語（Java, Perl, PHP, Python, Rubyなど）に存在し、「MVCモデル」と呼ばれる枠組みを使って、効率的・生産的にサービスを開発することができる。</p>
+
+<h2>MVCモデル</h2>
+<table class="some_tables">
+<tr><th>概念</th><th>説明</th></tr>
+<tr><td>Model</td>
+<td>
+Model（モデル）は、MVCフレームワークの中でデータベース用のロジックを担当する部分。<br>
+基本的に、ViewやControllerはModelの内容と対応するように記述される。
+</td></tr>
+
+<tr><td>View</td>
+<td>
+View（ビュー）は、MVCフレームワークの中で表示されるテンプレートの作成を担当する部分。<br>
+WebフレームワークではHTMLがこの部分に当たる。<br>PHPやERB（埋め込みRuby）などを用いて、<br>HTMLテンプレートに最小限のコードを埋め込むことで開発する。
+</td></tr>
+
+<tr><td>Controller</td>
+<td>
+Controller（コントローラ）は、MVCフレームワークの中で<br>さまざまなアクションイベントに応じたコントロール（処理の割り振り）を担当する部分。<br>
+特に、モデルとビューの橋渡しとサービスの上での総合的なやりとりを行う。
+</td></tr>
+</table>
+
+<h2>MVCフレームワークを自前で作る</h2>
+<p>MVCを用いたWebフレームワークは、基本的なもので良ければ、自前で設計・実装して作ることもできる。<a href="../prog_lang/php_framework.html">PHPフレームワーク</a>を参照のこと。</p>
+
+
+<h2>Webフレームワークの前夜</h2>
+<p>まず、Perl/CGIがある。Perl/CGIでは、Apacheを用いてサーバー側で処理を行う。Perlスクリプトを簡単に作ることで、掲示板やカウンターなどのWebサービスを作ることが出来た。</p>
+<p>次に、PHPがある。PHPでは、HTMLタグの中にスクリプトを埋め込むことで、さらに簡単にプログラミングが出来た。</p>
+<p>次にあるのは、JavaサーブレットとJSPである。プロセスをいちいち立ち上げるのではなく、ひとつのプログラムのスレッドとして管理することで、効率的にサーバーサイドプログラムが出来た。</p>
+<p>そして、いよいよWebフレームワークの夜明けが来る。Rubyはとても少ないコードで簡単なプログラミングが出来た。</p>
+<p>さあ、Railsが登場した。Railsの登場は革命である。全てのコードをRubyで書き、MVCと呼ばれる生産的な「フレームワーク構造」を使うことで、革命的なほど簡単にWebサービスを作ることが出来た。</p>
+<p>Railsを模したWebフレームワークとして、CakePHPやDjangoなどが登場した。「PHPやPythonでもRuby on Railsのようなことがやりたい」という声が多く、誰もが同じようなMVCフレームワークを作った。</p>
+<p>同時に、クライアントサイドでも革命が起こった。JavaScriptフレームワークである。JavaScriptフレームワークでは、クライアントサイドでもMVCと良く似た構造のプログラミングを可能とした。</p>
+<p>しだいに、「RailsはRailsで難しくて複雑だ」という意見が増えた。このことから、もっと簡単で、もっと短いコードで作るフレームワークは作れないか、という声が増えた。これが、マイクロフレームワークである。</p>
+
+
+<h1>フレームワーク</h1>
+
+<h2>Webフレームワーク</h2>
+<p>MVCなどの生産的で効率的な構造に従って開発するフレームワーク。各言語に存在する。<!--<a href="web_framework.html">Webフレームワーク</a>を参照のこと。--></p>
+
+<h2>Ruby on Rails</h2>
+<p>Rubyを使って、Webプログラミングを正しく効率的に行うフレームワーク。だが、「簡単すぎて技術力がつかない」と一部では批判的な意見も。</p>
+<p><a href="../prog_lang/ruby_on_rails.html">Ruby on Rails</a>を参照のこと。</p>
+
+<h3>セキュリティガイド</h3>
+<p>以下はRailsのセキュリティガイド。</p>
+<ul>
+<li><a href="https://railsguides.jp/security.html">Rails セキュリティガイド</a></li>
+</ul>
+<h3>チュートリアルとガイド</h3>
+<p>以下は日本語に訳されたRailsのチュートリアルとガイド。</p>
+<ul>
+<li><a href="https://railstutorial.jp/">Ruby on Rails チュートリアル</a></li>
+<li><a href="https://railsguides.jp/">Ruby on Rails ガイド (5.0 対応)</a></li>
+</ul>
+
+
+<h2>Node.js</h2>
+<p>サーバーサイドのJavaScript環境。</p>
+<p>MongoDB, Express, AngularJS, Node.jsの4つのアプリケーションを合わせて、MEANと呼ぶように提唱された。JavaScriptによるWeb環境である。</p>
+<p><a href="../prog_lang/javascript_framework.html">JavaScript（４．フレームワーク）</a>を参照のこと。</p>
+
+<h2>WordPress</h2>
+<p>素のHTMLを書くのではなく、簡単なインターフェースから高度な統合サイトを作ることが出来る技術。</p>
+<ul>
+<li><a href="https://ja.wordpress.org/">WordPress 日本語ローカルサイト</a></li>
+</ul>
+<p><a href="wordpress.html">WordPress</a>を参照のこと。</p>
+
+
+<h1>関連ページ</h1>
+<h2>Java</h2>
+<p>・<a href="../prog_lang/java_framework.html">Java（Webフレームワーク）</a></p>
+<p>・<a href="../prog_lang/java_framework_spring.html">Spring</a></p>
+
+
+<h2>Perl</h2>
+<p>・<a href="../prog_lang/perl_cgi.html">Perl/CGI</a></p>
+<p>・<a href="../prog_lang/perl_mojolicious.html">Mojolicious</a></p>
+
+
+<h2>PHP</h2>
+<p>・<a href="../prog_lang/php_framework.html">PHPフレームワーク</a></p>
+<p>・<a href="../prog_lang/php_framework_laravel.html">Larabel</a></p>
+
+
+<h2>Python</h2>
+<p>・<a href="../prog_lang/python.html">Python</a></p>
+<p>・<a href="../prog_lang/python_django.html">Django</a></p>
+
+
+<h2>Ruby</h2>
+<p>・<a href="../prog_lang/ruby.html">Ruby</a></p>
+<p>・<a href="../prog_lang/ruby_on_rails.html">Ruby on Rails</a></p>
+
+
+<h2>JavaScript</h2>
+<p>・<a href="../prog_lang/javascript_framework.html">JavaScriptフレームワーク</a></p>
+
+<h1>簡単な説明</h1>
+<h2>Webフレームワーク</h2>
+<ul class="defaultlist list7">
+<li>Webフレームワーク
+<ul>
+<li>MVCフレームワーク
+<ul>
+<li>Rails, Django, LaravelなどサーバーサイドのWebフレームワーク</li>
+<li>モデル、ビュー、コントローラ
+<ul>
+<li>モデルはデータベースの構造</li>
+<li>ビューはHTMLのテンプレートビュー</li>
+<li>コントローラはさまざまなプログラミング処理でモデルとビューを取り持つ</li>
+</ul></li>
+<li>スケルトン作成
+<ul>
+<li>Railsではコマンドラインの操作で、ソースコードのひな形となるスケルトンを自動作成してくれる</li>
+</ul></li>
+<li>ルーティング</li>
+<li>アクション</li>
+<li>ビューテンプレート</li>
+<li>マイグレーション</li>
+<li>バリデーション</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>MVCフレームワーク</h2>
+<h3>ルーティング</h3>
+<p>Webサイトにアクセスした時に、URLに基づいてどのページを表示するかを案内する</p>
+
+<h3>アクション</h3>
+<p>アクションは、コントローラで定義されるメソッドのこと</p>
+<p>ルーティングによって適切なコントローラとアクションが指名され、Railsはコントローラのインスタンスを作ってアクションを実行する</p>
+<p>Webサイトのさまざまな機能（たとえばリスト表示やフォローなど）はアクションに実装する</p>
+
+<h3>ビューテンプレート</h3>
+<p>RailsではHTMLにRubyコードを埋め込めるERBを使ってビューテンプレートを記述する</p>
+
+<h3>パーシャル</h3>
+<p>パーシャルは、複数のビューテンプレートの共通する部分を分割し、自動で読み込んでくれる機能</p>
+
+<h3>マイグレーション</h3>
+<p>SQLで直接データベースを操作しなくても、Rubyからデータベースにテーブルを作成できる</p>
+<p>SQLコマンドを打つことなく、データベーステーブルを自動作成する</p>
+
+<h3>バリデーション</h3>
+<p>ユーザーがWebサイトのフォームに入力した時、その入力内容のデータにあらかじめ制限をかける</p>
+<p>たとえば数値だけ有効、空文字列は無効など</p>
+
+<h3>フレームワークの独自作成</h3>
+<p>Webフレームワークは、簡単なものであれば自分で独自に作成することもできる。書籍「パーフェクトPHP」などを読んでほしい</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>デザインパターンの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>デザインパターンの世界観</h1>
+<p>デザインパターンの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>デザインパターン</h1>
+<h2>デザインパターンの概要</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/02/02より。</p>
+<p>デザインパターンの概要について言えるのは、クラスをどのように設計するか、ということです。</p>
+<p>ある機能を実装する上での、内部のクラス設計、たとえば、抽象的なテンプレートやAPIから実装したり、段階的に基礎から構築したり、受付や代理人にやらせたり、通知を行ったりします。</p>
+<p>同時に、ある機能を実現する上での、スマートなクラス設計を行います。</p>
+<p>要素と入れ物を同一視したり、要素に飾りをたくさんつけたり、あるいは状態やミニ言語でクラス設計を表現します。</p>
+<p>ほかにも、インスタンスがひとつであることを保証したり、訪問者を作ったり、責任をたらい回しにしたり、あるいは、機能のクラスと実装のクラスを分けたりします。</p>
+<p>マルチスレッドにおいては、スレッドの待機や排他制御を表現します。</p>
+
+<h2>デザインパターンとは</h2>
+<p>ソフトウェアを開発し、設計する時に出てくる「良くあるパターン」をまとめたもの。</p>
+<p>僕は以下の本を読んで、とても勉強になった。みんなも読んでほしい。（注意点：本当はまだそんなに読めていない。）</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797316462">Java言語で学ぶデザインパターン入門</a></li>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80-%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797319127">Java言語で学ぶデザインパターン入門 マルチスレッド編</a></li>
+</ul>
+
+<h2>デザインパターンとオブジェクト指向は相性が良い</h2>
+<p>デザインパターンは、Javaのようなオブジェクト指向と相性が良い。</p>
+<p>特に、クラスライブラリを使うだけのプログラミングから、クラスとインスタンス、継承と実装、そしてスレッドを用いた、オブジェクト指向のプログラム設計が出来るようになる。</p>
+<p>たくさんのパターンを知っておくことで、プログラム要件が来た時に、どのようにすれば実装出来るか、事前に準備しておくことが出来る。</p>
+<p>いわば、「設計のネタ帳」である。</p>
+<p>このページに書籍の全てを載せてしまうと、コピーになってしまうので、内容は自ら本を買って読んでほしい。下の説明は目次の引用に過ぎない。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E5%A2%97%E8%A3%9C%E6%94%B9%E8%A8%82%E7%89%88Java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797327030">増補改訂版Java言語で学ぶデザインパターン入門</a></li>
+<li><a href="https://www.amazon.co.jp/%E5%A2%97%E8%A3%9C%E6%94%B9%E8%A8%82%E7%89%88-Java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80-%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797331623">増補改訂版 Java言語で学ぶデザインパターン入門 マルチスレッド編</a></li>
+</ul>
+
+<h2>デザインパターンは乱用に注意</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/14より。</p>
+<p>オブジェクト指向で設計するために、頻出するパターンを教える、GoFのデザインパターンですが、乱用に注意しましょう。</p>
+<p>あくまで、大規模なソフトウェアを設計する上で、頻出するパターンを示したものであり、必要ないのに「設計が美しくなる」と思って、なんでもかんでもデザインパターンを使ったところで、保守しやすいソフトウェアにはならないからです。</p>
+<p>逆に、複雑で理解できないプログラムになってしまいます。</p>
+<p>しかしながら、デザインパターンの用語が分からないと、プログラマとの間で言葉が通じないことがあります。</p>
+<p>そのためにも、用語として知っておくとよいでしょう。</p>
+<p>以下のリンク先に、より詳しいことが書いてあります。</p>
+<ul>
+<li><a href="https://qiita.com/tanakahisateru/items/df03d2558f9499d1a64a">GoF デザインパターン チートシート - Qiita</a></li>
+</ul>
+
+<h1>詳しいデザインパターンの解説</h1>
+<h2>デザインパターン一覧</h2>
+<p>以下にデザインパターンの一覧と解説があります。プログラムの設計の前に参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/ichi-nakashima/items/ee09c9341f85c18f748a">デザインパターン一覧　[23種類] - Qiita</a></li>
+<li><a href="https://qiita.com/sghr/items/774e4f36ab1f8c2c423a">デザインパターンの学習 - Qiita</a></li>
+<li><a href="http://www.itsenka.com/contents/development/designpattern/">デザインパターン入門 - IT専科</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">デザインパターン (ソフトウェア) - Wikipedia</a></li>
+</ul>
+
+<h2>特におすすめなのはBuilderパターン</h2>
+<p>特におすすめなのはBuilderパターンです。</p>
+<ul>
+<li><a href="https://qiita.com/takutotacos/items/33cfda205ab30a43b0b1">Builderパターン - Qiita</a></li>
+<li><a href="https://qiita.com/disc99/items/840cf9936687f97a482b">Javaで書くBuilderパターンのパターン - Qiita</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>デザインパターン</h2>
+<ul class="defaultlist list7">
+<li>開発技法
+<ul>
+<li>デザインパターン</li>
+</ul></li>
+</ul>
+
+<h2>デザインパターン</h2>
+<p>23種類の設計のネタ帳</p>
+<p>有名なものにBuilderパターンなど</p>
+<p>イテレータやアダプタのような単純なパターンから、抽象ファクトリーや状態・記憶や代理人を扱ったりする設計上のデザイン、ミニ言語などの高度なパターンもあるので、一度目を通しておこう</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

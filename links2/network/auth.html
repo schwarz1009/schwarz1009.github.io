@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>認証関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>認証の世界観</h1>
+<p>認証に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>認証</h1>
+<h2>二段階認証 (Two-Factor Authentication)</h2>
+<p>今、7payで話題となっているように、二段階認証の必要性が注目されています。</p>
+<p>二段階認証とは、IDとパスワードにログインした時に、携帯電話などにコードの記載されたSMSが送られてきてそれを入力したり、その時だけ使えるワンタイムパスワードを使ったりして、「二段階でログインする技術」です。</p>
+<p>二段階認証を行うことで、Webサービスに対するセキュリティを強化することができます。二段階認証が使えるサービスであれば、ぜひ使いましょう。</p>
+
+<h2>2段階認証ワンタイムパスワード(TOTP, HOTP)</h2>
+<p>TOTPとは2段階認証ワンタイムパスワード(TOTP)のこと。</p>
+<p>Mozilla FirefoxのSyncなどで2段階認証を使う場合、WindowsではAuthyなどの2段階認証システムを使うことができる。</p>
+<p>AuthyはLinuxにも対応している模様だが、LinuxのCLIでTOTPを使うためには、oathtoolなどが使える。</p>
+<ul>
+<li><a href="https://support.mozilla.org/ja/kb/secure-firefox-account-two-step-authentication">二段階認証で Firefox アカウントを保護する | Firefox ヘルプ</a></li>
+<li><a href="https://qiita.com/u-minor/items/daa6579998da0c534a6d">CLI で Authy と共通の MFA Token を生成する - Qiita</a></li>
+<li><a href="https://okadahiroshi.hatenablog.com/entry/2018/10/17/163921">2段階認証ワンタイムパスワード (TOTP) クライアント を Ubuntu (コマンドライン) で - Okada Hiroshi の blog</a></li>
+</ul>
+<p>TOTPは時間ベース、HOTPはカウンターベースで二段階認証（Two-Factor Authentication）を行う。TOTPに比べHOTPはより安全であることは知っておくと良いだろう。</p>
+<ul>
+<li><a href="https://blog.ohgaki.net/2fa-totp-hotp-which-is-safer">2要素認証のTOTPとHOTP、どちらがより安全か？ – yohgaki's blog</a></li>
+</ul>
+
+<h2>二段階認証アプリ</h2>
+<p>二段階認証アプリでメジャーなのはAuthyとGoogle Authenticator。特にスマホで使うことを想定しており、二段階認証を有効にしたWebサービスにログインする時には、スマホからAuthyあるいはGoogle Authenticatorを起動して、ワンタイムパスワードを確認してログインを行う。</p>
+<p>フリーソフトウェアの実装としてはFreeOTPがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FreeOTP">FreeOTP - Wikipedia</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>パスワード認証そのものが間違っている可能性</h2>
+<p>僕は、今のコンピュータやネットワークでのセキュリティとして一般的な、IDとパスワードによる認証方式そのものが間違っている可能性があると思います。</p>
+<p>最近のネットバンキング詐欺などでも、メールを使って不正サイトに誘導し、本物そっくりの不正サイトでIDとパスワードを入力させることで、銀行の口座にある莫大な金を不正に別の口座に送金して、盗まれてしまいます。</p>
+<p>犯人はリアルタイムで不正サイトの入力を確認しているため、ワンタイムパスワードによるセキュリティも破られてしまいます。</p>
+<p>僕は、コンピュータネットワークそのものの認証方法のあり方を変える必要があるように思います。</p>
+<p>指紋認証や顔認証をするためには、指紋を採取する機器やカメラなど専用の機器が必要になりますが、こうした「パスワード以外の認証方式」を普及させなければいけないのではないでしょうか。そして、そもそも「本人であることを証明する手段」として、パスワードという簡単に盗むことができるものを、使ってはいけないと僕は思います。何らかの別の方法を考えなければいけません。</p>
+<p>僕は、今回のネットバンキングの詐欺は、銀行にお金を預ける意味が何なのか、という根源的な問いを発する段階に来ていると思う。ネットバンキングで不正ログインの可能性があるのであれば、銀行にお金を預ける意味があるのかどうか、そういう考え方に至る。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

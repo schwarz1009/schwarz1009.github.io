@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux フォント - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux フォント</h1>
+<p>Linuxのフォントに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>フォント</h1>
+<h2>Linuxでのフォントのインストール方法</h2>
+<p>Fontcondigの場合、/usr/share/fonts/や~/.local/share/fontsにTTFまたはOTFファイルを入れるだけ（~/.fonts/もあるが非推奨）。Fontconfigはこれらのフォルダを再帰的にスキャンする。</p>
+<p>TrueTypeの場合は、/usr/share/fonts/truetype/[フォント名]、OpenTypeの場合は、/usr/share/fonts/opentype/[フォント名]にインストールしよう。</p>
+<p>インストールしたら、フォントキャッシュの更新をするために、以下のコマンドを実行する。</p>
+<pre>
+fc-cache -f -v
+</pre>
+<p>最近のLinuxはFontconfigを使うが、旧来のXLFD（X Logical Font Description）を使っているアプリケーションもある。</p>
+<p>Fontcondigとは違い、Xorgは/usr/share/fonts/ディレクトリを再帰的に調べない。パスを追加するときは、フルパスを使う：</p>
+<pre>
+Section "Files"
+    FontPath     "/usr/share/fonts/local/"
+EndSection
+</pre>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A">フォント設定 - ArchWiki</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">フォント - ArchWiki</a></li>
+</ul>
+
+<h2>TrueTypeとOpenType</h2>
+<p>TrueTypeとOpenTypeは、拡大縮小しても輪郭がガタガタしないスケーラブルなフォントの規格。</p>
+<p>TrueTypeは旧式の規格で、普及しており、多くのプラットフォームやソフトウェアで使うことができる。</p>
+<p>OpenTypeは新しい規格で、より高機能で優れているとされている。収録文字数も多い。</p>
+<p>フォントの拡張子.ttfや.ttcや.otfは必ずしもTrueTypeとOpenTypeには対応しておらず、TrueTypeベースのOpenTypeフォントがttfまたはttc、PostScriptベースのOpenTypeフォントがotfとなる。</p>
+<p>また、一部の化石としてビットマップフォントと呼ばれるフォントもある。ビットマップのドットによってフォントを表現する。</p>
+<ul>
+<li><a href="https://fontnavi.jp/zakkuri/202-truetype_opentype.aspx">TrueTypeとOpenType - フォント専門サイト fontnavi</a></li>
+<li><a href="https://plife.studio/2017/08/10/font-otf-ttf-ttc/">フォントOpen Type、True Type、.otf .ttf .ttcって何？ – +Life Studio｜徳島で、あなたの会社の広報部署、代行します。</a></li>
+</ul>
+
+<h2>日本語フォントのファイルパス</h2>
+<p>また、日本語フォントのファイルパスは/usr/share/fonts/ja/TrueType/のように日本語を表す「ja」のサブディレクトリがあることがあるため、注意が必要。</p>
+<p>昔のXでは、/usr/X11R6/lib/X11/fonts/TrueTypeのような不思議な場所にインストールされることもあった。</p>
+
+<h1>フリーフォント</h1>
+
+<h2>M+ FONTS</h2>
+<p>フリーフォント。M<sup>+</sup>は森下浩司氏によってデザインされており、とても美しくなおかつフリーソフトウェアである。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/M%2B_FONTS">M+ FONTS - Wikipedia</a></li>
+</ul>
+
+<h2>さざなみフォント</h2>
+<p>フリーフォント。和田研フォントキット派生のCLWFKによって自動生成されたものと、既存のフリーなビットマップフォントを合成した。自動作成されたフォントであるため、多少品質が悪い。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%81%95%E3%81%96%E3%81%AA%E3%81%BF%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">さざなみフォント - Wikipedia</a></li>
+</ul>
+
+<h2>IPAフォント</h2>
+<p>フリーフォント。独立行政法人情報処理推進機構（IPA）によって配布されている。多くの書体に対応。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IPA%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">IPAフォント - Wikipedia</a></li>
+</ul>
+
+<h2>VLゴシック</h2>
+<p>フリーフォント。M<sup>+</sup> OUTLINE FONTSとさざなみゴシックとの合成フォント。多くのディストリビューションで標準的に採用されている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/VL%E3%82%B4%E3%82%B7%E3%83%83%E3%82%AF">VLゴシック - Wikipedia</a></li>
+</ul>
+
+<h2>源ノ明朝 & 源ノ角ゴシック</h2>
+<p>Adobeによるオープンソースのフォント。Adobeがリリースしたこともあって品質が高い。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Source_Han_Serif">Source Han Serif - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Source_Han_Sans">Source Han Sans - Wikipedia</a></li>
+</ul>
+
+<h2>Mgen+</h2>
+<p>M<sup>+</sup> OUTLINE FONTSと源ノ角ゴシックの合成フォント。</p>
+<ul>
+<li><a href="http://jikasei.me/font/mgenplus/">Mgen+ (ムゲンプラス) </a></li>
+</ul>
+
+<h2>モナーフォント</h2>
+<p>２ちゃんねるによる、Linuxで顔文字やAAを見るために作られたフォント。IPAフォントを使ったIPAモナーフォントというものもある。</p>
+<p>２ちゃんねるのAAは「MS Pゴシック 12ポイント」で表示されるが、これはLinuxなどでは綺麗に表示させることが出来ない。これを解決するために、文字幅を合わせたモナーフォントが作られた。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A2%E3%83%8A%E3%83%BC%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">モナーフォント - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/IPA%E3%83%A2%E3%83%8A%E3%83%BC%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">IPAモナーフォント - Wikipedia</a></li>
+</ul>
+
+<h2>フリーフォント一覧</h2>
+<p>以下はLinux向けに使えるフリーフォントの一覧。</p>
+<ul>
+<li><a href="http://note.kurodigi.com/free-font2019/">【2019年版】Linuxでも使えるフリーフォント集 - クロの思考ノート</a></li>
+</ul>
+<p>ネットでダウンロードできるフリーフォントはたくさんあるが、質にばらつきがあり、UIの表示に使うためにはたとえば対応していない漢字があったりする。</p>
+<p>よって、UIの表示はVLゴシックなどで行い、LibreOfficeなどでフォントを選択する時にフリーフォントを使用し、対応していない漢字があれば別のフォントを使用して文書を編集することをおすすめする。</p>
+
+<h1>フォントエンジン</h1>
+
+<h2>FreeType</h2>
+<p>フォントエンジン。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FreeType">FreeType - Wikipedia</a></li>
+</ul>
+
+<h2>Fontconfig</h2>
+<p>フォントの設定ライブラリ。</p>
+
+<h1>余談</h1>
+<h2>Windowsから取ってくるとライセンス違反</h2>
+<p>Windowsにフォントがあるのなら、Windowsからコピーして持って来れば良いことになるが、これはおおっぴらにやるとライセンス違反になる。公の企業などではしないこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>フォント</h2>
+<p>TrueTypeは古い規格、OpenTypeは新しい規格</p>
+<p>Linuxには搭載フォントが少ない</p>
+<p>インターネット上に多数のフリーフォントがある</p>
+<p>LibreOfficeなどを使うのであればフリーフォントを入れよう</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

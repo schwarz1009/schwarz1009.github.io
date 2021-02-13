@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXシステム管理 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<!--
+<p><a href="linuxlinks.html">Linuxリンク集（公式）</a></p>
+<p><a href="linuxlinks2.html">Linuxリンク集２（管理）</a></p>
+<p><a href="linuxlinks3.html">Linuxリンク集３（技術情報）</a></p>
+<p><a href="linuxlinks4.html">Linuxリンク集４（プログラミング）</a></p>
+<p><a href="linuxlinks5.html">Linuxリンク集５（アーキテクチャ）</a></p>
+<p><a href="linuxlinks6.html">Linuxリンク集６（アプリケーション）</a></p>
+<p><a href="linuxlinks7.html">Linuxリンク集７（デスクトップ）</a></p>
+<p><a href="linuxlinks8.html">Linuxリンク集８（X11）</a></p>
+<p><a href="linuxlinks9.html">Linuxリンク集９（技術詳細）</a></p>
+<p><a href="linuxlinks10.html">Linuxリンク集１０（その他）</a></p>
+<p><a href="windowslinks.html">Windowsリンク集</a></p>
+<p><a href="itcompanylinks.html">IT企業・商用ソフトリンク集</a></p>
+<p><a href="softwarelinks.html">ソフトとサービスのリンク集</a></p>
+<p><a href="hardwarelinks.html">ハードウェアのリンク集</a></p>
+
+<p><a href="bunkeilinks.html">文系のリンク集</a></p>
+<p><a href="rikeilinks.html">理系のリンク集</a></p>
+
+<p><a href="artlinks.html">芸術・音楽のリンク集</a></p>
+<p><a href="peoplelinks.html">人々のリンク集（偉人）</a></p>
+<p><a href="technologylinks.html">技術のリンク集</a></p>
+<p><a href="societylinks.html">社会のリンク集</a></p>
+<p><a href="bloglinks.html">ブログ・ツイッターのリンク集</a></p>
+<p><a href="piano.html">ピアノ入門</a></p>
+<p><a href="farm.html">農業入門</a></p>
+<p><a href="culture.html">世界の文化入門</a></p>
+<p><a href="human.html">人間一般入門</a></p>
+<p><a href="english.html">英会話入門</a></p>
+<p><a href="nofollow.html">NoFollowプログラミング言語</a></p>
+<p><a href="robot.html">人間頭脳型ロボット</a></p>
+-->
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>UNIXシステム管理</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Linuxのインストール</h1>
+<h2>Linuxのインストールの前に</h2>
+<p>Linuxのインストールの前に、今のWindowsの環境を残しておきましょう。</p>
+<p>出来るだけ大切なバックアップを取ることがお勧めされることが多いですが、僕はWindowsのハードディスクごと取り出してしまって、同じ型のハードディスクを装着するのがお勧めです。ハードディスクごと、Windowsの大切な環境を取っておくことが出来ます。</p>
+
+<h2>isoファイルの焼き方</h2>
+<p>Linuxのインストールは簡単で、ダウンロードしたisoファイルをお好みのCD/DVD書き込みソフトで焼いて、そのディスクから起動し、インストーラーに従ってシステムを構築します。</p>
+<p>ただ、isoをデータとして焼かないように注意しましょう。isoはディスクイメージファイルと呼ばれるもので、正しい設定で焼かないと、その中のイメージを構築してくれません。データファイルとして焼いてしまうと、Windowsで操作するデータアーカイブとして焼かれてしまいます。きちんと起動できるディスクにするためには、正しい設定で焼かないといけません。これは書き込みソフトによって違います。</p>
+<p>isoがきちんと焼けたら、通常はCD/DVDから起動することができる。出来ない時はBIOSでハードディスクよりもCD/DVDディスクの方を優先して起動するように設定する必要がある。</p>
+
+<h2>インストール時・インストール後の設定</h2>
+<p>インストール時の設定の時に注意することは、</p>
+<p>・ネットワークの設定。自動設定されても上手くいかない時は自分でネットワークの構成を確認した上で設定する必要がある。特に、Wi-Fiなどに繋ぐ時は、無線のアクセスポイントとそのためのパスワードを入力しなければ、ネットワークにはつながらない。</p>
+<p>・rootユーザーと使用する一般ユーザーの設定。パスワードを忘れないようにしよう。</p>
+<p>・パーティションの設定。自動でも動く場合があるが、手動で設定するならば十分なディスク容量を配置しなければならない。</p>
+<p>・インストールするパッケージの選択。通常はデスクトップのインストールを行うが、GNOME 3よりもKDEやMATEをインストールすることが出来る。ここで知っておくべきこととして、「全てのデスクトップを全部入れるのはあまりお勧めしない」ということ。アプリケーションパッケージがたくさん入って、端末やテキストエディタが何種類もあって「とても使い辛い」ものになってしまう。よって、GNOME 3を使うつもりなら、出来るだけGNOME 3だけをインストールすること。おすすめはMATE。</p>
+<p>インストール後の設定として注意すべきなのは、日本語入力。そのままでは日本語入力ができないことがある。GNOME 3なら、インプットエンジンが統合されているため、その上で設定を行う必要がある。KDEなどの場合は専用のパッケージをインストールする必要があることもある。</p>
+
+<h2>失敗したら</h2>
+<p>Linuxのインストールに失敗することは本当に日常茶飯事で、僕もUbuntuがインストールできなかったせいで仕方なくDebianを使ったりしたことがある。</p>
+<p>また、インストールできても起動しないことや設定の関係で使えるまでのレベルに達しないこともある。良くあるのは、「GNOMEやKDEが起動しない」ということ。</p>
+<p>諦めるのも良いが、せっかくだから別のディストリビューションを試してみよう。もちろん、Windowsに戻すという方法もアリだ。失敗した時のためにも、真面目にWindows環境を残しておこう。</p>
+
+<h1>OSとしての設計</h1>
+<h2>コンパイル時の設定と設定ファイルによる動的な実行内容の変化</h2>
+<p>僕は、OSとしての設計には、「コンパイル」と「アーキテクチャ」があると思う。</p>
+<p>まず、アプリケーション・プログラムは、コンパイルした時に動作が変わる部分と、実行時に動作が変わる部分がある。</p>
+<p>たとえば、コンパイルオプションと設定ファイル。</p>
+<p>コンパイルオプションで指定した内容は、再コンパイルした時にしか変わらない。アプリケーションの動作はコンパイルした時に静的に決定される。</p>
+<p>この場合、設定内容を変えるためには、再コンパイルする必要がある。</p>
+<p>それと対照的に、実行オプションや設定ファイルで設定する方法なら、実行時に動的に決めることが出来る。</p>
+<p>これにより、多様なプログラムの動作が期待出来る。</p>
+<p>これと同じことが、テキストファイルを入出力するプログラムや、モジュールを動的に読み込むプログラムについても言える。</p>
+<p>また、スクリプト言語のようなプログラムでは、スクリプトがそのまま動的に読み込むテキストファイルとして扱われる。</p>
+<p>簡単に言ってしまえば、コンパイルする時に設定を決定するプログラムと、動的に設定を実行時に読み込むプログラムがある。</p>
+
+<h2>CPUアーキテクチャ</h2>
+<p>次に、CPUアーキテクチャへの対応がある。</p>
+<p>Windowsなどでは、x86/x86_64にしかOSは対応しないが、UNIXはC言語で書かれたポータブルなOSであるため、移植性が高いと言われる。</p>
+<p>これは、プログラム自体をC言語と言う、さまざまなバイナリフォーマットに対応出来るいくらか高水準な言語で書くことによって、移植性を高める、と言う発想だ。</p>
+<p>カーネルの低レベルな部分で、最小限アーキテクチャ別のCとアセンブリ言語でのプログラムを書いて、高レベルな部分は全て共通のC言語で書く。</p>
+<p>GCCと言うさまざまなアーキテクチャのバイナリが吐けるコンパイラを使うことで、さまざまなプログラムを違うCPUのLinuxで使うことが出来る。</p>
+
+<h2>パッケージ管理</h2>
+<p>また、パッケージ管理と言う意味では、「依存性の解決」と「自動更新」を行うことが出来る。</p>
+<p>低レベルな部分では、パッケージ管理はOSにインストールされている全てのパッケージの依存関係の解決を行うことが出来る。</p>
+<p>これにより、OSが壊れることを防ぎながら、簡単にUNIX上のユーザーランド・アプリケーションの無数のパッケージを管理することが出来る。</p>
+<p>Linuxが管理しやすいのは、パッケージ管理のおかげでもある。</p>
+<p>パッケージ管理があるおかげで、不要なシステムの破壊を防ぎ、簡単にディストリビューションと言う「OS全体」を作って配布することが出来る。</p>
+<p>先に言う、コンパイルと設定ファイルの考え方のようなものが、パッケージ管理システムにおいても良く似た形態で見ることが出来る。</p>
+<p>また、apt-getやyum/dnfに見られるように、パッケージは自動更新され、常に最新のパッケージリストをダウンロードし、最新のパッケージに更新することが出来る。</p>
+<p>僕は、ここでもGentoo Linuxに注目したい。Gentoo Linuxでは、Portageと言う独自のパッケージ管理を行っている。</p>
+<p>使うコマンドはemerge、パッケージの記法はebuildである。常に最新のebuildをダウンロードしておき、emergeを使ってパッケージをインストールする。</p>
+<p>だが、Gentoo Linuxの特徴は、「全てのパッケージがソースベース」であることだ。emergeは、ほとんど全てのパッケージをソースコードからコンパイルする。</p>
+<p>ソースコードからコンパイルすることで、先に言ったようなコンパイルにおける設定をmake.confで変えることが出来る。</p>
+<p>また、USEフラグを使うことで、たとえばGTK+サポートをONにするかOFFにするかのような、パッケージのコンパイル依存関係を変えることが出来る。</p>
+<p>そして、基本的にパッケージは設定ファイルを手動で設定する。rc-updateのようなランレベルとデーモンの設定のようなものはある。</p>
+<p>ここで、DebianやRed Hatのようなシステムに戻ると、DebianやRed Hatでも、ソースパッケージとバイナリパッケージと言うものがある。</p>
+<p>そして、それはGentoo Linuxと同じであり、そこまで考えると、ソースコードとUNIXシステムの関係が分かりやすく、全貌を掴むことが出来る。</p>
+
+<h2>カーネルの手動コンパイル</h2>
+<p>最後に、Linuxカーネルである。Linuxカーネルは、手動でコンパイルすることで、さまざまなオプション機能を有効にしたり、無効にしたりすることが出来る。</p>
+<p>その方法は、</p>
+<p>１．/usr/src/linux-3.16.5-mykernel（/usr/src/linuxにリンクを張ることが多い）などにカーネルソースを展開してクリーンナップ（make clean && make mrproper）し、</p>
+<p>２．.configファイルをmake menuconfigで作り、</p>
+<p>３．makeやmakeコマンドのその他のオプションでカーネルやカーネルモジュールをコンパイル（make && make modules_install）し、</p>
+<p>４．ブートパーティションにbzImageをコピーする（make install）</p>
+<p>と言うものだ。</p>
+<p>Linuxカーネルをコンパイルするにあたって、良く設定するのはCPU関係とファイルシステム関係のサポートだ。特に以下のような設定をするかもしれない。</p>
+<pre>
+File systems ---&gt;
+  &lt;*&gt; Second extended fs support
+  &lt;*&gt; The Extended 3 (ext3) filesystem
+  &lt;*&gt; The Extended 4 (ext4) filesystem
+  &lt;*&gt; Reiserfs support
+  &lt;*&gt; JFS filesystem support
+  &lt;*&gt; XFS filesystem support
+  &lt;*&gt; Btrfs filesystem support
+  DOS/FAT/NT Filesystems  ---&gt;
+    &lt;*&gt; MSDOS fs support
+    &lt;*&gt; VFAT (Windows-95) fs support
+ 
+Pseudo Filesystems ---&gt;
+    [*] /proc file system support
+    [*] Tmpfs virtual memory file system support (former shm fs)
+</pre>
+
+<h2>入出力とパイプ</h2>
+<p>入出力とパイプによって、コマンドを関係で扱うことが出来る。</p>
+<pre>
+$ find / | less
+</pre>
+
+<h2>シェルとX11</h2>
+<p>シェルは、新しいプログラムを実行するためのプログラム。</p>
+<p>コマンド入力を受け付けて、PATHからバイナリを探し、子プロセスを起動出来る。</p>
+<p>シェルの初期化ファイルを使うことで、シェルの起動時にシェルの初期化をすることが出来る。</p>
+<p>X11でも、初期化ファイルを使うことで、Xサーバーの設定をしたり、最初に起動しておくアプリケーションの起動が出来る。</p>
+<p>コマンドプログラムとX11のGUIプログラムは大きく異なっているが、XクライアントはXサーバーに対する指令・通信を行う、Xプロトコルを使ったアプリケーションである、と理解すると、理解しやすい。</p>
+<p>また、CUIとは異なり、プログラムは階層化され、ツールキット・ライブラリであるGTK+やQtからXlibを操作する形になる。</p>
+<p>これは、命令である、と言うよりは、どのような仕組みを用いてX11を操作するか、と言う、GUIにおけるRailsのようなフレームワークである、と理解すれば良い。</p>
+
+<h2>パーミッションとユーザー</h2>
+<p>パーミッションは、システムを守る仕組みで、Windowsのような管理者権限を標準で使うOSとは違い、Linuxにはファイルやディレクトリごとにユーザーの権限が決まっている。</p>
+<p>ユーザーに見せられない機密データの閲覧や、実行してはならない実行ファイルの実行に、制限をかけることが出来る。</p>
+<p>rootユーザーだけが、全ファイルの全データにアクセス出来る。</p>
+<p>これは、Linuxのセキュリティに大きく貢献しているが、その反面、サーバーなどでのファイル管理において、ややこしい仕組みとなっている。</p>
+<p>だが、分かってしまえば簡単だ。</p>
+
+<h2>SELinux/AppArmor</h2>
+<p>もっとセキュリティを高めたい場合は、SELinuxのようなセキュリティ強化の仕組みを使うことも出来る。HTTP、FTPなどのプロセスごとにアクセス制限をかけ、rootユーザーを含む全ユーザーへのアクセス制限をかけ、rootユーザーへの権限の集中をもっと分散させることが出来る。AppArmorと言うSUSEなどの方式もある。</p>
+<p>SELinuxはFedoraやRHELなどでは標準で有効になっている。Fedoraは、そういう、Red Hatのやりたいように作っている、と言う側面がある。</p>
+
+<h2>関数</h2>
+<p>最後に、関数のレベルでの抽象化がある。</p>
+<p>関数は自動の実行処理であり、引数に何かの値を設定することで、実行内容が変わる。</p>
+<p>僕は、関数の本質とは、再利用性にあると思う。ライブラリのように、既に書かれている関数を再利用して、その利用を書く。</p>
+<p>だから、正しいプログラミング言語とは、Rubyのように、継承やブロックによって、既に書かれているコードの内容を上書き出来るようでなければならない。</p>
+<p>一度書かれたコードを無駄にせず、再利用と共有を行うために、関数は設計されなければならない。</p>
+<p>ある意味、オブジェクト指向も、そのように考えれば、「クラスの再利用」であると理解することが出来る。</p>
+
+<h1>OS</h1>
+<h2>Linuxカーネル</h2>
+<p>Linuxカーネルは受動型のプログラムで、能動的に何かを実行することは無い。アプリケーションからのシステムコールと、ハードウェアの割り込みに応じて、応答を返して実行される、イベント駆動型のソフトウェアである。</p>
+<p>カーネルのプログラムの役割としては、アプリケーションの実行（プロセス管理）と、システムとプログラムに対するメモリ管理、それからデバイスドライバーによるハードウェアの操作と監視、ストレージデバイスにおけるファイルシステムの実現、そしてネットワークへの接続などがある。</p>
+<p>Linuxカーネルは、単一の巨大なプログラムとして実現されており、モノリシックカーネルと呼ばれる。これは、カーネルの機能をたくさんのサーバーやサービスに分ける、MinixやGNU Hurdのマイクロカーネルとは逆の方向である。Minixのタネンバウム教授もそれを批判している。だが、マイクロカーネルは性能的に遅いことがある。Hurdなどは、遅すぎて使い物にならない、と言う話もある。</p>
+<p>詳しくは以下をご覧あれ：</p>
+<ul>
+<li><a href="https://ja.osdn.net/projects/linux-kernel-docs/wiki/0.1%E3%80%80Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%81%A8%E3%81%AF">0. 1　Linuxカーネルとは - Linux Kernel Documents</a></li>
+</ul>
+
+<h2>Linuxカーネルは常に動く</h2>
+<p>パソコンはOSが無ければただの箱と言うが、言ってしまえば、Linuxをインストールしたパソコンでは、常にLinuxカーネルが動いている。</p>
+<p>常に動きながら、たくさんのプログラムを「自身の上で実行する」、それがLinuxカーネルだ。</p>
+<p>GNOMEはX11を使い、X11はカーネルを使い、カーネルはハードウェアを使う。そして、最終的にはCPUとメモリが動いている。</p>
+<p>それを階層構造で示した時に、メインとなるのは、Linuxカーネルだ。</p>
+<p>Androidのスマホを実行する場合でも、Linuxのサーバーを利用する場合でも、その環境で常に動いているのは、Linuxカーネルだ。</p>
+<p>そう考えると、このLinuxと言うカーネルがオープンソースで技術的に公開されていて、自由に参加出来て、改良やコピー・再配布も自由である、と言うことは、この上なく良いことのように感じられる。それをやりたかったのが、GNU Projectのストールマンだと思う。</p>
+
+<h2>カーネルとは何か</h2>
+<p>カーネルとは、ハードウェアとソフトウェアの橋渡しをするものであり、システムの中で常に実行されながら、特定のプログラムを適切に実行し、それぞれのプログラムにリソース（利用出来るコンピュータ資源）を割り当てると同時に、ソフトウェアからの要求に応じてハードウェアへのアクセス手段を与え、サーバーやアプリケーションのようなプログラムがプログラムとして実行が可能になるための環境を与えるものだ。</p>
+<p>OSの中で、カーネルとはある意味下層部分と上層部分を繋げるノリのようなものであると同時に、ソフトウェアの仕掛け全体の中核に位置しながら、全てをきちんと成り立たせる、オーケストラで言えばコンダクター（指揮者）のようなものである。だが、主役は基本的にアプリケーションであり、それらが楽器である。</p>
+<p>OSの中でカーネルは一部分にすぎず、コマンドを入力するシェルや、それぞれの仕事を、UNIXにおいてはそれぞれが単機能に行う、各種のコマンドプログラム、システムに常駐するデーモン、X11のようなハードウェアをグラフィカルな操作インターフェースに変える特殊なアプリケーション、そしてコンパイラやパッケージ管理システムがなければならない。GNU/LinuxにおいてはカーネルはLinuxだが、OSとしてはGNUのさまざまなツールを使うため、GNU/Linuxと言う呼び名が適切であると（少なくともFSFからは）言われている。</p>
+<p>だが、技術的に見ると、デバイスドライバやメモリマネージメントやCPUの並列処理といったハードウェアの操作と、C言語ライブラリとの関係性、そしてプロセスの作成とリソースの割り当てやタイムスケジューリング、OSの下層システムとして必要なファイルシステムの実現やネットワーク接続（パケットやソケットなどの実現）が多い。ハードウェアをソフトウェアから適切に使うことが主目的であり、ネットワークやグラフィックスで専門的な用途を行うためには、カーネルを用いてハードウェアに接続する「ユーザーランド」が必要となる。これは、Apache HTTPDやX11 Serverのようなシステムに必須の専門プログラムから、専門的アプリケーションに至る広汎なソフトウェア集団となる。</p>
+<p>カーネルの特殊な用途はネットワークであり、カーネル以外での特殊の用途はグラフィックスであると言える。両者はカーネルとユーザーランドのどちらにも区分されにくい領域であり、WindowsのようなOSではグラフィックスはOSに統合されている。特に、X11はとても巨大であり、X11からKDE/GNOMEに至るGUIデスクトップ環境の領域は、「GUI時代の第二のカーネル（サブカーネル）」と呼んでも良いかもしれない。（サブカーネルは、僕の作った造語にすぎません。）</p>
+
+<h2>SysV init</h2>
+<p>最近はsystemdにとってかわられてしまったが、昔のシンプルだったごろのSysV initを解説する。</p>
+<p>まず、ファイルシステムの方に、起動時に実行するスクリプトが存在する。/etc/rc.d/などにあることが多い。</p>
+<p>init.dディレクトリの中に、それぞれのデーモン（コマンドではなく、起動時に実行され、システムで恒常的に実行されるプログラム）を実行させるスクリプトがある。</p>
+<p>rc0.dのように、rc[数字].dの中に、それぞれのランレベルごとに実行される、先ほどのスクリプトへの、シンボリックリンクがある。</p>
+<p>このスクリプトは、S85httpdのように、実行順（実行の順序）の数字とともにファイル名が付けられている。</p>
+<p>ランレベルは以下のようになる。</p>
+<table class="some_tables">
+<tr>
+<th>ランレベル</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>0</td><td>停止</td>
+</tr>
+<tr>
+<td>1</td><td>シングルユーザモード</td>
+</tr>
+<tr>
+<td>2</td><td>マルチユーザモード(ネットワークなし)</td>
+</tr>
+<tr>
+<td>3</td><td>マルチユーザモード(ネットワークあり)</td>
+</tr>
+<tr>
+<td>4</td><td>未使用</td>
+</tr>
+<tr>
+<td>5</td><td>マルチユーザモード(GUIログイン)</td>
+</tr>
+<tr>
+<td>6</td><td>再起動</td>
+</tr>
+</table>
+
+<p>そして、OSの起動・終了時に/etc/inittabの設定を見て、initと言うプログラムがランレベルによって実行される。</p>
+<p>詳しくは以下をご覧あれ：</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0204/02/news002.html">Linux起動の仕組みを理解しよう［init/inittab編］ (1/2)</a></li>
+</ul>
+
+<h2>ブートローダー（GRUB）</h2>
+<p>Linuxカーネルのイメージファイルは、通常/bootパーティションに置かれる。</p>
+<p>コンピュータの起動時に、ブートローダーの（Linuxでは主に）GRUBが実行され、GRUBによって/bootにあるLinuxのカーネルイメージが実行される。その上でSysV initあるいはsystemdにより、サービスが起動される。</p>
+<h3>インストール</h3>
+<p>一度Linuxをインストールしたらめったに再インストールする必要はないが、GRUBをMBRに再インストールするためには以下を実行する。</p>
+<pre>
+# grub2-install /dev/sda
+</pre>
+<p>必要に応じて/dev/sdaを変えること。</p>
+<h3>設定</h3>
+<p>GRUB 2の新しい仕様として、GRUBのメニューファイル/boot/grub/grub.cfgはgrub-mkconfigコマンドによって自動作成されるようになった。よって、このファイルを手動で設定してはならない。設定すべきファイルは/etc/default/grubに存在するので、それを編集する。</p>
+<p>内容はこんな感じ：</p>
+<pre>
+GRUB_TIMEOUT=5
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="crashkernel=auto rhgb quiet"
+GRUB_DISABLE_RECOVERY="true"
+</pre>
+<p>（<a href="http://enakai00.hatenablog.com/entry/2015/11/27/152442">GRUB2で知っておくとよいこと - めもめも</a>より。）</p>
+<p>編集したら、以下を実行して設定ファイルを再作成する。</p>
+<pre>
+# grub2-mkconfig -o /boot/grub/grub.cfg
+</pre>
+<p>/boot/grub/grub.cfgは環境によって/boot/grub2/grub.cfgになる場合があります。</p>
+
+<h3>シェル</h3>
+<p>GRUBは簡単なインタラクティブ・シェルを内蔵していて、起動しなくなった場合でもコマンドによって復旧することができる。</p>
+<p>起動時のメニュー画面で「c」を実行すると、</p>
+<pre>
+grub&gt;
+</pre>
+<p>というシェルの入力モードになる。以下のように入力することで、手動でカーネルを実行できる。</p>
+<pre>
+grub&gt; set root=(hd0,1)
+grub&gt; linux /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/mapper/centos-root rd.lvm.lv=centos/root
+grub&gt; initrd /initramfs-3.10.0-327.el7.x86_64.img
+grub&gt; boot
+</pre>
+<p>（<a href="https://eng-entrance.com/linux-bootloader">【Linux】ブートローダとは？とブートローダのインストール方法 - エンジニアの入り口</a>より。）</p>
+
+<h1>コンパイラなど</h1>
+<h2>GCC</h2>
+<p>GCCは、様々な言語に対応しているが、フロントエンドでC、C++、Objective-C、Fortran、Ada、Goをコンパイル出来る。中間コードで最適化処理（コードをもっと高速にする改変）を加えて、バックエンドでさまざまなCPUアーキテクチャに対応する。</p>
+<p>GCCもLLVM/Clangにとってかわられようとしている。</p>
+<ul>
+<li><a href="http://www.ysr.net.it-chiba.ac.jp/data/cc.html">コンパイラ(gccコマンド)の使い方 - 千葉工業大学 情報科学部 情報ネットワーク学科 屋代 研究室 データライブラリ</a></li>
+<li><a href="https://makandat.wordpress.com/2016/08/31/gcc-%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9/">gcc コンパイラの使い方 - Jura-Zakki 樹羅雑記</a></li>
+</ul>
+<h3>コマンド例</h3>
+<p>基本：</p>
+<pre>
+gcc -o hello hello.c
+</pre>
+<p>DEBUG情報を付加してtest.oとlibm.aをリンクする場合は以下のようにする：</p>
+<pre>
+gcc -g -o test -lm test.o
+</pre>
+<h2>GNU make</h2>
+<p>GNU makeは、プログラムのソースコードをコンパイルする時、更新されたファイルだけをコンパイルするなど、色んなことが出来ます。</p>
+<h3>Makefileの例</h3>
+<p>以下はmakefileの例：</p>
+<pre>
+program : main.o iodat.o dorun.o lo.o /usr/fred/lib/crtn.a
+    cc -o program main.o iodat.o dorun.o lo.o /usr/fred/lib/crtn.a
+main.o : main.c
+    cc -c main.c
+iodat.o : iodat.c
+    cc -c iodat.c
+dorun.o : dorun.c
+    cc -c dorun.c
+lo.o : lo.s
+    as -o lo.o lo.s
+</pre>
+<p>プログラムの実行例：</p>
+<pre>
+$ make program
+</pre>
+<p>コロンの左にターゲット、右にコンポーネントが位置し、タブで字下げされたコマンド行には、コンポーネントからターゲットを作り出す方法が記述されている。</p>
+<p>ここでの一行目には、programがmain.o, iodat.o, dorun.o, lo.o, /usr/fred/lib/crtn.aに依存していると言うことが、二行目にはこれらのファイルからprogramを作り出すためのコンパイルコマンドが記述されている。</p>
+<p>依存関係を辿っていって、programが存在した場合、programより新しいものが依存関係の中に存在しないかをチェックする。全ての.oファイルに対して、そのコンポーネントとの関係をチェックする。</p>
+<p>更新されたファイルがmain.cだけだった場合、次のコマンドが実行される。</p>
+<pre>
+cc -c main.c
+cc -o program main.o iodat.o dorun.o lo.o /usr/fred/lib/crtn.a
+</pre>
+<p>（make 改訂版 - オライリー・ジャパンより。）</p>
+
+<h2>Autotools</h2>
+<p>Autotoolsは、色んなプラットフォームでソフトウェアをコンパイルする時に自動で設定・処理してくれるGNUの仕組みですが、結構理解し辛いので嫌われています。</p>
+<p>このコマンドを実行することで簡単にソフトウェアがインストール出来るのは、Autotoolsのおかげ：</p>
+<pre>
+./configure &amp;&amp; make &amp;&amp; make install
+</pre>
+<p>--prefix=dirでインストール先を変更できる。</p>
+<p>Autoconfは、設定用のシェルスクリプトのconfigureを自動作成する。</p>
+<p>Automakeは、Makefileを自動作成する。</p>
+<p>UNIX由来のツールしか使っていないので、追加インストールなしであらゆるパッケージのビルドを実行出来る。</p>
+<p>（<a href="../../diary/2017.10.30.html">2017-10-30</a>より。）</p>
+<p>詳細は以下をご覧あれ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Autotools">Autotools - Wikipedia</a></li>
+</ul>
+
+<h2>国際化・地域化</h2>
+<p>gettextのような仕組みを用いることで、国際化と地域化が容易になる。</p>
+<p>文字列に</p>
+<pre class="prettyprint">
+printf(_("hoge is %s."), name);
+</pre>
+<p>と言うエイリアスをつけ、.poファイルでこのように翻訳出来る。</p>
+<pre>
+#: src/prog.c:20
+msgid "hoge is %s."
+msgstr "ほげとは%sである。"
+</pre>
+
+
+<h1>シェルとコマンド</h1>
+<h2>ユーザーとカレントディレクトリ・ホームディレクトリ</h2>
+<p>UNIXにはユーザーやパーミッションという考え方があり、シェルにログインしプログラムを実行するユーザーによってプログラムが実行される「権限」が決められる。</p>
+<p>また、UNIXのコマンドラインシェルには「カレントディレクトリ」という考え方がある。これは、今の作業ディレクトリを意味しており、シェルには常にカレントディレクトリがどこであるか、という情報とともに、プログラムを「環境として」実行することができる。</p>
+<p>また、各ユーザーには「ホームディレクトリ」というディレクトリが与えられる。これは/home/usernameに存在する。この中で、ユーザーは自由なデータやファイルを補完し、自由に作業することが出来る。</p>
+<p>また、システムには管理権限を持つrootユーザーが一人存在し、システムを変更・破壊する権限を持つ。パッケージ管理システムなどでシステムをアップデートする場合は、root権限が必要な場合がある。シェルでrootユーザーになるためには、</p>
+<pre>
+$ su -
+(rootユーザーのパスワードを入力)
+#
+</pre>
+<p>と実行する。一般的に、通常ユーザーのシェルは$から、rootユーザーのシェルは#から始まる。コマンド入力例などでこの例があった時、$や#を入力する必要はない。（上の例では、通常ユーザーのシェルにsu -と入力すれば良い。$を入力する必要はない。）</p>
+<p>sudoというコマンドを使うことで、いちいちrootユーザーにならなくても、特定のコマンドをrootユーザーで実行することが出来る。Ubuntuなどの一部の初心者向けディストリビューションではこちらのスタイルがとられる場合もある。</p>
+
+<h2>パイプとリダイレクト</h2>
+<p>あるコマンドを実行した結果の出力を、他のコマンドの入力として渡せる「パイプ」と、入出力とファイルを変換できる「リダイレクト」。</p>
+<p>たとえば</p>
+<pre>
+find ~ | grep "2012"
+</pre>
+<p>とすることで、ホームディレクトリにある、「2012」を名前とパスに含むファイルを列挙出来る。</p>
+<p>findで~の中を「サブディレクトリまで含めて」列挙し、そこからgrepで名前を検索する。</p>
+<p>パイプは、使うとやみつきになる。UNIXは、こうした多数のコマンドプログラムに分けながら、ユーザーが自分の力で環境を操作することを哲学としている。</p>
+
+<h2>シェルスクリプト</h2>
+<p>基本的に、コマンドをそのまま列挙したファイルを作って、実行すればシェルスクリプト。</p>
+<p>だが、引数や関数定義が使えたり、if文なども出来るなど、応用範囲は多い。</p>
+<p>UNIXでは、何でもかんでも再利用することで、応用性のあるシステム設計を行っている。</p>
+
+<h2>シェル変数と環境変数</h2>
+<p>コマンドライン環境の中で利用できる、変数のようなもの。</p>
+<p>シェル変数と環境変数がある。シェル変数はシェルの中だけで保たれ、起動したプロセスには引き継がれない。シェル変数は、</p>
+<pre>
+$ FOO=foo
+</pre>
+<p>と設定する。</p>
+<p>一度シェル変数を設定した上でexportすることで、環境変数を設定できる。</p>
+<pre>
+$ export FOO
+</pre>
+<p>コマンドのバイナリファイルを探すPATHやユーザーのホームディレクトリを探すHOMEなどが有名である。</p>
+
+<h2>コマンドの詳細</h2>
+<p>コマンドの詳細は、manと言うコマンドで見ることが出来る。</p>
+<pre>
+man ls
+</pre>
+<p>コマンドラインオプションは、例えば、詳細表示をしたい時は、以下のように使う。</p>
+<pre>
+ls -al
+</pre>
+<p>それ以上のコマンドの詳しいことは、manを参照のこと。manは、設定ファイルについても調べることが出来る。</p>
+<p>以下のサイトから、オンラインでブラウザからmanを見ることが出来る。</p>
+<p><a href="https://linuxjm.osdn.jp/">JM Project</a></p>
+
+<h2>PATHを通す</h2>
+<p>PATHを通すことで、新しいバイナリをインストールしたフォルダを追加することが出来ます。</p>
+<p><a href="http://pocketstudio.jp/linux/?%A5%D1%A5%B9(PATH)%A4%CE%B3%CE%C7%A7%A4%C8%C0%DF%C4%EA%CA%FD%CB%A1%A4%CF%A1%A9">パス(PATH)の確認と設定方法は？ - Pocketstudio.jp Linux Wiki</a>より。</p>
+<h3>PATHの確認</h3>
+<p>PATHの確認方法。</p>
+<pre>
+$ echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/usr/vine/bin:/home/zem/bin
+</pre>
+<h3>PATHの設定</h3>
+<p>PATHの設定方法。</p>
+<pre>
+$ PATH=$PATH:/usr/local/pgsql/bin:/usr/local/mysql/bin
+$ export PATH
+</pre>
+<h3>設定ファイル</h3>
+<p>PATHの設定ファイル。</p>
+<p>.bash_profileに上の設定を記述することで、ログインした時に自動でPATHを設定してくれます。</p>
+<p>サーバ内の全ユーザーで設定する場合は、/etc/profileに記述します。</p>
+
+
+<h1>ファイルシステム</h1>
+
+<h2>/etc/fstab</h2>
+<p>パーティションを記載する設定ファイル。</p>
+<p>普通はこうなる：</p>
+<pre>
+/dev/sda2   /boot        ext2    defaults,noatime     0 2
+/dev/sda3   none         swap    sw                   0 0
+/dev/sda4   /            ext4    noatime              0 1
+  
+/dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
+</pre>
+<p>（<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System/ja">システムの設定 - Gentoo Wiki</a>より。）</p>
+
+<h2>パーミッション</h2>
+<h3>パーミッションの説明</h3>
+<p>ファイルには所有ユーザーと所属グループがあり、そのユーザー（あるいはグループ・その他）が実行するプログラム（プロセス）において、ファイルに対してどれだけの権限を与えるかを決められる。これをパーミッションと言う。</p>
+<p>パーミッションには、記号表記と八進表記がある。記号表記は「rwx------」など、八進表記は「644」など。</p>
+<p>まず、一番左の「rwx」あるいは「6」が所有者における（ファイルやディレクトリの）読み込み（r, 4）、書き込み（w, 2）、実行（x, 1）の（権限の）許可を表す。八進表記では、それぞれの値を足し算で足す（4 + 2 = 6）。</p>
+<p>真ん中は、同一グループにおける読み込み・書き込み・実行、一番右は、その他のユーザーにおける読み込み、書き込み、実行を表す。</p>
+<p>ちなみに、「-rw-r--r--」や「drwxr-xr-x」のようにもう一つ左に多く表示された場合は、最初の1文字目はファイル種別を表している。「-」はファイル、「d」はディレクトリ、「l」はシンボリックリンク。</p>
+<p>ディレクトリの場合、rは一覧表示、wはディレクトリ内にファイルを作成したり削除したりできるかどうか、xはディレクトリの中に進めるかどうか（cdできるかどうか）を表す。</p>
+<p>Windowsのように.exeなら実行できる、というわけではなく、実行ファイルやスクリプトを実行させたい時は基本的にパーミッションの許可が必要（厳密に言えば、スクリプトの場合、rubyなどに引数を与えて実行させることはできる）。</p>
+<p>パーミッションの確認はls -lで見ることが出来る。</p>
+<pre>
+$ ls -l
+-rw-r--r--  1 user group      9  1月 1 00:00 hoge.txt
+drwxr-xr-x  6 user group  20480  1月 1 00:00 ダウンロード
+</pre>
+<ul>
+<li><a href="https://www.mdn.co.jp/di/articles/2104/?page=2">第2回 「パーミッションの意味と使い分け」 | デザインってオモシロイ -MdN Design Interactive-</a></li>
+<li><a href="http://shim0mura.hatenadiary.jp/entry/20110527/1306517437">ファイルとディレクトリのパーミッションの違い - tumblr</a></li>
+<li><a href="https://qiita.com/shisama/items/5f4c4fa768642aad9e06">Linuxの権限確認と変更（超初心者向け）</a></li>
+</ul>
+
+<h3>パーミッションの変更コマンド</h3>
+<p>以下のようなコマンドで変えるか：</p>
+<pre>
+chmod 756 index.html
+</pre>
+<p>あるいは、このように変えるかです。</p>
+<p>所有者に読み書き実行権を与える</p>
+<pre>
+% chmod u+rwx index.html
+</pre>
+<p>グループ所属ユーザに読みと実行権を与える</p>
+<pre>
+% chmod g+rx index.html
+</pre>
+<p>グループに所属しないユーザーから実行権を削除する</p>
+<pre>
+% chmod o-x index.html
+</pre>
+<p>（<a href="http://www.din.or.jp/~raelian/unix_permission.html">UNIXの基礎知識 - パーミッション編 - With RAELIAN</a>より。）</p>
+
+<h2>文字コード</h2>
+<p>文字コードは、システム全体の文字コード、各テキストファイルの文字コードから、PHPやMySQLの文字コードなどがあるし、クライアント側とサーバー側で合わせる必要もあります。</p>
+<p>今の標準はUTF-8です。出来るだけUTF-8で作るようにしましょう。でも、Windowsで書いた文章は、どうしてもShift-JISになってしまいますし、EUC-JPと言う昔のUNIXの文字コードも混在します。</p>
+
+<h2>マウント</h2>
+<p>マウントによって、デバイスをファイルシステムとして、ディレクトリとして使うことができる。</p>
+<p>マウントはこんな感じ：</p>
+<pre>
+# mount
+# mount &lt;DEVICE&gt; &lt;DIRECTORY&gt;
+</pre>
+<p>例えば：</p>
+<pre>
+# mkdir /media/usb
+# mount /dev/sdb1 /media/usb
+</pre>
+<p>アンマウントはこんな感じ：</p>
+<pre>
+# umount &lt;DEVICE&gt;
+# umount &lt;DIRECTORY&gt;
+</pre>
+<p>あとは：</p>
+<pre>
+# mount [OPTIONS] &lt;DEVICE&gt; &lt;DIRECTORY&gt;
+</pre>
+<p>（<a href="https://wiki.gentoo.org/wiki/Mount">Mount - Gentoo Wiki</a>より。）</p>
+
+<h2>パーティションの切り方</h2>
+<p><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks/ja">ディスクの準備 - Gentoo Handbook</a>より。</p>
+<h3>例</h3>
+<p>こんな感じで作りましょう。</p>
+<table class="some_tables">
+<tr>
+<th>パーティション</th><th>ファイルシステム</th><th>サイズ</th><th>説明</th>
+</tr>
+<tr>
+<td>/dev/sda1</td><td>(ブートローダ)</td><td>2M</td><td>BIOSブートパーティション</td>
+</tr>
+<tr>
+<td>/dev/sda2</td><td>ext2 (またはUEFIを使うならfat32)</td><td>128M</td><td>ブート/EFIシステムパーティション</td>
+</tr>
+<tr>
+<td>/dev/sda3</td><td>(swap)</td><td>512M もしくはそれ以上</td><td>スワップパーティション</td>
+</tr>
+<tr>
+<td>/dev/sda4</td><td>ext4</td><td>残りのディスク</td><td>ルートパーティション</td>
+</tr>
+</table>
+<p>partedかfdiskで頑張って作ってください。</p>
+<p>そういえば、昔はもっと単純だったような気がする。BIOSブートパーティションなんかあったっけ？時代は進歩した…。</p>
+<h3>parted</h3>
+<p>partedの場合：</p>
+<pre>
+# parted -a optimal /dev/sda
+(parted) mklabel gpt
+(parted) rm 2
+（この調子で繰り返して全部のパーティションを削除する。）
+(parted) unit mib
+(parted) mkpart primary 1 3
+(parted) name 1 grub
+(parted) set 1 bios_grub on
+(parted) print
+(parted) mkpart primary 3 131
+(parted) name 2 boot
+(parted) mkpart primary 131 643
+(parted) name 3 swap
+(parted) mkpart primary 643 -1
+(parted) name 4 rootfs
+(parted) set 2 boot on
+(parted) print
+Model: Virtio Block Device (virtblk)
+Disk /dev/sda: 20480MiB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+  
+Number   Start      End      Size     File system  Name   Flags
+ 1       1.00MiB    3.00MiB  2.00MiB               grub   bios_grub
+ 2       3.00MiB    131MiB   128MiB                boot   boot
+ 3       131MiB     643MiB   512MiB                swap
+ 4       643MiB     20479MiB 19836MiB              rootfs
+</pre>
+<h3>fdisk</h3>
+<p>fdiskの場合は<a href="http://www.atmarkit.co.jp/ait/articles/1803/01/news034.html">【 fdisk 】コマンド――パーティションを作成、削除する</a>を参照のこと。</p>
+<p>僕も昔はfdiskを使っていました。難しいようで慣れれば簡単です。対話的なcfdiskというプログラムもある。</p>
+<ul>
+<li><a href="http://kazmax.zpp.jp/linux_beginner/fdisk.html">Linux fdiskコマンドでパーティションを作成する - kazmax - Linuxで自宅サーバー</a></li>
+</ul>
+
+
+<h3>ファイルシステムの作成</h3>
+<p>ファイルシステムの作成。</p>
+<p>基本的には以下のようにする。</p>
+<pre>
+# mkfs.ext2 /dev/sda2
+# mkfs.ext4 /dev/sda4
+</pre>
+<p>8GB以下の小さいパーティションに使用する場合は、十分なinode数を確保できるように適切なオプションを指定してファイルシステムを作成する必要がある。</p>
+<p>ext2なら：</p>
+<pre>
+# mkfs.ext2 -T small /dev/&lt;device&gt;
+</pre>
+<p>ext3とext4なら、ジャーナリングを有効にするために（すでにこちらの方が一般的。ジャーナリングファイルシステムです。）：</p>
+<pre>
+# mkfs.ext2 -j -T small /dev/&lt;device&gt;
+</pre>
+<p>ext2-4以外にも、btrfs（さまざまな機能があるがまだ未熟）, f2fs（フラッシュメモリ向け）, JFS（IBMの信頼できるファイルシステム）, ReiserFS（大量の小さなファイルがある場合向け）, XFS（堅牢でスケーラブル）などの先進的なファイルシステムがあります。Windows向けのものとしてはvfat, NTFSなどがあります。</p>
+<h3>マウント</h3>
+<p>マウントは以下のようにしてください：</p>
+<pre>
+# mount /dev/sda4 /mnt/gentoo
+# mkdir /mnt/gentoo/boot
+# mount /dev/sda2 /mnt/gentoo/boot
+</pre>
+<p>gentooは変えてくださいね。</p>
+<h3>/etc/fstab</h3>
+<p>あとは、/etc/fstabを編集することを忘れないように：</p>
+<pre>
+/dev/sda2   /boot        ext2    defaults,noatime     0 2
+/dev/sda3   none         swap    sw                   0 0
+/dev/sda4   /            ext4    noatime              0 1
+/dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
+</pre>
+<p>（<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System/ja">システムの設定 - Gentoo Handbook</a>より。）</p>
+
+<h2>アーカイブと同期</h2>
+<p>ファイルのバックアップを取りたい場合、さまざまな方法がある。</p>
+<p>まず、tarコマンドで全体のアーカイブを取る。全体のファイル容量が小さい場合や、全体をまるごとバックアップしたい場合に有効。</p>
+<p>次に、rsyncコマンドで同期する。ディレクトリ全体をミラーリングして、常に最新版にしたい場合、変更点が少ない場合に有効。</p>
+<p>あとは、cpコマンドで全てコピーするとか、dumpとrestoreを使うとかいう方法がある。</p>
+<p>使えるコマンドとしては、diffで差分を取るとか、findを上手く使うことで「更新日が最近の10日以内のファイルを一覧する」といったことも出来る。以下はそのコマンド。</p>
+<pre>
+$ find . -mtime -10 -ls
+</pre>
+<p>（<a href="https://www.softel.co.jp/blogs/tech/archives/1332">【linux】更新日が最近のファイルを見つける（findコマンド） - SOFTELメモ</a>より。）</p>
+<p>特に、「どのフォルダで最新の更新をしたのか分からない」などといった場合は、findコマンドを上手く使おう。</p>
+<p>diffコマンドも、上手く使えば「どのファイルが変更されているのかを突き止める」といった場合に使える。どこを変更したのかまで分かる。だが、実行速度は遅い。</p>
+<pre>
+$ diff -ru dir1/ dir2/
+</pre>
+<p>最近はgitなどの便利なシステムもあるが、僕はgitはおススメしない。それは、単に僕が慣れていないから。gitのコマンドは複雑で覚え辛い。だが、慣れるととても優れたバージョン管理システムだ。</p>
+
+<h1>システム情報と設定</h1>
+<h2>ネットワークの設定</h2>
+<p>ネットワークの設定は、昔から手動でするのは複雑です。ディストリビューションによっても違います。以下のリンクが参考になるかもしれません。</p>
+<ul>
+<li><a href="https://wiki.archlinuxjp.org/index.php/%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E8%A8%AD%E5%AE%9A">ネットワーク設定 - Arch Wiki</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking/ja">ネットワーク設定 - Gentoo Wiki</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System/ja">システムの設定 - Gentoo Wiki</a></li>
+</ul>
+<p>出来るだけディストリビューションの公式ドキュメントを見ましょう。</p>
+<ul>
+<li><a href="https://docs.fedoraproject.org/en-US/Fedora/25/html/Networking_Guide/index.html">Fedora 25 - Networking Guide</a></li>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/index.ja.html">第5章 ネットワークの設定 - Debian リファレンス</a></li>
+<li><a href="https://www.debian.org/doc/manuals/debian-handbook/network-infrastructure.ja.html">第 10 章 ネットワークインフラ - Debian 管理者ハンドブック</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/ch-Network_Interfaces.html">第9章 ネットワークインターフェース - Red Hat Enterprise Linux 6 導入ガイド</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking/ja">ネットワーク設定 - Gentoo Handbook</a></li>
+</ul>
+
+<h2>タイムゾーンとロケール</h2>
+<h3>タイムゾーンとロケールの設定</h3>
+<p>Linuxを日本語環境にするためには、Linuxカーネル, GNOME/KDE, Firefox, X11, 日本語入力, あるいはApache/PHPやMySQLの文字コードまで、さまざまな設定が必要です。</p>
+<p>ですが、基本はタイムゾーンとロケールを設定します。</p>
+<p>タイムゾーンの設定：</p>
+<pre>
+# cp /usr/share/zoneinfo/Asia/Tokyo /etc/localetime
+</pre>
+<p>（<a href="https://eng-entrance.com/linux-time-timezone">【設定確認から変更方法まで】Linuxでのタイムゾーンの扱い方 - エンジニアの入り口</a></li>より。）</p>
+<p>ロケールを変えるためには、Gentoo LinuxではLANGやLC_*の環境変数を設定するために、/etc/locale.genに「ja_JP.UTF-8」を追加して、locale-genを実行する。（詳しくは<a href="https://wiki.gentoo.org/wiki/Localization/Guide/ja"> ローカライゼーション/ガイド - Gentoo Wiki</a>などを参照のこと。）</p>
+<p>Linuxの日本語環境は鬼門で、ディストリビューションごとにも違う。迷った時は英語を読むぐらいの覚悟が必要。日本語入力も昔は難しかった。最近は簡単に、GNOMEでインプットメソッドを設定するだけで出来る。設定方法以前に、そもそも対応していない場合もある（KDE3派生であるTrinityでは、最近の入力システムは動かない）。Linuxに日本語は期待しない方が良い。商用OSほどの国際化がされていると高々に謳う一方で、本当は日本語なんか誰も使っていないからだ。IRCで質問する場合でも、英語で質問して英語で返ってくる、それが普通だ。</p>
+
+<h3>日本語と英語のバランスをどうするか</h3>
+<p>本当は、日本語環境を使ってもそんなに悪いシステムではない。だが、ほとんどのユーザーが見て、劣悪なシステムにはなっている。時間がWindowsと一緒にならないとか、文字化けするとか、フォントの種類が少ないとか、英文と日本語文を混在させた時にレイアウトがおかしいとか、色んなおかしな点がある。翻訳もきちんとされていない個所があり、設定項目などで日本語と英語が混じることも少なくない。だから、最初から英語で使って、英語の生活に慣れるという発想もおかしくはない。不思議と、英語で使うと、最初からApacheやMySQLに設定も要らないし、フォントも豊富で、LibreOfficeもきちんとプロ並みに使える、という良い環境になる。決して日本語では使うな、と言いたいわけではなく、最近はインプットメソッドの設定やツールもどんどん進歩しているし、ブラウザのフォントも以前は表示できなかったきちんと太字などが表示できるようになってきた。だが、.zipファイルの中の日本語ファイル名が文字コードで文字化けするなどの不備は今でもFedoraなどで残っている。だが、インプットメソッドのような、本当に必要なところでの日本語対応はきちんとしている。だが、Debianではuimの変換候補の表示位置がおかしいなどの問題はある。</p>
+<p>どうすれば良いかと言うと、むしろ、英語に慣れるためだと思って英語を使う生活をし、どうしても必要なところではロケールの設定も出来る、という「両刀使い」を目指すしかない。英語漬けの勉強だと思って英語を基本的に使いながら、日本語入力や日本語文書の表示（特にブラウザなど）は日本語もマルチに使えるように設定しよう。Apacheの設定も、英語のマニュアルを見ながら、日本語のHTMLの文章もサーバできちんと表示させられるように設定できるようになろう。</p>
+<p>英語が出来ないと、海外では教養のない人間に見える。英語ぐらい分かるようになっておこう。そのためには、辞書なんか見なくて良い。<!--[英会話教室]-->英会話教室などの教室に行って6年も会話していれば、英語のメッセージは聞き取れるようになるし、英語の日本語と全く違うおかしな話し方を「どのように話していいのか」が分かるようになる。</p>
+
+<h2>コンピュータ情報の表示</h2>
+<p>/procファイルシステムには、カーネルやコンピュータのさまざまな情報がアクセスできるようになっている。</p>
+<p>例として、/proc/interrupts、/proc/meminfo、/proc/mounts、 /proc/partitions、/proc/filesystemsファイルや/proc/sys/ディレクトリなど。</p>
+<p>コンピュータのCPUを見る場合、cat /proc/cpuinfoを実行すると、以下のような情報にアクセスできる。</p>
+<pre>
+processor	: 0
+vendor_id	: AuthenticAMD
+cpu family	: 5
+model		: 9
+model name	: AMD-K6(tm) 3D+ Processor
+stepping	: 1
+cpu MHz		: 400.919
+cache size	: 256 KB
+fdiv_bug	: no
+hlt_bug		: no
+f00f_bug	: no
+coma_bug	: no
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 1
+wp		: yes
+flags		: fpu vme de pse tsc msr mce cx8 pge mmx syscall 3dnow k6_mtrr
+bogomips	: 799.53
+</pre>
+<p>（<a href="http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-ja-4/ch-proc.html">5章. proc ファイルシステム - Red Hat Enterprise Linux 4: リファレンスガイド</a>より。）</p>
+<p>また、PCIバスについての情報を表示するlspciコマンドや、ディスクの空き領域を表示するdfコマンド、ディレクトリ内のファイル容量を表示するduコマンドなどもある。</p>
+
+<h2>ユーザーとグループ</h2>
+<p>UNIXはマルチユーザー・マルチタスクのOSであるため、簡単にユーザーを追加することが出来る。</p>
+<p>Gentoo Linuxでは、以下のようにuseraddコマンドをrootで実行する。</p>
+<pre>
+root # useradd -m -G users,wheel,audio -s /bin/bash larry
+root # passwd larry
+
+Password: (larryのパスワードを入力してください)
+Re-enter password: (確認のためにもう一度パスワードを入力してください)
+</pre>
+<p>上記の例では、wheel（suを使うことができる）、users、audio（オーディオデバイスにアクセスできる）の3グループに所属するlarryというユーザを作成している。</p>
+<p>（<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Finalizing/ja"> インストールの締めくくり - Gentoo Handbook</a>より。）</p>
+<p>UNIXでは、ホームディレクトリ（/home/username）がそれぞれのユーザに与えられ、このディレクトリが基本的にユーザのデータや作業の場所になる。ホームディレクトリ以外は、一部の例外を除いてrootユーザにならなければ、どんなアプリケーションでも変更することは出来ない（読み取りや実行は出来る場合が多い）。そのため、セキュリティが高い。</p>
+<p>逆に言えば、注意すべきなのはホームディレクトリの中のデータだ。重要なデータはバックアップを取って、スパイウェアに知られないように、パスワードなどの重要なデータはネットワークに繋がった場所に置かないようにしよう。</p>
+<p>ホームディレクトリは、最近ではデスクトップやドキュメントのような便利なディレクトリが自動的に作られる。それから、ユーザそれぞれの設定ファイルとして、「.」から始まる「ドットファイル」というファイルがアプリケーションの使用時などに作られる。自動的に作られる場合もあれば、自分で設定する場合（.emacsなど）もある。ドットファイルは、ファイルマネージャなどからは隠しファイルとして扱われる。lsコマンドでドットファイルまでを一覧したい場合は、ls -aオプションを使う。</p>
+<pre>
+$ ls -a
+</pre>
+<p>ドットファイルは、.bashrcなど、アプリケーションにとってはとても重要なファイルであることが多いため、良く注意して管理しよう。</p>
+
+<h1>システムロガーとcron</h1>
+<h2>システムロガー</h2>
+<p>システムのログを取ってくれる。</p>
+<p>デフォルトでは、/var/logディレクトリにさまざまなログファイルがある。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0209/07/news002.html">システム管理の基礎 syslogdの設定をマスターしよう (1/3)</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0808/21/news120.html">syslog-ngの導入と設定 (1/3)</a></li>
+</ul>
+
+<h2>cronデーモン</h2>
+<p>定期的に特定の処理を実行してくれる。決まった時間にコマンドを実行することが出来る。</p>
+<h3>編集コマンド</h3>
+<p>crontabを編集するためのコマンド：</p>
+<pre>
+crontab -e
+</pre>
+<h3>書式</h3>
+<p>crontabの書式：</p>
+<pre>
+* * * * * [実行コマンド]
+</pre>
+<p>設定項目は左から「分」「時」「日」「月」「曜日」となっている。</p>
+<p>（<a href="http://www.server-memo.net/tips/crontab.html">crontabの書き方 - server-memo.net</a>より。）</p>
+<h3>設定ファイル</h3>
+<p>cronの設定ファイル：</p>
+<table class="some_tables">
+<tr>
+<th>ファイル</th>
+<th>ユーザ</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>/var/spool/cron/user</td><td>全ユーザ</td><td>ユーザの自動タスク設定ファイル</td>
+</tr>
+<tr>
+<td>/etc/crontab</td><td>root</td><td>毎時、毎日、毎月、毎週の自動タスクのメイン設定ファイル</td>
+</tr>
+<tr>
+<td>/etc/cron.hourly</td><td>root</td><td>毎時実行される自動タスク設定ファイルを置くディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.daily</td><td>root</td><td>毎日実行される自動タスク設定ファイルを置くディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.monthly</td><td>root</td><td>毎月実行される自動タスク設定ファイルを置くディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.weekly</td><td>root</td><td>毎週実行される自動タスク設定ファイルを置くディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.d</td><td>root</td><td>上記以外の自動タスク設定ファイルを置くディレクトリ</td>
+</tr>
+</table>
+<h3>例</h3>
+<p>/etc/crontabの例：</p>
+<pre>
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+
+# run-parts
+01 * * * * root run-parts /etc/cron.hourly
+02 4 * * * root run-parts /etc/cron.daily
+22 4 * * 0 root run-parts /etc/cron.weekly
+42 4 1 * * root run-parts /etc/cron.monthly
+
+0-59/5 * * * * root /usr/bin/mrtg /etc/mrtg/mrtg.cfg
+</pre>
+<h3>man crontab</h3>
+<p>crontabのmanページに記載されているファイルの内容を紹介：</p>
+<pre>
+# man 5 crontab
+
+CRON ファイルの例
+# (/etc/passwd の指定に関らず) コマンド実行に /bin/sh を使用する。
+SHELL=/bin/sh
+# (この crontabの所有者に関らず) あらゆる出力を `paul' にメールする。
+MAILTO=paul
+#
+# 毎日、日付変更の 5 分後に実行する
+5 0 * * *       $HOME/bin/daily.job >> $HOME/tmp/out 2>&1
+# 毎月初日の 2:15pm に実行する  出力は paul にメールされる
+15 14 1 * *     $HOME/bin/monthly
+# 週末の午後 10 時に実行してジョーを心配させる
+0 22 * * 15 mail s "午後10時だ" joe%ジョー、%%お前の子どもはどこだい?%
+23 023/2 * * * echo "毎日 0,2,4..時 23 分に実行する"
+5 4 * * sun     echo "日曜 4 時 5 分に実行する"
+</pre>
+<p>（<a href="https://www.express.nec.co.jp/linux/distributions/knowledge/system/crond.html">cron の設定ガイド - Linuxべんりな動作情報 ナレッジベース：環境設定 - Express5800シリーズポータル - NEC</a>より。）</p>
+
+
+
+<!--
+<h2>NFS</h2>
+<p>NFS（ネットワークファイルシステム）を使うことで、ネットワーク上のファイルシステムをマウントすることもできる。この場合、普通のディレクトリと全く同じようにコマンドやプログラムからアクセスできる。</p>
+<p>NFSサーバは、基本的に/etc/exportsを編集するが、安全性を考えると/etc/hosts.allow, /etc/hosts.denyも設定する必要がある。起動スクリプトを設定することも必要。</p>
+<p>/etc/exportsの例：</p>
+<pre>
+  /usr/local   192.168.0.1(ro) 192.168.0.2(ro)
+  /home        192.168.0.1(rw) 192.168.0.2(rw)
+</pre>
+<p>192.168.0.0から192.168.0.255にあるすべてのマシンにアクセスを許す場合：</p>
+<pre>
+  /usr/local   192.168.0.0/255.255.255.0(ro)
+  /home        192.168.0.0/255.255.255.0(rw)
+</pre>
+<p>/etc/hosts.denyの例：</p>
+<pre>
+    portmap:ALL
+
+    lockd:ALL
+    mountd:ALL
+    rquotad:ALL
+    statd:ALL
+</pre>
+<p>/etc/hosts.allowの例：</p>
+<pre>
+    portmap: 192.168.0.1 , 192.168.0.2
+
+    lockd: 192.168.0.1 , 192.168.0.2
+    rquotad: 192.168.0.1 , 192.168.0.2
+    mountd: 192.168.0.1 , 192.168.0.2
+    statd: 192.168.0.1 , 192.168.0.2
+</pre>
+<p>（<a href="http://linuxjf.osdn.jp/JFdocs/NFS-HOWTO/server.html">3. NFS サーバの設定 - Linux NFS-HOWTO</a>より。）</p>
+<p>NFSクライアントのマウントは、</p>
+<pre>
+# mount master.foo.com:/home /mnt/home
+</pre>
+<p>としてやるだけ。</p>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/NFS-HOWTO/">Linux NFS-HOWTO</a></li>
+</ul>
+-->
+
+
+<!--
+<h2>設定・初期化ファイル</h2>
+<p>Bash関係：</p>
+<pre>
+.profile
+</pre>
+<p>login shellを sh, bash にした場合（rootのlogin shell を除けば、shにすることはほとんどないが）に端末からloginした際に読み込まれる設定ファイル。login後にシェルを起動しても読み込まれない。</p>
+<pre>
+.bash_profile
+</pre>
+<p>login shellを bash にした場合に端末からloginした際に読み込まれる設定ファイル。login後にシェルを起動しても読み込まれない。</p>
+<pre>
+.bash_logout
+</pre>
+<p>login shellを bash にした場合、端末からlogoutする際に実行される設定ファイル。</p>
+<pre>
+.bashrc
+</pre>
+<p>bashを起動した際に読み込まれる設定ファイル。login後にシェルを起動した際にも毎回読み込まれる。 </p>
+<pre>
+.bash_history
+</pre>
+<p>bashの場合にコマンド履歴を保存するファイル</pre></p>
+<p>X関係：</p>
+<pre>
+.xsession
+</pre>
+<p>端末のX画面やXDMCPで飛ばされたXの画面(AstexXなどのlogin画面)からloginした場合に読み込まれる設定ファイル。</p>
+<pre>
+.xinitrc
+</pre>
+<p>テキストモードから xinit や startx でXを立ち上げる場合に使用する。Xが立ち上がっている状態でのloginやXDMCPでloginする場合には不要。基本的には.xsession へのリンクとしてもよい。</p>
+<pre>
+.Xdefaults
+</pre>
+<p>Xクライアントのリソース（大きさ、色、フォント、ボタンの形状等）を記述するファイル。記述がなければシステムのデフォルト値が用いられる。共通設定は/usr/lib/X11/ja_JP.ujis/app-defaults/...にある（Linux）。</p>
+<pre>
+.xmodmap
+</pre>
+<p>キーコードと文字の対応を記述する。高橋研ではjp106キーボード用に設定しているので別のキーボード(Sunのワークステーション付属のものなど)を使わなければ不要。</p>
+</pre>
+<p>（<a href="http://157.82.240.165/~yousuke/keisannki/init.html">初期設定</a>より。）</p>
+-->
+
+<h1>カーネルと共有ライブラリ</h1>
+<h2>共有ライブラリ</h2>
+<p><a href="https://linux.dogrow.net/blog6/">(6) ldconfigでライブラリパスを更新 - Linuxやってみる！</a>より。</p>
+<h3>検索の順序</h3>
+<p>プログラム実行時にOSが探す、動的にリンクされる共有ライブラリ（.soファイル）は、以下の順序で検索される。</p>
+<p>(1) 環境変数で指定されたパス</p>
+<p>LD_LIBRARY_PATH</p>
+<p>LD_LIBRARY_PATH_64</p>
+<p>(2) /etc/ld.so.conf に記述されたパス</p>
+<p>(3) 通常ライブラリが置かれるパス</p>
+<p>/lib (/usr/lib への symbolic link)</p>
+<p>/lib64 (/usr/lib64 への symbolic link)</p>
+<h3>ldconfig</h3>
+<p>ldconfigコマンドは、上記 (2) の情報をOSに伝えるためのコマンド。</p>
+<p>以下の例では、/etc/ld.so.confが</p>
+<pre>
+include ld.so.conf.d/*.conf
+</pre>
+<p>となっていることを前提として、/etc/ld.so.conf.d/以下にmy.confを作ってパスを記述し、ldconfigでキャッシュ（/etc/ld.so.cache）を更新している。</p>
+<pre>
+$ cd /etc/ld.so.conf.d/
+$ su
+パスワード:(パスワードを入力）
+# echo /home/user/mylib >> my.conf
+# ldconfig
+</pre>
+<h3>共有ライブラリを作る</h3>
+<p>共有ライブラリを作る場合は、以下のようにする。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+void say_hello(void){
+    printf("Hello!");
+}
+</pre>
+<pre>
+gcc -shared -fPIC -o libmytest.so test.c
+</pre>
+<h3>共有ライブラリを使う実行ファイルを作る</h3>
+<p>共有ライブラリを使う実行ファイルを作る場合は、以下のようにする。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+extern void say_hello(void);
+int main(void){
+    say_hello();
+    return 0;
+}
+</pre>
+<pre>
+gcc -L./ -lmytest -o test main.c
+</pre>
+
+
+<h2>カーネルヘッダー</h2>
+<p>自分でLinuxのプログラムをコンパイルしたい時に、カーネルヘッダーが必要となる時がある。カーネルのAPIを使うプログラムをコンパイルするために必要。</p>
+<p>カーネルヘッダーは、少し前の状況だと、カーネルがメジャーアップデートされた場合（2.4から2.6への移行の時など）、プログラムが正常に動かなくなったり、コンパイルできなくなる時があった。なので、大切な基盤システムなどでは、注意してアップデートすること。</p>
+<p>カーネルヘッダーだけではなく、gcc, glibc, pythonなどの重要コンポーネントは、メジャーアップデートに失敗すると悲惨なことになる。Red Hatの開発者などでも、注意して開発している。特に、Pythonなどは本当に動かなくなる。気を付けてシステムを管理しよう。</p>
+
+
+<h1>設定ファイル</h1>
+<h2>設定・初期化ファイル</h2>
+<p><a href="http://157.82.240.165/~yousuke/keisannki/init.html">初期設定 - 山下陽介のページ</a>より。</p>
+<!--
+<h2>.profile</h2>
+<p>login shellを sh, bash にした場合（rootのlogin shell を除けば、shにすることはほとんどないが）に端末からloginした際に読み込まれる設定ファイル。login後にシェルを起動しても読み込まれない。</p>
+<h2>.bash_profile</h2>
+<p>login shellを bash にした場合に端末からloginした際に読み込まれる設定ファイル。login後にシェルを起動しても読み込まれない。</p>
+<h2>.bash_logout</h2>
+<p>login shellを bash にした場合、端末からlogoutする際に実行される設定ファイル。</p>
+<h2>.bashrc</h2>
+<p>bashを起動した際に読み込まれる設定ファイル。login後にシェルを起動した際にも毎回読み込まれる。 </p>
+<h2>.bash_history</h2>
+<p>bashの場合にコマンド履歴を保存するファイル</pre></p>
+<h2>.xsession</h2>
+<p>端末のX画面やXDMCPで飛ばされたXの画面(AstexXなどのlogin画面)からloginした場合に読み込まれる設定ファイル。</p>
+<h2>.xinitrc</h2>
+<p>テキストモードから xinit や startx でXを立ち上げる場合に使用する。Xが立ち上がっている状態でのloginやXDMCPでloginする場合には不要。基本的には.xsession へのリンクとしてもよい。</p>
+<h2>.Xdefaults</h2>
+<p>Xクライアントのリソース（大きさ、色、フォント、ボタンの形状等）を記述するファイル。記述がなければシステムのデフォルト値が用いられる。共通設定は/usr/lib/X11/ja_JP.ujis/app-defaults/...にある（Linux）。</p>
+<h2>.xmodmap</h2>
+<p>キーコードと文字の対応を記述する。</p>
+-->
+<table class="some_tables">
+<tr>
+<th>設定ファイル</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>.profile</td>
+<td>login shellを sh, bash にした場合（rootのlogin shell を除けば、shにすることはほとんどないが）に端末からloginした際に読み込まれる設定ファイル。login後にシェルを起動しても読み込まれない。</td>
+</tr>
+<tr>
+<td>.bash_profile</td>
+<td>login shellを bash にした場合に端末からloginした際に読み込まれる設定ファイル。login後にシェルを起動しても読み込まれない。</td>
+</tr>
+<tr>
+<td>.bash_logout</td>
+<td>login shellを bash にした場合、端末からlogoutする際に実行される設定ファイル。</td>
+</tr>
+<tr>
+<td>.bashrc</td>
+<td>bashを起動した際に読み込まれる設定ファイル。login後にシェルを起動した際にも毎回読み込まれる。 </td>
+</tr>
+<tr>
+<td>.bash_history</td>
+<td>bashの場合にコマンド履歴を保存するファイル</pre></td>
+</tr>
+<tr>
+<td>.xsession</td>
+<td>端末のX画面やXDMCPで飛ばされたXの画面(AstexXなどのlogin画面)からloginした場合に読み込まれる設定ファイル。</td>
+</tr>
+<tr>
+<td>.xinitrc</td>
+<td>テキストモードから xinit や startx でXを立ち上げる場合に使用する。Xが立ち上がっている状態でのloginやXDMCPでloginする場合には不要。基本的には.xsession へのリンクとしてもよい。</td>
+</tr>
+<tr>
+<td>.Xdefaults</td>
+<td>Xクライアントのリソース（大きさ、色、フォント、ボタンの形状等）を記述するファイル。記述がなければシステムのデフォルト値が用いられる。共通設定は/usr/lib/X11/ja_JP.ujis/app-defaults/...にある（Linux）。</td>
+</tr>
+<tr>
+<td>.xmodmap</td>
+<td>キーコードと文字の対応を記述する。</td>
+</tr>
+</table>
+
+<h2>主なシステムの設定ファイル（一部のみ）</h2>
+<!--
+<h2>/etc/ld.so.conf</h2>
+<p>ライブラリのパスを記述する。</p>
+
+<h2>/etc/fstab</h2>
+<p>マウント設定。</p>
+
+<h2>/etc/crontab</h2>
+<p>cronに実行させる処理。</p>
+
+<h2>/etc/passwd</h2>
+<p>パスワードの設定。</p>
+
+<h2>/etc/shadow</h2>
+<p>シャドウパスワードの設定。</p>
+
+<h2>/etc/group</h2>
+<p>グループの設定。</p>
+
+<h2>/etc/gshadow</h2>
+<p>グループのシャドウパスワードの設定。</p>
+
+<h2>/etc/sudoers</h2>
+<p>sudo設定ファイル。</p>
+
+<h2>/etc/shells</h2>
+<p>ログインシェルの一覧。</p>
+-->
+
+<table class="some_tables">
+<tr>
+<th>設定ファイル</th>
+<th>説明</th>
+</tr>
+
+<tr>
+<td>/etc/ld.so.conf</td>
+<td>ライブラリのパスを記述する。</td>
+</tr>
+
+<tr>
+<td>/etc/fstab</td>
+<td>マウント設定。</td>
+</tr>
+
+<tr>
+<td>/etc/crontab</td>
+<td>cronに実行させる処理。</td>
+</tr>
+
+<tr>
+<td>/etc/passwd</td>
+<td>パスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/shadow</td>
+<td>シャドウパスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/group</td>
+<td>グループの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/gshadow</td>
+<td>グループのシャドウパスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/sudoers</td>
+<td>sudo設定ファイル。</td>
+</tr>
+
+<tr>
+<td>/etc/shells</td>
+<td>ログインシェルの一覧。</td>
+</tr>
+</table>
+
+<h3>/etc/passwdと/etc/shadowの例</h3>
+<p><a href="http://www.wakhok.ac.jp/biblion/1997/sysadmin/node18.html">2.2 パスワードファイル /etc/passwd の構造 - UNIXシステム管理入門コース</a>と<a href="http://www.wakhok.ac.jp/biblion/1997/sysadmin/node19.html">2.3 シャドウファイル /etc/shadow の構造 - UNIXシステム管理入門コース</a>より。</p>
+<p>/etc/passwdの例：</p>
+<pre>
+root:x:0:1:Super-User:/:/sbin/sh
+root2:x:0:1:Super-User:/:/sbin/sh
+daemon:x:1:1::/:
+bin:x:2:2::/usr/bin:
+sys:x:3:3::/:
+adm:x:4:4:Admin:/var/adm:
+lp:x:71:8:Line Printer Admin:/usr/spool/lp:
+smtp:x:0:0:Mail Daemon User:/:
+uucp:x:5:5:uucp Admin:/usr/lib/uucp:
+nuucp:x:9:9:uucp Admin:/var/spool/uucppublic:/usr/lib/uucp/uucico
+listen:x:37:4:Network Admin:/usr/net/nls:
+nobody:x:60001:60001:Nobody:/:
+noaccess:x:60002:60002:No Access User:/:
+user10:x:10002:1998::/summer/user10:/bin/ksh
+</pre>
+<p>ログインする時のユーザ名やホームディレクトリなど、各種の設定が書かれている。以前は暗号化されたパスワードが一緒に書かれていたが、このファイルは誰にでも見れるように公開されているため、暗号化されているからと言ってパスワードが破られる可能性があり、セキュリティを強化するため、今では暗号化されたパスワードは/etc/shadowファイルに書かれている。（<a href="http://www.wakhok.ac.jp/biblion/1997/sysadmin/node18.html">2.2 パスワードファイル /etc/passwd の構造 - UNIXシステム管理入門コース</a>より。）</p>
+<p>/etc/shadowの例：</p>
+<pre>
+root:/F4Dujeq2Pp6k:10337::::::
+root2:xHNuzvZ9XXhYA:10440::::::
+daemon:NP:6445::::::
+bin:NP:6445::::::
+sys:NP:6445::::::
+adm:NP:6445::::::
+lp:NP:6445::::::
+smtp:NP:6445::::::
+uucp:NP:6445::::::
+nuucp:NP:6445::::::
+listen:*LK*:::::::
+nobody:NP:6445::::::
+noaccess:NP:6445::::::
+user10:*LK*:::::::
+</pre>
+<p>このファイルはrootユーザーしか読むことは出来ない。このような二重化をしている理由は、</p>
+<p>・パスワードファイルを読めなくすると、一般ユーザがログインできなくなってしまう。</p>
+<p>・パスワードファイルを公開すると、最近の高性能なコンピュータを使うことで、暗号を解読することができてしまう。 </p>
+<p>という理由から。（<a href="http://www.wakhok.ac.jp/biblion/1997/sysadmin/node19.html">2.3 シャドウファイル /etc/shadow の構造 - UNIXシステム管理入門コース</a>より。）</p>
+
+<h1>セキュリティ対策</h1>
+<h2>clamavとウィルス対策</h2>
+<p>Linuxでもアンチウィルスソフトウェアを導入したいなら、clamavがある。</p>
+<p>Linuxのウィルス対策については、以下のサイトが参考になるかもしれない。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-virus">【初心者向け基本解説】Linuxのウィルスとその対策方法 - エンジニアの入り口</a></li>
+</ul>
+
+<h1>ライセンス</h1>
+<h2>GPLについて</h2>
+<p>基本的に、GPLは、</p>
+<p>0. プログラムの実行</p>
+<p>1. プログラムの研究と改造（この前提として、ソースコードを公開すること）</p>
+<p>2. プログラムのコピーの再配布</p>
+<p>3. プログラムの改良とその公開（この前提として、ソースコードを公開すること）</p>
+<p>を保障するが、この時、「コピーレフト」と呼ばれる考え方を導入する。</p>
+<p>それは、「プログラムが改良されたバージョンにおいても、自由が保たれる」というもので、早い話、「（改良版やソースコードを利用した版を含め）プログラムを公開する時は、必ずGPLで公開しなければならない」というもので、「ウイルス的」だと言って嫌われることもある。</p>
+<p>GPLには批判が多く、「オープンソースのソースコードを使ったら、自分のソフトウェアのソースコードも公開しなければならない」という一面がある。（GPLではソースコードを公開する代わり、そのソースコードを使った改良版をオープンソースにしなければならない。）このため、BSDライセンスのような、オープンソースの継承条件のないライセンスを好む開発者が多い。</p>
+<p>GPの影響で、クリエイティブコモンズのような、プログラム以外の二次創作物で自由を保障する（継承条件を課すことも選べる）ライセンスも生まれている。</p>
+
+<h2>所有するコンピュータの自由</h2>
+<p>GNUの言う自由は、本来社会主義でも民主主義でも考えられる、両方のことを言っています。</p>
+<p>民主主義的に言えば、それは「自分のコンピュータを自由に使える自由」です。自分の持っているコンピュータの権利について、Microsoftなどに独占されるのは良いことではありません。自分のコンピュータを自分で使う自由、そこにプログラマブルな「自分でプログラムの内容を変えられる」という権利を求めることは、コンピュータの特性から言って当然です。コンピュータはプログラムを実行する機械であり、プログラムを自分で書き変えられるということはコンピュータを「自分で使う」ということです。他人が書いたプログラムを、その通りにしか実行できない時点で、自由はありません。</p>
+
+<h2>デジタル共産主義</h2>
+<p>また、オープンソース的に言えば、「プログラムは誰のものでもない」と言えます。オープンソースのプログラムは、みんなのものです。誰か特定の「一部の人間」のものではないのです。誰かが特権的にプログラムを変更できる権利を独占するのではなく、みんなのものにすることでみんながプログラムを変更できる権利を平等に得ることができます。</p>
+<p>また、オープンソースをデジタル共産主義と見なすこともできます。ここで言えるのは、「コピーには良い点もある」ということです。それは、ただ単にコピーできるだけではなく、ソフトウェアには設計は必要でも製造は必要ありません。工場のようなものがなくても、一度コンパイルできるだけのソースコードを書いてしまえば、「ゼロコストでコピーして製造できる」ことが可能です。ここで、共有する、ということを思い出しましょう。共有することができるのは、ゼロコストでコピーできるからです。必要なのは最初の製造コストだけであり、コピーするたびに製造コストはかかりません。コピーはゼロコストで、どんなコンピュータでも行うことが出来ます。</p>
+
+<h2>オープンソース革命</h2>
+<p>オープンソースの利点は、ゼロコストと自由だけではなく、「みんなで繋がり合うことで、爆発的な人材資源の集積性を発揮する」ということです。これがオープンソースの真価です。オープンソースにするだけで、魔法のように高品質のソフトウェアが生み出されます。ですが、これは必ずしも成り立つものではありません。リーナス・トーバルズのような天才が、上手くまとめあげたために実現したものであり、Netscapeのような失敗例もあります。ですが、オープンソースは日進月歩です。Mozilla.orgも、まだ失敗したわけではありません。オープンソースには、維持コストがあまりかかりません。会社のようなプロジェクトチームがなくても、適当にGitHubにアップしておけば、誰かが開発するかもしれないし、しないかもしれません。ですが、Linuxのような成功例は、そんなにたくさんはないでしょう。Linuxが特別、リーナスによる素晴らしいソフトウェアプロジェクトだった、とは言えるかもしれません。それも、本当はGNUなど他のプロジェクトがなければ成り立たなかったでしょう。たくさんの善意の貢献者が生まれた背景には、LinuxとフリーUNIXの可能性を良く分かっている善意のボランティアたちが居たからだ、とは言えるでしょう。決して、Linuxは偶然ではありませんが、必然でもありません。</p>
+
+<h2>誰も著作権を行使するな、という著作権の行使</h2>
+<p>ある意味、GPLとは「誰も著作権を行使してはならない」という意味での、最初の著作者による著作権の行使であると考えられる。</p>
+<p>ただ、パブリックドメインにするだけでは、全員の自由にはならない。誰かが著作権を行使して、自分のものにすることが考えられる。それを許すライセンスがBSDライセンスで、それを許さないライセンスがGPLだ。許す、許さない、というとGPLの方が自由が少ないように感じられるかもしれないが、実際は全員が著作権を行使しないことで、誰もが自由にコピーや再配布を行うことが出来る。</p>
+<p>GPLは、改良版も含めて、プログラム全体をオープンソースにし、自由を許さなければならない、言い換えれば著作権を行使してはならない、というライセンスである、と言えるかもしれない。これには、別の考え方も存在する。MozillaのMPLのようなライセンスでは、改良した別の著作者が追加したコードはオープンソースにしなくても良いことになっている。だが、これを許してしまうと、コミュニティの意見や方針が変わったりした時に、誰かが別のライセンスに変えることが出来てしまう。GPLは永遠であり、永遠に同じGPLというライセンスが適用され続けることで、そうした「危険な独占リスク」を出来るだけ少なくしている。</p>
+<p>ある意味、みんなのもの（みんなのコード）であるとか、著作権者を自由にするのではなく、コードを自由にするライセンスであるなどと説明されることもある。だが、GPLは「誰も著作権を行使してはならない」という、コミュニティの「自由宣言」であると考えると良いだろう。まさに、オープンソース（フリー・自由ソフトウェア）は革命である。そうした革命的な全員の自由のことを、GNUは「ソフトウェアユーザー全員のための自由」とした。最初はUNIX文化から始まり、GNUが生まれ、そしてGNU/LinuxやMozillaとして受け継がれた、革命的な「ハッカー文化」である。</p>
+
+<h1>リンク集全般</h1>
+<h2>Linuxの仕組み</h2>
+<ul>
+<li><a href="http://www.tldp.org/">Linux Documentation Project</a></li>
+<li><a href="http://linuxjf.osdn.jp/">JF Project</a></li>
+<li><a href="http://linuxjm.osdn.jp/">JM Project</a></li>
+<li><a href="http://linuxjm.osdn.jp/INDEX/">JM インデックス</a></li>
+</ul>
+<p>LPIC（Linuxエンジニア向けの資格）について。</p>
+<ul>
+<li><a href="http://www.lpi.or.jp/">LPI-Japan</a></li>
+<li><a href="http://www.lpi.or.jp/lpic_all/linux/">Linux道場 - LPI-Japan</a></li>
+<li><a href="http://www.lpi.or.jp/column/linux/index.shtml">コラム【Linux道場】 - LPI-Japan</a></li>
+</ul>
+<p>Qiita（プログラマ向け技術情報サイト）より。</p>
+<ul>
+<li><a href="http://qiita.com/tags/Linux">Linux - Qiita</a></li>
+<li><a href="http://qiita.com/tags/UNIX">UNIX - Qiita</a></li>
+</ul>
+
+<h2>Linuxのファイルシステム</h2>
+<p>Linuxのファイルシステム。基本的にExt4, ReiserFS, JFS, XFSなどがある。FreeBSDなどにはZFSと言うのも存在する。（ライセンスのGPLとの兼ね合いで、LinuxではZFSは基本的に対応していない。）</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0305/20/news002.html">Linuxファイルシステム技術解説（1）</a></li>
+</ul>
+
+<h1>Linuxの新機能の提案</h1>
+<p>Linuxに追加する機能の提案。</p>
+<h2>１．GTK+ Lisp</h2>
+<p>１．GTK+にLispインタプリタを搭載し、全てのGTK+アプリケーションの内部をLispで操作出来る「GTK+ Lisp」。</p>
+<h2>２．ディスプレイ・スクリプト</h2>
+<p>２．ディスプレイに表示された内容をスクリプトで操作出来る「ディスプレイ・スクリプト」。</p>
+<h2>３．ディレクトリ・レイヤー</h2>
+<p>３．複数のディレクトリを一つのディレクトリに重ね合わせることの出来る「ディレクトリ・レイヤー」。手動でインストールしたパッケージの管理が楽になる。</p>
+<h2>４．パッケージ・フィード</h2>
+<p>４．アプリケーションの開発プロジェクトが公開した最新のリリース情報をフィードで自動的に知ることの出来る「パッケージ・フィード」。</p>
+<h2>５．セキュリティ更新プロジェクト</h2>
+<p>５．各ディストリビューションのセキュリティの更新を専門のセキュリティ更新プロジェクトがやってくれる「セキュリティ更新プロジェクト」。</p>
+<h2>６．新しいディストリビューションの開発</h2>
+<p>６．ディストリビューションのコアの開発を各ディストリビューションが統合・統一してやる「共通コア開発」と、著名パッケージに対して安定板と最新版とライト版を配布する「マルチ・ディストリビュート」、そしてマイナーなパッケージは外部ユーザーが提供する「ユーザー・リポジトリ」によって、ディストリビューションの開発と利用を大幅に簡単にする。</p>
+<h2>７．実行リスト</h2>
+<p>７．最初の起動時に自動で検出・実行した処理を記録し、次からは同じ処理だけをただ実行することで起動を速くする「実行リスト」。</p>
+<h2>８．システム・ファイルマネージャ・モード</h2>
+<p>８．ユーザーのホームディレクトリのような個人的なファイルマネージャの管理機能と、システムのファイルマネージャの機能を分け、別のインターフェースを提供する「システム・ファイルマネージャ・モード」。システムモードでは、システムのコマンドや設定ファイルのマニュアルを表示したり、一行の説明を読めたり、どのパッケージに含まれるかを知ったりすることが出来る。</p>
+<h2>９．パッケージ・ログ</h2>
+<p>９．パッケージマネージャのGUIのログインターフェースを提供する「パッケージ・ログ」。今までインストールした全てのパッケージとアクションを記録し、必要なところまで戻ったり、簡単にアンドゥ・リドゥが出来たり、システムを壊さないように安全かつ簡単にインストールしたパッケージを削除出来る。</p>
+<h2>１０．GUIバックエンド</h2>
+<p>１０．GNOMEとKDEのライブラリをバックエンドにし、バックエンドを切り替えることが出来るようにする「GUIバックエンド」。</p>
+<h2>１１．自然なデスクトップ・インターフェース</h2>
+<p>１１．GUIのインターフェースを出来るだけ「人間的」かつ「自然」にし、キー入力とマウス操作の手間を出来るだけ少なくし、ユーザーが考えなくてはならない労力を減らす、「自然なデスクトップ・インターフェース」。特に、メニューに操作を、サイドバーに管理を、ボタンに状況別メニューをと言う風に、操作と管理を分けたりするなど、出来るだけ自然に、考えられたインターフェースを提供する。クリックは要素の選択にし、そこから状況別メニューを表示し、それをクリックすることで操作するようにしても良い。GNOMEの問題点は、「自然でないこと」である。デスクトップ環境としてこうあるべきだと言う「自然」な考え方がない。</p>
+<h2>１２．GTK+ Delphi</h2>
+<p>１２．GTK+のライブラリ関数をDelphiのようなオブジェクト指向にしたラッパーAPIである「GTK+ Delphi」。</p>
+<h2>１３．オープンソース・クラスライブラリ</h2>
+<p>１３．文字の比較やネットワーク通信などのルーチン的ライブラリや、GUIやWebのフレームワークを統合した、「オープンソース・クラスライブラリ」。</p>
+<h2>１４．ファイルディレクトリ</h2>
+<p>１４．ファイルの中にディレクトリを作る「ファイルディレクトリ」。特に、コピーの高速化を目指す。ファイルをコピーする時は、変更された下位ファイルだけをコピーすることで、コピーが高速になる。</p>
+<h2>１５．ツールキットサーバーとTKML</h2>
+<p>１５．X11サーバーとは別に、今Xlibの単純なライブラリになっているGTK+やQtを分割し、そこもサーバーとクライアントにする。</p>
+<p>ツールキットサーバーは標準プロトコルと標準言語（TKML）を裁定し、バックエンドでGTK+やQtを動かす。</p>
+<p>どんなアプリケーションを使うのであっても、そのアプリケーションをGTK+でもQtでも表示出来るようになる。</p>
+<p>ツールキットクライアントにはTKMLを中心としたC言語の言語非依存のライブラリを作る。それにより、GTK+/GNOMEのようにさまざまな言語でのプログラミングが可能となる。</p>
+<p>HTMLを表示するブラウザにFirefoxやChromeなどがあるのと同じで、ツールキットサーバーは「UIブラウザ」と呼んでも良い。</p>
+<p>TKMLは表示するだけだが、本当はツールキットを操作するオペレーション言語も必要だ。それを、TKOLとしよう。そして、TKMLとTKOLを合わせてTKLとする。これを、SQLのようにプログラマはどこからでもTKLで書かれたアプリケーションをツールキットサーバーに表示できるようになる。</p>
+<p>TKMLをHTMLのように、TKOLをJavaScriptのように書いても良いだろう。こんな風にすれば良い：</p>
+<pre>
+[button1: (clicked: button1_clicked())]
+[button2: (clicked: button2_clicked())]
+[text1: (text_changed: text1_changed(text1.getThisEvent()))]
+
+func button1_clicked(void){
+  this_button.label = "clicked";
+}
+
+func text1_changed(event e){
+  text.write("new_key: %c\n", e.getPressedKey());
+}
+</pre>
+<p>なぜかJavaみたいな言語になった。本当はSQLのようにしたかった。</p>
+<p>TKOLをこんな言語にしても良いだろう：</p>
+<pre>
+ADD browser1 INTO box1 WHERE 2
+</pre>
+<p>これはSQLのような言語だから、TKSLという名前にしよう。</p>
+<p><a href="../../diary/2018.01.31.html">2018-01-31</a>に関連する内容があります。</p>
+<h2>その他</h2>
+<p>この他にもさまざまな提案を日記でしています。ぜひ日記もご覧ください！</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

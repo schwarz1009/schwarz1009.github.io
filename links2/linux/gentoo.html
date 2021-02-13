@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Gentoo - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Gentoo</h1>
+<p>Gentooに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>ハンドブック</h1>
+<h2>公式ハンドブックが一番</h2>
+<p>Gentooはとにかくハンドブックを見ましょう。それだけでLinuxの全てが分かります。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/ja">Gentoo AMD64 Handbook</a> - <a href="https://wiki.gentoo.org/wiki/Handbook:AMD64">英語</a>で読むのもおすすめ。おそらく僕が最初に読んだ英語のLinuxのドキュメントはGentoo Handbookです。</li>
+</ul>
+
+<h2>手動インストールと手動設定のカタマリ</h2>
+<p>Gentoo Linuxは、手動インストールと手動設定のカタマリです。
+<p>Portageという優れたパッケージ管理システムはありますが、ソースベースで、全てコマンドラインで操作してインストールし、パッケージのコンパイル画面を眺めて「ワクワク」しながら待ちながら、最後にきちんとファイルが入るところを確認して、ある時は「一晩かけてやっと終わった！」的な感じでパソコン画面に戻ります。
+<p>インストーラーはありません。コマンドから自分でインストールします。また、バイナリパッケージもありません。ebuildと呼ばれるシェルスクリプトのパッケージ記述システムと、Portageの強力な自動コンパイル・インストールシステムによって、何でも自動ダウンロード・自動コンパイルしてインストールします。</p>
+<p>また、設定は手動で設定ファイルなどに記述して行います。</p>
+<p>標準のデスクトップ環境もありません。まずコマンドでインストールしてから、X11をインストールし、お好みのウィンドウマネージャや統合デスクトップ環境をインストールします。</p>
+<p>それこそ、標準のcronデーモンも、標準のシステムロガーもありません。全て、自分の選択したものを使います。</p>
+<p>さらに言えば、標準のコンパイル設定もありません。make.confという設定ファイルに、自分のコンパイルオプションを書いて、最速に最適化します。USEフラグというものを用いて、自分の使いたい機能だけをオン・オフにしてコンパイルできます。</p>
+<p>ですが、手動でシステムを管理しなければならないわけではなく、Portageによってemergeなどのコマンドを使うことで、自動で簡単に、*BSDで言う「make world」のように、自分のコンピュータ環境を最新に保てる、かつ、全部いっぺんにコンパイルすることができます。依存関係などの解決も優れています。</p>
+<p>また、initシステム（RCスクリプト）やネットワーク設定などは「全て独自仕様」です。それは、決して役に立たない違いではなく、「手動で管理するならこれが一番ベストである」と言えるような、BSDライクな優れた独自性を持っています。</p>
+<p>早い話、「Linuxディストリビューションというシステムをきちんと作ると当たり前にこうなる」というディストリビューションです。</p>
+<p>一度ハンドブックからインストールして、使ってみれば、絶対に好きになります。Red Hat/Debianを使っていつまでもインストールと設定しか出来なかった昔の自分が嘘のようです。Linuxとはこういうものです。一度、Gentooを使ってみてください。後悔はしません。</p>
+<p>注意事項：バイナリパッケージをないと書きましたが、本当は一部の巨大なアプリケーションに限ってバイナリパッケージも用意されています。ですが、普通は使いません。また、initやネットワークを独自仕様と書きましたが、共通のものを選択してインストール・設定することもできます。systemdを使うという手もありです。</p>
+
+<h1>独自の概念</h1>
+<h2>stage1, 2, 3</h2>
+<p>Gentooにはstage1, stage2, stage3というものがある。これは、どこまで最適化を行い、どこまでコンパイルするかという問題です。stage3が一番手軽ですが、コンパイラなどは最適化コンパイルしません。stage1では、まず一時システムを最適化コンパイルした上で（好みの最適化を行った自分独自の版のGCCを使う）、そのベースシステムから完全なシステムをコンパイルします。LFSのやり方と似ています。</p>
+
+<h2>Portage</h2>
+<p>PortageはPythonで書かれたとてもユニークなパッケージ管理システム。まず、システムにebuildと呼ばれるシェルスクリプトを、最新版（のミラー）と常に同期する。そして、いつでもそのパッケージから、プログラムを自動ダウンロード、コンパイル、インストールできる。この時、設定で全てのパッケージに対して最適化オプションやUSEフラグ（パッケージごとに付けられているタグのようなもので、どんな機能を有効にするか、無効にするかを簡単に指定できる。gtk+サポートはするがqtサポートはしないなど。）を設定することが出来る。</p>
+<p>Portageツリーを最新にするには以下を実行する。これはrsyncのフロントエンド。</p>
+<pre>
+emerge --sync
+</pre>
+<p>パッケージを導入・更新するには以下を実行する。</p>
+<pre>
+emerge --ask パッケージ名
+</pre>
+<p>Portageはソースベースのパッケージ管理システムであるため、バイナリからインストールされるのではなく、ebuildスクリプトに基づいてコンパイルが行われる。そのため、少しコンパイルに時間がかかる。GNOMEやMozillaなど、場合によっては何時間もかかることがある。しかしながら、コンパイルの様子が出力されるので、「このプログラムはこんな構成でソースファイルが書かれているのだな」ということが分かる。</p>
+<p>システム全体を更新するには以下を実行する。</p>
+<pre>
+emerge --update --ask @world
+</pre>
+<p>また、PortageはFreeBSDのPortsと呼ばれるパッケージ管理システムを参考にしており、FreeBSDのようにシステム全体を簡単に完全に再ビルドできる。</p>
+<p>詳しい使い方は以下を参照のこと。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Working/Portage/ja">ハンドブック:AMD64/ワーキング/Portage - Gentoo Wiki</a></li>
+</ul>
+<p>Portageの設定ファイルはmake.conf。ここで、コンパイルオプション（たとえば最適化をどの程度有効にするオプションをコンパイラに与えるか）やUSEフラグ（GTKのサポートをする・しないなど）を設定できる。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki//etc/portage/make.conf">/etc/portage/make.conf - Gentoo Wiki</a></li>
+<li><a href="https://github.com/gentoo/portage/blob/master/cnf/make.conf.example">portage/make.conf.example at master · gentoo/portage · GitHub</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/ACCEPT_KEYWORDS/ja">ACCEPT_KEYWORDS - Gentoo Wiki</a></li>
+<li><a href="http://personal-installation-procedure-of-gentoo-linux.readthedocs.io/en/latest/default/rewrite_makeconf.html">make.confの設定 — Gentoo Install Battle 1.0 documentation</a></li>
+</ul>
+
+<h2>手動インストールと手動設定</h2>
+<p>Gentooには自動インストーラーが存在しない。全てのインストールと設定は手動で行う。もちろん、Bashを使いながら、chroot, parted/fdisk, mkfs.ext2, mountなどを駆使して行う。設定ファイルはviやnano（簡単で小さなテキストエディタ）を使って行う。</p>
+<p>また、GentooではLinuxカーネルはソースから手動でmakeでコンパイルする。このため、カスタマイズ性が高い。</p>
+
+<h3>ネットワーク・システム設定</h3>
+<p>ネットワークの設定は自動で設定するか、手動設定としては一般的なものとしてnet-setup（対話形式のネットワーク設定スクリプト）を使い、システムの設定ファイルは/etc/conf.d/以下のファイルを編集する。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking/ja">ネットワーク設定 - Gentoo Wiki</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System/ja">システムの設定 - Gentoo Wiki</a></li>
+</ul>
+<h3>RCスクリプトの管理</h3>
+<p>Gentooが採用しているOpenRCでは、init（RCスクリプト）の設定は、サービスの起動は</p>
+<pre>
+# /etc/init.d/postfix start
+</pre>
+<p>とか、追加と削除は</p>
+<pre>
+# rc-update add postfix default
+</pre>
+<p>あるいは、</p>
+<pre>
+# rc-update del postfix default
+</pre>
+<p>などとする。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Working/Initscripts/ja">ハンドブック:AMD64/ワーキング/Initscripts - Gentoo Wiki</a></li>
+</ul>
+
+
+<h2>参考文献</h2>
+<p>参考文献：</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Working/ja">Gentoo Linux amd64 ハンドブック:Gentoo での作業</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Working/USE">Handbook:AMD64/Working/USE</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Working/Initscripts">Handbook:AMD64/Working/Initscripts</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Portage">Portage - Gentoo Wiki</a></li>
+<li><a href="https://blog.bobuhiro11.net/2014/04-06-gentoo.html">Gentoo install on Virtualbox - bobuhiro11's diary</a></li>
+</ul>
+
+
+<h2>Gentooの誕生秘話</h2>
+<p>以下のGentoo誕生秘話は、僕がネット上にあるLinuxの文書の中で一番好きな文書です。とても面白い。</p>
+<ul>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-dist1/">ディストリビューションの作成: 第1回</a></li>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-dist2/">ディストリビューションの作成: 第2回</a></li>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-dist3/">ディストリビューションの作成、第3回</a></li>
+</ul>
+
+<h2>Google Chrome OSのベース</h2>
+<p>Google Chrome OSはGentoo LinuxのPortageをベースに開発されている。さすがGoogle、Linuxのことを良くわかっている。だが、ソースベースのパッケージ管理システムでどのようにバイナリ配布を行うのかがちょっと不安だ。Gentooではバイナリパッケージの配布は一部しか行われていない（全く未対応ではない）。全て自分でコンパイルするのが通常である。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Google_Chrome_OS">Google Chrome OS - Wikipedia</a></li>
+</ul>
+
+<h1>リンク集全般</h1>
+<h2>Portage</h2>
+<p>Gentoo Linuxのパッケージシステム。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:X86/ja">ハンドブック:X86</a></li>
+</ul>
+
+<h2>Gentoo Handbook</h2>
+<p>Gentoo Handbookは、Gentoo LinuxをインストールするだけでUNIX/Linuxの基本的なシステムが分かる、大変素晴らしい文書です。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/ja">Gentoo AMD64 Handbook</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

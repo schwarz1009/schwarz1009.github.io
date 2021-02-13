@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Docker関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Dockerの世界観</h1>
+<p>Dockerに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>コンテナ型仮想化 (Docker)</h1>
+
+<h2>Dockerとは</h2>
+<p>ホストのLinuxカーネルを共有した上で、さまざまなコンテナ型仮想Linux環境を実行出来る、仮想コンテナ技術。ホストとゲストのLinuxカーネルを共有するため、オーバーヘッドが少なく済む。</p>
+<ul>
+<li><a href="https://www.redhat.com/ja/topics/containers/whats-a-linux-container">Linux コンテナとは - Red Hat</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1701/30/news037.html">超入門Docker：第1回　Dockerとは - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1405/16/news032.html">いまさら聞けないDocker入門（1）：アプリ開発者もインフラ管理者も知っておきたいDockerの基礎知識 - @IT</a></li>
+</ul>
+
+<h2>Dockerの意味</h2>
+<p>Dockerは、今までのホストOSとゲストOSに分かれたVM型の仮想化ではなく、ホストのLinuxカーネルを共有しながら、アプリケーションやミドルウェア・ライブラリを「隔離」することで、コンテナの上で別のマシンを動かす（あたかも別のマシンが動いているかのように実行する）ことができる。</p>
+<p>この時、マシンの「イメージ」を作ることができ、環境設定や構成をコード化して別のマシンに簡単に適用したり、Dockerfileとして配布することや、配布されているイメージを簡単に自分のLinuxで動かすこともできる。イメージはWeb上のDocker Hubでも配布されている。</p>
+<p>Dockerの利点は、「コンテナ式による軽量さ」「再構築・削除が簡単」「イメージをDockerfileによって作成し、配布したり、環境の簡単な再現が可能」などの利点がある。また、「WordPressを使える環境を作りたい」などといった時に、Docker Hubで専用のイメージを入手すれば、簡単に同じ環境を作ることができる。</p>
+<p>Docker Hubを使うことで、Nginxを導入するのも、MySQLを導入するのも、WordPressを導入するのも全部「docker run」コマンドでOK。簡単にDocker Hubから導入できる。</p>
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/13265/">Docker入門（第一回）～Dockerとは何か、何が良いのか～ | さくらのナレッジ</a></li>
+</ul>
+
+<h2>Linuxにおけるコンテナ型仮想化</h2>
+<p>LXCやDockerなどのコンテナ型仮想化技術では、ホストのLinuxカーネルを共有するため、KVMなどのようなOSの上でOSを走らせることによるオーバーヘッドがゼロに近い。XenやKVMに比べて、起動や終了も早く、プロセス実行の効率も良い。</p>
+<p>注記：ここに書いた時のにわか知識で執筆したため、「Linuxの上でLinuxが動く」という説明をしていますが、本当は「Linuxカーネルの上でコンテナ型の仮想環境が動く」が正しいです。</p>
+<p>DockerはLinuxカーネルを共有しながら、さまざまなLinux環境（仮想マシン）を同時に構築し、動的に作ったり削除したりすることができる。このため、開発環境の上でデプロイする本番環境を作り出して、本番環境でどのようにシステムが動くのかを試すような用途に使える。</p>
+<p>システムをインスタンスに作ったり削除したりすることができることで、いついかなる時に必要になっても、迅速に新しいコンピュータ資源を確保できる。Dockerでは、Dockerfileを使うことで、新しいシステムイメージを簡単に作成できる。Kubernetesを使用することで、たくさんのネットワーク資源をあたかもひとつのコンピュータであるかのように仮想化できる。これらの技術により、いついかなる場合にどんなシステムの問題や必要性がでてきても、対応し、拡張し、あるいは改良することができる。</p>
+
+
+<h2>Dockerとコンテナ型仮想化の基本</h2>
+<p>コンテナ型の仮想環境は、ホストOSのLinuxカーネルを共有した上で、仮想化されたLinuxコンテナ環境（仮想マシン）を実行・実現する。</p>
+<p>ファイルやディレクトリ、プロセス、ネットワーク、設定、システム構成などをコンテナでそれぞれの環境に仮想化して、その上でその仮想環境におけるアプリケーションを実行することが出来る。</p>
+<p>DockerはLinuxの仮想コンテナ環境。Linuxの上で仮想コンテナを作ることによって、Linuxの上でたくさんのLinux仮想コンテナ環境を走らせることが出来る。</p>
+<p>Xenなどの仮想OSとは異なり、Linuxの上でWindowsなどの他のOSを動かすことは出来ない。Linuxの上でLinux仮想環境を動かすことが出来る。</p>
+<p>ただし、LinuxでLinuxを本当に動かすわけではない。Linuxと言うカーネルは共有しながら、通常のプロセスと同じように、別の環境でコンテナプロセスを動かすことが出来る。</p>
+<p>この時、VM型の仮想化に比べて、ネイティブなアプリケーションとほぼ同等の効率で、仮想Linuxコンテナ環境のアプリケーションを実行出来る。</p>
+<p>後日注記：実際のところ、「Linuxの上でLinuxが動く」と言うよりも、「仮想マシンとして隔離されたコンテナプロセスが動く」と言った方が正しい。たとえば、仮想マシンとして隔離したMySQLコンテナを動かしたり、隔離したRailsコンテナを動かすことで、「それぞれのサーバーに専用の仮想マシン環境を割り当てる」ことができる。Docker Hubなどを利用すれば、ネットからイメージをダウンロードして、コンテナとしてすぐに起動できる。こうした「隔離」という意味合いが強いため、コンテナ型仮想化のオリジナル的存在であるFreeBSDのjailsは「刑務所」という意味である。</p>
+
+<h2>Dockerfile</h2>
+<p>Dockerでは、システムイメージの構成をDockerfileと言うファイルに記述することで、新しいシステムイメージを簡単に作ることが出来る。Dockerfileにソフトウェアのインストール手順と設定手順を記述することで、どこでも同じシステムを簡単に再構築出来る。</p>
+<ul>
+<li><a href="http://docs.docker.jp/v1.12/engine/userguide/eng-image/dockerfile_best-practice.html">Dockerfile を書くベスト・プラクティス — Docker-docs-ja 1.12.RC2 ドキュメント</a></li>
+</ul>
+
+<h2>Dockerの利点</h2>
+<p>Dockerの利点とは、</p>
+<p>・それぞれの開発環境で、本番環境と同じ環境を簡単に再現できる。どんな環境でも同じ。ホストがDebianでもUbuntuでも関係なく、コンテナ環境でゲストの環境を再現できる。</p>
+<p>・Dockerfileに全てのインフラ＋アプリの情報が書かれており、コンテナの状態が保存されるため、間違いが発生しにくい。また簡単・高速にデプロイできる。</p>
+<p>・必要のなくなった時点で、簡単にインスタンスを削除できる。インスタンスなイメージの作成・削除ができる。</p>
+<p>・設定を間違えたら、元の状態に戻すことができる。ロールバックが簡単。</p>
+<p>など、多くが「環境の再現やデプロイの際の管理がしやすくなる」ということです。</p>
+<p>特に、たくさんのインフラソフトウェアやインフラシステムが重なり合っている「複雑なシステム」を管理するための助けになってくれます。</p>
+<ul>
+<li><a href="https://qiita.com/niisan-tokyo/items/88a53a1b4aa7ad60723e">Docker導入のための、コンテナの利点を解説した説得資料 - Qiita</a></li>
+<li><a href="https://qiita.com/kasackee/items/aec0c703ec92fd155645">Dockerの特徴とメリットについてまとめてみた - Qiita</a></li>
+<li><a href="https://thinkit.co.jp/article/2127">Dockerの誤解と神話。識者が語るDockerの使いどころとは？ Docker座談会（前編） | Think IT（シンクイット）</a></li>
+</ul>
+
+<h2>Docker Hub</h2>
+<p>Docker HubはDockerイメージをインターネット上で共有できるサービス。</p>
+<p>たとえばCentOSにnode.jsを入れたDockerイメージを共有することで、みんなと一緒に同じ環境を再現することができる。</p>
+<p>用途としては、「このようにLinuxをインストールして、こんな必要なソフトを導入して、このアプリケーションを使ってください」といった場合に、そんなことを手動でする必要なく、システム全体をまるっと共有できる。</p>
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/2210/">Dockerコンテナをクラウドサービス上で共有できる「Docker Hub」を使ってみる | さくらのナレッジ</a></li>
+<li><a href="http://docs.docker.jp/engine/userguide/dockerrepos.html">Docker Hub にイメージを保管する — Docker-docs-ja 1.9.0b ドキュメント</a></li>
+</ul>
+
+<h2>docker run</h2>
+<p>まず、docker pullでイメージをダウンロードする。（イメージは<a href="https://hub.docker.com/">Docker Hub</a>で探す。）</p>
+<pre>
+$ docker pull rails
+</pre>
+<p>docker runは以下のように使う。</p>
+<pre>
+$ docker run -it rails /bin/bash
+</pre>
+<p>以上で、Ruby on Railsが既に導入されたコンテナが立ち上がる。RubyのインストールもRailsのインストールもしなくて構わない。</p>
+<p>（以上は<a href="https://qiita.com/shimo_yama/items/d0c42394689132fcb4b6">docker run(コンテナ作成)する時のオプションあれこれ - Qiita</a>を参考に執筆・引用しました。）</p>
+<p>MySQLのコンテナやRailsのコンテナも全部docker runで立ち上げてしまおう。Railsの環境を構築する詳しい手順は以下が参考になる。MySQLはコンテナを削除するとデータも消えてしまうのでデータの永続化（MySQLコンテナとデータコンテナを分ける）も行うこと。</p>
+<ul>
+<li><a href="https://qiita.com/halhide/items/36e03c650bb08dfcc820">rails開発環境をdockerで作ったメモ - Qiita</a></li>
+<li><a href="https://qiita.com/pocari/items/456052a291381895f8b3">dockerでrails5環境構築 - Qiita</a></li>
+</ul>
+
+<h2>docker-compose</h2>
+<p>複数のDockerイメージを連携してコンテナを作りたい場合は、docker-composeというコマンドを使うといい。</p>
+<p>たとえばRailsとMySQLのイメージからコンテナを作って管理したい場合などに使える。</p>
+<ul>
+<li><a href="https://datumstudio.jp/blog/docker%E3%81%A7rails%E3%81%A8mysql%E3%81%AE%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">DockerでRailsとMySQLの環境構築 | ブログ一覧 | DATUM STUDIO株式会社</a></li>
+<li><a href="https://tech-lab.sios.jp/archives/20051">【連載】世界一わかりみが深いコンテナ &amp; Docker入門 〜 その4:docker-composeってなに？ 〜 | SIOS Tech. Lab</a></li>
+</ul>
+
+<h1>コンテナ型仮想化 (下部レイヤー)</h1>
+<h2>LXC</h2>
+<p>OSレベルのコンテナ型仮想化技術。上位レイヤーのDockerを通じて利用されることが多い。Linuxカーネルのcgroups機能に依存している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/LXC">LXC - Wikipedia</a></li>
+<li><a href="https://knowledge.sakura.ad.jp/2108/">15分で分かるLXC（Linux Containers）の仕組みと基本的な使い方 | さくらのナレッジ</a></li>
+<li><a href="https://qiita.com/onokatio/items/969e3b470359e4c47a04">Dockerもいいけど、LXCも使おうぜ - Qiita</a></li>
+<li><a href="https://qiita.com/Surgo/items/709a07d68c6eafbad267">Docker と LXC - Qiita</a></li>
+<li><a href="https://qiita.com/kentarosasaki/items/b44b5ffb57a69085027e">Docker だけじゃない Containers の世界 - Qiita</a></li>
+</ul>
+
+<h2>cgroups</h2>
+<p>プロセスグループのリソース（CPU、メモリ、ディスクI/Oなど）の利用を制限・隔離するLinuxカーネルの機能。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Cgroups">cgroups - Wikipedia</a></li>
+</ul>
+
+<h1>コンテナ型仮想化について</h1>
+<h2>コンテナはDevOpsと相性が良い</h2>
+<p>コンテナ型仮想化のメリットは、軽量であることや環境構築の時間短縮もありますが、DevOpsとの相性が良いことが言えます。</p>
+<p>DevOpsとは、開発チームと運用チームが協力し合って開発・運用を行っていく手法です。コンテナ型の仮想化を行うことで、環境をさまざまに構築して試験することができます。</p>
+<p>デメリットは、ホストのOSと別のOSで仮想化することができないことなど。</p>
+<ul>
+<li><a href="https://pfs.nifcloud.com/navi/tech/container_virtualization.htm">仮想化の新潮流「コンテナ型仮想化」とは | ニフクラ</a></li>
+</ul>
+
+<h2>VM型に対してコンテナ型は速度が速い</h2>
+<p>また、VM型の仮想化に比べて、コンテナ型は速度が速く軽量です。</p>
+<p>たとえば、サーバの本番環境を開発環境で試したい時に、何度も仮想サーバを立ち上げる必要がある時、VMwareのようなVM型の仮想化を行うよりも、Dockerのようなコンテナ型の方が素早く試すことができます。</p>
+<p>これは開発の効率化にとても大きく寄与します。</p>
+
+<h1>Red Hat系コンテナ・クラウド技術</h2>
+<h2>Kubernetes</h2>
+<p><a href="kubernetes.html">Kubernetes</a>を参照のこと。</p>
+
+<h2>OpenShift</h2>
+<p>Red Hatなどが推し進めている、オープンソースで開発されているクラウド環境構築用のフリーソフトウェア。</p>
+<p>基本的に、OpenShift & OpenStackとDockerを組み合わせて、Ansibleで自動化する、といった風に使う。</p>
+
+<h2>OpenStack</h2>
+<p>OpenStackはNova（コンピュート）、Neutron（ネットワーク、旧称Quantum）、Cinder（ブロックストレージ）、Keystone（認証）、Glance（マシンイメージ管理）、Swift（オブジェクトストレージ）、Horizon（Web管理）などのコンポーネントから構成される。AWSを自分で作れるソフトという感じの位置づけ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OpenStack">OpenStack - Wikipedia</a></li>
+<li><a href="https://jp-redhat.com/openeye_online/column/nakai/2777/">OpenStack、Docker、OpenShiftの関係を理解する！ レッドハット朝活セミナーのご紹介 | RED HAT OPENEYE -レッドハットの情報ポータル</a></li>
+<li><a href="https://rheb.hatenablog.com/entry/openshift-on-openstack-director-1">OpenShift on OpenStackの一例 - 赤帽エンジニアブログ</a></li>
+<li><a href="https://qiita.com/t_nakayama0714/items/183942514e7253b2c19c">OpenStackはじめてみる(知識整理)。 - Qiita</a></li>
+<li><a href="http://enakai00.hatenablog.com/entry/20140106/1388978670">OpenStackクラウド基盤構築・ハンズオンセミナー講義資料 - めもめも</a></li>
+</ul>
+
+<h2>Ansible</h2>
+<p>サーバを立ち上げる際にインストールや設定を自動化できる構成管理ソフト。</p>
+<p>Ansibleを使うことで、SSHで接続したサーバーに、リモートホストでミドルウェアのインストールや設定ファイルの更新ができる。</p>
+<p>Ansibleはリモートホストの状態を記載した定義ファイルであるPlaybook（YAML形式）を記述する。この時、Rolesと呼ばれる機能を使うことで、Playbookをちょうどいい単位に分割・整理することができる。</p>
+<p>Fedora Server 30では、AnsibleのRoles機能をベースにした「Linux System Roles」が実装されており、メール（Postfix）やネットワーク（Network）、セキュリティ（SELinux）といった重要なサブシステムに対してつねに一貫したインタフェースを提供している。コマンドラインの呼び出しよりも容易な構成管理が実現できる。</p>
+<ul>
+<li><a href="https://dev.classmethod.jp/server-side/ansible/practice_ansible/">Ansible実践入門 ｜ DevelopersIO</a></li>
+<li><a href="https://www.indetail.co.jp/blog/ansible-2/">RolesでAnsibleのPlaybookを整理してみよう | Tech Blog | 株式会社INDETAIL - インディテール</a></li>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201905/08">2019年5月8日　Fedora 30がリリース ―Linux 5.0 ＆ GNOME 3.32を実装：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>猫も杓子もDockerとKubernetes</h2>
+<p>最近のクラウド市場は、猫も杓子もDockerとKubernetesです。</p>
+<p>まず、クラウドを作る場合、Amazon EC2に登録して、クレジットカードを登録して従量課金制の契約を結び、OSはサポートが必要ならRHEL、必要ないならUbuntuにして、root権限が得られるためWebサーバやデータベースをインストールします。ApacheやNginx、あるいはNode.js+Reactです。</p>
+<p>仮想サーバの構築は、ホストのLinuxの上でDockerとKubernetesを用いて行うため、どんな仮想サーバ向けのOS（注意：Linuxに限る）でも導入できます。インフラのDockerとKubernetesが何から何まで全部やってくれるので、クラウドサーバの運営業者も楽です。DockerとKubernetesの上で動くRHELあるいはUbuntuを導入して、root権限で何でも好きなようにできるのです。</p>
+<p>あるいはRed HatやUbuntuなどが力を入れているのがOpenStack。これはAWSを自分で作れるという位置づけです。</p>
+<p>なぜDockerとKubernetesが流行るのか。それは、単純で簡単で、なおかつ軽量でパフォーマンスが良いからです。手元の開発環境のLinuxマシンで開発し、Docker上の本番環境と同等の試験環境で動くかどうかを試して、開発が終わったら本番環境にデプロイ。これを簡単かつスピーディに行えて、必要なことは全部DockerとKubernetesがやってくれる、というわけです。</p>
+<p>また、JavaScript環境がとても優れたものになってきつつある現在、JavaやPHPのような従来の言語は必要なくなってきています。サーバ側はNode.js、クライアント側はReact。あるいは、Ruby on RailsやDjangoのようなWebフレームワークを使います。</p>
+<p>僕も経験が豊富にあるわけではありませんが、最近のLinuxによるWebサービス開発は、そのようにどんどん進歩していて、最新が本当は何なのか、正しい情報は何なのか全くわかりません。僕が書いたこの情報も、ほとんどが書いてすぐウソになってしまいます。ですから、最初からネット上の情報などあてにしないことです。自分でやってみて、駄目なら駄目だと自分で判断し、自分で調べて自分で考えること、それがIT業界の鉄則です。Do-it-yourself、自分以外のものを信じないようにしましょう。</p>
+
+<h1>簡単な説明</h1>
+<h2>Docker</h2>
+<p>Linuxの上で仮想コンテナ環境・コンテナプロセスが動く</p>
+<p>ホストのLinuxカーネルを共有するためオーバーヘッドが少なく軽量</p>
+<p>本番環境を開発環境で再現するなどDevOpsと相性がいい</p>
+<p>必要なくなったら簡単に削除でき、再構築も簡単</p>
+
+<h2>Dockerfile</h2>
+<p>コンテナのイメージを作るための命令と設定を書く</p>
+<p>コンテナのイメージを簡単に作成・再利用できる</p>
+
+<h2>Docker Hub</h2>
+<p>コンテナのイメージを共有するサービス</p>
+<p>Railsサーバを導入するならDocker Hubからdocker runコマンドで簡単にRails仮想サーバを導入できる</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

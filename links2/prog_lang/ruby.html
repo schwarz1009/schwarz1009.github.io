@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Ruby関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Rubyの世界観</h1>
+<p>Rubyによるプログラミングに関する世界観です。<!--<a href="ruby_lib.html">Ruby（２．ライブラリ）</a>や--><a href="ruby_on_rails.html">Ruby on Rails</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%AE%E3%81%97%E3%81%84Ruby-%E7%AC%AC5%E7%89%88-%E9%AB%98%E6%A9%8B-%E5%BE%81%E7%BE%A9/dp/4797386290">たのしいRuby 第5版</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Rubyとは</h1>
+<h2>日本人が生んだコードを書く楽しさがある言語</h2>
+<p>Rubyは、日本人であるまつもとゆきひろ氏によって生まれた言語です。</p>
+<p>C++/Javaのような言語が、パフォーマンスやオブジェクト指向的な機能性を目指して作られているのとは違い、「コードを書く楽しさ」のために作られています。</p>
+<p>Rubyでは、動的スクリプト言語としてのオブジェクト指向の仕様と、ブロックやMix-inのような使いやすい記法から、美しく、機能的で、短いコードを簡素に書くことができます。</p>
+<p>Perlを参考にした言語であり、「パール（真珠）ではなくルビー」という名前になっていますが、記法の過度な自由や美しくない記法の多いPerlに比べて、書き方が制限されている代わり自然で「このように書きたい」というニーズを満たした言語仕様になっています。</p>
+<p>ライバルはPythonで、アメリカなどでPythonが流行っているのと逆に、日本ではRubyが流行っています。</p>
+<p>また、最近ではRuby on Railsという革命的なWebフレームワークで採用されたことで、日本だけではなくグローバルに普及しました。ここまで流行っているのは、Railsの功績が大きいです。</p>
+<p>ですが、ブロックの終わりに「end」というキーワードを使うとか、ブロック（無名関数）の引数を「|～|」で囲んだり、インスタンス変数を「@name」のようにアットマークで示すなど、独自のありえない記法がたくさんあります。ですが、その多くは自然で、使い慣れるとプログラミングの際にいつでもこの書き方をしたくなるほどシンプルかつ美しいです。</p>
+<p>また、JavaやC++と比べて「本当のプログラマの言語ではない」と言われることもあります。Rubyエンジニアは、いつまで経ってもRubyとRailsしかできず、限界が来ると言われています。これは確かにそうかもしれません。型名や呼び出し規約をきちんと考えるJavaやC++に比べて、動的であまり考えなくても適当に動くRubyは、一流のハッカーになるためには少し簡単すぎるのかもしれません。高水準・高レベルすぎて、実際のCPUやメモリなどを中心に動いているコンピュータ・アーキテクチャが見えづらくなっている、ということはあると思います。</p>
+
+<h2>Rubyは動的そのもの</h2>
+<p>Rubyの特徴として言えるのが、「動的」な言語ということです。</p>
+<p>C++やJavaなどが「型」の概念にとらわれるのに対して、（Rubyに型がないわけではありませんが）日常の利用で型という存在を別にしてコードを書くことができます。</p>
+<p>C++やJavaなどでは、親クラスの型や派生クラスの型、インターフェースの型などを考えて書かなければなりません。あるいは、たくさんの型に対応しようとするならば、テンプレートを使ってジェネリックで行わなければなりません。それに加えて、C++ではポインタの考え方が入ってきます。動的な配列やメモリ確保を実現したり、あるいはスコープ外のオブジェクトにアクセスするための参照型として、ポインタを使う必要があります。</p>
+<p>Rubyは、動的なスクリプト言語であるため、そうした静的型付けの考え方から「解放」されて、スクリプトを動的に書けます。Rubyの型は、あえて指定しなくても、その場その場の状況に応じて動的に決定されます。</p>
+<p>動的であることは必ずしも良いことではなく、厳密に型付けされている方が良いことは多々ありますが、手軽で簡単に処理を実行できる言語であると言えます。大規模なプログラムはJavaで書いて、個人で使うバッチ処理にはRubyを使う、といったやり方をすれば良いと思います。</p>
+
+<h2>Web用途に使うと何でもできる</h2>
+<p>Rubyは、Web用途に使うと何でもできます。</p>
+<p>従来はPerl/CGIやPHPのような言語で行われていたWeb業界は、最近は完全にRubyやRails、あるいはそれと同等のWebフレームワークを使って作るようになりました。</p>
+<p>Twitterのような高度な「掲示板のようなSNSのようなコミュニケーションサービス」は、RailsやDjango（Python版のRails）で作ることができます。（最近はTwitterはRailsからScalaに変更されたらしい。）</p>
+<p>Railsを使えば、超簡単に、また何でもできるWebサービスを作れます。PHPでPDOなどを使ってごりごりSQLを書かなくても、最低限の記述で簡単に管理できます。</p>
+<p>そのため、Webエンジニアになりたいのであれば、まずはRubyを習得しましょう。</p>
+<p>Rubyは良い言語で、優れた言語仕様と何でも簡単にできるライブラリ関数がありますが、GUIアプリケーションを作るのには向いていません。もともとはPerlのようなシステム管理のために使われることの多い言語ですが、簡単なスクリプト処理とWeb以外の分野ではあまり使われていません。そのため、C/C++やC#/VB/Javaなどと一緒に、Rubyを使って「Webサービスを作って何かやってやろう！」という気概を持って習得に励んでください。</p>
+
+<h2>バッチ処理の練習に最適</h2>
+<p>Rubyの大きな特徴は、「複雑で高度なことを小さな記述で簡単にできる」ということ。</p>
+<p>標準のデータ構造やブロックなどを使うことで、C/C++では何十行・何百行におよぶコードを、数行で記述することができます。</p>
+<p>また、日本発の言語であるため、日本語のマルチバイト文字などの対応も優れています。PerlやPythonでは複雑になる日本語のテキストファイルの処理などを簡単に処理できます。</p>
+<p>そのため、本当にバッチ処理の練習に向いています。練習だけではなく、Rubyを使うことで実用的なプログラミングを習得することができます。</p>
+
+<h1>主な用途</h1>
+<h2>Railsでの言語として</h2>
+<p>最高のWebフレームワークの一つRuby on Railsで採用されたことから、Railsで使われる言語として良く使われる。</p>
+
+<h2>日本人のプログラミング学習用途</h2>
+<p>日本人が創始者であることから、日本の情報が多い。日本でのプログラミング学習用途として良く使われる。</p>
+<p>Ruby作者の名前は日本人のまつもとゆきひろ。だが、日本人だけでなく外国人による開発者やコミッターも多いことから、まつもとは「厳密には国産とは言い切れない」と言っている。</p>
+
+<h2>手軽に少ない行数でプログラムを書く簡単なスクリプト用途</h2>
+<p>直観的で、少ない行数でプログラムが書けることから、手動でやる代わりにRubyで作業を自動化する用途に良く使われる。</p>
+
+<h1>Ruby標準</h1>
+<h2>Ruby</h2>
+<p>Rubyについて。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ruby">Ruby - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/ruby/ruby">git</a></li>
+</ul>
+
+<h2>Ruby公式ドキュメント</h2>
+<p>Rubyの公式ドキュメント。</p>
+<ul>
+<li><a href="https://www.ruby-lang.org/ja/documentation/">ドキュメント - Ruby</a></li>
+</ul>
+
+
+<h1>Rubyの基本</h1>
+<p>「たのしいRuby」を参考に執筆・引用しました。</p>
+<h2>変数の記法</h2>
+<p>Rubyには4種類の変数がある。</p>
+<table class="some_tables">
+<tr><th>変数</th><th>記法</th></tr>
+<tr><td>ローカル変数</td><td>先頭がアルファベットの小文字か「_」で始まる。</td></tr>
+<tr><td>グローバル変数</td><td>先頭が「$」で始まる。</td></tr>
+<tr><td>インスタンス変数</td><td>先頭が「@」で始まる。</td></tr>
+<tr><td>クラス変数</td><td>先頭が「@@」で始まる。</td></tr>
+</table>
+<p>ローカル変数は、その関数の内部でしか使えない。グローバル変数はどのスクリプトファイルからでも使えるが、バグが入りやすいため使い方に注意。</p>
+<p>インスタンス変数は、そのクラスのオブジェクトの内部で保持される変数で、インスタンスごとに別々の値を使うことができる。似ているものにselfキーワードがあり、そのレシーバ自身のことを指す。</p>
+<p>インスタンス変数は、メソッドとは異なりアクセサ（アクセスするための専用のメソッド）を定義しなければアクセスできない。そのため、@valueにアクセスするためにはそのためのアクセサを定義する必要がある。しかしながらバグが入りやすいため自動的にアクセサを定義する書き方がある。</p>
+<table class="some_tables">
+<tr><th>アクセサ</th><th>意味</th></tr>
+<tr><td>attr_reader :name</td><td>参照のみ可能。リーダーあるいはゲッターと呼ぶ。<br>nameメソッドの定義と同様。</td></tr>
+<tr><td>attr_writer :name</td><td>変更のみ可能。ライターあるいはセッターと呼ぶ。<br>name=メソッドの定義と同様。</td></tr>
+<tr><td>attr_accessor :name</td><td>参照・変更ともに可能。</td></tr>
+</table>
+<p>selfキーワードを用いることで、「自分自身のメソッド」や「自分自身のアクセサ」を通じて自分に対する参照・変更・操作を行える。</p>
+<p>クラス変数はどのクラスのオブジェクトでも保持される変数で、たとえばHumanクラスのbobオブジェクトとaliceオブジェクトがいたとして、bobオブジェクトでクラス変数@@valueを加算すると、その結果がaliceオブジェクトからも参照できる。</p>
+
+<h2>メソッド</h2>
+<p>メソッドの定義：</p>
+<pre class="prettyprint">
+def hello(name)
+  puts "Hello. I am #{name}."
+end
+
+hello("Assy")
+</pre>
+<p>Rubyのメソッドにはレシーバ（メソッドが帰属するオブジェクト）を持つインスタンスメソッド、クラスメソッド、あるいはレシーバを持たない関数的メソッドがある。</p>
+<p>インスタンスメソッドでは、</p>
+<pre class="prettyprint">
+mystr.hello("hello")
+</pre>
+<p>のように.と()を使ってレシーバ名からメソッドを実行する。クラスメソッドである場合は、クラス名から.あるいは::でメソッドを実行する（.と::は同じ意味）。関数的メソッドでは単に</p>
+<pre class="prettyprint">
+hello()
+</pre>
+<p>とする。</p>
+<p>引数では、ブロックは&blockのように引数に記述する。これにより、</p>
+<pre class="prettyprint">
+do |i|
+    ...
+end
+</pre>
+<p>のようなブロックを実行できる。</p>
+<p>たくさんの不特定多数の引数を取る場合は*argsとする（argsには配列の形でたくさんの引数が入る）。また、:を使うことでキーワード引数を作ることができる。</p>
+<p>メソッドには演算子のようなものも指定できる。たとえば[]や[]=を指定したり、def +(arg)やdef -(arg)のような形で演算子も再定義できる。</p>
+<p>また、メソッドはreturnで値を返すことができるが、returnは省略できる。returnを省略した場合、最後の値がメソッドの呼び出し元に返される。そのため、</p>
+<pre class="prettyprint">
+def plus_int(x, y)
+    x + y
+end
+
+puts plus_int(2, 3)
+</pre>
+<p>のように、まるでLispなどの関数型言語のような記述ができる。</p>
+
+<h2>ブロックをメソッドに与える</h2>
+<p>ブロックをメソッドに与えた場合、それを受け取ったメソッドの側で、次のいずれかを実行することで与えられたブロックを実行できる。</p>
+<table class="some_tables">
+<tr><th>実行処理</th><th>意味</th></tr>
+<tr><td>yield</td><td>与えられたブロックを実行する。</td></tr>
+<tr><td>Procクラス</td><td>ブロックをオブジェクトとして扱う。ブロックを持ち運んだり、別の関数にオブジェクトとして渡したりするのに使う。</td></tr>
+</table>
+<p>yieldはRubyではブロックを実行するのに使う。Pythonのようなジェネレータではないため注意が必要。</p>
+<p>ブロックの記述にはdo ～ end以外にも{}の形式も使える。普通は「複数行の記述にはdo endを、一行の記述には{}を使う」というやり方がある。</p>
+
+<h2>クラス</h2>
+<p>クラスを作る：</p>
+<pre class="prettyprint">
+class HelloWorld
+  def initialize(myname = "Assy")
+    @name = myname
+  end
+
+  def hello
+    puts "Hello. I am #{@name}."
+  end
+end
+
+schwarz = HelloWorld.new("Schwarz")
+michael = HelloWorld.new("Michael")
+assy = HelloWorld.new
+
+schwarz.hello
+</pre>
+<p>オブジェクトのメンバ変数には変数名に@をつける。</p>
+<p>インスタンス変数@valueには、外部からはアクセスできない。アクセスするためにはアクセサを定義する。また、インスタンスメソッドをprivateやprotectedやpublicで指定してアクセス可能範囲を設定できる。たとえばprivateにするには</p>
+<pre class="prettyprint">
+private :priv_func
+</pre>
+<p>とする。privateに引数をつけなかった場合、それ以降に定義された全てのメソッドがprivateになる。</p>
+<p>.newはオブジェクトを作成するクラスメソッドであり、newの引数はインスタンスの初期化を行うためにnewした時に実行される、コンストラクタであるinitializeメソッドに送られる。</p>
+<p>Rubyではクラスメソッドnewによってオブジェクトを作成する。また、new以外にもリテラルを用いてオブジェクトが作成されることもある。これは文字列リテラルである"text"などが挙げられる。</p>
+
+<h2>継承</h2>
+<p>Rubyでは継承を行うことで、既にあるクラスに機能を付け加えたり、新しい内容で再定義できる。演算子のように見えるもの（たとえば配列の[]）などもメソッドであることがあり、多くの場合再定義が許されている。</p>
+<p>継承を行うことで、元のプログラムコードを維持したまま、機能を付け加えたりメソッドを上書きすることができる。superを使うことで親クラスのメソッドを実行できる。</p>
+<p>継承の関係は「is-a関係」と呼ばれるが、これは英語のisとaに由来する。</p>
+<p>また、Rubyには特異クラスと呼ばれる機能があり、通常のクラスではなく</p>
+<pre class="prettyprint">
+str1 = "test"
+class &lt;&lt; str1
+  def hello()
+    puts str1
+  end
+end
+
+str1.hello()
+</pre>
+<p>のように、ある特定のオブジェクトだけのインスタンスメソッドを後で付け加えることができる。</p>
+
+<h2>モジュールとMix-in</h2>
+<p>Rubyではクラスによるオブジェクト指向の他に、モジュールという機能がある。モジュール内で独自の名前空間を使うことができる（特定のクラス名や変数名と重なっても大丈夫）ほか、クラス定義の中でメソッドや定数をクラスの中にincludeで取り込む（Mix-in）することができる。</p>
+<pre class="prettyprint">
+module MyModule
+  # ここに共通に使われるメソッドを書く
+end
+
+class MyClass1
+  include MyModule
+  # MyClass1のメソッドとしてMyModuleモジュールを読み込む
+end
+
+class MyClass2
+  include MyModule
+  # MyClass2のメソッドとしてMyModuleモジュールを読み込む
+end
+</pre>
+<p>また、includeではなくextendを用いることで、クラスの内部だけではなく、インスタンスとして作られたオブジェクトにも、モジュール内のメソッドを追加できる。たとえば文字列型のインスタンス変数を作って、このインスタンス変数に新しいメソッドを追加するようなことができる。</p>
+<p>ある意味、JavaScriptのプロトタイプチェーンや委譲に近いかもしれない。</p>
+<p>たとえば、クラスについて「継承関係を持たせたくはないが、同じ処理を複数のクラスで共有したい」といった場合、Mix-inを使うことが適切である。もちろん基本クラスに共通する処理を書いて、派生クラスには個別の処理を書いてもいい。</p>
+
+<h2>ダックタイピング</h2>
+<p>Rubyでは、「アヒルのように歩きアヒルのように鳴くものはアヒルである」というダックタイピングのやり方がある。たとえば、同じ名前のメソッド.eachを持っているメソッドは、同じように扱うことができる。</p>
+<p>「意図していないメソッドが実行されるリスク」はあるが、たとえばゲームのキャラクターなどで、同じ継承関係に属していなくても、攻撃した時は同じように攻撃し、死んだ時は同じように死んでほしい時などに使える。</p>
+
+<h2>例外</h2>
+<p>例外はRubyのエラー処理機構で、以下のように記述する。例外が投げられた時点で処理は中断し、rescueブロックに強制的に移動する。</p>
+<pre class="prettyprint">
+begin
+  func_a()
+  func_b()
+  func_c()
+rescue =&gt; ex
+  エラー処理
+end
+</pre>
+<p>例外はraiseを使えば自分で投げることもできる。</p>
+<p>また、ファイル処理などを行う場合、「openした後で必ずcloseしたい」といった場合がある。こうした場合はブロックを用いることができる。</p>
+<pre class="prettyprint">
+File.open("test.txt") do |file|
+  file.each_line do |line|
+    print line
+  end
+end
+</pre>
+<p>もしファイルの読み込みに失敗したら、このブロックは途中で中断する。また、読み込みの後でファイルをcloseする必要があれば、最後に必ずファイルをcloseする。</p>
+
+
+<h1>主なクラス</h1>
+<h2>リファレンスマニュアル</h2>
+<p>クラスやメソッドの一覧は、リファレンスマニュアルを参照のこと。</p>
+<ul>
+<li><a href="https://docs.ruby-lang.org/ja/latest/doc/index.html">オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル</a></li>
+<li><a href="https://docs.ruby-lang.org/ja/latest/library/_builtin.html">組み込みライブラリ - Ruby リファレンスマニュアル</a></li>
+<li><a href="https://docs.ruby-lang.org/ja/latest/library/index.html">ライブラリ一覧 - Ruby リファレンスマニュアル</a></li>
+</ul>
+
+<h2>主なクラス一覧</h2>
+<table class="some_tables">
+<tr><th>クラス</th><th>説明</th><th>リファレンス</th></tr>
+<tr><td>Numeric</td><td>数値のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Numeric.html">Numeric</a></td></tr>
+<tr><td>Array</td><td>配列のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Array.html">Array</a></td></tr>
+<tr><td>String</td><td>文字列のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/String.html">String</a></td></tr>
+<tr><td>Hash</td><td>ハッシュのクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Hash.html">Hash</a></td></tr>
+<tr><td>Regexp</td><td>正規表現のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Regexp.html">Regexp</a></td></tr>
+<tr><td>IO</td><td>入出力のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/IO.html">IO</a></td></tr>
+<tr><td>File</td><td>ファイルのクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/File.html">File</a></td></tr>
+<tr><td>Dir</td><td>ディレクトリのクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Dir.html">Dir</a></td></tr>
+<tr><td>Encoding</td><td>エンコーディングのクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Encoding.html">Encoding</a></td></tr>
+<tr><td>Time</td><td>時間のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Time.html">Time</a></td></tr>
+<tr><td>Proc</td><td>ブロックに関するクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Proc.html">Proc</a></td></tr>
+</table>
+
+<h2>requireで外部ファイルを読み込む</h2>
+<p>requireを用いることで、ライブラリや外部ファイルを読み込むことができる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+require "gtk"
+</pre>
+<p>とか、</p>
+<pre class="prettyprint">
+require "socket"
+</pre>
+<p>とする。これだけで、Gtk::WindowやTCPSocketのようなクラスを使えるようになる。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/16111">【Ruby入門】require(_relative)で外部ファイルを読み込もう！ | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+<p>ちなみに、requireとincludeとextendの違いについては以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/gaku8/items/db936ff7312ba7d97315">Ruby基礎 | requireとincludeとextendの違いを確認（includeとextendはメソッド探索で確認） - Qiita</a></li>
+</ul>
+
+<h2>メソッドの語末の!と?</h2>
+<p>Rubyでは、メソッドの語末の!は「破壊的なメソッド」、すなわちレシーバの内容を変更するかもしれないメソッドを表す。</p>
+<p>また、メソッドの語末の?は、「真偽値を返すメソッド」を表す。そのままif文やwhile文に指定することができる。</p>
+
+<h2>クラス名#メソッド</h2>
+<p>また、Rubyではドキュメントのような文書のために、「クラス名#メソッド」という記法を使う。これはメソッドがクラスのインスタンスメソッドであることを示している。</p>
+<p>この記法はドキュメント内でのみ有効であり、実際のプログラムコードでは「オブジェクト名.メソッド」と使う。</p>
+
+<h2>EnumerableモジュールとComparableモジュール</h2>
+<p>Enumerableとは「数え上げる」という意味で、Mix-inで提供されている数え上げるためのモジュール。繰り返しのための多くのメソッドを提供する。</p>
+<p>Arrayクラスのメソッドに見えて、本当はEnumerableモジュールで提供されているメソッドも少なくない。</p>
+<p>Enumerableモジュールはeachメソッドを要求する。eachメソッドをイテレータとして作成した上で、Enumerableモジュールをインクルードすると、これらのメソッドを使用できる。</p>
+<p>ちなみに、比較のためのメソッド&gt;や&lt;などはComparableモジュールで提供されている。Comparableとは「比較可能な」という意味。使うためには&lt;=&gt;演算子を、a &lt; bならば-1, a == bならば0, a &gt; bならば1であると成り立つように定義する必要がある。</p>
+
+
+<h1>関連ページ</h1>
+
+<h2>Ruby on Rails</h2>
+<p><a href="ruby_on_rails.html">Ruby on Rails</a>を参照のこと。</p>
+
+<h1>ライブラリ集・フレームワーク</h1>
+<h2>gems</h2>
+<p>Rubyのライブラリはgemと呼ばれます。</p>
+<ul>
+<li><a href="https://www.ruby-lang.org/ja/libraries/">ライブラリ - Ruby</a></li>
+</ul>
+
+<h2>Sinatra</h2>
+<p>たった5行のコードでWebサービスを作ることのできるマイクロフレームワーク。</p>
+<ul>
+<li><a href="https://type.jp/s/itac/article5.html">たった5行のコードでWebサービス！Sinatra, Rubyとは？ -角幸一郎 - type IT Academy|転職＠type</a></li>
+<li><a href="https://qiita.com/kimioka0/items/751e460cbb59c70379c6">Sinatra 入門 - Qiita</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>Ruby</h2>
+<ul class="defaultlist list7">
+<li>Ruby
+<ul>
+<li>Ruby
+<ul>
+<li>演算子</li>
+<li>データ構造</li>
+<li>制御フロー</li>
+<li>メソッド</li>
+<li>クラスとオブジェクト</li>
+<li>ブロックとProcクラス</li>
+<li>モジュールとMix-in</li>
+<li>ライブラリ</li>
+<li>gems</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>演算子</h2>
+<p>基本は加減乗除。+, -, *, /, %などが使えるほかMathモジュールで数学関数を使える。</p>
+
+<h2>データ構造</h2>
+<p>ローカル変数はvalue、グローバル変数は$value、インスタンス変数は@value、クラス変数は@@value</p>
+<p>リストやハッシュもある</p>
+
+<h2>制御フロー</h2>
+<p>ifなどの制御ブロックや関数の終了はend</p>
+<p>for文ではJavaの拡張for文のような記法（反復可能オブジェクトを1つ1つ操作する）も可能</p>
+
+<h2>メソッド</h2>
+<p>メソッドの定義はdef</p>
+<p>returnは省略した場合最後の値を返す</p>
+
+<h2>クラスとオブジェクト</h2>
+<p>クラスの定義はclass</p>
+<p>classの中にdefでメソッドを作り、@valueでインスタンス変数を操作する</p>
+<p>インスタンスの作成はnewメソッド</p>
+<p>メソッドはレシーバ名.メソッド名()というように「.」をつけて呼び出す（ブロックを付加することも可能）</p>
+<p>継承は「&lt;」を使う。演算子オーバーロードが使えるため配列の[]を再定義することもできる。また特異メソッドを使ってインスタンスに直接メソッドを追加するなどの荒業も可能。</p>
+
+<h2>ブロックとProcクラス</h2>
+<p>ブロックはdo |x| 〜 endや波括弧も使える</p>
+<p>ブロックは無名関数だが、ブロックがあるだけでRubyは極めて直観的で使いやすい</p>
+
+<h2>モジュールとMix-in</h2>
+<p>モジュールはクラスと似ているが、特定のメソッドをインクルードして使い回せる</p>
+
+<h2>EnumerableモジュールやComparableモジュール</h2>
+<p>これらのモジュールは、eachや&lt;=&gt;など最低限のメソッドを必要とし、最低限のメソッドだけ定義すれば、自分のクラスでもインクルードできる</p>
+<p>eachだけを実装してEnumerableモジュールをインクルードすれば、mapやfindも使えて便利</p>
+<p>Arrayクラスのメソッドに見えて、実際はEnumerableモジュールのメソッドという場合も多い</p>
+<p>ダックタイピング（アヒルのように鳴き、アヒルのように歩くものは、アヒルに違いない）との相性も良い</p>
+
+<h2>ライブラリ</h2>
+<p>Rubyにはさまざまなライブラリが用意されている</p>
+<p>特にArray, Hash, File, Dir, IO, String, Regexp, Procなどは不可欠</p>
+
+<h1>自作プログラム</h1>
+<h2>Rubyによるちょっとしたゲーム</h2>
+<p>Rubyによるちょっとしたゲーム。自作ですが、作業所のみんなで開発したPerlのプログラムを参考にしています。</p>
+<pre class="prettyprint">
+class Player
+    def initialize(name, hp, atk)
+        @name = name
+        @hp = hp
+        @atk = atk
+    end
+    
+    def name()
+        return @name
+    end
+    
+    def damaged(power)
+        puts "#{@name}は#{power}ダメージを受けた。"
+        @hp -= power
+    end
+    
+    def attack(player)
+        puts "#{@name}は#{player.name()}を攻撃した。"
+        player.damaged(@atk)
+    end
+    
+    def print_hp()
+        puts "#{@name}の残りHPは#{@hp}になった。"
+    end
+end
+
+player1 = Player.new("戦士", 100, 10)
+player2 = Player.new("魔法使い", 50, 15)
+boss = Player.new("ボス", 1000, 20)
+
+for i in 1..5 do
+    puts "ターン#{i}"
+    player1.attack(boss)
+    player2.attack(boss)
+    boss.attack(player1)
+    boss.attack(player2)
+    player1.print_hp()
+    player2.print_hp()
+    boss.print_hp()
+    print "\n"
+end
+</pre>
+<p>出力：</p>
+<pre>
+ターン1
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは80になった。
+魔法使いの残りHPは30になった。
+ボスの残りHPは975になった。
+
+ターン2
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは60になった。
+魔法使いの残りHPは10になった。
+ボスの残りHPは950になった。
+
+ターン3
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは40になった。
+魔法使いの残りHPは-10になった。
+ボスの残りHPは925になった。
+
+ターン4
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは20になった。
+魔法使いの残りHPは-30になった。
+ボスの残りHPは900になった。
+
+ターン5
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは0になった。
+魔法使いの残りHPは-50になった。
+ボスの残りHPは875になった。
+</pre>
+<p>ブラウザでRubyをコンパイル・実行できる<a href="https://paiza.io/ja">Paiza.io</a>上で開発しました。</p>
+
+<h2>継承を使ったバージョン</h2>
+<p>継承を使って魔法を実装したバージョン。</p>
+<pre class="prettyprint">
+class Player
+    def initialize(name, hp, atk)
+        @name = name
+        @hp = hp
+        @atk = atk
+    end
+    
+    def name()
+        return @name
+    end
+    
+    def damaged(power)
+        puts "#{@name}は#{power}ダメージを受けた。"
+        @hp -= power
+    end
+    
+    def attack(player)
+        puts "#{@name}は#{player.name()}を攻撃した。"
+        player.damaged(@atk)
+    end
+    
+    def print_hp()
+        puts "#{@name}の残りHPは#{@hp}になった。"
+    end
+end
+
+class Mage &lt; Player
+    def initialize(name, hp, atk)
+        super
+    end
+    
+    def attack(player)
+        puts "#{@name}は#{player.name()}に大魔法エクスカリバーを唱えた。"
+        player.damaged(@atk + 100)
+    end
+end
+
+player1 = Player.new("戦士", 100, 10)
+player2 = Mage.new("魔法使い", 50, 15)
+boss = Player.new("ボス", 1000, 20)
+
+for i in 1..5 do
+    puts "ターン#{i}"
+    player1.attack(boss)
+    player2.attack(boss)
+    boss.attack(player1)
+    boss.attack(player2)
+    player1.print_hp()
+    player2.print_hp()
+    boss.print_hp()
+    print "\n"
+end
+</pre>
+<p>出力：</p>
+<pre>
+ターン1
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは80になった。
+魔法使いの残りHPは30になった。
+ボスの残りHPは875になった。
+
+ターン2
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは60になった。
+魔法使いの残りHPは10になった。
+ボスの残りHPは750になった。
+
+ターン3
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは40になった。
+魔法使いの残りHPは-10になった。
+ボスの残りHPは625になった。
+
+ターン4
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは20になった。
+魔法使いの残りHPは-30になった。
+ボスの残りHPは500になった。
+
+ターン5
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは0になった。
+魔法使いの残りHPは-50になった。
+ボスの残りHPは375になった。
+</pre>
+
+<h2>適当なスクリプト</h2>
+<p>自分で作った適当なスクリプト。&lt;!--が二重になっている行を教えてくれる。いろいろと改善の余地はあるが自分で簡単に使う範囲ではこれでも使える。</p>
+<pre class="prettyprint">
+count = 0
+line_count = 0
+io = File.open("diffA.txt")
+while line = io.gets
+    line_count += 1
+    if /&lt;!--/ =~ line
+        if /--&gt;/ =~ line
+            count = 0
+        else
+            count += 1
+        end
+        if count &gt; 1
+            puts line_count
+        end
+    end
+    if /--&gt;/ =~ line
+        count = 0
+    end
+end
+</pre>
+<p>ただし、これには一行の中に&lt;!-- ～ --&gt;があった時に、その前から&lt;!--が二重になっていた時には検知してくれない。修正版は以下。</p>
+<pre class="prettyprint">
+count = 0
+line_count = 0
+io = File.open("diffA.txt")
+while line = io.gets
+    line_count += 1
+    if /&lt;!--/ =~ line
+        if /--&gt;/ =~ line
+            if count &gt; 0
+                puts line_count
+                count = 0
+            end
+        else
+            count += 1
+            if count &gt; 1
+                puts line_count
+            end
+        end
+    end
+    if /--&gt;/ =~ line
+        count = 0
+    end
+end
+</pre>
+<p>まだ問題はあるが、とりあえず普段使う分には十分のスクリプトである。全部を想定することをするよりも、必要に応じてスクリプトを書き換えて使うべきである。</p>
+<p>後日注記：実際のところ、このスクリプトは同じ行で&lt;!--と--&gt;の両方があった時に順番や個数を考えないため、仕様どおりの実装はできていない。単純に書いただけなので、仕様通りのものが欲しいのであれば自分で正規表現を使って作ればいいと思う。</p>
+
+<h1>さまざまな実装</h1>
+<h2>JRuby</h2>
+<p>JavaによるRubyインタプリタの実装。インタプリタをJavaアプリケーションに埋め込むことが出来る。また、Javaのコンポーネント（Swingなどクラスライブラリ）をRubyから利用出来る。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/JRuby">JRuby - Wikipedia</a></li>
+</ul>
+
+<h2>IronRuby</h2>
+<p>.NETにおけるRubyの実装。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IronRuby">IronRuby - Wikipedia</a></li>
+</ul>
+
+<h2>YARV</h2>
+<p>Rubyの新しい処理系だったが、Ruby 1.9.0からRuby（Matz's Ruby Interpreter, MRI）に組み込まれた。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/YARV">YARV - Wikipedia</a></li>
+</ul>
+
+<h2>mruby</h2>
+<p>軽量版Ruby。省メモリで、アプリケーションなどに組み込みやすく、UNIX（POSIX）などのプラットフォームに依存しないように設計されている。だが、クラスやメソッドが少ない。</p>
+<ul>
+<li><a href="http://blog.masuidrive.jp/2013/01/24/diff-cruby-mruby/">軽量Ruby – mrubyとRubyの違い – @masuidrive blog</a></li>
+</ul>
+
+<h1>開発環境（IDE）</h1>
+<h2>RubyMine</h2>
+<p>RubyMineは、JetBrains社によるRuby on Railsの開発環境。一部では「最高」と言われている。ただし有料。</p>
+<ul>
+<li><a href="https://www.pavlog.tokyo/entry/rubymine-preview">【必読】開発者が「RubyMine」を使ってはいけない4つの理由【JetBrains】 - pavlog</a> - 使ってはいけないと言いながらRubyMineの良さを説明している。</li>
+</ul>
+
+<h1>Webサーバ・APサーバ</h1>
+<h2>Puma, Unicorn, Passenger</h2>
+<p>Puma, Unicorn, PassengerはRubyのWeb・APサーバ。Rails5では標準のWebサーバがPumaになっている。Unicornはマルチプロセス、Pumaはマルチスレッドで動く。</p>
+<ul>
+<li><a href="https://qiita.com/ykyk1218/items/0ca7f1fa449b41fe1fea">Pumaの本当の力を引き出す - Qiita</a></li>
+<li><a href="https://arma-search.jp/article/ruby-puma">RubyのWebサーバ「puma」を使ってみた感想 | ARMA SEARCH</a></li>
+</ul>
+
+<h1>情報サイト</h1>
+<h2>Rubyist Magazine</h2>
+<p>Web雑誌。</p>
+<ul>
+<li><a href="http://magazine.rubyist.net/">Rubyist Magazine</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>Rubyの間違いは動的型付けにあり</h2>
+<p>僕個人の意見を言えば、Rubyは動的型付けが間違っていると思う。</p>
+<p>それは、なぜなら、「そのクラスが何なのか分からないままに、適当にメソッドを付けて操作することが多い」からである。</p>
+<p>たとえば、関数の引数にオブジェクトを指定する場合。どんなクラスのオブジェクトをそこに渡すのか、ということを明記せず、適当にそのクラスのメソッドを使う。どんなクラスのインスタンスを引数に与えるのか、ということがあいまいなまま、適当に動いてしまう。</p>
+<p>JavaScriptの方で「TypeScript」というものを作っているように、僕は「TypeRuby」というものを作ってほしい。おそらく、それがこの世界で一番最高の、理想のプログラミング言語になるだろう。</p>
+<p>後日注記：動的型付け言語であることは必ずしも悪いことばかりではなく、「ダックタイピング」ができるなど良い点もある。ダックタイピングとは、「アヒルのように歩きアヒルのように鳴くものはアヒルに違いない」という考え方で、共通のメソッドを持つものは、たとえ型が違っていても同じように扱える、という考え方である。これが、Rubyに「似たような名前のメソッド」が多い理由でもある。継承やインターフェースやジェネリックに似たような考え方を、Ruby流に「手軽に実現」したものであると言える。</p>
+
+<h2>Rubyを静的型付けにするCrystal</h2>
+<p>あるんじゃないかと思っていたら、やっぱりありました。Rubyを静的型付けにするCrystalという言語があります。実行速度が速く、型安全である。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Crystal_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)">Crystal (プログラミング言語) - Wikipedia</a></li>
+</ul>
+<p>ただ、僕としては少し不満な点がある。型をきちんと書いて欲しい。この言語は効率的な機械語は作成できるようだが、Rubyと同じように型を省略するコードが目立つ。そうではなく、クラスなどの型を書いて欲しいのである。（言っていることが良く分からないかもしれないが、僕も型推論などの機能が良く分かっていないので、当たり前である。）</p>
+
+<h2>RubyとRailsは一部ではとても嫌われている</h2>
+<p>Rubyは、一部では日本人にも嫌われている。その理由は何か。</p>
+<p>それは、「Rubyエンジニアはいつか限界が来る」からである。</p>
+<p>Rubyでコードを書いていると、型名などの難しいことを考えなくても適当なコードで動いてしまい、いつまでもきちんとしたコンピュータの知識と技術が身につかないのである。</p>
+<p>C++やJavaのプログラマには、そんなことはない。Rubyは確かにプログラマのベスト・フレンドだが、教育向けであると言う割に、教育にはふさわしくない。</p>
+<ul>
+<li><a href="https://qiita.com/klriutsa/items/86ac5e94ec99c0d95b61">「Railsは終わった」と言われる理由 - Qiita</a></li>
+</ul>
+
+<h2>Rubyは本物を超えたプログラミング言語</h2>
+<p>よく、Rubyについて、「本物のプログラミング言語ではない」ということが言われることがあります。</p>
+<p>つまり、「簡単なスクリプト処理には使えるが、C++やJavaのようにきちんとしたプログラマが使う、一流のプログラミング言語ではない」という意見です。</p>
+<p>同様に、JavaScriptなども、「本物のプログラミング言語ではない」と言われることがあります。</p>
+<p>しかしながら、Rubyに関して言えば、この意見は間違いです。</p>
+<p>なぜなら、Rubyは「本物を超えたプログラミング言語」だからです。</p>
+<p>Rubyには、独自の「Ruby道」があり、このRuby道を極めることこそ、Rubyでプログラムを書く理由です。</p>
+<p>このRuby道の精神は「楽しさ」であり、同時に「自然に分かりやすいプログラムを書けること」をMatzは信念としています。</p>
+<p>RubyはRuby on Railsという大作フレームワークを作りましたが、RailsではRuby道の極みを行っています。それは「なんでも簡単にできて、楽しくて、自然で、実用的だ」というポリシーです。</p>
+<p>Rubyはまさに「本物を超えたプログラミング言語」、すなわち、どのプログラミング言語とも違う、「言語という概念を超越した言語」なのです。</p>
+<p>2020年12月25日、クリスマスプレゼントとしてRuby 3.0.0がリリースされました。RubyコミュニティによってRubyがよりRubyらしい言語となっていくことを切に願っています。</p>
+
+<h2>Ruby 3.0.0</h2>
+<p>Ruby 3.0.0がリリースされましたが、</p>
+<p>今回のリリースの目玉は「三倍速くなった」「静的型解析ができるようになった」「並列処理」の3点だそうです。</p>
+<p>特に、静的型解析については、RBSというツールが搭載され、TypeScriptのようにRubyの型を解析することができます。</p>
+<p>また、TypeProfというツールを使うことで、一般的な型のないRubyコードから、自動的にコードの記述を解析して、型宣言ファイルを自動生成することができるようです。</p>
+<p>これにより、Rubyの使われる場面（たとえば大規模開発の言語として採用される）が大幅に向上することが期待できます。</p>
+<ul>
+<li><a href="https://www.ruby-lang.org/ja/news/2020/12/25/ruby-3-0-0-released/">Ruby 3.0.0 リリース</a></li>
+</ul>
+
+<h2>ルビーは真珠の次の月の誕生石</h2>
+<p>Rubyという名前のせいで、「パール（Pearl→Perl）のパクリではないか」と思われることの多いRubyですが、名前の由来は「真珠の次の月の誕生石がルビーだから」です。</p>
+<p>Perlからの影響は確かにありますが、むしろ同じオブジェクト指向のスクリプト言語であるPythonに共通点が多く、よくライバル扱いされます。</p>
+<p>また、作者のMatz（まつもとゆきひろ）は日本人ですが、日本人だけではなく多くの外国人の開発者と共同開発しているため、本人は「国産とはあまり言いたくない」と言っていたこともあります。</p>
+<p>しかしながら、日本から生まれた言語であるため、日本人の開発者や日本語の情報はとても多いです。しかしながら、Ruby on RailsはデンマークのDHH（デイヴィッド・ハイネマイヤー・ハンソン）によって開発されたフレームワークであり、決して「日本ローカル」に閉じたソフトウェアではなく、海外にも多くの愛好者がいます。彼らはRubyの精神のことを「Ruby Way」とか「Rubyish Way」と呼びます。</p>
+
+<h1>リンク集全般</h1>
+<h2>Ruby</h2>
+<ul>
+<li><a href="https://www.ruby-lang.org/ja/documentation/">ドキュメント - Ruby</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/series/1413/">若手エンジニア／初心者のためのRuby 2.1入門 - @IT</a></li>
+</ul>
+
+<h2>Rubyチュートリアル</h2>
+<p>Rubyのチュートリアル。</p>
+<ul>
+<li><a href="http://magazine.rubyist.net/?0002-FirstProgramming">Ruby ではじめるプログラミング 【第 1 回】 - Rubyist Magazine</a></li>
+</ul>
+
+<h2>Rubyリファレンス</h2>
+<p>Ruby</p>
+<ul>
+<li><a href="https://docs.ruby-lang.org/ja/">プログラミング言語 Ruby リファレンスマニュアル</a></li>
+</ul>
+
+<h1>書籍</h1>
+<h2>Ruby</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%AE%E3%81%97%E3%81%84Ruby-%E7%AC%AC5%E7%89%88-%E9%AB%98%E6%A9%8B-%E5%BE%81%E7%BE%A9/dp/4797386290">たのしいRuby 第5版</a></li>
+<li><a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

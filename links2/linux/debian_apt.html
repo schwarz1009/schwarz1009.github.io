@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Debian２（Apt） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Debian２（Apt）</h1>
+<p>Debianに関する世界観２（Apt）です。<a href="debian.html">Debian GNU/Linux</a>や<a href="debian_deb.html">Deb/Dpkg</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+
+<h1>Apt</h1>
+<h2>Apt</h2>
+<p>パッケージ管理システムで、アプリケーションを簡単にインストールする仕組み。</p>
+<p>AptはDebianのパッケージ管理ツール。依存関係を自動で解決したり、パッケージの自動更新などをやってくれる。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/sect.apt-get.html">6.2. aptitude、apt-get、apt コマンド - Debian</a></li>
+</ul>
+<p>yumやDNFの場合は以下を参照のこと：</p>
+<ul>
+<li><a href="http://sig9.hatenablog.com/entry/2015/06/21/081407">Linux パッケージ管理コマンド比較（yum / dnf / apt 等） - らくがきちょう</a></li>
+<li><a href="http://blog.hifumi.info/2015/05/18/dnf-as-new-fedora-package-manager/">Yumに替わる新たなパッケージマネージャ・DNFの覚書 - blog: takahiro okumura</a></li>
+</ul>
+
+<h2>最近はapt-getではなくapt</h2>
+<p>最近のDebianでは、パッケージをインストールする際のコマンドはapt-getではなく、aptだけ（たとえばapt install [package]のようになる）になった。</p>
+<p>apt-getに存在した設計上の問題点を解決したのがaptコマンド。外部プロジェクトとして、synaptic、aptitudeのようなフロントエンドもある。今のDebianでは基本的にaptを使う。詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/sect.apt-get.html">6.2. aptitude、apt-get、apt コマンド - Debian 管理者ハンドブック</a></li>
+</ul>
+
+<h2>aptとDeb/Dpkg</h2>
+<p>DebianやUbuntuなどでのパッケージ管理システム。</p>
+<p>aptをRPMで使うAPT-RPMというものも存在する。</p>
+
+<h2>Apt/Dpkgの設定と管理</h2>
+<table class="some_tables">
+<tr>
+<th>設定ファイル</th>
+<th>説明</th>
+</tr>
+
+<tr>
+<td>/etc/apt/apt.conf</td>
+<td>aptの設定ファイル。</td>
+</tr>
+
+<tr>
+<td>/etc/apt/sources.list</td>
+<td>aptのリポジトリ設定ファイル。</td>
+</tr>
+
+<tr>
+<td>dpkg -l</td>
+<td>Dpkgのインストールされているパッケージの一覧。</td>
+</tr>
+</table>
+
+<h2>sources.list</h2>
+<p>Aptのパッケージリポジトリ設定ファイル。/etc/apt/sources.listに存在する。</p>
+<p>「deb」はバイナリパッケージ用で、「deb-src」はソースパッケージ用。</p>
+<p>「stable」は安定板、「testing」はテスト版、「unstable」は不安定版を表す。他に、リリース版の自動更新を避けるため、リリースバージョン別のコードネームを使うことが出来る。</p>
+<p>「main」は完全なフリーソフトウェア、「contrib」はフリーではないソフトウェアに依存するフリーソフトウェア、「non-free」はフリーではないソフトウェアを使用することを宣言する。</p>
+<p>基本は以下を参照のこと。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/apt.html">第 6 章 メンテナンスと更新、APT ツール - Debian</a></li>
+</ul>
+
+<h1>GUI/CUIフロントエンド</h1>
+<h2>Synaptic</h2>
+<p>AptのGUIフロントエンド。</p>
+
+<h2>aptitude</h2>
+<p>AptのCUIフロントエンド。</p>
+
+
+<h1>余談</h1>
+<h2>不要になった依存パッケージの自動削除</h2>
+<p>最近のDebianのaptでは、不要になった依存パッケージの自動削除（追跡）をしてくれるようになった。</p>
+<p>昔のDebianのapt-getでは、依存関係でインストールされたパッケージがあったとして、その依存関係の元になった「導入したかったパッケージ」をアンインストールしても、そのパッケージと一緒に入った依存パッケージはアンインストールしてくれなかった。</p>
+<p>これは、たとえばアプリケーションが依存するライブラリを依存関係で自動的にインストールして、あとでこのアプリケーションを使わなくなってアンインストールしても、ライブラリは残ってしまう、ということを意味する。</p>
+<p>Debianだけでなく、FedoraのyumやGentooのPortageでも、依存パッケージを自動で削除することはしなかった。決してできなかったわけではない（たとえばPortageでは自動削除用の専用のコマンドがある）。だが、こうした不要パッケージの追跡をしなければ、システムに必要のないパッケージがどんどん残ってしまい、結果「パッケージ管理システムの意味がない」ということになってしまう。</p>
+<p>最近のパッケージ管理システムでは、こうしたことを背景に、不要になったパッケージはアンインストール時に追跡して自動で削除したり、明示的にそのお知らせを表示するようになっている。Debianのaptやapt-getでも、最近は要らないパッケージを「自分で明示的にインストールした場合でなければ」自動削除してくれる。</p>
+<p>ちなみに、apt-get autoremoveを使えば、不要になったパッケージを削除をその都度自動で削除してくれる。詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/sect.apt-get.html">6.2. aptitude、apt-get、apt コマンド - Debian 管理者ハンドブック</a></li>
+</ul>
+
+<h1>リンク集全般</h1>
+
+
+<h2>APT/DEB</h2>
+<p>Debianのパッケージ管理ツール。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/">Debian 管理者ハンドブック</a></li>
+<li><a href="https://www.debian.org/doc/manuals/aptitude/index.ja.html">aptitude ユーザマニュアル</a></li>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/packaging-system.html">第 5 章 パッケージシステム、ツールと基本原則 - Debian</a></li>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/apt.html">第 6 章 メンテナンスと更新、APT ツール - Debian</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

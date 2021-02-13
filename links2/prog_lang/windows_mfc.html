@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Windowsプログラミング関連の世界観（Visual C++/MFC） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Windowsプログラミング（Visual C++/MFC）</h1>
+<p>Windowsプログラミングに関する世界観（Visual C++/MFC）です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Visual C++/MFCの概要</h1>
+<h2>MFCの概要</h2>
+<p>MicrosoftによるC++のオブジェクト指向のクラスライブラリ（フレームワーク）。</p>
+<p>MFCは、.NET Frameworkが登場するまでは、Windowsプログラミングの主役だった。Windows APIのラッパー的フレームワークだが、生産性が高いと言われ、AppWizardやクラス・メンバ関数などのGUIによる自動作成ができるという特徴がある。ただし、ドキュメント・ビューと呼ばれる仕組みを理解するのが難解であることや、変数の名前付けルールに古いシステムハンガリアン記法を用いており、意味が分かり辛い。</p>
+<p>アプリケーションを作るためのフレームワークとして使えるほか、ファイル処理やGDI・デバイスコンテキストからスレッド、ソケット、FTP/HTTP、文字列や配列・リストなどのコンテナなど、C++向けのクラスライブラリとして使用できる。</p>
+
+<h2>MFCのクラス一覧</h2>
+<p>MFCで提供されるクラスには、CStringやCFileのような基本的なAPI（C++を拡張したようなクラスライブラリ）や、CDocumentやCViewのような継承されることを前提とされるドキュメント・ビューのフレームワーク、CDC（DCはデバイス・コンテキストの略）やCPen, CBrush, CRectのようなGDI+関係のAPI、そしてCButtonのようなWindowsコントロールのクラスなどがある。また、クラスだけではなく専用の関数や型がたくさん用意されている。TCP/IPネットワークについてはWinSockを使う。</p>
+<p>デバイス・コンテキストはWindowsとデバイスの橋渡し役のようなもので、Windowsはデバイスを直接操作するのではなく、デバイス・コンテキストを仲介役として操作する。このデバイス・コンテキストを上手く使うことで、たとえばペイントアプリケーションのようなGDI+を使ったグラフィックス操作を行うプログラムを記述することができる。</p>
+<p>以下に一覧があります。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/cpp/mfc/class-library-overview?view=vs-2017">MFC クラス ライブラリの概要 | Microsoft Docs</a></li>
+</ul>
+
+<h2>Visual C++のツールたち</h2>
+<p>Visual C++にはいくつかのツールがある。代表的なものは、</p>
+<table class="some_tables">
+<tr><th>ツール</th><th>説明</th></tr>
+<tr><td>AppWizard</td><td>プログラムの基本形を作る</td></tr>
+<tr><td>ダイアログエディタ</td><td>フォームにコントロールを配置する</td></tr>
+<tr><td>ClassWizard</td><td>ユーザーの定義したい機能に応じて機能を追加する</td></tr>
+<tr><td>テキストエディタ</td><td>コードをユーザーが記述する</td></tr>
+</table>
+<p>などとなる。このほかにもデバッグを行うためのデバッガなどがある。</p>
+<p>また、Visual C++ではプログラムを三種類に分類する。</p>
+<table class="some_tables">
+<tr><th>タイプ</th><th>説明</th></tr>
+<tr><td>SDI</td><td>メニューがあり、ツールバーがあり、中央部分全体がユーザーの作業領域になっているプログラム</td></tr>
+<tr><td>MDI</td><td>ひとつのアプリケーションの中で、複数のデータファイルをオープンし、複数のウィンドウが開く</td></tr>
+<tr><td>ダイアログベース</td><td>フォームがあり、その上にボタンやエディットボックスなどが配置される</td></tr>
+</table>
+<p>（<a href="https://www.amazon.co.jp/%E6%96%B0Visual-6-0%E5%85%A5%E9%96%80-%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%93%E3%82%AE%E3%83%8A%E3%83%BC%E7%B7%A8-Visual-6-0%E5%AE%9F%E7%94%A8%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/479730975X">新Visual C++6.0入門 スーパービギナー編 (Visual C++6.0実用マスターシリーズ)</a>を参考に執筆しました。）</p>
+
+<h1>MFCによる開発</h1>
+<h2>MFCのメッセージハンドラ・メッセージマップ</h2>
+<p>Windows APIにおけるWindowsメッセージの処理は、MFCではメッセージマップによって行う。</p>
+<p>これはBEGIN_MESSAGE_MAP()とEND_MESSAGE_MAP()の間にメッセージハンドラを追加することによって行われる。</p>
+<p>コントロールであれば「ON_COMMAND(ID名, 関数名)」や、Windowsメッセージであれば「ON_WM_メッセージ名()」などを記述する。</p>
+<p>以下はメッセージハンドラ（関数プロトタイプ）とメッセージマップについて：</p>
+<ul>
+<li><a href="https://so-zou.jp/software/tech/tool/ide/visual-cpp/mfc/windows-message.htm">ウィンドウ メッセージ | MFC プログラミング解説</a></li>
+<li><a href="https://akatukisiden.wordpress.com/2012/10/19/mfc%E3%83%A1%E3%83%A24-%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%83%BB%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%83%9E%E3%83%83%E3%83%97/">MFCメモ4 メッセージハンドラ・メッセージマップ | akatukisiden's blog</a></li>
+</ul>
+
+<h2>オーバーライドを多用する</h2>
+<p>MFCではメソッドのオーバーライドを多用する。</p>
+<p>たとえば、WindowsメッセージではWM_PAINTに対応するメソッドを記述したい場合、WM_PAINTのメッセージハンドラであるOnPaint()をオーバーライドする。</p>
+<p>C++のこうしたオーバーライドを使うことで、「あるイベントが起きた時やあるメソッドが実行されたタイミングに合わせて処理を実行しクラスの内容を書き換える」ことができる。</p>
+<p>また、既定の描画処理の後にカスタム描画したい、などといった場合はDefault()メソッドを加える。以下を参照のこと。</p>
+<ul>
+<li><a href="http://sphere42.mlexp.com/techlib/2011/02/mfc-onpaint.html">MFC で OnPaint をオーバーライド - Techlib</a></li>
+</ul>
+
+<h1>ドキュメント・ビュー・アーキテクチャ</h1>
+<h2>CViewとCDocumentの基本</h2>
+<p>基本的に、CViewとCDocumentを継承して作る。Documentクラスでファイルを読み書きし、Viewクラスで表示する。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/cpp/mfc/reference/cview-class?view=vs-2017">CView クラス | Microsoft Docs</a></li>
+<li><a href="https://docs.microsoft.com/ja-jp/cpp/mfc/reference/cdocument-class?view=vs-2017">CDocument クラス | Microsoft Docs</a></li>
+</ul>
+<p>GetDocument()でDocumentクラスのポインタが得られるので、Viewクラスはこれにアクセスすることになる。</p>
+<p>以下のサイトが参考になる。</p>
+<ul>
+<li><a href="https://bluefish.orz.hm/sdoc/winappl_mfc.html">MFCでアプリケーションを作る by K.I - Bluefish Webpage</a></li>
+</ul>
+
+<h2>CString</h2>
+<p>Visual C++では文字列処理のためにCString型を用いる。これはBASICの文字列変数と同じような性格を持っていて、可変長の文字列を処理できる。</p>
+<pre class="prettyprint">
+char str1[80];
+CString str2;
+</pre>
+<p>と宣言した場合、str1には80文字までの文字列しか格納できないが、str2にはそれより長い文字列をそのまま格納できる。</p>
+<p>また、Cではstrcpy関数を使う代入を=で記述したり、Cではstrcat関数を使う連結を+で記述したり、Cではstrcmp関数を使う比較を==で記述したりできる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E6%96%B0Visual-6-0%E5%85%A5%E9%96%80-%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%93%E3%82%AE%E3%83%8A%E3%83%BC%E7%B7%A8-Visual-6-0%E5%AE%9F%E7%94%A8%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/479730975X">新Visual C++6.0入門 スーパービギナー編 (Visual C++6.0実用マスターシリーズ)</a>を参考に執筆しました。）</p>
+
+
+<h2>MFCでカスタムコントロール</h2>
+<p>Windowsで、すでにあるコントロールのコンポーネントを使うだけではなく、独自のコンポーネントを作る場合は、継承やオーバーライドを使ってMFCなどで作る必要がある。既にあるクラスを継承し、メソッドをオーバーライドすることで、自分のコントロールを作ることができる。</p>
+<p>以下はMFCでカスタムコントロールを作る方法：</p>
+<ul>
+<li><a href="http://qwertyfk.blog16.fc2.com/blog-entry-63.html">MFCでカスタムコントロールを作る方法まとめ - プログラミングメモ日記</a></li>
+<li><a href="http://plaza.harmonix.ne.jp/~fakira/cppdoc/custum.htm">[MFC] カスタムコントロールの作成 - 斉藤のページ</a></li>
+</ul>
+
+
+<h1>サンプルコード</h1>
+<h2>MFCサンプルコード</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="https://qiita.com/aki___/items/5eada28e355161559c4a">世界一短いMFCダイアログのタブコントロールサンプル - Qiita</a></li>
+</ul>
+
+
+
+<h1>参考リンク集</h1>
+<h2>MSDNの入門記事</h2>
+<p>MSDN（Microsoftの開発者向け情報）を参照することで、MFC/ATLの情報を知ることが出来る。</p>
+<ul>
+<!--
+<li><a href="https://msdn.microsoft.com/ja-jp/library/kkcb3t0w.aspx">MFC の概念 - MSDN</a></li>
+-->
+<li><a href="https://code.msdn.microsoft.com/windowsdesktop/VisualC-43c71460">[連載! とことん VC++] 第 6 回 MFC アプリケーションの基本構造の再確認 ～ドキュメント/ビュー アーキテクチャ～ - MSDN</a></li>
+</ul>
+
+<h2>MFC関連のリンク集</h2>
+<p>MFC関連の参考になるサイト。</p>
+<ul>
+<!--<li><a href="http://marina.sys.wakayama-u.ac.jp/~tokoi/?date=20100820">床井研究室 - MFC によるダイアログベースのアプリケーション（１）</a></li>-->
+<!--<li><a href="http://www.g-ishihara.com/">【 G.Ishihara流 】Visual C++ (MFC)超入門</a></li>-->
+<li><a href="https://qiita.com/tadnakam/items/5bdb8354908a0267bf2f">Visual Studio 2017 Visual C++ による MFC デスクトップアプリ開発 (SDI) - Qiita</a></li>
+<!--<li><a href="http://rarara.cafe.coocan.jp/">ら ら ら のプログラマーズラウンジ</a></li>-->
+<li><a href="http://rarara.cafe.coocan.jp/vc/">Area of VC++TIPS らららのお部屋</a></li>
+<li><a href="http://www.jade.dti.ne.jp/~arino/sample99.htm">MFC 実践プログラミング ヒント集</a></li>
+<li><a href="https://so-zou.jp/software/tech/tool/ide/visual-cpp/mfc/">MFC (Microsoft Foundation Class) プログラミング解説 - so-zou.jp</a></li>
+</ul>
+
+<h1>デバッグ</h1>
+<h2>Visual Studioでデバッグ</h2>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/visualstudio/debugger/debugger-feature-tour?view=vs-2017">VS 2017 でデバッグを開始する - Visual Studio | Microsoft Docs</a></li>
+<li><a href="http://www.atmarkit.co.jp/fdotnet/chushin/vsdebug_index/index.html">Visual Studioデバッグ手法 - ＠IT</a></li>
+</ul>
+
+<h1>オープンソース版</h1>
+<h2>Bakery（ドキュメント/ビュー・アーキテクチャ）</h2>
+<p>Bakeryと言うオープンソースのドキュメント/ビュー・アーキテクチャもあるようだ。GTKmmやlibsigc++とともに使われる。</p>
+<ul>
+<li><a href="http://bakery.sourceforge.net/">Bakery</a></li>
+<li><a href="https://www.gtkmm.org/en/">GTKmm</a></li>
+<li><a href="http://libsigc.sourceforge.net/">libsigc++</a></li>
+</ul>
+
+<h1>リンク集全般</h1>
+<h2>Windows</h2>
+<p>Windows関係のチュートリアル。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/e6w9eycd(v=vs.100).aspx">Visual C++ のチュートリアル - MSDN</a></li>
+</ul>
+
+<h1>書籍</h1>
+<h2>Windows</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E4%BD%9C%E3%81%A3%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BVISUAL-C-6-0-%E6%B8%85%E6%B0%B4-%E5%BA%B7%E6%99%B6/dp/4798000035">作ってわかるVISUAL C++ 6.0</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

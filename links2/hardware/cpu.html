@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>CPUの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ハードウェアの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/hardware_menu.html" class="sideiframe"></iframe>
+</div><h1>CPUの世界観</h1>
+<p>CPUの世界観です。<a href="hardware.html">ハードウェア１（半導体）</a>や<a href="../prog_lang/assembly.html">アセンブリ言語</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>CPUとは</h1>
+
+<h2>CPUとは</h2>
+<p>CPUは、コンピュータの中枢であり、全ての計算と実行を行うハードウェア装置。</p>
+<p>加減乗除やシフト演算などの基本的な演算・計算ができる。</p>
+<p>また、レジスタと呼ばれる高速の記憶領域を何個か持っていて、計算の時に使う。レジスタにはAX, BX, CX, DXのように名前がついている。</p>
+<p>記憶を保管するためのメモリや、バスなどを通じて周辺機器ともつながっていて、メモリの中の記憶にアクセスしたり、メモリの中に記憶を保存したり、周辺機器に対するI/O操作を行うことができる。</p>
+<p>また、実行中のプログラムに関しては、現在の命令の位置を任意の位置にジャンプする「ジャンプ命令」を使うことができる。</p>
+<p>命令は機械が解釈できる機械語の命令で行うが、このそれぞれの命令を人間が理解しやすいように言葉（ニーモニック）に置き換えたアセンブリ言語というものがあり、機械語のプログラムを作る時はこうしたアセンブリ言語を用いる。<a href="../prog_lang/assembly.html">アセンブリ言語</a>を参照のこと。</p>
+
+<h2>現在のコンピュータではCPUを意識しない</h2>
+<p>現在のコンピュータでは、CPUやメモリのような低レベルなハードウェアを直接触ることは少ない。OSが仮想CPUや仮想メモリの機構を用意しているため、プログラムを動かす時は原則プログラムはOSの管理下に置かれる。プログラムはマルチタスクを実現するコンテキストスイッチ（プログラムを並列で動かすためのOSの機構）やスケジューリング、あるいはプログラムが利用する変数などの記憶が物理アドレスの中のどの場所に保管されるのか、などといったことを意識することなく、独自の論理アドレス空間を用いて、並列でプログラムを動かすことができる。</p>
+<p>だが、そうしたOSの低レベルなカーネル処理は、全て現実のCPUとメモリの上に実現されている。OSのコードを実行する場合でも、実際に動いているのはCPUであり、プログラムを動かす時も、実際に計算しているのはCPUである。CPUによっては「カーネルモード」と「ユーザーモード」が分かれていることがあり、カーネルはそうしたCPUの機能を用いて作られている。</p>
+<p>また、機械語やアセンブリ言語でプログラムを書くこと自体、現在のコンピュータでは稀であり、多くの場合C言語のようなプログラミング言語を用いて、それを機械語に翻訳するコンパイラを用いて機械語を生成する。手動でハンドアセンブルするよりは遅く非効率的になるかもしれないが、機械語やアセンブリ言語で書くよりもはるかに人間に分かりやすく、書きやすく、読みやすく、また移植性も高い。多くのコンパイラで「最適化」が行われており、ハンドアセンブル並みに高速かつ効率的な機械語をコンパイラが生成することも少なくない。</p>
+<p>もっとも高速なのはFORTRANやC/C++だが、遅くても生産性が高い他の言語を使うことで、さらに書きやすく、読みやすく、作りやすく、また移植性が高くなる。また、オブジェクト指向言語のような高水準の機能のある言語を用いて、より大規模かつ簡単な開発が可能となる。</p>
+<p>ただし、現在のコンピュータではCPUを意識しないからといって、CPUが無関係になるわけではない。実際のところコンピュータの中枢として動いているのはCPUであり、そのため、CPUのクロックやコア数が上がるとコンピュータのスピードが速くなる。</p>
+<p>また、OS開発者にとっては、CPUの処理は知っておかなければならない。近代のOSでは、CPUを有効に使うために、特にマルチプロセッサ環境やクラスタシステムなどにおいて、複数のプロセッサ（マルチプロセッサ）をいかに効率よく利用するか、などといった課題がある。</p>
+<p>後日注記：本当のことを言うと、機械語やアセンブラでの開発をしていると、CPUの命令体系にじかに触れる機会は結構多い。特に、x86アセンブラをやろうとすると、Intel CPUの演算命令（ニーモニック）を覚える必要があるし、セグメント、レジスタ、アドレスなどの概念を知っておかなければならない。C/C++言語を用いて開発をする上でも、メモリアドレスを格納する変数であるポインタに触る機会はわりと多い。また、2進数や16進数の考え方は、デジタル処理を行う上で多用される。CPUの仕組みを知っておいて、損になることはなく、ためになる知識がそのままスキルアップになる。詳しくは<a href="../prog_lang/assembly.html">アセンブリ言語</a>を参照のこと。</p>
+
+<h2>CPUと人間の頭脳の比較</h2>
+<p>CPUはコンピュータの「頭脳」だが、人間の頭脳との違いは、プログラムを書かなければ動かない、ということ。機械語の命令に変換（コンパイル）することのできるプログラム言語を用いて、プログラムを書かなければ動かない。自らプログラムを考える、ということをCPUはしない。</p>
+<p>その代わり、いったんプログラムが与えられてしまえば、それを計算するのは高速であり、人間よりはるかに速く、人間のするのと同じ計算をすることができる。また、CPUは柔軟で、どんなプログラムであっても、休まず、何度でも、ひたすらその通り計算することができる。</p>
+<p>その代わり、プログラムに書いたことしか理解できないため、プログラムに書くことのできない曖昧で厳密性を欠いたことについては理解することができない。必ず、厳密な命令が必要であり、そしてどんなに細かすぎるようであっても、機械が理解することができるように、極めて細かく、厳密に、間違いなく丁寧に書かなければならない。</p>
+<p>プログラムという方式の利点としては、「抽象性」が挙げられる。どんなに関数やサブルーチンを繰り返しても、その通りきちんと実行する。変数を用いることで、同じ言葉を繰り返さなくても、ひとつのサブルーチンでどんな場合にでも対応できる。人間であれば学習してひとつひとつ覚えなければならないことを、その計算式に基づいて簡単に計算できる。そのため、人間が頭で考えるには不可能な膨大な情報を瞬時かつ自動的に計算してくれる。そのため、形式的・手続き的な処理を行うのであれば、マウスやキーボードで行うより、プログラムを書いて行った方が楽である。OSのソースコードなどはとても膨大であるが、CPUは文句を言わずOSのコードを簡単に計算する。</p>
+
+<h2>CPUの基本原理</h2>
+<p>CPUは、基本的に二進数の0と1の組み合わせと桁上がりで足し算と引き算を行います。</p>
+<p>技術の進歩とともに、計算出来る量が増えてきました。ですが、これは計算する人数が増えたのであって、決して計算する頭が賢くなったわけではありません。だから、基本的に昔のプロセッサと原理は変わらないのです。<!--僕も、良く分かっていないので、間違っているかもしれません。ごめんなさい。--></p>
+<p>計算を行うための論理回路については<a href="computer_architecture.html">コンピュータの計算原理</a>を参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/CPU">CPU - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%97%E3%83%AD%E3%82%BB%E3%83%83%E3%82%B5">マイクロプロセッサ - Wikipedia</a></li>
+</ul>
+
+<h1>CPU</h1>
+<h2>レジスタ</h2>
+<p>処理装置の中には、「レジスタ」と呼ばれる高速な記憶装置が用意されている。（詳しくは<a href="../prog_lang/assembly.html">アセンブリ言語</a>を参照のこと。）</p>
+
+<h2>命令実行サイクル</h2>
+<p>１．命令の取り出し</p>
+<p>２．命令の解読</p>
+<p>３．有効アドレス計算</p>
+<p>４．データの取り出し</p>
+<p>５．命令の実行</p>
+<p>６．演算結果格納</p>
+<p>以上の１～６までの段階（ステージ）を順次、繰り返してプログラムは実行される。</p>
+
+<h2>パイプライン</h2>
+<p><a href="https://www.amazon.co.jp/%E8%A8%88%E7%AE%97%E6%A9%9F%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3-%E6%83%85%E5%A0%B1%E5%B7%A5%E5%AD%A6%E5%85%A5%E9%96%80%E9%81%B8%E6%9B%B8-%E6%A9%8B%E6%9C%AC-%E6%98%AD%E6%B4%8B/dp/4785620277">計算機アーキテクチャ (情報工学入門選書)</a>を参考に執筆しました。</p>
+<p>CPUのIF（命令読み出し） - ID（命令解読） - AC（アドレス計算） - AT（アドレス変換） - OF（オペランド読み出し） - EX（演算実行） - MW（メモリ書き込み）の処理を逐次実行するのではなく、クロックごとに独立して動作できるようにした上で、次々に命令を実行させる方式をパイプライン処理という。</p>
+<p>パイプラインがない状態では、CPUの命令実行は以下のようになる。</p>
+<table class="some_tables">
+<tr><th>時間</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th></tr>
+<tr><td>命令1</td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>命令2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td></tr>
+</table>
+<p>パイプラインがある状態では、CPUの命令実行は以下のようになる。</p>
+<table class="some_tables">
+<tr><th>時間</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th></tr>
+<tr><td>命令1</td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td><td></td><td></td><td></td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>命令2</td><td></td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td><td></td><td></td><td></td><td></td></td><td><td></td></tr>
+<tr><td>命令3</td><td></td><td></td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td><td></td><td></td><td></td></td><td><td></td></tr>
+<tr><td>命令4</td><td></td><td></td><td></td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td><td></td><td></td></td><td><td></td></tr>
+<tr><td>命令5</td><td></td><td></td><td></td><td></td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td><td></td></td><td><td></td></tr>
+<tr><td>命令6</td><td></td><td></td><td></td><td></td><td></td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td></td><td><td></td></tr>
+<tr><td>命令7</td><td></td><td></td><td></td><td></td><td></td><td></td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td></td><td></tr>
+<tr><td>命令8</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>IF</td><td>ID</td><td>AC</td><td>AT</td><td>OF</td><td>EX</td><td>MW</td></tr>
+</table>
+<p>パイプライン制御については以下を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3%E5%87%A6%E7%90%86">パイプライン処理 - Wikipedia</a></li>
+</ul>
+
+<h1>CPUアーキテクチャの種類</h1>
+<h2>CISCとRISCの主なプロセッサ</h2>
+<p>CISCは複雑な命令セットを持つプロセッサだが、これを単純化してパイプライン処理などを効率的にしたのがRISCプロセッサ。</p>
+<p>RISCプロセッサの例として、ARM、MIPS、POWER、SPARCなどが知られる。</p>
+
+<h2>Intel x86/x64</h2>
+<p>現行の主要なプロセッサはIntelのx86やAMD x86-64(x64)。</p>
+
+<h2>Itanium（IA-64）</h2>
+<p>Intelによる64bitのCPUアーキテクチャだったが、互換性などの面からAMDのx86-64に負け、IntelはAMD互換のEM64Tを採用するに至った。</p>
+
+<h2>SPARC</h2>
+<p>SunによるSolarisなどのUNIXワークステーション向けのRISCプロセッサ。Sunのワークステーション以外に、提携している富士通などのシステムで用いられる。</p>
+
+<h2>ARM</h2>
+<p>ARMはモバイル向けに良く使われるARM社のプロセッサ。Android搭載の各種スマートフォンでも使われおり、Fedoraなども対応している。</p>
+
+<h2>MIPS</h2>
+<p>MIPS社によるMIPSはRISCプロセッサの先駆者。</p>
+
+<h2>POWER</h2>
+<p>IBMのPOWERはRISCプロセッサとして良く知られている。プレステ3に搭載されたCellチップはPOWERがベース。Intelになる以前のMacでもPowerPCが使われていた。</p>
+<p>以下はPowerPCの命令セット。</p>
+<ul>
+<li><a href="http://www.super-computing.org/staff/ysd/public_html/yuke/ppcasm.html">ysd@KLab &gt; PowerPC &gt; ニーモニック</a></li>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-powarch/index.html">POWER アーキテクチャー開発者用ガイド - IBM</a></li>
+</ul>
+
+<h2>その他</h2>
+<p>他にも、AVR32, SH, DEC Alpha, S390, MC68000などのプロセッサがある。</p>
+<ul>
+<li><a href="https://qiita.com/anonimeco/items/3acf89ceded53bb12f84">CPUのはなし - Qiita</a></li>
+</ul>
+
+<h2>Intel CPUの詳しい歴史</h2>
+<p><a href="intel.html">Intel</a>を参照のこと。</p>
+
+<h2>ヘテロジニアス</h2>
+<p>ヘテロジニアスとは「異種の」という意味で、複数の異なるアーキテクチャのプロセッサを使って作ったシステムのこと。</p>
+<p>プレステ3に搭載されたCellチップなどが代表例である。</p>
+<p>単にヘテロジニアスと言った場合、異種のアーキテクチャを複数使うことを指す。たとえばプロセッサだけではなくデータベースなどでも、異種のKVSデータベースを組み合わせたり、MySQLと独自開発のデータベースを組み合わせたり、などといったヘテロジニアス構成を使うこともある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%98%E3%83%86%E3%83%AD%E3%82%B8%E3%83%8B%E3%82%A2%E3%82%B9%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B3%E3%82%A2">ヘテロジニアスマルチコア - Wikipedia</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>ソフトウェアやOSで仮想化しても動いているのはCPU</h2>
+<p>CPUについて言えることとして、「ソフトウェアやOSでいくら仮想化しても、動いているのはCPUである」ということ。</p>
+<p>マルチタスクや並列性のような技術は確かにソフトウェアでCPUを仮想化して実現しますが、それでも、パソコンで中央処理をしているのは、現実にあるCPU自身に他なりません。</p>
+<p>Intel 4004以降のマイクロプロセッサでは、CPUやハードウェアに機械的回路を作って計算するのではなく、ソフトウェアで「プログラミング」を行って計算を実現します。（ちなみに、Intel 4004をインテルとともに開発したのは、嶋正利という日本人エンジニアです。）</p>
+<p>そのため、プログラミングは必ず必要ですが、それでも、動いているのはCPUであり、それは機械語の命令を読み出し、解読し、データを取得し、計算し、実行結果を保管する、一連のステージを実行できるCPUプロセッサなのです。</p>
+
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

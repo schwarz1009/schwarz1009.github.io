@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux カーネル開発（割り込み） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（割り込み）</h1>
+<p>Linuxのカーネルの開発に関する世界観（割りこみ）です。<a href="linux_kernel.html">Linuxカーネル</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>割り込み</h1>
+<h2>割り込み</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>カーネルは、IOデバイスにアクセスする時点で、IOデバイスの処理の終了を待機するが、IOデバイスはプログラムの命令よりも動作が遅いので、いちいちIOデバイス処理を待っていたのでは効率が悪い。</p>
+<p>そのため、カーネルはIOデバイス処理を待つ間に、必要とあれば別の処理を行う。</p>
+<p>そして、IOデバイスの処理が終わった段階で、カーネルに対して「割り込み」を行う。</p>
+<p>割り込まれた時、カーネルはIOデバイスの処理の完了を知り、その後の命令を実行する。</p>
+
+<h2>割り込みとは</h2>
+<p>要するに、ハードウェアの要求をカーネルが待っていると遅いので、カーネルが待っている間別の処理をし、ハードウェア側で何かあったら「割り込み」としてカーネルの処理に割り込んでくる、という仕組み。</p>
+<p>注意されたい。</p>
+<ul>
+<li><a href="http://www.mech.tohoku-gakuin.ac.jp/rde/contents/linux/drivers/irq.html">割り込みをつかう - 機械知能工学科 - 東北学院大学 - 熊谷正朗</a></li>
+<li><a href="http://wiki.bit-hive.com/linuxkernelmemo/pg/%E5%89%B2%E3%82%8A%E8%BE%BC%E3%81%BF%E5%87%A6%E7%90%86">割り込み処理 - Linuxカーネルメモ</a></li>
+<li><a href="http://www.coins.tsukuba.ac.jp/~yas/coins/os2-2013/2014-01-16/">デバイスドライバと割り込み処理、inb()とoutb() - 情報科学類 - 筑波大学 - 新城靖</a></li>
+<li><a href="http://www.coins.tsukuba.ac.jp/~yas/coins/os2-2011/2012-02-07/">割り込み処理 - 情報科学類 - 筑波大学 - 新城靖</a></li>
+</ul>
+
+<h2>さまざまな割り込み</h2>
+<p>割り込みはこれ以外にもある。</p>
+<p>マウスやキーボードのイベントを取りこぼすことなく伝えるのも割り込みだし、ハードウェアの割り込みとは別にソフトウェアの割り込みもある。また、周辺機器に障害が発生した場合や例外処理の効率化、それに正確なタイミングでの処理をタイマー割り込みを行って行うこともある。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

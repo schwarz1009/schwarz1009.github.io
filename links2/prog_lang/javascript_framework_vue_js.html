@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Vue.js関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>Vue.jsの世界観</h1>
+<p>Vue.jsによるプログラミングに関する世界観です。</p>
+<p><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Vue.js</h1>
+<h2>学習コストが低く、テンプレートに使える</h2>
+<p>Vue.jsの特徴は、学習コストが低く、HTMLのテンプレートに使えること。</p>
+<p>最初のとっかかりが分かりやすく、簡単に習得出来る。しかしながら、ビューをHTMLで作る時に、「このようにしたいのだけど素のHTMLではたくさんの場所に重複する内容を記述しないといけない」といった時に、JavaScriptとVue.jsを使うことで、まるでWikipediaのテンプレートを書いているように、簡単に部品化やコンポーネント化ができる。</p>
+<p>導入は、MathJaxなどと同じようにscriptタグで読み込むか、あるいはnpmなどを使えば導入できる。ホームページを作る上で、「素のHTMLではやりづらい」といった時にVue.jsを使うことができる。</p>
+
+<h2>Vue.jsの基本</h2>
+<p>Vue.jsでは、Vueというオブジェクトを使って、データと画面のマッピングを行う。Vueの引数に渡すelが対応するHTMLのタグを示し、dataがそのタグに渡すデータとなる。波括弧二つのの{{ massage }}という記述は、Mustasheタグと呼ばれ、データをHTMLにはめ込むために使う。
+
+<h2>Vue.jsでのプログラミング</h2>
+<p>Vue.jsでは、v-on（たとえばv-on:click）でメソッドを実行したり、v-bind（たとえばv-bind:class）でクラスやスタイルを編集したり、v-model（v-onとv-bindをまとめて設定する）でフォームを構築したりできる。また、コンポーネントを使うことで、独自のタグを使って固定的なHTMLを挿入できる。またv-ifやv-forなどを使うことでサーバーサイドの処理の代わりにもなる（v-ifとv-forは同時には使うべきではない）。</p>
+<p>また、propsが便利で、テンプレートの一部の記述だけを変えるためにpropsが使える。たとえばリンクの文字列だけを変えて固定的なHTMLを任意の位置に挿入できる。</p>
+
+<h2>Vue.js習得のための動画</h2>
+<p>Vue.jsは学習コストが少なく、簡単に習得できる。以下のチュートリアル動画で、最新のVue.js 3の基本を学ぶことができる。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=wlCwyouRbtE">Vue.js入門講座【最新のバージョン3対応】基礎から学ぶVue js 3 - YouTube</a></li>
+</ul>
+
+<h2>アジア圏では流行っているが、世界ではReactに負けている</h2>
+<p>Vue.jsは、アジア圏では流行っていますが、世界ではReactに負けています（2021年1月現在）。</p>
+<p>日本などのアジア圏だけを見ると、Vue.jsはReact並みに使われていますが、世界ではReactに圧倒的に負けています。</p>
+<p>まだ決着がついたわけではありませんが、今後もTypeScriptとReactを学んでおけば何とかなると思います。</p>
+<p>以上は以下の動画を参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=1Jk-Lw366gI">2021年、Web/IT業界のトレンド7選！(DX, NoCode, TypeScript, Flutter...) - YouTube</a></li>
+</ul>
+
+<h1>関連技術</h1>
+<h2>Nuxt.js</h2>
+<p>Vue.jsで作られているNuxt.jsは、Next.jsのようなサーバサイドレンダリングを行うフレームワーク。</p>
+<p>後日注記：実際はNuxt.jsは単なるSSRではなく、さまざまな機能のあるフレームワーク。Vue.jsを単体で使うことは少なく、多くがNuxt.jsを使ってVue-routerやVuexを用いて使います（もちろんデフォルトでSSRが使えるため処理も高速になる）。そしてFirebaseなどと組み合わせます。</p>
+
+<h2>Vuex</h2>
+<p>Vue.jsアプリケーションのための、状態管理パターン＆ライブラリ。</p>
+<ul>
+<li><a href="https://qiita.com/kahirokunn/items/7001fe934bbaf08d3033">2018年Vue.jsとVuexを使ってる人には必ず知っていてほしい開発やメンテナンスの際に役立つ設計とTipsとサンプルコード - Qiita</a></li>
+</ul>
+
+<h2>Firebase</h2>
+<p>FirebaseはmBaaSというシステムで、永続化や認証などのバックエンドに使う。Nuxt.js + Firebaseの組み合わせでシステムを開発することが多い。</p>
+<ul>
+<li><a href="https://qiita.com/potato4d/items/cfddeb8732fec63cb29c">【v2対応】Nuxt.jsとFirebaseを組み合わせて爆速でWebアプリケーションを構築する - Qiita</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>Vue.js, Angular, Reactなど</h2>
+<p>クライアントサイドのフレームワーク。MVVMあるいはコンポーネント指向。</p>
+<p>学習コストが低く、手軽に使え、日本語の情報も多いVue.jsがおすすめ。</p>
+
+<h2>Vue.js</h2>
+<p>まず、div idタグでテンプレートとJavaScriptを紐づける</p>
+<p>HTMLテンプレートの中のエレメントの子要素に、属性を付加する。</p>
+<p>二重波かっこ{{ }}でテンプレートの中のメッセージを書く</p>
+<p>v-onはイベントを処理する。省略形は@</p>
+<p>v-bindはHTMLタグの属性値に変数名を割り当てる。省略形は:</p>
+<p>v-modelはVueオブジェクトのデータとフォーム値を関係づける</p>
+<p>ほかにもいろいろとv-からはじまる属性がある</p>
+<p>JavaScriptの方で独自のコーディングをして、テンプレート内のメッセージを動的に変更したり色んなことができる。</p>
+<p>複雑になってきたらCLIツールや複数の.vueファイルを用いてより高度な管理もできる。</p>
+<p>ビルドしてindex.htmlとbuild.jsができたらそれを本番環境にデプロイする。</p>
+
+<h2>サーバーサイドレンダリング</h2>
+<p>サーバ側でDOMレンダリングを終えた上で、クライアントがアクセスした時点ですぐに画面描画が行えるようにする（サーバーサイドレンダリング・SSR）</p>
+
+<h2>状態管理</h2>
+<p>ストアに状態（データ）を保持する（状態管理）</p>
+<p>Facebookにより提唱されたFluxの実装</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

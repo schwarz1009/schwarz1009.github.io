@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>MySQL関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>MySQLの世界観</h1>
+<p>MySQLによるデータベース操作に関する世界観です。<a href="db.html">データベースの世界観</a>と<a href="sql.html">SQLの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>MySQL</h1>
+<h2>MySQLとLAMP</h2>
+<p>LinuxでWebサービスを構築する時に使われるのが、Linux + Apache + MySQL + Perl/PHP/PythonというLAMPスタック。</p>
+<p>これはインターネット界では事実上の標準のようになっていて、MySQLは多くのPHPスクリプトなどから呼び出される形で使用する。</p>
+<p>また、PHPアプリケーションによってはMySQLがなければ動かないものもある。たとえばWordPressやMediaWikiなどがそれに当たる。</p>
+<p>もちろんPerl/CGIやPHPでデータファイルに書き出すこともできるが、MySQLを使うことでプログラムがより堅固かつ管理しやすくなる。</p>
+<p>MySQLでは安全かつ高速に大量のデータを取り扱うことができる。</p>
+<p>また、データの管理にデータベース管理システムを使うことで、全てのデータを一元管理しながらテーブルごとに分類することができる。たとえばとても大量のデータがあったとして、それらのデータを一元的な表で管理し、ひとつのSQLクエリで全てのデータベースからデータを検索できる。まさにこれが「データベース」である。</p>
+<p>またMySQLが物理的なデータベースとWebサービスとの仲介役となり、実際のデータベースが巨大なサーバーであっても（なったとしても）スケーラブルに対応できる。</p>
+<p>PHPからMySQLを操作する時は、SQL文とPDOオブジェクトを使う。</p>
+<p>また、最近ではRuby on RailsのようなWebフレームワークも存在し、こうした場合はMVCのMに当たるModelでデータベースを操作する。この際にもMySQLを使用できる。</p>
+
+<h2>プログラムとデータベース</h2>
+<p>データベースを使う際のメリットとして、特にMySQLなどの軽量データベースに言えるのが、プログラムから操作しやすいということ。</p>
+<p>ファイルだと、いちいちテキスト単位で解析しなければならない。データベースを使うことで、簡単にレコードを指定位置に挿入したり、検索したりできる。</p>
+<p>また、頻繁に更新しても壊れないため、ネットワーク上でさまざまな人々によって頻繁に更新される掲示板のような用途に優れている。</p>
+<p>（自分の書いたFacebookより。）</p>
+
+<h2>MySQLの利用に適した場面</h2>
+<p>Perlのデータなどでは、以下のように&lt;&gt;を使って、</p>
+<pre>
+キャラクター名&lt;&gt;レベル&lt;&gt;経験値&lt;&gt;お金&lt;&gt;ヒットポイント&lt;&gt;攻撃力&lt;&gt;防御力&lt;&gt;装備アイテム
+</pre>
+<p>のようにデータをdatファイルなどにテキストで格納することがよくありますが、こうしたデータの格納にMySQLは適しています。</p>
+<p>また、MySQLは安全なトランザクション処理を実装しているため、頻繁に更新しても壊れません。そのため、不特定多数から頻繁に更新されるWebサーバ上の掲示板スクリプトやSNSなどの用途にも、MySQLは適しています。</p>
+
+<h1>公式</h1>
+<h2>MySQL</h2>
+<p>データーベースのMySQLについて。ApacheやPHPとともに使います。最近はMariaDBがフォークしたらしい。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MySQL">MySQL - Wikipedia</a></li>
+</ul>
+
+<h2>MariaDB</h2>
+<p>MySQLを作っていたMySQL ABがSunによって買収され、SunをOracleが買収したことで、なんとMySQLをOracleが持っているという大変な事態が生じた。</p>
+<p>今のところOracleの中でMySQLは仲良くやっているようだが、MySQLのオリジナルの作者でMySQL ABの創始者ミカエル・ウィデニウスにより、MySQLをforkして作られたのがMariaDBである。</p>
+<p>多くのオープンソースプロジェクトでは、MariaDBを正式なMySQLの後継版と位置付けている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MariaDB">MariaDB - Wikipedia</a></li>
+</ul>
+
+<h1>MySQLデータベースの設計</h1>
+<!--
+<p>書籍「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考にさせていただきました。</p>
+-->
+<p><a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>を参考に執筆しました。</p>
+<h2>データベースの名前と照合順序</h2>
+<p>phpMyAdminを使ってMySQLデータベースを作成します。データベースの名前には分かりやすい「db1」のような名前を付けましょう。</p>
+<p>照合順序は、大文字と小文字を区別するか、検索結果であいうえおの後にアイウエオを表示するか、といった並び順を決めることで、標準的な「utf8_general_ci」を設定しておきます。</p>
+<p>この大きな箱に、小さな箱である「テーブル」を作っていきます。</p>
+
+<h2>テーブルの設計</h2>
+<p>テーブルには、どんな項目が必要か、決めていきます。最初の設計が肝心です。</p>
+<p>テーブルは、「カラム」と呼ばれる「列」と、「レコード」と呼ばれる「行」から構成されています。</p>
+<p>テーブル名、カラム名ともに英数字で入力します。</p>
+<p>必要なカラムの数を考えましょう。</p>
+<p>また、カラムごとにデータの種類である「型」を決めます。大きく分けて、数字、文字列、日時に分かれます。</p>
+<p>そして、文字列や数字の場合は、長さを指定します。</p>
+<p>最後に、オートインクリメント(A_I)とプライマリーキー（主キー）を設定します。オートインクリメントは、自動で1から順番に数字を割り振ります。プライマリーキー制約（主キー制約）は、重複したデータを禁止して、全て違うデータしか設定出来なくします（番号など、同じデータを作成することを禁止する）。</p>
+
+<h2>カラムの例</h2>
+<p>以下はカラムの例。テーブルの名前は「bbs」にします。</p>
+<table class="some_tables">
+  <tr>
+    <th>役割</th>
+    <th>カラム名</th>
+    <th>型</th>
+    <th>長さ</th>
+    <th>A_I</th>
+  </tr>
+  <tr>
+    <td>通し番号</td>
+    <td>id</td>
+    <td>INT</td>
+    <td>11</td>
+    <td>あり</td>
+  </tr>
+  <tr>
+    <td>名前</td>
+    <td>name</td>
+    <td>VARCHAR</td>
+    <td>45</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>メールアドレス</td>
+    <td>email</td>
+    <td>VARCHAR</td>
+    <td>45</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>投稿日</td>
+    <td>time</td>
+    <td>DATETIME</td>
+    <td>8</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>テキスト</td>
+    <td>text</td>
+    <td>VARCHAR</td>
+    <td>300</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>いいねの数</td>
+    <td>like_count</td>
+    <td>MEDIUMINT</td>
+    <td>9</td>
+    <td>-</td>
+  </tr>
+</table>
+<p>後日注記：5ちゃんねるのようなスレッドフロート型掲示板（たくさんのスレッドがあり、スレッドごとにレスがつくタイプの掲示板）を作る場合、たとえば2つの方法があります。まず、CREATE TABLE文を使って、bbs1, bbs2, bbs3のように、スレッドごとに別のテーブルを作成する方法。もうひとつは、bbsテーブルにスレッドIDを格納するtidカラムを追加し、スレッド一覧を格納するthreadsテーブルの外部キーとして、リレーションで表現し、必要に応じてテーブルを結合したり、WHERE句で抽出してSELECTしたりする方法です。後者の方法は処理効率が落ちますが、コメントを最小限のテーブルで管理できるため、掲示板ではなく学生の個人情報などの場合はこちらの方が適切かもしれません。</p>
+
+<h2>利用するユーザーを分ける</h2>
+<p>初期設定でrootユーザーになっていると、削除や破壊が出来てしまって危険なため、ユーザーを分けましょう。</p>
+<p>権限は、</p>
+<p>１．データベースに対する権限</p>
+<p>２．データベースの中の特定のテーブルに対する権限</p>
+<p>３．テーブルの中の特定のカラムに対する権限</p>
+<p>があります。</p>
+
+<h1>SQL文</h1>
+<p>書籍「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考に執筆・引用しました。</p>
+<p>以下はSQL文の例。</p>
+
+<h2>プロンプトとデータベースの作成</h2>
+<p>mysqlプロンプトを起動するには、</p>
+<pre>
+mysql -u ユーザー名 -p
+</pre>
+<p>と入力して、パスワードを聞かれたらパスワードを入力する。</p>
+<p>この状態で、SHOW DATABASESと実行すれば、データベース一覧が表示できる。また、CREATE DATABASE文でデータベースの作成、CREATE TABLEでテーブルの作成ができる。</p>
+<ul>
+<li><a href="https://qiita.com/knife0125/items/bb095a85d1a5d3c8f706">【MySQL, SQL】データベースを扱う基本SQL一覧 - Qiita</a></li>
+</ul>
+
+<h2>ユーザーの作成</h2>
+<p>また、新しいデータベースには必ずCREATE USER命令とGRANT命令でrootでない新しいユーザーを作って権限を付加すること。</p>
+<ul>
+<li><a href="https://proengineer.internous.co.jp/content/columnfeature/6638">MySQLでユーザを作成し、権限を設定する方法 | サービス | プロエンジニア</a></li>
+</ul>
+<p>後日注記：ユーザーの作成や権限の付加はphpMyAdminを用いて行うこともできる。動画の解説サイトなどで、GRANT命令で権限を付加するようなSQL文が示されている時は、phpMyAdminを用いて同じようにユーザーとテーブルを作成し、権限を付加することができることを知っておくと、XAMPPなどを導入した際の初期設定にも活用できる。</p>
+
+<h2>SELECT（取り出し）</h2>
+<p>データベースから項目を取得する。</p>
+<pre class="prettyprint lang-sql">
+SELECT text FROM bbs;
+SELECT name,email FROM bbs;
+SELECT * FROM bbs;
+</pre>
+<p>全てのデータを取得するには*（アスタリスク）を使うが、必要のない時はできるだけアスタリスクを用いず、明確に取り出す列を指定するべきである。</p>
+
+<h2>INSERT INTO（挿入）</h2>
+<p>データベースに項目を追加する。</p>
+<pre class="prettyprint lang-sql">
+INSERT INTO bbs (name,email,text) VALUES ('Assy','hoge@mail.hogehoge.com','応援しています！');
+INSERT INTO bbs VALUES (1,'Schwarz','schwarz@mail.hogehoge.com','2020-10-18 16:30:00','頑張れ',0);
+</pre>
+<p>二行目は省略構文。全ての列にデータを順番に登録する場合、省略構文を使うこともできる。ただし、データベースの構造が変わってしまった時などに命令の意味も変わってしまうことから、省略構文はあまり使うことを推奨されない。</p>
+<p>注意すべきなのは、文字列には''をつけるが、数値やNULL値には''をつけない。パスワードのように数値に見えても本当は文字列である場合には''をつけなければならない。</p>
+
+<h2>UPDATE（更新）</h2>
+<p>データベースの項目を変更する。</p>
+<pre class="prettyprint lang-sql">
+UPDATE bbs SET text = '削除されました', name = '削除済み' WHERE id = 3;
+</pre>
+<p>どの行のレコードであるかをWHEREで指定する。</p>
+
+<h2>DELETE（削除）</h2>
+<p>データベースの項目を削除する。</p>
+<pre class="prettyprint lang-sql">
+DELETE FROM bbs WHERE id = 3;
+</pre>
+<p>どの行のレコードであるかをWHEREで指定する。</p>
+
+<h2>SQL文一覧</h2>
+<p>以下はSQL文の一覧。</p>
+<p>データ定義言語（DDL）：</p>
+<table class="some_tables">
+<tr><th>SQL文</th><th>説明</th></tr>
+<tr><td>CREATE</td><td>データベースとテーブルの作成</td></tr>
+<tr><td>ALTER</td><td>テーブルの変更</td></tr>
+<tr><td>DROP</td><td>データベースとテーブルの削除</td></tr>
+</table>
+<p>データ操作言語（DML）：</p>
+<table class="some_tables">
+<tr><th>SQL文</th><th>説明</th></tr>
+<tr><td>INSERT</td><td>レコードの追加</td></tr>
+<tr><td>DELETE</td><td>レコードの削除</td></tr>
+<tr><td>UPDATE</td><td>レコードの更新</td></tr>
+<tr><td>SELET</td><td>レコードの取得</td></tr>
+</table>
+<p>データ制御言語（DCL）：</p>
+<table class="some_tables">
+<tr><th>SQL文</th><th>説明</th></tr>
+<tr><td>COMMIT</td><td>更新処理の確定</td></tr>
+<tr><td>ROLLBACK</td><td>更新処理の放棄</td></tr>
+<tr><td>SAVEPOINT</td><td>セーブポイントの設定</td></tr>
+</table>
+<p>特に、「既存のデータを変更することなく、新しい列をテーブルに追加したい」などといった場合はALTER命令を使うことができる。また列を削除するにもALTER命令を使う。また、列の名前を変えたい場合や、データ型を別の型に変更したい場合もALTER命令を使う。</p>
+<ul>
+<li><a href="http://web.sevendays-study.com/mysql/day1.html">一週間で身につくMySQL|1日目：MySQLの基本</a></li>
+<li><a href="https://www.dbonline.jp/mysql/table/index18.html">テーブル構造を変更する(ALTER TABLE文) | MySQLの使い方</a></li>
+<li><a href="https://techacademy.jp/magazine/5199">MySQLでALTER TABLEを使ってテーブル構造を変更する方法【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+<p>他にも、MySQLにはユーザーに権限を与えるGRANT命令などがある。</p>
+
+<h2>WHERE句</h2>
+<p>SELECTにWHERE句をつけることで、検索に条件をつけられる。</p>
+<pre class="prettyprint lang-sql">
+SELECT name,email FROM bbs WHERE name='Assy';
+</pre>
+<p>条件式に「AND」や「OR」演算子を使うと複数の条件を記述できる。</p>
+<p>「BETWEEN」によって数値の範囲を設定できる。</p>
+<p>「IN」によって数値のリスト（値1か値2のどちらかなど）を指定できる。</p>
+<p>「LIKE」によって文字の検索条件を指定できる。%は「任意の文字数の任意の文字」、_は「1文字の任意の文字」を表す。</p>
+<p>また、サブクエリは以下のようにできる。</p>
+<pre class="prettyprint lang-sql">
+SELECT * FROM bbs WHERE name=(SELECT name FROM bbs WHERE time = '2020-10-18 16:30:00');
+</pre>
+<ul>
+<li><a href="http://web.sevendays-study.com/mysql/day4.html">一週間で身につくMySQL|4日目：複雑な検索①</a></li>
+</ul>
+
+<h2>ORDER BYとGROUP BYと集計関数</h2>
+<p>「ORDER BY」を使うことで並べ替えることができる。ASCは昇順、DESCは降順。</p>
+<pre class="prettyprint lang-sql">
+SELECT * FROM bbs ORDER BY like_count ASC;
+</pre>
+<p>「GROUP BY」を使うことで、集計の際にグループ化を行える。</p>
+<pre class="prettyprint lang-sql">
+SELECT name,SUM(like_count) FROM bbs GROUP BY name;
+</pre>
+<p>集計関数は、</p>
+<table class="some_tables">
+<tr><th>SQL文</th><th>説明</th></tr>
+<tr><td>MAX</td><td>最大値</td></tr>
+<tr><td>MIN</td><td>最小値</td></tr>
+<tr><td>SUM</td><td>合計</td></tr>
+<tr><td>AVG</td><td>平均</td></tr>
+<tr><td>COUNT</td><td>個数のカウント</td></tr>
+</table>
+<p>となる。</p>
+<ul>
+<li><a href="http://web.sevendays-study.com/mysql/day5.html">一週間で身につくMySQL|5日目：複雑な検索②</a></li>
+</ul>
+
+<h2>LIMIT句、DISTINCT句</h2>
+<p>このほか、MySQLには件数を絞り込むLIMIT句や、重複行を削除するDISTINCT句などがある。</p>
+
+<h1>結合</h1>
+<h2>リレーショナルデータベース</h2>
+<p>リレーショナルデータベースモデルでは、一つの大きなリレーションで全てのデータを表現するのではなく、ひとつのリレーションにはひとつの事項に関係するデータを格納し、場合場合によってリレーションを結合して利用する。</p>
+
+<h2>テーブルの結合</h2>
+<p>SELECTとJOINを用いてテーブルの結合を行うことで、複数のテーブルを結合することができる。</p>
+<p>内部結合では、列の中で一致するデータを結合し、共通部分がないものに関しては含めない（消え去る）。</p>
+<p>これに対して外部結合は、列の中で一致しないデータについても結合し、共通部分が無い列にはNULLを入れて出力する。</p>
+<p>交差結合（クロス結合）は、すべて組み合わせを生成する。</p>
+<ul>
+<li><a href="http://web.sevendays-study.com/mysql/day6.html">一週間で身につくMySQL|6日目：テーブルの結合①</a></li>
+<li><a href="http://web.sevendays-study.com/mysql/day7.html">一週間で身につくMySQL|7日目：テーブルの結合②</a></li>
+</ul>
+<p>後日注記：一番よく使われるのは内部結合です。外部結合には、さらにLEFT、RIGHT、FULLの3つがあります（FULLは使えない環境もあります）。逆に、クロス結合はほとんど使われません。</p>
+<p>後日注記：分かりやすく言うと、どちらにも含まれるデータだけを抽出するのが内部結合である。列の中で値が一致するデータを全て含めて、新しい表を作る。この時、一致しないデータは無視される。一方、どちらかにしか含まれないデータも一緒に結合し、存在しないデータについてはNULL値でデータを挿入するのが外部結合。外部結合には、左のデータを全て含める左外部結合と、右のデータを全て含める右外部結合がある。</p>
+
+
+<h2>内部結合と外部結合の例</h2>
+<p>たとえば、以下のような二つのテーブルがあるとする。</p>
+<pre>
++----+------+-----+
+| id | sei  | bid |
++----+------+-----+
+|  1 | 田中 |  C  |
+|  2 | 鈴木 |  B  |
+|  3 | 井上 |  E  |
+|  4 | 山田 |  F  |
++----+------+-----+
+
++-----+------+
+| bid | name |
++-----+------+
+|  A  | 太郎 |
+|  B  | 次郎 |
+|  C  | 三郎 |
+|  D  | 四郎 |
++-----+------+
+</pre>
+<p>この時、内部結合をすると以下のようになるだろう。</p>
+<pre>
++----+------+-----+------+
+| id | sei  | bid | name |
++----+------+-----+------+
+|  1 | 田中 |  C  | 三郎 |
+|  2 | 鈴木 |  B  | 次郎 |
++----+------+-----+------+
+</pre>
+<p>また、左外部結合をすると以下のようになる。</p>
+<pre>
++----+------+-----+------+
+| id | sei  | bid | name |
++----+------+-----+------+
+|  1 | 田中 |  C  | 三郎 |
+|  2 | 鈴木 |  B  | 次郎 |
+|  3 | 井上 |  E  | NULL |
+|  4 | 山田 |  F  | NULL |
++----+------+-----+------+
+</pre>
+<p>右外部結合をすると以下のようになる。</p>
+<pre>
++------+------+-----+------+
+|  id  | sei  | bid | name |
++------+------+-----+------+
+| NULL | NULL |  A  | 太郎 |
+|   2  | 鈴木 |  B  | 次郎 |
+|   1  | 田中 |  C  | 三郎 |
+| NULL | NULL |  D  | 四郎 |
++------+------+-----+------+
+</pre>
+
+<h2>内部結合と外部結合のSQL文</h2>
+<p>内部結合のSQL文は、</p>
+<pre>
+SELSCT フィールド名, ... FROM テーブル名1 INNER JOIN テーブル名2 ON テーブル名1.外部キー = テーブル名2.主キー [WHERE / ORDER BY句など]
+</pre>
+<p>となります。</p>
+<p>そして、左外部結合のSQL文は、</p>
+<pre>
+SELSCT フィールド名, ... FROM テーブル名1 LEFT OUTER JOIN テーブル名2 ON テーブル名1.外部キー = テーブル名2.主キー [WHERE / ORDER BY句など]
+</pre>
+<p>となるのです。</p>
+
+<h2>AS句</h2>
+<p>AS句を用いることで、結合などで用いるテーブル名などが長い場合、繰り返す際に別名をつけることができる（FROM schedule AS sとしてs.subjectとしたり、JOIN category AS cとしてc.cidとしたりする）。</p>
+<p>また、AS句を用いることでカラムに別名をつけることもできる（カラムnameに対して別の名前foodなど）。</p>
+
+<h1>サンプルコード</h1>
+<h2>PHPからのSQLの利用</h2>
+<p>PHPからのSQL文の利用については、<a href="../prog_lang/php_db.html">PHPの世界観（データベース）</a>を参照のこと。</p>
+
+<h1>MySQLストレージエンジン</h1>
+<h2>InnoDBとMyISAM</h2>
+<p>MySQLのストレージエンジンは、MySQLというデータベース管理システムの中で、「データの読み書き」を行っている基盤のこと。</p>
+<p>主に、InnoDBとMyISAMという2つが有名。</p>
+<p>MyISAMはテーブルロックだが、InnoDBは行ロック。</p>
+<p>MyISAMにはトランザクション機能がないが、InnoDBにはトランザクション機能がある。</p>
+<ul>
+<li><a href="http://shindolog.hatenablog.com/entry/2015/04/01/185703">MySQLの「InnoDB」と「MyISAM」についての易しめな違い - （2015年までの）odaillyjp blog</a></li>
+</ul>
+
+
+<h1>MySQL/MariaDB公式</h1>
+
+<h2>MySQL公式ドキュメント</h2>
+<p>MySQLのドキュメント。MySQLはSunに買収され、SunがOracleに買収されたことで、Oracleのものになりました。</p>
+<p>OracleがMySQLを持っていると、冗談のように見えますが、forkしてMariaDBになりました。</p>
+<p>ただ、Oracleは積極的にオープンソースと友好しているので、あまり敵ではないと思います。</p>
+<ul>
+<li><a href="https://dev.mysql.com/doc/">MySQL Documentation</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MySQL">MySQL - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/mysql">git</a></li>
+</ul>
+
+<h2>MariaDB公式ドキュメント</h2>
+<p>MariaDBのドキュメント。</p>
+<ul>
+<li><a href="https://mariadb.com/kb/ja/documentation/">ドキュメント - MariaDB</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MariaDB">MariaDB - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/MariaDB">git</a></li>
+</ul>
+
+<h1>MySQL管理ツール</h1>
+<h2>MySQL Workbench</h2>
+<p>MySQL公式のグラフィカルなDB操作ツール。</p>
+<ul>
+<li><a href="https://proengineer.internous.co.jp/content/columnfeature/6605">便利な公式ツールMySQL Workbenchの使い方と日本語化方法 | サービス | プロエンジニア</a>
+<li><a href="https://qiita.com/hiesiea/items/01dde88d8062c3d16910">やさしい MySQL Workbench の使い方 for MacOS - Qiita</a></li>
+</ul>
+
+<h2>phpMyAdmin</h2>
+<p>MySQLのPHPによる管理ツール。昔から有名で、知っている方も多いはず。SQLのデータベース定義言語でテーブルを作るよりも簡単。</p>
+
+
+<h1>余談</h1>
+<h2>MySQLデータベースを設計するのは、自分のファイルシステムを作っている感覚</h2>
+<p>僕が思うに、MySQLデータベースを設計するのは、「自分独自のファイルシステムを作っている感覚」に近いと思います。</p>
+<p>オートインクリメントをしたり、データに対してカラムをいくらでも追加出来たりするのは、ファイルシステムで言えば、自分で独自に、オリジナルのファイルシステムを作っている感じに近いのではないかと思います。</p>
+
+<h1>書籍</h1>
+<h2>MySQL</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

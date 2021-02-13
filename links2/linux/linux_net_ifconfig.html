@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>ifconfig - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ifconfig</h1>
+<p>ifconfigに関する世界観です。<a href="linux_net.html">Linuxネットワーク</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ifconfig</h1>
+<p>ネットワーク設定の確認と変更に行う。特に良く使うコマンドだから、覚えていた方が良いが、とても複雑だ。設定を確認する以下のコマンドが分かっていればそれで何とかなる。</p>
+<p>net-tools由来のコマンドであるため、現在は非推奨。</p>
+
+<h2>コマンド実行例</h2>
+<p>ifconfigに「-a」オプションをつけて実行すると、存在するインタフェースごとのネットワーク設定を表示する。</p>
+<p>loは「ループバックインターフェース」で、自分自身と通信するために使われる。</p>
+<p>詳しい表示の説明は以下の記事が参考になる。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0109/29/news004.html">ifconfig　～（IP）ネットワーク環境の確認／設定を行う - @IT</a></li>
+</ul>
+
+<h2>ネットワークインターフェースの設定</h2>
+<p>設定は以下のように行う。</p>
+<pre>
+ifconfig eth0 192.168.1.10 netmask 255.255.255.0 broadcast 192.168.1.255
+              IPアドレス           サブネットマスク        ブロードキャストアドレス
+</pre>
+
+<h2>説明</h2>
+<p>まず、ifconfigに続いてインタフェース名を指定する。ここでは「eth0」。</p>
+<p>IPアドレスは、ホストのIPアドレス。</p>
+<pre>
+   192      168      0         2
+11000000 10101000 00000000 00000010
+</pre>
+<p>ネットワークの内部と外部を識別するために、IPアドレスはネットワーク部とホスト部に分かれる。IPをビットにした時に1をネットワーク部、0をホスト部としたものが、サブネットマスク。</p>
+<pre>
+   255      255     255        0
+11111111 11111111 11111111 00000000
+</pre>
+<p>サブネットマスクだけではなく、ブロードキャストアドレスを設定する場合もある。これはネットワークと同じネットワーク部を持ち、ホスト部を1としたアドレス。パケットをブロードキャストするためにのみ存在する。ブロードキャストとは1対1ではなく1対多の通信で、同じネットワーク内の全てのホストと通信を行う。</p>
+<pre>
+   192      168      0        255
+11000000 10101000 00000000 11111111
+</pre>
+<p>また、これらに加えてrouteコマンドでゲートウェイを登録する。ゲートウェイはどのホストがインターネットを共有するかを指定したアドレス。</p>
+<pre>
+route add default gw 192.168.1.1
+</pre>
+
+<h2>up（起動）とdown（停止）</h2>
+<p>起動と停止は：</p>
+<pre>
+ifconfig eth0 up
+ifconfig eth0 down
+</pre>
+
+<h2>Red Hat, Debianなどの高レベルな設定プログラム</h2>
+<p>net-toolsにはifconfigなどの低レベルプログラムがあるが、これらの多くは既に型遅れで、現在はiproute2のipなどを使うことが推奨される。</p>
+<p>これらの低レベルプログラムは強力だが使うのが面倒であり、多くの場合高レベルのネットワーク設定プログラムを使う。たとえばDebianではifupdown。</p>
+<p>詳細は<a href="linux_net2.html">Linuxネットワーク（２．設定）</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

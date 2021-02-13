@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXコマンド（応用１．ユーザープログラム） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXコマンド（応用１．ユーザープログラム）</h1>
+<p>UNIXやLinuxのコマンドに関する世界観（応用１．ユーザープログラム）です。<a href="linux_commands_system.html">UNIXコマンド（応用２．システム）</a>や<a href="linux_commands_beginner.html">UNIXコマンド（基本）</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+
+<h1>UNIXのフィルタコマンド</h1>
+<h2>UNIXコマンドの基本</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>プロセスは、シェルと呼ばれるプロンプトからコマンドで実行することが多いが、この時&をつけることで、バックグラウンドで実行できる。</p>
+<p>また、パイプとリダイレクトを用いることで、あるコマンドの出力を別のコマンドに渡したり、標準入出力をファイルと変換することができ、
+<p>特にgrep, find, xargs, sed, awkあるいはUNIXのさまざまなフィルターコマンドは、このパイプとリダイレクトを用いて、「複数のコマンドを組み合わせてひとつの作業をする」ことが一般的である。</p>
+
+<h2>フィルタコマンド</h2>
+<p>UNIXのフィルタコマンドを使ったシェル芸の例については以下のようなサイトを参照のこと。</p>
+<ul>
+<li><a href="http://uguisu.skr.jp/Windows/sort_uniq.html">ut、paste、sort、uniq、head、tail、wcを使ったフィルタコマンド一覧 - 何もないから何かみつかる</a></li>
+</ul>
+
+<h2>正規表現</h2>
+<p>文字列のパターンによるマッチングと置換に使う、正規表現について。</p>
+<p>僕はWindowsのxyzzyと言うテキストエディタから使うことが多いですが、Linux（特にsedやPerl）でも使うことが出来ます。</p>
+<ul>
+<li><a href="http://qiita.com/jnchito/items/893c887fbf19e17d3ff9">初心者歓迎！手と目で覚える正規表現入門・その１「さまざまな形式の電話番号を検索しよう」 - Qiita</a></li>
+<li><a href="http://www.kent-web.com/perl/chap7.html">第7章 正規表現 - Perl基礎入門 - KentWeb</a></li>
+<li><a href="http://www.mnet.ne.jp/~nakama/">サルにもわかる正規表現入門</a></li>
+</ul>
+<p>基本的な正規表現については、<a href="regex.html">正規表現の世界観</a>にまとめています。</p>
+
+
+
+<h1>テキスト操作</h1>
+<h2>cat, echo</h2>
+<p>catは、ファイルやストリームを表示する。</p>
+<p>echoは、文字列や変数の値を表示する。</p>
+
+<h2>tr, cut, paste</h2>
+<p>trは、テキストファイル内の特定の文字を置換する。trコマンドは、複数の置換をまとめて記述できるのが特徴で、たとえばa-zをA-Zにすることができる（全ての小文字が大文字に置換される）。これに対して、sedのようなストリームエディタでは、正規表現を用いたパターンマッチングの置換ができる。</p>
+<p>cutは、各行から指定した範囲を切り出すコマンド。テキストファイル内で特定の列を取り出す。空白によって分けられた文章を分割したりすることもできる。</p>
+<p>pasteは、複数ファイルの行をマージする。テキストファイルを列方向に結合する。</p>
+<ul>
+<li><a href="https://ja.wikibooks.org/wiki/UNIX/Linux%E5%85%A5%E9%96%80">UNIX/Linux入門 - Wikibooks</a></li>
+<li><a href="https://eng-entrance.com/linux-command-paste">pasteコマンドについて詳しくまとめました 【Linuxコマンド集】 - エンジニアの入り口</a></li>
+</ul>
+
+
+<h2>sort</h2>
+<p>テキストをソート（並べ替え）してくれる。</p>
+<p>sortはパイプで使われることが多く、またviなどで使うととても強力である。headコマンドで先頭の行だけを取り出すこともできる。</p>
+
+<h2>uniq</h2>
+<p>重複した行をひとつにまとめてくれる。</p>
+<p>sortやwcと同様に、パイプで使うことが多い。</p>
+
+<h2>join</h2>
+<p>2つの入力ファイルから共通するフィールド（項目）を結合する。</p>
+<p>たとえば、</p>
+<pre>
+$ cat test1.txt
+1 Assy
+2 Schwarz
+$ cat test2.txt
+1 150
+2 250
+$ join test1.txt test2.txt
+1 Assy 150
+2 Schwarz 250
+</pre>
+<p>となる。SQLにおけるJOINと同様のものであると考えればいいかも。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-command-join">joinコマンドについて詳しくまとめました 【Linuxコマンド集】 - エンジニアの入り口</a></li>
+</ul>
+
+
+<h2>wc</h2>
+<p>文字数や行数を数えてくれる。特に行数を数えてスクリプト処理を通して出力したりするのに使える。</p>
+
+<h2>head, tail</h2>
+<p>headはテキストファイルの先頭部分、tailはテキストファイルの末尾の部分を表示する。パイプを使って、ストリームの最初の方や最後の方だけを表示する時に使うことが多い（たとえば、ソートして上から10行表示する）。</p>
+
+<h2>splitとcsplit</h2>
+<p>splitはバイト単位・行単位で、csplitは任意の文字列でファイルを分割することの出来るコマンド。<a href="linux_filetools_diff.html">Linux diffとpatch・テキスト処理</a>を参照のこと。</p>
+
+<h2>diffとpatch</h2>
+<p>ファイルを内容の詳細まで比較したり、その変更（パッチ）を適用できるコマンド。<a href="linux_filetools_diff.html">Linux diffとpatch・テキスト処理</a>を参照のこと。</p>
+
+<h2>rev</h2>
+<p>各行の文字を逆に並べ替える。そのままtacに送ればファイルの行末から表示できる。</p>
+<pre>
+$ cat hoge.txt | rev | tac
+</pre>
+
+<h1>ページャとエディタ</h1>
+<h2>less</h2>
+<p>コマンドが大量の出力を吐く場合など、ストリームをスクロールして表示させたい時は、パイプでless（ページャ）に送るのが有用だ。</p>
+<pre>
+$ find /usr/src/linux | less
+</pre>
+
+<h2>vi/nano</h2>
+<p>viは無駄に使える。もっと簡単なテキストエディタが欲しい時は、nanoを使うと良い。</p>
+<p>viでは、:!commandでUNIXコマンドを実行できる。:1,10!sortなどとすれば、1～10行目をソートすることもできる。</p>
+<p>viについては<a href="vi.html">viの世界観</a>にまとめています。</p>
+
+<h2>UNIXコマンドはviで使うと真価を発揮する</h2>
+<p>viでは、先に書いたようにsortコマンドをコードブロックの中で実行できるが、このように、viでUNIXコマンドを実行することで、UNIXコマンドははじめて真価を発揮する。</p>
+
+<h1>印刷</h1>
+<h2>印刷関係のコマンド</h2>
+<p>lprはBSD系、lpはSystemV系の印刷コマンド。CUPSを設定した上で、どちらかのコマンドを使って印刷が行える。</p>
+
+<h1>プログラム開発</h1>
+<h2>source-highlight</h2>
+<p>シンタックスハイライトをしてくれるツール。</p>
+<ul>
+<li><a href="https://qiita.com/msh5/items/a3bc0fdb5699050c9744">Linux の定番シンタックスハイライトツール Source-highlight を覚える - Qiita</a></li>
+</ul>
+
+<h2>ctags</h2>
+<p>ctagsは、vimなどと一緒に使うことで、C言語の関数定義情報が入ったtagsファイルを作成し、tagsに基づいて関数定義がどこのファイルに入っているかを検出し、指定の関数定義を探し出すことができる。</p>
+<ul>
+<li><a href="https://qiita.com/soramugi/items/7014c866b705e2cd0b95">ctagsをちゃんと使う - Qiita</a></li>
+</ul>
+
+<h2>make</h2>
+<p>コンパイルやインストールを一括で実行する。</p>
+
+<h1>シェル操作</h1>
+<h2>scriptとtee</h2>
+<p>scriptコマンドは、scriptを実行してからexitを実行するまでの端末の操作（全てのキータイプと出力）を記録する。</p>
+<p>ファイル名を指定した場合はそのファイルに、指定しなかった場合はデフォルトではtypescriptというファイルに記録される。</p>
+<p>teeコマンドは、パイプでコマンド出力の「写しを取る」。</p>
+<p>DNF/Yum/Aptなどで、「どんなパッケージを（依存関係などを含めて）インストールしたかメモしたい」などといった状況で使える。 </p>
+
+<h2>watch</h2>
+<p>コマンドを繰り返し実行して結果を再描画する。</p>
+
+
+<h2>pv</h2>
+<p>パイプを使った処理の進歩状況を表示する。</p>
+
+
+
+<h1>ファイル操作</h1>
+<h2>tar</h2>
+<p>tarは複数のファイルを圧縮して1つのファイルにアーカイブすることができる。<a href="linux_filetools_archive.html">Linux アーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+
+<h2>rsync</h2>
+<p>ディレクトリ間のファイルの同期を行う。<a href="linux_filetools_archive.html">Linux アーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+<h2>git</h2>
+<p>gitは使える。</p>
+<p>最近、僕もgitを使うようになりました。ローカルだけで使うのであっても、差分を見事に管理してくれます。また、GitHubを使うことで、別の場所で変更・編集したファイルを同期することも簡単です。僕はホームページのファイルの同期に使っています。詳細は<a href="../prog_lang/git.html">Gitの世界観</a>にあります。</p>
+<ul>
+<li><a href="http://qiita.com/satoshi1335/items/ead109412430a078feaa">Gitの基礎 - Qiita</a></li>
+</ul>
+
+<h2>shred</h2>
+<p>ファイルを復元できないように削除する。重要な情報が書かれたファイルを削除するために使う。作業状況を表示するためには-vオプション。</p>
+<pre>
+$ shred -v daiji.txt
+</pre>
+<p>-zオプションを使うと、shred処理を隠すため、最後にゼロクリアする（nullデータで上書きする）。</p>
+
+<h2>file</h2>
+<p>fileコマンドを使うと、ファイルのファイル形式を確認できる。</p>
+<pre>
+$ file test.txt
+test.txt: ASCII text
+</pre>
+
+
+<h1>別ページ</h1>
+<h2>システム関係</h2>
+<p><a href="linux_commands_system.html">UNIXコマンド（応用２．システム）</a>を参照のこと。</p>
+
+<h2>プロセス関係</h2>
+<p><a href="linux_commands_proc.html">UNIXコマンド（応用３．プロセス）</a>を参照のこと。</p>
+
+<h2>ドキュメント関係</h2>
+<p><a href="linux_commands_doc.html">UNIXコマンド（応用４．ドキュメント）</a>を参照のこと。</p>
+
+<h2>grep, find, sed, awk</h2>
+<p><a href="grep_find_sed_awk.html">grep, find, sed, awk</a>を参照のこと。</p>
+
+<h1>コマンド一覧</h1>
+<!--
+<p><a href="https://web.archive.org/web/20130625052944/http://www.k4.dion.ne.jp/~mms/unix/linux_com/">Linuxコマンド一覧 - UNIX入門 ～初心者のためのUNIX/Linux講座～</a>を参考に執筆しました。</p>
+<p>本当はもっとたくさんあります。この中にはyesのような面白いコマンドが含まれていません。</p>
+-->
+<h2>コマンド一覧</h2>
+<p>コマンドを知りたいだけなら詳しいWebサイトを見るのが良いとは思いますが、Linuxの仕組みを知りたいなら、一度<a href="http://www.linuxfromscratch.org/lfs/">LFS</a>（<a href="http://lfsbookja.osdn.jp/">日本語版</a>）かGentoo Linuxをやるのが僕はおすすめです。</p>
+<ul>
+<li><a href="https://web.archive.org/web/20130625052944/http://www.k4.dion.ne.jp/~mms/unix/linux_com/">Linuxコマンド一覧 - UNIX入門 ～初心者のためのUNIX/Linux講座～</a></li>
+</ul>
+
+<h2>時代遅れなツールたち</h2>
+<p><a href="https://news.ycombinator.com/item?id=2567186">Cool, but obscure Unix tools | Hacker News</a>にツール一覧があります。こんな感じで、Linuxには時代遅れな「古代のツール」がわんさかとつまっています。</p>
+
+<h1>テキストエディタ</h1>
+<h2>Emacs</h2>
+<p><a href="emacs.html">Emacsの世界観</a>を参照のこと。</p>
+
+<h2>vi</h2>
+<p><a href="vi.html">viの世界観</a>を参照のこと。</p>
+
+<h2>正規表現</h2>
+<p><a href="regex.html">正規表現の世界観</a>を参照のこと。</p>
+
+
+<h1>コマンドのコードを読もう</h1>
+<h2>Coreutilsのコード</h2>
+<p>coreutilsのgitで基本的なコマンドのコードを読むことが出来ます。</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git/tree/src">coreutils.git</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/js-foundation/0013">第13回　Linuxコマンドの基礎の基礎 - gihyo.jp</a></li>
+</ul>
+
+<h2>GNOMEアプリケーションのコード</h2>
+<p>GNOMEアプリケーションのコードは以下から見れます。</p>
+<ul>
+<li><a href="https://developer.gnome.org/platform-overview/unstable/">GNOME application development overview</a> - 辿っていくと既存アプリケーションのソースコードをブラウズできる。</li>
+</ul>
+
+
+<h1>端末</h1>
+<p><a href="linux_terminal.html">端末</a>を参照のこと。</p>
+
+
+<h1>プログラミングAPIについて</h1>
+<h2>LinuxのAPI</h2>
+<p>LinuxのAPIについては<a href="linux_api.html">Linux システムコール・APIの世界観</a>を参照のこと。具体的な関数が分かると、コマンドのソースコードの理解もしやすいです。</p>
+
+<h1>TUIの対話的インターフェース</h1>
+<h2>Ncurses</h2>
+<p>NcursesはTUIの対話的インターフェース。コマンドではなく、メニュー選択、テキスト欄への入力、ボタンの選択のような形で、CUI環境から対話的インターフェースを利用できる。Linuxカーネルの設定やDebconfなどでも使われている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ncurses">Ncurses - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Ncurses&tbm=isch">Ncursesのスクリーンショット</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>複数のコマンドを結びつけるパイプはGUIのワープロと良く似ている</h2>
+<p>UNIXのコマンドで多用される仕組みとして、パイプがある。これは、「あるコマンドの出力を、別のコマンドの入力として、出力した内容をさらに加工する」ということができる。</p>
+<p>僕は、これがGUIのワープロと良く似ていると思う。GUIのワープロでは、ひとつのドキュメントをさまざまな機能で加工し、目的の出力を得るが、これはパイプでストリームデータを加工し続け、磨きをかけていくのと同じだからである。</p>
+<p>そう、僕はUNIXとGUIは共存できると思う。特にUNIXはプレーンテキストデータを好むが、viなどでUNIXコマンドを使うこともできる。</p>
+
+<h2>Rust製の美しいコマンド</h2>
+<p>Rustで作られたLinuxコマンドが最近注目を浴びている。カラフルでオシャレな表示をしてくれる。コマンドラインがカラフルだと視認性も向上し、モチベーションも高まる。</p>
+<ul>
+<li><a href="https://qiita.com/navitime_tech/items/c249269a3b47666c784b">ls よりも exa を使おう！モダンな Linux コマンド達を紹介 - Qiita</a></li>
+</ul>
+
+<h1>リンク集全般</h1>
+<h2>コマンドなどのインストール方法</h2>
+<p>Linux From Scratch。参考になります。</p>
+<ul>
+<li><a href="http://www.linuxfromscratch.org/lfs/view/stable/">Linux From Scratch</a></li>
+<li><a href="http://www.linuxfromscratch.org/blfs/view/stable/">Beyond Linux From Scratch</a></li>
+<li><a href="http://lfsbookja.osdn.jp/">LFSブック日本語版 (lfsbookja)</a></li>
+<li><a href="https://osdn.jp/projects/lfsbookja/">LFSブック日本語版 プロジェクト日本語トップページ - OSDN</a></li>
+</ul>
+
+<h2>ソフトウェアのソースコード</h2>
+<p>git</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git">coreutils.git</a></li>
+<li><a href="https://git.gnome.org/browse/">git.GNOME.org</a></li>
+<li><a href="https://github.com/KDE">KDE github</a></li>
+<li><a href="https://quickgit.kde.org/">KDE QuickGit</a></li>
+</ul>
+
+<h2>man-pages</h2>
+<p>man-pages</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/">JM Project</a></li>
+</ul>
+
+<h1>書籍</h1>
+<h2>Linuxコマンド</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

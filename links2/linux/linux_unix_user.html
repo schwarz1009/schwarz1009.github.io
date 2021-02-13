@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXシステム管理５（ユーザーとパーミッション） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXシステム管理５（ユーザーとパーミッション）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観５（ユーザーとパーミッション）です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>マルチユーザーシステム</h1>
+<h2>プロセスの権限とファイルのパーミッションによるマルチユーザーOS</h2>
+<p>UNIXでは、そのユーザーが実行したコマンドプロセスはそのユーザーの権限において実行される、という「ユーザーの権限」がある。</p>
+<p>ファイルやディレクトリには、所有者や所属グループやその他のユーザーに対して、どのような許可を与えるか、という「パーミッション」が決められている。</p>
+<p>UNIXでは、ユーザーのプロセス権限とファイルのパーミッションにおいて、それぞれのユーザーとプログラムの「出来ること」が決まっている。これが、UNIXにおけるマルチユーザーシステムである。</p>
+<p>ある意味、「旧世代的だ」と感じられるかもしれない。昔の、UNIXが開発された頃の、「たくさんの端末に1つの共有コンピュータが使われている」という状態の再来のように感じられるかもしれない。だが、本当は今でも、そうした「1つのコンピュータとたくさんのユーザーが繋がる」という場面は多くて、たとえばHTTPサーバーなどはそうした利用の形態に当たるだろう。完全にマルチユーザーシステムと合致するわけではないが、本来そのような用途を想定し、たとえばユーザーがログインするコンピュータとデータコンピュータを分けて管理する、といったコンピュータの「柔軟な構成」が可能である。こうした点が、UNIXが「ネットワークとの親和性が高い」と言われる点かもしれない。</p>
+
+<h2>本当は今のWindows PCが必ずしも正しいわけではない</h2>
+<p>ただ、本当のことを言うと、今のWindows PCのように「全てのパソコンにOSを入れる」というモデルが正しいわけではない。</p>
+<p>たとえば、Windowsにはサポート期限というのがある。もう少しすると、Windows 7もサポートが切れてしまう。今の、全てのPCにWindowsを導入するモデルだと、全てのPCの分だけライセンスを購入しなければならない。10台あれば、ライセンスの価格は10倍になる。これは大きな出費だ。</p>
+<p>それに対して、ひとつの中央コンピュータにのみLinuxのワークステーションを使い、それぞれ個別のPCではX端末を使うようにすれば、（X端末を導入するクライアントPCのOSはどうするのかという問題はあるが）OSの管理はひとつのワークステーション分だけで済む。</p>
+<p>ただし、そもそもOSのバージョンアップが必要なのか、という問題もあるし、端末にも何らかのシステムを導入して使うことを考えると、これも考え物である。</p>
+<p>僕としては、家庭内のLANに繋がったサポートの切れたコンピュータを、ひとつの（たとえばルータのファイアーウォールのように）経路を中心にし、何らかの形で「家庭内LANの全てのコンピュータを守る」ような、新しいセキュリティとアンチウイルス技術が必要になってくるのではないかと思う。全てのOSでWindows Updateをかけなくても、ひとつの中央コンピュータだけをきちんと管理していれば、他のコンピュータはその中央システムが守ってくれるような、そういうシステムが必要ではないかと思う。</p>
+
+<h1>ユーザーとグループ</h1>
+<h2>ユーザーの追加</h2>
+<p>UNIXはマルチユーザー・マルチタスクのOSであるため、簡単にユーザーを追加することが出来る。</p>
+<p>ユーザーを追加するには、useraddコマンドをrootで実行する。</p>
+<p>たとえば、wheel（suを使うことができる）、users、audio（オーディオデバイスにアクセスできる）の3グループに所属するusernameというユーザを作成する。</p>
+
+<h2>ホームディレクトリ</h2>
+<p>UNIXでは、ホームディレクトリ（/home/username）がそれぞれのユーザに与えられ、このディレクトリが基本的にユーザのデータや作業の場所になる。ホームディレクトリ以外は、一部の例外を除いてrootユーザにならなければ、どんなアプリケーションでも変更することは出来ない（読み取りや実行は出来る場合が多い）。そのため、セキュリティが高い。</p>
+<p>逆に言えば、注意すべきなのはホームディレクトリの中のデータだ。重要なデータはバックアップを取って、スパイウェアに知られないように、パスワードなどの重要なデータはネットワークに繋がった場所に置かないようにしよう。</p>
+<p>ホームディレクトリは、最近ではデスクトップやドキュメントのような便利なディレクトリが自動的に作られる。それから、ユーザそれぞれの設定ファイルとして、「.」から始まる「ドットファイル」というファイルがアプリケーションの使用時などに作られる。自動的に作られる場合もあれば、自分で設定する場合（.emacsなど）もある。ドットファイルは、ファイルマネージャなどからは隠しファイルとして扱われる。lsコマンドでドットファイルまでを一覧したい場合は、ls -aオプションを使う。</p>
+<pre>
+$ ls -a
+</pre>
+<p>ドットファイルは、.bashrcなど、アプリケーションにとってはとても重要なファイルであることが多いため、良く注意して管理しよう。</p>
+
+<h2>グループはユーザの権限を決める</h2>
+<p>UNIXにおけるグループは、ユーザの権限を決めるために使うことが多い。</p>
+<p>特に、wheelグループは多くのLinuxやUNIXで用いられるグループで、rootユーザーに昇格するためのsuコマンドを使うことができるようになる。rootのパスワードを知っているユーザーにroot権限を与えるのと似たような意味合いがあるので覚えておこう。また、apacheなどrootになってはならないユーザーにはできるだけ与えないようにしよう。</p>
+
+<h1>パーミッション</h1>
+<h2>パーミッションの説明</h2>
+<p>ファイルには所有ユーザーと所属グループがあり、そのユーザー（あるいはグループ・その他）が実行するプログラム（プロセス）において、ファイルに対してどれだけの権限を与えるかを決められる。これをパーミッションと言う。</p>
+<p>パーミッションには、記号表記と八進表記がある。記号表記は「rwx------」など、八進表記は「644」など。</p>
+<p>まず、一番左の「rwx」あるいは「6」が所有者における（ファイルやディレクトリの）読み込み（r, 4）、書き込み（w, 2）、実行（x, 1）の（権限の）許可を表す。八進表記では、それぞれの値を足し算で足す（4 + 2 = 6）。</p>
+<p>真ん中は、同一グループにおける読み込み・書き込み・実行、一番右は、その他のユーザーにおける読み込み、書き込み、実行を表す。</p>
+<p>ちなみに、「-rw-r--r--」や「drwxr-xr-x」のようにもう一つ左に多く表示された場合は、最初の1文字目はファイル種別を表している。「-」はファイル、「d」はディレクトリ、「l」はシンボリックリンク。</p>
+<p>ディレクトリの場合、rは一覧表示、wはディレクトリ内にファイルを作成したり削除したりできるかどうか、xはディレクトリの中に進めるかどうか（cdできるかどうか）を表す。</p>
+<p>Windowsのように.exeなら実行できる、というわけではなく、実行ファイルやスクリプトを実行させたい時は基本的にパーミッションの許可が必要（厳密に言えば、スクリプトの場合、rubyなどに引数を与えて実行させることはできる）。</p>
+<p>パーミッションの確認はls -lで見ることが出来る。</p>
+<ul>
+<li><a href="https://www.mdn.co.jp/di/articles/2104/?page=2">第2回 「パーミッションの意味と使い分け」 | デザインってオモシロイ -MdN Design Interactive-</a></li>
+<li><a href="http://shim0mura.hatenadiary.jp/entry/20110527/1306517437">ファイルとディレクトリのパーミッションの違い - tumblr</a></li>
+<li><a href="https://qiita.com/shisama/items/5f4c4fa768642aad9e06">Linuxの権限確認と変更（超初心者向け） - Qiita</a></li>
+</ul>
+
+<h2>chmod, chown, chgrp</h2>
+<p>パーミッション、オーナー、グループを変える三種の神器。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1605/24/news015.html">【 chown 】コマンド／【 chgrp 】コマンド――ファイルの所有者と所有グループを変更する：Linux基本コマンドTips（15） - ＠IT</a></li>
+<li><a href="https://webbibouroku.com/Blog/Article/chmod-permission">Linuxのファイル権限(chmod,chown,chgrp) │ Web備忘録</a></li>
+</ul>
+
+<h1>用途</h1>
+<h2>ユーザーとパーミッションの適切な使用法</h2>
+<p>UNIXにはユーザーとパーミッションの概念があるとして、どこでこれを使うか。</p>
+<p>これは、ファイルシステムの役割を柔軟にしたい時に使います。</p>
+<p>たとえば、Apacheのhtmlデータの入るディレクトリは、多くの場合/var/www/htmlですが、ユーザーassyが居たとして、Webサーバのデータをassyしか変更しないのであれば、/var/www/htmlの所有者やグループをassyに属させる、などといったことができます。ただし、実際はユーザーとグループをapache:apacheとした上で、apacheグループにユーザーassyを所属させるのが良いでしょう。</p>
+<p>また、/mnt/usbhddをassyしか使わないのであれば、これもassyに所有権を与えることができます。</p>
+<p>あるいは、/usr/local/assyのようなディレクトリを作って、このディレクトリをassyの所有とし、assyにこのディレクトリを変更する権限を与えることで、/usr/local/assy以下のprefixはassyの自由に変えられます。</p>
+<p>僕も無知のため色々と問題はあるかもしれませんが、このようにすることで、システムの一部だけをユーザーやグループに開放したりすることができます。</p>
+
+<h2>ホームディレクトリを暗号化する</h2>
+<p>Linuxではファイルシステムを暗号化することができますが、ホームディレクトリだけの暗号化も可能です。</p>
+<p>この場合、ログインパスワードを暗号化のパスワードと紐づけて、ログインした時点で暗号化が解けるようにし、もしマシンが盗まれてもハードディスクからホームディレクトリの機密情報（個人情報や仕事に使うデータなど）を守ることができます。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://allabout.co.jp/gm/gc/451274/">Ubuntu ホームフォルダは暗号化すべき？ - [Linuxの使い方] All About</a></li>
+<li><a href="http://blog.livedoor.jp/aratamete_eigo-hitoyasumi/archives/5305680.html">ubuntuに挑戦:後からホームフォルダを暗号化する</a></li>
+</ul>
+<p>しかしながら、別にSSHの設定が必要だったり（ssh接続から~/.ssh/authorized_keysが読めなくなることがある）、スワップや/tmpが暗号化されないなどの問題があるようです。</p>
+<ul>
+<li><a href="https://hnakamur.github.io/blog/2016/05/02/uninstall-encrypted-home-on-ubuntu/">Ubuntuでホームディレクトリを暗号化するのを止めた &middot; hnakamur&#39;s blog</a></li>
+</ul>
+<p>僕は、本当に「仕事用のマシンは暗号化しなさい」と上司から言われたとか、あるいは機密情報が入ったサーバーなどで使うのでなければ、ホームディレクトリの暗号化はおすすめしません。個人で使うパスワードなどを保護したいなら、データを圧縮解凍ツールで圧縮する時に暗号化を行うなどで代用することができます。LVM暗号化を使うという手もあります。</p>
+
+<h1>コマンド一覧</h1>
+<h2>パーミッション</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>chgrp</td>
+<td>ファイルやディレクトリの所属しているグループを変更する。</td>
+</tr>
+<tr>
+<td>chmod</td>
+<td>ファイルやディレクトリのパーミッション（読み書き実行の許可）を変更する。</td>
+</tr>
+<tr>
+<td>chown</td>
+<td>ファイルやディレクトリの所有者を変更する。</td>
+</tr>
+</table>
+
+<h2>ユーザーとグループ</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>groupadd</td>
+<td>グループの追加。</td>
+</tr>
+<tr>
+<td>groupdel</td>
+<td>グループの削除。</td>
+</tr>
+<tr>
+<td>groupmod</td>
+<td>グループの設定を変更。</td>
+</tr>
+<tr>
+<td>id</td>
+<td>ユーザーとグループのIDを表示する。</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td>パスワードを変更する。</td>
+</tr>
+<tr>
+<td>su</td>
+<td>他のユーザーに切り替えて新しいシェルを起動する。</td>
+</tr>
+<tr>
+<td>useradd</td>
+<td>ユーザーの追加。</td>
+</tr>
+<tr>
+<td>userdel</td>
+<td>ユーザーの削除。</td>
+</tr>
+<tr>
+<td>usermod</td>
+<td>ユーザーの設定を変更。</td>
+</tr>
+<tr>
+<td>who</td>
+<td>現在ログインしているユーザーを確認する。</td>
+</tr>
+</table>
+
+<h2>その他のコマンド</h2>
+<table class="some_tables">
+<tr><th>コマンド</th><th>説明</th></tr>
+<tr><td>pwck, grpck</td><td>パスワードファイル・グループファイルの整合性をチェックできる。</td></tr>
+<tr><td>chpasswd</td><td>パスワードを一括で変えられる。</td></tr>
+<tr><td>vipw, vigr</td><td>パスワードファイルを編集できる。-sオプションで暗号化された/etc/shadowを編集できる。</td></tr>
+<tr><td>pwconv, pwunconv, grpconv, grpunconv</td><td>/etc/passwdから/etc/shadowファイルを変換できる。</td></tr>
+<tr><td>htpasswd, htdigest</td><td>HTTPサーバでのベーシック認証ファイルとダイジェスト認証ファイルを管理できる。</td></tr>
+</table>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux diffとpatch・テキスト処理 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux diffとpatch・テキスト処理</h1>
+<p>Linuxのdiffとpatch・テキスト処理に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>テキスト操作</h1>
+<h2>split, csplit</h2>
+<p>splitはバイト単位・行単位で、csplitは任意の文字列でファイルを分割することの出来るコマンド。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/a072csplit.html">テキストファイルを任意の文字列で分割するには - @IT</a></li>
+<li><a href="http://takuya-1st.hatenablog.jp/entry/20110823/1314108412">csplitコマンド の使い方 csplit は区切り単語でファイル分割 - それマグで！</a></li>
+<li><a href="https://linuxjm.osdn.jp/info/GNU_coreutils/coreutils-ja.html">GNU Coreutils - GNU</a></li>
+<li><a href="https://eng-entrance.com/linux-command-split">splitコマンドについて詳しくまとめました 【Linuxコマンド集】 - エンジニアの入り口</a></li>
+</ul>
+
+
+<h2>sort</h2>
+<p>テキストを並び替えられる便利なコマンド。シェルから実行できるほか、viなどで:1,10!sortとすれば、1～10行目をソートできる。</p>
+
+<h2>diff</h2>
+<p>diffは：</p>
+<pre>
+diff -u test_before.txt test_after.txt &gt; test.patch
+</pre>
+<p>ディレクトリを再帰的に比較する場合は-rオプション。</p>
+<p>-uはunified diff形式でパッチを出力する。-cの場合、context diff形式での出力になる。基本的に-uを使おう。</p>
+<p>diffは使えます。僕はWindowsでもcygwinをインストールしてdiffを使っています。</p>
+<p>Windowsで使う場合は、オプション--strip-trailing-crをつけて改行コードCRを削除しましょう。</p>
+<pre>
+$ diff -ru --strip-trailing-cr dir1/ dir2/
+</pre>
+<ul>
+<li><a href="http://d.hatena.ne.jp/mrgoofy33/20101019/1287500809">diff & patch コマンドでのパッチを適用する方法 - hogehoge foobar Blog Style5</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?diff">UNIX/Linuxの部屋 diffコマンドの使い方</a></li>
+</ul>
+<p>ちなみに、Windowsで使えるサクラエディタにもDiffの機能があります。</p>
+
+<h2>patch</h2>
+<p>patchは：</p>
+<pre>
+patch -u &lt; test.patch
+</pre>
+<p>-uはunified diff形式のパッチを適用する。-cの場合、context diff形式での適用になる。</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/mrgoofy33/20101019/1287500809">diff & patch コマンドでのパッチを適用する方法 - hogehoge foobar Blog Style5</a></li>
+<li><a href="http://qiita.com/astro_super_nova/items/e30dcaf4d106deebc63c">Linuxエンジニアらしいパッチのつくりかた - Qiita</a></li>
+</ul>
+
+<h2>comm/cmp</h2>
+<p>diffのほかにも、comm（行単位で比較）やcmp（1バイトごとに比較）などのツールがある。</p>
+
+<h1>ユーティリティ</h1>
+<h2>md5sum/sha1sum</h2>
+<p>MD5/SHA1メッセージダイジェスト（そのファイルが変更されていないことを示すためのファイル内容の整合性を確認するハッシュ値）を表示する。</p>
+<p>MD5/SHA1ハッシュはLinuxディストリビューションのISOファイルのダウンロードの際などに使われており、ファイルが壊れていないか（あるいは改竄されていないか）のチェックに使うことができる。</p>
+<p>ファイル内容が完全に同じであれば、同じハッシュ値となる。もし少しでも壊れていれば、ハッシュ値は同じにならない。</p>
+
+<h2>uuencode/uudecode</h2>
+<p>バイナリファイルをテキストファイルに変換・復元する。</p>
+
+<h2>base64</h2>
+<p>入力をBase64エンコード・デコードする。</p>
+
+
+<h1>コマンド一覧</h1>
+<h2>フィルタ・テキスト処理</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>diff</td>
+<td>ファイルやテキストの内容の違いを調べる。ソースコードの差分などを求めるのに便利なコマンド。</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>ファイルやテキストの行を並び替える。プレーンテキストの簡単なソートができる。</td>
+</tr>
+<tr>
+<td>split</td>
+<td>ファイルやテキストを分割する。csplitという特定の文字から分割するコマンドが便利。</td>
+</tr>
+</table>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

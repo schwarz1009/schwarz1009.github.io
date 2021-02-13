@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Java関連の世界観D（Webフレームワーク） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観D（Webフレームワーク）</h1>
+<p>Javaによるプログラミングに関する世界観（D．Webフレームワーク）です。<a href="java.html">Javaの世界観１（言語）</a>や<a href="../network/web_framework.html">Webフレームワーク</a>も参照のこと。</p>
+<!--
+<p>書籍<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a>と<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a>を参考にさせていただきました。</p>
+-->
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Webフレームワークとは</h1>
+
+<h2>JavaにおけるWebフレームワーク</h2>
+<p>Javaでも、PHPやRubyと同様にWebフレームワークを使ってWebサービスを効率的に作ることができる。</p>
+<p>だが、JavaはRuby on Railsのように、「これが絶対的標準」というWebフレームワークがない。それは、Apache Strutsという標準的なフレームワークの開発の方法がいささか不評だからである。</p>
+<p>Apache Strutsは、「オブジェクト指向のJava言語なのに、せっかくのオブジェクト指向開発環境を活かしきれていない」とよく言われている。</p>
+<p>そのため、Spring FrameworkやPlay Frameworkのようなさまざまなフレームワークが乱立している。また、Hibernateのような専門的なフレームワークを組み合わせて使うことが多く、Railsのようにひとつのフルスタックフレームワークを採用することがなかなか難しい。</p>
+
+<h2>おすすめなのはSpring MVC</h2>
+<p>ネットを見たところ、僕がおすすめするのはSpring MVCです。</p>
+
+<h1>Webフレームワーク</h1>
+<p><a href="https://blog.codecamp.jp/java-framework-5">Javaのフレームワークとは何か？おすすめ5つを徹底解説！ - Tech2GO</a>より。</p>
+
+<h2>Java EE</h2>
+<p>Java標準のフレームワーク。</p>
+<p>J2EEのサーブレット技術だけでもWebアプリケーションを開発することはできるが、下にあるような著名なWebフレームワークを使うことで、MVCなどに基づく生産的・効率的なWebアプリケーションの開発ができる。</p>
+
+<h2>Apache Struts</h2>
+<p>JavaによるWebフレームワークの一つ。MVCに基いた高い生産性で有名。</p>
+<p>RubyにおけるRailsやPHPにおけるCakePHPやPythonにおけるDjangoと違い、あまり標準になりきれていない印象を受ける。下にあるSpringのようなフレームワークも広く知られている。</p>
+<p>（<a href="https://dev.classmethod.jp/server-side/java/spring-firstcontact/">第1回 はじめてのSpring Framework ｜ DevelopersIO</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache_Struts">Apache Struts - Wikipedia</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/0402/13/news095.html">Strutsフレームワークの「枠組み」を学ぶ (1/2)：Strutsを使うWebアプリケーション構築術（2） - ＠IT</a></li>
+<li><a href="https://www.javaroad.jp/opensource/index.html">Javaの道＞オープンソース</a></li>
+<li><a href="http://gihyo.jp/news/report/2013/09/1901">「業務系システムは今すぐ脱Strutsを！」業務システムエンジニアのためのHTML5勉強会#04 活動報告：レポート｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>Spring Framework</h2>
+<p><a href="java_framework_spring.html">Spring Framework</a>を参照のこと。</p>
+
+<h2>Seasar2</h2>
+<p>依存性の注入とアスペクト指向プログラミングに基づく国産オープンソースJavaフレームワーク。</p>
+<ul>
+<li><a href="https://www.ossnews.jp/oss_info/Seasar2">オープンソースのフレームワーク／Seasar2とは - OSS×Cloud News - オープンソース×クラウド情報サイト</a></li>
+</ul>
+
+<h2>Hibernate</h2>
+<p>JavaでO/Rマッピングを実現するためのツール。</p>
+<p>Hibernateは永続化専門のフレームワークであり、コントローラ専門のStrutsやテンプレート＆コントローラのWicketと組み合わせて使用する。</p>
+<p>（<a href="https://dev.classmethod.jp/server-side/java/spring-firstcontact/">第1回 はじめてのSpring Framework ｜ DevelopersIO</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://www.techscore.com/tech/Java/Others/Hibernate/index/">Hibernate | TECHSCORE(テックスコア)</a></li>
+</ul>
+
+<h2>Play Framework</h2>
+<p>JavaとScalaのためのRails風フレームワーク。MVCや「設定より規約」などのスタイルを採用。軽量で柔軟。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Play_Framework">Play Framework - Wikipedia</a></li>
+</ul>
+
+<h2>Spark Framework</h2>
+<p>シンプルで軽量なマイクロフレームワーク。</p>
+<ul>
+<li><a href="http://murayama.hatenablog.com/entry/2016/07/01/173245">フレームワーク初学者のためのSpark Framework入門 - Murayama blog.</a></li>
+</ul>
+
+<h2>JavaServer Faces (JSF)</h2>
+<p>コンポーネントベースのフレームワークの1つ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/JavaServer_Faces">JavaServer Faces - Wikipedia</a></li>
+</ul>
+
+<h2>Wicket</h2>
+<p>Javaフレームワークの1つ。</p>
+<p>StrutsはJavaで作られているにも関わらず、Javaらしいオブジェクト指向での開発を実現していない。WicketはもっとJavaらしいオブジェクト指向開発を促進するために作られている。</p>
+<p>WicketではWebページも文字列もタグもオブジェクトであり、Webページを継承したり機能を委譲したり独自の拡張をしたりできる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache_Wicket">Apache Wicket - Wikipedia</a></li>
+</ul>
+
+
+<h1>Rails風フレームワーク</h1>
+<h2>Lift (Scala)</h2>
+<p>ScalaによるRails風のWebフレームワーク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Lift">Lift - Wikipedia</a></li>
+</ul>
+
+<h2>Grails (Groovy)</h2>
+<p>GroovyによるRails風のWebフレームワーク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Grails">Grails - Wikipedia</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>Webフレームワーク</h2>
+<p>JavaのWebフレームワークはフルスタックフレームワークではなく、用途によってさまざまなシステムを組み合わせて使う</p>
+<p>Strutsが標準だが、多くの人々から「オブジェクト指向のJavaらしくない」と言って嫌われている</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

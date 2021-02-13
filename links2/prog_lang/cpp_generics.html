@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>C++関連の世界観２（ジェネリック） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C++の世界観２（ジェネリック）</h1>
+<p>C++によるプログラミングに関する世界観２（ジェネリック）です。<a href="cpp.html">C++</a>や<a href="cpp_stl_libs.html">C++３（STL・ライブラリ）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>テンプレートとは</h1>
+<h2>テンプレート</h2>
+<p>テンプレートを使うことで、「どんな型にでも汎用的に対応できる型」を作ることができる。特定の型に依存しないアルゴリズムを書くことができるため、「int型でもchar型でもどちらでも使えるようなリスト型データ構造を作りたい」などといった場合に使う。</p>
+<p>C++に標準ライブラリとして備わっているSTLでは、テンプレートを多用することでさまざまな型に対応してアルゴリズム・コンテナ・反復子などを使うことができる。<a href="cpp_stl_libs.html">C++３（STL・ライブラリ）</a>を参照のこと。</p>
+<p>後日注記：C++のテンプレートには注意が必要。効率のためにコードが冗長に作成される（コンパイラはテンプレートの実体化のたびにコードを生成する）ため、バイナリのファイルサイズが大きくなり、デバッグも難しくなる（エラーメッセージも役に立たないことが多い）。</p>
+
+<h2>テンプレートは型を作る型</h2>
+<p>テンプレートは、一言で言えば型を作る型です。「どんな型でも一般的に使うことができる」という理由で、「Generics」（一般とか総称という意味）という名称で呼ばれます。</p>
+<p>ジェネリックプログラミングは、C#やJavaでも見られる考え方です。要するに、Listと一言に言っても、StringのListやIntegerのListがあります。こうしたものを、総称的に使うことができるのです。</p>
+<p>これらは、動的スクリプト言語ではあまり言われない考え方です。それは、動的スクリプト言語では、そもそも型を動的に扱うため、リストやタプルの中でさまざまな型を「ミックスして」使うことができるからです。</p>
+<p>テンプレートは最初はList&lt;String&gt; lst;などと書く必要があり、とまどうかもしれません。また、C++のSTLではこうしたジェネリックプログラミングの考え方を多用し、「テンプレートメタプログラミング」という全くありえない考え方で、スマートにさまざまなコンテナやアルゴリズムを操作することができます。全ては繋がっています。<a href="cpp_stl_libs.html">C++３（STL・ライブラリ）</a>を参照のこと。</p>
+
+<h2>テンプレートの基本</h2>
+<p>テンプレートとは、どんな型でも使用できる汎用的な型を含むクラスや関数のこと。</p>
+<p>C++でのテンプレートでは、必要に応じて必要な型を指定し、クラスをある型のためにその都度作って使うというやり方ができる。</p>
+<p>たとえば、汎用関数は以下のように定義する。</p>
+<pre class="prettyprint">
+template &lt;typename T&gt; T Function1(T x)
+{
+    ...
+}
+</pre>
+<p>このFunction1にint型の引数を与えると、int型の返り値を返す。</p>
+<p>また、汎用クラスは以下のように定義する。</p>
+<pre class="prettyprint">
+template &lt;class T&gt; class Class1 {
+
+    T tval;
+    
+    ...
+}
+</pre>
+<p>汎用クラスのオブジェクトは以下のように作成する。</p>
+<pre class="prettyprint">
+Class1&lt;int&gt; obj;
+</pre>
+<p>ここでT tvalの型は、どんな型、たとえば数値や文字列やあらゆるクラスのオブジェクトに、宣言された時の型の情報に基づいて「変貌」する。数値型であっても、文字列型であっても成り立つような、何にでもなれるデータ型になる。</p>
+<p>動的スクリプト言語との違いは、使う前に必ずClass1&lt;int&gt;のように事前に型を明示的に指定しなければならない。</p>
+<p>Javaのようなオブジェクト指向言語では、Object型が全てのクラスの親クラスとなっており、Object型に全てのオブジェクトを詰め込むことができる。感覚としては近いかもしれないが、テンプレートは継承環境にない型やクラスであっても、どんな型でも成り立つ。</p>
+<p>C++の標準ライブラリに含まれるSTL（Standard Template Library）では、どんな型でも出し入れすることのできるコンテナや、どんな型でも順番に処理することができるイテレータなどのシーケンスにテンプレートが使われている。</p>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>アセンブリ言語の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>アセンブリ言語の世界観</h1>
+<p>アセンブリ言語に関する世界観です。<a href="../hardware/hardware.html">ハードウェア（１．半導体）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>8086命令一覧</h1>
+<p><a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%808086%E2%80%9516%E3%83%93%E3%83%83%E3%83%88%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E3%82%A2%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4871482456">はじめて読む8086―16ビット・コンピュータをやさしく語る (アスキーブックス)</a>を参考に執筆しました。</p>
+<p>16bitの8086のごく基本的な命令です。詳しい説明が欲しい方は書籍をご覧ください。</p>
+
+<h2>基本</h2>
+<p>基本的に、レジスタと呼ばれる高速な記憶装置に対して、演算命令を与えることで処理を行う。</p>
+<p>レジスタの中でも、AX, BX, CX, DXの4つのレジスタはよく使う。AXレジスタの上位8ビットにはAH、下位8ビットにはALという略称がつけられている。</p>
+
+<h2>セグメント</h2>
+<p>16ビットCPUでは、アドレスの指定を「セグメント方式」で行う。アドレス部は「32AE:0100」といったように、セグメントアドレスとオフセットアドレスに分割される。セグメントベースを固定して考えるならば、オフセットアドレスだけでアドレスを指定することができる。物理アドレスは、セグメントアドレスによって決まるセグメントベースにオフセットアドレスを加えた値になる。</p>
+
+<h2>MOV命令</h2>
+<table class="some_tables">
+<tr><th>コマンド</th><th>命令</th></tr>
+<tr><td>MOV 受け取る側, 送り出す側</td><td>データの転送（UNIXやDOSのコマンドとは方向が逆になる）</td></tr>
+<tr><td>MOV AL, 0FFH</td><td>1バイトのデータFF<sub>H</sub>をALレジスタにロードする</td></tr>
+<tr><td>MOV [0201H], AL</td><td>ALレジスタの内容をオフセットアドレス「201<sub>H</sub>」にストアする</td></tr>
+<tr><td>MOV AL, [0201H]</td><td>オフセットアドレス「201<sub>H</sub>」のメモリの内容をALレジスタにロードする</td></tr>
+<tr><td>MOV [0401H], AL </td><td>ALレジスタの内容をオフセットアドレス「401<sub>H</sub>」のメモリにストアする</td></tr>
+</table>
+<p>特定の場所にデータを記憶しておきたい場合などは、MOV XXやMOV [XX]が大活躍します。メモリのことをなぜメモリ（記憶）というのかが良く分かります。</p>
+
+<h2>演算・比較命令</h2>
+<table class="some_tables">
+<tr><th>コマンド</th><th>命令</th></tr>
+<tr><td>ADD AL, 40H</td><td>ALレジスタの内容に1バイトデータ「40<sub>H</sub>」を加える</td></tr>
+<tr><td>SUB AL, 20H</td><td>ALレジスタの内容から1バイトデータ「20<sub>H</sub>」を引く</td></tr>
+<tr><td>INC AL</td><td>ALレジスタをインクリメントする（+1）</td></tr>
+<tr><td>DEC AL</td><td>ALレジスタをデクリメントする（-1）</td></tr>
+<tr><td>CMP AX, XX</td><td>AXレジスタの内容と1ワイドデータ「XX」を比較し、<br>結果をフラグレジスタにセットする</td></tr>
+<tr><td>MUL BL</td><td>ALレジスタの内容（8ビット）にBLレジスタの内容（8ビット）を掛け、<br>結果をAXレジスタ（16ビット）にセットする</td></tr>
+<tr><td>MUL BX</td><td>AXレジスタの内容（16ビット）にBXレジスタの内容（16ビット）を掛け、<br>結果をDX:AXレジスタ（32ビット）にセットする</td></tr>
+<tr><td>DIV BL</td><td>AXレジスタの内容（16ビット）をBLレジスタの内容（8ビット）で割り、<br>商をALレジスタ（8ビット）に、余りをAHレジスタ（8ビット）にセットする</td></tr>
+<tr><td>DIV BX</td><td>DX:AXレジスタの内容（32ビット）をBXレジスタの内容（16ビット）で割り、<br>商をAXレジスタ（16ビット）に、余りをDXレジスタ（16ビット）にセットする</td></tr>
+</table>
+
+<h2>ジャンプ命令</h2>
+<table class="some_tables">
+<tr><th>コマンド</th><th>命令</th></tr>
+<tr><td>JMP XX</td><td>オフセットアドレス「XX」からのプログラムを実行する（無条件ジャンプ）</td></tr>
+<tr><td>JZ XX</td><td>ZFがセットされていれば、オフセットアドレス「XX」からのプログラムを実行する</td></tr>
+</table>
+<p>これ以外にも、「CMP AL,0DH」という命令の後ならば、次のような条件ジャンプ命令を使うことができる。</p>
+<table class="some_tables">
+<tr><th>コマンド</th><th>命令</th></tr>
+<tr><td>JZ XX</td><td>（AL=0D<sub>H</sub>）ならばジャンプする</td></tr>
+<tr><td>JNZ XX</td><td>（AL≠0D<sub>H</sub>）ならばジャンプする</td></tr>
+<tr><td>JB XX</td><td>（AL＜0D<sub>H</sub>）ならばジャンプする</td></tr>
+<tr><td>JA XX</td><td>（AL＞0D<sub>H</sub>）ならばジャンプする</td></tr>
+<tr><td>JBE XX</td><td>（AL≦0D<sub>H</sub>）ならばジャンプする</td></tr>
+<tr><td>JAE XX</td><td>（AL≧0D<sub>H</sub>）ならばジャンプする</td></tr>
+</table>
+<p>ここに示した条件ジャンプ命令は、比較した2つの値をそれぞれ符号なしの1バイトデータとみなした場合の命令だ。これに対して、1バイトのデータを符号ありと考えた場合の条件ジャンプ命令も用意されている。それを以下に挙げる。（つまり、負の数を扱う場合の条件ジャンプ命令。）</p>
+<table class="some_tables">
+<tr><th>コマンド</th><th>命令</th></tr>
+<tr><td>JL XX</td><td>（AL＜0D<sub>H</sub>）ならばジャンプする</td></tr>
+<tr><td>JG XX</td><td>（AL＞0D<sub>H</sub>）ならばジャンプする</td></tr>
+<tr><td>JLE XX</td><td>（AL≦0D<sub>H</sub>）ならばジャンプする</td></tr>
+<tr><td>JGE XX</td><td>（AL≧0D<sub>H</sub>）ならばジャンプする</td></tr>
+</table>
+
+<h2>マクロアセンブラ</h2>
+<p>マクロアセンブラ（MSAM）によって、ラベル（START:など）を使ったり、数値の豊かな表現（'A'など）を使ったりすることができる。（注意：ここまでの記述はDEBUGコマンドにおける記法である）</p>
+<pre>
+START:
+</pre>
+<p>のように「:」が付いているのがラベルだ。ラベルはその次の命令が格納されているアドレスを意味する。ラベルを使うことで、ラベルに対応するアドレスを自動的に決定してくれる。</p>
+
+<h1>PowerPC/ARMなど</h1>
+<h2>PowerPC命令一覧</h2>
+<p>以前のMac OS Xの命令セットで、IBM製品のほかLinuxなどでも対応していることのあるPowerPCのニーモニック（命令）の一覧は以下が参考になる。</p>
+<ul>
+<li><a href="http://www.super-computing.org/staff/ysd/public_html/yuke/ppcasm.html">ysd@KLab &gt; PowerPC &gt; ニーモニック</a></li>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-powarch/index.html">POWER アーキテクチャー開発者用ガイド - IBM</a></li>
+</ul>
+<p>ある意味、IBMはIBM-PC/AT互換機とPowerOS CPUで、本当はメインフレームだけではなくWindowsとMacも裏で牛耳っている恐ろしい会社である。プレステ3向けにCellというCPUも作っていたが、これは期待はずれだったらしい（Cellの理想であるソーシャルゲーム機という発想は革新的だったが、ゲームとの相性が悪かったとのこと）。</p>
+
+<h2>ARM命令セット</h2>
+<p>ARMの命令セットは以下を参照のこと。組み込み向けで、Fedoraなどでも対応しているし、Androidという成功例もある。</p>
+<ul>
+<li><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ij/Cegbgefe.html">RealView Compilation Tools アセンブラガイド - 2.2.6. 命令セットの概要 - ARM Information Center</a></li>
+</ul>
+
+<h2>Yellow Dog Linux</h2>
+<p>Yellow Dog LinuxはPowerPC向けLinuxとしては老舗で、FedoraベースのPowerPC向けLinuxディストリビューション。一時期プレステ3のCellにも対応していた。YumというFedoraのパッケージ管理ツールはYellow Dogが開発したものである。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Yellow_Dog_Linux">Yellow Dog Linux - Wikipedia</a></li>
+</ul>
+
+<h2>PowerPC向けDebianなど</h2>
+<p>また、DebianなどもPowerPCに対応している。</p>
+<p>DebianはMIPSやIBM System zなど対応するアーキテクチャが多いので要チェック。</p>
+<p>だが、そのせいでリリースが遅れがちになったり、要らぬ手間や負担がかかることもあるが、それはコミュニティでやっているため何とかなっている。本当にきちんと動くことは少ないため期待しない方が良い。</p>
+<ul>
+<li><a href="https://www.debian.org/ports/index.ja.html">Debian -- 移植版</a></li>
+</ul>
+
+<h2>Gentooなど</h2>
+<p>Gentoo Linuxはソースベースのパッケージ管理を行うことで、Debian並みの移植性を達成している。だが、コンパイルに長い時間がかかり、またきちんとチェックされているとは言えない部分もある。</p>
+
+
+
+<h1>書籍</h1>
+
+<h2>Intel CPU</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%808086%E2%80%9516%E3%83%93%E3%83%83%E3%83%88%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E3%82%A2%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4871482456">はじめて読む8086―16ビット・コンピュータをやさしく語る (アスキーブックス)</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%80486%E2%80%9532%E3%83%93%E3%83%83%E3%83%88%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4756102131">はじめて読む486―32ビットコンピュータをやさしく語る</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

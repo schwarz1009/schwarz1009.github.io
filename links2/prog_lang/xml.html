@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>XMLと文書形式関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div><h1>XMLと文書形式の世界観</h1>
+<p>XMLと文書形式に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>さまざまなデータフォーマット</h1>
+<h2>XMLとHTML</h2>
+<p>XMLは、拡張可能なマークアップ記述言語。HTMLと同様にタグを入れ子にした記法によるフォーマットで、設定ファイルやドキュメントの記述などに使われるほか、AjaxやMozillaのXULなどもXMLを用いて行われている。</p>
+<p>以前はHTMLをXML化したXHTMLが新しい技術として注目されていたが、HTML5の登場によってHTML5が完全に時代を塗り替えたため、XMLは日蔭に追いやられた感がある。</p>
+<p>Javaのクラスライブラリなどでも、XMLに対応していて、Javaでプログラムの設定を行うならXMLを使うのが便利である。Antと呼ばれる、XMLベースのMakeのようなビルドシステムは、Java周辺で良く使われている。JavaとXMLは親和性が高い。</p>
+
+<h2>JSON</h2>
+<p>また、最近人気のデータフォーマットとして、JSONがある。JSONはJavaScriptと親和性が高く、最近のAjaxやMongoDBなどにも使われている。</p>
+
+<h2>iniファイルとレジストリ</h2>
+<p>伝統的な設定ファイルの書式として、iniファイルがある。iniファイルでは、テキストベースのシンプルなデータ記述を行い、コマンドやデーモンなどのアプリケーションの設定に良く使われている。</p>
+<p>また、Windowsではレジストリという独自の設定データベースがある。GNOMEではXMLベースのGconfを長らく使っていたが、XMLでは遅いため、バイナリブロブによるdconfへと置換が始まっている。</p>
+
+<h2>troff</h2>
+<p>troffは伝統的なUNIXのドキュメント方式で、UNIXのmanコマンドなどに使われている。</p>
+
+<h2>Officeとその他の文書形式</h2>
+<p>その他のドキュメント記述フォーマットとして、古いものではTeX, PostScript, PDF, MS-Office, OpenDocumentなどがある。</p>
+
+<h2>TOML, YAML</h2>
+<p>また、設定ファイルの記法としては、githubによるTOMLなどがある。他に、シリアライズ用のYAMLなどがある。</p>
+
+<h2>Markdown, MediaWiki</h2>
+<p>また、MarkdownというHTMLよりも簡単な記述フォーマットも存在する。MediaWikiであれば、Wikipediaと同様のWiki記法を使うことができ、MediaWikiの機能であるテンプレートなどを使用できる。</p>
+
+<h2>ブログ記法</h2>
+<p>ブログであれば、Movable Typeやはてななどのブログ専用記法も人気である。</p>
+
+
+<h1>レジストリライクな設定システム</h1>
+<h2>Gconf</h2>
+<p>Gconfは、XMLによるレジストリ風の設定システムとして、長らく有名でした。GNOME 2ではGconfが標準です。</p>
+<p>ですが、最近はバイナリブロブベースの新しいシステムであるDconf/Gsettingsに取って代わられました。</p>
+<p>Dconfはバイナリ式のデータベースで、昔僕がどこかで言っていた、「Gconfのバイナリバックエンドを作れ」という意見と同じことをやっているようです。</p>
+<p>また、GSettingsはDConfのGLibにおける実装です。</p>
+
+<h1>文書作成</h1>
+<h2>DocBook</h2>
+<p>DocBookは技術文書のためのマークアップ言語。特にオープンソース関係で良く使われる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/DocBook">DocBook - Wikipedia</a></li>
+<li><a href="http://archive.linux.or.jp/JF/JFdocs/docbook-intro/">実用 DocBook 入門</a></li>
+</ul>
+
+<h1>Markdownエディタ</h1>
+<h2>Typora</h2>
+<p>かゆいところに手が届くMarkdownエディタとして有名。</p>
+<ul>
+<li><a href="https://qiita.com/kenji_shinoda/items/97320dc3f40a4c98df35">MarkdownエディタにTyporaを超推ししたい件 - Qiita</a></li>
+<li><a href="https://qiita.com/AnchorBlues/items/532dba54cd2f0465af97">どうしてみんなMarkdown書くときTypora使わないの? - Qiita</a></li>
+</ul>
+
+
+<h1>関連ページ</h1>
+<h2>XMLでGUI</h2>
+<p><a href="xml_gui.html">XML＆GUI</a>を参照のこと。</p>
+
+<h2>Ajax</h2>
+<p><a href="ajax.html">Ajax</a>を参照のこと。</p>
+
+<h2>JavaでXML</h2>
+<p><a href="java_lib_xml.html">Java３E（XML）</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>XML, JSON</h2>
+<p>XMLはHTMLとよく似たマークアップ言語</p>
+<p>JSONは最近流行しているシンプルなデータ記述フォーマット。PythonやJavaScriptとも相性がいい。</p>
+<p>Ajaxを実現するためにはXMLあるいはJSONを使う</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

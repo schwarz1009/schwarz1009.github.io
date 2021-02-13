@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>暗号関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>暗号の世界観</h1>
+<p>暗号に関する世界観です。<!--<a href="encrypt2.html">暗号化技術</a>や--><a href="security.html">セキュリティ</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>暗号化とは</h1>
+<h2>暗号化技術</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>ネットワーク上でセキュリティを確保するためには、暗号化という仕組みを用いる。</p>
+<p>共通鍵暗号方式では、暗号化と復号化に用いる鍵が同じだが、公開鍵暗号方式では、公開鍵と秘密鍵を行う。</p>
+<p>秘密鍵は知られてはならないが、公開鍵は誰に知られても構わない。</p>
+<p>暗号化通信においては、公開鍵暗号方式を使うことが多い。</p>
+<p>まず、受信者が公開鍵と秘密鍵のペアを作り、自分の公開鍵を相手に送る。</p>
+<p>送信者は、その公開鍵を使ってデータを暗号化する。</p>
+<p>そしてデータを受信した受信者は、秘密鍵を用いてデータを復号化する。</p>
+
+<h1>UNIXソフトウェアとコマンド</h1>
+<h2>OpenSSLとopensslコマンド</h2>
+<p>Linuxや*BSDでは、opensslコマンドでOpenSSLのさまざまな暗号化の機能を使用できる。</p>
+<p>なんでもかんでも詰め込みすぎた結果、opensslコマンドだけでとてもたくさんのことができる。</p>
+<p>たとえばRSAの公開鍵・秘密鍵の作成や暗号化・複合化などが可能。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?openssl">opensslコマンドの使い方: UNIX/Linuxの部屋</a></li>
+</ul>
+
+<h2>LibreSSL</h2>
+<p>LibreSSLはOpenSSLからのfork。OpenSSLのハートブリード脆弱性が発覚したのをきっかけにOpenSSLのソースコード監査を行ったところ、forkする必要性があると判断した。OpenSSLのコードを見直し、よりセキュアな実装とすることを目的としている。</p>
+<p>たとえば、古いコードや使われていない対応を削除し、メモリ呼び出しをCの標準関数にし、擬似乱数生成器をより安全にし、新しい暗号化アルゴリズムに対応し、Heartbeat拡張など危険性のある機能を削除している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/LibreSSL">LibreSSL - Wikipedia</a></li>
+</ul>
+
+<h1>未来技術</h1>
+<h2>量子コンピュータと量子暗号</h2>
+<p>現在広く使われているRSA暗号や楕円曲線暗号は、ただ解読に時間がかかるだけであり、超高速な量子コンピュータが実現すればいとも簡単に破られるということが数学的に証明されている。</p>
+<p>これに対して、量子暗号という、量子状態の特性に基づく未来の暗号がある。観測者が観察すると光はゆがみを起こすという量子力学の特性に基づいたもので、第三者が傍受しようとした時に、ほんのわずかであってもノイズが入ってしまう。このノイズをチェックすれば、秘密鍵が有効であるかどうかを判断し、傍受されれば別の秘密鍵に変える、というやり方である。</p>
+<p>「量子コンピュータか、あるいは量子暗号か、どちらが先に実現するか」とよく言われている。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://pc.watch.impress.co.jp/docs/news/1100569.html">量子コンピュータでも解読が困難な新暗号方式が国内で開発 - PC Watch</a></li>
+<li><a href="https://eset-info.canon-its.jp/malware_info/trend/detail/160225.html">最強と思われた量子暗号に脆弱性の疑い | マルウェア情報局</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>共通鍵暗号と公開鍵暗号</h2>
+<p>共通鍵暗号は、暗号化と復号化の鍵が同じ。公開鍵暗号は、暗号化と復号化の鍵が異なる。</p>
+<p>公開鍵暗号を使うことで、データを公開鍵で暗号化して秘密鍵で復号化し、暗号化通信を実現できる。</p>
+
+<h1>セキュリティ関係のソフトウェア</h1>
+<h2>GnuTLS</h2>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GnuTLS">GnuTLS - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://gitlab.com/gnutls/gnutls/">git</a></li>
+</ul>
+
+<h2>OpenSSL</h2>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OpenSSL">OpenSSL - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/openssl/openssl">git</a></li>
+</ul>
+
+<h2>LibreSSL</h2>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/LibreSSL">LibreSSL - Wikipedia</a></li>
+</ul>
+
+<h2>GNU Privacy Guard (GnuPG)</h2>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU Privacy Guard">GNU Privacy Guard - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://git.gnupg.org/">git</a></li>
+</ul>
+
+<h1>リンク集全般</h1>
+<h2>暗号化技術</h2>
+<p>暗号化技術。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1504/27/news032.html">マスターIT／暗号技術 - @IT</a></li>
+<li><a href="http://www.hyuki.com/cr/">暗号技術入門 第3版 - 秘密の国のアリス</a> - 昔買って読みました。</li>
+</ul>
+
+<h1>書籍</h1>
+<h2>暗号技術</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%9A%97%E5%8F%B7%E6%8A%80%E8%A1%93%E5%85%A5%E9%96%80-%E7%AC%AC3%E7%89%88-%E7%A7%98%E5%AF%86%E3%81%AE%E5%9B%BD%E3%81%AE%E3%82%A2%E3%83%AA%E3%82%B9-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797382228">暗号技術入門 第3版 秘密の国のアリス</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

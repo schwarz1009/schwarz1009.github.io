@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXシステム管理６（システム情報と設定） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>UNIXシステム管理６（システム情報と設定）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観６（システム情報と設定）です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>システム情報と設定</h1>
+<h2>コンピュータ情報の表示</h2>
+<p>/procファイルシステムには、カーネルやコンピュータのさまざまな情報がアクセスできるようになっている。</p>
+<p>例として、/proc/interrupts、/proc/meminfo、/proc/mounts、 /proc/partitions、/proc/filesystemsファイルや/proc/sys/ディレクトリなど。</p>
+<p>コンピュータのCPUを見る場合、cat /proc/cpuinfoを実行すると、CPUの情報にアクセスできる。</p>
+<p>また、PCIバスについての情報を表示するlspciコマンドや、ディスクの空き領域を表示するdfコマンド、ディレクトリ内のファイル容量を表示するduコマンドなどもある。</p>
+
+<h1>設定ファイル</h1>
+<h2>/etcディレクトリ</h2>
+<p>Linuxの設定ファイルは、基本的に/etcディレクトリに存在する。</p>
+<p>/etcディレクトリの中に、システムの設定はほとんどある。特に重要なディレクトリは/etc/rc.d/や/etc/init.d/で、Linuxが起動時にinitで実行する設定スクリプトがある。</p>
+<p>また、Red Hat系のLinuxでは、/etc/sysconfig/にさまざまなシステムの設定ファイルがあり、/etc/init.d/networkや/etc/sysconfig/network、/etc/sysconfig/network-scripts/ifcfg-eth0などは見慣れて久しい。</p>
+<p>Linuxでは、/usr以下のディレクトリは個人で変更するのは控えた方が良いところがあるが（システムのバイナリリソースが置かれており、パッケージ管理システムで管理すべき）、逆に/etc以下のディレクトリはどんどん個人で変更して構わない。</p>
+<p>また、/etc以外のディレクトリにも、Linuxの管理に必要なディレクトリがいくつかある。</p>
+<p>/varディレクトリは、/etcとは違い「使っていて容量が変化するファイル」を置くディレクトリで、システムによって使っている間に変化していく。ログファイルやスプールファイルが置かれる。全てのログファイルは/var/log/以下にある。</p>
+<p>/tmpディレクトリには、一時的なファイルが保管される。一時的に生まれては消えていく。</p>
+<p>/mntディレクトリには、静的にマウントしたデバイスのファイルシステムが置かれる。</p>
+<p>/mediaディレクトリには、/mntディレクトリと同じようにマウントしたディレクトリが置かれるが、デバイスを接続するたびに自動的にマウントされる。</p>
+<p>/devディレクトリには、デバイスドライバによって利用可能となったデバイスファイルが置かれる。今のLinuxではudevがこのデバイスファイルを自動作成する。また/sysにはデバイスの情報が入っている。</p>
+<p>/procにはカーネルやプロセスの情報が入っている。</p>
+<p>また、これら以外にも、/usr以下にシステム管理のためのファイルが入っていることがある。たとえばudevでは、カスタマイズしたルールファイルは/etc/udev/rules.dにあるが、そのデフォルトの設定は/usr/lib/udev/rules.dにある。また、/usr/share/docにはドキュメントが置かれ、/usr/share/fonts/truetype/にはフォントが置かれる。</p>
+
+<h2>ドットファイル</h2>
+<p>こうしたシステムの設定ファイルの他に、ユーザー個人個人のための設定ファイルが、原則ホームディレクトリ（/home/username/以下）に置かれる。</p>
+<p>これらのファイルは、UNIXの慣習から、ファイル名の最初が「.」から始まる。たとえば、「.emacs」とか「.bashrc」といった具合である。これらを「ドットファイル」と呼ぶ。</p>
+<p>ドットファイルは、標準のlsなどのコマンドやファイルマネージャなどでは「隠しファイル」として扱われるため、表示されないことがある。適切なコマンドオプションやアプリケーションの設定を変えることで、これらのドットファイルを含めて全てのファイルを表示できる。</p>
+<p>ドットファイルにアクセスするためには、ホームディレクトリにcdしてvi .bashrcのようにするか、ホームディレクトリを表す「~」を使って~/.bashrcとしたり、/home/username/.bashrcとすれば良い。</p>
+<p>Linuxでは、/etcの設定を空白のタブで区切られたプレーンテキストで行い、ドットファイルは「初期化スクリプト」とすることが慣習的にままある（そうでない場合も多い）。特に.bashrcや.xinitrcなどは内部がシェルスクリプトであり、アプリケーションの起動時に自動的に読み込まれ実行される。</p>
+<p>ドットファイルには、こうしたホームディレクトリに置かれるファイルの他、いくつか例外的に、それぞれのデータディレクトリの中に作られることもある。Apacheのディレクトリ単位での設定ファイルである.htaccessや、gitの.gitディレクトリなどがこれに当たる。</p>
+
+<h2>シェル変数と環境変数</h2>
+<p>シェル変数は、シェルの中だけで保たれる。</p>
+<pre>
+$ FOO=foo
+</pre>
+<p>シェル変数を参照するには、$を変数名につける。</p>
+<pre>
+$ echo $FOO
+foo
+</pre>
+<p>環境変数は、システム全体に適用される変数。設定するにはシェル変数を指定した後でexportする。</p>
+<pre>
+$ FOO=foo
+$ export FOO
+</pre>
+<p>たとえば以下のようにPATHを変更できる。</p>
+<pre>
+$ echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/home/assy/bin
+$ PATH=$PATH:/usr/local/pgsql/bin:/usr/local/mysql/bin
+$ export PATH
+</pre>
+<p>.bash_profileや.bashrc、.xsessionや.xinitrcなどに上記設定を記述することで、システムで常に同じ設定を使用できる。</p>
+<p>シェル変数の一覧はsetコマンド、環境変数の一覧はenvコマンドで表示できる。</p>
+<p>現在のシェルでのスクリプトの読み込みにはsourceコマンドを使う。</p>
+<pre>
+$ source .bashrc
+</pre>
+<p>一時的に設定を変えることで、「LANG=Cの状態でmanを見る」などということもできる。</p>
+<pre>
+$ LANG=C man ls
+</pre>
+
+<h2>主なシステムの設定ファイル（一部のみ）</h2>
+
+<table class="some_tables">
+<tr>
+<th>設定ファイル</th>
+<th>説明</th>
+</tr>
+
+<tr>
+<td>/etc/ld.so.conf</td>
+<td>ライブラリのパスを記述する。</td>
+</tr>
+
+<tr>
+<td>/etc/fstab</td>
+<td>マウント設定。</td>
+</tr>
+
+<tr>
+<td>/etc/crontab</td>
+<td>cronに実行させる処理。</td>
+</tr>
+
+<tr>
+<td>/etc/passwd</td>
+<td>パスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/shadow</td>
+<td>シャドウパスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/group</td>
+<td>グループの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/gshadow</td>
+<td>グループのシャドウパスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/sudoers</td>
+<td>sudo設定ファイル。</td>
+</tr>
+
+<tr>
+<td>/etc/shells</td>
+<td>ログインシェルの一覧。</td>
+</tr>
+</table>
+
+<h1>システム管理</h1>
+<h2>ロギング</h2>
+<p>ロギングとは、ログを取ること。システムの基本的なログは/var/log/syslogにある。</p>
+<p><a href="linux_unix_logger_cron.html">UNIXシステム管理８（システムロガーとcron）</a>を参照のこと。</p>
+
+<h2>モニタリング</h2>
+<p>モニタリングとは、システムの稼働状況を監視すること。特にサーバーなどのマシンでは、自分からプロセスを実行しなくても、稼働中のシステムが勝手にプロセスを動かす。</p>
+<p>プロセスやスレッドの情報を監視するためには、topコマンドを使う。</p>
+<p><a href="linux_net.html">Linux ネットワーク１（コマンド）</a>を参照のこと。</p>
+
+<h1>各種設定</h1>
+<h2>WebminでGUIからLinuxを設定</h2>
+<p>Webminは、LinuxのシステムやApacheなどのサーバーまで、各種の設定をブラウザ・GUIなどから行えるツール。</p>
+<ul>
+<li><a href="https://qiita.com/tukiyo3/items/7871dcb83f1980383821">webmin 良い - Qiita</a></li>
+<li><a href="https://singoro.net/note/centos-webmin/">CentOS7にサーバ管理ツールwebminをインストール&起動&日本語化する方法 - web覚書</a></li>
+</ul>
+
+<h2>設定ファイルのバックアップファイル</h2>
+<p>my.cnfはmy.cnf.org、さらにmy.cnf.org1やmy.cnf.org2のようにバックアップファイルを作りましょう。</p>
+<ul>
+<li><a href="http://oxynotes.com/?p=3865">Linux初心者こそ押さえたい、失敗しない設定ファイルの編集方法 - OXY NOTES</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+
+<h2>ネットワークの設定</h2>
+<p><a href="linux_net.html">Linuxネットワーク（１．コマンド）</a>と<a href="linux_net2.html">Linuxネットワーク（２．設定）</a>を参照のこと。</p>
+
+<h2>タイムゾーンとロケール</h2>
+<p><a href="linux_unix_timezone_locale.html">UNIXシステム管理７（タイムゾーンとロケール）</a>を参照のこと。</p>
+
+<h1>設定</h1>
+<h2>設定ファイル</h2>
+<p>設定ファイル。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_setting.html">Linux Tips［環境設定］ - @IT</a></li>
+<li><a href="http://www.yoshinobrain.com/set.html">Linux入門 その４  設定ファイル - Yoshino Brain</a></li>
+<li><a href="http://net-newbie.com/linux/user/envfiles.html">環境ファイル - ネットワーク管理者（の卵）養成講座</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/config.html">システム設定ファイル - UNIX/Linux の部屋</a></li>
+</ul>
+<h2>ネットワーク</h2>
+<p>ネットワークの設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_net.html">Linux Tips［ネットワーク］ - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/series/1634/">ネットワーク管理の基本Tips - @IT</a></li>
+</ul>
+<h2>X11</h2>
+<p>X11の設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_x.html">Linux Tips［X Window System］ - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0807/31/news132.html">X Window System の仕組みと設定 (1/4) - @IT</a></li>
+<li><a href="http://xjman.dsl.gr.jp/index.html">X Japanese Documentation Project</a></li>
+<li><a href="https://wiki.archlinuxjp.org/index.php/Xorg">Xorg - ArchWiki</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-x-server-config-xorg.conf.html">C.3.3. xorg.conf ファイル - RHEL</a></li>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch07.ja.html">第7章 X Window システム - Debian</a></li>
+<li><a href="http://www14.plala.or.jp/campus-note/vine_linux/x/x_configure.html">X の設定 - Penguin's campus note</a></li>
+<li><a href="http://www.ne.jp/asahi/it/life/it/linux/linux_setting/xorg_conf.html">Xサーバ設定ファイルxorg.confを設定する - itLifeTips</a></li>
+</ul>
+<p>昔は、xorg.confはXF86Configという名前でした。</p>
+<ul>
+<li><a href="http://xjman.dsl.gr.jp/man/man5/XF86Config.5x.html">Manpage of XF86Config</a></li>
+<li><a href="ftp://www.x.org/pub/X11R6.8.2/doc/xorg.conf.5.html">xorg.conf(5x) manual page</a></li>
+</ul>
+<h2>ハードウェア</h2>
+<p>ハードウェアの設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_hard.html">Linux Tips［ハードウェア］ - @IT</a></li>
+</ul>
+<h2>印刷</h2>
+<p>印刷とプリンターの設定。</p>
+<p><a href="linux_printer.html">Linuxプリンター</a>を参照のこと。</p>
+
+<h2>フォント</h2>
+<p>フォントの設定。</p>
+<p><a href="linux_font.html">Linuxフォント</a>を参照のこと。</p>
+
+
+<h1>コマンド一覧</h1>
+<h2>システム</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>cal</td>
+<td>現在のカレンダーを表示する。</td>
+</tr>
+<tr>
+<td>date</td>
+<td>現在の時刻を表示・設定する。</td>
+</tr>
+<tr>
+<td>shutdown</td>
+<td>システムを停止（シャットダウン）する。</td>
+</tr>
+</table>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

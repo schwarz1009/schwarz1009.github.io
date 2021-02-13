@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux ファイルシステム階層 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ファイルシステム階層</h1>
+<p>Linuxのファイルシステム階層に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ディレクトリ階層とファイルシステム</h1>
+<h2>基本</h2>
+<p>ディレクトリの階層構造。</p>
+<p>ルートディレクトリには以下のようなディレクトリツリーがある。</p>
+<table class="some_tables">
+<tr><th>ディレクトリ</th><th>説明</th></tr>
+<tr><td>/</td><td>ルートディレクトリ。</td></tr>
+<tr><td>/home</td><td>ユーザーのホームディレクトリ。</td></tr>
+<tr><td>/root</td><td>rootのホームディレクトリ。</td></tr>
+<tr><td>/bin</td><td>OSの基本プログラム。アプリケーションのプログラムは/usr/binにあります。</td></tr>
+<tr><td>/sbin</td><td>OSのシステムプログラム。アプリケーションのシステムプログラムは/usr/sbinにあります。</td></tr>
+<tr><td>/usr</td><td>アプリケーションなどのファイル。あとで記述するように、さらに階層があります。</td></tr>
+<tr><td>/etc</td><td>設定ファイル。使っていてもファイルのサイズが変化しないファイルを置く。</td></tr>
+<tr><td>/var</td><td>ログなどの使っていて変化するファイルを置く。</td></tr>
+<tr><td>/tmp</td><td>一時的なディレクトリ。</td></tr>
+<tr><td>/dev</td><td>デバイスファイル。</td></tr>
+<tr><td>/mnt</td><td>デバイスをマウントするためのディレクトリ。</td></tr>
+<tr><td>/proc</td><td>システム情報。</td></tr>
+<tr><td>/lib</td><td>共有ライブラリ。</td></tr>
+<tr><td>/boot</td><td>OSのブート用ファイル。</td></tr>
+</table>
+<p>また、/usr以下にはアプリケーションをパッケージ管理システムでインストールした時のアプリケーションの構成ファイルの入るサブディレクトリツリーがある。</p>
+<table class="some_tables">
+<tr><th>ディレクトリ</th><th>説明</th></tr>
+<tr><td>/usr/bin</td><td>アプリケーションの基本プログラム。沢山のプログラムがあります。</td></tr>
+<tr><td>/usr/sbin</td><td>アプリケーションのシステムプログラム。</td></tr>
+<tr><td>/usr/lib</td><td>アプリケーションのライブラリ。</td></tr>
+<tr><td>/usr/share</td><td>ドキュメントなど、アーキテクチャに依存しないファイル。</td></tr>
+<tr><td>/usr/include</td><td>C言語用ヘッダファイル。</td></tr>
+<tr><td>/usr/local</td><td>アプリケーションのローカルなインストール場所。</td></tr>
+</table>
+<p>後日注記：/usrと/varのワークステーション的な使い方として、/usrをNFSで共有し、/varでマシン個別のファイルを置いたりすることが考えられる。全てのネットワーク上のマシンで同一環境を共有出来て便利。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man7/hier.7.html">Man page of HIER</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0108/07/news002.html">各ディレクトリの役割を知ろう（ルートディレクトリ編） (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0109/07/news002.html">各ディレクトリの役割を知ろう（サブディレクトリ編） (1/2) - @IT</a></li>
+</ul>
+
+<h2>アプリケーションのインストール先の違い</h2>
+<p>アプリケーションのインストール先の違いは、以下のようになります。</p>
+<table class="some_tables">
+<tr><th>ディレクトリ</th><th>説明</th></tr>
+<tr><td>/bin と /sbin</td><td>システムの最低限の起動、操作、管理に必要なバイナリファイル。<br>最近は/usr/binにリンクが張られていることもある。</td></tr>
+<tr><td>/usr/bin</td><td>通常のアプリケーションのインストール先。<br>パッケージ管理システムでインストールしたディストリビュータ公式の配布ファイルがインストールされる。</td></tr>
+<tr><td>/usr/local/bin</td><td>システムの管理者が、ソースコードをコンパイルしてインストールしたバイナリファイル。</td></tr>
+<tr><td>/opt</td><td>Google Chromeのように、ディストリビューション公式ではない配布ファイルや、オープンソースでない配布ファイルなど。<br>システムによって/optディレクトリの用途が違う。</td></tr>
+<tr><td>/home/hoge/bin</td><td>hogeユーザーが自分で入れたバイナリファイル。</td></tr>
+</table>
+<p>最近はAppImageのように、ディストリビューションによらない、共通の簡単インストールの可能な仕組みも用意されています。Windowsのフリーソフトようにダウンロードして簡単に実行出来るようになっていくでしょう。</p>
+
+
+<!--
+<h2>PATHを通す</h2>
+<p><a href="linuxlinks10.html">１０．コマンド・設定</a>に移動しました。</p>
+-->
+
+<h2>ファイルシステム</h2>
+<p>Linuxでは、様々なファイルシステムが利用出来ます。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/series/2376/">Linuxファイルシステム技術解説 - @IT</a></li>
+</ul>
+
+<h2>パーティションのマウントの仕組み</h2>
+<p>パーティションを分けると、その部分のディレクトリ以下が別パーティションとしてマウントされる。</p>
+<p>たとえば、/と/usrを分けると、/binや/sbinは/パーティションの中に、/usr/binや/usr/sbinなどは/usrパーティションの中に出来る。</p>
+<p>これによって、大量のファイルがある場合などに、/homeのようなデータを分けることで、/homeだけを使いまわしたり、バックアップをしたり、障害があった時にシステムが起動不可能にならないようにするなどの対応がしやすくなる。</p>
+<p>だが、今日のLinuxデスクトップの用途では、ハードディスクを一時的にメモリの代わりに使うswapパーティションを作り、/bootパーティションをext2で保持し、それから/パーティションぐらいの、最低限の分け方をしていれば、問題になることは少ない。</p>
+
+<h2>このようなディレクトリ編成になっている理由</h2>
+<p>このようなディレクトリ編成になっている理由は、いくつかあります。</p>
+<p>まずひとつは、上に書いたように、パーティションで簡単にディレクトリを分けることができます。/homeや/varや/etcを簡単に/と分けられるほか、それぞれに独自のファイルシステムを適用することもできます。</p>
+<p>そして、もうひとつは、コマンドで操作しやすい、ということが挙げられます。たとえば、ソースコードだけを編集したいなら、find /usr/src | xargs sed -iなどで簡単にソースコードだけを自動編集できます。</p>
+<p>さらに言えば、シェルから見て、PATHなどを設定する都合が良いということが言えます。シェルはPATHのような環境変数から、システムにある全てのバイナリへと簡単にアクセスできます。</p>
+<p>反面、難点としては、「パッケージをさくっと削除できない」というのが挙げられます。もし/usr/firefox/binのようなディレクトリ構成をしていれば、firefoxディレクトリだけを簡単に削除できます。ですが、そのためにRed HatはRPMというパッケージ管理システムを作りました。そのため、Windowsよりもはるかに簡単にパッケージを依存関係を含めて管理・更新できるようになっています。</p>
+
+<h1>詳しい解説</h1>
+<h2>/var/spoolとスプールファイル</h2>
+<p>/var/spoolにはスプールファイルやキューファイルが置かれる。</p>
+<p>スプールとは、印刷ジョブの転送など、転送に時間がかかったり、処理速度に大きな時間の差がある場合などに、データを一時的にスプールファイルとしてファイルに書き出し、少しずつ転送する仕組み。</p>
+
+<h1>新技術</h1>
+<h2>GoboLinux</h2>
+<p>Filesystem Hierarchy Standardからの脱却を目指すディストリビューション。「ファイルシステムがパッケージ管理データベース」であることを目指している。<a href="gobolinux.html">GoboLinux</a>を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GoboLinux">GoboLinux - Wikipedia</a></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

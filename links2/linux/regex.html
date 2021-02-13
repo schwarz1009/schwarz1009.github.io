@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>正規表現 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_apps_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>正規表現</h1>
+<p>正規表現に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>正規表現とエスケープシーケンス</h1>
+<h2>正規表現とは</h2>
+<p>正規表現は、文字とパターンをマッチングさせる手段。多くの場合、言語のライブラリやUNIXなどのOSのコマンドで利用できる。</p>
+<p>主に、検索と置換のために使われる。「どんな文字に一致させるか」を考えながら、パターンマッチングを行う。また、特殊文字（改行やタブなど）はエスケープシーケンスと言って、バックスラッシュ（\）によってマッチングさせることができる。PerlやRubyなどでは、マッチングした場合としなかった場合において条件分岐したり、マッチングした部分を取り出して変数に格納したりすることもできる。</p>
+<p>正規表現は一見すると記号的で読みにくさを感じるかもしれないが、慣れるととても便利である。特に、テキストエディタにgrep置換機能が付いている時は、正規表現を使うことで膨大なファイルを一瞬にして編集することができる。</p>
+
+<h2>正規表現の例</h2>
+<p>たとえば、以下のようにすることで、*から始まる全ての行にh3タグを付加できる。</p>
+<p>検索：</p>
+<pre>
+^\*(.*)$
+</pre>
+<p>置換：</p>
+<pre>
+&lt;h3&gt;\1&lt;/h3&gt;
+</pre>
+<p>さらに以下のようにすれば、&lt;以外の文字から始まる全ての行にpタグを付加できる。</p>
+<p>検索：</p>
+<pre>
+^([^&lt;].*)$
+</pre>
+<p>置換：</p>
+<pre>
+&lt;p&gt;\1&lt;/p&gt;
+</pre>
+
+<h2>一覧</h2>
+<p><a href="https://www.mnet.ne.jp/~nakama/">サルにもわかる正規表現入門</a>などを参照のこと。</p>
+
+<h2>ちょっと面倒でも正規表現を使った方が確実で速い</h2>
+<p>正規表現は、書くのがちょっと面倒でも、正規表現を使って置換をした方が、確実で、速いです。</p>
+<p>たとえば、全ての行に&lt;p&gt; ～ &lt;/p&gt;をつけたいなら、^(.*)$を&lt;p&gt;\1&lt;/p&gt;で置換します。</p>
+<p>こうすることで、確実で簡単で速いだけではなく、たくさんのファイルを置き換える時にも管理しやすくなります。</p>
+<p>しかしながら、間違えることもあるので注意しましょう。たとえば.*でタグの中身だけを置換したい時に、マッチする部分が最小マッチではなく最大マッチになっていると、タグの外側までマッチしてしまって、&lt;p&gt;から&lt;/p&gt;までを置き換えたいのに&lt;p&gt;～&lt;/p&gt;～&lt;p&gt;～&lt;/p&gt;までを置き換えたりすることがあります。このような時には.*ではなく[^&lt;]*でマッチさせます。</p>
+<p>そのため、たくさんのファイルを置換する時は気を付けましょう。バックアップを取ることも大切です。</p>
+
+<h2>キャプチャ</h2>
+<p>( ～ )でくくったパターンは、\1や\2として、置換後のテキストに含めることが出来る（キャプチャ）。</p>
+<p>たとえば、</p>
+<table class="some_tables">
+<tr>
+<th>置換前</th>
+<th>置換後</th>
+</tr>
+<tr>
+<td>(.*)\t(.*)\n</td>
+<td>&lt;h2&gt;\1&lt;/h2&gt;\n&lt;p&gt;\2\n</td>
+</tr>
+</table>
+<p>などと置換出来る。</p>
+<p>エディタによっては( ～ )ではなく\( ～ \)のように\が要る場合もあるので注意が必要。xyzzyでは\が必要だが、サクラエディタでは\は必要ない。サクラエディタの場合、複数行の置換には対応していないので注意が必要。</p>
+<p>キャプチャせずにグループ化だけをしたい場合は(?:pattern)という記法を行う。</p>
+<p>viでも\が必要。viではexコマンドを使って以下のように置換できる。</p>
+<pre>
+:%s/\(Foo\) or \(bar\)/\2 or \1/
+</pre>
+<p>Foo or barをbar or Fooに置換できる。</p>
+<p>\(と\)にかこまれたパターンは、ホールドバッファと呼ばれる特殊な領域に保管され、1行中に存在する9つのパターンまで、\1や\2などの形で保存・利用できる。</p>
+
+<h2>エスケープ</h2>
+<p>特殊文字をそのまま文字としてマッチさせたい時は、\.のように\をつけてエスケープする。</p>
+
+<h2>修飾子</h2>
+<p>Perlなどでの正規表現の修飾子は/pattern/mのようにパターンの最後に付加して使う。viでマッチする全ての文字について置換を行う場合は:%s/old/new/gなどとする。</p>
+<p>デフォルトでは正規表現は一回のマッチングしか行われないが、/gを使うとマッチする全ての場所にマッチや置換を行うことができる。/sを使うと、.が改行にもマッチするようになる。また/mを使うと、文字列は行ごとのリストになって、行ごとに^や$がマッチし、繰り返し処理が行える。また便利なのは/eで、マッチした文字列ごとにPerlの関数をかけることができる。/xを使うと改行やコメントができるようになるため、正規表現が長くなっても見やすい記述をすることができる。</p>
+<ul>
+<li><a href="https://qiita.com/akatsuki174/items/af170a4db20bda5d51ef">正規表現：正規表現修飾子編 - Qiita</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>正規表現</h2>
+<p>Perlなどのプログラミング言語だけではなく、UNIXのコマンドやサクラエディタなどからも検索・置換のために使う</p>
+<p>大量のファイルを編集する際には正規表現は必須である</p>
+<p>使うツールによって正規表現に若干の差異があったり、サクラエディタでは複数行の検索・置換ができないなど制限もあったりするので、使うツールをよく選ぶこと</p>
+
+<h1>リンク集全般</h1>
+<h2>正規表現（xyzzy）</h2>
+<p>大量のテキストファイルを編集するためには、正規表現は必須です。僕は、xyzzyと言うテキストエディタを使っています。</p>
+<ul>
+<li><a href="http://xyzzy.s53.xrea.com/reference/wiki.cgi?p=%C0%B5%B5%AC%C9%BD%B8%BD%A4%CE%C9%BD%B5%AD">正規表現の表記</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Java関連の世界観３C（文字列） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３C（文字列）</h1>
+<p>Javaによるプログラミングに関する世界観３C（文字列）です。<a href="java_lib.html">Javaの世界観３（クラスライブラリ）</a>や<a href="java.html">Javaの世界観１（言語）</a>や<a href="java_oop.html">Javaの世界観２（オブジェクト指向）</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>String（文字列型）</h1>
+<h2>Stringクラス</h2>
+<p>Javaでの文字列は、以下のように記述する。</p>
+<pre class="prettyprint">
+String s = "文字列";
+</pre>
+<p>この、ダブルクォーテーションで囲まれた文字列を記述した時点で、既に「new String()」相当のStringインスタンスが作られている。以下のような記述もできるが、2つのインスタンスが生まれてしまうため、以下のような記述は非効率的で、避けた方が良い。</p>
+<pre class="prettyprint">
+String s = new String("文字列");
+</pre>
+<ul>
+<li><a href="https://nobuo-create.net/string/">【Java】 そもそもStringって何？ | 一番かんたんなJava入門</a></li>
+</ul>
+<p>後日注記：Javaは文字列が参照型であるため、==で文字列を比較することはできない。equalsメソッドを使う必要がある。</p>
+
+<h2>分割のためのメソッド</h2>
+<p>JavaのStringでとても便利なメソッドとして、splitメソッドが挙げられる。ある正規表現で区切られた文字列を分割することができる。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/start/string_class/index5.html">文字列を分割する(split) - Stringクラス - Let'sプログラミング</a></li>
+</ul>
+
+<h2>置換のためのメソッド</h2>
+<p>replaceFirstメソッドは最初に該当した文字列を置換、replaceAllメソッドは該当する全ての文字列を置換する。</p>
+<pre class="prettyprint">
+str.replaceFirst(regex, repl)
+str.replaceAll(regex, repl)
+</pre>
+<p>とする。光を闇に変換するには、</p>
+<pre class="prettyprint">
+str.replaceAll("光", "闇")
+</pre>
+<p>とする。</p>
+<p>同様の操作は、</p>
+<pre class="prettyprint">
+Pattern.compile(regex).matcher(str).replaceFirst(repl)
+</pre>
+<p>や、</p>
+<pre class="prettyprint">
+Pattern.compile(regex).matcher(str).replaceAll(repl)
+</pre>
+<p>でも実現できる。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/start/string_class/index6.html">最初に該当した文字列を置換する(replaceFirst) - Stringクラス - Let'sプログラミング</a></li>
+<li><a href="https://www.javadrive.jp/start/string_class/index7.html">該当する全ての文字列を置換する(replaceAll) - Stringクラス - Let'sプログラミング</a></li>
+</ul>
+
+<h1>正規表現</h1>
+<h2>パターンマッチング</h2>
+<p>Javaの正規表現によるパターンマッチングは、まずPatternクラスのオブジェクトを作り、それを正規表現を指定したcompileメソッドで「コンパイル」し、その後にmatcherメソッドで「マッチ」させるなど、少しややこしくて複雑である。</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/regex/Pattern.html">Pattern (Java Platform SE 8) - Javadoc</a></li>
+</ul>
+<p>以下のサイトが詳しくて参考になる。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/regex/">Java正規表現の使い方 - Let'sプログラミング</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/regexp.html">Java正規表現メモ(Hishidama's Java Regular Expression Memo)</a></li>
+</ul>
+<p>正規表現については<a href="../linux/regex.html">正規表現</a>のページを参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

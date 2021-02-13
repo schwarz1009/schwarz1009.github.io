@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>CORBA関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div><h1>CORBAの世界観</h1>
+<p>CORBAの世界観です。<a href="gnome.html">GNOME</a>や<a href="dbus.html">D-Bus</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>CORBA</h1>
+<h2>CORBAとGNOMEで分散デスクトップ</h2>
+<p>CORBAとGNOMEを使うことで、分散環境でのネットワークシステムが可能となる。</p>
+<p>たくさんのパソコンがあって、さまざまなプラットフォームがあって、それがインターネットで繋がれていたとして、その中でひとつの「統合デスクトップ環境」が、分散されたそれぞれのマシンをひとつにできる。</p>
+<p>また、COMと同様の技術であるため、エンジニアの視点から見ると、全てのネットワーク環境で、コンポーネントの再利用とネットワークインターフェースを通じたメッセージのやり取りやオブジェクトのリンクが可能となる。</p>
+<p>すなわち、ひとつのマシンにとらわれることなく、ネットワーク上の全てのマシンを総合的に操作することが可能となることを、GNOMEは目指している。</p>
+<p>後日注記：CORBAにより、異なるプログラミング言語やネットワーク上のオブジェクト（モジュール）がインターフェースとその記述言語IDLを通じてコミュニケーションすることが可能となる。</p>
+
+<h2>あるべきはコードの再利用</h2>
+<p>GNOMEプロジェクトの創始者ミゲル・デ・イカザは、「UNIXをもう少しマシなものにしよう」という論文で、コードの再利用の行われないUNIXシステムを「最悪である」と論じました。</p>
+<p>この論文のポイントは、</p>
+<p>・UNIXではコードの共有がされなかった</p>
+<p>・UNIXのどのプログラミング言語も、その世界の範囲内でしか協調して動作しない</p>
+<p>・UNIXのフィルタープログラムも、コンポーネント作成の最終回答ではない</p>
+<p>・UNIXの多くのアプリケーション（サーバ・GUI）は、libcやxlibを除いて、なんのコードの共有もなされていない</p>
+<p>・Windowsでは「巨大すぎるモノリシックアプリケーション」として批判されるInternet Explorerも、コンポーネントを再利用することができる</p>
+<p>・CORBAを用いたBonoboコンポーネントモデルによって、GNOMEは再利用可能なソフトウェアICとなる</p>
+<p>詳しい内容は以下の論文を参照のこと。</p>
+<ul>
+<li><a href="http://web.archive.org/web/20050206212853/http://www.os-omicron.org/~takano/private/trans/bongo-bong_j.html">Unix をもう少しマシなものにしよう</a></li>
+</ul>
+
+<h2>分散コンピューティング</h2>
+<p>GNOMEで使われていることで有名なCORBAだが、そもそもは分散システムでプラットフォームや言語の域を超えてオブジェクト同士がメッセージ通信を行う仕組み。</p>
+<p>分散システムでネットワーク上のリモートオブジェクトをローカルのモジュールのように使うことができる。</p>
+<p>分散コンピュータの一例として、地球外生命体の調査を行うために自分のコンピュータのリソースを提供するSETI@homeなどがある。</p>
+<p>主な分散システム技術として、COMやCORBA、JavaのRMIなどがある。</p>
+
+<h2>CORBA</h2>
+<p>GNOMEのベースになっているオブジェクト技術。WindowsのCOMと同様の技術。僕の理解では以下のようになる：</p>
+<p><!--このCORBAの理解は明らかに間違っている。ネットを見ていると、-->オブジェクト同士が言語やプラットフォームの違いを気にせずに相互にやり取りし、呼び出す、と言う技術だ。</p>
+<p>主に、サーバーとクライアントが繋がる時に、サーバー側のCORBA ORBとクライアント側のCORBA ORBがリンクし、互いに相互にやりとりするように動作する。</p>
+<p>CORBAの解説と実装例は以下を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture">Common Object Request Broker Architecture - Wikipedia</a></li>
+</ul>
+
+<h3>勝手な理解</h3>
+<p>（以下の内容はにわか知識で書いているため、間違っているかもしれません。注意してください。）</p>
+<p>CORBAは、僕の勝手な理解を言うと、アプリケーションサーバーとクライアントに分けることで、XサーバーとXクライアントのように、コアの万能コンポーネントと、小さなクライアントプログラムを分けることが出来る。</p>
+<p>これを最近の流行で実装すると、monoになる。</p>
+<p>要は、アプリケーションサーバーを外部から操作する。そこが賢いのが、CORBAとJavaだ。だから、GTK+のLispインタープリタなんか作る意味がない。Bonoboをコマンドから呼んでもおかしくは無い。</p>
+<p>そして、万能コンポーネントはオブジェクト指向で実現すると、本当に万能になる。</p>
+<p>と言うことになる<!--が、僕には良く分からない-->。大型コンピュータで使うのかもしれない。ただ、CORBAは成熟した技術らしい。</p>
+<!--<p>以下の「ネットワーク・オブジェクト・モデル」の章も参照のこと。</p>-->
+
+<h2>GNOMEのネットワーク・オブジェクト・モデル</h2>
+<p>GNOMEはネットワーク・オブジェクト・モデルという考え方によって作られている<!--が、僕はこの意味が良く分かっていない-->。</p>
+<!--
+<p>単に、コンポーネントをネットワークで行う、ということなのか。</p>
+<p>アプリケーションをリモートで操作する、というX11のようなことなのか。</p>
+<p>たくさんのネットワーク上のオブジェクトが一つのアプリケーションになるのだろうか。</p>
+<p>GLibやCORBAなどのGNOMEコンポーネントが、とてもオブジェクト指向的だ、ということを言いたいのか。</p>
+-->
+<p>ここには複数の意味がある。</p>
+<p>１．ネットワーク通信によって、言語とプラットフォーム非依存なコンポーネント連携を行う。</p>
+<p>２．X11のように、アプリケーションをリモートから操作し、さまざまなネットワーク上のアプリケーションが1つになって通信できる（ネットワーク上のオブジェクトが1つの連携したアプリケーションになる）。</p>
+<p>３．GLibやCORBAなど、GNOMEコンポーネントはとてもオブジェクト指向的である。</p>
+<p><!--ネットの情報を調べた結果、-->GNOMEのコンポーネント・フレームワークは、コンポーネントを書くのを簡略化し、それらのオブジェクトがCORBAを話すので、Bonoboコンポーネントは、ネットワーク上の別のところにあるWindowsマシンで動いている別のCORBAコンポーネントと話すことが出来る<!--、ということらしい-->。</p>
+<table class="some_tables">
+<tr><th>特徴</th><th>説明</th></tr>
+<tr><td>ネットワーク通信</td><td>ネットワーク上で、WindowsやLinuxなど、さまざまなCORBAアプリケーションが互いに「インターフェース定義」によって通信できる。<br>ライブラリやフレームワークのような「インターフェース」をネットワークを介して行うことができる。</td></tr>
+<tr><td>言語非依存・プラットフォーム非依存</td><td>たくさんの言語が使え、たくさんのOSで動く。<br>このことにより、多くのプラットフォームを混合させたシステム全体をアプリケーションにできる。</td></tr>
+<tr><td>バイナリレベルでの再利用</td><td>既存のコンポーネントをバイナリレベルで再利用できる。</td></tr>
+</table>
+<p>ということが、CORBAの優位性である。</p>
+<ul>
+<li><a href="http://www.yamdas.org/column/technique/gnomej.html">GNOME の優位性</a></li>
+</ul>
+
+<h2>CORBAの解説</h2>
+<p>きちんと解説すると：</p>
+<p>１．プログラムコードが、機能や呼び出し情報とともにカプセル化される。</p>
+<p>２．外部インターフェース記述言語IDLによって、さまざまな言語の間でマッピングが行われる。</p>
+<p>３．ネットワーク上の分散環境において、プログラムコードをリンクして呼び出せるようになる。</p>
+<p>これにより、ネットワーク上のどんな言語でも、どんなシステムでも、プログラムコードを再利用することができる。</p>
+<p>ただのライブラリのインターフェースではなく、言語非依存、プラットフォーム非依存で、ネットワークによって繋がる。たとえば、UNIXのワークステーションとWindowsのアプリケーションで、ネットワークをまたいでシステムを作ったりすることが出来る。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture">Common Object Request Broker Architecture - Wikipedia</a></li>
+</ul>
+
+<h2>IDL定義ファイル</h2>
+<p>IDL定義ファイルは、C++やJavaのクラスファイルのような見た目をしており、そんなに難しくはない。これをサーバー側とクライアント側のORBを使った各種言語のソースコードで使って、多言語での分散ネットワーク通信を行うことができる。</p>
+<p>以下のサイトにIDL定義ファイルの例がある。</p>
+<ul>
+<li><a href="https://www.zealseeds.com/SysDevTech/corba/index.html">CORBAとは―読み方はコルバ。CORBA通信（Java）の入門知識を解説。 - zealseeds</a></li>
+<li><a href="https://www.zealseeds.com/Lang/LangIdl/index.html">IDL（Interface Definition Language）―CORBAの理解に不可欠な言語 - zealseeds</a></li>
+<li><a href="https://www.zealseeds.com/Lang/LangIdl/Idllevel01/WhatIdl/index.html">IDLとは―CORBAのインタフェースを定義する言語 - zealseeds</a></li>
+</ul>
+
+<h2>要するにPlan 9みたいなもの</h2>
+<p>GNOMEがCORBAで何をやりたいのかと言うと、ネットワーク上のさまざまな分散オブジェクト（関数やリソース）を一緒にして、「たくさんのコンピュータを一緒にしてひとつのインターフェースで操作する」ということをやりたいのだ。</p>
+<p>要するに、Plan 9のような分散OSを、UNIXの基盤の上で実現したい、といった感じである。</p>
+<p>あるいは、WindowsもLinuxも全部まぜた上で、あらゆる言語を使ってネットワーク上に分散した全てのコンピュータ上でひとつの操作体系からあらゆる場所のリソースを操作したい。</p>
+<p>まさにこれは壮大な目標である。</p>
+<p>ただ、実際のところは、単なるコンポーネント技術にすぎない。WindowsのCOMと同様の技術であり、「UNIXをWindows並みに新しくする試み」であると言える。UNIXのネットワークは化石のようなシステムである。socketを使って相互に通信するだけではなく、CORBAを使うことでネットワーク上の分散システムを高度に実現できる。</p>
+
+<h2>CORBAでできること</h2>
+<p>僕は、CORBAでできることは主に4つあると思う。</p>
+<p>１．家庭内あるいは会社内での、ローカルな分散システムの構築。どのパソコンでも共有されたリソースにアクセスできる。</p>
+<p>２．さまざまな場所にあるサーバーのサービスと、自分のローカルなアプリケーションを結びつけた利用。HTTPやX11のように、プロトコル的な、サービスを提供するアプリケーションサーバーとクライアントとの間でのやり取りを行う。</p>
+<p>３．世界中のたくさんの人々を巻き込んだ、分散・クラスタネットワーク。癌・白血病を解析するUDや地球外生命体を発見するSETI@homeのようにたくさんのコンピュータ資源を用いた分散システム。</p>
+<p>４．たくさんのプラットフォームや言語を混在させた上でのネットワーク・コンポーネント再利用システムの構築。WindowsやUNIXとLinuxを混在させ、Pythonのような新しい言語からCOBOLのような古い言語のシステムをネットワークのたくさんの分散コンピュータから操作するかのようなシステム。</p>
+<p>CORBAはこうしたシステムをサーバー・クライアントのコンポーネントシステムとして実現することができる。</p>
+
+<h2>別々のマシンがひとつのシステムとして通信する</h2>
+<p>CORBAやCOMの利点として言えるのが、別々のマシンがひとつのシステムとして通信する、ということ。</p>
+<p>これは、ネットワーク接続されたリモートコンピュータの実行形態として、HTTPサーバとHTTPクライアントの関係と違い、コンポーネント・オブジェクトとして通信が可能であると言える。</p>
+<p>つまり、HTTPのように、通信プロトコルによって通信するのではなく、ライブラリ関数やクラスインターフェースのような形で、ネットワーク通信によるアプリケーションを利用することができる。</p>
+
+<h2>既存システムを再利用するために使う</h2>
+<p>実際のところ、CORBAは分散システムではあるものの、既存システムの再利用のために使われることが多い。</p>
+<p>たとえば、COBOLで組んだ巨大システムを完全にリプレースせず、Javaなどから利用するためにCORBAのコンポーネント再利用技術を用いて、ネットワークインターフェース部分だけを拡張する。</p>
+<p>JavaのRMIやJavaBeansなども、CORBAと同様の再利用可能なコンポーネント技術である。</p>
+
+<h2>Bonobo</h2>
+<p>BonoboはGNOMEのコンポーネントシステム。CORBAをベースにしている。</p>
+<p>利用可能なBonoboコンポーネントには以下のようなものがある。</p>
+<p>・Gnumericスプレッドシート</p>
+<p>・PostScriptビューア (ggv)</p>
+<p>・PDFビューア (xpdf)</p>
+<p>・SVGビューア (gill)</p>
+
+<h2>D-Bus</h2>
+<p>GNOME 3の新しいリモートでのプロセス間通信（インターフェースを含む）であるD-Busについては<a href="dbus.html">D-Bus</a>を参照のこと。</p>
+
+<h1>リンク集全般</h1>
+<h2>CORBA入門</h2>
+<p>GNOMEはCORBAと呼ばれるコンポーネント技術を使って開発されています。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0103/08/news002.html">いまなぜCORBAなの? - @IT</a></li>
+</ul>
+
+<h2>Bonobo</h2>
+<p>Bonobo（GNOMEのコンポーネントモデル）について。</p>
+<ul>
+<li><a href="http://web.archive.org/web/20050206212853/http://www.os-omicron.org/~takano/private/trans/bongo-bong_j.html">Unix をもう少しマシなものにしよう</a></li>
+<li><a href="http://www.yamdas.org/column/technique/gnomej.html">GNOME の優位性 - YAMDAS Project</a></li>
+<li><a href="https://developer.gnome.org/platform-overview/2.32/bonobo-corba.html.ja">Bonobo および CORBA - GNOME</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

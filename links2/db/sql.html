@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>SQL関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>SQLの世界観</h1>
+<p>SQLによるデータベース操作に関する世界観です。<a href="db.html">データベースの世界観</a>と<a href="mysql.html">MySQLの世界観</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>などを参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>リレーショナルデータベース</h1>
+<h2>リレーショナルデータベースの基本</h2>
+<p>リレーショナルデータベースは、表形式でそれぞれの列と行によってデータを格納し、データごとの属性を参照し、それぞれは小さなテーブルとしてデータベースに蓄積され、そのテーブル同士の関係性によって高度なデータを表現するデータベースです。</p>
+<p>データベースとは、ある目的を持って格納されたデータの蓄積であると言えます。</p>
+<p>リレーショナルデータベースでは、ひとつのテーブルに全てのデータを詰め込むことは基本的にしません。それぞれの小さなたくさんのテーブルを作って、そのテーブルとテーブルを互いに「リレーション」で関連付けて、より大きなテーブルを作成し、テーブルを参照したり、更新したり、挿入したり、削除したり、あるいは結合させたりして扱うことのできるデータベースです。</p>
+<p>リレーショナルデータベースの良い点は、最初から完璧なデータ構造を作らず、小さなテーブルを作って関連付けることができる点です。</p>
+<p>たとえば、学生の個人情報と、学生の単位や試験の点数などは、別々のテーブルに格納し、それを互いに関連付けて、その場その場で別の表にして扱うことができます。</p>
+
+<h2>主キーと外部キー</h2>
+<p>たとえば、以下の表（学生テーブル）があったとします。</p>
+<pre>
++------+------+----------+
+| 名前 | 年齢 | 学生番号 |
++------+------+----------+
+| 鈴木 |  21  | AAAAAAAA |
+| 田中 |  20  | BBBBBBBB |
++------+------+----------+
+</pre>
+<p>ここで、同じ「学生番号」という列を持つ別の表（学部テーブル）があったとします。</p>
+<pre>
++----------+--------+------+
+| 学生番号 |  学部  | 担任 |
++----------+--------+------+
+| AAAAAAAA | 理学部 | 山中 |
+| BBBBBBBB | 工学部 | 西川 |
++----------+--------+------+
+</pre>
+<p>ここで、学生番号という同じ列を用いて、この2つのテーブルを関連付けることができます。</p>
+<pre>
++------+------+----------+    +----------+--------+------+
+| 名前 | 年齢 | 学生番号 |    | 学生番号 |  学部  | 担任 |
++------+------+----------+    +----------+--------+------+
+| 鈴木 |  21  | AAAAAAAA | → | AAAAAAAA | 理学部 | 山中 |
+| 田中 |  20  | BBBBBBBB | → | BBBBBBBB | 工学部 | 西川 |
++------+------+----------+    +----------+--------+------+
+</pre>
+<p>ここで、学部テーブルにおける学生番号（AAAAAAAAまたはBBBBBBBB）のことを、学部テーブルの「主キー」と呼びます。主キーは「そのテーブルにおいてそれぞれの項目を一意に定めることのできる主となるキー」のことです。この主キーを用いて、テーブルを関連付けました。</p>
+<p>また、学生テーブルにおける学生番号のことを、「外部キー」と呼びます。外部キーは、別のテーブルの主キーと結びつけるために用いられる、特別なキーのことです。</p>
+<p>また、学生番号キーにおいては、同じ学生番号を同時に持つことは許されません。これを「制約」と呼びます。（このような場合は一意性制約と呼び、他にもさまざまな制約がある。また、一意性制約に加えてNULL値を禁止する制約のことを主キー制約と呼ぶ。）</p>
+<p>このような考え方に基づいて、リレーショナルデータベースの操作は行われます。</p>
+<p>後日注記：外部キーには「外部キー制約」を適用できます。これは外部キーの追加・更新・削除の時に対応する主キーが存在するかどうかを確認させる機能です。</p>
+
+
+<h1>SQLデーターベースサーバー</h1>
+<h2>SQLの基本は保管、更新、削除、検索</h2>
+<p>RDBMSでは、データを複数の行と列で構成された「テーブル」（表）の形で取り扱います。</p>
+<p>この仕組みにより、データベースはより安全かつ高速に大量のデータを取り扱うことができます。</p>
+<p>SQLの基本はデータの保管、更新、削除、検索です。</p>
+
+<h2>SQLの基本</h2>
+<p>基本は、追加（INSERT）、更新（UPDATE）、削除（DELETE）、取り出し（SELECT）の４つです。 DELETEの時WHEREを指定しないと「全削除」になってしまうので注意してください。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/SQL">SQL - Wikipedia</a></li>
+</ul>
+<!--<p><a href="../db/sql.html">SQL</a>を参照のこと。</p>-->
+
+<h2>CRUD</h2>
+<p>データベース用語として、Create（生成）、Read（読み取り）、Update（更新）、Delete（削除）の4つをCRUDと言います。</p>
+<p>Webやデータベースの世界でよく使う言葉なので覚えておきましょう。</p>
+
+<h2>MySQL/MariaDB</h2>
+<p>データーベースサーバー。MySQLがサン・マイクロシステムズ（現オラクル）に買収されたことで、MariaDBと言う派生版が生まれている。</p>
+
+<h2>PostgreSQL</h2>
+<p>データーベースサーバー。MySQLのライバル。</p>
+
+<h2>SQLite</h2>
+<p>軽量なデーターベースサーバー。</p>
+
+<h2>phpMyAdmin</h2>
+<p>PHPで実装されたMySQL設定ソフトウェア。</p>
+
+<h1>データベースの作成（データベース定義言語）</h1>
+<p>SQLの記述は<a href="https://qiita.com/devopsCoordinator/items/0f742158caf0fdb533e3">【新人教育 資料】第4章 SQLへの道 〜SQL基本操作編〜 - Qiita</a>と<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>などを参考にしています。</p>
+
+<h2>CREATE</h2>
+<p>CREATE データベースのテーブルやビューを作成する。</p>
+<p>テーブルの作成：</p>
+<pre class="prettyprint lang-sql">
+CREATE TABLE customer (
+ customer_id INTEGER PRIMARY KEY,
+ name CHAR(20) NOT NULL,
+ address CHAR(100),
+ post_number CHAR(8) PEFERENCES shopname(shopcode),
+ tel_number CHAR(12),
+ mail_address CHAR(30) UNIQUE )
+</pre>
+<p>ビューの作成：</p>
+<pre class="prettyprint lang-sql">
+CREATE VIEW viewname AS SELECT ...
+</pre>
+<p>後日注記：ビューとはユーザに見せるための仮想的な表で、実体はSQL文であり、物理テーブルの実体を持たない。ユーザにテーブルの一部を見せたり、結合したテーブルを見せるためなどに利用できる。</p>
+
+<h2>phpMyAdmin</h2>
+<p>MySQLでは、テーブルの作成は、phpMyAdminというブラウザ上のツールを使って行うこともできます。</p>
+
+<h1>四大命令（データベース操作言語）</h1>
+<p>SQLの記述は<a href="https://qiita.com/devopsCoordinator/items/0f742158caf0fdb533e3">【新人教育 資料】第4章 SQLへの道 〜SQL基本操作編〜 - Qiita</a>と<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>などを参考にしています。</p>
+
+<h2>INSERT</h2>
+<p>INSERT データを追加する。</p>
+<pre class="prettyprint lang-sql">
+INSERT INTO tablename (column1, column2, ...) VALUES (value1, value2, ...);
+</pre>
+<p>または</p>
+<pre class="prettyprint lang-sql">
+INSERT INTO tablename (column1, column2, ...)
+  SELECT ...
+</pre>
+
+<h2>SELECT</h2>
+<p>SELECT データを参照する。</p>
+<pre class="prettyprint lang-sql">
+SELECT column1, column2, ... FROM tablename [WHERE search];
+</pre>
+<p>searchは検索条件です。<p>
+
+<h2>UPDATE</h2>
+<p>UPDATE データを更新する。</p>
+<pre class="prettyprint lang-sql">
+UPDATE tablename SET column1=value1 [, column2=value2 ...] [WHERE search];
+</pre>
+<h2>DELETE</h2>
+<p>DELETE データを削除する。</p>
+<pre class="prettyprint lang-sql">
+DELETE FROM tablename [WHERE search];
+</pre>
+
+<h1>その他のSQL文</h1>
+<p><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>を参考にしています。</p>
+
+<h2>あいまい検索</h2>
+<p>あいまいな検索にはLIKEを使う。</p>
+<p>たとえば、</p>
+<pre>
+氏名 LIKE '加藤%'
+</pre>
+<p>の場合は、「加藤」で始まる氏名を検索する。</p>
+
+<h2>カーソル</h2>
+<p>カーソルは、一連の連続したデータにひとつひとつアクセスするための機能。</p>
+<p>後日注記：カーソルはDECLAREで宣言し、OPEN～CLOSEの間で、データをFETCHで取得し、ループ処理の中でWHERE CURRENT OFを使って現在位置にあるデータを編集・削除する。カーソルを使うことで、ファイルシステムとよく似た感じで「現在位置」を保持しながらデータを操作することができる。</p>
+
+<h2>集計関数</h2>
+<p>SUM（合計）, AVG（平均）, MAX（最大）, MIN（最小）, COUNT（行のカウント）などの集計関数がある。</p>
+
+<h1>セキュリティ</h1>
+<h2>SQLインジェクションとプレースホルダ</h2>
+<p>SQLインジェクションは、悪意のあるユーザーによってSQL文の行末などに別のSQL文をあたかも値であるかのように入力され、不正なSQLを実行されてしまう脆弱性。</p>
+<p>こうした場合、プレースホルダによって値を入れるべき部分に$1、$2、あるいは?などの特別な文字列（プレースホルダ）を入れておき、その中に可変の文字列が代入されるようにすることで、「必ず値が値として評価されるようにする」ことで脆弱性を回避できる。</p>
+<p>また、プレースホルダを使う他にも、入力された値を適切にエスケープするという対策もある。</p>
+<ul>
+<li><a href="https://lets.postgresql.jp/documents/tutorial/with_php/against_sql_injection/placeholder/1">PHPでのSQLインジェクション対策 - プレースホルダ編 | Let's Postgres</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">SQLインジェクション - Wikipedia</a></li>
+</ul>
+<p>プレースホルダの例については<a href="../prog_lang/php_db.html">PHP（データベース）</a>を参照のこと。</p>
+
+<h1>リンク集全般</h1>
+<h2>SQL</h2>
+<p>データベース専用言語。</p>
+<ul>
+<li><a href="http://www.techscore.com/tech/sql/index.html/">SQL - TECHSCORE(テックスコア)</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

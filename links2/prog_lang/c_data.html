@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>C関連の世界観２（データ構造） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C言語の世界観（２．データ構造）</h1>
+<p>C言語によるプログラミングに関する世界観２（データ構造）です。<a href="c.html">C</a>や<a href="cpp.html">C++</a>も参照のこと。</p>
+<p>ツール関係は<a href="c_cpp_tools.html">C/C++ツール</a>に移動しました。</p>
+<p>システムに依存する部分は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>や<a href="windows_programming.html">Windowsプログラミング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>変数と演算子</h1>
+<h2>変数と定数</h2>
+<p>変数。</p>
+<pre class="prettyprint">
+int x;
+char c;
+x = 4;
+printf("%d\n", 2 * x + 3);
+</pre>
+<p>変数は基本的にint x;のように「変数の型」と「変数の名前」を指定する。代入は=で行う。また、</p>
+<pre class="prettyprint">
+x = x + 1;
+</pre>
+<p>は</p>
+<pre class="prettyprint">
+x += 1;
+</pre>
+<p>あるいは</p>
+<pre class="prettyprint">
+x++;
+</pre>
+<p>と書くことが出来る。</p>
+<p>-も同様に</p>
+<pre class="prettyprint">
+x -= 1;
+</pre>
+<p>あるいは</p>
+<pre class="prettyprint">
+x--;
+</pre>
+<p>と書ける。</p>
+<p>定数は、10進数については10のようにそのまま記述する。8進数は先頭に0をつけて047などとする。16進数は先頭に0xをつけて0xffなどとする。浮動小数点定数は10.08や1.0e-2などのように記述する。文字は'A'、文字列は"ABC"と囲んで表記する。</p>
+<p>変数には型と呼ばれるものが存在する。型は変数の性質を表す。</p>
+<table class="some_tables">
+<tr><th>名前</th><th>種類</th><th>バイト数</th><th>扱える数値の範囲</th></tr>
+<tr><td>char</td><td>文字型</td><td>バイト数1</td><td>-128～127</td></tr>
+<tr><td>int</td><td>整数型</td><td>バイト数2</td><td>-32768～32767</td></tr>
+<tr><td>long</td><td>倍長整数型</td><td>バイト数4</td><td>-2147483648～2147483647</td></tr>
+<tr><td>float</td><td>単精度浮動小数点型</td><td>バイト数4</td><td>3.4E-38～3.4E+38</td></tr>
+<tr><td>double</td><td>倍精度浮動小数点型</td><td>バイト数8</td><td>1.7E-308～1.7E+308</td></tr>
+</table>
+<p>後日注記：演算子などで異なる型同士の演算をした際には、小さいほう（たとえばint）から大きい方（たとえばdouble）への自動的な型キャストが行われる。代入や関数の引数渡しなどにおいても自動的に変数の型が変換される。()を使うことで強制的な型変換ができる。たとえば、i = (int) f;など。</p>
+<p>後日注記：プログラム（関数）は、単に成功した場合に値を返すだけではなく、失敗した場合のエラーチェックも返さなければならない。このため、たとえ文字を返す関数であっても、返り値の型をcharではなくintにする場合がある。これはchar型の値に加えてエラーチェックのための値を返す必要があるからである。</p>
+
+<h2>演算子</h2>
+<p>基本的な演算子：</p>
+<table class="some_tables">
+<tr><th>演算子</th><th>演算</th></tr>
+<tr><td>=</td><td>代入</td></tr>
+<tr><td>+</td><td>足し算</td></tr>
+<tr><td>-</td><td>引き算</td></tr>
+<tr><td>*</td><td>掛け算</td></tr>
+<tr><td>/</td><td>割り算</td></tr>
+<tr><td>%</td><td>余りの計算</td></tr>
+</table>
+<p>また、++でインクリメント（その数値に+1を計算して代入）、--でデクリメント（その数値に-1を計算して代入）ができる。</p>
+<p>インクリメント・デクリメント演算子には、後置演算（a++）と前置演算（++a）が存在する。単独で用いた時は結果は変わらないが、=とともに用いると、++aは先に処理をしてから代入され、a++は代入してから後に処理が行われる。</p>
+
+<h2>const</h2>
+<p>constは、「一度代入されたら変更されない変数」すなわち（名前のついた）定数を定義するのに使う。</p>
+<p>たとえば一度代入したら再度変更されない文字列には、const char*型を使うことが多い。できるだけ定数として使われる変数にはすべてconstを付けることが推奨される。</p>
+<p>また、関数の引数が文字列のポインタである場合、constをつけることで明示的に「変更されない」ということを示すことができる。</p>
+
+<h2>static</h2>
+<p>staticは静的ローカル変数と静的グローバル変数を宣言するのに使う。</p>
+<p>静的ローカル変数は、関数のローカル変数でありローカルスコープでのみアクセスできる変数でありながら、関数の実行が一度終わってからもプログラム終了まで保持され続ける変数のこと。たとえば、以下のように、関数の中で定義した静的ローカル変数をインクリメントすることで、関数を呼び出すたびに値を増やし続ける、といったことができる。</p>
+<pre class="prettyprint">
+void func() {
+  static int x = 0;
+  x++;
+  printf("%d\n", x);
+}
+
+int main() {
+  func();
+  func();
+  func();
+}
+</pre>
+<p>実行結果</p>
+<pre>
+1
+2
+3
+</pre>
+<p>この時、x=0という初期化処理は最初の一回のみされ、xは関数の実行が終わってもプログラムの終了まで値を保持し続ける。</p>
+<p>また、静的グローバル変数は関数外で宣言されるグローバル変数でありながら、別のファイルからはアクセスできない変数のこと。関数外でstaticを使った場合、そのグローバル変数は静的グローバル変数となり、他のファイルからはアクセスできなくなる。</p>
+<p>static変数は、簡易オブジェクト指向のようにも利用できる。</p>
+<p>たとえば、オブジェクトのインスタンスを作る代わりに、静的ローカル変数を使用できる。また、静的グローバル変数を使うことで、複数の関数から共有されるデータをグローバル変数としながら、他のファイルからアクセスできなくし、隠蔽することができる。この場合、静的グローバル変数にアクセスするための特別のインターフェース関数を作って、そのインターフェースからのみグローバル変数にアクセスできるようにすることで、グローバル変数を隠蔽することができる。</p>
+<p>ややこしいことにJavaにもstaticキーワードというものがあり、これも意味が違う。Javaのstaticメソッド（あるいは変数）は、クラスのインスタンスを作成しなくても実行できる、インスタンスの生成とは別個の関数的なメソッド（変数）である。</p>
+
+<h1>構造体</h1>
+<p>「ANSI対応 C言語プログラミングレッスン 入門編」より編集して引用。</p>
+<h2>構造体</h2>
+<p>構造体：</p>
+<pre class="prettyprint">
+struct student {
+  int id;
+  char name[20];
+  int kokugo;
+  int math;
+  int english;
+};
+
+struct student shinji;
+</pre>
+<p>構造体の中のメンバにアクセスするためには、自分でつけた変数名と構造体のメンバ名を「.」でつないで、以下のようにアクセスする：</p>
+<pre class="prettyprint">
+shinji.kokugo = 100;
+shinji.math = 85;
+shinji.english = 60;
+</pre>
+<p>ポインタの先にある構造体のメンバは、「-&gt;」でアクセスできる。</p>
+<p>オブジェクト指向のクラスとメソッドは、要はこの構造体の「.」を、構造体を作るのと同じように、同一インスタンスでのメンバ関数とメンバ変数の共有に応用したものである。</p>
+
+<h2>typedefで独自の型を宣言する</h2>
+<p>typedefを用いて型名を宣言することで、独自の型を宣言して、structをつけなくてもその型の変数を宣言できるようになる。C言語ではFILE型などがこれに当たる。また、C++ではクラス名を宣言することでオブジェクトの型となるクラスを宣言できる。</p>
+
+<h2>構造体の用途の例</h2>
+<p>Cの構造体の用途は、主に「データ構造の表現」と「ハードウェアなどの機能のマッピング」です。</p>
+<p>たとえば、構造体は以下のような用途によく使われます。</p>
+<p>・共通の特徴をもった変数のグループ化（たとえば関数への引数渡しなどに使う）</p>
+<p>・決まりきったデータの表現（全ての月と日の網羅など）</p>
+<p>・グラフィックスにおけるX軸とY軸の表現や、図形オブジェクトの位置やサイズなど、一時的な内部情報の保持</p>
+<p>・連結リストやツリー、グラフなどの紐づけされたデータ構造</p>
+<p>・メタ属性を持ったバッファの表現</p>
+<p>・個人情報やひとつのグループとなったデータベース情報（掲示板の名前やコメントなど）</p>
+<p>・準グローバル変数としての、各関数やメソッドから共有される、共有データプール</p>
+<p>・ハードウェアデバイスのマッピング</p>
+<p>・ネットワーク接続情報のマッピング</p>
+<p>・プロセスやファイルを表すための低レベルシステムの内部的表現</p>
+<p>また、ポインタとともに構造体を用いることで「動的に作成されるデータ」をC言語などで表現できます。ローカル変数ではないため、スコープから出ても消えることがなく、自分で作成・破棄のタイミングをコントロールします。</p>
+
+<h2>Cでオブジェクト指向</h2>
+<p>Cでオブジェクト指向は出来ないというのが通説だが、GTK+などでは、Cによるオブジェクト指向のライブラリであるGLibなどを使って、Cでもオブジェクト指向を行うことが出来る。</p>
+
+<h1>共用体と列挙型</h1>
+<h2>union（共用体）</h2>
+<p>Cの共用体（union）は、同じ記憶域を共有する複数の項目をひとつにまとめたもの。</p>
+
+<h2>enum（列挙型）</h2>
+<p>enumは列挙型と言われるもので、値を列挙してそれぞれに数値を割り振ることで、複数の値を格納する「列挙スタイルの型を作る」ことができる。</p>
+<pre class="prettyprint">
+enum animal {
+  CAT,
+  DOG,
+  PIG
+};
+
+enum animal value = PIG;
+</pre>
+
+<h1>アルゴリズムとデータ構造</h1>
+
+<h2>スタックとキュー</h2>
+<p>何かと良く使われる、スタックとキューについて。</p>
+<p>スタックでは、最後に入れたデータが一番最初に取り出される。上へとどんどん積んでいって、上から取り出されるイメージである。</p>
+<p>キューでは、最初に入れたデー タが一番最初に取り出される。どんどん左から右へと突っ込んでいって、右から取り出されるイメージである。</p>
+
+<h2>配列とリスト</h2>
+<p>配列とリストの違いは、配列は連続した領域に変数の列を格納するのに対し、リストは前後のデータのある位置をメモリーに入れておく。</p>
+
+<h2>アルゴリズムとデータ構造</h2>
+<p><a href="algorithm.html">アルゴリズム</a>と<a href="data_structure.html">データ構造</a>を参照のこと。</p>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

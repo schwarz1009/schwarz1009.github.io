@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>ハードディスクの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ハードウェアの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/hardware_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ハードディスクの世界観</h1>
+<p>ハードディスクの世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ハードディスク</h1>
+<p>データの記憶装置。パソコンに内蔵されて用いられることが多い。</p>
+<p><a href="../tech/magnetic_tape.html">磁気テープ</a>も参照のこと。</p>
+
+<h2>ハードディスクの仕組み</h2>
+<p>昔のテープは、紙や磁気によるテープにデータを記録していたが、大容量の記録媒体になると、「どこにどんなデータがあるか」というのを、番地やアドレスで管理し、データが欲しい時はそのデータのある場所だけを読めば良いような仕組みが考えられた。</p>
+<p>この番地を管理する特別な記憶領域を、ファイルアロケーションテーブル（FAT）と言う。フロッピーディスクやハードディスクでは、ファイルアロケーションテーブルからどこにデータがあるかを探し、データのアドレスに基づいてセクタ（個々の記憶領域）を読み出して、データを取得する。</p>
+<p>磁気ディスク装置では、電磁気を用いた磁気ヘッドによるディスクの読み書きを行う。磁気ヘッドは電磁気によって磁気を感知する物質が塗られた磁気テープに情報を記録・読み取りする。これは、フロッピーディスクでも、ハードディスクでも変わらず、ハードディスクはより高精度に磁気記録を行うヘッドとディスクが構成されている。</p>
+<p>フロッピーディスクとハードディスクの違いは、データを読み書きする速さである。フロッピーディスクの場合、テープにヘッドが着いている、つまり接触しているが、ハードディスクでは、ヘッドはディスクの上を「接触せずに」動いている。少しディスクから浮いた状態で動いているため、とても高速に動かすことができる。また、ハードディスクは高精度で、何千分の一ミリで動く。ディスク容量は、フロッピーディスクと比べても、1GB～2GBと当時からすると大容量だった。だが、衝撃に弱く、壊れやすいという欠点もある。</p>
+<p>後日注記：最近機密情報の入ったハードディスクの不正転売問題がニュースになっているが、パソコンのOSがファイルを削除する際に、一般的に完全には削除しない。ファイルアロケーションテーブル内の「目次」を削除するだけで、実際のデータは後で別のデータに書き換えられるまで残っていることが多く、このような場合復元ソフトで目次だけを再構築すれば簡単に復元できてしまう。Linuxではshredコマンドなどで、完全に復元できないように削除することもできるが、物理的に破壊することが一番であり、今回の事件のように「物理的に破壊されるはずの超大容量のハードディスクが大量に売られていた」という話は、IT業界を揺るがす「とても恐ろしい話」である。</p>
+
+<h2>データの永続性</h2>
+<p>メモリのデータには永続性がない。すなわち、電気を通さないと中のデータが消えてしまう。</p>
+<p>ハードディスクは大容量であることと同時に、長期のデータの記憶や保管に向いている。</p>
+<p>CPUはメモリとやり取りが多く高速である必要があるため、バスやI/OコントローラでCPUとメモリは近い位置に配置するが、ハードディスクは低速であり、やり取りも少ないため遠い位置に配置し、読み書きもキャッシュを用いることが多い。</p>
+
+<h2>ライトスルーとライトバック</h2>
+<p>メモリに限らずハードディスクにもライトスルーとライトバックがある。</p>
+<p>ライトスルーは、キャッシュにデータを書き込んだ時、すぐさま物理ハードディスクにもデータを書き込む。データが書き込まれるまで処理は待機する。信頼性が高いが、参照や変更が多い場合には処理が遅くなる。</p>
+<p>ライトバックは、キャッシュにデータを書き込んだ時、すぐにはハードディスクにデータを書き込まず、キャッシュに書き込んだ時点で完了とし、別の処理を行う。物理ハードディスクへの書き込み処理はCPUの負荷が低くなった時などに行われる。高速だが、信頼性は低く、どこかでカーネルなどの処理が異常終了すれば、データが正確に書き込まれない可能性もある。</p>
+
+<h2>SSD</h2>
+<p>磁気ディスクのハードディスクは大容量だが、ヘッドの回転が必要という意味で、必ずしも高速ではない。</p>
+<p>これに対して、SSDでは回転の必要が無いため、ハードディスクよりさらに高速であり、磁気ディスクのハードディスクはそのうちSSDに取って代われると言われている。</p>
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

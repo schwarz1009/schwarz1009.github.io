@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXシステム管理７（カーネルと共有ライブラリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<!--
+<p><a href="linuxlinks.html">Linuxリンク集（公式）</a></p>
+<p><a href="linuxlinks2.html">Linuxリンク集２（管理）</a></p>
+<p><a href="linuxlinks3.html">Linuxリンク集３（技術情報）</a></p>
+<p><a href="linuxlinks4.html">Linuxリンク集４（プログラミング）</a></p>
+<p><a href="linuxlinks5.html">Linuxリンク集５（アーキテクチャ）</a></p>
+<p><a href="linuxlinks6.html">Linuxリンク集６（アプリケーション）</a></p>
+<p><a href="linuxlinks7.html">Linuxリンク集７（デスクトップ）</a></p>
+<p><a href="linuxlinks8.html">Linuxリンク集８（X11）</a></p>
+<p><a href="linuxlinks9.html">Linuxリンク集９（技術詳細）</a></p>
+<p><a href="linuxlinks10.html">Linuxリンク集１０（その他）</a></p>
+<p><a href="windowslinks.html">Windowsリンク集</a></p>
+<p><a href="itcompanylinks.html">IT企業・商用ソフトリンク集</a></p>
+<p><a href="softwarelinks.html">ソフトとサービスのリンク集</a></p>
+<p><a href="hardwarelinks.html">ハードウェアのリンク集</a></p>
+
+<p><a href="bunkeilinks.html">文系のリンク集</a></p>
+<p><a href="rikeilinks.html">理系のリンク集</a></p>
+
+<p><a href="artlinks.html">芸術・音楽のリンク集</a></p>
+<p><a href="peoplelinks.html">人々のリンク集（偉人）</a></p>
+<p><a href="technologylinks.html">技術のリンク集</a></p>
+<p><a href="societylinks.html">社会のリンク集</a></p>
+<p><a href="bloglinks.html">ブログ・ツイッターのリンク集</a></p>
+<p><a href="piano.html">ピアノ入門</a></p>
+<p><a href="farm.html">農業入門</a></p>
+<p><a href="culture.html">世界の文化入門</a></p>
+<p><a href="human.html">人間一般入門</a></p>
+<p><a href="english.html">英会話入門</a></p>
+<p><a href="nofollow.html">NoFollowプログラミング言語</a></p>
+<p><a href="robot.html">人間頭脳型ロボット</a></p>
+-->
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>UNIXシステム管理７（カーネルと共有ライブラリ）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観７（カーネルと共有ライブラリ）です。</p>
+<p>このページの内容は、<a href="linux_unix_compiler.html">UNIXシステム管理２（コンパイラ）</a>と<a href="linux_kernel.html">Linuxカーネル開発</a>に分割して移動しました。</p>
+<!--
+<div id="toc"></div>
+<div class="page_links">
+-->
+
+
+<!--
+<h1>カーネルと共有ライブラリ</h1>
+<h2>共有ライブラリ</h2>
+<p><a href="https://linux.dogrow.net/blog6/">(6) ldconfigでライブラリパスを更新 - Linuxやってみる！</a>より。</p>
+<blockquote class="inyou1">
+<h3>検索の順序</h3>
+<p>プログラム実行時にOSが探す、動的にリンクされる共有ライブラリ（.soファイル）は、以下の順序で検索される。</p>
+<p>(1) 環境変数で指定されたパス</p>
+<p>LD_LIBRARY_PATH</p>
+<p>LD_LIBRARY_PATH_64</p>
+<p>(2) /etc/ld.so.conf に記述されたパス</p>
+<p>(3) 通常ライブラリが置かれるパス</p>
+<p>/lib (/usr/lib への symbolic link)</p>
+<p>/lib64 (/usr/lib64 への symbolic link)</p>
+<h3>ldconfig</h3>
+<p>ldconfigコマンドは、上記 (2) の情報をOSに伝えるためのコマンド。</p>
+<p>以下の例では、/etc/ld.so.confが</p>
+<pre>
+include ld.so.conf.d/*.conf
+</pre>
+<p>となっていることを前提として、/etc/ld.so.conf.d/以下にmy.confを作ってパスを記述し、ldconfigでキャッシュ（/etc/ld.so.cache）を更新している。</p>
+<pre>
+$ cd /etc/ld.so.conf.d/
+$ su
+パスワード:(パスワードを入力）
+# echo /home/user/mylib >> my.conf
+# ldconfig
+</pre>
+<h3>共有ライブラリを作る</h3>
+<p>共有ライブラリを作る場合は、以下のようにする。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+void say_hello(void){
+    printf("Hello.");
+}
+</pre>
+<pre>
+gcc -shared -fPIC -o libmytest.so test.c
+</pre>
+<h3>共有ライブラリを使う実行ファイルを作る</h3>
+<p>共有ライブラリを使う実行ファイルを作る場合は、以下のようにする。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+extern void say_hello(void);
+int main(void){
+    say_hello();
+    return 0;
+}
+</pre>
+<pre>
+gcc -L./ -lmytest -o test main.c
+</pre>
+</blockquote>
+-->
+
+<!--
+<h2>カーネルヘッダー</h2>
+<p>自分でLinuxのプログラムをコンパイルしたい時に、カーネルヘッダーが必要となる時がある。カーネルのAPIを使うプログラムをコンパイルするために必要。</p>
+<p>カーネルヘッダーは、少し前の状況だと、カーネルがメジャーアップデートされた場合（2.4から2.6への移行の時など）、プログラムが正常に動かなくなったり、コンパイルできなくなる時があった。なので、大切な基盤システムなどでは、注意してアップデートすること。</p>
+<p>カーネルヘッダーだけではなく、gcc, glibc, pythonなどの重要コンポーネントは、メジャーアップデートに失敗すると悲惨なことになる。Red Hatの開発者などでも、注意して開発している。特に、Pythonなどは本当に動かなくなる。気を付けてシステムを管理しよう。</p>
+-->
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

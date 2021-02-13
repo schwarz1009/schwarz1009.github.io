@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>クラスタ・分散・高信頼システム関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>クラスタ・分散システムの世界観</h1>
+<p>クラスタ・分散システムに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>オープン系分散・クラスタシステム</h1>
+<h2>メインフレームとオープン系システム</h2>
+<p>エンタープライズシステムでは、大きく分けて、IBMのメインフレームのような「中央集約アーキテクチャ」と、UNIXやC/C++などの標準技術を用いた「オープン系分散・分割アーキテクチャ」に分かれる。</p>
+<p>IBMのメインフレームは、巨大な大型コンピュータがひとつあり、内部の処理はとても高度かつ複雑で、とても大きな処理能力と信頼性があるが、ユーザーによる変更の柔軟性や拡張性が低く、コストも高くなる傾向にある。</p>
+<p>これに対して、オープン系システムでは、ひとつひとつのコンピュータの処理能力はメインフレームほど大きくないが、たくさんのコンピュータをネットワークでつないで、分散型システムすなわち「クラスタ」を構築する。UNIXのような標準的OSやC/C++のような標準的言語を使うため、多くのコンピュータメーカー・ハードウェア・ソフトウェア・ベンダーに開かれているという意味で「オープン系」と呼ばれる。</p>
+<p>一般的に、オープン系の方が拡張性や柔軟性が高いが、その代わりひとつひとつのコンピュータの性能や信頼性は低いため、ある特定の系が故障しても別の系が働くように「冗長化」や「アクティブ・スタンバイ」を行う必要がある。</p>
+
+<h2>クラウドとオンプレ</h2>
+<p>また、最近は企業の業務システムもクラウド化が進んでいる。</p>
+<p>クラウドによって、ネットワーク上のシステムを社内でインターネットを通じて使うことで、自前でシステムを構築する場合よりもコストや手間の削減に繋がる。</p>
+<p>これに対して、自社の企業内にシステムを配置し、自社運用するシステムを「オンプレ」と呼ぶ。</p>
+
+<h1>クラスター</h1>
+<h2>Linuxでクラスタをやってみよう</h2>
+<p>クラスタとは、複数の分散コンピュータを使ってひとつのサーバやスパコンのようなシステムを構築する手法。</p>
+<p>LinuxでHA（High Availability）クラスタを行うためには、以下のようなページが参考になる。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/0103/13/news002.html">多様化するクラスタ方式：Linuxクラスタリングへの招待（1） - ＠IT</a></li>
+<li><a href="https://qiita.com/yubais/items/7c40227a17569dc9d412">Linux で計算機クラスタを作る (1. ネットワーク構築) - Qiita</a></li>
+<li><a href="https://qiita.com/yubais/items/d05b789f3ae7fcc06084">Linux で計算機クラスタを作る (2. 分散ファイルシステム NFS 導入) - Qiita</a></li>
+</ul>
+
+<h2>Kubernetesでクラスタ</h2>
+<p>僕が思うにKubernetesでクラスタをやるのが良いのではないかと。</p>
+<ul>
+<li><a href="https://qiita.com/Esfahan/items/4fcf51622fed20dffb88">Kubernetesハンズオン目次 - Qiita</a></li>
+<li><a href="https://qiita.com/Esfahan/items/db7a79816731e6aa5cf5">Kubernetesでクラスタ環境構築手順(1) - masterの作成 - Qiita</a></li>
+<li><a href="https://qiita.com/Esfahan/items/256fdb78e6a40b7c3e1f">Kubernetesでクラスタ環境構築手順(2) - nodeの作成 - Qiita</a></li>
+</ul>
+
+<h2>Beowulfでクラスタ</h2>
+<p>Beowulfは結構昔に流行したシステムで、分散システムの中でもOSがコモディティ製品（LinuxやBSDなどの安価なシステム）で構成されていることが特徴。並列処理ライブラリMPIなどとともに用いる。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/fcoding/articles/parallel/01/para01b.html">並列処理を体感してみよう （2/3）－ ＠IT</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/Beowulf-HOWTO.html">Beowulf HOWTO</a></li>
+</ul>
+
+<h2>LinuxのHPCクラスタの例</h2>
+<p>Beowulf（NASA主導）、SCore（通商産業省主導）、MOSIX、グリッド・コンピューティング（Globusツールキットが事実上の標準になりつつある）などが挙げられる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Linux%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC">Linuxクラスター - Wikipedia</a></li>
+</ul>
+<p>Linuxにはクラスター用のパッケージとして、openMosix、Kerrighed、OpenSSI、PVM、OSCAR、Grid Engineなどがある。クラスターディストリビューションにはGlusterがある。</p>
+<ul>
+<li><a href="https://www.itmedia.co.jp/enterprise/articles/0609/26/news036.html">オープンソースのクラスター管理システム (1/2) - ITmedia エンタープライズ</a></li>
+<li><a href="http://misshie.jp/blog/2007/09/linux_hpc_1.html">みっし～の研究生活: Linux HPCクラスターの構築（その１）</a></li>
+</ul>
+<p>また、バッチシステム（JMSやジョブスケジューラーとも呼ばれる）としてはOpenPBSやTorqueが、並列計算に使用するライブラリにはMPICHやMPICH2などがある。</p>
+<ul>
+<li><a href="http://www.kurobuti.com/linux_server/?page_id=58">並列計算クラスタサーバ構築 - 黒ぶちメガネのLinuxサーバ構築まとめ</a></li>
+<li><a href="http://a98.jugem.jp/?eid=433">CentOS 6でバッチシステムといえばTORQUE(OpenPBS) | お試しlog4</a></li>
+<li><a href="http://chem.tf.chiba-u.jp/gacb10/linux/cluster.html">並列計算機の製作 - 極限環境材料化学研究室 (千葉大学)</a></li>
+</ul>
+
+<h2>Linuxの高可用性クラスターの例</h2>
+<p>Linuxでは高可用性クラスターの例としてLinux Virtual Serverや、Linux-HAプロジェクトによるHeartbeatおよびPacemaker、Red HatによるRed Hat Cluster Suiteなどがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BB%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC">コンピュータ・クラスター - Wikipedia</a></li>
+</ul>
+
+<h1>スパコン</h1>
+<h2>スーパーコンピュータとLinux</h2>
+<p>Linuxはスーパーコンピュータ用のOSとして良く使われている。以下のページを見れば分かる通り、TOP500のほとんどはLinux。IBMのスパコンではRHELが目立つが、ドイツのスパコンにはSUSEが良く使われているようだ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TOP500">TOP500 - Wikipedia</a></li>
+</ul>
+
+<h2>日本のスパコン</h2>
+<p>日本のスパコンとしては京や地球シミュレータなどが過去に頑張っていた。地球シミュレータはNECによるスパコンで、かつてはベクトルプロセッサを用いた数少ないスパコンだった。</p>
+
+<h1>クラスタ用ソフトウェア</h1>
+<h2>Slurm</h2>
+<p>Slurmはオープンソースなジョブスケジューラー（ワークロード管理ソフトウェア）。多くのスパコンやクラスタで使われている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Slurm_Workload_Manager">Slurm Workload Manager - Wikipedia</a></li>
+</ul>
+
+<h2>Beowulf</h2>
+<p>LinuxやBSDによるオープンソースなクラスター方式。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Beowulf">Beowulf - Wikipedia</a></li>
+</ul>
+
+<h2>Linux Virtual Server</h2>
+<p>Linuxによる負荷分散ソリューション。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Linux_Virtual_Server">Linux Virtual Server - Wikipedia</a></li>
+</ul>
+
+<h2>Linux-HA/Heartbeat</h2>
+<p>Linux-HAはLinux, FreeBSD, OpenBSDに高可用ソリューション（クラスター）を提供するプロジェクト。クラスタ管理プログラムHeartbeatが主な成果。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Linux-HA">Linux-HA - Wikipedia</a></li>
+</ul>
+
+<h2>CORBA</h2>
+<p><a href="../linux/corba.html">CORBA</a>を参照のこと。</p>
+
+<h2>研究用の分散OS</h2>
+<p><a href="../os/os.html">OS</a>を参照のこと。</p>
+
+
+<h1>分散システムモデル</h1>
+<h2>JavaScriptのような分散アプリケーションシステムを</h2>
+<p>僕は、「分散環境」という時に、マシンをクラスタで用いることもできるとは思うが、そうではなく、たとえばjQueryのJavaScriptファイルをHTMLから呼び出すような形で、「分散アプリケーション環境」というのを作れないかと思う。</p>
+<p>たとえば、「こんなソフトが使いたい」と思った時に、インターネットを検索して、そのURLからワンクリックでアプリケーションを起動できるようにする。</p>
+<p>WebサービスやWebアプリケーションがこれに近いかもしれないが、専用のサービス運営サーバーを管理するのではなく、ただサーバーにアップしてある「バイナリファイル」を適切に実行できるようにする。</p>
+<p>JavaScriptのようにすると面白いと思うのだが、実際はGNOMEのような「理想だけで終わってしまった」システムになるかもしれない。だが、ファイル共有ソフトがやっているように、P2Pで分散システムで「リレーション環境」ができれば、HTMLやハイパーテキストの考え方と結びついて、とても面白いことになるのではないかと思う。</p>
+
+<h2>Webにおけるモジュールや連携</h2>
+<p>面白いと思うのは、すでにあるサービスを組み合わせて、モジュールのように別のサービスを作ったり、連携させたりするような段階である。</p>
+<p>ハイパーテキストのリンクからGoogle検索を作ることはできるが、たとえばInstagramとGoogleイメージ検索を組み合わせて、ハッシュタグのようなものから独自の検索をさまざまなオプションでできるようにするとか、そんな風に一種の仮想コンピュータシステムのようなものを、ネットのみんなで作ったり使ったりできるようにすると、面白いのかもしれないと思う。</p>
+<p>インスタで流行している写真から、ストリートビューでその場所に行ってみよう的な、これはまだリンク利用の域を出ていないが、色んな応用が考えられる。ある意味、GNOMEやCORBAの理想はそういうものだったのかもしれない。</p>
+
+<h2>ソーシャルハードウェア</h2>
+<p>また、ハードウェアインフラ的なものを考えると、Cellチップがやっていたように、「みんなのパソコンを使って処理を分散して行う」というモデルも考えられる。</p>
+<p>ゲームだけではなく、多くの処理をみんなのパソコンで行えば、「巨大なコンピュータ資源」が手に入り、カーナビやDVDレコーダーは資源の一つになって、世界中全ての機器が繋がる。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

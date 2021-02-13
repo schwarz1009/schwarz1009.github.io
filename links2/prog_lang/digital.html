@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>デジタル情報の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>デジタル情報の世界観</h1>
+<p>デジタル情報に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>デジタル情報</h1>
+<h2>二進数</h2>
+<p>コンピュータは、0と1を使った二進数で計算を行う。</p>
+<p>この時、数値のとり得る値の範囲をbit（ビット）という単位で表す。1bitでは0と1の2つの値を表せる。</p>
+<p>8bitを1byte（1B、1バイト）と呼び、大きくなるとKB（キロバイト、1024B）やMB（メガバイト、1024×1024B）となる。</p>
+<p>CPUなどでは、bitは8bit, 16bit, 32bit, 64bit, 128bit, 256bitと2の累乗を倍々してアーキテクチャの性能が向上していく。</p>
+<p>二進数とは、10進数では9の次が10とけた上がりをするが、2進数では1の次が10となる。</p>
+<p>位取り記数法では、10進数の場合、10を基数として、1桁目は基数の0乗（すなわち1）、2桁目は基数の1乗（すなわち基数）、3桁目は基数の2乗、と計算できる。</p>
+<p>そのため、二進数は2の累乗を用いることで、1101は1×2<sup>3</sup>＋1×2<sup>2</sup>＋0×2<sup>1</sup>＋1×2<sup>0</sup>＝13と計算できる。</p>
+<p>二進数の一番上の桁をプラスマイナスを表すために使うことも多い。</p>
+
+<h2>16進数</h2>
+<p>二進数を表現するのに便利なのが16進数。2進数と並んで良く使われる。</p>
+<p>2進数と16進数は親和性が高く、0000=0 ～ 1111=F（10進数で15）として四桁の2進数の変換が容易で、FFとすればそのまま八桁にできる。</p>
+<p>2進数の四桁をそのまま0～Fにできるため、特に値が大きくなってくると10進数に直すよりも16進数に直した方が扱いやすい。</p>
+<p>16進数は0xをつけて0x0Fのように表す。</p>
+
+<h2>機械語</h2>
+<p>機械語は、16進数の命令とレジスタへの記憶を使って、CPUに順次命令を行う。</p>
+
+<h2>文字データ</h2>
+<p>文字データは単純に数値に直される。この時、文字コードによってどの文字がどの数値に対応するかが決まる。</p>
+<p>英語の文字コードはASCII。日本語はShift-JIS、EUC-JP、UTF-8などが良く使われる。またISO-2022-JPはインターネットメールで良く使われる。</p>
+
+<h2>画像・写真データ</h2>
+<p>画像・写真データは、画像を四角形のピクセル（点）の集まりに変換し、ピクセルごとに数値にする。</p>
+<p>この時、解像度（どれくらいの大きさの点にするか）によって画像の粗さとサイズが決まる。</p>
+<p>画像データには、</p>
+<table class="some_tables">
+<tr><th>画像形式</th><th>説明</th></tr>
+<tr><td>JPEG</td><td>非可逆圧縮で写真向き</td></tr>
+<tr><td>GIF</td><td>256色のみだがアニメーションなども可能</td></tr>
+<tr><td>PNG</td><td>可逆圧縮でWebなどの画像向き</td></tr>
+<tr><td>TIFF</td><td>画像データに追加情報が付属。スキャナなどで使われる</td></tr>
+<tr><td>MPEG</td><td>動画形式</td></tr>
+<tr><td>PDF</td><td>どの環境でも同じ見た目を再現できるポータブルな文書形式</td></tr>
+<tr><td>BMP</td><td>圧縮しない巨大なビットマップ形式</td></tr>
+<tr><td>Camera Raw</td><td>カメラで写真を撮った時の生データ</td></tr>
+</table>
+<p>などがある。</p>
+
+<h2>音声データ</h2>
+<p>音声データは、音声の「波」に変換される。</p>
+<p>音声データを一定の時間間隔で離散的に記録することを「標本化」（サンプリング）といい、一定の精度で丸みをつけたりして近似して記録することを「量子化」という。</p>
+<p>標本化の際には、「標本化定理」という定理があり、元の最大周波数の2倍以上のサンプリング周波数があれば、正確にサンプリングすることができる。</p>
+<ul>
+<li><a href="https://kotobank.jp/word/%E6%A8%99%E6%9C%AC%E5%8C%96%E5%AE%9A%E7%90%86-10928">標本化定理とは - コトバンク</a></li>
+<li><a href="http://e-words.jp/w/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B0.html">サンプリング（標本化）とは - IT用語辞典 e-Words</a></li>
+<li><a href="http://e-words.jp/w/%E9%87%8F%E5%AD%90%E5%8C%96.html">量子化とは - IT用語辞典 e-Words</a></li>
+</ul>
+
+<h1>デジタル情報のトピック</h1>
+<h2>デジタル情報は劣化しない</h2>
+<p>デジタル情報は、いくらコピーしても劣化しません。</p>
+<p>これは、「似たような図形を描いてください」と伝言ゲームをするのではなく、「コンパスを使って10cmの円を描いてください」と伝言ゲームをするのに近い。</p>
+<p>アナログなコピーでは「見た目」をコピーするため、何度もコピーしていると劣化してしまう。</p>
+<p>デジタルなコピーでは「情報の値」をコピーするため、何度コピーしても同じ値を維持できる。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

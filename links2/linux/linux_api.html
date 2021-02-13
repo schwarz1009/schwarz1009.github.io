@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux システムコール・API１（ファイル・入出力・メモリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux システムコール・API</h1>
+<p>Linuxのシステムコールとライブラリ関数・APIに関する世界観１（ファイル・入出力・メモリ）です。<a href="linux_api2.html">API２（プロセス）</a><!--、<a href="linux_api3.html">API３（ネットワーク・ソケット）</a>-->も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考にさせていただきました。</p>
+<p>X11やGTK+/Qtなどについては<a href="linux_x11.html">Linux（X11周辺）</a>を参照のこと。また<a href="linux_kernel.html">Linuxカーネルの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ストリーム処理（システムコール）</h1>
+<h2>入出力の基本</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>入出力処理は、ストリームを通じて行われる。</p>
+<p>ストリームはバイト列のことで、バイト列としてあらわされるものは何でもストリーム。</p>
+<p>ストリームを使うためには、デバイスファイルを媒介に使う。</p>
+<p>キャラクタ型デバイスかブロック型デバイスかによって使い方は異なるが、キャラクタ型デバイスはバイト列の処理としてあらわされ、ランダムアクセスができない。</p>
+<p>ブロック型デバイスは、ファイルシステムにマウントして用い、ランダムアクセスができる。</p>
+<p>標準で標準入力、標準出力、標準エラー出力が、ストリームを識別するファイルディスクリプタとして、プロセスに与えられるが、open/closeしたファイルについてはそれぞれのストリームがファイルディスクリプタとして対応し、readやwriteから読み書きできる。</p>
+<p>しかしながら、システムコールはバイト固定長の入出力しかできず、バッファ管理を行わないため速度も遅い。</p>
+<p>これに対して、C言語のstdioライブラリでは、バッファ管理ができて高速であるほか、1文字単位や1行単位の入出力、フォーマット入出力もサポートしている。</p>
+<p>stdioを使う時は、fopenとfcloseを使ってファイルをオープンし、freadやfwriteで固定長の操作ができる。</p>
+<p>注意点として、getsは使ってはならない。</p>
+<p>バッファオーバーランの脆弱性を回避できないためである。</p>
+<p>通常、入力にはfgetsを使い、一文字単位の入出力にはgetcharとputchar、コンソールへの出力はputsやprintf、ファイルへの出力はfprintfを使う。</p>
+<p>また、文字列をフォーマット変換のみしたい場合は、sprintfを使えばよい。</p>
+<p>また、プログラミングの特性上、「一文字余計に読み込まなければトークンの終端か分からない」ということがある。</p>
+<p>この時、一文字元に戻すAPIとしてungetcがある。</p>
+
+<h2>ストリームとは</h2>
+<p>UNIXにおけるプログラミングは、プロセスとファイルシステムが「ストリーム」をやりとりすることで行われる。</p>
+<p>ストリームは要するに、バイト列の流れ道のことであり、UNIXでは標準入力やファイルを表すのにストリームという概念を使う。読みだすことを「読む」、書き込むことを「書く」という。ファイルだけではなく、デバイスやプロセスについても同様。デバイスファイルはストリームの「とっかかり」になる。</p>
+<p>そもそもが単純なバイト列の流れの操作が多かった、UNIXシステム由来の概念です。</p>
+
+<h2>システムコールとライブラリ関数</h2>
+<p>LinuxのC言語によるAPIの基本は、システムコールとライブラリ関数です。</p>
+<p>システムコールはLinuxカーネルによる機能で、ストリーム、ファイルシステム、ネットワーク、プロセス、メモリ管理などで、カーネルの機能を使う時に使用します。</p>
+<p>C言語のライブラリ関数は、主にglibcなどによる「標準Cライブラリ」です。</p>
+<p>システムコールとライブラリ関数では、似たような機能を提供する関数もあります。</p>
+<p>たとえば、システムコールのread(2), write(2), open(2), close(2)は、stdio版として、fopen(3), fclose(3), fgetc(3), fputc(3), getc(3), putc(3), getchar(3), putchar(3), ungetc(3), fgets(3), fputs(3), puts(3), printf(3), fprintf(3), scanf(3), fread(3), fwrite(3)などなど、さまざまなライブラリ関数があります。</p>
+<p>ここで、(2)や(3)は、システムコール(2)かライブラリ関数(3)かを表しています。</p>
+<p>システムコールは、バッファリングを行わないため、動作が遅いです。バッファリングだけの問題ではなく、ライブラリ関数よりもシステムコールの方がずっと遅いです。ライブラリ関数の方が普遍的なため、通常はライブラリ関数を優先して使いましょう。</p>
+
+<h2>四大システムコール</h2>
+<p>システムコールでは、ファイルの情報はファイルディスクリプタと呼ばれる整数値のデータを使って保持します。これはOSがストリームの識別のために使います。</p>
+<p>以下は四大システムコール。</p>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>open(2)</td><td>ファイルを開く。ファイルに接続するストリームを用意する。</td>
+</tr>
+<tr>
+<td>close(2)</td><td>ファイルを閉じる。ストリームを始末する。<br>使い終わったストリームはclose()で後始末しないといけない。</td>
+</tr>
+<tr>
+<td>read(2)</td><td>ファイルを読み込む。ストリームからバイト列を読み込む。</td>
+</tr>
+<tr>
+<td>write(2)</td><td>ファイルを書き込む。ストリームにバイト列を書きこむ。</td>
+</tr>
+</table>
+<p>ファイルと言うよりは、ストリームを読み書きします。ですので、標準入出力に読み書きすることも可能です。たとえばcatコマンドを作ったり出来ます。</p>
+<p>また、四大システムコールの美しさを保つために、それ以外の雑多な処理は全てioctl()で行う。</p>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>ioctl(2)</td><td>デバイスに特化した色んなことをやる。</td>
+</tr>
+</table>
+
+<h1>stdio</h1>
+<h2>stdioの基本関数</h2>
+<p>stdioでは、バッファリングを行うため通常はシステムコールよりも動作速度が速い。また、固定長バイトだけではなく、文字単位（バイト単位）や行単位での入出力ができる。</p>
+<p>これらのCライブラリ関数では、FILE型のポインタを使ってファイルの情報を格納します。</p>
+<p>FILE型はファイルディスクリプタのラッパーで、stdioバッファの情報も含まれています。</p>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>fopen(3)<br>fclose(3)<br>fread(3)<br>fwrite(3)</td><td>ライブラリ関数の版。<br>バッファリングを行うため、通常はシステムコールより動作が速い。</td>
+</tr>
+<tr>
+<td>printf(3)</td><td>printfはフォーマットされた文字列を出力出来ます。<br>任意の文字列や変数の中身を展開して表示する場合など、良く使います。</td>
+</tr>
+<tr>
+<td>scanf(3)</td><td>scanfはフォーマットを指定して入力できる。<br>バッファオーバーフローを起こす潜在的な危険がある（文字幅指定で回避できる）。</td>
+</tr>
+<tr>
+<td>getchar(3)</td><td>バイト単位（一文字単位）で文字を入力できる。</td>
+</tr>
+<tr>
+<td>putchar(3)</td><td>バイト単位（一文字単位）で文字を出力できる。</td>
+</tr>
+</table>
+<h3>stdioの入出力</h3>
+<p>以下はさらに詳しい解説。</p>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr><td>fopen(3)</td><td>open(2)に対応するライブラリ関数。</td></tr>
+<tr><td>fclose(3)</td><td>close(2)に対応するライブラリ関数。</td></tr>
+<tr><td>fread(3)</td><td>固定長バイト列の入力。</td></tr>
+<tr><td>fwrite(3)</td><td>固定長バイト列の出力。</td></tr>
+</table>
+<h3>バイト単位入出力</h3>
+<p>以下はバイト単位（一文字）での入出力。</p>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr><td>fgetc(3)</td><td>バイト単位（一文字）で入力するAPI。</td></tr>
+<tr><td>fputc(3)</td><td>バイト単位（一文字）で出力するAPI。</td></tr>
+<tr><td>getc(3)</td><td>マクロ。基本的にfgetc(3)と同じ。</td></tr>
+<tr><td>putc(3)</td><td>マクロ。基本的にfputc(3)と同じ。</td></tr>
+<tr><td>getchar(3)</td><td>入力元をstdinに固定してバイト単位（一文字）で入力する。</td></tr>
+<tr><td>putchar(3)</td><td>出力先をstdoutに固定してバイト単位（一文字）で出力する。</td></tr>
+</table>
+<h3>行単位入出力</h3>
+<p>以下は行単位での入出力。</p>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr><td>fgets(3)</td><td>行単位での入力API。一行の文字列を入力できて便利。</td></tr>
+<tr><td>fputs(3)<br>puts(3)</td><td>行単位での出力API。一行の文字列を出力できて便利。</td></tr>
+</table>
+<p>セキュリティの問題があるgets()は廃止されました。</p>
+
+<h3>フォーマット入出力</h3>
+<p>以下はフォーマット入出力。</p>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr><td>printf(3)<br>fprintf(3)</td><td>フォーマット出力。</td></tr>
+<tr><td>scanf(3)</td><td>フォーマット入力。</td></tr>
+</table>
+<p>後日注記：printfはコンソールへの出力、fprintfはファイルへの出力によく使います。</p>
+
+<h2>FILE型構造体のポインタ</h2>
+<p>Cのファイル系関数は、FILE型構造体のポインタを宣言し、このファイルポインタを使って操作します。</p>
+<p>ファイルの先頭から10文字を3回縦に出力する：</p>
+<ul>
+<li><a href="https://www.grapecity.com/tools/support/powernews/column/clang/037/page02.htm">もう一度基礎からC言語 第37回 ファイルの扱い(2)～ファイル操作の実例 FILE構造体の中身 - グレープシティ株式会社</a></li>
+</ul>
+<p>ここで"r"は読み込みオープンを表す。"w"は新規書き込み、"a"は追加書き込みとなる。</p>
+
+<h2>オフセットの移動</h2>
+<p>ちなみに、ファイルオフセットを移動させたいだけなら、lseek(2)やfseek(3), fseeko(3)で出来る。</p>
+
+<h2>コマンドラインオプションの解析</h2>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>getopt(3)</td><td>ショートオプション（ls -a -s -kやls -ask）を解析する。</td>
+</tr>
+<tr>
+<td>getopt_long(3)</td><td>ロングオプション（ls --all --size --kilobytes）を解析する。</td>
+</tr>
+</table>
+<p>コマンドラインオプションには慣習があり、以上のAPIを使うことで、ショートオプションとロングオプションを解析できる。</p>
+
+<h1>メモリ管理</h1>
+<h2>mallocの使い方</h2>
+<p>malloc()の使い方は、</p>
+<pre class="prettyprint">
+int *data;
+data = (int *)malloc(sizeof(int) * 5);
+</pre>
+<p>のように、配列のサイズを指定したmalloc()関数を実行し、その返り値を型キャストして配列のポインタに代入する。</p>
+<p>（<a href="http://www.me.tokushima-u.ac.jp/~miw/wadai/IP3/Tips/Array2.html">配列の使い方 - 徳島大学大学院ソシオテクノサイエンス研究部 - 三輪昌史</a>より引用。）</p>
+<p>動的に生成したメモリ領域は、使わなくなった段階で必ずfree()で解放すること。そうでなければメモリリークが起きてしまう。</p>
+
+<h1>パターンマッチング</h1>
+<h2>libcでの正規表現</h2>
+<p>libcでは、</p>
+<table class="some_tables">
+<tr>
+<th>API</th>
+<th>説明</th>
+</tr>
+<tr><td>regcomp(3)</td><td>正規表現のコンパイル</td></tr>
+<tr><td>regfree(3)</td><td>解放（open()とclose()と同じ）</td></tr>
+<tr><td>regexec(3)</td><td>パターンの照合。適合したら0を返します。</td></tr>
+<tr><td>regerror(3)</td><td>regcomp()は成功したら0を返し、失敗したらエラーコードを返します。<br>このエラーコードはregerror()でエラーメッセージに変換できます。</td></tr>
+</table>
+<p>などの正規表現インターフェースがある。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>C++11では正規表現をサポートしているが、それ以前のC++などではlibcのC言語の正規表現も使用できる。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/regex.3.html">Man page of REGEX</a></li>
+<li><a href="https://qiita.com/thaladabar/items/91b1a66b1ead90b26102">Cでの正規表現 - Qiita</a></li>
+</ul>
+
+
+<h1>サンプルコード</h1>
+<p><a href="http://i.loveruby.net/stdlinux2/">ふつうのLinuxプログラミング 第2版 サポートサイト</a>より、サンプルコードが<a href="https://github.com/aamine/stdlinux2-source">GitHub</a>でMITライセンスに基づいて公開されているので、ここに掲載させていただきます。著作権者は青木峰郎氏です。</p>
+<h2>grepコマンドサンプル</h2>
+<p>コード全文は以下のリンク先をご覧ください。</p>
+<ul>
+<li><a href="https://github.com/aamine/stdlinux2-source/blob/master/grep.c">https://github.com/aamine/stdlinux2-source/blob/master/grep.c</a></li>
+</ul>
+<p>このコードで重要なのは以下の部分です。</p>
+<blockquote class="inyou1">
+<pre class="prettyprint">
+static void
+do_grep(regex_t *pat, FILE *src)
+{
+    char buf[4096];
+
+    while (fgets(buf, sizeof buf, src)) {
+        if (regexec(pat, buf, 0, NULL, 0) == 0) {
+            fputs(buf, stdout);
+        }
+    }
+}
+</pre>
+</blockquote>
+<p>ここだけを見ると、bufという変数がバッファであることが分かります。バッファは4096とサイズが決め打ちですが、これはfgets()とfputs()を繰り返すために決め打ちでも構わないのです。</p>
+<p>このコードでは、grepコマンドの実装であるため、fgets()やfputs()を使って一行ずつ文字列を読み出してbufに格納し、書き出しを行っていますが、catコマンドの実装などにおいては、システムコールのread()/write()やstdioのfread()/fwrite()など、固定長バイトでの読み書きを行うこともあります。この際にも、こうした一時バッファの固定文字列に一時的にデータを格納する、という手法は良く使われます。</p>
+<p>このようにすることで、巨大なメモリ領域を確保しなくても全文字列を書き出せるため、使用メモリの削減にもなります。仕組みは違いますが同じ目的に使えるものとして、Pythonのyield returnがあります。Pythonではyield returnを使うことで一行ごとにデータを読み、一行分のメモリだけでデータを書き出すことができます。</p>
+<p>またregcomp()とregexec()はC言語での正規表現のために使います。</p>
+
+
+<h2>MIT License</h2>
+<p>上記サンプルコードは以下のライセンス条項に基づきます。</p>
+<blockquote class="inyou1">
+<pre>
+The MIT License
+
+Copyright (c) 2017 Minero Aoki
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</pre>
+</blockquote>
+
+<h1>その他</h1>
+<h2>straceコマンド</h2>
+<p>straceコマンドを使うと、実際に動作中のプログラムが読んだシステムコールをその場で表示してくれます。</p>
+<pre>
+$ strace ./hello >/dev/null
+</pre>
+
+<h1>Linuxカーネル</h1>
+<h2>Linuxカーネルのファイルシステムの仕組み</h2>
+<p><a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>を参照のこと。</p>
+
+<h1>リンク集全般</h1>
+<h2>Linux/UNIXプログラミング一般</h2>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a> - 昔買いました。読んでいません。と言いましたが、最近途中まで読みました。とても良い本なので、いつか最後まで読みたいです。特に、カーネルとプロセスとメモリの記述、仮想アドレス空間のような記述をもっと詳しく知りたいと思います。</li>
+</ul>
+
+<h2>システムコール</h2>
+<p>システムコールについて。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/systemcall.html">連載記事 「知ってトクするシステムコール」 - @IT</a></li>
+<li><a href="http://postd.cc/the-definitive-guide-to-linux-system-calls/">Linuxシステムコール徹底ガイド - POSTD</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

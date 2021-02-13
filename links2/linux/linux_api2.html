@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux システムコール・API２（プロセス） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux システムコール・API２（プロセス）</h1>
+<p>Linuxのシステムコールとライブラリ関数・APIに関する世界観２（プロセス）です。<a href="linux_api.html">API１（ファイル・入出力・メモリ）</a><!--や<a href="linux_api3.html">API３（ネットワーク・ソケット）</a>-->も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考にさせていただきました。</p>
+<p>X11やGTK+/Qtなどについては<a href="linux_x11.html">Linux（X11周辺）</a>を参照のこと。また<a href="linux_kernel_proc.html">Linuxカーネルの世界観（プロセス）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>プロセスとは</h1>
+
+<h2>プロセス</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p>UNIXではプロセスは、fork()とそれに準ずるシステムコールによって作成する。</p>
+<p>また、デーモンを作る時は、fork()した後でsetsid()で端末を切り離す。</p?
+<p>マルチタスクにはプロセスとスレッドがあり、プロセスはそれぞれ個別にメモリ領域が与えられるが、スレッドでは共有データとなる。</p>
+<p>一応、プロセス間通信などの例外もある。</p>
+
+<h2>fork(2)</h2>
+<p><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆・編集して引用しました。</p>
+<p>fork()を呼び出すと、カーネルはプロセスを複製して、2つのプロセスに分裂させる。これによって新しいプロセスを作り出す。</p>
+<p>分裂された時点で、複製前と複製後のプロセスは、どちらもfork()を呼び出した状態になっている。</p>
+<p>2つのプロセスの両方にfork()の呼び出しが戻って、両方のプロセスでfork()以後のコードが実行される。</p>
+<p>この時、元のプロセスを親プロセス、複製されたプロセスのことを子プロセスと呼ぶ。</p>
+<p>後日注記：fork()のエラー処理を行ったり、子プロセスと親プロセスで違った処理をさせるためには、fork()の返り値（通常はpidなどの変数に格納する）をif文で-1や0と比較する。fork()は、失敗した時は-1、成功した時は子プロセスの場合は0、親プロセスの場合は子プロセスのPIDを返す。fork()した後で、親プロセスが子プロセスの終了を待つためにはwait()を実行する。あるいはそれぞれのプロセスを個別に終了するためには_exit()あるいはexit()を実行する（子プロセスの場合は_exit()、親プロセスの場合はexit()を使う）。</p>
+
+<h2>exec(2)</h2>
+<p>exec()は新しいプログラムをロードして、自らのプロセスを上書きして実行する。</p>
+
+<h2>wait(2)</h2>
+<p>wait()は実行したプロセスの終了を待って待機する。</p>
+
+<h2>_exit(2), exit(3)</h2>
+<p>_exit()あるいはexit()はプロセスを終了させる。</p>
+
+<h2>setsid(2)</h2>
+<p><!--後日注記：-->setsid()はデーモンを作る時にお世話になるAPI。デーモンを作る時にはfork()した後でsetsid()を実行して制御端末を持たないプロセスを作る。</p>
+
+<h2>クレデンシャル（認証情報）</h2>
+<p>クレデンシャルとは、セキュリティ関連の用語で、一般的にはユーザーIDやパスワードなどのログインに使われるユーザー認証情報のことを言う。</p>
+<p><a href="https://www.weblio.jp/content/%E3%82%AF%E3%83%AC%E3%83%87%E3%83%B3%E3%82%B7%E3%83%A3%E3%83%AB%E6%83%85%E5%A0%B1">クレデンシャル情報の意味や定義 Weblio辞書</a>などを参照のこと。</p>
+<p>自分のユーザーIDとは別のユーザーIDでプロセスを実行したい時などに使用する。</p>
+
+
+<h1>マルチスレッド</h1>
+<h2>スレッドプログラミング</h2>
+<p>スレッドを用いたプログラミングをCとLinuxでするのであれば、NPTL(Native POSIX Thread Library)のpthread_create()という関数を使えば良い。</p>
+<ul>
+<li><a href="http://www.tsoftware.jp/nptl/">Linux スレッドプログラミング - T Software</a></li>
+<li><a href="https://ota42y.com/blog/2015/06/18/c-thread/">C言語でのスレッド処理 | おおたの物置</a></li>
+<li><a href="http://www.hakodate-ct.ac.jp/~tokai/tokai/doc2009/proen/thread.html">函館高専4年 プログラミング演習 スレッドと排他処理</a></li>
+</ul>
+
+<h1>Linuxカーネル</h1>
+<h2>Linuxカーネルのマルチタスクの仕組み</h2>
+<p><a href="linux_kernel_proc.html">Linuxカーネルの世界観（プロセス）</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

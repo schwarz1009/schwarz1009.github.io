@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>デバッグ（gdb）関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>デバッグ（gdb）の世界観</h1>
+<p>デバッグ（gdb）に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>デバッガ</h1>
+<h2>gdb</h2>
+<p>GNUによるデバッガ。</p>
+<p>基本的に、gccに-gオプションをつけてバイナリをコンパイルし、</p>
+<pre>
+gdb app
+</pre>
+<p>として、各種コマンドを実行する。たとえば、bでブレークポイントを設定、runで実行、attachで実行中のプログラムのデバッグ、p 変数名で変数の値を表示、setで変数の値を書き換える、nでステップ実行、sで関数の中までステップ実行、cで次のブレークポイントまでを実行、などができる。</p>
+
+<h2>gdbリンク集</h2>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU%E3%83%87%E3%83%90%E3%83%83%E3%82%AC">GNUデバッガ - Wikipedia</a></li>
+<li><a href="https://qiita.com/ShikiSumiya/items/a08363db88f21c81d351">はじめてのgdb - Qiita</a></li>
+<li><a href="http://www.ysr.net.it-chiba.ac.jp/data/gdb.html">gdbの使い方 - 千葉工業大学 情報科学部 情報ネットワーク学科 屋代 研究室 データライブラリ</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb1.html">gcc+gdbによるプログラムのデバッグ 第1回 ステップ実行、変数の操作、ブレークポイント - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb2.html">gcc+gdbによるプログラムのデバッグ 第2回 変数の監視、バックトレース、その他のコマンド - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb3.html">gcc+gdbによるプログラムのデバッグ 第3回 gdbの便利な機能、デバッグの例 - RAT Portal Site</a></li>
+<li><a href="http://d.hatena.ne.jp/Watson/20100318/1268887029">gdbコマンド メモ - Watsonのメモ</a></li>
+<li><a href="http://uguisu.skr.jp/Windows/gdb.html">gdb の使い方・デバッグ方法まとめ - ネットの基礎知識＆Windows/Linuxの快適術 - 何もないから何かみつかる</a></li>
+<li><a href="http://d.hatena.ne.jp/shibason/20090624/1245840061">GDBデバッギング覚え書き - しばそんノート</a></li>
+<li><a href="http://akito.wiki.fc2.com/wiki/gdb">gdb - 仕事のメモ</a></li>
+</ul>
+<p>物凄いマニュアルが以下にあります。</p>
+<ul>
+<li><a href="http://sourceware.org/gdb/current/onlinedocs/gdb.html">Debugging with GDB</a></li>
+<li><a href="http://www.asahi-net.or.jp/~wg5k-ickw/html/online/gdb-5.0/gdb-ja_toc.html">Debugging with GDB(日本語訳)</a></li>
+</ul>
+
+<h1>その他のソフトウェア</h1>
+<h2>Eclipseのデバッグ機能</h2>
+<p>オープンソースのIDEであるEclipseでもブレークポイントを設定したデバッグが可能です。<a href="eclipse.html">Eclipse</a>を参照のこと。</p>
+
+<h2>RubyMineとPyCharm</h2>
+<p>Ruby on Railsの開発にはジェットブレインズ社のRubyMine、Pythonの開発には同社のPyCharmがおすすめです。</p>
+<p>たとえば、関数やクラス名から、その宣言へとジャンプできますし、コンソールで対話的にコードを実行したり、ブレークポイントを設定して、ある特定の場所で変数の値がどうなっているかを知ることができます。</p>
+
+<h2>HTML, CSS, JavaScript</h2>
+<p>HTML, CSS, JavaScriptの開発なら、Google ChromeやMozilla Firefoxの検証機能を使いましょう。</p>
+
+<h2>VS-Code</h2>
+<p>また、マイクロソフト社のオープンソーステキストエディタVS-Codeでも、デバッグ機能を使うことができます。</p>
+
+<h1>余談</h1>
+<h2>「何がどこで実行中か」を見ながら作る</h2>
+<p>ある意味、プログラムの基本とは、「何がどこで実行中か」ということがポイントだと思います。</p>
+<p>いつ、そのプログラムがどこで何を実行しているのか、それが分かると、たとえばループの条件判断に関数を入れ込むなど、といった荒業でプログラムを書くことができます。</p>
+
+<h2>バグのないプログラム</h2>
+<p>僕は、パソコンのプログラムを開発するという仕事は、たくさんの部品を組み合わせて作る自動車などとよく似ていると思います。</p>
+<p>自動車の製造過程では、それぞれの部品が上手く働くかを入念にテストし、きちんと動く部品だけを組み合わせて全体の自動車を組み立てます。</p>
+<p>プログラムもこれと同じで、入念にそれぞれのモジュールやコンポーネントをテストして、バグのないプログラムを作ることができます。</p>
+<p>ですが、プログラムという特性上、きちんとプログラムが動くかどうかをテストするのは難しいものです。たとえば、入出力だけをテストしても、内部のデータ変数全てが適切に働いているかどうかをチェックすることは、デバッガを使わないとできず、またデバッガを使っても難しいです。</p>
+<p>それから、プログラムはアナログな部品と違って、とても多くの実行パターンを考えなければなりません。画像処理であればあらゆるグラフィック処理の全ての場合を考えなければなりませんし、コンパイラやインタープリタであれば、あらゆる言語的記述の全ての場合を考えなければなりません。</p>
+<p>ここで、一番簡単にできるのは、もし金儲けを考えない場合であれば、オープンソースにして、みんなでプログラムにバグがないかをチェックする、という方法です。</p>
+<p>よって、僕はオープンソースは、自動車などの製造で巧みな技術を持っている日本の製造業に親和性が高いと思います。同時に、日本がきちんとしたテスト用のフレームワークを作れば、オープンソースにしなくても、同程度の高品質のプログラム開発を行うことは可能ではないかと思います。</p>
+<p>デバッガを使うことで、ある程度のプログラムのコード分析を行うことができます。値をその時のブレークポイントでチェックしたり、変数にさまざまな値を代入してテストすることができます。printfチェックなども併用しながら、プログラムにバグが混入しないように注意して開発しましょう。</p>
+<p>最近は、Windowsなどの開発も高度になってきており、.NETなどの新技術も使いながら、たくさんの資金を投入して安定したOSをMSも作っています。以前のように「Windowsは不安定だがUNIXは安定している」とは必ずしも言えなくなっています。特に最近はLinuxでもGUIの巨大デスクトップ環境を開発しており、Windowsと同じぐらいバグがあります。特にオープンソースでは、きちんとテストされているかどうかは不透明で、保証もなく、また一部ではアマチュア・プログラマがコードを書いていたりして、必ずしもオープンソースは高品質ではなくなっています。</p>
+<p>後日注記：実際には、オープンソースにするだけでバグがなくなるということはなく、プログラマによる設計と実装が重要になる。たとえば、コアの関数を正しく書き、どの処理でもその関数を使うようにすれば、バグの入る余地を減らすことができる。また、たくさんの処理が増えすぎた時は、全てのコードを書き直す必要もある。これは仕事でプログラミングを書く時にも言えて、バグが解決できない時はもう一度全て書き直すしかない。これがそのまま「デスマーチ」へと繋がるのである。</p>
+
+<h1>リンク集全般</h1>
+<h2>GDB</h2>
+<p>GDB</p>
+<ul>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb1.html">gcc+gdbによるプログラムのデバッグ 第1回 ステップ実行、変数の操作、ブレークポイント - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb2.html">gcc+gdbによるプログラムのデバッグ 第2回 変数の監視、バックトレース、その他のコマンド - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb3.html">gcc+gdbによるプログラムのデバッグ 第3回 gdbの便利な機能、デバッグの例 - RAT Portal Site</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

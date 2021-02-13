@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>vsftpd関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>vsftpd関連の世界観</h1>
+<p>vsftpdに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>FTPサーバー</h1>
+<h2>vsftpd</h2>
+<p>FTPサーバー。FTPは、ホームページのHTMLファイルをサーバーにアップロードする時などに、ファイルの転送のために使われるプロトコル。自前で自分のホームページの自宅サーバーを運営したいと考えているなら、FTPサーバーの立て方とFTPクライアントの使い方を知っておきたい。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1612/01/news181.html">FTPサーバーを理解しよう (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1612/01/news182.html">FTPサーバーを使ってみよう (1/2) - @IT</a></li>
+</ul>
+
+<h2>vsftpdの導入</h2>
+<p>パッケージ管理システムでインストールしたら、/etc/vsftpd/vsftpd.confで設定を行う。</p>
+<p>ログイン禁止ユーザーは/etc/vsftpd/ftpusersに書かれている。ログはデフォルトなら/var/log/xferlogに出力される。/etc/hosts.denyと/etc/hosts.allowでアクセス許可を行う。</p>
+
+<h2>vsftpdの設定</h2>
+<p>基本的に、</p>
+<pre>
+# これによりユーザのルートディレクトリがルートになる。
+chroot_local_user=YES
+chroot_list_enable=YES
+allow_writeable_chroot=YES
+
+# local_root=/var/www/htmlをルートにしたい場合は、許可するユーザー名をchroot_listに記述する
+chroot_list_file=/etc/vsftpd/chroot_list
+local_root=/var/www/html
+
+# ユーザリストアップファイルを有効にし、リストアップしたユーザのみアクセス許可とする
+# 許可するユーザをuser_listに記述する
+userlist_enable=YES
+userlist_deny=NO
+userlist_file=/etc/vsftpd/user_list
+
+# その他の設定
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+local_umask=022
+dirmessage_enable=NO
+xferlog_enable=YES
+connect_from_port_20=YES
+xferlog_std_format=NO
+vsftpd_log_file=/var/log/vsftpd.log
+ascii_upload_enable=YES
+ascii_download_enable=YES
+listen=NO
+listen_ipv6=YES
+pam_service_name=vsftpd
+tcp_wrappers=NO
+use_localtime=YES
+force_dot_files=YES
+pasv_enable=YES
+chmod_enable=YES
+</pre>
+<p>とし、chroot_listとuser_listにユーザー名（たとえばhoge）を追加する。</p>
+<p>詳しくは<a href="https://qiita.com/Qsugi/items/6f383694f60913abb948">さくらVPSでCentOS7 ６．FTP接続 - Qiita</a>を参照のこと。</p>
+<p>SSHやsftpの設定もしようね。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

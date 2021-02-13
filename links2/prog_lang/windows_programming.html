@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Windowsプログラミング関連の世界観１（Windows API） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Windowsプログラミングの世界観１（Windows API）</h1>
+<p>Windowsプログラミングに関する世界観１（Windows API）です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Windowsプログラミングの前提知識</h1>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/12/20より。</p>
+
+<h2>ハンガリアン記法</h2>
+<p>Windowsプログラミングでは、ハンガリアン記法という統一されたルールで、変数や構造体メンバの名前を付ける。</p>
+<p>たとえば、ポインタには必ずlpが付く。</p>
+<p>これが分からないと、構造体メンバの意味が分からない。</p>
+
+<h2>関数の戻り値</h2>
+<p>素のC++では、関数に複数の値を渡すことはできるが、複数の値を返すことはできない。</p>
+<p>しかしながら、複数の値を実行結果として、呼び出し元に返したい時もある。</p>
+<p>このような時、構造体のポインタあるいは参照を渡して、関数の中から構造体を操作することができる。</p>
+<p>返り値はエラーチェックに使う。</p>
+<p>Windowsでは、こうしたやり方で関数に変数を与える。</p>
+
+<h2>メッセージループ</h2>
+<p>Windowsでは、コールバック関数とハンドルを多用し、</p>
+<p>メッセージループでイベント駆動をする。</p>
+<p>ここで使われるのが、Windowsメッセージ。</p>
+<p>WM_という名前で定義されており、イベントの発生に対してメッセージが送られ、コールバック関数を実行する。</p>
+<p>たとえば、「マウスがクリックされた時」とか、「画面が再描画された時」などに、場合や状況に応じてメッセージに応答する。</p>
+<p>これを、メッセージループとか、イベントループと呼ぶ。</p>
+<p>また、それぞれのウィンドウやアプリケーションインスタンスを識別するため、ハンドルを使用してOSとやり取りを行う。</p>
+
+<h2>MFC</h2>
+<p>MFCでは、メッセージマップによって、Onから始まるメソッドにメッセージをマップする。</p>
+<p>ドキュメントデータを表すドキュメントクラスと、画面を表すビュークラスを継承する。</p>
+<p>特に、データを保存するために、オブジェクトをファイルに書き出すことのできる、シリアライズを使用する。</p>
+<p>ブラウザなどを作るのであれば、Visual C++のAppWizardやClassWizardなどを使って、スケルトンを作成したりメソッドを自動作成して関連づけながら、ビュークラスを継承していけば、IEコンポーネントを使った簡単なウェブブラウザを開発できる。</p>
+
+<h2>デバイスコンテキスト</h2>
+<p>Windowsでは、グラフィック操作などをする際に、Windowsとデバイスの仲介役として、デバイスコンテキストを使用する。</p>
+<p>たとえばGDIなどの操作で、ペンやブラシから線や円、四角形などのグラフィックを描く時などに、必要となる。</p>
+
+<h2>リソースファイルとコントロール</h2>
+<p>GUIのインターフェイスは、リソースファイルからデザインしたり、メソッドからコントロールを作成したり操作したりできる。</p>
+<p>メニューはリソースファイルで作るのが一般的だが、ビュー画面などはさまざまな処理をするために、動的にコントロールを操作する。</p>
+
+<h2>.NET</h2>
+<p>また、VBやC#などでは、ポトペタ操作でデザインし、プロパティを操作したり、イベントハンドラを用いてイベントに応じてメソッドを実行したりして、イベント駆動で開発ができる。</p>
+<p>Windowsは既にこうした.NET言語で開発することが一般的だが、Javaと同様、仮想マシンである.NET Frameworkが必要であり、ネイティブなコンパイル言語を使う場合よりも速度や効率のようなパフォーマンスは劣る。</p>
+<p>しかしながら、優れたクラスライブラリを用いて、とても簡単にアプリケーションが開発できるとエンジニアから評判である。</p>
+<p>Windows開発だけでなく、Unityなどのゲームエンジンにも、C#が採用されており、C++と並んでゲーム開発の標準言語になっている。</p>
+
+<h2>サーバーにもWindowsを使う</h2>
+<p>最近は、サーバーにもWindowsを使う事例が増えた。</p>
+<p>これは、NTカーネルが安定して動いていることや、ActiveXやASP.NETなどのネットワーク技術が成熟し、UNIXと同等に使えるものになったこと、それから、契約や取引などの意味で、マイクロソフトと合意する政治的な判断などが、理由として挙げられる。</p>
+<p>クライアントOSで圧倒的シェアを誇るWindowsだが、サーバーでも勢力を着実に伸ばしており、たとえばSQL ServerやWSLなどの努力はサーバーOSでは選択肢一択のLinuxをいずれ倒すことになるかもしれない。</p>
+
+<h1>Windows標準技術</h1>
+<h2>Visual Studio</h2>
+<p>Microsoftが開発する有料の統合開発環境・コンパイラ。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1704/10/news026.html">連載：簡単！ Visual Studio 2017入門 - @IT</a></li>
+</ul>
+<p>無料の代替ソフトウェアとして、EclipseのC/C++バージョン（CDT）を入れると言う手もあります。僕はC言語で人工知能のプログラムを作る時はEclipse CDTを使っています。ただ、MSのライブラリが使えるのかどうかは定かではありません。ですが、GNUによるC/C++コンパイラのWindows版（MinGW）はWindowsでもきちんと動きます。</p>
+<h2>C/C++ & Visual C++</h2>
+<p>C/C++言語とVisual C++について。</p>
+<ul>
+<li><a href="http://www7b.biglobe.ne.jp/~robe/cpphtml/">ロベールのＣ＋＋教室</a></li>
+<li><a href="http://www.kumei.ne.jp/c_lang/">猫でもわかるプログラミング</a></li>
+</ul>
+
+<h2>Windows API</h2>
+<p>C/C++による、Windows APIプログラミング。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/windows/desktop/ff381399(v=vs.85).aspx">C++ による Windows プログラミングの学習 - MSDN</a></li>
+</ul>
+
+<h2>COM</h2>
+<p>COMを使用したプログラミング。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/cc465338.aspx">COM プログラミングの基本 (上) - MSDN</a></li>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/cc465327.aspx">COM プログラミングの基本 (中) - MSDN</a></li>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/cc465328.aspx">COM プログラミングの基本 (下) - MSDN</a></li>
+</ul>
+
+<h2>MFC</h2>
+<p>C++のクラス群であるMFCによるプログラミング。</p>
+<ul>
+<li><a href="https://code.msdn.microsoft.com/windowsdesktop/VisualC-43c71460">[連載! とことん VC++] 第 6 回 MFC アプリケーションの基本構造の再確認 ～ドキュメント/ビュー アーキテクチャ～ - MSDN</a></li>
+</ul>
+
+<h1>Windows API</h1>
+<h2>概要</h2>
+<p>MicrosoftによるWindowsのAPI。</p>
+
+<h2>MSDNにおけるサンプル</h2>
+<p>MSDNにおけるサンプルです。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/windows/desktop/ff381399(v=vs.85).aspx">C++ による Windows プログラミングの学習 - MSDN</a></li>
+</ul>
+
+<h2>サンプルコード</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/windows/desktop/ff381409(v=vs.85).aspx">モジュール 1. 初めての Windows プログラム - MSDN</a></li>
+</ul>
+
+<h2>サンプルコードその２</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="http://wisdom.sakura.ne.jp/system/winapi/common/common15.html">リストビュー - WisdomSoft（旧）</a></li>
+</ul>
+
+
+<h2>Windows APIでカスタムコントロール</h2>
+<p>Windows APIでカスタムコントロールを作る方法：</p>
+<ul>
+<li><a href="http://wisdom.sakura.ne.jp/system/winapi/win32/win87.html">カスタムコントロール - WisdomSoft（旧）</a></li>
+</ul>
+
+
+<h1>Windowsプログラミングのトピック</h1>
+<h2>Windowsメッセージ一覧</h2>
+<p>メッセージ一覧は以下のサイトが参考になる。</p>
+<ul>
+<li><a href="http://home.a00.itscom.net/hatada/windows/windowmessage01.html">Windowsメッセージ - Hatada's Home Page</a></li>
+</ul>
+
+<h2>Windows API コモンコントロール</h2>
+<p>ツールバーやリストビューなど、Windows APIのコモンコントロールについては以下のサイトが参考になる。</p>
+<ul>
+<li><a href="http://wisdom.sakura.ne.jp/system/winapi/">Win32 API入門 - WisdomSoft（旧）</a></li>
+<li><a href="http://home.a00.itscom.net/hatada/_toc/winc.html">Windowsプログラミング入門[WIN32 APIベース] - Hatada's Home Page</a></li>
+</ul>
+
+<h2>リソースファイル</h2>
+<p>メニューやアイコンなどのコントロールは、リソースファイルを用いて使うことが多いです。</p>
+<ul>
+<li><a href="https://www.keicode.com/winprimer/wp13.php">メニュー、アイコン、バージョン情報の設定 ～ リソースファイルの作成 - Web/DB プログラミング徹底解説</a></li>
+</ul>
+
+<h2>メモリの動的確保</h2>
+<p>テキストエディタを作る場合など、サイズがどれくらいになるか分からないバッファにはメモリを動的に確保する。</p>
+<p>Windowsでは、メモリの動的確保にはGlobalAlloc()関数とGlobalLock()関数を使う。不要になったら、GlobalUnlock()とGlobalFree(hMem)で解放する。</p>
+
+<h2>DLLを作る</h2>
+<p>以下の記事を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/false-git@github/items/2e1eb4614b1024131dd0">WindowsのDLLについて - Qiita</a></li>
+</ul>
+
+
+<h1>Windows旧来の技術</h1>
+<h2>MS-DOS</h2>
+<p>昔の16bitのコマンドラインOS。UNIXに比べると低機能だが、絶対に使えないわけではない。</p>
+<p><a href="../windows_pc/dos.html">DOS</a>を参照のこと。</p>
+
+
+<h1>Windows互換API</h1>
+<h2>WineとReactOS</h2>
+<p>WineはWindows APIのUNIXにおける実装で、Linux上でWindowsアプリケーションを動かすことができる。</p>
+<p>ReactOSはオープンソースのWindows NT（2000以降）のアプリケーションとドライバにおけるバイナリ互換性を目指すOS。言ってみればオープンソースのWindows 2000互換のOSだ。</p>
+<p>どちらも、Microsoftの牙城を倒そうとするOS・APIだ。Wineは開発中で、エミュレータではなく、APIを作ることでWindowsアプリケーションをそのまま動かすことを目指している。</p>
+
+<h1>簡単な説明</h1>
+<h2>Windows</h2>
+<ul class="defaultlist list7">
+<li>Windows
+<ul>
+<li>Windows/.NET
+<ul>
+<li>Windows API
+<ul>
+<li>Windowsメッセージ</li>
+<li>メッセージループ</li>
+<li>コールバック関数</li>
+<li>Windowsコントロール</li>
+</ul></li>
+<li>Visual C++
+<ul>
+<li>MFC</li>
+<li>AppWizard, ClassWizard</li>
+<li>コードエディタ、ダイアログエディタ</li>
+<li>デバッガ</li>
+<li>ドキュメント・ビュー</li>
+<li>メッセージマップ</li>
+<li>ATL, COM, ActiveX, WTL</li>
+<li>GDI</li>
+<li>デバイスコンテキスト</li>
+<li>DirectX</li>
+</ul></li>
+<li>.NET
+<ul>
+<li>Windows.Forms</li>
+<li>WPF</li>
+<li>.NET Core</li>
+<li>Mono</li>
+<li>Xamarin</li>
+</ul></li>
+<li>Visual C#, Visual Basic
+<ul>
+<li>イベントハンドラー</li>
+</ul></li>
+<li>Windowsコモンコントロール</li>
+<li>ASP.NET
+<ul>
+<li>Windowsでサーバーサイドプログラミングができる</li>
+</ul></li>
+<li>ADO.NET
+<ul>
+<li>Windowsでデータベース操作ができる</li>
+<li>LINQ
+<ul>
+<li>.NET版のSQLとも言えるような、C#でSQLクエリを記述する際のスマートな言語機能</li>
+</ul></li>
+</ul></li>
+<li>Microsoft SQL Server
+<ul>
+<li>Microsoftによるデータベースサーバ</li>
+<li>OracleやMySQLに次ぐシェア率</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>Windowsコントロール</h2>
+<p>Windowsコントロールは、一般のユーザーとしては使いやすいのだが、Windows APIやMFCなどから使おうと思うと、「超わけの分からないAPI」である。</p>
+
+<h2>デバイスコンテキスト</h2>
+<p>Windowsとデバイスの仲介役</p>
+<p>MFCでグラフィックス処理を行う上では、「何をするにもまずはデバイスコンテキスト」。ここが難しい。</p>
+
+<h1>リンク集全般</h1>
+<h2>MSDN</h2>
+<p>MSDN</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/dn308572.aspx">MSDN</a></li>
+</ul>
+
+<h2>Windowsサンプルコード集</h2>
+<p>サンプル</p>
+<ul>
+<li><a href="https://code.msdn.microsoft.com/windowsdesktop/">Windows desktop code samples - MSDN</a></li>
+</ul>
+<p>Windowsは、基本的に、MSDNを見れば事が足ります。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp">Microsoft Developer Network で開発を学ぶ - MSDN</a></li>
+</ul>
+
+<h1>書籍</h1>
+<h2>Windows</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング 第4版 (猫でもわかるプログラミング)</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

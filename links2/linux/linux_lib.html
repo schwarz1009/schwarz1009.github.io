@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux 共有ライブラリ・ヘッダファイル - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux 共有ライブラリ・ヘッダファイル</h1>
+<p>Linuxの共有ライブラリ・ヘッダファイルに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>共有ライブラリのコマンド</h1>
+<h2>lddコマンド</h2>
+<p>lddコマンドは、引数に指定した実行ファイルが利用している共有ライブラリを表示する。</p>
+<pre>
+$ ldd /bin/ls
+（lsの依存関係にある共有ライブラリが表示される）
+</pre>
+<p>基本的に、通常は/libや/lib64に共有ライブラリが置かれる。これは/usr/libや/usr/lib64などのシンボリックリンクになっていることもある。しかしながら、LD_LIBRARY_PATHやLD_LIBRARY_PATH_64の環境変数や、/etc/ld.so.confに記述されたパスはこれよりも優先度が上。ldconfigコマンドは、/etc/ld.so.confの情報をOSに伝えるためのコマンド。</p>
+
+<h2>共有ライブラリを作る</h2>
+<p>基本的に、</p>
+<pre>
+$ gcc -shared -fPIC -o libhoge.so hoge.c
+</pre>
+<p>とする。ここで「-shared」が共有ライブラリの指定の意味となる。</p>
+<p>Linuxの共有ライブラリを作るためには、PIC (Position Independent Code)となるようコンパイルする。PICでコンパイルするにはgccに-fpicまたは-fPICを渡す。詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="http://0xcc.net/blog/archives/000107.html">Linux の共有ライブラリを作るとき PIC でコンパイルするのはなぜか - bkブログ</a></li>
+<li><a href="http://www.koikikukan.com/archives/2016/10/27-000300.php">Linuxで共有ライブラリの作成とダイナミックリンクをする方法: 小粋空間</a></li>
+</ul>
+
+<h1>ヘッダファイル</h1>
+<h2>/usr/includeとヘッダファイル</h2>
+<p>/usr/includeには、システムのC言語用のヘッダファイルが置かれる。</p>
+<p>たとえば、Cのプログラムコードに必ずといって出てくる「#include &lt;stdio.h&gt;」のstdio.hが存在するディレクトリがここ。</p>
+<p>標準入出力関数のヘッダファイルは/usr/include/stdio.hに存在する。</p>
+<p>C言語で任意のライブラリ関数のAPIを使ったプログラムを自分で書いてコンパイルするためには、関数のプロトタイプ宣言が書かれたヘッダファイルをインクルードしなければならない。</p>
+<p>/usr/includeディレクトリが存在しなければ、Cの標準ライブラリ関数や、あるいはどんなライブラリ関数を使ったプログラムも、コンパイルして使うことはできない。</p>
+<p>ただし、gccに-Iオプションをつけてコンパイルすると、/usr/include以外のディレクトリを検索対象に追加できる。</p>
+<p>また、#include "hoge.h"のようにダブルクオーテーションでヘッダファイルを囲った場合は、/usr/includeでなくプログラムと同じディレクトリからヘッダファイルをインクルードできる）。</p>
+<p>だが、一度コンパイルしたバイナリを動かすためには、ヘッダファイルは必要ない。その代わり、ビルドされた共有ライブラリが必要になる。</p>
+<ul>
+<li><a href="https://qiita.com/DQNEO/items/4e5c2eca2761ec08b922">C言語におけるinclude文とgcc -Iオプションの関係 - Qiita</a></li>
+</ul>
+
+<h2>-develパッケージ</h2>
+<p>-develと名前のついたライブラリのパッケージをインストールすると、/usr/includeにヘッダファイルが展開される。</p>
+<p>ほかにもREADMEなど開発向けドキュメントやサンプルプログラムなどがインストールされることもある。</p>
+<p>これは、自分でそのライブラリのAPIを使ったプログラムを書いたり、そのライブラリAPIを使ったプログラムをソースコードから「ビルドするために必要」だが、単にそのライブラリを使ったプログラムを「実行するためには必要ない」。</p>
+<ul>
+<li><a href="https://www.unknownengineer.net/entry/2017/04/07/162346">develパッケージについてもう少し調べてみた - よくわからないエンジニア</a></li>
+<li><a href="https://www.unknownengineer.net/entry/2016/05/11/120014">無印とdevelの違いについて - よくわからないエンジニア</a></li>
+</ul>
+
+<h2>カーネルヘッダー</h2>
+<p>Linuxのカーネルヘッダーも/usr/include以下にインストールされる。</p>
+<ul>
+<li><a href="http://archive.linux.or.jp/JF/JFdocs/LFS-BOOK/chapter06/linux-headers.html">6.7. Linux-2.6.32.8 API ヘッダ -  Linux From Scratch - Version 6.6</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

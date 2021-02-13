@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux カーネル開発（ソケット） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（ソケット）</h1>
+<p>Linuxのカーネルの開発に関する世界観（ソケット）です。<a href="linux_kernel.html">Linuxカーネル</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>ソケット</h1>
+<h2>ネットワーク</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>Linuxカーネルはネットワークをサポートしており、BSDソケットインターフェースからネットワーク通信ができる。</p>
+<p>BSDソケットは、互いに2つのソケットが繋がると有効になり、片方に書き込むと片方から読み込むことができる。</p>
+<p>TCPやUDPもサポートされている。</p>
+<p>TCPでは、再送制御などの多くの機能がある。</p>
+<p>UDPには、そうした機能がない代わり、ビデオや音声を送ったりする時に、誤りを無視して高速に通信することができる。</p>
+<p>BSDソケットは多くの場合サーバー・クライアントシステムであり、片方のサーバが待ち受けをし、そのサーバに対してクライアントが接続する。</p>
+
+<h2>ソケット</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/27より。</p>
+<p><!--また、このような-->TCP/IPの仕組みは、便利だがソフトウェアの開発においては複雑である。</p>
+<p>よって、OSがソケットと呼ばれる仕組みで簡素化を行う。</p>
+<p>ソケットは、BSD UNIXで最初に採用されたTCP/IPスタックであり、二つのソケットが繋がると有効になり、繋がったソケット同士では、片方からwriteすればもう片方からreadできる。</p>
+<p>BSDではソケットをファイルとして実現し、ファイルをシステムコールでやり取りする際の情報である、ファイルディスクリプタによって操作できるようにしたため、ファイルの読み書きと同様にソケットの読み書きができる。</p>
+<p>ソケットを使うことで、カーネルだけがネットワークの詳細と接続情報の管理を行えばよい。</p>
+<p>ソケットは通常サーバー・クライアントで接続を行い、ユーザーはソケットをサーバー側で待ち受け、クライアント側で接続を要求するだけでよい。</p>
+<p>UNIXでは、これはsocket(), bind(), listen(), accept(), connect()の各APIで行われる。</p>
+<p>カーネルの内部では、たとえばLinuxではsk_buff型のポインタを使っており、sk_buff型のポインタを各階層に順々に渡していくことで処理が行われている。</p>
+<p>カーネルは、確実にパケットを目的の機器に送らなければならないが、このためにはルータのアドレスさえ知っておけばよい。</p>
+<p>LinuxにおいてはBSDソケット層とINETソケット層で、複雑な接続情報の管理を行っている。</p>
+
+<h1>ソケットのAPI</h1>
+<h2>socket()</h2>
+<p>socket()のAPIは以下。クライアント側・サーバ側双方で使用する。</p>
+<pre class="prettyprint">
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+
+int socket(int domain, int type, int protocol);
+</pre>
+<p>後日注記：ソケットをsocket()で作った段階では、対応するファイルディスクリプタが返されるだけで、まだ接続はされていない。ソケットを接続するためには以下のconnect()関数を使う。</p>
+
+<h2>connect()</h2>
+<p>connect()のAPIは以下。クライアント側で使用する。</p>
+<pre class="prettyprint">
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+
+int connect(int sock, const struct sockaddr *addr, socklen_t addrlen);
+</pre>
+<p>後日注記：クライアント側では、socket()でソケットを作成した後でconnect()でサーバに接続する。addrにはIPアドレスとポート番号が格納され、サーバにストリームを接続する。</p>
+
+<h2>bind()</h2>
+<p>bind()のAPIは以下。サーバ側で使用する。</p>
+<pre class="prettyprint">
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+
+int bind(int sock, struct sockaddr *addr, socklen_t addrlen);
+</pre>
+<p>後日注記：サーバ側、すなわちストリームの接続を待つ側では、やや手順が増えてsocket(), bind(), listen(), accept()の4つのシステムコール呼び出しが必要。基本的にbind()ではポート番号を指定する。</p>
+
+<h2>listen()</h2>
+<p>listen()のAPIは以下。サーバ側で使用する。</p>
+<pre class="prettyprint">
+#include &lt;sys/socket.h&gt;
+
+int listen(int sock, int backlog);
+</pre>
+<p>後日注記：listen()では接続を待つソケットということをカーネルに伝えて、新しい接続が来たら受信するように伝達する。また、同時に受け付けるコネクションの最大数を指定する。</p>
+
+<h2>accept()</h2>
+<p>accept()のAPIは以下。サーバ側で使用する。</p>
+<pre class="prettyprint">
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+
+int accept(int sock, struct sockaddr *addr, socklen_t addrlen);
+</pre>
+<p>後日注記：accept()ではクライアントが接続するのを待つ。接続が完了したら接続済みストリームのファイルディスクリプタを返す。</p>
+
+<h2>getaddrinfo()</h2>
+<p>getaddrinfo()のAPIは以下。</p>
+<pre class="prettyprint">
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netdb.h&gt;
+
+int getaddrinfo(const char *node, const char *service,
+                const struct addrinfo *hints, struct addrinfo **res);
+void freeaddrinfo(struct addrinfo *res);
+char *gai_strerror(int err);
+
+struct addrinfo {
+    int             ai_flags;
+    int             ai_family;
+    int             ai_socktype;
+    int             ai_protocol;
+    socklen_t       ai_addrlen;
+    struct sockaddr *ai_addr;
+    char            *ai_canoname;
+    struct addrinfo *ai_next;
+};
+</pre>
+<p>後日注記：getaddrinfo()はホスト名・サービス名からIPアドレス・ポート番号を得るために使う。これに対してgetnameinfo()はIPアドレスやポート番号からドメイン名やサービス名を得るために使う。</p>
+
+<h2>Manpage</h2>
+<p>socketの詳しい情報はmanpageにあるため参照してください。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man7/socket.7.html">Man page of SOCKET(7)</a></li>
+</ul>
+
+<h1>Linuxネットワーク</h1>
+<h2>Linuxのネットワークについて</h2>
+<p><a href="linux_net.html">Linuxネットワーク１（コマンド）</a>や<a href="linux_net2.html">Linuxネットワーク２（設定）</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

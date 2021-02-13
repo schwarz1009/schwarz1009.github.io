@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Java関連の世界観２A（継承） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観２A（継承）</h1>
+<p>Javaによるプログラミングに関する世界観２A（継承）です。<a href="java_oop.html">Javaの世界観（２．オブジェクト指向）</a>や<a href="java.html">Java</a>や<a href="java_lib.html">Java（クラスライブラリ）</a>も参照のこと。</p>
+<p><a href="design_pattern.html">デザインパターン</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>継承</h1>
+
+<h2>拡張クラス</h2>
+<p>extends - 拡張クラスの宣言。</p>
+<p>クラスを継承した新しいクラスを作ることができる。オブジェクト指向の真骨頂。</p>
+<pre class="prettyprint">
+public class MyThread extends Thread {
+  ...
+}
+</pre>
+
+<h2>継承の目的</h2>
+<p>継承は、既にある財産であるクラスを引き継ぐために行う。</p>
+
+<h2>綺麗な設計をしたコードは、極力既存のコードを変更する必要性がない</h2>
+<p>継承について言えることとして、「綺麗な設計をしたコードは、極力元のコードを変更する必要がない」ということが言えます。</p>
+<p>たとえば、関数やメソッドを編集する必要がある時、その関数だけではなく別の関数を巻き込んで変更したり、関数の呼び出し元が変更しなければならなくなったり、ということが極力ないべきです。</p>
+<p>クラス設計も同じで、極力元のクラスや呼び出し元を変更することなく、必要な部分の最低限の変更で済むようにすべきです。</p>
+<p>これはデザインパターンとしても言え、綺麗なデザインパターンを採用することで、極力最低限の変更で済むようにできます。マルチスレッドなどの場合でも、デザインパターンを参考に設計できます。Ruby on Railsでも「くり返しは極力なくする」といった考え方が提唱されています。</p>
+<p>後日注記：また、何度も繰り返し同じものを作るよりも、既にある「きちんと動くもの」をベースに作った方が、コードも動きやすく、プログラムの信頼性も高くなる。関数をただ呼び出すだけではなく、「プログラムコードの抜本的な継承」という考え方を、継承によって行うことができる。</p>
+
+<h2>スーパークラスとサブクラス</h2>
+<p>継承。</p>
+<p>継承によって新しい機能をクラスに追加することができる。インスタンス作成時に、オブジェクトのクラスを継承後のものに選ぶことが可能。</p>
+<p>継承を使うと、スーパークラスにあるメソッドを新しい名前で上書きあるいは追加することが出来る。</p>
+<p>ある意味、クラスの継承はファイルシステムにおけるパスとファイルの関係と良く似ている。</p>
+<p>Javaは、ある意味、こうしたエレガントな継承をしたいがために作られた言語だと言っても過言ではない。</p>
+<p>スーパークラスを指定せずにクラスを宣言すると、自動的にObjectクラスのサブクラスとして宣言される。</p>
+<p>フィールドとメソッドは継承されるが、コンストラクタは継承されないため、注意が必要。</p>
+<p>継承の例：</p>
+<ul>
+<li><a href="https://www.javadrive.jp/start/extends/index2.html">JavaDrive - クラスの継承 - スーパークラスのメンバへのアクセス</a></li>
+</ul>
+
+<h2>コンストラクタ</h2>
+<p>コンストラクタはインスタンス作成時の「初期化」をするメソッド。</p>
+<p>自分のインスタンス自身のフィールドにアクセスしたいときは、this.nameのようにする。</p>
+<p>super()はスーパークラスのコンストラクタの呼び出しを意味する。また、this()は自分のクラスのコンストラクタの呼び出しを意味する。</p>
+
+
+
+<h2>オーバーライド</h2>
+<p>オーバーライドすることで、メソッドを「上書き」することができる。同じメソッド名でオーバーライドしたメソッドを実行することを、「ポリモーフィズム」と呼ぶ。</p>
+
+<h2>オーバーライドの制限</h2>
+<p>finalが付いているメソッド（finalメソッド）はオーバーライドできない。</p>
+<p>また、スーパークラスにprivateが付いているメソッドやフィールドは、サブクラスからはアクセスできない（継承されない）。</p>
+<p>実装を隠蔽したい場合に、フィールドを（publicから）privateにすることがある。</p>
+
+<h2>アノテーションと@Overrideキーワード</h2>
+<p>Javaでは、クラスやメソッド定義の上にアノテーションと呼ばれる注釈をつけることで、さまざまな機能を利用できる。これらは「@」を行頭につける。</p>
+<p>最近のJavaでは、@Overrideキーワードを使って、オーバーライドするメソッドを明確に記述することができる。@Overrideを書くことで、間違ってメソッド名を書き間違えた場合など、正しくオーバーライドされていない時にエラーを出してくれる。間違いが発覚せずにそのままコンパイルが通って動いてしまうのを水際で防ぐことができる。</p>
+<ul>
+<li><a href="http://www.javaroad.jp/java_class8.htm">Javaの道：クラス（９．オーバーライドとオーバーロード）</a></li>
+</ul>
+
+<h2>ポリモーフィズム</h2>
+<p>ある親クラスを継承した派生クラスがあった時、派生クラスのインスタンスを親クラスの変数に格納することができる。</p>
+<p>この時、オーバーライドされたメソッドを実行すると、派生クラスのメソッドが呼び出される。</p>
+<p>たとえば、Rectangleを継承したNamedRectangleクラスがあった時、</p>
+<pre class="prettyprint">
+Rectangle rc = new NamedRectangle();
+</pre>
+<p>とできる。ここで</p>
+<pre class="prettyprint">
+rc.setSize(x, y);
+</pre>
+<p>とした時、setSizeメソッドがNamedRectangleでオーバーライドされていたら、NamedRectangleのsetSizeメソッドが実行される。これを「ポリモーフィズム」と言い、継承やインターフェースの実装をこのように操作することができる。</p>
+<p>このように、Javaでは「インターフェースはそのままで、機能だけを変更する」といったことができる。たとえば、ゲームのキャラクタークラスを作っておいて、勇者と魔法使いを別々の派生クラスにする、といった応用ができる。</p>
+
+<h2>アクセサ</h2>
+<p>フィールドはprivateにしておき、そのフィールドの内容を得るメソッドと、内容を変更するメソッドを別途宣言しておく方が、拡張性のよいクラスになる。これをアクセスメソッドまたはアクセサと呼ぶ。</p>
+
+<h2>抽象クラス</h2>
+<p>メソッドの名前と引数の型だけが決まっていて、その本体（実装）がないメソッドのことを抽象メソッドあるいはabstractメソッドと呼ぶ。</p>
+<p>抽象メソッドを含んでいるクラスを抽象クラスあるいはabstractクラスと呼ぶ。</p>
+<pre class="prettyprint">
+public abstract class Hundred {
+    public abstract void func();
+    public void loop() {
+        for (int i = 0; i < 100; i++) {
+            func();
+        }
+    }
+}
+</pre>
+<p>この例では、メソッドを使う側を先に作っておいて、あとでメソッドの側を継承を使って作る、といったやり方が出来るかもしれない。</p>
+
+<h2>is-a関係とhas-a関係</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/01/21より。</p>
+<p>継承の用語について。</p>
+<p>スーパークラスに対するサブクラスのように、継承して派生クラスを作る関係を、is-a関係と呼ぶ。</p>
+<p>is-a関係では、親クラスのメソッドを派生クラスが呼び出せる。</p>
+<p>これに対して、クラスのメンバ変数として、インスタンスをクラス内に包有する関係を、合成あるいはhas-a関係と呼ぶ。</p>
+<p>has-a関係では、メンバ変数のインスタンスを通じて、そのオブジェクトのメソッドや機能を呼び出せる。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

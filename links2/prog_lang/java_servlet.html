@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Java関連の世界観B（サーブレット） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観B（サーブレット）</h1>
+<p>Javaによるプログラミングに関する世界観（B．サーブレット）です。<a href="java.html">Javaの世界観１（言語）</a>も参照のこと。</p>
+<!--
+<p>書籍<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a>と<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a>を参考にさせていただきました。</p>
+-->
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>サーバーサイドJava（Java EE）</h1>
+
+<h2>Javaサーブレットとは</h2>
+<p>Javaサーブレットとは、サーバー側で動作しHTMLを吐き出す、CGIやPHPと同様のJavaによる技術。</p>
+<p>Apacheのようなサーバーソフトウェアと、Tomcatのようなサーブレットコンテナ（アプリケーションサーバー）を使って構築する。</p>
+<p>Perl/CGIやPHPと異なる点は、プログラミング言語がJavaであり、静的型付けの言語で使えるということや、IBMなどがメインフレームでもWebSphereなどをサポートしており、「高度なインフラシステムとしても利用できる」という点がある。</p>
+<p>多くの場合PHPやWebフレームワーク技術のあるRubyなどで作られることの多いWebサーバーサイド技術だが、「Javaでもいける」という点では優れている。Javaの優れたクラスライブラリを使うことができ、JavaVMの高パフォーマンスでクロスプラットフォームな仮想マシンを使うこともできる。特にJSPを使うことで、PHPと同様にHTMLの中にJavaコードを埋め込むことができる。</p>
+<p>ちなみに、ブラウザ上でプラグインによって動くJavaアプレットとは本質的に異なる技術であるため、混同しないように注意しよう。</p>
+
+<h2>サーブレット・JSP</h2>
+<p>サーバーでJavaを動かすJavaサーブレットと、PHPのようにHTMLに埋め込むことの出来るJSP。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/servlet/">JavaDrive - サーブレット(Servlet) / JSP入門</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0301/09/news001.html">基礎から学ぶサーブレット／JSP（1） - @IT</a></li>
+<li><a href="https://www.ulsystems.co.jp/topics/036">いまさら聞けないサーバーサイドJava 第1回 これだけは知っておきたいJ2EEの基本 - ウルシステムズ株式会社</a></li>
+</ul>
+
+<h2>サーブレット/JSPサンプルコード</h2>
+<p><a href="http://www.atmarkit.co.jp/fjava/javafaq/jsp/jsp01.html">JSPとは何ですか？ - @IT</a>にサンプルコードがある。</p>
+
+
+<h1>サーブレットの基本</h1>
+<h2>HttpServletクラス</h2>
+<p>HTTP通信を行うサーブレットは、「HttpServlet」クラスを継承して作成する。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/servlet/ini/index2.html">HttpServletクラスとメソッド - サーブレットの基本 - サーブレット入門 - Let'sプログラミング</a></li>
+<li><a href="https://www.javadrive.jp/servlet/ini/index3.html">サーブレットの基本形 - サーブレットの基本 - サーブレット入門 - Let'sプログラミング</a></li>
+</ul> 
+
+<h2>doGet()とdoPost()</h2>
+<p>HttpServletでは、リクエストをGETで受けた時はdoGet()、リクエストをPOSTで受けた時はdoPost()で処理を行う。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/servlet/ini/index4.html">doGetメソッドとdoPostメソッド - サーブレットの基本 - サーブレット入門 - Let'sプログラミング</a></li>
+</ul>
+
+<h1>アプリケーションサーバ</h1>
+<h2>アプリケーションサーバ</h2>
+<p>サーバ上でビジネスロジックを実装したアプリケーションを動かすためのミドルウェア。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B5%E3%83%BC%E3%83%90">アプリケーションサーバ - Wikipedia</a></li>
+</ul>
+<p>それぞれのサーバの比較については以下の記事が参考になる。</p>
+<ul>
+<li><a href="https://cloudear.jp/blog/?p=985">Java 最近のアプリケーションサーバー事情（2015年） - 技術ブログ | 株式会社クラウディア</a></li>
+</ul>
+
+<h2>Jakarta</h2>
+<p>JakartaはApache Software Foundationの中のJavaサーバ関連のオープンソースプロジェクトのためのサブプロジェクト。</p>
+<p>主な製品はTomcat、Ant、Struts、JSTL（JSPのためのタグライブラリ）など。他にも、テストやパフォーマンス調査、メールサーバやログ出力などのツールを豊富に手掛けていた。</p>
+<p>しかしながら、2011年に全てのプロジェクトが卒業し、廃止された。</p>
+<ul>
+<li><a href="https://allabout.co.jp/gm/gc/80604/">Jakartaってなに？ [Javaプログラミング] All About</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Jakarta_Project">Jakarta Project - Wikipedia</a></li>
+</ul>
+
+<h2>Apache Tomcat</h2>
+<p>JavaサーブレットやJSPを実行するためのWebコンテナ（サーブレットコンテナ、サーブレットエンジン）。</p>
+<p>オープンソースでスタンダードなサーバーとして知られる。</p>
+<ul>
+<li><a href="https://qiita.com/yuji38kwmt/items/267d4ce618e80785f03d">【社内勉強会】ApacheとTomcat(2017/03/09) - Qiita</a></li>
+<li><a href="http://www.atmarkit.co.jp/fjava/channel/appserver.html">アプリケーションサーバ（Tomcatなど） - @IT</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache Tomcat">Apache Tomcat - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/apache/tomcat">git</a></li>
+</ul>
+
+<h2>Jetty</h2>
+<p>100%Javaによる、軽量で起動の早いサーバー。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Jetty">Jetty - Wikipedia</a></li>
+</ul>
+
+<h2>WebLogic</h2>
+<p>Oracleの商用サーバー。</p>
+
+<h2>GlassFish</h2>
+<p>Sun（現在はOracle）によるオープンソースのサーバー。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GlassFish">GlassFish - Wikipedia</a></li>
+</ul>
+
+<h2>JBoss (WildFly)</h2>
+<p>Red HatによるオープンソースのJava EEアプリケーションサーバ。Tomcatより高機能でヘビーなサーバー。</p>
+<p>JBoss Application Serverのオープンソース版の名称はWildFlyに改称された。これは商用版のJBoss Enterprise Application Platformと名称が似すぎていたためである。これはFedoraとRed Hat Enterprise Linuxの関係と似たものだということである。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/JBoss">JBoss - Wikipedia</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0909/10/news124.html">企業向けアプリの常識を学び、JBossの環境構築 (1/2) - @IT</a></li>
+</ul>
+
+<h2>WebSphere Application Server</h2>
+<p>IBMのJava EEアプリケーションサーバ。メインフレームからWindowsまでのスケーラビリティが特徴。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/WebSphere_Application_Server">WebSphere Application Server - Wikipedia</a></p>
+</ul>
+
+<h1>JavaBeans</h1>
+<h2>JavaBeansとは</h2>
+<p>JavaBeansとは、他のプログラムから再利用される、汎用的なビジネスロジックを実装したクラスのこと。再利用可能なコンポーネント仕様のこと。</p>
+<p>Javaで書かれている再利用可能なコンポーネントの仕様のことで、Webアプリケーションでデータを操作する際に良く使われる。</p>
+<p>たとえば、サーブレット・JSPでメールアドレスやパスワードのような個人情報を、どこで格納しておくか、という時に、「JavaBeans銀行が預かってくれる」という風に使う。</p>
+<ul>
+<li><a href="https://qiita.com/s_hino/items/0e3234b8feefe2d14315">【初心者向け】10分で絶対にわかる！JavaBeansとは - Qiita</a></li>
+<li><a href="http://www.wakhok.ac.jp/~tomoharu/web2004/text/index_c4.html">JavaによるWebアプリケーション入門 - サマースクール 2004 in 稚内</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/0404/17/news012.html">JavaBeansのルールを知る (1/2)：基礎から学ぶサーブレット／JSP（12） - ＠IT</a></li>
+<li><a href="https://www.sejuku.net/blog/60374">JavaBeansとは？仕様や使い方、永続化について解説 | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/JavaBeans">JavaBeans - Wikipedia</a></li>
+</ul>
+
+<h1>Javaネットワークプログラミング</h1>
+<h2>JavaのネットワークAPI</h2>
+<p>JavaでTCP/UDPのネットワークを接続したり、ソケット通信を行うためには以下が参考になる。</p>
+<ul>
+<li><a href="https://www.techscore.com/tech/Java/JavaSE/Network/index/">ネットワークプログラミング | TECHSCORE(テックスコア)</a></li>
+<li><a href="http://www.ics.kagoshima-u.ac.jp/edu/ProgramingJava/Networking/index.html">ネットワークへの接続 - Programing on Java</a></li>
+<li><a href="http://wisdom.sakura.ne.jp/system/java/net/index.html">Javaネットワーク入門 - JAVA入門 - WisdomSoft（旧）</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>クロスプラットフォームなバイトコード</h2>
+<p>Javaサーブレットは、クロスプラットフォームなJavaの「バイトコード」の特徴を活かしている。</p>
+<p>CGIプログラムは、C言語で書くこともできる。だが、この場合、再コンパイルしなければ動かない。サーバーマシンでわざわざ再コンパイルするのは、難しい。</p>
+<p>サーバープログラムに、PerlやPHPなどを用いると、スクリプトをアップロードすることで動くため、コンパイルしなくても良い。だが、この場合、C/C++よりも実行速度が遅くなる。</p>
+<p>ここで出てくるのが、Javaサーブレットである。Javaはバイトコードでコンパイルされると同時にクロスプラットフォームなため、サーバーでできるだけ速度を犠牲にせず、その上でローカル環境で開発することができる。</p>
+<p>Javaサーブレットはサーバー開発のある意味での理想である。</p>
+
+<h2>仮想化システムと似ている</h2>
+<p><a href="https://ubiteku.oinker.me/2017/02/21/docker-and-kubernetes-intro/">Docker（コンテナ型仮想化）と Kubernetes についての簡単な紹介 – ゆびてく</a>を見ると分かるように、Java EEによるアプリケーションサーバ（Javaサーブレットコンテナ）は、コンテナ型の仮想化と良く似ている。</p>
+<p>OS + Java + Tomcatの上でWAR Appが動くこの図式は、Linux + Dockerの上でDocker Imageが動く図式の元になったものであると言える。Java EEとTomcatを簡単な仮想化システムとして活用することができる。</p>
+
+<h1>簡単な説明</h1>
+<h2>サーブレット</h2>
+<p>Javaをアプリケーションサーバで動かす</p>
+<p>3階層型システムのWebサーバ、APサーバ、DBサーバで言えばAPサーバ</p>
+<p>エンタープライズ開発ではJavaサーブレットは非常に普及している</p>
+<p>単なるPHPの代替としても使える</p>
+
+<h1>リンク集全般</h1>
+<h2>JSP/Servlet</h2>
+<p>JSP/Servlet</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/channel/jspservlet/jspservlet.html">JSP／Servlet - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/fjava/channel/appserver.html">アプリケーションサーバ（Tomcatなど） - @IT</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

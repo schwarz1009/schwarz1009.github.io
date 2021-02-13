@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>PHP関連の世界観（２．ライブラリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PHPの世界観（２．ライブラリ）</h1>
+<p>PHPによるプログラミング（２．ライブラリ）に関する世界観です。<a href="php.html">PHP</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>文字列</h1>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆・引用しました。</p>
+
+<h2>文字列の処理</h2>
+<p>文字列の処理は、printf(), sprintf(), htmlspecialchars(), nl2br(), implode()などを使うことが多い。</p>
+<table class="some_tables">
+<tr><th>関数</th><th>説明</th></tr>
+<tr><td>printf()<br>sprintf()</td><td>変数をフォーマットして出力する。</td></tr>
+<tr><td>htmlspecialchars()</td><td>HTMLのタグを文字に変換する。</td></tr>
+<tr><td>nl2br()</td><td>改行をbrタグにする。</td></tr>
+<tr><td>implode()</td><td>配列を連結する。</td></tr>
+</table>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="http://php.net/manual/ja/book.strings.php">PHP: 文字列 - Manual</a></li>
+</ul>
+
+<h1>パターンマッチング</h1>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆・引用しました。</p>
+
+<h2>正規表現の関数</h2>
+<table class="some_tables">
+<tr><th>関数</td><th>説明</th></tr>
+<tr><td>preg_match()</td><td>正規表現でマッチング。1回マッチしたらマッチングをやめる。</td></tr>
+<tr><td>preg_match_all()</td><td>正規表現でマッチング。パターンに一致するもの全てを抜き出したい場合に使う。</td></tr>
+<tr><td>preg_replace()</td><td>置換。</td></tr>
+<tr><td>preg_split()</td><td>分割。</td></tr>
+</table>
+<p>特定の文字列が含まれているかどうかを判定したい場合、正規表現を使わなくても、strpos()関数を使った方が高速なので、「わざわざ正規表現を使う必要が無い」時は、文字列系の関数を使おう。</p>
+
+
+<h1>ファイル処理</h1>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆・引用しました。</p>
+
+<h2>ファイル入出力の基本</h2>
+<p>C言語のラッパー関数として、fopen(), fread(), fwrite(), fclose()などを使うことができる。</p>
+<p>file_get_contents()関数でファイルの内容を文字列として一気に読み込むことができる。また、書き込みたい場合はfile_put_contents()関数を使う。</p>
+<p>SplFileObjectクラスはfopen()関数などをAPIに持つクラスで、Iteretorインターフェースを実装しているため、1行ずつ読み出す、などという操作をforeach構文で行うことができる。</p>
+
+<h2>glob()関数</h2>
+<p>ファイル一覧を取得するには、glob()関数を用いると便利。</p>
+<pre class="prettyprint">
+glob('path/*.txt')
+</pre>
+<p>のように、libcのglob()関数で用いられるルールに基づいてパス名の検索ができる。</p>
+
+<h2>ファイル処理の関数</h2>
+<p>そのほか、</p>
+<table class="some_tables">
+<tr><th>関数</td><th>説明</th></tr>
+<tr><td>mkdir()</td><td>ディレクトリの作成</td></tr>
+<tr><td>rmdir()</td><td>ディレクトリの削除</td></tr>
+<tr><td>rename()</td><td>名前変更</td></tr>
+<tr><td>copy()</td><td>コピー</td></tr>
+<tr><td>unlink()</td><td>削除</td></tr>
+<tr><td>chown()<br>chgrp()<br>chmod()</td><td>権限の変更</td></tr>
+</table>
+<p>などのファイル処理関数や、file_exists(), is_readable(), is_writable(), is_executable(), is_file(), is_dir(), is_link()などの確認用関数がある。</p>
+
+<h1>画像処理</h1>
+<h2>GDライブラリ</h2>
+<p>PHP標準のGD拡張モジュールを使うことで、PHPで画像を動的に作成したり、画像を操作したりできる。</p>
+<p>簡単な画像処理の他、投稿された画像のリサイズなどにも使うことができる。</p>
+<ul>
+<li><a href="https://www.php.net/manual/ja/book.image.php">PHP: GD - Manual</a></li>
+<li><a href="http://bashalog.c-brains.jp/17/09/15-150000.php">PHPで画像を動的に生成する【GD編】 | バシャログ。</a></li>
+<li><a href="http://kyasper.com/php-tips/">PHP GDライブラリで画像加工をしてみる | 福島県郡山市のホームページ制作、Web制作　Kyasper Web Design キャスパーウェブデザイン</a></li>
+<li><a href="https://qiita.com/laughool/items/8ccdb6d51dceea5fb593">phpのGDライブラリを試してみました！ - Qiita</a></li>
+<li><a href="https://www.sejuku.net/blog/74338">PHPで画像をリサイズしよう！表示・保存方法もわかる | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+
+<h2>Imagick</h2>
+<p>ImagickはImageMagickをPHPで使用するための画像処理ライブラリ。</p>
+<ul>
+<li><a href="https://www.php.net/manual/ja/book.imagick.php">PHP: ImageMagick - Manual</a></li>
+</ul>
+
+<h1>関数一覧</h1>
+<h2>PHPの主な関数の一覧</h2>
+<p>主な関数の一覧は以下が参考になる。</p>
+<ul>
+<li><a href="https://php-archive.net/php/essential-php-functions/">[PHP]最低限覚えておきたい必須関数一覧 | PHP Archive</a></li>
+</ul>
+
+<h2>リファレンス</h2>
+<p>PHPのリファレンスは以下から参照できます。</p>
+<ul>
+<li><a href="http://php.net/manual/ja/langref.php">PHP: 言語リファレンス - Manual</a></li>
+<li><a href="http://php.net/manual/ja/funcref.php">PHP: 関数リファレンス - Manual</a></li>
+<li><a href="http://php.net/manual/ja/index.php">PHP: PHP マニュアル - Manual</a></li>
+</ul>
+<p>以下は個人サイト。</p>
+<ul>
+<li><a href="https://webkaru.net/php/function-reference/">PHP入門 - PHP関数リファレンス - Webkaru</a></li>
+<li><a href="http://alphasis.info/php/">PHP リファレンス - アルファシス</a></li>
+<li><a href="http://www.php-ref.com/">忘れっぽいエンジニアのＰＨＰリファレンス</a></li>
+<li><a href="http://php-beginner.com/reference/">PHPスクリプト講座：PHP言語リファレンス | そふぃのphp入門</a></li>
+<li><a href="http://php-beginner.com/function/">PHP関数講座：PHP関数リファレンス | そふぃのphp入門</a></li>
+</ul>
+
+<h1>ライブラリ集</h1>
+<h2>PEAR</h2>
+<p>PEARはPHPのライブラリ。</p>
+<ul>
+<li><a href="http://www.phpbook.jp/pear/">PEAR入門 - PHPBook</a></li>
+</ul>
+
+<h2>PEAR::Auth</h2>
+<p>PEARの例として、たとえば認証機能を使えるようになるPEAR::Authなどが存在する。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/pear/pear_auth/">ユーザー認証(PEAR::Auth) - PEAR入門</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

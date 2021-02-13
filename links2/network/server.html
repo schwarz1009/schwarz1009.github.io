@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>サーバー構築関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<!--
+<p><a href="linuxlinks.html">Linuxリンク集（公式）</a></p>
+<p><a href="linuxlinks2.html">Linuxリンク集２（管理）</a></p>
+<p><a href="linuxlinks3.html">Linuxリンク集３（技術情報）</a></p>
+<p><a href="linuxlinks4.html">Linuxリンク集４（プログラミング）</a></p>
+<p><a href="linuxlinks5.html">Linuxリンク集５（アーキテクチャ）</a></p>
+<p><a href="linuxlinks6.html">Linuxリンク集６（アプリケーション）</a></p>
+<p><a href="linuxlinks7.html">Linuxリンク集７（デスクトップ）</a></p>
+<p><a href="linuxlinks8.html">Linuxリンク集８（X11）</a></p>
+<p><a href="linuxlinks9.html">Linuxリンク集９（技術詳細）</a></p>
+<p><a href="linuxlinks10.html">Linuxリンク集１０（その他）</a></p>
+<p><a href="windowslinks.html">Windowsリンク集</a></p>
+<p><a href="itcompanylinks.html">IT企業・商用ソフトリンク集</a></p>
+<p><a href="softwarelinks.html">ソフトとサービスのリンク集</a></p>
+<p><a href="hardwarelinks.html">ハードウェアのリンク集</a></p>
+
+<p><a href="bunkeilinks.html">文系のリンク集</a></p>
+<p><a href="rikeilinks.html">理系のリンク集</a></p>
+
+<p><a href="artlinks.html">芸術・音楽のリンク集</a></p>
+<p><a href="peoplelinks.html">人々のリンク集（偉人）</a></p>
+<p><a href="technologylinks.html">技術のリンク集</a></p>
+<p><a href="societylinks.html">社会のリンク集</a></p>
+<p><a href="bloglinks.html">ブログ・ツイッターのリンク集</a></p>
+<p><a href="piano.html">ピアノ入門</a></p>
+<p><a href="farm.html">農業入門</a></p>
+<p><a href="culture.html">世界の文化入門</a></p>
+<p><a href="human.html">人間一般入門</a></p>
+<p><a href="english.html">英会話入門</a></p>
+<p><a href="nofollow.html">NoFollowプログラミング言語</a></p>
+<p><a href="robot.html">人間頭脳型ロボット</a></p>
+-->
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div><h1>サーバー構築の世界観</h1>
+<p>サーバー構築に関する世界観です。</p>
+<p>このページの内容は、<a href="web.html">Webサーバー</a>と<a href="../db/sql.html">SQL</a>に分割して移動しました。</p>
+<!--
+<p><a href="network.html">ネットワークの世界観</a>、<a href="../prog_lang/php.html">PHPの世界観</a>、<a href="sql.html">SQLの世界観</a>、<a href="db.html">データベースの世界観</a>、<a href="../linux/linux_net.html">Linux（ネットワーク）</a>も参照のこと。</p>
+<p>書籍「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考にさせていただきました。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+-->
+
+<!--
+<h1>サーバーの基本設定</h1>
+<blockquote class="inyou1">
+<h2>テキストエディターの文字コードを設定する</h2>
+<p>適当なテキストエディタをインストールし、文字コードをUTF-8に設定します。</p>
+<p>出来れば、色づけをPHPに設定できるエディターが良いでしょう。</p>
+<p>また、Windowsの設定を変更して、拡張子を表示するようにしましょう。</p>
+
+<h2>XAMPP</h2>
+<p>まず、Windowsのローカル環境にサーバーをインストールしましょう。これにより、サーバーにアップロードしなくても、自分のPCで環境を再現出来ます。</p>
+<p>WindowsでApache、MySQL、Perl、PHPを使うために、XAMPPをインストールします。</p>
+
+<h2>サーバーを起動する</h2>
+<p>XAMPP Conreol PanelからApacheを起動します。ファイアウォールの経由を許可してください。</p>
+
+<h2>Apacheの設定ファイル</h2>
+<p>Skypeを使う場合は、Apacheの使う80番ポートと重なってしまうので、Apacheのポート番号を8888に変更します。（Skypeを使わないならそのままでも良し。）</p>
+<p>このためには、Apacheのhttpd.confとhttpd-ssl.confを変更します。</p>
+<p>httpd.confの編集：</p>
+<pre>
+Listen 80
+</pre>
+<p>を</p>
+<pre>
+Listen 8888
+</pre>
+<p>に書き換え。</p>
+<pre>
+ServerName localhost:80
+</pre>
+<p>を</p>
+<pre>
+ServerName localhost:8888
+</pre>
+<p>に書き換え。</p>
+<p>httpd-ssl.confの編集：</p>
+<pre>
+Listen 443
+</pre>
+<p>を</p>
+<pre>
+Listen 44388
+</pre>
+<p>に書き換え。</p>
+<p>そしてXAMPPの「Configuration of Control Panel（Config）」から「Service Settings（Service and Port Settings）」を開く。</p>
+<p>Main Portに「8888」、SSL Portに「44388」と入力してSave。</p>
+<p>最後に、XAMPPからApacheを再起動。</p>
+
+
+<h2>PHPの設定ファイル</h2>
+<p>PHPの設定ファイルでも、文字コードをUTF-8に設定しましょう。このためには、php.iniを変更します。</p>
+<p>以下はphp.iniの設定。（上が編集前、下が編集後）</p>
+<pre>
+error_reporting = E_ALL & ~E_NOTICE & ~E_DEPRECATED
+error_reporting = E_ALL
+</pre>
+<p>に書き換え。</p>
+<pre>
+;default_charset = "UTF-8"
+default_charset = "UTF-8"
+</pre>
+<p>に書き換え。（行頭の;を削除）</p>
+<pre>
+;mbstring.language = Japanese
+mbstring.language = Japanese
+</pre>
+<p>に書き換え。（行頭の;を削除）</p>
+<pre>
+;mbstring.internal_encoding = EUC-JP
+mbstring.internal_encoding = UTF-8
+</pre>
+<p>に書き換え。</p>
+<pre>
+;mbstring.http_input = auto
+mbstring.http_input = pass
+</pre>
+<p>に書き換え。</p>
+<pre>
+;mbstring.http_output = SJIS
+mbstring.http_output = UTF8
+</pre>
+<p>に書き換え。</p>
+<pre>
+;mbstring.encoding_translation = Off
+mbstring.encoding_translation = Off
+</pre>
+<p>に書き換え。（行頭の;を削除）</p>
+<pre>
+;mbstring.substiture_character = none;
+mbstring.substiture_character = none;
+</pre>
+<p>に書き換え。（行頭の;を削除）</p>
+<pre>
+;mbstring.func_overload = 0
+mbstring.func_overload = 0
+</pre>
+<p>に書き換え。（行頭の;を削除）</p>
+
+</blockquote>
+
+<h1>サーバー管理</h1>
+<blockquote class="inyou1">
+<h2>ファイルを配置する</h2>
+<p>xamppフォルダ内のhtdocsフォルダの中に、フォルダを作成して、この中にサーバーのファイルを配置します。</p>
+<p>配置したHTMLファイルのURLは、http://localhostか、ポート番号を変更した場合はhttp://localhost:8888になります。</p>
+<p>作成したフォルダhogeがある場合は、そのフォルダへのアクセスは、http://localhost/hoge/となります。ファイルがある場合はhttp://localhost/hoge/page.htmlとなります。</p>
+
+<h2>PHPプログラムを書く</h2>
+<p>実際にPHPプログラムを書いていきます。</p>
+
+<h2>MySQLの設定</h2>
+<p>MySQLの設定は、phpMyAdminという管理ツールを用いて行いますが、設定ファイルを編集することもあります。</p>
+<p>MySQLの設定ファイルは、my.iniです。ここでも、文字コードをUTF-8に設定しましょう。</p>
+<p>以下はmy.iniの設定。</p>
+<pre>
+[client]
+</pre>
+<p>の下の行に</p>
+<pre>
+default-character-set=utf8
+</pre>
+<p>を追加。</p>
+<pre>
+[mysqld]
+</pre>
+<p>の下の行に</p>
+<pre>
+character-set-server=utf8
+</pre>
+<p>を追加。</p>
+<pre>
+[mysql]
+</pre>
+<p>の下の行に</p>
+<pre>
+default-character-set=utf8
+</pre>
+<p>を追加。</p>
+<p>そして、phpMyAdminを起動します。</p>
+
+<h2>データベースを作成</h2>
+<p>実際にPHPから利用される名前を考慮して、データベースの名前を設定し、データベースを設計・作成してください。</p>
+<p>基本的に、phpMyAdminを使うことで、データベースを作成します。</p>
+
+<h2>PHPとMySQLを連携させる</h2>
+<p>そして、PHPとMySQLを連携させながら、Webプログラミングを行いましょう。</p>
+</blockquote>
+-->
+
+<!--
+<h1>データベースの設計</h1>
+<blockquote class="inyou1">
+<h2>データベースの名前と照合順序</h2>
+<p>phpMyAdminを使ってMySQLデータベースを作成します。データベースの名前には分かりやすい「db1」のような名前を付けましょう。</p>
+<p>照合順序は、大文字と小文字を区別するか、検索結果であいうえおの後にアイウエオを表示するか、といった並び順を決めることで、標準的な「utf8_general_ci」を設定しておきます。</p>
+<p>この大きな箱に、小さな箱である「テーブル」を作っていきます。</p>
+
+<h2>テーブルの設計</h2>
+<p>テーブルには、どんな項目が必要か、決めていきます。最初の設計が肝心です。</p>
+<p>テーブルは、「カラム」と呼ばれる「列」と、「レコード」と呼ばれる「行」から構成されています。</p>
+<p>テーブル名、カラム名ともに英数字で入力します。</p>
+<p>必要なカラムの数を考えましょう。</p>
+<p>また、カラムごとにデータの種類である「型」を決めます。大きく分けて、数字、文字列、日時に分かれます。</p>
+<p>そして、文字列や数字の場合は、長さを指定します。</p>
+<p>最後に、オートインクリメント(A_I)とプライマリーキーを説明します。オートインクリメントは、自動で1から順番に数字を割り振ります。プライマリーキーは、重複したデータを禁止して、全て違うデータしか設定出来なくします（番号など、同じデータを作成することを禁止する）。</p>
+<p>以下はカラムの例。テーブルの名前は「recipes」にします。</p>
+<table class="some_tables">
+  <tr>
+    <th>役割</th>
+    <th>カラム名</th>
+    <th>型</th>
+    <th>長さ</th>
+    <th>A_I</th>
+  </tr>
+  <tr>
+    <td>通し番号</td>
+    <td>id</td>
+    <td>INT</td>
+    <td>11</td>
+    <td>あり</td>
+  </tr>
+  <tr>
+    <td>料理名</td>
+    <td>recipe_name</td>
+    <td>VARCHAR</td>
+    <td>45</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>カテゴリ</td>
+    <td>category</td>
+    <td>TINYINT</td>
+    <td>1</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>難易度</td>
+    <td>difficulty</td>
+    <td>TINYINT</td>
+    <td>1</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>予算</td>
+    <td>budget</td>
+    <td>MEDIUMINT</td>
+    <td>9</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>作り方</td>
+    <td>howto</td>
+    <td>VARCHAR</td>
+    <td>320</td>
+    <td>-</td>
+  </tr>
+</table>
+
+<h2>利用するユーザーを分ける</h2>
+<p>初期設定でrootユーザーになっていると、削除や破壊が出来てしまって危険なため、ユーザーを分けましょう。</p>
+<p>権限は、</p>
+<p>１．データベースに対する権限</p>
+<p>２．データベースの中の特定のテーブルに対する権限</p>
+<p>３．テーブルの中の特定のカラムに対する権限</p>
+<p>があります。</p>
+
+<h2>SQL文</h2>
+<p>以下はSQL文の例。</p>
+<h3>SELECT</h3>
+<p>SELECT（取り出し）：</p>
+<pre class="prettyprint lang-sql">
+SELECT recipe_name FROM recipes;
+SELECT recipe_name,budget FROM recipes;
+SELECT * FROM recipes;
+</pre>
+<h3>INSERT INTO</h3>
+<p>INSERT INTO（挿入）：</p>
+<pre class="prettyprint lang-sql">
+INSERT INTO recipes (recipe_name,budget,howto) VALUES ('野菜炒め',800,'野菜を炒める');
+</pre>
+<h3>UPDATE</h3>
+<p>UPDATE（更新）：</p>
+<pre class="prettyprint lang-sql">
+UPDATE recipes SET budget = 90, howto = '卵を焼く' WHERE id = 2;
+</pre>
+<h3>DELETE</h3>
+<p>DELETE（削除）：</p>
+<pre class="prettyprint lang-sql">
+DELETE FROM recipes WHERE id = 1;
+</pre>
+</blockquote>
+
+-->
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

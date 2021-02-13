@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>UNIXシステム管理８B（cron） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXシステム管理８B（cron）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観８B（cron）です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>cron</h2>
+<h2>cronデーモン</h2>
+<p>定期的に特定の処理を実行してくれる。決まった時間にコマンドを実行することが出来る。</p>
+
+<h2>サーバーのバックアップを勝手にやってほしいならcron</h2>
+<p>「サーバーマシンのバックアップやアーカイブの作成なんか、勝手にやってほしい」とか、「NFSに適当に定期的にコピーしてほしい、それもバックグラウンドで」とか、そういう、「バックグラウンドで定期的にやってほしい」というサーバー管理者の想いを叶えてくれるのがcronです。</p>
+<p>基本的には、定期的に実行する「スケジュール」と、やってほしい「処理」を書くだけです。処理にはシェルスクリプトを書くこともできます。</p>
+<p>特に、サーバー管理者のタスクとして、Apacheの設定やSSHでのリモートログインに匹敵する重要なタスクがcronです。ただ、書く処理を間違えると悲惨なことになるので、良く確認しましょう。</p>
+<p>バックアップをUNIXで行う時は、rsyncを使って全ファイルをフォルダごと同期するか、tarを使ってアーカイブを日ごとに作っていくか、どちらかを選択することが多いでしょう。古いアーカイブは自動的に消すようにしても良いでしょう。簡単に一行では書けないところもあるので、詳しくはネットで検索してその情報に頼ってください。</p>
+<p>自分でサーバーのWebアプリケーションを開発するのであれば、最初からMySQLなどで一元的にデータベースを管理することも、信頼性の確保に繋がります。ですが、レンタルサーバーのような場合、全ての顧客のデータをSQLで一元化することは難しいこともあります。cronでrsync/tarを行うのは、そういうニーズが根強いためです。SQLデータベースの使える環境では、最初からRDBMSを使いましょう。</p>
+<p>SQLデータベースを使う場合は、「差分のバックアップ」と「全体のバックアップ」を上手く管理する必要があります。それぞれのデータベース管理システムで、こうした機能は必ずあります。UNIXのファイルシステムには、そもそも、バージョンを管理する機能もありません。バージョンを管理したい時は、gitなどのバージョン管理システムでひとつひとつコミットするか、あるいはtarで毎日バックアップするしかありません。そういうわけで、cronには限界がありますが、使えないわけではありません。</p>
+<p>注意：UNIXでのバックアップとしてtarやrsyncが一般的であるかのようなことを書きましたが、FreeBSDハンドブックにもあるように、多くの場合UNIXで最も一般的なのはdumpとrestoreというコマンドで、/dev/sda1のようなブロック型のデバイスをいっぺんにバックアップ・復旧することができます。ですが、イメージファイルが巨大になる上に、イメージ単位でのバックアップになるため、ファイルシステムの一部だけをバックアップしたり、複数のファイルシステムにまたがるディレクトリツリーをバックアップすることができません。dumpとrestoreは、大事なデータのバックアップというよりも、システム全体の復旧をしたい時に有効です。通常、大事なデータのバックアップには、tar, rsync, cpioなどのコマンドを使います。ですが、システム管理者になりたいのであれば、dump, restore, ddなどのコマンドも覚えておくと良いでしょう。</p>
+<p>後日注記：そもそも、データベース管理システムを使う場面というのは、「億単位のデータから瞬時に検索する」場合のように、本当にデータの信頼性と性能が必要な場合だけです。多くの設定ファイルや個人データなどで、データベース管理システムを使うというのは考えられません。よって、そうしたデータはcronでバックアップを取りましょう。その代り、上手くやらなければ「たくさん圧縮ファイルが生まれて訳が分からない」ことになるので、古いデータは自動で削除するなどの処理をスクリプトに書いて、そのスクリプトをcronで実行するようにします。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-backup">【概要を一通り】Linuxのバックアップについてのまとめ - エンジニアの入り口</a></li>
+<li><a href="https://www.freebsd.org/doc/ja_JP.eucJP/books/handbook/backup-basics.html">15.9. バックアップの基本 - FreeBSD ハンドブック</a></li>
+</ul>
+
+<h2>rsyncとcron+tarで自動バックアップ</h2>
+<p>以下が参考になる。</p>
+<ul>
+<li><a href="http://arakanoj.com/tips/rsync-%E3%81%A7%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97.html">rsync でバックアップ | Linux実践講座</a></li>
+<li><a href="https://bacchi.me/linux/backup-by-cron/">Linuxで定期的にバックアップを取得する | bacchi.me</a></li>
+</ul>
+
+<h2>bcron, dcron, fcron, cronie</h2>
+<p>bcron, dcron, fcron, cronieはそれぞれ、cronデーモンを提供するパッケージ。</p>
+
+<h2>systemd timer</h2>
+<p>システムロガーと同様、長らくcronだった定期的な時間処理は、systemd timerを使ってやるようになった。</p>
+<p><a href="systemd.html">systemd</a>を参照のこと。</p>
+
+<h1>コマンド一覧</h1>
+<h2>システム</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>crontab</td>
+<td>ジョブの自動実行の設定を行う。</td>
+</tr>
+</table>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux シェル（Bash）１（シェル） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux シェル（Bash）１（シェル）</h1>
+<p>Linuxのシェル（Bash）に関する世界観１（シェル）です。<a href="linux_bash_script.html">Bash２（シェルスクリプト）</a>も参照のこと。</p>
+<p>以下のサイトを参考にして執筆しました。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>シェルの基本</h1>
+<h2>シェルとは</h2>
+<p>シェルは、ユーザーのライン入力を受け取って、任意のコマンドプログラムを実行するプログラム。ユーザーが思い通りにさまざまなコマンドのプログラムを実行できるようにした、人間であるユーザーと機械とのインターフェース。</p>
+<p>GNU/Linuxで一般的なBashには、コマンドやパスの補完、ヒストリ機能（一度実行したコマンドを履歴から探索できる）、マルチタスクの機能（&を使ったプログラムの非同期の実行やjobsコマンドなど）、コマンドの別名を作れるエイリアス、（厳密にはシェルではなくOSの機能だが）コマンドとコマンドを繋げるパイプの実行、シェルスクリプトの実行などの便利な機能が備わっている。ライバルはFreeBSDなどで一般的なcsh/tcsh（Cシェル系のシェル。シェルスクリプトなどの記法がC言語に近い）。</p>
+
+<h2>PATH</h2>
+<p>Bashなどのコマンドラインシェルは、基本的にユーザーの入力を受け取ってコマンドを実行するが、このコマンドは環境変数であるPATHのディレクトリの中から検索される。</p>
+<p>PATHに含まれていないコマンドや実行ファイルでも、/sbin/serviceのようにフルパスで指定するか、./configureのように相対パスで指定すれば実行できる。</p>
+<p>また、ユーザーのホームディレクトリを得るHOMEという環境変数もある。Bashでは、ホームディレクトリを~（チルダ）で表現し、ホームディレクトリの中にある.bashrcは~/.bashrcと記述してシェルからアクセスできる。</p>
+
+<h2>一般ユーザーとrootユーザーのシェル</h2>
+<p>シェルには、一般ユーザーのシェルとrootユーザーのシェルという二種類のシェルがある。慣習的に、コマンドの入力例などを記述する際に、一般ユーザーのシェルは$、rootユーザーのシェルは#を行頭につけて表現する。この$や#を入力する必要はない。</p>
+<p>UNIXでは、誤った操作によるシステムの破壊を防ぐために、通常はシステムの変更・破壊権限を持たない一般ユーザーとしてログインし、一般ユーザーのシェルを起動させて操作する。データはホームディレクトリのような場所に保存し、多くの操作は一般ユーザーで行う。</p>
+<p>だが、ソフトウェアパッケージのインストール・アンインストールや、システムの定期的な更新など、一部の操作はrootユーザーになった上で行う必要がある。</p>
+<p>この時は、su -コマンドを使うことで、rootユーザーのシェルを起動できる。</p>
+
+<h2>初期化スクリプト</h2>
+<p>特に、PATHの永続的な設定をしたい場合など、ログイン時に特定のコマンドを実行したい場合、起動スクリプトに記述することができる。</p>
+<p>たとえば、上のPATHの設定の例では、そのコマンドを実行した時にしかPATHが設定されず、シェルを終了してしまうと次回のシェルでまた手動で実行しないといけない。このような時に初期化スクリプトを使う。</p>
+<p>初期化スクリプトはホームディレクトリにある.bash_profile（ログイン時）と.bashrc（シェルの毎回起動時）などがある。</p>
+<p>だが、これはコマンドシェルとしてログインした場合であり、Xサーバーでグラフィカルなディスプレイマネージャ（GNOMEならGDMなど）でログインした時には実行されない。</p>
+<p>Xサーバーを実行した時にコマンドを実行したい場合は、.xsession（Xログイン時）や.xinitrc（startxコマンドでXサーバーを手動で起動する時）などにコマンドを記述する。.xinitrcは、たとえばtwmではなく独自のウィンドウマネージャを起動したい場合などにその起動コマンドを記述すると、startxを実行した時に自動でウィンドウマネージャを起動できて便利である。日本語入力のためのインプットエンジンの設定も.xinitrcに記述することが多い。（最近のiBusなどの新しい世代のインプットエンジンでは、.xinitrcを編集する必要はなく、GUIで設定できる。）</p>
+
+<h2>コマンドの強制終了とエラー</h2>
+<p>コマンドを実行している時に、途中で実行を中止し、強制終了したい時はCtrl+Cを実行する。</p>
+<p>また、プログラムを実行して、何も出力せずにプログラムが終了し、元のシェルの入力に戻った時は、コマンドは正常に処理を完了している。何かエラーを出した時（途中で不正終了した時）はエラーが表示される。</p>
+
+<h2>作業の終了</h2>
+<p>別のユーザーとしてログインしたい場合など、シェルそのものを終了させたい時はexitコマンドを実行する。また、システムを終了させたい時はshutdownコマンドを実行する。システムの終了は-h、再起動は-r。</p>
+<pre>
+# shutdown -h now
+</pre>
+
+<h2>Bashのソースコードを読もう</h2>
+<p>BashとReadlineのコードは以下から読める。</p>
+<ul>
+<li><a href="https://git.savannah.gnu.org/cgit/bash.git">bash.git - bash</a></li>
+<li><a href="https://git.savannah.gnu.org/cgit/readline.git">readline.git - The GNU Readline library</a></li>
+</ul>
+
+<h1>基本</h1>
+
+<h2>補完（Tabキー）</h2>
+<p>ファイルのパスを入力している時に、途中まで入力してTabキーを押すと、それ以降の入力（決まっているところまで）を自動補完してくれます。</p>
+<p>候補がたくさんある時はリスト表示されます。</p>
+<h2>ヒストリ（↑、↓）</h2>
+<p>↑キーと↓キーを押すことで、一度入力したことのあるコマンド行を再度表示し、再実行することが出来ます。</p>
+<p>ヒストリは.bash_historyに記録されます。</p>
+<p>ヒストリは、Ctrl+r（後方）とCtrl+s（前方）でインクリメンタルサーチをすることが出来ます。</p>
+<ul>
+<li><a href="https://tetokon.com/2013/01/21/bash-ctrl-r/">bashの履歴を検索するコマンドが捗りすぎてヤバい！俺の作業効率が２倍どころか更に倍してドンッ！ - でーじてとこん</a></li>
+</ul>
+
+<h2>エイリアス</h2>
+<p>コマンドに常にオプションを付けたい時は、エイリアスが使えます。</p>
+<pre>
+$ alias rm='rm -i'
+</pre>
+<p>aliasコマンドを引数を付けずに実行することで、定義済みのエイリアス一覧を見ることが出来ます。</p>
+<pre>
+$ alias
+</pre>
+
+<h1>シェルの記法</h1>
+<h2>複数行に渡るコマンド（\）</h2>
+<p>行末に\を付けることで、コマンドを複数行にわたって記述出来ます。</p>
+<h2>パイプとリダイレクト（| &lt; &gt; &gt;&gt;）</h2>
+<p>パイプは、プログラムが出力した内容を別のプログラムに入力として再度渡す機能。上手く使うことで、たくさんの処理をひとつのテキストデータ（ストリーム）に対して複数行うことができる。また、リダイレクトはストリームとファイル入出力を変換する機能。読み込み、書き込み、追記が存在する。</p>
+<p>言ってしまえば、オブジェクト指向の「.」と同じような考え方である。UNIXのコマンドは、多くがこのパイプによって使われることを意図して設計されている。</p>
+
+<h3>リダイレクト</h3>
+<p>リダイレクトは、&lt;は読み込み、&gt;は書き込み、&gt;&gt;は追記です。</p>
+<p>リダイレクトの例１：</p>
+<pre>
+$ echo hello &gt; test_hello.txt
+$ echo hello2 &gt;&gt; test_hello.txt
+$ cat test_hello.txt
+hello
+hello2
+</pre>
+<p>リダイレクトの例２：</p>
+<pre>
+$ patch -u &lt; test.patch
+</pre>
+<p>その他にも、既にファイルが存在しても書く場合、エラー出力も取る場合などがあり、またCシェルとBシェルでも違う。以下のようなページを参照のこと。</p>
+<p>普通のリダイレクトでは、標準出力しかリダイレクトされず、標準エラー出力は無視される。標準エラー出力もリダイレクトしたい場合は「&amp;&gt; all.txt」などとする。また、標準出力を1&gt;、標準エラー出力を2&gt;と分けて使うこともできる。（Windowsのコマンドプロンプトも同様に1&gt;と2&gt;で標準出力と標準エラー出力を区別できる。）</p>
+<ul>
+<li><a href="http://www.rsch.tuis.ac.jp/~ohmi/literacy/stdio.html">UNIXの標準入出力とリダイレクション - コンピュータリテラシー演習</a></li>
+<li><a href="https://qiita.com/kite_999/items/05eef645dd6274610509">UNIXのリダイレクトについてのまとめ - Qiita</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1603/24/news018.html">パイプとリダイレクトでコマンドを組み合わせて実行しよう (1/4)：“応用力”をつけるためのLinux再入門（6） - ＠IT</a></li>
+</ul>
+
+<h3>標準エラー出力を除外</h3>
+<p>標準エラー出力を除外したい場合は、「2&gt; /dev/null」のようにリダイレクトする。このようにした場合、標準エラー出力はどこにも表示されず、保存もされない。</p>
+
+<h3>パイプ</h3>
+<p>パイプを使うことで、あるコマンドの結果を別のコマンドに渡すことができる。</p>
+<pre>
+$ find / | grep 2018
+</pre>
+<p>標準エラー出力も合わせてパイプに渡したい場合は、「|& more」などとする。
+
+<h2>コマンドの同時実行（; && ||）</h2>
+<p>;を使うことで、複数のコマンドを同時に実行出来ます。また、&&や||を使うことで、コマンドが正常に終了した場合、異常に終了した場合に次のコマンドを実行出来ます。</p>
+
+<h2>チルダ展開 (~)</h2>
+<p>チルダ（~）はホームディレクトリを指す。</p>
+<pre>
+cd ~
+</pre>
+<p>「cd ~」とすることでホームディレクトリに移動できるほか、ホームディレクトリ内のディレクトリやファイルを「vi ~/.emacs」などと表すことができる。
+
+<h2>変数展開 ($)</h2>
+<p>変数を使うことで、シェルスクリプトなどが綺麗に書けることがある。</p>
+<pre>
+$変数名
+</pre>
+<p>または</p>
+<pre>
+${変数名}
+</pre>
+<p>のように使う。</p>
+<h2>コマンド置換 (``)</h2>
+<p>コマンド名をそのコマンドを実行した出力で置き換えられる。</p>
+<pre>
+$(コマンド)
+</pre>
+<p>または</p>
+<pre>
+`コマンド`
+</pre>
+<p>のように使う。</p>
+<ul>
+<li><a href="https://qiita.com/yamikoo@github/items/5643644613f51f7a30a7">bash コマンド置換 - Qiita</a></li>
+</ul>
+
+<h1>シェル変数と環境変数</h1>
+<h2>シェル変数とset</h2>
+<p>シェル変数の一覧を見るためには、setコマンドを使う。</p>
+<pre>
+$ set
+BASH=/bin/bash
+～略～
+</pre>
+<p>シェル変数の設定は以下のように行う。</p>
+<pre>
+$ HOGE=hoge
+</pre>
+
+<h2>環境変数とenv/export</h2>
+<p>環境変数の一覧を見るためには、envコマンドを使う。</p>
+<pre>
+$ env
+PWD=/home
+～略～
+</pre>
+<p>環境変数を設定するためには、一度シェル変数を設定して、exportする。</p>
+<pre>
+$ env | grep HOGE
+$ HOGE=hoge
+$ export HOGE
+$ env | grep HOGE
+HOGE=hoge
+</pre>
+<p>シェル変数は、シェルから起動したプロセスに値が引き継がれない。シェル変数はシェル固有の値を、環境変数は言語などグローバルな値を持たせる。</p>
+
+<h2>sourceコマンド</h2>
+<p>sourceコマンドは、ファイルに書かれたコマンドを現在のシェルで実行する。シェルの設定を反映させるために使う。</p>
+<pre>
+source .bashrc
+</pre>
+
+<h1>ジョブ制御</h1>
+<h2>フォアグラウンドで実行</h2>
+<p>コマンドをフォアグラウンドで実行する時は、単にコマンドを実行します。</p>
+<h2>バックグラウンドで実行（&）</h2>
+<p>コマンドの最後に&を付けると、バックグランドで並列的にコマンドを実行出来ます。</p>
+<pre>
+$ cp /home/hoge/test1 /home/hoge/test2 &
+</pre>
+<p>&をつけたバックグラウンド実行はとても良く使うので覚えておきましょう。特に、GUIアプリケーションをコマンドラインから実行したりする時に良く使います。サーバーデーモンも&と同じ仕組みで動いています。</p>
+<p>基本的に、コマンドをマルチタスクで実行したい時は、なんでもコマンド行の最後に&をつければ並列で実行される。特にXのターミナルからGUIアプリケーションを実行する時、&をつけずに実行すると、ターミナルエミュレータのウィンドウを閉じた時にGUIアプリケーションも一緒に終了してしまう。必ず「firefox &」のように最後に&をつけて並列で実行させるようにしよう。</p>
+
+<h2>ジョブ制御のコマンド一覧</h2>
+<table class="some_tables">
+<tr><th>コマンド</th><th>説明</th></tr>
+<tr><td>Ctrl+z</td><td>コマンドの一時停止。</td></tr>
+<tr><td>Ctrl+c</td><td>フォアグランドで実行中のプロセスを強制終了する。</td></tr>
+<tr><td>jobs</td><td>一時停止中・バックグラウンドで実行中のコマンドの一覧。</td></tr>
+<tr><td>bg</td><td>一時停止中のコマンドをバックグラウンドに移す。</td></tr>
+<tr><td>fg</td><td>一時停止中・バックグラウンドで実行中のコマンドをフォアグラウンドに持ってくる。</td></tr>
+<tr><td>ps</td><td>実行中のプロセス一覧。</td></tr>
+<tr><td>kill</td><td>バックグラウンドで実行中のプロセスを強制終了する。</td></tr>
+</table>
+
+
+<h1>シェルスクリプト</h1>
+<p><a href="linux_bash_script.html">Bash２（シェルスクリプト）</a>を参照のこと。</p>
+
+
+
+<h1>初期化スクリプト</h1>
+<h2>~/.bash_profile</h2>
+<p>ログインシェルとして起動したときに実行される。</p>
+<h2>~/.bashrc</h2>
+<p>対話的に起動したときに実行される。</p>
+<h2>~/.bash_logout</h2>
+<p>ログアウトのときに実行される。</p>
+
+<h1>コマンドライン入力</h1>
+<h2>Readline</h2>
+<p>Readlineは、Bashで使われているコマンドライン入力用のライブラリ。さまざまなショートカットがあり、履歴の管理やコマンド行補完などもReadlineによって行われている。</p>
+<p>NetBSDのeditlineというライブラリもある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_Readline">GNU Readline - Wikipedia</a></li>
+</ul>
+
+
+<h1>GUIから操作する</h1>
+<h2>端末エミュレータ</h2>
+<p>GNOME端末やKonsoleを使うことで、GUIから端末エミュレータとしてシェルを実行出来ます。</p>
+
+<h1>コマンド一覧</h1>
+<h2>フィルタ・テキスト処理</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>basename</td>
+<td>パス名の中からファイル名を取り出す。findなどから解析できる。</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>ファイルやストリームの内容を全部表示する。</td>
+</tr>
+<tr>
+<td>cut</td>
+<td>テキストの文字列を切り出す。</td>
+</tr>
+<tr>
+<td>echo</td>
+<td>文字列（テキスト）や変数の値を表示する。シェルスクリプトなどでprintfの代わりに使える。</td>
+</tr>
+<tr>
+<td>head</td>
+<td>ファイルやテキストの先頭部分を表示する。パイプで使うことが多い。</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>ファイルやテキストの末尾を表示する。パイプで使うことが多い。</td>
+</tr>
+<tr>
+<td>wc</td>
+<td>ファイルやテキストの文字数・行数をカウントする。パイプで使うことが多い。</td>
+</tr>
+</table>
+
+<h2>ページャ</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>less</td>
+<td>ファイルやテキストの内容を１画面に表示する（２）。とても良く使う便利なコマンド。</td>
+</tr>
+<tr>
+<td>more</td>
+<td>ファイルやテキストの内容を１画面に表示する（１）。便利だが逆戻りが出来ないためlessを使うことが多い。</td>
+</tr>
+</table>
+
+<h2>シェル</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>alias</td>
+<td>コマンドの別名を登録する。rmについて確認表示をデフォルトに登録したりできる。</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>カレントディレクトリ（現在のシェルのディレクトリ）を変更する。</td>
+</tr>
+<tr>
+<td>clear</td>
+<td>画面をクリアする。</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>ログアウトする。</td>
+</tr>
+<tr>
+<td>history</td>
+<td>コマンドの履歴を表示する。</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>カレントディレクトリを表示する。</td>
+</tr>
+<tr>
+<td>unalias</td>
+<td>コマンドの別名を解除する。</td>
+</tr>
+<tr>
+<td>which</td>
+<td>コマンドのパスを表示する。</td>
+</tr>
+</table>
+
+<h2>プロセス</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>jobs</td>
+<td>バックグラウンドジョブを表示する。</td>
+</tr>
+<tr>
+<td>kill</td>
+<td>プロセスやジョブを強制終了する（シグナルを送る）。</td>
+</tr>
+<tr>
+<td>nohup</td>
+<td>ログアウト後もプログラムを実行する。</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>実行中のプロセスを表示する。</td>
+</tr>
+<tr>
+<td>sleep</td>
+<td>一定時間スリープする（一時停止）。</td>
+</tr>
+</table>
+
+<h1>リンク集全般</h1>
+
+<h2>Bash</h2>
+<p>Linuxの標準的なシェル。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_bash/man1/bash.1.html">Man page of BASH</a></li>
+</ul>
+<h2>zsh</h2>
+<p>「究極のシェル」と呼ばれる、超高機能なシェル。</p>
+<ul>
+<li><a href="http://gihyo.jp/dev/serial/01/zsh-book">zshで究極のオペレーションを - gihyo.jp</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Debian３（Deb/Dpkg） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Debian３（Deb/Dpkg）</h1>
+<p>Debianに関する世界観３（Deb/Dpkg）です。<a href="debian.html">Debian GNU/Linux</a>や<a href="debian_apt.html">Apt</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Dpkg</h1>
+<h2>Dpkg</h2>
+<p>Debianのパッケージ管理システム。低レベルなDebパッケージのインストール管理を行う。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/sect.manipulating-packages-with-dpkg.html">5.4. dpkg を用いたパッケージの操作 - Debian</a></li>
+</ul>
+<p>たくさんのコマンドがあるので、<a href="https://eng-entrance.com/linux-package-dpkg">debファイルを扱うdpkgコマンドの使い方を簡単解説 - エンジニアの入り口</a>を参照のこと。</p>
+
+<h2>Debパッケージとcontrolファイル</h2>
+<p>controlファイルはRPMで言うspecファイルに相当する。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/sect.package-meta-information.html">5.2. パッケージのメタ情報 - Debian</a></li>
+</ul>
+
+<h2>ソースパッケージ</h2>
+<p>.dsc、.orig.tar.gz、.debian.tar.gz (または .diff.gz) の3つのファイルで構成される。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/sect.source-package-structure.html">5.3. ソースパッケージの構造 - Debian</a></li>
+</ul>
+
+<h2>配布ファイル一覧</h2>
+<p>Debian公式はちょっと分からないが、<a href="https://pureos.net/">PureOS</a>（GNU推奨のディストリビューション）のようなDebian派生ディストリビューションの<a href="http://repo.pureos.net/pureos/pool/main/">リポジトリ</a>では、</p>
+<p>(1) .dscファイル</p>
+<p>(2) .orig.tar.gzファイル（オリジナルのtarball）</p>
+<p>(3) .debian.tar.xzファイル（あるいはdiffか）</p>
+<p>(4) バイナリのamd64.debファイル</p>
+<p>(5) バイナリのarm64.debファイル</p>
+<p>(6) PGP署名
+<p>などがリポジトリで配布されている。</p>
+<p>サードパーティが再配布をしているのは、Windowsから見ると無駄に思えるかもしれないが、ディストリビューションとして簡単にインストールできる形で配布されていて、最初から利用可能なのは結構嬉しい。Windowsでも同じようにオープンソースでパッケージを再配布してほしいぐらいだ。（Windowsのフリーソフトは、ダウンロードやインストールの過程で地雷を踏むのが怖い。）</p>
+<p>Debianのパッケージはコマンド一つで簡単に最新版にアップデートできるが、これは結構怖い（いつ動かなくなるか分からない）ので注意が必要。特にDebianはstableではなくtestingやsidを使っている人が結構多いので、そういう場合はメインOSとして使う以外に遊び・実験用としてもう一つOSを入れることをおすすめする。（Debianの場合はまだマシである。メインマシンでUbuntuやFedoraなんか使っていると、もうありえないだけである。）</p>
+
+<h2>debパッケージを自分で作る方法</h2>
+<p>以下のリンクが参考になる。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-package-deb-create">debパッケージ作成方法をステップバイステップでまとめました - エンジニアの入り口</a></li>
+</ul>
+
+
+<h1>debconf</h1>
+<h2>debconf</h2>
+<p>Debパッケージの設定をしてくれるツール。</p>
+<p>debdonfはDebianでパッケージの設定をするツール。パッケージ管理システムに統合されている。全てのパッケージで、最初の設定をdebconfで行う。</p>
+<p>ncursesのCUIの形式の他、GTK+のインターフェースも存在する。</p>
+<p>インストールした後で、もう一度設定をやり直したい場合は、</p>
+<pre>
+dpkg-reconfigure package_name
+</pre>
+<p>と実行する。</p>
+
+
+<h1>リンク集全般</h1>
+<h2>DEBパッケージの作成・パッケージ管理システム</h2>
+<ul>
+<li><a href="https://osdn.jp/magazine/14/01/17/090000">独自のDebパッケージやaptリポジトリを作ってみよう - OSDN</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

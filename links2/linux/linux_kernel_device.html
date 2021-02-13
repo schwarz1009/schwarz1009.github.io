@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux カーネル開発（デバイス） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（デバイス）</h1>
+<p>Linuxのカーネルの開発に関する世界観（デバイス）です。<a href="linux_kernel.html">Linuxカーネル</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>デバイスドライバ</h1>
+<h2>デバイスドライバ</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>実際のところ、カーネルはデバイスコントローラの詳細をデバイスドライバという小さなソフトウェアモジュールによって知っている。</p>
+<p>カーネルにおいて、実際のデバイスの詳細を知っているのは、デバイスドライバだけである。</p>
+<p>デバイスには、キャラクタ型デバイスとブロック型デバイスがある。</p>
+<p>キャラクタ型デバイスは、その時その時の状況を、バイト列（文字列）によって知らせるようなデバイスであり、システムコールのストリームを通じて操作できる。</p>
+<p>ブロック型デバイスは、内部にファイルシステムが存在するデバイスであり、ファイル処理APIを通じてアクセスする。</p>
+<p>キャラクタ型デバイスは、ランダムアクセス（好きな時に好きな場所のデータを知ること）ができないが、ブロック型デバイスは、ランダムアクセスができる。</p>
+
+<h2>BIOS</h2>
+<p>BIOSは、起動時に最初に実行されてブートローダを読み込むだけではなく、接続された機器のI/Oを直接操作し、その操作の方法を共通したインターフェースを通じてOSが行うための基本的なI/O操作方式を提供する。</p>
+<p>現代的なOSでは、こうしたI/Oの共通インターフェースの提供はデバイスドライバを通じて行うことが多く、BIOSによるI/O操作はあまり行われなくなっている。</p>
+
+<h2>デバイスドライバ</h3>
+<p>デバイスドライバは、この世界にあまたあるハードウェアデバイスそれぞれを共有のインターフェースで操作する仕組みで、デバイスドライバが用意されていないハードウェアについてはOSは操作することができない。Linuxカーネルの大部分のコードはデバイスドライバに充てられている。Linuxはプリンターなど一部のデバイスについては今でもドライバが十分ではなく、プリンターについては「ドライバレス」と呼ばれる新しい仕組みも開発されている。</p>
+<p>最近はLinuxカーネルもX11もモジュールを自動でロードするので、自分でデバイスドライバを導入したり設定したりすることは少なくなっている。組み込みシステム向けにLinuxカーネルを使う場合などは、カーネルを手動コンパイルすることで、必要のないモジュールを全て消去できる。また、リアルタイム向けのパッチを当てることで、プリエンティブルなRTOSの機能（要求が起きてからタスクを実行する時間を最短にする）を実現できる。特に自動車などLinux+Pythonの環境を組み込みでも使いたい場合など（人工知能を乗せるなど）の時は、PC向けの要らない機能（デバイスドライバだけではなくファイルシステムなど）は全部消去させることができる。</p>
+<ul>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers">linux.git - drivers</a></li>
+<li><a href="https://qiita.com/take-iwiw/items/1fdd2e0faaaa868a2db2">組み込みLinuxデバイスドライバの作り方 (1) - Qiita</a></li>
+</ul>
+
+<h2>ブロック型デバイスとキャラクタ型デバイス</h2>
+<p>デバイスドライバには、大きく分けてブロック型デバイスとキャラクタ型デバイスがある。</p>
+<p>基本的に、ブロック型デバイスというのは、ハードディスクやCD-ROMのような「データ」を扱うためのもので、キャラクタ型デバイスというのは、モデムやプリンタやキーボードやマウスといった「やり取り」を行うためのもの。</p>
+<p>ブロック型とキャラクタ型の違いは、「好きな時に好きなところにアクセスできるかどうか」。</p>
+<ul>
+<li><a href="http://www.ace.ec.saga-u.ac.jp/members/master/kenji/Syuron_htm/node35.html">デバイスドライバの種類と使い方 - インターネットを援用した 遠隔操作可能な動画・計測データ配信システムの構築に関する研究（倉垣 健治）</a></li>
+</ul>
+
+<h2>デバイスドライバの開発</h2>
+<p>以下のサイトが参考になります。</p>
+<ul>
+<li><a href="http://linux-dvr.biz/">Linuxデバイスドライバ開発入門</a></li>
+</ul>
+
+
+<h1>関連ページ</h1>
+<h2>デバイスファイル</h2>
+<p>/devディレクトリにあるデバイスファイルは、<a href="linux_devicefile.html">Linux デバイスファイル</a>を参照のこと。</p>
+
+<h2>ドライバのロード</h2>
+<p>ドライバ（カーネルモジュール）のロードについては、<a href="linux_kernel_src.html">Linuxカーネル（ソースコード）</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

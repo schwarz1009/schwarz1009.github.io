@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>メモリの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">ハードウェアの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/hardware_menu.html" class="sideiframe"></iframe>
+</div><h1>メモリの世界観</h1>
+<p>メモリの世界観です。<a href="hardware.html">ハードウェア１（半導体）</a>や<a href="../prog_lang/assembly.html">アセンブリ言語</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>半導体メモリ（主記憶装置）</h1>
+<h2>メモリの特徴</h2>
+<p>メモリの特徴は、</p>
+<p>・メモリの中の記憶情報の格納場所（番地・住所）を指すメモリアドレスを指定して読み書きする。x86のアセンブリ言語ではmov [XX]を使う。</p>
+<p>・CPUの計算に使われるレジスタより低速。</p>
+<p>・電源を消しても内容を保持できるハードディスクなどの磁気ディスクより高速。</p>
+<p>メモリは基本的に、0と1を記録しておくデバイス。この0と1のひとつひとつにアドレスがふられ、アドレスから値を見ることができる。</p>
+
+<h1>メモリの種類</h1>
+<h2>RAMとROM</h2>
+<p>RAMはデータの読み書きが出来るメモリ。反対に読み込みしかできないメモリをROMという。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E4%B8%BB%E8%A8%98%E6%86%B6%E8%A3%85%E7%BD%AE">主記憶装置 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Random_Access_Memory">Random Access Memory - Wikipedia</a></li>
+</ul>
+<h2>DRAM（主メモリ）</h2>
+<p>主記憶装置に用いられる。安価で容量が大きい一方、SRAMと比較すると低速。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Dynamic_Random_Access_Memory">Dynamic Random Access Memory - Wikipedia</a></li>
+</ul>
+<h2>SRAM（キャッシュメモリ）</h2>
+<p>キャッシュメモリに用いられる。主メモリよりもさらに高速。</p>
+<p>キャッシュメモリは低容量で高価格だがスピードが高速なため、一度アクセスしたデータに何度も繰り返し頻繁にアクセスするための「キャッシュ」として用いられる。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Static_Random_Access_Memory">Static Random Access Memory - Wikipedia</a></li>
+</ul>
+
+<h1>キャッシュメモリ</h1>
+<h2>キャッシュメモリ</h2>
+<p>キャッシュとして高速なメモリを使う方式をキャッシュメモリという。</p>
+<p>キャッシュメモリについては以下を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%83%A1%E3%83%A2%E3%83%AA">キャッシュメモリ - Wikipedia</a></li>
+</ul>
+
+<h2>キャッシュメモリの方式</h2>
+<p>キャッシュメモリのデータ更新方式には、ライトスルー方式とライトバック方式がある。ライトスルーでは、キャッシュに書かれたデータを同時にメモリに転送する。ライトバックでは、すぐには転送せず、条件を満たした場合にのみ書き込まれる。スループレットはよくなるが、コヒーレンシが保たれないことがある。</p>
+<p>キャッシュメモリの割り当てには、最初に見つかった空き領域に配置するファーストヒット方式と、見つかったもののうちベストフィット（要求された大きさを満たす最小サイズの領域、すなわち、ちょうどいい大きさの領域）のものを選ぶベストフィット方式がある。</p>
+
+<h2>キャッシュ</h2>
+<p>キャッシュとは「隠し場所・貯蔵庫」の意味で、よく使うデータをキャッシュに置き、素早く利用するために使う。</p>
+<p>データがハードディスク上にあるよりも、メモリ上にあった方が圧倒的に速いため、よく使うデータをメモリ上に置き、そこからアクセスし、必要になった段階でハードディスクに読み書きするようなキャッシュの実装が考えられる。</p>
+
+<h2>メモリインタリーブ</h2>
+<p>メモリインタリーブは、メモリを複数のメモリバンクに分割し、複数のメモリバンクに同時にアクセスすることで効率的にメモリにアクセスする仕組み。</p>
+
+
+
+
+
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

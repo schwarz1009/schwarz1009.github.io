@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>RDBMS関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>RDBMSの世界観</h1>
+<p>RDBMSに関する世界観です。<a href="db.html">データベースの世界観</a>と<a href="mysql.html">MySQLの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>B-Tree</h2>
+<h2>B-Treeインデックスの構造</h2>
+<p>B-Treeインデックスの構造については以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/suzukito/items/908a3523f4b90dd77c6a">B-Treeインデックスの話 - Qiita</a></li>
+</ul>
+
+<h2>二分探索の基本</h2>
+<p>単語を検索する時に、すべて総当たりで検索するのは時間がかかる。</p>
+<p>このような時、二分木構造を用いた二分探索を行うことで、少ない手順で目的の単語に到達できる。</p>
+<p>二分探索では、より小さいものを左、より大きいものを右の子要素とする二分木を使う。全ての単語をこの規則にしたがって並べることで、最短で単語を検索できる。</p>
+<p>AVL木は、木の高さが深くなりすぎないように、中心を回転させる平衡木のこと。</p>
+
+<h2>B-Treeの基本</h2>
+<p>B-Treeは二分探索のAVL木に比べて少し複雑です。基本的にルートノードから、子ノードのポインタに従ってリーフノードを探します。以下を参照してください。</p>
+<ul>
+<li><a href="https://qiita.com/kiyodori/items/f66a545a47dc59dd8839">B-treeインデックス入門</a></li>
+</ul>
+
+<h1>オープンソースのデータベースサーバ</h1>
+<h2>それぞれのDBMSの比較</h2>
+<p>OSSデータベースのPostgreSQLとMySQLを比べると、PostgreSQLの方が機能は多いが、MySQLは軽量かつ性能が良い。</p>
+<p>また、Oracle Databaseは最大のシェアを誇り、情報も圧倒的に豊富。IBM DB2は着実にシェアを伸ばし存在感を高めている。SQL ServerはWindowsプラットフォームに特化し、Oracleに次ぐシェアを持つ。HiRDBは日立による国産DBMS。</p>
+<p>（<a href="http://db-study.com/archives/24">たくさんあるDBMS ｜ PostgreSQLではじめるDB入門</a>を参考に執筆しました。）</p>
+
+<h2>MySQL</h2>
+<p>オープンソースのSQLサーバ。事実上の標準。<a href="mysql.html">MySQL</a>を参照のこと。</p>
+
+<h2>PostgreSQL</h2>
+<p>オープンソースのSQLサーバ。MySQLのライバル。<a href="postgresql.html">PostgreSQL</a>を参照のこと。</p>
+
+<h2>SQLite</h2>
+<p>サーバではなくアプリケーションに埋め込んで利用出来るSQLデータベース。</p>
+<p>組み込みやスマホアプリなど比較的規模の小さいアプリケーションで使用され、データベースは1ファイルに格納される。</p>
+<p>（<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>を参考に執筆しました。）</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/SQLite">SQLite - Wikipedia</a></li>
+</ul>
+
+<h2>Berkeley DB</h2>
+<p>アプリケーション埋め込みのデータベースライブラリ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Berkeley DB">Berkeley DB - Wikipedia</a></li>
+</ul>
+
+<h2>Firebird</h2>
+<p>InterBaseから派生したオープンソースの関係データベース管理システム。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Firebird">Firebird - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/FirebirdSQL/firebird">git</a></li>
+</ul>
+
+<h2>LibreOffice Base</h2>
+<p>デスクトップデータベースのフロントエンド。Microsoft Accessに相当する。<a href="../linux/libreoffice.html">LibreOffice</a>を参照のこと。</p>
+
+
+<h1>NoSQLデータベース</h1>
+<!--
+<p><a href="nosql.html">NoSQL</a>を参照のこと。</p>
+-->
+<h2>MongoDB</h2>
+<p><a href="mongodb.html">MongoDB</a>を参照のこと。</p>
+
+<h2>Redis</h2>
+<p><a href="redis.html">Redis</a>を参照のこと。</p>
+
+<h1>商用のデータベースサーバ</h1>
+<h2>Microsoft SQL Server</h2>
+<p>MicrosoftによるSQLサーバ。C#/VB.NETやASP.NET/ADO.NETとともに利用する。</p>
+
+<h2>Microsoft Access</h2>
+<p>MicrosoftによるSQLサーバで、MS-Officeの上位版に同梱されている。</p>
+
+<h2>Oracle DB</h2>
+<p>Oracleによるとても高額なデータベースサーバ。<a href="oracle.html">Oracle</a>を参照のこと。</p>
+
+<h2>InterBase</h2>
+<p>Delphiの開発元であるエンバカデロ社によるデータベース製品。</p>
+
+<h2>IBM Db2 (DB2)</h2>
+<p>IBMによるデータベース管理システム。IBMのメインフレーム用の関係データベース用のミドルウェアである。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IBM_Db2">IBM Db2 - Wikipedia</a></li>
+</ul>
+
+
+<h1>データベース接続クライアント</h1>
+<h2>DBeaver</h2>
+<p>汎用性の高いデータベース接続クライアント。</p>
+<ul>
+<li><a href="https://linuxappdata.com/software/45/">DBeaver - Linux App Data</a></li>
+</ul>
+
+<h1>独自データベース</h1>
+<h2>データベースを独自に実装する</h2>
+<p>データベース管理システムは、既存のMySQLやPostgreSQLを使わなくても、独自に実装する場合もあります。</p>
+<p>たとえば、リレーショナルデータベースをデータモデルとしない場合。自社でデータセンターを運用したり、あるいはシステムの構成上別のデータモデルを使用したい場合などに、独自のデータベース管理システムを作ることができます。</p>
+<p>また、スケーラビリティが必要な場合。モバイルやゲームなどで小さな環境で動くデータベースが欲しいとか、あるいはクラスタやスーパーコンピュータなどで並列性を高めて性能や信頼性に妥協しないデータベースを作りたい場合など、独自のエンジンを作ってデータベース管理システムを設計します。</p>
+<p>ほかにも、プラットフォームやシステム構成が特殊だったり制限されていたりする場合や、セキュリティやネットワークなどで独自の機能が欲しい場合などにも、データベースを特殊に設計することができます。</p>
+<p>また、そもそもデータベースを使う用途が特殊である場合もあります。</p>
+<p>たとえば、バージョン管理システムなどは、たくさんの新しいファイルが常にコミットされ、古いデータはアーカイブに格納します。この時、新規のファイルと過去のアーカイブの管理の方法を分けることで、処理を高速化できます。たくさんのテキストファイルの差分を扱う上で、テキスト処理を何度も繰り返すことも多く、リレーショナルモデルが適切でない場合もあります。</p>
+<p>また、P2Pのネットワーク通信アプリなどでは、どのネットワークノードがファイルの断片を持っているかを適切に判断しなければなりません。匿名性を高めるためにネットワークセキュリティの機能も必要です。このような場合にも、特殊なデータベースが設計できるかもしれません。</p>
+<p>また、Oracleなどの商用データベースを使うよりもコストが安くついて制限もないとか、あるいは自社の別の既存技術を再利用できるといった利点もあります。</p>
+<p>こうしたデータベースのバックエンドを作る上で必要となるのは、アルゴリズムの知識です。特に、B-Treeのようなインデックスや検索のアルゴリズムが必要となります。また、トランザクションやロールバック、排他制御のような「きちんと信頼できるデータベース」を作るためには、人並み外れた経験が必要です。簡単にはいかないでしょう。</p>
+<p>後日注記：僕は基本的にデータベースについて何も分かっていないので、これ以外にも多くの理由があるだろう。たとえば、冗長性（データを二重にコピーして破損に備える）やフェイルオーバ（ひとつのサーバがダウンしても別のサーバが代わりを務める）を高めるなどといった理由で独自のデータベースを設計する場合もあるだろう。</p>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

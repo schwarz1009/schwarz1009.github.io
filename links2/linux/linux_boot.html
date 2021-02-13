@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux ブート - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ブート</h1>
+<p>Linuxのブートに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>起動</h1>
+<h2>Linuxの起動の流れ</h2>
+<p>Linuxでは、カーネルイメージやブートローダは/bootというブート用のディレクトリに置かれている。</p>
+<p>起動を確実にするために、/bootをジャーナリングのないext2ファイルシステムでフォーマットすることもある。/bootの中にカーネルイメージとブートローダを配置する。</p>
+<p>ブートローダとは、OSの起動を行うためにBIOSから実行されるソフトウェア。Linuxではgrubを用いることが多い。</p>
+<p>BIOSは、BIOSの設定で、ハードディスク、CD/DVDドライブ、フロッピーディスクなどの起動の優先順位が決まっている。多くの場合、ハードディスクよりもCD/DVDの方が優先されているため、CD/DVDにディスクが入っていて、そのディスクから起動できる場合にはディスクから起動する。これは、Linuxのインストールメディアから起動したい場合などに用いられる。CD/DVDから起動しない場合は、BIOSの設定を変更する。フロッピーディスクやCD/DVDにメディアが入っていない場合は、BIOSはハードディスクから起動しようとする。</p>
+
+<h2>MBRとGPT</h2>
+<p>Linuxをインストールするために、パーティショニングを行っていない生のディスクを使うことは可能だが、現在それは現実的ではなく、現在の主流のパーティショニング技術にはMBRとGPTがある。</p>
+<p>MBRの場合、MBRにインストールされたブートローダgrubが起動される。</p>
+<p>基本的にBIOSではなくEFI/UEFIで制御するシステムにおいて、従来のMBR以外にGPTと呼ばれるパーティション管理が行えるようになった。（BIOSベースのシステムでGPTを使うこともある。）</p>
+
+<h2>grub</h2>
+<p>grubはLinuxを起動するだけではなく、Windowsの起動もできる。</p>
+<p>grubは/boot/grub/grub.cfgの設定に従ってOSを起動する選択肢を表示し、起動時に起動したいOSを選択できる。</p>
+<p>現在はgrubは/etc/default/grubや/etc/grub.d以下のスクリプトに従って、/boot/grub/grub.cfgを自動作成する。この時、システムに存在するOSの一覧を検出するため、特に何もしなくても、Windowsや別にインストールされているLinuxを検出して、メニューを表示する。</p>
+
+<h2>BIOSブートパーティション</h2>
+<p>BIOSブートパーティションはとても小さな1-2MBのパーティション。grubなどのブートローダが、与えられた領域に収まらず、他の場所に置くこともできないようなデータを置く。</p>
+<p>常に必要ではないが、ディスク使用量も大したことでないため、作ることが推奨されている。</p>
+
+<h1>ブートローダー（GRUB）</h1>
+
+<h2>grubの基本</h2>
+<p>Linuxカーネルのイメージファイルは、通常/bootパーティションに置かれる。</p>
+<p>コンピュータの起動時に、BIOSからブートローダーの（Linuxでは主に）GRUBが実行され、GRUBによって/bootにあるLinuxのカーネルイメージが実行される。その上でSysV initあるいはsystemdにより、サービスが起動される。</p>
+<h2>grubのインストール</h2>
+<p>一度Linuxをインストールしたらめったに再インストールする必要はないが、GRUBをMBRに再インストールするためには以下を実行する。</p>
+<pre>
+# grub2-install /dev/sda
+</pre>
+<p>必要に応じて/dev/sdaを変えること。</p>
+<h2>grubの設定</h2>
+<p>GRUB 2の新しい仕様として、GRUBのメニューファイル/boot/grub/grub.cfgはgrub-mkconfigコマンドによって自動作成されるようになった。よって、このファイルを手動で設定してはならない。設定すべきファイルは/etc/default/grubに存在するので、それを編集する。</p>
+<p>編集したら、以下を実行して設定ファイルを再作成する。</p>
+<pre>
+# grub2-mkconfig -o /boot/grub/grub.cfg
+</pre>
+<p>/boot/grub/grub.cfgは環境によって/boot/grub2/grub.cfgになる場合があります。</p>
+
+<h2>grubのシェル</h2>
+<p>GRUBは簡単なインタラクティブ・シェルを内蔵していて、起動しなくなった場合でもコマンドによって復旧することができる。</p>
+<p>起動時のメニュー画面で「c」を実行すると、</p>
+<pre>
+grub&gt;
+</pre>
+<p>というシェルの入力モードになる。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

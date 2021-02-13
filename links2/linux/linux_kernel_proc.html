@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux カーネル開発（プロセス管理） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（プロセス管理）</h1>
+<p>Linuxのカーネルの開発に関する世界観（プロセス管理）です。<a href="linux_kernel.html">Linuxカーネル</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>マルチタスクの仕組み</h1>
+<h2>LinuxはマルチタスクのOS</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>まず、LinuxカーネルはマルチタスクなOSのカーネルである。</p>
+<p>マルチタスクとは、「複数のプログラムを同時に並列実行できる」ということ。</p>
+
+<h2>プロセスとスレッド</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>ここで、プログラムにはプロセスとスレッドがあることが重要である。</p>
+<p>プロセスは、それぞれに個別の独立したメモリ領域が与えられる。</p>
+<p>それに対して、スレッドはプロセスの中に存在する並列処理であり、同じメモリ領域を参照することができる。</p>
+<p>このため、マルチスレッド環境では、排他制御を行う「ロック」が肝心となる。</p>
+<p>ロックを適切に行うことで、スレッドセーフな関数を作らなければならない。</p>
+<p>プロセスにおいても、プロセス間通信（IPC）と呼ばれる機構を使うことで、メモリを共有したり、簡単な排他制御を行う（セマフォ）ことが可能となっている。</p>
+
+<h2>コンテキスト切り替え</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>プログラムがもしあったとして、それをマルチタスクで実行するためにどうするか。</p>
+<p>プログラムは、実際、機械語でCPU命令とメモリアドレスが記述されているため、単純に考えれば、CPUとメモリがそれぞれのプログラムに必要となる。</p>
+<p>しかしながら、マルチタスクのOSでは、プログラムの命令を、とても小さな時間で切り替えながら実行することで、CPUの仮想化を実現する。</p>
+<p>つまり、プログラムの実行しているレジスタの内容や、プログラムカウンタなどを、task_structと呼ばれる構造体に退避させて、プログラムを「安全に停止させる」ことができればいい。</p>
+<p>この上で、プログラムを次々に停止・再実行する。</p>
+<p>これを「コンテキスト切り替え」と呼ぶ。</p>
+
+<h2>プロセスディスクリプタ</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」2020/06/26より。</p>
+<p>カーネルはプロセスを管理するために、「プロセスディスクリプタ」と呼ばれるプロセスの情報によってプロセスを管理する。</p>
+<p>カーネルがプロセスの実行を停止すると、CPUレジスタ内のさまざまな情報がプロセスディスクリプタの中に退避される。</p>
+<p>この情報には、プログラムカウンタや汎用レジスタ、浮動小数点レジスタ、プロセッサ制御レジスタ、メモリ管理レジスタなどが含まれる。</p>
+<p>カーネルがプログラムの再開を決めると、プロセスディスクリプタに退避された情報を使って、停止されたCPUレジスタを復旧する。</p>
+
+<h2>schedule()関数</h2>
+<p>スケジューリングが行われている実際のコードは以下から参照できます。</p>
+<ul>
+<li><a href="https://elixir.bootlin.com/linux/latest/A/ident/schedule">schedule - lxr</a> - 「kernel/sched/core.c, line 4595 (as a function)」を参照しよう。</li>
+<li><a href="https://elixir.bootlin.com/linux/latest/source/arch/x86/include/asm/switch_to.h">switch_toマクロ(x86) - lxr</a></li>
+</ul>
+
+<h2>仮想メモリ</h2>
+<p>仮想メモリについては<a href="linux_kernel_mm.html">Linuxカーネル（メモリ管理）</a>を参照のこと。</p>
+
+<h1>非同期処理</h1>
+
+<h2>Bashで非同期実行</h2>
+<p>単純に非同期でプロセスを実行させたいのであれば、Bashで&をつけて実行させれば良い。</p>
+<ul>
+<li><a href="https://qiita.com/inosy22/items/341cfc589494b8211844">Linuxコマンド(Bash)でバックグラウンド実行する方法のまとめメモ - Qiita</a></li>
+</ul>
+
+<h1>Linuxカーネルドキュメントプロジェクト</h1>
+<h2>Linuxカーネル2.6解読室</h2>
+<p>以下のサイトに、Linuxカーネル2.6解読室という書籍の第2章までが公開されています。</p>
+<ul>
+<li><a href="https://ja.osdn.net/projects/linux-kernel-docs/wiki/FrontPage">Linux Kernel Documents Wiki - Linux Kernel Documents - OSDN</a></li>
+</ul>
+
+<h1>スケジューリング</h1>
+<h2>スケジューリング・アルゴリズム</h2>
+<p>スケジューリング・アルゴリズムについては以下を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">スケジューリング - Wikipedia</a></li>
+</ul>
+
+<h2>ラウンドロビン</h2>
+<p>ラウンドロビンは、実行可能状態にあるプロセスに対して、ひとつひとつ順番に交代してプロセッサを割り当てるアルゴリズム。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%82%A6%E3%83%B3%E3%83%89%E3%83%AD%E3%83%93%E3%83%B3%E3%83%BB%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">ラウンドロビン・スケジューリング - Wikipedia</a></li>
+</ul>
+
+<h2>多段フィードバックキュー</h2>
+<p>多段フィードバックキューは、複数のFIFOキューで構成され、上位のFIFOキューから実行可能プロセスを探して最初に見つかったプロセスを実行するアルゴリズム。</p>
+<p>多くのOSでプリエンプション（実行中のタスクを一時的に中断する動作）ありの多段フィードバックキューが使われている。昔は協調的スケジューラが使われていたOSが多かった。</p>
+<p>Linuxでは、Linux 2.6までは多段フィードバックキュー方式のO(n)スケジューラ、Linux 2.6からはO(1)スケジューラ、Linux 2.6.23以降では均等化キューイングベースのCompletely Fair Schedulerが使われている（汎用OSで均等化キューイングをスケジューラとして実装したのはCFSが初）。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%A4%9A%E6%AE%B5%E3%83%95%E3%82%A3%E3%83%BC%E3%83%89%E3%83%90%E3%83%83%E3%82%AF%E3%82%AD%E3%83%A5%E3%83%BC">多段フィードバックキュー - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%82%A8%E3%83%B3%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3">プリエンプション - Wikipedia</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

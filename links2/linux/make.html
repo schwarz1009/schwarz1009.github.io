@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Make関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Makeの世界観</h1>
+<p>Makeに関する世界観です。<a href="gnu_toolchain.html">GNUツールチェイン</a>や<a href="linux_unix.html">UNIXシステム管理</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Make</h1>
+<h2>Makefileの書き方</h2>
+<p>Makefileの基本。以下が参考になる。</p>
+<ul>
+<li><a href="http://www.ie.u-ryukyu.ac.jp/~e085739/c.makefile.tuts.html">Makefile の書き方 (C 言語) - WTOPIA v1.0 documentation</a></li>
+</ul>
+
+<h2>Make</h2>
+<p>GNU makeは、プログラムのソースコードをコンパイルする時、更新されたファイルだけをコンパイルするなど、色んなことが出来ます。</p>
+
+<h2>Makefile</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」2021/02/08より。</p>
+<p>Makefileは、基本的に作られるもののあとに:で依存ファイルを書き、それ以下の行でTABに続いて作成方法を書く。</p>
+<pre>
+hello: main.o hoge1.o hoge2.o
+           gcc -o hello main.o hoge1.o hoge2.o
+main.o:    main.c
+           gcc -c main.c
+hoge1.o:   hoge1.c
+           gcc -c hoge1.c
+hoge2.o:   hoge2.c
+           gcc -c hoge2.c
+</pre>
+<p>これで、main.cが更新された場合、</p>
+<pre>
+gcc -c main.c
+gcc -o hello main.o hoge1.o hoge2.o
+</pre>
+<p>のみが実行される。</p>
+<p>実際のMakefileでは、変数やマクロを使ってより抽象的な書き方をする。</p>
+
+<h2>MakefileでCFLAGS</h2>
+<p>gccを使う時は、Makefileの中でCFLAGSやCXXFLAGSを記述することで、最適化に関する環境変数を設定することが出来る。</p>
+<p>GentooのPortageは先進的で、/etc/portage/make.confでこの設定をコンパイルする全てのパッケージに対して行うことが出来る。</p>
+
+
+<h1>その他のシステム</h1>
+<h2>Autotools</h2>
+<p><a href="autotools.html">Autotools</a>を参照のこと。</p>
+
+<h2>Apache Ant</h2>
+<p>Javaによるビルドシステム。XMLを用いてビルドを行う。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache_Ant">Apache Ant - Wikipedia</a></li>
+</ul>
+
+<h2>pkg-config</h2>
+<p>GTK+アプリケーションは、pkg-configを用いてコンパイルすることが多い。単にgccだけではコンパイルできないことがあるので注意が必要。</p>
+<p><a href="gtk.html">GTK+</a>も参照のこと。</p>
+<ul>
+<li><a href="http://onoono-life.blogspot.com/2013/11/cc-hello-world-gtk.html">各々の生き方: C/C++ Hello World ウィンドウ表示(GTK+)</a></li>
+<li><a href="https://developer.gnome.org/gtk3/stable/gtk-compiling.html">Compiling GTK+ Applications: GTK+ 3 Reference Manual</a></li>
+<li><a href="https://developer.gnome.org/gtk2/stable/gtk-compiling.html">Compiling GTK+ Applications: GTK+ 2 Reference Manual</a></li>
+</ul>
+
+<h2>CMake</h2>
+<p>KDEアプリケーションはCMakeをビルドシステムに使う。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/CMake">CMake - Wikipedia</a></li>
+<li><a href="https://qiita.com/shohirose/items/45fb49c6b429e8b204ac">CMakeの使い方（その１） - Qiita</a></li>
+</ul>
+
+<h2>Meson+Ninja</h2>
+<p>最近は、Meson+Ninjaのような新しいビルドシステムもあり、X.orgやGNOME3でもMesonを使っているようである。</p>
+<ul>
+<li><a href="http://hellolibraryworld.blogspot.com/2016/12/the-meson-build-system.html">Hello Library World: The Meson Build System</a></li>
+</ul>
+
+<h1>リンク集全般</h1>
+
+<h2>make</h2>
+<p>make</p>
+<ul>
+<li><a href="http://quruli.ivory.ne.jp/document/make_3.79.1/make-jp_toc.html">GNU make - 私的文書置場</a></li>
+<li><a href="http://www.ecoop.net/coop/translated/GNUMake3.77/make_toc.jp.html">GNU make 日本語訳(Coop編) - ecoop.net</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

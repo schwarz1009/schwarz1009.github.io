@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>sed - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>sed</h1>
+<p>sedに関する世界観です。<a href="grep_find_sed_awk.html.html">grep, find, sed, awk</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>sed</h1>
+
+<h2>sed</h2>
+<!--<p>ストリーム操作の例。</p>-->
+<p><!--特定のカラムだけを表示させたいとか、-->正規表現で検索や置換を行ったり、パターンにマッチする行だけを抜き出したい・削除したいなど、ストリームの編集を行いたい時は、sedを使う。</p>
+<p>コマンド行に変換してbashに送る、などといった荒業も可能だ。</p>
+
+<h2>sedの各種コマンド</h2>
+<table class="some_tables">
+<tr><th>コマンド</th><th>解説</th></tr>
+<tr><td>sed s/Linux/FreeBSD/</td><td>sは文字列の置き換え</td></tr>
+<tr><td>sed -n s/Linux/FreeBSD/p</td><td>pは置換した行だけを出力<br>デフォルトの出力を抑制する-nオプションを付ける</td></tr>
+<tr><td>sed -n s/Linux/FreeBSD/pg</td><td>gは各行に含まれる全てのパターンを置換</td></tr>
+<tr><td>sed -n 2,100s/Linux/FreeBSD/p</td><td>sオプションでは、sの前に<br>行番号（たとえば2,100で2～100行目）か/パターン/を<br>指定することで、対象の行を制限できる。<br>これにより、「あるパターンを含む行において、<br>別のパターンの置換を行う」ことが可能。</td></tr>
+<tr><td>sed -n /Linux/s/FreeBSD/OpenBSD/p</td><td>「Linux」というパターンが含まれる行の「FreeBSD」を「OpenBSD」に置換し、<br>置換した行だけを出力</td></tr>
+</table>
+
+<h2>sedとパイプでファイル名を一括で変更</h2>
+<p>sedを使ってファイル名を一括で変更する応用テクニックについては<a href="http://www.atmarkit.co.jp/ait/articles/1610/18/news008.html">【 sed 】コマンド（応用編）――正規表現を使って文字を置き換える - @IT</a>を参照してください。</p>
+<ul>
+<li><a href="http://qiita.com/hirohiro77/items/7fe2f68781c41777e507">sedでこういう時はどう書く? - Qiita</a></li>
+<li><a href="https://hydrocul.github.io/wiki/commands/sed.html">sed コマンド - hydroculのメモ</a></li>
+<li><a href="http://qiita.com/shima_529/items/e68fc81c341249a0cbaa">sedで各種コマンドを作ってみよう - Qiita</a></li>
+</ul>
+
+<h2>sedと一緒にviも使おう</h2>
+<p>sedはコマンドで使うと強力だが、テキストを編集する際にはviを使おう。とても便利で簡単にテキスト処理ができる。sedとviを制するものはLinuxを制す。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

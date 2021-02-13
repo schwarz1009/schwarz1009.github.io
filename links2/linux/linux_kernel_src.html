@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux カーネル開発（ソースコード） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（ソースコード）</h1>
+<p>Linuxのカーネルの開発に関する世界観（ソースコード）です。<a href="linux_kernel.html">Linuxカーネル</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Linuxカーネルソース探検</h1>
+<p><a href="http://archive.linux.or.jp/JF/JFdocs/The-Linux-Kernel-15.html">The Linux Kernel: Linux カーネルソース</a>を参考に執筆しました。（実際にカーネルの探索を行う場合は、「どこから見るべきか」がこのページに書いてあるので、参照してください。）</p>
+<h2>Linuxカーネルソースコード</h2>
+<p><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/">git.kernel.orgのtree</a>から実際のコードを探すことができます。</p>
+<table class="some_tables">
+<tr><th>ディレクトリ</th><th>解説</th></tr>
+<tr><td>arch</td><td>アーキテクチャ固有のコード。</td></tr>
+<tr><td>include</td><td>インクルードファイル。</td></tr>
+<tr><td>init</td><td>カーネル初期化のコード。これからカーネルの動作を見たい場合には良い出発点になる。</td></tr>
+<tr><td>mm</td><td>メモリ管理。</td></tr>
+<tr><td>drivers</td><td>デバイスドライバ。</td></tr>
+<tr><td>ipc</td><td>プロセス間通信。</td></tr>
+<tr><td>modules</td><td>モジュール。</td></tr>
+<tr><td>fs</td><td>ファイルシステム。</td></tr>
+<tr><td>kernel</td><td>主要なカーネルコード。アーキテクチャ固有のコードはarch/*/kernelにある。</td></tr>
+<tr><td>net</td><td>ネットワーク。</td></tr>
+<tr><td>lib</td><td>カーネルのライブラリ。アーキテクチャ固有のライブラリはarch/*/libにある。</td></tr>
+<tr><td>scripts</td><td>カーネルを設定する際に使用されるスクリプト。</td></tr>
+</table>
+<p>注意：原文がLinuxカーネル2.0.xの頃の説明であり、古いため、上記のディレクトリ構造は変わっていることがある。注意してほしい。</p>
+<!--<p>原文通りの意味で言えば、<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/head_64.S">arch/x86/kernel/head_64.S</a>がアーキテクチャ固有の設定を行ってから、<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/init/main.c">init/main.c</a>内にあるメインルーチンへジャンプする。<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/head64.c">arch/x86/kernel/head64.c</a>に「x86_64_start_kernel」がある模様。</p>
+-->
+
+<h2>デバイスドライバ</h2>
+<p>driversからさらに以下のディレクトリが分岐している。</p>
+<table class="some_tables">
+<tr><th>ディレクトリ</th><th>解説</th></tr>
+<tr><td>/block</td><td>IDEなどのブロックデバイスドライバ。</td></tr>
+<tr><td>/char</td><td>tty、シリアルポート、マウスなどのキャラクタデバイスドライバ。</td></tr>
+<tr><td>/cdrom</td><td>CD-ROM。</td></tr>
+<tr><td>/pci</td><td>PCI仮想ドライバ。</td></tr>
+<tr><td>/scsi</td><td>SCSI。</td></tr>
+<tr><td>/net</td><td>ネットワークデバイスドライバ。</td></tr>
+<tr><td>/sound</td><td>サウンドカードドライバ。</td></tr>
+</table>
+
+<h2>Linuxカーネルの主なソースファイル</h2>
+<p><a href="http://archive.linux.or.jp/JF/JFdocs/The-Linux-Kernel-15.html">The Linux Kernel: Linux カーネルソース</a>に掲載されていたものを、今のカーネルバージョンのファイルパスに変更しました。</p>
+<table class="some_tables">
+<tr><th>機能</th><th>コード</th></tr>
+<tr><td>メモリ管理</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/mm">mm</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/mm/memory.c">mm/memory.c</a>（ページフォルト処理）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/mm/filemap.c">mm/filemap.c</a>（メモリマッピングとページキャッシュ）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/buffer.c">fs/buffer.c</a>（バッファキャッシュ）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/mm/swap_state.c">mm/swap_state.c</a>と<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/mm/swapfile.c">mm/swapfile.c</a>（スワップキャッシュ）</td></tr>
+<tr><td>カーネル（スケジューラなど）</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel">kernel</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/core.c">kernel/sched/core.c</a>（スケジューラ）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/fork.c">kernel/fork.c</a>（fork）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/interrupt.h">include/linux/interrupt.h</a>（ボトムハーフ処理）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/sched.h">include/linux/sched.h</a>（task_structデータ構造体）</td></tr>
+<tr><td>PCI</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/pci/pci.c">drivers/pci/pci.c</a>（PCI仮想ドライバ）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/pci.h">include/linux/pci.h</a>（システム全体の定義）</td></tr>
+<tr><td>プロセス間通信</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/ipc">ipc</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/ipc.h">include/linux/ipc.h</a>（ipc_permデータ構造体）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/ipc/msg.c">ipc/msg.c</a>（System Vメッセージ）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/ipc/shm.c">ipc/shm.c</a>（共有メモリ）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/ipc/sem.c">ipc/sem.c</a>（セマフォ）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/pipe.c">fs/pipe.c</a>（パイプ）</td></tr>
+<tr><td>割り込み処理</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/kernel/irq.c">arch/x86/kernel/irq.c</a>（Intelの割り込み処理）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/irq.h">include/linux/irq.h</a>（定義）</td></tr>
+<tr><td>デバイスドライバ</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/ide/ide.c">drivers/ide/ide.c</a>（IDE）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/ide/ide-cd.c">ide/ide-cd.c</a>（IDE CDドライバ）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/scsi/scsi.c">drivers/scsi/scsi.c</a>（SCSI）など。</td></tr>
+<tr><td>ファイルシステム</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/ext2">fs/ext2</a>（EXT2ファイルシステム）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/ext2_fs.h">include/linux/ext2_fs.h</a>（データ構造の定義）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/fs.h">include/linux/fs.h</a>（仮想ファイルシステムのデータ構造体）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/buffer.c">fs/buffer.c</a>（バッファキャッシュ）</td></tr>
+<tr><td>ネットワーク</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/net">net</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/net">include/net</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/net/core">net/core</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/net/ipv4">net/ipv4</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/net">drivers/net</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/net/socket.c">net/socket.c</a>（BSDソケット）<br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/net/ipv4/af_inet.c">net/ipv4/af_inet.c</a>（IPv4 INETソケット）</td></tr>
+<tr><td>モジュール</td><td><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/module.c">kernel/module.c</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/module.h">include/linux/module.h</a><br><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/elf.h">include/linux/elf.h</a>（ELFオブジェクトファイルの構造）</td></tr>
+</table>
+<p>注意：原文の意図はあくまで「カーネルのどこから見るべきか」ということであり、上記のファイルが重要なソースファイルのすべてであるという意味ではありません。また、原文のカーネルバージョンが古く、現在のLinuxカーネルでは全く違っている可能性があります。僕がカーネルについての知識や常識が欠如しているため、このリンクは全く意味を成さない可能性もあります。原文にあるように、「これからカーネルをハッキングしたい方がどこから見るべきか」という意図で閲覧してください。</p>
+
+<h2>今のカーネルの読み方</h2>
+<p>良く調べると、今のカーネルではいろいろと違うようである。</p>
+<p>まず、原文にあるようなアーキテクチャ固有の設定は、<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/boot/header.S">arch/x86/boot/header.S</a>にある。ここからmain()ルーチンにジャンプする。</p>
+<p>mainは<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/x86/boot/main.c">arch/x86/boot/main.c</a>にある。</p>
+<p>基本的に<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/init/main.c">init/main.c</a>の中の「start_kernel」から読めば良い。</p>
+<p>最後のarch_call_rest_initからrest_initを呼び、その中のcpu_startup_entryを呼ぶ。</p>
+<p>cpu_startup_entryは<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/idle.c">kernel/sched/idle.c</a>にある。</p>
+<p>そして、do_idleでアイドルループに入る。</p>
+<p>（<a href="https://qiita.com/peo3/items/263d167eceedf89a9d67">Linuxのブートプロセスを追うときに見るべきファイル(x86_64編) - Qiita</a>を参考に執筆しました。このページは今のカーネルの読み方について詳しい。）</p>
+
+
+<h1>カーネルのコンパイル</h1>
+<h2>カーネルの手動コンパイルの方法</h2>
+<p>Linuxカーネルは、手動でコンパイルすることで、さまざまなオプション機能を有効にしたり、無効にしたりすることが出来る。各機能は有効・無効あるいは動的にいつでも読み込めるモジュールにすることができる。</p>
+<p>以下はカーネルのコンパイルについてのリンク。カーネルのコンパイル方法はバージョンとともに良く変わるので、上の方法は古い可能性があります。必ず下のリンクのような情報から、そのコンパイルしようとしているバージョンのカーネルのコンパイル方法について調べた上で、コンパイルを行ってください。</p>
+<ul>
+<li><a href="https://wiki.archlinuxjp.org/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB/%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB/%E4%BC%9D%E7%B5%B1%E7%9A%84%E3%81%AA%E6%96%B9%E6%B3%95">カーネル/コンパイル/伝統的な方法 - ArchWiki</a></li>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/sect.kernel-compilation.html">8.10. カーネルのコンパイル - Debian</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel/ja">カーネルの設定 - Gentoo Wiki</a></li>
+<li><a href="http://www.geocities.co.jp/SiliconValley-Cupertino/9120/kernel_recompile.html">Linux Kernelの再構築 - RedHat Linuxでサーバ構築 </a></li>
+</ul>
+
+<h2>カーネルヘッダー</h2>
+<p>自分でLinuxのプログラムをコンパイルしたい時に、カーネルヘッダーが必要となる時がある。カーネルのAPIを使うプログラムをコンパイルするために必要。</p>
+<p>カーネルヘッダーは、少し前の状況だと、カーネルがメジャーアップデートされた場合（2.4から2.6への移行の時など）、プログラムが正常に動かなくなったり、コンパイルできなくなる時があった。なので、大切な基盤システムなどでは、注意してアップデートすること。</p>
+<p>カーネルヘッダーだけではなく、gcc, glibc, pythonなどの重要コンポーネントは、メジャーアップデートに失敗すると悲惨なことになる。Red Hatの開発者などでも、注意して開発している。特に、Pythonなどは本当に動かなくなる（Python2とPython3には全く互換性がない）。気を付けてシステムを管理しよう。</p>
+
+<h1>カーネルモジュール</h1>
+<h2>カーネルモジュールについて</h2>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://linux-dvr.biz/archives/57">ドライバのロード・アンロード | Linuxデバイスドライバ開発入門</a></li>
+<li><a href="http://www.tldp.org/LDP/lkmpg/2.6/html/">The Linux Kernel Module Programming Guide</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel/ja">カーネルの設定 - Gentoo Wiki</a></li>
+</ul>
+
+<h1>Linuxカーネルガイド</h1>
+<h2>RHELとGentooとArchのガイド</h2>
+<p>カーネルのコンパイルやモジュールなどの管理については、RHELとGentooとArchのガイドが参考になる。</p>
+<ul>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/index">カーネルの管理、監視、および更新 Red Hat Enterprise Linux 8 | Red Hat Customer Portal</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/kernel_administration_guide/index">カーネル管理ガイド Red Hat Enterprise Linux 7 | Red Hat Customer Portal</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Kernel/Gentoo_Kernel_Configuration_Guide/ja">カーネル / Gentoo カーネルコンフィグレーションガイド - Gentoo Wiki</a></li>
+</ul>
+<p>特に以下のArchのガイドは分かりやすくて参考になる。カーネルモジュールを管理する場合は一読の必要あり。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB">カーネルモジュール - ArchWiki</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB">カーネルモジュールのコンパイル - ArchWiki</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

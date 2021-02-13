@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux ファイアウォール - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ファイアウォール</h1>
+<p>Linuxのファイアウォールに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>iptables</h1>
+<h2>iptables</h2>
+<p>ファイアーウォール（パケットフィルタリング）やNAT（ルーティングやアドレス変換）として通信の許可とブロックを行うための、Linuxのネットワーク設定（Netfilter）を設定する技術。CentOS 6などで使われる。</p>
+<p>Netfilterはパケットフィルタリングのパッケージで、ネットワークドライバとカーネルとの間でパケットの内容を精査し、設定に応じてパケットを破棄することで不正なパケットの排除を行う。</p>
+<ul>
+<li><a href="https://qiita.com/kkojima0127/items/55cf768c046aa2731455">パケットフィルタリング Netfilterの動作と設定 - Qiita</a></li>
+<li><a href="https://eng-entrance.com/linux-firewall">【丁寧解説】Linuxファイアウォール iptablesの使い方 - エンジニアの入り口</a></li>
+<li><a href="https://qiita.com/Tocyuki/items/6d90a1ec4dd8e991a1ce">iptables まとめ - Qiita</a></li>
+</ul>
+
+<h2>iptablesを使って使わないポートを閉じる</h2>
+<p>/etc/iptables/iptables.rules(ipv4)と/etc/iptables/ip6tables.rules(ipv6)に設定ファイルがある。</p>
+<p>詳しい設定内容は<a href="http://qiita.com/cocuh/items/e7c305ccffb6841d109c">そこそこセキュアなlinuxサーバーを作る - Qiita</a>を参照のこと。</p>
+
+<h2>iptablesのテーブルの意味</h2>
+<p>基本的にチェイン（-A INPUTなど）、ターゲット（ACCEPTなど）、テーブル（filterなど）、コマンド（-Aなど）、パラメータ（-iなど）を使い、サーバに入ってくるパケットや出ていくパケットに対して、遮断・許可を行うフィルターを記述します。</p>
+<ul>
+<p><a href="https://eng-entrance.com/linux-firewall">【丁寧解説】Linuxファイアウォール iptablesの使い方 - エンジニアの入り口</a></li>
+</ul>
+
+<h2>確認</h2>
+<p>rootユーザで</p>
+<pre>
+# iptables -L
+</pre>
+<p>を実行すると、現在の設定一覧が出る。さらに詳しいリストは</p>
+<pre>
+# iptables -L -v -t filter
+</pre>
+<p>で表示される。</p>
+
+<h2>DNATとSNAT</h2>
+<p>グローバルアドレスには限りがあるため、ホームネットワークなどではプライベートアドレスを使って通信を行う。</p>
+<p>グローバルアドレスとプライベートアドレスで通信し合う際に、グローバルアドレスとプライベートアドレスを変換する必要がある。</p>
+<p>NATはアドレスの変換を行う。送信元アドレスを変換するのがSNATで、送信先アドレスを変換するのがDNAT。</p>
+<ul>
+<li><a href="https://yoru9zine.hatenablog.com/entry/2015/12/19/072304">NAT と SNAT と DNAT - 隙あらば寝る</a></li>
+</ul>
+
+<h1>その他のファイアーウォール</h1>
+<h2>nftables</h2>
+<p>ファイアーウォール。Debian 10ではiptablesからnftablesに置き換わる。</p>
+<ul>
+<li><a href="https://yakst.com/ja/posts/187">あなたがnftablesを好きになるわけ | Yakst</a></li>
+</ul>
+
+<h2>firewalld</h2>
+<p>ファイアーウォール。CentOS 7ではiptablesからfirewalldに置き換わった。</p>
+<ul>
+<li><a href="https://qiita.com/kenjjiijjii/items/1057af2dddc34022b09e">CentOS 7 firewalld よく使うコマンド - Qiita</a></li>
+<li><a href="https://qiita.com/kkojima0127/items/55cf768c046aa2731455">パケットフィルタリング Netfilterの動作と設定 - Qiita</a></li>
+</ul>
+
+<h2>ufw</h2>
+<p>ファイアーウォール。Ubuntuなどで使われる。</p>
+<ul>
+<li><a href="https://qiita.com/RyoMa_0923/items/681f86196997bea236f0">ufwの基本操作 - Qiita</a></li>
+</ul>
+
+<h1>ファイアーウォール向けディストリビューション</h1>
+<h2>IPFire</h2>
+<p>IPFireはLinuxベースのファイアーウォールシステムを構築するためのディストリビューション。ファイアーウォールの他、侵入防止システム（IPS）などを備え、DDoS攻撃やインターネット経由の攻撃を防御できる。</p>
+<ul>
+<li><a href="https://mag.osdn.jp/20/01/10/160000">ファイアウォール向けLinuxディストリビューション「IPFire 2.23 Core Update 139」リリース | OSDN Magazine</a></li>
+</ul>
+
+<h1>コマンド一覧</h1>
+<h2>iptables</h2>
+<table class="some_tables">
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>ip6tables</td>
+<td>IPv6パケットフィルタの管理。</td>
+</tr>
+<tr>
+<td>ip6tables-restore</td>
+<td>IPv6テーブルの復元。</td>
+</tr>
+<tr>
+<td>ip6tables-save</td>
+<td>IPv6テーブルの保存。</td>
+</tr>
+<tr>
+<td>iptables</td>
+<td>IPv4のパケットフィルタとNATを管理する。</td>
+</tr>
+<tr>
+<td>iptables-restore</td>
+<td>iptablesの設定の復元。</td>
+</tr>
+<tr>
+<td>iptables-save</td>
+<td>iptablesの設定の保存。</td>
+</tr>
+</table>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

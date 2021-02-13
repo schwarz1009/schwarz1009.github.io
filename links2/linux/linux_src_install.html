@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Linux ソースからのインストール - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+<div class="page">
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux ソースからのインストール</h1>
+<p>Linuxのソースtarballからのアプリケーションのインストールに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>アプリケーションのインストールとパッケージ管理</h1>
+<h2>ソースからのコンパイルによるインストール</h2>
+<p>ソースからのインストールには、GNU式のパッケージだと、基本的に./configureとmakeとmake installを実行する。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/045instsrc.html">ソースファイルで配布されているプログラムをインストールするには - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/886usepaco.html">ソースからインストールしたアプリを管理するには - @IT</a></li>
+<li><a href="http://www.linux-beginner.com/linux_kihon79.html">ソースファイルからのインストール - Linux初心者の基礎知識</a></li>
+</ul>
+<h2>パッチを当てる方法</h2>
+<p>パッチを当てるには、patchコマンドを使う。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/505patch.html">ソースコードにパッチを当てるには - @IT</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Patch">patch - Wikipedia</a></li>
+</ul>
+
+<h1>README</h1>
+<h2>まずはREADMEを読もう</h2>
+<p>ソフトウェアをソースからインストールする時は、まず、READMEやそれに類する文書（INSTALLなど）がtarball（*.tar.gz圧縮ファイル）の中に無いかを確認し、あったらそれを読みましょう。</p>
+<p>ソフトウェアをビルド・インストールするための方法がREADMEに書いてあることが多いためです。</p>
+<p>ちなみに、Autotoolsで作成されたGNUパッケージでは、以下のようなファイルが含まれていることが多いです。</p>
+<table class="some_tables">
+<tr><th>ファイル名</th><th>説明</th></tr>
+<tr><td>README</td><td>一般的な情報</td></tr>
+<tr><td>AUTHORS</td><td>クレジット</td></tr>
+<tr><td>THANKS</td><td>謝辞</td></tr>
+<tr><td>Changelog</td><td>詳細な変更履歴（プログラマー向け）</td></tr>
+<tr><td>NEWS</td><td>簡単な変更履歴（ユーザー向け）</td></tr>
+<tr><td>INSTALL</td><td>インストール方法</td></tr>
+<tr><td>COPYING / LICENSE</td><td>著作権・ライセンス情報</td></tr>
+<tr><td>BUGS</td><td>報告があった既知のバグ</td></tr>
+</table>
+<p>ちなみに、ソースコードなどのファイルはsrcディレクトリに入っていることが多い。ただしそうではなくアプリケーション名のディレクトリに入っている場合もあれば、分野ごとに分かれていたりする場合もあるし、ライブラリだけをlibxxxに入れていることもあったりする。</p>
+
+<h1>ソースからのソフトウェアのインストール</h1>
+<h2>/usr/localにインストールする場合</h2>
+<p>ソースコードの入ったtarballのインストールをする場合、Linuxでは慣習的にprefixを/usr/localに指定してインストールします。</p>
+<pre>
+$ ./configure --prefix=/usr/local
+$ make
+$ su -
+Password: (rootユーザーのパスワードを入力する)
+# make install
+</pre>
+<p>/usr/local/binがPATHに入っているかどうかを確認してください。</p>
+<pre>
+$ echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/home/assy/bin
+</pre>
+<p>入ってなかった時は、.bash_profileなどに記述をお願いします。</p>
+
+<h2>ホームディレクトリにインストールする場合</h2>
+<p>ホームディレクトリにインストールする場合は、以下のようにします。</p>
+<pre>
+$ ./configure --prefix=/home/assy/app_name
+$ make
+$ make install
+</pre>
+<p>これで、/home/assy/app_nameにプログラムをインストールできます。実行する場合は、相対パスを用いて以下のようにするか、</p>
+<pre>
+$ cd /home/assy/app_name/bin
+$ ./program
+</pre>
+<p>あるいは、インストールしたディレクトリのbinディレクトリをPATHに追加します。</p>
+<p>以下が参考になるかもしれません。</p>
+<ul>
+<li><a href="https://qiita.com/kuchida1981/items/d028940ade41096490de">自分でソフトウェアをビルド・インストールするときに/usrや/usr/localへインストールしない - Qiita</a></li>
+</ul>
+
+<h2>/usr/localにサブディレクトリを作る場合</h2>
+<p>/usr/localにサブディレクトリを作って、/usr/local/mysqlなどにプログラムをインストールすることもできます。管理もしやすいし、あとで削除するかもしれないがシステムとして使いたいプログラムの場合は、これがお勧めです。</p>
+
+<h2>共有ライブラリの場合</h2>
+<p>共有ライブラリの場合、LD_LIBRARY_PATHかLD_LIBRARY_PATH_64にディレクトリを登録するか、/etc/ld.so.confにパスを記述します。記述したあとで、ldconfigコマンドを実行してキャッシュを更新してください。</p>
+
+<h1>ソースからインストールしたソフトを管理する</h1>
+<h2>paco</h2>
+<p>pacoはソースからインストールしたソフトウェアを、パッケージ管理システムのように管理することのできるツール。</p>
+<p>最近はporgという後継プロジェクトに替わったようである。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/886usepaco.html">ソースからインストールしたアプリを管理するには - @IT</a></li>
+<li><a href="https://qiita.com/pasela/items/eea4a9cbbd54ad118d09">pacoからporgへ - Qiita</a></li>
+<li><a href="https://qiita.com/pasela/items/9c6cd7b9e477ed0501c8">pacoでソースビルドをパッケージっぽく管理する - Qiita</a></li>
+</ul>
+
+<h1>開発に参加したい</h1>
+<h2>git cloneで最新を追いかける</h2>
+<p>最近は開発のためのソフトウェアが整っているため、GitHubのような最新のリポジトリからgit cloneすることで、ソフトウェアの最新版を追いかけることができます。</p>
+<p>追いかけるのも面白いでしょうが、バグや開発途上のコードがたくさんあるため、うかつにgit cloneしても動かないことがあります。</p>
+<p>初心者は、下のtarballを導入して、パッチを作る方法を学びましょう。</p>
+<p>Gitについては<a href="../prog_lang/git.html">Gitの世界観</a>に基本的な使い方をまとめています。</p>
+
+<h2>tarballを改造する</h2>
+<p>tarballを、まずソースからインストールしてみましょう。その上で、そのコードを改造し、目的とする機能を付け足すことができるか、挑戦してみてください。</p>
+<p>基本的に、makeコマンドを使ってプログラムをビルドしながら、さまざまなソースコードを改良します。テキストエディタにはEmacsやvimを使うこともできますし、Eclipseのような巨大開発環境を導入するのも手です。</p>
+<p>プログラミングをやりたいという人は、プログラム言語の基本を勉強しましょう。僕の書いている<a href="../prog_lang/programming_basic.html">プログラミング作法の世界観</a>が参考になるかもしれません。</p>
+
+<h2>diffでパッチを作る</h2>
+<p>開発が完了したら、diffでパッチを作りましょう。元のtarballの何も変更されていないディレクトリと、改造したコードがあるディレクトリをdiffで比較して、パッチを作ります。</p>
+<p>以下は通常のUNIXのパッチ、CVSによるパッチ、TortoiseSVNによるパッチ、gitによるパッチなどの作り方です。</p>
+<ul>
+<li><a href="https://qiita.com/astro_super_nova/items/e30dcaf4d106deebc63c">Linuxエンジニアらしいパッチのつくりかた - Qiita</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Creating_a_patch">パッチの作成 | MDN</a></li>
+<li><a href="https://tortoisesvn.net/docs/nightly/TortoiseSVN_ja/tsvn-dug-patch.html">パッチの作成及び適用 - TortoiseSVN</a></li>
+<li><a href="https://qiita.com/sea_mountain/items/7d9c812e68a26bd1a292">Git で変更を patch ファイルにする / patch コマンドで適用する - Qiita</a></li>
+</ul>
+
+<h2>MLにパッチを投稿する</h2>
+<p>パッチが出来たら、Linux Kernel Mailing Listのような公式のMLにパッチを投稿します。この時、さまざまな流儀や慣習があるので、それを破らないようにしましょう。</p>
+<ul>
+<li><a href="http://vger.kernel.org/lkml/">The linux-kernel mailing list FAQ</a></li>
+</ul>
+<p>Bugzillaのような開発システムを使っているプロジェクトの場合は、Bugzillaにパッチを投稿しても良いでしょう。Mozillaだけではなく、たとえばRed HatのBugzillaなどもあります。</p>
+<ul>
+<li><a href="https://bugzilla.mozilla.org/">bugzilla.mozilla.org</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+<!--jQuery-->
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
