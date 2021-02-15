@@ -359,10 +359,41 @@ var x = test(100);
 
 <h2>ノードの選択</h2>
 <p>以下は<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。</p>
-<p>ノードの選択の方法は、Document.getElementById()でIDから検索する、Element.getElementsByTagName()でタグ名から検索する（ワイルドカードとしての*も使用可）、HTMLDocument.getElementsByName()で名前（name属性）から検索する、HTMLElement.getElementsByClassName()でクラス名から検索する、などの方法がある。</p>
-<p>また、プロパティparentNodeで親ノード、childNodesで子ノードリスト、firstChildで最初の子ノード、lastChildで最後の子ノード、nextSiblingで次の子ノード、previousSiblingで1つ前の子ノードが取得できる。また空白や改行もテキストノードとして扱われる。HTMLを記述する際には可読性からタグごとに改行を入れるが、この改行部分に空白ノードが存在するため、firstChildとした時にまず空白ノードが取得される。注意すること。</p>
-<p>また、ノードを作成・追加・変更するには、Document.createElement()やDocument.createTextNode()でノードを作成する。Document.createComment()でコメントを作成する。</p>
-<p>注意点として、ノードを作成しただけではHTMLには何の変化もない。ノードをDOMツリーに追加してはじめてWebブラウザに表示される。最後の子要素に追加するにはNode.appendChild()、ある位置に追加するにはNode.insertBefore()を使う。変更する場合は取得したノードのプロパティを書き換えるか、Node.replaceChild()を使う。ノードの削除にはNode.removeChild()を使う。</p>
+<p>ノードの選択の方法は、</p>
+<table class="some_tables">
+<tr><th>ノードの選択</th><th>説明</th></tr>
+<tr><td>Document.getElementById()</td><td>IDから検索する</td></tr>
+<tr><td>Element.getElementsByTagName()</td><td>タグ名から検索する（ワイルドカードとしての*も使用可）</td></tr>
+<tr><td>HTMLDocument.getElementsByName()</td><td>名前（name属性）から検索する</td></tr>
+<tr><td>HTMLElement.getElementsByClassName()</td><td>クラス名から検索する</td></tr>
+</table>
+<p>などの方法がある。</p>
+<p>また、プロパティとして</p>
+<table class="some_tables">
+<tr><th>プロパティ</th><th>説明</th></tr>
+<tr><td>parentNode</td><td>親ノード</td></tr>
+<tr><td>childNodes</td><td>子ノードリスト</td></tr>
+<tr><td>firstChild</td><td>最初の子ノード</td></tr>
+<tr><td>lastChild</td><td>最後の子ノード</td></tr>
+<tr><td>nextSibling</td><td>次の子ノード</td></tr>
+<tr><td>previousSibling</td><td>1つ前の子ノード</td></tr>
+</table>
+<p>が取得できる。また空白や改行もテキストノードとして扱われる。</p>
+<p>HTMLを記述する際には可読性からタグごとに改行を入れるが、この改行部分に空白ノードが存在するため、firstChildとした時にまず空白ノードが取得される。注意すること。</p>
+<p>また、ノードを作成・追加・変更するには、</p>
+<table class="some_tables">
+<tr><th>ノードの作成</th><th>説明</th></tr>
+<tr><td>Document.createElement()<br>Document.createTextNode()</td><td>ノードを作成する</td></tr>
+<tr><td>Document.createComment()</td><td>コメントを作成する</td></tr>
+</table>
+<p>注意点として、ノードを作成しただけではHTMLには何の変化もない。ノードをDOMツリーに追加してはじめてWebブラウザに表示される。</p>
+<table class="some_tables">
+<tr><th>ノードの追加</th><th>説明</th></tr>
+<tr><td>Node.appendChild()</td><td>最後の子要素に追加する</td></tr>
+<tr><td>Node.insertBefore()</td><td>ある位置に追加する</td></tr>
+<tr><td>Node.replaceChild()</td><td>変更する。取得したノードのプロパティを書き換えてもよい。</td></tr>
+<tr><td>Node.removeChild()</td><td>ノードの削除。</td></tr>
+</table>
 <p>しかしながら、いちいちcreateElement()やappendChild()を使うのは面倒くさいので、HTMLElement.innerHTMLプロパティを使ってHTML文字列を取得・変更したり、textContentプロパティで子要素まで含めてテキスト部分だけを取得・変更することもできる。</p>
 
 <h2>イベント</h2>
