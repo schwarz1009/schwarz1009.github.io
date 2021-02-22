@@ -48,6 +48,54 @@
 <li><a href="https://www.freebsd.org/doc/ja_JP.eucJP/books/handbook/backup-basics.html">15.9. バックアップの基本 - FreeBSD ハンドブック</a></li>
 </ul>
 
+<h2>設定の例</h2>
+<p>/etc/crontabはこのようになっていることが多い。</p>
+<pre>
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+
+# run-parts
+01 * * * * root run-parts /etc/cron.hourly
+02 4 * * * root run-parts /etc/cron.daily
+22 4 * * 0 root run-parts /etc/cron.weekly
+42 4 1 * * root run-parts /etc/cron.monthly
+
+0-59/5 * * * * root /usr/bin/mrtg /etc/mrtg/mrtg.cfg
+</pre>
+<p>設定ファイルはこのように使い分ける。</p>
+<table class="some_tables">
+<tr>
+<th>ファイル</th>
+<th>ユーザ</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>/var/spool/cron/user</td><td>全ユーザ</td><td>ユーザの自動タスク設定ファイル</td>
+</tr>
+<tr>
+<td>/etc/crontab</td><td>root</td><td>毎時、毎日、毎月、毎週のメイン設定ファイル</td>
+</tr>
+<tr>
+<td>/etc/cron.hourly</td><td>root</td><td>毎時実行されるディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.daily</td><td>root</td><td>毎日実行されるディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.monthly</td><td>root</td><td>毎月実行されるディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.weekly</td><td>root</td><td>毎週実行されるディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.d</td><td>root</td><td>上記以外の自動実行設定ファイルを置くディレクトリ</td>
+</tr>
+</table>
+<p>（<a href="https://www.express.nec.co.jp/linux/distributions/knowledge/system/crond.html">cron の設定ガイド - Linuxべんりな動作情報 ナレッジベース：環境設定 - Express5800シリーズポータル - NEC</a>を参考に執筆・引用しました。）</p>
+
+
 <h2>rsyncとcron+tarで自動バックアップ</h2>
 <p>以下が参考になる。</p>
 <ul>
