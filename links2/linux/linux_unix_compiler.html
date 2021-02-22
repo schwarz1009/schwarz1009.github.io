@@ -127,18 +127,6 @@ gcc -g -o test -lm test.o
 <li><a href="https://ja.wikipedia.org/wiki/Autotools">Autotools - Wikipedia</a></li>
 </ul>
 
-<h2>国際化・地域化</h2>
-<p>gettextのような仕組みを用いることで、国際化と地域化が容易になる。</p>
-<p>文字列に</p>
-<pre class="prettyprint">
-printf(_("hoge is %s."), name);
-</pre>
-<p>と言うエイリアスをつけ、.poファイルでこのように翻訳出来る。</p>
-<pre>
-#: src/prog.c:20
-msgid "hoge is %s."
-msgstr "ほげとは%sである。"
-</pre>
 
 <h1>関連ページ</h1>
 <h2>共有ライブラリ・ヘッダファイル</h2>

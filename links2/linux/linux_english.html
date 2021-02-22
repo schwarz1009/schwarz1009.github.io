@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -30,6 +31,19 @@
 <div class="page_links">
 
 <h1>Linuxと英語</h1>
+<h2>国際化・地域化</h2>
+<p>gettextのような仕組みを用いることで、国際化と地域化が容易になる。</p>
+<p>文字列に</p>
+<pre class="prettyprint">
+printf(_("hoge is %s."), name);
+</pre>
+<p>と言うエイリアスをつけ、.poファイルでこのように翻訳出来る。</p>
+<pre>
+#: src/prog.c:20
+msgid "hoge is %s."
+msgstr "ほげとは%sである。"
+</pre>
+
 <h2>Linuxの日本語環境</h2>
 <p>Linuxの日本語環境は鬼門で、ディストリビューションごとにも違う。迷った時は英語を読むぐらいの覚悟が必要。日本語入力も昔は難しかった。最近は簡単に、GNOMEでインプットメソッドを設定するだけで出来る。設定方法以前に、そもそも対応していない場合もある（KDE3派生であるTrinityでは、最近の入力システムは動かない）。Linuxに日本語は期待しない方が良い。商用OSほどの国際化がされていると高々に謳う一方で、本当は日本語なんか誰も使っていないからだ。IRCで質問する場合でも、英語で質問して英語で返ってくる、それが普通だ。</p>
 
@@ -63,5 +77,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
