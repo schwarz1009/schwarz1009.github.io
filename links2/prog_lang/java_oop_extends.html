@@ -43,6 +43,27 @@ public class MyThread extends Thread {
   ...
 }
 </pre>
+<p>継承の例：</p>
+<pre class="prettyprint">
+public class Cat {
+  public void mew() {
+    System.out.println("にゃーご");
+  }
+}
+
+public class ExCat extends Cat {
+  @Override
+  public void mew() {
+    System.out.println("ごろごろにゃーん");
+  }
+  
+  public void printloop(int c) {
+    for (int i = 0; i &lt; c; i++) {
+      mew();
+    }
+  }
+}
+</pre>
 
 <h2>継承の目的</h2>
 <p>継承は、既にある財産であるクラスを引き継ぐために行う。</p>
