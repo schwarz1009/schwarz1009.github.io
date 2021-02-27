@@ -490,6 +490,35 @@ alert(app_list[2].getinfo());
 <p>callは、あるオブジェクトにあるメソッドを関連づけて呼び出すことができる。</p>
 <p>applyは、あるオブジェクトにあるメソッドを関連づけて呼び出すことができる。第二引数は配列で渡す。</p>
 <p>bindは、あるメソッドに対してあるオブジェクトをbindで関連づける。</p>
+<p>以下は自分の書いたコード。</p>
+<pre class="prettyprint">
+function calc() {
+    let l = this.x;
+    let r = this.y;
+  
+    let a = l + r;
+    let s = l - r;
+    let m = l * r;
+    let d = l / r;
+  
+    console.log(l + " + " + r + " = " + a);
+    console.log(l + " - " + r + " = " + s);
+    console.log(l + " * " + r + " = " + m);
+    console.log(l + " / " + r + " = " + d);
+}
+
+let v1 = { x : 100, y : 200 };
+let v2 = { x : 150, y :  30 };
+let v3 = { x :  30, y : 150 };
+let v4 = { x : 120, y : 130 };
+
+calc.call(v1);
+calc.call(v2);
+calc.call(v3);
+
+let func_v4 = calc.bind(v4);
+func_v4();
+</pre>
 
 <h1>応用技術</h1>
 <h2>Ajax</h2>
