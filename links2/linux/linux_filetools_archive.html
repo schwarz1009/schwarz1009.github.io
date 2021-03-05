@@ -33,6 +33,13 @@
 
 
 <h1>ファイル操作</h1>
+<h2>圧縮アルゴリズム</h2>
+<p>ZIPのdeflate圧縮やLHAのlhXシリーズ圧縮で使われる、辞書式・ハフマン法のアルゴリズムについては以下が参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/yuba/items/55226c2de81436746a8c">ZIP,LHAの圧縮の仕組み - Qiita</a></li>
+<li><a href="https://service.plan-b.co.jp/blog/tech/10282/">今更だけど、圧縮についてまとめてみたい | PINTO!</a></li>
+</ul>
+
 <h2>deflate圧縮</h2>
 <p>deflate圧縮は、zipやgzipなどで使われている可逆データ圧縮アルゴリズム。</p>
 <p>可逆圧縮で、インターネットで広く使われている。圧縮は比較的高速で、伸長は非常に高速。</p>
@@ -58,6 +65,7 @@ $ rsync -av 同期元/ 同期先/
 </pre>
 <p>rsyncはシェルスクリプトにしてcronに指定することで、毎日夜に定期的に同期してくれるように設定することもできる。tarとの併用で、たまに全体のバックアップをとっても良いだろう。</p>
 <ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1702/02/news031.html">【 rsync 】コマンド（その1）――ファイルやディレクトリを同期する - @IT</a></li>
 <li><a href="https://jp.linux.com/news/linuxcom-exclusive/431401-lco2015070802">Rsyncを使ってファイルのバックアップをとる - Linux.com</a></li>
 <li><a href="https://www.virment.com/rsync-backup/">rsyncとシェルスクリプトを使った自動バックアップ環境の構築手順 - virtualiment</a></li>
 </ul>
@@ -136,6 +144,10 @@ $ du -h
 <p>ddコマンドでは、入力（if=/dev/sdb1など）と出力（of=/dev/sdb2など）を指定する。ここでデバイスを指定できるため、デバイスの内容をそのままコピーできる。</p>
 <p>用途としては、簡単なファイルの複製や、デバイスファイル（HDDやCD-ROM）からファイルへのコピー、ディスクイメージをデバイスに出力する際に利用できる。またKVMやXenの仮想イメージ作成にも利用できる。作成したイメージはファイルシステムの作成後に、mount(8)に「-o loop」をつけてマウントできる。</p>
 <p>デバイスをそのままイメージに出力したり、イメージからデバイスに出力したり、といった用途に使うことが多い。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1711/30/news027.html">【 dd 】コマンド――ブロック単位でファイルをコピー、変換する：Linux基本コマンドTips（163） - ＠IT</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
 
 <h2>lsattr/chattr</h2>
 <p>ext2/3/4のファイル属性を表示・変更する。追記専用、変更不可、安全な削除、復旧可能など、さまざまな機能が使える。</p>

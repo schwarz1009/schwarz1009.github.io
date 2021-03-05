@@ -105,10 +105,21 @@ gcc -g -o test -lm test.o
 <p>そのため、新しいプログラミング言語を作りたい場合は、GCCのフロントエンドだけを開発すれば良い。</p>
 <p>フロントエンドは構文解析のbisonや字句解析のflexというツールが使われている。</p>
 
+<h2>中間コードと最適化</h2>
+<p>中間コードと最適化については、Wikipediaの記事が参考になる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">GNUコンパイラコレクション - Wikipedia</a></li>
+</ul>
+
 <h2>macOS/Windows版</h2>
 <p>GCCはmacOSでも動かすことができ、Xcodeを導入すると自動的にgccがインストールされる。</p>
 <p>また、Windows版としてMinGWがあり、Visual Studioの代替C/C++コンパイラとして利用できる。</p>
 
+<h2>プログラムができるまで</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
 
 <h1>その他のトピック</h1>
 <h2>共有ライブラリの作成・ヘッダファイル</h2>
@@ -123,6 +134,11 @@ gcc -g -o test -lm test.o
 <h2>LLVM/Clang</h2>
 <p>LLVM/Clangは新しいC/C++など向けのコンパイラ。gccを置きかえるのではないかと期待されている。Linuxでも使えるし、Macや*BSDなどでも最近使われるようになってきている。</p>
 
+<h2>lex/yacc</h2>
+<p>コンパイラを作る時に使われる技術。字句解析器・構文解析器を自動作成する。</p>
+<ul>
+<li><a href="http://kmaebashi.com/programmer/devlang/yacclex.html">yaccとlex - K.Maebashi's home page</a></li>
+</ul>
 
 <h1>関連ページ</h1>
 <h2>libc</h2>

@@ -56,6 +56,7 @@
 <li><a href="https://qiita.com/DQNEO/items/0b5d0bc5d3cf407cb7ff">Systemdを使ってさくっと自作コマンドをサービス化してみる - Qiita</a></li>
 </ul>
 
+
 <h2>systemdの意義</h2>
 <p>僕が感じることとして、systemdはただの複雑さ・相互依存のオンパレードではない。「Linux界の設定・管理の中心的存在」になろうとしているのである。</p>
 <p>systemdは、System VやMulticsの失敗を繰り返していると良く批判されるが、systemdのやりたいことは、「Linuxシステム管理で、新しい中心的なリーダー」になろうとしている、ということである。</p>
@@ -72,6 +73,12 @@
 <p>そして、多くの開発者や管理者も、それを受け入れている。「systemdは確かに巨大なソフトウェアスイートで、Linuxの管理全てを支配するソフトウェアだが、今までのLinuxよりはマシ」ということになろうとしている。</p>
 <p>これは必ずしも悪いことではない。今のLinuxの管理はsystemdそのものである。systemdを学んでおけば、Linuxの管理ができるようになる。カーネルやシステムとアプリケーションを繋ぐ「ノリ」の役割は全部systemdにさせる、というのが今の「ナウいLinuxの管理」である。</p>
 <p>よく似ているものとして、ネットワークの設定に使うNetworkManagerが挙げられる。Linuxはどんどん作り変えられようとしている。</p>
+
+<h2>Unitファイルの命名規則と起動</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://yukiyan.hatenablog.jp/entry/2015/10/18/190639">いまさらだけどsystemdに入門した - 雑なメモ</a></li>
+</ul>
 
 <h2>systemctlコマンド</h2>
 <p>systemctlコマンドは、enable（有効化）、disable（無効化）、is-enabled（有効・無効の確認）、start（起動）、status（状況の表示）、show（状況の表示２）、stop（停止）、reload（設定の再読み込み）、restart（再起動）と使う。</p>

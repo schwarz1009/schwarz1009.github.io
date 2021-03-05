@@ -74,6 +74,12 @@
 
 
 <h1>RPM</h1>
+<h2>rpmパッケージのコマンド</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1609/13/news024.html">【 rpm 】コマンド（基礎編）――RPMパッケージをインストールする／アンインストールする：Linux基本コマンドTips（47） - ＠IT</a></li>
+</ul>
+
 <h2>RPMとspecファイル</h2>
 <p>RPMは、ソフトウェアごとにspecファイルと言うそれぞれのパッケージの分類、依存関係、インストール処理、ファイルリストなどを事前に書いておくことで、インストールやアンインストールを分かりやすく、手軽にする仕組みです。</p>
 <p>RPMのspecファイルはこんな感じになります：</p>
@@ -88,6 +94,9 @@
 <h2>SRPMからRPMをリビルド</h2>
 <p>RPMはSRPMから簡単にリビルド出来る。</p>
 <p>必要なのはrpmbuildコマンドの導入。</p>
+<ul>
+<li><a href="http://tetsuyai.hatenablog.com/entry/20120106/1325839318">SRPMを使ったパッケージのインストール - tetsuyai’s blog</a></li>
+</ul>
 <p>RPMでは、ソースパッケージは/usr/src/redhat/SRPMS/、specファイルは/usr/src/redhat/SPECS/、x86_64のバイナリパッケージは/usr/src/redhat/RPMS/x86_64/に出来ます。ディストリビューションを開発する時は、これらのディレクトリで作業する必要があります。</p>
 
 <h2>SRPMやRPMからファイルを取り出す</h2>

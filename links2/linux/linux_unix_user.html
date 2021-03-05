@@ -65,6 +65,13 @@ $ ls -a
 <p>UNIXにおけるグループは、ユーザの権限を決めるために使うことが多い。</p>
 <p>特に、wheelグループは多くのLinuxやUNIXで用いられるグループで、rootユーザーに昇格するためのsuコマンドを使うことができるようになる。rootのパスワードを知っているユーザーにroot権限を与えるのと似たような意味合いがあるので覚えておこう。また、apacheなどrootになってはならないユーザーにはできるだけ与えないようにしよう。</p>
 
+<h2>/etc/passwdと/etc/shadow</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://www.wakhok.ac.jp/biblion/1997/sysadmin/node18.html">2.2 パスワードファイル /etc/passwd の構造 - UNIXシステム管理入門コース</a></li>
+<li><a href="http://www.wakhok.ac.jp/biblion/1997/sysadmin/node19.html">2.3 シャドウファイル /etc/shadow の構造 - UNIXシステム管理入門コース</a></li>
+</ul>
+
 <h1>パーミッション</h1>
 <h2>パーミッションの説明</h2>
 <p>ファイルには所有ユーザーと所属グループがあり、そのユーザー（あるいはグループ・その他）が実行するプログラム（プロセス）において、ファイルに対してどれだけの権限を与えるかを決められる。これをパーミッションと言う。</p>
@@ -86,6 +93,7 @@ $ ls -a
 <ul>
 <li><a href="http://www.atmarkit.co.jp/ait/articles/1605/24/news015.html">【 chown 】コマンド／【 chgrp 】コマンド――ファイルの所有者と所有グループを変更する：Linux基本コマンドTips（15） - ＠IT</a></li>
 <li><a href="https://webbibouroku.com/Blog/Article/chmod-permission">Linuxのファイル権限(chmod,chown,chgrp) │ Web備忘録</a></li>
+<li><a href="http://www.din.or.jp/~raelian/unix_permission.html">UNIXの基礎知識 - パーミッション編 - With RAELIAN</a></li>
 </ul>
 
 <h1>用途</h1>

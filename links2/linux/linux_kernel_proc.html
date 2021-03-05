@@ -63,11 +63,16 @@
 <p>カーネルがプログラムの再開を決めると、プロセスディスクリプタに退避された情報を使って、停止されたCPUレジスタを復旧する。</p>
 
 <h2>schedule()関数</h2>
+<p>schedule()関数については、以下の書籍が参考になります。schedule()関数におけるswitch_toマクロは、元あったプロセスへの参照を失わないためにprev、next、lastの3引数を取る（2つではない）ことに注意。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+</ul>
 <p>スケジューリングが行われている実際のコードは以下から参照できます。</p>
 <ul>
 <li><a href="https://elixir.bootlin.com/linux/latest/A/ident/schedule">schedule - lxr</a> - 「kernel/sched/core.c, line 4595 (as a function)」を参照しよう。</li>
 <li><a href="https://elixir.bootlin.com/linux/latest/source/arch/x86/include/asm/switch_to.h">switch_toマクロ(x86) - lxr</a></li>
 </ul>
+
 
 <h2>仮想メモリ</h2>
 <p>仮想メモリについては<a href="linux_kernel_mm.html">Linuxカーネル（メモリ管理）</a>を参照のこと。</p>
@@ -109,6 +114,18 @@
 <li><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%82%A8%E3%83%B3%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3">プリエンプション - Wikipedia</a></li>
 </ul>
 
+<h1>そのほか</h1>
+<h2>プロセスファイルシステム（/proc）</h2>
+<p>プロセスやカーネルの情報を得ることのできる特殊なディレクトリ。以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h2>MINIX本</h2>
+<p>MINIX本では、プロセス管理・スケジューリングについて詳細が記述されています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+</ul>
 
 
 
