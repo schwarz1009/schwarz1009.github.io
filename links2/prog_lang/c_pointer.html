@@ -124,7 +124,10 @@ struct block *blk = next_block();
 <h2>mallocとfree</h2>
 <p>malloc()を使うと、静的な変数へのメモリ割り当てだけではなく、動的に変数にメモリを割り当てることができる。</p>
 <p>malloc()で確保したメモリは、使用後に必ず手動でfree()関数で解放しなければならない。</p>
-
+<ul>
+<li><a href="http://www.geocities.co.jp/SiliconValley-Bay/7437/c/malloc.html">メモリの動的割り当て（malloc,free） - パソコン活用研究C&C++であそぼ</a></li>
+<li><a href="https://teratail.com/questions/99420">C - malloc関数について｜teratail</a></li>
+</ul>
 
 <h2>mallocの使い方</h2>
 <p>malloc()の使い方は、</p>
@@ -133,6 +136,9 @@ int *data;
 data = (int *)malloc(sizeof(int) * 5);
 </pre>
 <p>のように、配列のサイズを指定したmalloc()関数を実行し、その返り値を型キャストして配列のポインタに代入する。</p>
+<ul>
+<li><a href="http://www.me.tokushima-u.ac.jp/~miw/wadai/IP3/Tips/Array2.html">配列の使い方 - 徳島大学大学院ソシオテクノサイエンス研究部 - 三輪昌史</a></li>
+</ul>
 
 <h2>動的なメモリ割り当て</h2>
 <p>malloc()で動的に確保した配列は、ポインタに代入して操作し、実行時に配列のサイズが決められない。このため、「どれくらいのサイズになるか分からない」変数を扱うために使用できる。</p>
@@ -149,6 +155,10 @@ data = (int *)malloc(sizeof(int) * 5);
 <h2>関数ポインタ</h2>
 <p>関数ポインタを使うことで、関数をポインタとして変数に格納できる。構造体や配列に格納したり、引数として関数ポインタを使うことも可能。
 <p>後日注記：関数ポインタは(*func_p)(t_arg1, t_arg2)のように定義する。この関数ポインタの見た目は「醜い」といって批判されがちである。関数を引数にとることもできるので、どのような関数が来るかは分からないがその関数を実行したい時などに使える。</p>
+<ul>
+<li><a href="http://utsukemononi.gozaru.jp/gc/page23.html">関数ポインタ - Linuxで遊ぼう</a></li>
+</ul>
+
 
 
 
