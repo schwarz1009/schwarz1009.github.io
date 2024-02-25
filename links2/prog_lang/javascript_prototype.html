@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JavaScript関連の世界観３（プロトタイプチェーン） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaScriptの世界観３（プロトタイプチェーン）</h1>
+<p>JavaScriptによるプログラミングに関する世界観３（プロトタイプチェーン）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="javascript.html">JavaScript（１．一般）</a></li>
+<ul>
+<li><a href="javascript_intro.html">JavaScript入門</a></li>
+<li><a href="javascript_dom_canvas.html">２．DOM/Canvas</a></li>
+<li><b>３．プロトタイプチェーン</b></li>
+</ul>
+<li><a href="javascript_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="javascript_framework.html">JavaScriptフレームワーク</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+
+
+<h1>オブジェクト指向</h1>
+<h2>プロトタイプベースのオブジェクト指向</h2>
+<p>JavaScriptはプロトタイプベースでオブジェクト指向を行う。</p>
+<p>aplly()メソッドやcall()メソッドを使って「委譲」と呼ばれるオブジェクト指向を行うことが大きな特徴。</p>
+<p>JavaScriptでは、クラスベースではなく、プロトタイプベースの「委譲」と呼ばれるオブジェクト指向を行う。</p>
+<p>上手く使うことで、あるメソッドを任意のオブジェクトに適用して実行したり、あるオブジェクトのメソッドを別のオブジェクトに関連づけさせて実行させることができる（委譲）。場合場合によってさまざまなメソッドをさまざまなオブジェクトに対して実行したり、あとでオブジェクトに対するメソッドを変更・追加したりすることもできる。</p>
+
+<h2>プロトタイプ継承とプロトタイプチェーン</h2>
+<p>プロトタイプ継承とは、そのオブジェクトのメンバが存在しなくても、そのオブジェクトのプロトタイプとされているオブジェクトのメンバが存在すれば、そのメンバを実行するという方法です。</p>
+<p>たとえば、CalcオブジェクトのプロトタイプにBasicCalcが存在した場合、Calcオブジェクトにadd()メソッドが存在しなければ、BasicCalcオブジェクトにadd()メソッドがないかどうかを確認し、その結果あった場合はBasicCalcオブジェクトのadd()メソッドを実行します。</p>
+<p>プロトタイプ継承は、プロトタイプのプロトタイプのさらにプロトタイプ、のように、鎖で繋がれたチェーンのようにひとつひとつ参照していきます。そのため、「プロトタイプチェーン」と呼ばれます。</p>
+<p>後日注記：JavaScriptでは、prototypeに同じプロトタイプを所有することで、オブジェクトの間で共通のインターフェースを持つことができます。</p>
+
+<h2>コード例</h2>
+<p>基本的なコード例は、たとえばコンストラクタは、以下のようになる。</p>
+<pre class="prettyprint">
+function Calc(x, y)
+{
+    this.x = x;
+    this.y = y;
+
+    this.a = x + y;
+    this.s = x - y;
+    this.m = x * y;
+    this.d = x / y;
+}
+</pre>
+<p>プロトタイプを以下のように宣言する。</p>
+<pre class="prettyprint">
+Calc.prototype.printAll = function() {
+    console.log(this.x + " + " + this.y + " = " + this.a);
+    console.log(this.x + " - " + this.y + " = " + this.s);
+    console.log(this.x + " * " + this.y + " = " + this.m);
+    console.log(this.x + " / " + this.y + " = " + this.d);
+}
+</pre>
+<p>そして、以下のようにnewしてオブジェクトを作成する。</p>
+<pre class="prettyprint">
+let calc_list = [ new Calc(1, 3), new Calc(13, 23), new Calc(16, 15), new Calc(20, 7) ];
+</pre>
+<p>最後に、メソッドは以下のように取得できる。</p>
+<pre class="prettyprint">
+for (const value of calc_list.values()) {
+    value.printAll();
+}
+</pre>
+<p>まさに、関数（コンストラクタ）のprototypeに関数（メソッド）を追加し、その上でnewしてオブジェクトとメソッドをいっぺんに作り出すという風に、まるでプラモデルを組み立てるようにプログラムの開発をすることができる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-%E6%B2%B3%E6%9D%91-%E9%80%B2/dp/4798130648">おうちで学べるプログラミングのきほん</a>を参考にしながら自分でコードを書きました。）</p>
+
+<h2>thisを使った委譲</h2>
+<p>this参照とcall(), apply(), bind()を使うことで、メソッドをその都度異なるオブジェクトに関連付けて実行できる。これを委譲と言う。（コンストラクタをnewした場合は、新しいオブジェクトが作成される。）</p>
+<p>call()は、あるオブジェクトにあるメソッドを関連づけて呼び出すことができる。</p>
+<p>apply()は、あるオブジェクトにあるメソッドを関連づけて呼び出すことができる。第二引数は配列で渡す。</p>
+<p>bind()は、あるメソッドに対してあるオブジェクトをbindで関連づける。</p>
+<p>以下は自分の書いたコード。</p>
+<pre class="prettyprint">
+function calc() {
+    let l = this.x;
+    let r = this.y;
+  
+    let a = l + r;
+    let s = l - r;
+    let m = l * r;
+    let d = l / r;
+  
+    console.log(l + " + " + r + " = " + a);
+    console.log(l + " - " + r + " = " + s);
+    console.log(l + " * " + r + " = " + m);
+    console.log(l + " / " + r + " = " + d);
+}
+
+let v1 = { x : 100, y : 200 };
+let v2 = { x : 150, y :  30 };
+let v3 = { x :  30, y : 150 };
+let v4 = { x : 120, y : 130 };
+
+calc.call(v1);
+calc.call(v2);
+calc.call(v3);
+
+let func_v4 = calc.bind(v4);
+func_v4();
+</pre>
+
+<h2>プロトタイプチェーンの基本</h2>
+<p>JavaScriptのプロトタイプチェーンでは、関数に用意されている「prototype」というプロパティをチェーンのように辿っていって、「プロトタイプ継承」を可能とする。</p>
+<p>JavaScriptでは、関数は第一級のオブジェクトであり、関数もオブジェクトのプロパティとして格納できる。関数（コンストラクタ）のプロパティとして関数（メソッド）を格納することもできる。ここで、関数は参照されているだけであり、束縛されない。</p>
+<p>JavaScriptのプロトタイプチェーンでは、関数（オブジェクト）のプロパティ（メソッド）を探していく際に、もしそのメソッドがその関数自体になかったとしても、prototypeとして参照されているオブジェクトにそのメソッドがあればそれを参照する。</p>
+<p>コンストラクタとなるメソッドのprototypeにメソッドを格納しておき、このprototypeを持ったコンストラクタをnewすると、オブジェクトが新しく生成されるが、このオブジェクトに対して、obj.prototype.meth()とアクセスしなくても、obj.meth()とアクセスできる。</p>
+<p>obj.meth()とメソッドにアクセスした場合、obj.meth()があった場合はobj.meth()を参照するが、なかった場合、obj.prototype.meth()があるかどうかを探して、あった場合これを参照する。これもなかった場合はobj.prototype.prototype.meth()を探す。ここで探されていくのは、「暗黙リンク」と呼ばれる参照で、コンストラクタのprototypeからこのように暗黙リンクをひとつひとつ辿っていく。</p>
+<p>つまり、直接のプロパティとしてのmeth()がなかったとしても、prototypeとなっているオブジェクトにそのメソッドがあればそれを継承する。これを「プロトタイプ継承」と呼ぶ。</p>
+<p>同じメソッド名をもったオブジェクトを量産するには、「同じプロトタイプを所有」すればよい。たとえば、meth()メソッドを持ったobjxがあった場合、objyとobjzはprototypeにobjxを代入すればいい。そうすることで、objyとobjzからobjxのメソッドにアクセスできる。</p>
+<p>このようにすることで、prototypeの内容をあらかじめ作っておいてnewすれば、クラスを使うことなしに、オブジェクトの量産が可能となる。Calc.prototype.printAll()メソッドは、コンストラクタであるCalc()を使って作られたオブジェクトobjから、obj.printAll()として実行することができる。</p>
+<p>また、このようになっているおかげで、自分で定義したメソッドではなくても、プロトタイプ継承されたメソッドであれば、自分で定義したメソッドを使うのと同様に呼び出すことができる。toString()やvalueOf()のようなメンバは、Object.prototypeで定義されているため、Object.prototypeを継承する多くのインスタンスで実行できる。</p>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="http://www.slideshare.net/yuka2py/javascript-23768378">最強オブジェクト指向言語 JavaScript 再入門！ - SlideShare</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Learn/JavaScript/Objects/Object_prototypes">Object のプロトタイプ - ウェブ開発を学ぶ | MDN</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>オブジェクト指向</h2>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>関数型プログラミング</h2>
+<p><a href="functional_programming.html">関数型プログラミング</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

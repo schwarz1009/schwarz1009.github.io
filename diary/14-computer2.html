@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>コンピュータ２ - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" href="../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../js/diary.js"></script>
+
+<p><a href="index.html">日記に戻る</a></p>
+<div class="box1"><!--<p class="p2">MENU:</p>-->
+<ul>
+<li class="off"><a href="01-story.html">物語</a></li>
+<li class="off"><a href="02-poem.html">詩</a></li>
+<li class="off"><a href="03-text.html">文章</a></li>
+<li class="off"><a href="04-history.html">歴史</a></li>
+<li class="off"><a href="05-memo.html">メモ</a></li>
+<li class="off"><a href="06-economics.html">政治経済</a></li>
+<li class="off"><a href="07-literature.html">文学</a></li>
+<li class="off"><a href="08-computer.html">コンピュータ</a></li>
+<li class="off"><a href="09-school.html">学校</a></li>
+<li class="off"><a href="10-etc.html">その他</a></li>
+<li class="off"><a href="11-literature2.html">文学２</a></li>
+<li class="off"><a href="12-economics2.html">政治経済２</a></li>
+<li class="off"><a href="13-history3.html">歴史３</a></li>
+<li class="on"><a href="14-computer2.html">コンピュータ２</a></li>
+<li class="off"><a href="15-language.html">言語</a></li>
+<li class="off"><a href="16-school2.html">学校２</a></li>
+<li class="off"><a href="17-philosophy.html">哲学</a></li>
+<li class="off"><a href="18-myself.html">自分</a></li>
+<li class="off"><a href="19-etc2.html">その他２</a></li>
+<li class="off"><a href="20-philosophy2.html">哲学２</a></li>
+<li class="off"><a href="21-economics3.html">政治経済３</a></li>
+<li class="off"><a href="22-computer3.html">コンピュータ３</a></li>
+<li class="off"><a href="23-literature3.html">文学３</a></li>
+<li class="off"><a href="24-text2.html">文章２</a></li>
+<li class="off"><a href="25-oldhomepage.html">昔HP</a></li>
+<li class="off"><a href="26-notitled.html">日付無し</a></li>
+<li class="off"><a href="/">サイトトップ</a></li>
+</ul>
+</div>
+<div class="box2">
+<!--
+<div class="sidebar">
+-->
+<!--
+<p><a href="01-story.html">01-物語</a></p>
+<p><a href="02-poem.html">02-詩</a></p>
+<p><a href="03-text.html">03-文章</a></p>
+<p><a href="04-history.html">04-歴史</a></p>
+<p><a href="05-memo.html">05-メモ</a></p>
+<p><a href="06-economics.html">06-政治経済</a></p>
+<p><a href="07-literature.html">07-文学</a></p>
+<p><a href="08-computer.html">08-コンピュータ</a></p>
+<p><a href="09-school.html">09-学校</a></p>
+<p><a href="10-etc.html">10-その他</a></p>
+<p><a href="11-literature2.html">11-文学２</a></p>
+<p><a href="12-economics2.html">12-政治経済２</a></p>
+<p><a href="13-history3.html">13-歴史３</a></p>
+<p><a href="14-computer2.html">14-コンピュータ２</a></p>
+<p><a href="15-language.html">15-言語</a></p>
+<p><a href="16-school2.html">16-学校２</a></p>
+<p><a href="17-philosophy.html">17-哲学</a></p>
+<p><a href="18-myself.html">18-自分</a></p>
+<p><a href="19-etc2.html">19-その他２</a></p>
+<p><a href="20-philosophy2.html">20-哲学２</a></p>
+<p><a href="21-economics3.html">21-政治経済３</a></p>
+<p><a href="22-computer3.html">22-コンピュータ３</a></p>
+<p><a href="23-literature3.html">23-文学３</a></p>
+<p><a href="24-text2.html">24-文章２</a></p>
+<p><a href="25-oldhomepage.html">25-昔のホームページ</a></p>
+<p><a href="26-notitled.html">26-日付の無い日記</a></p>
+-->
+<!--
+<iframe src="../menus/2012.firsthalf_menu.html" class="sideiframe"></iframe>
+</div>
+-->
+<h1>14-コンピュータ２</h1>
+<div id="toc"></div>
+<h2>ロボット</h2>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+struct _obj {
+    int p;
+    int hara;
+};
+int getlp(struct _obj *obj){
+    obj-&gt;p = rand()%4;
+    return 1;
+}
+void action(struct _obj *obj){
+    if(obj-&gt;p==0){
+        printf("はらは");
+        if(obj-&gt;hara==0){printf("減った。");}
+        else{printf("減っていない。");}
+    }
+    if(obj-&gt;p==1){printf("楽しい。");}
+    if(obj-&gt;p==2){
+        printf("はらが減る");
+        obj-&gt;hara=0;
+    }
+    if(obj-&gt;p==3){
+        printf("おいしいごはんを食べた");
+        obj-&gt;hara=1;
+    }
+}
+int main(void){
+    struct _obj obj;
+    obj.hara=1;
+    while(getlp(&obj)){
+        action(&obj);
+    }
+}
+</pre>
+<p>----</p>
+<p>ロボットの今後。</p>
+<p>記憶を作って、覚えて考えるようにする。</p>
+<p>認識を覚えて、知らないものを考える。</p>
+<p>学習と考え方を作る。証明の仕方を覚えて、証明するようにする。</p>
+<p>改良するためには、パラメータとメソッドを増やす。</p>
+<p>ランダムが悪い。優先順位をつければ良い。</p>
+<h2>ロボット</h2>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+struct _obj {
+    int p;
+    int w;
+    int t;
+};
+int getlp(struct _obj *obj){
+    obj-&gt;p = rand()%5;
+    return 1;
+}
+void action(struct _obj *obj){
+    if(obj-&gt;p==0){
+        printf("ここは");
+        if(obj-&gt;w==1){
+            printf("日本です。");
+        }
+        if(obj-&gt;w==2){
+            printf("ドイツです。");
+        }
+    }
+    if(obj-&gt;p==1){
+        printf("日本にやってきました。");
+        obj-&gt;w=1;
+    }
+    if(obj-&gt;p==2){
+        printf("ドイツにやってきました。");
+        obj-&gt;w=2;
+    }
+    if(obj-&gt;p==3){
+        printf("想像力を使います。");
+        printf("りんごは赤い。");
+        obj-&gt;t=1;
+    }
+    if(obj-&gt;p==4){
+        printf("想像力を使います。");
+        printf("りんごは白い。");
+        obj-&gt;t=0;
+    }
+    if(obj-&gt;p==3||obj-&gt;p==4){
+        if(obj-&gt;t==1){
+            printf("正しい。");
+        }
+        else{
+            printf("間違っている。");
+        }
+    }
+}
+int main(void){
+    struct _obj obj;
+    obj.w=1;
+    obj.t=1;
+    while(getlp(&obj)){
+        action(&obj);
+    }
+}
+</pre>
+<p>----</p>
+<p>僕のロボットは、Cでオブジェクト指向だ。パラメータとメソッドを保持し、getとsetをしている。Javaにすると分かりやすいかもしれない。</p>
+<p>ロボットが最初から、りんごが赤いのを正しいと知っているのがおかしい。そこだけ設定ファイルにすればいいかもしれない。</p>
+<p>何が何なら正しいか、覚えて分かるのも良いが、複雑なプログラムになってしまう。</p>
+<p>思考がすべてランダムなのはおかしい。優先順位をつけるのもいいが、それより、思考の後の次の思考を決めて、続けて言うようにすれば良いかもしれない。</p>
+<p>◇◇</p>
+<p>Linuxなんか、ただのスカイネットだ。</p>
+<p>（スカイネットは、ターミネーター２に出てくる、悪いロボットの会社だ。）</p>
+<p>◇◇</p>
+<p>Cでは、close()したときにfree()するのを、JavaやC#では、ガベージコレクタでメモリ管理を自動にできる。</p>
+<p>おそらくC++では、コンストラクタとデストラクタ時に破棄すれば良い。</p>
+<p>そして、使うものを作る。作ったものを使う。</p>
+<p>あとは、Perlのパクリや、それと同様に、JavaのC#が賢い。</p>
+<p>◇◇</p>
+<p>JavaScriptのようなLisp、HTMLのようなLispを作れば、</p>
+<p>簡単にコンパイラが出来るような気がする。</p>
+<p>JavaScriptのHTMLを処理するだけは、Lispと同じだ。</p>
+<p>◇◇</p>
+<p>パソコンは賢い。</p>
+<p>悪いものが多いから、それで賢くなる。</p>
+<p>Lispなど、賢いものも多いから、それで賢くなる。</p>
+<p>◇◇</p>
+<p>自動車は、死ぬのが悪いが、楽だ。</p>
+<p>コンピュータは、壊れるのと、滅びた世界があるのが悪いが、</p>
+<p>便利で、色んな事に使え、情報がある。</p>
+<p>テレビは、馬鹿なのが悪いが、情報があり、面白い。</p>
+<p>競争は、戦う、金もうけしかしないのが悪いが、日本が発展する。</p>
+<p>◇◇</p>
+<p>パソコンのハードウェアにメニューボタンをつけて、押すと「ホーム」を表示し、画面いっぱいの中から、クリックして項目を選ぶ。</p>
+<p>ドコモのケータイのように、４つのボタンを配置し、サブメニューを表示したりする。これも、画面いっぱいを使う。</p>
+<p>アプリケーションは、通常はボタンを表示せず、メニューはメニューボタンを押すと表示するか、マウスを一番上に持って行ったときにスライドで表示する。</p>
+<p>あとは、画面いっぱいにビューを表示する。</p>
+<p>画面いっぱいを使えば分かりやすくなるようで、そういうことはない。今のままの方が分かりやすい。</p>
+<p>◇◇</p>
+<p>自分が治さない方が、病気は治る。</p>
+<p>自分が悪いせいで、みんなが悪く見える。自分は普通だし、みんなも普通だ。</p>
+<p>出来るようになれば、簡単にできる。覚えれば、出来る。</p>
+<p>初期投資をすれば、後で簡単にできる。Wiki記法やプログラミングがそうである。</p>
+<p>完璧なコマンドや関数を作って、簡単に命令して使うのが、パソコンである。</p>
+<p>Wikiのマクロの分かりやすい点は、ページ名を引数として、簡単に自動化できる点である。</p>
+<p>おすすめの言語は、RubyとC#。</p>
+<p>◇◇</p>
+<p>パソコンのおかしな点は、IBM-PCに全て統一した点。</p>
+<p>その前の多様な文化は消え去った。しかし、Windowsが発展した。</p>
+<p>あとは、キーボード配列がおかしい。打ちやすいわけでもないのに、アルファベット順になっていない。</p>
+<p>理由は、タイプライターがそうだったから。</p>
+<p>あとは、マウスでメニュー、ボタン、タスクバー、スクロールをクリックして選択するのがおかしい。</p>
+<p>ダブルクリックとドラッグ・ドロップがさらに難しい。</p>
+<p>アップルが考えたのだろう。なれると使いやすいが。</p>
+<p>◇◇</p>
+<p>Linuxが成り立つのは、インターネットの共有は結構面白くて、</p>
+<p>GNUはストールマンが勝手にコマンドとコンパイラとエディタを作っていて、</p>
+<p>トーバルズがインターネットに投下したカーネルが、みんなの反響を呼び、</p>
+<p>適当にハッカーが集まって作っていると、色んなプロジェクトが出来て、</p>
+<p>それを全部GPLの所有にして、金が無く、インターネットで平等分配していた。</p>
+<p>◇◇</p>
+<p>Linuxはクズだ。論外なのに、グーグルなどで多い。</p>
+<p>FLOWと良く似ている。</p>
+<p>◇◇</p>
+<p>Linuxは、どのインターネットでも悲惨だから、やめた方が良い。</p>
+<p>マイクロソフトやアップルの世界が分からなくなる。</p>
+<p>悲惨に、カーネルのコードは、見ると誰でも分かるのが、Linuxだ。</p>
+<p>なぜか、Androidのカーネルとして採用されている。</p>
+<p>◇◇</p>
+<p>最近、右翼になったが、昔から自由、平等の左翼だ。</p>
+<p>オープンソースは普通だ。Mac OS XもBSDだ。サーバーは、Linuxが普通だ。</p>
+<p>コードは、Cではポインタがオブジェクトを持ち、それぞれの関数の中で、同じデータを保持する。</p>
+<p>メモリともいうが、ポインタだけをコピーした方が楽だ。</p>
+<p>あとは、変数名で分かる。</p>
+<p>普通、返り値と引数を統一してオブジェクト指向を行う。</p>
+<p>Getを行い、ポインタを取得する。＝で代入しても良い。</p>
+<p>それから、繰り返しと代入がある。辿って分かれば良い。</p>
+<p>Javaは、特に同じだが、賢い。C#も、特に同じだが、さらに機能が多い。</p>
+<p>◇◇</p>
+<p>普通の機械の方が良い。時計や車の方が面白い。</p>
+<p>人間は、キモイ方が賢い。</p>
+<p>どのように行うか、その原因はなぜか、を考えれば良い。</p>
+<p>かもしれない、おそらく、はずだ、と考えれば良い。</p>
+<p>Windowsは、中身が見れないのが悪い。GNU/Linuxのハッカーが多いのは、中身が見れるから、誰でも分かるからだ。</p>
+<p>それはどこから来たか。それは、誰がどうしたか。</p>
+<p>◇◇</p>
+<p>Linuxは、UNIX互換OSで、コマンドラインでは安定して動く。</p>
+<p>フリーで、オープンソース、みんなで作るのが賢い。</p>
+<p>作り方を馬鹿とはいうが、Wikiも似たようなものだし、Windowsだって同じように作っている。</p>
+<p>プログラミングでは、データを関数で運んで、処理する部分で処理している。</p>
+<p>UNIXは、入出力とパーミッション、マルチタスクとファイルシステムのシンプルなOSだが、</p>
+<p>LinuxはUNIXよりは賢い。</p>
+<p>他のオープンソースなソフトウェアは、スクリプト言語のPerlやPHP、コンパイラのGCC、</p>
+<p>画像編集ソフトのGIMP、オフィススイートのLibreOffice、OSのFreeBSDやOpenSolarisなどがある。</p>
+<p>あとは、GoogleのOS、Androidもオープンソースである。</p>
+<p>良い点は、無料で、コードを見れるところだ。</p>
+<p>Windowsでは、グラフィックの表示は、デバイスコンテキストを操作して行う。</p>
+<p>Windowsがウィンドウを管理しているため、ハンドルを用いる。</p>
+<p>詳しくは、検索して。</p>
+<p>MSDNライブラリ：<a href="http://msdn.microsoft.com/ja-jp/library/default.aspx">http://msdn.microsoft.com/ja-jp/library/default.aspx</a></p>
+<p>ユーザーインターフェース：<a href="http://msdn.microsoft.com/ja-jp/library/65dtx4a4.aspx">http://msdn.microsoft.com/ja-jp/library/65dtx4a4.aspx</a></p>
+<p>ウィンドウオブジェクト：<a href="http://msdn.microsoft.com/ja-jp/library/kc6x1ya0.aspx">http://msdn.microsoft.com/ja-jp/library/kc6x1ya0.aspx</a></p>
+<p>OpenOffice.orgやMozillaのWindows版は意味がない。Windowsが全部やっているのに、MS/Windowsと戦っている。</p>
+<p>オープンソースは全部GNU/Linuxの方が良い。みんな同じオープンソースコードだ。</p>
+<p>Linuxは醜い。コンパイラ、ライブラリ、カーネルとシステムコールに、インタープリタ、X、GTK+がある。インタープリタがXとGTK+を表示していると、最悪に見える。</p>
+<p>給与を払わない。Linuxのものになる。誰も更新していない。</p>
+<p>QtとGTK+アプリケーションが共存していると、キモく見える。KDEとGNOMEが戦っていると、最悪に見える。</p>
+<p>Androidに統一すべきなのだ。</p>
+<p>ディストリビューションは、Red Hat、SuSE、Debian、Ubuntuと無数にあるのが悪い。パッケージ管理システムも、バージョン管理も馬鹿に多い。</p>
+<p>Windowsみたいに出来ないなら、しなくていい。何かになるように見える。</p>
+<p>◇◇</p>
+<p>データを運んで、処理して表示する。データは、メモリのどこかにあり、たまに操作する。</p>
+<p>◇◇</p>
+<p>世界と違うになる。</p>
+<p>可能性を考える。</p>
+<p>することを考える。ただ従うだけでなく、何かの決まりごとや原因と結果を、たらればで分かる。</p>
+<p>Linuxは、みんなで作っているのが賢い。システム的には、シェルスクリプトの技術と、aptitudeが賢い。</p>
+<p>あとは、ウィンドウを管理しているXと、その上の技術が賢い。X以上がカスタマイズできる。</p>
+<p>GNOMEとKDEは、コンポーネント技術と見た目、統一性が賢い。</p>
+<p>サーバーサイドは、無数に技術がある。スクリプトと言語、SQL、サーバーが多様で、安定している。</p>
+<p>あとは、カーネルのコードが見れるのが優れている。</p>
+<p>劣っている点は、無料では給与が払われない。フリーソフトだから、それでいい。</p>
+<h2>Google 16:06</h2>
+<p>Googleは、子供だ。</p>
+<p>Microsoftは、大人だ。</p>
+<h2>パソコン 16:54</h2>
+<p>パソコンには、まず、Windowsのスタートメニューと終了の方法、タスクバーがある。</p>
+<p>これを使って、アプリケーションを実行する。</p>
+<p>アプリケーションには、ウィンドウごとに、最大化、最小化、閉じる、のボタンがあり、</p>
+<p>メニューとボタンから機能を選び、ビューに表示して編集する。</p>
+<p>マウスとキーボードを使った機械だ。</p>
+<h2>アプリケーション 16:58</h2>
+<p>アプリケーションは、インターネットエクスプローラは、インターネットを表示し、移動する。</p>
+<p>エクスプローラは、ファイルを選択し、作り、削除し、コピーする。</p>
+<p>テキストエディタは、テキストの編集と保存を行う。</p>
+<p>ワードは、高度な文章を編集する。</p>
+<p>エクセルは、表計算をする。</p>
+<p>パワーポイントは、プレゼンテーションを作る。</p>
+<p>Visual Studioは、アプリケーションとソースコードを開発し、コンパイルする。</p>
+<p>他に、お絵かきソフトや、音楽プレイヤーなどがある。</p>
+<h2>ハードウェア 16:58</h2>
+<p>ハードウェアから見ると、起動時にOSを起動する。</p>
+<p>機械語をインテルのCPUが計算している。</p>
+<p>おそらく、論理和と論理積で2進数を計算している。</p>
+<p>ハードウェアに保存されたデータとプログラムをメモリに読み込んで</p>
+<p>CPUがその機械語セット通りに、プログラムを実行する。</p>
+<p>キーボードとマウスで、イベント駆動を行う。</p>
+<p>周辺機器は、USBなど。</p>
+<p>表示は、ディスプレイやモニターで行う。</p>
+<h2>パソコン 17:01</h2>
+<p>パソコンは、そのままで良い。</p>
+<p>さらに簡単にしなくていい。十分簡単だ。</p>
+<p>クラシック音楽のように残せばいいように見える。</p>
+<h2>作る 21:45</h2>
+<p>作るためには、仕組みを知って考えるしかない。</p>
+<p>しかし、プログラミングは、そういう風には出来ない。</p>
+<p>知性が必要なのだ。</p>
+<h2>戦わない 19:21</h2>
+<p>僕は、何も戦わないに治った。</p>
+<p>その方がつらい。戦っていた方が楽だ。</p>
+<p>いつも通り、ビルゲイツやヒトラーを倒せばいい。</p>
+<h2>ビルゲイツ 19:22</h2>
+<p>ビルゲイツを倒すためには、どうしたらいいか。</p>
+<p>アンドロイドを自社製品に採用すれば、すぐ倒せる。</p>
+<p>Googleは賢い。</p>
+<p>そうすると、ゲイツにあまり意味がない。</p>
+<h2>ゲイツ 19:23</h2>
+<p>ゲイツは倒さない。どうでもいいことにする。</p>
+<p>誰が見ても、ゲイツが儲けると、世界が発展するから、良い。</p>
+<h2>Linux 19:26</h2>
+<p>Linuxはどうするか。</p>
+<p>あれはバカだが、分かる。</p>
+<p>コンパイルしてネットで会話するとよく分かる。</p>
+<p>だが、低い。</p>
+<h2>Linux 19:27</h2>
+<p>Linuxはやめた方が良い。</p>
+<p>倒さないが、使わない方が良い。</p>
+<p>狂って、後でつらくなる。</p>
+<p>つらいから、悪い。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

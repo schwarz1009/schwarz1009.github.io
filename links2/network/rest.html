@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>RESTの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div><h1>RESTの世界観</h1>
+<p>RESTの世界観。<!--<a href="../software/linux_mail.html">Linux メール</a>や<a href="mail_server.html">メールサーバー</a>も参照のこと。--></p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>REST</h1>
+<h2>RESTとは</h2>
+<p>RESTとはネットワーク上のリソースを遠隔から操作するためのWebサービスの設計思想。</p>
+<p>RESTを実装したWebアプリケーションを「RESTful」と呼ぶ。</p>
+<p>RESTfulなWebサービスでは、RESTの仕様に基づいてリモートからWebやデータベースなどのリソースにアクセスすることができる。</p>
+
+<h2>SOAPとREST</h2>
+<p>RESTが登場する以前から、SOAPと呼ばれる遠隔ネットワーク通信の方式が使われていた。</p>
+<p>SOAPでは、まるで関数のように外部のリソースにおけるメソッドを遠隔で呼び出す。この時、データフォーマットにはXMLを使う。</p>
+<p>これに対して、RESTではXMLのAtomあるいはJSONといった「データ」を中心にやり取りを行い、URLをベースとしたリクエスト（GET, POST, PUT, DELETEなど）でやり取りを行う。</p>
+
+<h2>RailsやJavaScriptなど多くの技術で使われる</h2>
+<p>RESTは、RailsやJavaScriptなど、多くのモダンなWeb技術で使われている。</p>
+<p>たとえば、Railsの自動作成機能ScaffoldでCRUD操作を自動作成すると、ルーティングにGETやPOSTだけではなくRESTfulなメソッドが多数作成される。rails routesで表示されるGETやPOST以外のわけのわからないリクエストの正体はRESTfulメソッド。</p>
+<p>RailsではHTMLデータだけではなくAjaxなどから用られることを想定したJSONデータの提供機能もHTMLと同様に自動で作成され、HTMLと同様にJSONデータを簡単に公開できる。</p>
+<p>JavaScriptでは、JSONやRESTとの親和性が強く、Web APIなどでもREST技術を用いたRESTfulなサービスが提供される。</p>
+<p>JavaScriptフレームワークのひとつBackbone.jsでは、クライアントサイドのJavaScriptでは難しいとされてきたモデルすなわちデータベースの処理をRESTを用いることで実現している。</p>
+
+<h2>RESTful APIとGraphQL</h2>
+<p>フロントエンドとバックエンドを繋げるには、APIを利用します。</p>
+<p>APIとして、一般的にはRESTful APIが使われます。RESTful APIはURIのようなエンドポイントによってAPI操作を行い、フロントエンドでリクエストした情報をバックエンドのサーバーから返します。</p>
+<p>ですが、エンドポイントが分からないといった場合も稀にあります。</p>
+<p>そのような場合には、GraphQLという技術を使用することで、エンドポイントをひとつだけに制限し、そこからすべての情報を得ることができます。</p>
+<ul>
+<li><a href="https://www.hexabase.com/column/restful-api-graphql-connect-frontend-backend/">Restful API、GraphQL…フロントエンドとバックエンドをつなげる方法 | Hexabase</a></li>
+</ul>
+<p>フロントエンドとバックエンドについては<a href="cgi.html">CGI</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.12</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Webサーバー</h2>
+<p><a href="web.html">Webサーバ</a>を参照のこと。</p>
+
+<h2>Web API</h2>
+<p><a href="web_api.html">Web API</a>を参照のこと。</p>
+
+<h2>Ruby on Rails</h2>
+<p><a href="../prog_lang/ruby_on_rails.html">Ruby on Rails</a>を参照のこと。</p>
+
+<h2>Backbone.js</h2>
+<p><a href="../prog_lang/javascript_framework_backbone_js.html">Backbone</a>を参照のこと。</p>
+
+<h2>JSON</h2>
+<p><a href="../prog_lang/json.html">JSON</a>を参照のこと。</p>
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

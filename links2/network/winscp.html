@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>WinSCP関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>WinSCP関連の世界観</h1>
+<p>WinSCPに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>WinSCP</h1>
+<h2>WinSCP</h2>
+<p>Windowsで使えるGUIのFTPクライアント。</p>
+
+<h2>ローカルとリモートの方向に注意</h2>
+<p>WinSCPでは、ローカルとリモートの方向に注意しましょう。</p>
+<p>特に、別のパソコンにインストールしたWinSCPを新しく使う場合、「同期」をクリックして何気なく一覧を見ると、たくさんの転送が表示されますが、初期状態では「ローカル←リモート」になっていることが多いのです。</p>
+<p>この状態で同期をしてしまうと、まさに、最新の更新内容が全て消えてしまいます。</p>
+<p>ホームページの更新を行う時は、かならず「ローカル→リモート」で同期するようにしなければなりません。</p>
+<p>後日注記：同期を行う際は、「ローカル→リモート」を選択した上で、「次回も同じオプションを使用する」にチェックを入れておこう。</p>
+
+<h2>WinSCPでgit関係のフォルダやファイルを除外する</h2>
+<p>環境設定→転送で、「プリセットの詳細」を「デフォルト」にして「編集」を押し、「転送設定」ダイアログが表示されたら「その他」項目の「編集」をクリックし、マスクの編集画面で含めないファイルに「.gitkeep」、含めないディレクトリに.gitを設定する。あとはOKボタンを押していく。ファイルマスクとなる文字は、「| .gitkeep; .git/」になる。</p>
+<p>僕は</p>
+<pre>
+| .gitkeep; .gitignore; Thumbs.db; .git/
+</pre>
+<p>という設定にしている。</p>
+<ul>
+<li><a href="https://nelog.jp/winscp-git-exclusion">WinSCPでアップロード時にGit関係のフォルダやファイルを除外する方法 - 寝ログ</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

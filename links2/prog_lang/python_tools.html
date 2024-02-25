@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Pythonのツールの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Pythonのツール</h1>
+<p>Pythonのツールです。<a href="python.html">Python</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>開発ツール</h1>
+<h2>PyCharmを使おう</h2>
+<p>Pythonの開発をするには、ジェットブレインズ社のPyCharmが便利です。</p>
+<p>たとえば、コードの途中にブレークポイントを設定し、ある場所まで動かした上で停止させ、その時の変数の値を確認したりすることができます。</p>
+<p><a href="intellij.html">IntellJ IDEA</a>も参照のこと。</p>
+
+<h1>GTK+/GNOME</h1>
+<h2>Python GTK+ 3</h2>
+<p>PythonでGTK+アプリケーションを作る。</p>
+<ul>
+<li><a href="http://python-gtk-3-tutorial.readthedocs.io/en/latest/">The Python GTK+ 3 Tutorial</a> - 日本語訳もありますが、僕は英語で読むのをお勧めします。</li>
+<li><a href="https://documents.mikeforce.net/PyGObject-Tutorial/html/index.html">Python GTK+ 3 チュートリアル</a></li>
+</ul>
+<p><a href="../linux/gtk_bindings.html">GTK言語バインディング</a>も参照のこと。</p>
+
+<h1>さまざまな実装</h1>
+<h2>Jython</h2>
+<p>JavaによるPythonの実装。Javaコンポーネントを利用可能なため、Swing、AWT、SWTを使ったプログラムを書いたり出来る。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Jython">Jython - Wikipedia</a></li>
+</ul>
+<p><a href="java_langs.html">Java（各種言語）</a>も参照のこと。</p>
+
+<h2>IronPython</h2>
+<p>.NET FrameworkにおけるPythonの実装。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IronPython">IronPython - Wikipedia</a></li>
+</ul>
+<p><a href="dotnet.html">.NET</a>も参照のこと。</p>
+
+<h1>Pythonの高速化</h1>
+<h2>PyPy</h2>
+<p>PyPyはPythonによって実装されたセルフホスティングなコンパイラ。正確にはPythonの低レベル向けのサブセットであるRPythonで実装されている。</p>
+<p>PyPyのメリットは、公式のCPythonよりもパフォーマンスが良いこと。JITコンパイル機能を主な開発目標としており、JITコンパイルによってCPythonよりも高速に動作する。場合によっては数十倍以上。</p>
+<ul>
+<li><a href="https://qiita.com/ta_ta_ta_miya/items/33253e9bcbb7034f088d">PyPyの基礎知識まとめ その1 - Qiita</a></li>
+</ul>
+
+<h2>Cython</h2>
+<p>CythonはPythonのコードをC/C++に変換することで高速化する。</p>
+<p>ただし、静的な型を明示するなどのコードの修正が必要になることもある。数十倍以上の高速化が期待できる。</p>
+<p>CythonやNumbaに言えることとして、プログラム全体をコンパイルするよりも、ボトルネックとなっている一部の処理だけにコンパイルをかけた方がはるかに高速化のメリットが高い。PyPyなども含め、場合によっては低速化することもあるため、重要な部分だけを高速化し、また静的コンパイルだけに頼るのではなくアルゴリズムの改善も行うことが必須条件。また、CPUではなくメモリやI/Oのアクセスには高速化のメリットを享受できないことがある。</p>
+<ul>
+<li><a href="https://qiita.com/pashango2/items/45cb85390193d97523ca">深入りしないCython入門  - Qiita</a></li>
+</ul>
+
+<h2>Numba</h2>
+<p>Numbaは、Pythonの関数ごとにJITコンパイルをかけることができる。コードの修正は最低限で、数十倍以上の高速化が期待できる。</p>
+<ul>
+<li><a href="https://qiita.com/toyolab/items/b5d95bd38b3c7c66b510">PythonコードをNumbaで高速化したときのメモ - Qiita</a></li>
+</ul>
+
+<h1>Webフレームワーク標準</h1>
+<h2>WSGI</h2>
+<p>WSGIはPythonのWebフレームワーク向けの標準規格。標準を定めることで、どのようなフレームワークを使う場合でも、WSGIに対応したWebサーバを使うことができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Web_Server_Gateway_Interface">Web Server Gateway Interface - Wikipedia</a></li>
+</ul>
+
+<h1>Rails風フレームワーク</h1>
+<h2>Django</h2>
+<p>Pythonによる、MVCのWebアプリケーションフレームワーク。</p>
+<p><a href="python_django.html">Django</a>を参照のこと。</p>
+
+<h2>Flask</h2>
+<p>Pythonによるマイクロフレームワーク。Bottleと並んで有名で、フルスタックのDjangoよりも軽量。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Flask">Flask - Wikipedia</a></li>
+</ul>
+
+<h2>Bottle</h2>
+<p>Pythonによるマイクロフレームワーク。Flaskと並んで有名で、フルスタックのDjangoよりも軽量。</p>
+<ul>
+<li><a href="https://qiita.com/masaibar/items/e3b6911aee6741037549">Python初心者がBottleを使ってみたら案外簡単に動いてくれた - Qiita</a></li>
+</ul>
+
+<h2>TurboGears</h2>
+<p>PythonによるWebフレームワーク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TurboGears">TurboGears</a></li>
+</ul>
+
+<h2>Pylons/Pyramid</h2>
+<p>Pylons/Pyramidは、最近のWebフレームワークの中でも特に新しいもののひとつで、WSGIに準拠している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Pylons">Pylons - Wikipedia</a></li>
+</ul>
+
+<h1>Webアプリケーションサーバ</h1>
+<h2>Zope</h2>
+<p>古くから存在するPythonによるWebアプリケーションサーバ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Zope">Zope - Wikipedia</a></li>
+</ul>
+<p><a href="../network/web_cms.html">CMS・ブログエンジン</a>も参照のこと。</p>
+
+<h1>マイクロコントローラ向け</h1>
+<h2>MicroPython</h2>
+<p>デスクトップ向けのCPythonよりも制限の厳しいマイクロコントローラで動くPython。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MicroPython">MicroPython - Wikipedia</a></li>
+</ul>
+
+<h1>パッケージ管理システム</h1>
+<h2>pip</h2>
+<p>pipはPythonのパッケージ管理ツール。パッケージのインストールが簡単にできる。</p>
+<ul>
+<li><a href="https://qiita.com/saitoxu/items/18e6a1c8c7840029147e">Pythonを使う上で欠かせないパッケージ管理システムpipの使い方 - Qiita</a></li>
+</ul>
+<p><a href="python_intro_advanced.html">Python入門（応用・モジュール）</a>も参照のこと。</p>
+
+<h2>Anaconda</h2>
+<p>AnacondaはPythonのパッケージ管理ツールおよびディストリビューション。機械学習やデータサイエンスに必要なモジュールが最初から導入されている。</p>
+<p>最初にPythonを導入する時にAnacondaを選ぶことで、すぐにデータサイエンスを始めることができる。</p>
+<div class="edit_date">
+<p>2023.05.15</p>
+</div>
+
+<h1>Webブラウザ上でPython</h1>
+<h2>PyScript</h2>
+<p>PyScriptは、Webブラウザ上でPythonコードを動かすための技術。</p>
+<p>pyscript.jsをロードすることで、HTMLの中に記述されたPythonコードをWebブラウザ上で動かすことができる。</p>
+<p>DOMのように、HTML要素を操作することも可能。</p>
+<p>Anacondaで有名なAnaconda社が開発した。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2023/04/monthly-python-2304">WebブラウザでPythonが動作する！PyScriptの詳解 | gihyo.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.05</p>
+</div>
+
+<h1>Pythonによる主なソフトウェア</h1>
+<h2>Portage</h2>
+<p>Portageは、Gentoo Linuxのパッケージ管理システム。</p>
+<p><a href="../linux/gentoo.html">Gentoo</a>も参照のこと。</p>
+
+<h2>DNF/Yum</h2>
+<p>DNF/Yumは、Fedoraのパッケージ管理システム。</p>
+<p><a href="../linux/redhat_dnf_yum.html">Red Hat（DNF/Yum）</a>も参照のこと。</p>
+
+<h2>MyPaint</h2>
+<p>MyPaintは、オープンソースのペイントソフトウェア。</p>
+<p><a href="../art/mypaint.html">MyPaint</a>も参照のこと。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
