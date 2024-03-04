@@ -187,6 +187,45 @@ f'(x)=\lim_{h \to 0}\frac{f(x + h)-f(x)}{h}
 <li><a href="http://www.latex-cmd.com/struct/contents.html">LaTeXコマンド集 - 目次</a></ul>
 </ul>
 
+<h2>イコールの位置で整列させる</h2>
+<p>TeXやMathJaxにおいて、イコール（=の記号）などの特定の文字の位置で全体を整列させるには、まず、数式を</p>
+<pre>
+\begin{eqnarray}
+</pre>
+<p>と、</p>
+<pre>
+\end{eqnarray}
+</pre>
+<p>で囲み、その上で整列したい位置の文字（=など）の両端に&を付けて、</p>
+<pre>
+&=&
+</pre>
+<p>などとする。また、改行は、</p>
+<pre>
+\\
+</pre>
+<p>とする。</p>
+<p>たとえば、具体例として、</p>
+<pre>
+\begin{eqnarray}
+(a+b)^2 &=& a \times (a + b) + b \times (a + b) \\
+&=& a^2 + ab + ab + b^2 \\
+&=& a^2 + 2ab + b^2
+\end{eqnarray}
+</pre>
+<p>ならば、</p>
+<p>\[
+\begin{eqnarray}
+(a+b)^2 &=& a \times (a + b) + b \times (a + b) \\
+&=& a^2 + ab + ab + b^2 \\
+&=& a^2 + 2ab + b^2
+\end{eqnarray}
+\]</p>
+<p>となる。</p>
+<div class="edit_date">
+<p>2024.03.04</p>
+</div>
+
 <h2>科学論文や出版社向け</h2>
 <p>MS-Wordと比べると、Wordがビジネス向けの書類などを作れるワープロであるのに対して、TeXは科学者や学生による科学論文、あるいは出版社による書籍の出版向けであると言われる。</p>
 <p>僕のようにAdobe Illustratorを使う人間から見ると、TeXとイラレは出版やデスクトップパブリッシング（DTP）で使われる主要なソフトであり、完全に文書として読まれる小説や専門書のような出版ならTeXだが、写真をふんだんに使った雑誌やデザインポスターなどであればイラレを使う。</p>
