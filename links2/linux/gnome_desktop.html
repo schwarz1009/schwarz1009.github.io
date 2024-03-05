@@ -202,10 +202,11 @@
 
 <h1>拡張とデバッグシェル</h1>
 <h2>拡張とLooking Glass</h2>
-<p>Looking GlassはGNOMEのデバッグシェルで、JavaScriptのコードスニペットを実行することができる。GNOME3の拡張を作るために使える。</p>
-<p>GNOME 3の内部のアーキテクチャとして、GNOME-Shellの拡張機能や、GNOME-Shell自体のコードの多くは、JavaScript/CSSで構成されている。FirefoxのSpiderMonkeyをMozillaから切り出した、mozjsをベースとしたJavaScriptバインディングであるgjsを用いている。</p>
-<p>GNOME-ShellではUIエレメントをgjsから操作できる。</p>
-<p>Looking GlassはGNOMEのデバッグシェル。GNOME-Shellを実行中に、「Alt+F2」を押すことで「コマンドを入力」ダイアログが表示されるが、この中に「lg」と入力すると、Looking Glassが起動する。Looking Glassのシェルでは、GNOME-Shellの内部をインタラクティブにJavaScriptで操作できる。</p>
+<p>Looking GlassはGNOMEに用意されている、プログラマ向けのデバッグシェル。任意のJavaScriptのコードスニペットを実行できる。</p>
+<p>Looking Glassは、GNOME3の拡張を作る際に、インタラクティブなコードを試すために使える。</p>
+<p>GNOME-Shellにおける拡張機能や、GNOME-Shellそのものは、内部のアーキテクチャとして、JavaScript/CSSといったWeb技術が使われている。gjsは、MozillaのSpiderMonkeyから切り出されたmozjsをベースにしたJavaScriptバインディング。</p>
+<p>GNOME-Shellにおいて、UIの要素（エレメント）をgjsから操作することができる。</p>
+<p>GNOME-Shellの実行中に、「Alt+F2」を押すと「コマンドを入力」ダイアログが表示される。ここに「lg」と入力すると、Looking Glassの画面が表示される。このLooking Glassのシェルの中で、GNOME-ShellをJavaScriptで操作することができる。</p>
 <p>以下のページが参考になります。</p>
 <ul>
 <li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0492">第492回　GNOME Shellの拡張機能を作ってみよう：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
