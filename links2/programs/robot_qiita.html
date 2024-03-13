@@ -83,10 +83,16 @@ int getlp(struct _obj *obj){
 void action(struct _obj *obj){
     if(obj-&gt;p==0){
         printf("はらは");
-        if(obj-&gt;hara==0){printf("減った。\n");}
-        else{printf("減っていない。\n");}
+        if(obj-&gt;hara==0){
+            printf("減った。\n");
+        }
+        else{
+            printf("減っていない。\n");
+        }
     }
-    else if(obj-&gt;p==1){printf("楽しい。\n");}
+    else if(obj-&gt;p==1){
+        printf("楽しい。\n");
+    }
     else if(obj-&gt;p==2){
         printf("はらが減る\n");
         obj-&gt;hara=0;
