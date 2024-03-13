@@ -109,21 +109,21 @@ void action(struct _obj *obj){
     if(obj-&gt;p==0){
         printf("はらは");
         if(obj-&gt;hara==0){
-            printf("減った。");
+            printf("減った。\n");
         }
         else{
-            printf("減っていない。");
+            printf("減っていない。\n");
         }
     }
     if(obj-&gt;p==1){
-        printf("楽しい。");
+        printf("楽しい。\n");
     }
     if(obj-&gt;p==2){
-        printf("はらが減る");
+        printf("はらが減る\n");
         obj-&gt;hara=0;
     }
     if(obj-&gt;p==3){
-        printf("おいしいごはんを食べた");
+        printf("おいしいごはんを食べた\n");
         obj-&gt;hara=1;
     }
 }
@@ -159,36 +159,36 @@ void action(struct _obj *obj){
     if(obj-&gt;p==0){
         printf("ここは");
         if(obj-&gt;w==1){
-            printf("日本です。");
+            printf("日本です。\n");
         }
         if(obj-&gt;w==2){
-            printf("ドイツです。");
+            printf("ドイツです。\n");
         }
     }
     if(obj-&gt;p==1){
-        printf("日本にやってきました。");
+        printf("日本にやってきました。\n");
         obj-&gt;w=1;
     }
     if(obj-&gt;p==2){
-        printf("ドイツにやってきました。");
+        printf("ドイツにやってきました。\n");
         obj-&gt;w=2;
     }
     if(obj-&gt;p==3){
         printf("想像力を使います。");
-        printf("りんごは赤い。");
+        printf("りんごは赤い。\n");
         obj-&gt;t=1;
     }
     if(obj-&gt;p==4){
         printf("想像力を使います。");
-        printf("りんごは白い。");
+        printf("りんごは白い。\n");
         obj-&gt;t=0;
     }
     if(obj-&gt;p==3||obj-&gt;p==4){
         if(obj-&gt;t==1){
-            printf("正しい。");
+            printf("正しい。\n");
         }
         else{
-            printf("間違っている。");
+            printf("間違っている。\n");
         }
     }
 }
