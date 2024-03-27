@@ -145,7 +145,7 @@ $ ls -a
 <p>ドットファイルは、.bashrcなど、アプリケーションにとってはとても重要なファイルであることが多いため、良く注意して管理しよう。</p>
 <p><a href="linux_unix_admin.html">UNIXシステム管理（６．システム情報と設定）</a>も参照のこと。</p>
 
-<h2>ホームディレクトリを指す別の表現（~と$HOME）</h2>
+<h2>ホームディレクトリを指す別の表現（~とHOME）</h2>
 <p>ホームディレクトリを指す別の表現として、UNIXでは昔から~（チルダ）を用います。</p>
 <p>たとえば、ホームディレクトリの中の.bashrcをviで編集するためには、</p>
 <pre>
@@ -159,14 +159,14 @@ $ vi .bashrc
 </pre>
 <p>この場合、カレントディレクトリが変わることに注意しましょう。</p>
 <p>また、cdコマンドはディレクトリ名を指定せずに実行するとホームディレクトリに移動するため、この場合はcd ~の「~」を省略できます。</p>
-<p>また、環境変数$HOMEも、~と同様に、ユーザーのホームディレクトリを指し示す環境変数です。</p>
+<p>また、環境変数HOMEも、~と同様に、ユーザーのホームディレクトリを指し示す環境変数です。これは$HOMEから参照できます。</p>
 <ul>
 <li><a href="https://www.ibm.com/docs/ja/aix/7.1?topic=c-cd-command">cd コマンド - IBM Documentation</a></li>
 <li><a href="https://qiita.com/tmshn/items/ed4d1ca9852c1a507f19">[Linux] カレントユーザのホームディレクトリはどこから取得すべきか #Linux - Qiita</a></li>
 <li><a href="https://blog.s-giken.net/459.html">Linuxで使用される主な環境変数・PATH、HOME、PS1・printenv、set、declare | エス技研</a></li>
 </ul>
 <div class="edit_date">
-<p>2024.03.26</p>
+<p>2024.03.26-27</p>
 </div>
 
 <h2>グループはユーザの権限を決める</h2>
