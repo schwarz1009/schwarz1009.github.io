@@ -1,0 +1,74 @@
+body { background: #ffffff; line-height: 1.5; padding: 50; font-size: 15.5px; }
+A:link { color: #884444; }
+A:visited { color: #884444; }
+A:active { color: #884444; }
+A:hover { color: #884444; }
+
+/*
+.p2   {
+     float:left;
+     margin:0px;
+     display:block;
+     width:60px;
+     margin-top:5px;
+    }
+*/
+
+.on,.off  {float:left;display:block;}
+
+.box1 {height:26px;}
+
+.on  {
+      background-color:#ff3333;
+      width:120px;
+      height:26px;
+      margin-right:5px;
+      margin-top:5px;
+      text-align:center;
+     }
+
+.off {
+      background-color:#ffcccc;
+      width:120px;
+      height:26px;
+      margin-right:5px;
+      margin-top:5px;
+      text-align:center;
+     }
+
+.on a         {
+               text-decoration:none;
+               display:block;
+               margin-top:5px;
+              }
+.on a:link    {color:#ffffff;}
+.on a:visited {color:#ffffff;}
+.on a:hover   {color:#ffffff;}
+
+.off a         {
+                text-decoration:underline;
+                display:block;
+                margin-top:5px;
+               }
+.off a:link    {color:#000000;}
+.off a:visited {color:#000000;}
+.off a:hover   {color:#ff0000;}
+
+.box2
+    {
+     clear:both;
+     border-top:solid 10px #ff3300;
+    }
+ul.box1  {margin:0px;}
+
+.mokuji
+{
+    float: right; line-height: 1.5; margin: 25px; padding: 25px; border: 1px solid #888888; width: 250px;
+    background-color:#ffffff;
+}
+
+.mokuji p
+{
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+}

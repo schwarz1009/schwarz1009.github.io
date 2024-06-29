@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Xamarin関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">モバイルの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/mobile_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Xamarinの世界観</h1>
+<p>Xamarinに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Xamarin</h1>
+<h2>Xamarin</h2>
+<p>Xamarinは、MonoやGNOMEの開発で知られるスーパープログラマ、ミゲル・デ・イカザ氏の会社Xamarinによる、モバイル向けのクロスプラットフォームな.NET環境。</p>
+<p>Monoと同様オープンソースだが、iOS向けにもAndroid向けにも対応できるクロスプラットフォーム性が売りで、.NET系のC#などの言語を用いて、モバイル向けのアプリケーションを開発することができる。</p>
+<ul>
+<li><a href="https://qiita.com/amay077/items/38ee79b3e3e88cf751b9">Xamarin(ザマリン) とはなんぞや - Qiita</a></li>
+</ul>
+
+<h2>XimianからXamarinへ</h2>
+<p>そもそも、GNOMEの創始者であるミゲル・デ・イカザ氏は、GNOMEの開発に<a href="../network/corba.html">CORBA</a>を用いて、libcやxlibを除いて何のコードの再利用もされないUNIXの現状に一石を投じ、「コードをきちんと再利用しよう」と主張しながら、同時にツールキットQtがフリーでなかたっため（<a href="../linux/motif.html">Motif</a>を参照のこと）、GNOMEプロジェクトを設立したUNIX界のスーパープログラマです。</p>
+<p>ミゲルは、GNOMEの開発をC言語でするだけでは飽き足らず（当初から<a href="../linux/gtk.html">GTK</a>は言語バインディングを作りやすいことを長所としていた）、マイクロソフトの技術でありながら標準化された<a href="../prog_lang/dotnet.html">.NET</a>を用いてGNOMEアプリケーションを開発するために、Linux上で動く.NET技術である<a href="../prog_lang/mono.html">Mono</a>を開発しました。また、オープンソースなVisual Studioの代替として使うことのできる統合開発環境であるMonoDevelopやGTKの.NETバインディングであるGTK#も開発されました。</p>
+<p>また、（時間が前後しますが）ミゲルはGNOMEのサポートを行う企業Ximianを創業し、メールアプリケーションEvolutionや表計算ソフトウェアGnumericを開発。このXimianという企業はNovellに買収されます。<a href="../linux/ximian.html">Ximian</a>を参照のこと。</p>
+<p>しかしながら、NovellがさらにAttachmateに買収されたりなどする後に、Monoチームはプロジェクトの価値を疑問視され、その後にレイオフされてしまいます。</p>
+<p>そこで、レイオフされたミゲルたちMonoチームはXamarinという新しい会社を創設。Xamarinでは、Linux向けだけではなく、iOSやAndroid向けにも、.NETの言語で開発されたアプリケーションをクロスプラットフォーム向けにひとつのコードで対応させられるような「モバイル向けの.NET環境」を開発しました。</p>
+<p>このXamarinが、マイクロソフトに買収され、ミゲルはオープンソース界のLinuxハッカーでありながらマイクロソフトの傘下に入ります。</p>
+
+<h2>Xamarinは.NET 6で統合される予定</h2>
+<p>Xamarinは、<a href="../prog_lang/dotnet_core.html">.NET Core</a>から名称を変更した.NETの次期バージョン.NET 6で統合される予定です（2021年時点でのバージョンは5）。</p>
+<p>.NET Coreは、そもそもMonoとよく似た立ち位置にあるオープンソースなLinux/Macなどでも動作するクロスプラットフォームな.NET環境でしたが、マイクロソフトは.NET Coreと従来のWindows向けの.NET Frameworkを統合して「.NET」という名前にしました。</p>
+<p>.NET 6でXamarinが統合されれば、ひとつの.NETプロジェクトから、Windowsにも、Linuxにも、Macにも、そしてiOSやAndroidにも対応するアプリケーションが開発できることになり、デスクトップ・サーバ・モバイルのプラットフォームに.NETだけで対応できるため、.NET開発者にとっては嬉しいのではないでしょうか。</p>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
