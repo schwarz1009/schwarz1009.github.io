@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観２B（インターフェース） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観２B（インターフェース）</h1>
+<p>Javaによるプログラミングに関する世界観２B（インターフェース）です。<a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="java.html">Java（１．文法）</a></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><b>２B．インターフェース</b></li>
+<li><a href="java_gc.html">２C．ガーベッジコレクションと例外</a></li>
+</ul>
+<li><a href="java_lib.html">３．クラスライブラリ</a></li>
+<ul>
+<li><a href="java_lib_io.html">３A．入出力</a></li>
+<li><a href="java_lib_list.html">３B．コレクションと配列</a></li>
+<li><a href="java_lib_string.html">３C．文字列</a></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><a href="java_lib_xml.html">３E．XML</a></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+</ul>
+<p><a href="design_pattern.html">デザインパターン</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>インターフェース</h1>
+
+<h2>インターフェースの実装</h2>
+<p>インターフェースは、違うクラスに同じ操作インターフェースを提供する技術。</p>
+<table class="some_tables">
+<tr><th class="min60">キーワード</th><th>説明</th></tr>
+<tr><td>interface</td><td>インターフェースを宣言する。</td></tr>
+<tr><td>implements</td><td>インターフェースを実装したクラスの宣言をする。</td></tr>
+</table>
+<p>Javaでは、継承するだけではなく、インターフェースを実装することで、「同じ操作形態を持った別のメソッド」を作ることができる。</p>
+<!--
+<pre class="prettyprint">
+public class MyRunner implements Runnable {
+  ...
+}
+</pre>
+-->
+
+<h2>インターフェースの意味</h2>
+<p>インターフェースは、さまざまな種類の違うクラスに対して共通の「呼び出し規約」を持たせる。</p>
+<p>インターフェースを各クラスで実装することで、それぞれ異なるクラスであっても同じインターフェースを実装した同様のクラスとしてさまざまなクラスを操作することができる。</p>
+<p>たとえば、read()とwrite()を持つインターフェースは以下のように定義する。</p>
+<pre class="prettyprint">
+interface ReaderAndWriter {
+    void read();
+    void write();
+}
+</pre>
+<p>これを以下のように実装する。</p>
+<pre class="prettyprint">
+public class FileManager implements ReaderAndWriter {
+    public void read() {
+        ...
+    }
+    public void write() {
+        ...
+    }
+}
+
+public class NetworkIOManager implements ReaderAndWriter {
+    public void read() {
+        ...
+    }
+    public void write() {
+        ...
+    }
+}
+</pre>
+<p>そして以下のように利用する。</p>
+<pre class="prettyprint">
+public class IO {
+    public static void main(String[] args) {
+        ReaderAndWriter manager;
+    
+        if (...) {
+            manager = new FileManager();
+        } else if (...) {
+            manager = new NetworkIOManager();
+        }
+    
+        manager.read();
+        manager.write();
+    }
+}
+</pre>
+<p>以下のように、インターフェースをメソッドの引数に用いれば、異なるクラスのオブジェクトを渡して、メソッドの中から操作できる。</p>
+<pre class="prettyprint">
+public class IO2 {
+    public static void operation(ReaderAndWriter manager) {
+        manager.read();
+        manager.write();
+    }
+    
+    public static void main(String[] args) {
+        FileManager fmanager = new FileManager();
+        NetworkIOManager nmanager = new NetworkIOManager();
+        
+        operation(fmanager);
+        operation(nmanager);
+    }
+}
+</pre>
+<p>このように、ほかの言語でポリモーフィズムやダックタイピングを用いて行うことは、Javaでは継承やインターフェースを用いて行うことができる。</p>
+
+<h2>何のためにインターフェースを使うのか</h2>
+<p>何のためにインターフェースを使うのか、それは異なるクラスを同じ操作体系で操作するためです。</p>
+<p>たとえば、最初にread()やwrite()をメソッドに持つインターフェースを作っておけば、そのインターフェースを実装したクラスのオブジェクトは、どんなに派生し改良されても、同じ呼び出しメソッドから呼び出すことができます。</p>
+<p>このため、たとえば、クラスのメンバ関数としてインスタンスを持っていた場合などに、「そのインスタンス変数にさまざまなクラス（共通のインターフェースを実装したクラス）を詰め込むことができる」のです。</p>
+<p>つまり、クラスの中にキャッシュ管理を行う別のクラスのオブジェクトがあったとして、最初にread()やwrite()を実装しておけば、たとえばキャッシュに加えてプロキシ機能を実装したクラスであっても、インスタンスの中に入れることができます。そして、そのクラスはキャッシュ機能にプロキシ機能を加えることが、その呼び出し元のプログラムを変更することなく実現することができます。</p>
+<p>同様に、掲示板とチャットのクラスがあったとして、それに発言する機能を付ける場合や、逆に掲示板やチャットの機能を埋め込んで使うWebサービスのような機能を作る時などに、応用が利くと思います。</p>
+<p>インターフェースという言葉がしっくりこない場合は、CORBAのインターフェースのようなものだと考えると良いでしょう。</p>
+<p>インターフェースを使うことで、「まだ書かれていない未知のプログラム」や、「違う場所で他人によって書かれたプログラム」に対して、プログラムの中であらかじめ対応することができる。簡単なプラグイン機構のようなものも応用として実現できる。</p>
+
+<h2>多重継承できる</h2>
+<p>Javaのインターフェースの特徴として、多重継承（多重実装）できるということが言える。インターフェースを実装するクラスは、複数のインターフェースを同時に実装できる。また、インターフェースで定められているメソッドはすべて実装しなければならない。これらの点が抽象クラスと異なる。多重継承できないJavaであっても、C++の多重継承と同じようなことがインターフェースを用いて可能となる。</p>
+<ul>
+<li><a href="http://wisdom.sakura.ne.jp/programming/java/java28.html">インターフェイス - JAVA言語入門 - WisdomSoft（旧）</a></li>
+<li><a href="https://qiita.com/ecoyamas/items/455016279926bff5e3e6">javaのinterfaceを自分なりに理解する - Qiita</a></li>
+</ul>
+
+<h2>参考文献</h2>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a></li>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>C/C++のヘッダファイルに似ているが、共通のAPIを型として持つことができる</h2>
+<p>インターフェースとは、APIの呼び出し規約だけをすべて宣言した型のことであり、C/C++のヘッダファイルとよく似ていますが、実際にはヘッダファイルよりもより柔軟です。</p>
+<p>Javaでは、ヘッダファイルを使わなくても、クラス定義だけでclassファイルのAPIを読み込むことができるため、ヘッダファイルに相当するものはありません。</p>
+<p>Javaのインターフェースは、複数のクラスや型であっても、共通のAPIを持つインターフェースを元に実装して、共通の呼び出し規約を持って操作できます。</p>
+<p>これは、たとえばメソッドの引数にインターフェースの型を渡したり、あるいはメンバとしてインターフェースの型を持つことができるということを意味します。</p>
+<p>インターフェースは複数の型で共通のAPIを持つことができるため、この特徴は、「単なる特定のクラスではなく、より広い意味で分類されたクラスの種類を型として指定できる」ということを意味しています。</p>
+<p>なので、インターフェースを使うと、さまざまな場合やシチュエーションに幅広く対応することができ、また後々改良したり機能を追加したりする「拡張性」が高くなります。</p>
+<p>ひとつのクラスだけダイレクトに対応するのではなく、複数の「同じ種類のクラス」は同等に扱うことができる、ということが、Javaのインターフェースの優位性であると言えます。</p>
+<p>同じことは継承でもできますが、インターフェースは多重継承ができ、また親クラスの異なるまったく関係のないクラスについても、同じAPIを持ったクラスであるとして、共通のインターフェースを実装して扱うことができます。</p>
+<p>継承が「ツリー構造のサブツリーが同じAPIとして扱える」ということを意味するなら、インターフェースは「まったく異なる場所にあるノードであっても同じAPIとして扱える」ということを意味します。</p>
+<p>また、C++で言えば、テンプレートによるダックタイピングはインターフェースとよく似ているところがあります。インターフェースの実装という方法ではなく、パラメータとして型を指定することで、さまざまな型に対して柔軟に型をその時作ることができるのが、テンプレートの良さです。</p>
+<p>また、C++には多重継承も存在するので、C++ではJavaと同じインターフェースを使うことはありません。C++では通常のクラスとしてJavaのインターフェースに相当する「インターフェース専門のクラス」を定義し、通常のクラスと同じように継承することができます。</p>
+
+<h2>異なるものを同じものとして扱える</h2>
+<p>Javaのインターフェースを使うことで、異なるものを同じものとして扱うことができます。</p>
+<p>たとえば、ハードウェアの場合、個々のデバイスの実装は異なりますが、デバイスドライバのレベルで個々の詳細を実装し、OSのレベルでそのデバイスを扱うためのインターフェースを共通にし、カプセル化することで、すべてのハードウェアデバイスをどのアプリケーションからでも、デバイスドライバとOSを仲介して使うことができます。</p>
+<p>同様のことを、Javaのインターフェースを使うことで、ソフトウェアレベルで行うことができます。</p>
+<p>たとえば、統合開発環境のEclipseなどは、基本的な開発環境にプラグインを追加する形で機能を拡張することができます。このような場合、プラグインそれぞれの具体的な機能は違いますが、Eclipseからプラグインを操作するためのインターフェースを共通化し、すべてのプラグインで同じインターフェースから操作できます。</p>
+<p>ほかにも、ウィジェットツールキットなどでも、どのウィジェットであっても同じインターフェースから操作できるようにすると、ボタンであってもメニューであってもテキストボックスであっても、あるいはユーザー定義の独自のウィジェットであっても同じように利用できます。</p>
+<p>その他の例として、マルチスレッド環境を実現する場合、プログラマが独自に個々のスレッドを実装し、その実装したスレッドを、スレッドを使って様々な機能を提供するさまざまなクラスに渡すことで、スレッドの機能をさまざまなところで同じインターフェースから利用することができます。</p>
+<p>あるいは、ファイルシステムを操作する際に、そのファイルシステムがどのような具体的な形式でフォーマットされていても、ローカルに存在せずネットワーク上に存在するとしても、それらを同じものとして操作することができます。</p>
+<p>このようなJavaのインターフェースを使うことで、プログラムの開発と利用がとても便利になります。同じインターフェースを実装したクラスが同じように操作できるというだけで、とてもプログラムの開発がしやすくなるのです。Javaのインターフェースは、OSや仮想化のような仕組みを、オブジェクト指向のプログラミング言語として実現したものであると言えます。</p>
+<div class="edit_date">
+<p>2023.05.06</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>インターフェース</h2>
+<p><a href="interface.html">インターフェース</a>を参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

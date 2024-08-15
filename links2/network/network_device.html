@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ネットワーク機器 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ネットワーク機器</h1>
+<p>ネットワーク機器の世界観です。<a href="network.html">ネットワーク</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ネットワーク機器</h1>
+<h2>ネットワーク装置</h2>
+<p>「<a href="https://www.amazon.co.jp/%E4%BB%A4%E5%92%8C05%E5%B9%B4-%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%EF%BC%86%E3%82%AF%E3%83%AC%E3%83%90%E3%83%BC%E6%96%B9%E5%BC%8F%E3%81%A7%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B-%E6%A0%A2%E6%9C%A8%E5%85%88%E7%94%9F%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%83%85%E5%A0%B1%E6%8A%80%E8%A1%93%E8%80%85%E6%95%99%E5%AE%A4-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E6%A0%A2%E6%9C%A8/dp/4297131307">平成18年度 イメージ&クレバー方式でよくわかる栢木先生の基本情報技術者教室 (情報処理技術者試験)</a>」を参考に執筆しました。</p>
+<p>ネットワークの種類は以下のようになる。</p>
+<table class="some_tables">
+<tr><th class="min60">ネットワーク</th><th>説明</th></tr>
+<tr><td>LAN</td><td>ローカルエリア（たとえば家や会社の中）を繋ぐネットワーク。</td></tr>
+<tr><td>WAN</td><td>ワイドエリア（たとえば全世界）を繋ぐネットワーク。</td></tr>
+<tr><td>ISDN</td><td>電話、FAX、データ通信が「デジタル回線」として一緒になったサービス。</td></tr>
+<tr><td>ADSL</td><td>電話回線を使い、下り（ダウンロード）は速いが上り（アップロード）は遅い。</td></tr>
+<tr><td>CATV</td><td>ケーブルテレビの回線を使ったサービス。</td></tr>
+<tr><td>FTTH/光</td><td>光ファイバーによる高速な通信サービス。</td></tr>
+</table>
+<p>後日注記：WANとインターネットの違いは、WANは企業のようなひとつの組織が大きなネットワーク（たとえば会社の支部を繋ぐ）のために利用する。インターネットは不特定多数のたくさんの人によって自由に通信に入ったり出たりできる。</p>
+<p>Ethernetはもっとも世界中で普及しているLANの規格。</p>
+<p>LANの接続形態（トポロジー）は以下のようになる。</p>
+<table class="some_tables">
+<tr><th class="min60">接続形態</th><th>説明</th></tr>
+<tr><td>バス型</td><td>一つの基本となる基幹線があり、この回線に全機械一本型で機器を繋ぐ。</td></tr>
+<tr><td>スター型</td><td>一つのハブに対して放射線状に、一機械中心型で機器を繋ぐ。</td></tr>
+<tr><td>リング型</td><td>各装置を環状に、輪になって一つになる型で機器を繋ぐ。</td></tr>
+</table>
+<p>LANとLANあるいはLANとWANは、以下のような接続装置によって接続され、データを中継する。OSI参照モデルの「どの層で中継するか」が違う。</p>
+<table class="some_tables">
+<tr><th class="min60">接続装置</th><th>説明</th></tr>
+<tr><td>リピータ</td><td>第1層（物理層）で中継する機器。距離を延長するだけのためにあり、中継するかしないかの判断をしない。</td></tr>
+<tr><td>ブリッジ</td><td>第2層（データリンク層）で中継する機器。パケットのMACアドレスを見て、パケットの中継を判断する。</td></tr>
+<tr><td>ルータ</td><td>第3層（ネットワーク層）で中継する機器。パケットのIPアドレスを見て、パケットの中継を判断する。また、ルーティングを行う。</td></tr>
+<tr><td>ゲートウェイ</td><td>全ての層（トランスポート層以上）で、プロトコルの異なるLANとLANを接続する、ネットワークの出入口。</td></tr>
+</table>
+<p>ハブは、複数のケーブルを1本にまとめるための装置で、スター型のLANのために使う。通常はリピータハブのこと。</p>
+<table class="some_tables">
+<tr><th class="min60">ハブ</th><th>説明</th></tr>
+<tr><td>リピータハブ</td><td>すべての接続LANポートにパケットを転送するハブ（リピータの機能を持つ）。</td></tr>
+<tr><td>スイッチングハブ</td><td>MACアドレスの宛先がある接続LANポートにだけパケットを転送するハブ（ブリッジの機能を持つ）。</td></tr>
+</table>
+<p>以下の書籍が参考になります。（上記の内容は以下の書籍を参考にして書きました。）</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E4%BB%A4%E5%92%8C05%E5%B9%B4-%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%EF%BC%86%E3%82%AF%E3%83%AC%E3%83%90%E3%83%BC%E6%96%B9%E5%BC%8F%E3%81%A7%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B-%E6%A0%A2%E6%9C%A8%E5%85%88%E7%94%9F%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%83%85%E5%A0%B1%E6%8A%80%E8%A1%93%E8%80%85%E6%95%99%E5%AE%A4-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E6%A0%A2%E6%9C%A8/dp/4297131307">平成18年度 イメージ&クレバー方式でよくわかる栢木先生の基本情報技術者教室 (情報処理技術者試験)</a></li>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+</ul>
+<div class="edit_date">
+<p>2022.12.05編集</p>
+<p>2022.12.10編集</p>
+</div>
+
+<h2>トークンリング</h2>
+<p>トークンリングはIBMによって開発されたLANの規格で、ネットワーク上のノードデバイスがリング状に配置され、ひとつの回線を共有する。</p>
+<p>デバイスがトークンという「通信できる権限」を持ち、それをリング状に接続されたノードの間で順番に渡していき、今トークンを持っているデバイスがネットワーク通信ができる。</p>
+<p>回線がひとつしか存在せず、パケットの衝突や混雑を避けられるというメリットがあるが、残念ながらEthernetほどは普及しなかった。</p>
+<ul>
+<li><a href="https://the-simple.jp/what-is-token-ring-an-easy-to-understand-explanation-of-the-basic-concepts-of-network-technology-and-how-they-work">トークンリングとは？ネットワーク技術の基本概念とその仕組みをわかりやすく解説 | THE SIMPLE</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%83%AA%E3%83%B3%E3%82%B0">トークンリング - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.02.08</p>
+</div>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

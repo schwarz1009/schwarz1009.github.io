@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Kotlinの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Kotlinの世界観</h1>
+<p>Kotlinに関する世界観です。<a href="java_langs.html">Javaの世界観C（各種言語）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+
+<h1>Kotlin</h1>
+
+<h2>Kotlin</h2>
+<p>Java仮想マシンで動作する、静的型付けのオブジェクト指向言語。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Kotlin">Kotlin - Wikipedia</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/jvm-kotlin/0001">プログラマに優しい現実指向JVM言語 Kotlin入門 - gihyo.jp</a></li>
+</ul>
+
+<h2>null安全とは</h2>
+<p>Javaプログラマの大いなる時間と手間が、null参照において費やされてきました。</p>
+<p>null参照とは、「変数がnullであるにも関わらず参照」することで、NullPointerExceptionがでる、という問題です。</p>
+<p>この問題は、たとえば引数にnullが渡され、関数の中でその引数を参照した場合にも発生しますが、関数の実装者がnullが与えられることを想定していない場合、たとえ実装者とは別のプログラマが間違えてその関数にnullを渡した場合であっても、nullではないかどうかをきちんとif文などで比較してチェックしなければなりません。</p>
+<p>その結果、参照型変数がnullではないかどうか、プログラマは常に神経質に怯えながらコードを書かなければならないのです。</p>
+<p>しかしながら、nullという値を意味があって代入したり、与えたりする場合もあります。この場合は、nullを変数の値として許容するのは当然です。</p>
+<p>この、nullが与えられることを想定している場合としていない場合がある、というのがポイントで、すなわち「nullを許容する型とnullを許容しない型で別の型にしてしまえばいい」というのがKotlinの言語的なnull安全の前提となる考え方です。</p>
+<p>Kotlinでは、単なるStringにはnullを代入することは最初からできません。nullを許容するには、String?という別の型を使用します。すなわち、「nullが必要のない部分ではnullを許容しない文字列型（String）を使い、nullが必要な時にだけnullを許容する文字列型（String?）を使う」という発想です。</p>
+<p>この「nullを代入できる参照の方が特別なのだ」という逆転の発想で、KotlinではString型を使う範囲において、nullチェックをする必要がないのです。どうでしょうか、この解放感は。</p>
+<p>詳しくは以下のページにコードとともに記述されています。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1803/15/news012.html">「null安全」とは――Javaプログラマーが血と汗と涙を流さなくてすむ理由 (1/2)：Android Studioで始めるKotlin入門（3） - ＠IT</a></li>
+</ul>
+<p>後日注記：ちなみに、Rustにはnullそのものが存在しない。Rustでnullを使うには、Option型（任意の型のほかにNoneを持てる型）か、unsafeを使う必要がある。また、SwiftやTypeScript 2もnull安全。Java 8ではOptionalクラスが導入された。TypeScriptでnullを使うにはUnion型でstring | nullのようにしなければならない。ほかにもPythonなどでもnull安全がある。null安全の言語一覧は以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/koher/items/e4835bd429b88809ab33">null安全でない言語は、もはやレガシー言語だ - Qiita</a></li>
+</ul>
+<p><a href="parallel.html">並列処理</a>も参照のこと。</p>
+
+<h2>Kotlin大流行中</h2>
+<p>最近のJava界ではKotlinが流行っている。GoogleがAndroidアプリを開発するのにも使われている。</p>
+<ul>
+<li><a href="https://qiita.com/omochimetaru/items/98e015b0b694dd97f323">Android開発を受注したからKotlinをガッツリ使ってみたら最高だった - Qiita</a></li>
+</ul>
+
+<h2>Kotlinは次の学ぶべき言語になる</h2>
+<p>ネットを見ていると、Kotlinがとても流行っています。「Kotlinを触るとJavaには戻れない」とも。</p>
+<p>JetBrains社（IntelliJ IDEAで知られるとてもJava界では有名な会社）のロシアの研究所で生まれ、オープンソース化されたKotlinは、Androidの公式開発言語としても知られる。</p>
+<p>行末がセミコロン無しとか型宣言を「変数名 : 型名」で行うとか、あるいは「静的なNull安全の保証」という出来るエンジニアには嬉しい機能があり、Javaの開発中の機能やScalaなどから取り入れた機能などを盛り込んでいる。</p>
+<p>見ていると、本当に次に来るべき言語となることが分かる。「Railsを捨ててKotlinへ」と言う人も多い中、ハーウェイへのAurora OS提供などでも取り出さされる「ロシアのIT技術」に期待がかかる。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1712/08/news010.html">Kotlinとは――読み方、メリット、「Java」とのコード比較、実行までのチュートリアル (1/3)：Android Studioで始めるKotlin入門（1） - ＠IT</a></li>
+<li><a href="https://news.mynavi.jp/article/programinglanguageoftheworld-14/">世界のプログラミング言語(14) Androidの公式開発言語「Kotlin」はJavaよりも簡潔に書ける言語 | マイナビニュース</a></li>
+</ul>
+<p><a href="../country/russia.html">ロシア</a>も参照のこと。</p>
+
+<h2>Android開発ならKotlin</h2>
+<p>最近のAndroidアプリ開発では、Android Studioを用いてKotlinでプログラミングを行うのが普通になりました。</p>
+<p>Kotlinを作ったのも、Android StudioのベースになったIntelliJ IDEAも、JetBrains社の製品です。</p>
+<p>言ってしまえば、今のIT業界は「JetBrains社の時代」であると言えます。</p>
+<p>僕は、Androidアプリの開発を、XULや２ちゃんねる専用ブラウザとよく似ていると思います。それは「リッチなモバイルインターフェースからネットワークサーバーに接続してクライアントから利用する」からです。XULや2ch専用ブラウザがやっていたことを、再度真似しているように思えてしまいます。日本のガラパゴスインターネット界が昔歩んだ道を、アメリカやロシアも同じように歩んでいるのです。</p>
+<p><a href="../mobile/android.html">Android</a>や<a href="intellij.html">IntelliJ IDEA</a>も参照のこと。</p>
+
+<h1>フレームワーク</h1>
+<h2>Ktor + Exposed</h2>
+<p>Ktor + ExposedはKotlinによるフレームワーク。</p>
+<ul>
+<li><a href="https://zenn.dev/jy8752/articles/1fd789f9419adb">Springの代わりを求めた先に~Ktor + Exposed~ - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.23</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>Kotlin</h2>
+<p>IntelliJ IDEAで有名なJetBrains社のロシアの研究所が開発したロシア製のAltJava言語で、Androidアプリ開発の標準。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+
+</body>
+</html>

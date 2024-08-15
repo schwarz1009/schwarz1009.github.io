@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C言語サンプルコードの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C言語サンプルコード</h1>
+<p>C言語のサンプルコードです。<a href="c.html">C言語（１．基本）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>サンプルコード</h1>
+<h2>ロボット</h2>
+<p>以下は自分の作った<a href="../programs/robot.html">ロボット</a>のコード。</p>
+<h3>その１</h3>
+<p>その１：</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct _obj {
+    int o;
+    int n;
+};
+
+void action(int* p, struct _obj *obj){
+    if(*p==0){
+        printf("[1] テレビは、つまらない\n");
+    }
+    else if(*p==1){
+        printf("[2] テレビは、面白い\n");
+    }
+    else if(*p==2){
+        printf("[3] パソコンは、つまらない\n");
+    }
+    else if(*p==3){
+        printf("[4] パソコンは、面白い\n");
+    }
+    else if(*p==4){
+        printf("[5] テレビやパソコンは、機械だ。\n");
+    }
+    else if(*p==5){
+        printf("[6] テレビやパソコンは、生き物ではない。\n");
+    }
+    else if(*p==6){
+        printf("[7] テレビって何なのだろう。\n");
+    }
+    else if(*p==7){
+        printf("[8] テレビとパソコンは好きだ。\n");
+    }
+    else if(*p==8){
+        printf("[9] テレビとパソコンは嫌いだ。\n");
+    }
+    else if(*p==9){
+        if(obj-&gt;n==0){
+            printf("[10] 比較すると、テレビの方が普通だ。\n");
+        }
+        else if(obj-&gt;n==1){
+            printf("[11] 比較すると、パソコンの方が普通だ。\n");
+        }
+    }
+    else if(*p==10){
+        if(obj-&gt;n==0){
+            printf("[12] テレビよりパソコンの方が普通かな。\n");
+            obj-&gt;n=1;
+        }
+        else if(obj-&gt;n==1){
+            printf("[13] パソコンよりテレビの方が普通かな。\n");
+            obj-&gt;n=0;
+        }
+    }
+    else if(*p==11){
+        if(obj-&gt;o==0){
+            printf("[14] リンゴが好きです。\n");
+        }
+        else if(obj-&gt;o==1){
+            printf("[15] みかんが好きです。\n");
+        }
+    }
+    else if(*p==12){
+        if(obj-&gt;o==0){
+            printf("[16] リンゴより、みかんが好きになりました。\n");
+            obj-&gt;o=1;
+        }
+        else if(obj-&gt;o==1){
+            printf("[17] みかんより、リンゴが好きになりました。\n");
+            obj-&gt;o=0;
+        }
+    }
+}
+
+int main(void){
+    int p;
+    struct _obj obj;
+    p=0;
+    obj.o=0;
+    obj.n=0;
+    while(1){
+        p=rand()%13;
+        action(&p, &obj);
+    }
+}
+</pre>
+<h3>その２</h3>
+<p>その２（<a href="http://qiita.com/schwarz1009/items/6fb34bc6834b3c111f03">Qiita</a>で、<a href="http://qiita.com/shiracamus">@shiracamus</a>という方と共同で作りました。）：</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+
+struct brain {
+    int (*check)(struct _obj *obj);
+    void (*action)(struct _obj *obj);
+} brain[] = {
+    { check1, action1 },
+    { check2, action2 },
+    { NULL, NULL }
+};
+
+void doing (struct _obj *obj) {
+    struct brain *b;
+    for (b = brain; b-&gt;check; b++) {
+        if (b-&gt;check(obj)){
+            b-&gt;action(obj);
+        }
+    }
+}
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    struct _obj obj2 = { .p = 1 };
+    while(1){
+        doing(&obj);
+        doing(&obj2);
+    }
+}
+</pre>
+
+<h2>簡単な計算プログラム</h2>
+<blockquote class="inyou2">
+<p>自分で作った簡単なプログラムです。攻撃力が10のキャラと、攻撃力が1だが「1ターンごとに攻撃力が1上がっていく」キャラが戦って、いつ上がっていく方のキャラが上回るか、を計算する。</p>
+<p>正確にいうと、「いつ上回るかを計算する」というより、その「上回っていく過程」を表示する。</p>
+</blockquote>
+<p><a href="rust.html">Rust</a>で書いたコードをCに移植しました。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+int main(void) {
+    int x;
+    int y;
+    int i;
+    
+    x = 0;
+    y = 0;
+    
+    for (i = 1; i &lt;= 100; i++) {
+        x += 10;
+        y += i;
+        printf("%d\t%d\t%d\n", x, y, i);
+    }
+}
+</pre>
+
+<h2>お札の枚数を数えるプログラム</h2>
+<p>自分で作った指定された値段からお札の枚数を数えるプログラム。こういう小さなプログラムを書くのは楽しいです。みなさんにもプログラムの入門として、このようなプログラムを書いてみてはいかがでしょうか。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+int main(void){
+    int nedan = 98760;
+    int x = nedan;
+    int ichiman = 0;
+    int gosen = 0;
+    int sen = 0;
+    int gohyaku = 0;
+    int hyaku = 0;
+    int amari = 0;
+    while (x &gt;= 10000) {
+        x -= 10000;
+        ichiman++;
+    }
+    while (x &gt;= 5000) {
+        x -= 5000;
+        gosen++;
+    }
+    while (x &gt;= 1000) {
+        x -= 1000;
+        sen++;
+    }
+    while (x &gt;= 500) {
+        x -= 500;
+        gohyaku++;
+    }
+    while (x &gt;= 100) {
+        x -= 100;
+        hyaku++;
+    }
+    amari = x;
+    printf("%d円は一万円札%d枚、五千円札%d枚、千円札%d枚、五百円玉%dつ、百円玉%dつ、あまり%d円です。", nedan, ichiman, gosen, sen, gohyaku, hyaku, amari);
+}
+</pre>
+<p>オンラインでソースコードをコンパイル・実行できる<a href="https://paiza.io/ja/">Paiza.io</a>で開発しました。</p>
+
+<h2>FizzBuzz</h2>
+<p>以下はC言語で自分が書いたFizzBuzz。3の倍数の時はFizz、5の倍数の時はBuzz、3と5両方ともの倍数の時はFizzBuzz、そうでない時は数値を発言する。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+int main(void){
+    int i;
+    for (i = 1; i &lt;= 100; i++) {
+        if (i % 15 == 0) {
+            printf("FizzBuzz, ");
+        } else if (i % 3 == 0) {
+            printf("Fizz, ");
+        } else if (i % 5 == 0) {
+            printf("Buzz, ");
+        } else {
+            printf("%d, ", i);
+        }
+    }
+    printf("終了.\n");
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, FizzBuzz, 31, 32, Fizz, 34, Buzz, Fizz, 37, 38, Fizz, Buzz, 41, Fizz, 43, 44, FizzBuzz, 46, 47, Fizz, 49, Buzz, Fizz, 52, 53, Fizz, Buzz, 56, Fizz, 58, 59, FizzBuzz, 61, 62, Fizz, 64, Buzz, Fizz, 67, 68, Fizz, Buzz, 71, Fizz, 73, 74, FizzBuzz, 76, 77, Fizz, 79, Buzz, Fizz, 82, 83, Fizz, Buzz, 86, Fizz, 88, 89, FizzBuzz, 91, 92, Fizz, 94, Buzz, Fizz, 97, 98, Fizz, Buzz, 終了.
+</pre>
+<p>FizzBuzzはプログラマとしての最低限のスキルがあるかどうかを調べるための問題で、新しいプログラミング言語の入門コードにもよく使われる。</p>
+<p>以下は参考リンク。</p>
+<ul>
+<li><a href="https://sitest.jp/blog/?p=3822">初心者も上級者も。FizzBuzz問題について考えてみよう ｜ SiTest (サイテスト) ブログ</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Fizz_Buzz">Fizz Buzz - Wikipedia</a></li>
+<li><a href="https://qiita.com/baan_nasebanaru/items/a70e630f13009d8d26b6">C言語入門(FizzBuzz書いてみた) - Qiita</a></li>
+<li><a href="https://web-engineer-wiki.com/javascript/fizz-buzz/">【JavaScript】FizzBuzz問題をやってみよう｜Webエンジニア Wiki</a></li>
+</ul>
+<p><a href="java_samplecode.html">Javaサンプルコード</a>、<a href="python_samplecode.html">Pythonサンプルコード</a>、<a href="ruby_samplecode.html">Rubyサンプルコード</a>、<a href="javascript_samplecode.html">JavaScriptサンプルコード</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.17</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>coreutilsソースコード</h2>
+<p>coreutils（UNIXの汎用コマンド）のgitで基本的なコマンドのコードを読むことが出来ます。</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git/tree/src">coreutils.git</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/js-foundation/0013">第13回　Linuxコマンドの基礎の基礎 - gihyo.jp</a></li>
+</ul>
+
+<h2>Cサンプルコード集</h2>
+<p>サンプルコード集</p>
+<ul>
+<li><a href="http://webkaru.net/clang/program-examples/">C言語入門 - サンプルプログラム集 - Webプログラミング入門</a></li>
+<li><a href="http://saeki-ce.xsrv.jp/Cgengo.html">Ｃ言語サンプルプログラム（オープンソース）／佐伯英子技術士事務所（情報工学）</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>lintツール関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>lintツールの世界観</h1>
+<p>lintツールに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>lintツール</h1>
+<h2>lintツールとは</h2>
+<p>lintツールとは、静的解析ツールとも言われ、コンパイラよりも厳密にコードの問題点を報告してくれる、いわば「駄目出しツール」。</p>
+<p>コンパイラでコンパイルできるコードであっても、コードにはさまざまな問題点があることがある。</p>
+<p>lintツールを使うことで、そのような問題点に駄目出し、あるいは「こうした方が良いよ」というアドバイスを得られる。</p>
+<p>実際の開発の現場ではほぼ必須。とても便利なツールだ。</p>
+
+<h2>ESLint</h2>
+<p>ESLintは、JavaScript界で有名なlintツールのひとつ。</p>
+<ul>
+<li><a href="https://qiita.com/mysticatea/items/f523dab04a25f617c87d">ESLint 最初の一歩 - Qiita</a></li>
+</ul>
+<p><a href="javascript_tools.html">JavaScriptのツール</a>を参照のこと。</p>
+
+<h2>RuboCop</h2>
+<p>RuboCopは、Ruby界でよく使われているlintツール。</p>
+<ul>
+<li><a href="https://qiita.com/tomohiii/items/1a17018b5a48b8284a8b">RuboCop is 何？ - Qiita</a></li>
+</ul>
+<p><a href="ruby.html">Ruby</a>を参照のこと。</p>
+
+<h2>Pylintとflake8</h2>
+<p>Pylintとflake8はPython界で使われているlinter。</p>
+<ul>
+<li><a href="https://www.keisuke69.net/entry/2021/01/18/135517">VS CodeでPythonのLinterとしてPylintの代わりにflake8を導入するメモ - Sweet Escape</a></li>
+</ul>
+<p><a href="python.html">Python</a>を参照のこと。</p>
+
+<h2>Rome</h2>
+<p>RomeはJavaScriptのビルドまわりの何でも屋ツールチェイン。以下の記事が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/rana_kualu/items/dcadf11b3e97db1dded6">【Rome】RomeはJavaScriptをやめてRustにするってよ - Qiita</a></li>
+<li><a href="https://qiita.com/circled9/items/8e57ecaa2d1d1176e12e">Romeを試してみた - Qiita</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>原因が良く分からないバグの多くを検出できる</h2>
+<p>linterを使うと、原因がよく分からないバグの多くを検出できる。</p>
+<p>たとえば、C言語のプログラミングの書籍である<a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a>では、関数の戻り値として配列のポインタを返した際に起きる、考えれば考えるほど分からなくなるようなバグについて記述されている。</p>
+<p>このようなバグは、linterを使うことで多くが検出できる。</p>
+<p>そもそも、かつてのUNIXの初期段階のCコンパイラは、linterの機能がまだコンパイラの中に含まれていた。それが、コンパイラを軽量化するにあたって、linterの機能を削除し、linterだけを分離・独立して、コンパイラだけを専門とするようになった。</p>
+<p>そして、この本では、そのようなコンパイラからlinterの機能を削除することを批判する。バグのあるプログラムを高速にコンパイルできるよりも、バグがあればそれを提示したほうがいいとこの本の著者は言う。</p>
+<p>わたしたちがコンパイラを使う際にも、コンパイラだけを単独で使うことが多い。その中に見つかりにくいバグが含まれている可能性もある。なので、きちんとlinterを実行するようにしよう。</p>
+<div class="edit_date">
+<p>2023.01.19</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

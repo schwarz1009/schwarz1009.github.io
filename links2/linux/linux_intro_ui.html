@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux UI - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux UI</h1>
+<p>LinuxのUIに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>UNIXの3つのインターフェース</h1>
+<h2>CUI</h2>
+<p>UNIXには、主に「キャラクタユーザインターフェース（CUI）」と、「グラフィカルユーザインターフェース（GUI）」という2つのインターフェースがある。</p>
+<p>CUIはUNIXの標準で、Bashなどのコマンドシェルプロンプトからプログラム名とオプションをキーボードで記述してENTERキーでコマンド実行し、プログラムが出力を表示したり、場合によってはコマンドプロンプトと同様にキーボード入力をしてデータを入力したりして、プログラムが正常に終了するとコマンドシェルプロンプトに戻るインターフェース。</p>
+<p>CUIはGUIよりも劣っているわけではなく、自動化や機能へのアクセスのしやすさなどの面から言って、場合によってはWindowsのようなGUIよりも高度で使いやすい場合がある。特に、シェルスクリプトを使ってバッチ処理を自動化したりできるし、設定システムもテキストで用意されている場合が多く、GUIよりも柔軟でカスタマイズブルな設定ができることが多い。</p>
+<p>Linuxでは、Windowsと違い、今でもこのCUIインターフェースを固持している。主な理由は、「サーバーにGUIは要らない」という考え方や、GUIを統合しない方がセキュア（セキュリティ的に安全）でバグがなく、高速、軽量、そして安定性が高いなどの理由もあるからである。</p>
+<p><a href="linux_unix_shell.html">UNIXシステム管理（シェル）</a>を参照のこと。</p>
+
+<h2>GUI</h2>
+<p>だが、LinuxでもWindowsのようなGUI画面が使えないわけではない。それどころか、OSにExplorerが統合されているWindowsとは違い、多種多様なGUI環境が存在する。</p>
+<p>LinuxでWindowsのようなGUIのデスクトップ環境を使うためには、X Window Systemというソフトウェアを使う。これはサーバー（X Server）とクライアント（X Client）に分かれたシステムで、ウィンドウシステムはモニターのピクセル単位でのグラフィックスの描画と、マウスやキーボードの入力、フォントや画像の描画、そしてメッセージングを担当する。メッセージングとは、「今サーバーでマウスがクリックされたから、クライアントさん、マウスクリック時のイベントを実行してね」と言う風に、グラフィックスへの描画やハードウェアのデータやり取りをするXサーバーとそれぞれのウィンドウの中でプログラム処理を行うXクライアントの間を取り持ち、ハードウェアとソフトウェアの間で相互に「メッセージ」をやり取りするシステム。</p>
+<p>そもそも、GUIはアラン・ケイによる「メッセージング」というダイナブック構想から生まれたものだが、UNIXのX11は歴史が古く、UNIXのグラフィックスシステムとしては正統派で、伝統的である。X Window SystemのことをX11と省略する。</p>
+<p>Linuxでは、X11はウィンドウを表示してメッセージングを行う部分を担当しているが、デスクトップの見た目や操作性はX11とは分離されている。たとえば、X11でアプリケーションを作る際、Xプロトコルの詳細を知らなくてもXプロトコルを使ったアプリケーションが開発できるように、Xlibと呼ばれるXクライアント向けのライブラリがあるが、ここにはボタンやメニュー、あるいはフォームへの配置のようなGUIツールキットは用意されていない。それらは、また別のプロジェクトが開発している。</p>
+<p>伝統的にX11で使われているMotifというツールキットは、ボタンやメニューなどをXクライアントが簡単に使って作れるようにした関数ライブラリのAPIで、Motifで作られたアプリケーションは「Motifアプリケーション」などと呼ばれる。Motifは完全なフリーソフトウェアでなかったし、TrollTechの開発したQtもフリーではなかったため、GNUはこうしたGUIのUNIX環境の整備に苦労した。結果、今では、LinuxにおけるツールキットはGIMPによるGTK+とオープンかつフリーになったQtが使われている。</p>
+<p>また、ツールキット以外に、ウィンドウを操作するウィンドウマネージャと呼ばれるプログラムも必要となる。Linuxでは、ウィンドウマネージャを別のものにすることで、WindowsからMacにデスクトップ環境を乗り換えた時のように、「全く別のウィンドウ操作環境」をカスタマイズして入れ替えることが可能である。これは、Windowsユーザーの感覚からすると、OS全体を入れ替える感覚に近い。</p>
+<p>また、ツールキットだけでアプリケーションは開発できるものの、ユーザーがGUI画面を使う場合において、さまざまな必要なユーティリティが必要になる。たとえば、端末エミュレータはX11でグラフィカル環境でもコマンドシェルプロンプトから入力したい場合は必須だし、他にもアプリケーションランチャー（アプリケーションを起動するメニューを表示するプログラム）やファイルマネージャ（シェルからmkdirとかlnなどとしてコマンドで操作しなくても、GUIで操作出来るファイル管理ツール）などが必要である。そして、Windowsを使っていたら分かるように、ブラウザやメールクライアントなども、GUI画面の標準として用意されるべきだし、共通のルック＆フィールや操作性を持つべきである。そして、開発者が見ると、WindowsにはレジストリやCOMのようなアプリケーションの開発をしやすくする「総合的ライブラリAPI」が用意されている。このような「統合デスクトップ環境」はLinuxでは、GNOME、KDE、Xfce、LXDEなど複数ある。また、先のウィンドウマネージャの種類も合わせると、OpenboxやFVWM、enlightenmentやWindowMakerなど、さまざまなルック＆フィールのデスクトップ環境がある。Linuxでは、こうしたデスクトップ環境を、同じ「X Window System」という仕組みの中で、複数使うことができる。</p>
+<p><a href="linux_x11.html">X11</a>を参照のこと。</p>
+
+<h2>TUI</h2>
+<p>また、GUIでもCUIでもない中間のインターフェースとして、「テキストユーザインターフェース（TUI）」というものがある。</p>
+<p>これは、テキストエディタのviを考えてもらえば分かりやすいかと思われるが、CUIではコマンドを実行して出力が返り、またコマンドを実行する画面に戻るため、「画面いっぱいを作って文書やメールなどを見る、インタラクティブに操作する」ということが難しい。</p>
+<p>TUIでは、CUIと同じようにキャラクタ（文字）ベースのインターフェースを提供するが、コマンド入力ではなく、画面いっぱいにスクリーンを表示して、その中でプログラムの機能を実行したり、メニューを表示したり、複数行のマルチテキストボックスでデータを編集したりすることができる。</p>
+<p>要は、MS-DOSでMS-WordやLotus 1-2-3を使うような、そういう感覚である。</p>
+<p>TUIを使った操作は、たとえばDOSより以前の「専門的事務コンピュータ」を考えると分かりやすい。昔は、企業には専門の事務コンピュータがあったほか、文書の作成には日本企業が作っていた「ワープロ」と呼ばれるワードプロセッサーやプリンターが搭載された白黒画面の文字だけのワープロを使っていた。TUIはそんな感じである。UNIXに慣れたユーザーなら、viをTUIの一例だと思えば分かりやすいだろう。</p>
+<p><a href="ncurses.html">ncurses</a>や<a href="vi.html">vi</a>や<a href="emacs.html">Emacs</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>WebKit関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>WebKitの世界観</h1>
+<p>WebKitやその他のコンポーネントによるWebブラウザ開発・組み込みに関する世界観です。<a href="linux_browsers.html">Linux Webブラウザ</a>や<a href="../windows_pc/browsers.html">Windows Webブラウザ</a>や<a href="../windows_pc/tab_browsers.html">タブブラウザ</a>や<a href="../windows_pc/browsers_privacy.html">プライバシー保護ブラウザ</a>なども参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>個別記事</h1>
+<ul class="defaultlist list6">
+<li><a href="webkit_embedded.html">WebKit埋め込み</a></li>
+</ul>
+
+<h1>WebKitの基本</h1>
+<h2>WebKitとは</h2>
+<p>そもそも、オープンソースなブラウザのレンダリングエンジンとしてはMozillaのGeckoがあった。</p>
+<p>ただ、MozillaはXULという技術を元にして作られていたり、「重くてもっさりしている」など、課題があった。</p>
+<p>KDEには、古くからKHTMLという独自のレンダリングエンジンがあった。これはKDEのブラウザ兼ファイルマネージャであるKonquerorなどで使われていた。</p>
+<p>Appleは、このKHTMLに目をつけ、自社のSafariというブラウザのベースとするために、KHTMLをWebKitとしてforkした。</p>
+<p>このforkは成功した。WebKitは「高機能ながら軽量」であることを売りにして、Safariだけではなく、GoogleのブラウザChromeなどにも採用された。</p>
+<p>その後、Apple中心のWebKitに対して、GoogleはBlinkという新しいエンジンをforkした。Blinkではマルチプロセスに対応し、WebKit側とBlink側では双方の技術を排除した。</p>
+<p>BlinkはGoogle Chromeのほか次世代のOperaなどにも採用され、ChromeはChromiumというオープンソースなコア・ブラウザを元に作られるようになった。これは、Mozillaに対するNetscapeに近い。</p>
+<p>最近では、Microsoftの次世代WebブラウザEdgeでも、Chromuimをベースとして採用することが決まっている。また、Windows界で有名なブラウザであるSleipnirもWebKit/Blink系のエンジンを積んでいる。</p>
+<p>エンジンとしての特徴は、簡単に自分のブラウザに組み込めるようなC++/Qt/GTK+用のインターフェースを持っているほか、MozillaのGeckoに比べて軽量で起動も早い。Linux界ではGTK+/QtのWebKit対応ブラウザが開発されるほど、一時期はとても波に乗ったプロジェクトだった。</p>
+
+<h2>ChromiumベースのWebブラウザが一般的になるか</h2>
+<p>最近では、WebブラウザをChromiumベースで作ることが一般的になってきています。</p>
+<p>たとえば、新しいMicrosoft EdgeはChromuimベースです。「とても使いやすい」と高評価のVivaldiもChromiumベースです。</p>
+<p>Operaは長い間独自エンジンでしたが、最近になってBlinkエンジンになりました。SleipnirもWebKit/Blink系のエンジンを積んでいます。</p>
+<p>しかしながら、このような動きは、IEコンポーネントを使ったタブブラウザなどでは、昔からあるものです。SleipnirやDonut、Lunascapeのような「日本のタブブラウザ」は、ほとんどがIEコンポーネントを使用していました。</p>
+<p>なぜChromuimベースなのか、それはWebKitというHTMLのレンダリングエンジンが、とてもよくできているからだと思います。そもそもKHTMLをベースとしたWebKitですが、Mozillaほど重くなく、IEとは違ってオープンソースです。</p>
+
+<h1>基本</h1>
+<h2>Chromium</h2>
+<p>GoogleによるオープンソースなWebブラウザ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Chromium">Chromium - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/chromium/chromium">git</a></li>
+</ul>
+
+<h2>WebKit</h2>
+<p>HTMLレンダリングエンジン。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/WebKit">WebKit - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/WebKit/webkit">git</a></li>
+</ul>
+
+<h2>Blink</h2>
+<p>HTMLレンダリングエンジン。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Blink">Blink - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/ChromiumWebApps/blink">git</a></li>
+</ul>
+
+<h1>解説記事</h1>
+<h2>WebKit</h2>
+<p>WebKitがどれくらい各ブラウザの間で共通なのか、と言う記事。</p>
+<ul>
+<li><a href="https://myakura.github.io/n/webkit4devs.html">開発者のための WebKit</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Mac</h2>
+<p><a href="../os/mac.html">Mac</a>も参照のこと。</p>
+
+<h2>Google</h2>
+<p><a href="../services/google.html">Google</a>も参照のこと。</p>
+
+<h2>KDE</h2>
+<p><a href="kde.html">KDE</a>や<a href="kde_apps.html">KDEアプリケーション</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>WebKit</h2>
+<ul class="defaultlist list7">
+<li>GUIアプリケーション
+<ul>
+<li>基本・インターネット
+<ul>
+<li>WebKitなど
+<ul>
+<li>Google Chrome</li>
+<li>Safari</li>
+<li>Sleipnir</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>WebKitなど</h2>
+<p>WebKitはKDEのレンダリングエンジンであるKHTMLをベースに開発された軽量なレンダリングエンジン。</p>
+<p>AppleやGoogleなどが協力して開発していたが、GoogleによりBlinkなどが分岐するなど必ずしも仲良くない。</p>
+
+
+<h1>リンク集</h1>
+<h2>レンダリングエンジン</h2>
+<p>HTMLのレンダリングエンジン。基本的にMozilla由来のGeckoと、KHTML由来のWebKitがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/HTML%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3">HTMLレンダリングエンジン - Wikipedia</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
