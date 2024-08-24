@@ -97,7 +97,7 @@ $ sudo du -x -m -d 5 / | awk '$1 &gt;= 100 { print }' | sort -n -r | less
 
 
 
-<h1>テキスト操作１</h1>
+<h1>テキスト操作</h1>
 <h2>cat</h2>
 <p>catは、ファイルやストリームを表示する。</p>
 <pre>
@@ -364,51 +364,28 @@ $ pr hoge.txt | lpr
 <p>2024.02.08編集</p>
 </div>
 
-<h1>テキスト操作２</h1>
-<h2>truncate</h2>
-<p>ファイルサイズの切り詰めを行うコマンド。</p>
+<h2>その他のテキスト操作コマンド</h2>
+<p>以下はその他のテキスト操作コマンド。</p>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>truncate</td><td>ファイルサイズの切り詰めを行うコマンド。</td></tr>
+<tr><td>nkf/iconv</td><td>文字コード処理を行うコマンド。</td></tr>
+<tr><td>col</td><td>改行コード処理を行うコマンド。</td></tr>
+<tr><td>column</td><td>表に整形するコマンド。</td></tr>
+<tr><td>colrm</td><td>桁の削除を行うコマンド。</td></tr>
+<tr><td>expand/unexpand</td><td>タブ・スペースの変換を行うコマンド。</td></tr>
+<tr><td>shuf</td><td>ランダムに並べ替えを行うコマンド。</td></tr>
+</table>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/truncate.1.html">man truncate</a></li>
-</ul>
-
-<h2>nkf/iconv</h2>
-<p>文字コード処理を行うコマンド。</p>
-<ul>
 <li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man1/iconv.1.html">man iconv</a></li>
-</ul>
-
-<h2>col</h2>
-<p>改行コード処理を行うコマンド。</p>
-<ul>
 <li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/col.1.html">man col</a></li>
-</ul>
-
-<h2>column</h2>
-<p>表に整形するコマンド。</p>
-<ul>
 <li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/column.1.html">man column</a></li>
-</ul>
-
-<h2>colrm</h2>
-<p>桁の削除を行うコマンド。</p>
-<ul>
 <li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/colrm.1.html">man colrm</a></li>
-</ul>
-
-<h2>expand/unexpand</h2>
-<p>タブ・スペースの変換を行うコマンド。</p>
-<ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/expand.1.html">man expand</a></li>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/unexpand.1.html">man unexpand</a></li>
-</ul>
-
-<h2>shuf</h2>
-<p>ランダムに並べ替えを行うコマンド。
-<ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/shuf.1.html">man shuf</a></li>
 </ul>
-
-<h2>その他のテキスト操作コマンド</h2>
 <p>このほか、tailf（リアルタイムに変化するログの追跡）, strings（表示可能な文字の表示）, write/wall（他のユーザにメッセージを送信）などのコマンドがある。</p>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/apmd/man1/tailf.1.html">man tailf</a></li>
@@ -422,6 +399,7 @@ $ pr hoge.txt | lpr
 </ul>
 <div class="edit_date">
 <p>2023.05.18編集</p>
+<p>2024.08.24編集</p>
 </div>
 
 <h1>ページャとエディタ</h1>
