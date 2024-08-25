@@ -103,14 +103,14 @@ block value: 10 value: 5.
 ^ true.
 </pre>
 <p>条件分岐（ifTrue:やifFalse:）や反復（do:やwhileTrue:）などもブロックによって行うことができる。</p>
-<p>クラスは、たとえば順序なし、重複なしのセットを作るなら以下のようにする。add:メッセージで10と5を登録し、(s includes: 5)はtrueを返すためifTrue:以下のブロックが実行される。</p>
+<p>クラスは、たとえば順序なし、重複なしのセットを作るなら以下のようにする。add:メッセージで10と5を登録し、s includes: 5はtrueを返すためifTrue:以下のブロックが実行される。</p>
 <pre>
 s := Set new.
 s add: 10.
 s add: 5.
-(s includes: 5) ifTrue: [ Transcript cr; show: '5 is included!'. ].
+s includes: 5 ifTrue: [ Transcript show: '5 is included!'; cr. ].
 </pre>
-<p>ここで、Transcript（実行結果を出力できるウィンドウ）では改行文字crを出力し、カスケードという方法で次にshowメッセージを実行している。また文字列は'～'で囲む。</p>
+<p>ここで、Transcript（実行結果を出力できるウィンドウ）ではshowメッセージを実行し、カスケードという方法で次に改行文字crを出力している。また文字列は'～'で囲む。</p>
 <p>詳しくは以下のページが参考になる。</p>
 <ul>
 <li><a href="https://qiita.com/newapplesho/items/6376c90d3e9ca66d2a95">Smalltalk基本文法編 #Pharo - Qiita</a></li>
