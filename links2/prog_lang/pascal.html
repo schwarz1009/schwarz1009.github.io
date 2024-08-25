@@ -108,7 +108,7 @@ var
 <p>インターフェース部では、usesは使うユニットを指定する。typeは型定義を記述する。varはユニットの中の変数の定義を行う。</p>
 <p>また関数はfunction、手続きはprocedureに記述する。関数名に続いて引数がある時は()の中に引数名とデータ型を記述する。Resultは関数の場合のみ、返り値として使用する特別な変数。</p>
 <pre>
-function Add100(x : Integer) : Integer;
+function FuncAdd100(x : Integer) : Integer;
 begin
   Result := x + 100;
 end;
@@ -123,9 +123,18 @@ begin
   Result := str;
 end;
 </pre>
+<p>procedureを使う場合、Resultは使用できないが、引数にvarを付ければ、ポインタや参照型と同じように引数をそのまま編集できる。なので、</p>
+<pre>
+procedure ProcAdd100(x : Integer; var y : Integer);
+begin
+  y := x + 100;
+end;
+</pre>
+<p>のようにできる。</p>
 <p>（「<a href="https://www.amazon.co.jp/Borland-Delphi7%E3%82%AA%E3%83%95%E3%82%A3%E3%82%B7%E3%83%A3%E3%83%AB%E3%82%B3%E3%83%BC%E3%82%B9%E3%82%A6%E3%82%A7%E3%82%A2-%E5%9F%BA%E7%A4%8E%E7%B7%A8-official-courseware/dp/4756142281">Borland Delphi 7 オフィシャルコースウェア 基礎編</a>」を参考に執筆しました。）</p>
 <div class="edit_date">
 <p>2023.10.31</p>
+<p>2024.08.25編集</p>
 </div>
 
 
