@@ -103,10 +103,22 @@ block value: 10 value: 5.
 ^ true.
 </pre>
 <p>条件分岐（ifTrue:やifFalse:）や反復（do:やwhileTrue:）などもブロックによって行うことができる。</p>
+<p>クラスは、たとえば順序なし、重複なしのセットを作るなら以下のようにする。add:メッセージで10と5を登録し、(s includes: 5)はtrueを返すためifTrue:以下のブロックが実行される。</p>
+<pre>
+s := Set new.
+s add: 10.
+s add: 5.
+(s includes: 5) ifTrue: [ Transcript cr; show: '5 is included!'. ].
+</pre>
+<p>ここで、Transcript（実行結果を出力できるウィンドウ）では改行文字crを出力し、カスケードという方法で次にshowメッセージを実行している。また文字列は'～'で囲む。</p>
 <p>詳しくは以下のページが参考になる。</p>
 <ul>
 <li><a href="https://qiita.com/newapplesho/items/6376c90d3e9ca66d2a95">Smalltalk基本文法編 #Pharo - Qiita</a></li>
+<li><a href="https://qiita.com/newapplesho/items/323cf9d1be014861a57f">Smalltalk 基本クラス編 #Pharo - Qiita</a></li>
+<li><a href="https://qiita.com/newapplesho/items/4a90c0771e15506c8484">Smalltalk開発環境入門編 #Pharo - Qiita</a></li>
 <li><a href="https://sumim.hatenablog.com/entry/20100207/p1">Smalltalk基礎文法最速マスター（Squeak版） - Smalltalkのtは小文字です</a></li>
+<li><a href="http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/Squeak/SmalltalkSyntax/index-j.html">Smalltalk Syntax（スモールトーク文法） - 青木淳（あおきあつし）のホームページ</a></li>
+<li><a href="https://www.ogis-ri.co.jp/otc/hiroba/technical/Squeak3/S3-6-3.html">Happy Squeaking!! -オブジェクト指向再入門- [第三回：オブジェクト指向の基礎固め編（Part2）]</a></li>
 </ul>
 <div class="edit_date">
 <p>2024.08.25</p>
