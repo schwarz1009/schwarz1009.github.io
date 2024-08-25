@@ -71,9 +71,46 @@
 <p>注意点：Smalltalk標準では代入は:=を用いて行います。Squeakでは代入に_（アンダースコア）を使用し、表示は←となります。</p>
 <p>とても面白いSmalltalkのサンプルコードが以下にあります。</p>
 <ul>
-<li><a href="https://qiita.com/newapplesho/items/6376c90d3e9ca66d2a95">Smalltalk基本文法編 - Qiita</a></li>
-<li><a href="https://qiita.com/newapplesho/items/323cf9d1be014861a57f">Smalltalk 基本クラス編 - Qiita</a></li>
+<li><a href="https://qiita.com/newapplesho/items/6376c90d3e9ca66d2a95">Smalltalk基本文法編 #Pharo - Qiita</a></li>
+<li><a href="https://qiita.com/newapplesho/items/323cf9d1be014861a57f">Smalltalk 基本クラス編 #Pharo - Qiita</a></li>
 </ul>
+
+<h2>Smalltalkの基本</h2>
+<p>Smalltalkには、単項メッセージ、2項メッセージ、キーワードメッセージの三種類のメッセージがある。</p>
+<p>まず、代入は:=を用いる。</p>
+<pre>
+x := 50.
+</pre>
+<p>以下は2の平方根を求める単項メッセージ。<p>
+<pre>
+2 sqrt.
+</pre>
+<p>以下は10+5の計算を行う2項メッセージ。</p>
+<pre>
+10 + 5.
+</pre>
+<p>以下は配列10, 20, 30の中から2番目の要素を取り出すキーワードメッセージ。</p>
+<pre>
+#(10 20 30) at: 2.
+</pre>
+<p>また、ブロックを使うことができる。ブロックは無名関数のこと。</p>
+<pre>
+block := [:v1 :v2 | v1 + v2].
+block value: 10 value: 5.
+</pre>
+<p>値を返すには^（キャレット）を用いる。</p>
+<pre>
+^ true.
+</pre>
+<p>条件分岐（ifTrue:やifFalse:）や反復（do:やwhileTrue:）などもブロックによって行うことができる。</p>
+<p>詳しくは以下のページが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/newapplesho/items/6376c90d3e9ca66d2a95">Smalltalk基本文法編 #Pharo - Qiita</a></li>
+<li><a href="https://sumim.hatenablog.com/entry/20100207/p1">Smalltalk基礎文法最速マスター（Squeak版） - Smalltalkのtは小文字です</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.25</p>
+</div>
 
 <h2>Objective-C</h2>
 <p>Cにクラスやオブジェクト指向を取り入れたC++とは異なり、Objective-CはCの中にSmalltalk的なコードをインラインで書ける言語として知られる。</p>
