@@ -47,6 +47,40 @@
 <li><a href="https://en.wikipedia.org/wiki/ALGOL_68">ALGOL 68 - Wikipedia(英語)</a></li>
 </ul>
 
+<h2>ALGOLの例</h2>
+<p>ALGOLでは、ブロックをBEGINとENDで囲んでネストできます。なので、</p>
+<pre>
+BEGIN
+    INTEGER i, j, x, y;
+    i := j := 0;
+    
+    IF i = 0 THEN
+    BEGIN
+        x := 0;
+        
+        IF j = 0 THEN
+        BEGIN
+            y = :0;
+        END
+    END
+END
+</pre>
+<p>のようなコードが可能となります。このように、ALGOLは早くから行番号ではなく自由記述方式を導入していました。</p>
+<p>実際には、IF文の終端はFI、FOR文とともに使うDOの終端はODで閉じることも多いです。IF～ELIF～ELSE～FIも使えます。</p>
+<p>また、ALGOLでは言語仕様として入出力命令が仕様化されていません。入出力命令は関数であり、機種によって異なります。なので、その機種で動く入出力命令が、別の機種でも動くとは限りません。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/ALGOL">ALGOL - Wikipedia</a></li>
+<li><a href="http://www.kogures.com/hitoshi/history/soft-language-rei/index.html">プログラミング言語の記述例＜ソフトウェアの歴史＜歴史＜木暮仁</a></li>
+</ul>
+<p>以下はALGOL-68によるFizzBuzz。剰余演算はMODで行う。</p>
+<ul>
+<li><a href="https://github.com/Keith-S-Thompson/fizzbuzz-polyglot/blob/master/fizzbuzz.a68">fizzbuzz-polyglot/fizzbuzz.a68 at master · Keith-S-Thompson/fizzbuzz-polyglot</a></li>
+<li><a href="https://rosettacode.org/wiki/FizzBuzz">FizzBuzz - Rosetta Code</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%89%B0%E4%BD%99%E6%BC%94%E7%AE%97">剰余演算 - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.26</p>
+</div>
 
 </div></div> <!--page-->
 
