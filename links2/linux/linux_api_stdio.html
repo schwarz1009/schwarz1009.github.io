@@ -222,6 +222,9 @@ fclose(fp);
 <p>このコードで重要なのは以下の部分です。</p>
 <blockquote class="inyou1">
 <pre class="prettyprint">
+static void
+do_grep(regex_t *pat, FILE *src)
+{
     char buf[4096];
 
     while (fgets(buf, sizeof buf, src)) {
@@ -229,13 +232,16 @@ fclose(fp);
             fputs(buf, stdout);
         }
     }
+}
 </pre>
 </blockquote>
 <p>ここだけを見ると、bufという変数がバッファであることが分かります。バッファは4096とサイズが決め打ちですが、これはfgets()とfputs()を繰り返すために決め打ちでも構わないのです。</p>
 <p>このコードでは、grepコマンドの実装であるため、fgets()やfputs()を使って一行ずつ文字列を読み出してbufに格納し、書き出しを行っていますが、catコマンドの実装などにおいては、システムコールのread()/write()やstdioのfread()/fwrite()など、固定長バイトでの読み書きを行うこともあります。この際にも、こうした一時バッファの固定文字列に一時的にデータを格納する、という手法は良く使われます。</p>
 <p>このようにすることで、巨大なメモリ領域を確保しなくても全文字列を書き出せるため、使用メモリの削減にもなります。仕組みは違いますが同じ目的に使えるものとして、Pythonのyield returnがあります。Pythonではyield returnを使うことで一行ごとにデータを読み、一行分のメモリだけでデータを書き出すことができます。</p>
 <p>またregcomp()とregexec()はC言語での正規表現のために使います。</p>
-
+<div class="edit_date">
+<p>2024.08.28編集</p>
+</div>
 
 <h2>MIT License</h2>
 <p>上記サンプルコードは以下のライセンス条項に基づきます。</p>
@@ -264,6 +270,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </pre>
 </blockquote>
+<ul>
+<li><a href="https://github.com/aamine/stdlinux2-source/blob/master/LICENSES">https://github.com/aamine/stdlinux2-source/blob/master/LICENSES</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.28編集</p>
+</div>
 
 <h1>参考情報</h1>
 <h2>man stdio(3)</h2>
