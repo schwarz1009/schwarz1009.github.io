@@ -130,7 +130,6 @@
 <li><a href="https://www.amazon.co.jp/Linux%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90-%E7%AC%AC3%E7%89%88-Jonathan-Corbet/dp/4873112532">Linuxデバイスドライバ 第3版</a></li>
 </ul>
 
-
 <h2>書籍</h2>
 <p>以下の書籍が参考になります。</p>
 <ul>
@@ -154,6 +153,16 @@
 <ul>
 <li><a href="https://www.omgubuntu.co.uk/2022/05/hp-dev-one-laptop-pop-os">HP Team Up With System76 for New Linux Laptop - OMG! Ubuntu!</a></li>
 </ul>
+
+<h1>余談</h1>
+<h2>デバイスドライバがなければデバイスは動かない</h2>
+<p>Linuxにおいて、デバイスドライバがなければデバイスは動かない。</p>
+<p>open(), close(), read(), write()といった入出力APIが動くのは、裏でそれらに対応するデバイスドライバが存在するおかげである。</p>
+<p>ネットワーク通信やプリンターのデバイスドライバも同様。</p>
+<p>デバイスドライバを書くことで、デバイスがLinuxで動くようになる。基本的にデバイスドライバがなければ、デバイスは動かない。</p>
+<div class="edit_date">
+<p>2024.09.16</p>
+</div>
 
 <h1>関連ページ</h1>
 <h2>デバイスファイル</h2>
