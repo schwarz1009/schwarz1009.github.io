@@ -49,19 +49,42 @@
 <pre>
 ps [オプション]
 </pre>
-<p>普通は、ps ax（すべてのプロセスを表示）やps aux（CPU・メモリ使用量を含めて表示）とすることが多い。</p>
+<p>普通は、</p>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>説明</th></tr>
+<tr><td>ps ax</td><td>すべてのプロセスを表示。</td></tr>
+<tr><td>ps aux</td><td>CPU・メモリ使用量を含めて表示。</td></tr>
+</table>
+<p>とすることが多い。</p>
 <pre>
 ps aux
 </pre>
-<p>ほかにr（実行中のプロセスを表示）や、-u ユーザ名（ユーザ名やユーザIDで抽出）など、さまざまなオプションがある。</p>
+<p>ほかに</p>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>説明</th></tr>
+<tr><td>r</td><td>実行中のプロセスを表示。</td></tr>
+<tr><td>-u ユーザ名</td><td>ユーザ名やユーザIDで抽出。</td></tr>
+</table>
+<p>など、さまざまなオプションがある。</p>
 <p>（<a href="https://www.amazon.co.jp/%E6%9C%80%E6%96%B0Debian-GNU-Linux%E5%AE%8C%E5%85%A8%E6%94%BB%E7%95%A5%E3%82%AC%E3%82%A4%E3%83%89-%E5%A4%A9%E9%87%8E-%E6%AD%A3%E6%A8%B9/dp/4798014125">最新 Debian GNU/Linux 完全攻略ガイド（天野正樹）</a>を参考に執筆しました。）</p>
 <p>詳しくはmanを参照してほしい。</p>
 <ul>
 <li><a href="https://linuxjm.osdn.jp/html/procps/man1/ps.1.html">Man page of PS</a></li>
 </ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
 
 <h2>psの表示項目</h2>
-<p>表示項目については、PID（プロセスID）、TTY（端末名）、TIME（利用CPU時間）、CMD（実行ファイルの名前）となる。</p>
+<p>表示項目については、</p>
+<table class="some_tables">
+<tr><th class="min60">表示項目</th><th>説明</th></tr>
+<tr><td>PID</td><td>プロセスID</td></tr>
+<tr><td>TTY</td><td>端末名</td></tr>
+<tr><td>TIME</td><td>利用CPU時間</td></tr>
+<tr><td>CMD</td><td>実行ファイルの名前</td></tr>
+</table>
+<p>となる。</p>
 <p>psコマンドにTオプションを付けると、STAT（プロセスの状態）が表示される。この状態は以下のようになる。</p>
 <table class="some_tables">
 <tr><th class="min60">状態</th><th>説明</th></tr>
@@ -71,14 +94,38 @@ ps aux
 <tr><td>T</td><td>トレース中・停止中</td></tr>
 <tr><td>Z</td><td>ゾンビ（死亡して親プロセスに回収されなかった状態）</td></tr>
 </table>
-<p>状態の付加情報として、sはセッションリーダー、lはマルチスレッド化されているプロセス、+はフォアグラウンドプロセスとなる。また&lt;は優先度が高く、Nは優先度が低い。</p>
+<p>状態の付加情報として、</p>
+<table class="some_tables">
+<tr><th class="min60">付加情報</th><th>説明</th></tr>
+<tr><td>s</td><td>セッションリーダー</td></tr>
+<tr><td>l</td><td>マルチスレッド化されているプロセス</td></tr>
+<tr><td>+</td><td>フォアグラウンドプロセス</td></tr>
+<tr><td>&lt;</td><td>優先度が高い</td></tr>
+<tr><td>N</td><td>優先度が低い</td></tr>
+</table>
+<p>となる。</p>
 <p>（「<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
 
 <h2>psのその他のオプション</h2>
-<p>psのその他のオプションとして、e（環境変数とコマンド名を表示）、u（CPUやメモリの使用量を表示）、l（実行状態などを表示）、f（階層的に表示）、p（プロセスIDを表示）などのオプションがある。以下のページが参考になる。</p>
+<p>psのその他のオプションとして、</p>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>説明</th></tr>
+<tr><td>e</td><td>環境変数とコマンド名を表示。</td></tr>
+<tr><td>u</td><td>CPUやメモリの使用量を表示。</td></tr>
+<tr><td>l</td><td>実行状態などを表示。</td></tr>
+<tr><td>f</td><td>階層的に表示。</td></tr>
+<tr><td>p</td><td>プロセスIDを表示。</td></tr>
+</table>
+<p>などのオプションがある。以下のページが参考になる。</p>
 <ul>
 <li><a href="https://eng-entrance.com/linux-command-ps">psコマンドについて詳しくまとめました 【Linuxコマンド集】 - エンジニアの入り口</a></li>
 </ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
 
 <h1>killとnice/reniceコマンド</h1>
 <h2>killコマンド</h2>
