@@ -66,7 +66,10 @@
 <p>必要に応じて/dev/sdaを変えること。</p>
 <h2>grubの設定</h2>
 <p>GRUB 2の新しい仕様として、GRUBのメニューファイル/boot/grub/grub.cfgはgrub-mkconfigコマンドによって自動作成されるようになった。よって、このファイルを手動で設定してはならない。設定すべきファイルは/etc/default/grubに存在するので、それを編集する。</p>
-<p>内容は<a href="http://enakai00.hatenablog.com/entry/2015/11/27/152442">GRUB2で知っておくとよいこと - めもめも</a>が参考になる。</p>
+<p>内容は以下が参考になる。</p>
+<ul>
+<li><a href="http://enakai00.hatenablog.com/entry/2015/11/27/152442">GRUB2で知っておくとよいこと - めもめも</a></li>
+</ul>
 <p>編集したら、以下を実行して設定ファイルを再作成する。</p>
 <pre>
 # grub2-mkconfig -o /boot/grub/grub.cfg
