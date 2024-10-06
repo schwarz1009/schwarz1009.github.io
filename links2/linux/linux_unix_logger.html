@@ -115,14 +115,28 @@
 
 <h2>起動で何かあったらログを見てsystemctl statusを確認する</h2>
 <p>もし、デーモンの起動で何かあったら、まずログを見ましょう。たとえば/var/log/boot.logに、OSを起動する時に表示されるログがあります。</p>
-<p>ログを見て、何のデーモンなのか確認出来たら、systemctl status [サービス名]を確認します。ここで表示される情報から、たとえば正常に起動できなかったサービスについて、何が問題なのかを突き止められます。</p>
+<p>ログを見て、何のデーモンなのか確認出来たら、</p>
+<pre>
+systemctl status [サービス名]
+</pre>
+<p>を確認します。ここで表示される情報から、たとえば正常に起動できなかったサービスについて、何が問題なのかを突き止められます。</p>
 <p><a href="linux_daemon.html">initとデーモン</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
 
 <h1>systemd</h1>
 <h2>journalctl (journald)</h2>
 <p>journalctlは、systemdによる新しいシステムロガーの表示コマンド。</p>
-<p>長らくシステムロガーの吐くログファイルはless /var/log/syslogで読むことができたが、systemd導入の結果、今ではjounalctlを使うようになった。</p>
+<p>長らくシステムロガーの吐くログファイルは</p>
+<pre>
+less /var/log/syslog
+</pre>
+<p>で読むことができたが、systemd導入の結果、今ではjounalctlを使うようになった。</p>
 <p><a href="systemd.html">systemd</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
 
 </div></div> <!--page-->
 
