@@ -126,13 +126,18 @@ $ (ユーザーに戻る)
 </ul>
 
 <h2>ユーザ関連のコマンド</h2>
-<p>ユーザの追加と削除と設定は、useradd, userdel, usermodコマンドで行える。グループについてはgroupadd, groupdel, groupmodコマンドを使う。</p>
-<p>パスワードの変更はpasswdコマンドで行う。</p>
-<p>idコマンドでユーザーID・グループIDが表示できる。</p>
-<p>suコマンドでユーザー権限を変えてログインすることができる。</p>
-<p>whoコマンドでログイン中のユーザを表示できる。</p>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>useradd<br>userdel<br>usermod</td><td>ユーザの追加と削除と設定。</td></tr>
+<tr><td>groupadd<br>groupdel<br>groupmod</td><td>グループの追加と削除と設定。</td></tr>
+<tr><td>passwd</td><td>パスワードの変更。</td></tr>
+<tr><td>id</td><td>ユーザーID・グループIDが表示できる。</td></tr>
+<tr><td>su</td><td>ユーザー権限を変えてログインできる。</td></tr>
+<tr><td>who</td><td>ログイン中のユーザを表示できる。</td></tr>
+</table>
 <div class="edit_date">
 <p>2023.01.17</p>
+<p>2024.10.06編集</p>
 </div>
 
 <h2>ホームディレクトリ</h2>
@@ -178,10 +183,13 @@ $ vi .bashrc
 </ul>
 
 <h2>/etc/passwdと/etc/shadow</h2>
-<p>/etc/passwdにはユーザーごとのさまざまな設定が書かれている。</p>
-<p>/etc/shadowには暗号化されたパスワードが記述されている。</p>
+<table class="some_tables">
+<tr><th class="min60">設定ファイル</th><th>説明</th></tr>
+<tr><td>/etc/passwd</td><td>ユーザーごとのさまざまな設定が書かれている設定ファイル。</td></tr>
+<tr><td>/etc/shadow</td><td>暗号化されたパスワードが記述されている設定ファイル。</td></tr>
+<table>
 <p>昔は/etc/passwdにパスワードまで含めて書かれていたが、/etc/passwdは誰でも見ることができるファイルであり、暗号化されているとは言えセキュリティ的によくないため、暗号化されたパスワードは一般ユーザには見えない/etc/shadowに記述されるようになった。</p>
-<p>/etc/passwdはそれぞれの項目が「:」で区切られており、左から「ユーザー名」、「暗号化されたパスワード」（大抵の場合、シャドウパスワードとして/etc/shadowに記述されている）、「ユーザーID」、「グループID」、「ユーザーのフルネーム」、「ホームディレクトリのパス」、「ログインシェルの種類」、が記述されている。</p>
+<p>/etc/passwdはそれぞれの項目が「:」で区切られており、左から「ユーザー名」「暗号化されたパスワード（大抵の場合、シャドウパスワードとして/etc/shadowに記述されている）」「ユーザーID」「グループID」「ユーザーのフルネーム」「ホームディレクトリのパス」「ログインシェルの種類」が記述されている。</p>
 <p>/etc/passwdの内容を編集する場合は、編集中にロックをかけるためにviではなく専用のvipwコマンドを使うことが推奨される。内容を間違えるとユーザーがログインできなくなるので気を付けよう。</p>
 <p>以下のページが参考になります。</p>
 <ul>
@@ -198,6 +206,7 @@ $ vi .bashrc
 </ul>
 <div class="edit_date">
 <p>2024.07.28編集</p>
+<p>2024.10.06編集</p>
 </div>
 
 <h2>/etc/skel</h2>
