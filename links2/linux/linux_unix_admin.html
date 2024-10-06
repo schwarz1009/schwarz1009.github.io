@@ -272,11 +272,20 @@ $ LANG=C man ls
 
 <h2>コンピュータ情報の表示</h2>
 <p>/procファイルシステムには、カーネルやコンピュータのさまざまな情報がアクセスできるようになっている。</p>
-<p>コンピュータのCPUを見る場合、cat /proc/cpuinfoを実行すると、CPUの情報にアクセスできる。</p>
-<p>cat /proc/cpuinfoでCPUの情報を、cat /proc/meminfoでメモリの情報を確認できる。</p>
+<p>コンピュータのCPUを見る場合、</p>
+<pre>
+cat /proc/cpuinfo
+</pre>
+<p>を実行すると、CPUの情報にアクセスできる。また、</p>
+<pre>
+cat /proc/meminfo
+</pre>でメモリの情報を確認できる。</p>
 <ul>
 <li><a href="http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-ja-4/ch-proc.html">5章. proc ファイルシステム - Red Hat Enterprise Linux 4: リファレンスガイド</a></li>
 </ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
 
 <h1>システム管理</h1>
 <h2>ロギング</h2>
