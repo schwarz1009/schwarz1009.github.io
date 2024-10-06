@@ -150,11 +150,17 @@
 <p>.xinitrcはカスタマイズすることで、Xサーバーが起動する時に実行するアプリケーションやウィンドウマネージャを設定できる。</p>
 
 <h2>.xsessionと.xinitrc</h2>
-<p>.xsessionは、端末のX画面（ディスプレイマネージャ）にログインした時に実行される初期化スクリプト。</p>
-<p>.xinitrcは、startxコマンドやxinitコマンドでXを起動した時に実行される初期化スクリプト。</p>
+<table class="some_tables">
+<tr><th class="min60">スクリプト</th><th>説明</th><tr>
+<tr><td>.xsession</td><td>端末のX画面（ディスプレイマネージャ）にログインした時に実行される初期化スクリプト。</td></tr>
+<tr><td>.xinitrc</td><td>startxコマンドやxinitコマンドでXを起動した時に実行される初期化スクリプト。</td></tr>
+</table>
 <ul>
 <li><a href="https://wiki.archlinux.jp/index.php/Xinitrc">xinitrc - ArchWiki</a></li>
 </ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
 
 <h2>.xinitrcのカスタマイズ</h2>
 <p>.xinitrcあるいは.xsessionをカスタマイズすることで、Xサーバーを起動させたい時に行わせたい処理を記述できる。</p>
