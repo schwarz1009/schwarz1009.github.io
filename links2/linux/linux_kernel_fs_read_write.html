@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（ディスクの読み書き） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（ディスクの読み書き）</h1>
+<p>Linuxのカーネルの開発に関する世界観（ディスクの読み書き）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><b>ディスクの読み書き</b></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>キャッシュ</h1>
+<h2>ディスクキャッシュとスワップ</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>を参考に執筆しました。）</p>
+<p>カーネルは、できるだけ低速なディスクにアクセスしないように、ディスクの内容をキャッシュしている。</p>
+<p>バッファキャッシュは、その名の通りバッファによるキャッシュのこと。</p>
+<p>これとは別に、ページによるディスクキャッシュであるページキャッシュがある。</p>
+<p>メモリをディスクの代わりに使って高速にアクセスするディスクキャッシュとは逆に、ディスクをメモリの代わりに使ってメモリの空き容量を拡大させるスワップという処理がある。</p>
+<p>スワップでは、空きメモリが不足した際、ディスクをメモリの「避難場所」として使うことができる。</p>
+<p>後日注記：Linux 2.6では、バッファキャッシュは廃止され、ディスクキャッシュはページキャッシュに統合された。</p>
+
+<h2>ダーティリスト</h2>
+<p>（以下は<a href="https://atmarkit.itmedia.co.jp/ait/articles/0305/20/news002_2.html">VFSとファイルシステムの基礎技術：Linuxファイルシステム技術解説（1）（2/2 ページ） - ＠IT</a>を参考に執筆しました。）</p>
+<p>i-nodeは、次の3つの双方向リストのうち、常にどれかに入っている。</p>
+<table class="some_tables">
+<tr><th class="min60">リスト</th><th>説明</th></tr>
+<tr><td>UNUSED</td><td>未使用</td></tr>
+<tr><td>USED</td><td>使用中</td></tr>
+<tr><td>DIRTY</td><td>書き込み中</td></tr>
+</table>
+<p>ダーティとは「書き込み中」の意味。</p>
+<p>メモリ上のファイルのキャッシュに書き込みが行われた場合、i-nodeにはダーティビットがつけられ、ダーティリストに追加される。</p>
+<p>ダーティリストに追加されたi-nodeは、I/Oリクエストキューに書き込みI/Oを待つバッファキャッシュとして追加され、ディスクに順次書き込みがなされる。</p>
+
+<h2>syncコマンド</h2>
+<p>syncコマンドは、キャッシュの中身をディスクに書き込むコマンド。</p>
+<p>カーネルはディスクの内容をキャッシュしているが、これが書き込まれずにシステムがなんらかの原因で停止すると、データが失われてしまう。</p>
+<p>長い時間稼働しているシステムで、停電などなんらかのリスクがある時には、syncコマンドを実行すればその場でキャッシュをディスクに書き込んでくれる。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/413/">syncコマンド | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h1>ファイルアクセス</h1>
+<h2>読み取りと書き込み</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>を参考に執筆しました。）</p>
+<p>ファイルの読み取りを行う際に、カーネルが行うことは以下のような流れになる。</p>
+<p>まず、ディスク上にそのファイルがどこに存在するかを突き止めるために、i-nodeを探索する。</p>
+<p>ディスクからファイルを読み込む前に、まず、先読みウィンドウあるいはページキャッシュの中にデータが存在しないかどうかを確認する。</p>
+<p>実際にディスクからファイルを読み込む際には、新しいページフレームを確保し、ここにディスクからデータを読み込む。読み込みが終わったら、ページをページキャッシュに追加する。</p>
+<p>そして、最後に、データを要求されたプロセスアドレス空間にコピーして転送する。</p>
+<p>ファイルの書き込みの場合は、ファイルのサイズが変わる場合があるため、もう少し複雑になる。サイズが変わった場合、ディスク上の物理ブロックの確保や解放をしなければならない。この操作はファイルシステムの種類によって異なる。</p>
+
+<h2>先読み技術</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>を参考に執筆しました。）</p>
+<p>ファイルシステムにおいて、先読み技術を使うことで、ファイルの読み取りが高速になることがある。</p>
+<p>先読みとは、ファイルを読んだ際に、隣接するデータのページを必要とされる前に読み込んでおく技術。</p>
+<p>先読みアルゴリズムでは、隣接したページのことを「先読みウィンドウ」と呼び、前回の先読みページと合わせて「先読みグループ」と呼ばれる。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

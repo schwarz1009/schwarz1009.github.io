@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>モニタリング - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>モニタリング</h1>
+<p>モニタリングに関する世界観です。<a href="linux_net.html">Linuxネットワーク</a>も参照してください。</p>
+<p><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+
+<h1>サーバーのモニタリング</h1>
+<h2>top</h2>
+<p>topはリアルタイムのモニタリングツール。システムで稼働しているプロセスやスレッドの状況をリアルタイムで表示できる。</p>
+<p>「-d 秒数」で更新間隔を、「-p プロセスID」で特定のプロセスIDのみを表示できる。</p>
+<p>主な対話オプションは、</p>
+<table class="some_tables">
+<tr><th class="min60">対話オプション</th><th>説明</th></tr>
+<tr><td>Space/Enter</td><td>更新</td></tr>
+<tr><td>q</td><td>終了</td></tr>
+<tr><td>k</td><td>シグナルの送信（デフォルトは15/SIGTERM）</td></tr>
+<tr><td>r</td><td>優先度（NICE値）の変更</td></tr>
+<tr><td>s</td><td>更新間隔（秒単位）の変更</td></tr>
+<tr><td>n</td><td>一覧に表示されるプロセス数の変更</td></tr>
+<tr><td>c</td><td>コマンド名にオプションを含める</td></tr>
+<tr><td>h</td><td>使い方のヘルプ</td></tr>
+</table>
+<p>その他さまざまな対話オプションがあり、CPUやメモリの利用順に値を並び替えたり（PでCPU、Mでメモリ）、さまざまな表示項目の表示・非表示を切り替えたり（l, t, m, 1）できる。またHでスレッドモードに変更できる。</p>
+<p>（「<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>」を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man1/top.1.html">man top</a></li>
+</ul>
+
+<h2>vmstatとiostat</h2>
+<p>vmstatは仮想メモリについての統計情報、iostatは入出力デバイスについての統計情報を表示する。</p>
+<p>topとともに、サーバーのリソースをリアルタイムでモニタリングするのに使える。OSでの実行を待機中のプロセスのキューを表示するのにもvmstatが使える。</p>
+<ul>
+<li><a href="https://qiita.com/s_suzaku/items/1d4dd297c454f0483c9b">vmstatコマンドまとめ - Qiita</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man8/vmstat.8.html">man vmstat</a></li>
+</ul>
+
+<h2>dstat</h2>
+<p>サーバーのリソースをリアルタイムで監視するためのツール。</p>
+<p>vmstatはメモリやブロックの状況、iostatはI/Oの状況を見ることができるが、他の状況は見ることができない。</p>
+<p>1つのターミナルでさまざまな状況を見たいときは、dstatを使う。</p>
+<ul>
+<li><a href="http://hirose31.hatenablog.jp/entry/20120229/1330501968">dstatの万能感がハンパない - （ひ）メモ</a></li>
+</ul>
+
+<h2>uptime</h2>
+<p>uptimeは稼働しているシステムがどれだけの間稼働しているかを表示する。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/procps/man1/uptime.1.html">man uptime</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+
+<h1>統合監視ソフトウェア</h1>
+<h2>Zabbix</h2>
+<p>Zabbixはオープンソースの統合監視ソフトウェア。システムのさまざまな広範囲のことを統合的に監視できる。すべてオープンソースかつ無償で利用できる。</p>
+<ul>
+<li><a href="https://www.kagoya.jp/howto/cloud/vps/zabbix/">【初心者向け】Zabbixとは？概要からインストール方法までわかりやすく解説 - カゴヤのサーバー研究室</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.27</p>
+</div>
+
+<h2>Grafana</h2>
+<p>Grafanaはオープンソースの可視化ダッシュボードソフトウェア。Zabbixなどと組み合わせられる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Grafana">Grafana - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.09.22</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>プロセス関係のコマンド</h2>
+<p><a href="linux_commands_proc.html">Linuxコマンド（プロセス）</a>も参照のこと。</p>
+
+<h2>セキュリティ</h2>
+<p><a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>モニタリング</h2>
+<h3>top</h3>
+<p>Windowsでいうタスクマネージャ。</p>
+
+<h3>dstat</h3>
+<p>vmstatやiostatではシステム全般の情報が見れない（仮想メモリやI/Oしか確認できない）ため、全ての情報を表示できるdstatを使う。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

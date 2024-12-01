@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>磁気テープの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">工学・機械技術の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/tech_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>磁気テープの世界観</h1>
+<p>磁気テープの世界観です。機械いじりが子供のごろから好きだった父親の話を参考にしています。</p>
+<p><a href="../hardware/harddisk.html">ハードディスク</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>磁気テープの仕組み</h1>
+<h2>蓄音機とレコード</h2>
+<p>歴史上、文字を使って紙に文章を書くことで、文字情報を記録することはできた。だが、音声などの記録は難しかった。</p>
+<p>音声の記録として生まれたメディアは、蓄音機とレコードである。これは、円盤状に音声の「波」を記録して、そこに針を乗せることで、膜を震わせて音声を再生する。</p>
+<p>だが、蓄音機とレコードは、作るのが難しくて、誰でも簡単に録音し、再生することは難しかった。</p>
+<p>ここで生まれたのが、磁気テープによる音声の記録と再生である。</p>
+
+<h2>磁気テープ</h2>
+<p>まず、磁気テープは「ヘッド」と呼ばれる電磁石を用いる。これは磁界を局所的に発生させる、強弱をコントロールできる電磁石である。</p>
+<p>このヘッドに、「磁性体」と呼ばれる、磁界を記録することのできる物質を組み合わせることで、テープに電気信号を記録する。プラスチックで出来た、磁性体を塗ったフィルムに、ヘッドの電磁力で磁界を記録する。</p>
+<p>磁性体は電磁石から与えられた磁界の磁力を記録する。内容を消去したい時は、普通の磁石でなぞるだけで磁気が消える。</p>
+<p>磁性体は、磁界を記録し、それ自体が磁力を持つ。これを、記録する時と同じようにヘッドに通すと、今度は逆に電磁力からヘッドに電流が流れる。</p>
+<p>このようにして、音声はテープレコーダーで記録できる。音声だけではなく、プログラムの記録にも昔使われていた。</p>
+
+<h2>フロッピーディスクとFAT</h2>
+<p>音声や映像のような「連続したデータ」ならば、このようなテープで十分である。だが、プログラムのデータのように、さまざまな場所にあるデータをさまざまな場所に保存するメディアでは、テープのままでは使いづらい。</p>
+<p>このため、フロッピーディスクなどでは、円盤状の磁性体テープや、ハードディスクなどでは磁性体の特性を持つ固い金属を円盤状のディスクとして使う。「セクタ」に保存したデータは、「ファイルアロケーションテーブル（FAT）」によってどこにどんなデータが保存されているかが管理されており、ヘッドはさまざまな場所のデータを飛んで読み取り、書き込むことができる。</p>
+<p>この「ディスク」を管理するためには、プログラムの側でファイルシステムとして対応することも必要である。このディスクに対応したOSが、MS-DOSなどの「DOS（ディスクオペレーティングシステム）」である。</p>
+
+<h2>VHSとベータ</h2>
+<p>ビデオなどに使われるビデオテープには、昔大きく分けてVHSとベータという2つの規格に分かれて標準化競争が行われていた。</p>
+<p>結果はVHSが勝って、小型で性能の良かったSONYのベータは負けた。</p>
+<p>ちょうど僕が幼少期だったごろがそうしたVHSとベータが競争していた時代で、僕の家には今はもう再生できないベータで録画されたアラレちゃんのビデオが残っている。</p>
+<p>SONYはよくこういう時に標準的な規格につかずに独自規格を打ち出すことがあり、記憶に新しいHD-DVDとブルーレイのような、DVDより次世代の大容量メディアの時はSONYのブルーレイが勝利した。</p>
+
+<h1>関連ページ</h1>
+<h2>ハードディスク</h2>
+<p><a href="../hardware/harddisk.html">ハードディスク</a>も参照のこと。</p>
+
+<h2>電磁気学</h2>
+<p><a href="../natural/physics_electromagnetism.html">電磁気学</a>も参照のこと。</p>
+
+<h2>科学者</h2>
+<p>エジソンについては<a href="../natural/scientists.html">科学者・科学史</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>蓄音機・磁気テープ</h2>
+<ul class="defaultlist list7">
+<li>自然科学（物理・工学）
+<ul>
+<li>工学
+<ul>
+<li>蓄音機
+<ul>
+<li>音の波をレコードに残す</li>
+</ul></li>
+<li>磁気テープ
+<ul>
+<li>電磁力を発生させる磁気ヘッドにより、磁気を記録するテープを書き換える</li>
+</ul></li>
+<li>AV機器</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

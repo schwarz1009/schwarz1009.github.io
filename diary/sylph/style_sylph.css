@@ -1,0 +1,121 @@
+.sylph h1 {
+    font-size: 175%;
+    color: #6c5776; 
+    background: white;
+    border-bottom: 1px solid #be91bc;
+    border-left: 5px solid #a6658d;
+    box-shadow: none;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+    padding-left: 17.5px;
+    padding-bottom: 5px;
+}
+
+.sylph h2 {
+    font-size: 120%;
+    color: #6c5776; 
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+A:link {
+    color: #c73576;
+}
+
+A:visited {
+    color: #3a614f;
+}
+
+.tab_menu { }
+
+.tab_list {
+    margin: 0;
+    padding: 0;
+}
+
+.tab_list li {
+    list-style-type:none;
+    list-style-image:none;
+    display: inline-block;
+    margin: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 3px 10px 3px 10px;
+    width: auto;
+    border-top: 2px solid #6bb6bb;
+    border-right: 1px solid #9acce3;
+    border-left: 1px solid #9acce3;
+    background: #c6e2f8;
+}
+
+.tab_list A:link,
+.tab_list A:visited {
+    color: #019c96;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.box {
+    border: 1px solid #9acce3;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 20px;
+}
+
+.box ul {
+    padding: 0;
+    margin: 0;
+}
+
+.box li {
+    list-style-type:none;
+    list-style-image:none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+.tl-tweet {
+    border: 1px solid #be91bc;
+    border-left: 3px solid #a6658d;
+    background: white;
+    padding: 10px;
+}
+
+.tl-tweet A:link,
+.tl-tweet A:visited {
+    color: #845d9e;
+}
+
+#toc {
+    background: white;
+    border: 1px solid #be91bc;
+    border-top: 3px solid #a6658d;
+    box-shadow: none;
+}
+
+#toc A:link,
+#toc A:visited {
+    color: #845d9e;
+}
+
+#toc:before {
+    color: #6c5776;
+}
+
+#toc li:before {
+    border-top: 1px solid #845d9e;
+    border-right: 1px solid #845d9e;
+}

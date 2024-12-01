@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Web関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Web関連の世界観</h1>
+<p>Webプログラミングに関する世界観です。<a href="../linux/linux_net.html">Linux（ネットワーク）</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>HTTP</h1>
+<h2>HTTP</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>HTTPにおいては、サーバとクライアントの間でHTMLデータをやり取りする。</p>
+<p>この時、リクエストに対してサーバはレスポンスを返す。</p>
+<p>WebブラウザはWebサーバにリクエストを要求し、この時GETやPOSTなどのメソッドを要求する。</p>
+<p>これに対して、Webサーバは、「安全にデータを返します」「エラーが発生しました」といった番号（HTTPステータスコード）による応答と、具体的なデータ（エンティティボディ）を返す。</p>
+
+<h2>Webの世界</h2>
+<p><a href="web_intro.html">Webの世界</a>も参照のこと。</p>
+
+<h1>Webサーバー</h1>
+<h2>Apache</h2>
+<p>現在主流のサーバー。<a href="apache.html">Apache</a>を参照のこと。</p>
+
+<h2>Nginx</h2>
+<p>イベント駆動のアプローチで高い性能を誇るサーバー。<a href="nginx.html">Nginx</a>を参照のこと。</p>
+
+<h2>lighttpd</h2>
+<p>軽量なWebサーバー。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/lighttpd">lighttpd - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/lighttpd">git</a></li>
+</ul>
+
+<h2>IIS</h2>
+<p>MicrosoftのWebサーバー。昔からApacheの一番のライバル。</p>
+<p>使いたい人は少ないが、なぜかシェアは多い。</p>
+<p>MSのASP.NETを使えるのは長所だが、逆にIISでPHPなどを動かす場合はどうなるのかなどが疑問である。</p>
+<p>ネットを調べたところ、Windows 7のIISでもPHPを動かすことは現実的に可能なようだ。</p>
+<p>ASP.NETをLinuxで使いたい場合は、monoを使うことで実現できる。monoにはC#/VB.NETコンパイラが付属し、.NET Frameworkが搭載され、ASP.NETの開発が出来る。ただ、どこまで動くのかは疑問である。</p>
+
+<h1>HTTPリクエストとレスポンス</h1>
+<h2>HTTPリクエストとレスポンス</h2>
+<p>HTTPリクエストでは、リクエスト行（HTTPメソッドとURLを含む）、メッセージヘッダ（情報）、エンティティボディ（実際のデータ）がクライアントからサーバーにリクエストされる。</p>
+<p>HTTPレスポンスでは、HTTPステータスコード（結果）、メッセージヘッダ、エンティティボディがサーバーからクライアントにレスポンスとして返ってくる。</p>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-Gene/dp/4798125261">おうちで学べるネットワークのきほん</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.17編集</p>
+</div>
+
+<h2>HTTPメソッド</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-Gene/dp/4798125261">おうちで学べるネットワークのきほん</a>を参考に執筆しました。）</p>
+<p>HTTPメソッドには、</p>
+<table class="some_tables">
+<tr><th class="min60">HTTPメソッド</th><th>説明</th></tr>
+<tr><td>GET</td><td>データの取得</td></tr>
+<tr><td>HEAD</td><td>ヘッダだけを取得</td></tr>
+<tr><td>POST</td><td>サーバへとデータを送信</td></tr>
+<tr><td>PUT</td><td>既にあるデータを置換</td></tr>
+</table>
+<p>がある。</p>
+<p>また、RESTと呼ばれる新しいWeb上のリソースのやり取りのAPIとして、RESTfulメソッド（GET、POST、PUT、DELETEなど）が設定（追加）されることもある。</p>
+<p><a href="rest.html">REST</a>、<a href="web_api.html">Web API</a>、<a href="../prog_lang/json.html">JSON</a>も参照のこと。</p>
+
+<h2>ステータスコード</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-Gene/dp/4798125261">おうちで学べるネットワークのきほん</a>と<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>HTTPのステータスコードは、1xx（情報がある）、2xx（成功）、3xx（リダイレクト）、4xx（クライアントのエラー）、5xx（サーバのエラー）となる。</p>
+<p>たとえば、ステータスコード200は「成功」、404は「ページが存在しない」、403は「アクセスするための権限がない」を表す。</p>
+
+<h2>独自のWebサーバーを実装する</h2>
+<p>Webサーバーを実装するのは、プログラミング初心者にとってよい練習になります。</p>
+<p>たとえば、「<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>」のような書籍でも、WebサーバーをソケットAPIを使って実装することが、最後の演習問題の課題になっていて、fork()によって並列で動くサーバーのサンプルコードがついてきます。</p>
+<p>また、Rustの「<a href="https://doc.rust-jp.rs/book-ja/index.html">Rust Book second-edition</a>」においても、マルチスレッドで動くWebサーバーのサンプルコードが出てきます。</p>
+<p>このように、Webサーバーを実装するということは、適度に難しい課題であり、プログラミング初心者にとっては取り組みやすい問題であると言えます。LinuxのシステムコールやRustの言語仕様を学ぶ上でも適切であると言えます。</p>
+<div class="edit_date">
+<p>2023.08.17</p>
+</div>
+
+<h1>Webサーバー関連のTips</h1>
+<h2>ポート番号</h2>
+<p>HTTPのデフォルトのポート番号は80番、HTTPSのデフォルトのポート番号は443番。</p>
+<p>ただし、Apacheの設定ファイルなどで設定すると、デフォルト以外のポート番号を指定することもできる。</p>
+<p>サーバーにアクセスする際、デフォルト以外のポート番号を指定するためには、http://www.hogehoge.com:8080/のように、ドメインの後にポート番号（ここでは8080番）を指定する。</p>
+<ul>
+<li><a href="https://e-words.jp/w/8080%E7%95%AA%E3%83%9D%E3%83%BC%E3%83%88.html">8080番ポート（ポート8080 / TCP8080番ポート）とは - 意味をわかりやすく - IT用語辞典 e-Words</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.19</p>
+</div>
+
+<h1>サーバー構築ノウハウ</h1>
+<h2>セキュリティ</h2>
+<p>何はともあれ、サーバー構築のために一番必要なのはセキュリティの知識です。</p>
+<p>セキュリティさえしっかりしていれば、あとはどんな運用や設定も許されます。</p>
+<p>以下のページが参考になるでしょう。</p>
+<ul>
+<li><a href="http://qiita.com/cocuh/items/e7c305ccffb6841d109c">そこそこセキュアなlinuxサーバーを作る - Qiita</a></li>
+</ul>
+
+<h2>ダイナミックDNS</h2>
+<p>ダイナミックDNSは動的に変わるIPアドレスとホスト名をDNSに登録する仕組みで、IPアドレスがDHCPで自動的に割り振られる場合でも、サーバーとなる一台のコンピュータのIPアドレスを特定することができる仕組み。ホスト名からIPアドレスを割り出すことができ、定期的に更新することによって、DHCPの中の自宅サーバーでも特定のホスト名アドレスからその一台へとアクセスすることができる。</p>
+<p>家庭用ネットワークで、独自ドメインを有料で登録しなくても、ダイナミックDNSを使えば、自宅サーバーを固有のアドレスで公開できる。一部のダイナミックDNSは無料で利用できる。</p>
+<ul>
+<li><a href="http://blog.livedoor.jp/hiroumauma/archives/1352813.html">Linuxをはじめよう！:自宅サーバーの構築2 ドメインの取得</a></li>
+<li><a href="https://wa3.i-3-i.info/word12931.html">ダイナミックDNS (DDNS)とは｜「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典</a></li>
+</ul>
+<p><a href="network_etc.html">ネットワークの雑多なこと</a>も参照のこと。</p>
+
+<h2>自動でアップデート</h2>
+<p>Linuxサーバーを自動で（cronなどで定期的に）アップデートするための専用パッケージのインストールについては、<a href="../linux/linux_pkgmanagement.html">Linux パッケージ管理</a>を参照のこと。</p>
+
+<h1>サーバー構築入門</h1>
+<h2>非公開の練習用マシンを用意する</h2>
+<p>Linuxでサーバーを立てるために、まず、練習用の外部に非公開のマシンを一台用意しましょう。</p>
+<p>そのマシンで、Linuxをインストールしてネットワークやファイヤーウォールの設定をし、Apache、PHP、MySQLの導入をすれば、すぐにWebアプリケーションを開発する環境が整います。</p>
+<p>FTPやSSHの設定もしましょう。必要な知識としては、パッケージ管理システムの知識、ネットワークの設定の知識、それからApache/PHP/MySQLの設定の知識と、Web向けのプログラミング言語の知識（HTML/CSS/JavaScript + PHP + MySQL）が必要になるでしょう。また、FTPクライアントの操作の仕方や、Windowsから操作するSSHの知識も必要になります。</p>
+<p>ですが、外部に公開しない範囲で練習するのであれば、けっこう簡単です。PHPの教科書を読みながら、ツイッターのようなシステムはそんなに上級者ではなくても作れるでしょう。PHPができたら、Ruby on Railsに挑戦すると良いでしょう。</p>
+<p>ただし、何もLinux用のマシンを用意しなくても、XAMPPを導入すればWindowsでサーバー環境を構築することはできます。RailsもWindowsで動かすこともできます。</p>
+<p>決して、安易な気持ちでサーバーを公開しないこと。Webアプリケーションにセキュリティホールがあれば、一貫の終わりです。サービス化してしまうと、途中でやめるわけにもいきませんし、掲示板であれば運営するための手間とコストも必要です。本当にサービスを公開するのであれば、レンタルサーバーを利用するのが良いでしょう。</p>
+<p>サーバーを公開したいのであれば、まず、セキュリティがきちんとできているかを確認すること。次に、きちんとシステム管理を行い、パッケージを最新版に更新し続けるための時間と手間がきちんと準備できていることを確認すること。その上で、独自ドメインを取って、サーバーを外部に公開するために、ルーターなどを設定し、サーバーを公開するように設定を行うこと。Linuxはそれだけで、だれかれ構わずしっかりとサーバーとして動いてくれるでしょう。</p>
+
+<h2>オープンソース・Linuxとサーバー</h2>
+<p>オープンソースやLinuxとサーバーには、いくらかの親和性とメリットがある。</p>
+<p>１．いくらサーバー台数・CPU数が増えても無料のままで、UNIXと比べてコストが削減でき、導入のハードルも低い。</h2>
+<p>２．パッケージ管理システムで、コマンド一発で全てのソフトウェアを最新にできる。</p>
+<p>３．Perl/PHP/Python/Rubyなど、主流のさまざまな言語処理系・開発ツールが使える。</p>
+<p>４．Dockerなどのクラウド関連ソフトウェアが使える。</p>
+<p>５．カーネルやマシンレベルで、UNIXの優れたネットワーク機能が使える（システムがネットワークと親和性が高く、UNIXの設計であるため安定性が高い）。</p>
+<p>６．コマンドのOSなので、リモートログインしてコマンドで操作でき、GUIなどの不要なソフトウェアを入れる必要がない。またUNIXのツールが使えるためシステム管理がやりやすい。</p>
+<p>７．オープンソースで開発されているため、バグが少ない。</p>
+<p>特に、ApacheからMySQL（MariaDB）まで、全てのパッケージがリポジトリから配布されており、簡単に最新バージョンにすることができるというのは、セキュリティが大切なサーバーマシンにはメリットが大きい。</p>
+<p>ただし、デメリットとして</p>
+<p>８．会社が作っていないため、サポート期間が短い。</p>
+<p>９．GUI機能が貧弱（サーバーにはあまり関係がない）。</p>
+<p>というのがあげられる。だが、これはRed HatやSUSEを購入することなどで対応できる（RHELはサポート期間が長い）。エンタープライズ向けには、IBMのメインフレームでLinuxを動かすこともできる。もちろんPC向けにも使えるほか、Androidなどはモバイル機器で使うこともでき、スケーラブルなマシン構成に対応できる。従来のUNIXワークステーションのように、中央のマシンと端末を分けて構成できるなど、マシン構成の柔軟性が高い。クラスタや分散システムなどの構築も可能。</p>
+
+<h1>簡単な説明</h1>
+<h2>Web</h2>
+<ul class="defaultlist list7">
+<li>Web
+<ul>
+<li>Webサーバー
+<ul>
+<li>Apache</li>
+<li>Nginx
+<ul>
+<li>C10K問題</li>
+<li>イベント駆動 + ノンブロッキングI/O</li>
+</ul></li>
+</ul></li>
+<li>HTTPリクエストとレスポンス</li>
+<li>CGI、PHP、サーブレット、アプリケーションサーバなど
+<ul>
+<li>ステートレス、ステートフル
+<ul>
+<li>クッキー</li>
+<li>セッション</li>
+</ul></li>
+<li>FastCGI</li>
+</ul></li>
+<li>掲示板の作成
+<ul>
+<li>フォームへの投稿</li>
+<li>HTMLの出力</li>
+<li>投稿の表示</li>
+<li>基本的にフォームへの投稿をHTMLとしてファイルに追記出力し、そのHTMLを自動で表示するようにすれば掲示板は作れる</li>
+</ul></li>
+<li>WordPress</li>
+<li>BASIC認証
+<ul>
+<li>Webサイトで認証を行うにはBASIC認証を使う</li>
+</ul></li>
+<li>バーチャルホスト
+<ul>
+<li>ひとつのサーバで複数のホストを運用できる</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+<h1>リンク集</h1>
+<h2>Webアプリ開発など</h2>
+<p>全般</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1507/15/news023.html">JavaScriptを中心としたWebアプリ開発の栄枯盛衰まとめ――LiveScriptからAngularJS／React.jsまで - @IT</a></li>
+</ul>
+<p><a href="../prog_lang/php.html">PHP</a>や<a href="../prog_lang/javascript.html">JavaScript</a>については対象の言語の項目を参照して下さい。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

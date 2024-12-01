@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JavaScript関連の世界観２（DOM/Canvas） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaScriptの世界観２（DOM/Canvas）</h1>
+<p>JavaScriptによるプログラミングに関する世界観２（DOM/Canvas）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="javascript.html">JavaScript（１．一般）</a></li>
+<ul>
+<li><a href="javascript_intro.html">JavaScript入門</a></li>
+<li><b>２．DOM/Canvas</b></li>
+<li><a href="javascript_prototype.html">３．プロトタイプチェーン</a></li>
+</ul>
+<li><a href="javascript_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="javascript_framework.html">JavaScriptフレームワーク</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>DOM</h1>
+<h2>DOM</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>ブラウザはHTMLをCSSなどと同時に解釈し、HTMLデータを内部的なツリー構造であるDOMツリーに変換する。</p>
+<p>DOMツリーはブラウザにおいては、JavaScriptと呼ばれる言語で操作することができる。</p>
+<p>JavaScriptによる操作は、クライアントのWebブラウザの内部で行われるため、クライアントサイドと呼ばれる。</p>
+
+<h2>DOMツリーとWindowオブジェクト</h2>
+<p>HTMLがブラウザに読み込まれると、HTMLの内容と同じツリー構造の「DOMツリー」が自動的に作られる。</p>
+<p>JavaScriptでは、このDOMツリーを操作することで、HTMLを操作できる。</p>
+<p>また、JavaScriptではWindowオブジェクトを使うことで、window.alert()関数から警告ボックスを出したり、window.documentプロパティからHTMLの内容にアクセスしたり、window.locationプロパティからURL情報を取得したりできる。</p>
+<p>最初から何もしなくても用意されている関数やプロパティは、みんなWindowオブジェクト。window.は省略することができる。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://qiita.com/tsukishimaao/items/39d22fd9178546d6cdeb">windowオブジェクト - Qiita</a></li>
+<li><a href="https://qiita.com/hththt/items/cc047e326994f440a17a">DOMのまとめ - Qiita</a></li>
+</ul>
+
+<h2>DOMの利用</h2>
+<p>（以下は<a href="https://eng-entrance.com/what-is-dom">JavaScript初心者でもすぐわかる！DOMとは何か？ - エンジニアの入り口</a>を参考に執筆しました。）</p>
+<p>DOMではツリー構造でノード（HTMLの要素）へアクセスすることができる。JavaScriptからはID名でノードを取得し、操作することができる。</p>
+<p>HTMLの側には、</p>
+<pre class="prettyprint">
+&lt;div id="hoge"&gt;
+    &lt;p&gt;Hoge&lt;/p&gt;
+    &lt;p&gt;Foo&lt;/p&gt;
+    &lt;p&gt;Bar&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<p>とする。</p>
+<p>まず、以下のようにすることで、このhoge要素を取得できる。</p>
+<pre class="prettyprint">
+let hoge_element = document.getElementById('hoge');
+</pre>
+<p>ここで、hoge_element.styleプロパティを編集すれば、CSSが操作できる。</p>
+<pre class="prettyprint">
+hoge_element.style.color = "blue";
+</pre>
+<p>また、hoge_element.childNodes[5]などを取得した上で、この子ノードのinnerHTMLを書き換えれば、子ノードが書き換えられる。</p>
+<pre class="prettyprint">
+hoge_element.childNodes[5].innerHTML = "&lt;p&gt;Fuga&lt;/p&gt;";
+</pre>
+<p>Webブラウザの仕様として、ノードとノードの間に空白のノードが挿入されるため、childNodes[5]は5番目の要素にはならず、3番目の要素となる。（後日注記：おそらく、タグとタグの間に含まれる空白の情報のことだと思われる。）</p>
+<p>DOMを使うことで、簡単にHTMLの要素をオブジェクトとして変えることができる。HTMLを用意してある特定の要素を変える、という点ではPHPに似ているが、フォーマットに</p>
+<pre class="prettyprint">
+&lt;div id="hoge"&gt;&lt;/div&gt;
+</pre>
+<p>などのID要素を指定した上で、JavaScriptやCSSなどから'hoge'とか'#hoge'などのIDで要素を特定しなければならない。（DOMを直接操作せずにフレームワークを用いることもできる。）</p>
+<div class="edit_date">
+<p>2023.04.21編集</p>
+</div>
+
+<h2>document.writeとinnerHTML</h2>
+<p>JavaScriptで文字列をページに出力するためには、document.write()関数を使います。</p>
+<pre class="prettyprint">
+document.write('&lt;p&gt;Welcome to my homepage.&lt;/p&gt;');
+</pre>
+<p>これで、現在の位置（スクリプトを実行した位置）にHTMLを出力できます。</p>
+<p>指定の位置に出力したい場合は、まず、HTMLにidをつけてdivタグを表示しておきます。</p>
+<pre class="prettyprint">
+&lt;div id="header"&gt;&lt;/div&gt;
+</pre>
+<p>そして、DOMで以下のように操作します。</p>
+<pre class="prettyprint">
+var header = document.getElementById("header");
+header.innerHTML = "&lt;p&gt;Welcome to my homepage.&lt;/p&gt;";
+</pre>
+<p>複数行にわたる文字列を入れたい場合は、行末に\をつけます。</p>
+<p>応用として、</p>
+<pre class="prettyprint">
+function OnMenuButtonClick() {
+    ...
+}
+</pre>
+<p>のような関数の中でDOMを操作し、HTMLの側にリンクとして</p>
+<pre class="prettyprint">
+&lt;input type="button" value="Menu" onclick="OnMenuButtonClick();"/&gt;
+</pre>
+<p>のようにすることが考えられます。</p>
+<p>（<a href="https://www.ipentec.com/document/javascript-exec-javascript-on-button-click">ボタンのクリック時にJavaScriptを実行する (JavaScript プログラミング) - iPentec</a><!--や<a href="https://www.ipentec.com/document/javascript-exec-javascript-on-hyperlink-click">リンクのクリック時にJavaScriptを実行する - リンクのonClickの実装 (JavaScript プログラミング) - iPentec</a>-->を参考に執筆・引用しました。）</p>
+
+<h2>insertAdjacentHTML</h2>
+<p>document.write()は便利ですが、現在では非推奨となっています。</p>
+<p>このため、insertAdjacentHTML()を代わりに使うことができます。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+let div_page = document.getElementsByClassName('page');
+div_page[0].insertAdjacentHTML('afterend', '&lt;p&gt;このホームページはAssyによって運営されています。&lt;/p&gt;';
+</pre>
+<p>とします。afterendを指定すると要素の後ろに、beforebeginを指定すると要素の前に表示されます。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/26542">JavaScriptのdocument.write()メソッドの使い方を現役エンジニアが解説【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+
+<h2>ノードの選択</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+<p>ノードの選択の方法は、</p>
+<table class="some_tables">
+<tr><th class="min60">ノードの選択</th><th>説明</th></tr>
+<tr><td>Document.getElementById()</td><td>IDから検索する</td></tr>
+<tr><td>Element.getElementsByTagName()</td><td>タグ名から検索する（ワイルドカードとしての*も使用可）</td></tr>
+<tr><td>HTMLDocument.getElementsByName()</td><td>名前（name属性）から検索する</td></tr>
+<tr><td>HTMLElement.getElementsByClassName()</td><td>クラス名から検索する</td></tr>
+</table>
+<p>などの方法がある。</p>
+<p>JavaScriptは素直でないため、得られたエレメントが配列になっていることがある。このような時は添え字を加えて配列の要素としてアクセスする。</p>
+<p>また、プロパティとして</p>
+<table class="some_tables">
+<tr><th class="min60">プロパティ</th><th>説明</th></tr>
+<tr><td>parentNode</td><td>親ノード</td></tr>
+<tr><td>childNodes</td><td>子ノードのリスト</td></tr>
+<tr><td>firstChild</td><td>先頭の子ノード</td></tr>
+<tr><td>lastChild</td><td>末尾の子ノード</td></tr>
+<tr><td>nextSibling</td><td>ひとつ後にある子ノード</td></tr>
+<tr><td>previousSibling</td><td>ひとつ前にある子ノード</td></tr>
+</table>
+<p>が取得できる。また空白や改行もテキストノードとして扱われる。</p>
+<p>HTMLを記述する際には可読性からタグごとに改行を入れるが、この改行部分に空白ノードが存在するため、firstChildとした時にまず空白ノードが取得される。注意すること。</p>
+<p>空白ノードが含まれるのが嫌なら、空白ノードを除去することのできる次のAPIがある。</p>
+<table class="some_tables">
+<tr><th class="min60">プロパティ</th><th>説明</th></tr>
+<tr><td>children</td><td>子要素のリスト</td></tr>
+<tr><td>firstElementChild</td><td>先頭の子要素</td></tr>
+<tr><td>lastElementChild</td><td>末尾の子要素</td></tr>
+<tr><td>nextElementSibling</td><td>ひとつ後にある子要素</td></tr>
+<tr><td>previousElementSibling</td><td>ひとつ前にある子要素</td></tr>
+<tr><td>childElementCount</td><td>子要素の個数</td></tr>
+</table>
+<p>より柔軟なノードの指定にはXPathを使う。XPathを使うと、複雑な条件の指定（なんちゃらのなんちゃらの中のなんちゃらなど）を簡単に行える。</p>
+<p>XPathよりシンプルな仕組みとしてはSelectors APIがあり、querySelectorAll()は指定した条件に一致する全ての要素を、querySelector()は指定した条件に一致する最初の要素を取得する。</p>
+<p>また、ノードを作成・追加・変更するには、</p>
+<table class="some_tables">
+<tr><th class="min60">ノードの作成</th><th>説明</th></tr>
+<tr><td>Document.createElement()<br>Document.createTextNode()</td><td>ノードを作成する</td></tr>
+<tr><td>Document.createComment()</td><td>コメントを作成する</td></tr>
+</table>
+<p>注意点として、ノードを作成しただけではHTMLには何の変化もない。ノードをDOMツリーに追加してはじめてブラウザに表示される。</p>
+<table class="some_tables">
+<tr><th class="min60">ノードの追加</th><th>説明</th></tr>
+<tr><td>Node.appendChild()</td><td>最後の子要素に追加する</td></tr>
+<tr><td>Node.insertBefore()</td><td>ある位置に追加する</td></tr>
+<tr><td>Node.replaceChild()</td><td>変更する。取得したノードのプロパティを書き換えてもよい。</td></tr>
+<tr><td>Node.removeChild()</td><td>ノードの削除。</td></tr>
+</table>
+<p>しかしながら、いちいちcreateElement()やappendChild()を使うのは面倒くさいので、HTMLElement.innerHTMLプロパティを使ってHTML文字列を取得・変更したり、textContentプロパティで子要素まで含めて文字列を取得・変更することもできる。</p>
+<p>後日注記：基本的に、JavaScriptでDOMを操作したいなら、Document.createElement()で要素を作成し、HTMLElement.innerHTMLでそれを変更すればよい。以下のリンクが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/alt_yamamoto/items/2fbd63ee77d87dd727f7">VueもReactもやったことないのでVanilla JSでやってみたSPA - Qiita</a></li>
+</ul>
+
+<h2>イベント</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+<p>DOMとともに使われるJavaScriptの機能がイベントです。</p>
+<p>イベントを使うことで、マウスのクリックやマウスポインタの要素の上への移動などを検出したり、感知してJavaScriptの関数を実行することができます。</p>
+<p>JavaScriptでイベントを用いることで、イベントドリブンプログラムが可能です。JavaScriptのイベントドリブンでは、「イベントハンドラ」あるいは「イベントリスナ」を用います。</p>
+<p>イベントハンドラは、たとえば上の例でいえば「onclick」です。これはマウスがクリックされた時に発生するイベントのイベントハンドラです（正確にはイベントハンドラがonclickで、イベントタイプがclick。マウスをクリックするとイベントclickがイベントハンドラ・イベントリスナに引数として与えられる）。これをHTMLに直接記述するか、DOM要素のプロパティに指定するか、あるいはdocument.getElementById()をした後にaddEventListener()を使ってイベントリスナを登録することで、イベントに関数を関連付けられます。</p>
+<pre class="prettyprint">
+var hoge_button = document.getElementById('hoge');
+hoge_button.addEventListener('click', function (e) {
+    ...
+}, false);
+</pre>
+<p>イベントとDOMを組み合わせて使うことで、たとえばマウスがクリックされた時に特定のHTML要素を表示する、といったことが可能です。</p>
+<p>たとえば、getElementById()で取得した特定の位置のHTML要素（エレメント）に、appendChild()で要素を追加したり、removeChild()で削除したり、innerHTMLでHTMLを挿入したり、といったことができます。</p>
+<p>CSSを使って、display: none;を使って隠された要素のスタイルを変えることで、表示・非表示を切り替える、という方法もあります。</p>
+<p>このような時に、CSSのセレクタを使うことで、position:absolute;で要素を絶対位置に表示したり、position:relative;である基準となる位置からの相対位置に表示したり、といったことができます。</p>
+<p>上手く使えば、はてなブログのようにブログの編集画面を表示・非表示したり、メニュー項目を表示したり、画像を大きく表示したり、×ボタンを押した時に非表示にしたり、といったこともできます。</p>
+<p>同じことは<a href="jquery.html">jQuery</a>や<a href="javascript_framework_vue_js.html">Vue.js</a>などのライブラリやフレームワークを用いても可能です。</p>
+
+<h2>Windowオブジェクトの主なメソッドとプロパティ</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-%E6%B2%B3%E6%9D%91-%E9%80%B2/dp/4798130648">おうちで学べるプログラミングのきほん</a>より編集して引用。）</p>
+<table class="some_tables">
+<tr><th class="min60">機能</th><th>メソッド・プロパティ</th></tr>
+<tr><td>HTML</td><td>document（表示されている文書、Documentオブジェクト）</td>
+<tr><td>Webブラウザ</td><td>history（履歴、Historyオブジェクト）<br>location（URI、Locationオブジェクト）<br>name（ウィンドウ名）<br>navigator（Webブラウザ情報、Navigatorオブジェクト）</td>
+<tr><td>ダイアログ</td><td>alert()（警告ダイアログ）<br>confirm()（確認ダイアログ）<br>print()（印刷ダイアログ）</td>
+<tr><td>周期・時限実行</td><td>setInterval()（指定時間ごとに繰り返し周期実行する関数を設定）<br>setTimeout()（指定時間後に1度だけ時限実行する関数を設定）<br>clearInterval()（setInterval()の設定をクリア）<br>clearTimeout()（setTimeout()の設定をクリア）</td>
+</table>
+
+<h1>Canvas</h1>
+<h2>canvas要素</h2>
+<p>canvas要素を使うことで、JavaScriptから図を描くことができる。</p>
+<p>以下にサンプルコードがある。</p>
+<ul>
+<li><a href="https://qiita.com/okuchan/items/3c6908c5c90e5a70deab">HTML5 の Canvas でアナログ時計を作ってみた - Qiita</a></li>
+</ul>
+<p>たとえば、HTMLに</p>
+<pre class="prettyprint">
+&lt;canvas id="paint_area"&gt;&lt;/canvas&gt;
+</pre>
+<p>とした上で、JavaScriptから、</p>
+<pre class="prettyprint">
+var paint_area = document.getElementById("paint_area");
+var context = paint_area.getContext("2d");
+</pre>
+<p>とする。このcontextに対して、スタイルを設定（fillStyleやlineWidthなど）したり、さまざまな図形描画用のAPI（beginPath(), closePath(), moveTo(), lineTo(), fill(), stroke()など）を使って図を描画することができる。</p>
+<ul>
+<li><a href="http://www.htmq.com/canvas/">Canvasリファレンス - HTMLクイックリファレンス</a></li>
+</ul>
+<!--
+<p>この例では一部の記述にjQueryを使っている。jQueryを使わない例は<a href="http://www.html5.jp/canvas/how2.html">さまざまな図形を描く - Canvas - HTML5.JP</a>を参照のこと。</p>
+-->
+
+<h1>関連ページ</h1>
+<h2>HTML/CSS</h2>
+<p><a href="html.html">HTML</a>や<a href="css.html">CSS</a>を参照のこと。</p>
+
+<h2>Ajax</h2>
+<p><a href="ajax.html">Ajax</a>を参照のこと。</p>
+
+<h2>jQuery</h2>
+<p><a href="jquery.html">jQuery</a>を参照のこと。</p>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

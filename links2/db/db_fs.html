@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>データベースとファイルシステムの比較 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>データベースとファイルシステムの比較</h1>
+<p>データベースとファイルシステムの比較の世界観です。<a href="db.html">データベース</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ファイルシステムとの比較</h1>
+<p>（以下の文章は、データベースについての経験や知識がなく、自分で考えて書いたため、一般的な良識と比較して間違ったことや何も分かっていないことを教えています。注意してご覧ください。）</p>
+
+<h2>堅固かつ高速で、さまざまな機能がある</h2>
+<p>また、データベースはファイルシステムと比べて、大量のデータをやり取りする場合、堅固かつ高速です。</p>
+<p>大切な何年も保存しておくべき顧客データは、ファイルにするとすぐに無くなります。破損の恐れもあります。こうしたデータはDBMSにすることで堅固になるだけではなく、プログラムから取得・変更もしやすくなります。</p>
+<p>また、ファイルからデータを検索するためには、いちいちファイルをひとつひとつ開いて確認しなければなりません。SQLならこれをいっぺんに検索できます。</p>
+<p>また、さまざまな信頼性の機能があるため、データの冗長化（同じデータを複数重複して保持することで、信頼性を上げる）のような「高信頼機能」や、排他制御、アクセス制御などの「制御機能」、データが破損した時に復活する「回復機能」などが実現できます。</p>
+
+<h2>プログラムから操作しやすい</h2>
+<p>また、SQLデータベースは、プログラムから見てアクセス・操作しやすいということが言えます。</p>
+<p>ファイルと比べると、ファイルではテキストデータを解析して操作しなければならず、特定の要素を特定の位置に挿入したり更新したりといった作業が面倒です。また、頻繁に書き換えていると、すぐに壊れます。</p>
+<p>データベースは、指定の位置に素早くデータを格納することができ、更新や取得もSQL文によって容易にできます。頻繁な更新があっても壊れないため、ネットワーク上の掲示板などを作る時に適しています。</p>
+<p>後日注記：また、排他制御を提供する、という点が大きい。UNIXのファイルシステムでは、排他制御が提供されず、複数のユーザから同時にアクセスがあるとデータが失われてしまう。DBMSなら、そうした排他制御をきちんと行うことができる。</p>
+
+<h2>性能と堅固さ</h2>
+<p>ファイルシステムでデータを格納するのに比べて、データベースを使う主な理由は、「高い性能と堅固さ」です。</p>
+<p>LinuxでもBtrFSなどで見られるように、Bツリー方式のファイルシステムが最近ブロック型ファイルシステムに代わって良く使われるようになりましたが、このBツリーとはデータベースの世界で培われたアルゴリズムです。</p>
+<p>データベースではファイル処理に比べて、大量にあるデータを高速に検索できます。また頻繁に更新されても、壊れることがありません。</p>
+<p>データベース管理システムには、同時にアクセスしてもデータが壊れないような排他制御の機能や、データベースが乱雑になった時にそれを整理してアクセス性能を向上させる再編成の機能があります。また大切なデータを勝手にアクセスされないように守るためのセキュリティ機能も必要です。</p>
+<p>MySQLは軽量さや性能を求める人向けで、PostgreSQLは機能や堅固さを求める人向きだとよく言われます。また、国際的にはMySQLが標準ですが、日本では以前からPostgreSQLがよく使われます。</p>
+<p>後日注記：実際には、MySQLは検索性能が高く、PostgreSQLはSQLの機能が多い。標準的に使われているのはMySQLだが、PostgreSQLはOracle DBなどからの本格的な移行先として利用を検討できる。</p>
+
+
+<h1>余談</h1>
+<h2>MySQLデータベースを設計するのは、自分のファイルシステムを作っている感覚</h2>
+<p>（以下の文章は、リレーショナルデータベース管理システムやMySQLの経験がなく、何も知らなかったころの自分が書いたため、一般的な良識と比較して間違ったことを教えています。注意してご覧ください。）</p>
+<p>僕が思うに、MySQLデータベースを設計するのは、「自分独自のファイルシステムを作っている感覚」に近いと思います。</p>
+<p>オートインクリメントをしたり、データに対してカラムをいくらでも追加出来たりするのは、ファイルシステムで言えば、自分で独自に、オリジナルのファイルシステムを作っている感じに近いのではないかと思います。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

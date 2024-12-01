@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ネットワーク設定B（ifupdown） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ネットワーク設定B（ifupdown）</h1>
+<p>Linuxのネットワーク設定に関する世界観B（ifupdown）です。<a href="linux_net2.html">Linuxネットワーク２（設定）</a>や<a href="../network/network.html">ネットワークの世界観</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Debianと無線LAN</h1>
+<h2>DebianでもNetworkManagerが推奨</h2>
+<p>現在は、DebianでもNetworkManagerの使用が推奨されます。<a href="linux_net_networkmanager.html">Linux ネットワーク設定D（NetworkManager）</a>を参照のこと。</p>
+<p>WPAを使う場合、NetworkManagerはwpa_supplicantのフロントエンドでもあります。</p>
+<p>WiFiを使う場合、詳しくは以下が参考になります。</p>
+<ul>
+<li><a href="https://wiki.debian.org/WiFi/HowToUse">WiFi/HowToUse - Debian Wiki</a></li>
+</ul>
+
+<h2>interfacesと無線LAN</h2>
+<p>Debian 10では、パッケージをコマンドラインの基本ツールだけインストールした場合、無線LANの設定をしてインストールした後で、設定がリセットされるため、もう一度設定する必要があります。</p>
+<p>無線LANの設定は、iwconfigで表示されたネットワークインターフェース名を使って、/etc/network/interfaces.d/[インターフェース名]を作り、WPAやWPA2の場合SSIDとPSKを設定します。PSKはwpa_passphraseコマンドを使うことで暗号化された値を出力できます。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://medium.com/@h.taiju/set-up-wireless-lan-57d7a1ed591e">Debian (Stretch) で無線 LAN の設定 - HIGASHI Taiju - Medium</a></li>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch05.ja.html#_the_basics_of_wireless_lan_interface">5.6.6. ワイアレス LAN インターフェースの基本 - 第5章 ネットワークの設定 - Debian リファレンス</a></li>
+</ul>
+<p><a href="../network/network_wifi.html">無線通信</a>も参照のこと。</p>
+
+<h1>Debianのネットワーク設定</h1>
+<h2>ifupdownにおける設定ファイル</h2>
+<table class="some_tables">
+<tr>
+<th class="min60">設定ファイル</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>/etc/hostname</td>
+<td>Debianでのホスト名の設定。</td>
+</tr>
+<tr>
+<td>/etc/network/interfaces</td>
+<td>Debianの場合、/etc/network/interfacesでネットワークインターフェースの設定を行います。<br>ifupとifdown用のネットワークインターフェイス設定です。</td>
+</tr>
+</table>
+
+
+<h1>interfaces</h1>
+<h2>ifupdownについて</h2>
+<p>ifupdownは、Debianでの高レベルネットワーク設定のデファクトスタンダード。</p>
+<pre>
+ifup eth0
+</pre>
+<p>とするだけでネットワークを立ち上げることができる。</p>
+<p>設定ファイルは、/etc/network/interfacesにある。</p>
+<ul>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch05.ja.html">第5章 ネットワークの設定 - Debian</a></li>
+</ul>
+
+<h2>ifupdown参考リンク</h2>
+<p>公式のリファレンス：</p>
+<ul>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch05.ja.html">第5章 ネットワークの設定 - Debian リファレンス</a></li>
+<li><a href="https://www.debian.org/doc/manuals/debian-handbook/sect.network-config">8.2. ネットワークの設定 - Debian 管理者ハンドブック</a></li>
+</ul>
+
+<p>以下のリンク先が参考になります。</p>
+<ul>
+<li><a href="https://wiki.debian.org/NetworkConfiguration">NetworkConfiguration - Debian Wiki</a></li>
+<li><a href="https://qiita.com/JhonnyBravo/items/bdc503892e17b42a430b">interfaces 覚書 - Qiita</a></li>
+<li><a href="http://www.fml.org/home/fukachan/ja/linux.share.network.debian.html">ネットワークの設定 (Debian/Linux 系) - 深ちゃんのホームページ</a></li>
+<li><a href="https://www.server-world.info/query?os=Debian_9&p=initial_conf&f=3">Debian 9 Stretch : 初期設定 : ネットワークの設定 : Server World</a></li>
+<li><a href="http://clown-do.ddo.jp/index.php?id=523">徒然なるままに・・・ | 初期設定：ネットワーク</a></li>
+</ul>
+
+<p>以下のリンク先で、CentOSとDebianの設定ファイルの比較が分かります。</p>
+<ul>
+<li><a href="http://blog.asial.co.jp/819">サーバの基本的な設定ファイルとCentOS、Debian比較 - アシアルブログ</a></li>
+</ul>
+
+<h2>設定の例（DHCPを使う場合）</h2>
+<p>DHCPを使う場合。</p>
+<pre>
+auto eth0
+iface eth0 inet dhcp
+</pre>
+<p>以上は以下のページからの引用です。</p>
+<ul>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch05.ja.html">第5章 ネットワークの設定 - Debian</a></li>
+</ul>
+
+<h2>静的にIPアドレスを設定する場合</h2>
+<p>たとえば、静的にIPアドレスを設定する場合は以下のようになる。</p>
+<pre>
+iface eth0 inet static
+    address 192.168.0.3
+    netmask 255.255.255.0
+    network 192.168.0.0
+    broadcast 192.168.0.255
+    gateway 192.168.1.1
+</pre>
+<p>以上は以下のページからの引用です。</p>
+<ul>
+<li><a href="http://www.fireproject.jp/feature/uzumi/admin_memo/interfaces.html">設定ファイルinterfacesについて -  ファイヤープロジェクト</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.02.08編集</p>
+</div>
+
+<h2>upとdown</h2>
+<p>up (pre-up, post-up)を記述するとインターフェースの起動時に、down (post-down, pre-down)を記述するとインターフェースの停止時に、指定したコマンドを実行することができる。</p>
+
+<h2>マッピング</h2>
+<p>また、マッピングを行うことで、インターフェースの使い分けをマップできる。staticとwirelessの使い分けなどが考えられる。</p>
+<ul>
+<li><a href="http://qref.sourceforge.net/Debian/reference/ch-gateway.ja.html">Debian リファレンス - ネットワークの設定</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Debian</h2>
+<p>Debianについては<a href="debian.html">Debian</a>を参照のこと。</p>
+
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="../network/network.html">ネットワーク</a>や<a href="../network/network_intro.html">ネットワーク入門</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
