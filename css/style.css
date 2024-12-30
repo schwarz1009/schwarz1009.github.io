@@ -834,6 +834,7 @@ ul.box1  {margin:0px;}
         padding-right: 15px;
         width: auto;
         max-width: none;
+        min-width: 274px;
         margin: 10px 0 10px 0;
     }
     #toc ol li {
