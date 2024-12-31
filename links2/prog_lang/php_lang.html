@@ -112,7 +112,7 @@ $_FILES['hoge_file']['name']
 $_FILES['hoge_file']['tmp_name']
 </pre>
 <p>のように操作します。nameは元のファイル名、tmp_nameはサーバー上に保管された一時ファイル名です。</p>
-<p>注意点として、暗号化のために以下のように&lt;form&gt;タグに記述します。</p>
+<p>注意点として、データのエンコードのために以下のように&lt;form&gt;タグに記述します。</p>
 <pre class="prettyprint">
 &lt;form enctype="multipart/form-data" action="post.php" method="post"&gt;
 </pre>
@@ -120,6 +120,7 @@ $_FILES['hoge_file']['tmp_name']
 <ul>
 <li><a href="https://qiita.com/asami___t/items/42fc7f40f5753389a913">【PHP】ファイルのアップロード方法 #PHP7 - Qiita</a></li>
 <li><a href="https://www.php.net/manual/ja/features.file-upload.post-method.php">PHP: POST メソッドによるアップロード - Manual</a></li>
+<li><a href="https://www.yoheim.net/blog.php?q=20171201">[フロントエンド] multipart/form-dataを理解してみよう - YoheiM .NET</a></li>
 </ul>
 <div class="edit_date">
 <p>2024.12.31編集</p>
