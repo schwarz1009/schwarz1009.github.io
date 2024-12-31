@@ -102,11 +102,11 @@ $_GET['username']
 
 <h2>$_FILES</h2>
 <p>ファイルのアップロードがPOSTから行われた時、この変数にファイルの情報が格納される。</p>
-<p>後日注記：PHPでファイルをアップロードするためには、</p>
+<p>後日注記：PHPでファイルをアップロードするためには、HTMLの投稿フォームで</p>
 <pre class="prettyprint">
-&lt;input name="hoge_file" type="file"&gt;
+&lt;input name="hoge_file" type="file" /&gt;
 </pre>
-<p>を使用します。これを</p>
+<p>を使用します。これを受け取ったスクリプトから</p>
 <pre class="prettyprint">
 $_FILES['hoge_file']['name']
 $_FILES['hoge_file']['tmp_name']
