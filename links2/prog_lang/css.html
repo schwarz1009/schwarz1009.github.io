@@ -378,11 +378,27 @@ document.getElementById('div_hoge').style.display = 'none';
 <h1>CSS3とSass</h1>
 <h2>CSS3</h2>
 <p>CSS3では、色が徐々に変わっていくグラデーション、変形や角を丸くする、影の効果、ボックス形状のレイアウト、動くアニメーションなど、さまざまな視覚効果が追加された。</p>
+<p>たとえば、影の効果を使いたいなら、</p>
+<pre class="prettyprint lang-css">
+box-shadow: 0px 1px 3px rgba(0,0,0,.2);
+</pre>
+<p>などとする。また、角を丸くしたいなら、</p>
+<pre class="prettyprint lang-css">
+border-radius: 10px;
+</pre>
+<p>などとする。また、背景をグラデーションにしたいなら、</p>
+<pre class="prettyprint lang-css">
+background: linear-gradient(to right bottom, #ffffff, #eff3f6);
+</pre>
+<p>などとする。</p>
 <p>詳細は以下のページを参照のこと。</p>
 <ul>
 <li><a href="https://kumaweb-d.com/html/html5-css3/">【ちゃんと使えてる？】HTML5・CSS3の使い方 - くまWeb</a></li>
 <li><a href="https://qiita.com/Y_ASAMOTO/items/90afe7d24467020c17f0">【爆速】HTML5 + CSS3で簡単にWebデザインしよう！ - Qiita</a></li>
 </ul>
+<div class="edit_date">
+<p>2024.12.31編集</p>
+</div>
 
 <h2>CSSの関数</h2>
 <p>CSS3では、関数を使うことができる。たとえばcalc()関数は数値の計算ができる。たとえば、</p>
