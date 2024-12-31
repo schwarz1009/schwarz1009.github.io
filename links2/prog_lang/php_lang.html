@@ -116,6 +116,7 @@ $_FILES['hoge_file']['tmp_name']
 <pre class="prettyprint">
 &lt;form enctype="multipart/form-data" action="post.php" method="post"&gt;
 </pre>
+<p>実際には、アップロードされた時点で、本来あるべき場所に一時ファイルを移動させる処理を書く必要があります。そのためにis_uploaded_file()とmove_uploaded_file()を使います。</p>
 <p>以下が参考になります。</p>
 <ul>
 <li><a href="https://qiita.com/asami___t/items/42fc7f40f5753389a913">【PHP】ファイルのアップロード方法 #PHP7 - Qiita</a></li>
