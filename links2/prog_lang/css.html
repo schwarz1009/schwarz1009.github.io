@@ -384,6 +384,33 @@ document.getElementById('div_hoge').style.display = 'none';
 <li><a href="https://qiita.com/Y_ASAMOTO/items/90afe7d24467020c17f0">【爆速】HTML5 + CSS3で簡単にWebデザインしよう！ - Qiita</a></li>
 </ul>
 
+<h2>CSSの関数</h2>
+<p>CSS3では、関数を使うことができる。たとえばcalc()関数は数値の計算ができる。たとえば、</p>
+<pre class="prettyprint lang-css">
+width: 100%;
+</pre>
+<p>とした場合に、マージンとして取っていた幅を100%から引きたい時がある。このような時は、
+<pre class="prettyprint lang-css">
+width: calc(100% - 60px);
+</pre>
+<p>などとできる。</p>
+<p>ちなみに、このような時は、widthにstretchを指定してもよい。</p>
+<pre class="prettyprint lang-css">
+width: stretch;
+</pre>
+<p>また、その他の便利な関数として、比較関数のmin()、max()、clamp()がある。たとえば以下のように、幅の最小値を複数の値から選べる。</p>
+<pre class="prettyprint lang-css">
+min-width: min(90%, 274px);
+</pre>
+<ul>
+<li><a href="https://coliss.com/articles/build-websites/operation/css/how-calc-works-by-ire.html">CSSのcalc()関数を使うとスゴイ便利！ページのレイアウト、要素やフォントのサイズ指定など実装テクニックのまとめ | コリス</a></li>
+<li><a href="https://coliss.com/articles/build-websites/operation/css/css-stretch-keyword.html">CSSのwidth: 100%;のより良い代替手段として、stretchキーワードが実はかなり便利です | コリス</a></li>
+<li><a href="https://coliss.com/articles/build-websites/operation/css/css-about-min-max-clamp.html">CSSの比較関数が便利すぎる！ min(), max(), clamp()の使い方を詳しく解説 | コリス</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.12.31</p>
+</div>
+
 <h2>Sass</h2>
 <p>SassはプログラムのようにCSSを書くことのできる技術。</p>
 <p>変数やmixin（関数のように引数を指定できる）が使え、セレクタの指定をネストできる。記法にはSASS形式とSCSS形式（よりCSSに近い）がある。</p>
