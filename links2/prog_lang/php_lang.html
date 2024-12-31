@@ -102,6 +102,28 @@ $_GET['username']
 
 <h2>$_FILES</h2>
 <p>ファイルのアップロードがPOSTから行われた時、この変数にファイルの情報が格納される。</p>
+<p>後日注記：PHPでファイルをアップロードするためには、</p>
+<pre class="prettyprint">
+&lt;input name="hoge_file" type="file"&gt;
+</pre>
+<p>を使用します。これを</p>
+<pre class="prettyprint">
+$_FILES['hoge_file']['name']
+$_FILES['hoge_file']['tmp_name']
+</pre>
+<p>のように操作します。nameは元のファイル名、tmp_nameはサーバー上に保管された一時ファイル名です。</p>
+<p>注意点として、暗号化のために以下のように&lt;form&gt;タグに記述します。</p>
+<pre class="prettyprint">
+&lt;form enctype="multipart/form-data" action="post.php" method="post"&gt;
+</pre>
+<p>以下が参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/asami___t/items/42fc7f40f5753389a913">【PHP】ファイルのアップロード方法 #PHP7 - Qiita</a></li>
+<li><a href="https://www.php.net/manual/ja/features.file-upload.post-method.php">PHP: POST メソッドによるアップロード - Manual</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.12.31編集</p>
+</div>
 
 <h2>$_SESSION</h2>
 <p>セッションはサーバーに一時的に保持されるデータで、ページをまたいでユーザーの情報を保持しておくことができる。ユーザーのログイン情報などを保持するために使われることが多い。</p>
