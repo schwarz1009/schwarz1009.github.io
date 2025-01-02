@@ -76,7 +76,7 @@ $ ldd /bin/ls
 
 <h2>/libディレクトリとldconfig</h2>
 <p>基本的に、通常は/libや/lib64に共有ライブラリが置かれる。これは/usr/libや/usr/lib64などのシンボリックリンクになっていることもある。</p>
-<p>だが、システムの環境変数LD_LIBRARY_PATHやLD_LIBRARY_PATH_64、あるいは設定ファイル/etc/ld.so.confに記述された共有ライブラリの置かれるディレクトリパスは、これよりも優先度が上。</p>
+<p>だが、これよりも優先度が上となるのが、システムの環境変数LD_LIBRARY_PATHやLD_LIBRARY_PATH_64、あるいは設定ファイル/etc/ld.so.confに記述された共有ライブラリの置かれるディレクトリパス。</p>
 <p>/etc/ld.so.confの設定は、ldconfigコマンドを実行することによってシステムに反映させることができる。</p>
 <p>具体的には、/etc/ld.so.conf.d/以下にhoge.confを作ってこの中に共有ライブラリの置かれるディレクトリパスを記述し、ldconfigコマンドを実行してキャッシュ（/etc/ld.so.cache）を更新する。</p>
 <ul>
