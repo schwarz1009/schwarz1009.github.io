@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ヘッダファイル - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ヘッダファイル</h1>
+<p>Linuxのヘッダファイルに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ヘッダファイル</h1>
+<h2>/usr/includeとヘッダファイル</h2>
+<p>/usr/includeには、システムのC言語用のヘッダファイルが置かれる。</p>
+<p>たとえば、Cのプログラムコードに必ずといって出てくる</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+</pre>
+<p>のstdio.hが存在するディレクトリがここ。</p>
+<p>標準入出力関数のヘッダファイルは/usr/include/stdio.hに存在する。</p>
+<p>C言語で任意のライブラリ関数のAPIを使ったプログラムを自分で書いてコンパイルするためには、関数のプロトタイプ宣言が書かれたヘッダファイルをインクルードしなければならない。</p>
+<p>/usr/includeディレクトリが存在しなければ、Cの標準ライブラリ関数や、あるいはどんなライブラリ関数を使ったプログラムも、コンパイルして使うことはできない。</p>
+<p>ただし、gccに-Iオプションをつけてコンパイルすると、/usr/include以外のディレクトリを検索対象に追加できる。</p>
+<p>また、</p>
+<pre class="prettyprint">
+#include "hoge.h"
+</pre>
+<p>のようにダブルクオーテーションでヘッダファイルを囲った場合は、/usr/includeでなくプログラムと同じディレクトリからヘッダファイルをインクルードできる）。</p>
+<p>だが、一度コンパイルしたバイナリを動かすためには、ヘッダファイルは必要ない。その代わり、ビルドされた共有ライブラリが必要になる。</p>
+<ul>
+<li><a href="https://qiita.com/DQNEO/items/4e5c2eca2761ec08b922">C言語におけるinclude文とgcc -Iオプションの関係 - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>-develパッケージ</h2>
+<p>-develと名前のついたライブラリのパッケージをインストールすると、/usr/includeにヘッダファイルが展開される。</p>
+<p>ほかにもREADMEなど開発向けドキュメントやサンプルプログラムなどがインストールされることもある。</p>
+<p>これは、自分でそのライブラリのAPIを使ったプログラムを書いたり、そのライブラリAPIを使ったプログラムをソースコードから「ビルドするために必要」だが、単にそのライブラリを使ったプログラムを「実行するためには必要ない」。</p>
+<ul>
+<li><a href="https://www.unknownengineer.net/entry/2017/04/07/162346">develパッケージについてもう少し調べてみた - よくわからないエンジニア</a></li>
+<li><a href="https://www.unknownengineer.net/entry/2016/05/11/120014">無印とdevelの違いについて - よくわからないエンジニア</a></li>
+</ul>
+
+<h2>カーネルヘッダー</h2>
+<p>Linuxのカーネルヘッダーも/usr/include以下にインストールされる。</p>
+<ul>
+<li><a href="http://archive.linux.or.jp/JF/JFdocs/LFS-BOOK/chapter06/linux-headers.html">6.7. Linux-2.6.32.8 API ヘッダ -  Linux From Scratch - Version 6.6</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>共有ライブラリ</h2>
+<p><a href="linux_lib.html">Linux共有ライブラリ</a>を参照のこと。</p>
+
+<h2>GNUツールチェイン</h2>
+<p><a href="gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+
+<h2>libc・API</h2>
+<p><a href="libc.html">libc</a>や<a href="linux_api_stdio.html">Linux API（stdio）</a>を参照のこと。</p>
+
+<h2>カーネルソースコード</h2>
+<p><a href="linux_kernel_src.html">Linuxカーネル（ソースコード・カーネルモジュール）</a>を参照のこと。</p>
+
+<h2>C言語</h2>
+<p><a href="../prog_lang/c_flow.html">C言語（制御フロー）</a>や<a href="../prog_lang/c_preprocessor.html">C言語（プリプロセッサとインラインアセンブラ）</a>も参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

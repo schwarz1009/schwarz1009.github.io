@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>メッセージキューの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div><h1>メッセージキューの世界観</h1>
+<p>メッセージキューに関する世界観です。<a href="data_structure_stack.html">スタックとキュー</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>メッセージキュー</h1>
+<h2>キューとメッセージキュー</h2>
+<p>キューはシステムのさまざまなところで使われる技術で、「待ち行列」を表現したデータ構造のこと。</p>
+<p>キューの具体的な利用例としては、たとえばネットワーク通信時のサーバのキュー制御やプリンタキューのように、システムの内側と外側を繋げる「インターフェース」として使ったりする。</p>
+<p>あるいは、カーネルの中で、I/Oリクエストキューのように、ファイルシステムの書き込み状況をストレージに反映するなど、ひとつひとつのデータの通信・制御をする際などに使われる。</p>
+<p>メッセージキューは、IPCやマルチスレッド環境などで使われるメッセージのキューのこと。</p>
+<p>メッセージキューは、一種の通信プロトコルで、格納されたキューを取り出すまで保管し続ける。データの通信や同期・非同期の制御を処理するために使われる。</p>
+<p>詳しくは以下のページ・書籍が参考になる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%AD%E3%83%A5%E3%83%BC">メッセージキュー - Wikipedia</a></li>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+</ul>
+<p><a href="data_structure.html">データ構造</a>や<a href="data_structure_stack.html">スタックとキュー</a>や<a href="../linux/linux_kernel_ipc.html">Linuxカーネル開発（IPC）</a>も参照のこと。</p>
+
+<h2>待ち行列理論</h2>
+<p>また、数学上の理論のひとつに、待ち行列理論というのがあります。何かの状況で「待つ」必要がある時に、待ち時間の平均値を求めることができます。</p>
+<ul>
+<li><a href="https://ssaits.jp/promapedia/method/queueing-theory.html">待ち行列理論とは何か？リーン・ソフトウェア開発でも用いられる思考ツールを解説 | Promapedia</a></li>
+<li><a href="http://objectclub.jp/technicaldoc/monkey/s_wait">サルでもわかる待ち行列</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>構成管理の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>構成管理の世界観</h1>
+<p>構成管理に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>構成管理ツール</h1>
+<h2>構成管理とは</h2>
+<p>構成管理（CM）とはConfiguration Managementの略。</p>
+<p>サーバを運用する際、事前に設定ファイルを記述することで、サーバの管理や設定を自動化してくれる。</p>
+<p>後日注記：たとえばAnsibleでは、システムの「状態」を設定ファイルPlaybookに記述し、この「状態」がサーバシステムの構成に反映される。</p>
+<div class="edit_date">
+<p>2023.11.08編集</p>
+</div>
+
+<h2>Chef</h2>
+<p>Chefは構成管理ツール。特にChefはRubyでスクリプトを書くことからRuby使いに支持者が多い。</p>
+<p>後日注記：Chefではサーバ管理者をChef（料理人）と見立てて、RubyによるRecipeとRecipeを管理するCookbookにより、サーバシステムの構成と管理を自動化できる。</p>
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/867/">サーバー設定ツール「Chef」の概要と基礎的な使い方 | さくらのナレッジ</a></li>
+</ul>
+<p>Chefを使ってLAMP環境を構築するには、以下が参考になるかもしれません。</p>
+<ul>
+<li><a href="https://tracpath.com/works/development/make-lamp-development-environment-with-chef/">Chefを用いたLAMP開発環境の構築方法～LAMP環境構築編 | tracpath:Works</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.11.08編集</p>
+</div>
+
+<h2>Puppet</h2>
+<p>PuppetもChefと同様の構成管理ツール。設定ファイルmanifest（マニフェスト）とpuppetコマンドにより、サーバシステムの構成と管理を自動化できる。</p>
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/755/">Puppetを使ったLinuxシステムの設定自動管理 | さくらのナレッジ</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.11.08編集</p>
+</div>
+
+<h2>Ansible</h2>
+<p>サーバを立ち上げる際にインストールや設定を自動化できる構成管理ソフト。</p>
+<p>Ansibleを使うことで、SSHによってリモート接続してシステムに必要なミドルウェアの導入・設定・更新ができる。</p>
+<p>Ansibleでは、YAML形式のPlaybookにより、リモートマシンのシステムの「状態」を記述する。Playbookに記述した状態が、リモートマシンのシステムに反映される。</p>
+<p>この時、Rolesという機能を使うことで、Playbookをそれぞれ適度な大きさに分割することができる。</p>
+<p>Fedora 30のサーバーエディションやそれ以降のFedora/RHELでは、このRolesを基にした「Linux System Roles」が実装されていて、システムの重要なソフトウェア・コンポーネントに統一されたインターフェースによる設定の自動化システムを提供している。</p>
+<ul>
+<li><a href="https://dev.classmethod.jp/server-side/ansible/practice_ansible/">Ansible実践入門 ｜ DevelopersIO</a></li>
+<li><a href="https://www.indetail.co.jp/blog/ansible-2/">RolesでAnsibleのPlaybookを整理してみよう | Tech Blog | 株式会社INDETAIL - インディテール</a></li>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201905/08">2019年5月8日　Fedora 30がリリース ―Linux 5.0 ＆ GNOME 3.32を実装：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.11.04編集</p>
+</div>
+
+<h2>Itamae</h2>
+<p>軽量な構成管理ツール。Chefよりも簡単で導入しやすい。</p>
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/4341/">導入しやすく軽量な構成管理ツール「Itamae」を使ってみよう | さくらのナレッジ</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Docker</h2>
+<p><a href="../virt/docker.html">Docker</a>も参照のこと。</p>
+
+<h2>クラウド</h2>
+<p><a href="cloud.html">クラウド</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

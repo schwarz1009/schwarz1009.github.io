@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Prologの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Prologの世界観</h1>
+<p>Prologに関する世界観です。<a href="oldpl.html">昔の言語</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Prolog</h1>
+<h2>Prolog</h2>
+<p>Prologは「論理型言語」と呼ばれる言語。</p>
+<ul>
+<li><a href="https://gihyo.jp/dev/serial/01/enjoy-pg/0002">第2回　Prologをご存じですか？：もっと楽しむ！　プログラミング言語　「豆」談義｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Prolog">Prolog - Wikipedia</a></li>
+</ul>
+
+<h2>事物と事物の関係</h2>
+<p>Prologでは、ものごとを「事物と事物の関係」であると捉えます。</p>
+<p>たとえば、「シュバルツはリンゴが大好きだ」という時、「シュバルツ」という事物と「リンゴ」という事物が「大好き」という関係を表しています。</p>
+<p>Prologでは、他のプログラミング言語のように「手続き」ではなく、「宣言」によって事物とその関係を定義し、それに対して「質問」します。</p>
+<p>質問に適合する事実があれば「イエス」、なければ「ノー」が返ります。</p>
+<p>たとえば、「シュバルツはリンゴが大好き」はこのように記述します。</p>
+<pre>
+likes(schwarz, apple).
+</pre>
+<p>これに対して、このように質問します。</p>
+<pre>
+?- likes(schwarz, X).
+X = apple
+Yes
+</pre>
+<ul>
+<li><a href="https://nw.tsuda.ac.jp/lec/prolog/intro/">Prolog入門 - Nitta Lab., Computer Science, Tsuda University, Japan.</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

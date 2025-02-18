@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>WebAssembly関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>WebAssemblyの世界観</h1>
+<p>WebAssemblyによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>WebAssembly</h1>
+<h2>WebAssembly</h2>
+<p>WebAssemblyはWebブラウザでアセンブリ言語（機械語）を扱うことのできる技術。</p>
+<p>たとえばコンパイル言語のRustなどでWebAssemblyを使うことで、RustをWeb用途のプラットフォーム言語として使うことができる。</p>
+<ul>
+<li><a href="https://qiita.com/umamichi/items/c62d18b7ed81fdba63c2">WebAssemblyとは？～実際にC言語をブラウザで動かす～【2019年6月版】 - Qiita</a></li>
+</ul>
+<p><a href="assembly.html">アセンブリ言語</a>も参照のこと。</p>
+
+<h2>WebAssemblyとは</h2>
+<p>WebAssembly（略称はWASM）は、従来のJavaScriptに代わって、Webブラウザ上でアセンブリ言語を実行できる技術。</p>
+<p>WebAssemblyを使うことで、C/C++/Rustなどの低水準言語で記述したアプリケーションを、コンパイルした上でWebブラウザ上あるいはNode.js上で実行できる。</p>
+<p>従来のJavaScriptと比べて、大幅にパフォーマンスの向上が期待できる。特に3DゲームやVR、マルチメディアなどの用途で性能向上が期待されている。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/WebAssembly">WebAssembly | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/WebAssembly/Concepts">WebAssembly の概要 - WebAssembly | MDN</a></li>
+</ul>
+<p><a href="javascript.html">JavaScript</a>や<a href="node_js.html">Node.js</a>も参照のこと。</p>
+
+<h2>中間言語はS式</h2>
+<p>WebAssemblyの面白い点として、人間が読むために用意されている中間言語表現（テキスト表現）はLispなどと同じS式で記述されている。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/WebAssembly/Understanding_the_text_format">WebAssembly テキスト形式の理解 - WebAssembly | MDN</a></li>
+</ul>
+<p><a href="lisp.html">Lisp</a>も参照のこと。</p>
+
+<h2>JavaScript代替言語としてのRust</h2>
+<p>一部のRustファンからは「JavaScriptの代わりをRustで行える」と期待されており、現にRustコミュニティではWebAssemblyの開発が活発である。</p>
+<ul>
+<li><a href="https://www.rust-lang.org/ja/what/wasm">WebAssembly - Rustプログラミング言語</a></li>
+</ul>
+<p><a href="rust.html">Rust</a>も参照のこと。</p>
+
+<h2>Debianがブラウザで動く</h2>
+<p>以下は、Linux（Debian）をバイナリ編集なしでWebAssemblyによる仮想マシン上で動かしたWebVMという技術の例。</p>
+<ul>
+<li><a href="https://forest.watch.impress.co.jp/docs/news/1385758.html">Webブラウザーで「Debian」Linuxが動く！ WebAssembly製のx86仮想マシン「WebVM」 - 窓の杜</a></li>
+</ul>
+<p><a href="../linux/debian.html">Debian</a>も参照のこと。</p>
+
+<h2>RubyがWebAssemblyで動く</h2>
+<p>2022年12月25日にリリースされたRuby 3.2.0では、WASIでWebAssemblyに対応し、WebブラウザやNode.jsでRubyが実行できるようになりました。</p>
+<ul>
+<li><a href="https://www.publickey1.jp/blog/22/webassemblyrubyyjitruby_320.html">WebAssembly版Rubyが正式に登場、YJITが実用段階に。「Ruby 3.2.0」正式リリース － Publickey</a></li>
+</ul>
+<p><a href="ruby.html">Ruby</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.11.30</p>
+</div>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

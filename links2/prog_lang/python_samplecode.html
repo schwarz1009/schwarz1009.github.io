@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Pythonサンプルコードの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Pythonサンプルコードの世界観</h1>
+<p>Pythonサンプルコードです。<a href="python.html">Python</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>サンプルコード</h1>
+<h2>ロボット</h2>
+<p>以下は自分の作った<a href="../programs/robot.html">ロボット</a>のコード。</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# 初版作成 Assy, 在導万創
+
+import sys
+
+class Robot:
+    def __init__(self):
+        self.ego = 0
+        
+    def msg_loop(self):
+        while True:
+            e = self.view()
+            self.action(e)
+    
+    def action(self, msg):
+        self.do(msg)
+        self.think(msg)
+        self.make_ego(msg)
+        
+    def do(self, msg):
+        if msg == 0:
+            print('晴れだ')
+            
+        elif msg == 1:
+            print('雨だ')
+    
+    def think(self, msg):
+        if msg == 0:
+            print('散歩に出かけよう')
+        elif msg == 1:
+            print('家の中に居よう')
+            
+        if self.ego &gt; 20:
+            print('僕もそろそろ大人になったなあ')
+    
+    def make_ego(self, msg):
+        #自我を作る
+        self.ego += 1
+        if self.ego &gt; 100:
+            print('死にました')
+            sys.exit()
+        
+    def view(self):
+        #外を見て、晴れ(0)か雨(1)かを判断する
+        #ここでは常に0
+        return 0
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.msg_loop()
+</pre>
+
+<h2>簡単な計算プログラム</h2>
+<blockquote class="inyou2">
+<p>自分で作った簡単なプログラムです。攻撃力が10のキャラと、攻撃力が1だが「1ターンごとに攻撃力が1上がっていく」キャラが戦って、いつ上がっていく方のキャラが上回るか、を計算する。</p>
+<p>正確にいうと、「いつ上回るかを計算する」というより、その「上回っていく過程」を表示する。</p>
+</blockquote>
+<p><a href="rust.html">Rust</a>で書いたコードをPythonに移植しました。</p>
+<pre class="prettyprint">
+x = 0
+y = 0
+count = 1
+
+while (count &lt;= 100) :
+    x += 10
+    y += count
+    print("{0}\t{1}\t{2}".format(x, y, count))
+    count = count + 1
+</pre>
+
+<h2>HTMLタグの文字列をつける例</h2>
+<p>簡単なプログラムの例として、HTMLタグを文字列につける関数を作ってみました。</p>
+<pre class="prettyprint">
+def html_tag(tag, text):
+    return '&lt;' + tag + '&gt;' + text + '&lt;/' + tag + '&gt;'
+
+text = html_tag('html', html_tag('body', html_tag('p', 'Welcome to my homepage.')))
+print(text)
+</pre>
+<p>出力結果：</p>
+<pre class="prettyprint">
+&lt;html&gt;&lt;body&gt;&lt;p&gt;Welcome to my homepage.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</pre>
+
+<h2>FizzBuzz</h2>
+<p>以下はPythonで僕が書いたFizzBuzz。</p>
+<pre class="prettyprint">
+for i in range(1, 101):
+    if (i % 15 == 0) :
+        print('FizzBuzz, ', end='')
+    elif (i % 3 == 0) :
+        print('Fizz, ', end='')
+    elif (i % 5 == 0) :
+        print('Buzz, ', end='')
+    else:
+        print(str(i) + ', ', end='')
+
+print("終了.")
+</pre>
+<p>実行結果：</p>
+<pre>
+1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, FizzBuzz, 31, 32, Fizz, 34, Buzz, Fizz, 37, 38, Fizz, Buzz, 41, Fizz, 43, 44, FizzBuzz, 46, 47, Fizz, 49, Buzz, Fizz, 52, 53, Fizz, Buzz, 56, Fizz, 58, 59, FizzBuzz, 61, 62, Fizz, 64, Buzz, Fizz, 67, 68, Fizz, Buzz, 71, Fizz, 73, 74, FizzBuzz, 76, 77, Fizz, 79, Buzz, Fizz, 82, 83, Fizz, Buzz, 86, Fizz, 88, 89, FizzBuzz, 91, 92, Fizz, 94, Buzz, Fizz, 97, 98, Fizz, Buzz, 終了.
+</pre>
+<p>以下は参考リンク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Fizz_Buzz">Fizz Buzz - Wikipedia</a></li>
+</ul>
+<p>FizzBuzzの詳細については<a href="c_samplecode.html">C言語サンプルコード</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.17</p>
+</div>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

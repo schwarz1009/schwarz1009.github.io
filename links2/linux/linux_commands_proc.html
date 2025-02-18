@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXコマンド（応用２．プロセス） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXコマンド（応用２．プロセス）</h1>
+<p>UNIXやLinuxのコマンドに関する世界観（応用２．プロセス）です。</p>
+<p><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>を参考にしています。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_commands_beginner.html">UNIXコマンド（基本）</a></li>
+<ul>
+<li><a href="linux_commands.html">応用１．ユーザープログラム</a></li>
+<li><b>応用２．プロセス</b></li>
+<li><a href="linux_commands_doc.html">応用３．ドキュメント</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>psコマンド</h1>
+<h2>psコマンド</h2>
+<p>psはプロセス状態を表示するコマンド。UNIXオプション、BSDオプション、GNUロングオプションの三種類のオプションがある。killと一緒に使う。</p>
+<pre>
+ps [オプション]
+</pre>
+<p>普通は、</p>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>説明</th></tr>
+<tr><td>ps ax</td><td>すべてのプロセスを表示。</td></tr>
+<tr><td>ps aux</td><td>CPU・メモリ使用量を含めて表示。</td></tr>
+</table>
+<p>とすることが多い。</p>
+<pre>
+ps aux
+</pre>
+<p>ほかに</p>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>説明</th></tr>
+<tr><td>r</td><td>実行中のプロセスを表示。</td></tr>
+<tr><td>-u ユーザ名</td><td>ユーザ名やユーザIDで抽出。</td></tr>
+</table>
+<p>など、さまざまなオプションがある。</p>
+<p>（<a href="https://www.amazon.co.jp/%E6%9C%80%E6%96%B0Debian-GNU-Linux%E5%AE%8C%E5%85%A8%E6%94%BB%E7%95%A5%E3%82%AC%E3%82%A4%E3%83%89-%E5%A4%A9%E9%87%8E-%E6%AD%A3%E6%A8%B9/dp/4798014125">最新 Debian GNU/Linux 完全攻略ガイド（天野正樹）</a>を参考に執筆しました。）</p>
+<p>詳しくはmanを参照してほしい。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/procps/man1/ps.1.html">Man page of PS</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>psの表示項目</h2>
+<p>表示項目については、</p>
+<table class="some_tables">
+<tr><th class="min60">表示項目</th><th>説明</th></tr>
+<tr><td>PID</td><td>プロセスID</td></tr>
+<tr><td>TTY</td><td>端末名</td></tr>
+<tr><td>TIME</td><td>利用CPU時間</td></tr>
+<tr><td>CMD</td><td>実行ファイルの名前</td></tr>
+</table>
+<p>となる。</p>
+<p>psコマンドにTオプションを付けると、STAT（プロセスの状態）が表示される。この状態は以下のようになる。</p>
+<table class="some_tables">
+<tr><th class="min60">状態</th><th>説明</th></tr>
+<tr><td>D</td><td>スリープ（割り込み不可能）</td></tr>
+<tr><td>R</td><td>実行中・実行可能</td></tr>
+<tr><td>S</td><td>スリープ（割り込み可能）</td></tr>
+<tr><td>T</td><td>トレース中・停止中</td></tr>
+<tr><td>Z</td><td>ゾンビ（死亡して親プロセスに回収されなかった状態）</td></tr>
+</table>
+<p>状態の付加情報として、</p>
+<table class="some_tables">
+<tr><th class="min60">付加情報</th><th>説明</th></tr>
+<tr><td>s</td><td>セッションリーダー</td></tr>
+<tr><td>l</td><td>マルチスレッド化されているプロセス</td></tr>
+<tr><td>+</td><td>フォアグラウンドプロセス</td></tr>
+<tr><td>&lt;</td><td>優先度が高い</td></tr>
+<tr><td>N</td><td>優先度が低い</td></tr>
+</table>
+<p>となる。</p>
+<p>（「<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>psのその他のオプション</h2>
+<p>psのその他のオプションとして、</p>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>説明</th></tr>
+<tr><td>e</td><td>環境変数とコマンド名を表示。</td></tr>
+<tr><td>u</td><td>CPUやメモリの使用量を表示。</td></tr>
+<tr><td>l</td><td>実行状態などを表示。</td></tr>
+<tr><td>f</td><td>階層的に表示。</td></tr>
+<tr><td>p</td><td>プロセスIDを表示。</td></tr>
+</table>
+<p>などのオプションがある。以下のページが参考になる。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-command-ps">psコマンドについて詳しくまとめました 【Linuxコマンド集】 - エンジニアの入り口</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h1>killとnice/reniceコマンド</h1>
+<h2>killコマンド</h2>
+<p>killはプロセスにシグナルを送るコマンド。</p>
+<pre>
+kill [オプション] プロセスID
+</pre>
+<p>オプションは</p>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>説明</th></tr>
+<tr><td>-s シグナル</td><td>送信するシグナルを指定</td></tr>
+<tr><td>-l シグナル</td><td>シグナルを一覧で表示。<br>あるいはシグナルIDの表示（シグナル名を指定した場合）。</td></tr>
+</table>
+<p>たとえば、</p>
+<pre>
+$ kill -l
+（シグナルの一覧が表示される）
+$ kill 4444
+（シグナルを送る）
+</pre>
+<p>-sで送信するシグナルを指定できる。何も指定しなかった場合はデフォルトで15（SIGTERM）が送信される。</p>
+<p>上の例ではプロセスIDが4444のプロセスにSIGTERMを送信して強制終了させている。</p>
+<p>（「<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>」を参考に執筆しました。）</p>
+
+<h2>nice</h2>
+<p>niceは実行する際の優先度（NICE値）をつけてコマンドを実行するコマンド。</p>
+<pre>
+nice [オプション] [コマンド]
+</pre>
+<p>オプションは「-n NICE値」でNICE値を指定して実行する。</p>
+<p>NICE値は「-n 15」のように指定する。-20が最高優先度、19が最低優先度となる。niceコマンドを使わずに通常の方法でコマンドを実行した場合のNICE値は0で、NICE値を設定せずにオプションなしでniceコマンドを実行した場合はNICE値10となる。また、負の数のNICE値はrootユーザーにしか設定できない。</p>
+<ul>
+<li><a href="https://e-words.jp/w/nice%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89.html">niceコマンドとは - 意味をわかりやすく - IT用語辞典 e-Words</a></li>
+</ul>
+<p>（「<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>」を参考に執筆しました。）</p>
+
+<h2>renice</h2>
+<p>また、reniceで優先度を変更できる。</p>
+<pre>
+renice NICE値 [オプション]
+</pre>
+<p>オプションは「-n NICE値」「-g グループ名」「-u ユーザー名」「-p プロセスID」。オプションを指定した場合はプロセスをまとめて指定できる。</p>
+<p>たとえば、</p>
+<pre>
+renice -n 5 1111 1112
+</pre>
+<p>とすれば、実行中のプロセス1111と1112に対してNICE値を5にすることができる。</p>
+<p>（「<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>」を参考に執筆しました。）</p>
+
+<h1>プロセス管理</h1>
+<h2>ps</h2>
+<p>プロセスの状況を表示する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man1/ps.1.html">man ps</a></li>
+</ul>
+
+<h2>pstree</h2>
+<p>プロセスの親子関係を分かりやすくツリー表示してくれる。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/psmisc/man1/pstree.1.html">man pstree</a></li>
+</ul>
+
+<h2>kill</h2>
+<p>プロセスにシグナルを送信する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/kill.1.html">man kill</a></li>
+</ul>
+
+<h2>killall</h2>
+<p>killallを使うと、プロセスを殺す時に、killのようなプロセスIDではなく、プロセスの名前で指定できる。同じ名前のプロセスは全部死ぬ。</p>
+<p>killを使うよりも使いやすいが、別のプロセスまで一緒に殺さないように注意しよう。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/psmisc/man1/killall.1.html">man killall</a></li>
+</ul>
+
+<h2>free</h2>
+<p>freeは、メモリの使用状況を表示する。利用しているメモリや空きメモリを表示する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man1/free.1.html">man free</a></li>
+</ul>
+
+<h2>vmstat/iostat/dstat</h2>
+<p>vmstatは、仮想メモリやブロック、iostatはI/Oの状況をモニタリングできる。</p>
+<p>vmstat、iostat、mpstat、ifstatは、サーバーのリソースをリアルタイムで表示・モニタリングするのに使えるが、それぞれひとつの種類のリソースしか表示できない。</p>
+<p>すべての状況をひとつのターミナルで見たい時は、dstatを使う。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man8/vmstat.8.html">man vmstat</a></li>
+<li><a href="http://hirose31.hatenablog.jp/entry/20120229/1330501968">dstatの万能感がハンパない - （ひ）メモ</a></li>
+</ul>
+
+<h2>top</h2>
+<p>プロセスの状況をリアルタイムでモニタリングできる。Windowsでいうタスクマネージャと同じ。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man1/top.1.html">man top</a></li>
+</ul>
+
+<h2>nice/renice</h2>
+<p>プロセスの実行優先度を指定・変更。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/nice.1.html">man nice</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/renice.1.html">man renice</a></li>
+</ul>
+
+<h2>その他</h2>
+<p>そのほか、</p>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>pgrep</td><td>プロセスIDを表示。</td></tr>
+<tr><td>pkill</td><td>プロセスにシグナルを送信。</td></tr>
+<tr><td>pidof</td><td>実行中のプロセスのプロセスIDを表示。</td></tr>
+<tr><td>time</td><td>コマンドの実行時間・リソース使用時間を表示。</td></tr>
+<tr><td>nohup</td><td>シグナルを受け付けずにコマンドを実行。</td></tr>
+<tr><td>at</td><td>予定した時刻にコマンドを実行。</td></tr>
+</table>
+<p>などのコマンドがある。</p>
+<p>（「<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>」を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man1/pgrep.1.html">man pgrep/pkill</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/psmisc/man1/pidof.1.html">man pidof</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man1/time.1.html">man time</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/nohup.1.html">man nohup</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/at/man1/at.1.html">man at</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>参考ページ・書籍</h2>
+<p>以下のページ・書籍が参考になります。</p>
+<ul>
+<li><a href="http://hirose31.hatenablog.jp/entry/20120229/1330501968">dstatの万能感がハンパない - （ひ）メモ</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>モニタリング</h2>
+<p><a href="linux_net_monitoring.html">Linuxネットワーク（モニタリング）</a>も参照のこと。</p>
+
+<h2>シグナル</h2>
+<p><a href="linux_kernel_signal.html">Linuxカーネル（シグナル）</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

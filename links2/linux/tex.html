@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>TeX関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>TeXの世界観</h1>
+<p>TeXの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>TeXとは</h1>
+
+<h2>基本</h2>
+<p>ドナルド・クヌース先生によって作られた、最強の文書整形システム。</p>
+<p>特に、数式を綺麗に表示できる。</p>
+<p>大学の卒論や論文を書くために使われることが多い。Linuxは主にTeXのために使う、という人が多いようだ。</p>
+
+<h2>マークアップで文書を整形する</h2>
+<p>MS-Wordなどのソフトウェアが画面上に表示されるのと同じ形で文書を整形することができるのに対し、TeXではマークアップ的に文書を整形する。</p>
+<p>要するに、色やサイズや太さを変えるために、ボタンで画面に表示しながら整形することは、LinuxのTeXでは出来ない。その代り、たとえばHTMLのように、文書のテキストファイルの中に「マークアップ記法」という独自の記法を入れ込むことで、文書の整形を行う。</p>
+<p>これはHTMLが簡単にCSSでデザインを変えられるのと同じで、「自動的に文書の見た目を生成する」際に適している。全ての見出しや文書フォーマットのスタイルを一括で変えられるからである。</p>
+<p>TeXは、数式の表示に使われることの多いソフトウェアだ。それは、数式を表示させる際、TeXのマークアップを使えばとても綺麗に整形できるからである。また、数式だけではなく、書物の編集に良く使われる。Adobe IllustratorなどでDTPを行って、PDFに変換して扱うことも多い「書籍のデザイン」だが、TeXのマークアップを使いこなすことで、負けないぐらいシンプルで強力な「書籍の作成」を行うことができる。</p>
+<p>注記：TeXを使ったことのなかった自分が書いていたため、見当はずれな部分があるかもしれません。特に、CSSのように簡単にデザインを変えるというよりも、「書籍並みの綺麗な組版を行う」という意味で使われることが多いです。ワードなどに比べてとても綺麗な「出版レベルのデザイン」ができます。</p>
+<p><a href="../prog_lang/html.html">HTML</a>や<a href="../prog_lang/css.html">CSS</a>も参照のこと。</p>
+
+<h2>本を作ることができるレベルの出力</h2>
+<p>僕は決してMS-WordがLaTeXに劣っているとは思わないが、出版というシビアなレベルの仕事になると、LaTeXを使うことも多いようである。</p>
+<p>TeXはMS-Wordと比べて、とてもレベルの高い出版物の組版ができる。</p>
+<p><a href="../windows_pc/msword.html">MS-Word</a>も参照のこと。</p>
+
+<h2>アスキーによる日本語のpTeX</h2>
+<p>TeXは英語圏で開発されたソフトウェアだが、ソースコードが公開されている。日本語に対応させたものはNTTあるいはアスキーのものが長い間代表的だった。特にアスキーはpTeXなどの日本語版TeXを開発し公開している。pTeXに対応したマクロセットであるpLaTeXもある。</p>
+<p>現在では日本語TeXはコミュニティによってアスキーのものをforkして開発されている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Publishing_TeX">Publishing TeX - Wikipedia</a></li>
+</ul>
+
+<h1>TeX/LaTeX</h1>
+<h2>TeX/LaTeX</h2>
+<p>以下は参考のリンク。さまざまなサンプルや説明があるので必読。</p>
+<ul>
+<li><a href="http://www.juen.ac.jp/math/nakagawa/texguide.html">TeX入門 - 中川仁のホームページ</a></li>
+<li><a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80">LaTeX入門 - TeX Wiki</a></li>
+<li><a href="https://www.biwako.shiga-u.ac.jp/sensei/kumazawa/tex.html">TeX/LaTeX - @KUMAZAWA Yoshiki</a></li>
+<li><a href="http://www.comp.tmu.ac.jp/tsakai/lectures/intro_tex.html">TeX入門 - 酒井高司 (Takashi Sakai)</a></li>
+</ul>
+
+<h2>TeXの解説</h2>
+<p>TeXファイルは拡張子.texで保存し、platexコマンドでDVIファイルにコンパイルする。</p>
+<pre>
+platex hoge.tex
+</pre>
+<p>作成されたDVIファイルをDVIビューア（たとえばdvioutコマンド）で見ることもできるが、PDFに変換（たとえばdvipdfmxコマンド）して見ることもできる。</p>
+<p>TeXファイルは必ず以下で始まる。</p>
+<pre>
+\documentclass[オプション]{クラス名}
+</pre>
+<p>クラス名にクラスファイルを指定してフォーマットを設定する。日本語の論文であればjarticleを指定する。縦書きならtarticleを指定する。</p>
+<p>本文は</p>
+<pre>
+\begin{document}
+</pre>
+<p>で始まり</p>
+<pre>
+\end{document}
+</pre>
+<p>で終わるように記述する。すべてのTeXのコマンドは \ で始まる。</p>
+<ul>
+<li><a href="http://www.comp.tmu.ac.jp/tsakai/lectures/intro_tex.html">TeX入門 - 酒井高司 (Takashi Sakai)</a></li>
+</ul>
+
+<h2>数式を書く</h2>
+<p>TeXでは\（UNIXではバックスラッシュで表示される。日本語Windowsではお金の円記号（全角では￥）で表示される）に続いて記号名を書くことで数式や記号を書くことができる。</p>
+<p>たとえば、円周率であれば</p>
+<pre>
+\pi
+</pre>
+<p>となる。これをMathJax（TeXと記法が同じ）で表示させると</p>
+<p>\[\pi\]</p>
+<p>となる。</p>
+<p>ほかにも、たとえば分数であれば、</p>
+<pre>
+\frac{1}{2}
+</pre>
+<p>とすれば二分の一となる。これを同様にMathJaxにかけると</p>
+<p>\[\frac{1}{2}\]</p>
+<p>となる。</p>
+<p>他にも、</p>
+<pre>
+\sum_{k=1}^{n} k^2
+</pre>
+<p>ならば、</p>
+<p>\[\sum_{k=1}^{n} k^2\]</p>
+<p>となる。</p>
+<p>さらに、</p>
+<pre>
+f'(x)=\lim_{h \to 0}\frac{f(x + h)-f(x)}{h}
+</pre>
+<p>ならば、</p>
+<p>\[f'(x)=\lim_{h \to 0}\frac{f(x + h)-f(x)}{h}\]</p>
+<p>となる。</p>
+
+<h2>Wikipediaの数式</h2>
+<p>TeXは、Wikipediaで数式を表示するために使われている。<a href="../services/wiki.html">Wiki</a>も参照のこと。</p>
+
+<h1>導入</h1>
+<h2>TeX Live</h2>
+<p>TeX LiveはTeXのディストリビューション。Windows向けにも利用できる。Windowsユーザーはこれを導入しよう。</p>
+<ul>
+<li><a href="https://texwiki.texjp.org/?TeX%20Live">TeX Live - TeX Wiki</a></li>
+</ul>
+
+<h2>WebでTeX</h2>
+<p>Web上でTeXを使えるオンラインサービスが複数存在する。</p>
+<ul>
+<li><a href="https://texwiki.texjp.org/?TeX%E3%82%92Web%E3%81%A7">TeXをWebで - TeX Wiki</a></li>
+<li><a href="https://www.mathcha.io/">Mathcha - Online Math Editor</a> - おすすめ。英語だが登録なしで簡単にエディタを使える。</a></li>
+</ul>
+
+<h1>TeXでいろいろ</h1>
+<h2>文字サイズ・用紙サイズの変更</h2>
+<p>文字サイズや用紙サイズを変える時は、</p>
+<pre>
+\documentclass[a4paper,12pt]{jarticle}
+</pre>
+<p>のように[]内にオプションを記述する。</p>
+<ul>
+<li><a href="https://medemanabu.net/latex/documentclass/">LaTeXコマンド - 文書クラス（種類）とオプション - documentclass - LaTeX入門 - 数学の公式</a></li>
+</ul>
+
+<h2>縦書き</h2>
+<p>縦書きは、</p>
+<pre>
+\documentclass{tarticle}
+</pre>
+<p>のように、ドキュメントクラスにtarticleと指定する。</p>
+<ul>
+<li><a href="http://www.fugenji.org/~thomas/texlive-guide/vertical.html">縦書きしてみよう - TeX Live を使おう──主に Linux ユーザのために──</a></li>
+</ul>
+
+<h2>目次の自動作成</h2>
+<p>セクションやサブセクションに分けた内容は、目次を自動的に作成できる。</p>
+<p>セクションは、</p>
+<pre>
+\section{タイトル}
+内容
+
+\subsection{サブタイトル}
+内容
+
+\subsubsection{サブサブタイトル}
+内容
+</pre>
+<p>とし、目次は</p>
+<pre>
+\tableofcontents
+</pre>
+<p>とする。</p>
+<ul>
+<li><a href="http://www.latex-cmd.com/struct/contents.html">LaTeXコマンド集 - 目次</a></li>
+<li><a href="https://medemanabu.net/latex/part-section-subsection/">LaTeXコマンド - 論文の見出し - 部・節・小節 - part, section, subsection - LaTeX入門</a></li>
+</ul>
+
+<h2>イコールの位置で整列させる</h2>
+<p>TeXやMathJaxにおいて、イコール（=の記号）などの特定の文字の位置で全体を整列させるには、まず、数式を</p>
+<pre>
+\begin{eqnarray}
+</pre>
+<p>と、</p>
+<pre>
+\end{eqnarray}
+</pre>
+<p>で囲み、その上で整列したい位置の文字（=など）の両端に&を付けて、</p>
+<pre>
+&=&
+</pre>
+<p>などとする。また、改行は、</p>
+<pre>
+\\
+</pre>
+<p>とする。</p>
+<p>たとえば、具体例として、</p>
+<pre>
+\begin{eqnarray}
+(a + b)^2 &=& a \times (a + b) + b \times (a + b) \\
+&=& a^2 + ab + ab + b^2 \\
+&=& a^2 + 2ab + b^2
+\end{eqnarray}
+</pre>
+<p>ならば、</p>
+<p>\[
+\begin{eqnarray}
+(a + b)^2 &=& a \times (a + b) + b \times (a + b) \\
+&=& a^2 + ab + ab + b^2 \\
+&=& a^2 + 2ab + b^2
+\end{eqnarray}
+\]</p>
+<p>となる。</p>
+<p>注記：ネットで調べたところ、このようなeqnarrayの使い方はイレギュラーな方法かもしれません。そもそもeqnarrayはTeXの非推奨機能みたいです。</p>
+<ul>
+<li><a href="http://komashow.cside.com/column/column5-4.html">TeXの「こんなときどうする？」 - TeXでレポートでも書いてみようじゃないか。</a></li>
+<li><a href="https://twitter.com/hahahahaha_NNN/status/1486972750426415106">@hahahahaha_NNNさんのポスト - X</a></li>
+<li><a href="https://qiita.com/t_kemmochi/items/a4c390b4967b13f3afb7">amsmathの数式環境まとめ #LaTeX - Qiita</a></li>
+<li><a href="https://lecture.ecc.u-tokyo.ac.jp/~cnakamur/LaTeX/Sect-7-Math.pdf">7 数式と記号の出力 - LaTeX 入門 - 情報処理 　(中村) - 東京大学情報基盤センター 教育用計算機システム 講義用WWWサーバ</a></li>
+<li><a href="https://www.irohabook.com/latex-eqnarray">TeX（LaTeX）で数式のイコールをそろえる（eqnarray） - Irohabook</a></li>
+<li><a href="https://yama-itech.net/mathjax-latex-align">MathJax-Latexで数式をそろえたい！使える数式の書き方メモ|やまでぃーのブログ</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.03.04</p>
+</div>
+
+<h2>科学論文や出版社向け</h2>
+<p>MS-Wordと比べると、Wordがビジネス向けの書類などを作れるワープロであるのに対して、TeXは科学者や学生による科学論文、あるいは出版社による書籍の出版向けであると言われる。</p>
+<p>僕のようにAdobe Illustratorを使う人間から見ると、TeXとイラレは出版やデスクトップパブリッシング（DTP）で使われる主要なソフトであり、完全に文書として読まれる小説や専門書のような出版ならTeXだが、写真をふんだんに使った雑誌やデザインポスターなどであればイラレを使う。</p>
+<p>Photoshopはまた別であり、写真の加工や補正に使う。イラストを単に描くのであればSAIやクリスタなどを使うことも多い。</p>
+<p><a href="../art/illustrator.html">Illustrator</a>や<a href="../art/photoshop.html">Photoshop</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>その他の数学計算関係のソフトウェア</h2>
+<p><a href="../prog_lang/computer_science.html">コンピュータ科学</a>のページを参照のこと。</p>
+
+<h2>MathJax</h2>
+<p><a href="mathjax.html">MathJax</a>を参照のこと。</p>
+
+<h2>gnuplot</h2>
+<p><a href="gnuplot.html">gnuplot</a>を参照のこと。</p>
+
+<h2>PDF</h2>
+<p><a href="../art/pdf.html">PDF</a>を参照のこと。</p>
+
+<h2>文書形式</h2>
+<p><a href="../prog_lang/xml.html">XMLと文書形式</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>TeX, LaTeX</h2>
+<p>出版レベルの組版が可能。</p>
+<p>大学のレポートなどはLaTeXで書く人間が多い。</p>
+<p>¥を使ってマークアップで文書を編集する。</p>
+<p>ワードやHTMLと比べても、そんなに難しくない。</p>
+
+<h1>リンク集</h1>
+
+<h2>TeX/LateX</h2>
+<p>Tex/LaTeXは、組版システム。美しい数式を表示出来ることで有名。</p>
+<ul>
+<li><a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80">LaTeX入門 - TeX Wiki</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</html>

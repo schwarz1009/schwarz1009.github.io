@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>systemd - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>systemd</h1>
+<p>systemdに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>systemd</h1>
+<h2>デーモンとsystemd</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>また、サーバーはデーモンと呼ばれるシステムに常駐するプログラムによって一度に一回実行するコマンドではなく、システムで常にサービスを提供するが、これの管理にはsystemdと呼ばれる仕組みを用いる。</p>
+<p>以前はSysV initと呼ばれるプログラムとrcスクリプトによって設定を行っていたが、現在はinitに「デーモンの並列起動処理ができない」という問題があり、systemdが使われることが多い。</p>
+<p>FreeBSDなどの*BSD系UNIXでは、SysV initではなくrc.confと呼ばれる、ひとつの設定ファイルにおいてinit処理を行う。</p>
+<p>以前のrcスクリプトでは、デーモンごとに起動を行う起動スクリプトがあり、スクリプトへのシンボリックリンクに番号をつけることで順番を管理していたが、これでは並列で起動処理を行うことができず、現在のマルチコアプロセッサにおいては起動が遅くなる。</p>
+<p>そのため、systemdではUnitファイルを用いて、可能な限り並列で起動する。</p>
+<p>同時に、systemdはinitの代替以外にも多くの機能を提供し、たとえばコマンドを定期的に実行するcrondや、システムロガーなどの代わりにもなる。</p>
+<p>systemdは「新しいLinuxの管理の中心」ともいえるシステムであり、複雑であるため賛否の両論があるが、現在のLinuxの管理機構の中心となっている。</p>
+<p><a href="linux_daemon.html">Linux initとデーモン</a>も参照のこと。</p>
+
+<h2>systemd概要</h2>
+<p>複雑怪奇だと言って、何かと嫌われているsystemd。僕もそんなに好きではない。並列処理が可能なため速く、サービスの開始・停止などをスクリプトではなく、systemdの標準機能として行える。サービスの設定などはUnitファイルと呼ばれる、シェルスクリプトよりも単純でシンプルな設定ファイルから行える。</p>
+<p>柔軟で動的な管理が可能ということだが、いかんせん複雑だ。</p>
+<p>Debianから派生したDevuanのように、systemdを取り除いて、さまざまなinitアーキテクチャを選べるようにしたディストリビューションも存在する。</p>
+<p>後日注記：現在のマルチコアプロセッサが普通になった64bit CPU環境では、従来の順次起動しかできないSysV initは時代遅れであり、並列処理が可能なsystemdは大幅な起動時間の削減に繋がる。これは悪いことではない。</p>
+<ul>
+<li><a href="https://qiita.com/DQNEO/items/0b5d0bc5d3cf407cb7ff">Systemdを使ってさくっと自作コマンドをサービス化してみる - Qiita</a></li>
+</ul>
+
+
+<h2>systemdの意義</h2>
+<p>僕が感じることとして、systemdはただの複雑さ・相互依存のオンパレードではない。「Linux界の設定・管理の中心的存在」になろうとしているのである。</p>
+<p>systemdは、System VやMulticsの失敗を繰り返していると良く批判されるが、systemdのやりたいことは、「Linuxシステム管理で、新しい中心的なリーダー」になろうとしている、ということである。</p>
+<p>複雑とは言われるが、systemdのUnitファイルはSysV initよりもシンプルである。これは、シェルスクリプトではなくさまざまなsystemdの機能の下での「設定ファイル」を使うことで、システムアーキテクチャとしての「シンプルかつ高機能性」を目指しているところがある。</p>
+<p>批判について知りたい方は、有名な以下のサイトやWikipediaを参照のこと。</p>
+<ul>
+<li><a href="https://postd.cc/why-i-dislike-systemd/">私がsystemdを嫌う理由 | POSTD</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Systemd">systemd - Wikipedia</a></li>
+</ul>
+
+<h2>モダンなLinuxの管理＝systemd</h2>
+<p>最近のLinuxを見ていると、まるで「Linuxの管理＝systemd」である。</p>
+<p>今までのLinuxの管理の方法を一掃し、「ディストリビューションの間で違っていたさまざまな管理の手法」は、全てsystemdに置き換わろうとしている。</p>
+<p>そして、多くの開発者や管理者も、それを受け入れている。「systemdは確かに巨大なソフトウェアスイートで、Linuxの管理全てを支配するソフトウェアだが、今までのLinuxよりはマシ」ということになろうとしている。</p>
+<p>これは必ずしも悪いことではない。今のLinuxの管理はsystemdそのものである。systemdを学んでおけば、Linuxの管理ができるようになる。カーネルやシステムとアプリケーションを繋ぐ「ノリ」の役割は全部systemdにさせる、というのが今の「ナウいLinuxの管理」である。</p>
+<p>よく似ているものとして、ネットワークの設定に使うNetworkManagerが挙げられる。Linuxはどんどん作り変えられようとしている。</p>
+
+<h2>systemdには批判的な意見が多い</h2>
+<p>systemdには、とても批判的な意見が多い。</p>
+<p>たとえば、Slashdotの以下のような記事を見ると、systemdが「古きよきUNIXの慣習を全部壊している」という意見を見ることができる。</p>
+<ul>
+<li><a href="https://linux.slashdot.org/story/20/05/02/034216/will-systemd-245-bring-major-changes-to-linuxs-home-directory-management?sdsrc=popbyskidbtmprev">Will Systemd 245 Bring Major Changes to Linux's Home Directory Management? - Slashdot</a></li>
+</ul>
+
+<h2>Unitファイルの命名規則と起動</h2>
+<p>systemdでは、Linuxカーネルが起動するとPID=1でsystemdが起動する。systemdは正しい順序関係（これより前・後に実行しなければならないとする設定）を計算してそれぞれのUnitを起動する。順序関係のないUnitはすべて並列で起動される。</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://yukiyan.hatenablog.jp/entry/2015/10/18/190639">いまさらだけどsystemdに入門した - 雑なメモ</a></li>
+</ul>
+
+<h2>Unitの解説</h2>
+<p>システム標準のUnitファイルは/usr/lib/systemd/system/にある。管理者が自分で設定するには/etc/systemd/system/にUnitファイルを置く。順序関係とは別に依存関係という概念があることがポイントか。</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://enakai00.hatenablog.com/entry/20130917/1379374797">Systemd入門(4) - serviceタイプUnitの設定ファイル - めもめも</a></li>
+<li><a href="https://dev.classmethod.jp/cloud/aws/service-control-use-systemd/">はじめてのsystemdサービス管理ガイド ｜ DevelopersIO</a></li>
+</ul>
+<p><a href="linux_fhs.html">Linuxファイルシステム階層</a>も参照のこと。</p>
+
+<h2>systemctlコマンド</h2>
+<p>systemctlコマンドは、enable（有効化）、disable（無効化）、is-enabled（有効・無効の確認）、start（起動）、status（状況の表示）、show（状況の表示２）、stop（停止）、reload（設定の再読み込み）、restart（再起動）と使う。</p>
+<p>たとえば、</p>
+<pre>
+# systemctl start httpd.service
+</pre>
+<p>.serviceは省略できる。</p>
+<pre>
+# systemctl start httpd
+</pre>
+<p>httpdをシステム起動時に起動するには以下のようにする。</p>
+<pre>
+# systemctl enable httpd
+</pre>
+
+<h2>journalctl (journald)</h2>
+<p>systemdでは、ログの参照にはless /var/log/syslogではなくjounalctlを使用する。</p>
+<ul>
+<li><a href="https://qiita.com/aosho235/items/9fbff75e9cccf351345c">journalctl 最低限覚えておくコマンド - Qiita</a></li>
+</ul>
+<p><a href="linux_unix_logger.html">UNIXシステム管理（システムロガー）</a>も参照のこと。</p>
+
+<h2>timer</h2>
+<p>systemdでは、cronの代わりにsystemd timerを使うことができる。</p>
+<ul>
+<li><a href="https://blog.n-z.jp/blog/2017-06-04-cron-systemd-timer.html">cron(crontab)の代わりにsystemdのtimerを使う - @znz blog</a></li>
+<li><a href="https://qiita.com/bubai/items/d36cc8e552b51c296d20">systemdタイマーのスケジューリング - Qiita</a></li>
+</ul>
+<p><a href="linux_unix_cron.html">UNIXシステム管理（cron）</a>も参照のこと。</p>
+
+<h2>localectl</h2>
+<p>systemdでは、localectlでロケールを設定できる。</p>
+<ul>
+<li><a href="https://zero-config.com/centos/changelocale-002.html">[CentOS]CentOS7でのロケール(locale)の確認及び変更 | Zero Configuration</a></li>
+</ul>
+<p><a href="linux_unix_timezone_locale.html">UNIXシステム管理（タイムゾーンとロケール）</a>も参照のこと。</p>
+
+<h2>networkd</h2>
+<p>systemdでは、networkdでネットワークを設定できる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Systemd-networkd">systemd-networkd - ArchWiki</a></li>
+</ul>
+<p><a href="linux_net2.html">Linuxネットワーク（設定）</a>も参照のこと。</p>
+
+<h2>udevd</h2>
+<p>udevは/devディレクトリ以下にあるデバイスファイルを自動的に作成するユーザーレベルのLinuxの機構。</p>
+<p>以下のような記事もあるように、最近のudevは完全にsystemdと統合されている。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0555">第555回　いま，あらためてudev：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p><a href="linux_devicefile.html">Linuxデバイスファイル</a>も参照のこと。</p>
+
+<h2>systemdについてのいろいろ</h2>
+<p>systemdはGNOMEなどとも統合されており、「今までのLinuxは何だったのだ」というぐらい、systemdによってLinuxシステム管理の方法は変わっている。激変ではないが、多くがsystemdによってリプレースされようとしている。systemdへの「複雑で巨大だ」という批判は、こうした理由から起きているのかもしれない。</p>
+
+<h1>init/systemd代替システム</h1>
+<h2>systemdが大嫌いな方への選択肢</h2>
+<p>systemdが嫌いな方は多い。多くの人が、Linuxを棄て、systemdのないBSDなどの別のUNIXに逃れようとしている。</p>
+<p>たとえば、Devuanというプロジェクトでは、Debian GNU/Linuxからsystemdを排除し、「色んなRCシステムが使えるように選択肢を与える」という発想をしている。Arch LinuxベースでもArtix Linuxというsystemdを排除したArch系ディストリビューションが開発されている。</p>
+<p>また、GentooはOpenRCと呼ばれるBSDライクだが独自なRCシステムを開発している。GNOMEなどからも、systemd依存の部分を書き直したりしている。</p>
+<p>ただし、これらのプロジェクトは、多くの場合アップストリームに対するパッチになってしまい、保守や維持、メンテナンスと追従が大変である。</p>
+<p>そこで、良い選択肢がある。OpenBSDである。最近、OpenBSDが新しいUNIXの選択肢として注目されている。特に、GNOMEなどを排除し、OpenBSDでXfceなどを使う方が増えている。</p>
+<p><a href="debian.html">Debian GNU/Linux</a>や<a href="arch_linux.html">Arch Linux</a>や<a href="gentoo.html">Gentoo</a>や<a href="../unix/openbsd.html">OpenBSD</a>も参照のこと。</p>
+
+<h2>OpenRC, runit, S6</h2>
+<p>systemdに代わるinitシステムとして、OpenRC, runit, S6などがある。</p>
+<p>OpenRCは、Gentoo Linuxで使われていることで有名。また、runitはいろいろと人気である。また、S6は独自の面白い設計思想を持っている。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201904/25">2019年4月25日　systemdフリーな世界を快適に立ち上げる ―モダン＆シンプルな起動ユーティリティ「S6」：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://developer.medley.jp/entry/2017/10/04/120000">runitが便利なので、使い方を紹介した話〜メドレーTechLunch〜 - Medley Developer Blog</a></li>
+<li><a href="http://d.hatena.ne.jp/n_hayashi/20110422/1303454798">runit によるユーザ権限でのデーモン化 - Little Tech Notes</a></li>
+</ul>
+<p><a href="void_linux.html">Void Linux</a>も参照のこと。</p>
+
+<h2>Upstart</h2>
+<p>Ubuntuによるinitの代替。昔は採用するディストリビューションが多かったが、今ではsystemdが事実上の標準になって衰退した。</p>
+<p><a href="ubuntu.html">Ubuntu</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>Linuxを一度全部最初から作り直す</h2>
+<p>僕が思うに、Linuxは一度全部最初から作り直してもいいのかもしれないと思います。</p>
+<p>たとえば、ファイルシステム階層などは、FHSから逸脱したGoboLinuxのようなディストリビューションが誕生しています。</p>
+<p>また、X11のようなウィンドウシステムは、ネットワーク透過の機能があるなど、前時代的で、今のモダンなOSのディスプレイサーバとしては相応しくありません。そのため、新しいWaylandなどが開発されています。</p>
+<p>このように、UNIXのシステムは古くなってきており、そろそろ一度すべて作り直すような、新しいアップデートが必要となってきています。</p>
+<p>そして、systemdは、まさにこのような「Linuxの管理方法を刷新する」という意味で、新しい試みだと思います。</p>
+<p>確かに、「systemdはUNIXの古き良き文化を壊している」とは言えるでしょう。たとえば、ホームディレクトリ管理で、ユーザー情報をJSONレコードにするなどはありえないと感じられるかもしれません。ですが、systemdの開発者は、もっと遠くを見ています。UNIXのおかしな慣習を改め、Linuxをモダンでまともな最先端のOSにしようとしているのです。</p>
+<p><a href="gobolinux.html">GoboLinux</a>や<a href="wayland.html">Wayland</a>も参照のこと。</p>
+
+<h2>ディストリビューションの間での違いがなくなる</h2>
+<p>また、systemdのいい点があるとしたら、それはディストリビューションの間の無駄な違いがなくなるということです。</p>
+<p>ネットワークの設定は、NetworkManagerがあるとはいえ、各ディストリビューションの間で違いますし、従来のinitシステムもそれぞれのディストリビューションで起動スクリプトの場所が違ったり、ランレベルの構成が違ったりします。デーモンをOS起動時に起動する・しないの設定方法も異なります。</p>
+<p>systemdでは、このような「無駄なディストリビューションの違い」がなくなります。すべての設定が共通化され、ディストリビューションはより重要な「使いやすさ」や「安定性・堅牢さ」だけを考えることができるのです。</p>
+<p><a href="linux_net_networkmanager.html">Linuxネットワーク設定（D．NetworkManager）</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+
+<h2>systemd</h2>
+<p>新しいinitシステムのsystemdについて。</p>
+<ul>
+<li><a href="http://dev.classmethod.jp/cloud/aws/systemd-getting-started/">systemd超入門 - Developers.IO</a>
+<li><a href="http://enakai00.hatenablog.com/entry/20130914/1379146157">Systemd入門(1) - Unitの概念を理解する - めもめも</a>
+<li><a href="http://yukiyan.hatenablog.jp/entry/2015/10/18/190639">いまさらだけどsystemdに入門した - 雑なメモ</a>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

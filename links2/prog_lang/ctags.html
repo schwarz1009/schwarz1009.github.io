@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ctags関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ctagsの世界観</h1>
+<p>ctagsに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ctags</h1>
+<h2>ctagsがなければ投げ出してしまうかも</h2>
+<p>ctagsは、ソースファイルやヘッダファイルのインデックスを作って、エディタなどから関数やクラスなどの定義にジャンプすることができるソフトウェアです。</p>
+<p>たとえば、「C/C++の勉強したから、いっそClang/LLVMの開発でもやってみるか！」と思い立った時、githubから以下のようなリポジトリを見て、ソースファイルを読んでみようと思ったとします。</p>
+<ul>
+<li><a href="https://github.com/llvm/llvm-project">GitHub - llvm/llvm-project</a></li>
+</ul>
+<p>そして、ソースファイルを見てみましょう。すると、#includeにヘッダファイルが山のようにあって、その下では見知らぬ関数やクラスが実行されています。</p>
+<p>これを見て、「なんだ、こんなにヘッダファイルがある中から、自分で関数定義を探さなければいけないのか…」とあなたは落ち込み、「これは無理だ」と思って投げだすのではないでしょうか。</p>
+<p>こんな時、ctagsがあれば、プログラマになる道を投げ出さなくてすみます。</p>
+
+<h2>ctagsとは</h2>
+<p>ctagsは、プログラムの中のソースファイルやヘッダファイルのインデックスを作って、「関数を使っているところ」から「関数の元々の定義」にジャンプすることのできるソフトウェアです。</p>
+<p>ctagsのサポートするエディタや使い方については以下をご覧ください。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ctags">Ctags - Wikipedia</a></li>
+<li><a href="https://qiita.com/soramugi/items/7014c866b705e2cd0b95">ctagsをちゃんと使う - Qiita</a></li>
+</ul>
+<p>ctagsがあれば、vimやemacsから「なんだこの関数」と思った時に瞬時にその定義を参照することができます。</p>
+<p>言ってしまえば、「コンパイラ＋テキストエディタ＋ctags＝きちんとできる入門者向けの開発環境」であると言えるでしょう。</p>
+
+<h2>ctagsという名前ながらたくさんの言語に対応</h2>
+<p>また、ctagsはctagsという名前ながらたくさんのプログラミング言語に対応し、それぞれの言語に異なるtagsファイルを作成することができる。</p>
+
+<h1>lxr / dxr</h1>
+<h2>Linuxカーネルとlxr</h2>
+<p>また、Linuxカーネルのソースコードを閲覧するためのソフトウェアとして、lxrというのがあります。これも便利です。ソースファイルをタグ付けされたHTMLファイルにして、リンクをクリックすることで関数の定義や参照箇所をチェックできます。</p>
+<p>Linuxカーネル限定で良いのであれば、オンラインからLinuxカーネルのlxrを参照できます。</p>
+<ul>
+<li><a href="https://elixir.bootlin.com/linux/latest/source">Linux source code:  (v5.5.3) - Bootlin</a></li>
+</ul>
+
+<h2>Mozillaとdxr</h2>
+<p>また、Mozillaのソースコードはdxrから見ることができます。ディレクトリ構造についての説明もあります。</p>
+<ul>
+<li><a href="https://dxr.mozilla.org/mozilla-central/source/">mozilla-central - DXR</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla_Source_Code_Directory_Structure">Mozilla ソースコードのディレクトリ構造 | MDN</a></li>
+</ul>
+
+<h2>OpenGrok</h2>
+<p>OpenGrokは高速で使いやすいソースコード閲覧・検索ツール。</p>
+<ul>
+<li><a href="https://oracle.github.io/opengrok/">{OpenGrok by OpenGrok</a></li>
+<li><a href="https://qiita.com/vmmhypervisor/items/23e9ea60863c15014836">OpenGrokによるソースコード検索環境の構築 - Qiita</a></li>
+<li><a href="https://one-it-thing.com/2746/">OpenGrokをインストールしてソースリーディング環境を作る &#8211; One IT Thing</a></li>
+</ul>
+<p>特に以下のページからOSカーネルなどのコードを簡単に参照できる。個人的にHaikuが気になる。</p>
+<ul>
+<li><a href="https://xref.landonf.org/source/">OpenGrok Search for current project(s)</a></li>
+</ul>
+
+<h1>Windowsで開発環境を揃える</h1>
+<h2>ctags + gvim + Clang/LLVM on Windows</h2>
+<p>「ctags使いたいけど、Linuxで開発したくないなあ」と思っている方。ctagsはWindowsでも動きます。</p>
+<ul>
+<li><a href="https://maku77.github.io/vim/advanced/tags.html">プログラムの関数定義などにジャンプする（tags ファイルの利用） | まくまくVimノート</a></li>
+</ul>
+<p>Windowsでgvim + ctagsを導入してしまえば、Linuxと同等の「快適vim環境」が構築できます。</p>
+<ul>
+<li><a href="https://qiita.com/knt45/items/61fb0efcefaa35079711">Windows環境にGVimをインストールして色々カスタマイズした際の作業メモ - Qiita</a></li>
+</ul>
+<p>また、Windowsで動くフリーのC/C++コンパイラを探しているなら、Clang/LLVMがおすすめ。MinGW（GNU開発ツールのWindows版）でも構いませんが、個人的におすすめなのはLLVMのWindows版の導入です。</p>
+<ul>
+<li><a href="http://yohshiy.blog.fc2.com/blog-entry-294.html">LLVM Clang の Windows へのインストールと使い方 | プログラマーズ雑記帳</a></li>
+</ul>
+
+<h1>gtags</h1>
+<h2>GNU Grobal (gtags)</h2>
+<p>GNU Grobal (gtags)もctagsと同様にソースコードをタグ付けして関数定義にジャンプすることができるソフトウェア。ソースコードを読むのがとても快適になる。</p>
+<p>使い方は、まずgtagsコマンドでタグファイルを作成する。（-vは進歩状況を表示するオプションで、指定しなくてもよい。）</p>
+<pre>
+$ gtags -v
+</pre>
+<p>関数名から関数定義の含まれるソースコードのファイル名を得るには関数名をそのまま引数に与える。関数名には正規表現も使える。</p>
+<pre>
+$ global 関数名
+</pre>
+<p>ファイル名からファイルに含まれる関数のリスト（一覧）を得るには-fオプションを使う。</p>
+<pre>
+$ global -f ファイル名
+</pre>
+<p>関数が呼び出されている場所を検索するには-rオプションを使う。</p>
+<pre>
+$ global -r 関数名
+</pre>
+<p>-cオプションで関数名の一部から関数名を検索できる。</p>
+<pre>
+$ global -c 関数名の一部
+</pre>
+<p>ソースコードの全体をgrepで検索するには-gオプションを使う。</p>
+<pre>
+$ global -g 検索文字列
+</pre>
+<p>とする。</p>
+<p>詳細情報の表示には-xオプションを指定する。</p>
+<p>（以上は<a href="https://www.machu.jp/diary/20090307.html">ソースコードを快適に読むための GNU GLOBAL 入門 (前編) - まちゅダイアリー(2009-03-07)</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://uguisu.skr.jp/Windows/gtags.html">GNU GLOBAL（gtags）ソースコードタグシステムの使い方 - ネットの基礎知識＆Windows/Linuxの快適術 - 何もないから何かみつかる</a></li>
+</ul>
+
+<h2>テキストエディタとの連携</h2>
+<p>コマンドのglobalと同じことを、vimでは「:Gtags」に-r, -f, -gオプションを使うことで行える。</p>
+<p>また、カーソルがある場所の単語で検索するには「:GtagsCursor」と入力することで、ジャンプすることができる。</p>
+<p>入力するのが面倒なので、~/.vimrcにキーマップを記述しておこう。</p>
+<p>（以上は<a href="https://www.machu.jp/diary/20090308.html">ソースコードを快適に読むための GNU GLOBAL 入門 (中編) - まちゅダイアリー(2009-03-08)</a>を参考に執筆・引用しました。）</p>
+<p><a href="../linux/vi.html">vi</a>も参照のこと。</p>
+
+<h2>タグ付けされたHTMLを吐き出す</h2>
+<p>GNU GrobalはvimやEmacsなどのテキストエディタで閲覧するだけではなく、タグ付けされた状態のHTMLファイルも吐き出すことができる。ブラウザでコードをクリックして見たい僕のような人間には便利。</p>
+<p>gtagsコマンドでタグファイルを作成した状態で、htagsコマンドを実行する。</p>
+<pre>
+$ gtags -v
+$ htags -ansx
+</pre>
+<p>-ansxオプションは、-aがアルファベット順に作成、-nが行番号の表示、-sが変数名のような関数以外のシンボルにもリンク、-xがXHTMLでの出力となる。</p>
+<p>（以上は<a href="https://www.machu.jp/diary/20090309.html">ソースコードを快適に読むための GNU GLOBAL 入門 (後編) - まちゅダイアリー(2009-03-09)</a>を参考に執筆しました。）</p>
+
+
+<h1>統合開発環境</h1>
+<h2>Eclipseで宣言にジャンプ</h2>
+<p>オープンソースのJavaの統合開発環境のEclipseでも、F3キーを押すことで関数の宣言にジャンプできる。<a href="eclipse.html">Eclipse</a>を参照のこと。</p>
+
+<h2>RubyMineとPyCharm</h2>
+<p>ジェットブレインズ社のRubyMineやPyCharmでも、関数名やクラス名から関数定義やクラス定義にジャンプする機能があります。<a href="intellij.html">IntelliJ IDEA</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>ctags</h2>
+<p>関数の呼び出しから関数定義へとジャンプできる。</p>
+<p>巨大なソースコードを読むためには必須のツール。</p>
+<p>ちなみにEclipseではF3キーで関数定義にジャンプできる。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

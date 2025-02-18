@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>OpenBSD関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">UNIXの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/unix_bsd_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>OpenBSDの世界観</h1>
+<p>OpenBSDに関する世界観です。<a href="bsd.html">BSD</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>OpenBSD</h1>
+<h2>セキュリティの*BSD</h2>
+<p>OpenBSDは、*BSDの中ではテオ・デ・ラート氏（Theo de Raadt）が率いる*BSDとして有名で、セキュリティに力を入れていることで知られる。</p>
+<p>OpenBSDは、「正しい思想」と「先制的なセキュリティ」で知られる。BSDライセンスを「正しいOSのフリーなライセンス」とし、ライセンスに妥協しない。また、セキュリティホールが絶対に生まれないように、徹底的にコードを検査して、書き直している。そのため、デフォルトの状態でのリモートセキュリティホールは、現在まで2件しか発生していない。</p>
+<p>公式・Wikipedia</p>
+<ul>
+<li><a href="https://www.openbsd.org/">OpenBSD.org</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/OpenBSD">OpenBSD - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/openbsd">git</a></li>
+</ul>
+
+<h2>LibreSSL(OpenSSL), OpenSSHなど</h2>
+<p>LibreSSL（昔はOpenSSLだった）やOpenSSHなど、さまざまなセキュリティ関係のプロジェクトを主導している。</p>
+<p>また、OpenBSDの本拠地は暗号の輸出制限のないカナダに置かれている。</p>
+<p><a href="../linux/linux_ssh.html">SSH</a>や<a href="../network/encrypt.html">暗号</a>を参照のこと。</p>
+
+<h2>バグが無い</h2>
+<p>OpenBSDには、とにかくバグがない。バグはセキュリティホールの一番の近道であるため、バグができるだけないように、何度も何度も入念にコードを書き直している。バグのないコードを書く、ということは、正しいコードを書く、ということである。よって、OpenBSDは「最も正しいコード」である。</p>
+<p>ただし、これはカーネルや標準のコマンドや初期状態で設定されているプログラムに限る。ApacheやX11のようなものは初期状態では入っておらず、自分でインストールして設定しなければならない。だが、これは逆に、「ユーザーが自分のシステムをきちんと把握する」という意味で優れている。標準で動くサービスも最低限しかなく、Portも空いていない。Red Hatのような、何でも初心者向けに自動で設定してくれるGUIなインストーラすら動かない。だが、このことは、「ユーザーが自分でした設定のことをきちんと把握して管理する」という意味では優れていると言える。</p>
+<p>また、もともとNetBSDから派生したため移植性が優れているOpenBSDは、「新しいアーキテクチャへの移植によってコードが洗練されセキュリティの向上につながってきた」として、別の観点から移植性を重視している。</p>
+
+<h2>きっかけは子供のケンカ</h2>
+<p>OpenBSDはNetBSDから分派したプロジェクトである。これを、「セキュリティの高い別のOSを作るために分岐した」と言われることが多いが、実際は子供のケンカである。NetBSDの開発者であったテオ・デ・ラート氏（Theo de Raadt）が、NetBSDのプロジェクト関係者とケンカし、追い出された結果、OpenBSDが始まった。</p>
+<p>FreeBSDやNetBSDは、悪魔のデーモン君がマスコットになっているが、これはUNIXシステムのデーモン（daemon）を表している。だが、OpenBSDではハリセンボンあるいはフグのような、面白い劇画調のキャラクターになっている。それだけではない。このフグは歌を歌う。OpenBSDの主要なリリースが行なわれた時は、フグの新曲が発表される。OpenBSDのリリースとともに新しい歌も「OpenBSDの一部として」リリースされるのである。</p>
+<ul>
+<li><a href="https://cruel.org/openbsd/">OpenBSD advocacy page</a></li>
+</ul>
+<p><a href="netbsd.html">NetBSD</a>も参照のこと。</p>
+
+<h2>クソコードを全部直す</h2>
+<p>僕はOpenBSDについて良く知らないが、おそらくテオのやりたいことは、「クソコードの根絶」ではないかと思う。</p>
+<p>プログラミングにおいて、クソコードと言う発想は多い。あまり分かっていない新米のプログラマーが書くと、クソみたいなCやJavaのコードを書く。こうしたコードは動くわけがなく、有害である。</p>
+<p>テオは、おそらく、専制的なセキュリティと言ってきちんと美しいコードを書くだけでなく、こうしたクソコードを根絶しようとしているのではないかと思う。</p>
+
+<h2>先制的なセキュリティ</h2>
+<p>僕は、先制的なセキュリティは最高の理想のひとつだと思う。Linuxも他のBSDも、機能や移植性や安定性は重視するものの、セキュリティホールが毎月・毎週のように見つかっている。</p>
+<p>これでは、安心してOSを使うことすらできない。</p>
+<p>OpenBSDでは、セキュリティホールが絶対に生まれないように、何度も入念にコードを書きなおす。今までOpenBSDで発生したデフォルトのセキュリティホールは二件だけである。</p>
+<p><a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<h1>派生OS</h1>
+<h2>Bitrig</h2>
+<p>BitrigはOpenBSDからの派生OS。OpenBSDが保守的なのに比べて、LLVMをサポートするなど先進的なシステム構成で知られる。また、GNUのツールはTexinfoのみとなっている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Bitrig">Bitrig - Wikipedia</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>OpenBSD</h2>
+<p>セキュリティの高い*BSD。NetBSDから喧嘩別れした。</p>
+<p>移植性も重視する。「新しい移植のたびにコードが洗練され、セキュリティの向上につながってきた」。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
