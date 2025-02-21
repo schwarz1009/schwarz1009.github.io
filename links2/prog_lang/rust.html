@@ -341,41 +341,49 @@ fn main() {
 <p>以下は簡単な電卓アプリ。</p>
 <pre class="prettyprint lang-rust">
 struct Calc {
-    x: u32,
-    y: u32,
+    x: i32,
+    y: i32,
 }
 
 impl Calc {
-    fn add(&self) -&gt; u32 {
-        self.x + self.y;
+    fn add(&self) -&gt; i32 {
+        self.x + self.y
     }
     
-    fn sub(&self) -&gt; u32 {
-        self.x - self.y;
+    fn sub(&self) -&gt; i32 {
+        self.x - self.y
     }
     
-    fn mul(&self) -&gt; u32 {
-        self.x * self.y;
+    fn mul(&self) -&gt; i32 {
+        self.x * self.y
     }
     
-    fn div(&self) -&gt; u32 {
-        self.x / self.y;
+    fn div(&self) -&gt; i32 {
+        self.x / self.y
     }
 }
 
 fn main() {
-    let cl = Calc { x: 10, y: 20 };
+    let cl = Calc { x: 10, y: 5 };
     println!("{} + {} = {}", cl.x, cl.y, cl.add());
     println!("{} - {} = {}", cl.x, cl.y, cl.sub());
     println!("{} * {} = {}", cl.x, cl.y, cl.mul());
     println!("{} / {} = {}", cl.x, cl.y, cl.div());
 }
 </pre>
+<p>実行結果：</p>
+<pre>
+10 + 5 = 15
+10 - 5 = 5
+10 * 5 = 50
+10 / 5 = 2
+</pre>
 <ul>
 <li><a href="https://doc.rust-jp.rs/book-ja/ch05-03-method-syntax.html">メソッド記法 - The Rust Programming Language 日本語版</a></li>
 </ul>
 <div class="edit_date">
 <p>2023.08.14</p>
+<p>2025.02.21編集</p>
 </div>
 
 <h1>Rustで書かれたアプリケーション</h1>
