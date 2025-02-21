@@ -91,6 +91,7 @@
 <p>また、言語的に見ていると、「やり方がC++の全面的改良版」であるという特徴があり、たとえば入力処理などでも関数に参照（ポインタと同じ）を渡すなど、今までC++でやってきたやり方（たとえばWindowsなどでのポインタの使い方）とよく似ています。全体的に見てもC++に似ているため、C++エンジニアにとってみれば「ベターC++」のように使うことができます。</p>
 <p>こういう「言語的に面白い、新しいアイディアが満載」であるという特徴があるため、「自分の言語を設計したい」という言語設計者にとっても知っておくべき言語ではないかと思います。</p>
 
+<h1>Rustのトレイト</h2>
 <h2>トレイト</h2>
 <p>Rustでは、トレイトによってオブジェクト指向を行うことができる。</p>
 <p>メソッドの集合体であるトレイトを、型に対して実装すれば、その型でそのトレイトのメソッドを実行できるようになる。</p>
@@ -99,6 +100,44 @@
 <ul>
 <li><a href="https://qiita.com/mandel59/items/e9a5438f4c1d70cffb7a">Rustにおけるオブジェクト指向の考え方 - Qiita</a></li>
 </ul>
+
+<h2>トレイトの例</h2>
+<p>トレイトは、さまざまな型で共通に利用できるような抽象的な部分を作るために使う。ほかの言語においてはインターフェースに相当する。</p>
+<p>たとえば、動物が自己紹介をするためにAnimalIntroduceトレイトの中でintroduce()メソッドの枠組みを作る。</p>
+<pre class="prettyprint lang-rust">
+pub trait AnimalIntroduce {
+    fn introduce(&self) -&gt; String;
+}
+</pre>
+<p>これを、まず、猫と犬に実装するためには、</p>
+<pre class="prettyprint lang-rust">
+pub struct Dog {
+    pub name: String,
+}
+
+pub struct Cat {
+    pub name: String,
+}
+</pre>
+<p>とした上で、</p>
+<pre class="prettyprint lang-rust">
+impl AnimalIntroduce for Dog {
+    fn introduce(&self) -&gt; String {
+        format!("僕は犬だよ、名前は{}だ、ワン！", self.name)
+    }
+}
+
+impl AnimalIntroduce for Cat {
+    fn introduce(&self) -&gt; String {
+        format!("僕は猫だよ、名前は{}だ、ニャア！", self.name)
+    }
+}
+</pre>
+<p>のようにする。</p>
+<p>（<a href="https://doc.rust-jp.rs/book-ja/ch10-02-traits.html">トレイト：共通の振る舞いを定義する - The Rust Programming Language 日本語版</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.02.21</p>
+</div>
 
 <h1>Rustのメモリ管理</h1>
 <h2>所有権</h2>
