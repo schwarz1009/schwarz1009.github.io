@@ -83,7 +83,7 @@ String s_hoge = new String("ほげほげ");
 <h1>正規表現</h1>
 <h2>パターンマッチング</h2>
 <p>Javaの正規表現によるパターンマッチングは、まずPatternクラスのオブジェクトを作り、それを正規表現を指定したcompile()メソッドで「コンパイル」し、その後にmatcher()メソッドで「マッチ」させるなど、少しややこしくて複雑である。</p>
-<p>以下は<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/regex/Pattern.html">Pattern (Java Platform SE 8) - Javadoc</a>を参考に執筆しました。</p>
+<p>（以下は<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/regex/Pattern.html">Pattern (Java Platform SE 8) - Javadoc</a>を参考に執筆しました。）</p>
 <pre class="prettyprint">
 Pattern pat = Pattern.compile("ho*ge");
 Matcher mtch = pat.matcher("hooooooooge fuuuuuga");

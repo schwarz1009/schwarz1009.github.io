@@ -155,7 +155,7 @@ $_SESSION['username']
 <p>後日注記：$_SERVERはとてもよく使うグローバル変数であるため、中にある要素をよく確認しておこう。</p>
 
 <h1>PHP文法</h1>
-<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
 
 <h2>変数名のつけ方とPerlからの影響</h2>
 <p>PHPは「PerlライクにHTMLにコードを埋め込むことのできる言語」として使われることが多かったため、変数名には必ず$をつけるなど、Perlからの影響が見られます。</p>
@@ -274,7 +274,7 @@ if (条件式) {
 }
 ?&gt;
 </pre>
-<p>詳しくは<a href="https://www.php.net/manual/ja/tutorial.useful.php">実用的な例 - PHPマニュアル</a>が参考になる。</p>
+<p>（詳しくは<a href="https://www.php.net/manual/ja/tutorial.useful.php">実用的な例 - PHPマニュアル</a>が参考になる。）</p>
 <p>後日注記：また、{}を使った場合に「どのカッコがどのカッコに対応しているのか」が、このようなHTMLに対する埋め込みだと分かりづらくなる。このような時は{}の代わりに:（コロン）とendif;やendfor;やendwhile;などを使うことができる。</p>
 <pre class="prettyprint">
 &lt;?php if (条件式): ?&gt;
@@ -287,7 +287,7 @@ if (条件式) {
 
 &lt;?php endif; ?&gt;
 </pre>
-<p>詳しくは<a href="https://www.php.net/manual/ja/control-structures.alternative-syntax.php">制御構造に関する別の構文 - PHPマニュアル</a>が参考になる。</p>
+<p>（詳しくは<a href="https://www.php.net/manual/ja/control-structures.alternative-syntax.php">制御構造に関する別の構文 - PHPマニュアル</a>が参考になる。）</p>
 <p><a href="structured_programming.html">構造化プログラミング</a>も参照のこと。</p>
 
 <h2>ループ</h2>
@@ -462,7 +462,7 @@ array_map(function($n) { return $n * 3; }, $ar);
 </div>
 
 <h1>オブジェクト指向</h1>
-<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
 <h2>PHPでオブジェクト指向</h2>
 <p>PHPでオブジェクト指向プログラミングを行うことは可能だ。クラスやオブジェクトも完備され、標準でさまざまな機能が提供されており、C++/Javaに負けない高度なオブジェクト指向機能を使うことができる。</p>
 <p>オブジェクトの作成には「new」演算子を使い、メソッドの呼び出しには-&gt;を使う。たとえばデータベースへのアクセスにはPDOクラスのオブジェクトを作って行う。</p>
@@ -497,7 +497,7 @@ $shiro = clone $kuro;
 <p>また、PHPにはマジックメソッドというものがあり、これはオブジェクトを特定の状況で使う時に自動的に呼び出されるメソッドで、フックとして使うことができる。</p>
 <p>たとえば、__toString()メソッドは、文字列型へキャストしようとした時に呼び出される。この動作を上書き（オーバーロード）することで、デフォルトの動作を書き換えることができる。</p>
 <p>コンストラクタの__constructやデストラクタの__destructは、マジックメソッドの一種として実現されている。</p>
-<p>詳しくは<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参照のこと。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参照のこと。）</p>
 
 <h2>__invoke()</h2>
 <p>マジックメソッドの面白い例として、__invoke()メソッドがある。これはオブジェクトのインスタンスを関数のように実行することのできるメソッド。たとえば、</p>
@@ -561,7 +561,7 @@ $y = 200;
 </ul>
 
 <h1>文字列・ファイル処理・配列</h1>
-<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
 
 <h2>文字列の処理</h2>
 <p>文字列の処理は、printf(), sprintf(), htmlspecialchars(), nl2br(), implode(), explode()などを使うことが多い。</p>
@@ -697,7 +697,7 @@ glob('hoge_dir/*.txt')
 </ul>
 
 <h2>PHPの設定ファイルを編集</h2>
-<p>書籍「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考にさせていただきました。</p>
+<p>（書籍「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考にさせていただきました。）</p>
 <p>PHPの設定ファイルで、文字コードをUTF-8に設定しましょう。このためには、php.iniを変更します。</p>
 <p>以下はphp.iniの例。</p>
 <pre>
