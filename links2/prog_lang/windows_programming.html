@@ -104,7 +104,7 @@
 
 <h1>Windows APIの基本</h1>
 <h2>Windowsプログラミングの解説</h2>
-<p>詳しいコードは<a href="https://docs.microsoft.com/ja-jp/windows/win32/learnwin32/your-first-windows-program?redirectedfrom=MSDN">Module 1. Your First Windows Program - MSDN</a>が参考になります。以下はこのコードに対する解説。</p>
+<p>（詳しいコードは<a href="https://docs.microsoft.com/ja-jp/windows/win32/learnwin32/your-first-windows-program?redirectedfrom=MSDN">Module 1. Your First Windows Program - MSDN</a>が参考になります。以下はこのコードに対する解説。）</p>
 <p>Windows APIによるプログラミングは、ウィンドウプロシージャ（システムから呼ばれるコールバック関数）とメッセージループを中心に成り立つ。</p>
 <p>まず、プログラムはwWinMain()から実行される。最初に、WNDCLASSのlpfnWndProcにコールバック関数WindowProc()を登録する。</p>
 <p>wWinMain()の最後にはメッセージループwhile (GetMessage()) {}が登場し、Windowsメッセージをやり取りする。</p>
@@ -141,7 +141,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 <h1>Windowsプログラミングのトピック</h1>
 <h2>主なWindowsメッセージ</h2>
-<p>以下は<a href="http://home.a00.itscom.net/hatada/windows/windowmessage01.html">Windowsメッセージ - Hatada's Home Page</a>を参考に執筆しました。</p>
+<p>（以下は<a href="http://home.a00.itscom.net/hatada/windows/windowmessage01.html">Windowsメッセージ - Hatada's Home Page</a>を参考に執筆しました。）</p>
 <p>主なWindowsメッセージの一覧：</p>
 <table class="some_tables">
 <tr><th class="min60">関連</th><th>メッセージ</th></tr>

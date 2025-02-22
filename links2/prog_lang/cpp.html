@@ -362,7 +362,7 @@ class Cat: public Animal {
 <p>C++のpublic継承は、is-a関係を表す。</p>
 <p>たとえば、AnimalクラスからCatクラスあるいはDogクラスを継承する。</p>
 <p>この時、CatであろうとDogであろうと、Animalに実装されたメソッドはどちらにも含まれる。</p>
-<p>詳しくは<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>を参照のこと。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>を参照のこと。）</p>
 <p>後日注記：Effective C++では、さまざまなis-a関係の基本が述べられています。たとえば、鳥のすべてが飛べるわけではありません。鳥の中にはペンギンのような飛べない鳥も含まれます。このような時は、鳥の中でも「飛ぶ鳥」という派生クラスを作り、その飛ぶ鳥から飛ぶ鳥のさらなる派生クラスを作ります。この「飛ぶ鳥」の中で、「飛ぶ」というメソッドを仮想関数とし、派生クラスはこの仮想関数をオーバーライドするのです。ですが、「飛ぶ」という法則が重要でない場合には、このような方法は冗長になるだけであり、必ずしも必要ではないでしょう。</p>
 
 <h2>private継承（has-a関係）</h2>

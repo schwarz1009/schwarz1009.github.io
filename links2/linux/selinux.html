@@ -44,13 +44,13 @@
 </ul>
 
 <h2>SELinuxシステム</h2>
-<p>以下は<a href="https://blog.fenrir-inc.com/jp/2016/09/selinux.html">理由がわかれば怖くない！SELinux とのつきあい方 (フェンリル | デベロッパーズブログ)</a>を参考に執筆しました。</p>
+<p>（以下は<a href="https://blog.fenrir-inc.com/jp/2016/09/selinux.html">理由がわかれば怖くない！SELinux とのつきあい方 (フェンリル | デベロッパーズブログ)</a>を参考に執筆しました。）</p>
 <p>基本的に、動作モードが3つ（有効のEnforcing, ログに記録のPermissive, 無効のDisable）あり、getenforceとsetenforceでその時のモードを、/etc/selinux/configでシステムのモードを変更できる。</p>
 <p>ファイルはパーミッションだけではなくSELinuxコンテキストを持つ。lsやpsに-Zオプションを付けることでコンテキストを表示できる。コンテキストは4つの項目に区切られており、それぞれ「ユーザ:ロール:タイプ:機密ラベル」となる。中でも基本となるのがタイプ。</p>
 <p>動作拒否時のログは、/var/log/audit/audit.logに出力される。</p>
 
 <h2>タイプ変更の方法</h2>
-<p>以下は<a href="https://qiita.com/chi9rin/items/af532d0dd9237cc65741">SELinux を使おう．使ってくれ． - Qiita</a>を参考に執筆しました。</p>
+<p>（以下は<a href="https://qiita.com/chi9rin/items/af532d0dd9237cc65741">SELinux を使おう．使ってくれ． - Qiita</a>を参考に執筆しました。）</p>
 <p>タイプを変更するには、chconで個別的にタイプを変更する以外に、システムの既定のディレクトリ（/var/wwwなど）のために用意されている基本テンプレートを使うことで、restoreconコマンドを使ってタイプを楽に変更できる。</p>
 <pre>
 # restorecon -RF /var/www/html/
