@@ -221,8 +221,8 @@ pre.prettyprint {
 }
 
 #toc {
-    float: right;
-    clear: right;
+    float: none;
+    clear: none;
     width: 274px;
     max-width: calc(100% - 60px);
     background:#f8f8f8;
@@ -230,7 +230,8 @@ pre.prettyprint {
     border-top: 5px solid #5f897b;
     font-size: 95%;
     display: table;
-    margin: 0px 0px 30px 30px;
+    /*margin: 0px 0px 30px 30px;*/
+    margin: 10px 0px 10px 0px;
     padding: 6px 6px 3px 3px;
     box-shadow: 0px 1px 3px rgba(0,0,0,.2);
 }
