@@ -154,3 +154,9 @@ A:hover { }
 
 .tl-tweet A:link { color: #665990; }
 .tl-tweet A:visited { color: #AAA5D1; }
+
+@media screen and (max-device-width: 480px) {
+    #toc {
+        width: auto;
+    }
+}
