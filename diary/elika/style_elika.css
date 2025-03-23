@@ -96,7 +96,7 @@ A:hover { }
     color: #FC9D9D;
     border: 1px solid #AAA5D1;
     border-top: 5px solid #AAA5D1;
-    width: 272px;
+    width: /*272px*/375px;
     box-shadow: none;
 }
 
