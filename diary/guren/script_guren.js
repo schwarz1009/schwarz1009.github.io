@@ -24,6 +24,7 @@ function ChangeTab(tabname) {
    document.getElementById('tab_2025_01').style.display = 'none';
    document.getElementById('tab_2025_02').style.display = 'none';
    document.getElementById('tab_2025_03').style.display = 'none';
+   document.getElementById('tab_2025_04').style.display = 'none';
 
    document.getElementById(tabname).style.display = 'block';
    
@@ -80,6 +81,9 @@ function ChangeTab(tabname) {
    if (tabname != 'tab_2025_03') {
        document.getElementById('tab_2025_03_li').style.background = '#f2dae8';
    }
+   if (tabname != 'tab_2025_04') {
+       document.getElementById('tab_2025_04_li').style.background = '#f2dae8';
+   }
 }
 
 let div_guren_script = document.getElementById('guren_tab');
@@ -103,6 +107,7 @@ div_guren_script.insertAdjacentHTML('beforebegin', '\
 <li id="tab_2025_01_li"><a href="#tab_2025_01" class="tab_2025_01" onclick="ChangeTab(\'tab_2025_01\'); return false;">2025-01</a></li>\
 <li id="tab_2025_02_li"><a href="#tab_2025_02" class="tab_2025_02" onclick="ChangeTab(\'tab_2025_02\'); return false;">2025-02</a></li>\
 <li id="tab_2025_03_li"><a href="#tab_2025_03" class="tab_2025_03" onclick="ChangeTab(\'tab_2025_03\'); return false;">2025-03</a></li>\
+<li id="tab_2025_04_li"><a href="#tab_2025_04" class="tab_2025_04" onclick="ChangeTab(\'tab_2025_04\'); return false;">2025-04</a></li>\
 </ul>\
 </div>\
 <div class="box">\
@@ -635,6 +640,11 @@ div_guren_script.insertAdjacentHTML('beforebegin', '\
 <li><a href="2025.03.27.html">2025-03-27</a></li>\
 <li><a href="2025.03.29.html">2025-03-29</a></li>\
 <li><a href="2025.03.31.html">2025-03-31</a></li>\
+</ul>\
+</div>\
+<div id="tab_2025_04" style="display: none;">\
+<ul>\
+<li><a href="2025.04.01.html">2025-04-01</a></li>\
 </ul>\
 </div>\
 </div>\
