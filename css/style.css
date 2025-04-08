@@ -231,7 +231,7 @@ pre.prettyprint {
     font-size: 95%;
     display: table;
     /*margin: 0px 0px 30px 30px;*/
-    margin: 10px 0px 10px 0px;
+    margin: 20px 0px 10px 0px;
     padding: 6px 6px 3px 3px;
     box-shadow: 0px 1px 3px rgba(0,0,0,.2);
 }
@@ -374,7 +374,7 @@ blockquote.inyou2:before {
 
 .sidebar {
     float: none;
-    margin: 0px 0px 20px 0px;
+    margin: 20px 0px 10px 0px;
     padding: 6px 3px 3px 3px;
     clear: none;
     box-shadow: 0px 1px 3px rgba(0,0,0,.2);
