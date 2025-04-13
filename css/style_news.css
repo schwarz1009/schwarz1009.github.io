@@ -49,3 +49,9 @@ a:visited { color: /*#f77*/#444444; }
     background: white;
     color: #23466e;
 }
+
+@media screen and (max-device-width: 480px) {
+    #toc {
+        width: auto;
+    }
+}
