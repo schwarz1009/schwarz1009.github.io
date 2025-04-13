@@ -849,7 +849,7 @@ ul.box1  {margin:0px;}
         width: auto;
         max-width: none;
         min-width: min(calc(100% - 60px), 274px);
-        margin: 10px 0 10px 0;
+        margin: 20px 0 10px 0;
     }
     #toc ol li {
         margin: 0px;
