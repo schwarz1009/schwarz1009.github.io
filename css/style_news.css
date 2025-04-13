@@ -32,7 +32,7 @@ a:visited { color: /*#f77*/#444444; }
     color: #23466e;
     border: 1px solid #23466e;
     border-top: 5px solid #23466e;
-    width: 272px;
+    /*width: 272px;*/
 }
 
 #toc li:before {
@@ -50,8 +50,11 @@ a:visited { color: /*#f77*/#444444; }
     color: #23466e;
 }
 
+/*
 @media screen and (max-device-width: 480px) {
     #toc {
         width: auto;
+        min-width: min(calc(100% - 60px), 274px);
     }
 }
+*/
