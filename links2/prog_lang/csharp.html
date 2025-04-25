@@ -118,36 +118,61 @@
 <p>デリゲートとは、関数を格納できる変数のこと。</p>
 <p>まず、以下のようなコードがあったとする。</p>
 <pre class="prettyprint">
+// Formを継承してクラスHogeFormを定義する
 class HogeForm : Form
 {
+    // クラスHogeFormのメンバとしてボタンhoge_buttonを宣言する
     Button hoge_button;
     
-    ...
+    // ...
 }
 </pre>
 <p>ここで、以下のようなコールバック関数がある。</p>
 <pre class="prettyprint">
+class HogeForm : Form
+{
+    Button hoge_button;
+    
+    // コールバック関数hoge_button_Clickを定義する
     private void hoge_button_Click(object sender, EventArgs e)
     {
-        // クリックされた時の処理
+        // hoge_buttonがクリックされた時の処理をここに書く
+        
+        // ...
     }
+}
 </pre>
 <p>この時、以下のようにEventHandlerを用いてイベントを登録できる。</p>
 <pre class="prettyprint">
+class HogeForm : Form
+{
+    // ...
+    
+    // HogeFormの初期化を行うコンストラクタを定義する
     public HogeForm()
     {
+        // hoge_buttonを作る
         hoge_button = new Button();
+        
+        // hoge_buttonのプロパティに値を代入する
         hoge_button.Text = "Hoge";
         
-        ...
+        // ...
 
+        // hoge_buttonのClickイベントにイベントハンドラを追加する
         hoge_button.Click += new EventHandler(hoge_button_Click);
 
+        // hoge_buttonコントロールをフォームに追加する
         this.Controls.Add(hoge_button);
     }
+}
 </pre>
+<p>これにより、ボタンhoge_buttonがクリックされると、メソッドhoge_button_Click()が実行されるようになる。ボタンhoge_buttonのClickイベントにイベントハンドラが登録されている。</p>
 <p>オブジェクトの初期化（hoge_buttonのプロパティへの代入）は、=を使ってひとつひとつ代入する以外に、{}を用いたより簡潔な構文が用意されており、それを使うこともできる。</p>
 <p>（<a href="http://home.a00.itscom.net/hatada/visual-studio/windows-forms/csforms01.html">Windows Forms入門 - Hatada's Home Page</a>と<a href="http://gomocool.net/gomokulog/?p=255">[C#]イベントハンドラとはなんぞや – gomokulog</a>を参考に執筆・編集して引用しました。）</p>
+<div class="edit_date">
+<p>2025.04.25編集</p>
+</div>
 
 <h2>ラムダ式</h2>
 <p>C# 3.0ではラムダ式が導入された。たとえば以下のように使用する。</p>
