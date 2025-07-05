@@ -39,10 +39,12 @@
 <p>等幅フォント（Monospaced Font）は、すべての文字の幅が同じフォントのこと。これに対してプロポーショナルフォント（Proportional Font）は、それぞれの文字によって幅が異なるフォントのこと。</p>
 <p>欧米のフォントには、セリフ体とサンセリフ体がある。セリフ体とは、文字に「セリフ」と呼ばれる飾りのついたフォントのこと。これに対してサンセリフ体は、セリフのないフォントのこと。</p>
 <p>日本語のフォントには、明朝体とゴシック体、あるいはそれ以外の特殊なフォント（飾りフォントなど）がある。大まかにいって、欧米のセリフ体が日本語の明朝体、サンセリフ体がゴシック体に相当する。</p>
-<p>また、同じフォントであっても、太さの異なる「ファミリー」が用意されていることがある。</p>
+<p>また、同じフォントであっても、太さの異なる「ファミリー」が用意されていることがある。たとえばIllustratorなどのAdobe製品でよく使われる「小塚明朝」や「小塚ゴシック」の場合、細いほうから「EL」「L」「R」「M」「B」「H」などとなる（ELがもっとも細く、Hがもっとも太い）。</p>
 <p>また、文字のギザギザを滑らかにして、読みやすく綺麗に表示する技術としてアンチエイリアス処理がある。</p>
 <ul>
 <li><a href="https://www.adobe.com/jp/creativecloud/roc/blog/design/font-serif.html">セリフ体とサンセリフ体の違いは？セリフ体の定番フォント12選| Adobe</a></li>
+<li><a href="https://www.akibatec.net/wabunfont/library/adobe/kozuka.html">和文フォント大図鑑 [アドビ／総合書体]</a></li>
+<li><a href="https://blog.adobe.com/jp/publish/2023/04/06/cc-design-learn-typography-and-fonts-02">明朝・ゴシックetc…書体の種類とウェイト｜文字とフォントのことはじめ02</a></li>
 <li><a href="https://e-words.jp/w/%E3%82%A2%E3%83%B3%E3%83%81%E3%82%A8%E3%82%A4%E3%83%AA%E3%82%A2%E3%82%B9.html">アンチエイリアス（スムージング / アンチエイリアシング）とは？意味を分かりやすく解説 - IT用語辞典 e-Words</a></li>
 </ul>
 <div class="edit_date">
@@ -68,19 +70,21 @@ Section "Files"
     FontPath     "/usr/share/fonts/hogefonts/"
 EndSection
 </pre>
+<p>以下は参考文献。新しいフォント導入の詳しい方法が書いてあります。</p>
 <ul>
 <li><a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A">フォント設定 - ArchWiki</a></li>
 <li><a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">フォント - ArchWiki</a></li>
 <li><a href="http://www.uetyi.com/server-const/entry-327.html">Linuxでのシステムフォントの変更とフォントの追加 - Linuxで自宅サーバ構築（新森からの雑記）</a></li>
 <li><a href="http://www.nofuture.tv/diary/20121221.html">Wheezyのデフォルトのフォント設定がヘンな気がするので調べてみた - Days of Speed</a></li>
 </ul>
-
-<h2>パッケージ管理システムから導入する</h2>
-<p>フォントを導入するには、パッケージ管理システムを使ってパッケージから自動でインストールする、という方法もアリ。</p>
+<p>また、フォントを導入するには、パッケージ管理システムを使ってパッケージから自動でインストールする、という方法もアリ。</p>
 <pre>
 sudo apt install fonts-vlgothic
 </pre>
 <p>フォントのパッケージについては<a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">フォント - ArchWiki</a>が参考になる。たとえば中国語の文字を表示したいなら中国語のフォントパッケージを導入しよう。</p>
+<div class="edit_date">
+<p>2025.07.05編集</p>
+</div>
 
 <h2>システムの利用可能なフォントを探す</h2>
 <p>システムの利用可能なフォントはfc-matchあるいはfc-listコマンドで検索できる。</p>
@@ -95,11 +99,15 @@ sudo apt install fonts-vlgothic
 <p>また、システムのフォント（たとえば「serif」「sans-serif」「Monospace」に割り当てられているフォントなど）は、/etc/fonts/conf.avail/*.confから設定できる。</p>
 <p>/etc/fonts/conf.d/*.confより、先のconf.availや/usr/share/fontconfig/conf.avail/*.confへとシンボリックリンクが張られている。</p>
 <p>この中の、たとえば65-nonlatin.confを~/.fonts.confにコピーして編集すればよい。</p>
+<p>後日注記：基本的にシステムのフォント設定はあまり変えるべきではなく、フォントをインストールしたら使いたいアプリケーションのほうでその都度フォントを選択すべき。ただし、ディストリビューションによってはシステムのフォントがたまにおかしな状態で標準設定されていることがあったり、Firefoxなどのアプリケーションの設定で「serif」「sans-serif」「Monospace」と設定される際のフォントを変えたい時があったりするので、その修正のためにシステムのフォント設定を変えることができる。</p>
 <p>以下のページを参考に執筆しました。</p>
 <ul>
 <li><a href="http://www.uetyi.com/server-const/entry-327.html">Linuxでのシステムフォントの変更とフォントの追加 - Linuxで自宅サーバ構築（新森からの雑記）</a></li>
 <li><a href="http://www.nofuture.tv/diary/20121221.html">Wheezyのデフォルトのフォント設定がヘンな気がするので調べてみた - Days of Speed</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.07.05編集</p>
+</div>
 
 <h2>TrueTypeとOpenType</h2>
 <p>TrueTypeとOpenTypeは、拡大縮小しても輪郭がガタガタしないスケーラブルなフォントの規格。</p>
