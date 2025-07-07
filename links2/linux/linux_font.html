@@ -99,7 +99,7 @@ sudo apt install fonts-vlgothic
 <p>Linuxシステムでは、基本的に/etc/fonts/conf.dでフォント設定を管理する。このファイルの中で、フォントの描画方法（アンチエイリアスなど）や優先順位（たとえば日本語フォントのヒットの順番）を管理し、X11やWaylandはこのファイルを参照する。基本的にXML形式で記述し、ラテンアルファベット文字は60-latin.confなどで、非ラテン文字は65-nonlatin.confなどで優先順位を設定する。</p>
 <p>ただし、このシステム設定を直接変えることはシステムの破壊のリスクがあるので推奨されない。設定を変えたい場合は、/etc/fonts/local.confで全体的に記述するか、~/.fonts.conf.dあるいは~/.fonts.confあるいは~/.config/fontconfig/fonts.conf（$XDG_CONFIG_HOME/fontconfig/fonts.conf）のような個人設定ファイルに記述する。また、設定のプリセットは/usr/share/fontconfig/conf.availに存在し、/etc/fonts/conf.dにリンクを作成することで、プリセットを簡単に有効にしたり無効にしたりできる。</p>
 <p>システムのフォント設定（たとえば「serif」「sans-serif」「Monospace」に割り当てられているフォントなど）は、/etc/fonts/conf.availの中で設定されている。この中の*.confファイルで実際のフォント設定が記述されており、/etc/fonts/conf.dより、この/etc/fonts/conf.availや/usr/share/fontconfig/conf.availへとシンボリックリンクが張られている。日本語のフォントの順番を変えたい時などは、この中の、たとえば65-nonlatin.confを~/.fonts.confにコピーして編集すればよい。また、たとえば、ビットマップフォントを無効にするには70-no-bitmaps.confへのリンクを作る。</p>
-<p>注意点として、/etc/fonts/fonts.confを直接編集してはならない。このファイルはfontconfigがアップデートした時に、すべての設定ファイルを寄せ集めて置き換えられる中心的な設定ファイル。なので、自分で設定を書く場合は、/etc/fonts/local.confあるいは/etc/fonts/conf.d、そしてユーザーの個人設定ファイル（.fonts.confなど）に記述する。</p>
+<p>注意点として、/etc/fonts/fonts.confを直接編集してはならない。このファイルはfontconfigがアップデートした時に、すべての設定ファイルを寄せ集めて置き換えられる中心的な設定ファイル。なので、自分で設定を書く場合は、/etc/fonts/local.confあるいは/etc/fonts/conf.dのリンク、そしてユーザーの個人設定ファイル（.fonts.confなど）に記述する。</p>
 <p>後日注記：基本的にシステムのフォント設定はあまり変えるべきではなく、フォントをインストールしたら使いたいアプリケーションのほうでその都度フォントを選択すべき。ただし、ディストリビューションによってはシステムのフォントがたまにおかしな状態で標準設定されていることがあったり（たとえば日本語フォントのヒットする順番がおかしいなど）、Firefoxなどのアプリケーションの設定で「serif」「sans-serif」「Monospace」と設定される際のフォントを変えたい時があったりするので、その修正のためにシステムのフォント設定を変えることができる。</p>
 <p>以下のページを参考に執筆しました。</p>
 <ul>
