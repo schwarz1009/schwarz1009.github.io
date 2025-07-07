@@ -87,13 +87,16 @@ sudo apt install fonts-vlgothic
 </div>
 
 <h2>システムの利用可能なフォントを探す</h2>
-<p>システムの利用可能なフォントはfc-matchあるいはfc-listコマンドで検索できる。</p>
+<p>システムの利用可能なフォントはfc-matchあるいはfc-listコマンドで検索できる。フォント名の確認や、現在の設定状態の確認などに使える。</p>
 <ul>
 <li><a href="https://texwiki.texjp.org/?Fontconfig">Fontconfig - TeX Wiki</a></li>
 <li><a href="https://atmarkit.itmedia.co.jp/ait/articles/1812/13/news030.html">【 fc-match 】コマンド――フォントのマッチングと優先順位を確認する：Linux基本コマンドTips（265） - ＠IT</a></li>
 <li><a href="https://atmarkit.itmedia.co.jp/ait/articles/1812/07/news021.html">【 fc-list 】コマンド――X Window System環境で使用できるフォントを一覧表示する：Linux基本コマンドTips（264） - ＠IT</a></li>
 <li><a href="https://docs.oracle.com/cd/E26502_01/html/E29214/glmkf.html">fontconfig Library - International Language Environments Guide for Oracle Solaris 11.1</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.07.07編集</p>
+</div>
 
 <h2>システムのフォント設定</h2>
 <p>Linuxシステム（Fontconfig）では、基本的に/etc/fonts/conf.dでフォント設定を管理する。このディレクトリの中で、フォントの描画方法（アンチエイリアスなど）や優先順位（たとえば日本語フォントのヒットの順番）を管理し、X11やWaylandはこのファイルを参照する。XML形式で記述し、ラテンアルファベット文字は60-latin.confで、非ラテン文字は65-nonlatin.confで優先順位を設定する。</p>
