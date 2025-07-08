@@ -33,13 +33,6 @@
 <div id="toc"></div>
 <div class="page_links">
 
-<h1>オープンソースかな漢字変換</h1>
-<h2>オープンソースかな漢字変換の変遷</h2>
-<p>オープンソースなかな漢字変換の変遷については、以下のPDFの資料が詳しい。</p>
-<ul>
-<li><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a></li>
-</ul>
-
 <h1>入力エンジン</h1>
 <h2>kinput2</h2>
 <p>kinput2+cannaの場合、.xinitrc（コマンドラインからstartxする場合）や.xsession（GUIのディスプレイマネージャからログインする場合）などにインプットエンジンの設定を記述する。</p>
@@ -63,14 +56,13 @@ kinput2 -canna &
 <p>最近のインプットメソッド（多言語入力エンジン）。Fedora/UbuntuなどのGNOMEなどで日本語入力を行う時は、iBusかFcitxのどちらかと、以下のかな漢字変換エンジンのどれかを組み合わせて使うのが一般的。</p>
 <p>現在のiBus/Fcitxの場合、パッケージマネージャからインストールすることで、簡単にインプットメソッドを導入出来る。iBusはGNOME 3と統合されているため、GNOMEなら簡単にインストールと設定を行うだけで日本語を入力できる。</p>
 
-<h1>昔のかな漢字変換エンジン</h1>
+<h1>かな漢字変換エンジン</h1>
 <h2>Wnn/FreeWnn、Canna、ATOK-Xなど</h2>
 <p>昔あったかな漢字変換エンジンとしては、ワークステーションでも連文節変換をということで開発されたWnnとFreeWnn(1987年)、おバカな変換をするCanna(1990年)、商用のATOK-Xなどがあった。</p>
 
 <h2>SKK</h2>
 <p><a href="linux_japanese_input_skk.html">SKK</a>を参照のこと。</p>
 
-<h1>今どきのかな漢字変換エンジン</h1>
 <h2>Anthy</h2>
 <p>かな漢字変換エンジン。コミュニティにより活発な開発がされていたが、現在では主要開発者による開発は終了している。</p>
 <p><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a>によれば、「機械学習を用いた識別モデル」「統計的方法の先駆者」とのこと。</p>
@@ -84,12 +76,17 @@ kinput2 -canna &
 <p>今どきのかな漢字変換エンジン。Fedoraで標準。</p>
 <p><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a>によれば、「N-gramを採用」「ビッグデータを大いに活かせる」とのこと。</p>
 
-<h1>予測入力システム</h1>
-<h2>PRIME</h2>
+<h1>その他の技術</h1>
+<h2>オープンソースかな漢字変換の変遷</h2>
+<p>オープンソースなかな漢字変換の変遷については、以下のPDFの資料が詳しい。</p>
+<ul>
+<li><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a></li>
+</ul>
+
+<h2>PRIME (予測入力システム)</h2>
 <p>昔からある予測入力システム。最近ではMozcを使うことでも予測入力が可能です。</p>
 
-<h1>拡張ローマ字入力</h1>
-<h2>AZIK</h2>
+<h2>AZIK (拡張ローマ字入力)</h2>
 <p>AZIKは一部で人気の拡張ローマ字入力方式。SKKと同様「普通のIMEを使って入力なんかしたくない」という曲がりものに向いている。</p>
 <ul>
 <li><a href="http://hp.vector.co.jp/authors/VA002116/azik/azikinfo.htm">AZIK総合解説書</a></li>
@@ -99,11 +96,11 @@ kinput2 -canna &
 <p>2023.08.14</p>
 </div>
 
-<h1>コンソールでの日本語入力・表示</h1>
+<h2>コンソールでの日本語入力・表示</h2>
 <p><a href="linux_japanese_console.html">日本語入力・表示（コンソール・コマンドライン）</a>を参照のこと。</p>
 
-<h1>GNOME</h1>
-<h2>日本語入力 (iBus)</h2>
+<h1>GNOME/KDEの設定</h1>
+<h2>日本語入力 (GNOME/iBus)</h2>
 <p>GNOMEの日本語入力は特殊で、分かっていないと難しく感じるかもしれない。以下はGNOME3 & ibus-mozcの場合。（GNOMEはiBusが統合されているので、コントロールパネルから簡単に設定が可能。）</p>
 <ul>
 <li><a href="https://blog.goo.ne.jp/psyna_hone/e/b30dc3a44d1cc7173f50e9aada82d848">Ubuntu GNOMEの日本語入力環境設定 - Hone.のたま～に戯言</a></li>
@@ -126,7 +123,7 @@ kinput2 -canna &
 <p>2025.07.08編集</p>
 </div>
 
-<h2>日本語入力 (fcitx)</h2>
+<h2>日本語入力 (GNOME/fcitx)</h2>
 <p>fcitxの場合は、fcitx-configtoolで設定する。以下の記事を参考にすると良いだろう。</p>
 <ul>
 <li><a href="https://note.kurodigi.com/fedora23-fcitx-mozc/">Fedora 23に日本語入力fcitx-mozcを導入する | クロの思考ノート</a></li>
@@ -141,8 +138,7 @@ kinput2 -canna &
 <p>uimは使えないので、Debianでuimなどが入っている場合は、ibusかfcitxに変えよう。uimでも使えると思うなら使っても良い。（僕の場合、入力の候補が思った場所に表示されないのが使えなかった。）</p>
 <p>後日注記：uimは必ずしも厄介者ではなく、さまざまな方式で開発されているLinuxのGUIアプリケーションでは汎用的に使える方である。Debianでuimが採用されているのはそのためで、KDE3派生のTrinityなどでも日本語入力ができる（昔のQtを使っているため。どこかで聞いた話であり、嘘かも）。</p>
 
-<h1>KDE</h1>
-<h2>im-chooserのインストール</h2>
+<h2>im-chooser (KDE)</h2>
 <p>KDEで日本語が入力できない場合は、im-chooserをインストールしよう。</p>
 <pre>
 # dnf install im-chooser
