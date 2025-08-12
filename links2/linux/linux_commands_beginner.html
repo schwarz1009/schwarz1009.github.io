@@ -297,14 +297,29 @@ man man
 find / | less
 </pre>
 <p>lessのコマンドは、fあるいはスペースで一画面下にスクロール、bで一画面上にスクロール、jで一行下、kで一行上、qで終了、/で検索、?で逆方向に検索、nで次の検索場所に移動、Nで前の検索場所に移動。</p>
+<p>主なオプションは-N（行番号を付ける）、-s（連続した空白だけの行を1行として表示する）。</p>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/more.1.html">man more</a></li>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_less/man1/less.1.html">man less</a></li>
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?less">UNIXの部屋 コマンド検索: less</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
 
 <h2>lv</h2>
 <p>lessと同様にファイルの内容を表示するページャだが、EUC-JP、UTF-8、Shift-JISなどの文字コードに対応している。</p>
+<pre>
+lv hoge.txt
+</pre>
+<p>主なオプションは-I（入力文字コードを指定）、-O（出力文字コードを指定）。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
 
 <h2>ls</h2>
 <p>ディレクトリの中身のリスト（ファイル一覧）を表示する。</p>
@@ -312,11 +327,17 @@ find / | less
 <pre>
 ls -Al
 </pre>
-<p>主なオプションは-a（ドットファイルや隠しファイルを含むすべてのファイルを表示）、-l（詳細表示、更新日時などが表示される）、-t（更新時間で並び替え）、-x（拡張子で並び替え）、-F（ディレクトリや実行ファイルのタイプ識別子をマーキングして表示）、-R（子ディレクトリのディレクトリ階層を再帰的に辿って表示）、-i（ファイルのi-node番号を表示）。</p>
+<p>主なオプションは-a（ドットファイルや隠しファイルを含むすべてのファイルを表示）、-l（詳細表示、更新日時などが表示される）、-h（ファイルサイズを人間の読みやすい形式で表示）、-t（更新時間で並び替え）、-x（拡張子で並び替え）、-S（ファイルサイズで並び替え）、-r（ソートを逆順にする）、-F（ディレクトリや実行ファイルのタイプ識別子をマーキングして表示）、-R（子ディレクトリのディレクトリ階層を再帰的に辿って表示）、-i（ファイルのi-node番号を表示）。</p>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/ls.1.html">man ls</a></li>
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?ls">UNIXの部屋 コマンド検索: ls</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+<li><a href="https://eng-entrance.com/linux_command_ls">lsコマンドの使い方と覚えたい15のオプション【Linuxコマンド集】 - エンジニアの入り口</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
 <h2>cd</h2>
 <p>現在のディレクトリを変更（移動）する。</p>
 <pre>
@@ -326,56 +347,82 @@ cd ..
 <ul>
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cd">UNIXの部屋 コマンド検索: cd</a></li>
 </ul>
+
 <h2>pwd</h2>
 <p>カレントディレクトリ（作業ディレクトリ）のパスを表示する。</p>
 <pre>
 pwd
 </pre>
+<p>主なオプションは-L（環境変数PWDを使う）、-P（シンボリックリンクを辿る）。</p>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/pwd.1.html">man pwd</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
 
 <h2>mkdir</h2>
 <p>ディレクトリを新しく作成する。</p>
 <pre>
 mkdir -m 755 hoge
 </pre>
-<p>主なオプションは-p（上位のディレクトリ階層すべてを作成する）。</p>
+<p>主なオプションは-p（上位のディレクトリ階層すべてを作成する）、-m（権限を指定する）。</p>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/mkdir.1.html">man mkdir</a></li>
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?mkdir">UNIXの部屋 コマンド検索: mkdir</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
 <h2>cp</h2>
 <p>ファイルやディレクトリをコピーする。</p>
 <pre>
 cp -r hoge1 hoge2
 </pre>
-<p>主なオプションは-i（同じ名前のファイルがあった場合に確認）、-r（ディレクトリごと再帰的にコピー）、-p（更新日時を保つ）。</p>
+<p>主なオプションは-i（同じ名前のファイルがあった場合に確認）、-r（ディレクトリごと再帰的にコピー）、-p（更新日時を保つ）、-u（コピー先の同一ファイル名のほうが更新日時が新しい場合はコピーしない）、-b（バックアップフラグを指定する）。</p>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/cp.1.html">man cp</a></li>
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cp">UNIXの部屋 コマンド検索: cp</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
 <h2>mv</h2>
 <p>ファイルやディレクトリを移動・名前変更する。</p>
 <pre>
 mv hoge1 hoge2
 </pre>
-<p>主なオプションは-i（同じ名前のファイルがあった場合に確認）。</p>
+<p>主なオプションは-i（同じ名前のファイルがあった場合に確認）、-b（同じファイル名がある場合にバックアップフラグを指定する）。-bを指定すると、デフォルトでは~をバックアップ拡張子に追加し、-b=tを指定すると、バックアップファイルが既にある場合に数値を加算する。</p>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/mv.1.html">man mv</a></li>
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?mv">UNIXの部屋 コマンド検索: mv</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+<li><a href="https://linuxcommand.net/mv/">mv コマンド – ファイルの移動や名前変更 | Linuxコマンド.NET</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
 <h2>rm</h2>
 <p>ファイルやディレクトリを削除する。</p>
 <p>間違えて使わないように、エイリアスなどで確認表示をデフォルトにすることもある。</p>
 <pre>
 rm hoge
 </pre>
-<p>主なオプションは-i（削除を確認する）、-f（警告を表示しない）、-r（ディレクトリ以下のすべてのファイルを再帰的に削除）。</p>
+<p>主なオプションは-i（削除を確認する）、-f（警告を表示しない）、-r（ディレクトリ以下のすべてのファイルを再帰的に削除）、-d（空のディレクトリを削除）。</p>
 <ul>
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/rm.1.html">man rm</a></li>
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?rm">UNIXの部屋 コマンド検索: rm</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
 
 <h2>rmdir</h2>
 <p>ディレクトリを削除する。空のディレクトリを削除する。</p>
@@ -393,6 +440,7 @@ cat hoge_a.txt hoge_b.txt &gt; hoge_c.txt
 <li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/cat.1.html">man cat</a></li>
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cat">UNIXの部屋 コマンド検索: cat</a></li>
 </ul>
+
 <h2>ln</h2>
 <p>ファイルのリンク（ハードリンク・シンボリックリンク）を作る。</p>
 <p>ファイルやディレクトリにリンクを設定。シンボリックリンクを作る時に使う。</p>
@@ -475,6 +523,22 @@ find /
 <li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?find">UNIXの部屋 コマンド検索: find</a></li>
 </ul>
 <p><a href="find.html">find</a>を参照のこと。</p>
+
+<h2>tree</h2>
+<p>ファイルやディレクトリの中身をツリー構造で表示する。</p>
+<pre>
+tree /home/assy
+</pre>
+<p>パターンにマッチさせて表示を絞るには-Pオプションを使う。</p>
+<pre>
+tree -P '*.html' /home/assy
+</pre>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13</p>
+</div>
 
 <h2>grep</h2>
 <p>特定の文字列を含む行を抽出する。</p>
@@ -580,6 +644,7 @@ $(date +%Y.%m.%d)
 <p>以下の書籍・ページが参考になります（上のコマンド一覧は以下の情報を基に記述しました）。</p>
 <ul>
 <li><a href="https://www.amazon.co.jp/%E6%9C%80%E6%96%B0Debian-GNU-Linux%E5%AE%8C%E5%85%A8%E6%94%BB%E7%95%A5%E3%82%AC%E3%82%A4%E3%83%89-%E5%A4%A9%E9%87%8E-%E6%AD%A3%E6%A8%B9/dp/4798014125">最新 Debian GNU/Linux 完全攻略ガイド（天野正樹）</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
 <li><a href="https://qiita.com/taddy_korokoro/items/7aab525561c59cd39d02">Linux ディレクトリ・ファイル操作 コマンド一覧 - Qiita</a></li>
 <li><a href="https://www12.atwiki.jp/linux2ch/pages/54.html">初心者のためのシェル(bash)入門 - 2ch-Linux-Beginners</a></li>
 </ul>
