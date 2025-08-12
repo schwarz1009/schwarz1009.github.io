@@ -55,13 +55,14 @@
 <p>基本的に、以下のテーブルを使い、サーバに入ってくるパケットや出ていくパケットに対して、遮断・許可を行うフィルターを記述します。</p>
 <table class="some_tables">
 <tr><th class="min60">テーブル</th><th>意味</th></tr>
-<tr><td>テーブル</td><td>filter（パケットの通過と遮断）<br>nat（NAT、パケットの送信元・送信先の書き換え）<br>mangle（Quality of Service、Type of Serviceなどの設定）</tr></td>
-<tr><td>コマンド</td><td>-F（全フィルタテーブルの消去）<br>-X（デフォルト以外のチェインを全て消去）<br>-A（ルールを追加）<br>-D（ルールを消去）<br>-P（ポリシーを設定）<br>-N（ユーザー定義チェイン）</tr></td>
-<tr><td>チェイン</td><td>INPUT（外部から入るパケット）<br>OUTPUT（外部へと出るパケット）<br>FORWARD（経由するパケット）<br>PREROUTING（受信時にアドレスを変換）<br>POSTROUTING（送信時にアドレスを変換）</tr></td>
-<tr><td>パラメータ</td><td>-s（送信元IPアドレス）<br>-d（送信先IPアドレス）<br>-p（プロトコル）<br>-i（入るインターフェイス名、たとえばeth0）<br>-o（出るインターフェイス名）<br>-j（ターゲット）<br>--sport（送信元ポート番号）<br>--dport（宛先ポート番号）</tr></td>
-<tr><td>ターゲット<br>（-jで指定する）</td><td>DROP（遮断）<br>ACCEPT（許可）<br>REJECT（遮断してメッセージ送信）<br>LOG（ログに記録）<br>REDIRECT（別のポートにリダイレクト）</tr></td>
+<tr><td>テーブル</td><td>filter（パケットの通過と遮断）<br>nat（NAT、パケットの送信元・送信先の書き換え）<br>mangle（Quality of Service、Type of Serviceなどの設定）</td></tr>
+<tr><td>コマンド（全体）</td><td>-F（全フィルタテーブルの消去）<br>-L（チェインのルールを一覧表示）<br>-X（デフォルト以外のチェインを全て消去）<br>-N（新しいユーザー定義のチェインを作成）<br>-P（組み込まれたチェインのポリシーを変更）</td></tr>
+<tr><td>コマンド（個別）</td><td>-A（ルールを追加）<br>-I（その位置にルールを挿入）<br>-D（ルールを消去）<br>-R（ルールを置換）</td></tr>
+<tr><td>チェイン</td><td>INPUT（外部から入るパケット）<br>OUTPUT（外部へと出るパケット）<br>FORWARD（経由するパケット）<br>PREROUTING（受信時にアドレスを変換）<br>POSTROUTING（送信時にアドレスを変換）</td></tr>
+<tr><td>パラメータ</td><td>-s（送信元IPアドレス）<br>-d（送信先IPアドレス）<br>-p（プロトコル）<br>-i（入るインターフェイス名、たとえばeth0）<br>-o（出るインターフェイス名）<br>-j（ターゲット）<br>--sport（送信元ポート番号）<br>--dport（宛先ポート番号）</td></tr>
+<tr><td>ターゲット<br>（-jで指定する）</td><td>DROP（遮断）<br>ACCEPT（許可）<br>REJECT（遮断してメッセージ送信）<br>LOG（ログに記録）<br>REDIRECT（別のポートにリダイレクト）</td></tr>
 </table>
-<p>（上記の表は<a href="https://eng-entrance.com/linux-firewall">【丁寧解説】Linuxファイアウォール iptablesの使い方 - エンジニアの入り口</a>からの引用です。）</p>
+<p>（上記の表は<a href="https://eng-entrance.com/linux-firewall">【丁寧解説】Linuxファイアウォール iptablesの使い方 - エンジニアの入り口</a>と<a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a>からの引用です。）</p>
 <p>たとえば以下のようになる（80番ポートを開放）。</p>
 <pre>
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
@@ -71,7 +72,11 @@ iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 <li><a href="https://eng-entrance.com/linux-firewall">【丁寧解説】Linuxファイアウォール iptablesの使い方 - エンジニアの入り口</a></li>
 <li><a href="https://dream.jp/vps/support/manual/mnl_security_04.html">iptablesの設定方法 | マニュアル｜ServersMan@VPS Entry/Standard/Proプラン｜仮想専用サーバー｜クラウドサービス：ユビキタスプロバイダ　DTI</a></li>
 <li><a href="https://qiita.com/Tocyuki/items/6d90a1ec4dd8e991a1ce">iptables まとめ - Qiita</a></li>
+<li><a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
 
 <h2>ルールの設定の基本</h2>
 <p>ファイアウォールの設定では、基本的に「全部遮断した上で必要なルールだけ許可する」というやり方を行う。</p>
