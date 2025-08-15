@@ -133,7 +133,12 @@ httpd.listen(8080);
 httpd.on('イベント名', イベントハンドラの関数);
 </pre>
 <p>でコールバック関数を登録する。</p>
+<p>後日注記：Node.jsのプログラミングでは、基本的に同期処理ではなく非同期処理を使います。なので、コールバック関数（イベントが発生した際に実行される無名関数）をよく使います。</p>
+<p>後日注記：このほか、Socket.IOとWebSocketを使うことで、Node.jsでソケットを用いたネットワーク通信ができます。</p>
 <p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.08.15編集</p>
+</div>
 
 <h2>Node.jsのファイル処理</h2>
 <p>Node.jsでファイル処理を行うには、fsモジュールとパス情報を操作するpathモジュールを使用する。</p>
@@ -156,9 +161,11 @@ httpd.on('イベント名', イベントハンドラの関数);
 <tr><td>writeFileSync()</td><td>ファイルを書き込む（簡易版・同期版）</td></tr>
 </table>
 <p>これらのAPIのほか、バッファを表すBufferオブジェクトをデータの保持に使用する。また非同期APIをつかう場合はコールバック関数を指定する必要がある。</p>
+<p>後日注記：このほか、watchFile()というAPIを使うことで、ファイルの変更を監視し、ファイルが変更された時にコールバック関数を呼ぶようにできます。監視を解除するにはunwatchFile()を使います。</p>
 <p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
 <div class="edit_date">
 <p>2023.09.10</p>
+<p>2025.08.15編集</p>
 </div>
 
 <h2>Node.jsとMongoDB</h2>
