@@ -128,6 +128,29 @@ for n, a in zip(names, ages):
 <li><a href="http://ailaby.com/yield/">python の yield。サクッと理解するには return と比較 | コード７区</a></li>
 </ul>
 
+<h2>ジェネレータの書き方</h2>
+<p>以下はジェネレータ式の例。内包表記に似ているが、[]ではなく()でくくる。ひとつひとつの値を作りながら表示するため、最初の項目を表示するために時間がかからない。</p>
+<pre class="prettyprint">
+for v in (x * 2 for x in range(10))
+    print(v)
+</pre>
+<p>関数と同様にジェネレータを作るためにはyield文を使う。</p>
+<pre class="prettyprint">
+def gen():
+    for x in range(10):
+        yield x * 2
+
+for v in gen():
+    print(v)
+</pre>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.06</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>イテレータとジェネレータ</h2>
 <p><a href="iterator.html">イテレータとジェネレータ</a>を参照のこと。</p>
