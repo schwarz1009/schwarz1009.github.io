@@ -131,7 +131,7 @@ for n, a in zip(names, ages):
 <h2>ジェネレータの書き方</h2>
 <p>以下はジェネレータ式の例。内包表記に似ているが、[]ではなく()でくくる。ひとつひとつの値を作りながら表示するため、最初の項目を表示するために時間がかからない。</p>
 <pre class="prettyprint">
-for v in (x * 2 for x in range(10))
+for v in (x * 2 for x in range(10)):
     print(v)
 </pre>
 <p>関数と同様にジェネレータを作るためにはyield文を使う。</p>
