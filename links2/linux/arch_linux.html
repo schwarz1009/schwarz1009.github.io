@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Arch Linux - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Arch Linux</h1>
+<p>Arch Linuxに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Arch Linuxについて</h1>
+<h2>ローリングリリース</h2>
+<p>Arch Linuxは、「ローリングリリース」と「手動管理」を追求したディストリビューションです。</p>
+<p>ローリングリリースとは、「いつでも最新のパッケージに更新される」というソフトウェア更新システムです。</p>
+<p>Red HatやDebianでは、リリースされた日付のバージョンに基づく「ポイントリリース」を行いますが、これはバージョンの数だけサポートしなければならず、何千何万とパッケージのあるLinuxディストリビューションでは、「システムを破壊する可能性がない」代わり、「手間とコストがかかるばかり」だと言えます。</p>
+<p>Arch Linuxでは、ローリングリリースモデルを採用することで、いつでも最新のパッケージを導入できます。ディストリビューションをバージョンごとにリリースする必要すらありません。</p>
+
+<h2>手動管理</h2>
+<p>Red HatやDebianは、設定ツールのフロントエンドを使ってシステムを管理しますが、これはそもそも必要ありません。</p>
+<p>自分で設定ファイルを手動設定できない人間が、プロのシステム管理者になれるわけがないのです。</p>
+<p>設定ツールのフロントエンドは、確かに初心者向きではありますが、こうしたツールは「有害」です。Arch Linuxでは、手動設定以上のツールを開発しません。</p>
+<p>その上でどうすれば設定内容をきちんと理解できるかというと、「文書化」することです。Arch Linuxでは、Arch Wikiなどの「ドキュメント」を重視することで、人々に「正しい管理の方法」を周知します。</p>
+<p>Arch Linuxには、インストーラーすらありません。Arch Wikiのインストール手順を見ながら手動で設定します。これはとても難易度自体は高いですが、「自分で設定した内容を良く知った上で管理することができる」という利点があります。</p>
+
+<h2>Pacmanというパッケージ管理システムを採用</h2>
+<p>Arch Linuxには、上記のような「プロ向けの手動管理ディストリビューション」という一面がある一方、パッケージ管理システムにはPacmanという独自のパッケージ管理システムを採用しています。</p>
+<p>ここまで書いて、気付かれた方も多いと思いますが、Arch LinuxはGentoo Linuxととても似通っています。多くの点で同じ思想をしています。</p>
+<p>ですが、Arch LinuxのPacmanは、Gentoo LinuxのPortageのように、ソースベースではなく、バイナリベースです。わざわざソースコードを自分のマシンでコンパイルする必要はありません。Pacmanでバイナリでパッケージを利用・配布できます。</p>
+<p>また、Gentooのようなソースベースのパッケージ管理システムは、Arch Build System（ABS）として用意されています。さらにABSでビルドしたパッケージを収容する非公式のリポジトリであるArch User Repository（AUR）が存在し、公式のパッケージがない場合にはAURからパッケージが提供されることもあります。</p>
+
+<h2>シンプルさとプロとしての実用性の両立</h2>
+<p>また、Arch Wikiで、繰り返し「シンプルさ」すなわちK.I.S.Sの原則と、「do-it-yourself」が述べられます。</p>
+<p>これは、「シンプルであることがもっとも大切」というUNIXの原則と、「自分自身の手でやれ」というLinuxネットユーザーの鉄則が込められています。</p>
+<p>また、Arch Linuxはとても利便性が高いです。実用的なシンプルさ、という両立の難しい課題、そしてとても正しい課題に、Arch Linuxは取り組んでいます。</p>
+
+<h2>Arch WikiはLinuxのドキュメントとしてクォリティが高い</h2>
+<p>また、Arch LinuxのWikiであるArch Wikiは、Linuxのドキュメントとして利便性が高いです。</p>
+<p>一通りLinuxの使い方が分かった人間は、Arch Wikiを探索するといいでしょう。さまざまなシステム管理のメソッド（方法）が何でも書かれています。</p>
+<p>特に、僕のこのホームページは、浅すぎて、そして狭すぎるため、Linuxの基本的なスキルとは離れたところにある「概念的」な「技術や原理の話」になってしまっていると思います。もっと「方法的」な「管理の方法」を求めるのであれば、Arch Wikiはとても有用です。昔からのLinuxユーザーが、今の最新のLinuxのやり方を学びたいとかいった場合にも、Arch Wikiは役に立ちます。</p>
+
+<h2>ArchWikiは覚えなきゃいけないことが多すぎてつまらない</h2>
+<p>ただし、ArchWikiははっきり言ってつまらないです。なぜなら、「覚えなきゃいけないことが多すぎる」からです。</p>
+<p>最近のLinuxは、systemdとかを越えて、覚えなければいけないことがめちゃくちゃ増えすぎました。</p>
+<p>ネットワークの接続をするのであっても、ストレージデバイスのパーティショニングやマウントを行うのであっても、これでもかというぐらいページをめぐって読まなければなりません。</p>
+<p>ある意味、FedoraやUbuntuのような「何もしなくても初心者でも使える」という自動設定やGUIによる管理も意味がないですが、Arch Linuxのような「これでもかというぐらい前提知識が多い」のも意味がありません。</p>
+<p>昔のシンプルなLinux、たとえばSlackwareやGentoo Linuxの時代は良かった。そう思うしかありません。</p>
+<p>後日注記：ただし、このような見解は一般的ではありません。ArchWikiは「ドキュメントが豊富で充実している」という意見が多いです。ArchWikiのドキュメントには、多くのシステム管理者がお世話になっています。</p>
+
+<h2>Pacman</h2>
+<p>PacmanはArch Linuxのために開発されたパッケージ管理システム。</p>
+<p>たとえば、リポジトリで提供されているパッケージのインストールのためには、</p>
+<pre>
+pacman -S package
+</pre>
+<p>とする。</p>
+<p>リポジトリ以外からのパッケージの直接のインストールは-U、キーワードの検索は-Ss、最新のパッケージ情報の同期とパッケージの更新は-Syu、削除は-Rとする。</p>
+<p>パッケージ形式は*.pkg.tar.xz。このtarアーカイブの中にパッケージを構成するバイナリファイルが含まれる。圧縮形式によっては最後のxzが変わることもある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Pacman">Pacman - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.17編集</p>
+</div>
+
+<h1>Arch Linux系ディストリビューション</h1>
+<h2>Manjaro Linux</h2>
+<p>Arch Linuxをベースにデスクトップ環境を整えて導入しやすくしたディストリビューション。</p>
+
+<h2>Antergos</h2>
+<p>Arch Linuxベースだが、Manjaroのような独自リポジトリではなくArch Linuxのリポジトリを利用する。</p>
+
+<h2>Artix Linux</h2>
+<p>Arch Linuxベースでsystemdを取り除くことを目的としているディストリビューション。</p>
+<p><a href="systemd.html">systemd</a>も参照のこと。</p>
+
+<h2>Obarun</h2>
+<p>initシステムにS6を採用した、Arch Linuxベースのディストリビューション。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201904/25">2019年4月25日　systemdフリーな世界を快適に立ち上げる ―モダン＆シンプルな起動ユーティリティ「S6」：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>Garuda Linux</h2>
+<p>Garuda Linuxはインド産のディストリビューションで、Btrfsのスナップショット機能を用いてシステムの更新の前にロールバックすることができる。またKDE Plasmaを採用している。</p>
+<ul>
+<li><a href="https://www.ura-no-ura.com/2021/02/lets-start-linux-54.html">Arch系ローリングリリースのGaruda Linuxは思いのほか使いやすかった｜ざっくりLinux！- 54</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>みんな使っているArch Linux</h2>
+<p>Arch Linuxについて言えることは、「みんな使っている」ということです。</p>
+<p>ツイッターなどでも、最近のナウなLinuxのギークは、みんなArch Linuxを使っています。</p>
+<p>Acrh Linuxのいいところであり欠点でもあるところは、「システムを最低限の環境から自分でパッケージを導入し、手動で設定や管理を行う」ということです。</p>
+<p>つまり、Arch Linuxを使うには、Linuxについての基本的な知識があって、きちんと手動で設定・管理・パッケージ導入ができるだけのスキルがなければいけないということです。</p>
+<p>Arch Linuxは、ツイッターなどで大人気です。ほとんどのLinuxユーザーは第一にArch Linuxを使っています。</p>
+<p>しかしながら、僕はDebianを使います。その理由は、Arch Linuxの管理は大変だからです。</p>
+<p>知識とスキルがあれば、Arch Linuxを管理することはそんなに困難ではありませんが、それでも、たくさんの時間と手間が必要になってしまいます。</p>
+<p>僕は、実際、そのような手動での管理や設定を行うだけの、時間や労力の余裕がありません。</p>
+<p>普通に最初からGNOMEとMozilla Firefoxが動いてくれて、Vimのような必要とするソフトウェアだけを簡単に導入できるディストリビューションが、恥ずかしながらLinuxスキルの低い僕にとっては必要なのです。</p>
+<p>僕は、逆にUbuntuなどのような初心者向けのディストリビューションも使いませんが、Arch Linuxは僕にとっては必要とする労力がかかりすぎてしまうのです。</p>
+<p>ですが、Linuxのスキルをつけたい、学生のようなLinux入門者には、Arch Linuxはとてもおすすめできます。その理由は、設定や管理のスキルがつくということもありますが、「みんな使っているから」というのもひとつの理由です。ネットのツイッターのSNSでは、みんなArch Linuxを使っています。そのような人々と付き合いたいなら、Arch Linuxはとても良い選択肢だと思います。</p>
+<div class="edit_date">
+<p>2023.08.16</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>Arch Linux</h2>
+<p>Arch Linuxについて。</p>
+<ul>
+<li><a href="https://www.archlinux.org/">Arch Linux</a></li>
+<li><a href="https://www.archlinux.jp/">Arch Linux JP Project</a></li>
+</ul>
+
+<h2>ArchWiki</h2>
+<p>Linuxのことを検索するとArchWikiがかかることが多い。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/">ArchWiki</a></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

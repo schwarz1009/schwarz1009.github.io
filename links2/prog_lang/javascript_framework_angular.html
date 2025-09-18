@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Angular関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>Angularの世界観</h1>
+<p>Angularによるプログラミングに関する世界観です。</p>
+<p><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Angular</h1>
+<h2>Angular</h2>
+<p>Google中心のフレームワーク。Angularは1と2で大きく変わった。Angular 1はMVC（MVVM）フレームワークだったが、Angular 2はコンポーネント指向のフレームワークとなっている。</p>
+<p>Angularは「フルスタック（Web開発に必要とされるもの全部入り）」と言われる。単なるプログラム以外にも、テストのためのツールなども含まれる。</p>
+<p>また、TypeScriptを基本的に使う。JavaScriptやDartにも対応はしているが、ドキュメントなどで使われるのはすべてTypeScriptである。</p>
+<ul>
+<li><a href="https://www.slideshare.net/shumpei/angular2-59809652">Angular2実践入門</a></li>
+<li><a href="http://blog.yuhiisk.com/archive/2016/05/03/learning-method-of-angular2.html">Angular入門！ゼロから始めたぼくの勉強方法 - イソップブログ</a></li>
+<li><a href="https://qiita.com/zoetro/items/a45dbc18bb2b22e944b2">AngularJSのMVWパターンを理解する - Qiita</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1509/02/news020.html">いまさら聞けないAngularJSの基礎知識と5つの主な特徴、インストール、簡単な使い方 (1/2) - @IT</a></li>
+</ul>
+<p>ただし、Angularは公式のドキュメントを読まないと駄目です。Angularを知るためには、公式のドキュメントが一番であると言われています。</p>
+<p>（<a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考に執筆しました。）</p>
+<p><a href="javascript_framework_typescript.html">AltJS/TypeScript</a>も参照のこと。</p>
+
+<h2>Angularのインストール</h2>
+<p>以下のようにnpmから導入できる。</p>
+<pre>
+npm install angular2
+</pre>
+
+<h2>コンポーネントの三要素</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考に執筆しました。）</p>
+<p>Angularは、「import」、「@Component」、「export」でソースコードを記述する。</p>
+<p>importで読み込みたいクラスをインポートし、@Componentでコンポーネントとしてセレクタ（selector、名前）とテンプレート（template、出力される中身）を記述し、exportを実行することでコンポーネントができあがる。</p>
+<p>テンプレートの中に変数（たとえばmsg）に格納された文字列を埋め込むには{{msg}}のように記述する。export部分でこの変数の値を指定する。</p>
+<p>これで、セレクタに記述したタグを使って、コンポーネントをHTMLの中で使用できる。たとえば、</p>
+<pre class="prettyprint">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'hoge-app',
+  template: '&lt;p&gt;{{msg}}&lt;/p&gt;'
+})
+export class HogeComponent {
+  msg = 'My name is Assy.';
+}
+</pre>
+<p>とした場合、HTML側から&lt;hoge-app&gt;～&lt;/hoge-app&gt;で内容を出力できる。</p>
+<div class="edit_date">
+<p>2023.07.04編集</p>
+</div>
+
+<h2>Vue.jsやReactに比べてあまり流行っていない印象</h2>
+<p>Googleがフルスタックフレームワークとして本気で作った割には、Qiitaなどを見ていると、Angularはあまり流行っていない印象があります。</p>
+<p>Vue.jsやReactが標準的であり、Angularはあまり支持されていません。</p>
+<p>その理由は、Googleプロダクトである、ということと、シンプルで無い、ということではないかと思います。Angularはフルスタックかつ高機能で、TypeScriptを全面的に使うなど、良く分からない仕様をしています。これに比べて、Vue.jsやReactはシンプルで、分かりやすく、使いやすいのです。</p>
+<p>また、最近はGoogle熱が下火になってきているところがあります。なんでもかんでもGoogleプロダクトで、「Google色に染まりたい」という人が少なくなってきています。Facebookの作ったReactを使うのもその理由で、Facebookの方がかっこよくてスタイリッシュである、と思う人が増えてきていると思います。</p>
+<p><a href="../services/google.html">Google</a>も参照のこと。</p>
+
+<h2>Aurelia</h2>
+<p>AureliaはAngularの開発者が開発した未来志向の新しいコンポーネント型フレームワーク。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+<li><a href="https://qiita.com/akokubu/items/b84ab54707c817459678">Aurelia。それはReactやVue.jsに出遅れ感のある私に刺さりそうなフレームワーク #JavaScript - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.13</p>
+</div>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

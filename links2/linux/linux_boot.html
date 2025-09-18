@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ブート - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ブート</h1>
+<p>Linuxのブートに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>起動</h1>
+<h2>Linuxの起動の流れ</h2>
+<p>Linuxでは、カーネルイメージやブートローダは/bootというブート用のディレクトリに置かれている。</p>
+<p>起動を確実にするために、/bootをジャーナリングのないext2ファイルシステムでフォーマットすることもある（後日注記：UEFIを用いた新しいシステムの場合、ESPとなる/bootパーティションはFAT32でフォーマットする）。/bootの中にカーネルイメージとブートローダを配置する。</p>
+<p>ブートローダとは、OSの起動を行うためにBIOSから実行されるソフトウェア。Linuxではgrubを用いることが多い。</p>
+<p>BIOSは、BIOSの設定で、ハードディスク、CD/DVDドライブ、フロッピーディスクなどの起動の優先順位が決まっている。多くの場合、ハードディスクよりもCD/DVDの方が優先されているため、CD/DVDにディスクが入っていて、そのディスクから起動できる場合にはディスクから起動する。これは、Linuxのインストールメディアから起動したい場合などに用いられる。CD/DVDから起動しない場合は、BIOSの設定を変更する。フロッピーディスクやCD/DVDにメディアが入っていない場合は、BIOSはハードディスクから起動しようとする。</p>
+
+<h2>MBRとGPT</h2>
+<p>現在の主流のパーティショニング技術にはMBRとGPTがある。MBRの場合、MBRにインストールされたブートローダgrubが起動される。</p>
+<p>基本的にBIOSではなくEFI/UEFIでブートする場合、従来のMBR以外にGPTを使うことができるようになった。（BIOSベースのシステムでGPTを使うこともある。）</p>
+<p>後日注記：従来のMBRによるパーティショニングでは、プライマリパーティションを4つしか設定できず、それ以上のパーティションは拡張パーティションにしなければならなかった。これはMBRの領域サイズが小さいためで、GPTでは領域のサイズが大きい。このため、GPTでは無制限にパーティションを切ることができ、サイズの上限も大きい。ただし、BIOSベースのシステムでGPTを使う場合、Windowsをデュアルブートできないなどの問題もある。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation/ja">Gentoo Linux amd64 ハンドブック: Gentoo をインストールする - Gentoo Wiki</a></li>
+<li><a href="https://e-words.jp/w/MBR.html">MBR（マスターブートレコード）とは - IT用語辞典 e-Words</a></li>
+</ul>
+
+<h2>grub</h2>
+<p>grubはLinuxを起動するだけではなく、Windowsの起動もできる。</p>
+<p>grubは/boot/grub/grub.cfgの設定に従ってOSを起動する選択肢を表示し、起動時に起動したいOSを選択できる。</p>
+<p>現在はgrubは/etc/default/grubや/etc/grub.d以下のスクリプトに従って、/boot/grub/grub.cfgを自動作成する。この時、システムに存在するOSの一覧を検出するため、特に何もしなくても、Windowsや別にインストールされているLinuxを検出して、メニューを表示する。</p>
+<p>後日注記：昔のデュアルブートは複雑で、/boot以下にある起動したいカーネルイメージを指定するなどする必要がありましたが（詳細は覚えていないので違っていたら申し訳ない）、今はGRUBが自動的にインストールされているシステムを見つけてくれるので、簡単です。面白味はなくなったかもしれませんが、設定を間違える恐れがなく、とても便利です。</p>
+<div class="edit_date">
+<p>2024.10.28編集</p>
+<p>2024.10.30編集</p>
+</div>
+
+<h2>GRUBとLILO</h2>
+<p>今でこそ、Linuxの世界ではGNU GRUBが標準的なブートローダーとして使われているが、過去にはLILOと呼ばれるブートローダーが使われていたことがあり、過去の文献などではLILOが出てくることも多い。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/LILO">LILO - ArchWiki</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.28</p>
+</div>
+
+<h1>ブートローダー（GRUB）</h1>
+
+<h2>grubの基本</h2>
+<p>Linuxカーネルのイメージファイルは、通常/bootパーティションに置かれる。</p>
+<p>コンピュータの起動時に、BIOSからブートローダーの（Linuxでは主に）GRUBが実行され、GRUBによって/bootにあるLinuxのカーネルイメージが実行される。その上でSysV initあるいはsystemdにより、サービスが起動される。</p>
+<h2>grubのインストール</h2>
+<p>一度Linuxをインストールしたらめったに再インストールする必要はないが、GRUBをMBRに再インストールするためには以下を実行する。</p>
+<pre>
+# grub2-install /dev/sda
+</pre>
+<p>必要に応じて/dev/sdaを変えること。</p>
+<h2>grubの設定</h2>
+<p>GRUB 2の新しい仕様として、GRUBのメニューファイル/boot/grub/grub.cfgはgrub-mkconfigコマンドによって自動作成されるようになった。よって、このファイルを手動で設定してはならない。設定すべきファイルは/etc/default/grubに存在するので、それを編集する。</p>
+<p>内容は以下が参考になる。</p>
+<ul>
+<li><a href="http://enakai00.hatenablog.com/entry/2015/11/27/152442">GRUB2で知っておくとよいこと - めもめも</a></li>
+</ul>
+<p>編集したら、以下を実行して設定ファイルを再作成する。</p>
+<pre>
+# grub2-mkconfig -o /boot/grub/grub.cfg
+</pre>
+<p>/boot/grub/grub.cfgは環境によって/boot/grub2/grub.cfgになる場合があります。</p>
+
+<h2>grubのシェル</h2>
+<p>GRUBは簡単なインタラクティブ・シェルを内蔵していて、起動しなくなった場合でもコマンドによって復旧することができる。</p>
+<p>起動時のメニュー画面で「c」を実行すると、</p>
+<pre>
+grub&gt;
+</pre>
+<p>というシェルの入力モードになる。</p>
+<p>この状態で、手動でカーネルを実行できる。以下が参考になる。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-bootloader">【Linux】ブートローダとは？とブートローダのインストール方法 - エンジニアの入り口</a></li>
+</ul>
+
+<h2>参考ページ</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://enakai00.hatenablog.com/entry/2015/11/27/152442">GRUB2で知っておくとよいこと - めもめも</a></li>
+<li><a href="https://eng-entrance.com/linux-bootloader">【Linux】ブートローダとは？とブートローダのインストール方法 - エンジニアの入り口</a></li>
+</ul>
+<p>また、以下のページは詳しくて、「今のLinuxのブートの仕組み」を知る上で参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0743">Ubuntu Weekly Recipe - 第743回　Ubuntuの標準ブートローダーであるGRUBを改めて見直す | gihyo.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.09編集</p>
+</div>
+
+<h1>デュアルブート</h1>
+<h2>デュアルブートと仮想化</h2>
+<p>WindowsとLinuxのように、複数のOSを同じハードディスクから起動したい場合、昔はデュアルブートやマルチブートという方法を使っていました。</p>
+<p>たとえば、GRUBを使って、ハードディスクの中の別々のパーティションに記録した、WindowsとLinuxのシステムを起動時に選択して起動することができます。</p>
+<p>昔は複雑な設定が必要でしたが、今はGRUBが自動的にインストールされているシステムを検索するため、簡単にデュアルブート構成を実現できます。</p>
+<p>ですが、最近のWindowsやLinuxを使うのであれば、デュアルブートよりももっとよい方法があります。それは仮想化ソフトを使う方法です。</p>
+<p>仮想化ソフトを使うことで、WindowsやMacの上でLinuxを動かしたりすることが簡単にできます。</p>
+<p>また、ホストOSがLinuxである場合は、Dockerを使うことで、Linuxの上で仮想マシンのコンテナをいくらでも動かすことができて、便利です。</p>
+<p>デュアルブートに勝る仮想化ソフトのメリットは、ホストOSが実行中であってもゲストOSを実行できることです。</p>
+<p>デュアルブートの場合、Windowsを実行している時にLinuxを実行したくなったら、WindowsをシャットダウンしてLinuxを起動しなければなりません。</p>
+<p>なので、「Linuxのインストール中にWindowsでインターネットの情報源を調査する」ということができません。</p>
+<p>仮想化ソフトなら、Windowsの実行中にLinuxを実行できます。</p>
+<p>デメリットがあるとしたら、専用の仮想化ソフトが必要になることです。仮想化システムでは、ホストOSに専用の仮想化ソフトをインストールして、その上でゲストOSを導入しなければなりません。この時、仮想化ソフトを導入するためには、複雑な設定と管理が必要です。仮想化ソフトごとに異なり、不都合や手間がかかることが多くあります。それに比べて、デュアルブートはGRUBなどから起動するシステムを選ぶだけでよいため、手軽です。</p>
+<p>また、仮想化ソフトは仮想化のオーバーヘッドがかかるので、ゲストOSの実行が遅くなって操作が重たくなります。Linuxの上でLinuxを動かすだけのDockerならまだ軽量ですが、そうでない場合、非力なパソコンで仮想化ソフトを動かすのは困難があります。デュアルブートの場合はそれがありません。ネイティブの速度で実行できます。</p>
+<p>Macを使う場合、Intel MacではWindowsをMacの上で動かすことのできる「Boot Camp」という機能があり、デュアルブートと同等のものとして利用できます。昔僕がデザインの作業所で使っていたMacにも、Boot CampによるWindowsシステムが入っていました。ですが、使わないのに容量を食ってしまうので削除しました。デュアルブートや仮想化ソフトの場合も同じで、あまり多くのシステムを同じパソコンに入れすぎると、使わないのに容量を馬鹿みたいに食ってしまいます。なので、使わないシステムは導入しないようにしましょう。</p>
+<p>仮想化ソフトの用途としては、プログラミングやサーバー構築用の勉強用です。Windowsを使っていながら、LinuxでApacheやPHPなどを動かす勉強ができます。Windows用のApacheを入れる方法もありますが、Linuxを使ったほうがより実践的で、本番環境に近い環境でテストができます。</p>
+<p><a href="../virt/virt.html">仮想化</a>や<a href="../virt/docker.html">Docker</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.10.28</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

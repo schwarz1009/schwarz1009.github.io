@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Python入門（１．基本） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Python入門（１．基本）</h1>
+<p>Python入門（１．基本）です。</p>
+<p><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="python_intro.html">Python入門</a></li>
+<ul>
+<li><b>１．基本</b></li>
+<li><a href="python_intro_flow.html">２．制御フロー</a></li>
+<li><a href="python_intro_oop.html">３．オブジェクト指向</a></li>
+<li><a href="python_intro_data.html">４．データ構造</a></li>
+<li><a href="python_intro_str.html">５．文字列</a></li>
+<li><a href="python_intro_file.html">６．ファイル</a></li>
+<li><a href="python_intro_functional.html">７．関数型言語の機能</a></li>
+<li><a href="python_intro_others.html">８．その他</a></li>
+<li><a href="python_intro_advanced.html">９．応用・モジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>学習環境の構築</h1>
+<h2>PythonをやるならAnaconda</h2>
+<p>Pythonをやる上で、使えるツールがAnacondaです。Pythonに加えてさまざまなパッケージがバンドルされており、WindowsやMacにおける初期導入におすすめ。僕もMacではAnacondaでPython 3を入れています。</p>
+<ul>
+<li><a href="https://www.python.jp/install/anaconda/index.html">Anaconda のインストール - python.jp</a></li>
+</ul>
+<p>テキストエディタはMicrosoftのVS-Codeがいいとよく言われますが、僕は全能エディタviの信者なのでMacではVimとVS-Codeを併用しています。WindowsではサクラエディタとEmacsライクなエディタxyzzyを併用しています。</p>
+
+<h2>Macで行う場合</h2>
+<p>僕の職場で使っているマシンがMacなので、Macでの説明になってしまいますが、MacではAnacondaをインストールするだけで、簡単にPythonが構築できます。</p>
+<p>詳しくは以下の動画を参照のこと。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?list=PLwgFP6xz77Rxol-cydiwuJSeVFK61rGXP&v=HTY-Ot_Bal0&feature=emb_imp_woyt"> Python入門　第1回 その2 Anacondaを利用したPython学習環境の構築とJupyter Notebookの利用方法 - YouTube</a></li>
+</ul>
+<p>この動画シリーズにはWindowsにおける環境構築もあるので、Windowsの方はそれをご覧ください。</p>
+
+<h2>エディタにはVS-CodeとJupyter Notebookがおすすめ</h2>
+<p>Pythonを書くためのエディタとしては、MicrosoftのVS-Codeがおすすめです。Anaconda NavigatorからはPythonシェルだけではなくVS-Codeをクイックで起動できます（上の動画を参照のこと。）</p>
+<p>また、Jupyter Notebookを使うと、ブラウザからPythonを実行できます。これもAnaconda Navigatorからクイック起動できます。Jupyter Notebookは、たとえばPythonの入っていない入門者のパソコンなどで、Pythonコードの動き方などを簡単に試すような用途に使えると思います。</p>
+<p>Pythonシェル（Anacondaプロンプト）は対話式のインタープリタとして、コードを実行したければプロンプトで簡単に実行できます。最初はインタープリタでPythonの動きに慣れながら、開発するにしたがってVS-Codeによる*.pyファイルの編集に慣れていけばいいでしょう。*.pyファイルは</p>
+<pre>
+python hoge.py
+</pre>
+<p>のようにコマンドから実行できます。</p>
+<p>また、Anacondaを使いたくない場合は、公式のPythonにIDLEと呼ばれる簡単な統合開発環境が付属しているのでそれを使ってください。</p>
+<p>Anacondaにはコンポーネントを管理する機能があり、新しいPythonに関連するコンポーネントはここから簡単にGUIで導入できます。一覧表示され更新も簡単です。</p>
+<p>VS-Codeでエラーが出た場合などには、コンポーネントが足りないことがあります。導入はpipを使ってコマンドから
+<pre>
+python -m pip install package
+</pre>
+<p>とします（packageの部分にパッケージ名を入力する）。</p>
+
+<h1>Pythonの基本</h1>
+<h2>変数と定数</h2>
+<p>変数は$などの記号を付けず、=で代入できる。</p>
+<pre class="prettyprint">
+hoge = 'Hoge!'
+print(hoge)
+</pre>
+<p>後日注記：変数が「データの箱」として中身を変えることのために使うのに対し、定数は中身を変えないために使う。定数は円周率や消費税のように「数値を一か所に記述し、プログラマにとって目的を明確化し分かりやすくするために名前（ラベル）をつける」といったことのために用いる。</p>
+<p>後日注記：変数の定義や書き換えには=を使う。=は代入の場合に使い、等しいかどうか比較する時は==を使うことに注意。同じ変数は何度でも使えるし、代入すれば値を上書きすることもできる。</p>
+
+<h2>演算子</h2>
+<p>算術演算子には、</p>
+<table class="some_tables">
+<tr><th class="min60">演算子</th><th>説明</th></tr>
+<tr><td>+</td><td>加算</td></tr>
+<tr><td>-</td><td>減算</td></tr>
+<tr><td>*</td><td>乗算</td></tr>
+<tr><td>/</td><td>実数除算の商</td></tr>
+<tr><td>//</td><td>整数除算の商</td></tr>
+<tr><td>%</td><td>整数除算の余り</td></tr>
+<tr><td>**</td><td>累乗</td></tr>
+</table>
+<p>などがある。</p>
+<p>後日注記：数値型（int）と文字列型（str）など、型が違う場合は演算子の働きが異なる。たとえば1 + 2は3だが、"python" + "言語"は"python言語"となる。</p>
+<p>後日注記：計算に使う関数としては、</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>abs()</td><td>絶対値の計算</td></tr>
+<tr><td>divmod()</td><td>商と剰余の計算</td></tr>
+<tr><td>pow()</td><td>べき乗の計算</td></tr>
+<tr><td>round()</td><td>小数部分をまるめる</td></tr>
+<tr><td>max()</td><td>最大値</td></tr>
+<tr><td>min()</td><td>最小値</td></tr>
+<tr><td>sum()</td><td>合計</td></tr>
+</table>
+<p>などがある。</p>
+
+<h2>global文</h2>
+<p>Pythonで変数を扱う時の注意点として、変数のスコープがある。ローカル変数は関数の内部の変数であり、関数の中からしか使うことができない。これに対してグローバル変数はどこからでも使うことができる。</p>
+<p>特に注意すべきこととして、同じ名前のグローバル変数があったとしても、ローカル変数で変数を定義するとローカル変数として扱われる。たとえxがグローバル変数であっても、関数の内部のxはローカル変数であり、グローバル変数のxとは区別される。</p>
+<p>関数の内部からグローバル変数にアクセスするには、global文を使う。</p>
+<pre class="prettyprint">
+def add(a):
+    global g
+    return g + a
+    
+g = 150
+print(add(250))
+</pre>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+
+<h2>コメント</h2>
+<p>Pythonでは、一行コメントである#が利用できる。</p>
+<p>あるいは、関数の説明を書くためのdocstringと同様の記法として、トリプルクォート（'''あるいは"""で囲まれた文字列）を複数行コメントとして使うことができる。</p>
+<ul>
+<li><a href="https://note.nkmk.me/python-comment/">Pythonのコメント、コメントアウトの書き方 | note.nkmk.me</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.03</p>
+</div>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

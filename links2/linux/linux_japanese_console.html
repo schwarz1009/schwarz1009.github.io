@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux 日本語入力・表示（コンソール・コマンドライン） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux 日本語入力・表示（コンソール・コマンドライン）</h1>
+<p>Linuxの日本語入力・表示（コンソール・コマンドライン）に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>コンソール</h1>
+<h2>端末での日本語入力</h2>
+<p>また、ターミナルで日本語入力がしたい時は、uim-anthyとuim-fepなどを試しましょう。「FEP」は昔のDOS時代のコンソールでの日本語入力ソフトの略称です。</p>
+<p>X11なら、昔ながらのkinput2-cannaの設定方法をtwmとかで学ぶ、というのもアリだと思います。</p>
+
+<h2>端末での日本語表示</h2>
+<p>ターミナルでの日本語表示が出来ない時は、コンソール（黒画面）ならjfbterm、X11のtwmのような環境ならrxvt-unicode（あるいはktermなど）、ページャならlvなどを試しましょう。</p>
+<p>後日注記：最近のLinuxでは、jfbtermではなくjのついていないfbtermを使う。Debian 10なら、（コンソールのみのインストールでも）初期インストールで最初から入っていて、設定もされているため、以下のコマンドを実行すれば日本語の表示ができる端末が起動できる。</p>
+<pre>
+$ fbterm
+</pre>
+<p>fbtermやuim-fepなどの詳しい設定方法（フォントの変更など）については以下を参照のこと。</p>
+<ul>
+<li><a href="https://server-setting.info/debian/debian-console-japanease.html">Debian(Ubuntu)で コンソールに日本語表示してみた&nbsp;|&nbsp;レンタルサーバー・自宅サーバー設定・構築のヒント</a></li>
+<li><a href="http://www.green-pen.jp/lang.html">Debian コンソール日本語環境を試してみた fbterm [Green-pen miyagi]</a></li>
+</ul>
+
+<h1>その他日本語環境</h1>
+<h2>iconvとnkf（文字コードの変換コマンド）</h2>
+<p>文字コードの変換は、iconvやnkfといったプログラムから行える。現在はiconvが標準的だが、nkfの方が古くて昔からある。</p>
+
+<h2>タイムゾーンやロケールの設定</h2>
+<p>タイムゾーンやロケールの設定、それから文字コードの扱い方については、<a href="linux_unix_timezone_locale.html">UNIXシステム管理７（タイムゾーンとロケール）</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>日本語入力</h2>
+<p><a href="linux_japanese_input.html">Linux 日本語入力</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

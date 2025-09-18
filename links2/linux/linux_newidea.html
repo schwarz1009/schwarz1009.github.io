@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux 新常識 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux 新常識</h1>
+<p>Linuxの新しい常識に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>新常識</h1>
+<h2>ソースコードからソフトウェアを入れる時は、「/usr/local/パッケージ名」にインストールしよう</h2>
+<p>ソースコード（tarball）からソフトウェアをコンパイルしてインストールする時は、「/usr/local/パッケージ名」にインストールして、PATHを通すこと。</p>
+<p>UNIXの古いしきたりはどうでも良い。むしろ、こうする場合もある。</p>
+<p>昔から、/usr/localにパッケージ名を付けずにインストールすると、管理がとてもし辛い。</p>
+<p>パッケージ名を付けたディレクトリにインストールすることで、管理がとても楽になる。</p>
+<p>あるいは、/home以下にインストールしても良い。</p>
+<p><a href="linux_src_install.html">ソースからのインストール</a>を参照のこと。</p>
+
+<h2>コマンドなんか習得しなくて良いし、デスクトップ環境はMATEを使おう</h2>
+<p>Linuxのコマンドラインなんか、何も賢くない。デスクトップ環境はMATEを使うこと。</p>
+<p><a href="mate.html">MATE</a>を参照のこと。</p>
+
+<h2>LibreOfficeは悪くない</h2>
+<p>何かと嫌悪されるLibreOfficeだが、本当は悪くない。</p>
+<p>ワードやエクセルのような高度なコンピュータ環境を得ることが出来る。本当に悪くない。</p>
+<p>viやEmacsなんか、習得しなくて良い。LibreOfficeでほとんどのことは出来る。</p>
+<p><a href="libreoffice.html">LibreOffice</a>を参照のこと。</p>
+
+<h2>パッケージマネージャは習得のために使わないこと</h2>
+<p>便利なパッケージマネージャだが、Linuxの習得段階で使うと、何も分からないまま動いてしまって、習得が出来なくなる。</p>
+<p>最初の段階では、出来るだけソースコードをコンパイルすることも学ぶこと。</p>
+<p>それでもパッケージマネージャを使いたいなら、Gentoo LinuxやArch Linuxのようなディストリビューションが良いだろう。</p>
+<p><a href="linux_pkgmanagement.html">Linuxパッケージ管理</a>も参照のこと。</p>
+
+<h2>FedoraやUbuntuではなく、ローリングリリースのディストリビューションを使っても良い</h2>
+<p>FedoraやUbuntuのような安定バージョンをリリースするディストリビューションは、習得のためにならない。</p>
+<p>ローリングリリースのディストリビューションの方が、フリーソフト好きには良いだろう。特に、openSUSEがお勧めだ。</p>
+<p>出来ることなら、最初はGentoo Linuxを使ってほしい。Portageはシステムの習得のためになる。</p>
+<p><a href="gentoo.html">Gentoo</a>や<a href="suse.html">SUSE</a>や<a href="arch_linux.html">Arch Linux</a>を参照のこと。</p>
+
+<h2>出来ればハードウェアの手動設定も出来るべき</h2>
+<p>ある意味、自動設定や自動認識は良くない。</p>
+<p>カーネルもきちんと手動でコンパイルした経験があるべきだし、コマンドでハードウェアなどのデバイスの設定や初期化も出来るべきだ。</p>
+<p>ただ、そんなに難しくは無い。ネットワークの設定はドキュメントを読めば誰でも出来る。</p>
+<p>mountやchrootなどのコマンドを覚えるために、Gentoo Linuxに触れてほしい。</p>
+<p>カーネルはある意味、一番一般的な手動コンパイルのソフトウェアだ。makeコマンドで簡単に出来る。以下を参照のこと：</p>
+<ul>
+<li><a href="https://wiki.archlinuxjp.org/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB/%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB/%E4%BC%9D%E7%B5%B1%E7%9A%84%E3%81%AA%E6%96%B9%E6%B3%95">カーネル/コンパイル/伝統的な方法 - ArchWiki</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel/ja">カーネルの設定 - Gentoo Wiki</a> - Gentoo独自の部分もありますが、一番カーネルの手動コンパイルが簡単なのはGentooではないかと思います。</li>
+</ul>
+<p><a href="linux_kernel_src.html">Linuxカーネル（ソースコード・カーネルモジュール）</a>を参照のこと。</p>
+
+<h2>manは開発者向けだから、ディストリビューションのドキュメントを読め</h2>
+<p>初心者に「manを読め」とは言うが、僕は初心者がmanコマンドの内容を理解出来ると思えない。</p>
+<p>出来るだけ、Debianなどのディストリビューションのドキュメントを読むこと。何度も言うが、Gentoo Linuxがお勧めだ。</p>
+<p>あとは、コマンドは適当に知っていれば良い。本当はむしろ、システムコールとライブラリ関数を知るべきだ。それでコードが読めるようになる。</p>
+<p><a href="linux_commands_doc.html">UNIXコマンド（ドキュメント）</a>や<a href="linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+<h2>Cではなく、Perlから</h2>
+<p>プログラミングを学びたいなら、C言語ではなく、Perlからやると良い。</p>
+<p>僕が最初に学んだのも、きっときちんと辿ればPerlだった。Perlは最初からインストールされているから、簡単に遊ぶことが出来る。</p>
+<p>Perlを学ぶ上でお勧めのサイトは以下。</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/perlcodesample/">Perl学習サイト - サンプルコードPerl入門</a></li>
+</ul>
+<p>そもそも、C言語なんか学んでも、大したことは出来ない。PHPはWebだし、JavaはLinuxと相性が良いように見えない。Perlが一番最初のプログラミング初心者に良い。</p>
+<p>初心者がJavaをやると、public static void main(String[] args)の意味が分からない。</p>
+<p>むしろ、クラスやオブジェクトの概念がいまいち分からないだろうから、つまらないだろう。</p>
+<p>逆に、C言語をやると、ポインタの意味が分からないだろう。そして、文字列の操作が難しく感じるはずだし、関数もprintf()しか分からないはずだ。</p>
+<p>Perlは、そういう悪しき慣習に汚染されていない。最初の素直な知性で、素直に分かることが出来る。</p>
+<p>Perlをやったあとは、僕はGUIのプログラミングをしてほしいと思うが、DelphiやVBはWindowsでしかすることが出来ない。僕は、CでいきなりGTK+を書けば良いと思う。</p>
+<p>Perlでどんなプログラムを書けば良いか分からないだろうが、僕は中学生でも書けるような簡単なネットゲームのようなものを作れば良いと思う。中学生の頃の僕と同じだからだ。</p>
+<p>僕はその後、Delphiをやって、PHPやC#を学んでいた。だが、満足の行くプログラムは書けなかった。適当に改造をいくらかして、マクロをWikipediaで書いていた。</p>
+<p><a href="../prog_lang/perl.html">Perl</a>も参照のこと。</p>
+
+<h2>最新の開発状況を知りたいなら、rawhide</h2>
+<p>僕は自分で試したことは無いのだが、ネットを見ていると、Fedoraの最新開発版「rawhide」は「usable（使える）」らしい。</p>
+<p>LinuxカーネルやGNOMEの開発バージョンなど、何でも開発バージョンが入るので、開発者を目指す方はrawhideをインストールしても良いかもしれない。</p>
+<p>不安定度が違うかもしれないが、昔僕がMozillaのNightly Buildを使っていたのと良く似ているかもしれない。</p>
+<p>もう少し安定度を期待するのであれば、Debianのsid（不安定版）が良いだろう。</p>
+<p>ネットを見ていると、僕の想像していたのと違って、rawhideは不安定版ではなく、最新の使えるバージョンが入るらしい。だから、ローリングリリース版だと思えば良い。</p>
+<p>旧Red Hat Linux時代から、Red Hatは最新開発版としてrawhideをリリースしているが、その頃とは事情が違うのかもしれない。そこらへんは分からなかった。</p>
+<p><a href="fedora.html">Fedora</a>を参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

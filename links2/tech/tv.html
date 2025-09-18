@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>テレビの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">工学・機械技術の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/tech_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>テレビの世界観</h1>
+<p>テレビの世界観です。機械いじりが子供のごろから好きだった父親の話を参考にしています。</p>
+<p><a href="../hardware/monitor.html">モニター</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>テレビの仕組み</h1>
+<h2>走査</h2>
+<p>テレビは、離れたところにある映像を別の場所に送るために、走査という考え方を行う。</p>
+<p>これは、画像をテープのように細切れにして、それぞれに番号と「始点・終点」のマークをつけ、画像を一つの電気信号に変換する。</p>
+<p><img class="images_figure" src="tv.png" alt="テレビ"></p>
+<p>ここでは、イという文字を10つの細切れの線に変え、その上で、それを一本の連続した電気信号に変換し、電波に乗せて電波塔から各家庭のアンテナに送り、それをブラウン管に表示させる。（最近は、ブラウン管ではなく、液晶ディスプレイが使われることが多い。）</p>
+<p>ただ、本当は10本ではなく、もっとたくさんの細かい線を一本の連続した電気信号に変える。それを電波に乗せて、ブラウン管で一行ずつ表示し、遠くの場所でも映像が見られるようになる。</p>
+<p>この方式を発明・実験したのは日本人の高柳健次郎である。彼はブラウン管による電送・受像を世界で初めて成功し、カタカナの「イ」の文字を走査線40本で送受信した。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E9%AB%98%E6%9F%B3%E5%81%A5%E6%AC%A1%E9%83%8E">高柳健次郎 - Wikipedia</a></li>
+</ul>
+
+
+<h1>ブラウン管の仕組み</h1>
+<h2>電磁石と磁界</h2>
+<p>まず、導線（電線）に電流を流すと、電子は電流として流れる。この時、磁界が右回りに発生する。</p>
+<p><img class="images_figure" src="crt1.png" alt="CRT1"></p>
+<p>これは、以下の永久磁石の磁界と同じである。</p>
+<p><img class="images_figure" src="crt2x.png" alt="CRT2"></p>
+<p>鉄でできた釘にコイルを巻くと、永久磁石と同じ電磁石を作れる。これは、電流を流した時だけ磁界が発生する。</p>
+<p><img class="images_figure" src="crt3.png" alt="CRT3"></p>
+<p>これはなぜかというと、以下のように、導線の周りの電磁力が、全て内向きに発生するからである。</p>
+<p><img class="images_figure" src="crt4.png" alt="CRT4"></p>
+<p>そして、磁界中にある電子は、力を受けて動く。これがミソである。</p>
+<p><img class="images_figure" src="crt5.png" alt="CRT5"></p>
+
+<h2>ブラウン管</h2>
+<p>ブラウン管は、ブラウン博士が発明した、画像を表示する装置である。以下のような構造になっている。</p>
+<p><img class="images_figure" src="crt6.png" alt="CRT6"></p>
+<p>電子銃から飛び出した電子は、（何も電磁力の無い場合は）まっすぐ中央に飛んでくるが、それを縦と横の電磁石で向きを変えることによって、さまざまな方向に電子が飛ぶ。</p>
+<p>ディスプレイの表面に「蛍光物質」が塗られており、電子が当たると光るようになっている。</p>
+<p>また、ブラウン管の中は真空になっている。</p>
+<p>ブラウン管に送られる電子銃の方向は、以下のように、右から左へと進んで繰り返しゼロに戻る。</p>
+<p><img class="images_figure" src="crt7.png" alt="CRT7"></p>
+<p>これによって、以下のように画像を表示できる。</p>
+<p><img class="images_figure" src="crt8.png" alt="CRT8"></p>
+<p>そして、電子銃で飛ばす電子の強弱をコントロールすることで、映像を表示する。明るい部分は明るく、暗い部分は暗くするために、強弱を調節する。</p>
+<p>右から左に繰り返し表示し、明るさと暗さの調節をしながら映像を表示する。ここで「走査」が行なわれている。</p>
+
+<h1>液晶の仕組み</h1>
+<h2>液晶ディスプレイ</h2>
+<p>偏光板とは、特定方向に入射してくる光だけを通し、それ以外の方向の光を遮断する特殊な板のこと。</p>
+<p>液晶は、この偏光板を液体で作り出し、電圧によって整列させることで、光をシャットする。</p>
+<p>液晶ディスプレイなどで、この技術が用いられている。</p>
+<p>後日注記：液晶分子と偏光板に対して、電圧を通して液晶分子を整列させ、特定の方向に対する偏光パネルを作って、光をブラインドのように遮る。</p>
+<!--
+<p>僕の知識があいまいなのか、僕は液晶は液体に何らかの物質を混ぜて、それに電圧を通してその物質を整列させ、特定の方向に対する偏光パネルを作って、光をブラインドのように遮る、と理解していた。だが、父親は、液晶と言う物質があるのであって、液体に混ぜて作るのではない、と言っていた。</p>
+-->
+<div class="edit_date">
+<p>2025.02.03編集</p>
+</div>
+
+<h2>液晶ディスプレイの詳しい仕組み</h2>
+<p>二枚の偏光フィルターを使って、液晶分子を電圧によって整列させる（0度あるいは90度に並び方を変える）ことで、そこを通る光を遮断したり通したりすることが可能になる。</p>
+<p>詳しくは以下のようなページを参照のこと。</p>
+<ul>
+<li><a href="https://jp.sharp/products/lcd/tech/s2_1.html">液晶ディスプレイの原理｜液晶の世界：シャープ</a></li>
+</ul>
+
+<h1>テレビとは</h1>
+<h2>テレビ</h2>
+<p>テレビとは、テレビジョンのこと。テレビジョンとは、「遠隔」を表すテレと、「映像」を表すビジョンの合成語。</p>
+<p>テレビには、点の集まりである「画素」が存在し、画素が多ければ解像度（画面の精細さ）が高くなり、映像が綺麗になる。</p>
+<p>今のテレビはカラーテレビであり、カラフルな色を表示できる。昔のテレビやカメラは白黒だった。</p>
+<p>テレビにおいては、テレビ局のような商売のコンテンツ業者がほぼ映像の制作を独占し、個人では映像の制作をしなくなった。</p>
+<p>これとはまったく正反対に、インターネットでは商売のコンテンツ業者ではなく、個人によってコンテンツが制作されている。</p>
+<p>テレビ放送は、地上を伝わる電波である「地上波」と、人工衛星を使った「衛星放送」が存在する。現在の地上波ではかつてのアナログ放送が終了し、地上デジタル放送（地デジ）へと移行している。</p>
+<p>また、このほかにケーブルテレビと呼ばれる有線での放送形態がある。ケーブルテレビにおいてはインターネット回線や電話回線もサービスとして提供される。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%9C%B0%E4%B8%8A%E6%B3%A2">地上波 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E8%A1%9B%E6%98%9F%E6%94%BE%E9%80%81">衛星放送 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E3%81%AE%E5%9C%B0%E4%B8%8A%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81">日本の地上デジタルテレビ放送 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%83%86%E3%83%AC%E3%83%93">ケーブルテレビ - Wikipedia</a></li>
+<li><a href="https://www.teluru.jp/posts/938">スマホやテレビの「画素数」とは？4KやフルHDって一体何が違うの？ - 総合デジタルショップテルル</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.09</p>
+</div>
+
+<h2>4K・8Kとは</h2>
+<p>新しいとても綺麗で高画質なテレビとして、4K・8Kが開発されている。最近では4K・8K対応の衛星放送も始まった。</p>
+<p>まるで「実際の三次元空間を見ているよう」と表現され、まさに「別世界」である。新しいネットワークの「5G」とともに、新たな時代の放送・通信を担っていく。今、始まっている。</p>
+<ul>
+<li><a href="http://www.soumu.go.jp/menu_seisaku/ictseisaku/housou_suishin/4k8k_suishin.html">総務省｜4K放送・8K放送　情報サイト</a></li>
+<li><a href="https://www.apab.or.jp/4k-8k/">４Ｋ・８Ｋ | 一般社団法人放送サービス高度化推進協会（A-PAB）</a></li>
+</ul>
+
+<h1>DVDレコーダー</h1>
+<h2>DVDレコーダーの使いどころ</h2>
+<p>DVDレコーダーは、テレビ番組を録画して、後で見るために利用できます。主にハードディスクにデータを記録しますが、DVDにダビングすることもできます。</p>
+<p>僕は昔、テレビでやっていたバック・トゥ・ザ・フューチャーの映画を見るために、DVDレコーダーを使ってテレビ放送を録画したことがあります。</p>
+<p>ほかにも、放送大学でやっている授業を録画して後で視聴するためにも、DVDレコーダーを使います。</p>
+<p>また、メジャーリーグの野球の試合を早朝にやっていたり、あるいはサッカーの国際試合を深夜にやっていたり、あるいは深夜にやっているアニメなどについても、DVDレコーダーは活用できます。</p>
+<p>録画だけではなく、レンタルDVDショップでレンタルされている映画のDVDを見るためにも使います。父親などは「男はつらいよ」のDVDなどをよく見ています。</p>
+<div class="edit_date">
+<p>2024.06.10</p>
+</div>
+
+<h2>空き時間に注意</h2>
+<p>DVDレコーダーで録画予約をする際には、ハードディスクの空き時間を確認しておきましょう。なんらかの理由（以前、毎週録画予約した番組の設定が生きていて、いつの間にか空き時間を食いつくすなど）で空き時間が使い果たされていた場合、正常に録画することができません。そのような場合は番組が始まった時点で録画がキャンセルされてしまいます。</p>
+<p>また、番組を毎週同じ時間で録画予約した時に、たまに放送局のほうで番組の放送時間が変わることがあるので、そのような情報をネットのニュース記事などで見逃さないようにしましょう。</p>
+<p>僕自身の経験（失敗談）については、<a href="../../diary/guren/2025.05.21.html">2025-05-21</a>、<a href="../../diary/guren/2025.06.03.html">2025-06-03</a>、<a href="../../diary/guren/2025.06.17.html">2025-06-17</a>、<a href="../../diary/guren/2025.07.05.html">2025-07-05</a>なども参照のこと。</p>
+<div class="edit_date">
+<p>2025.06.18</p>
+</div>
+
+<h1>その他</h1>
+<h2>HDMI</h2>
+<p>HDMIは、テレビにパソコンのモニター画面を表示させる時などに使うケーブル端子。すべてのAV情報を一本のケーブルで伝達できるのが特徴。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/HDMI">HDMI - Wikipedia</a></li>
+</ul>
+<p><a href="magnetic_tape.html">磁気テープ</a>や<a href="../services/netflix.html">Netflix</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.04.16</p>
+</div>
+
+<h1>他のページ</h1>
+<h2>マスコミ</h2>
+<p><a href="../social/mass_communication.html">マスコミ</a>や<a href="../social/mass_communication_tv.html">テレビの問題</a>も参照のこと。</p>
+
+<h2>テレビ番組</h2>
+<p><a href="../social/movie.html">映画・ドラマ・テレビ番組</a>を参照のこと。</p>
+
+<h2>カメラ</h1>
+<p><a href="camera.html">カメラ</a>を参照のこと。</p>
+
+<h2>電話</h2>
+<p><a href="phone.html">電話</a>を参照のこと。</p>
+
+<h2>モニター</h2>
+<p><a href="../hardware/monitor.html">モニター</a>も参照のこと。</p>
+
+<h2>電波</h2>
+<p><a href="electrical_wave.html">電波</a>も参照のこと。</p>
+
+<h2>電磁気学</h2>
+<p><a href="../natural/physics_electromagnetism.html">電磁気学</a>も参照のこと。</p>
+
+<h2>漫画・アニメ</h2>
+<p><a href="../art/manga.html">漫画・アニメ</a>も参照のこと。</p>
+
+<h2>Netflix</h2>
+<p><a href="../services/netflix.html">Netflix</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>テレビ</h2>
+<ul class="defaultlist list7">
+<li>自然科学（物理・工学）
+<ul>
+<li>工学
+<ul>
+<li>テレビ
+<ul>
+<li>走査線
+<ul>
+<li>たとえば画面を縦に100分割して、それぞれの画像を左から右に流れるように転送する</li>
+</ul></li>
+<li>電子ビーム
+<ul>
+<li>ブラウン管（ブラウン博士により発明）では、走査線による映像を電子ビームで蛍光体（電子が当たると発光する）に放射して表示する</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Ruby入門（２．クラス） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Ruby入門（２．クラス）</h1>
+<p>Ruby入門（２．クラス）です。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%AE%E3%81%97%E3%81%84Ruby-%E7%AC%AC5%E7%89%88-%E9%AB%98%E6%A9%8B-%E5%BE%81%E7%BE%A9/dp/4797386290">たのしいRuby 第5版</a>を参考にしています。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="ruby_intro.html">Ruby入門</a></li>
+<ul>
+<li><a href="ruby_intro_basic.html">１．基本</a></li>
+<li><b>２．クラス</b></li>
+<li><a href="ruby_intro_io.html">３．文字列操作とIO</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Rubyとライブラリ</h1>
+<h2>ライブラリの仕様を覚えることはRubyエンジニアになるために必須</h2>
+<p>Rubyエンジニアを目指す上で、ライブラリの仕様を覚えることは、ほとんど必須です。</p>
+<p>プログラミング言語を学ぶ上で、基本となる「言語機能」を覚えることは確かに必要ですが、それよりも「ライブラリの仕様」を覚えることのほうが、領域としては広いです。</p>
+<p>Rubyのライブラリの仕様を知っておくことで、どのような場合にどのようなAPIが存在し、使うことができるかということを、あらかじめ知っておくことができます。</p>
+<p>幸い、Rubyは日本で生まれた言語であるため、日本語の情報が多いです。Rubyに関する情報を検索した時にも、日本語の情報がよくかかります。</p>
+<p>本当のことを言えば、ライブラリの仕様すべてを丸暗記する必要はありません。それは不可能です。なので、Googleなどの検索エンジンを使って、言語とライブラリの仕様を「ググって開発する」ということが基本となります。</p>
+
+<h1>主なクラス</h1>
+<h2>リファレンスマニュアル</h2>
+<p>クラスやメソッドの一覧は、リファレンスマニュアルを参照のこと。</p>
+<ul>
+<li><a href="https://docs.ruby-lang.org/ja/latest/doc/index.html">オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル</a></li>
+<li><a href="https://docs.ruby-lang.org/ja/latest/library/_builtin.html">組み込みライブラリ - Ruby リファレンスマニュアル</a></li>
+<li><a href="https://docs.ruby-lang.org/ja/latest/library/index.html">ライブラリ一覧 - Ruby リファレンスマニュアル</a></li>
+</ul>
+
+<h2>主なクラス一覧</h2>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>説明</th><th>リファレンス</th></tr>
+<tr><td>Numeric</td><td>数値のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Numeric.html">Numeric</a></td></tr>
+<tr><td>Array</td><td>配列のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Array.html">Array</a></td></tr>
+<tr><td>String</td><td>文字列のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/String.html">String</a></td></tr>
+<tr><td>Hash</td><td>ハッシュのクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Hash.html">Hash</a></td></tr>
+<tr><td>Regexp</td><td>正規表現のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Regexp.html">Regexp</a></td></tr>
+<tr><td>IO</td><td>入出力のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/IO.html">IO</a></td></tr>
+<tr><td>File</td><td>ファイルのクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/File.html">File</a></td></tr>
+<tr><td>Dir</td><td>ディレクトリのクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Dir.html">Dir</a></td></tr>
+<tr><td>Encoding</td><td>エンコーディングのクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Encoding.html">Encoding</a></td></tr>
+<tr><td>Time</td><td>時間のクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Time.html">Time</a></td></tr>
+<tr><td>Proc</td><td>ブロックに関するクラス</td><td><a href="https://docs.ruby-lang.org/ja/2.6.0/class/Proc.html">Proc</a></td></tr>
+</table>
+
+<h2>requireで外部ファイルを読み込む</h2>
+<p>requireを用いることで、ライブラリや外部ファイルを読み込むことができる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+require "gtk"
+</pre>
+<p>とか、</p>
+<pre class="prettyprint">
+require "socket"
+</pre>
+<p>とする。これだけで、Gtk::WindowやTCPSocketのようなクラスを使えるようになる。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/16111">【Ruby入門】require(_relative)で外部ファイルを読み込もう！ | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+<p>ちなみに、requireとincludeとextendの違いについては以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/gaku8/items/db936ff7312ba7d97315">Ruby基礎 | requireとincludeとextendの違いを確認（includeとextendはメソッド探索で確認） - Qiita</a></li>
+</ul>
+<p><a href="../linux/gtk_bindings.html">GTK言語バインディング</a>も参照のこと。</p>
+
+<h2>メソッドの語末の!と?</h2>
+<p>Rubyでは、メソッドの語末の!は「破壊的なメソッド」、すなわちレシーバの内容を変更するかもしれないメソッドを表す。</p>
+<p>また、メソッドの語末の?は、「真偽値を返すメソッド」を表す。そのままif文やwhile文に指定することができる。</p>
+
+<h2>クラス名#メソッド</h2>
+<p>また、Rubyではドキュメントのような文書のために、「クラス名#メソッド」という記法を使う。これはメソッドがクラスのインスタンスメソッドであることを示している。</p>
+<p>この記法はドキュメント内でのみ有効であり、実際のプログラムコードでは「オブジェクト名.メソッド」と使う。</p>
+
+<h2>EnumerableモジュールとComparableモジュール</h2>
+<p>Enumerableとは「数え上げる」という意味で、Mix-inで提供されている数え上げるためのモジュール。繰り返しのための多くのメソッドを提供する。</p>
+<p>Arrayクラスのメソッドに見えて、本当はEnumerableモジュールで提供されているメソッドも少なくない。</p>
+<p>Enumerableモジュールはeachメソッドを必要とする。eachメソッドをイテレータとして作成した上で、Enumerableモジュールをインクルードすると、これらのメソッドを使用できる。</p>
+<p>ちなみに、比較のためのメソッド&gt;や&lt;などはComparableモジュールで提供されている。Comparableとは「比較可能な」という意味。使うためには&lt;=&gt;演算子を、a &lt; bならば-1, a == bならば0, a &gt; bならば1であると成り立つように定義する必要がある。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%AE%E3%81%97%E3%81%84Ruby-%E7%AC%AC5%E7%89%88-%E9%AB%98%E6%A9%8B-%E5%BE%81%E7%BE%A9/dp/4797386290">たのしいRuby 第5版</a>を参考に執筆しました。）</p>
+
+<h1>スレッド</h1>
+<h2>Rubyでスレッド</h2>
+<p>（<a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a>を参考に執筆しました。）</p>
+<p>Rubyでマルチスレッド処理を行う時はThreadクラスを使う。</p>
+<pre class="prettyprint">
+th = Thread.new do
+  # スレッドで行う処理をここに書く
+end
+
+# メインで行う処理をここに書く
+</pre>
+<p>スレッドの内部の変数に外部からアクセスするにはハッシュを使う。</p>
+<pre class="prettyprint">
+th = Thread.new do
+  t = Thread.current
+  t[:x] = "Hoge"
+end
+
+x = th[:x]
+</pre>
+<p>スレッドはstopで停止したり、killで殺したり、exitで自ら終了したりできる。stopしたスレッドはrunやwakeupで復帰できる。スレッドの終了を待機するにはjoinメソッドを使う。</p>
+<p>また、クリティカルセクションを使用するにはThread.criticalをtrueにする。クリティカルセクションを出たら、Thread.criticalをfalseに変更する。クリティカルセクションを出るまで、別のスレッドは実行されない。</p>
+<p>ほかにも、Mutexライブラリを使ってMutexの同期を行うこともできる。</p>
+<div class="edit_date">
+<p>2023.08.14</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>状態</h2>
+<p><a href="state.html">状態</a>を参照のこと。</p>
+
+<h2>インターフェース</h2>
+<p><a href="interface.html">インターフェース</a>を参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

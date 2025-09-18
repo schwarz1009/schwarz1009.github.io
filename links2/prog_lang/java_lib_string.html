@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観３C（文字列） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３C（文字列）</h1>
+<p>Javaによるプログラミングに関する世界観３C（文字列）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="java.html">Java（１．文法）</a></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><a href="java_oop_interface.html">２B．インターフェース</a></li>
+<li><a href="java_gc.html">２C．ガーベッジコレクションと例外</a></li>
+</ul>
+<li><a href="java_lib.html">３．クラスライブラリ</a></li>
+<ul>
+<li><a href="java_lib_io.html">３A．入出力</a></li>
+<li><a href="java_lib_list.html">３B．コレクションと配列</a></li>
+<li><b>３C．文字列</b></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><a href="java_lib_xml.html">３E．XML</a></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>String（文字列型）</h1>
+<h2>Stringクラス</h2>
+<p>Javaでの文字列は、以下のように記述する。</p>
+<pre class="prettyprint">
+String s_hoge = "ほげほげ";
+</pre>
+<p>この、ダブルクォーテーションで囲まれた文字列を記述した時点で、既に「new String()」相当のStringインスタンスが作られている。以下のような記述もできるが、2つのインスタンスが生まれてしまうため、以下のような記述は非効率的で、避けた方が良い。</p>
+<pre class="prettyprint">
+String s_hoge = new String("ほげほげ");
+</pre>
+<ul>
+<li><a href="https://nobuo-create.net/string/">【Java】 そもそもStringって何？ | 一番かんたんなJava入門</a></li>
+</ul>
+<p>後日注記：Javaは文字列が参照型であるため、==で文字列を比較することはできない。equals()メソッドを使う必要がある。</p>
+
+<h2>StringBufferクラスとStringBuilderクラス</h2>
+<p>StringBufferクラスは、文字列を連結・編集することができるクラス。</p>
+<p>Javaの標準のStringは、固定長かつ変更不可能（イミュータブル）だが、これに対してStringBufferは可変長かつ変更可能（ミュータブル）である。</p>
+<p>JavaのStringを使っている際に、たくさん「+」で文字列を連結していると、メモリ上に文字列がたくさん作られて速度が遅くなってしまう。このような場合にStringBufferを使う。</p>
+<p>また、Java 1.5で追加されたStringBuilderクラスは、StringBufferと同様、文字列を連結・編集することができるクラス。</p>
+<p>StringBufferよりもStringBuilder（新しいほう）が処理速度が高速だが、StringBuffer（古いほう）はスレッドセーフであるという違いがある。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/31984">JavaのStringBufferクラスの使い方を現役エンジニアが解説【初心者向け】 | TechAcademyマガジン</a></li>
+<li><a href="https://www.javadrive.jp/start/stringbuilder/index3.html">Java | StringBuilderオブジェクトの作成と基本的な使い方 - Let'sプログラミング</a></li>
+</ul>
+
+<h1>正規表現</h1>
+<h2>パターンマッチング</h2>
+<p>Javaの正規表現によるパターンマッチングは、まずPatternクラスのオブジェクトを作り、それを正規表現を指定したcompile()メソッドで「コンパイル」し、その後にmatcher()メソッドで「マッチ」させるなど、少しややこしくて複雑である。</p>
+<p>（以下は<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/regex/Pattern.html">Pattern (Java Platform SE 8) - Javadoc</a>を参考に執筆しました。）</p>
+<pre class="prettyprint">
+Pattern pat = Pattern.compile("ho*ge");
+Matcher mtch = pat.matcher("hooooooooge fuuuuuga");
+boolean bl = mtch.matches();
+</pre>
+<p>以下のサイトが詳しくて参考になる。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/regex/">Java正規表現の使い方 - Let'sプログラミング</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/regexp.html">Java正規表現メモ(Hishidama's Java Regular Expression Memo)</a></li>
+</ul>
+<p>正規表現については<a href="../linux/regex.html">正規表現</a>のページを参照のこと。</p>
+
+<h2>置換のためのメソッド</h2>
+<p>replaceFirst()メソッドは最初に該当した文字列を置換、replaceAll()メソッドは該当する全ての文字列を置換する。</p>
+<p>光を闇に変換するには、</p>
+<pre class="prettyprint">
+str = "光の戦士";
+str.replaceAll("光", "闇");
+</pre>
+<p>とする。</p>
+<p>似たような操作は、</p>
+<pre class="prettyprint">
+Pattern.compile("$", Pattern.MULTILINE).matcher("Welcome to my homepage.\nNice to meet you.\n").replaceFirst("&lt;br&gt;");
+Pattern.compile("$", Pattern.MULTILINE).matcher("Welcome to my homepage.\nNice to meet you.\n").replaceAll("&lt;br&gt;");
+</pre>
+<p>のようにも実現できる。Pattern.MULTILINEを指定することで、$が改行地点にもマッチする。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/start/string_class/index6.html">最初に該当した文字列を置換する(replaceFirst) - Stringクラス - Let'sプログラミング</a></li>
+<li><a href="https://www.javadrive.jp/start/string_class/index7.html">該当する全ての文字列を置換する(replaceAll) - Stringクラス - Let'sプログラミング</a></li>
+<li><a href="https://www.javadrive.jp/start/regex/index18.html">Java | MULTILINEフラグ(複数行モードを有効にする) - Java正規表現の使い方 -  Let'sプログラミング</a></li>
+</ul>
+
+<h2>分割のためのメソッド</h2>
+<p>JavaのStringでとても便利なメソッドとして、split()メソッドが挙げられる。ある正規表現で区切られた文字列を分割することができる。</p>
+<pre class="prettyprint">
+String orig = "Java:Perl:C:Python:Ruby";
+String[] items = orig.split(":");
+for (String item : items) {
+    System.out.println(item);
+}
+</pre>
+<ul>
+<li><a href="https://www.javadrive.jp/start/string_class/index5.html">文字列を分割する(split) - Stringクラス - Let'sプログラミング</a></li>
+<li><a href="https://techacademy.jp/magazine/25947">Javaのsplitの使い方を現役エンジニアが解説【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

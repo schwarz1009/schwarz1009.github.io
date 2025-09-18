@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXコマンド（初心者向け） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXコマンド（基本）</h1>
+<p>UNIXやLinuxのコマンド（基本）に関する世界観です。</p>
+<p>「<a href="https://www.amazon.co.jp/%E6%9C%80%E6%96%B0Debian-GNU-Linux%E5%AE%8C%E5%85%A8%E6%94%BB%E7%95%A5%E3%82%AC%E3%82%A4%E3%83%89-%E5%A4%A9%E9%87%8E-%E6%AD%A3%E6%A8%B9/dp/4798014125">最新 Debian GNU/Linux 完全攻略ガイド（天野正樹）</a>」を参考に執筆しました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>UNIXコマンド（基本）</b></li>
+<ul>
+<li><a href="linux_commands.html">応用１．ユーザープログラム</a></li>
+<li><a href="linux_commands_proc.html">応用２．プロセス</a></li>
+<li><a href="linux_commands_doc.html">応用３．ドキュメント</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>システム</h1>
+<h2>コマンドの基本</h2>
+<p>コマンドの基本は、「入力に対してデータの編集を行い、その結果を出力する」ということです。</p>
+<p>これが、坂村健さんによる「<a href="https://www.amazon.co.jp/%E7%97%9B%E5%BF%AB-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E5%AD%A6-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E5%9D%82%E6%9D%91-%E5%81%A5/dp/4087474283">痛快! コンピュータ学</a>」でも言われているような、プログラムの基本です。</p>
+<p>入力とはキーボード入力やファイルからの読み込みのことであり、出力とはモニター画面への表示やファイルへの出力のことです。</p>
+<p>そして、UNIXではこれを「パイプ」や「リダイレクト」によって便利にします。パイプは、あるコマンドの出力を別のコマンドの入力として渡すことであり、リダイレクトは標準入出力とファイル読み書きを変換することです。</p>
+<p>そのように、UNIXのコマンドは、入力と出力があって、入力に対して必要な処理を行った上で出力する、ということが基本になっています。コマンドを使う場合も、C言語などでコマンドを開発・実装する場合も、入力に対して出力するということが基本です。</p>
+<p>原始的なインターフェースに見えるコマンドですが、なぜ、UNIX系のOSでは、このようなコマンドを今でも使うのでしょうか。</p>
+<p>その鍵は、「リモート」と「自動化」にあります。</p>
+<p>コマンドは、実際にそのマシン（ホスト）にログインして使う以外に、ネットワークで繋がったリモートホストにログインし、サーバーのように端末（制御画面）を持たないホストであっても、リモートから操作することができます。</p>
+<p>このために使われるのは、telnetやrloginやsshといったリモートログインのための専用のコマンドです。</p>
+<p>このようなリモートログインの環境では、通常のローカルのホストのコマンドと同じコマンドが使えます。ログインするのにパスワードや公開鍵暗号の鍵が必要になりますが、それさえ持っていれば離れたネットワークからでもログインできるのです。</p>
+<p>もうひとつのコマンドの優位性は、スクリプトで自動化できることです。</p>
+<p>コマンドは、シェルと呼ばれるソフトウェアの対話的なプロンプトで実行されますが、このプロンプトで対話的に実行するだけではなく、テキストファイルにコマンドの羅列を書いておいて、その書いておいたコマンド行を、いつでも、どれだけの行でも、何度でも自動的に実行することができます。</p>
+<p>シェルにはbashやcshなどがあります。そして、パイプと組み合わせることで、スクリプトはさらに便利になります。なんらかの文字列をsedのようなフィルターコマンドで編集することで、bashに対するコマンド行に変換し、それをbashに送って実行する、などといった「シェル芸」が実現できるのです。</p>
+<p>そのように、コマンドは非常に便利です。なので、GUIアプリケーションばかり使われるようになったWindowsパソコンの現代においても、エンジニアやサーバー管理者はUNIXをコマンドで操作します。</p>
+<p>ほかにも、コマンドの優位性はあります。GUIでポチポチとマウスをクリックするよりも、効率的で間違いの少ない入力が可能です。いちいちスクロールバーをドラッグしてスクロールしながら、設定項目をひとつひとつ目で見て確認したり、現れるダイアログボックスの中のボタンをクリックしたりするよりも、多くの場合コマンド操作は効率的です。キーボードだけでコマンド行を書いてエンターで入力すればいいからです。設定についても、viでプレーンテキストの設定ファイルを編集するのは、難しく見えて本当はそのほうが間違いも少なく、ファイルそのものをコピーしてバックアップしたりできるといった利点もあります。</p>
+<p>また、現代的なLinuxのようなOSでは、コマンドの入力支援のための機能が整っています。たとえば、bashのような多くのシェルでは、タブを押すことで入力中の残りの文字列を自動的に補完してくれるタブ補完、過去に実行したコマンドをヒストリーの記録から再び入力できるヒストリ機能、あらかじめ決められたコマンドをより少ないコマンドで実行できるエイリアスのような機能があります。</p>
+<p>また、Linuxはさまざまなところでシェルスクリプトを使います。bashやX11の起動時に使われる初期化スクリプトや、デーモンの起動スクリプト、cronの定期的に実行されるスクリプトなどがシェルスクリプトによって記述されます。シェルスクリプトはC/C++のようなプログラミング言語と同じ機能を持っていて、変数や条件式や分岐・繰り返しや関数のある記述が可能です。</p>
+<p>そのように、UNIXやLinuxでは、強力なコマンド機能を使うことができます。効率的で、素早く、コマンド行さえ間違っていなければ人為的な手作業による間違いのない、半自動的な操作ができるというだけでも、この恩恵は素晴らしいものです。あるいは、viやEmacsのようなテキストエディタからUNIXのシェルやコマンドを実行したり、Perlのようなプログラミング言語からUNIXコマンドを呼び出すこともできます。特にPerlなどでは正規表現を使った優れた文字列処理ができるため、かつてよりプログラマはUNIXとPerlを使いこなします。UNIXのさまざまな単純作業はPerl（あるいはawkなど）を使って自動化できるのです。PerlとUNIXはとても親和性が高く、PythonやRubyといった現代的な言語にもその目的と役割が受け継がれています。</p>
+<p>さらにコマンドの優位性があるとしたら、それは四六時中モニターの前で待機している必要がないということです。コマンドは実行されている間、なんらかの対話的処理がもしなかった場合、モニターから離れてもコマンドの実行を続けてくれます。コマンドの実行が終わったら、またコマンドの入力ができますが、それをパイプやスクリプトを使って自動化できます。一部のソフトウェア（パッケージ管理システムなど）では、モニターに張り付いている必要がないように、-yのようなすべての対話的な入力にyesと自動的に答えてくれるオプションがあったりもします（expectのような対話的プロンプトの自動化専用のコマンドもある）。エラーの場合は中断してしまいますが、エラーがなければ最後にすべての仕事が終わるまで、別の作業（たとえば本を読む、コーヒーを飲む、インターネットをするなど）をすることができるのです。</p>
+<p>ほかには、最近は構成管理ツールというソフトウェアがあって、サーバーの導入に必要な管理作業を自動化してくれたりします。そのようなツールを使うことで、たくさんの物理的なマシンがあった場合、それらに必要なミドルウェアを導入する作業をすべて自動化できます。なので、Windowsのように、いちいちひとつひとつのパソコンにOSのインストールや設定作業を行う必要は今ではもはやありません。パソコンがひとつやふたつであれば手動でインストールすることもありますが、サーバー環境では何十何百といったマシンを一度に管理したい場合もあります。そのような場合にはAnsibleのような構成管理ツールが便利です。</p>
+<div class="edit_date">
+<p>2023.09.10</p>
+</div>
+
+<h2>ホスト名とtelnet</h2>
+<p>まず、「ホスト名」とは、ネットワーク上のそのマシン（ホスト）に付けられた名前のこと。</p>
+<p>ワークステーションに接続するためには、telnetなどにホスト名あるいはIPアドレスを指定する。</p>
+<p>telnetでホスト「hogepc」に接続する時は、</p>
+<pre>
+telnet hogepc
+</pre>
+<p>とする。Windowsでtelnetを行うには、TeraTermなどを用いる。</p>
+<p>（「<a href="https://www.amazon.co.jp/%E6%83%85%E5%A0%B1%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96-%E5%96%9C%E4%B9%85%E5%B7%9D-%E6%94%BF%E5%90%89/dp/4873613515">情報基礎概論 第4版 喜久川政吉・殿塚勲 共著（学術図書出版社）</a>」を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/netkit/man1/telnet.1.html">man telnet</a></li>
+</ul>
+<p>後日注記：現在のLinuxでは、telnetはパスワード情報などを暗号化せず平文でネットワーク送信してしまうため、利用を推奨されません。SSHを使うようにしましょう。</p>
+<p><a href="linux_ssh.html">SSH</a>も参照のこと。</p>
+
+<h2>カレントディレクトリ</h2>
+<p>UNIXのコマンド操作を行うには、まず、カレントディレクトリの概念を知っておく必要がある。</p>
+<p>カレントディレクトリとは、「ユーザーが今作業を行っているディレクトリ」のこと。</p>
+<p>今いる場所を変えるには、cdコマンドを使う。</p>
+<p>たとえば、/usr/ディレクトリに移動するには、</p>
+<pre>
+cd /usr/
+</pre>
+<p>とする。~はホームディレクトリ、/はルートディレクトリ、.あるいは./は現在のディレクトリ、..あるいは../はひとつ上のディレクトリを表す。単にhogeとした場合は、現在のディレクトリの中のhogeディレクトリあるいはhogeファイルを表す。</p>
+
+<h2>コマンド操作とパイプ・リダイレクト</h2>
+<p>現在のディレクトリの中のhogeファイルを読みたいなら、</p>
+<pre>
+cat hoge
+</pre>
+<p>とすれば、hogeファイルの中身をターミナルに全出力する。しかしながら、上の方が流れてしまうため、通常はパイプを使ってlessに渡す。lessはページャと呼ばれるコマンドプログラムで、テキストを上下にスクロールして閲覧することができる。</p>
+<pre>
+cat hoge | less
+</pre>
+<p>UNIXでは、このように「catコマンドの出力を別のlessコマンドに渡す」といったことが|を使って簡単にできる。これをパイプという。</p>
+<p>また、lessに渡すのではなく、いったんファイルに出力して、そのファイルを表示したい時などに、リダイレクトと呼ばれる機能が使える。</p>
+<pre>
+cat hoge &gt; hoge1.txt
+</pre>
+<p>&gt;とすればファイルへと出力でき、逆に&lt;とすればファイルから全行を入力に使うことができる。この時、C言語のプログラムでは、標準入出力と呼ばれる機構を使って入出力管理が行われているため、どんなソフトウェアでも、標準入力や標準出力としてリダイレクトやパイプによるストリームを渡すことができる。</p>
+
+<h2>オプション</h2>
+<p>コマンドにはオプションがあり、標準で実行されるプログラムに「このようにしてほしい」というオプション命令を加えて実行することができる。</p>
+<p>たとえば、lsで詳細表示と全てのファイルを表示する場合は、</p>
+<pre>
+ls -al
+</pre>
+<p>とする。オプションの詳細については、manコマンドを実行することでオンラインマニュアルを読むことができる。たとえば、</p>
+<pre>
+man ls
+</pre>
+<p>と実行すれば、lsコマンドのオンラインマニュアルを閲覧できる。</p>
+
+<h2>基本のコマンド</h2>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>login</td><td>ログインしている時に、<br>他のユーザで再ログインするために使う。</td></tr>
+<tr><td>man</td><td>オンラインマニュアル。<br>man lsとすればlsについての使い方やオプションの情報が見れる。</td></tr>
+<tr><td>echo</td><td>引数となる文字列を出力する。<br>特に確認のために環境変数を出力したり、<br>一行をファイルに出力したい場合などに使う。</td></tr>
+<tr><td>alias</td><td>コマンドの別名。<br>rmなどの危険なコマンドに、<br>常に-i（確認が必要）オプションをつける場合などに使う。</td></tr>
+</table>
+
+<h2>rootユーザー</h2>
+<p>UNIXシステムの管理者ユーザー。システムを変え、破壊する権限を持つ。rootになるためには、su -を実行する。</p>
+<p>基本的に、ホームディレクトリ以外はrootの管理に置かれるため、ホームディレクトリ以外のファイルを変更したい時は、su -を実行して、rootパスワードを入力する。</p>
+<p>Ubuntuなどでは、普段使う際にはrootユーザーが存在せず、suの代わりにsudoを使う。</p>
+<p>また、rootが所有者となっているシステムのファイルにアクセスできるかどうかは、パーミッションによる。パーミッションはファイルの読み込み、書き込み、実行に関する権限を与えるもので、所有ユーザ、所有グループ、その他のユーザに対して許可と不許可を設定できる。</p>
+
+<h2>ホームディレクトリ(~/)</h2>
+<p>ユーザーに与えられた、自由なディレクトリ。</p>
+<p>通常は/home/username/の中にあり、自分の好きなように使うことができ、他のユーザーからは秘匿にすることができる。</p>
+
+<h2>端末とシェル</h2>
+<p>コマンドを入力し、実行するための、端末とシェルにおいて、$や%は一般ユーザーでの操作、#はrootユーザーでの操作を表す。この文字を入力する必要はない。</p>
+<p>たとえば、</p>
+<pre>
+$ ls hoge
+</pre>
+<p>と記述されていれば、一般ユーザーのシェルで、</p>
+<pre>
+ls hoge
+</pre>
+<p>と入力してエンターキーを押せばいい。</p>
+<p>あるいは、</p>
+<pre>
+# apt install gcc
+</pre>
+<p>と記述されていれば、まずrootユーザーになるためにsuコマンドを使用する。</p>
+<pre>
+su -
+</pre>
+<p>このように入力して（-を忘れないように注意）、rootユーザーのパスワードを聞かれたら入力する。パスワードは画面には表示されないが、間違いなく入力してエンターキーを押してログイン後のシェルを起動すると、シェルのプロンプトが$や%から#に変化する。</p>
+<p>この状態で、</p>
+<pre>
+apt install gcc
+</pre>
+<p>と入力してエンターキーを押せばいい。</p>
+<p>もし、root権限が必要なくなったら、</p>
+<pre>
+exit
+</pre>
+<p>と実行すれば、その時点で起動中のシェルは終了し、一般ユーザーのシェルに戻る。rootユーザーはどんなシステムの破壊行為も可能であるため、できるだけ一般ユーザーで作業することが強く推奨される。</p>
+<p>Ubuntuなどでは、sudoコマンドをsuコマンドの代わりに使用することができる。この時、rootユーザーのパスワードは聞かれず、今ログインしている一般ユーザーのパスワードが要求される。</p>
+<pre>
+sudo apt install gcc
+</pre>
+<p>sudoを使うことができるユーザーは、/etc/sudoersでユーザーが登録されていることが条件となる。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0201/05/news002.html">コマンドオペレーションの魅力を再確認 - @IT</a></li>
+</ul>
+
+<h1>シェル</h1>
+<h2>基本</h2>
+<p>シェルとコマンド操作の基本は以下のようなページがとても参考になる。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/series/3016/">“応用力”をつけるためのLinux再入門 - @IT</a></li>
+</ul>
+<h2>シェル</h2>
+<p>シェルとは、ライン入力からコマンドのプログラムを実行するソフトウェア。Linuxでは、標準的にbashが使われる。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_bash/man1/bash.1.html">Man page of BASH</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0203/12/news001.html">bashの便利な機能を使いこなそう (1/2) - @IT</a></li>
+</ul>
+<h2>PATH</h2>
+<p>PATHは環境変数。シェルにコマンド名を入力して実行した時、PATHに含まれているディレクトリからプログラムが検索される。以下のコマンドでPATHを表示できる。</p>
+<pre>
+echo $PATH
+</pre>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/Path.html">PATH HOWTO</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1605/09/news013.html">PATHを理解して、コマンドの在りかを探してみよう (1/3) - @IT</a></li>
+</ul>
+<h2>初期化ファイル</h2>
+<p>bashは、初期化設定ファイルを読み込みます。</p>
+<table class="some_tables">
+<tr><th class="min60">ファイル名</th><th>説明</th></tr>
+<tr><td>~/.bashrc</td><td>ユーザーの設定で、シェルの起動時に毎回読み込まれる。</td></tr>
+<tr><td>~/.bash_profile</td><td>ユーザーの設定で、ログイン時のシェル（ログインシェル）で一回だけ読み込まれる。</td></tr>
+<tr><td>/etc/profile</td><td>システムの標準設定で、ログインシェルで読み込まれる。</td></tr>
+<tr><td>/etc/bashrc</td><td>システムの標準設定で、シェルの起動時に毎回読み込まれる。</td></tr>
+</table>
+<p>~/はホームディレクトリのことです。</p>
+<p><a href="linux_unix_admin.html">UNIXシステム管理（システム情報と設定）</a>を参照のこと。</p>
+
+<h2>コマンド補完</h2>
+<p>途中まで打ち込んで、タブキーを押すと、コマンド補完が出来ます。</p>
+<p><a href="linux_bash.html">Bash</a>を参照のこと。</p>
+
+<h2>パイプとリダイレクト</h2>
+<p>コマンドを組み合わせて使うことが出来るパイプとリダイレクトについて。パイプはコマンドの出力を別のコマンドの入力に渡す。たとえば、</p>
+<pre>
+cat hoge.txt | grep A | grep B | grep C
+</pre>
+<p>とすれば、hoge.txtの中のAとBとCが含まれた行を表示できる。</p>
+<p>リダイレクトは、ファイルの内容を標準入力や標準出力と変換することのできる機能。プログラミングの視点から言えば、C言語の標準入出力のAPIでファイルを操作できる。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1603/24/news018.html">パイプとリダイレクトでコマンドを組み合わせて実行しよう (1/4) - @IT</a></li>
+</ul>
+<p><a href="linux_bash_advanced.html">Bashのさまざまな機能</a>を参照のこと。</p>
+
+<h2>シェルスクリプト</h2>
+<p>bashでのシェルスクリプトについて。基本的にコマンドの羅列をスクリプトに書くことで、そのコマンドを実行できます。またプログラミングも可能。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0202/05/news001.html">bashで始めるシェルスクリプト基礎の基礎 (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/shellsindex.html">連載記事 「ステップ・バイ・ステップ・シェルスクリプト」 - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/smart_shell.html">連載記事 「スマートな紳士のためのシェルスクリプト」 - @IT</a></li>
+</ul>
+<p><a href="linux_bash_script.html">Bash（シェルスクリプト）</a>を参照のこと。</p>
+
+<h2>ワイルドカード</h2>
+<p>シェルでコマンドを実行する際、ファイル名などに*や?などのワイルドカードが使える。</p>
+<p>*は任意の文字列（複数文字）、?は任意の文字（1文字）を表す。</p>
+<p>たとえば、</p>
+<pre>
+ls /etc/*.conf
+</pre>
+<p>などとできる。</p>
+
+<h1>コマンドのソースコードを読もう</h1>
+<h2>coreutils.git</h2>
+<p>coreutilsのgitで基本的なコマンドのコードを読むことが出来ます。</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git/tree/src">coreutils.git</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/js-foundation/0013">第13回　Linuxコマンドの基礎の基礎 - gihyo.jp</a></li>
+</ul>
+<p>たとえばcat.cはこんな感じです。</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git/tree/src/cat.c">cat.c\src - coreutils.git - GNU coreutils</a></li>
+</ul>
+
+<h1>コマンド</h1>
+<h2>コマンド一覧</h2>
+<p>コマンド一覧。Linuxのコマンドの中で一番基本的なものは、coreutilsと言うパッケージに含まれていますが、さらに高度で便利なコマンドが沢山あります。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/">UNIXの部屋</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/series/3065/">Linux基本コマンドTips - @IT</a></li>
+<li><a href="http://linuxjf.osdn.jp/">JF Project</a></li>
+<li><a href="http://linuxjm.osdn.jp/">JM Project</a></li>
+<li><a href="http://linuxjm.osdn.jp/INDEX/">JM インデックス</a></li>
+<li><a href="http://net-newbie.com/linux/commands/index.html">ＵＮＩＸコマンド概説 - ネットワーク管理者（の卵）養成講座</a></li>
+<li><a href="http://www.yoshinobrain.com/linux2.html">Linux 入門   その２ - Yoshino Brain</a></li>
+</ul>
+
+<h2>alias</h2>
+<p>コマンドの別名（エイリアス）を設定する。</p>
+<pre>
+alias rm='rm -i'
+</pre>
+<p>何も引数を与えずにaliasコマンドを実行すると、定義されたエイリアスの一覧が見れる。</p>
+
+<h2>man</h2>
+<p>マニュアルページを表示する。</p>
+<pre>
+man man
+</pre>
+<p>主なオプションは-C（設定ファイルの指定）、-P（ページャの指定）、-k（キーワード検索）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/man-db/man1/man.1.html">man man</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?man">UNIXの部屋 コマンド検索: man</a></li>
+</ul>
+<p><a href="linux_commands_doc.html">Linuxコマンド（ドキュメント）</a>を参照のこと。</p>
+
+<h2>less/more</h2>
+<p>ファイルの中身を表示する。lessではスクロールでファイルの全体を観覧出来る。</p>
+<pre>
+find / | less
+</pre>
+<p>lessのコマンドは、fあるいはスペースで一画面下にスクロール、bで一画面上にスクロール、jで一行下、kで一行上、qで終了、/で検索、?で逆方向に検索、nで次の検索場所に移動、Nで前の検索場所に移動。</p>
+<p>主なオプションは-N（行番号を付ける）、-s（連続した空白だけの行を1行として表示する）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/more.1.html">man more</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_less/man1/less.1.html">man less</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?less">UNIXの部屋 コマンド検索: less</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>lv</h2>
+<p>lessと同様にファイルの内容を表示するページャだが、EUC-JP、UTF-8、Shift-JISなどの文字コードに対応している。</p>
+<pre>
+lv hoge.txt
+</pre>
+<p>主なオプションは-I（入力文字コードを指定）、-O（出力文字コードを指定）。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>ls</h2>
+<p>ディレクトリの中身のリスト（ファイル一覧）を表示する。</p>
+<p>ディレクトリの中のファイル一覧と、ファイルの情報を表示する。ディレクトリの中のファイル内容をリストする時に使う。オプションを使いこなそう。</p>
+<pre>
+ls -Al
+</pre>
+<p>主なオプションは-a（ドットファイルや隠しファイルを含むすべてのファイルを表示）、-l（詳細表示、更新日時などが表示される）、-h（ファイルサイズを人間の読みやすい形式で表示）、-t（更新時間で並び替え）、-x（拡張子で並び替え）、-S（ファイルサイズで並び替え）、-r（ソートを逆順にする）、-F（ディレクトリや実行ファイルのタイプ識別子をマーキングして表示）、-R（子ディレクトリのディレクトリ階層を再帰的に辿って表示）、-i（ファイルのi-node番号を表示）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/ls.1.html">man ls</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?ls">UNIXの部屋 コマンド検索: ls</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+<li><a href="https://eng-entrance.com/linux_command_ls">lsコマンドの使い方と覚えたい15のオプション【Linuxコマンド集】 - エンジニアの入り口</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>cd</h2>
+<p>現在のディレクトリを変更（移動）する。</p>
+<pre>
+cd ..
+</pre>
+<p>主なオプションは-L（シンボリックリンクの場合にリンク先のディレクトリに移動する）、-P（シンボリックリンクの場合にリンク先のディレクトリに移動しない）。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cd">UNIXの部屋 コマンド検索: cd</a></li>
+</ul>
+
+<h2>pwd</h2>
+<p>カレントディレクトリ（作業ディレクトリ）のパスを表示する。</p>
+<pre>
+pwd
+</pre>
+<p>主なオプションは-L（環境変数PWDを使う）、-P（シンボリックリンクを辿る）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/pwd.1.html">man pwd</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>mkdir</h2>
+<p>ディレクトリを新しく作成する。</p>
+<pre>
+mkdir -m 755 hoge
+</pre>
+<p>主なオプションは-p（上位のディレクトリ階層すべてを作成する）、-m（権限を指定する）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/mkdir.1.html">man mkdir</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?mkdir">UNIXの部屋 コマンド検索: mkdir</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>cp</h2>
+<p>ファイルやディレクトリをコピーする。</p>
+<pre>
+cp -r hoge1 hoge2
+</pre>
+<p>主なオプションは-i（同じ名前のファイルがあった場合に確認）、-r（ディレクトリごと再帰的にコピー）、-p（更新日時を保つ）、-u（コピー先の同一ファイル名のほうが更新日時が新しい場合はコピーしない）、-b（バックアップフラグを指定する）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/cp.1.html">man cp</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cp">UNIXの部屋 コマンド検索: cp</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>mv</h2>
+<p>ファイルやディレクトリを移動・名前変更する。</p>
+<pre>
+mv hoge1 hoge2
+</pre>
+<p>主なオプションは-i（同じ名前のファイルがあった場合に確認）、-b（同じファイル名がある場合にバックアップフラグを指定する）。-bを指定すると、デフォルトでは~をバックアップ拡張子に追加し、-b=tを指定すると、バックアップファイルが既にある場合に数値を加算する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/mv.1.html">man mv</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?mv">UNIXの部屋 コマンド検索: mv</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+<li><a href="https://linuxcommand.net/mv/">mv コマンド – ファイルの移動や名前変更 | Linuxコマンド.NET</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>rm</h2>
+<p>ファイルやディレクトリを削除する。</p>
+<p>間違えて使わないように、エイリアスなどで確認表示をデフォルトにすることもある。</p>
+<pre>
+rm hoge
+</pre>
+<p>主なオプションは-i（削除を確認する）、-f（警告を表示しない）、-r（ディレクトリ以下のすべてのファイルを再帰的に削除）、-d（空のディレクトリを削除）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/rm.1.html">man rm</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?rm">UNIXの部屋 コマンド検索: rm</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>rmdir</h2>
+<p>ディレクトリを削除する。空のディレクトリを削除する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/rmdir.1.html">man rmdir</a></li>
+</ul>
+
+<h2>cat</h2>
+<p>ファイルの中身を表示する。ファイルの全体をコマンドラインに出力する。</p>
+<pre>
+cat hoge_a.txt hoge_b.txt &gt; hoge_c.txt
+</pre>
+<p>よく使うオプションは-n（行番号を表示）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/cat.1.html">man cat</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?cat">UNIXの部屋 コマンド検索: cat</a></li>
+</ul>
+
+<h2>ln</h2>
+<p>ファイルのリンク（ハードリンク・シンボリックリンク）を作る。</p>
+<p>ファイルやディレクトリにリンクを設定。シンボリックリンクを作る時に使う。</p>
+<pre>
+ln -s /usr/local/bin bin
+</pre>
+<p>-sをつけるとシンボリックリンクを、つけないとハードリンクを作成する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/ln.1.html">man ln</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?ln">UNIXの部屋 コマンド検索: ln</a></li>
+</ul>
+
+<h2>touch</h2>
+<p>タイムスタンプを更新する。内容を変更せずftpなどで再更新したい時などに使う。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/touch.1.html">man touch</a></li>
+</ul>
+
+<h2>shred</h2>
+<p>ファイルを復元不可能にする。</p>
+<p>主なオプションは-v（処理の状況を表示）、-z（shred処理の痕跡を残さないために、最後にnullデータで上書きする）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/shred.1.html">man shred</a></li>
+</ul>
+<p><a href="linux_commands.html">Linuxコマンド（ユーザープログラム）</a>を参照のこと。</p>
+
+<h2>chmod/chown</h2>
+<p>ファイルのパーミッション・オーナーを変更する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/chmod.1.html">man chmod</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/chown.1.html">man chown</a></li>
+</ul>
+<p><a href="linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>を参照のこと。</p>
+
+<h2>ps</h2>
+<p>実行中のプロセス一覧を表示する。</p>
+<pre>
+$ ps
+ PID TTY          TIME CMD
+ 400 pts/2    00:00:00 bash
+ 410 pts/2    00:00:00 ps
+</pre>
+<p>（<a href="https://www12.atwiki.jp/linux2ch/pages/54.html">初心者のためのシェル(bash)入門 - 2ch-Linux-Beginners</a>より編集して引用。）</p>
+<p>主なオプションはa（全てのプロセスを表示）、r（実行中のプロセスを表示）、-u ユーザ名（ユーザ名やユーザIDで抽出）。</p>
+<p>また、Tオプションをつけて表示される状態は、Sが割り込み可能なスリープ、Dが割り込み不可能なスリープ、Rが実行中・実行可能、Tがトレース中・停止中、Zがゾンビ。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man1/ps.1.html">man ps</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?ps">UNIXの部屋 コマンド検索: ps</a></li>
+</ul>
+<p><a href="linux_commands_proc.html">Linuxコマンド（プロセス）</a>を参照のこと。</p>
+
+<h2>kill/killall</h2>
+<p>プロセスを強制終了する。Ctrl+Cも使います。</p>
+<pre>
+$ cp /home/hoge/bigfile1 /home/hoge/bigfile2 &
+$ ps
+ PID TTY          TIME CMD
+ 400 pts/2    00:00:00 bash
+ 412 pts/2    00:00:00 cp
+ 414 pts/2    00:00:00 ps
+$ kill 412
+</pre>
+<p>（<a href="https://www12.atwiki.jp/linux2ch/pages/54.html">初心者のためのシェル(bash)入門 - 2ch-Linux-Beginners</a>より編集して引用。）</p>
+<p>killのオプションは-s シグナル名（送信するシグナルを指定する）、-l（シグナルの一覧を表示する）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/kill.1.html">man kill</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/psmisc/man1/killall.1.html">man killall</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?kill">UNIXの部屋 コマンド検索: kill</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?killall">UNIXの部屋 コマンド検索: killall</a></li>
+</ul>
+<p><a href="linux_commands_proc.html">Linuxコマンド（プロセス）</a>を参照のこと。</p>
+
+<h2>find</h2>
+<p>ファイルを検索して一覧表示する。</p>
+<pre>
+find /
+</pre>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_findutils/man1/find.1.html">man find</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?find">UNIXの部屋 コマンド検索: find</a></li>
+</ul>
+<p><a href="find.html">find</a>を参照のこと。</p>
+
+<h2>tree</h2>
+<p>ファイルやディレクトリの中身をツリー構造で表示する。</p>
+<pre>
+tree /home/assy
+</pre>
+<p>パターンにマッチさせて表示を絞るには-Pオプションを使う。</p>
+<pre>
+tree -P '*.html' /home/assy
+</pre>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13</p>
+</div>
+
+<h2>grep</h2>
+<p>特定の文字列を含む行を抽出する。</p>
+<pre>
+find . | grep hoge
+</pre>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_grep/man1/grep.1.html">man grep</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?grep">UNIXの部屋 コマンド検索: grep</a></li>
+</ul>
+<p><a href="grep.html">grep</a>を参照のこと。</p>
+
+<h2>tar</h2>
+<p>アーカイブファイルを作成・展開する。</p>
+<pre>
+tar czvf hoge.tar.gz hoge_dir/
+tar xzvf hoge.tar.gz
+</pre>
+<p>xは展開、cは作成、tは表示、rは追加。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_tar/man1/tar.1.html">man tar</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?tar">UNIXの部屋 コマンド検索: tar</a></li>
+</ul>
+<p><a href="linux_filetools_archive.html">Linux アーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+<h2>date</h2>
+<p>dateは日付を表示・設定する。単にdateと入力して実行すると現在の日付と時刻を表示する。</p>
+<p>後日注記：dateは、シェルスクリプトなどでよく使われる。たとえば、</p>
+<pre>
+$(date +%Y.%m.%d)
+</pre>
+<p>のように、現在の日時をシェルスクリプトの中で指定したい場合に使える。+以降の文字列はフォーマットを表し、%Yは年、%mは月、%dは日に自動で変換される。</p>
+<p><a href="linux_unix_cron.html">UNIXシステム管理（cron）</a>も参照のこと。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/date.1.html">man date</a></li>
+<li><a href="https://hydrocul.github.io/wiki/commands/date.html">date コマンド | コマンドの使い方(Linux) | hydroculのメモ</a></li>
+</ul>
+
+<h2>cal</h2>
+<p>calはカレンダーの表示を行う。cal -yで一年分、cal -3で三か月分（今月に加えて先月と来月）を表示する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man1/cal.1.html">man cal</a></li>
+</ul>
+
+<h2>adduser</h2>
+<p>ユーザを新しく追加する。</p>
+<p>主なオプションは--conf ファイル名（設定ファイルを指定する）、--shell シェル名（ログインシェルを指定する）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/shadow/man8/adduser.8.html">man adduser</a></li>
+</ul>
+<p><a href="linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>を参照のこと。</p>
+
+<h2>passwd</h2>
+<p>ユーザのパスワードを変更する。</p>
+<p>passwdは、特定のアカウントを停止するために使うこともできる。この場合のオプションは、-lは停止、-uは停止の解除、-Sは状態の表示となる。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/shadow/man1/passwd.1.html">man passwd</a></li>
+</ul>
+<p><a href="linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>を参照のこと。</p>
+
+<h2>halt/shutdown</h2>
+<p>システムを停止させるコマンド。</p>
+<p>haltのオプションは-w（再起動・停止をせずにwtmpに記録のみを行う）、-d（wtmpに記録しない）、-f（強制的に再起動・停止をする）。</p>
+<p>shutdownのオプションは-h（シャットダウン）、-r（再起動）、-F（再起動する際にfsckを行う）、hh : mm（指定した時間にシャットダウンを行う）、+数字（指定した分後にシャットダウンを行う）、now（コマンド入力をしてすぐにシステムを終了する）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/SysVinit/man8/halt.8.html">man halt</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/SysVinit/man8/shutdown.8.html">man shutdown</a></li>
+</ul>
+
+<h2>シェル変数・環境変数</h2>
+<table class="some_tables">
+<tr>
+<th class="min60">コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>set</td>
+<td>シェル変数の設定と表示。</td>
+</tr>
+<tr>
+<td>setenv</td>
+<td>環境変数の設定。（csh/tsch）</td>
+</tr>
+<tr>
+<td>export</td>
+<td>環境変数の設定。（sh/bash）</td>
+</tr>
+<tr>
+<td>env/printenv</td>
+<td>環境変数の一覧の表示・設定。</td>
+</tr>
+</table>
+
+<h2>ソースコード</h2>
+<p>もっと沢山のコマンドがありますが、coreutilsのgitで基本的なコマンドのコードを読むことが出来ます。</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git/tree/src">coreutils.git</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/js-foundation/0013">第13回　Linuxコマンドの基礎の基礎 - gihyo.jp</a></li>
+</ul>
+
+<h1>参考文献</h1>
+<h2>書籍</h2>
+<p>以下の書籍・ページが参考になります（上のコマンド一覧は以下の情報を基に記述しました）。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%9C%80%E6%96%B0Debian-GNU-Linux%E5%AE%8C%E5%85%A8%E6%94%BB%E7%95%A5%E3%82%AC%E3%82%A4%E3%83%89-%E5%A4%A9%E9%87%8E-%E6%AD%A3%E6%A8%B9/dp/4798014125">最新 Debian GNU/Linux 完全攻略ガイド（天野正樹）</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+<li><a href="https://qiita.com/taddy_korokoro/items/7aab525561c59cd39d02">Linux ディレクトリ・ファイル操作 コマンド一覧 - Qiita</a></li>
+<li><a href="https://www12.atwiki.jp/linux2ch/pages/54.html">初心者のためのシェル(bash)入門 - 2ch-Linux-Beginners</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

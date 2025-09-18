@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>発電機の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">工学・機械技術の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/tech_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>発電機の世界観</h1>
+<p>発電機の世界観です。</p>
+<p>機械に詳しい父親の話を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>発電機</h1>
+<h2>直流と交流</h2>
+<p>電流の流れ方には、直流と交流がある。</p>
+<p>たとえば、水流の場合。水は、上から下へと一方向に流れる。これは電池も同じで、電流は+から-へと一方向に流れる（電子の流れは-から+だが、電流の流れは+から-）。</p>
+<p>これは、川が上流から下流へと一方向に流れるのと同じ。</p>
+<p>このように、流れが一方向の電流の流れのことを、直流（DC）という。電池の場合は直流である。</p>
+<p>これに対して、海の寄せては返す波のように、「行ったり来たりを繰り返す電流の流れ」がある。これを交流（AC）と呼ぶ。そして、原理上、発電機は交流であり、家庭に届けられる電気も交流である。</p>
+<p>家庭に届く電気は交流だが、パソコンなど電気機械の多くは直流で動いている。このため、ACアダプターと呼ばれる、ACの電流をDCに変換する装置が必要となることがある。</p>
+
+<h2>電磁誘導</h2>
+<p>発電機の仕組みを考えるためには、電磁誘導を考えなければならない。</p>
+<p>電磁誘導とは、電流から磁界を発生させたり、磁界から電流を発生させることのできる現象のこと。</p>
+<p>磁石の周りの空間には、以下のような目に見えない磁界が発生する。</p>
+<p><img class="images_figure" src="generator1.png" alt="磁界"></p>
+<p>磁界を表現したこのような図（モデル）の中で、周りの線のことを磁力線と言う。</p>
+<p>磁石にはN極とS極があり、同じ極同士は反発し、違う曲同士は引き合うという性質がある。</p>
+<p>また、地球も巨大な磁石であり、地球の周りには磁界がある。コンパス（羅針盤）を使うことで、北と南がどの方角なのかを知ることができる。</p>
+<p>また、磁石に鉄の釘のような鉄でできたものをくっつけると、釘は磁石の性質を持つ。鉄が磁界の流れを通し、磁石の性質を働かせるようになるのである。鉄の釘のように、磁石の性質を持った物質を「磁性体」と呼ぶ。</p>
+<p>次に、導線に対して以下のように磁石を近づけて、導線の周囲の磁界の強さを変化させてみる。</p>
+<p><img class="images_figure" src="generator2.png" alt="電磁誘導"></p>
+<p>このようにすると、なんと導線に電流が流れる。これを電磁誘導と言う。</p>
+
+<h2>フレミングの法則</h2>
+<p>電磁誘導とは、「導線の周囲の磁界の強さが変化すると、導線に電流が発生する」というものである。</p>
+<p>電磁誘導に関して、「フレミングの法則」と呼ばれる法則がある。フレミングの法則は、よく知られている「左手の法則」と「右手の法則」がある。</p>
+<table class="some_tables">
+<tr><th class="min60">法則</th><th>意味</th></tr>
+<tr><td>左手の法則</td><td>磁界によって電流を生み出す時の法則。<br>磁界と導線が直角であった時、それぞれ直角に指した左手の中指が電流(I)、人差し指が磁力(B)、親指が力(f)の方向となる。<br>それぞれの頭を取って「電磁力」と覚える。</td></tr>
+<tr><td>右手の法則</td><td>コイルに発生する起電力（たとえばモーター）の法則。<br>右手の中指が電流、人差し指が磁力、親指が力の方向となる。右手と左手が違うだけで指は同じ。</td></tr>
+</table>
+<p>この法則を用いて、導線に磁石を近づけたり離したりすることで、発電機を作ることができる。この「近づけたり離したり」という動作が繰り返し行われることが、発電機が交流になった理由である。</p>
+
+<h2>コイルと発電機</h2>
+<p>さて、このように電磁誘導が理解できたところで、電力を連続させて、大きく使うためにはどうするか。</p>
+<p>まず、以下のように、導線をくるくると巻いて、その中に磁石を入れたり出したりする仕組みを考えた。この時、導線をくるくると巻いたものをコイルと呼ぶ。</p>
+<p><img class="images_figure" src="generator3.png" alt="コイル１"></p>
+<p>このようにすることで、磁界の強さがたくさんの導線で一度に変えられ、電流が大きく流れるし、入れたり出したりすることで連続して電流を発生させられる。</p>
+<p>しかしながら、「入れたり出したり」といった方式は少し面倒であり、手間がかかる。</p>
+<p>そして、磁性体の周りにコイルを巻いて、磁石を回転させる仕組みを考えた。</p>
+<p><img class="images_figure" src="generator4.png" alt="コイル２"></p>
+<p>これなら、回転させるだけで、たくさんの電力を発生させることができる。</p>
+<p>実際の発電機では、磁石の周りにたくさんのコイルをつけ、磁石を中心で回転させるなどして、より効率的に発電を行うようになっている。</p>
+<p><img class="images_figure" src="generator5.png" alt="コイル３"></p>
+
+<h1>さまざまなこと</h1>
+<h2>発電機の発明</h2>
+<p>発電機を発明したのはエジソン（GE社、ゼネラル・エレクトリック社）だが、当時はシーメンス社など同じように発電機を発明しようとする多くの発明家や会社があった。</p>
+<p>ちなみに、日本では、関東と関西で別々の会社から発電システムを輸入したため、東日本と西日本で50Hzと60Hzの違いが生まれてしまった。東京（関東）の電力会社はドイツから50Hzの発電機を、大阪（関西）の電力会社はアメリカから60Hzの発電機を輸入した。</p>
+<ul>
+<li><a href="https://www.monotaro.com/s/pages/productinfo/hertz/">周波数の50Hzと60Hzの違い 【通販モノタロウ】</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.05.04編集</p>
+</div>
+
+<h2>使用後は燃料を使い切る</h2>
+<p>発電機の注意点として、燃料を入れっぱなしにすることはNG。燃料が劣化して発電機が動かなくなったり、火災の原因になったりします。使用後は燃料を使い切ってから保管するようにしよう。</p>
+<ul>
+<li><a href="https://hatudenki.jp/?p=145">発電機にガソリンを入れっぱなしはダメ？保管方法などを徹底解説！ &#8211; 発電機.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.05.04</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>発電所・電池</h2>
+<p><a href="power_plant.html">発電所</a>や<a href="battery.html">電池</a>を参照のこと。</p>
+
+<h2>電磁気学</h2>
+<p><a href="../natural/physics_electromagnetism.html">電磁気学</a>も参照のこと。</p>
+
+<h2>科学者</h2>
+<p>エジソンについては<a href="../natural/scientists.html">科学者・科学史</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>発電機</h2>
+<ul class="defaultlist list7">
+<li>自然科学（物理・工学）
+<ul>
+<li>力学
+<ul>
+<li>発電機
+<ul>
+<li>電磁誘導
+<ul>
+<li>導線の周りの磁界を変化させると導線に電流が発生する</li>
+</ul></li>
+<li>フレミングの右手・左手の法則</li>
+<li>原理上発電機は交流になる（電流が行ったり来たりする）
+<ul>
+<li>家庭に届けられる電機は交流</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

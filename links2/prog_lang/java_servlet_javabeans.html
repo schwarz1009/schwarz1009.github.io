@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JavaBeans関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaBeansの世界観</h1>
+<p>JavaBeansに関する世界観です。<a href="java_servlet.html">Javaの世界観B（サーブレット）</a>も参照のこと。</p>
+
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>再利用のモデルと分散コンピューティング</h1>
+<h2>JavaBeansとは</h2>
+<p>JavaBeansとは、Javaにおける再利用可能なビジネスロジックをコンポーネント化する技術仕様のこと。</p>
+<p>Javaのコンポーネントをよりよく再利用することを目的としている。</p>
+<ul>
+<li><a href="https://qiita.com/s_hino/items/0e3234b8feefe2d14315">【初心者向け】10分で絶対にわかる！JavaBeansとは - Qiita</a></li>
+<li><a href="http://www.wakhok.ac.jp/~tomoharu/web2004/text/index_c4.html">JavaによるWebアプリケーション入門 - サマースクール 2004 in 稚内</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/0404/17/news012.html">JavaBeansのルールを知る (1/2)：基礎から学ぶサーブレット／JSP（12） - ＠IT</a></li>
+<li><a href="https://www.sejuku.net/blog/60374">JavaBeansとは？仕様や使い方、永続化について解説 | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/JavaBeans">JavaBeans - Wikipedia</a></li>
+</ul>
+
+<h2>JavaBeansの意味</h2>
+<p>（以下の記述は何も知らない時点の僕が記述したものであり、間違っている可能性があります。注意してご覧ください。）</p>
+<p>JavaBeansは、サーブレットの開発において、データをまとめて格納する仕組みのこと。</p>
+<p>たとえば、サーブレットの開発などにおいて、JavaBeansがないと、データをどこかにまとめて格納し、アクセスする仕組みがない。</p>
+<p>サーブレットは、ページごとに完結した処理を行う関係上、データを各ページで共有する仕組みが最小限（同じ変数を定義して各ページでデータを参照するぐらい）となる。</p>
+<p>だが、各ページで共有したいデータがあった時（たとえばテキストファイルの巨大なバッファなど）、データをどこかに格納しておかないと、ページとページを推移した時に、同じデータにアクセスすることができない。</p>
+<p>ファイル作成やデータベース管理システムを使う方法もあるが、セッションごとに一時ファイルを作成するのは現実的ではない。</p>
+<p>JavaBeansを使うことで、サーブレットにおいても、同じデータをJavaBeansの中に格納し、参照することができる。</p>
+<ul>
+<li><a href="https://camp.trainocate.co.jp/magazine/whats-javabeans/">JavaBeansとは？仕様や使い方、メリットなどまとめて解説！ | プログラミングを学ぶならトレノキャンプ（TRAINOCAMP）</a></li>
+</ul>
+<p><a href="../network/cluster.html">クラスタ・分散・高信頼システム</a>も参照のこと。</p>
+
+<h2>EJB (Enterprise JavaBeans)</h2>
+<p>EJB (Enterprise JavaBeans)は、サーバーサイドでの再利用可能なコンポーネントモデル。GUIによるクライアント（特にRAD環境）で使われることを想定したJavaBeansに対し、分散ネットワークシステムで、サーバーサイドのビジネスロジックを実装するために使用する。</p>
+<p>CORBAにおけるCCMと同様の技術だが、CCMはCORBAをベースとしており、EJBはJava/RMIをベースとしている。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/fjava/keyword/jkey/jkey03.html">Javaを紐解くための重点キーワード：EJB - @IT</a></li>
+</ul>
+
+<h2>RMI</h2>
+<p>RMIはEJBのベースとなっている分散ネットワーク技術で、分散ネットワーク環境において、ローカルまたはリモートのオブジェクトのメソッドを呼び出すことができる。</p>
+<p>CORBAと同様の技術だが、Javaをベースとしている。</p>
+<p><a href="../network/corba.html">CORBA</a>も参照のこと。</p>
+<ul>
+<li><a href="http://ash.jp/java/rmi.htm">RMIについて | ASH のホームページ</a></li>
+</ul>
+
+<h2>WebコンテナとEJBコンテナ</h2>
+<p>JavaのWebアプリケーションはアプリケーションサーバ（Webコンテナあるいはサーブレットコンテナと呼ばれる）で実行されるが、EJBはEJBコンテナで実行される。</p>
+<p>JBoss（オープンソース版はWildFly）やIBMのWebSphereなどがEJBコンテナとして有名。</p>
+<p><a href="java_servlet_appserver.html">Java（アプリケーションサーバ）</a>や<a href="../hardware/mainframe.html">メインフレーム</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Java">Java - Wikipedia</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

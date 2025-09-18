@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C++関連の世界観２（ジェネリック） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C++の世界観２（ジェネリック）</h1>
+<p>C++によるプログラミングに関する世界観２（ジェネリック）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="cpp.html">C++（１．オブジェクト指向）</a></li>
+<ul>
+<li><b>２．ジェネリック</b></li>
+<li><a href="cpp_stl_libs.html">３．STL・ライブラリ</a></li>
+</ul>
+<li><a href="cpp_comments.html">A．戯言</a></li>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>テンプレートとは</h1>
+<h2>テンプレート</h2>
+<p>テンプレートを使うことで、「どんな型にでも汎用的に対応できる型」を作ることができる。特定の型に依存しないアルゴリズムを書くことができるため、「int型でもchar型でもどちらでも使えるようなリスト型データ構造を作りたい」などといった場合に使う。</p>
+<p>C++に標準ライブラリとして備わっているSTLでは、テンプレートを多用することでさまざまな型に対応してアルゴリズム・コンテナ・反復子などを使うことができる。<a href="cpp_stl_libs.html">C++３（STL・ライブラリ）</a>を参照のこと。</p>
+<p>後日注記：C++のテンプレートには注意が必要。効率のためにコードが冗長に作成される（コンパイラはテンプレートの実体化のたびにコードを生成する）ため、バイナリのファイルサイズが大きくなり、デバッグも難しくなる（エラーメッセージも役に立たないことが多い）。</p>
+
+<h2>テンプレートは型を作る型</h2>
+<p>テンプレートは、一言で言えば型を作る型です。「どんな型でも一般的に使うことができる」という理由で、「Generics」（一般とか総称という意味）という名称で呼ばれます。</p>
+<p>ジェネリックプログラミングは、C#やJavaでも見られる考え方です。要するに、Listと一言に言っても、StringのListやIntegerのListがあります。こうしたものを、総称的に使うことができるのです。</p>
+<p>これらは、動的スクリプト言語ではあまり言われない考え方です。それは、動的スクリプト言語では、そもそも型を動的に扱うため、リストやタプルの中でさまざまな型を「ミックスして」使うことができるからです。</p>
+<p>テンプレートは最初はList&lt;String&gt; lst;などと書く必要があり、とまどうかもしれません。また、C++のSTLではこうしたジェネリックプログラミングの考え方を多用し、「テンプレートメタプログラミング」という全くありえない考え方で、スマートにさまざまなコンテナやアルゴリズムを操作することができます。全ては繋がっています。<a href="cpp_stl_libs.html">C++３（STL・ライブラリ）</a>を参照のこと。</p>
+<p>後日注記：僕がここで「型を作る型」を表現したのは、その場その場の状況に応じて、型を自分で決めて「作る」ことができるからです。最初から存在しない型やクラス、ユーザが後で自分の型として作った型やクラスに対応することもできます。実際は、テンプレートとは「汎用的にどんな型に対しても対応できるロジックを書くことができるクラス」ということです。すなわち、intとfloatにどちらでも対応できるロジックとか、どんな型のデータであっても（それが後で作られる「今存在しないクラス」であったとしても）詰め込むことのできるベクター配列やリストデータ型とか、そういうもののためにテンプレートは使用できます。</p>
+
+<h2>テンプレートの基本</h2>
+<p>テンプレートとは、どんな型でも使用できる汎用的な型を含むクラスや関数のこと。</p>
+<p>C++でのテンプレートでは、必要に応じて必要な型を指定し、クラスをある型のためにその都度作って使うというやり方ができる。</p>
+<p>たとえば、汎用関数は以下のように定義する。</p>
+<pre class="prettyprint">
+template &lt;typename T&gt; T t_add(T x, T y)
+{
+    return x + y;
+}
+</pre>
+<p>この関数にint型の引数を与えると、int型の返り値を返す。また、float型など、int以外の型であっても、汎用的に関数を使うことができる。</p>
+<p>また、汎用クラスは以下のように定義する。</p>
+<pre class="prettyprint">
+template &lt;class T&gt; class TCalc {
+private:
+    T t_val1;
+    T t_val2;
+
+public:
+    TCalc(T a_val1, T a_val2) {
+        t_val1 = a_val1;
+        t_val2 = a_val2;
+    }
+    
+    T add() {
+        return t_val1 + t_val2;
+    }
+    
+    T sub() {
+        return t_val1 - t_val2;
+    }
+    
+    T mul() {
+        return t_val1 * t_val2;
+    }
+    
+    T div() {
+        return t_val1 / t_val2;
+    }
+};
+</pre>
+<p>汎用クラスのオブジェクトは以下のように作成する。</p>
+<pre class="prettyprint">
+TCalc&lt;int&gt; t_calc1(14, 20);
+cout &lt;&lt; t_calc1.add() &lt;&lt; endl;
+cout &lt;&lt; t_calc1.sub() &lt;&lt; endl;
+cout &lt;&lt; t_calc1.mul() &lt;&lt; endl;
+cout &lt;&lt; t_calc1.div() &lt;&lt; endl;
+
+TCalc&lt;float&gt; t_calc2(40.53, 12.98);
+cout &lt;&lt; t_calc2.add() &lt;&lt; endl;
+cout &lt;&lt; t_calc2.sub() &lt;&lt; endl;
+cout &lt;&lt; t_calc2.mul() &lt;&lt; endl;
+cout &lt;&lt; t_calc2.div() &lt;&lt; endl;
+</pre>
+<p>ここでTの型は、どんな型、たとえば数値や文字列やあらゆるクラスのオブジェクトに、宣言された時の型の情報に基づいて「変貌」する。数値型であっても、文字列型であっても成り立つような、何にでもなれるデータ型になる。</p>
+<p>動的スクリプト言語との違いは、使う前に必ずTClass&lt;int&gt;のように事前に型を明示的に指定しなければならない。</p>
+<p>Javaのようなオブジェクト指向言語では、Object型が全てのクラスの親クラスとなっており、Object型に全てのオブジェクトを詰め込むことができる。感覚としては近いかもしれないが、テンプレートは継承環境にない型やクラスであっても、どんな型でも成り立つ。</p>
+<p>C++の標準ライブラリに含まれるSTL（Standard Template Library）では、どんな型でも出し入れすることのできるコンテナや、どんな型でも順番に処理することができるイテレータなどのシーケンスにテンプレートが使われている。</p>
+<ul>
+<li><a href="https://brain.cc.kogakuin.ac.jp/~kanamaru/lecture/C++2/11/11-01.html">第五回-01 : テンプレート - クラスから入る C++ - 金丸隆志の講義資料</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.20編集</p>
+</div>
+
+<h2>typenameとclass</h2>
+<p>自分の書いたブログ「未来のわたしの心より今のあなたへ」<a href="../../diary/blog_frey/2021.03.27.html">2021/03/27</a>より。</p>
+<p>テンプレートにおいて、typenameとclassはほとんど同じ意味。</p>
+<p>普段使う上ではどちらを使っても構わない。</p>
+<p>typenameはintなどの基本型、classはクラスなどの目的に使うことを期待している。</p>
+<p>（詳しくは、<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>が参考になります。）</p>
+
+<h2>テンプレートは効果的に使おう</h2>
+<p>テンプレートは効果的に使いましょう。</p>
+<p>たとえば、スマートポインタを実装したり、関数オブジェクト（functorやlambda式）を作ったり、Singletonパターンを実装したりする際にも、テンプレートを使うことができます。</p>
+<p>詳しくは、やねうらお氏による「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B02%E3%80%90CD-ROM%E4%BB%98%E3%80%91-Game-developer-books-%E3%81%86%E3%82%89%E3%81%8A/dp/4798006033">Windowsプロフェッショナルゲームプログラミング2</a>」が参考になります。</p>
+<p>後日注記：やねうらお氏の上記の書籍は、まるで「C++テンプレート・テクニック集」のように、テンプレートを使った高度なテクニックが満載で、めまいがでるほど参考になります。</p>
+<p>後日注記：テンプレートは、あらゆるクラスのオブジェクトのために使うことのできるようなラッパーとして使うことがあります。特に、リソースの管理のため（newとdeleteを上手く行い、コンストラクタとデストラクタを上手く呼び出すため）に、テンプレートを一枚被せてオブジェクトのリソース作成と破棄を管理したりすることがあります。この応用がスマートポインタです。最近のC++では、スマートポインタが標準で提供されているため、このようなリソース管理専用のテンプレートを書く必要は必ずしもありません。スマートポインタを使いましょう。やねうらお氏の上記の書籍が参考になります。</p>
+
+<h2>ダックタイピングに近い</h2>
+<p>C++のクラスやオブジェクトはダックタイピングではないが、テンプレートに限って言えば、RubyやPythonで言うようなダックタイピングと、テンプレートは似たような仕組みであると言える。</p>
+<p>たとえば、RubyやPythonのような動的型付け言語において、さまざまなクラスや型の変数にあるかどうか分からない.show()メソッドを呼びだすように、C++のテンプレートでは、「あるかどうか分からないメソッドやインターフェースを暗黙的に使用」します。</p>
+<p><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>では、これを「実行時ポリモーフィズム」と「コンパイル時ポリモーフィズム」と呼びます。C++のオブジェクト指向プログラミングは「実行時ポリモーフィズム」であり、明示的かつ実行時に仮想関数のクラスのインターフェースが決定される。それに対して、テンプレートジェネリックプログラミングは「コンパイル時ポリモーフィズム」であり、暗黙的かつコンパイル時にテンプレートのインターフェースが関数のオーバーロードによって決定される。</p>
+
+<h2>なぜTを使うのか</h2>
+<p>C++のジェネリクスで「T」という識別子を使う理由は、型が二種類以上になることがあるからです。</p>
+<p>たとえば、ハッシュをジェネリクスにする際に、キーの型と値の型はそれぞれ異なる型を使用するべきです。</p>
+<p>なので、T以外にEやKやVを増やすことができるように考えられているのです。</p>
+<div class="edit_date">
+<p>2023.05.14</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Javaのコレクションとジェネリクス</h2>
+<p><a href="java_lib_list.html">Java（コレクションと配列）</a>に、ジェネリクスに関連する内容があります。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

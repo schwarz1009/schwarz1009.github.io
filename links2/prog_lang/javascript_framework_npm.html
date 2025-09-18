@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>npm関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>npmの世界観</h1>
+<p>npmに関する世界観です。<a href="node_js.html">Node.js</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>パッケージマネージャ</h1>
+<h2>パッケージマネージャ</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考に執筆しました。）</p>
+<p>最近ではJavaScriptにおいてもパッケージマネージャを利用する機会が多い。依存関係を含めて、JavaScript関係のソフトウェアを簡単に導入・更新・管理できる。代表的なのはnpm。</p>
+<table class="some_tables">
+<tr><th>パッケージマネージャ</th><th>説明</th></tr>
+<tr><td>npm</td><td>元はサーバーサイドのJavaScript環境Node.jsのためのパッケージマネージャで、<br>最も一般的。</td></tr>
+<tr><td>Bower</td><td>パッケージマネージャの1つ。<br>npmがサーバーサイドのことも考慮しているのに比べ、クライアントサイドに特化している。</td></tr>
+<tr><td>webpack</td><td>モジュールバンドラーと呼ばれるソフトウェア。<br>読み込むファイルを1つにまとめることで、読み込みにかかる待ち時間の増加を防ぐ。</td></tr>
+</table>
+
+<h2>npmの使い方</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考に執筆しました。）</p>
+<p>まず、npmを導入するためにNode.jsをインストールする。</p>
+<p>基本的に、</p>
+<pre>
+npm install packagename
+</pre>
+<p>でパッケージのローカルインストール（クライアントサイドで利用する時に使う）ができる。また、</p>
+<pre>
+npm install -g packagename
+</pre>
+<p>でグローバルインストール（Node.js全体から利用できる。サーバーサイドで利用する時に使う）ができる。また、</p>
+<pre>
+npm update -g
+</pre>
+<p>で全パッケージの更新ができる。</p>
+<p>ローカルインストールをすると、プロジェクトの中の「node_modules」ディレクトリの中にJavaScriptファイルがインストールされるので、この中の必要なスクリプトファイルを&lt;script&gt;タグで読み込む。</p>
+<p>また、npmでは、このようなコマンド一発のインストールではなく、特定のプロジェクトのためのパッケージの情報ファイルであるpackage.jsonに記述してパッケージをインストールすることもできる。この場合、JSON形式でパッケージの情報を記述する。</p>
+
+<h2>3つの基本コマンド</h2>
+<p>（以下は<a href="https://qiita.com/hashrock/items/15f4a4961183cfbb2658">フロントエンド開発の３ステップ（npmことはじめ） - Qiita</a>を参考に執筆しました。）</p>
+<p>npmには、npm init、npm install、npm runの3つの基本コマンドがある。</p>
+<p>まず、npm initは、「このディレクトリをnpmで管理する」ということをディレクトリに対して設定するコマンド。実行するとpackage.jsonが置かれる。</p>
+<p>次に、npm installは、パッケージをインストールするコマンド。パッケージはnode_modules内に保管される。--saveオプションをつけると、package.jsonに導入したパッケージを記録できる。</p>
+<p>そして、npm runは、package.json内に記述されたタスク（基本的にビルドなどを行うために自分で記述する）を実行するコマンド。</p>
+<p>また、browserifyという便利なツールがあり、これはnode_modules内のパッケージをJavaScriptから読み込むことのできるツールである。</p>
+
+<h2>npmとnpx</h2>
+<p>npmでは、ローカルインストールした場合node_modules/.bin/に、グローバルインストールした場合/usr/local/bin/にCLIコマンドがインストールされる。</p>
+<p>だが、たとえばローカルインストールした場合、node_modules/.bin/にあるCLIコマンドを実行するために、相対パス指定が必要となる。</p>
+<p>普通このような場合は、package.jsonの中のscriptsフィールドに、コマンドを定義してnpm runによって実行する。</p>
+<p>だが、わざわざこのような記述をしなければならないのは面倒だし、scriptsフィールドにたくさんのコマンドのみの定義が増え続けてしまう。</p>
+<p>npxは、このような場合、コマンドを勝手に探してきて実行できるコマンド。ローカルインストールしたパッケージの中に含まれるCLIコマンドの実行がとても楽になる。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://qiita.com/sivertigo/items/622550c5d8ec991e59a6">npmとnpx。なにが違う？ - Qiita</a></li>
+<li><a href="https://dev.classmethod.jp/articles/node-npm-npx-getting-started/">知らないのは損！npmに同梱されているnpxがすごい便利なコマンドだった | DevelopersIO</a></li>
+</ul>
+
+<h1>周辺ツール</h1>
+<h2>Yarn</h2>
+<p>YarnはFacebookが開発したJavaScriptのパッケージ管理システム。npmと互換性がある。</p>
+<ul>
+<li><a href="https://www.wakuwakubank.com/posts/307-javascript-yarn/">JavaScript｜パッケージマネージャー「Yarn」の使い方 - わくわくBank</a></li>
+</ul>
+
+<h2>pnpm</h2>
+<p>pnpmはJavaScriptのパッケージ管理システム。npmやyarnと同様のツールだが速度が速い。</p>
+<ul>
+<li><a href="https://zenn.dev/azukiazusa/articles/pnpm-feature">pnpm の特徴 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.11.30</p>
+</div>
+
+<h2>esbuild</h2>
+<p>esbuildはJavaScriptのビルドツール。WebpackやBrowserifyと同様のツールだが、ビルド速度が高速。</p>
+<ul>
+<li><a href="https://zenn.dev/ryoka419319/articles/d0a474a81efdbb">Node.js のビルドツール「esbuild」について！ - Zenn</a></li>
+<li><a href="https://qiita.com/hedrall/items/2548718cfdf7bef3efc0">話題のesbuildをさっくりと調査してみた #Node.js - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.11.30</p>
+</div>
+
+<h2>gulp</h2>
+<p>gulpはWeb系のタスク処理ツール。Web開発のさまざまな作業を自動化できる。</p>
+<ul>
+<li><a href="https://tracpath.com/works/development/gulp-automate-and-enhance-your-workflow/">Gulp（ガルプ）を使ってWeb開発の面倒なタスクを自動化しよう！ | tracpath:Works</a></li>
+<li><a href="https://www.pc-koubou.jp/magazine/38196">Node.jsのパッケージgulp（ガルプ）で開発を効率化 | パソコン工房 NEXMAG</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.13</p>
+</div>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

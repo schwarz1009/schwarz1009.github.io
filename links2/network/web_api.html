@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Web API関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Web API関連の世界観</h1>
+<p>Web APIに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>API</h1>
+<h2>APIとは</h2>
+<p>Web業界で使われるAPIという用語は、多くの場合「Web API」のことを指しています。Web APIとは、サービスの一部だけを公開し、外部の別のサービスやソフトウェアから利用できるようにしたものです。</p>
+<p>「API」という用語自体は、昔から（今でも）、ソフトウェア（特に言語処理系やOS、ライブラリ、ミドルウェア）の標準機能を外部から利用するためのインターフェースを指した言葉として使われています。</p>
+<p>たとえば、C言語のAPIは標準ライブラリ関数やプラットフォームのライブラリのことです。LinuxのAPIはシステムコールやlibcのことです。JavaのAPIはJava SEなどのクラスライブラリのことです。</p>
+<p>ただし、今のWeb業界では、APIと何も仮定せずに言った場合、Web APIのことを指している場合が多くなりました。</p>
+<p>Web APIの例としては、たとえばツイッターのユーザー認証情報やデータを外部から利用することのできるTwitter APIや、それと同様のFacebook API、LINE APIなどがります。</p>
+<p>このようなAPIを使うメリットは、開発の効率化やコスト削減、簡単にサービスの質の向上ができることのほかに、データを利用して自分でそのデータの加工や解析などを行いたい場合（ツイッターのツイートをブログ形式で表示できるツイログなど）や、セキュリティの向上（ツイッターやGoogleなどのアカウントを使って自分のSNSを作れば、自分でその認証情報を安全に管理しなくても、ツイッターやGoogleが代わりにきちんと管理してくれるため、ツイッターやGoogle任せにできる）などがあります。</p>
+<p>以上は以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/7087">APIとは？意味やメリット、使い方を世界一わかりやすく解説 | 侍エンジニアブログ</a></li>
+</ul>
+<p>以下に主要なWeb APIの一覧があります。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/7278">【2021年最新】作りたいアプリ別API一覧を全紹介〜随時更新〜 | 侍エンジニアブログ</a></li>
+</ul>
+
+<h2>JavaScriptとWeb API</h2>
+<p>僕は、JavaScriptが勢力を増している理由は、Web APIの存在が大きいと思います。</p>
+<p>通常、GoogleやTwitterなどのWebサービスは、ページを人間が見て、人間が操作します。</p>
+<p>しかしながら、JavaScriptを使った「Web API」を使うことで、こうしたWebサービスの機能を、外側からプログラマブルに使うことができます。</p>
+<p>Web APIは、Google, Twitter, Facebookなどの大手Webサービスが提供していて、たとえばJSONやXMLの形式でデータを得ながら、JavaScriptによって外部から操作できます。</p>
+<p>Web APIを使うと、HTTPやJavaScript API、あるいはJavaScriptを単純にHTMLに埋め込む形の「ウィジェット」（ブログパーツ、ガジェット、プラグインなどとも呼ばれる）などを使って、たとえばGoogle翻訳でテキストを外国語に翻訳したり、Google Mapsの地図に独自にピンをつけて自分のWebサイトに案内図を表示したり、Twitterクライアントを作ったり、Twitterに定期的に自動でツイートするbotを作ったり、ということができます。Twitterの認証にはOAuthという認証技術を使います。</p>
+<p>APIの提供には、SOAPやRESTといった技術を用います。SOAPはネットワークで外部の関数を呼び出すRPCのように、リモートで手続きを呼び出しますが、RESTはHTTPでデータを送受信します。REST風のAPIをRESTfulと呼び、SOAPではXMLを、RESTではXMLのAtomあるいはJSONと関連します。</p>
+<p>このような「外部のWebサービスのサービス機能を利用する」という発想は、JavaScriptを大きく特徴付けられるものになっています。GoogleやTwitterのAPIを呼び出すことで、自分のWebサイトでそれらのサービスの機能を使えます。</p>
+<p>Web APIが用意されていなくても、HTMLを取得して解析する「スクレイピング」という技術を使えば、Webサイトの情報を処理できます。スクレイピングはプログラミング入門者には優しい課題で、Pythonを使ってスクレイピングを行うプログラミングの入門書なども出ています。昔ながらの「２ちゃんねる専用ブラウザ」も同様の技術であると言えるでしょう。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a></li>
+</ul>
+
+<h2>フロントエンドとバックエンドをWeb APIで繋ぐ</h2>
+<p>フロントエンドとバックエンドを分割して開発する場合、フロントエンドはReactなどのフレームワークを使い、バックエンドはJSONを返すようにして、Web API（REST）のインターフェースで両者を結合することがよくあります。</p>
+<p>このような時は、バリデーションに注意しましょう。インターネット上にサービスを公開する際に、不正なリクエストが来ないと想定することは想定が甘すぎます。また予期せぬデータの破壊が起きないように、フロントエンドだけではなく、バックエンドもバリデーションに気をつけましょう。</p>
+<ul>
+<li><a href="https://qiita.com/heiwa/items/10d1a74d0b141999220f">フロントエンドとバックエンドをわけて開発する - Qiita</a></li>
+<li><a href="https://teratail.com/questions/81861">フロント側で入力チェックをしていればサーバー側では入力チェックは必要ない？｜teratail</a></li>
+<li><a href="https://twitter.com/yamaemon_jp/status/1462727881826521090">やまえもん（@yamaemon_jp）さんのツイート</a></li>
+</ul>
+<p><a href="cgi.html">CGI</a>も参照のこと。</p>
+
+<h2>Node.jsとExpress</h2>
+<p>実際のAPIの開発には、JavaScriptではNode.jsとExpressを使うことが多いです。データベース管理システムにはMySQLやPostgreSQLを使い、REST APIでフロントエンドと結合します。データ形式にはJSONを使います。</p>
+<p><a href="../prog_lang/node_js.html">Node.js</a>や<a href="../prog_lang/node_js_express.html">Express</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.06.30</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>JavaScript</h2>
+<p><a href="../prog_lang/javascript.html">JavaScript</a>を参照のこと。</p>
+
+<h2>REST</h2>
+<p><a href="rest.html">REST</a>を参照のこと。</p>
+
+<h2>JSON</h2>
+<p><a href="../prog_lang/json.html">JSON</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

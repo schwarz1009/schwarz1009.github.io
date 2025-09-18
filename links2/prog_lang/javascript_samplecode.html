@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JavaScriptサンプルコードの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaScriptサンプルコード</h1>
+<p>JavaScriptサンプルコードです。<a href="javascript.html">JavaScript</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>いろいろ</h1>
+<h2>history.pushStateとpopstate</h2>
+<p>history.pushState()とpopstate()は、履歴に対して新しい項目を追加したり、その追加した項目を取り出すことのできる機能。</p>
+<p>シングルページアプリケーションを実装している際に、たとえばタブの切り替えに応じて、履歴を追加・取り出ししたい時などに使う。</p>
+<p>たとえば、タブがクリックされた時は、</p>
+<pre class="prettyprint">
+function TabClick(tabname) {
+    history.pushState(tabname, null, "index.html");
+    ChangeTab(tabname);
+}
+
+function ChangeTab(tabname) {
+   document.getElementById('tab_top').style.display = 'none';
+   document.getElementById('tab_profile').style.display = 'none';
+   document.getElementById('tab_novel').style.display = 'none';
+   document.getElementById('tab_diary').style.display = 'none';
+   document.getElementById('tab_links').style.display = 'none';
+   document.getElementById('tab_intro').style.display = 'none';
+
+   document.getElementById(tabname).style.display = 'block';
+   
+   document.getElementById(tabname + '_li').style.background = 'white';
+
+   if (tabname != 'tab_top') {
+       document.getElementById('tab_top_li').style.background = '#e3e3e3';
+   }
+   if (tabname != 'tab_profile') {
+       document.getElementById('tab_profile_li').style.background = '#e3e3e3';
+   }
+   if (tabname != 'tab_novel') {
+       document.getElementById('tab_novel_li').style.background = '#e3e3e3';
+   }
+   if (tabname != 'tab_diary') {
+       document.getElementById('tab_diary_li').style.background = '#e3e3e3';
+   }
+   if (tabname != 'tab_links') {
+       document.getElementById('tab_links_li').style.background = '#e3e3e3';
+   }
+   if (tabname != 'tab_intro') {
+       document.getElementById('tab_intro_li').style.background = '#e3e3e3';
+   }
+}
+</pre>
+<p>のようにし、クリックされた項目を履歴に追加する。</p>
+<p>popstateイベントは、戻るや進むボタンがクリックされた時に呼び出される。そのため、以下のようにすれば、戻るや進むボタンがクリックされた時にタブを移動できる。</p>
+<pre class="prettyprint">
+window.addEventListener('popstate', e =&gt; {
+   if (e.state === null) {
+       return;
+   } else {
+       ChangeTab(e.state);
+   }
+});
+</pre>
+<p>e.stateはhistory.pushState()で挿入した内容（tabname）が取り出される。自分で追加したのではない場合にはnullが返る。</p>
+<p>これで、ページのロード時に指定のタブを表示するために、以下のようにする。</p>
+<pre class="prettyprint">
+&lt;script type="text/javascript"&gt;
+ChangeTab('tab_top');
+&lt;/script&gt;
+</pre>
+<p>ただし、僕がこれを実装していた時、上のコードだとバグがある。e.stateがnullである時は、ページの最初に何もpushState()せずにページが表示された時点へと戻った時と、別のサイトからこのページに戻ってきた時を示すが（ここらへんのことは、ブラウザでデバッグしながら自分なりに分かったことであり、詳細まで分かっていないので、もし間違っていたら申し訳ない）、このような時に上のコードでは上手く履歴が戻ってくれない。</p>
+<p>次のように、ロード時にChangeTab()ではなくTabClick()を実行すると、この問題は解決する。</p>
+<pre class="prettyprint">
+&lt;script type="text/javascript"&gt;
+TabClick('tab_top');
+&lt;/script&gt;
+</pre>
+<p>だが、この場合、ページのロード時にpushState()を行うため、別のページから戻ってきた時に進むの履歴が消えてしまう。また、最初のページのロード時に必要のない履歴がひとつ加わってしまう。</p>
+<p>僕はいろいろと試した結果、結局このバグを直すことができなかったため、このシングルページアプリケーションを実装するのは諦めた。</p>
+<p>ちなみに、HTMLは以下のようになる。</p>
+<pre class="prettyprint">
+&lt;div class="tab_menu"&gt;
+&lt;ul class="tab_list"&gt;
+&lt;li id="tab_top_li"&gt;&lt;a href="#tab_top" class="tab_top" onclick="TabClick('tab_top'); return false;"&gt;トップ&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_profile_li"&gt;&lt;a href="#tab_profile" class="tab_profile" onclick="TabClick('tab_profile'); return false;"&gt;自己紹介&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_novel_li"&gt;&lt;a href="#tab_novel" class="tab_novel" onclick="TabClick('tab_novel'); return false;"&gt;作品&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_diary_li"&gt;&lt;a href="#tab_diary" class="tab_diary" onclick="TabClick('tab_diary'); return false;"&gt;日記&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_links_li"&gt;&lt;a href="#tab_links" class="tab_links" onclick="TabClick('tab_links'); return false;"&gt;世界観&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_intro_li"&gt;&lt;a href="#tab_intro" class="tab_intro" onclick="TabClick('tab_intro'); return false;"&gt;略歴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="box"&gt;
+&lt;div id="tab_top"&gt;
+&lt;h3&gt;トップ&lt;/h3&gt;
+&lt;p&gt;(ここにトップページを記述する)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div id="tab_profile"&gt;
+&lt;h3&gt;自己紹介&lt;/h3&gt;
+&lt;p&gt;(ここに自己紹介を記述する)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div id="tab_novel"&gt;
+&lt;h3&gt;作品&lt;/h3&gt;
+&lt;p&gt;(ここに作品を記述する)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div id="tab_diary"&gt;
+&lt;h3&gt;日記&lt;/h3&gt;
+&lt;p&gt;(ここに日記を記述する)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div id="tab_links"&gt;
+&lt;h3&gt;世界観&lt;/h3&gt;
+&lt;p&gt;(ここに世界観を記述する)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div id="tab_intro"&gt;
+&lt;h3&gt;略歴&lt;/h3&gt;
+&lt;p&gt;(ここに略歴を記述する)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>また、CSSは以下のようになる。</p>
+<pre class="prettyprint lang-css">
+.tab_menu { }
+
+.tab_list {
+    margin: 0;
+    padding: 0;
+}
+
+.tab_list li {
+    list-style-type:none;
+    list-style-image:none;
+    display: inline-block;
+    margin: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 3px 5px 3px 5px;
+    width: auto;
+    border-top: 2px solid #aaaaaa;
+    border-right: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    background: #e3e3e3;
+}
+
+.tab_list A:link,
+.tab_list A:visited {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#tab_top_li {
+    background: white;
+}
+
+.box {
+    border-top: 1px solid #cccccc;
+}
+
+.box h3 {
+    font-size: 120%;
+    background: #eeeeee;
+    border: 1px solid #cccccc;
+    color: #444444;
+    padding: 5px 10px 5px 10px;
+    margin: 20px 0 20px 0;
+}
+</pre>
+<p>後日注記：このようにタブごとにページを切り替えるページを作る時は、シングルページアプリケーションにするのではなく、きちんとページをタブごとに分けましょう。それがもっとも素直で正しい解決方法です。また、シングルページアプリケーションにする際には、そもそもタブごとに切り替えるような構造のサイトにしないことです。Ajaxを用いたサービスは、普通戻るや進むボタンは使いません。</p>
+<p>以下はヒストリーAPIの参考文献。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/History/pushState">History.pushState() - Web API | MDN</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/History/state">History.state - Web APIs | MDN</a></li>
+<li><a href="https://qiita.com/nenokido2000/items/2dd8da77d06837c8a510">History APIとスマホブラウザでのハマりどころ - Qiita</a></li>
+<li><a href="https://rainbow-engine.com/javascript-history-pushstate/">JavaScriptのhistory.pushState()とは？ &#8211; Rainbow Engine</a></li>
+<li><a href="https://www.ipentec.com/document/javascript-history-pushstate">ページの遷移はせずにページ遷移したように見せかけ、履歴にページを追加する - pushState の利用 : JavaScript | iPentec</a></li>
+<li><a href="https://www.ipentec.com/document/javascript-history-popstate">Webブラウザの [前へ][次へ] ボタンがクリックされ履歴のページが表示されるイベントを検出する - popStateの利用 : JavaScript | iPentec</a></li>
+<li><a href="https://web-designer.cman.jp/javascript_ref/window/history/">ウインドウ ヒストリ「戻る」「進む」「追加」 【JavaScript 動的サンプル】 - cman.jp</a></li>
+</ul>
+<p>タブ切り替えのコードは以下が参考になります。</p>
+<ul>
+<li><a href="http://www.zyonass.com/blog/781">ページ内でのタブ表示切替 | ホームページ制作 佐賀 福岡 長崎　ワールド ザイオナス</a></li>
+</ul>
+
+<h2>FizzBuzz</h2>
+<p>以下はJavaScriptで僕が書いたFizzBuzz。</p>
+<pre class="prettyprint">
+for (var i = 1; i &lt;= 100; i++) {
+    if (i % 15 == 0) {
+        process.stdout.write('FizzBuzz, ');
+    } else if (i % 3 == 0) {
+        process.stdout.write('Fizz, ');
+    } else if (i % 5 == 0) {
+        process.stdout.write('Buzz, ');
+    } else {
+        process.stdout.write(i + ', ');
+    }
+}
+process.stdout.write('終了.\n');
+</pre>
+<p>実行結果：</p>
+<pre>
+1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, FizzBuzz, 31, 32, Fizz, 34, Buzz, Fizz, 37, 38, Fizz, Buzz, 41, Fizz, 43, 44, FizzBuzz, 46, 47, Fizz, 49, Buzz, Fizz, 52, 53, Fizz, Buzz, 56, Fizz, 58, 59, FizzBuzz, 61, 62, Fizz, 64, Buzz, Fizz, 67, 68, Fizz, Buzz, 71, Fizz, 73, 74, FizzBuzz, 76, 77, Fizz, 79, Buzz, Fizz, 82, 83, Fizz, Buzz, 86, Fizz, 88, 89, FizzBuzz, 91, 92, Fizz, 94, Buzz, Fizz, 97, 98, Fizz, Buzz, 終了.
+</pre>
+<p>JavaScriptにおいて、改行なしで画面に出力するにはprocess.stdout.write()を使う。</p>
+<ul>
+<li><a href="https://teratail.com/questions/81920">for文の中のconsole.logを改行せずに横に表示したい - teratail[テラテイル]</a></li>
+<li><a href="https://starhoshi.hatenablog.com/entry/2017/12/01/console.log_%E3%81%A7%E6%94%B9%E8%A1%8C%E3%81%95%E3%81%9B%E3%81%9F%E3%81%8F%E3%81%AA%E3%81%84">console.log で改行させたくない - star__hoshi&#39;s diary</a></li>
+</ul>
+<p>FizzBuzzの詳細については<a href="c_samplecode.html">C言語サンプルコード</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.17</p>
+</div>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
