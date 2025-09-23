@@ -7,8 +7,8 @@ let div_page_diary = document.getElementsByClassName('page');
 div_page_diary[0].insertAdjacentHTML('beforebegin', '\
 <div id="closed_menu" class="closed_menu_icon"><a href="#" onclick="openMenu(); return false;">日記のメニューを開く</a></div>\
 <div id="open_menu" class="menu_icons_diary">\
-<p><a href="../../subpages/diary.html">日記</a>: <a href="../index.html">日記一覧（2012 ～ 2020-04）</a> - <a href="../list/index.html">月別一覧</a></p>\
-<p><a href="../index_new_diary2.html">新・日記２（17-06 ～ 20-04）</a></p>\
+<p><a href="../../subpages/diary.html">日記</a>: <a href="../index.html">日記一覧</a> - <a href="../list/index.html">月別一覧</a></p>\
+<p><a href="../index_new_diary2.html">新・日記２（2017-06 ～ 2020-04）</a></p>\
 <p>2017: <a href="../list/2017.06.html">2017-06</a> -\
  <a href="../list/2017.07.html">2017-07</a> -\
  <a href="../list/2017.08.html">2017-08</a> -\
