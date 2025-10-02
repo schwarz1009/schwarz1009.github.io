@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>分散ファイルシステム関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>分散ファイルシステムの世界観</h1>
+<p>分散ファイルシステムに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>分散ファイルシステム</h1>
+<h2>分散ファイルシステムとは</h2>
+<p>複数のホストがネットワークで繋がり、ローカルにあるかのようにファイルシステムとして扱える技術。</p>
+<p>また、ストレージ資源を仮想化し、ネットワークで繋がったコンピュータを巨大な仮想ストレージとして扱うことができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">分散ファイルシステム - Wikipedia</a></li>
+<li><a href="https://research.sakura.ad.jp/2010/04/15/dfs-overview/">分散ファイルシステムを試す(基礎編) – さくらインターネット研究所</a></li>
+</ul>
+
+<h2>NFS</h2>
+<p>昔からあるネットワークファイルシステム技術としてNFSがある。<a href="file_server_nfs.html">NFS</a>を参照のこと。</p>
+
+<h2>9P</h2>
+<p>AT&Tベル研究所のPlan 9（UNIXの後継的な位置付けの分散OS）におけるプロトコル。<a href="../unix/plan9.html">Plan 9</a>を参照のこと。</p>
+
+<h2>WebDAV</h2>
+<p>HTTPを拡張し、Webサーバを分散ファイルシステムとして扱うことができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/WebDAV">WebDAV - Wikipedia</a></li>
+<li><a href="https://www.kagoya.jp/howto/network/webdav/">WebDAVとは？その機能と使い方 | カゴヤのサーバー研究室</a></li>
+</ul>
+
+<h2>Ceph</h2>
+<p>分散ファイルシステム（分散ストレージ）技術。Red Hatなどからサポートされている。</p>
+<ul>
+<li><a href="http://nodoka.org/%E5%88%86%E6%95%A3fs-%E6%AF%94%E8%BC%83-cephfs-vs-glusterfs-1-ceph%E7%B7%A8/">分散FS 比較 cephfs vs glusterfs (1) ceph編 – nodoka.org</a></li>
+</ul>
+
+<h2>GlusterFS</h2>
+<p>分散ファイルシステムの1つ。Cephと同様にRed Hatなどからサポートされている。</p>
+<ul>
+<li><a href="http://nodoka.org/%e5%88%86%e6%95%a3fs-%e6%af%94%e8%bc%83-cephfs-vs-glusterfs-2-glusterfs%e7%b7%a8/">分散FS 比較 cephfs vs glusterfs (2) glusterfs編 – nodoka.org</a></li>
+</ul>
+
+<h2>Google File System</h2>
+<p>Googleによって開発された分散型のファイルシステム。ApacheによるGoogleFSの実装としてJavaによって書かれたHadoopがある。<a href="../services/google.html">Google</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache_Hadoop">Apache Hadoop - Wikipedia</a></li>
+</ul>
+
+<h2>GFS2 (Global File System)</h2>
+<p>Red Hatによるクラスタ型のファイルシステム。</p>
+<p>後日注記：GFS2はクラスタファイルシステムとしては著名。Pacemakerと統合することもできる。LinuCの304試験にでてくるので勉強しよう。</p>
+
+<h2>OCFS2</h2>
+<p>OCFS2（Oracle Cluster File System ver.2）はオラクルによるクラスタファイルシステム。<a href="../db/oracle.html">Oracle</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OCFS">OCFS - Wikipedia</a></li>
+</ul>
+
+<h2>DRBD</h2>
+<p>DRBDは、ストレージをネットワーク上でリアルタイムにレプリケーション（複製）する技術。</p>
+<ul>
+<li><a href="https://bcblog.sios.jp/drbd-is/">DRBDってなに？ | ビジネス継続とITについて考える</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>クラスタ</h2>
+<p><a href="cluster.html">クラスタ</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

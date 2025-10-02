@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Rubyのツールの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Rubyのツール</h1>
+<p>Rubyのツールです。<a href="ruby.html">Ruby</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ライブラリ集・フレームワーク</h1>
+<h2>Ruby on Rails</h2>
+<p><a href="ruby_on_rails.html">Ruby on Rails</a>を参照のこと。</p>
+
+<h2>Sinatra</h2>
+<p>Rubyによるマイクロフレームワーク。とても短いコードでWebアプリケーションが開発できる。</p>
+<ul>
+<li><a href="https://type.jp/s/itac/article5.html">たった5行のコードでWebサービス！Sinatra, Rubyとは？ -角幸一郎 - type IT Academy|転職＠type</a></li>
+<li><a href="https://qiita.com/kimioka0/items/751e460cbb59c70379c6">Sinatra 入門 - Qiita</a></li>
+</ul>
+<p><a href="../network/web_framework.html">Webフレームワーク</a>も参照のこと。</p>
+
+<h1>さまざまな実装</h1>
+<h2>JRuby</h2>
+<p>JavaによるRubyインタプリタの実装。JavaアプリケーションにJRubyを埋め込むことが出来る。また、Javaのコンポーネント（Swingなどクラスライブラリ）をRubyから利用出来る。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/JRuby">JRuby - Wikipedia</a></li>
+</ul>
+<p><a href="java_langs.html">Java（各種言語）</a>も参照のこと。</p>
+
+<h2>IronRuby</h2>
+<p>.NETにおけるRubyの実装。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IronRuby">IronRuby - Wikipedia</a></li>
+</ul>
+<p><a href="dotnet.html">.NET</a>も参照のこと。</p>
+
+<h2>YARV</h2>
+<p>Rubyの新しい処理系だったが、Ruby 1.9.0からRuby（Matz's Ruby Interpreter, MRI）に組み込まれた。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/YARV">YARV - Wikipedia</a></li>
+</ul>
+
+<h2>mruby</h2>
+<p>軽量版Ruby。アプリケーションなどに組み込みやすく、UNIX（POSIX）の機能がない環境でも動く小さなサブセット。</p>
+<ul>
+<li><a href="http://blog.masuidrive.jp/2013/01/24/diff-cruby-mruby/">軽量Ruby – mrubyとRubyの違い – @masuidrive blog</a></li>
+</ul>
+
+<h1>Webサーバ・APサーバ</h1>
+<h2>Puma, Unicorn, Passenger</h2>
+<p>Puma, Unicorn, PassengerはRubyのWeb・APサーバ。Rails5の標準のWebサーバはPuma。Unicornは複数プロセス、Pumaは複数スレッドで動く。</p>
+<ul>
+<li><a href="https://qiita.com/ykyk1218/items/0ca7f1fa449b41fe1fea">Pumaの本当の力を引き出す - Qiita</a></li>
+<li><a href="https://arma-search.jp/article/ruby-puma">RubyのWebサーバ「puma」を使ってみた感想 | ARMA SEARCH</a></li>
+</ul>
+
+<h2>Rack</h2>
+<p>Rackは、Web/APサーバーの種類に依存しないWebアプリケーションを開発するためのインターフェースで、どんなWeb/APサーバーを使っていてもWebフレームワークを使えるようにする。RailsやSinatraなどで使われている。</p>
+<ul>
+<li><a href="https://qiita.com/unagiootoro8388/items/50849631f8aaeca92034">RubyとRackで始めるWebアプリケーションフレームワーク自作入門 - Qiita</a></li>
+</ul>
+
+<h1>開発環境（IDE）</h1>
+<h2>RubyMine</h2>
+<p>RubyMineは、JetBrains社によるRuby on Railsの開発環境。一部では「最高」と言われている。ただし有料。</p>
+<ul>
+<li><a href="https://www.pavlog.tokyo/entry/rubymine-preview">【必読】開発者が「RubyMine」を使ってはいけない4つの理由【JetBrains】 - pavlog</a> - 使ってはいけないと言いながらRubyMineの良さを説明している。</li>
+</ul>
+<p><a href="intellij.html">IntellJ IDEA</a>も参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

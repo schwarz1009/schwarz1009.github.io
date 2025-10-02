@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Wine - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">仮想化・互換レイヤーの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/virt_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Wine</h1>
+<p>Wineに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Wine</h1>
+<h2>Windows APIのUNIX実装</h2>
+<p>Wineは、LinuxでWindowsアプリケーションを動かすためのAPI。エミュレータではなく、Windows APIをUNIX APIの上で実装している。このため、WindowsアプリケーションをLinuxの上で実行できる。</p>
+<ul>
+<li><a href="http://minto.tech/linux-wine/">Linux上でWindowsアプリケーションを動かす「wine」の基礎知識と特徴 | minto.tech</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Wine">Wine - Wikipedia</a></li>
+</ul>
+
+<h2>導入方法</h2>
+<p>Wineをパッケージ管理システムでインストールした後、コマンドラインからwinecfgを実行すれば、Windowsのドライブと同等のフォルダが作られる。この中で、Windowsの実行ファイルを実行できる。ドライブが作られると、設定のための画面が表示され、Wineを設定できる。</p>
+<p>（<a href="http://minto.tech/linux-wine/">Linux上でWindowsアプリケーションを動かす「wine」の基礎知識と特徴 | minto.tech</a>を参考に執筆しました。）</p>
+
+<h2>Linux 5.11のリダイレクトAPI</h2>
+<p>Linux 5.11では、非LinuxのシステムコールをWineなどにリダイレクトする仕組みが加わった。このため、Windowsバイナリがユーザー空間でダイレクトに実行できる。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/202102/17">2021年2月17日　Linux 5.11がリリース，Intel SGXやAMDのハードウェア群を新たにサポート：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h1>ゲーム</h1>
+<h2>Windowsゲームの実行（Proton, Lutris, Bottles, PlayOnLinux）</h2>
+<p>Proton, Lutris, Bottles, PlayOnLinuxは、WineとWindowsゲームの管理ツールで、Linux上でWindowsのゲームやアプリケーションを実行させることができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Proton_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">Proton (ソフトウェア) - Wikipedia</a></li>
+<li><a href="https://partner.steamgames.com/doc/steamdeck/proton?l=japanese">Steam DeckとProton (Steamworks ドキュメント)</a></li>
+<li><a href="https://slacknotebook.com/lutris-linux-game-manager/">Linux：「Lutris」最強？のゲーム管理ツール – SlackNote</a></li>
+<li><a href="http://distronanakey.livedoor.blog/archives/14876939.html">Linux上でWindowsソフト動作『Bottles』紹介～Internet Explorerは動く？他、いくつかのアプリも試してみた～ : ナナッキーのLinux紹介〜脱Windows〜</a></li>
+<li><a href="http://distronanakey.livedoor.blog/archives/5659122.html">Windowsソフトの導入を助けてくれるplayonlinuxを検証してみた〜Wineのフロントエンド〜 : ナナッキーのLinux紹介〜脱Windows〜</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.10</p>
+</div>
+
+<h1>その他の製品</h1>
+<h2>CrossOver Linux</h2>
+<p>CrossOver LinuxはCodeWeaversというアメリカの会社の製品で、WindowsアプリケーションをLinuxで動作させる。Wineベース。</p>
+
+<h2>ReactOS</h2>
+<p>Windows NT互換のオープンソースなOS。Wineとも協力している。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

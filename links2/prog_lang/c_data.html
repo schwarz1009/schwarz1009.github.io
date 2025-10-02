@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C関連の世界観３（データ構造） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C言語の世界観（３．データ構造）</h1>
+<p>C言語によるプログラミングに関する世界観３（データ構造）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="c.html">C言語（１．基本）</a></li>
+<ul>
+<li><a href="c_flow.html">２．制御フロー</a></li>
+<li><b>３．データ構造</b></li>
+<li><a href="c_pointer.html">４．配列とポインタ</a></li>
+<li><a href="c_io.html">５．入出力</a></li>
+<li><a href="c_preprocessor.html">６．プリプロセッサとインラインアセンブラ</a></li>
+</ul>
+<li><a href="c_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="c.html">C</a>や<a href="cpp.html">C++</a>も参照のこと。</p>
+<p>ツール関係は<a href="c_cpp_tools.html">C/C++ツール</a>に移動しました。</p>
+<p>システムに依存する部分は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>や<a href="windows_programming.html">Windowsプログラミング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>グローバル変数とstatic</h1>
+<h2>グローバル変数</h2>
+<p>グローバル変数とは、グローバルスコープに宣言された、どこからでもアクセスすることのできる変数のこと。</p>
+<p>通常、関数の内部に宣言された変数のことをローカル変数、関数の外部に宣言された変数のことをグローバル変数と呼ぶ。</p>
+<p>グローバル変数は、たくさんの関数の間でデータを共有するために使うことができるが、あまり使いすぎると、どのように動作しているのかわけの分からない「スパゲッティプログラム」ができてしまう。</p>
+<p>また、C++のような名前空間のないC言語では、グローバルスコープに変数を宣言しすぎると、名前空間の汚染に繋がる。</p>
+<p>なので、できるだけグローバル変数を使うべきではない。</p>
+<p>グローバル変数の代わりとして使うことができるのが、関数の引数である。綺麗なコードを書くプログラマは、関数の引数を上手く使う。特に、関数の引数に構造体のポインタを与えることで、複数の関数の間でグローバル変数を使わなくてもデータを共有することができる。</p>
+
+<h2>static</h2>
+<p>staticは静的ローカル変数と静的グローバル変数を宣言するのに使う。</p>
+<p>静的ローカル変数は、関数の中のローカル変数にstaticを付けたもので、関数の呼び出しが終わっても、プログラムが終了するまで、変数の値が保持されるようになる。ローカル変数でありながら、オブジェクト指向のクラスのインスタンス変数のように、「状態」を保持することができるようになる。たとえば、以下のように、関数の中で定義した静的ローカル変数をインクリメントすることで、関数を呼び出すたびに値を増やし続ける、といったことができる。</p>
+<pre class="prettyprint">
+void func() {
+    static int x = 0;
+    x++;
+    printf("%d\n", x);
+}
+
+int main() {
+    func();
+    func();
+    func();
+}
+</pre>
+<p>実行結果</p>
+<pre>
+1
+2
+3
+</pre>
+<p>この時、x = 0という初期化処理は最初の一回のみされ、xは関数の実行が終わってもプログラムの終了まで値を保持し続ける。</p>
+<p>また、静的グローバル変数（あるいは関数）は、グローバル変数あるいは関数にstaticを付けたもので、そのファイル以外からアクセスできなくなる。グローバル変数でありながら、ほかのファイルの名前空間を汚染せず、秘匿されたプライベートなインターフェースとして仕様を隠蔽できる。関数外でstaticを使った場合、そのグローバル変数あるいは関数は静的グローバル変数（関数）となり、他のファイルからはアクセスできなくなる。</p>
+<p>static変数は、簡易オブジェクト指向のようにも利用できる。</p>
+<p>たとえば、オブジェクトのインスタンスを作る代わりに、静的ローカル変数を使用できる。また、静的グローバル変数を使うことで、複数の関数から共有されるデータをグローバル変数としながら、他のファイルからアクセスできなくし、隠蔽することができる。この場合、静的グローバル変数にアクセスするための特別のインターフェース関数を作って、そのインターフェースからのみグローバル変数にアクセスできるようにすることで、グローバル変数を隠蔽することができる。</p>
+<p>ややこしいことにJavaにもstaticキーワードというものがあり、これも意味が違う。Javaのstaticメソッド（あるいは変数）は、クラスのインスタンスを作成しなくても実行できる、インスタンスの生成とは別個の関数的なメソッド（変数）である。</p>
+<p>後日注記：staticは大人数でプログラムを記述する際には必ず必要となる機能。名前空間やオブジェクト指向のないC言語であっても、staticを使うことでいくらかそれらと同様のことをすることができる。</p>
+<div class="edit_date">
+<p>2022.12.05編集</p>
+</div>
+
+<h2>リエントラント</h2>
+<p>自分の書いたブログ「未来のわたしの心より今のあなたへ」<a href="../../diary/blog_frey/2021.03.27.html">2021/03/27</a>より。</p>
+<p>リエントラントとは再入可能という意味で、あるプログラムの実行中に同じプログラムを起動できるかどうか。</p>
+<p>ローカル変数を使う場合には、リエントラントでなくなることはないが、グローバル変数やstatic変数を使う場合、リエントラントが崩れることがある。</p>
+<p>（<a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a>を参考に執筆しました。）</p>
+
+<h1>構造体</h1>
+<p>（「<a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8%E2%80%95ANSI%E5%AF%BE%E5%BF%9C-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797307579">ANSI対応 C言語プログラミングレッスン 入門編</a>」より編集して引用。）</p>
+<h2>構造体</h2>
+<p>構造体は、複数の変数をひとつの変数としてまとめたり、具体的な構造体データをひとつの変数名で扱うことができるようにする。構造体にはint型やchar型などすべての基本型の変数を定義可能で、ポインタや配列も含むことができる。連結リストやツリーやグラフなどは、構造体の中に別の要素を指し示すポインタを入れ込むことで表現できる。また、構造体自体をポインタとして扱い、構造体のアドレスやポインタを関数の引数などに渡すことで、ヒープ領域に動的に格納したデータにさまざまな関数やスコープからアクセスできる。構造体の中に入れ子となった構造体を定義することもできる。</p>
+<p>構造体を定義する際には、構造体名にsrtuctをつけ、{};の中に定義する。最後にセミコロン（;）が必要なことに気を付けよう。また、実際にこの構造体の型の変数を宣言する際には、「struct 構造体名 変数名」として変数を定義する：</p>
+<pre class="prettyprint">
+struct art_scores {
+    int id;
+    char student_name[20];
+    int illust;
+    int photo;
+    int design;
+    int piano;
+};
+
+struct art_scores shinji;
+</pre>
+<p>また、構造体が最初からひとつしか必要ないような場合、以下のようにその場で宣言することもできる：</p>
+<pre class="prettyprint">
+struct art_scores {
+    int id;
+    char student_name[20];
+    int illust;
+    int photo;
+    int design;
+    int piano;
+} shinji;
+</pre>
+<p>この場合は、グローバル変数になってしまうが、関数の中に構造体を定義することもできる。</p>
+<p>構造体の中のメンバにアクセスするためには、自分でつけた変数名と構造体のメンバ名を「.」でつないで、以下のようにアクセスする：</p>
+<pre class="prettyprint">
+shinji.illust = 100;
+shinji.photo  =  85;
+shinji.design =  60;
+shinji.piano  =  40;
+</pre>
+<p>ポインタの先にある構造体のメンバは、「-&gt;」でアクセスできる。</p>
+<p>以下は、関数の中から構造体のメンバを編集する例。</p>
+<pre class="prettyprint">
+struct art_scores {
+    int id;
+    char student_name[20];
+    int illust;
+    int photo;
+    int design;
+    int piano;
+};
+
+void change_scores(struct art_scores *s, int a_illust, int a_photo, int a_design, int a_piano) {
+    s-&gt;illust = a_illust;
+    s-&gt;photo  = a_photo;
+    s-&gt;design = a_design;
+    s-&gt;piano  = a_piano;
+}
+
+int main() {
+    struct art_scores shinji;
+  
+    change_scores(&shinji, 100, 85, 60, 40);
+}
+</pre>
+<p>オブジェクト指向のクラスとメソッドは、要はこの構造体の「.」を、構造体を作るのと同じように、同一インスタンスでのメンバ関数とメンバ変数の共有に応用したものである。</p>
+
+<h2>typedefで独自の型を宣言する</h2>
+<p>typedefを用いて型名を宣言することで、独自の型を宣言して、structをつけなくてもその型の変数を宣言できるようになる。C言語ではFILE型などがこれに当たる。</p>
+<p>たとえば以下のようにすることができる。</p>
+<pre class="prettyprint">
+typedef struct art_scores {
+    int id;
+    char student_name[20];
+    int illust;
+    int photo;
+    int design;
+    int piano;
+} arts_t;
+
+arts_t shinji;
+</pre>
+<p>また、C++ではクラス名を宣言することでオブジェクトの型となるクラスを宣言できる。</p>
+
+<h2>構造体の用途の例</h2>
+<p>Cの構造体の用途は、主に「データ構造の表現」と「ハードウェアなどの機能のマッピング」です。</p>
+<p>たとえば、構造体は以下のような用途によく使われます。</p>
+<p>・共通の特徴をもった変数のグループ化（たとえば関数への引数渡しなどに使う）</p>
+<p>・決まりきったデータの表現（全ての月と日の網羅など）</p>
+<p>・グラフィックスにおけるX軸とY軸の表現や、図形オブジェクトの位置やサイズなど、一時的な内部情報の保持</p>
+<p>・連結リストやツリー、グラフなどの紐づけされたデータ構造</p>
+<p>・メタ属性を持ったバッファの表現</p>
+<p>・個人情報やひとつのグループとなったデータベース情報（掲示板の名前やコメントなど）</p>
+<p>・準グローバル変数としての、各関数やメソッドから共有される、共有データプール</p>
+<p>・ハードウェアデバイスのマッピング</p>
+<p>・ネットワーク接続情報のマッピング</p>
+<p>・プロセスやファイルを表すための低レベルシステムの内部的表現</p>
+<p>また、ポインタとともに構造体を用いることで「動的に作成されるデータ」をC言語などで表現できます。ローカル変数ではないため、スコープから出ても消えることがなく、自分で作成・破棄のタイミングをコントロールします。</p>
+<p>構造体の用途の例について、より正しい内容は<a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a>が参考になります。上記は、この本を読んだうえで、自分なりに違う内容を書きました。</p>
+
+<h2>Cでオブジェクト指向</h2>
+<p>Cでオブジェクト指向は出来ないというのが通説だが、GTK+などでは、Cによるオブジェクト指向のライブラリであるGLibなどを使って、Cでもオブジェクト指向を行うことが出来る。</p>
+<p><a href="../linux/gtk.html">GTK</a>を参照のこと。</p>
+
+<h1>共用体と列挙型</h1>
+<h2>union（共用体）</h2>
+<p>Cの共用体（union）は、同じ記憶域を共有する複数の項目をひとつにまとめたもの。</p>
+
+<h2>enum（列挙型）</h2>
+<p>enumは列挙型と言われるもので、値を列挙してそれぞれに数値を割り振ることで、複数の値を格納する「列挙スタイルの型を作る」ことができる。</p>
+<pre class="prettyprint">
+enum animal {
+    CAT,
+    DOG,
+    PIG,
+    BIRD
+};
+
+enum animal akind = PIG;
+</pre>
+<p>後日注記：0や1といったマジックナンバーでも同じことはできるが、あとあと理解するのがとても面倒になるため、マジックナンバーを避けることが大切。きちんとenum型を宣言して使うようにすることで、他人がそのコードを読んだ時の可読性や保守性が大幅に向上する。</p>
+
+<h1>アルゴリズムとデータ構造</h1>
+
+<h2>スタックとキュー</h2>
+<p>何かと良く使われる、スタックとキューについて。</p>
+<p>スタックでは、最後に入れたデータが最初に取り出される。上にお皿を積んでいき、上から取り出すようになる。</p>
+<p>キューでは、最初に入れたデータが最初に取り出される。左から右に並んでいき、一番左の人から取り出されるようになる。</p>
+<ul>
+<li><a href="http://www.yamamo10.jp/yamamoto/lecture/2005/2E/test_4/html/node2.html">2 スタックとキュー - 情報工学概論 (C言語:アルゴリズムとデータ構造)</a></li>
+</ul>
+<p><a href="data_structure_stack.html">スタックとキュー</a>も参照のこと。</p>
+
+<h2>配列とリスト</h2>
+<p>配列はメモリ内の連続した場所に連続した要素を格納する。リストはそれぞれの要素が前後のデータの位置関係を表すポインタによって紐づけされる。</p>
+<ul>
+<li><a href="http://www.yamamo10.jp/yamamoto/lecture/2005/2E/21st/html/node4.html">4 リストを使う方法 - 情報工学概論 (C言語:アルゴリズムとデータ構造)</a></li>
+</ul>
+<p><a href="data_structure_list.html">配列とリストとハッシュ</a>も参照のこと。</p>
+
+<h2>アルゴリズムとデータ構造</h2>
+<p><a href="algorithm.html">アルゴリズム</a>と<a href="data_structure.html">データ構造</a>を参照のこと。</p>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8%E2%80%95ANSI%E5%AF%BE%E5%BF%9C-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797307579">ANSI対応 C言語プログラミングレッスン 入門編</a></li>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+</ul>
+
+
+<h1>関連ページ</h1>
+<h2>データ操作</h2>
+<p><a href="programming_data.html">プログラミング作法（３B．データ操作）</a>も参照のこと。</p>
+
+<h2>状態</h2>
+<p><a href="state.html">状態</a>も参照のこと。</p>
+
+<h2>保守性</h2>
+<p><a href="maintenance.html">保守性</a>も参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

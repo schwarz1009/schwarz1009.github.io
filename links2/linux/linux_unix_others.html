@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理９（提案） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>UNIXシステム管理９（提案）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観９（提案）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<li><b>９．提案</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Linuxの新機能の提案</h1>
+<p>Linuxに追加する機能の提案。</p>
+<h2>１．GTK+ Lisp</h2>
+<p>GTK+にLispインタプリタを搭載し、全てのGTK+アプリケーションの内部をLispで操作出来る「GTK+ Lisp」。</p>
+<p>後日注記：GNOMEにはLooking Glassというデバッグシェルがあり、JavaScriptでUI要素を調査したり、コードスニペットを実行できる。</p>
+<p><a href="../prog_lang/lisp.html">Lisp</a>や<a href="gtk_bindings.html">GTK言語バインディング</a>や<a href="gnome_desktop.html">GNOMEデスクトップ</a>や<a href="emacs.html">Emacs</a>も参照のこと。</p>
+
+<h2>２．ディスプレイ・スクリプト</h2>
+<p>ディスプレイに表示された内容をスクリプトで操作出来る「ディスプレイ・スクリプト」。</p>
+
+<h2>３．ディレクトリ・レイヤー</h2>
+<p>複数のディレクトリを一つのディレクトリに重ね合わせることの出来る「ディレクトリ・レイヤー」。</p>
+<p>手動でインストールしたパッケージの管理が楽になる。</p>
+<p><a href="linux_src_install.html">ソースからのインストール</a>も参照のこと。</p>
+
+<h2>４．パッケージ・フィード</h2>
+<p>アプリケーションの開発プロジェクトが公開した最新のリリース情報をフィードで自動的に知ることの出来る「パッケージ・フィード」。</p>
+<p><a href="linux_pkgmanagement.html">パッケージ管理</a>も参照のこと。</p>
+
+<h2>５．セキュリティ更新プロジェクト</h2>
+<p>各ディストリビューションのセキュリティの更新を専門のセキュリティ更新プロジェクトがやってくれる「セキュリティ更新プロジェクト」。</p>
+<p><a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<h2>６．新しいディストリビューションの開発</h2>
+<p>ディストリビューションのコアの開発を各ディストリビューションが統合・統一してやる「共通コア開発」と、著名パッケージに対して安定板と最新版とライト版を配布する「マルチ・ディストリビュート」、そしてマイナーなパッケージは外部ユーザーが提供する「ユーザー・リポジトリ」によって、ディストリビューションの開発と利用を大幅に簡単にする。</p>
+<p><a href="linux_distro.html">Linuxディストリビューション</a>も参照のこと。</p>
+
+<h2>７．実行リスト</h2>
+<p>最初の起動時に自動で検出・実行した処理を記録し、次からは同じ処理だけをただ実行することで起動を速くする「実行リスト」。</p>
+
+<h2>８．システム・ファイルマネージャ・モード</h2>
+<p>ユーザーのホームディレクトリのような個人的なファイルマネージャの管理機能と、システムのファイルマネージャの機能を分け、別のインターフェースを提供する「システム・ファイルマネージャ・モード」。</p>
+<p>システムモードでは、システムのコマンドや設定ファイルのマニュアルを表示したり、一行の説明を読めたり、どのパッケージに含まれるかを知ったりすることが出来る。</p>
+
+<h2>９．パッケージ・ログ</h2>
+<p>パッケージマネージャのGUIのログインターフェースを提供する「パッケージ・ログ」。</p>
+<p>今までインストールした全てのパッケージとアクションを記録し、必要なところまで戻ったり、簡単にアンドゥ・リドゥが出来たり、システムを壊さないように安全かつ簡単にインストールしたパッケージを削除出来る。</p>
+
+<h2>１０．GUIバックエンド</h2>
+<p>GNOMEとKDEのライブラリをバックエンドにし、バックエンドを切り替えることが出来るようにする「GUIバックエンド」。</p>
+
+<h2>１１．自然なデスクトップ・インターフェース</h2>
+<p>GUIのインターフェースを出来るだけ「人間的」かつ「自然」にし、キー入力とマウス操作の手間を出来るだけ少なくし、ユーザーが考えなくてはならない労力を減らす、「自然なデスクトップ・インターフェース」。</p>
+<p>特に、メニューに操作を、サイドバーに管理を、ボタンに状況別メニューをと言う風に、操作と管理を分けたりするなど、出来るだけ自然に、考えられたインターフェースを提供する。</p>
+<p>クリックは要素の選択にし、そこから状況別メニューを表示し、それをクリックすることで操作するようにしても良い。</p>
+<p>GNOMEの問題点は、「自然でないこと」である。デスクトップ環境としてこうあるべきだと言う「自然」な考え方がない。</p>
+<p><a href="linux_x11.html">X11</a>も参照のこと。</p>
+
+<h2>１２．GTK+ Delphi</h2>
+<p>GTK+のライブラリ関数をDelphiのようなオブジェクト指向にしたラッパーAPIである「GTK+ Delphi」。</p>
+<p><a href="../prog_lang/delphi.html">Delphi</a>も参照のこと。</p>
+
+<h2>１３．オープンソース・クラスライブラリ</h2>
+<p>文字の比較やネットワーク通信などのルーチン的ライブラリや、GUIやWebのフレームワークを統合した、「オープンソース・クラスライブラリ」。</p>
+
+<h2>１４．ファイルディレクトリ</h2>
+<p>ファイルの中にディレクトリを作る「ファイルディレクトリ」。</p>
+<p>特に、コピーの高速化を目指す。</p>
+<p>ファイルをコピーする時は、変更された下位ファイルだけをコピーすることで、コピーが高速になる。</p>
+
+<h2>１５．ツールキットサーバーとTKML</h2>
+<p>X11サーバーとは別に、今Xlibの単純なライブラリになっているGTK+やQtを分割し、そこもサーバーとクライアントにする。</p>
+<p>ツールキットサーバーは標準プロトコルと標準言語（TKML）を裁定し、バックエンドでGTK+やQtを動かす。</p>
+<p>どんなアプリケーションを使うのであっても、そのアプリケーションをGTK+でもQtでも表示出来るようになる。</p>
+<p>ツールキットクライアントにはTKMLを中心としたC言語の言語非依存のライブラリを作る。それにより、GTK+/GNOMEのようにさまざまな言語でのプログラミングが可能となる。</p>
+<p>HTMLを表示するブラウザにFirefoxやChromeなどがあるのと同じで、ツールキットサーバーは「UIブラウザ」と呼んでも良い。</p>
+<p>TKMLは表示するだけだが、本当はツールキットを操作するオペレーション言語も必要だ。それを、TKOLとしよう。そして、TKMLとTKOLを合わせてTKLとする。これを、SQLのようにプログラマはどこからでもTKLで書かれたアプリケーションをツールキットサーバーに表示できるようになる。</p>
+<p>TKMLをHTMLのように、TKOLをJavaScriptのように書いても良いだろう。こんな風にすれば良い：</p>
+<pre>
+[button1: (clicked: button1_clicked())]
+[button2: (clicked: button2_clicked())]
+[text1: (text_changed: text1_changed(text1.getThisEvent()))]
+
+func button1_clicked(void){
+    this_button.label = "clicked";
+}
+
+func text1_changed(event e){
+    text.write("new_key: %c\n", e.getPressedKey());
+}
+</pre>
+<p>なぜかJavaみたいな言語になった。本当はSQLのようにしたかった。</p>
+<p>TKOLをこんな言語にしても良いだろう：</p>
+<pre>
+ADD browser1 INTO box1 WHERE 2
+</pre>
+<p>これはSQLのような言語だから、TKSLという名前にしよう。</p>
+<!--[過去の日記]-->
+<p><a href="../../diary/2018.01.31.html">2018-01-31</a>に関連する内容があります。</p>
+
+<h2>その他</h2>
+<p>この他にもさまざまな提案を日記でしています。ぜひ日記もご覧ください！</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

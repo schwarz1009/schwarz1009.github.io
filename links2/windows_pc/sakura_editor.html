@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>サクラエディタの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Windows/PCの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/windows_pc_softs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>サクラエディタの世界観</h1>
+<p>サクラエディタの世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>サクラエディタ</h1>
+<h2>サクラエディタ</h2>
+<p>Windows向けの高機能なエディタ。僕はxyzzyから乗り換え試し中です。</p>
+<p>後日注記：原作者によるテキストエディタをコミュニティが引き継いで開発している。オープンソースだがそれぞれのコードの著作権はそれぞれの部分を記述した著作者によって留保されている。</p>
+<ul>
+<li><a href="https://sakura-editor.github.io/">サクラエディタ</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.25編集</p>
+</div>
+
+<h2>シンタックスハイライトを追加</h2>
+<p>サクラエディタにJavaScript/CSSのカラーモードを追加する方法は、以下が参考になります。</p>
+<ul>
+<li><a href="https://blog.codecamp.jp/utility_of_sakuraeditor">サクラエディタ初心者なら必ず入れたい便利機能3選 | Tech2GO</a></li>
+<li><a href="http://d.hatena.ne.jp/momdo/20111124/p1">サクラエディタ用CSSシンタックスハイライトを公開します - 血統の森+はてな</a></li>
+<li><a href="https://cly7796.net/blog/other/setting-of-sakura-editor/">サクラエディタのインストール後の設定 | cly7796.net</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.09.27編集</p>
+</div>
+
+<h2>基本設定</h2>
+<p>また、デフォルトの文字コードをUTF-8にし、タブバーを表示し、ウィンドウの折り返し方法を「右端で折り返す」に設定しておきましょう。「タイプ別設定一覧」から設定することが出来ます。（言語・拡張子別の設定となるので注意が必要。）</p>
+
+<h2>検索・置換</h2>
+<p>サクラエディタは改行をまたいだ置換が出来ない。だが、行頭の改行を消したいなら</p>
+<pre>
+^\r\n
+</pre>
+<p>を置換すれば良い。（改行をまたいだ置換が出来ないなら、xyzzyを引き続き使うしかないかもしれない。）</p>
+<p>サクラエディタで使える正規表現は以下が参考になる。xyzzyとは違いグループの\は必要ない。</p>
+<ul>
+<li><a href="https://sakura-editor.github.io/help/HLP000089.html">利用可能な正規表現 - サクラエディタ Ver 2.3.2.0 ヘルプファイル最終更新日 2017/05/02</a></li>
+</ul>
+<p>正規表現については<a href="../linux/regex.html">正規表現</a>を参照のこと。</p>
+
+<h2>GrepとGrep置換</h2>
+<p>xyzzyと同様、サクラエディタにもGrepとGrep置換があり、たくさんのファイルに対して一括で検索・置換をすることができる。</p>
+<p>LinuxでUNIXコマンドのfindとxargsとsedを使うのと同じことが、サクラエディタを使うことでWindowsでもできる。</p>
+<p>実際のところ、これがなければ僕はホームページのHTMLファイルを編集することができない。僕のホームページは全部で約4400ファイルある。</p>
+<p>また、サクラエディタには簡単なDIFFの機能もある。</p>
+<p>MicrosoftはWindowsに標準でこうしたテキストエディタないしはテキスト処理ツールを付けないのが不思議でならない。他のテキストエディタ開発者に競合するなどの理由があるのか、それともOfficeとVisual Studioを使ってほしいのかは知らないが、Visual Studio Code（VS-Code）という新しいテキストエディタも作っているぐらいだから、MSにももっと頑張ってほしい。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

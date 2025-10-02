@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理７（タイムゾーンとロケール） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>UNIXシステム管理７（タイムゾーンとロケール）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観７（タイムゾーンとロケール）です。</p>
+
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><b>７．タイムゾーンとロケール</b></li>
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>タイムゾーンとロケール</h1>
+<h2>タイムゾーンとロケールの設定</h2>
+<p>Linuxを日本語環境にするためには、Linuxカーネル, GNOME/KDE, Firefox, X11, 日本語入力, あるいはApache/PHPやMySQLの文字コードまで、さまざまな設定が必要です。</p>
+<p>ですが、基本はタイムゾーンとロケールを設定します。</p>
+
+
+<h2>タイムゾーン</h2>
+<p>Linuxでは、/usr/share/zoneinfo/以下に、UTCからの時間のズレを記述したバイナリのゾーン情報ファイルがあるので、タイムゾーンを設定するにはこれを/etc/localtimeにコピーする。コピーではなくシンボリックリンクを張っても良い。</p>
+<p>タイムゾーンの設定：</p>
+<pre>
+# cp /usr/share/zoneinfo/Asia/Tokyo /etc/localetime
+</pre>
+<p>また、一時的に変えたい時は環境変数TZを設定しても良い。</p>
+<pre>
+$ export TZ="Asia/Tokyo"
+</pre>
+<p>dateコマンドを実行してJSTと表示されればOK。</p>
+<pre>
+$ date
+</pre>
+<p>また、CentOS7ではtimedatectlコマンドを使う。</p>
+<p>（<a href="https://eng-entrance.com/linux-time-timezone">【設定確認から変更方法まで】Linuxでのタイムゾーンの扱い方 - エンジニアの入り口</a></li>を参考に執筆・引用しました。）</p>
+
+<h2>gettextで国際化・地域化</h2>
+<p>gettextのような仕組みを用いることで、国際化と地域化が容易になる。</p>
+<p>文字列に</p>
+<pre class="prettyprint">
+printf(_("hoge is %s."), hoge_name);
+</pre>
+<p>と言うエイリアスをつけ、.poファイルでこのように翻訳出来る。</p>
+<pre>
+#: src/hoge_prog.c:20
+msgid "hoge is %s."
+msgstr "ほげとは%sである。"
+</pre>
+<p>下にあるロケールの設定をすることで、プログラムのメッセージが日本語に翻訳されたものになる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gettext">gettext - Wikipedia</a></li>
+</ul>
+
+<h2>ロケール</h2>
+<p>ロケールを作るためには、Gentoo Linuxでは/etc/locale.genに「ja_JP.UTF-8」を追加して、locale-genを実行する。</p>
+<p>基本的に、英語と日本語のja_JP.UTF-8のロケールは作っておこう。</p>
+<p>ロケールの設定は、LANGやLC_*の環境変数を設定する。</p>
+<p>基本的に、 LC_ALLを設定すると、他の全ての環境変数が上書きされるため、設定すれば日本語のUnicodeの環境になる。ただ、一般的にはLC_ALLよりもLANGを設定すべきである。LC_ALLはすべてのLC_*を同じ言語で上書きするが、LANGでは個別のLC_*を別々に設定できる。多くの解説（Gentoo Wikiなど）でも「LC_ALLを設定するのは避けるべき」だとされている。よって、</p>
+<pre>
+export LANG=ja_JP.UTF8
+</pre>
+<p>のように.bashrcあるいは.bash_profileに書けば、それだけでロケールを設定できる。</p>
+<pre>
+LANG=ja_JP.UTF8 ls
+</pre>
+<p>のように環境変数を設定した上でコマンドを実行すれば、一時的に日本語の環境にした上でコマンドを実行出来る。逆に英語にした上で</p>
+<pre>
+LANG=C ls
+</pre>
+<p>とすることも可能。</p>
+<p>個別のロケールを設定したい場合は、LC_MESSAGES（メッセージのローカライズ用の言語で、設定することでコマンドなどのメッセージを日本語などに変えられる）やLC_COLLATE（文字の順序付け）やLC_CTYPE（文字の属性、どのような文字がアルファベットや数に含まれるかなど）やLC_TIME（日付と時刻の表記）やLC_MONETARY（通貨の表記）やLC_NUMERIC（数値の表記）やLC_PAPER（用紙のサイズ）などのLC_*系の環境変数を設定すれば良い。</p>
+<p>実際のシステム管理では、システム全体のロケールは英語のC（UNIXでは英語のASCIIコードを表すために単に「C」とする）にしておいて、ユーザーの環境だけ、環境変数でLANGを設定する、というやり方もある。これはサーバーなどで使うために、基本的環境をCにしたい時に有効。一般ユーザでもCで使う人も居るが、これはメッセージ（ユーザーインターフェースやコマンド出力）が英語になるほか、適切に設定しないと日本語入力もできない（たぶん何とかすればできる）、ハードコアな環境になるので注意が必要。</p>
+<p>ローカライゼーション系の環境変数を表示するには、localeコマンドを実行する。</p>
+<pre>
+$ locale
+</pre>
+<p>設定を恒久的に残したい場合は、.bashrcや.bash_profileなどに「export LANG=ja_JP.UTF-8」と記述すること。</p>
+<p>systemdを使うCentOS 7ではlocalectlという専用のコマンドも用意されている。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Localization/Guide/ja">ローカライゼーション/ガイド - Gentoo Wiki</a></li>
+<li><a href="https://qiita.com/aosho235/items/58e2e7acd5c2ee3641ff">ロケール（locale）まとめ - Qiita</a></li>
+<li><a href="https://eng-entrance.com/linux-localization-lang">Linuxのローカライゼーション系LANG変数：langについて - エンジニアの入り口</a></li>
+<li><a href="https://envader.plus/course/12/scenario/1130">国際化とローカライゼーション及び環境変数の設定 - エンベーダー</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.12.24編集</p>
+</div>
+
+<h2>コンソールで日本語文字を表示させる（fbterm）</h2>
+<p>ただし、ロケールの設定には注意が必要。コンソール端末で表示させた場合、日本語ロケールを使っていると、コンソールで日本語の文字が表示されないことがある。</p>
+<p>このような時にはfbtermを使う。</p>
+<p>Debianなどの場合、fbtermは最初から入っている。以下のようにfbtermを実行し、その後にmanなどを読めばいい。</p>
+<pre>
+$ fbterm
+（ターミナルの見た目が変わる）
+$ man ls
+</pre>
+<ul>
+<li><a href="https://server-setting.info/debian/debian-console-japanease.html">Debian(Ubuntu)で コンソールに日本語表示してみた&nbsp;|&nbsp;レンタルサーバー・自宅サーバー設定・構築のヒント</a></li>
+<li><a href="http://www.green-pen.jp/lang.html">Debian コンソール日本語環境を試してみた fbterm [Green-pen miyagi]</a></li>
+</ul>
+
+<h2>文字コード</h2>
+<p>文字コードは、システム全体の文字コード、各テキストファイルの文字コードから、PHPやMySQLの文字コードなどがあるし、クライアント側とサーバー側で合わせる必要もあります。</p>
+<p>今の標準はUTF-8です。ファイルは出来るだけUTF-8で作るようにしましょう。でも、Windowsで書いた文章は、どうしてもShift-JISになってしまいますし、EUC-JPと言う昔のUNIXの文字コードも混在します。</p>
+<p>後日注記：たとえば、WindowsでPerlを使った場合、UTF-8でprint文を実行すると文字化けして日本語が表示できない。perlスクリプトを必ずShift-JISで作る必要がある。だが、そういうUNIXとWindowsとの違いの部分が、Linuxを使えないものにしているという側面はある。Windowsで作ったShift-JISの日本語ファイル名を含むzipの圧縮ファイルは、Linuxで解凍すると文字化けしてしまう。convmvコマンドを使うことで、こうしたファイル名が文字化けしたファイルの名前を変換できる。</p>
+
+<h1>Linuxと英語</h1>
+<h2>Linuxの日本語環境</h2>
+<p>Linuxの日本語環境は鬼門で、ディストリビューションごとにも違う。迷った時は英語を読むぐらいの覚悟が必要。日本語入力も昔は難しかった。最近は簡単に、GNOMEでインプットメソッドを設定するだけで出来る。設定方法以前に、そもそも対応していない場合もある（KDE3派生であるTrinityでは、最近の入力システムは動かない）。Linuxに日本語は期待しない方が良い。商用OSほどの国際化がされていると高々に謳う一方で、本当は日本語なんか誰も使っていないからだ。IRCで質問する場合でも、英語で質問して英語で返ってくる、それが普通だ。</p>
+
+<h2>日本語と英語のバランスをどうするか</h2>
+<p>本当は、日本語環境を使ってもそんなに悪いシステムではない。だが、ほとんどのユーザーが見て、劣悪なシステムにはなっている。時間がWindowsと一緒にならないとか、文字化けするとか、フォントの種類が少ないとか、英文と日本語文を混在させた時にレイアウトがおかしいとか、色んなおかしな点がある。翻訳もきちんとされていない個所があり、設定項目などで日本語と英語が混じることも少なくない。だから、最初から英語で使って、英語の生活に慣れるという発想もおかしくはない。不思議と、英語で使うと、最初からApacheやMySQLに設定も要らないし、フォントも豊富で、LibreOfficeもきちんとプロ並みに使える、という良い環境になる。決して日本語では使うな、と言いたいわけではなく、最近はインプットメソッドの設定やツールもどんどん進歩しているし、ブラウザのフォントも以前は表示できなかったきちんと太字などが表示できるようになってきた。だが、.zipファイルの中の日本語ファイル名が文字コードで文字化けするなどの不備は今でもFedoraなどで残っている。だが、インプットメソッドのような、本当に必要なところでの日本語対応はきちんとしている。だが、Debianではuimの変換候補の表示位置がおかしいなどの問題はある。</p>
+<p>どうすれば良いかと言うと、むしろ、英語に慣れるためだと思って英語を使う生活をし、どうしても必要なところではロケールの設定も出来る、という「両刀使い」を目指すしかない。英語漬けの勉強だと思って英語を基本的に使いながら、日本語入力や日本語文書の表示（特にブラウザなど）は日本語もマルチに使えるように設定しよう。Apacheの設定も、英語のマニュアルを見ながら、日本語のHTMLの文章もサーバできちんと表示させられるように設定できるようになろう。</p>
+<p>英語が出来ないと、海外では教養のない人間に見える。英語ぐらい分かるようになっておこう。そのためには、辞書なんか見なくて良い。<!--[英会話教室]-->英会話教室などの教室に行って6年も会話していれば、英語のメッセージは聞き取れるようになるし、英語の日本語と全く違うおかしな話し方を「どのように話していいのか」が分かるようになる。</p>
+<p>後日注記：とはいえ、英語でLinuxのメッセージなどを見るのはハードルが少し高い。たとえば、セグメンテーションエラーなどは、Linuxのセグメント機能を知っている上で、英語も理解できなければ理解することができない。だが、エラーメッセージなどは比較的Google検索などで調べやすいメッセージだし、多くの英語のメッセージは簡単である。ただし、システムについての警告などを英語だからといって無視してOKを押すようなことはシステム管理者としては避けるべきだし、商業サーバーなどでは、顧客のデータが日本語で（たとえばホームページのHTMLファイルなど）書かれていることは多くある。こういう時はきちんと日本語ロケールを設定しよう。</p>
+
+<h2>Linuxに英語は必要か？</h2>
+<p>最近は日本語に翻訳された環境も整ってきていて、Linuxを使うのに必ずしも英語は必要なくなってきている。</p>
+<p>だが、絶対に英語が必要ないかと言うと、そうでもなくて、プログラミングや開発をしたいなら、英語は分かっていた方が良い。</p>
+<p>特に、UNIX的な情報の一次情報源を読んだり、開発に参加したりするために、ドキュメントを英語で読んだり、開発者の人と英語でコミュニケーション出来たりすることは、ほとんど必須である。</p>
+<p>だが、僕の場合、そんなに英語でドキュメントを読んだ記憶がない。Gentoo Handbookぐらいを英語で読んだだけで、あとは日本語の情報でほとんどのことは分かった。</p>
+<p>ただし、英語が分かっていた方が良いと痛感したことはたくさんある。特に、昔はメーリングリストを読むことが出来なかった。</p>
+<p>そういうわけで、英会話学校に行くのが良いだろう。僕は<!--[英会話教室]-->英会話教室に通っている。僕の書いた<a href="../country/english.html">英会話の世界観</a>も参照して欲しい。</p>
+<p>ただ、僕はそんなに開発に参加しているわけでもないし、本当に日本語の情報だけでUNIXの基本的な仕組みは分かる。だから、英語が分からないからと言って諦めないでほしい。繰り返し言うが、僕は英語の情報源をあまり読んだ記憶がない。日本語の情報だけでも、ほとんどのことは分かる。恐れないでほしい。</p>
+
+<h1>関連ページ</h1>
+<h2>日本語環境</h2>
+<p>Linuxの日本語環境（入力・表示）については、<a href="linux_japanese_input.html">Linux日本語入力</a>や<a href="linux_japanese_console.html">Linux日本語入力・表示（コンソール・コマンドライン）</a>のページを参照のこと。</p>
+
+<h2>英会話</h2>
+<p>英語の学習方法については、<a href="../country/english.html">英会話</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

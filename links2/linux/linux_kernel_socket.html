@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（ソケット） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（ソケット）</h1>
+<p>Linuxのカーネルの開発に関する世界観（ソケット）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><b>ソケット</b></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>ソケット</h1>
+<h2>ソケットインターフェース</h2>
+<p>ソケットを使うことで、UNIXにおけるデータ通信を行うことができる。</p>
+<p>二つのソケットが互いに関連付けられると、片方から書いたデータを、もう片方から読むことができる。</p>
+<p>Linuxでは、socket()関数でソケットを作成できる。</p>
+<ul>
+<li><a href="http://www.geekpage.jp/programming/linux-network/socket.php">ソケットの作成:Geekなぺーじ</a></li>
+</ul>
+
+<h2>書いて読むだけで通信できる</h2>
+<p>送信側が「書き」、受信側が「読む」ことだけでどんなに複雑なプロトコルを用いた通信も可能となる。</p>
+<!--<p>ネットワークインターフェースデバイス（NIC）の操作やOSIのプロトコル手順やIPアドレス・MACアドレスやルーティングなど、複雑な処理は全部カーネルがやってくれる。</p>-->
+<p>ソケットはファイルとして扱われるため、普通のファイルと同じようにファイルディスクリプタを用いて操作する。</p>
+<p>後日注記：ソケットAPIはBSDではじめて搭載された。<a href="../unix/bsd.html">BSD</a>を参照のこと。</p>
+
+<h2>ネットワーク</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>Linuxカーネルはネットワークをサポートしており、BSDソケットインターフェースからネットワーク通信ができる。</p>
+<p>BSDソケットは、互いに2つのソケットが繋がると有効になり、片方に書き込むと片方から読み込むことができる。</p>
+<p>TCPやUDPもサポートされている。</p>
+<p>TCPでは、再送制御などの多くの機能がある。</p>
+<p>UDPには、そうした機能がない代わり、ビデオや音声を送ったりする時に、誤りを無視して高速に通信することができる。</p>
+<p>BSDソケットは多くの場合サーバー・クライアントシステムであり、片方のサーバが待ち受けをし、そのサーバに対してクライアントが接続する。</p>
+
+<h2>ソケット</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p><!--また、このような-->TCP/IPの仕組みは、便利だがソフトウェアの開発においては複雑である。</p>
+<p>よって、OSがソケットと呼ばれる仕組みで簡素化を行う。</p>
+<p>ソケットは、BSD UNIXで最初に採用されたTCP/IPスタックであり、二つのソケットが繋がると有効になり、繋がったソケット同士では、片方からwrite()すればもう片方からread()できる。</p>
+<p>BSDではソケットをファイルとして実現し、ファイルをシステムコールでやり取りする際の情報である、ファイルディスクリプタによって操作できるようにしたため、ファイルの読み書きと同様にソケットの読み書きができる。</p>
+<p>ソケットを使うことで、カーネルだけがネットワークの詳細と接続情報の管理を行えばよい。</p>
+<p>ソケットは通常サーバー・クライアントで接続を行い、ユーザーはソケットをサーバー側で待ち受け、クライアント側で接続を要求するだけでよい。</p>
+<p>UNIXでは、これはsocket(), bind(), listen(), accept(), connect()の各APIで行われる。</p>
+<p>カーネルの内部では、たとえばLinuxではsk_buff型のポインタを使っており、sk_buff型のポインタを各階層に順々に渡していくことで処理が行われている。</p>
+<p>カーネルは、確実にパケットを目的の機器に送らなければならないが、このためにはルータのアドレスさえ知っておけばよい。</p>
+<p>LinuxにおいてはBSDソケット層とINETソケット層で、複雑な接続情報の管理を行っている。</p>
+
+<h2>参考ページ・書籍</h2>
+<p>ソケットについては以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="http://www.geekpage.jp/programming/linux-network/socket.php">ソケットの作成:Geekなぺーじ</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man2/socket.2.html">man socket(2)</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man7/socket.7.html">Man page of SOCKET(7)</a></li>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+</ul>
+
+<h1>ソケットのAPI</h1>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+
+<h2>socket()</h2>
+<p>socket()は、クライアント側・サーバ側双方で使用する。</p>
+<p>socket()関数には、</p>
+<table class="some_tables">
+<tr><th>引数</th><th>型</th><th>引数名</th></tr>
+<tr><td>第一引数</td><td>int型</td><td>domain</td></tr>
+<tr><td>第二引数</td><td>int型</td><td>type</td></tr>
+<tr><td>第三引数</td><td>int型</td><td>protocol</td></tr>
+</table>
+<p>を指定する。戻り値の型はint。</p>
+<p>socket()では、プロトコルファミリー（domain）、通信方式の型（type）、プロトコル（protocol）を指定し、ソケット（接続の端点）を表すファイルディスクリプタが返される。</p>
+<p>ソケットをsocket()で作った段階では、対応するファイルディスクリプタが返されるだけで、まだ接続はされていない。ソケットを接続するためには次に説明するconnect()関数を使う。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/socket.2.html">man socket(2)</a></li>
+</ul>
+
+<h2>connect()</h2>
+<p>クライアント側では、socket()でソケットを作成した後でconnect()でサーバに接続する。</p>
+<p>connect()は、クライアント側で使用する。</p>
+<p>connect()関数には、</p>
+<table class="some_tables">
+<tr><th>引数</th><th>型</th><th>引数名</th></tr>
+<tr><td>第一引数</td><td>int型</td><td>sock</td></tr>
+<tr><td>第二引数</td><td>constのsockaddr構造体型のポインタ</td><td>addr</td></tr>
+<tr><td>第三引数</td><td>socklen_t型</td><td>addrlen</td></tr>
+</table>
+<p>を指定する。戻り値の型はint。</p>
+<p>connect()では、sockにソケットを指定し、addrにはIPアドレスとポート番号を格納する。ホスト名ではなくIPアドレスを指定するので、あらかじめホスト名をIPアドレスに変換しておく必要がある。addrlenはaddrのサイズ。</p>
+<p>connect()を実行した時点で、ソケットははじめてサーバに接続される。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/connect.2.html">man connect(2)</a></li>
+</ul>
+
+<h2>bind()</h2>
+<p>サーバ側、すなわちストリームの接続を待つ側では、やや手順が増えてsocket(), bind(), listen(), accept()の4つのシステムコール呼び出しが必要。</p>
+<p>bind()は、サーバ側で使用する。</p>
+<p>bind()関数には、</p>
+<table class="some_tables">
+<tr><th>引数</th><th>型</th><th>引数名</th></tr>
+<tr><td>第一引数</td><td>int型</td><td>sock</td></tr>
+<tr><td>第二引数</td><td>sockaddr構造体型のポインタ</td><td>addr</td></tr>
+<tr><td>第三引数</td><td>socklen_t型</td><td>addrlen</td></tr>
+</table>
+<p>を指定する。戻り値の型はint。</p>
+<p>bind()では、サーバ側のアドレスとポート番号（addr）を、ソケット（sock）に関連付ける。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/bind.2.html">man bind(2)</a></li>
+</ul>
+
+<h2>listen()</h2>
+<p>listen()は、サーバ側で使用する。</p>
+<p>listen()関数には、</p>
+<table class="some_tables">
+<tr><th>引数</th><th>型</th><th>引数名</th></tr>
+<tr><td>第一引数</td><td>int型</td><td>sock</td></tr>
+<tr><td>第二引数</td><td>int型</td><td>backlog</td></tr>
+</table>
+<p>を指定する。戻り値の型はint。</p>
+<p>listen()では、カーネルに「ソケットが接続を待機している」ということを伝え、新しい接続がきたら受信するように伝達する。backlogは同時に受け付ける接続の最大数。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/listen.2.html">man listen(2)</a></li>
+</ul>
+
+<h2>accept()</h2>
+<p>accept()は、サーバ側で使用する。</p>
+<p>accept()関数には、</p>
+<table class="some_tables">
+<tr><th>引数</th><th>型</th><th>引数名</th></tr>
+<tr><td>第一引数</td><td>int型</td><td>sock</td></tr>
+<tr><td>第二引数</td><td>sockaddr構造体型のポインタ</td><td>addr</td></tr>
+<tr><td>第三引数</td><td>socklen_t型</td><td>addrlen</td></tr>
+</table>
+<p>を指定する。戻り値の型はint。</p>
+<p>accept()では、クライアント側のソケットがサーバ側のソケットに接続した時、その接続を受ける。接続された時点で読み書き可能なストリームのファイルディスクリプタが返る。addrにはクライアント側のアドレスが格納される。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/accept.2.html">man accept(2)</a></li>
+</ul>
+
+<h2>getaddrinfo()</h2>
+<p>getaddrinfo()、getnameinfo()、freeaddrinfo()、gai_strerror()では、addrinfo構造体を使ってIPアドレスの情報を得る。</p>
+<p>getaddrinfo()はホスト名・サービス名からIPアドレス・ポート番号を得るために使う。</p>
+<p>これに対して、getnameinfo()はIPアドレス・ポート番号からドメイン名・サービス名を得るために使う。</p>
+<p>getaddrinfo()関数には、</p>
+<table class="some_tables">
+<tr><th>引数</th><th>型</th><th>引数名</th></tr>
+<tr><td>第一引数</td><td>const char型のポインタ</td><td>node</td></tr>
+<tr><td>第二引数</td><td>const char型のポインタ</td><td>service</td></tr>
+<tr><td>第三引数</td><td>constのaddrinfo構造体型のポインタ</td><td>hints</td></tr>
+<tr><td>第四引数</td><td>addrinfo構造体型のポインタのポインタ</td><td>res</td></tr>
+</table>
+<p>を指定する。戻り値の型はint。</p>
+<p>getaddrinfo()では、接続するターゲットとなるnodeから、resへと得られたアドレス情報の候補のリストが書き込まれる。また、serviceとhintsで必要な情報を絞り込める。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/getaddrinfo.3.html">man getaddrinfo(3)</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/getnameinfo.3.html">man getnameinfo(3)</a></li>
+</ul>
+
+<h2>addrinfo構造体</h2>
+<p>addrinfo構造体はgetaddrinfo()でresへと書き込まれるリンクリストを表現したデータ構造で、resの中のai_nextがリンクとして次のaddrinfo構造体に続いていく。</p>
+<p>addrinfo構造体のメンバには、</p>
+<table class="some_tables">
+<tr><th>型</th><th>メンバ</th></tr>
+<tr><td>int型</td><td>ai_flags</td></tr>
+<tr><td>int型</td><td>ai_family</td></tr>
+<tr><td>int型</td><td>ai_socktype</td></tr>
+<tr><td>int型</td><td>ai_protocol</td></tr>
+<tr><td>socklen_t型</td><td>ai_addrlen</td></tr>
+<tr><td>sockaddr構造体型のポインタ</td><td>ai_addr</td></tr>
+<tr><td>char型のポインタ</td><td>ai_canoname</td></tr>
+<tr><td>addrinfo構造体型のポインタ</td><td>ai_next</td></tr>
+</table>
+<p>が含まれる。</p>
+
+<h2>freeaddrinfo()</h2>
+<p>addrinfo構造体はmalloc()で割り当てられるため、freeaddrinfo()で明示的に解放する。</p>
+<p>freeaddrinfo()関数には、引数に</p>
+<table class="some_tables">
+<tr><th>型</th><th>引数名</th></tr>
+<tr><td>addrinfo構造体型のポインタ</td><td>res</td></tr>
+</table>
+<p>を指定する。戻り値の型はvoid。</p>
+
+<h2>Manpage</h2>
+<p>socketの詳しい情報はmanpageにあるため参照してください。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man7/socket.7.html">Man page of SOCKET(7)</a></li>
+</ul>
+
+<h2>書籍・参考ページ</h2>
+<p>Linuxカーネル公式のネットワークのドキュメントは以下にあります。（英語）</p>
+<ul>
+<li><a href="https://www.kernel.org/doc/html/latest/networking/index.html">Linux Networking Documentation</a></li>
+</ul>
+<p>また、以下のページに参考になる内容があります。日本語版もあります。</p>
+<ul>
+<li><a href="http://en.tldp.org/LDP/tlk/tlk.html">The Linux Kernel</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-images/frame.html">The Linux Kernel日本語訳</a></li>
+</ul>
+<p>Linuxのネットワークについては以下が参考になります。（英語）</p>
+<ul>
+<li><a href="http://www.tldp.org/LDP/nag2/">Linux Network Administrators Guide</a></li>
+</ul>
+
+<h1>Linuxカーネル内部の仕組み</h1>
+<h2>カーネルの内部で何が行われているか</h2>
+<p>（以下は「<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>」を参考に執筆しました。）</p>
+<p>NIC（ネットワークインターフェースカード）は、シンボル名（たとえばeth0）はあるがデバイスファイルの存在しない、特殊なI/Oデバイス。</p>
+<p>Linuxでは、BSDソケットをsockfsという特殊ファイルシステムによって、ファイルとして実現している。</p>
+<p>Linuxのソケット層は、大きく分けてBSDソケット層とINETソケット層の二つで実現している。BSDソケット層はネットワークにおける共通のインターフェースで、INETソケット層はアーキテクチャ固有のメンバやメソッドを持っている。</p>
+<p>カーネルが相手のもとに確実にパケットを届けるためには、自分が属するLANのIPアドレス、すなわちルータのIPアドレスさえ分かっていればいい。</p>
+<p>IPアドレスからデバイスの場所を知るためには、LAN上のすべてのホストにARPを使ってブロードキャスト（同じネットワークの全ホストへの通信）でパケットを送信し、どのデバイスが目的のIPアドレスを持っているかを確認する。</p>
+<p>Linuxでは、ソケットバッファ構造体（sk_buff型）にデータを保管する。そして、このポインタを各層に渡していくことで、効率的にバッファを各層に受け渡す。</p>
+<p>１．トランスポート層で、ユーザから与えられたバッファを元にペイロード（データのこと）を複製し、TCP/UDPのヘッダを付け加える。</p>
+<p>２．ネットワーク層でIPヘッダを付け加える。</p>
+<p>３．データリンク層でヘッダやトレーラを付け加えた上で、新しく送信キューとして追加し、パケットを送信する。</p>
+<p>パケットを受信すると、データがsk_buffに変換され、ヘッダが削除される。</p>
+<p>そのほか、カーネル内のネットワークスタックについての詳細は、以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-11.html">The Linux Kernel: ネットワーク</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>頼りになるアラン・コックス</h2>
+<p>Linuxカーネル業界では知らないものはいないという、リーナスの右腕であるアラン・コックス。</p>
+<p>アラン・コックスは、初期のLinuxカーネルのネットワーク周辺のコードの多くのバグを修正し、初期のネットワーク・サブシステムを大きく書き直した。</p>
+<p>そのように、アラン・コックスは頼りになる男である。とてもいい人間だ。</p>
+<p>MBAの取得のためにLinuxの開発からは遠ざかることになったが、彼はLinuxの歴史に名を刻んだ「元祖Linuxハッカー」である。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A9%E3%83%B3%E3%83%BB%E3%82%B3%E3%83%83%E3%82%AF%E3%82%B9">アラン・コックス - Wikipedia</a></li>
+</ul>
+<p><a href="linux_people.html">Linux著名人</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.09.19</p>
+</div>
+
+<h1>Linuxネットワーク</h1>
+<h2>Linuxのネットワークについて</h2>
+<p><a href="linux_net.html">Linuxネットワーク１（コマンド）</a>や<a href="linux_net2.html">Linuxネットワーク２（設定）</a>を参照のこと。</p>
+
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="../network/network.html">ネットワーク</a>や<a href="../network/network_intro.html">ネットワーク入門</a>を参照のこと。</p>
+
+<h2>BSD</h2>
+<p>ソケットはBSD UNIXで最初に採用されました。<a href="../unix/bsd.html">BSD</a>も参照のこと。</p>
+
+<h2>DNS</h2>
+<p>DNS・名前解決については<a href="../network/dns.html">DNSサーバ</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

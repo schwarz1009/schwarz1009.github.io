@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ペイントソフト開発の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ペイントソフト開発の世界観</h1>
+<p>ペイントソフト開発の世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ペイントソフトの開発</h1>
+<h2>ペイントソフトを作る</h2>
+<p>ここで、プログラミングの高度な実例として、ペイントソフトの開発手順を見ていこう。</p>
+<p>ここで作るペイントソフトでは、ビュー画面を統括するViewクラスをシステムマネージャのように使い、この中に描画を行うrender()メソッドを作って、これをさまざまな場所から呼び出される相談役として使う。</p>
+<p>まず、ビュー画面を表すViewクラスを作る。この中には、システム依存の低レベルなデバイスコンテキストのような情報や、現在描画されているビュー画面のグラフィックスの内部的な全ての情報が含まれている。</p>
+<p>Viewクラスの中に、描画を行うrender()メソッドを作る。render()メソッドでは、Viewクラスの内部の情報を更新し、編集した上で再描画を行う。もし新しいグラフィックスの情報が与えられた時は、Viewクラスの内部のグラフィックスデータにそれを追加し、現在の描画画面に追加してそのグラフィックスを描画した上で、画面を再描画する。Windowsの場合はデバイスコンテキストを使ってビュー画面にグラフィックスを適用するところまでを行う。</p>
+<p>もし、レイヤーの機能を付ける必要が出た時は、このViewクラスの中に、重ね合わせの情報を追加し、グラフィックスデータはひとつひとつの個別のデータを分割し、それぞれにZ軸の情報を保持するようにデータ属性を追加し、背面にあるものから前面にあるものを順番に描画するようにする。</p>
+<p>ここで、Viewクラスのrender()メソッドは、ブラシツール（線をブラシで描く）やシェイプツール（図形を描く）などを表すBrush()関数やShape()関数から呼び出されて実行される。Brush()関数では、マウスのドラッグやペンタブレットの感知情報に応じて、筆圧と現在選択されているカラーピッカーの色を計算して、どのようなグラフィックスを描くかを計算し、その結果をView.render()メソッドに渡して呼び出す。Shape()関数では、マウスのドラッグなどの情報から、どの位置にどれくらいの大きさ・形状・色で図形を描くかを計算し、その結果をView.render()メソッドに渡して呼び出す。</p>
+<p>同時に、マウスボタンがクリックあるいはドラッグされた時に実行されるOnMouseMoved()メソッドを作る。OnMouseMoved()メソッドでは、Windowsのイベントループからマウスのイベント情報を与えられた際に、今選択されているツール（ブラシツールあるいはシェイプツール）に対応するBrush()関数あるいはShape()関数にその情報を渡して呼び出す。</p>
+<p>ここまでで、基本的な描画をすることのできるペイントソフトが作れることは分かった。しかしながら、ベクター形式のパス情報に対応させることはまだできていない。ここで、Viewクラスの内部をむやみやたらに編集するのではなく、Viewクラスを継承してVectorViewクラスを作る。VectorViewクラスでは、ペンツールで作ったグラフィックスのパス情報を新しいvectorRender()メソッドで受け取り、VectorViewクラスの内部でパス情報を保管・維持する。また、新しいvectorEdit()メソッドを作ることで、パス情報を外部から編集・変更することができるようにする。</p>
+<p>次に、ベジェ曲線でパスを付属した図形を描くことのできるPen()関数を作る。Pen()関数では、マウスのドラッグ情報からベジェ曲線を生成し、そのベジェ曲線をVectorView.vectorRender()メソッドに渡す。また、パス情報を編集するPathEdit()関数を作り、ここでVectorView.vectorEdit()メソッドを呼び出して、既に描画されてパス情報を付加して表示されているグラフィックスオブジェクトのパス情報を編集できるようにする。インタラクティブにパス情報を画面に表示するため、VectorViewでは「疑似グラフィックス」としてアンカーポイントやパスの情報を「Z軸のもっとも上にかぶせてインタラクティブに表示する」ようにする。最後に、現在選択されているツールにペンツールとパス編集ツールを追加し、OnMouseMoved()メソッドを更新する。</p>
+<p>このようにすることで、おそらくPhotoshopやIllustratorと同等のペイントソフトを作ることができる。</p>
+<p>ペイントソフトだけではなく、Webブラウザなどを作るのであっても、render()メソッドで領域を表示するようにし、さまざまな関数からrender()メソッドに具体的な飾りの種類などの値を渡して呼び出すようにすれば、これと同じようなレンダリングエンジンを作ることはできるだろう。ワープロなども同様である。</p>
+
+<h2>基本はデータの保持とビューの描画</h2>
+<p>ペイントソフトやWebブラウザのレンダリングエンジンの実装に必要なのは、「データの保持」と「ビューの描画」です。</p>
+<p>MFCなどがやっているように、まず画面に描画する部分が必要であり、次に画面のデータを保持し、データにアクセスする部分が必要です。</p>
+<p>オブジェクト指向で実装するならば、オブジェクトのメンバとしてキャンバスのデータを保持し、ビュー画面にそのデータを描画する関数を作ればいいのです。</p>
+<p>実際には、データを変更した時に再描画したり、マウスやキーボードなどでボタンや画面のウィンドウ枠を操作したりした際に、画面をインタラクティブに再描画する機能や、データをファイルに読み書きする機能などが必要となるでしょう。</p>
+<p>また、ベクター系のソフトなら、単にグラフィックスを描画するだけではなく、パス情報とラスター情報を保持し、変換したりする機能が必要となるでしょう。</p>
+<div class="edit_date">
+<p>2023.09.07</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>グラフィックス処理</h2>
+<p>各プラットフォームでのグラフィックス処理については<a href="windows_gdi.html">GDI</a>や<a href="../linux/cairo.html">Cairo</a>を参照のこと。</p>
+
+<h2>デザインソフト</h2>
+<p>デザインソフトについては<a href="../art/photoshop.html">Photoshop</a>や<a href="../art/illustrator.html">Illustrator</a>や<a href="../art/paint_softs.html">ペイントソフト</a>などを参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

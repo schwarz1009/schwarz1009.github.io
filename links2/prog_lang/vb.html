@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Visual Basic関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Visual Basicの世界観</h1>
+<p>Visual Basicに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>Visual Basic（１．基本）</b></li>
+<ul>
+<li><a href="vb_lib.html">２．クラスライブラリ</a></li>
+<li><a href="vb_form.html">３．フォームデザイナー</a></li>
+</ul>
+</ul>
+<p><a href="dotnet.html">.NET</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Visual Basicとは</h1>
+<h2>ポトペタで、イベント駆動でプログラムを作る</h2>
+<p>Visulal BasicはVBと略され、ポトペタ（RADとも呼ばれる）の環境でGUIアプリケーションを開発することができる。</p>
+<p>VBでは、フォームを表示するために、Windowsコントロールの位置やサイズを計算する必要はない。GUIのフォームデザイナーから、ダイレクトにフォーム上にコントロールを配置（ポトペタ）することができる。</p>
+<p>また、単にデザインができるだけではなく、ダブルクリックをしたり、特定のイベントに応じたメソッドを定義・登録していくことで、簡単にGUIアプリケーションをホイホイと作っていくことが可能。</p>
+<p>とても簡単にプログラミングができるだけでなく、.NET Frameworkのクラスライブラリを使うことで、どんな状況にも対応できる「賢いGUIアプリケーション」をさくさく作ることができる。</p>
+<p><a href="event.html">イベント駆動</a>も参照のこと。</p>
+
+<h2>VBの文法の基本</h2>
+<p>（以下のVBの文法についての記述は<a href="https://www.amazon.co.jp/VisualBasic2010%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC-Perfect-Master-%E9%87%91%E5%9F%8E-%E4%BF%8A%E5%93%89/dp/4798031100">VisualBasic2010パーフェクトマスター (Perfect Master SERIES)</a>を参考に執筆・引用しました。）</p>
+<p>変数は以下のように宣言する。</p>
+<pre>
+Dim 変数名 As 型名
+</pre>
+<p>たとえば、</p>
+<pre class="prettyprint lang-vb">
+Dim x As Integer
+x = 100
+</pre>
+<p>定数はDimの代わりにConstを使う。</p>
+<p>型はByte, Short, Integer, Long, Single, Double, Decimal, Boolean, Date, Char, Stringなどがある。</p>
+<p>配列は()で宣言する。</p>
+<pre class="prettyprint lang-vb">
+Dim array(9) As Integer
+array(0) = 75
+</pre>
+<p>配列のインデックスは0から始まる。配列の要素数を指定する際にも、(9)で10個分になる（0～9になる）ということに注意しよう。</p>
+<p>2次元配列は以下のようになる。</p>
+<pre class="prettyprint lang-vb">
+Dim array(9,9) As Integer
+array(0,3) = 50
+</pre>
+<p>構造体は以下のようになる。</p>
+<pre>
+Structure 構造体名
+    Dim 変数名1 As 型名
+    Dim 変数名2 As 型名
+End Structure
+</pre>
+<p>利用する場合は、</p>
+<pre>
+Dim 構造体変数名 As 構造体名
+構造体変数名.メンバ変数名 = 値
+</pre>
+<p>のようになる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint lang-vb">
+Structure Hoge
+    Dim x As Integer
+    Dim y As Integer
+End Structure
+</pre>
+<p>とした上で、</p>
+<pre class="prettyprint lang-vb">
+Dim hoge1 As Hoge
+hoge1.x = 100
+hoge1.y = 50
+</pre>
+<p>構造体は参照型ではなく値型であることに注意が必要。</p>
+<p>制御構造は、</p>
+<p>・If ... Then ... Else</p>
+<p>・Select Case</p>
+<p>・For ... Next</p>
+<p>・Do While ... Loop</p>
+<p>などが使える。</p>
+<p>条件分岐：</p>
+<pre class="prettyprint lang-vb">
+Dim v As Integer
+
+v = Integer.Parse(Console.ReadLine())
+
+If v &gt; 0 Then
+    Console.WriteLine("{0}は正の数です。", v)
+ElseIf v &lt; 0 Then
+    Console.WriteLine("{0}は負の数です。", v)
+ElseIf v = 0 Then
+    Console.WriteLine("{0}は0です。", v)
+End If
+</pre>
+<p>これ以外にも、GUIフォームを使うのであれば、チェックボックスのチェック状態を知るために、HogeCheckBox.Checked = Trueを比較するなどの方法がある。等しいかどうかを比較するために==ではなく=を用いる点に注意しよう。</p>
+<p>ループ：</p>
+<pre class="prettyprint lang-vb">
+Private Sub Button1_Click(ByVal sender As System.Object, _
+  ByVal e As System.EventArgs) Handles Button1.Click
+
+    Dim i As Integer
+
+    For i = 1 To 40 Step 1
+        MessageBox.Show(Str(i) & "回目のメッセージ地獄です。全部で40回表示されます。", "メッセージ地獄40回")
+    Next i
+    
+End Sub
+</pre>
+<p>Subプロシージャは値を返すことができない。簡単な処理をサブルーチン化するのに利用する。</p>
+<pre class="prettyprint lang-vb">
+Sub Calc(ByVal x As Integer, ByVal y As Integer)
+
+    Console.WriteLine("{0} + {1} = {2}", x, y, (x + y))
+    Console.WriteLine("{0} - {1} = {2}", x, y, (x - y))
+    Console.WriteLine("{0} * {1} = {2}", x, y, (x / y))
+    Console.WriteLine("{0} / {1} = {2}", x, y, (x * y))
+
+End Sub
+</pre>
+<p>Functionプロシージャは値を返す。主に計算処理で利用する。</p>
+<pre class="prettyprint lang-vb">
+Function Ave2(ByVal x As Integer, ByVal y As Integer) As Integer
+
+    Dim result As Integer
+    
+    result = (x + y) / 2
+    
+    Return result
+
+End Function
+</pre>
+<p>関数の引数にByValではなくByRefを使用することで、C言語のポインタのように関数の内部から関数呼び出し側にあるデータを操作する関数を作ることができる。</p>
+<p>後日注記：VBでは、行の中の'に続く文字列はコメントとして扱われ、行末まで無視される。</p>
+<p><a href="structured_programming.html">構造化プログラミング</a>や<a href="function.html">関数</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.02.03編集</p>
+</div>
+
+<h2>オブジェクト指向</h2>
+<p>また、.NET化されたVB.NETではオブジェクト指向のクラスを用いたプログラミングができる。</p>
+<p>クラスはClass文で定義し、コンストラクタ名はNewとなる。</p>
+<p>インスタンスは</p>
+<pre>
+Dim 変数名 As New クラス名()
+</pre>
+<p>として作成し、メンバには「.」を用いてアクセスできる。</p>
+<p>アクセス修飾子はPrivate, Protected, Publicなどを指定できる。フレンズ関数も作成できる。</p>
+<p>プロパティはGetまたはSetでも作成できるが、Property文を使えば自動で作成できる。</p>
+<p>継承はInherits文で行う。</p>
+<p>インターフェースはInterface文で宣言し、Implements文で実装できる。</p>
+<p>（<a href="https://www.amazon.co.jp/VisualBasic2010%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC-Perfect-Master-%E9%87%91%E5%9F%8E-%E4%BF%8A%E5%93%89/dp/4798031100">VisualBasic2010パーフェクトマスター (Perfect Master SERIES)</a>を参考に執筆しました。）</p>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>例</h2>
+<p>以下は自分で書いたコード。</p>
+<p>クラス定義：</p>
+<pre class="prettyprint lang-vb">
+Public Class Hoge
+    Private x As Integer
+    Private y As Integer
+    
+    Public Sub New(ByVal a_x As Integer, ByVal a_y As Integer)
+        x = a_x
+        y = a_y
+    End Sub
+    
+    Public Property X() As Integer
+        Get
+            Return x
+        End Get
+        
+        Set (ByVal s_x As Integer)
+            x = s_x
+        End Set
+    End Property
+    
+    Public Property Y() As Integer
+        Get
+            Return y
+        End Get
+        
+        Set (ByVal s_y As Integer)
+            y = s_y
+        End Set
+    End Property
+    
+    Public Function Add() As Integer
+        Return x + y
+    End Function
+    
+    Public Function Sub() As Integer
+        Return x - y
+    End Function
+    
+    Public Function Mul() As Integer
+        Return x * y
+    End Function
+    
+    Public Function Div() As Integer
+        Return x / y
+    End Function
+    
+End Class
+</pre>
+<p>クラスの利用：</p>
+<pre class="prettyprint lang-vb">
+Dim x As Integer = 10
+Dim y As Integer = 20
+Dim hoge As New Hoge(x, y)
+
+Console.WriteLine("{0} + {1} = {2}", hoge.X, hoge.Y, hoge.Add())
+Console.WriteLine("{0} - {1} = {2}", hoge.X, hoge.Y, hoge.Sub())
+Console.WriteLine("{0} * {1} = {2}", hoge.X, hoge.Y, hoge.Mul())
+Console.WriteLine("{0} / {1} = {2}", hoge.X, hoge.Y, hoge.Div())
+
+hoge.X = 30
+hoge.Y = 15
+
+Console.WriteLine("{0} + {1} = {2}", hoge.X, hoge.Y, hoge.Add())
+Console.WriteLine("{0} - {1} = {2}", hoge.X, hoge.Y, hoge.Sub())
+Console.WriteLine("{0} * {1} = {2}", hoge.X, hoge.Y, hoge.Mul())
+Console.WriteLine("{0} / {1} = {2}", hoge.X, hoge.Y, hoge.Div())
+</pre>
+
+<h2>参考文献</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/VisualBasic2010%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC-Perfect-Master-%E9%87%91%E5%9F%8E-%E4%BF%8A%E5%93%89/dp/4798031100">VisualBasic2010パーフェクトマスター (Perfect Master SERIES)</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+
+<h2>クラスライブラリ</h2>
+<p><a href="vb_lib.html">VB２（クラスライブラリ）</a>も参照のこと。</p>
+
+<h2>フォームデザイナー</h2>
+<p><a href="vb_form.html">VB３（フォームデザイナー）</a>も参照のこと。</p>
+
+<h2>.NET Framework</h2>
+<p><a href="dotnet.html">.NET</a>を参照のこと。</p>
+
+<h2>Mono</h2>
+<p><a href="mono.html">Mono</a>を参照のこと。</p>
+
+<h2>MS-Excel VBA</h2>
+<p><a href="../windows_pc/msexcel_vba.html">MS-Excel VBA</a>も参照のこと。</p>
+
+<h1>昔のVB 6.0</h1>
+<h2>VB 6.0</h2>
+<p>旧来のVisual Basic。オブジェクト指向でなかった頃のVB。</p>
+<p>VB 6.0アプリケーションを動かすにはランタイムが必要。</p>
+<p>以下はVB 6.0のサンプル。</p>
+<ul>
+<li><a href="http://gihyo.jp/dev/serial/01/vb62csharp/0002">第2回　VB6で作ったサンプルソフト：VB6開発者向け：C#で始める.NETプログラミング｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>Gambas（VB 6.0の再来）</h2>
+<p>オブジェクト指向BASICを用いる、コンパイラと統合開発環境/RADツール。</p>
+<p>「VB 6.0の再来」ともいえるような開発環境であり、Qt/GTK向けのGUIデザイナーが付属し、.NET化以前のVisual Basicに似た言語仕様を持つ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gambas">Gambas - Wikipedia</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>意外とVBは現場で使われている</h2>
+<p>VBは既に古い言語だと思っている人は多いでしょうが、実際、意外とVBは現場で使われています。</p>
+<p>システム開発の現場で、Windows向けに開発する場合、VBを使うことは意外と多いです。</p>
+<p>その理由は、「使える人が多いから」です。</p>
+<p>VBは、使える人が開発現場に多く、みんなVBについてなら分かるため、今でもVBを開発用の言語に使うことが多いのです。</p>
+<p>確かに、C#のような言語のほうが新しいですし、中にはF#とか、あるいはRustやGolangなども最先端の流行ではありますが、これらの言語は分かる人がVBに比べて少ないのです。</p>
+<p>RustやGolangで開発をする際、問題が起きたらどのように解決すればいいのか、誰にも分かりません。特に、Rustには所有権や借用の概念があり、初心者が使うと所有権周りのエラーでコンパイルできないことが多々あり、解決にはそれなりの時間がかかります（たとえば<a href="https://gihyo.jp/article/2023/07/rust-monthly-topics-04-02">GTKオブジェクトの利用 ～gtk-rsでデスクトップアプリ開発をはじめよう［中編］ | gihyo.jp</a>などを参照のこと）。</p>
+<p>それよりも、多少古い言語であっても、分かる人や情報の多いVBなどを使ったほうが、システム開発の工程は容易に進みます。</p>
+<p>なので、VBは今でもシステム開発のために使われます。</p>
+<p>あるいは、最近はフロントエンドとバックエンドを分けてWeb化したクラウドサービスとしてシステムを開発することが多いですが、VBを使うと、そのようなクラウド的なシステムではなく、GUIを使ったより簡単なアプリケーションが開発できます。</p>
+<p>なので、Web以外のシステムであれば、VBを採用することは一般的なのです。</p>
+<p>VBであっても、ネットワークを完全に使わないわけではありません。一般的なHTTP通信をVBで行うことは可能です。そして、最近のVBでは.NETというJavaとよく似たクラスライブラリが提供されており、.NETは現場の開発者から見てもとても便利で簡単に使えます。VBは決して「もう終わった言語」ではなく、「現役バリバリで使われる言語」なのです。</p>
+<div class="edit_date">
+<p>2023.08.16</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>VB.NET</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E4%B8%96%E7%95%8C%E3%81%A7%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E7%B0%A1%E5%8D%98%E3%81%AAVisualBasic%E3%81%AEe%E6%9C%AC-%E6%9C%80%E6%96%B0%E7%AC%AC3%E7%89%88-VisualBasic2010%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%81%A8%E8%80%83%E3%81%88%E6%96%B9%E3%81%8C%E3%82%8F-%E9%87%91%E5%9F%8E-%E4%BF%8A%E5%93%89/dp/4798029440">世界でいちばん簡単なVisualBasicのe本[最新第3版]</a></li>
+<li><a href="https://www.amazon.co.jp/VisualBasic2010%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC-Perfect-Master-%E9%87%91%E5%9F%8E-%E4%BF%8A%E5%93%89/dp/4798031100">VisualBasic2010パーフェクトマスター (Perfect Master SERIES)</a></li>
+<li><a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-vb.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

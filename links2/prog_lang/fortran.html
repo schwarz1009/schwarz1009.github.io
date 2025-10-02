@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>FORTRANの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>FORTRANの世界観</h1>
+<p>FORTRANに関する世界観です。<a href="oldpl.html">昔の言語</a>や<a href="../hardware/mainframe.html">メインフレーム</a>や<a href="../hardware/old_computer.html">古いコンピュータ</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>FORTRAN</h1>
+<h2>FORTRAN</h2>
+<p>メインフレームの時代の言語。科学技術計算に使われることが多い。</p>
+<ul>
+<li><a href="https://qiita.com/cure_honey/items/795bd0e048ffeadc3e63">今時の Fortran 入門 ( Introduction to Modern Fortran ) - Qiita</a></li>
+<li><a href="http://www.nag-j.co.jp/fortran/">Fortran入門 - Numerical Algorithms Group</a></li>
+</ul>
+
+<h2>FORTRAN入門</h2>
+<p><a href="fortran_intro.html">FORTRAN入門</a>を参照のこと。</p>
+
+<h2>FORTRANの歴史</h2>
+<p>FORTRANの歴史はIBMの社員ジョン・バッカスによって機械語やアセンブリ言語に代わる新しい言語として考え出されたことからはじまる。</p>
+<p>後日注記：FORTRANの名前そのものが「formula translation」（数式の翻訳）を表すように、FORTRANは、数式そのものを翻訳して、逐次的に実行することしかできないコンピュータでも数式を理解できるように変換するためのソフトウェアである。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FORTRAN">FORTRAN - Wikipedia</a></li>
+</ul>
+
+
+<h2>FORTRANの時代のプログラミング</h2>
+<p>昔のFORTRANがどういうものだったのかは、<a href="https://qiita.com/kuh96/items/15007c4be80a4a67064e">恐るべし！ むかしむかしの FORTRAN ! - Qiita</a>が参考になる。面白くて笑ってしまった。</p>
+<p>面白いだけではなく、昔のFORTRANの時代のプログラム開発が記述されているため、参考になる。リンク先を参照してほしい。</p>
+
+<h2>GNU/Linuxでfortran</h2>
+<p>GNU/Linuxでfortranをやるためには、gfortranをインストールしよう。Ubuntuなら、</p>
+<pre>
+sudo apt install gfortran
+</pre>
+<p>ですぐに導入出来る。</p>
+<p>FORTRANは化石のような言語だが、今でもC/C++より高速に計算出来る場合があり、科学技術計算用としては今でも使われている。Linux/gfortranだけではなく、昔のSystem 360などは互換性を保っているため、今のメインフレームでも、昔のFORTRANプログラムを動かすことができる。</p>
+
+<h2>FFTWの導入</h2>
+<p>FFTWは高速フーリエ変換 （FFT）の計算をするためのライブラリ。詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://auewe.hatenablog.com/entry/2013/06/19/221946">高速フーリエ変換ライブラリ fftw のインストールと使用法 - 余白の書きなぐり</a></li>
+<li><a href="https://www.weblio.jp/content/FFTW">FFTWとは - Weblio辞書</a> - FFTW - Wikipedia</li>
+<li><a href="https://fukuchi.org/oss4art/FFTW">FFTW - Oss4art</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>FORTRANをすればプログラミングができる</h2>
+<p>PythonやC/C++を経験して、それでもプログラミングのやり方がよく分からないという人は、FORTRANをやるといいかもしれません。</p>
+<p>なぜ、FORTRANをするとよく分かるのか、それはFORTRANは「GOTO使い放題」だからです。</p>
+<p>現代のプログラミング業界では、GOTOは忌み嫌われます。その理由は、GOTOを使うと、とてもおかしなあり得ないプログラムができてしまうからです。</p>
+<p>GOTOでさまざまな場所にジャンプしまくるプログラムは、「スパゲッティプログラム」と言われるような、あり得ないほどおかしくて、誰にも理解不可能な、意味不明なプログラムを生み出します。</p>
+<p>ですが、上級者にとってはそれがいいのです。なぜなら、「スパゲッティプログラムがどのようにしたらできるのか」ということが分かるからです。</p>
+<p>すなわち、C言語やPascalのような構造化プログラミング言語のせいで、なくなってしまった、「昔のおかしなプログラミングの世界」が、FORTRANを使うと見えてくるのです。</p>
+<p>なので、上級者はFORTRANでGOTO使い放題の地獄になって、その地獄を自ら脱出するような経験をひとりひとり経験すべきなのです。</p>
+<p>FORTRANはそれだけではありません。なぜなら、FORTRANは実用的です。その理由は、高速だから、そして初心者向けの配慮を一切しないからです。</p>
+<p>Pythonは初心者がプログラミングに入門する際の「初心者用の言語」として優れていますが、その理由は初心者が思った通りの「正しい振る舞い」をしてくれるからです。==で文字列を比較できるPythonでは、C/C++の配列やポインタの問題を考えなくて済みます。ですが、Pythonはそのような初心者への配慮をしているせいで、遅くて重いのです。</p>
+<p>Pythonの問題点はほかにもあります。既存のモジュールが便利すぎるのです。最初からとても多機能で使いやすいライブラリやモジュールが整備されているせいで、ほとんどそれをただ使うだけでやりたいことができてしまいます。仕事としては使いやすくても、そのような理由で、初心者が初心者を脱するには向いていません。</p>
+<p>それに比べて、FORTRANはそのようなところがありません。本当のことを言えば、もっとも自分ですべてを手動で作らなければいけないのはC/C++ですが、それはシステムを学ぶという目標があるなら面白いですが、単にプログラミングをする上では、逆に極端に何もなさすぎるのです。さまざまな計算用の過去の資産があり、自分でGOTOを使って作るFORTRANは、上級者にとってちょうどいいのです。</p>
+<p>なので、初心者向け言語がPythonで、中級者向け言語がC言語やPascalだとしたら、上級者向け言語はFORTRANです。それらをすべて経験し終えて、「GOTOは最悪だ」という言葉の意味が分かった人間が、C++やJavaに進むべきなのです。LinuxやFreeBSDのような大学のUNIX環境は、それらをすべて経験するためにあるのです。</p>
+<p>本当は、そんなことくらい自分で分かるべきです。そもそも、Pascalぐらいから、「本物のプログラマはPascalを使わない」と言い出したのは、FORTRANを使ってほしいからです。GOTO使い放題の環境で、スパゲッティプログラムをたくさん作って、保守管理の地獄を経験して、その後にPascalを使えば、「こんなにPascalはありがたい」ということが分かるのです。みんな、昔はきちんと分かっていたのです。</p>
+<p>FORTRANのよい点はほかにもあります。ひとつは、行番号を使うことです。昔のプログラミングでは、行番号を使うことが当たり前でした。当たり前だった理由はちゃんとあり、行番号を使うことで、機械語の動き方がよく分かります。機械語では行番号とともにプログラムカウンタをインクリメントするのが普通ですが、そこを隠蔽せず、公開するFORTRANは、機械的なCPUの動き方がよく分かるのです。</p>
+<p>FORTRANは、基本的にオブジェクト指向をしません。最近のプログラミング言語は、オブジェクト指向ばかりを主張していて、まるで「オブジェクト指向の通りにやるのが正しいプログラミングだ」と言っています。そうかもしれませんが、そうだと決まったわけではありません。FORTRANは自由です。オブジェクト指向に染まることなく、本来のプログラミングをすることができるのです。</p>
+<p>C言語に何もないのは、ちゃんと理由があります。システムを作る上で、本当に何もない環境が多いのです。stdio.hを必ずインクルードするのは、入出力すらない環境でも使えるようにするためです。</p>
+<p>逆に、機能をこれでもかというぐらいつけたC++（C言語とC++は異なる言語です。きちんと覚えましょうね）にも、「ゼロオーバーヘッドの原則」があって、あると遅くなるような機能はありません（より正確に言うと、その機能を使わなくてもパフォーマンスの落ちるような機能はC++では取り入れないが、それ以外は取り入れる）。なので、スマートポインタはあってもガーベッジコレクションはないのです。そのような理由が、JavaやPythonなどの現代的な言語が使われる理由です。</p>
+<p>そして、FORTRANはプログラミングの世界で、最初に生まれたプログラミング言語です。最初に生まれた言語だけあって、プログラミングの世界で生まれたすべての考え方（あるいは最初の頃の考え方）が全部残っています。たとえば、英語をやっても語学ができない人が、フランス語やドイツ語をやるとできる人がいますが、FORTRANはそのような人に向いていると言えます。</p>
+<div class="edit_date">
+<p>2025.01.27</p>
+</div>
+
+<h2>GOTOのコード例</h2>
+<p>また、GOTOを排除しすぎた結果、プログラミング言語がどうなったか、それはRubyです。そもそも、C言語のfor文は分かりやすいです。最初からiという数があって、iがひとつひとつインクリメントされていく、というのがfor文の常套手段であり、ほとんど99%のfor文はそのように書きます。</p>
+<pre class="prettyprint">
+for (i = 0; i &lt; 100; i++) {
+    printf("%d\n", i);
+}
+</pre>
+<p>ですが、書くことが同じなら、もっと短くてもいいはずです。なので、Rubyのように、ブロックを与えればそれでよく、その中でブロックに対する引数だけを使えばよいのです。</p>
+<pre class="prettyprint">
+ar = 0..99
+ar.each do |i|
+  puts i
+end
+</pre>
+<p>そのような結果、今のRubyを中心としたプログラミング言語では、早い話、何もしません。最初から全部その通り決まっていて、それ以外何もしなくなりました。もし、Rubyのせいでプログラミング言語がおかしくなったと思うのであれば、結局、GOTOに立ち戻るべきなのです。</p>
+<p>同じプログラムは、FORTRANでGOTOを使うと以下のように書けます。</p>
+<pre>
+      integer i
+      i = 0
+10    if (i .lt. 100) then
+        write(*,*) i
+        i = i + 1
+        goto 10
+      end if
+</pre>
+<p>あるいはdo文を用いると以下のように書けます。</p>
+<pre>
+      integer i
+      do 20 i = 0, 99
+        write(*,*) i
+20    continue
+</pre>
+<p>もしかすると、こんな風にも書けると思います。</p>
+<pre>
+      integer :: i = 0
+10    write(*,*) i
+      i = i + 1
+      if (i .ge. 100) then
+        goto 20
+      end if
+      goto 10
+20    continue
+</pre>
+<p>このような豊かなGOTOがプログラミングの知性を付けるのです。もちろん冗談だよ～。</p>
+<p>注記：GOTOがクソなのは、こんなにおかしなわけの分からないコードになる。こんなコードが動くわけがない。もう分かったから、反省して、GOTOのない言語を学んだほうがいい。</p>
+<ul>
+<li><a href="https://udemy.benesse.co.jp/development/system/ruby-each.html">Ruby eachメソッドを初心者でも使える！知っていると便利な知識やfor文との違いも｜Udemy メディア</a></li>
+<li><a href="https://pweb.cc.sophia.ac.jp/k-kobayashi/f90/f90_3.html">理論研Fortran講座　繰り返し処理</a></li>
+<li><a href="https://www.nag-j.co.jp/fortran/FI_18.html">Fortran 入門: 知識として必要な過去の Fortran</a></li>
+<li><a href="https://www.nag-j.co.jp/fortran/FI_14.html">Fortran 入門: データ入出力</a></li>
+<li><a href="https://www.nag-j.co.jp/fortran/FI_4.html">Fortran 入門: 定数と変数</a></li>
+<li><a href="https://qiita.com/bluepost59/items/83fe23cfae31dba99ecf">【fortran】行番号は使ってはならない #Fortran - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.01.27</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Linux/UNIX API</h2>
+<p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
