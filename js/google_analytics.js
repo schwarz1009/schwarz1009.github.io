@@ -16,8 +16,4 @@ if (location.hostname==="schwarz1009.github.io"){
 
   google_analytics_byhost('G-J5SYB6TP8S');
   
-} else if (location.hostname==="assy.dousetsu.com"){
-
-  google_analytics_byhost('G-WTBBM43YH8');
-  
 }
