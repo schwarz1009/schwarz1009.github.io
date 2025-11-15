@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JavaScript入門 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaScript入門</h1>
+<p>JavaScript入門です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="javascript.html">JavaScript（１．一般）</a></li>
+<ul>
+<li><b>JavaScript入門</b></li>
+<li><a href="javascript_dom_canvas.html">２．DOM/Canvas</a></li>
+<li><a href="javascript_prototype.html">３．プロトタイプチェーン</a></li>
+</ul>
+<li><a href="javascript_comments.html">A．戯言</a></li>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>JavaScriptの面白さ</h1>
+<h2>JavaScriptは単純明快</h2>
+<p>僕は、JavaScriptの面白さというのは、単純明快なオブジェクトの代入・呼び出しシステムである、ということではないかと思う。</p>
+<p>オブジェクトは単にPythonの辞書のような{ 名前1: 値, 名前2: 値 }といった初期化子で記述できるプロパティ（名前と値）の集団で、変数にオブジェクトを代入すると「オブジェクト名.プロパティ名」でアクセスできる。ブラケットを用いてobj['x']ともアクセスできる（obj.xと同じ）。</p>
+<p>変数に型はなく、どんな値あるいはオブジェクトも代入できる名前にすぎない。「オブジェクト名.新しいプロパティ名 = 値」で、いつでも新しいプロパティをオブジェクトに追加できる。</p>
+<p>関数も（特別に実行可能な）オブジェクトであり、関数を別の変数に代入して参照することも自由。</p>
+<p>コンストラクタは単に関数であり、プロトタイプとして「コンストラクタ関数.prototype.メソッド関数 = function(){}」のように、プロパティとして別のメソッド関数を所有してnewすればオブジェクトを操作するメソッドとなり、newでコンストラクタ関数を呼び出せばオブジェクト指向的なインスタンスの生成もできる。</p>
+<p>プロトタイプチェーンを使った継承や委譲も可能。</p>
+<p>このような単純明快さ、これがJavaScriptの好まれる理由ではないかと思う。</p>
+<p>また、ホストオブジェクトがクライアントサイドのWebブラウザなら、windowオブジェクトからDOMなどにアクセスできるという仕様も単純。同時にNode.jsなどを使えばサーバーサイドのホストオブジェクトも利用できて、そもそもがブラウザの拡張言語として設計されたために拡張性に優れている。拡張言語としての使いやすさから、GNOMEやAdobe製品でもスクリプト用途に採用されている。</p>
+<p>後日注記：つまり、JavaScriptにおいてはハッシュと構造体は同じものです。ここに目を付けたのは天才かもしれません。これらはJavaScriptでは、オブジェクトと呼ばれます。また、JavaScriptでは関数もオブジェクトです。関数は、通常の変数とまったく同じように、名前をつけて管理でき、関数の引数に関数オブジェクトとして渡すこともできます。クラスがJavaScriptにないのは、クラスは単なる関数とオブジェクトに過ぎないからです。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a></li>
+</ul>
+<p><a href="javascript_prototype.html">JavaScript（プロトタイプチェーン）</a>や<a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>JavaScript入門</h2>
+<p>変数は値を入れる箱のこと。</p>
+<p>変数を宣言するにはletを使う。文字列は'～'あるいは"～"で囲んで表現する。</p>
+<pre class="prettyprint">
+let name = 'assy';
+</pre>
+<p>letは値を変えられる変数だが、constは値を変えることができない。</p>
+<p>変数の中身を参照するには、単に変数名を書けばよい。変数を左において=を用いると、変数の値を変えられる。</p>
+<pre class="prettyprint">
+let name2 = name;
+</pre>
+<p>変数の値を確認したいなら、console.log()という関数を使えば、コンソールに変数の値を出力できる。</p>
+<pre class="prettyprint">
+console.log(name);
+</pre>
+<p>constで宣言した変数の値を変えるとエラーとなる。</p>
+<pre class="prettyprint">
+const age = 10;
+age = 20; //エラー
+</pre>
+<p>また、配列は[var1, var2, var3]のように囲む。参照する時は変数名の後にインデックス番号をつけてarray[0]などとする。</pre>
+<pre class="prettyprint">
+let baka = ['hoge', 'hage', 'manuke'];
+console.log(baka[0]);
+</pre>
+<p>インデックス番号は0から始まることに注意。</p>
+<p>JavaScriptでは、キーと値からなるハッシュあるいは構造体のことをオブジェクトと呼ぶ。オブジェクトは、</p>
+<pre class="prettyprint">
+let family = { dad: 'andy', mam: 'kate' };
+</pre>
+<p>などとする。</p>
+<p>条件分岐はif文、反復文はwhile文で可能。また、関数はアロー記法とfunction記法がある。アロー記法を使う場合は、</p>
+<pre class="prettyprint">
+const loop_log = (text, c) =&gt; {
+    let i = 0;
+    while (i &lt; c) {
+        console.log(text);
+        i++;
+    }
+}
+
+loop_log('assy', 30);
+</pre>
+<p>などとする。関数はオブジェクトの中に入れることもできる。</p>
+<p>JavaScriptでWebブラウザの情報を取得するには、windowオブジェクトを使用する。</p>
+<p>たとえばブラウザの大きさを出力するには、</p>
+<pre class="prettyprint">
+console.log(window.innerWidth);
+console.log(window.innerHeight);
+</pre>
+<p>とする。</p>
+<p>documentオブジェクトは、HTMLの情報を取得することができる。</p>
+<p>たとえば、getElementsByTagName('button')とすればボタンを取得できる。ここで得られるボタンは配列の形になっているので、4つのボタンのうちの3番目を取得するには、インデックス番号をつけて配列の要素として取得すればいい。</p>
+<p>getElementsByTagName()だけではなく、getElementById()を使えばIDから取得することもできる。こちらの方が便利。</p>
+<p>最後に、イベント。イベントリスナを使うことで、ドキュメントから取得したボタンに、イベントを関連付けられる。たとえば、クリックした時に関数を実行するのであれば、</p>
+<pre class="prettyprint">
+let hoge_button = document.getElementById('hoge');
+hoge_button.addEventListener('click', function () {
+    window.alert('hogeボタンを押しました');
+});
+</pre>
+<p>ちなみに、関数はアロー記法でもfunctionを使った記法でもどちらでも結構です。</p>
+<p>この説明で分からない方は、以下の動画で分かりやすく説明されているのでそちらをご覧ください。この入門はこの動画を見た上で自分なりに書いてみました。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=QCjFPSO96RU">【JavaScript超入門講座】わずか50分で知識ゼロから基礎をマスター！ （セイト先生のWeb・IT塾） - YouTube</a></li>
+</ul>
+<p><a href="javascript_dom_canvas.html">JavaScript（DOM/Canvas）</a>も参照のこと。</p>
+
+<h1>基本文法</h1>
+<h2>算術演算子と比較演算子</h2>
+<p>JavaScriptの標準的な算術演算子には+（足し算）, -（引き算）, *（掛け算）, /（割り算）, %（割り算の余り）などがある。</p>
+<p>比較演算子は==など一通りそろっているが、==とは別に===がある。</p>
+<p>===と==の違いについては、==は型を変換して一致させる。===は型を変換しない。</p>
+<p>JavaScriptだけでなくPHPなど、Webサービス開発においてIDとパスワードの比較などでは数値にキャストするととんでもないことになることがあるので、基本的に===を使おう。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators">算術演算子 - JavaScript | MDN</a></li>
+<li><a href="https://qiita.com/PianoScoreJP/items/e43d70ec188c6fed73ed">JavaScript 忘れがちな　=== と == の違い - Qiita</a></li>
+</ul>
+<p><a href="php_security.html">PHP（セキュリティ）</a>も参照のこと。</p>
+
+<h2>変数定義</h2>
+<p>以下のようにvarで変数を使用できる。</p>
+<pre class="prettyprint">
+var name = "Assy";
+</pre>
+<p>変数定義については、varの他にletやconstがある。varは関数スコープだが、letとconstはブロックスコープ。また、constは変更されない変数、すなわち定数を定義できる。</p>
+<pre class="prettyprint">
+let name = "Assy";
+</pre>
+<p>後日注記：varによる変数定義は関数スコープであるため、ブロックの中で使った変数をブロックの外からアクセスできるが、これはバグの元になるため、ブロックスコープのletを使おう。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/5290">JavaScriptで変数を使う方法【初心者向け】 | TechAcademyマガジン</a></li>
+<li><a href="https://techacademy.jp/magazine/14872">JavaScriptで書く「let,var,const」の違い・使い分け | TechAcademyマガジン</a></li>
+</ul>
+
+<h2>TypeScriptとES6の変数定義</h2>
+<p>以前から、TypeScriptではvarのほかにletやconstが用意されていました。ですが今ではES6以降標準のJavaScriptの仕様としてletやconstが含まれます。</p>
+<p>そのため、「varは時代遅れであり、使うべきではない」とされています。</p>
+<p>ですが、以前のJavaScriptの書籍などではvarが使われていることが多いです。以前の仕様で動くコードも残っているため、varを使うことは引き続き可能です。</p>
+<p><a href="javascript_framework_typescript.html">TypeScript</a>も参照のこと。</p>
+
+<h2>配列とmap()</h2>
+<p>配列は以下のようにします。</p>
+<pre class="prettyprint">
+let langs = ['Ruby', 'Python', 'JavaScript'];
+console.log(langs[0]);
+</pre>
+<p>配列をひとつひとつ順番に処理するには、後述するイテレータとfor-of文を使います。</p>
+<p>配列の要素ひとつひとつに関数を適用し、その実行結果の配列を返したい場合はmap()関数を使います。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/21812">【JavaScript入門】配列処理をするmap()の使い方とMapオブジェクトの解説！ | 侍エンジニアブログ</a></li>
+</ul>
+<p>JavaScriptでは、配列の操作のためにArrayオブジェクトが用意されており、さまざまな操作ができます。たとえばpush(), delete(), filter(), map(), copy(), sort()などのメソッドがあります。詳しくは以下が参考になります。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/31746">【JavaScript入門】配列の使い方と操作まとめ（初期化・追加・結合・検索・削除） | 侍エンジニアブログ</a></li>
+</ul>
+<p><a href="data_structure_list.html">配列とリストとハッシュ</a>も参照のこと。</p>
+
+<h2>if文を使う</h2>
+<p>if～else文を使った条件分岐は、</p>
+<pre>
+if (条件1) {
+    処理
+} else if (条件2) { 
+    処理
+}
+</pre>
+<p>で可能。条件を満たす場合に処理が行われ、満たされない場合は次の条件に進む。</p>
+<p>たとえば以下のようになる。</p>
+<pre class="prettyprint">
+function zero_or_one(arg) {
+    if (arg == 0) {
+        return 'Zero';
+    } else if (arg == 1) {
+        return 'One';
+    } else {
+        return 'Error';
+    }
+}
+
+console.log(zero_or_one(0));
+console.log(zero_or_one(1));
+</pre>
+<p>if～else文のほか、switch-case文も利用できる。switch-case文では、case文の場所に定数式だけではなく任意の式を書ける。</p>
+<p>後日注記：JavaScriptでは、変数に具体的な値を代入するには=を使って代入すれば良いが、変数の中の具体的な値を知るためには、console.log()などで出力するか、このようにif文やswitch-case文を使って値に基づいて条件分岐をすればいい。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/5411">JavaScriptでIF文を使って条件分岐させる方法【初心者向け】 - TechAcademyマガジン | 教育×テクノロジーのオンライン専門情報誌</a></li>
+</ul>
+<p><a href="structured_programming.html">構造化プログラミング</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.04.12編集</p>
+</div>
+
+<h2>for文/while文を使う</h2>
+<p>for文を使った繰り返しは、</p>
+<pre>
+for (初期化を行う式; 条件式; 反復する際に実行される式) {
+    繰り返し処理
+}
+</pre>
+<p>で可能。条件式が真である間繰り返しが行われる。</p>
+<p>もちろんwhile文も使えます。</p>
+<pre>
+while (条件式) {
+    繰り返し処理
+}
+</pre>
+<p>ほかにもdo-while文などがあります。</p>
+<p>永久ループにならないためには条件式を正しく記述するか、break文を使ってループから脱出しましょう。</p>
+<p>また、continue文を使うと、その回の繰り返しをスキップして次の繰り返しに移ることができます。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/5481">JavaScriptでfor文を使ってループ処理する方法【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+<p>以下は応用例（自分で書いたコード）。</p>
+<pre class="prettyprint">
+function ul_array(id, array) {
+    document.write('&lt;ul id="' + id + '"&gt;');
+    for (var i = 0; i &lt; array.length; i++) {
+        document.write('&lt;li&gt;' + array[i] + '&lt;/li&gt;');
+    }
+    document.write('&lt;/ul&gt;');
+}
+
+ul_array('langs', ['HTML', 'CSS', 'JavaScript', 'PHP', 'Python', 'Ruby']);
+ul_array('names', ['Assy', 'Zaidou', 'Frey']);
+</pre>
+<p>ここではコードを単純化するためにdocument.write()を使っているが、現在のJavaScript界隈ではdocument.write()は非推奨とされているので注意してほしい。</p>
+<div class="edit_date">
+<p>2023.04.12編集</p>
+</div>
+
+<h2>イテレータ（for-of文）を使う</h2>
+<p>イテレータとfor-of文を使うことで、要素を順番に処理できます。値を取り出すにはvalues()メソッドを使います。</p>
+<pre class="prettyprint">
+for (const value of list.values()) {
+    console.log(value);
+}
+</pre>
+<p>インデックス番号と値を同時に取り出したいならentries()メソッドを使えばよいです。Mapの場合keys()を使えばキーだけを取り出せます。</p>
+<ul>
+<li><a href="https://qiita.com/uhyo/items/cc68e66e4008a66f3d94">JavaScriptのイテレータが持つメソッドをそろそろ知っておきたい人が読む記事 - Qiita</a></li>
+<li><a href="https://ja.javascript.info/keys-values-entries">Object.keys, values, entries - 現代の JavaScript チュートリアル</a></li>
+</ul>
+<p><a href="iterator.html">イテレータとジェネレータ</a>や<a href="functional_programming.html">関数型プログラミング</a>も参照のこと。</p>
+
+<h2>関数定義</h2>
+<p>基本的に以下のように定義する。</p>
+<pre class="prettyprint">
+function sub10(arg) {
+    var v = arg - 10;
+    return v;
+}
+</pre>
+<p>そして、以下のように実行する。</p>
+<pre class="prettyprint">
+var x = sub10(100);
+</pre>
+<p>関数はfunction記法のほかアロー記法があります。たとえば、</p>
+<pre class="prettyprint">
+function func_add(a, b) {
+    return a + b;
+}
+</pre>
+<p>はアロー記法では</p>
+<pre class="prettyprint">
+const func_add = (a, b) =&gt; {
+    return a + b;
+}
+</pre>
+<p>と書けます。</p>
+<p>JavaScriptは関数もオブジェクトであるため、=を使って左辺の変数に代入し、それを実行できます。</p>
+<pre class="prettyprint">
+let func_loop = (text, c) =&gt; {
+    let i = 0;
+    while (i &lt; c) {
+        console.log(text);
+        i++;
+    }
+}
+
+func_loop('OK Google', 100);
+</pre>
+<ul>
+<li><a href="https://blog.codecamp.jp/javascript-function-use">【初心者向け】簡単にJavaScriptの関数を使う方法 | CodeCampus</a></li>
+</ul>
+<p><a href="function.html">関数</a>も参照のこと。</p>
+
+<h2>オブジェクトの作成</h2>
+<p>オブジェクトの作成をするためには、オブジェクトリテラルを使う方法と、コンストラクタとnewを使う方法がある。</p>
+<p>オブジェクトリテラルを使う方法：</p>
+<pre class="prettyprint">
+let obj = { x:1, y:2 };
+console.log(obj.x + obj.y);
+</pre>
+<p>コンストラクタとnewを使う方法：</p>
+<pre class="prettyprint">
+function HogeClass(x, y) {
+    this.x = x;
+    this.y = y;
+}
+
+let obj2 = new HogeClass(3, 4);
+console.log(obj2.x + obj2.y);
+</pre>
+<p>もしconsole.log()文をshow()のようにオブジェクトのメソッドとして持たせたいなら以下のようにすればいい。</p>
+<p>オブジェクトリテラルを使う方法（メソッド付き）：</p>
+<pre class="prettyprint">
+let obj3 = {
+    x:5, y:6,
+    show:function() {
+        console.log(this.x + this.y);
+    }
+};
+
+obj3.show();
+</pre>
+<p>コンストラクタとnewを使う方法（メソッド付き）：</p>
+<pre class="prettyprint">
+function Hoge2Class(x, y) {
+    this.x = x;
+    this.y = y;
+    
+    this.show = function() {
+        console.log(this.x + this.y);
+    }
+}
+
+let obj4 = new Hoge2Class(7, 8);
+obj4.show();
+</pre>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>が参考になる。）</p>
+
+<h2>さまざまなクラス</h2>
+<p>すべてのクラスの基底クラスはObjectクラスとなる。</p>
+<p>文字列のためのクラスとしてStringクラス、配列のためのクラスとしてArrayクラス、関数のためのクラスとしてFunctionクラスがある。</p>
+<p>また、数値のためのNumberクラス、数学関数のためのMathクラス、日付クラスとしてDate、正規表現クラスとしてRegExpなどがある。</p>
+<p>また、JSONクラスを使うことで、JSONデータをネイティブに扱うことができる。</p>
+<p><a href="../linux/regex.html">正規表現</a>や<a href="json.html">JSON</a>も参照のこと。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+
+<h2>コメント</h2>
+<p>JavaScriptでは、C/C++と同様、複数行のブロックコメントとして/* ～ */を、一行コメントとして//を利用できる。</p>
+<p>HTMLのコメントである&lt;!-- ～ --&gt;とごっちゃにならないように注意しよう。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/javascript/ini/index4.html">JavaScript | コメントを記述する | Let'sプログラミング</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.03</p>
+</div>
+
+<h1>応用・ブラウザ処理</h1>
+<h2>console.log関数</h2>
+<p>console.log()で、デバッガのコンソールに値を表示できる。</p>
+<pre class="prettyprint">
+console.log("Assy");
+</pre>
+<p>あるいは、</p>
+<pre class="prettyprint">
+let name = "Assy";
+console.log(name);
+</pre>
+<ul>
+<li><a href="https://www.sejuku.net/blog/27205">デバッグに大活躍! JavaScriptのconsole.logで値を表示しよう | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+
+<h2>document.write関数</h2>
+<p>ブラウザにそのまま内容を表示したい場合はdocument.write()が使えますが、現在では非推奨とされています。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/26542">JavaScriptのdocument.write()メソッドの使い方を現役エンジニアが解説【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+<p>現在では、document.write()の代わりに、insertAdjacentHTML()を使うことが推奨されます。</p>
+
+<h2>ホスト名の取得方法</h2>
+<p>たとえば、ホスト名は「location.hostname」で取得できる。</p>
+<ul>
+<li><a href="http://128bit.blog41.fc2.com/blog-entry-231.html">JavaScriptでホスト名(ドメイン)を取得する方法 - Web Memo.SE</a></li>
+</ul>
+<p>ホスト名で処理を分けたいなら、</p>
+<pre class="prettyprint">
+if (location.hostname==="hoge.hogehoge.com"){
+    document.write('&lt;p&gt;このサイトはhoge.hogehoge.comです。&lt;/p&gt;');
+    
+} else if (location.hostname==="hoge2.hogehoge2.com"){
+    document.write('&lt;p&gt;このサイトはhoge2.hogehoge.com2です。&lt;/p&gt;');
+}
+</pre>
+<p>とすればよい。</p>
+<p>ほかにも、ウィンドウ幅によって処理を分けたい場合、たとえばスマホ向けとPC向けで別の内容を表示させたい時などは、window.innerWidthなどを使って定数値と比較するなどの方法がある（ほかにも方法はある）。767pxぐらいで分けるのが一般的。</p>
+
+<h2>ボタン・リンクから実行する</h2>
+<p>基本的に、</p>
+<pre class="prettyprint">
+onclick="OnButtonClick();"
+</pre>
+<p>のような属性をHTMLのタグの中に書けば、クリック時にOnButtonClick()という名前の関数を実行できます。</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.ipentec.com/document/javascript-exec-javascript-on-button-click">ボタンのクリック時にJavaScriptを実行する (JavaScript プログラミング) - iPentec</a></li>
+<li><a href="https://www.ipentec.com/document/javascript-exec-javascript-on-hyperlink-click">リンクのクリック時にJavaScriptを実行する - リンクのonClickの実装 (JavaScript プログラミング) - iPentec</a></li>
+</ul>
+
+<h1>発展</h1>
+<h2>即時関数</h2>
+<p>JavaScriptには、即時関数と呼ばれる面白い関数の書き方がある。以下のように関数定義を()でくくって後ろに()を記述すれば、関数を定義して即座に実行できる。</p>
+<pre class="prettyprint">
+(function () {
+    ....
+}());
+</pre>
+<p>引数を持たせることも返り値を返すこともできる。</p>
+<pre class="prettyprint">
+let v = (function (x, y) {
+    return x + y;
+}(10, 200));
+
+console.log(v);
+</pre>
+<p>詳しくは以下のページが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/katsukii/items/cfe9fd968ba0db603b1e">JavaScriptで即時関数を使う理由 - Qiita</a></li>
+</ul>
+
+<h2>setIntervalとクロージャ</h2>
+<p>JavaScriptでは、関数定義を関数定義の中でも宣言できる。また、関数を宣言した場所と同一のスコープにある変数には関数の内部からアクセスできる。これをクロージャと呼ぶ。</p>
+<p>以下は定期的に関数を実行するsetInterval()を使った例。</p>
+<pre class="prettyprint">
+let v = 0;
+let limit = 500;
+let step = 50;
+
+function func() {
+    if (v &gt; limit) {
+        v = 0;
+    }
+    
+    console.log(v);
+    
+    v += step;
+}
+
+setInterval(func, 3000);
+</pre>
+<p>たとえば、out_func()の中でin_func()を定義する場合などに役に立つ。</p>
+<p>後日注記：上のコードは、応用すると画像を左から右にスライドショーのように切り替えて表示するプログラムが作れます。画像のサイズが50だとして、最初は0地点ですが、それが3秒ごとに50ずつ加算されていきます。画像を結合させて作っておいて、50ずつ位置を移動させるようなことに応用可能です。</p>
+
+<h2>MapとSet</h2>
+<p>JavaScriptでは、オブジェクトを使ってPerlで言うハッシュのようなデータ構造を使うこともできますが、マップ専用のデータ構造としてMapが存在します。同様にSetも存在します。</p>
+<ul>
+<li><a href="https://ja.javascript.info/map-set">Map と Set - 現代の JavaScript チュートリアル</a></li>
+</ul>
+
+<h1>別ページからの転載</h1>
+<h2>クロージャ</h2>
+<p><a href="closure.html">クロージャ・無名関数・関数オブジェクト</a>より。</p>
+<blockquote class="inyou2">
+<p>たとえば、</p>
+<pre class="prettyprint">
+function f() {
+    var value = 1;
+    function g() {
+        console.log(value);
+    }
+    g();
+    value = 3;
+    g();
+}
+
+f();
+</pre>
+<p>実行結果：</p>
+<pre>
+1
+3
+</pre>
+<p>このような時、g()は同じスコープにある変数valueを参照するクロージャであり、valueの値は後々になって変えることもできる。</p>
+<p>また、</p>
+<pre class="prettyprint">
+var f = function() {
+    var value = 0;
+    return function g(number) {
+        value += number;
+        console.log(value);
+    };
+};
+
+add = f();
+add(3);
+add(6);
+</pre>
+<p>実行結果：</p>
+<pre>
+3
+9
+</pre>
+<p>このように、関数から関数を返し、この関数をクロージャとして使うこともできる。変数valueの値はクロージャとともに保持される。</p>
+</blockquote>
+
+<h2>Promiseとasync/await</h2>
+<p><a href="parallel.html">並列処理</a>より。</p>
+<blockquote class="inyou2">
+<p>非同期処理を行う上で、「何かの処理がきちんと完了してから次の処理を行いたい」とか、「処理を行った結果を別の処理に渡したい」などとすることがあります。</p>
+<p>これを同期処理で書くことは簡単ですが、非同期処理にすることで、長い時間がかかる処理を行っている間、CPUはそれに待たされることなく別の関係のない処理を行えます。</p>
+<p>コールバック関数で実現することもできますが、コールバック地獄になることもあります。コールバックを複数使うと、ネストが深くなりすぎ、見通しも悪くなります。</p>
+<p>JavaScriptでは、このような時に、Promiseと呼ばれる仕組みを使うことができます。</p>
+<p>Promiseでは、関数の引数として、resolve（処理の成功）とreject（処理の失敗）の二つの関数をとります。まず、処理がきちんと完了した時点で、resolve()を実行します。ここで、処理は「解決」されます。これがreturnやyieldに相当します。処理が解決したら、then()に記述された次の関数の処理が実行されます。thenはいくらでも続けることができます（メソッドチェーン）。また、正しく処理が解決せず、不正に終了する場合はreject()を実行します。これをcatch()で捕捉します。catch()は処理中にthrowで吐かれた例外を捕捉することもできます。</p>
+<p>また、このようなPromiseによる非同期処理を、もっと同期処理と同じような記述で書くことのできる仕組みとして、async/awaitがあります。asyncを関数定義につけると、その関数は非同期関数となります。awaitはasyncをつけた関数の中にしか記述できませんが、awaitが記述された時点で、awaitをつけた関数のPromiseの結果が返されるまで、非同期関数を一時的に停止して、Promiseの解決を待機します。そして、解決した時点で非同期関数の実行を再開します。</p>
+</blockquote>
+
+<h1>参考情報</h1>
+<h2>Mozillaの入門が一番いい</h2>
+<p>JavaScriptを学ぶなら、ほとんど公式と言ってもいいぐらいのMozillaの情報があります。</p>
+<p>実際、JavaScriptをやりたいなら、Mozillaの入門が一番いいです。特に、以下に僕が記述する内容の中でも、ボタンやリンクからJavaScriptを実行する場合などは「HTMLの内部にJavaScriptを書くのは避けた方が良い」といったようなことが書かれており、自分が見てもきちんとMozillaの情報を読んだ方が良いと思います。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Learn/JavaScript/First_steps/What_is_JavaScript">JavaScript とは - ウェブ開発を学ぶ | MDN</a></li>
+</ul>
+<p>しかしながら、一部の内容が英語のままです。ただし、Google Chromeを使っている場合は、Googleの機械翻訳を使うことをおすすめします。Google翻訳は最近のAI技術の向上などにより、驚くほど質の高い日本語を吐いてくれます。</p>
+
+<h2>ES6</h2>
+<p>JavaScriptの標準であるECMAScriptは、以前は欧州における標準規格団体だったECMAで標準化が進められています。</p>
+<p>ECMAScript 2015のことをES6と言い、ブロックスコープの変数定義やClass文、for-of文によるイテレータ、Promiseによる非同期処理など数多くの変更が加わっています。</p>
+<ul>
+<li><a href="https://qiita.com/soarflat/items/b251caf9cb59b72beb9b">ES2015(ES6) 入門 - Qiita</a></li>
+</ul>
+
+<h2>リファレンス</h2>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://www.tohoho-web.com/js/">とほほのJavaScriptリファレンス</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

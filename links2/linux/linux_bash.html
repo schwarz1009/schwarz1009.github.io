@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux シェル（Bash）１（シェル） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux シェル（Bash）１（シェル）</h1>
+<p>Linuxのシェル（Bash）に関する世界観１（シェル）です。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>Bash（１．シェル）</b></li>
+<ul>
+<li><a href="linux_bash_script.html">２．シェルスクリプト</a></li>
+<li><a href="linux_bash_advanced.html">Bashのさまざまな機能</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>シェルの基本</h1>
+<h2>シェルとは</h2>
+<p>シェルは、ユーザーのライン入力を受け取って、任意のコマンドプログラムを実行するプログラム。ユーザーが思い通りにさまざまなコマンドのプログラムを実行できるようにした、人間であるユーザーと機械とのインターフェース。</p>
+<p>GNU/Linuxで一般的なBashには、コマンドやパスの補完、ヒストリ機能（一度実行したコマンドを履歴から探索できる）、マルチタスクの機能（&を使ったプログラムの非同期の実行やjobsコマンドなど）、コマンドの別名を作れるエイリアス、（厳密にはシェルではなくOSの機能だが）コマンドとコマンドを繋げるパイプの実行、シェルスクリプトの実行などの便利な機能が備わっている。ライバルはFreeBSDなどで一般的なcsh/tcsh（Cシェル系のシェル。シェルスクリプトなどの記法がC言語に近い）。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_bash/man1/bash.1.html">man bash</a></li>
+</ul>
+
+<h2>PATH</h2>
+<p>Bashなどのコマンドラインシェルは、基本的にユーザーの入力を受け取ってコマンドを実行するが、このコマンドは環境変数であるPATHのディレクトリの中から検索される。</p>
+<p>PATHに含まれていないコマンドや実行ファイルでも、/sbin/serviceのようにフルパスで指定するか、./configureのように相対パスで指定すれば実行できる。</p>
+<p>また、ユーザーのホームディレクトリを得るHOMEという環境変数もある。Bashでは、ホームディレクトリを~（チルダ）で表現し、ホームディレクトリの中にある.bashrcは~/.bashrcと記述してシェルからアクセスできる。</p>
+<p>（以下は<a href="http://pocketstudio.jp/linux/?%A5%D1%A5%B9(PATH)%A4%CE%B3%CE%C7%A7%A4%C8%C0%DF%C4%EA%CA%FD%CB%A1%A4%CF%A1%A9">パス(PATH)の確認と設定方法は？ - Pocketstudio.jp Linux Wiki</a>を参考に執筆・引用しました。）</p>
+<h3>PATHの確認</h3>
+<p>PATHの確認方法。</p>
+<pre>
+$ echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin
+</pre>
+<h3>PATHの設定</h3>
+<p>PATHの設定方法。</p>
+<pre>
+$ PATH=$PATH:/home/assy/bin
+$ export PATH
+</pre>
+<h3>設定ファイル</h3>
+<p>PATHの設定ファイル。</p>
+<p>.bash_profileに以下の設定を記述することで、ログインした時に自動でPATHを設定してくれます。</p>
+<pre>
+PATH=$PATH:/home/assy/bin
+export PATH
+</pre>
+<p>システム全体（すべてのユーザーのシェル）で設定する場合は、/etc/profileに記述します。</p>
+
+
+<h2>一般ユーザーとrootユーザーのシェル</h2>
+<p>シェルには、一般ユーザーのシェルとrootユーザーのシェルという二種類のシェルがある。慣習的に、コマンドの入力例などを記述する際に、一般ユーザーのシェルは$、rootユーザーのシェルは#を行頭につけて表現する。この$や#を入力する必要はない。</p>
+<p>UNIXでは、誤った操作によるシステムの破壊を防ぐために、通常はシステムの変更・破壊権限を持たない一般ユーザーとしてログインし、一般ユーザーのシェルを起動させて操作する。データはホームディレクトリのような場所に保存し、多くの操作は一般ユーザーで行う。</p>
+<p>だが、ソフトウェアパッケージのインストール・アンインストールや、システムの定期的な更新など、一部の操作はrootユーザーになった上で行う必要がある。</p>
+<p>この時は、su -コマンドを使うことで、rootユーザーのシェルを起動できる。</p>
+<p><a href="linux_commands_beginner.html">Linuxコマンド（基本）</a>を参照のこと。</p>
+
+<h3>su -</h3>
+<p>rootユーザーになってシェルを実行する。</p>
+<pre>
+$ su -
+Password: (root のパスワードを入力)
+# (rootのシェルになった)
+</pre>
+<p>終了する時はexitを実行する。</p>
+<pre>
+# exit
+$ (ユーザーに戻る)
+</pre>
+
+<h2>初期化スクリプト</h2>
+<p>特に、PATHの永続的な設定をしたい場合など、ログイン時に特定のコマンドを実行したい場合、起動スクリプトに記述することができる。</p>
+<p>たとえば、上のPATHの設定の例では、そのコマンドを実行した時にしかPATHが設定されず、シェルを終了してしまうと次回のシェルでまた手動で実行しないといけない。このような時に初期化スクリプトを使う。</p>
+<p>初期化スクリプトはホームディレクトリにある.bash_profile（ログイン時）と.bashrc（シェルの毎回起動時）などがある。</p>
+<p>だが、これはコマンドシェルとしてログインした場合であり、Xサーバーでグラフィカルなディスプレイマネージャ（GNOMEならGDMなど）でログインした時には実行されない。</p>
+<p>Xサーバーを実行した時にコマンドを実行したい場合は、.xsession（Xログイン時）や.xinitrc（startxコマンドでXサーバーを手動で起動する時）などにコマンドを記述する。.xinitrcは、たとえばtwmではなく独自のウィンドウマネージャを起動したい場合などにその起動コマンドを記述すると、startxを実行した時に自動でウィンドウマネージャを起動できて便利である。日本語入力のためのインプットエンジンの設定も.xinitrcに記述することが多い。（最近のiBusなどの新しい世代のインプットエンジンでは、.xinitrcを編集する必要はなく、GUIで設定できる。）</p>
+<p><a href="linux_unix_admin.html">UNIXシステム管理（システム情報と設定）</a>や<a href="linux_japanese_input.html">日本語入力</a>を参照のこと。</p>
+
+<h2>コマンドの強制終了とエラー</h2>
+<p>コマンドを実行している時に、途中で実行を中止し、強制終了したい時はCtrl+Cを実行する。</p>
+<p>また、プログラムを実行して、何も出力せずにプログラムが終了し、元のシェルの入力に戻った時は、コマンドは正常に処理を完了している。何かエラーを出した時（途中で不正終了した時）はエラーが表示される。</p>
+
+<h2>作業の終了</h2>
+<p>別のユーザーとしてログインしたい場合など、シェルそのものを終了させたい時はexitコマンドを実行する。また、システムを終了させたい時はshutdownコマンドを実行する。システムの終了は-h、再起動は-r。</p>
+<pre>
+# shutdown -h now
+</pre>
+
+<h2>Bashのソースコードを読もう</h2>
+<p>BashとReadlineのコードは以下から読める。</p>
+<ul>
+<li><a href="https://git.savannah.gnu.org/cgit/bash.git">bash.git - bash</a></li>
+<li><a href="https://git.savannah.gnu.org/cgit/readline.git">readline.git - The GNU Readline library</a></li>
+</ul>
+
+<h1>基本</h1>
+
+<h2>補完（Tabキー）</h2>
+<p>ファイルのパスを入力している時に、途中まで入力してTabキーを押すと、それ以降の入力（決まっているところまで）を自動補完してくれます。</p>
+<p>候補がたくさんある時はリスト表示されます。</p>
+<h2>ヒストリ（↑、↓）</h2>
+<p>↑キーと↓キーを押すことで、一度入力したことのあるコマンド行を再度表示し、再実行することが出来ます。</p>
+<p>ヒストリは.bash_historyに記録されます。</p>
+<p>ヒストリは、Ctrl+r（後方）とCtrl+s（前方）でインクリメンタルサーチをすることが出来ます。</p>
+<ul>
+<li><a href="https://tetokon.com/2013/01/21/bash-ctrl-r/">bashの履歴を検索するコマンドが捗りすぎてヤバい！俺の作業効率が２倍どころか更に倍してドンッ！ - でーじてとこん</a></li>
+</ul>
+
+<h2>エイリアス</h2>
+<p>コマンドに常にオプションを付けたい時は、エイリアスが使えます。</p>
+<pre>
+$ alias rm='rm -i'
+</pre>
+<p>引数を付けずにaliasコマンドを実行することで、定義されたエイリアスの一覧を見ることが出来ます。</p>
+<pre>
+$ alias
+</pre>
+
+<h1>個別ページ</h1>
+<h2>シェルスクリプト</h2>
+<p><a href="linux_bash_script.html">Bash２（シェルスクリプト）</a>を参照のこと。</p>
+
+<h2>Bashのさまざまな機能</h2>
+<p><a href="linux_bash_advanced.html">Bashのさまざまな機能</a>を参照のこと。</p>
+
+<h1>GUIから操作する</h1>
+<h2>端末エミュレータ</h2>
+<p>GNOME端末やKonsoleを使うことで、GUIから端末エミュレータとしてシェルを実行出来ます。</p>
+<p><a href="gnome_apps.html">GNOMEアプリケーション</a>や<a href="kde_apps.html">KDEアプリケーション</a>や<a href="linux_terminal.html">Linux端末</a>を参照のこと。</p>
+
+<h1>コマンド一覧</h1>
+<h2>basename</h2>
+<p>パス名の中からファイル名を取り出す。findなどから解析できる。</p>
+
+<h2>echo</h2>
+<p>文字列（テキスト）や変数の値を表示する。シェルスクリプトなどでprintf()の代わりに使える。</p>
+
+<h2>lessとmore</h2>
+<p>lessとmoreは、ファイルやテキストの内容をスクロール可能な１画面に表示する便利なコマンド。</p>
+<p>moreは逆戻りが出来ないためlessを使うことが多い。</p>
+
+<h2>alias</h2>
+<p>aliasはコマンドの別名を登録する。rmについて確認表示をデフォルトに登録したりできる。</p>
+<p>また、unaliasで別名を解除できる。</p>
+
+<h2>その他</h2>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>clear</td><td>画面をクリアする。</td></tr>
+<tr><td>exit</td><td>ログアウトする。</td></tr>
+<tr><td>history</td><td>コマンドの履歴を表示する。</td></tr>
+<tr><td>which</td><td>コマンドのパスを表示する。</td></tr>
+<tr><td>nohup</td><td>ログアウト後もプログラムを実行する。</td></tr>
+<tr><td>sleep</td><td>一定時間スリープする（一時停止）。</td></tr>
+</table>
+
+<h1>参考ページ</h1>
+<h2>参考ページ</h2>
+<p>詳しくは以下が参考になります。</p>
+<ul>
+<li><a href="http://pocketstudio.jp/linux/?%A5%D1%A5%B9(PATH)%A4%CE%B3%CE%C7%A7%A4%C8%C0%DF%C4%EA%CA%FD%CB%A1%A4%CF%A1%A9">パス(PATH)の確認と設定方法は？ - Pocketstudio.jp Linux Wiki</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</li>
+</ul>
+
+<h1>リンク集</h1>
+
+<h2>Bash</h2>
+<p>Linuxの標準的なシェル。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_bash/man1/bash.1.html">Man page of BASH</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

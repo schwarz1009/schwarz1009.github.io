@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Haskellの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Haskellの世界観</h1>
+<p>Haskellに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Haskell</h1>
+<h2>Haskell</h2>
+<p>純粋な関数型言語。やると人生が変わるらしい。</p>
+<ul>
+<li><a href="https://qiita.com/arowM/items/0305d4f439752f285438">なぜHaskellを学ぶと良いか - Qiita</a></li>
+<li><a href="https://qiita.com/7shi/items/145f1234f8ec2af923ef">Haskell 超入門 - Qiita</a></li>
+</ul>
+
+<h2>Haskellサンプルコード</h2>
+<p>（<a href="https://wiki.haskell.org/Haskell%E5%85%A5%E9%96%80_5%E3%82%B9%E3%83%86%E3%83%83%E3%83%97">Haskell入門 5ステップ</a>にサンプルコードがあります。以下に「初めてのHaskell並列プログラミング」を解説します。）</p>
+<p>まさに「こんなに美しい」。facとackとfibは再帰関数で、パターンマッチを使うことで引数が0の時は～とする、それ以外の時は再帰的に呼び出す、といった「数学的に美しいコード」を記述できる。またwhereを使うことで、変数を使用している場所の下で定義できる（上で使うにはletを使う）。また、それだけではなくこのコードは並列処理で実行される（`par`が並列処理を表す）。</p>
+<p>また、doを使うことで連続してprintしたりできる。letではdoがなければ終端にinが必要。``で引数を囲むのは中置演算子として利用するため。原則、変数は代入し直すことができない（代入ではなく束縛という言葉を使う）。その他もろもろについては<a href="https://qiita.com/7shi/items/145f1234f8ec2af923ef">Haskell 超入門 - Qiita</a>を参照のこと。</p>
+
+<h2>パターンマッチングとガード</h2>
+<p>Haskellは強力なパターンマッチングと呼ばれる機能があり、引数の値の構造によって関数の処理内容をそれぞれ分けて定義することができる。</p>
+<p>たとえば、関数hogeに0を与えた時と、0以外の数を与えた時の処理は、</p>
+<pre class="prettyprint lang-hs">
+hoge :: Int -&gt; Int
+hoge 0 = 1
+hoge n = n * hoge (n - 1)
+</pre>
+<p>のように別々に書くことができる。</p>
+<p>また、ガードは引数の値の構造ではなく、条件式にマッチするような「性質」で関数の処理内容をそれぞれ分けることができる機能。</p>
+<p>パターンマッチがswitch-case文に相当するなら、ガードはif ～ else if文に相当すると言える。</p>
+<ul>
+<li><a href="http://south37.hatenablog.com/entry/2014/03/14/Haskell%E3%81%A7%E3%81%AE%E9%96%A2%E6%95%B0%E5%AE%9A%E7%BE%A9">Haskellでの関数定義 - Nao Minami's Blog</a></li>
+<li><a href="https://qiita.com/YusukeHosonuma/items/5da9847db16d33f27a06">Haskell個人メモ :: 3.関数の構文 - Qiita</a></li>
+<li><a href="https://qiita.com/7shi/items/145f1234f8ec2af923ef">Haskell 超入門 - Qiita</a></li>
+<li><a href="https://wiki.haskell.org/Haskell%E5%85%A5%E9%96%80_5%E3%82%B9%E3%83%86%E3%83%83%E3%83%97">Haskell入門 5ステップ</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.14編集</p>
+</div>
+
+<h2>関数か、変数か</h2>
+<p>僕は、Haskellのような関数型言語には、「関数か、変数か」という考え方があると思う。</p>
+<p>普通、手続き型のプログラミング言語で言う関数は、特定の名前がついていて、コードブロックのどこかにあって、一度決まったら再度変更することはできず、どこからでも呼び出せる。</p>
+<p>逆に、変数にも特定の名前がついているが、使用するよりも前に宣言されている必要があり、一度決まっても再度変更することができて、同じスコープの中からのみ呼び出せる。</p>
+<p>僕は、関数型のプログラミング言語とは、こうした「関数と変数の違い」を無くし、「全てを関数＝変数として使う」ということができる、ということではないかと思う。</p>
+<p>特に、HaskellやElmのような関数型言語では、関数と同じように、変数はどこからでも、順序を関係なく呼び出すことができて、再度変更することはできない。</p>
+<p>こうした「関数か、変数か」という部分の統一が分かると、関数型言語は良く分かってくると思う。</p>
+
+<h2>Haskellのメリット</h2>
+<p>C言語などの手続き型言語では、変数の値を変えることができます。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+x = 10
+</pre>
+<p>とした下の行で、</p>
+<pre class="prettyprint">
+x = 20
+</pre>
+<p>とすることができます。</p>
+<p>これはC言語のようなプログラミング言語では正しくても、数学としてはおかしな変数です。さっきまではxが10だったにもかかわらず、後になってxが20であるということに「再定義」されてしまっています。</p>
+<p>Haskellでは、このような記述はできません。xが10であれば、xは永遠に10であり、コード全体でxが10であることは永久に変わらないのです。</p>
+<p>別の考え方をすると、なんらかのデータがあるとして、このデータに破壊的作用を加えると、データを編集することができますが、そのデータの前の状態は失われてしまいます。</p>
+<p>このような破壊的作用を、関数型言語では嫌います。</p>
+<p>関数型言語では、データを破壊的に編集するのではなく、新しいデータのための新しい変数を作って、新しい変数がその新しい編集後のデータを表すようにします。</p>
+<p>このようにすると、編集後のデータも作ることができ、編集前のデータはその値のまま、まったく破壊的作用を加えられることなく、同じ値のままで残ります。</p>
+<p>これは、「上書き保存」をするのではなく、常に「名前を付けて新しいファイルに保存」を行うのに近いと思います。</p>
+<p>このようにするメリットはいくらかあります。</p>
+<p>まず、変数はコードの中で値を変更されないため、もしバグがあっても、「どこでその値が書き換えられているのか」ということを考える必要がなくなりますし、データは同じ値しか保持しないため、「データの値が今何になっているか」ということに気を使ってプログラミングする必要がなくなります。</p>
+<p>また、コードの中のどこであっても、変数は同じ値を持ちます。純粋関数型言語には「参照透過性」という原則があり、同じ式と引数で関数を呼び出せば必ず同じ結果が返ります。このため、「プログラムを実際に実行しなくても、実行する前の時点で問題を見つけやすい」ということが言えます。実行時にはじめて値が決まるのではなく、コードを書いた時点で既にその関数の値は決まっています。このため、もし値が目的とするものと違えば、そこにバグがあるということが明確になり、プログラムの実行前にバグを見つけやすくなります。</p>
+<p>そして、コードのどこであっても値が同じであるため、変数の定義をした後で参照をするという順番を守る必要がなくなります。同じ変数は同じ値をどのコードの部分であっても保ちます。なので、Haskellでは、変数を使う前に変数を定義するという決まりがなく、変数を使うのよりも後に変数を定義することができます。</p>
+
+<h2>Haskellは悟りを得られる</h2>
+<p>Haskellのメリットとして、「悟りが得られる」というのが僕はあると思います。</p>
+<p>Haskellをやると、人生が変わると言っている方も居ます。これはRustと同様に「美しいスタイルでプログラミングができる能力がつく」というのもありますが、僕が思うに、「悟りが得られる」のです。</p>
+<p>Haskellは、プログラミング言語界の仏典のようなものです。特に昔の僕のような引き篭もりやニートが自分で思いつく多くのことは、Haskellが実現しています。数学的でもありながら、「プログラミングにおける覚者」となることができます。</p>
+
+<h1>Haskell概論</h1>
+<h2>Haskellは純粋関数型言語</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="../../diary/blog_frey/2020.09.15.html">2020/09/15</a>より。</p>
+<p>また、本当にプログラミングを極めたいのであれば、むしろ、Haskellが良いと思う。</p>
+<p>Haskellは最近少し英語のドキュメントを読んでいる僕だが、Pure functionalで、static typingで、immutableで、Lazyで、変数と関数は基本的にまったく同じものとして扱われ、関数は「first-class」。</p>
+<p>変数は変更可能な値の入れ物ではなく、単純に値につける名前であり、immutableで不変であり、状態を破壊（変更されてしまう）することがない。</p>
+<p>これは数学の数式における変数の概念と同じ。</p>
+<p>また、同じことを自分で繰り返すことはなく、実行時ではなくコンパイル時にエラーが発覚するように、などといった設計姿勢を持つ、「神経質だが大切なことを教えてくれる言語」である。</p>
+<p>多くの、たとえばPythonやRustやJavaScriptなどに見られる特徴は、Haskellでは既に実現されていたことが多く、たくさんの高度な概念や考え方があるため、習得と理解には困難を要するが、おそらく本当にマスターできたときに、本当の「悟り」を得ることができるかもしれない。</p>
+
+<h2>関数型ってこういうことじゃないかという仮説</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="../../diary/blog_frey/2020.09.16.html">2020/09/16</a>より。</p>
+<p>今日は、作業所で仕事がなかったので、英語の読み上げソフトでHaskellのチュートリアルを聴いていた。</p>
+<p>通常、変数は以下のように上から下へと順序的に書いていく。</p>
+<pre class="prettyprint lang-hs">
+x = 30
+y = x + 10
+</pre>
+<p>しかしながら、Haskellでは変数がimmutable（不変）であり、一度名前付けされた値がプログラムのどの位置であっても変わらないため、記述を逆にできる。</p>
+<pre class="prettyprint lang-hs">
+y = x + 10
+x = 30
+</pre>
+<p>このプログラムを、じっと見てほしい。</p>
+<p>そう、気付くことがある。</p>
+<p>これはまさに、関数の引数定義と呼び出しと同じである。</p>
+<p>たとえば、C言語では関数は以下のように宣言・定義する。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+int add(int x) {
+    return x + 10;
+}
+
+int main() {
+    int y;
+    y = add(30);
+    printf("%d\n", y);
+}
+</pre>
+<p>Haskellではこうなる。letを使う場合（GHCiから実行）：</p>
+<pre class="prettyprint lang-hs">
+let x = 30 in x + 10
+</pre>
+<p>あるいは、関数を定義する場合（以下は全てファイルから実行）：</p>
+<pre class="prettyprint lang-hs">
+add x = x + 10
+
+main = print (add 30)
+</pre>
+<p>あるいは、単にCと逆向きに書く場合：</p>
+<pre class="prettyprint lang-hs">
+main = do { print y }  -- doブロックで複数のアクションの実行が可能
+
+y = x + 10
+x = 30
+</pre>
+<p>doブロックは;でそれぞれのアクションを区切るか、レイアウトと言ってインデントを揃えることでPythonのようにきれいに書くこともできる。</p>
+<p>そして、whereを使うことでこのようにも書ける：</p>
+<pre class="prettyprint lang-hs">
+add = x + 10
+  where
+    x = 30
+
+main = print (add)
+</pre>
+<p>そう、ここには、変数と関数の区別もなく、順序通りに宣言・定義されるという決まりもない。</p>
+<p>まさに、プログラミングは関数である。</p>
+<p>そして、関数は変数であり、言うとすれば「計算」である。</p>
+<p>計算においては、関数もステートメントも変わらない。</p>
+<p>これが、Haskellの本質ではないかと僕は思う。</p>
+
+<h2>リストとパターンマッチング</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="../../diary/blog_frey/2020.09.16.html">2020/09/16</a>より。</p>
+<p>公式にあるオンラインのWebブラウザ上でHaskellを実行できる、</p>
+<p><a href="http://tryhaskell.org/">Try Haskell</a>で「help」を実行してチュートリアルを一通りやった。</p>
+<p>リストとパターンマッチングはとても面白い機能だと感じた。</p>
+
+<h2>モナド</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="../../diary/blog_frey/2020.09.16.html">2020/09/16</a>より。</p>
+<p>Haskellは、「同じ関数を同じ引数の呼び出しで行うと必ず同じ結果が返る」という、純粋関数型言語であり、変数はimmutable（不変）である。</p>
+<p>しかしながら、変数が不変だと不便なことがある。</p>
+<p>特に、IOなどのデータ処理をどうするのか、という問題である。</p>
+<p>Haskellでは、「モナド」という圏論のアイデアを使った考え方を用いて、参照透過性を壊すことなくIOを実現している。</p>
+<p>標準的によく使われるListや、Maybeなどもモナドで実装されている。</p>
+<p>モナドの解説はネット上にあふれているのでそれを参照してほしい（僕はまだ理解できていない）。</p>
+
+<h1>Haskell製のソフトウェア</h1>
+<h2>Pugs</h2>
+<p>PugsはPerl 6の言語処理系。<a href="perl_comments.html">Perl戯言</a>を参照のこと。</p>
+<ul>
+<li><a href="https://kazu-yamamoto.hatenablog.jp/entry/20081219/1229656417">実践的な Haskell の本 - あどけない話</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Pugs">Pugs - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.29</p>
+</div>
+
+<h2>xmonad</h2>
+<p>xmonadはタイル型ウィンドウマネージャ。<a href="../linux/tilingwm.html">タイル型WM</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.08.29</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>関数型プログラミング</h2>
+<p><a href="functional_programming.html">関数型プログラミング</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>Haskell</h2>
+<p>Haskellのチュートリアル。</p>
+<ul>
+<li><a href="https://wiki.haskell.org/10%E5%88%86%E3%81%A7%E5%AD%A6%E3%81%B6Haskell">10分で学ぶHaskell</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-hs.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Rubyサンプルコードの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Rubyサンプルコード</h1>
+<p>Rubyサンプルコードです。<a href="ruby.html">Ruby</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>自作プログラム</h1>
+<h2>Rubyによるちょっとしたゲーム</h2>
+<p>Rubyによるちょっとしたゲーム。自作ですが、作業所のみんなで開発したPerlのプログラムを参考にしています。</p>
+<pre class="prettyprint">
+class Player
+  def initialize(name, hp, atk)
+    @name = name
+    @hp = hp
+    @atk = atk
+  end
+  
+  def name()
+    return @name
+  end
+  
+  def damaged(power)
+    puts "#{@name}は#{power}ダメージを受けた。"
+    @hp -= power
+  end
+  
+  def attack(player)
+    puts "#{@name}は#{player.name()}を攻撃した。"
+    player.damaged(@atk)
+  end
+  
+  def print_hp()
+    puts "#{@name}の残りHPは#{@hp}になった。"
+  end
+end
+
+player1 = Player.new("戦士", 100, 10)
+player2 = Player.new("魔法使い", 50, 15)
+boss = Player.new("ボス", 1000, 20)
+
+for i in 1..5 do
+  puts "ターン#{i}"
+  player1.attack(boss)
+  player2.attack(boss)
+  boss.attack(player1)
+  boss.attack(player2)
+  player1.print_hp()
+  player2.print_hp()
+  boss.print_hp()
+  print "\n"
+end
+</pre>
+<p>出力：</p>
+<pre>
+ターン1
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは80になった。
+魔法使いの残りHPは30になった。
+ボスの残りHPは975になった。
+
+ターン2
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは60になった。
+魔法使いの残りHPは10になった。
+ボスの残りHPは950になった。
+
+ターン3
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは40になった。
+魔法使いの残りHPは-10になった。
+ボスの残りHPは925になった。
+
+ターン4
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは20になった。
+魔法使いの残りHPは-30になった。
+ボスの残りHPは900になった。
+
+ターン5
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスを攻撃した。
+ボスは15ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは0になった。
+魔法使いの残りHPは-50になった。
+ボスの残りHPは875になった。
+</pre>
+<p>ブラウザでRubyをコンパイル・実行できる<a href="https://paiza.io/ja">Paiza.io</a>上で開発しました。</p>
+
+<h2>継承を使ったバージョン</h2>
+<p>継承を使って魔法を実装したバージョン。</p>
+<pre class="prettyprint">
+class Player
+  def initialize(name, hp, atk)
+    @name = name
+    @hp = hp
+    @atk = atk
+  end
+  
+  def name()
+    return @name
+  end
+  
+  def damaged(power)
+    puts "#{@name}は#{power}ダメージを受けた。"
+    @hp -= power
+  end
+  
+  def attack(player)
+    puts "#{@name}は#{player.name()}を攻撃した。"
+    player.damaged(@atk)
+  end
+  
+  def print_hp()
+    puts "#{@name}の残りHPは#{@hp}になった。"
+  end
+end
+
+class Mage &lt; Player
+  def initialize(name, hp, atk)
+    super
+  end
+  
+  def attack(player)
+    puts "#{@name}は#{player.name()}に大魔法エクスカリバーを唱えた。"
+    player.damaged(@atk + 100)
+  end
+end
+
+player1 = Player.new("戦士", 100, 10)
+player2 = Mage.new("魔法使い", 50, 15)
+boss = Player.new("ボス", 1000, 20)
+
+for i in 1..5 do
+  puts "ターン#{i}"
+  player1.attack(boss)
+  player2.attack(boss)
+  boss.attack(player1)
+  boss.attack(player2)
+  player1.print_hp()
+  player2.print_hp()
+  boss.print_hp()
+  print "\n"
+end
+</pre>
+<p>出力：</p>
+<pre>
+ターン1
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは80になった。
+魔法使いの残りHPは30になった。
+ボスの残りHPは875になった。
+
+ターン2
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは60になった。
+魔法使いの残りHPは10になった。
+ボスの残りHPは750になった。
+
+ターン3
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは40になった。
+魔法使いの残りHPは-10になった。
+ボスの残りHPは625になった。
+
+ターン4
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは20になった。
+魔法使いの残りHPは-30になった。
+ボスの残りHPは500になった。
+
+ターン5
+戦士はボスを攻撃した。
+ボスは10ダメージを受けた。
+魔法使いはボスに大魔法エクスカリバーを唱えた。
+ボスは115ダメージを受けた。
+ボスは戦士を攻撃した。
+戦士は20ダメージを受けた。
+ボスは魔法使いを攻撃した。
+魔法使いは20ダメージを受けた。
+戦士の残りHPは0になった。
+魔法使いの残りHPは-50になった。
+ボスの残りHPは375になった。
+</pre>
+
+<h2>適当なスクリプト</h2>
+<p>自分で作った適当なスクリプト。&lt;!--が二重になっている行を教えてくれる。いろいろと改善の余地はあるが自分で簡単に使う範囲ではこれでも使える。</p>
+<pre class="prettyprint">
+count = 0
+line_count = 0
+io = File.open("diffA.txt")
+while line = io.gets
+  line_count += 1
+  if /&lt;!--/ =~ line
+    if /--&gt;/ =~ line
+      count = 0
+    else
+      count += 1
+    end
+    if count &gt; 1
+      puts line_count
+    end
+  end
+  if /--&gt;/ =~ line
+    count = 0
+  end
+end
+</pre>
+<p>ただし、これには一行の中に&lt;!-- ～ --&gt;があった時に、その前から&lt;!--が二重になっていた時には検知してくれない。修正版は以下。</p>
+<pre class="prettyprint">
+count = 0
+line_count = 0
+io = File.open("diffA.txt")
+while line = io.gets
+  line_count += 1
+  if /&lt;!--/ =~ line
+    if /--&gt;/ =~ line
+      if count &gt; 0
+        puts line_count
+        count = 0
+      end
+    else
+      count += 1
+      if count &gt; 1
+        puts line_count
+      end
+    end
+  end
+  if /--&gt;/ =~ line
+    count = 0
+  end
+end
+</pre>
+<p>まだ問題はあるが、とりあえず普段使う分には十分のスクリプトである。全部を想定することをするよりも、必要に応じてスクリプトを書き換えて使うべきである。</p>
+<p>後日注記：実際のところ、このスクリプトは同じ行で&lt;!--と--&gt;の両方があった時に順番や個数を考えないため、仕様どおりの実装はできていない。単純に書いただけなので、仕様通りのものが欲しいのであれば自分で正規表現を使って作ればいいと思う。</p>
+
+<h2>FizzBuzz</h2>
+<p>以下はRubyで僕が書いたFizzBuzz。</p>
+<pre class="prettyprint">
+for i in 1..100 do
+  if (i % 15 == 0)
+    print("FizzBuzz, ")
+  elsif (i % 3 == 0)
+    print("Fizz, ")
+  elsif (i % 5 == 0)
+    print("Buzz, ")
+  else
+    print("#{i}, ")
+  end
+end
+puts("終了.")
+</pre>
+<p>実行結果：</p>
+<pre>
+1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, FizzBuzz, 31, 32, Fizz, 34, Buzz, Fizz, 37, 38, Fizz, Buzz, 41, Fizz, 43, 44, FizzBuzz, 46, 47, Fizz, 49, Buzz, Fizz, 52, 53, Fizz, Buzz, 56, Fizz, 58, 59, FizzBuzz, 61, 62, Fizz, 64, Buzz, Fizz, 67, 68, Fizz, Buzz, 71, Fizz, 73, 74, FizzBuzz, 76, 77, Fizz, 79, Buzz, Fizz, 82, 83, Fizz, Buzz, 86, Fizz, 88, 89, FizzBuzz, 91, 92, Fizz, 94, Buzz, Fizz, 97, 98, Fizz, Buzz, 終了.
+</pre>
+<p>FizzBuzzの詳細については<a href="c_samplecode.html">C言語サンプルコード</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.17</p>
+</div>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

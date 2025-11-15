@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>.NET関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>.NETの世界観</h1>
+<p>.NETに関する世界観です。<a href="csharp.html">C#</a>や<a href="vb.html">Visual Basic</a>も参照のこと。</p>
+<!--
+<p><a href="https://www.amazon.co.jp/VisualBasic2010%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC-Perfect-Master-%E9%87%91%E5%9F%8E-%E4%BF%8A%E5%93%89/dp/4798031100">VisualBasic2010パーフェクトマスター (Perfect Master SERIES)</a>や<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考にしています。</p>
+-->
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>.NETでのGUI開発</h1>
+<h2>イベント駆動でウィンドウアプリケーションを作る</h2>
+<p>C#/VB.NETでは、GUIのアプリケーションを開発するために「イベント駆動」と呼ばれる方式でプログラムを記述する。</p>
+<p>これは、「ボタンが押された時」や「キーが入力された時」のようなイベントの発生に対して、それぞれに対応するプログラムコード（イベントプロシージャ）を開発する、ということを意味している。</p>
+<p>プログラマは、GUIデザイナーでウィンドウをデザインし、ウィンドウのイベントやプロパティを設定して、イベントに対応するコールバック関数を登録していく。</p>
+<p>これは、.NETより以前のVisual BasicやDelphi、それからGTK+などにもみられる、「イベントドリブン」と呼ばれるGUIプログラムの開発方法である。</p>
+<p><a href="event.html">イベント駆動</a>を参照のこと。</p>
+
+<h1>.NET Framework</h1>
+<h2>Javaライクな仮想マシン</h2>
+<p>.NET Frameworkは、Microsoftによる拡張されたJavaライクな仮想マシン。</p>
+<p>Microsoftによる、Java仮想マシンを参考にして作られた、プログラムの実行環境。</p>
+<p>Windowsと密接に結びついているが、標準化されているため、UNIXで同等の環境を開発することは出来る。そのため、monoが生まれている。</p>
+
+<h1>言語</h1>
+<h2>VB.NET</h2>
+<p>旧来のVisual Basicを.NET向けにオブジェクト指向に拡張した言語。</p>
+<p><a href="vb.html">Visual Basic</a>も参照のこと。</p>
+<ul>
+<li><a href="http://ufcpp.net/study/csharp/st_consoleio.html">値の入出力 - C# によるプログラミング入門 | ++C++; // 未確認飛行 C</a></li>
+<li><a href="https://docs.microsoft.com/ja-jp/dotnet/visual-basic/">Visual Basic - Microsoft</a></li>
+<li><a href="http://www.atmarkit.co.jp/fdotnet/vb6tonet2/index/">改訂版 プロフェッショナルVB.NETプログラミング - @IT</a></li>
+</ul>
+
+
+<h2>C#</h2>
+<p>独自に設計された、JavaとDelphiを基にして作られた言語。C#と.NETの組み合わせは「Javaのパクリ」と言われることが多く、見た目も良く似ているが、WindowsネイティブのGUIアプリケーションを作成するために良く用いられる。</p>
+<p><a href="csharp.html">C#</a>も参照のこと。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/dotnet/csharp/csharp">C# - Microsoft</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/subtop/features/dotnet/csharp_abc2_index.html">連載　 改訂版 C#入門 - @IT</a></li>
+</ul>
+
+
+<h2>C++/CLI</h2>
+<p>C++を.NET Frameworkで使うためのC++の拡張。</p>
+<p><a href="windows_mfc.html">Visual C++/MFC</a>を参照のこと。</p>
+
+<h2>F#</h2>
+<p>Ocamlをベースとした関数型言語。</p>
+<p><a href="ml.html">ML</a>も参照のこと。</p>
+
+<h1>クラスライブラリ</h1>
+<h2>概要</h2>
+<p>.NET Frameworkのクラスライブラリ。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/gg145045(v=vs.110).aspx">.NET Framework クラス ライブラリ - MSDN</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/subtop/features/dotnet/index_class.html">.NET TIPS 名前空間／クラス別インデックス - @IT</a></li>
+</ul>
+
+<h2>.NET Frameworkクラスライブラリ</h2>
+<p><a href="https://msdn.microsoft.com/ja-jp/library/gg145045(v=vs.110).aspx">.NET Framework クラス ライブラリ - MSDN</a>を参照のこと。</p>
+
+
+<h1>Windows Forms</h1>
+<h2>概要</h2>
+<p>.NETでWindowsフォームを作成するためのクラスライブラリ。</p>
+<p>旧来の.NETでのGUIデザイン。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/fdotnet/chushin/introwinform_index/index.html">連載：Windowsフォーム開発入門【Visual Studio 2010対応】 - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/fdotnet/chushin/introwinform_01/introwinform_01_01.html">Windowsフォーム初めの一歩 - @IT</a></li>
+</ul>
+
+<h2>サンプルコード</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="http://kaitei.net/csforms/">C# フォーム入門 - C# による GUI プログラミング入門 - かいてい.net</a></li>
+<li><a href="http://www.atmarkit.co.jp/fdotnet/chushin/introwinform_01/introwinform_01_03.html">Windowsフォーム初めの一歩 - イベント駆動の考え方を身に付ける - @IT</a></li>
+<li><a href="http://ufcpp.net/study/csharp/st_basis.html">C#のプログラムの基本構造 - ++C++; // 未確認飛行 C</a></li>
+<li><a href="http://kaitei.net/csforms/page-12/">2.5 位置 - C# フォーム入門 - かいてい.net</a></li>
+</ul>
+
+
+
+<h1>さまざまなコントロール</h1>
+
+<h2>コンテナ系コントロール</h2>
+<p>コンテナ系のコントロールは、コントロールの中にほかのコントロールを入れ込んで配置できるコントロールで、複雑なレイアウトやタブによる切り替えなどを利用できる。</p>
+<p>Windows.Formsでは、さまざまなコントロールをコンテナの中に配置することで、フォームデザインを行う。</p>
+<p>PanelコントロールやTabControlコントロールなどがコンテナに含まれる。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/fdotnet/chushin/introwinform_04/introwinform_04_03.html">Windowsフォーム・コントロールの基礎（その2）（3/3） - ＠IT</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.11編集</p>
+</div>
+
+<h2>RichTextBox</h2>
+<p>.NETではRichTextBoxを使うことで、文字の色やサイズを変えることができる。</p>
+<ul>
+<li><a href="https://dobon.net/vb/dotnet/control/rtbchangecolorandfont.html">RichTextBoxで文字列の色とフォントを変更する - .NET Tips (VB.NET,C#...) - DOBON.NET</a></li>
+<li><a href="https://so-zou.jp/software/tech/programming/c-sharp/control/rich-text-box/">RichTextBoxクラス | C# プログラミング解説 - so-zou.jp</a></li>
+</ul>
+
+<h2>WebBrowser</h2>
+<p>.NETではWebBrowserコントロールを使うことで、Webブラウザがすぐに作れる。</p>
+<ul>
+<li><a href="https://kana-soft.com/tech/sample_0009.htm">VB.NETで簡単なWebブラウザを作る - 金澤ソフト設計</a></li>
+<li><a href="https://www.ipentec.com/document/csharp-create-simple-webbrowser-component-application">WebBrowser コントロールでWebページを表示する - WebBrowser コントロールを利用したシンプルなアプリケーションの作成 (C#プログラミング) - iPentec.com</a></li>
+</ul>
+
+<h2>OpenWebKitSharp</h2>
+<p>また、<a href="https://code.google.com/archive/p/open-webkit-sharp/">OpenWebKitSharp</a>（<a href="http://webkitdotnet.sourceforge.net/index.php">WebKit .NET</a>の派生）を使ってWebKitを埋め込むこともできる。</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/lironi5/20130624/p1">C# で Webkit ベースのブラウザを作成する - チラシの裏でプログラミング</a></li>
+</ul>
+<p><a href="../linux/webkit_embedded.html">WebKit埋め込み</a>も参照のこと。</p>
+
+<h2>カスタムコントロール</h2>
+<p>Windowsで標準のコントロールを配置するだけではなく、独自の機能を追加したカスタムコントロールを作って使いたい場合は、MFCなどで作る方法もあるが、継承やオーバーライドやイベントを使ってC#/VB.NETで作る方法もある。</p>
+<p>C#でカスタムコントロールを作る方法：</p>
+<ul>
+<li><a href="http://kbdpage.blog82.fc2.com/blog-entry-122.html">[C#]テキストボックスのカスタムコントロールを作成する - 忘れる前にメモ</a> - ここではTextBoxを継承したctrllibを定義して、Ctrl+Aによる全選択の機能を追加している。</li>
+<li><a href="http://tech.junax.jp/custom-control-beginner/wfcb-vs-prepare/">作成環境の準備 （カスタムコントロール作成入門講座初級編） | みかみんのプログラミング道場</a></li>
+<li><a href="https://kokufu.blogspot.com/2009/02/visual-c.html">Visual C# でカスタムコントロールを作る | 穀風</a></li>
+</ul>
+<p>このように、UserControlやTextBoxなどの継承を行うことで、カスタムコンポーネントを簡単に作ることが出来る。</p>
+
+<h2>VBのフォームデザイナー</h2>
+<p><a href="vb_form.html">Visual Basic（フォームデザイナー）</a>も参照のこと。</p>
+
+<h1>グラフィックス操作</h1>
+<h2>GDI+によるグラフィックスプログラミング</h2>
+<p>以下のマイクロソフトの記事が参考になります。ペンやブラシを使って幾何学的なグラフィックスが実現できます。ぜひブラウザのようなものを作ってください。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/dotnet/framework/winforms/advanced/getting-started-with-graphics-programming">グラフィックス プログラミングについて | Microsoft Docs</a></li>
+</ul>
+<p><a href="windows_gdi.html">GDI</a>も参照のこと。</p>
+
+<h1>ツール・ライブラリ</h1>
+<h2>AngleSharp</h2>
+<p>AngleSharpはC#/.NETの定番ライブラリで、HTMLをパースできる。スクレイピングなどに活用できる。</p>
+<ul>
+<li><a href="https://neue.cc/2021/12/04.html">neue cc - .NET 6とAngleSharpによるC#でのスクレイピング技法</a></li>
+<li><a href="https://araramistudio.jimdo.com/2021/01/06/c-%E3%81%A7html%E3%82%92%E8%A7%A3%E6%9E%90%E3%81%99%E3%82%8B-anglesharp%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA/">C#でHTMLを解析する(AngleSharpライブラリ) - Ararami Studio</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>NuGet</h2>
+<p>NuGetは.NET向けのパッケージ管理ツール。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/NuGet">NuGet - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h1>応用技術</h1>
+
+<h2>ASP.NET</h2>
+<p><a href="dotnet_asp.html">ASP.NET</a>を参照のこと。</p>
+
+<h2>ADO.NET</h2>
+<p><a href="dotnet_ado.html">ADO.NET</a>を参照のこと。</p>
+
+<h2>WPF</h2>
+<p><a href="dotnet_wpf.html">WPF</a>を参照のこと。</p>
+
+<h1>オープンソース版</h1>
+<h2>Mono</h2>
+<p><a href="mono.html">Mono</a>を参照のこと。</p>
+
+<h2>.NET Core（とASP.NET Core）</h2>
+<p><a href="dotnet_core.html">.NET Core</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>GUI開発</h2>
+<p>GUIの開発全般については<a href="gui_develop.html">GUI開発</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>.NET</h2>
+<p>Microsoftによる、Java VMと同等の仮想マシンを用いたプログラム実行・開発環境。</p>
+<p>Windows版のJavaとも言えるが、標準化されているためMonoなども実装されており、またManaged C++（C++/CLI）やC#/VB.NET、F#などどちらかというと「実行プラットフォームの共通性」よりも「プログラミング言語の多様性」を重視している。</p>
+
+<h2>Windows.Forms</h2>
+<p>C#/.NETのWindows.Formsの設計は素晴らしい。WindowsフォームやWindowsコントロールを扱う上で、とても使いやすい。GUIを開発するならおすすめ。</p>
+
+<h2>.NET Core</h2>
+<p>Microsoftによるオープンソース版の.NET Framework。</p>
+
+<h2>Mono</h2>
+<p>.NET Coreよりも昔からあるオープンソースな.NET Framework。</p>
+<p>Gtk#などを使うことで、Linux/GTKでもC#でGUIプログラムを開発できる。</p>
+<p>ゲームエンジンUnityで使われている。</p>
+
+<h2>C#/VB.NET</h2>
+<p>C#コードの見た目はJavaとよく似通っており、.NET FrameworkのクラスライブラリもJavaのクラスライブラリとよく似ているため、「Microsoft版のJava」であると言われることも多い。</p>
+<p>C#やVB.NETでは、main()関数からプログラムが始まるスタイルのプログラミングではなく、イベントに応じて登録したそれぞれの関数をコールバック関数として呼び出すことで、「フォームやボタンから関数が呼び出される」スタイルでプログラミングを行う。</p>
+<p>ほとんどのC#コードはVB.NETで同様のコードが書けるため、必要に応じてどちらかを選択する。</p>
+
+<h1>リンク集</h1>
+<h2>.NET</h2>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/subtop/dotnet/">Insider.NET : .NET ソリューションのための技術情報フォーラム - @IT</a></li>
+</ul>
+
+<h2>Windows</h2>
+<p>Windows関係のチュートリアル。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/k76aht6s(v=vs.90).aspx">Visual Basic のチュートリアル - MSDN</a></li>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/1dbsh6t3(v=vs.90).aspx">Visual C# のチュートリアル - MSDN</a></li>
+</ul>
+
+<h2>Windows(VB.NET/C#)</h2>
+<p>ブラウザを作るサンプル</p>
+<ul>
+<li><a href="http://kana-soft.com/tech/sample_0012.htm">C#で簡単なWebブラウザを作る - 金澤ソフト設計</a></li>
+<li><a href="https://code.msdn.microsoft.com/windowsdesktop/10-WebBrowser-C-0131de80">10 行でズバリ!! 簡単 WebBrowser の作成 (C#) - MSDN</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-vb.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

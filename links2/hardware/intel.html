@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Intelの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ハードウェアの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/hardware_menu.html" class="sideiframe"></iframe>
+</div><h1>Intelの世界観</h1>
+<p>Intel CPUの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Intel</h1>
+<h2>Intelとムーアの法則</h2>
+<p>Intelは、CPUの集積率をものすごく高めて、CPUのスピードを速く、高速にした。</p>
+<p>インテル創業者の一人であるゴードン・ムーアの経験則として、ムーアの法則が知られている。これは、「半導体の集積率は18か月で2倍になる」ということ。</p>
+<p>半導体は、原理自体はそんなに変わっていない。だが、極めて集積率が高くなり、ものすごくスピードが速くなっている。これは、計算する頭が賢くなったわけではなく、計算する人数が増えたということである。</p>
+<p>そういうわけで、原理的にはそんなに変わっていない。Intelはスピードを速くした、つまり、計算のための論理回路のやり取りを（集積率を高めることで）速くしたというだけである。</p>
+<ul>
+<li><a href="https://cyber-synapse.com/dictionary/ja-ma/understaing-moors-law-for-marketing-strategy.html">ムーアの法則とは-半導体性能の原則 | マ行 | マーケティング用語集 | 株式会社シナプス</a></li>
+</ul>
+<p><a href="computer_architecture.html">コンピュータの計算原理</a>も参照のこと。</p>
+
+<h2>Intelプロセッサの機械語命令（x86アセンブラ）</h2>
+<p>x86アセンブラについては<a href="../prog_lang/assembly.html">アセンブリ言語</a>を参照のこと。</p>
+
+<h2>Intel CPUの歴史</h2>
+<p>基本的に、8086からx86_64に至るまで、IntelはさまざまなCPUの命令セットの拡張と高性能化を行った。</p>
+<p>IBM-PC/AT互換機において、16bit CPUとして登場した8086で、既に基本的なCPUの命令セットは完成していた。その後に、80186や80286という名前で少しずつ性能を向上させた16bit CPUの新製品が登場。今のようなGHz（ギガヘルツ）ではなく、まだMHz（メガヘルツ）の時代（それも5～12MHzぐらい）だった。</p>
+<p>その後に、i386と呼ばれる32bit CPUの新しいバージョンの製品が登場。この時点でアーキテクチャを32bitの新仕様に大幅に刷新した。これがその後のx86アーキテクチャの基本形となる。i486ではワイヤードロジック化を拡大して高速化を果たし、浮動小数点数を専門に計算できるFPUを搭載する。</p>
+<p>このi386/i486の時代、PC-UNIXのブームが巻き起こった。32bit CPUかつMMUや仮想CPU機能があり、「UNIXのようなマルチタスクのワークステーション向けOSも動くのではないか」と言われ、Linuxや*BSDなどPC-UNIXをIntel搭載のパソコンに移植するハッカーが現れた。</p>
+<p>i586では、これまでの数字による名称では商標が登録できないという問題が（80386をi386と改称した頃から）あり、Pentiumという名前に改称したが、多くの人々は今までの数字による呼び方（i586）を継続した。i686（Pentium Pro）以降の製品（Pentium2、Pentium3、Celeronなど）は、基本的なアーキテクチャ（命令セットなど）が変わらなかったため、以降はi686の呼び方が維持された。</p>
+<p>その後に、Intelは64bit CPUの製品を目指したが、Intelが作った次世代のIA-64（Itanium）アーキテクチャは今までのx86と互換性がなかったため、x86との互換性を保ち続けたAMD x86_64に敗北した。</p>
+<p>以下に詳しい内容があります。</p>
+<ul>
+<li><a href="http://web.archive.org/web/20070818060621/http://linux2ch.is.land.to:80/index.php?MiscFAQs">MiscFAQs - 2ch-Linux-Beginners (web.archive.orgのアーカイブ)</a></li>
+</ul>
+<p>以下はその他の参考文献。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FPU">FPU - Wikipedia</a></li>
+</ul>
+<p><a href="old_computer.html">古いコンピュータ（メインフレーム・ミニコン）</a>や<a href="old_computer2.html">古いコンピュータ（パソコン）</a>や<a href="cpu.html">CPU</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.03.26編集</p>
+<p>2025.08.27編集</p>
+</div>
+
+<h2>これ以上、速くなる意味がないところまで速くなった</h2>
+<p>実際、今のパソコンと昔のパソコンでは、Intelやパソコン自体の置かれた状況が異なると思います。</p>
+<p>昔は、CPUが高速になると、パソコンが速くなったのが実感できました。そのため、少しでもいいパーツを買って自作PCを組み立てる人も多かったです。</p>
+<p>ですが、今のパソコンは、高速になってもそれをあまり実感しなくなりました。</p>
+<p>ムーアの法則が停滞したこともあるかもしれませんが、それ以上に、今のパソコンは完全に「オーバースペック」であり、作業に必要なパフォーマンスを超えて速くなってしまったのです。</p>
+<p>つまり、「速くなる必要のないところまで速くなってしまった」のです。</p>
+<p>動画の編集やゲームなど、一部の人にとっては恩恵があるかもしれませんが、実際のところ今のハードウェアはオーバースペックです。</p>
+<p>また、マルチコアCPUによって高速になるのは並列にできる処理だけであり、そもそも一方向で順番に処理を実行することをベースとしている従来のCPUのアーキテクチャでは、マルチスレッド化には困難が伴います。必要以上に複雑なプログラムになってしまいます。</p>
+<p>RISC-Vのようなオープンアーキテクチャを使って、拡張可能な専用プロセッサにするという発想もありますが、Intelとともに大きく速くなってきたパソコンは、もはやこれ以上進歩する必要がほとんど無くなってきたのではないかと思います。</p>
+
+<h2>CPUとセキュリティ</h2>
+<p>必要な改善点があるとしたら、セキュリティ対策でしょう。Microsoftが今、セキュリティ対策にもっとも投資しているひとつの企業となりつつあります。</p>
+<p>ハードウェアのセキュリティ機能として、TPMなどの技術があります。OSなどと独立しているためセキュリティ攻撃に強く、従来はハードディスクに保管していた認証のための暗号キーをセキュアに格納できます。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Trusted_Platform_Module">Trusted Platform Module - Wikipedia</a></li>
+<li><a href="https://jpn.nec.com/products/bizpc/performance/security2.html">セキュリティチップ（TPM）について : セキュリティ/マネジメント | ビジネスPC | NEC</a></li>
+</ul>
+<p><a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<h2>Intel CPUの詳しい仕様</h2>
+<p>OSのカーネルを書くためには、Intel CPUの詳しい仕様の知識が必要となります。</p>
+<p>たとえば、以下のリンクが参考になるでしょう。</p>
+<ul>
+<li><a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">Intel® 64 and IA-32 Architectures Software Developer Manuals</a></li>
+<li><a href="https://osdev-jp.readthedocs.io/ja/latest/general/references.html">資料集 &mdash; osdev-jp core docs 1.0 ドキュメント</a></li>
+</ul>
+<p>このほか、<a href="https://wiki.osdev.org/Expanded_Main_Page">osdev</a>や<a href="https://osdev.jp/">osdev-jp</a>には、OSを開発する上で参考になるページがあります。</p>
+<p><a href="../linux/linux_kernel_develop.html">Linuxカーネル（開発）</a>も参照のこと。</p>
+
+
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

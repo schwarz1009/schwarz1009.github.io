@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Python入門（２．制御フロー） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Python入門（２．制御フロー）</h1>
+<p>Python入門（２．制御フロー）です。</p>
+<p><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="python_intro.html">Python入門</a></li>
+<ul>
+<li><a href="python_intro_basic.html">１．基本</a></li>
+<li><b>２．制御フロー</b></li>
+<li><a href="python_intro_oop.html">３．オブジェクト指向</a></li>
+<li><a href="python_intro_data.html">４．データ構造</a></li>
+<li><a href="python_intro_str.html">５．文字列</a></li>
+<li><a href="python_intro_file.html">６．ファイル</a></li>
+<li><a href="python_intro_functional.html">７．関数型言語の機能</a></li>
+<li><a href="python_intro_others.html">８．その他</a></li>
+<li><a href="python_intro_advanced.html">９．応用・モジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Pythonの制御フロー</h1>
+<p><a href="structured_programming.html">構造化プログラミング</a>も参照のこと。</p>
+
+<h2>if～else文（タブとインデントでブロックを記述する）</h2>
+<p>Pythonでは、タブと空白のインデントでブロックを記述する。たとえば、if～else文は以下のようになる。</p>
+<pre class="prettyprint">
+def hoge(x):
+    if (x &lt; 3):
+        print(f"{x}は3より小さい")
+    elif (x == 3):
+        print(f"{x}は3と等しい")
+    else:
+        print(f"{x}は3より大きい")
+
+hoge(5)
+hoge(2)
+hoge(3)
+</pre>
+<p>字下げが文法に含まれるのは賛否両論があるが、必ずある程度美しいコードになる、ということで、Linux界でPythonはとても流行っている。</p>
+<p>if文やfor文、def文やclass文などで、どこからがコードブロックや関数やクラスの続きであり、どこが終わりであるかは必ずインデントで指定する。また、慣習として、インデントは多くの場合半角スペース4つにすることになっている。</p>
+<p>また、if文で複数の条件を分岐する時にはelifを使う。</p>
+<ul>
+<li><a href="https://python.keicode.com/lang/control-basic-rule.php">基本的なルール - Python 入門</a></li>
+</ul>
+<p>後日注記：if文などの論理式を書く時は、等しいかどうか比較するには==を使う。大きさの比較には&lt;, &lt;=, &gt;, &gt;=などを使うほか、等しくないことを確かめたい時は!=を使う。また、and, or, notを使うことで論理演算も可能。型が一致するかどうかを確かめるにはisを使う。</p>
+<p>後日注記：if文の中にif文を使う時はネストしてスペース8つでインデントすればよい。インデントの位置によってコードの意味が全く違うものになるので、ifとelseは必ず同じ位置にインデントを揃えなければならない。elifを使うこともできる。また、if文の中で何もすることがない時はpassを使って明示的に「ここは飛ばす」と書くこともできる。</p>
+
+<h2>for文とwhile文</h2>
+<p>Pythonのfor文は特殊で、</p>
+<pre>
+for ループ変数 in 反復可能なオブジェクト:
+</pre>
+<p>となる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+msg = 'Schwarz'
+
+for ch in msg:
+    print(ch)
+</pre>
+<p>となる。ここでは反復可能オブジェクトは文字列で、文字のひとつひとつ全てに対して処理を行う。</p>
+<p>文字列以外にも、リストなどからも反復できる。</p>
+<pre class="prettyprint">
+animals = ["犬", "猫", "鳥", "牛"]
+for name in animals:
+    print('わたしは' + name + 'です。')
+</pre>
+<p>このように、Pythonでは他の言語におけるforeach文と同じことをfor文で行える。</p>
+<p>他の言語と同じように、回数を指定して繰り返すのであれば、range()関数を使う。</p>
+<pre class="prettyprint">
+for x in range(10):
+    print(f'{x + 1}:' + (' Hoge' * (x + 1)))
+</pre>
+<p>このコードでは、文字列を繰り返し連結する*演算子を使って、インデックス変数xの後に、' Hoge'をxの値だけ複数回連結した文字列を表示している。たとえば3回目なら'3: Hoge Hoge Hoge'となる。</p>
+<p>ちなみに、C言語などでも使われるwhile文も使える。これには</p>
+<pre>
+while 条件:
+</pre>
+<p>とすればいい。条件が満たされる間、繰り返しをし続ける。</p>
+<p>繰り返しを途中で抜けるのはbreak文、途中で処理を中断して次の繰り返しに行くにはcontinue文を使う。else節を使うことで繰り返し後に行いたい処理を書ける。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1905/10/news023.html">［Python入門］for文による繰り返し処理 (1/3)：Python入門 - ＠IT</a></li>
+</ul>
+
+<h2>for文とイテレータ</h2>
+<p>Pythonのfor文はイテレータと結びつきが強い。いわば「for文はイテレータのための構文」であると言える。</p>
+<p>詳しくは<a href="python_intro_functional.html">Python入門（関数型言語の機能）</a>や<a href="iterator.html">イテレータとジェネレータ</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.02.22</p>
+</div>
+
+<h2>辞書のループ</h2>
+<p>Pythonでは、辞書を以下のようにループさせると、キーだけを取り出す。</p>
+<pre class="prettyprint">
+dct = {"human": "Assy", "robot": "Schwarz", "god": "Frey"}
+for k in dct:
+    print(k)
+</pre>
+<p>上記の例ではkにキーが代入されるため、出力されるのは</p>
+<pre>
+human
+robot
+god
+</pre>
+<p>となる。値を代入したい場合は、</p>
+<pre class="prettyprint">
+dct = {"human": "Assy", "robot": "Schwarz", "god": "Frey"}
+for k in dct:
+    print(dct[k])
+</pre>
+<p>とする。あるいは、items()を使えば以下のような書き方もできる。</p>
+<pre class="prettyprint">
+dct = {"human": "Assy", "robot": "Schwarz", "god": "Frey"}
+for k, v in dct.items():
+    print(f"I'm {k}, my name is {v}.")
+</pre>
+<p>他にも、keys()やvalues()などを使ってキーや値を取得することもできる。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/datastructures.html">5. データ構造 &#8212; Python 3.10.0b2 ドキュメント</a></li>
+<li><a href="https://note.nkmk.me/python-dict-keys-values-items/">Pythonの辞書（dict）のforループ処理（keys, values, items） | note.nkmk.me</a></li>
+</ul>
+
+<h2>関数</h2>
+<p>Pythonではdefで関数オブジェクトを作成できる。</p>
+<pre class="prettyprint">
+def ave2(x, y):
+    return (x + y) / 2
+</pre>
+<p>呼び出す時は以下のようにする。</p>
+<pre class="prettyprint">
+print(ave2(11, 34))
+</pre>
+<p>（以上は<a href="https://python.keicode.com/lang/functions-basics.php">def による関数オブジェクトの作成 - Python 入門</a>を参考に執筆しました。）</p>
+<p>後日注記：Pythonでは上から下へ順番にプログラムを実行するが、defで定義したメソッドは呼び出されるまで実行されない。またメソッド名の()の中に引数を書くことで、呼び出した時の具体的な値を関数の内部に渡すことができ、関数の内部でreturnを実行すると呼び出し元に戻り値を返すことができる。</p>
+<p><a href="function.html">関数</a>も参照のこと。</p>
+
+<h2>別のファイルの関数を使う</h2>
+<p>別のファイルにある関数を使うには、importを使う。</p>
+<p>まず、hoge_calc.pyを作って以下のように書く。</p>
+<pre class="prettyprint">
+def print_calc(x, y):
+    print(f"{x} + {y} = {x + y}")
+    print(f"{x} - {y} = {x - y}")
+    print(f"{x} * {y} = {x * y}")
+    print(f"{x} / {y} = {x / y}")
+</pre>
+<p>次に、main.pyを作って次のように書く。</p>
+<pre class="prettyprint">
+import hoge_calc
+
+hoge_calc.print_calc(10, 2)
+</pre>
+
+<h2>関数と引数のポイント</h2>
+<p>関数において、</p>
+<pre class="prettyprint">
+func(x=200, y=300)
+</pre>
+<p>のように引数を与えると、キーワード引数として引数の順序に関係なく、目的の引数に値を渡すことができる。</p>
+<p>位置引数とキーワード引数を併用する場合、位置引数を左に、キーワード引数を右に書く。</p>
+<p>また、関数定義の際、</p>
+<pre class="prettyprint">
+def add100(x, y=100):
+    return x + y
+
+print(add100(70))
+</pre>
+<p>のようにすることで引数にデフォルト値を設定できる。デフォルト値を設定した引数は、そうでない引数よりも右に書く。</p>
+<p>また、**（アスタリスク2つ）を用いると、辞書のキーと値の関係を引数として与えることができる。</p>
+<pre class="prettyprint">
+def ave2(x, y):
+    return (x + y) / 2
+
+arg1 = {'x': 200, 'y': 300}
+print(ave2(**arg1))
+
+arg2 = {'x': 300, 'y': 500}
+print(ave2(**arg2))
+</pre>
+<p>アスタリスクがひとつ（*）の場合は、リストを引数として与えることができる。</p>
+<pre class="prettyprint">
+def ave2(x, y):
+    return (x + y) / 2
+
+print(ave2(*[200, 300]))
+</pre>
+<p>また、関数定義の方に*あるいは**を付けた場合、可変長引数として値を受け取れる。タプルとして受け取る場合は*、辞書として受け取る場合は**とする。</p>
+<pre class="prettyprint">
+def ave(*arg):
+    x = 0
+    for v in arg:
+        x = x + v
+    return x / len(arg)
+
+print(ave(100, 200, 300))
+</pre>
+
+<h2>例外</h2>
+<p>Pythonでは、エラー処理のために例外を使うことができる。</p>
+<p>例外はraiseで自分で投げることもできる。キャッチしなかった場合は、その場で強制終了になる。</p>
+<p>例外をtry ～ exceptでキャッチした場合、tryブロックのどこかで例外が発生するとexceptブロックに強制的にジャンプし、exceptブロックの内容を実行した後で、その後の処理が行われる。</p>
+<p>Pythonのエラーには構文エラーと例外の二種類があり、例外は必ずしも致命的とは限らない。そのため、例外をキャッチしてそのまま処理を継続することも多くある。</p>
+<pre class="prettyprint">
+try:
+    if d == 0:
+        raise ZeroDivisionError
+except ZeroDivisionError as e:
+    print(e)
+</pre>
+<p>後日注記：例外が発生しなかった場合に行う処理はelse節、例外が発生してもしなくてもどちらの場合も行う処理はfinally節に書ける。</p>
+<ul>
+<li><a href="https://note.nkmk.me/python-try-except-else-finally/">Pythonの例外処理（try, except, else, finally） | note.nkmk.me</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.17編集</p>
+</div>
+
+<h2>if __name__ == "__main__":の意味</h2>
+<p>これは、そのスクリプトがコマンドラインで単独で実行された場合、__name__変数に__main__が代入されるので、その時に実行されることを意味している。要は、ライブラリとしてインポートされた場合ではなく、C言語のコマンドのようにコマンドラインから実行される時に実行される処理をここに書く。</p>
+<ul>
+<li><a href="http://azuuun-memorandum.hatenablog.com/entry/2015/05/09/002549">Python - if __name__ == '__main__': の意味 - ざっくりん雑記</a></li>
+</ul>
+
+<h2>パターンマッチング</h2>
+<p>最近のPythonには構造化パターンマッチングという機能がある。C言語でいうswitch-case文に相当する。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2022/07/monthly-python-2207">Python 3.10の新機能：構造化パターンマッチング | gihyo.jp</a></li>
+<li><a href="https://www.python.jp/news/wnpython310/index.html">Python 3.10の新機能(その1） パターンマッチ: Python3.10の新機能 - python.jp</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

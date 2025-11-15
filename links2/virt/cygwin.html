@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Cygwinの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">仮想化・互換レイヤーの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/virt_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Cygwinの世界観</h1>
+<p>Cygwinに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>GNU on Windows</h1>
+<h2>Cygwin</h2>
+<p>Windowsで動くUNIX互換環境。ただしソフトウェアの動作にはCygwin1.dllが必要。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Cygwin">Cygwin - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://cygwin.com/git/gitweb.cgi?p=newlib-cygwin.git">git</a></li>
+</ul>
+
+<h2>MinGW</h2>
+<p>GNUのC/C++コンパイラをWindowsに対応させたもの。僕としては、EclipseのCDT（C/C++開発ツール）をインストールするのがお勧めです。</p>
+<p>Windows APIのためのヘッダファイルを含んでいるため、Windowsアプリケーションの開発のために使える、と言うことらしいが、本当にきちんと動くかは怪しいところ。</p>
+<p><a href="../prog_lang/eclipse.html">Eclipse</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MinGW">MinGW - Wikipedia</a></li>
+</ul>
+
+<h2>Cygwin/X</h2>
+<p>Cygwin/XはCygwin環境上で動くX11。<a href="../linux/linux_x11_admin.html">X11設定とプログラミング</a>を参照のこと。</p>
+
+<h1>コンパイラとして</h1>
+<h2>GCC/MinGW + MSYS</h2>
+<p>GCCはGNUによるコンパイラ。MinGWと言うWindows版もある。</p>
+<p>MSYSはWindows上で動作するBashやUNIXユーティリティ。MinGWを補う目的で作られた。</p>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+
+<h2>Cygwin</h2>
+<p>MinGWを使うのも良いが、WindowsでUNIX環境を構築できるCygwinを使うという手もある。この場合、ランタイムライブラリのCygwin1.dllを開発したプログラムに同梱する必要がある。</p>
+
+<h1>簡単な説明</h1>
+<h2>互換レイヤー</h2>
+<ul class="defaultlist list7">
+<li>その他のOS
+<ul>
+<li>互換レイヤー
+<ul>
+<li>Cygwin
+<ul>
+<li>WindowsでUNIXコマンドを使いたいならCygwinを入れよう</li>
+<li>WindowsでGCCを使いたいのであれば、MinGW, MSYSを使うことでフリーなC/C++のコンパイル環境が整う</li>
+<li>LLVM/ClangをWindowsで使うという選択肢もあり</li>
+</ul></li>
+<li>Wine
+<ul>
+<li>WindowsアプリケーションをLinuxなどで動かすための互換レイヤー</li>
+<li>実際は全てのアプリケーションが完全に動作するわけではない</li>
+</ul></li>
+<li>WSL
+<ul>
+<li>WSL1はWindowsでLinuxアプリケーションがネイティブ動作する互換レイヤーだった</li>
+<li>WSL2はWindows上でLinuxカーネルを動作させる仮想環境になった</li>
+</ul></li>
+<li>コマンドプロンプト、PowerShell
+<ul>
+<li>Windowsでコマンド操作を行う時は、コマンドプロンプトを使う</li>
+<li>最近ではPowerShellと呼ばれる従来よりも高機能なシェルがあり、仮想環境の構築などの時にも使う</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h1>リンク集</h1>
+<h2>Cygwin</h2>
+<p>WindowsでUNIXのコマンドとシェルが使えます。</p>
+<ul>
+<li><a href="https://www.cygwin.com/">Cygwin</a></li>
+<li><A href="http://www2.kuma.u-tokai.ac.jp/~kfuji/cygwin/cygwin.htm">Cygwinのインストールと使い方 - 藤本邦昭のホームページ</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

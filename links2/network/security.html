@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>セキュリティ関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>セキュリティの世界観</h1>
+<p>セキュリティに関する世界観です。<a href="encrypt.html">暗号</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>基本的なセキュリティ対策</h1>
+<h2>セキュリティパッチ情報が出ていないかをきちんと追いかけよう</h2>
+<p>エンジニアにとって、必須の作業がもしあるとしたら、それは「セキュリティパッチ情報を追いかける」ということです。</p>
+<p>セキュリティパッチの情報を集めて、もし今運用している環境に影響しないかを知るということは、エンジニアにとって「必須の作業」です。</p>
+<p>たとえば下に書いたLog4Shellの脆弱性などは、知らないということは絶対に許されません。</p>
+<p>脆弱性情報データベースとして、有名なのはCVEです。最新の情報はTwitterアカウントがあります。</p>
+<ul>
+<li><a href="https://cve.mitre.org/cve/">CVE</a></li>
+<li><a href="https://twitter.com/CVEnew">Twitter @CVEnew</a></li>
+<li><a href="https://www.redhat.com/ja/topics/security/what-is-cve">CVE とは - Red Hat</a></li>
+</ul>
+<p>アメリカの場合NVD、日本の場合JVNなどがあります。</p>
+<ul>
+<li><a href="https://nvd.nist.gov/">NVD</a></li>
+<li><a href="https://jvn.jp/">Japan Vulnerability Notes</a></li>
+</ul>
+<p>その他のリンク集などは以下が参考になります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E8%84%86%E5%BC%B1%E6%80%A7%E6%83%85%E5%A0%B1%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9">脆弱性情報データベース - Wikipedia</a></li>
+<li><a href="https://qiita.com/kannkyo/items/9ebf9934378c3f28a64a">セキュリティ関連の情報収集サイト - Qiita</a></li>
+<li><a href="https://www.ipa.go.jp/security/kokokara/">ここからセキュリティ！ 情報セキュリティ・ポータルサイト - IPA</a></li>
+</ul>
+
+<h2>個人PCのセキュリティ対策</h2>
+<p>僕が思いつく限りで、簡単にできるセキュリティ対策としては、</p>
+<table class="some_tables">
+<tr><th class="min60">セキュリティ対策</th><th>説明</th></tr>
+<tr><td>セキュリティ更新</td><td>使うサーバーやシステム、コンピュータなどについて、<br>セキュリティホールを埋める。<br>サポートの切れたWindowsや昔のRed Hat Linuxを使わず、<br>アンチ・ウイルスソフトウェアのパターンも最新にする。<br>WindowsだけではなくJavaなども最新にする。</td></tr>
+<tr><td>重要なファイルの管理</td><td>スパイウェアから盗まれるのを防ぐため、<br>個人情報やパスワードの入ったデータファイルを、<br>ネットワークに繋いだパソコンに置かない。</td></tr>
+<tr><td>強力なパスワード</td><td>Webサービスがハッキングされた時に備えて、<br>GoogleのようなWebサービスに、<br>容易に推測できるパスワードを使わない。</td></tr>
+<tr><td>暗号化通信</td><td>通信機器などの中継地点から通信を傍受されないように、<br>暗号化されていない通信で、<br>大切な情報をやり取りしない。</td></tr>
+<tr><td>ウイルスを入れない</td><td>ウイルスやデータを盗むスパイウェアの入ったフリーソフトを<br>インストールしない。<br>ウイルス対策ソフトウェアを入れる。</td></tr>
+<tr><td>不正サイトを見ない</td><td>不正サイトを見ない。怪しいリンクを踏まない。<br>怪しいサイトではパスワードやクレジットカード番号を入力しない。</td></tr>
+<tr><td>怪しい添付ファイルを見ない</td><td>Windowsなどで、不審なメールや不正マクロの入った<br>添付ファイルを開かない。</td></tr>
+<tr><td>バックアップ</td><td>バックアップはバランスが大切。<br>盗まれて困るようなUSBメモリなどに大切なデータを保管しないと同時に、<br>どこかのマシンが壊れても別のマシンにデータがバックアップされるようにする。</td></tr>
+<tr><td>機器のセキュリティ</td><td>セキュリティの甘いマシンや通信機器をネットワークに繋がない。<br>Windows XP以前のOSはネットワークに繋がないようにする。</td></tr>
+</table>
+<p>などがあります。</p>
+<p>企業やビジネスで言えば、</p>
+<table class="some_tables">
+<tr><th class="min60">セキュリティ対策</th><th>説明</th></tr>
+<tr><td>メールのセキュリティ</td><td>セキュリティの甘い会社とはメールでやり取りをしない。</td></tr>
+<tr><td>機器のセキュリティ</td><td>セキュリティの甘い機器は使わない。</td></tr>
+<tr><td>持ち出し禁止</td><td>重要なデータや個人情報を社外に（たとえ関連企業や家庭のパソコンでも）持ち出さない。<br>USBディスクは盗まれる可能性があるため、社内で共有しない。</td></tr>
+<tr><td>システムのアップデート</td><td>前時代のシステムは常にアップデートを行う（古いRed Hatなどを使ってはいけない）。</td></tr>
+<tr><td>システムのネットワークを遮断</td><td>システムを構築する際に、インターネットを使わず、社内ネットワークやローカル通信を使う。</td></tr>
+<tr><td>バックアップ</td><td>バックアップをきちんと取る。</td></tr>
+<tr><td>専門家</td><td>OSなどのセキュリティ対策（SELinuxなど）が分かる専門家に相談する。</td></tr>
+</table>
+<p>これらは、公益性の高い職場やサービスであればあるほど、重要性を増してきます。</p>
+<p>ですが、このようなセキュリティ対策を行っていても、「関連する末端の企業のセキュリティ」が甘ければ、そこからウイルスが入ります。このウイルスは入った時点では、見つからないように潜伏しているため、存在が分かりません。突如として大量にサーバーを破壊し、復旧しようとしても別のパソコンから感染し転移するため、復旧も難しくなります。</p>
+<p>オリンピック大会の選手や観戦者の認証を行う認証サーバーなど、本当にセキュリティ対策をしていても、何百とあるセキュリティ攻撃の「どれかが入り込む」ことで、セキュリティは木端微塵に破られてしまいます。ピョンチャンオリンピックでもこうしたセキュリティ攻撃が行われました（<a href="../prog_lang/it_society.html">IT社会</a>を参照のこと）。</p>
+<p>忘れがちなのが、パソコンだけではなく、スマホやタブレットのセキュリティ。パソコン同様に危険なので、パスワードをきちんとかけて、他人に簡単に渡したりしないこと。今からの時代大切な媒体になっていくでしょう。スマホはモバイルで携帯して使うため、パソコンよりも盗まれやすく、駅などに放置すると盗まれた時が大変で、紛失することも多いため、十分注意して使いましょう。</p>
+<p><a href="antivirus.html">アンチウイルス</a>や<a href="../prog_lang/it_society.html">IT社会</a>も参照のこと。</p>
+
+<h2>サーバーのセキュリティの基本</h2>
+<p>サーバーのセキュリティ対策の基本は、「アップデート」「ミニマリズム」「認証制限」そして「監視」です。</p>
+<p>まず、アップデート。サポートされているOSを使うこと。常にシステムをアップデートすること。</p>
+<p>次に、ミニマリズム。不要なサービスを起動しないこと。不要なパッケージをインストールしないこと。</p>
+<p>次に、認証制限。ログインできるユーザーを制限すること。SSHのログインを制限すること。</p>
+<p>最後に、監視。ロギングとモニタリングでネットワーク通信を監視すること。ログをできるだけ残す設定にすること。定期的にウイルススキャンを行うこと。</p>
+<p>また、chkrootkitの導入なども行いましょう。</p>
+<p>詳しくは以下の記事が参照になります。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1612/01/news185.html">Linuxサーバーのセキュリティを学ぼう (1/3) - @IT</a></li>
+<li><a href="https://eng-entrance.com/linux-virus">【初心者向け基本解説】Linuxのウィルスとその対策方法 - エンジニアの入り口</a></li>
+</ul>
+<p>Linuxでは、システムのログは/var/log/syslogに出力される。またtopコマンドを使うことで、システムのプロセスやスレッドの状況を監視できる。</p>
+<p><a href="../linux/linux_daemon.html">initとデーモン</a>や<a href="../linux/linux_ssh_config.html">SSH設定</a>や<a href="../linux/linux_unix_logger.html">UNIXシステム管理（システムロガー）</a>や<a href="../linux/linux_net_monitoring.html">Linuxネットワーク（モニタリング）</a>や<a href="rootkit.html">rootkit</a>を参照のこと。</p>
+
+<h2>Linuxでプライバシーを守る方法</h2>
+<p>Googleによる追跡・トラッキングに反対するDuckDuckGoにより、Linuxのセキュリティやプライバシーを守る方法が以下に投稿されています。</p>
+<ul>
+<li><a href="https://spreadprivacy.com/linux-privacy-tips/">How to Protect Your Privacy on Linux - DuckDuckGo Blog</a></li>
+</ul>
+<p>ちなみに、以下にWindows/Mac向けのプライバシー保護情報があります。普通のWindowsユーザーはこちらも参照のこと。</p>
+<ul>
+<li><a href="https://spreadprivacy.com/windows-7-privacy-tips/">How to Protect Privacy on Windows 7 - DuckDuckGo Blog</a></li>
+<li><a href="https://spreadprivacy.com/windows-10-privacy-tips/">How to Protect Your Privacy on Windows 10 - DuckDuckGo Blog</a></li>
+<li><a href="https://spreadprivacy.com/mac-privacy-tips/">How to Protect Your Privacy on Mac - DuckDuckGo Blog</a></li>
+</ul>
+<p><a href="../services/duckduckgo.html">DuckDuckGo</a>も参照のこと。</p>
+
+<h2>CISAによるバッドプラクティス</h2>
+<p>セキュリティ対策において、「バッドプラクティス」と呼ばれる間違った方法をリスト化したCISAによれば、バッドプラクティス（を行わないための対策）は「サポートがされなくなったOSやソフトウェアを使わないこと」「既知・固定・デフォルトのままのパスワードを使わないこと」「単一要素認証を使わないこと」です。</p>
+<ul>
+<li><a href="https://security.srad.jp/story/21/09/04/0539227/">CISA、単一要素認証をサイバーセキュリティの「バッドプラクティス」リストに追加 | スラド セキュリティ</a></li>
+</ul>
+<p><a href="auth.html">認証</a>も参照のこと。</p>
+
+<h2>Linuxの進歩とセキュリティ技術の向上</h2>
+<p>最近、Linuxは少しずつセキュアになっています。</p>
+<p>たとえば、先日リリースされたDebian 10では、強制アクセス制御のAppArmourがデフォルトで有効になり、またDebianでもようやくセキュアブートがサポートされた。UEFIのセキュアブートは多くのディストリビューションで有効になっており、PCの起動時にあらかじめデジタル署名のあるソフトウェアしか実行できなくし、ルートキットなどがOSより早く実行されるのを防ぐ。</p>
+<ul>
+<li><a href="https://www.weblio.jp/content/%E3%82%BB%E3%82%AD%E3%83%A5%E3%82%A2%E3%83%96%E3%83%BC%E3%83%88">セキュアブートの意味や定義 Weblio辞書</a> - IT用語辞典バイナリ</li>
+</ul>
+<p>7payやビットコインなどの不正利用などの問題で、既存のシステムを使ってビジネスサービスを行う際のセキュリティ向上はとても大きな課題である。時代は、LinuxのようなOSのレベルでセキュリティを向上させ、「絶対にハッキングが起きなくする」ことを求めている。</p>
+<p>また、Debian 10では新たにRustによるバイナリを追加し、Waylandが標準で有効になった。こうした足場から、少しずつセキュリティを高めてもらいたい。</p>
+<p><a href="../linux/selinux.html">SELinux</a>や<a href="../linux/apparmor.html">AppArmor</a>も参照のこと。</p>
+
+<h1>セキュリティ技術</h1>
+<h2>パケットフィルタリングとVPN</h2>
+<p>パケットフィルタリングとは、ファイアーウォールを用いて、パケット通信に介入し、アクセスの制御を行う仕組みのこと。つまり、不正な通信をブロックすること。</p>
+<p>これに対してVPNとは、インターネット上に仮想のプライベートネットワーク（専用回線）を作ること。つまり、社内だけの専用のネットワークを作ること。VPNの中での通信をVPNの外から傍受することはできない。</p>
+<p>ファイアーウォールでパケットフィルタを設定し、VPNを設定することで、社内・家庭内のネットワークのセキュリティを向上できる。</p>
+<ul>
+<li><a href="https://www.n-study.com/security-fundamentals/packet-filter/">パケットフィルタ ～不正な通信をブロック～ | セキュリティの基礎 | ネットワークのおべんきょしませんか？</a></li>
+<li><a href="https://japan.norton.com/vpn-8553">VPNとは？その基本と無料Wi-Fiを安全に利用する方法 - ノートン ブログ</a></li>
+<li><a href="https://www.jbsvc.co.jp/useful/security/vpn-connection.html">VPN接続とは？VPNの基本、仕組みについて | お役立ちブログ | 情報セキュリティ対策に関するお役立ち情報 | 企業の情報セキュリティ対策・ITシステム運用のＪＢＳ　ＪＢサービス株式会社 ＪＢサービス株式会社</a></li>
+</ul>
+<p><a href="../linux/linux_net_firewall.html">Linux ファイアウォール</a>と<a href="../linux/linux_net_firewall_iptables.html">iptables</a>も参照のこと。</p>
+
+<h2>VPNの種類</h2>
+<p>インターネットVPN（インターネットを使用するVPN）には、SSLを使ったSSL-VPNと、IPSecを使ったIPSec-VPNがある。</p>
+<p>IPSecはパケットの暗号化や改竄防止の機能を提供するプロトコルで、IPSec-VPNで使われている。</p>
+<p>ほかに、インターネットを使用せず、閉ざされた専用のネットワーク回線を使用する、IP-VPNなどがある。</p>
+<ul>
+<li><a href="https://www.ntt.com/bizon/glossary/e-i/ipsec.html">IPsecとは？意味・定義 | ITトレンド用語 | NTTコミュニケーションズ</a></li>
+<li><a href="https://amnimo.com/column/037/">IPsecとは？～仕組みや接続方法をわかりやすく解説～｜アムニモ</a></li>
+<li><a href="https://www.kagoya.jp/howto/it-glossary/security/ipsec-vpn/">【わかりやすい】 【図解】IPsecの仕組みとは？IPsec-VPN とSSL-VPNの違い - カゴヤのサーバー研究室</a></li>
+<li><a href="https://www.gmosign.com/media/work-style/ssl-vpn/">SSL-VPNとは？IPSec-VPNとの違いや接続方式、メリット・デメリット ｜GMOサインブログ</a></li>
+<li><a href="https://www.otsuka-shokai.co.jp/words/ip-vpn.html">IP-VPN｜大塚商会</a></li>
+</ul>
+<p><a href="encrypt.html">暗号</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.07</p>
+<p>2023.05.08編集</p>
+</div>
+
+<h2>PiVPN/OpenVPN</h2>
+<p>手軽にVPNサーバを立てたいなら、Raspberry PiにPiVPN/OpenVPNを導入するといいかもしれない。自宅のネットワークに外から接続できる。</p>
+<ul>
+<li><a href="https://raspida.com/pivpn">ラズパイとPiVPNで、手軽にVPNサーバーを手に入れる | ラズパイダ</a></li>
+<li><a href="https://petit-noise.net/blog/build-up-self-vpn-server-on-raspberry-pi-with-openvpn/">raspberry piで自宅VPN環境を構築(openvpn編) &#8211; ぷちのいず</a></li>
+<li><a href="https://knowledge.rinpress.com/index.php/PiVPN%E3%81%AB%E3%82%88%E3%82%8BOpenVPN%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">PiVPNによるOpenVPNのインストール - とある社畜の頭脳整理</a></li>
+<li><a href="https://ascii.jp/elem/000/001/208/1208047/">ASCII.jp：スタバからでも自宅にイケる！Raspberry Piで専用VPNサーバー作ってみた</a></li>
+</ul>
+<p><a href="../linux/raspberry_pi.html">Raspberry Pi</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.27</p>
+<p>2025.04.24編集</p>
+</div>
+
+<h2>トンネリング</h2>
+<p>トンネリングとは、インターネット回線上に仮想のトンネルを作成し、送信者と受信者をトンネルで繋ぐ仕組みのこと。</p>
+<p>トンネルの内部に、外部から遮断された「見えない通り道」を作る。</p>
+<p>暗号化とともに使い、トンネルを相互に繋ぐことで、あたかも専用のプライベートネットワークであるかのようにVPNを運用することができる。</p>
+<ul>
+<li><a href="https://e-words.jp/w/%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AA%E3%83%B3%E3%82%B0.html">トンネリング（トンネル）とは - IT用語辞典 e-Words</a></li>
+</ul>
+<p><a href="../linux/linux_net_etc.html">Linuxネットワーク（さまざまなコマンド）</a>を参照のこと。</p>
+
+<h2>侵入検知・防御</h2>
+<p>侵入検知とは、その通り侵入を検知する技術。</p>
+<p>異常な通信などを発見し、「どうすれば防げるのか」だけではなく、「今侵入されているかどうか」を監視し、検知し、通告する技術である。</p>
+<p>IDSは侵入検知システムと呼ばれ、侵入を検知するシステム。</p>
+<p>これに対してIPSは侵入防御システムと呼ばれ、侵入を検知するだけではなく防御する。</p>
+<p>UTM（Unified Threat Management）は、IDSとIPSの機能を備えている統合型のセキュリティ製品。</p>
+<ul>
+<li><a href="https://www.amiya.co.jp/column/ids_ips_20200908.html">IDS／IPS（侵入検知・防御システム）とは？ 機能や製品の選び方について｜SECU LABO（セキュ ラボ）｜株式会社網屋</a></li>
+</ul>
+
+<h2>ペネトレーションテスト</h2>
+<p>ソフトウェアやシステムのセキュリティを強化するためには、ハッカーと同じことをしなければならない。実際に既知の技術を用いて侵入を試みることを「ペネトレーションテスト」という。これはLinuxでもよくやられているセキュリティ強化の手法である。まさに「善意のハッカーと悪意のハッカーは紙一重」である。善意のハッカーのことをホワイトハット、悪意のハッカーのことをブラックハットという。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%9A%E3%83%8D%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88">ペネトレーションテスト - Wikipedia</a></li>
+</ul>
+<p>サイバー攻撃については<a href="../prog_lang/php_security.html">PHPセキュリティ</a>を参照のこと。</p>
+
+<h2>IPA セキュア・プログラミング講座</h2>
+<p>IPAのセキュア・プログラミング講座で、さまざまなセキュリティ対策が紹介されています。</p>
+<ul>
+<li><a href="https://www.ipa.go.jp/security/awareness/vendor/programming/">IPA セキュア・プログラミング講座</a></li>
+<li><a href="https://www.ipa.go.jp/security/index.html">IPA 独立行政法人 情報処理推進機構：情報セキュリティ</a></li>
+</ul>
+
+<h2>セキュリティ関連の資格</h2>
+<p>Linuxにおけるセキュリティ技術について、本格的に学びたい方は、LinuCレベル3 303試験でセキュリティの領域に関する資格試験を実施されているため、情報セキュリティスペシャリスト試験（略称SC）などと合わせて勉強されると良いと思います。</p>
+<ul>
+<li><a href="https://linuc.org/linuc3/303.html">LinuCレベル3 303</a></li>
+<li><a href="https://www.jitec.ipa.go.jp/1_11seido/sc.html">情報処理安全確保支援士試験(SC)</a></li>
+</ul>
+<p><a href="../prog_lang/kihonjouhou.html">基本情報</a>や<a href="../linux/lpic_linuc.html">LPIC/LinuC</a>を参照のこと。</p>
+
+<h1>サイバー攻撃</h1>
+<h2>主なサイバー攻撃</h2>
+<p>（「<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>」を参考に執筆しました。）</p>
+<p>PHPなどの言語によって対策可能なセキュリティ攻撃については、<a href="../prog_lang/php_security.html">PHPセキュリティ</a>に記述しているが、それ以外の主なサイバー攻撃についてを説明する。</p>
+<table class="some_tables">
+<tr><th class="min60">攻撃</th><th>説明</th></tr>
+<tr><td>バッファオーバーフロー攻撃</td><td>バッファよりも大きなサイズのデータをポインタなどに代入することで、<br>バッファオーバーフローを起こしてシステムの大事なデータを書き換え、<br>不正なプログラムを実行させる攻撃。</td></tr>
+<tr><td>DNSキャッシュポイズニング</td><td>DNSサーバのキャッシュを書き換えることで、<br>不正なサイトのURLを正常なサイトに見せかけて、不正サイトに誘導する攻撃。</td></tr>
+<tr><td>DoSあるいはDDoS攻撃</td><td>たくさんの「踏み台」と呼ばれるマシンにウイルスを感染させ、<br>それらのマシンからひとつのサーバにリクエストを送りまくることで、<br>サーバをダウンさせる攻撃。</td></tr>
+<tr><td>フィッシングサイト</td><td>不正なサイトを正常なサイトに見せかけて作り、<br>パスワードや暗証番号・クレジットカード番号などを入力させ、盗み取る攻撃。</td></tr>
+<tr><td>ランサムウェア</td><td>コンピュータ内の大事なデータを暗号化し、<br>「暗号化を解いてほしければ金を払え」と、<br>暗号化の解除に対して金銭の支払いを要求してくる攻撃。</td></tr>
+</table>
+<p>このほか、パスワードを不正に入手するパスワードクラックという攻撃がある。辞書を使うものを辞書攻撃、総当たりで力技で解析するものをブルートフォース攻撃、ほかのサイトで入手したパスワードと同じパスワードを使うものをパスワードリスト攻撃などと言う。</p>
+<p>また、ウイルスやマルウェアの感染についても、踏み台を通じて行う場合が多い。ウイルスに感染した踏み台から、さらに大量のウイルスメールを不特定多数に送り付け、間違ってクリックした人間をどんどんウイルスにかける。また、ウイルスと同等の、それ自体が悪いことをするのではなく、情報を不特定多数に拡散する目的の「スパムメール」と呼ばれる攻撃があり、大量の人間にURLの宣伝をすることで有料サイトや不正サイトなどへと誘導する。</p>
+<div class="edit_date">
+<p>2023.01.31</p>
+</div>
+
+<h1>セキュリティ関連ページ</h1>
+<h2>暗号</h2>
+<p><a href="encrypt.html">暗号</a>を参照のこと。</p>
+
+<h2>認証</h2>
+<p><a href="auth.html">認証</a>を参照のこと。</p>
+
+<h2>アンチウイルスソフトの導入</h2>
+<p><a href="antivirus.html">アンチウイルス</a>を参照のこと。</p>
+
+<h2>主なセキュリティ攻撃</h2>
+<p>主なセキュリティ攻撃について詳しくは<a href="../prog_lang/php_security.html">PHPセキュリティ</a>を参照のこと。</p>
+
+<h2>ファイアーウォール</h2>
+<p>Linuxにおけるファイアーウォールについては、<a href="../linux/linux_net_firewall.html">Linux ファイアウォール</a>と<a href="../linux/linux_net_firewall_iptables.html">iptables</a>を参照のこと。</p>
+
+<h2>パーミッション・セキュアOS</h2>
+<p><a href="../linux/linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>や<a href="../linux/selinux.html">SELinux</a>や<a href="../linux/apparmor.html">AppArmor</a>を参照のこと。</p>
+
+<h2>監視・モニタリング</h2>
+<p>監視・モニタリングについては<a href="../linux/linux_net_monitoring.html">Linuxモニタリング</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>書籍</h2>
+<p>以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-Gene/dp/4798125261">おうちで学べるネットワークのきほん</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1612/01/news185.html">Linuxサーバーのセキュリティを学ぼう (1/3) - @IT</a></li>
+</ul>
+
+<h1>通信経路の匿名化</h1>
+<h2>Tor</h2>
+<p>Torはインターネット通信において接続経路情報を匿名化する技術。</p>
+<p>The Guardian Projectはオープンソースのセキュリティ関連の団体で、Torプロジェクトと協力関係にある。</p>
+<p>後日注記：Torは、インターネットでハッキングを試みる悪意あるハッカー集団によって使われることが多い技術。多くの組織的なハッカーが、自らの国や組織を隠すためにTorを使用している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Tor">Tor - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/The_Guardian_Project_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">The Guardian Project (ソフトウェア) - Wikipedia</a></li>
+</ul>
+<p><a href="../windows_pc/browsers_privacy.html">プライバシー保護ブラウザ</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>Log4jの脆弱性（Log4Shell）によって、インターネットは闇の世界になるかも</h2>
+<p>今、世間を騒がしているLog4jの脆弱性（Log4Shell）により、インターネットは闇の世界になるかもしれません。</p>
+<p>Log4jは、Javaのライブラリのひとつで、オープンソースソフトウェアです。使う目的は、ログを取ること。Javaでは、ログを吐き出す目的で、ほとんどの場合Log4jが使われています。</p>
+<p>見つかった脆弱性は、Log4jに実装されていた、ログを吐き出すだけではなく、特定の記法でログを吐き出す命令が来た時に、LDAPとJNDIを用いて、インターネット上のclassファイルをダウンロードして実行するという機能による脆弱性です。</p>
+<p>そもそも、ログを取るだけの目的であれば、このような機能は必要ありません。ですが、Log4jでは、特定の構文が来た時に、それを自動的に解決して実際の値に置き換えるマクロ的な構文が用意されていて、この中に、LDAPとJNDIに関する命令があり、これをログに記録させようとした場合、インターネット上から悪意あるプログラムをダウンロードして実行してしまうということが分かったのです。</p>
+<p>Log4jは、とても広く使われているソフトウェアです。そのようなソフトウェアに、このような一般的大多数には必要とされないような機能が実装されていたことがまず問題です。Javaの多くのモダンなプロジェクトは、Log4jをロギングのために使っています。</p>
+<p>そして、この脆弱性を通じてハッキングを行うのは極めて簡単です。ログに記録させることさえできれば構わないからです。ログは、入力フォームなどを実行しただけでも、あるいはリクエストが来ただけでも記録されます。この中に、不正な文字列を仕込ませておけば、あとはプログラムを勝手にダウンロードさせて実行できます。データを破壊することも、盗むことも、ウイルスに感染させてバックドアを仕込むことも、なんでもやりたい放題です。</p>
+<p>そして、対象範囲が広すぎます。多くのJavaプロジェクトでLog4jをロギングのために使っています。たとえば公開サーバーのサーバーサイドのバックエンドに使われているかもしれません。自分でロギングに使わなくても、依存ソフトウェアがロギングのために使っていればアウトです。依存ツールすべてを調べ上げるのはとても困難です。</p>
+<p>Log4jはApacheプロジェクトの傘下であり、既にパッチが提供されています。一度のパッチで済むはずが、さらに問題が見つかって今のところ（2021.12.20）では3つの新しいバージョンが公開されています。Log4jの脆弱性を後回しにすることは、家のドアに鍵をかけずに公開しているのと同じです。すぐにパッチを当てるなどの対処をおすすめします。</p>
+<ul>
+<li><a href="https://www.itmedia.co.jp/news/articles/2112/10/news157.html">「やばすぎる」　Javaライブラリ「Log4j」にゼロデイ脆弱性、任意のリモートコードを実行可能　iCloudやSteam、Minecraftなど広範囲のJava製品に影響か - ITmedia NEWS</a></li>
+<li><a href="https://japan.zdnet.com/article/35180887/">「Apache Log4j」の脆弱性問題--これまでの経緯や知っておくべきこと - ZDNet Japan</a></li>
+<li><a href="https://www.gizmodo.jp/2021/12/log4j.html">深刻度10。今すぐパッチ！ネットをぶっ壊してるLog4jをわかるように説明するよ | ギズモード・ジャパン</a></li>
+<li><a href="https://gigazine.net/news/20211213-cve-2021-44228-jndi-lookup/">JavaのLog4jライブラリで発見された脆弱性「Log4Shell(CVE-2021-44228)」はなぜ世界中に大きな影響を与えるのか？ - GIGAZINE</a></li>
+</ul>
+
+<h2>ユーザーが明示的に行ったプログラムの実行以外、サンドボックス環境で実行する</h2>
+<p>僕は、システムのセキュリティを向上させるために、ユーザーが明示的に行ったプログラムの実行以外は、サンドボックス環境でしか実行できないようにするなどの方法が考えられると思う。</p>
+<p>自分でコマンド操作やGUI操作を行う場合以外には、プログラムがシステムのデータを書き換える際に、必ず許可を求めなければいけないようにし、許可がない場合はファイルの変更やプログラムの実行ができないようなサンドボックス環境でプロセスが実行されるようにすればいい。</p>
+<p>そうすれば、ウイルスなどが入り込んで不正な処理を実行することもできなくなり、システムのセキュリティホールをつかれたとしても、重要なファイルが破壊されたり奪われたりということを減らすことができるだろう。</p>
+
+<h1>簡単な説明</h1>
+<h2>セキュリティ・暗号</h2>
+<ul class="defaultlist list7">
+<li>セキュリティ・暗号
+<ul>
+<li>セキュリティ
+<ul>
+<li>セキュリティアタック</li>
+<li>ペネトレーションテスト</li>
+</ul></li>
+<li>認証
+<ul>
+<li>二段階認証</li>
+<li>NIS</li>
+<li>LDAP</li>
+</ul></li>
+<li>セキュアOS
+<ul>
+<li>SELinux</li>
+<li>AppArmor</li>
+</ul></li>
+<li>暗号
+<ul>
+<li>DES（共通鍵暗号）</li>
+<li>RSA（公開鍵暗号）</li>
+<li>ハッシュ、デジタル署名</li>
+<li>OpenSSL</li>
+<li>LibreSSL</li>
+</ul></li>
+</ul></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
