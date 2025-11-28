@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Mozilla Firefox - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Mozilla Firefox</h1>
+<p>Mozilla Firefoxに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="mozilla.html">Mozilla</a></li>
+<ul>
+<li><b>Mozilla Firefox</b></li>
+<li><a href="mozilla_thunderbird.html">Mozilla Thunderbird</a></li>
+<li><a href="mozilla_xul.html">XUL</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Mozilla Firefox</h1>
+<h2>けっこう使える、WindowsでもLinuxでも動く賢いブラウザ</h2>
+<p>Mozilla Firefoxは、けっこう使えるブラウザだ。拡張機能で機能を増やすことができ、またオープンソースで、どこかの会社の利益のために作っていない。</p>
+<p>僕のメインブラウザも、2018.07.06現在ではFirefoxだ。とても快適だが、エクステンションのようなものはあまり導入していない。初期状態のまま使っている。</p>
+<p>Linuxでも動くのはとても良い特徴で、僕はDebianのFirefoxと一緒に使っている。また、Google Chromeの同期機能とよく似た機能として、各Firefox間でブックマークなどをSyncする機能もある。</p>
+<ul>
+<li><a href="https://www.mozilla.org/ja/firefox/new/">Firefox をダウンロード — 無料ウェブブラウザー</a></li>
+</ul>
+<p>公式・Wikipedia</p>
+<ul>
+<li><a href="https://www.mozilla.jp/">Mozilla.jp</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Mozilla Firefox">Mozilla Firefox - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/mozilla/gecko-dev">git</a></li>
+</ul>
+
+<h2>アドオン</h2>
+<p>アドオンを入れたい場合は以下を参照のこと。拡張やテーマが導入できる。</p>
+<ul>
+<li><a href="https://addons.mozilla.org/ja/firefox/">Add-ons for Firefox</a></li>
+</ul>
+<p>見ていると、広告ブロックのような拡張が多い。たとえば以下の拡張はYouTubeのあらゆる広告を消去する。「本当にそんなことができていいのだろうか」と思わされる。</p>
+<ul>
+<li><a href="https://addons.mozilla.org/ja/firefox/addon/adblock-for-youtube/?src=featured">AdBlocker for YouTube™ – Firefox (ja) 向け拡張機能を入手</a></li>
+</ul>
+<p><a href="../services/youtube.html">YouTube</a>も参照のこと。</p>
+
+<h2>Syncと二段階認証</h2>
+<p>Firefoxアカウントを作成し、Firefox Syncを使うことで、複数のFirefoxの間で情報を共有できる。</p>
+<p>Firefox Syncでは二段階認証を利用できる。二段階認証をONにするには、以下のページが参考になる。</p>
+<p>僕はFirefoxだけではなく、他のサービスでも二段階認証をONにしている。</p>
+<ul>
+<li><a href="https://support.mozilla.org/ja/kb/secure-firefox-account-two-step-authentication">二段階認証で Firefox アカウントを保護する | Firefox ヘルプ</a></li>
+</ul>
+<p><a href="../network/auth.html">認証</a>も参照のこと。</p>
+
+<h2>トラッキングのブロック</h2>
+<p>最近のWeb業界では、Webサイト運営者からの「トラッキング」や「追跡」が問題になっている。</p>
+<p>トラッキングとは、Webサイトの管理者が、Webページを見た閲覧者の情報を収集すること。</p>
+<p>昔から、アクセス解析のようなツールをWebサイトに導入することでWebページの管理者は訪問者の情報を収集することができたが、最近は個人情報の保護や、YouTubeなどのGoogleやFacebookなどGAFAのサービスにおける「過剰なまでの情報収集」が問題となっており、「個人情報と匿名性を守る」という意味で、トラッキングを防止する技術が盛ん。</p>
+<p>僕のこのホームページも、昔はGoogleや忍者ツールズのアクセス解析ツールを導入していたが、そうした問題があることを知ってからトラッキングを行う全てのツールを取り外した。（はてなブログの方には、はてなのアクセス解析機能が残っている）。</p>
+<p>こうしたこともあって、Mozilla Firefoxではトラッキングを防止する「ブロック機能」が搭載されている。僕もMozilla Firefoxを使う上でこのトラッキング防止機能を使っている。また、トラッキング防止機能を使っていても、Google検索を使っている場合、Googleに検索履歴などの情報がわたってしまう。僕はインターネットユーザーとしての立場を表明するために、DuckDuckGoというトラッキングや追跡を行わない新しい検索エンジンを、Firefoxで使っている。</p>
+<p>また、僕はFacebookを使わない。Facebookで行った全てのいいねやコメントなどの情報は削除し（そのための専用の管理ページがあるため、削除したい方はネットで調べてほしい）、Facebookにおける友達や個人情報は非公開にし、自分のタイムラインの投稿情報も全て消した。もう、Facebookは絶対に使わない。また、GoogleのサービスはGmailだけを使っているほか、Yahoo!のメールも使っているが、それらは二段階認証をONにしている。ただし僕はYouTubeの動画だけは視聴する。バランスが肝心である。</p>
+<p>後日注記：今ではDuckDuckGoは使っていない。FirefoxにDuckDuckGoを入れると不安定になるような気がするからである。</p>
+<p><a href="../windows_pc/browsers_privacy.html">プライバシー保護ブラウザ</a>や<a href="../services/duckduckgo.html">DuckDuckGo</a>や<a href="../services/google.html">Google</a>を参照のこと。</p>
+
+<h2>Web開発機能が使える</h2>
+<p>FirefoxやChromeなどで使えると思うのは、Web開発機能。</p>
+<p>たとえば、ブラウザーコンソールからはconsole.log()で出力した端末出力が見えるほか、DOMツリーを選択しながらCSSの記述をインタラクティブに修正して、現在のページに反映させることができます。</p>
+<p>このDOMツリーの要素を選択してCSSを修正する機能は、Webページを作成している人間から見ると、「どこが間違っていたのか、どのように修正すればいいのかを突き止める」という意味で、めちゃくちゃ使える機能です。</p>
+<p>また、もうひとつ使えるのが、レスポンシブデザインモードです。スマホなどの表示画面をPC上で再現することができます。これを見ることで、スマホ向けのレスポンシブ対応表示でおかしな表示がされた場合を確認することができます。</p>
+<p><a href="../prog_lang/html.html">HTML</a>や<a href="../prog_lang/css.html">CSS</a>や<a href="../prog_lang/javascript_tools.html">JavaScriptのツール</a>を参照のこと。</p>
+
+<h1>Firefox拡張</h1>
+<h2>Webサービス連携</h2>
+<p>FirefoxやGoogle Chromeでは、拡張機能を導入することで、さまざまな追加的な機能を「自分の使いたいものだけ」を導入することができる。</p>
+<p>Webブラウザとして使う場合、使えるのははてななどのWebサービスとの連携機能である。</p>
+<p>たとえば、はてなブックマークやはてなブログ通知機能のような拡張を入れることで、今見ているページをブラウザのブックマークだけではなくはてなのソーシャルブックマークにワンクリックで登録したり、はてなブログ読者の通知機能（たとえばスターやコメントをつけたとか、読者が増えたとか）をリアルタイムで知ることができる。</p>
+<p>僕は、現在、FirefoxでそうしたWebサービス系の拡張は使っていないが、昔はGoogle Chromeではてなの拡張機能を導入していた。Google Chromeをタスクトレイに常駐起動させることで、いつ何をしていても、はてなで何かイベントがあった時はタスクトレイから通知を表示してくれる。Linuxでも使うことができ、とても便利であるが、最近は逆に通知機能が鬱陶しくなってしまったので、今使っているFirefoxにははてなの拡張は導入していない。今でははてなブログにブラウザから手動でアクセスするなどして、通知を確認している。はてなブックマークの拡張を入れると、Google検索にはてなブックマークの登録人数が表示されたりもするが、これも逆に鬱陶しい。</p>
+<p>Chromeの話だが、ChromeにはChromeアプリという拡張機能の一種があり、僕はGoogle Keepというクラウドのメモアプリケーションを使っていたことがある。これはLinuxでも使うことができる。</p>
+
+<h2>使えるのは絵文字と翻訳</h2>
+<p>拡張の中で、使えるのは絵文字と翻訳です。絵文字は、YouTubeのチャットなどで絵文字を入力するために必須。また、翻訳は英語圏のサイトを読む時にとても便利です。</p>
+<ul>
+<li><a href="https://addons.mozilla.org/ja/firefox/addon/awesome-emoji-picker/">✨ Awesome Emoji Picker ✨ – 🦊 Firefox (ja) 向け拡張機能を入手</a></li>
+<li><a href="https://addons.mozilla.org/ja/firefox/addon/to-google-translate/">To Google Translate – 🦊 Firefox (ja) 向け拡張機能を入手</a></li>
+</ul>
+
+<h2>ウイルスバスター</h2>
+<p>トレンドマイクロのウイルスバスターをインストールすると、IE, Chrome, Firefoxに自動的にウイルスバスターの拡張機能が入る。</p>
+<p>これは、Google検索などにサイトが怪しいかそうでないかを表示し、不正なサイトにリダイレクトされた場合は自動で検知して遮断し、警告を表示してくれる。</p>
+<p>安心な機能だが、もちろんウイルスバスターを購入して導入したWindowsパソコンでしか動作させることはできない。Linuxでは使えない。</p>
+<p><a href="../network/antivirus_windows.html">アンチウイルス（Windows）</a>を参照のこと。</p>
+
+<h2>拡張を作る</h2>
+<p>拡張は自分で作ることもできる。<!--XULとJavaScriptを使って拡張を作る方法は<a href="../prog_lang/xml_gui.html">XML & GUI</a>に一応あるが、これは古い情報なので参考まで。（注記：もう消しました。）--></p>
+<p>拡張を作りたい人向けの参考サイトとして、以下のページがある。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla/Add-ons/WebExtensions">ブラウザ拡張機能 - Mozilla | MDN</a></li>
+</ul>
+<p><a href="mozilla_xul.html">XUL</a>も参照のこと。</p>
+
+<h2>拡張・プラグイン指向はミニマム化の理想とは逆</h2>
+<p>一般的に、システムはミニマム化、つまり使うものだけを最低限入れることが推奨されます。</p>
+<p>たとえば、HTTPサーバーなんか使わないのにApacheがインストールされて、なおかつサービスを起動させ、ポート80番を開いている、という状態では、いつポート80番のApacheから侵入されて情報が流出するか分かりません。</p>
+<p>よって、使わないサービスは削除し、ポートも開けずサービスも停止させ、アプリケーションについても必要なソフトウェアだけを入れる、ということが推奨されます。</p>
+<p>ですが、Mozilla FirefoxやGNOME3のような「拡張指向」のソフトウェアは、僕はミニマム化の理想とは矛盾するのではないかと思います。</p>
+<p>好きな拡張やプラグインをこれでもかというぐらい入れて、結果いつも使っている拡張は数えるほどしかない、という状況になりかねません。これはバグの問題からいっても、あるいはスパイウェアなどの危険性からセキュリティの問題から言っても、良いことではありません。</p>
+<p>この拡張指向に火をつけたのは、iPhoneやAndroidの「アプリ」ではないかと思います。これでもかというぐらい、無料アプリやクーポンなどのアプリを入れて、結果いつも使っているアプリは数個しかないのです。</p>
+<p>ですから、僕はミニマム化の理想をとります。たとえば、Linuxディストリビューションをインストールする場合でも、たくさんのアプリケーションが標準的にインストールされているディストリビューションを僕は使いたいと思いません。Gentooのように、全てのアプリケーションを自分で導入し、設定する項目を自分でどう設定したか把握できるようなシステムを使います。LibreOfficeを最初からインストールするのすら、僕は良いことだと思いません。後からLibreOfficeをインストールして、使わない人のためにシステムをできるだけクリーンにした方がはるかに良いと思います。</p>
+<p>ただし、こういう拡張指向をはじめて、唯一成功したありえないソフトウェアがあります。それはEmacsです。Emacsだけは、Lispで拡張できる拡張性を売りにして、「最強のテキストエディタ」として覇権をviなどと争っています。Atomなどもそこに加わっています。そうした実例があるので、一概に「全てをデフォルトのままで使え」とは言えないでしょう。ですが、Emacsは言わば言語処理系のようなもので、Lispでプログラミングを行うための良い環境として、昔のBASICと同じように「文化を築いた」ことで成功したのだと思います。</p>
+
+<h2>ブラウザに機能を追加出来るだけではなく、Webサイトの表示も書き換えられる</h2>
+<p>Mozillaの拡張は、ブラウザに機能を追加させることもできますが、フィルターのようにWebサイトの表示を書き換えることもできます。</p>
+<p>ブラウザに機能を追加させる拡張としては、たとえばマウスジェスチャーのようなものがありますが、フィルターの拡張としては、広告ブロックのような機能があります。</p>
+<p>これは、以前WindowsのProxomitronがやっていたのと同じです。ブラウザが表示するWebサイトの情報を仲介して、間に拡張が入ることで、Webページの見た目を変えられるのです。</p>
+<p><a href="../windows_pc/proxomitron.html">Proxomitron</a>も参照のこと。</p>
+
+<h2>変な拡張を入れるとすぐに不安定になる</h2>
+<p>Mozilla Firefoxを使っていて残念な点として、変な拡張を入れるとすぐに不安定になったり、おかしな挙動になる、ということ。</p>
+<p>僕は極力拡張を入れていないつもりだが、DuckDuckGoの拡張などを入れていると、たまに突然停止したり、あるいは広告のトラッキングをDuckDuckGoがカットするため、はてなブログの編集機能が上手く使えないことがあった。</p>
+<p>Mozillaは良いブラウザだが、拡張は使えない。僕はYouTubeの広告カットも消した。</p>
+
+<h2>さまざまなサービスからサポート対象外と言われて締め出される</h2>
+<p>Mozilla FirefoxをDebianで使っていて、一番困るのは、サポート対象外と言われて締め出されることです。</p>
+<p>たとえば、Yahoo!ニュースのテキスト記事は読むことができますが、その中のテレビなどの動画を見ようとすると、サポート対象外と言われ、見ることができません。</p>
+<p>また、僕の入っている放送大学でも、テレビ科目やラジオ科目のインターネット配信を見ることができません。</p>
+<p>最近も、多くのサービスで、FirefoxとLinuxの組み合わせは締め出されます。たとえば以下の記事のような感じです。</p>
+<ul>
+<li><a href="https://apple.srad.jp/story/22/07/11/1558219/">Appleのビジネスサイトでも「Firefox」がサポート対象外に | スラド アップル</a></li>
+<li><a href="https://it.srad.jp/story/22/05/05/1529217/">NHKプラス、5月23日以降のアップデートでFirefoxを動作対象外に | スラド IT</a></li>
+</ul>
+<p>残念ですが、一般のパソコンユーザーに対して、Linuxの利用を勧めることを控える理由は、「サポート対象外のサービスが多いから」という理由が一番だと思います。</p>
+
+<h1>コツ</h1>
+<h2>ブックマークの復元方法</h2>
+<p>Mozilla Firefoxでブックマークを誤って削除してしまった場合、自動的に保存されたバックアップから復旧することができます。</p>
+<p>まず、メニューバーが表示された状態で（非表示になっている時はツールバーの何もないところを右クリックして「メニューバー」にチェックを入れると表示される）、「ブックマーク」メニューから「ブックマークを管理」を選択し、「ブラウジングライブラリー」というウィンドウが開いたら、「インポートとバックアップ」をクリックして、「復元」サブメニューの中に保存された過去のブックマークのバックアップがあります。この中の復元したい時点のデータを選んでクリックし、表示された確認ダイアログから「OK」を選択します。</p>
+<p>詳しくは以下の記事が参考になります。</p>
+<ul>
+<li><a href="https://support.mozilla.org/ja/kb/restore-bookmarks-from-backup-or-move-them">ブックマークの保存と復元 | Firefox ヘルプ</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.02.13</p>
+</div>
+
+<h2>特定のサイトの履歴だけを消す</h2>
+<p>また、Mozilla Firefoxでは特定のサイトの履歴だけを消すことができます。</p>
+<p>まず、「履歴」メニューから「すべての履歴を表示」を選択します。「ブラウジングライブラリー」というウィンドウが開き、履歴情報が一覧表示されるので、その中から任意のサイトの履歴をひとつ選んで右クリックし、「このサイトの履歴を消去」を選択します。確認ウィンドウが表示されたら「消去」を選択します。</p>
+<div class="edit_date">
+<p>2025.02.13</p>
+</div>
+
+<h1>Firefox派生</h1>
+<h2>Waterfox</h2>
+<p>Firefoxの派生ブラウザとして、Waterfoxという面白いブラウザがある。イギリスの16歳の少年Alex Kontosによって開発された「プライバシーとユーザビリティの完璧なバランスを実現」するブラウザである。</p>
+<ul>
+<li><a href="https://www.waterfox.net/">Waterfox</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

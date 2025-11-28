@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Python入門（３．オブジェクト指向） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Python入門（３．オブジェクト指向）</h1>
+<p>Python入門（３．オブジェクト指向）です。</p>
+<p><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="python_intro.html">Python入門</a></li>
+<ul>
+<li><a href="python_intro_basic.html">１．基本</a></li>
+<li><a href="python_intro_flow.html">２．制御フロー</a></li>
+<li><b>３．オブジェクト指向</b></li>
+<li><a href="python_intro_data.html">４．データ構造</a></li>
+<li><a href="python_intro_str.html">５．文字列</a></li>
+<li><a href="python_intro_file.html">６．ファイル</a></li>
+<li><a href="python_intro_functional.html">７．関数型言語の機能</a></li>
+<li><a href="python_intro_others.html">８．その他</a></li>
+<li><a href="python_intro_advanced.html">９．応用・モジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>オブジェクト指向</h1>
+<h2>オブジェクト指向とは</h2>
+<p>Pythonでいうオブジェクト指向は、オブジェクトを「自分自身」とし、メソッドを「自分自身を対象とする関数」とする。</p>
+<p>どんなメソッドを使うのであっても、そのメソッドは自分自身に対して行われる。</p>
+<p>後日注記：Pythonでは、データ（変数）とメソッド（関数）をひとつの関連するモジュールにまとめて、クラスにコード（たい焼きで言えば金型）を記述し、そのクラスをインスタンス（たい焼きで言えばひとつひとつのたい焼き）にして扱う。これをオブジェクト指向と呼ぶ。また、Pythonではクラスの中のデータとメソッドをアトリビュート（属性）と呼ぶ。</p>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>オブジェクト指向の概要</h2>
+<p>こんな感じになる。</p>
+<pre class="prettyprint">
+# クラス名は大文字で始める。
+class Text:
+
+    # コンストラクタ。クラスからインスタンスを作り出した時に実行される。
+    # 最初の引数selfは特別な引数で、オブジェクト自身を表す。
+    # 実際の引数は2番目から使われる。
+    def __init__(self, content):
+    
+        # メンバ変数はself.変数名となる。
+        # このクラス（ここではText）の全てのメソッドから、
+        # 同じメンバ変数（ここではself.buff）にアクセスできる。
+        self.buff = content
+        
+    def add(self, content):
+        self.buff = self.buff + content
+
+# Textを継承したPrintableTextを定義する。
+class PrintableText(Text):
+    def print_text(self):
+        print(self.buff)
+
+# インスタンスの作成。それぞれが異なるデータを保持する。
+text1 = PrintableText("hoge")
+text2 = PrintableText("foo")
+text2.add("bar")
+text1.print_text()
+text2.print_text()
+</pre>
+
+<h2>クラスとメソッドを使う</h2>
+<p>まず、import文でモジュールを読み込む。</p>
+<pre>
+import モジュール名
+</pre>
+<p>その後にモジュール名.クラス名()のようにクラスのオブジェクトを作成する。</p>
+<p>モジュール名をいちいち明記したくない時は、</p>
+<pre>
+from モジュール名 import クラス名
+</pre>
+<p>のようにfrom ～ import文を使う。</p>
+<p>あるいは、</p>
+<pre>
+from モジュール名 import *
+</pre>
+<p>としてもよい。</p>
+<ul>
+<li><a href="https://torina.top/detail/380/">Pythonで、月間カレンダーをつくる - naritoブログ</a></li>
+</ul>
+
+<h2>クラス</h2>
+<p>以下はクラスについてのキーワード。</p>
+<table class="some_tables">
+<tr><th class="min60">キーワード</th><th>説明</th></tr>
+<tr><td>class クラス名:</td><td>クラスの定義</td></tr>
+<tr><td>def メソッド名(引数):</td><td>メソッドの定義</td></tr>
+<tr><td>__init__</td><td>コンストラクタ。<br>インスタンスが作成された時に実行される。</td></tr>
+<tr><td>__del__</td><td>デストラクタ。<br>インスタンスが破棄された時に実行される。</td></tr>
+<tr><td>self</td><td>メソッドの第一引数に指定する。<br>selfはそれぞれのインスタンスを意味する。<br>Java/C++のthisのようなもの。<br>メソッドの第一引数は必ずselfとなる。</td></tr>
+<tr><td>メソッドの第二引数以降<br>（self以降の引数）</td><td>メソッドの第二引数から、通常の関数に与えるものと同じ引数を与える。<br>メソッドを呼び出す時は、第二引数以降を引数として渡す。<br>メソッドを呼び出す際にselfは引数として指定しない。<br>selfだけの引数を持ったメソッドは引数なしのメソッドとして呼び出す。</td></tr>
+<tr><td>self.属性</td><td>インスタンスの属性を表す。<br>クラスの内部（メソッド間）で共有される変数として利用できる。<br>インスタンスが作成されてから破棄されるまで保持される。<br>たとえばself.hogeとなる。</td></tr>
+<tr><td>from ... import</td><td>モジュールをインポートする。<br>クラスは通常モジュールに保管し、インポートして利用する。</td></tr>
+<tr><td>クラス名()</td><td>インスタンスを作成する。newは必要ない。</td></tr>
+<tr><td>インスタンス名.メソッド名()</td><td>インスタンスに対してメソッドを呼び出す。<br>たとえばobj.hoge()となる。</td></tr>
+</table>
+<p>たとえば以下のようになる。</p>
+<pre class="prettyprint">
+class Cat:
+    def __init__(self, name, food, mew):
+        self.name = name
+        self.food = food
+        self.mew = mew
+    
+    def intro(self):
+        print('僕の名前は{0}だ。好きな食べ物は{1}。'.format(self.name, self.food))
+        print(self.mew)
+</pre>
+<p>上の内容をcat.pyに保存して次のようにインポートする。</p>
+<pre class="prettyprint">
+from cat import Cat
+
+kuro = Cat('クロ', 'たこ焼き', 'にゃーご。')
+shiro = Cat('シロ', 'チーズ', 'ごろごろにゃーん。')
+
+kuro.intro()
+shiro.intro()
+</pre>
+<ul>
+<li><a href="https://python.keicode.com/lang/oop-basics.php">クラス定義の基本 - Python 入門</a></li>
+</ul>
+
+<h2>継承</h2>
+<p>継承は</p>
+<pre class="prettyprint">
+class ExCat(Cat):
+</pre>
+<p>などのようにクラス名 (親クラス名)と指定する。</p>
+<p>後日注記：継承はプログラムコードの再利用性を高める。最初のうちは「なんのためにあるのか分からない」というオブジェクト指向だが、たくさんのコードを複数の人間が書くようになった時に、はじめて「オブジェクト指向で設計していてよかった」という悟りを得ることができる。</p>
+<p>後日注記：派生クラスから基底クラスのメソッドを実行するにはsuper()関数を使う。</p>
+
+<h2>オブジェクトに関する関数</h2>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>object()</td><td>もっとも基本的なobjectクラスのオブジェクトを作成できる。</td></tr>
+<tr><td>id()</td><td>オブジェクトの識別子であるIDを返す。</td></tr>
+<tr><td>hash()</td><td>オブジェクトのハッシュ値を返す。</td></tr>
+<tr><td>type()</td><td>オブジェクトの型を調べることができる。</td></tr>
+<tr><td>isinstance()</td><td>オブジェクトがクラスのインスタンスであるかどうかを調べられる。</td></tr>
+<tr><td>issubclass()</td><td>クラスが派生クラスであるかどうかを調べられる。</td></tr>
+</table>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+
+<h2>標準ライブラリ</h2>
+<p>Pythonの標準ライブラリには、さまざまなモジュールが用意されている。</p>
+<p>Pythonプログラムを書く上で、必ずしも自分で同じものを作らなくても、多くの機能が標準ライブラリにモジュールとして用意されているため、上手く使えば「三分ハッキング」のように簡単にプログラミングを行える。本当に三分でできるかは別として。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/index.html">Python 標準ライブラリ</a>
+</ul>
+
+<h2>これではオブジェクト指向が分からないという方向けの記事</h2>
+<p>オブジェクト指向が「これだけでは分からない」という方向けに、以下の記事がおすすめです。</p>
+<ul>
+<li><a href="https://qiita.com/kaitolucifer/items/926ed9bc08426ad8e835">Pythonのオブジェクト指向プログラミングを完全理解 - Qiita</a></li>
+</ul>
+
+<h2>主語・述語・目的語になっている</h2>
+<p>Pythonの特徴として言えるのは、極めて英語のように書けるということです。</p>
+<p>Pythonでは、まず、クラスのオブジェクトを書き、次にメソッドを書き、その次にメソッドに与える引数を書きます。</p>
+<p>英語を知っている人なら誰でも分かる通り、英語と同じです。まず主語、次に述語（動詞）、そして次に目的語を書きます。</p>
+<p>目的語は、複数取ることができます。英語を知っている人なら、間接目的語の後に直接目的語を渡したいでしょう。Pythonのメソッド定義でクラスのインスタンスとしてselfをほかの引数よりも前に置くのは、そういう理由が少しばかり見え隠れすると思います。</p>
+<p>Pythonは極めて高水準な言語です。Lispには負けますが、Lispと同じぐらいの抽象性があります。大学でも最近はPythonを中心に教えます。まさに現代的言語として、Pythonは完成されたと言えます。</p>
+<div class="edit_date">
+<p>2024.08.15</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>状態</h2>
+<p><a href="state.html">状態</a>を参照のこと。</p>
+
+<h2>インターフェース</h2>
+<p><a href="interface.html">インターフェース</a>を参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

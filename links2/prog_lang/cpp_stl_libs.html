@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C++関連の世界観３（STL・ライブラリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C++の世界観３（STL・ライブラリ）</h1>
+<p>C++によるプログラミングに関する世界観３（STL・ライブラリ）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="cpp.html">C++（１．オブジェクト指向）</a></li>
+<ul>
+<li><a href="cpp_generics.html">２．ジェネリック</a></li>
+<li><b>３．STL・ライブラリ</b></li>
+</ul>
+<li><a href="cpp_comments.html">A．戯言</a></li>
+</ul>
+<p>ツール関係は<a href="c_cpp_tools.html">C/C++ツール</a>に移動しました。</p>
+<p>システムに依存する部分は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>や<a href="windows_programming.html">Windowsプログラミング</a>も参照のこと。</p>
+<p><a href="windows_mfc.html">Visual C++/MFC</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>標準C++ライブラリ</h1>
+<h2>標準C++ライブラリとは</h2>
+<p>C++の標準ライブラリ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%A8%99%E6%BA%96C%2B%2B%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">標準C++ライブラリ - Wikipedia</a></li>
+<li><a href="https://docs.oracle.com/cd/E19957-01/806-4840/Standard.html">C++ ライブラリ・リファレンス - Oracle Help Center</a></li>
+</ul>
+
+<h2>C++におけるC言語のヘッダ</h2>
+<p>C++では、標準Cライブラリのヘッダは.hを取り除いて先頭にcを付ける。</p>
+
+<h1>STL</h1>
+<h2>STLの要素</h2>
+<p>STLは標準ライブラリとして含まれているC++のテンプレートを活用したライブラリ。何でもできる柔軟性と調和された美しさを持っている。</p>
+<p>標準C++ライブラリの一部で、テンプレートを使った基本的なデータ構造を提供するライブラリ。</p>
+<p>STLは以下の要素から構成されている。</p>
+<table class="some_tables">
+<tr><th class="min60">要素</th><th>説明</th></tr>
+<tr><td>コンテナ</td><td>複数の連続したデータ（シーケンス）を格納する。<br>ほかの言語でいう動的にサイズの変化するリスト、あるいはキーと値のあるハッシュ。</td></tr>
+<tr><td>イテレータ</td><td>シーケンスを反復処理できる反復子。</td></tr>
+<tr><td>アルゴリズム</td><td>シーケンスにプログラム的な処理をかけることができる。</td></tr>
+<tr><td>関数オブジェクト</td><td>オブジェクトに関数のような振る舞いを持たせて実行することができる。<br>ほかの言語でいうlambda式のようなオブジェクトとして扱うことのできるfunctor。</td></tr>
+</table>
+<p>STLはこれらの機能をジェネリックなテンプレートを使うことで実現している。</p>
+<p>後日注記：STLはC++を使う上では必須の知識です。「C++をマスターするためにはオブジェクト指向やテンプレートを学ぶだけではなく、STLの使い方に習熟する必要がある」と言われます。実際、STLはさまざまな場面でよく使われます。</p>
+<p>後日注記：C++のクラスがオブジェクト指向、テンプレートがジェネリックなダックタイピングに相当するなら、STLは動的なデータ構造や関数オブジェクトに相当する。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Standard_Template_Library">Standard Template Library - Wikipedia</a></li>
+</ul>
+
+<h2>STLのコンテナの基本</h2>
+<p>STLのコンテナは、「複数の値をひとまとめに格納する」ためのクラス。</p>
+<p>STLのコンテナでは、テンプレートを使うことで、任意の型の複数の値を持ったコレクションを扱い、要素を格納・取り出しすることができる。</p>
+<p>種類と目的に応じて、vector、deque、list、stack、queue、priority_queue、set、multiset、map、multimapなどがある。</p>
+<p>これらは、</p>
+<p>・要素の順番が意味を持つか（vector, deque, list）、持たないか（set, multiset, map, multimap）</p>
+<p>ベクターやリストの場合：</p>
+<p>・ランダムアクセスな操作ができるか（vector, deque）、できないか（list）</p>
+<p>・末尾への追加・削除の操作だけが高速か（vector）、末尾だけではなく先頭への操作も高速か（deque）、任意の位置への操作も高速か（list）</p>
+<p>セットとマップの場合：</p>
+<p>・値だけを持つか（set, multiset）、キーと値の両方を持つか（map, multimap）</p>
+<p>・セットの場合、重複した値が許されるか（multiset）、許されないか（set）</p>
+<p>・マップの場合、重複したキーが許されるか（multimap）、許されないか（map）</p>
+<p>などの特徴がある。</p>
+<p>また、stackは後入れ先出し（FILO）のスタック、queueは先入れ先出し（FIFO）のキューとなる。priority_queueは優先度の順に取り出す。</p>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://ufcpp.net/study/stl/characteristics.html">STL コンテナの特徴一覧 - C++ STL | ++C++; // 未確認飛行 C</a></li>
+</ul>
+<p>後日注記：<!--コンテナに関して言えば、-->vector以外にも、listやmap、setなどはさまざまな場面で、たとえばアルゴリズムやデータ構造、デザインパターンなどを記述する際に多く使われます。</p>
+<p><a href="data_structure_list.html">配列とリストとハッシュ</a>や<a href="data_structure_stack.html">スタックとキュー</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2022.11.30</p>
+</div>
+
+<h2>反復子</h2>
+<p>STLでは、反復子を使うことで、コンテナのそれぞれの要素を順番に処理できる。</p>
+<p>後日注記：STLのvectorのような可変長の非連続データは、ポインタや添え字でアクセスすることができない。このため、順番に処理するためにイテレータ（反復子）を用いる。</p>
+<p>後日注記：反復子は機能によって5種類に分類される。それぞれ、</p>
+<table class="some_tables">
+<tr><th class="min60">反復子</th><th>特徴</th></tr>
+<tr><td>入力反復子</td><td>前にしか進めない<br>進む時は一要素ずつしか進められない<br>読み込みしかできない<br>読み込みは要素ごとに一回しかできない</td></tr>
+<tr><td>出力反復子</td><td>書き込みにも使える</td></tr>
+<tr><td>前方向反復子</td><td>読み書きを何度でもできる</td></tr>
+<tr><td>双方向反復子</td><td>後ろに戻ることができる</td></tr>
+<tr><td>ランダムアクセス反復子</td><td>反復子を前後に好きなだけ移動できる</td></tr>
+</table>
+<p>となる。（<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>を参考に執筆しました。）</p>
+<p><a href="iterator.html">イテレータとジェネレータ</a>を参照のこと。</p>
+
+<h2>アルゴリズム</h2>
+<p>STLでは、アルゴリズムを使うことで、コンテナのそれぞれの要素をソートしたり検索したり一致判断や結合などを行うことができる。</p>
+<table class="some_tables">
+<tr><th class="min60">機能</th><th>アルゴリズム</th></tr>
+<tr><td>最大値、最小値</td><td>max（最大値を検索）<br>min（最小値を検索）</td></tr>
+<tr><td>コピー、マージ</td><td>copy（コピー）<br>merge（シーケンスとシーケンスを結合）<br>swap（値を互い違いに入れ替え）</td></tr>
+<tr><td>一致、カウント</td><td>count（個数を数える）<br>equal（シーケンス同士の範囲の一致を調べる）</td></tr>
+<tr><td>検索</td><td>find（範囲内の値を検索）<br>includes（要素が含まれるかどうかの確認）<br>search（シーケンスの中にあるシーケンスの検索）</td></tr>
+<tr><td>ソート</td><td>sort（シーケンスをソート）<br>next_permutation（昇順ソートを作成）<br>prev_permutation（降順ソートを作成）</td></tr>
+</table>
+<p>（<a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a>を編集して引用しました。）</p>
+<p>注記：シーケンスとは「連続量」のことで、連続したデータのことを表す。STL以外では、プログラムの流れのこともシーケンスと呼ぶことがある（シーケンス図など）。</p>
+<p><a href="algorithm.html">アルゴリズム</a>も参照のこと。</p>
+
+<h2>STLのvectorとstringとソートとイテレータを使った例</h2>
+<p>たとえばこんな感じ。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main(void){
+    vector&lt;string&gt; v;
+    
+    v.push_back("C++");
+    v.push_back("Python");
+    v.push_back("Java");
+    v.push_back("Perl");
+    
+    sort(v.begin(), v.end());
+    
+    for (auto iterator = v.begin(); iterator != v.end(); ++iterator) {
+        cout &lt;&lt; *iterator &lt;&lt; endl;
+    }
+}
+</pre>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://rinatz.github.io/cpp-book/ch03-08-iterators/">3.8. イテレータ - ゼロから学ぶ C++</a></li>
+<li><a href="https://qiita.com/ysuzuki19/items/df872d91c9c89cc31aee">C++のvectorまとめ - Qiita</a></li>
+<li><a href="http://maeda.g2.xrea.com/cpp/string3.htm">string に vector を使う - 前田稔(Maeda Minoru)の超初心者のプログラム入門</a></li>
+<li><a href="https://c.keicode.com/stl/sort.php">sort - STL の使い方 - C/C++ 入門</a></li>
+</ul>
+<p>後日注記：vectorにはsize(), push_back(), begin(), end()の各メソッドがあり、size()で配列の要素数を得ることができ、push_back()で配列の最後に要素を追加できます。また、begin()で配列の先頭位置に対するイテレータを、end()で配列の末尾位置に対するイテレータを取得できます。詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.20編集</p>
+</div>
+
+<h2>C++のfunctor</h2>
+<p>C++では、クラスにoperator()を実装することで、オブジェクトを関数オブジェクト（functor）として扱うことができる。</p>
+<p>functorはクラスとして表されるため、インスタンスごとに異なるデータを格納できる。</p>
+<p>このため、たとえばさまざまな場合に応じて別のオブジェクトのメソッドを実行するようなクラスとして関数オブジェクトを記述することもできる。</p>
+<p>ソートなどのSTLアルゴリズムにはfunctorを渡せるため、STLとfunctorは相性がいい。</p>
+<ul>
+<li><a href="https://yusuke-ujitoko.hatenablog.com/entry/2008/10/25/000000">【C++】関数オブジェクト（Functor）ってなに？ - 緑茶思考ブログ</a></li>
+<li><a href="https://cpprefjp.github.io/reference/functional.html">functional - cpprefjp C++日本語リファレンス</a></li>
+<li><a href="https://urashita.com/archives/1202">ファンクタ(functor、関数オブジェクト)を使ってvectorに入れたオブジェクトをメンバーでソートする  |  urashita.com 浦下.com (ウラシタドットコム)</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.15</p>
+</div>
+
+<h2>STLをもっと知りたい</h2>
+<p>以下のようなサイトが参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/h_hiro_/items/a83a8fd2391d4a3f0e1c">[C++] STLの型の使い分け - Qiita</a></li>
+<li><a href="https://ufcpp.net/study/stl/">C++ STL | ++C++; // 未確認飛行 C</a></li>
+<li><a href="http://stlalv.la.coocan.jp/STL.html">C++マニアック, STL の使い方</a></li>
+<li><a href="http://vivi.dyndns.org/tech/cpp/container.html">C++ コンテナ クラス入門 - ViVi web site</a></li>
+</ul>
+
+<h2>書籍・ページ</h2>
+<p>以下の書籍・ページが参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a></li>
+<li><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a></li>
+<li><a href="https://ufcpp.net/study/stl/characteristics.html">STL コンテナの特徴一覧 - C++ STL | ++C++; // 未確認飛行 C</a></li>
+</ul>
+
+<h1>その他のC++の基本API</h1>
+<h2>C++で正規表現</h2>
+<p>C++で正規表現を行うためには、std::regexを使う。</p>
+<ul>
+<li><a href="https://codezine.jp/article/detail/7716">標準C++の正規表現: ＜regex＞ (1/2)：CodeZine（コードジン）</a></li>
+<li><a href="https://cpplover.blogspot.com/2015/01/c-stdregex.html">本の虫: C++の正規表現ライブラリ: std::regex</a></li>
+<li><a href="https://qiita.com/kmikmy/items/6ac1f54b64a307b5b941">C++11で正規表現（std::regex）を使う - Qiita</a></li>
+</ul>
+<p><a href="../linux/regex.html">正規表現</a>を参照のこと。</p>
+
+<h2>C++で文字列</h2>
+<p>C++で文字列を扱うためには、std::stringを使う。</p>
+<ul>
+<li><a href="https://qiita.com/7shi/items/cac7b3e9b90bf91b00cc">文字列で学ぶC++入門 - Qiita</a></li>
+</ul>
+
+<h2>C++でファイル読み書き</h2>
+<p>C++でファイルの読み書きを行うには、ifstream（ファイルの読み込み）とofstream（ファイルの書き込み）を使用する。また先頭に#include &lt;fstream&gt;を書く必要がある。</p>
+<p>後日注記：<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>では、宣言用のヘッダファイルと定義用のヘッダファイルを分けることで、コンパイラの依存性をできるだけ少なくするという話が出てきますが、その中で「iosfwd」というヘッダファイルが紹介されています。これはsstream, streambuf, fstream, iostreamなどのヘッダの宣言内容を集めたもので、コンパイル依存性を少なくするために使うことができます。</p>
+<ul>
+<li><a href="https://programming.pc-note.net/cpp/filestream.html">ファイルストリーム(C++) - 超初心者向けプログラミング入門</a></li>
+<li><a href="https://qiita.com/NickTominaga/items/7e01b7eb0b67ac791ec6">[C++] ファイル入出力の覚書 - Qiita</a></li>
+<li><a href="https://qiita.com/knknkn1162/items/47736785a3e472db5525">いっつも忘れるC++ ファイル入出力関数を図にしてみた - Qiita</a></li>
+</ul>
+<p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+<h2>C++でマルチスレッド</h2>
+<p>長らく、C/C++にはスレッドの概念がなかった。そのため、プラットフォーム依存のAPIを使う必要があった。UNIXではpthreadを使うのが一般的だった。</p>
+<p>だが、C++11ではstd::threadが提供され、C++でもマルチスレッドアプリケーションを開発できるようになった。</p>
+<ul>
+<li><a href="https://qiita.com/kurun_pan/items/f626e763e74e82a44493">C++ std::threadの使い方 - Qiita</a></li>
+</ul>
+<p><a href="parallel.html">並列処理</a>や<a href="java_lib_thread.html">Java（マルチスレッド）</a>や<a href="../linux/linux_api2.html">Linux API（プロセス・メモリ）</a>も参照のこと。</p>
+
+<h1>boost</h1>
+<h2>boost</h2>
+<p>C++の標準ライブラリ以上の強力な標準ライブラリを目指すライブラリ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Boost">Boost - Wikipedia</a></li>
+</ul>
+
+<h2>Boost.PropertyTree</h2>
+<p>Boost.PropertyTreeを使うことで、INI, XML, JSONなどの形式でプロパティ情報（設定情報）を読み書きできる。特にiniファイルを使ってプログラムの設定情報を保存する際に便利。</p>
+<ul>
+<li><a href="https://boostjp.github.io/tips/ini.html">iniファイルの読み込み／書き込み - boostjp</a></li>
+<li><a href="https://ameblo.jp/nana-2007-july/entry-11798565515.html">iniファイルを読み込むには？ | C++　フリーでぷろぐらみんぐ</a></li>
+</ul>
+<p>iniファイルの読み書きは、Windows APIを用いた方法もある。</p>
+<ul>
+<li><a href="https://inemaru.hatenablog.com/entry/2018/03/18/070657">C++ Windowsで ini ファイルを読み込む - イネマルのプログラミング備忘録</a></li>
+<li><a href="https://stellacreate.com/entry/cs-ini-read">【C#】超簡単！iniファイルを読み込む方法 - 社畜ゲートウェイ</a></li>
+</ul>
+<p><a href="xml.html">XMLと文書形式</a>や<a href="java_lib_xml.html">Javaクラスライブラリ（XML）</a>も参照のこと。</p>
+
+<h2>さまざまなBoostライブラリ</h2>
+<p>さまざまなBoostライブラリについては、以下のサイトが参考になる。C++で高度な応用アプリケーションの開発を行いたいと思っている人は必見。</p>
+<ul>
+<li><a href="https://boostjp.github.io/">boostjp</a></li>
+<li><a href="https://boostjp.github.io/tips.html">Boost逆引きリファレンス - boostjp</a></li>
+</ul>
+
+<h2>boost::serialization</h2>
+<p>boost::serializationによるC++のシリアライズについては、<a href="serialize.html">シリアライズ</a>を参照のこと。</p>
+
+<h2>Boost Graph Library</h2>
+<p>Boost Graph LibraryによるC++のグラフ操作については、<a href="data_structure_graph.html">グラフ</a>を参照のこと。</p>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

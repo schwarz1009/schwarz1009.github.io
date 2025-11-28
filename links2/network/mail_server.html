@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>メールサーバー関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>メールサーバー関連の世界観</h1>
+<p>メールサーバーに関する世界観です。<a href="mail.html">メール</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>メールサーバー</h1>
+<h2>Sendmail</h2>
+<p>UNIXで古くから使われてきたメールサーバー。</p>
+<p>MTAの動作をsendmail.cfで設定するが、パターンマッチルールが複雑かつ膨大で、mcファイルというM4マクロで記述したものをcfファイルに変換しなければならないという複雑な仕様になっており、セキュリティホールが発生しやすい。このため、代替となるメールサーバが多く開発されている。</p>
+<p>後日注記：Sendmailは有名だが、設定ファイルが複雑怪奇極まりないことでも有名であり、最近はPostfixやqmailなどが優勢となっている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Sendmail">Sendmail - Wikipedia</a></li>
+</ul>
+
+<h2>Postfix+Dovecot</h2>
+<p>メール転送エージェント（MTA）。</p>
+<p>Postfixは、送信用のSMTPサーバー。Dovecotは、受信用のPOP/IMAPサーバー。</p>
+<ul>
+<li><a href="https://centossrv.com/postfix.shtml">メールサーバー構築(Postfix+Dovecot) - CentOSで自宅サーバー構築</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Postfix">Postfix - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Dovecot">Dovecot - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/vdukhovni/postfix">git - Postfix</a></li>
+</ul>
+
+
+<h2>Exim</h2>
+<p>メール転送エージェント（MTA）。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/exim">exim - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/Exim/exim">git</a></li>
+</ul>
+
+
+<h2>qmail</h2>
+<p>メール転送エージェント（MTA）。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0109/04/news002.html">qmailによるSMTPサーバの構築 (1/3)</a></li>
+<li><a href="http://www.unixuser.org/~euske/doc/ipv6ex/djbmyth.html">djb はいったい何を考えてるのか - Yusuke Shinyama</a></li>
+<li><a href="https://gist.github.com/mootoh/217375">djb.md</a> - Donald Knuth（TeXのクヌース先生）と並び称される最高のプログラマがdjbではないかと仮定したギャグ文章。</li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/qmail">qmail - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BB%E3%83%90%E3%83%BC%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%B3">ダニエル・バーンスタイン - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/amery/qmail">git</a></li>
+</ul>
+
+<h2>Microsoft Exchange</h2>
+<p>Microsoftによるグループウェア・サーバー。</p>
+<p><a href="../windows_pc/windows_mail.html">Windows メーラー</a>や<a href="file_server_windowsnetwork.html">Windowsネットワーク</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Microsoft_Exchange_Server">Microsoft Exchange Server - Wikipedia</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

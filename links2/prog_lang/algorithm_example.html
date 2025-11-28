@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>具体的なアルゴリズムの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div><h1>具体的なアルゴリズムの世界観</h1>
+<p>具体的なアルゴリズムに関する世界観です。<a href="data_structure.html">データ構造</a>も参照のこと。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="algorithm.html">アルゴリズム</a></li>
+<ul>
+<li><b>具体的なアルゴリズム</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>具体的なアルゴリズム</h1>
+<h2>アルゴリズム一覧</h2>
+<p>（<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>を参考に執筆しました。）</p>
+<p>探索アルゴリズムには、</p>
+<p>・線形探索（先頭からひとつひとつ順番に探索する）</p>
+<p>・二分探索（データは最初からあらかじめ整列させておき、真ん中から二分割して「前」と「後」のどちらかにデータがあると予測しながら、真ん中の値と比較してどちらに行くべきかを判断した上で、前あるいは後の部分の真ん中と比較し、これを繰り返してデータを探索する）</p>
+<p>・ハッシュテーブル探索（データのハッシュ値をハッシュ関数で求めることで探索する）</p>
+<p>などがある。</p>
+<p>また、整列アルゴリズムには、
+<p>・バブルソート（隣り合う要素を比較し、大小関係に基づいて入れ替えし続ける）</p>
+<p>・挿入ソート（まっさらな新しい整列された列の、的確な場所に要素を挿入し続ける）</p>
+<p>・選択ソート（整列されていない列の最大値あるいは最小値を検索し続ける）</p>
+<p>・クイックソート（中間となる基準値を設定し、それよりも大きな値を含む列と、小さな値を含む列に振り分け、その中でさらに基準値を設定する）</p>
+<p>・シェルソート（ある一定の間隔で取り出した要素を整列させ、間隔を少しずつ狭めていき、最終的に間隔を1にする）</p>
+<p>・ヒープソート（整列されていない列をヒープとし、ヒープの根から最大値・最小値を取り出し、それを整列された列に渡す）</p>
+<p>・マージソート（整列されていない列を前半部分と後半部分に分け、それ以上分割できず大きさが1になるまで分割を繰り返し、分割を最後まで行った後で前半と後半をマージして、整列後の列を作るということを繰り返し、最後に全体をマージする）</p>
+<p>などがある。</p>
+
+<h2>計算量オーダーとオーダー記法</h2>
+<p>アルゴリズムの計算量を表すために、O記法（オーダー記法）というのを使用する。</p>
+<p>ハッシュテーブル探索はO(1)、二分探索はO(log N)、線形探索はO(N)となる。</p>
+<p>バブルソート・挿入ソート・選択ソートは計算量がO(N<sup>2</sup>)と時間がかかる。</p>
+<p>これに対してクイックソート・シェルソート・ヒープソート・マージソートは計算量がO(N log N)と高速。</p>
+<p>詳しくは以下の書籍・ページが参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+<li><a href="https://qiita.com/asksaito/items/59e0d48408f1eab081b5">計算量オーダーについて - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.21編集</p>
+</div>
+
+<h2>二分探索と二分探索木</h2>
+<p>二分探索において、目的の値や単語などを探すには、まず単語を小さいほうから大きいほうへとソートして整理しておく。まず、中央値と比較し、それよりも小さければ左、それよりも大きければ右に移動して、左側あるいは右側の、全体の半分の中の中央値を比較し、左または右に移動し、これを繰り返す。</p>
+<p>このようにすることで、片方に移動した場合、もう片方には単語は存在しないことが分かっているため、それを除いていくことで、最短で値や単語を探索できる。</p>
+<p>二分探索木は、二分木を用いた、二分探索がしやすいようにツリー構造を構築する方法。</p>
+<p>二分探索木において、要素の左の子要素は必ず親よりも小さく、要素の右の子要素は必ず親よりも大きくなる。そのようにツリーは常に整理されて築かれている。探索を行う際は、要素より小さければ左、大きければ右へと辿っていく。新しい値を配置する場合は、それを適切な要素の左あるいは右の子要素とする。</p>
+<p>また、ツリーの深さが深くなりすぎないように、中心を回転させる平衡木のことをAVL木と呼ぶ。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EC-%E7%AC%AC2%E7%89%88-ANSI%E8%A6%8F%E6%A0%BC%E6%BA%96%E6%8B%A0-B-W-%E3%82%AB%E3%83%BC%E3%83%8B%E3%83%8F%E3%83%B3/dp/4320026926">プログラミング言語C（K&R）</a>が参考になります。）</p>
+
+<h1>アルゴリズムのコード例</h1>
+<h2>The Algorithms</h2>
+<p>アルゴリズムの勉強をするために参考になるサイトとして、The Algorithmsが挙げられる。</p>
+<p>さまざまな言語で記述されたさまざまなアルゴリズムのコード例が掲載されている。</p>
+<p>アルゴリズムの図鑑として勉強のために使う以外にも、アルゴリズムを自分で実装する際、The Algorithmsのコードを参考にして実装することで手間と負担を軽減できる。</p>
+<ul>
+<li><a href="https://the-algorithms.com/">The Algorithms</a></li>
+<li><a href="https://twitter.com/Comamoca_/status/1674063024703909891">@Comamoca_さんのツイート</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.29</p>
+</div>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux X11（２．ツールキットとデスクトップ環境） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux X11（２．ツールキットとデスクトップ環境）</h1>
+<p>LinuxのX11に関する世界観（２．ツールキットとデスクトップ環境）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_x11.html">X11 (X Window System)</a></li>
+<ul>
+<li><a href="linux_x11_basic.html">１．アーキテクチャ</a></li>
+<li><b>２．ツールキットとデスクトップ環境</b></li>
+<li><a href="linux_x11_admin.html">X11設定とプログラミング</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Linuxとデスクトップ環境</h1>
+<h2>デスクトップ環境とは</h2>
+<p>Linuxにおけるデスクトップ環境（昔は統合デスクトップ環境と呼んでいた）は、デスクトップ環境における統一されたアプリケーションや、その基盤となるさまざまなコンポーネントソフトウェアの集合体のことを言う。</p>
+<p>X11やGTK/Qtなどのツールキットだけを用いて、twmのような原始的なウィンドウマネージャを用いても、もちろんLinuxのGUIアプリケーションを使うこともできる。このような環境を好む人も多い。</p>
+<p>だが、KDEやGNOMEでは、たとえばWindowsやmacOSのような、「使いやすくてどのソフトウェアも同じ規則や見た目（ルック・フィール）に従って開発されているようなワークスペース環境」を提供する。</p>
+<p>たとえば、GNOMEでは、端末アプリケーション、ファイルマネージャ、音楽再生アプリケーション、Webブラウザなどを、基本的に同じ見た目と操作性を持っていて、そして同様の規則に従って開発されているような、一貫的な環境として提供している。</p>
+<p>また、その上で、そうしたGNOMEアプリケーション全体が従い、どのソフトウェアにとっても必要となるような、基本コンポーネントを提供している。Windowsのレジストリと同様の監視・コールバック型の設定システムであるdconfや、仮想ファイルシステム（GnomeVFS/GVfs/GIO）、CORBA（Bonobo）やD-Busを用いた分散コンポーネント技術、それからアイコンやヒューマンインターフェースガイドラインなどはこの例である。</p>
+<p>このようにすることで、取り決めが存在しないLinuxのX11環境であっても、基本的なアプリケーションの使用感は共通し、同じように簡単に使えるようになっている。</p>
+<p>また、Linuxにおける特徴は、「標準的ではないデスクトップ環境の選択肢がたくさんある」ということ。準標準的なのはGNOMEだが、ほかにもKDE、Xfce、MATE、Cinnamonなどが存在する。デスクトップ環境としての機能を持たない、単純なウィンドウマネージャであれば、さらに多数存在する。</p>
+<p>これは「カスタマイズ性が高い」という意味ではWindowsなどに対する大きな優位性ではあるが、実際にはGNOMEと使用感が違うため使ったり設定や管理を行うためにはそれぞれのデスクトップ環境のスタイルを学ぶ必要があるし、下手にインストールしようとするとシステムが滅茶苦茶になってしまうリスクもある。</p>
+<p>なので、一般的な人は準標準的なGNOMEを使ってもよい。GNOMEには拡張機能が存在するため、GNOMEを使いながらGNOMEの使用感をたとえばWindows 10風にしたりMac風のDockを導入することもできる。Linuxの使い方は人によって千差万別である。</p>
+<p><a href="linux_desktop.html">デスクトップ環境・ウィンドウマネージャ</a>も参照のこと。</p>
+
+<h2>最近のLinuxのGUI環境</h2>
+<p>最近のLinuxのGUI環境について、概観を述べます。</p>
+<p>「重たい」とか「Windowsのパクリ」などと、巷では悪く言われることの多いGNOMEですが、事実上の標準であるだけあって、よい点がひとつあります。</p>
+<p>それは、多くのユーザーによってよくテストされており、きちんと動いてくれるということです。</p>
+<p>GNOME以外の巨大なデスクトップ環境として、KDEやXfceなどがありますが、それらは見た目こそスタイリッシュで美しく、そして機能的で（KDEは機能てんこもり）、かっこいいですが、よくテストされておらず、きちんと動いてくれないことがあります。</p>
+<p>僕の個人的な体験になりますが、昔のKDEは僕の環境だと、日本語のインプットメソッドに問題があり、日本語の入力や漢字の変換ができませんでした。</p>
+<p>また、それより昔のKDEでは、インストールして起動しようとしても、真っ暗な画面になって起動すらしなかったこともあります。</p>
+<p>また、僕の環境では、以前のXfceのファイルの開く・保存のダイアログにも問題があり、画面がちらついて操作不能になってしまい、Xfceのテキストエディタからファイルを開いたり保存したりすることができませんでした。</p>
+<p>そのように、巨大デスクトップ環境は、メジャーバージョンがリリースされても、必ず何かしらの不具合に遭遇します。そうした問題は、マイナーバージョンで修正されることを待つしかありません。</p>
+<p>その点、多くのユーザーにテストされているGNOMEは、ほかのデスクトップ環境に比べれば、きちんと動いてくれます。</p>
+<p>また、GNOMEが使いづらいと思っているのは、デフォルトのGNOME-Shellを使っているからです。GNOMEは拡張（エクステンション）を導入することで使い勝手を改善することができ、いくらかの拡張を導入するだけで劇的に使い勝手がよくなります。Windows 10とまったく同じにすることもできます。それらの拡張は、MozillaのJavaScriptエンジンからの派生エンジンを用いてJavaScriptで書かれており、技術的にもモダンです。</p>
+<p>ただし、これらは最近の巨大デスクトップ環境の話です。古くから存在する、FVWMやWindow Makerなどについては話が変わってきます。それらのウィンドウマネージャは古くから存在し、昔からのコードが枯れていて、そしてサイズも軽量で、目立った不具合はありません。重くてWindowsの模倣ばかりだと、GNOMEに飽きてきた脱初心者は、それらの軽量ウィンドウマネージャを導入するのも手です。それではじめて、Linuxを使っている意味があります。</p>
+<p>GNOMEとほかのデスクトップ環境やウィンドウマネージャはひとつのシステムで共存させることもできますが、アプリケーションを使う際に不具合が出てくることがあるため、OSごと全部削除して入れ直したほうが無難です。KDEやXfceを入れる際には、一度入れると簡単には削除できなくなる（削除するにはOS再インストールが必要）ということを覚悟して導入しましょう。</p>
+<p>また、最近のLinuxでは、従来のX11から新しいディスプレイサーバのWaylandへの移行の問題があり、昔以上に複雑になってきています。XorgとWaylandサーバが両方ともシステムに導入され、場合によっては両方起動しようとするなど、Waylandに伴う問題が多く存在します。中には「X11のままでなんにも問題ない、Waylandなんか要らない」と言う人もいます。</p>
+<p>また、GNOME 3からの抜本的なインターフェースの刷新に反発した旧GNOME 2のユーザーによって、GNOME 2のforkであるMATEが開発されたり、独自の道を行くCinnamonが開発されて、Windowsライクなインターフェースが人気だったりします。これらのデスクトップ環境と一緒にGNOMEアプリケーションを使うこともできますが、さまざまな不具合が出ることが考えられることから、アプリケーション一式もforkされています。</p>
+<p>ほかにも、FlutterやElectronのようなクロスプラットフォームのGUIフレームワークを使ったアプリケーションも少しずつ増えています。ネイティブなアプリケーションよりは重たいですが、WindowsとLinuxとモバイル環境で同じアプリケーションを使うことができます。特にVS-CodeはLinuxで動くため、「LinuxとVS-CodeでやっていることはWindowsと何も変わらず快適」という人もいます。</p>
+<p>このように、最近のLinuxのGUI環境は混沌の極みです。まるでカオスです。何も知らない馬鹿な初心者は、金を払ってWindowsを使い続けたほうが得策です。本当にLinuxのことを愛している人だけが、Linuxデスクトップを使うべきなのです。</p>
+<div class="edit_date">
+<p>2025.01.07</p>
+</div>
+
+<h1>ツールキット</h1>
+<h2>ツールキットとは</h2>
+<p>ツールキットは「道具箱」という意味で、X11でGUIプログラミングを行う際に、Xlibの上で動いてくれるさまざまなGUIの部品（パーツ）のこと。</p>
+<p>通常、UNIXではX11の上でMotifのようなGUIツールキットを用いてGUIのアプリケーションを開発する。Moitfはフリーではなかったため、GTK+やQtのようなフリー版のツールキットが開発されている。</p>
+
+<h2>ツールキットの一覧</h2>
+<p>主にIntrinsics/Xt（正確にはツールキットではなく、ツールキットを作るために必要な基本ライブラリ）、Athena widget set（Xaw、アテナプロジェクトによるツールキット）、Motif、GTK+、Qt、Tkなどがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Xlib">Xlib - Wikipedia</a></li>
+</ul>
+<p>また、Windows APIのクローンとしてはWine、NeXTSTEPのクローンとしてはGNUstepなどがある。将来的な.NET CoreではWindows.Formsもオープンソースで提供される予定であり、期待が高まっている。</p>
+
+<h2>Motif</h2>
+<p>商用UNIXで使われる、昔支配的だったツールキット。</p>
+<p>初期のGIMPなどは、GTK+で書かれる前はMotifを使用したコードで書かれていた。</p>
+<p>スタイルに味があって一部では人気である。</p>
+<p><a href="motif.html">Motifの世界観</a>を参照のこと。</p>
+
+<h2>GTK+</h2>
+<p>GIMPによって開発された、本当にフリーなGUIツールキット。</p>
+<p>GNOMEで使われており、GLibによってC言語を用いながらオブジェクト指向を行い、さまざまな言語で利用できるラッパーライブラリ（バインディング）を提供する。</p>
+<p>このため、C/C++だけではなく、C#、Java、Perl、Python、Ruby、JavaScript、Valaなどからも使うことができる。</p>
+<p>ただし、それぞれのバインディングに開発状況の差があり、必ずしも安定して使えるとは限らないため、標準的に使われるのはC/C++によるGTK+/GTKmmである。</p>
+<p><a href="gtk.html">GTK+の世界観</a>を参照のこと。</p>
+
+<h2>Qt</h2>
+<p>Trolltechという会社によって提供されたGUIツールキット。</p>
+<p>標準的ツールキットのないLinuxのためのツールキットだったが、残念ながらフリーとは言えなかった。</p>
+<p>KDEで使用されたが、Qtがフリーではないため、GNOMEプロジェクトが発足した。</p>
+<p>現在では、Qtはオープンソースのライセンスを採用し、名実ともにフリーソフトウェアとなった。</p>
+<p>Linuxの他にWindowsでも動くクロスプラットフォームなツールキットとして知られる。</p>
+<p>開発に使用できる言語はC/C++のほか、Pythonなど。</p>
+<p>テーマやスタイルが表現豊かで美しく、その名の通り「キュートなツールキット」として知られる。なぜか、GTK+はQtと比べてはるかに醜い。</p>
+<p><a href="qt.html">Qtの世界観</a>を参照のこと。</p>
+
+<h2>Tk</h2>
+<p>主にTcl/Tkとして使われることの多いツールキット。</p>
+<p>昔のMozillaなどはブラウザ画面の表示にTkスタイルのボタンやテキストボックスのスタイルを採用していた。（当時のMozillaは標準では日本語の太字すら出ない、開発途上のブラウザだった。）</p>
+<p><a href="../prog_lang/tcl_tk.html">Tcl/Tk</a>を参照のこと。</p>
+
+<h2>FLTK</h2>
+<p>ツールキット。小さく、クロスプラットフォームで、どの環境でも同じルック・フィールとなる（ネイティブではない）。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FLTK">FLTK - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.04.26編集</p>
+</div>
+
+<h2>FOX</h2>
+<p>FOXは、クロスプラットフォームなツールキットのひとつで、LinuxのほかWindowsなどでも動作する。</p>
+<p>基本的にC++で書かれているが、PythonやRuby向けのバインディングも提供されている。</p>
+<p>書籍「<a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版</a>」では、FOXのRubyバインディングであるFXRubyでGUIアプリケーションを開発する方法に多くのページが割かれており、著者は「FOXの未来を信じている」と述べている（ただし、この本は古い）。</p>
+<p>よって、RubyでGUIアプリケーションを書く際に、GTKやTk以外の選択肢としてFOXが挙げられる。</p>
+<p>見た目は、Windows 95とよく似ている。</p>
+<ul>
+<li><a href="https://progsoft.net/ja/software/fox-toolkit">Fox toolkit の代替および類似のソフトウェア - ProgSoft.net</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.04.26</p>
+</div>
+
+<h2>wxWidgets</h2>
+<p>wxWidgetsは、クロスプラットフォームの有名なGUIツールキットのひとつ。</p>
+<p>GUIツールキットのほか、GUIアプリのクロスプラットフォーム開発をやりやすくするために、GUIツールキット以上のさまざまな機能を提供している。</p>
+<p>基本的にC++向けだが、wxPythonやwxRubyのようなバインディングも存在する。</p>
+<p>書籍「<a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版</a>」では、Pythonの将来的な標準GUIツールキットとして、wxWidgetsを推す声が多いといったことが記述されている（ただし、この本は古い）。</p>
+<p>wxWidgetsは昔から有名なC++のGUIツールキットであり、WindowsやUNIXやmacOSなどさまざまな環境で動作する。エミュレートではなくネイティブのAPIを使っているため、ネイティブと同様のルック・フィールとなる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/WxWidgets">wxWidgets - Wikipedia</a></li>
+<li><a href="https://progsoft.net/ja/software/wxwidgets">wxWidgets の代替および類似のソフトウェア - ProgSoft.net</a></li>
+<li><a href="https://progsoft.net/ja/software/wxpython">wxPython の代替および類似のソフトウェア - ProgSoft.net</a></li>
+<li><a href="http://aboutwxruby.cocolog-nifty.com/">wxRubyのこと</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.04.26</p>
+</div>
+
+<h2>Electron</h2>
+<p>ElectronはJavaScriptとWeb技術（HTML/CSSなど）でGUIアプリを開発する技術。最近はElectronによる「GUIアプリ新時代」が到来しつつある。</p>
+<p><a href="../prog_lang/electron.html">Electron</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.04.26</p>
+</div>
+
+<h1>ツールキットのテーマエンジン</h1>
+<h2>テーマエンジン</h2>
+<p>GTKやQtなどのGUIツールキットでは、テーマエンジンを搭載しており、テーマを変えることでアプリケーションの見た目を変えることができる。</p>
+<p><a href="linux_desktop_jisaku.html">ウィンドウマネージャ自作</a>のページに、テーマの作成についての情報があります。</p>
+
+<h2>GTKアプリとQtアプリの見た目が異なる問題</h2>
+<p>GTKアプリケーションとQtアプリケーションでは、テーマエンジンが異なるため、アプリケーションのルック＆フィールが異なってしまう。</p>
+<p>これについては以下のような記事が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Qt_%E3%81%A8_GTK_%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%A4%96%E8%A6%B3%E3%81%AE%E7%B5%B1%E5%90%88">Qt と GTK アプリケーションの外観の統合 - ArchWiki</a></li>
+</ul>
+
+<h1>デスクトップ環境</h1>
+<h2>メタファーと環境の実現</h2>
+<p>X11のデスクトップ環境について言えることは、「メタファーの実現」である。</p>
+<p>メタファーとは隠喩のことで、コンピュータを現実のものに喩えた「デスクトップ」あるいは「ワークスペース環境」を提供する。</p>
+<p>GNOMEやKDEは、既存のWindowsやmacOSのようなデスクトップOSの操作環境と基本的には同一の、デスクトップ環境を構成するGUIアプリケーションをひとまとめに開発しており、一定の共通性のあるルック・フィールでデスクトップを操作できる。</p>
+<p>メタファーの実現は重要で、コマンドラインでは「シェルとコマンドとファイル」によって実現されていた「コマンドライン環境」が、GNOMEやKDEではファイルマネージャやランチャーやウィンドウマネージャによって全く違う「GUI環境」に変貌する。</p>
+<p>LinuxはGUIの分野ではコマンドラインほどの目立った成果は得られていないが、そのためにかかる開発のコストや手間はコマンドラインより大きく、さまざまなGUIアプリケーションをウィンドウマネージャや基礎のアーキテクチャ（ライブラリやフレームワーク）の基に実現している。またGNOMEや最近のKDEなど一部の環境はCORBAやD-Busのような分散ネットワークシステムを基盤にしており、Plan 9のように分散ネットワーク上でGUIアプリケーションを実行できる。</p>
+
+<h2>GNOME</h2>
+<p>Linuxで実行出来る巨大なデスクトップ環境の1つ。シンプルで使いやすい、一般ユーザーに分かりやすい操作性と、CORBAを使用したネットワークオブジェクト指向なアーキテクチャを提供する。ただし、巨大なコンポーネント指向のデスクトップであるため、昔から動作が遅く「もっさり」しており、またデザインがのっぺりとしていてダサい。動作が遅いだけではなく、何をするにも到達するまでのステップが一息遅い。だが、一般ユーザー、時にパソコン初心者のことを良く考えており、余計なものがなく簡単に使える、シンプルなデスクトップを目指している。</p>
+<p>最近ではSunがやっていたように、UNIXワークステーションの環境でもGNOMEが使われることが多くなってきている。GNOMEがKDEよりも標準的に採用されることが多い理由は、こうしたUNIXワークステーションベンダーが会社としてGNOMEを支持する傾向が強いからである。なぜか、明らかにKDEの方が優れているのに、馬鹿なGNOMEを標準的に採用する。</p>
+<p>だが、GNOMEが決して馬鹿なわけではなく、最近はGNOME 3はWindows 8よりも先んじて投入された、「全画面インターフェース」の先駆けであり、GNOME 3はオリジナル要素が強い。逆にKDEは個性を失い、美しくなったように見えてWindowsと全く同じものになった印象がある。</p>
+<p><a href="gnome.html">GNOMEの世界観</a>を参照のこと。</p>
+
+<h2>KDE</h2>
+<p>Linuxで実行出来るもうひとつの巨大なデスクトップ環境。機能性とQt/C++による整理されたフレームワーク、美しくて使いやすくカッコいいデスクトップ環境が特徴。美しい代わりメモリを食うことで知られており、またGNOMEに比べて不安定なところがある（GNOMEは遅くても起動するが、KDEは起動すらしない場合が多い）。「本当のLinuxのデスクトップ」を目指しているが、Qtを採用しているため、FirefoxのようなGTK+アプリケーションと調和せず、「美しいようでそんなに美しくない」デスクトップ環境である。</p>
+<p><a href="kde.html">KDEの世界観</a>を参照のこと。</p>
+
+<h2>CDE</h2>
+<p>UNIXワークステーションで使われることの多い統合デスクトップ環境。Motifをツールキットとして採用する。KDEはそもそもはこのCDEを模倣して作られた。</p>
+<p><a href="motif.html">Motif</a>を参照のこと。</p>
+
+<h2>Xfce</h2>
+<p>Xfceは意外と人気がある。僕は、みんなが使う時のことを考えると、UbuntuでXfceかMATEを使ってもらうのが一番良いと思う。</p>
+<p>昔使っていたところで考えると、本当に軽くて使いやすいのだが、何かがチープで、シンプル過ぎて一人前のデスクトップ環境として使えないような、そんな印象を受ける。</p>
+<p>UNIXのメタファーを尊重し、それぞれを単機能で小さなプログラムにする、という発想は、とても良い発想だと思う。</p>
+<p><a href="xfce.html">Xfceの世界観</a>を参照のこと。</p>
+
+<h2>LXDE/LXQt</h2>
+<p>軽量さを目指しているデスクトップ環境。ただ、僕は機能性を考えるとMATEの方が良いと思う。</p>
+<p><a href="lxde.html">LXDE/LXQt</a>を参照のこと。</p>
+
+<h2>Android</h2>
+<p>Androidはケータイ向けで、僕はスマホで使っていますが、本当はテレビと通信させるなどでも動きます。テレビと通信させる場合は、マウスポインタを使うことも出来ます。</p>
+<p><a href="../mobile/android.html">Android</a>を参照のこと。</p>
+
+<h2>Unity</h2>
+<p>UbuntuではGNOME 3のGNOME-Shellを拒否し、独自に開発したインターフェースであるUnityを採用していたが、最近はGNOME 3に戻ったようである。</p>
+<p><a href="ubuntu.html">Ubuntu</a>を参照のこと。</p>
+
+<h2>マイナーなカスタムDE</h2>
+<p>UbuntuのUnityがやったことで知られていますが、GNOMEやKDEでもMac風のメニューバーを画面トップに持ってくるインターフェースにしている例が、マイナーディストリビューションで見られるようになりました。</p>
+<p>どのディストリビューションだったかは失念しましたが、探してみてください。マイナーなディストリビューションでも、最近は技術力が高く、インターフェースを大胆に変えているものや、Mintのようにさまざまな使いやすいオマケソフトをつけているものが増えています。</p>
+
+<h2>Cinnamon, MATE, Budgie, Pantheon, Deepin</h2>
+<p>最近は新しいデスクトップ環境がどんどん開発されています。CinnamonやMATEのようなGNOME 3の代替・forkだけではなく、Budgie, Pantheon, Deepinなどをディストリビューションがサポートする動きも大きくなっています。</p>
+<p>UbuntuではUbuntu BudgieとしてBudgieを公式のフレーバーとして対応し、Fedora 30ではPantheonとDeepinに対応しました。</p>
+<p>これからLinuxデスクトップはとても面白くなっていくと思います。もちろん、フレーバーやSpinとして対応していないデスクトップ環境やウィンドウマネージャでも、UbuntuやFedoraのパッケージから導入することができます。</p>
+<p><a href="mate.html">MATE</a>や<a href="cinnamon.html">Cinnamon</a>や<a href="budgie.html">Budgie</a>を参照のこと。</p>
+<ul>
+<li><a href="https://kledgeb.blogspot.com/2016/04/budgie-1.html">Budgie その1 - 簡素でありながら上品さを備えたデスクトップ環境 - kledgeb</a></li>
+<li><a href="https://www.fosslinux.com/13962/how-to-install-pantheon-and-deepin-de-on-fedora-30-workstation.htm">How to install Pantheon and Deepin DE on Fedora 30 - FOSS Linux</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>SVGとHTMLを拡張して異次元のテーマを</h2>
+<p><!--[過去の日記]--><a href="../../diary/2017.11.01.html">2017-11-01</a>より。</p>
+<blockquote class="inyou2">
+<p>僕は、LinuxのGUI環境は、SVGとHTMLの拡張のような言語を作って、どんなグラフィックスでもテーマで描画出来るような、そういう「異次元のテーマ」をサポートするのが良いと思う。</p>
+<p>AdobeのFlashと似ている。</p>
+<p>アイコンは今はpngのようになっているが、どんな風にリストするのか、のようなことまでSVG-HTMLでサポートする。</p>
+<p>そういう風にすれば、きっとデザイナーもIllustratorのような雰囲気でLinuxのテーマを作ることが出来るだろう。</p>
+<p>出来れば、MicrosoftがWindows XPの時に裏で実装していたスキン機能や、XULなどの技術を凌ぐものになってほしい。</p>
+<p>UIをXMLにすることで、全てのインターフェースをサポート出来るかもしれない。</p>
+<p>だが、GTK+アプリのそれぞれの作り方と矛盾するものになってはいけない。</p>
+<p>ある意味、SVGでHTMLにするなら、バックエンドをPHPのようなものにして、そのインタプリタ・エンジンから作っても良い。</p>
+<p>ある意味、ブログに良くあるテーマ機能と同じものを作れば良い。</p>
+<p>だが、GUIである以上、ページよりもインタラクティブなスキン・シェルにする必要がある。</p>
+</blockquote>
+
+<h2>Linuxを使いやすいものにするために</h2>
+<p>Linuxを使いやすいものにするために必要なのは、僕が思うに以下のような方針を決めることだと思う。</p>
+<p>１．最初から全部の情報を見せて、最も少ない手順で操作出来るようにすること</p>
+<p>２．画面上の混乱や変化を最低限にし、驚きの少ない自然な操作を可能にすること</p>
+<p>３．何がどの機能、どのアプリケーションを意味しているのかを明確にすること</p>
+<p>４．きちんと美しく整理・統合されたものにすること</p>
+<p>５．アクションに応じて出てくるメニューなどは、絶対に「自然」の範囲をはみ出さないようにすること</p>
+<p>６．分からなくなった時は、何をすればヘルプや解説を得られるのかを明確にし、出来るだけ最初から解説を表示するようにすること</p>
+<p>７．ヘビーユーザーのために、たくさんの操作法を可能にすると同時に、画面を整理し、初心者に必要のないインターフェースを初心者が見なくても良いようにすると同時に、どこを操作すればそうした画面の設定を変えられるのか、というボタンを一番目立たせること</p>
+<p>８．デザインの基本と同じように、目立たせるべきものと目立たなくて良いものの優先順位をきちんと決めて、その上で良く整理され、統合されたインターフェースをすること</p>
+<p>悪い例は、Microsoft OfficeやGIMPのようなどこに何があるのかさっぱり分からないアプリケーションで、良い例はEclipseやAdobe Illustratorのような考え抜かれたアプリケーションだ。</p>
+<p>僕は、昔から「自然」という発想によるインターフェースを良く考える。自然に機能が配置・準備され、自然な挙動を示し、それが自然にそうデザインされるべきである、といった「自然なGUI」というものを考える。そこでは、全てのことに根拠を求めて、どんなところにどんな機能があるのか、デザイナーのようにきちんと考える。ただの機械ではなく、操作環境なのだということを意識する。</p>
+<p>今のGNOMEは、リーナス・トーバルズが言っているように、「ユーザーを馬鹿だと見なしている」と思う。デスクトップ環境のことを何も知らない素人のことしか考えていない。本当は、Linuxはある程度慣れた人間しか使わないはずだ。だから、一般的Linuxユーザーのことを考えていない。一般的Linuxユーザーに良いようにしたいなら、もっとUNIXとの親和性を高め、そして管理が簡単にコマンドと設定ファイルで出来るような、そういうものにしなければならないはずだ。ある意味、最近は自動設定するようになったのは良いが、もし手動設定に戻したい場合にどうすれば良いのか良く分からなかったりする。そうした、一般的なLinuxユーザー、もっと言えばパソコンオタクやIT上級者のために使いやすい機能環境を作らなければ、Linuxユーザーは減るばかりで増えることは無いだろう。</p>
+<p>GNOMEのインターフェースは簡単にし、分かりやすくするのは良いが、本当に大切な効率性や考えなければならないこと、手間の削減のようなことを見落としている。その方が初心者向けにすることよりも優先度は高いはずだ。</p>
+
+<h2>新機能提案：GUIパイプ（コピー＆ペーストとパイプの類似性）</h2>
+<p>僕は、X11の新しい機能の提案として、GUIパイプを提案する。</p>
+<p>UNIXではパイプを使うことで、あるプログラムの出力を別のプログラムの入力に与えることが出来る。</p>
+<p>僕は、GUIでテキストをコピー＆ペーストしたり、いったんファイルに保存して開いたりすることが、このパイプと類似していると思う。</p>
+<p>だから、GUIでもパイプのようにテキストとコマンドを介して、処理を自動化出来ないかと思う。</p>
+<p>このためには、GUIのプログラムの機能をコマンドから呼び出せなければならない。</p>
+<p>そして、実現するとこのようになる：</p>
+<pre>
+$ cat test.txt | msoffice.sort('A_to_Z') | msoffice.creat_toc('.table') | illustrator.make_textbox('center').set_background('black').save_png('view.png')
+</pre>
+<p>このようにすると、GUIのアプリケーションをコマンドで自動化し、UNIXの今までのコマンドプログラムとも連携出来る。ややオブジェクト指向のコードに似ている。</p>
+<p>まるでGUIとコマンドラインの融和を見ているようだ。</p>
+
+<h2>新しいデスクトップインターフェース</h2>
+<p>僕は、新しいデスクトップ環境のインターフェースを考えた。</p>
+<p>まず、画面の一番上に、今開いているアプリケーションの一覧をアイコンで表示する。これは、Windows 7のタスクバーと同様。Dockのように動く。</p>
+<p>そして、画面の上から二番目のバーに、アプリケーションのメニューバーを表示する。これは、Macでアプリケーションメニューを表示するのと同様。</p>
+<p>一番上のアプリケーション一覧をタブのようにして、アプリケーションのアイコンをクリックすることでメニューバーの表示を切り替える。</p>
+<p>その上で、その下の大きなスクリーン画面には、アプリケーションのウィンドウを表示する。</p>
+<p>最後に、画面の一番下に、今開いているアプリケーションのウィンドウ一覧を表示する。これは、Windows XPのタスクバーと同様。</p>
+<p>ウィンドウ一覧に表示されるのは、一番上のアプリケーションアイコン（アプリケーションタブ）で選択されたアプリケーションのみ。</p>
+<p>そして、アプリケーションタブを画面左に表示したり（UbuntuのUnityと同様）、NeXTSTEPのようにウィンドウ一覧をDockのように表示することもできるようにする。</p>
+<p>要するに、こんな感じ。</p>
+<pre>
++-----------+----+-----------------+
+| App1 App2 |App3| Computer System |
++-----------+----+-----------------+
+| File Edit View Search Tools Help |
++----------------------------------+
+|                                  |
+|  +-------------+                 |
+|  | Window2  _+x|                 |
+|  +-------------+                 |
+|  |             |                 |
+|  |       +-------------+         |
+|  |       | Window1  _+x|         |
+|  |       +-------------+         |
+|  +-------|             |         |
+|          |             |         |
+|          |             |         |
+|          |             |         |
+|          +-------------+         |
+|                                  |
++---------+------------------------+
+| Window1 | Window2 Window3        |
++---------+------------------------+
+</pre>
+<p>あるいは、アプリケーションアイコンからメインメニューを伸ばす感じにしてはどうだろうか。</p>
+<pre>
++-----------+----+-----------------+
+| App1 App2 |App3| Computer System |
++-----------+----+---+-------------+
+|           | File   |             |
+|           | Edit   |             |
+|           | View   |             |
+|  +--------| Window |             |
+|  | Window2+--------+             |
+|  +-------------+                 |
+|  |             |                 |
+|  |       +-------------+         |
+|  |       | Window1  _+x|         |
+|  |       +-------------+         |
+|  +-------|             |         |
+|          |             |         |
+|          |             |         |
+|          |             |         |
+|          +-------------+         |
+|                                  |
++---------+------------------------+
+| Window1 | Window2 Window3        |
++---------+------------------------+
+</pre>
+<p>これは、ウィンドウ一覧もメニューにすることで、バーをひとつだけにでき、画面を巨大なバーが占領しなくても済むようにできる。</p>
+<pre>
++-----------+-------+--------------+
+| App1 App2 |Windows| Place System |
++-----------+-------+-+------------+
+|           | Window1 |            |
+|           | Window2 |            |
+|           | Window3 |            |
+|  +--------| Window4 |            |
+|  | Window2+---------+            |
+|  +-------------+                 |
+|  |             |                 |
+|  |       +-------------+         |
+|  |       | Window1  _+x|         |
+|  |       +-------------+         |
+|  +-------|             |         |
+|          |             |         |
+|          |             |         |
+|          |             |         |
+|          +-------------+         |
+|                                  |
+|                                  |
+|                                  |
++----------------------------------+
+</pre>
+
+<!--[過去の日記]-->
+<h2>関連する日記</h2>
+<p><a href="../../diary/2017.10.28.html">2017-10-28</a>に関連する内容があります。</p>
+
+<h1>ちょっと古めのコンピュータ</h1>
+<h2>Tcl/Tk</h2>
+<p>GUIを簡単に表示することの出来るスクリプト言語。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Tcl/Tk">Tcl/Tk - Wikipedia</a></li>
+</ul>
+<p><a href="../prog_lang/tcl_tk.html">Tcl/Tk</a>を参照のこと。</p>
+
+<h2>Motif/CDE</h2>
+<p>昔のUNIXワークステーションで使われていたツールキットMotifとデスクトップ環境CDEについて。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Motif_(GUI)">Motif (GUI) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Common_Desktop_Environment">Common Desktop Environment - Wikipedia</a></li>
+</ul>
+<p><a href="motif.html">Motif</a>を参照のこと。</p>
+<h2>MS-DOS/Windows 3.1</h2>
+<p>MicrosoftによるDOS（ディスク・オペレーティング・システム）と、それを拡張する16bitのオペレーティング環境。この当時はまだDOSとWindowsが分離されていた。今のLinuxとX11に近い。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MS-DOS">MS-DOS - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Microsoft_Windows_3.x">Microsoft Windows 3.x - Wikipedia</a></li>
+</ul>
+<p><a href="../windows_pc/dos.html">DOS</a>を参照のこと。</p>
+
+<h2>昔のMac OS</h2>
+<p>アップルによる先駆的とされたOS。最近のMac OS Xは昔のMacではなく、NeXTSTEPと言う技術を応用したUNIXの一つです。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Classic_Mac_OS">Classic Mac OS - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/MacOS">macOS - Wikipedia</a>（最近のMac）</li>
+<li><a href="https://ja.wikipedia.org/wiki/NEXTSTEP">NEXTSTEP - Wikipedia</a></li>
+</ul>
+<p><a href="../os/mac.html">Mac</a>を参照のこと。</p>
+
+<h2>BeOS</h2>
+<p>昔先進的だったOSです。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/BeOS">BeOS - Wikipedia</a></li>
+</ul>
+<p><a href="../os/beos.html">BeOS</a>を参照のこと。</p>
+
+<h2>8bitパソコン/BASIC</h2>
+<p>昔のホビー向けパソコン。BASICと言う簡単な言語のインタプリタを使って、プログラミングを誰でも楽しめる。</p>
+<p>僕の父親がこの世代のパソコンに詳しいです。父親は8bit以降の色んなコンピュータを集めていたことがあります。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/8%E3%83%93%E3%83%83%E3%83%88%E3%83%91%E3%82%BD%E3%82%B3%E3%83%B3">8ビットパソコン - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E5%8F%B2">パーソナルコンピュータ史 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/BASIC">BASIC - Wikipedia</a></li>
+</ul>
+<p><a href="../hardware/hobby_pc.html">ホビーパソコン</a>や<a href="../prog_lang/basic.html">BASIC</a>も参照のこと。</p>
+
+<h2>ゲーム機</h2>
+<p>昔僕も好きだったテレビゲーム。最近はオンラインで行うネットゲームが流行っています。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B2%E3%83%BC%E3%83%A0%E6%A9%9F">ゲーム機 - Wikipedia</a></li>
+</ul>
+<p><a href="../videogame/videogame.html">テレビゲーム</a>も参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

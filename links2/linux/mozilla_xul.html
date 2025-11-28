@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>XUL - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>XUL</h1>
+<p>XULに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="mozilla.html">Mozilla</a></li>
+<ul>
+<li><a href="mozilla_firefox.html">Mozilla Firefox</a></li>
+<li><a href="mozilla_thunderbird.html">Mozilla Thunderbird</a></li>
+<li><b>XUL</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>XUL</h1>
+
+<h2>XULとは何か</h2>
+<p>XULは、Mozillaを作るために作られた、XMLによるGUI記述言語。XULでは、XMLの技術とJavaScriptを使うことで、クロスプラットフォームなアプリケーションを開発することができる。また、Mozillaのための拡張機能もXULで記述される。</p>
+<p>既に最近のMozilla.orgではXULは廃止への方向へ向かっているが、最近WindowsやFLASHやJavaなどでもXMLによるインターフェースの記述が流行している以前の、XMLによるGUI記述の「先駆者」であったと言える。まさにMozillaはインターネットで、オリジナルの技術であるXULを持っている。XULとHTMLレンダリングエンジンのGeckoは、Mozillaのブラウザアプリケーションを執り行う中で、基盤となる技術である。</p>
+<p>ちなみに、最近のMozillaはRustという大人気のシステム用プログラミング言語を作っているほか、ServoというRustによる並列ブラウザエンジンを作っている。XUL亡きあとも、MozillaはRustを中心に独自の、どの企業にも中立な、日進月歩のオープンソースWebブラウザを作り続ける。最近はGoogle Chromeなど、WebKitやBlinkなどの新しいオープンソースHTMLレンダリング技術が流行っているが、今でも、オープンソースはLinux KernelとMozilla.orgを中心に回っている。多くのLinuxディストリビューションでMozilla Firefoxは標準であり、WindowsでもMozilla Firefoxは人気である。</p>
+
+<h2>ブラウザのインターフェースをWebコンテンツと同様に扱う</h2>
+<p>XULの本質とは、「WebブラウザのインターフェースをWebコンテンツと同様に扱う」というところにあると思います。</p>
+<p>Mozillaは、ブラウザが表示するHTMLだけではなく、ブラウザのUIすら、Webコンテンツと同様に、さまざまな機能をネットから入手して操作できるようにしたかったのです。</p>
+<p>たとえば、XULにはJavaScript/CSS/RDFのようなWebの標準技術が使われています。ブラウザのボタンをクリックする、ということは、Webページのボタンやリンクをクリックすることと全く変わりません。JavaScriptとXMLベースのUI記述言語であるXULを使います。</p>
+<p>Mozillaでは、XULによって開発された拡張機能を導入することで、Emacs Lispのように際限なくブラウザの機能を「強化」することができます。自分の使いたい機能だけを搭載することができます。</p>
+<p>また、昔のSeaMonkey時代のMozillaはそのメタリックな外観で有名でしたが、XULの技術を使うことで、テーマを導入し、どこまでもブラウザの見た目をゴージャスにすることができます。</p>
+<p>こうした技術は、最近ではMSがXAMLを作ったほかに、GitHubによるElectronがあります。Electronでは、Web技術を使うことでGUIアプリケーションを開発できます。GitHubのテキストエディタであるAtomや、GitHubを買収したMicrosoftによるテキストエディタのVisual Studio Code（VS-Code）がElectronによるアプリケーションとして有名です。</p>
+<p>Mozillaにはいろいろと先見の明があったと僕は思っていて、スマホにおけるアプリストアや、HTML5によるWebアプリケーションは、Mozillaのやりたかったことをそのままやっている。FLASHなどについても同じで、まさにMozillaは「Webページが単なるページではなく、インターフェースも含めた上でのアプリケーションサービスとして扱われる」ようにしたかった。僕はMozillaのやりたいことが本当に良く分かる。Mozillaは正しかった。</p>
+<p>XULがもし成功すれば、Webページで複雑なAjaxを使わなければいけなかったことも、ReactのようなWebパーツのJavaScriptフレームワークも存在しなかったかもしれない。また、WebアプリケーションがGUIになる、すなわち、「URLへアクセスするだけでそのアプリケーションがすぐに使える」ようになっていたかもしれない。最近はWeb上で動く画像加工サービスのようなものもあるが、そうしたWebサービスがもっと身近だったかもしれない。スマホのアプリなどそもそも必要がない。</p>
+
+<h2>XULによる拡張の開発</h2>
+<p>XULによる拡張は、XMLとJavaScriptによって行う。個人的な主観としては、コンテキストメニューにXMLとJavaScriptでアイテムを追加したりして、「既にあるXULの仕組みを上手く利用して、ブラウザと拡張のXML定義をドッキングして拡張する」ということが面白かった。まさに「Web技術のGUIにおける応用」という感じがして、Webというエコシステムそのものを作ったNetscapeのセンスが感じられた。</p>
+
+<h2>XULサンプルコード</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="http://geckodev.sakura.ne.jp/p/firefox/index.php?%E6%8B%A1%E5%BC%B5%E3%81%AE%E4%BD%9C%E6%88%90">拡張の作成 - Firefoxまとめサイト</a> (<a href="https://web.archive.org/web/20181124125547/http://geckodev.sakura.ne.jp/p/firefox/index.php?%E6%8B%A1%E5%BC%B5%E3%81%AE%E4%BD%9C%E6%88%90">Webarchive</a>)</li>
+</ul>
+<p>後日注記：上のページのXULとJavaScriptによるFirefoxの拡張機能の作成入門は、昔僕が多くの部分を翻訳しました（ほかの人が翻訳した部分もある）。英語のことを何も分かっていない少年時代の僕が訳した文章であるため、稚拙なところがあるかもしれません。ですが、「XULで作るとこんなに拡張性が高いのだ」ということが分かって、とても勉強になりました。またこのページの方法は昔のやり方であり、今のFirefoxではやり方が変わっていることに注意してください。</p>
+
+<h1>関連ページ</h1>
+<h2>XMLでGUI</h2>
+<p><a href="../prog_lang/xml_gui.html">XML＆GUI</a>を参照のこと。</p>
+
+<h2>GUI開発</h2>
+<p>GUIの開発全般については<a href="../prog_lang/gui_develop.html">GUI開発</a>を参照のこと。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

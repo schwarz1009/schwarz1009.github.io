@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C++ミニツアーの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C++ミニツアーの世界観</h1>
+<p>C++ミニツアーに関する世界観です。<a href="cpp.html">C++</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>C++をはじめよう</h1>
+<h2>C++ミニツアー</h2>
+<p>クラスは、C++の主要な機能で、ユーザーが独自に作ることのできるデータ型を宣言できる。</p>
+<p>クラスでは、データ型を含む構造体と、その構造体を操作するメソッドをひとつにまとめることができる。</p>
+<p>C言語では、構造体を操作する関数は作ることができるが、その構造体を間違った方法でアクセスする関数から、構造体のデータを守る術がない。</p>
+<p>C++では、データ型の構造体とその構造体を操作するメソッドをまとめた上で、アクセス指定子を宣言することで、限られた範囲のメソッドからのみデータ構造を操作することができる。このような考え方をカプセル化と呼ぶ。</p>
+<p>アクセス指定子には、public（公開）、private（非公開）、protected（派生クラスのみに公開）がある。これ以外にも、関連するキーワードとしてfriendとvirtualがある。friendを使うことで、一部のクラスや関数にだけ特別にデータにアクセスすることができるようにすることができる。これをfriendクラス、friend関数と呼ぶ。</p>
+<p>C++で自分で作ったクラスは、構造体のように静的に宣言して、ローカルスコープで使う場合は、通常の型と同じように宣言し、メソッドはobj.meth()のように呼び出す。malloc()やfree()のように動的にメモリに確保する場合は、new/delete演算子を使って、型宣言に*をつけ、ClassA *obj = new ClassA();とする。この時、メソッドの実行はアロー演算子を用いてobj-&gt;meth()のように呼び出す。</p>
+<p>クラスと同名のメソッドはコンストラクタと呼ばれ、クラスが最初に作られた時に初期化に必要な処理を行うメソッドとして実行される。クラスと同名に~をつけたメソッドはデストラクタと呼ばれ、クラスが破棄された時に後処理を行うメソッドとして実行される。</p>
+<pre class="prettyprint">
+class Hoge {
+private:
+    int v;
+public:
+    Hoge(int x) {
+        v = x;
+    }
+    void hogeAssign(int x) {
+        v = x;
+        printf("%d\n", v);
+    }
+    void hogeIncr() {
+        v++;
+        printf("%d\n", v);
+    }
+    int hogeGet() {
+        return v;
+    }
+};
+
+void main(){
+    Hoge *obj = new Hoge(10);
+    obj-&gt;hogeIncr();
+    obj-&gt;hogeAssign(100);
+    obj-&gt;hogeIncr();
+    obj-&gt;hogeIncr();
+    delete obj;
+}
+</pre>
+<p>クラス内の変数はメンバ変数あるいはフィールド変数、関数はメンバ関数あるいはメソッドと呼ばれる。クラスを元に作られた「生成された変数」はインスタンス変数と呼ばれる。</p>
+<p>クラスは、継承を行うことで、既存のクラスに対して新しいデータ型やメソッドを追加し、publicやprotectedな変数を操作したり、さまざまな機能を追加することができる。</p>
+<p>継承は以下のように行う。</p>
+<pre class="prettyprint">
+class ExHoge : public Hoge {
+public:
+    void hogeIncr10() {
+        for (int i = 0; i &lt; 10; i++) {
+            hogeIncr();
+        }
+    }
+};
+</pre>
+<p>クラスを継承した際、同名のメソッドを定義することで、元のクラスのメソッドを「上書き」し、書き換えることができる。これをオーバーライドと呼ぶ。オーバーライドを使うことで、クラスの一部分だけを独自に自分で実装し、処理内容を書き換えることができる。</p>
+<p>また、C++ではオーバーロードを使うことで、同じ名前のメソッドを別の引数の型で使い分けたり、場合によって別のメソッドが実行されるようにできる。</p>
+<p>C++では演算子をオーバーロードすることで、+や=、[]や()などの演算子もオーバーロードできる。</p>
+<pre class="prettyprint">
+int Hoge::operator+(Hoge &h) {
+    return v + h.hogeGet();
+}
+</pre>
+<p>C++ではiostereamで演算子&lt;&lt;と&gt;&gt;を用いて入出力を行うが、これは演算子をオーバーロードして実現されている。</p>
+<p>また、virtualキーワードを使うことで、継承したメソッドを仮想関数にできる。仮想関数を用いると、たとえばClassAのメソッドを実行するのか、それともClassAを継承したClassBの同名のメソッドを実行するのかを「動的にバインディング」できる。仮想関数を使うには、基本クラスのメソッドにvirtual宣言をつけた上で、派生クラスでそれをオーバーライドする。このような考え方をポリモーフィズムと言う。</p>
+<p>例外は、エラー処理の専用の制御フローで、どこかの時点でエラーができた時に、「例外を投げ」、それを「キャッチ」することで、エラー処理を分かりやすく単純にできる。</p>
+<p>テンプレートは、さまざまな型を汎用的に使うことができるように、型の中の型を引数として受け渡すことができる。</p>
+<pre class="prettyprint">
+template &lt;typename T&gt; T funcHoge (T x, T y) {
+    return x + y;
+}
+</pre>
+<p>インライン関数は、特定の関数を呼び出しではなくマクロのように、命令コード中に埋め込み展開することができる。</p>
+<p>参照渡しは、ポインタのように変数を参照型として扱える機能。Cにはポインタがあるだけで参照渡しをすることができなかった。C++では参照渡しの機能を標準の仕様として使うことができる。</p>
+<p>C++のライブラリはSTLを中核としている。STLではコンテナ（シーケンスの保持）、反復子（シーケンスの反復）、アルゴリズム（シーケンスの操作）、関数オブジェクトなどの機能を提供している。</p>
+<p>（一部の内容で<a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a>を参考に執筆しました。多くは自分で書きました。）</p>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

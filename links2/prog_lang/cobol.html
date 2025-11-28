@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>COBOLの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>COBOLの世界観</h1>
+<p>COBOLに関する世界観です。<a href="oldpl.html">昔の言語</a>や<a href="../hardware/mainframe.html">メインフレーム</a>や<a href="../hardware/old_computer.html">古いコンピュータ</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>COBOL</h1>
+<h2>COBOL</h2>
+<p>メインフレームの時代の言語。業務用・事務処理用に使われることが多い。</p>
+<ul>
+<li><a href="http://tallercolibri.com/">COBOLプログラミング入門</a></li>
+<li><a href="http://www16.plala.or.jp/hiyokogumi/top.html">サルでもわかるCOBOL入門</a></li>
+</ul>
+
+<h2>サンプルコード</h2>
+<p>（<a href="https://ja.wikipedia.org/wiki/COBOL">COBOL - Wikipedia</a>にサンプルコードがある。以下に「実例3 (Fizz Buzz)」を解説する。）</p>
+<table class="some_tables">
+<tr><th class="min60">部</th><th>説明</th></tr>
+<tr><td>見出し部<br>IDENTIFICATION DIVISION</td><td>PROGRAM-IDが宣言されている。</td></tr>
+<tr><td>環境部<br>ENVIRONMENT DIVISION</td><td>今回は存在しない。</td></tr>
+<tr><td>データ部<br>DATA DIVISION</td><td>WORKING-STORAGE SECTION（作業場所）では<br>プログラムの中で使われる変数の定義を行う。</td></tr>
+<tr><td>手続き部<br>PROCEDURE DIVISION</td><td>PERFORM VARYING UNTIL文による繰り返しと<br>EVALUATE文による条件分岐が行なわれている。<br>また、DISPLAY文でメッセージを表示している。</td></tr>
+</table>
+<p>ほかにも、IF～THEN文（条件分岐）やPERFORM UNTIL文（繰り返し）やPERFORM TIMES文（回数が明確に分かっている場合に繰り返しに使う）が利用できる。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="http://tallercolibri.com/">COBOLプログラミング入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.30編集</p>
+</div>
+
+<h2>サンプルコードその２</h2>
+<p>以下のページにサンプルコードがあります。</p>
+<ul>
+<li><a href="https://jpn.nec.com/sortkit/cobol_popup.html">COBOL サンプルプログラム: 高性能ソート・マージ SORTKIT | NEC</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/COBOL">COBOL - Wikipedia</a></li>
+</ul>
+
+
+<h2>そもそもエンジニアではなく一般の事務系のユーザー向け</h2>
+<p>COBOLはそもそもエンジニアや科学者がプログラミングを行うためではなく、一般の事務系のユーザーをターゲットにしている。</p>
+<p>そのため、FORTRANのような科学技術計算には向いておらず、事務処理のための機能が多い。</p>
+<p>また、COBOLは企業や政府機関にとてもたくさんの過去の資産があることで有名である。</p>
+<p>60年もの間使われた老人のような言語である。</p>
+
+<h2>事務処理向けで英語に近い</h2>
+<p>COBOLは事務処理向けに開発されたこともあり、一般の事務系の職業の人間が使うことを意図しているため、文法が科学技術計算用のFORTRANなどと比べて、英語に近い。</p>
+<p>たとえば、</p>
+<pre>
+COMPUTE MONEY = MONEY + 150.
+</pre>
+<p>という命令は、英語のように以下のように書くことができる。</p>
+<pre>
+ADD 150 TO MONEY.
+</pre>
+<p>しかしながら、この「英語に近い」という特徴は、他の言語に比べてCOBOLでは記述が冗長になりがち（たとえばX = 100 + (200 / Y) - 20のような計算を行う場合を考えてみてほしい）という欠点がある。可読性が高いと言われているものの、簡単に書いたC言語の構文よりもたくさんの記述があって逆に見通しがし辛いことも多い。政府などには膨大な過去のCOBOLプログラムとデータがあるとされている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/COBOL">COBOL - Wikipedia</a></li>
+</ul>
+
+<h2>COBOLからエクセルへ</h2>
+<p>Microsoftはエクセルという表計算ソフトを提供しており、現在はエクセルで簡単に事務計算ができるので、COBOLを使う機会はとても少ない。だが、政府や公官庁には膨大な過去のCOBOL資産があるとされている。「PROGRAM-ID」にプログラム識別名を記載するなど、さまざまな形式的記述が要求され、そうしたところがMS-Officeにも雰囲気として良く似ている。</p>
+<p>後日注記：残念ながら、COBOLとエクセルは比較対象としておかしい。COBOLはメインフレームでバッチ処理を書く際に使うことが多く、その際は大量に送られてくるデータにまとめてバッチ処理を行う。そのようなCOBOL処理は、今でもほかの言語にリプレースすることが難しいと言われている。</p>
+<p>後日注記：COBOLとエクセルはともに金額計算（給与や決算など）に使われます。なので、両者の比較には何かしら意味があるとは言えるかもしれません。現代の事務処理では、COBOLを使わなくてもエクセルを使って金額計算ができます。</p>
+<div class="edit_date">
+<p>2023.10.10編集</p>
+</div>
+
+<h2>GNU/LinuxでCOBOL</h2>
+<p>GNU/LinuxでCOBOLを使いたいのであれば、GnuCOBOL（旧OpenCOBOL）というコンパイラや、OpenCobolIDEという開発環境が使える。</p>
+<ul>
+<li><a href="https://postd.cc/3-open-source-projects-for-modern-cobol-development/">現代のCOBOL開発のための3つのオープンソースプロジェクト | POSTD</a></li>
+</ul>
+
+<h2>FedoraでCOBOL</h2>
+<p>FedoraでGnuCOBOLをインストールするには、</p>
+<pre>
+# dnf install open-cobol
+</pre>
+<p>とする。COBOLコードのコンパイルは</p>
+<pre>
+$ cobc -x HOGE.cob
+</pre>
+<p>とする。</p>
+<p>（<a href="https://postd.cc/3-open-source-projects-for-modern-cobol-development/">現代のCOBOL開発のための3つのオープンソースプロジェクト | POSTD</a>を参考に執筆・引用しました。）</p>
+
+<h1>余談</h1>
+<h2>今でも大型コンピュータとCOBOLが使われるのは、日本企業がシステムのリプレースに消極的だから</h2>
+<p>実際のところ、日本の企業のシステムには、今でも大型コンピュータとCOBOLが多く使われています。</p>
+<p>この理由は、日本企業がシステムのリプレースやアップデートに消極的だからです。</p>
+<p>アメリカの企業では、IT技術を最新技術にアップデートするということが常に行われています。何十年もの間同じシステムを継続して使うことは少なく、COBOLのようなシステムは多くの場合Javaなどの新しい技術へとリプレースされます。</p>
+<p>ですが、日本では、アップデートという概念を理解する経営者や会社が少なく、古くなったシステムが動き続ける間、何十年もの間同じシステムを使い続けることが多いのです。</p>
+<p>僕は、これは日本のIT技術が遅れていることの主たる要因ではないかと思います。日本の会社は、IT技術を最新にアップデートしたり、古くなったシステムを最新のシステムにリプレースする、という考え方がありません。そのため、何十年も同じシステムを使い続けることになってしまいます。</p>
+<p>なので、COBOLを「もう終わった古い言語」だと考えると、いろいろと間違えます。企業は今でも大型コンピュータとCOBOLによる「古びた巨大システム」を使っています。COBOLを習得すること自体は間違ったことではなく、COBOLのシステムの保守・点検という仕事を得ることには繋がるでしょう。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>無線LAN関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>無線通信の世界観</h1>
+<p>無線通信に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>無線通信</h1>
+<h2>Wi-Fiと無線LAN</h2>
+<p>Wi-Fiとは、パソコンやスマホを繋ぐ無線LANのこと。</p>
+<p>昔のLANでは、有線すなわちコード接続でルーターと個々のマシンを接続していたが、最近はWi-Fiを使うことで、無線LANにより、Wi-Fiルーターと個々のマシンをコードなしに繋ぐことができるようになった。</p>
+<p>Wi-Fiでインターネット（あるいはローカルなネットワーク）と繋がるのは、パソコン、スマホ、そしてプリンターなどの周辺機器。</p>
+<p>無線LANをパソコンで使うためには、昔は無線LANのための専用のネットワークカードをパソコンに指す必要があったが、今は多くの場合パソコンに内蔵されたネットワークカードからWi-Fiに接続できる（できない場合はカードや子機をUSBに接続して使用する）。</p>
+<p>Wi-Fiを使うには、パソコンの画面から使用するWi-Fiを選択してパスワードを入力する。設定が必要ならばWi-Fiルーターの設定などを行う。</p>
+<p>スマホで使うWi-Fiについては、<a href="../mobile/smartphone.html">スマホ</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.11.20</p>
+</div>
+
+<h2>無線LANの設定</h2>
+<p>無線LANの設定は、まず、ルーターに無線LANを繋いで、電源を入れます。起動に時間がかかることがあります。電源ケーブルなどに無線LANであることをセロテープなどで明記しておくと、あとあと管理がしやすいです。</p>
+<p>ソフトウェアの設定は、たとえば設定ツールやユーティリティがある時はそれをインストールします。この時、SSIDやパスワードを聞かれることがあります。また、DHCPで自動でIPアドレスを振り分ける場合も、その旨をオプションにチェックします。</p>
+<p>そして、多くの場合、初期設定が終わったら、ブラウザに192.168.1.1など（このアドレスは無線LANの機器によって違う）などにアクセスすると、無線LANの設定画面に入れることが多いです。SSIDやパスワードを変える時は、この設定画面に入りましょう。</p>
+<p>192.168.1.1などは、むしろ、ルーターの設定画面に使われることが多いので注意しましょう。ルーターの設定と別に、無線LANの設定があります。</p>
+<p>Linuxなどでは、iwconfigなどのツールで無線LANの設定ができます。ただiwconfigは最近は変わっている部分もある（iwなどに変わっている）こともあるので注意してください。</p>
+<p>また、マニュアルを良く読みましょう。機器によっては全く違う設定を行います。特にIPアドレスの割り振り方や設定の仕方などが違います。注意してください。</p>
+
+<h2>最近のWi-Fi設定は候補を選択してパスワードを入力するだけ</h2>
+<p>最近は、ルーターが適切に設定されている場合、Wi-Fiに接続するには、画面上に出てきたWi-Fiネットワークの接続候補を選択し、パスワードを入力するだけで通信設定できることがほとんどになりました。</p>
+<p>Windowsだけではなく、Mac、Linux、Android、iPhoneなど、多くの場合は、利用可能なネットワーク接続を選択して、パスワードを入力すれば、それで終わりです。</p>
+
+<h2>Wi-Fiで注意すべき点</h2>
+<p>特に注意すべき点は、公衆Wi-Fiのような場合、暗号化通信がきちんとされているかどうかをチェックすることです。暗号化されていない通信で、ネットワーク上に送受信したデータは別の人から傍受される危険性があります。</p>
+<p>スマホを使う場合、データをモバイルネットワーク（携帯電話のネットワーク）に繋いでいると、データ通信のための利用料がかかります。なので、多くのパケットを送受信する際、たとえばソフトウェアアップデートをする際などは、Wi-Fiに繋がった状態で行うようにしましょう。</p>
+
+<h2>機器によって最大速度が違う</h2>
+<p>また、無線LAN関係の機器で注意するべきことは、機器によって通信の最大速度が異なるため、複数の機器を繋ぐ場合には、その中でもっとも低い最大速度で決定されるということです。ISPやWi-Fiルーターで通信の最大速度が高くても、無線カードや子機の最大速度が低ければ、低い速度でしか通信できません。</p>
+<p>ただし、僕自身も分かっていないところがたくさんある（何を言っているのか自分でもよく分からない）ので、詳しくは家電量販店のアドバイザーなどに聞けば教えてくれるので、無線関係の機器を購入する時には要相談です。</p>
+<div class="edit_date">
+<p>2024.03.08</p>
+</div>
+
+<h2>Wi-Fiの2Gと5G</h2>
+<p>また、Wi-Fiには「2G」と「5G」が存在する。</p>
+<p>障害物があっても遠くまでよく届くのは周波数の低い2G（2.4GHz帯）だが、高速でWi-Fi専用の周波数帯であるため混雑しづらく安定しているのは5G（5GHz帯）。</p>
+<p>ただし場合によっては2Gのほうが速度が出る場合もある。</p>
+<ul>
+<li><a href="https://shibarinashi-wifi.jp/media/43266/">WiFiの2Gと5Gの違い徹底比較！通信速度や接続範囲が異なる！ | コムナビ</a></li>
+<li><a href="https://wifistore.jp/column/1412">Wi-Fiの2.4GHzと5GHzの速度の違いは？ メリットやデメリット・切り替え方・同時使用方法についても徹底解説！ | WiFiストア</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.03.08</p>
+</div>
+
+<h1>Bluetooth</h1>
+<h2>Bluetooth</h2>
+<p>Bluetoothは、近い距離にある機器同士を繋ぐ、新しい無線通信規格。</p>
+<p>スマホとパソコンの間でデータをやり取りする（たとえばスマホで撮った写真データを選択してパソコンに送る）ような時に使うことが多い。</p>
+<ul>
+<li><a href="http://k-tai.sharp.co.jp/appli/useful/10sen/01bluetooth.html">スマホを便利にするBluetoothの活用・設定方法は？｜AQUOS使いこなし技15選｜AQUOS：シャープ</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Linuxのネットワーク関連のコマンド</h2>
+<p><a href="../linux/linux_net_etc.html">Linuxネットワーク（さまざまなネットワーク系コマンド）</a>や<a href="../linux/linux_net_ifupdown.html">Linuxネットワーク設定（ifupdown）</a>も参照のこと。</p>
+
+<h2>スマホ</h2>
+<p><a href="../mobile/smartphone.html">スマホ</a>や<a href="../mobile/ios.html">iOS/iPhone</a>や<a href="../mobile/android.html">Android</a>も参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

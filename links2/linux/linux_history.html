@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux 歴史 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux 歴史</h1>
+<p>Linuxの歴史に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>コンピュータの歴史</h1>
+<h2>OSの誕生</h2>
+<p>OSが生まれる以前のコンピュータは、それぞれの業務の種類に応じてそれぞれのシステムが作られることが一般的だったが、これはコストがかかる上に収益の少ないモデルだった。</p>
+<p>OSの概念は1960年代に生まれ、OSによって全ての業務に同じシステムを使うことができるようになった。</p>
+<p>OSの始祖的な存在はIBM System/360であり、これはメインフレームのシリーズとして上位互換性を保って今でも使われている。</p>
+<p><a href="../hardware/old_computer.html">古いコンピュータ（１．メインフレーム・ミニコン）</a>も参照のこと。</p>
+
+<h2>MulticsとUNIX</h2>
+<p>1960年代中ごろに、Multicsと呼ばれるOSが、MITを中心に、米AT&Tのベル研究所やゼネラル・エレクトロニックなどを中心とするグループによって開発された。</p>
+<p>Multicsはタイムシェアリングシステムで、とてもたくさんの機能を持ったOSだったが、複雑さから実用にならず、Multics（複数の）をもじってUNIX（単一の）と呼ばれるOSが、ベル研究所のケン・トンプソンらのグループによって開発された。</p>
+<p>AT&Tは当時独占禁止法の制限があり、コンピュータ業界に参入することを禁じられていたため、UNIXはパブリックドメインでソースコードを公開する形で提供された。</p>
+<p>このUNIXはシンプルで安定したシステムであり、同時にソースコードが公開され自由に改良することができるものであったため、大学や研究所などに爆発的に普及していく。</p>
+<p>UNIXはC言語で書かれていることもあり、さまざまなプラットフォームに移植可能なものであったため、さまざまなコンピュータに移植され、大学のOSの講義もUNIXをベースに教えられることになった。</p>
+<p><a href="../unix/unix.html">UNIX</a>や<a href="../unix/multics.html">Multics</a>も参照のこと。</p>
+
+<h2>UNIXの独占化</h2>
+<p>しかしながら、UNIXは次第に独占的なものへと変わっていく。</p>
+<p>まず、商用UNIX企業が「AT&Tから正式にライセンスを受けたUNIXだけがUNIXの名前を名乗れる」という、UNIXの名称で儲けるようになった。</p>
+<p>そして、AT&Tの独占禁止法が解体され、AT&TのUNIXはパブリックドメインでなくなり、クローズドソースになり、今まで使えていたパブリックドメインのUNIXコードは使えなくなった。</p>
+<p>大学で教えるためにUNIXのソースコードを使うこともできなくなり、大学では実装ではなく理論を中心に教えるようになった。</p>
+
+<h2>BSDとGNU</h2>
+<p>1977年より、UNIXを改良した派生版として有名だった、ビル・ジョイやカリフォルニア大学バークレー校によるUNIXソフトウェア集である、「BSD」と呼ばれるOSがあった。</p>
+<p>このBSDから、AT&Tの権利のあるコードを削除したものが、ネット上で配布されるようになる。これが、のちのFreeBSDなどの「BSD系UNIX」となる。</p>
+<p>また、1983年にGNUプロジェクトを創始したリチャード・ストールマンは、完全にフリーなUNIXの代替品を作ろうと、GNUの開発を始める。</p>
+<p>しかしながら、BSDは386対応に後れを取り、カリフォルニア大学バークレー校がUSL（訴訟の最中にノベルに買収）から起訴されるなど、長い間公開することができなかった。</p>
+<p>またGNUは、安定したカーネルを出せないままでいた。特に、GNUは、ほとんどのUNIXソフトウェアコンポーネントは作れていたのに、カーネルやデーモンなどの部分を完成させることが出来ないままだった。GNUは、当時先進的だとされていたマイクロカーネル（Hurd）によるOSを開発しようとしていた。現在でも、GNU Hurdは完成していない。</p>
+<p><a href="../unix/bsd.html">BSD</a>や<a href="gnu.html">GNU</a>や<a href="../unix/hurd.html">Hurd</a>も参照のこと。</p>
+
+<h2>MINIX</h2>
+<p>UNIXがクローズドソースとなったことで、大学では「OSの講義のために教えられるシステムがない」という問題があった。</p>
+<p>これに対して、A・S・タネンバウム教授は、大学で教えるための「教材」としてMINIXと呼ばれるUNIX互換OSを作った。</p>
+<p>MINIXは書籍に付属する形で全ソースコードを掲載し、UNIXと互換性を保ちながら、マイクロカーネル設計を導入した。</p>
+<p>しかしながら、MINIXのニューズグループでは、学生やニューズグループの参加者から「MINIXに取り入れてほしい機能」がたくさん送られてくる。</p>
+<p>これに対して、タネンバウムなどのMINIX開発者は、「OSを勉強する入門者のために小さく理解しやすい大きさを保ちたい」と考えており、こうした機能追加要求に必死で抵抗を続ける。</p>
+<p>ここに現れたのが、リーナス・トーバルズによるLinuxだった。</p>
+<p><a href="../unix/minix.html">MINIX</a>も参照のこと。</p>
+
+<h2>Linux</h2>
+<p>1990年代には、BSDやLinuxなどのUNIX系のフリーOSがUNIX界で使われるようになった。</p>
+<p>Linuxは、1991年に、当時大学院生だったフィンランド人のリーナス・トーバルズによって開発された。</p>
+<p>リーナス・トーバルズはMINIXを使っていたが、Intelの仮想記憶などに対応しないMINIXの機能に不満を感じ、MINIXの改良を始める。</p>
+<p>最初はターミナル・エミュレータだったLinuxだが、開発していくうちに、MINIXから改良したコードだけで、ほとんどのOSの機能を満たすようになった。</p>
+<p>トーバルズは、MINIXのメーリングリストでこのLinuxを公開し、開発者を募る。</p>
+<p>Linuxはリーナス・トーバルズによってまったく独自のコードで開発されたため、UNIXの利権問題はこれによって解決した。</p>
+<p>そして、トーバルズと同じようにMINIXに不満を感じるニューズグループの参加者と相乗効果となり、爆発的に開発者が増えていった。</p>
+<p>MINIXのコンポーネントは、既にあったGNUのコンポーネントに参加者たちによって置き換えられた。また、商用利用を禁止していた独自のライセンスを撤廃し、GNU GPL v.2を適用した。</p>
+<p>その後、これを見たエリック・レイモンドは、「伽藍とバザール」と言う著の中で、オープンソース開発と言う全く新しいソフトウェアの開発方式だとした。</p>
+<p>Linux界の有名な開発者としては、アラン・コックスやアンドリュー・モートンなどが知られている。特に彼らは独自のカーネルツリーをメンテナンスしていたこともあり知名度が大きい。</p>
+<p>アラン・コックスはリーナスの右腕として知られ、ネットワーク関係のバグを直し、ネットワークサブシステムの多くを書き換えたことで有名である。</p>
+<p>アンドリュー・モートンはAKPMという名前で知られており、現在もLinuxカーネルの中枢をメンテナンスしている。</p>
+<p>また、カーネル以外では、GNOMEプロジェクトの創始者ミゲル・デ・イカザなどが、さまざまな発言をするオープンソース界のキーパーソンとして有名である。ミゲルは、コードの再利用と共有が行われないUNIXを、「UNIXをもう少しマシなものにしよう」という論文で、CORBAを用いたGNOMEのBonoboのビジョンについて記述して、大きな反響を呼んだ。</p>
+<p><a href="linux_people.html">Linux 著名人</a>も参照のこと。</p>
+
+<h2>企業による開発</h2>
+<p>そして、Microsoftにブラウザ戦争で敗北したNetscapeはMozilla.orgとして、バザール開発をもくろんで、Mozillaのソースコードをオープンソースにした。</p>
+<p>その後、開発はボランティア主導ではなく、企業主導へと移っていく。Red Hatなどの会社がRPMと言う「専門技術のあるオタクではなくても、誰でも使えるディストリビューション」を作成した。だが、完全にボランティア主導のDebianなどのコミュニティも存続し、たくさんのオープンソース・プロジェクトが生まれている。</p>
+<p>だが、いまだにMicrosoftの牙城を倒すまでには至っていない。Microsoftの開発したCOMと呼ばれる次世代のコンポーネント・システムは、KDEの使用するツールキットQtがオープンソースでなかったことから生まれた、GNOMEと呼ばれるデスクトップ環境によって、逆にWindowsからUNIX/Linuxへと、技術の移転が生まれている。</p>
+<p><a href="redhat.html">Red Hat</a>や<a href="mozilla.html">Mozilla</a>も参照のこと。</p>
+
+<h2>参考文献</h2>
+<p>以上の記述は以下のページ・文献を参考に自分で書きました。</p>
+<ul>
+<li><a href="https://eng-entrance.com/unix_linux">３分間で人に説明できるようになるUnixとLinuxの違い - エンジニアの入り口</a></li>
+<li><a href="https://eng-entrance.com/linux_birth">【初心者向け】Linuxの歴史解説！ OS誕生からLINUXへ - エンジニアの入り口</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a> - MINIXについての節。</li>
+<li><a href="https://ja.wikipedia.org/wiki/UNIX">UNIX - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/BSD">BSD - Wikipedia</a></li>
+</ul>
+
+<h1>メーリングリストの投稿</h1>
+<h2>最初のアナウンス</h2>
+<p><a href="http://www.thelinuxdaily.com/2010/04/the-first-linux-announcement-from-linus-torvalds/">The First Linux Announcement from Linus Torvalds</a>より引用。</p>
+<blockquote class="inyou1">
+<pre>
+  From: torvalds@klaava.Helsinki.FI (Linus Benedict Torvalds)
+  Newsgroups: comp.os.minix
+  Subject: What would you like to see most in minix?
+  Summary: small poll for my new operating system
+  Message-ID: &lt;1991Aug25.205708.9541@klaava.Helsinki.FI&gt;
+  Date: 25 Aug 91 20:57:08 GMT
+  Organization: University of Helsinki
+
+
+  Hello everybody out there using minix -
+
+  I'm doing a (free) operating system (just a hobby, won't be big and
+  professional like gnu) for 386(486) AT clones.  This has been brewing
+  since april, and is starting to get ready.  I'd like any feedback on
+  things people like/dislike in minix, as my OS resembles it somewhat
+  (same physical layout of the file-system (due to practical reasons)
+  among other things).
+
+  I've currently ported bash(1.08) and gcc(1.40), and things seem to work.
+  This implies that I'll get something practical within a few months, and
+  I'd like to know what features most people would want.  Any suggestions
+  are welcome, but I won't promise I'll implement them :-)
+
+                Linus (torvalds@kruuna.helsinki.fi)
+
+  PS.  Yes - it's free of any minix code, and it has a multi-threaded fs.
+  It is NOT protable (uses 386 task switching etc), and it probably never
+  will support anything other than AT-harddisks, as that's all I have :-(.
+</pre>
+</blockquote>
+<ul>
+<li><a href="https://groups.google.com/forum/#!msg/comp.os.minix/dlNtH7RRrGA/SwRavCzVE7gJ">What would you like to see most in minix?</a> - Google Groupsから実際のメールが見れます。</li>
+<li><a href="https://www.cs.cmu.edu/~awb/linux.history.html">LINUX's History by Linus Torvalds</a></li>
+<li><a href="https://gigazine.net/news/20150826-linus-told-how-linux-born/">Linuxはどのようにして生まれたのかをリーナス・トーバルズの述懐から紐解く - GIGAZINE</a></li>
+</ul>
+
+<h2>トーバルズとタネンバウムの議論</h2>
+<p>Linux is Obsolete.(Linus Tanenbaum Debate) - 『ディベート：リナックスは時代遅れだ』 - Andrew Tanenbaum教授とLinus Torvaldsの議論。</p>
+<ul>
+<li><a href="https://www.oreilly.co.jp/BOOK/osp/OpenSource_Web_Version/appen_A/appen_A.html"> Linux is Obsolete.(Linus Tanenbaum Debate)</a></li>
+</ul>
+
+<h1>Linuxとオープン開発</h1>
+<h2>Linuxの開発が面白かった理由</h2>
+<p>Linuxの開発が面白かった理由は、僕は2つあると思います。</p>
+<p>第一に、リーナス・トーバルズに対して、多くの貢献者が手助けをした、ということ。先陣を切って開発するトーバルズに対し、多くの有能プログラマが手助けをする、そのことが「インターネットの革新性」となって面白かった、というのが第一の理由です。</p>
+<p>第二に、Linuxカーネルが使い物になるぐらい高品質だった、ということ。GNUのツールをカーネルに乗せたことで、Linuxカーネルはすぐに実用的なものになりました。作るべきは、カーネルだけで良かったのです。リーナスだけでは作れなかった部分を、多くのLinuxカーネルやGNUの貢献者がコードやソフトウェアを寄贈し、そのことによってLinuxは実用的な品質を手に入れ、「まるで片手間のプログラマたちの献身的な手間の貢献だけで、超一流のOSが生まれた」という、エリック・レイモンドの言う「Linuxは破壊的存在なり」という側面がクローズアップされました。</p>
+<p>開発体制がオープンだったことは、当時はネットでの共同開発ということ自体が珍しかったというだけで、僕は大きな理由ではないと思います。ツイッターやFacebookが同じことを「まるで猿のように」やっているからです。彼らは、頭を全く使わないソーシャル・コミュニケーションを楽しんでいます。そう、Linuxはその前衛的な存在でした。</p>
+
+<h2>Linuxカーネルの開発過程</h2>
+<p>Linuxカーネルの開発過程について、Plamo Linux開発者のこじまみつひろ氏によって記事が公開されており、参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0082">第82回　Linuxの成長過程をふりかえる［その1］：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0083">第83回　Linuxの成長過程をふりかえる［その2］：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0084">第84回　Linuxの成長過程をふりかえる［その3］：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0085">第85回　Linuxの成長過程をふりかえる［その4］：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0087">第87回　Linuxの成長過程をふりかえる［その5］：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0088">第88回　Linuxの成長過程をふりかえる［その6］：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0089">第89回　Linuxの成長過程をふりかえる（おまけ）：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0090">第90回　Linuxの成長過程をふりかえる（おまけ2）：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h1>著名な開発者</h1>
+<p><a href="linux_people.html">Linux 著名人</a>を参照のこと。</p>
+
+<h1>Linuxコミュニティ</h1>
+<h2>さまざまな人々の集まる場所</h2>
+<p><!--[過去の日記]--><a href="../../diary/2018.01.05.html">2018-01-05</a>より。</p>
+<blockquote class="inyou2">
+<p>オープンソースは、標準技術を公開する、という意味で正しい。一度作ったコードを再利用出来るようにするなら、外部から利用しやすいコンポーネントにするか、あるいはオープンソースにすべきだ。</p>
+<p>Linuxを意味がないとは言うが、逆に意味がないのが優れている。オタク、ハッカー、自分勝手な人間、小さなコードの貢献者、何でもかんでも作る人間、オープンソース企業、エンタープライズ企業、サーバーやサービスの会社、研究施設の研究者など、色んな人間が作っている。プロジェクトは沢山ある。</p>
+<p>プロジェクトも、Linuxカーネルのようにさまざまな人間がやっているのをリーナスがまとめているものから、GNUのように理想のために作っているもの、Red Hatのように会社が作るもの、KDEとGNOMEのように競争しているものなど、色んなプロジェクトがある。</p>
+<p>GNUは原理主義的なところがあるが、何故かGNUに共感する人間は多い。オープンソースとフリーソフトウェアは仲良くやりながら対立している。</p>
+<p>オープンソースというと、機能の発展や開発体制に目が行きがちだが、フリーソフトウェアはそんなものは目指していない。ライセンスを厳密に守り、みんなのものにすることを目指している。だが、誰のものでもない素晴らしいものを作るという点で、両者は協力している。</p>
+<p>本当は、Linuxの開発者とGNUの開発者は会社のように分かれているわけではなく、重なる部分も多い。</p>
+<p>Linux的なオープンソースの良い点は、自発的な協力者によってどんどん発展すること。これはとても楽しい。だから、会社の協力者も節操なく受け入れる。オープンにすることで、どんどんコードが改良される。だが、Netscapeのような失敗例もある。</p>
+</blockquote>
+<p>さまざまな人々が集まっているのは今でも同じで、企業の開発するRed Hatとある意味でアフリカの慈善団体のような集団であるUbuntuが、それぞれ違ったやり方でオープンソースソフトウェアをどんどん作ってLinuxを改良している。これはとても面白い、そして稀な現象である。</p>
+
+<h2>パソコン(PC)とは革命である</h2>
+<p>昔のLinux関連の文章を見ていると、エリート聖職者階級の大きなコンピュータではなく、安価で簡単に作れるパソコンという発想は、革命的でした。</p>
+<p><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-images/frame.html">The Linux Kernel</a>でもそうした話が出てきます。</p>
+<p><a href="../hardware/old_computer2.html">古いコンピュータ（２．パソコン）</a>や<a href="../hardware/intel.html">Intel</a>も参照のこと。</p>
+
+<h2>GNUという「無償開発ツール」</h2>
+<p>Linuxがこれほど大きな運動になったのは、GNUの開発ツールであるgccやmakeなどを既にGNUが無償で配布していたからだ。</p>
+<p>リーナスはただ本の情報に基づいて、自分の作りたいものを作っただけだが、それをネットに公開したのが大きかった。</p>
+<p>誰もがGNUの無償ツールを使って、Linuxの開発を行うことが出来た。</p>
+<p>だから、Windowsでも同じようにVisual C++がもし無料で配布されていたら、おそらくどこの国でもリーナスと同じ人間が現れるだろう。</p>
+<p>そのためには、Windows本体もオープンソースにする必要があるかもしれないが、僕は必ずしもないと思う。</p>
+<p>なぜなら、Windows自体をみんなで書いてしまえば良いからだ。</p>
+<p><a href="gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+
+<h1>歴史的ソフトウェア</h1>
+<h2>Linux Kernel 2.x</h2>
+<p>昔は、Linuxカーネルはメジャーバージョンの2の次に偶数でマイナーバージョンを付けるのが慣習でした。</p>
+<p>2.0, 2.2, 2.4, 2.6など。特に、2.4や2.6は大きなバージョンアップとして、Linuxコミュニティの期待を背負いました。</p>
+<p><a href="linux_kernel.html">Linux カーネル開発</a>を参照のこと。</p>
+
+<h2>XFree86</h2>
+<p>昔の、フリー版のX11の実装。そのうち、プロジェクト間の問題が起きて、X.orgが復活しました。</p>
+<p><a href="linux_x11.html">X11 (X Window System)</a>を参照のこと。</p>
+
+<h2>kinput2 + canna</h2>
+<p>昔の本当に未熟だった頃の日本語変換エンジン。</p>
+<p><a href="linux_japanese_input.html">日本語入力</a>を参照のこと。</p>
+
+<h2>IIIMF / SCIM / uim + anthy</h2>
+<p>昔の次世代の入力フレームワーク。今では、mozc / anthy + Fcitx / IBusを使うのが一般的。</p>
+<p><a href="linux_japanese_input.html">日本語入力</a>を参照のこと。</p>
+
+<h2>Bonobo</h2>
+<p>GNOMEはBonoboによるコンポーネント・オブジェクト・モデルがその冠するところでありましたが、最近はもっと違う技術を使うようです。</p>
+<p><a href="gnome.html">GNOME</a>や<a href="../network/corba.html">CORBA</a>を参照のこと。</p>
+
+<h2>Mozilla</h2>
+<p>昔のMozillaは重かったですが、きちんと動く唯一のオープンソースのLinuxのWebブラウザでした。</p>
+<p><a href="mozilla.html">Mozilla</a>を参照のこと。</p>
+
+<h2>Netscape</h2>
+<p>Microsoftにブラウザ戦争で負けた悲惨な会社。だが、負けた上でそのソースコードを公開し、Mozilla.orgを創始した、と言う役割は、今考えると偉大だった。</p>
+<p>僕はやけにこのNetscapeの歴史が好きで、以下の文章が面白かった。読んでみることをお勧めする。</p>
+<ul>
+<li><a href="http://cruel.org/jwz/nomo.html">辞職そして追悼。</a></li>
+<li><a href="http://cruel.org/jwz/aol.html">ネットスケープと aol.</a></li>
+<li><a href="http://cruel.org/jwz/aoltw.html">ネットスケープと aol/time-warner, パート2.</a></li>
+</ul>
+<p><a href="mozilla.html">Mozilla</a>を参照のこと。</p>
+
+<h2>統合デスクトップ環境</h2>
+<p>GNOMEやKDEのことを昔は統合デスクトップ環境と言っていた。重くて嫌われていたが、結構LinuxもWindowsと同等の環境になるものだ、とみんな信じきっていた。</p>
+<p><a href="gnome.html">GNOME</a>や<a href="kde.html">KDE</a>を参照のこと。</p>
+
+<h2>夢のGNOME 3</h2>
+<p>GNOME 3は夢でしたが、出てきたものを見ると劣悪だった。Windows Vistaや8と良く似ている。</p>
+<p><a href="gnome.html">GNOME</a>を参照のこと。</p>
+
+<h2>CVS / Subversion / 他いろいろ</h2>
+<p>昔のCVSと言うバージョン管理システムは、きちんと動く代わり設計が劣悪だった。</p>
+<p>Subversionなどを遍歴したのちに、リーナス・トーバルズの作ったgitが標準になった。</p>
+<p><a href="../prog_lang/scm.html">バージョン管理システム</a>や<a href="../prog_lang/git.html">Git</a>を参照のこと。</p>
+
+<h2>さざなみフォント / IPAフォント</h2>
+<p>昔は、オープンソースのフォントと言うと、なかなかなかった。東風フォントが使えなくなって生まれたのがさざなみフォントである。</p>
+<p><a href="linux_font.html">Linuxフォント</a>を参照のこと。</p>
+
+<h2>Apache + Perl/CGI + テキストデータファイル</h2>
+<p>昔は、サーバーソフトウェアは今よりも単純で、CGIとしてPerlが動いていた。SQLも無いわけではなかったが、テキスト形式にデータを格納するのが普通だった。</p>
+<p><a href="../network/apache.html">Apache</a>や<a href="../network/cgi.html">CGI</a>や<a href="../prog_lang/perl_cgi.html">Perl/CGI</a>を参照のこと。</p>
+
+<h2>Kylix</h2>
+<p>ボーランドがLinux向けに出していた、クロスプラットフォームなIDE。</p>
+<p><a href="../prog_lang/delphi.html">Delphi</a>を参照のこと。</p>
+
+<h2>GNU Classpath</h2>
+<p>GNUによるJavaのクラスライブラリの実装。</p>
+<p><a href="../prog_lang/java_openjdk.html">OpenJDK</a>を参照のこと。</p>
+
+<h2>Macromedia Flashとオープンソース版</h2>
+<p>MacromediaはAdobeに買収されましたが、昔はこれがネットでの標準的な動画・アニメーションのプラットフォームだった。</p>
+<p><a href="../art/flash.html">FLASH</a>を参照のこと。</p>
+
+<h2>GCC 2.95</h2>
+<p>GCCの昔のバージョン。</p>
+<p><a href="gnu_toolchain.html">GNUツールチェイン</a>を参照のこと。</p>
+
+<h2>Looking Glass</h2>
+<p>Sunによる次世代の3Dデスクトップ環境。</p>
+<p><a href="../unix/sun.html">Sun</a>を参照のこと。</p>
+
+<h2>ReiserFSとExt3fs</h2>
+<p>どちらもジャーナリングファイルシステムです。ライバル関係にあった。</p>
+<p><a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>や<a href="linux_kernel_fs_ext2.html">ext2</a>や<a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a>を参照のこと。</p>
+
+<h1>歴史的会社</h1>
+<h2>MySQL</h2>
+<p>オープンソースのSQLサーバーを作っていた会社。</p>
+<p><a href="../db/mysql.html">MySQL</a>を参照のこと。</p>
+
+<h2>Trolltech</h2>
+<p>KDEで採用されているGUIツールキットQtを作っていた会社。</p>
+<p><a href="qt.html">Qt</a>を参照のこと。</p>
+
+<h2>Zend Technologies</h2>
+<p>PHPを作っている会社。なくなったのかと思いきや、どうやら今でもあるらしい。</p>
+<p><a href="../prog_lang/php.html">PHP</a>を参照のこと。</p>
+
+<h2>Ximian</h2>
+<p>GNOMEやMonoを作っていた会社。</p>
+<p><a href="ximian.html">Ximian</a>を参照のこと。</p>
+
+<h2>SuSE</h2>
+<p>ドイツのLinuxディストリビューター。</p>
+<p><a href="suse.html">SUSE</a>を参照のこと。</p>
+
+<h2>Novell</h2>
+<p>XimianとSuSEを買収した会社。昔はNetWareと言うグループ管理ネットワークソフトウェアが有名だったらしい。</p>
+<p><a href="suse">SUSE</a>を参照のこと。</p>
+
+<h2>Sun Microsystems</h2>
+<p>Solarisなど、UNIX関係で有名な会社。</p>
+<p><a href="../unix/sun.html">Sun</a>を参照のこと。</p>
+
+<h1>歴史的ディストリビューション</h1>
+<h2>Red Hat Linux</h2>
+<p>昔はLinuxの代名詞だった、標準的ディストリビューターだった。今は、なくなってFedoraとRHELへ移行している。</p>
+<p><a href="redhat.html">Red Hat</a>を参照のこと。</p>
+
+<h2>Slackware</h2>
+<p>今でもあるのは確かだが、老舗のディストリビューター。</p>
+<p><a href="linux_distro.html">Linuxディストリビューション</a>を参照のこと。</p>
+
+<h2>SuSE Linux</h2>
+<p>ドイツのLinuxディストリビューション。SlackwareをもとにRPM化を行い、YaSTと呼ばれる統合設定ツールを備えている。</p>
+<p><a href="suse.html">SUSE</a>を参照のこと。</p>
+
+<h2>Mandrake Linux</h2>
+<p>フランスのLinuxディストリビューション。「まんだらけ」ではなく「マンドレーク」と読む。</p>
+<p><a href="linux_distro.html">Linuxディストリビューション</a>を参照のこと。</p>
+
+<h2>Conectiva Linux</h2>
+<p>ブラジルのLinuxディストリビューション。Mandrake Linuxと合併してMandriva Linuxとなった。</p>
+
+<h2>Vine Linux</h2>
+<p>国産Linuxディストリビューションとして、昔は有名だった。最近は、開発リソースが少ない。日本人にはLinux開発者が少ない。</p>
+<p><a href="linux_distro_japan.html">日本向けLinuxディストリビューション</a>を参照のこと。</p>
+
+<h2>Turbolinux</h2>
+<p>日本の企業主導による国産Linuxディストリビューションとして有名だったが、野球問題で知られているライブドアに買収されてから、名前をあまり聞かない。</p>
+<p><a href="linux_distro_japan.html">日本向けLinuxディストリビューション</a>を参照のこと。</p>
+
+<h2>Plamo Linux</h2>
+<p>Slackwareをベースとした、楽しさを重視する国産Linuxディストリビューション。</p>
+<p><a href="plamo_linux.html">Plamo Linux</a>を参照のこと。</p>
+
+<h2>Kondara MNU/Linux</h2>
+<p>国産Linuxディストリビューション。もう存在しない。昔、Linuxの日本語関連のパッチやパッケージの開発に協力していた。Momonga Linuxが後継。</p>
+<p><a href="linux_distro_japan.html">日本向けLinuxディストリビューション</a>を参照のこと。</p>
+
+<h2>LASER5 Linux</h2>
+<p>昔存在したLinuxディストリビューション。</p>
+
+<h2>Lindows</h2>
+<p>昔存在したLinuxディストリビューション。僕は買ってインストールしたことがあります。日本版はライブドアの前身の会社が作っていた。</p>
+
+<h1>その他のリンク集</h1>
+<h2>オープンソースの歴史</h2>
+<p>オープンソース全般の歴史としては、Wikipediaの<a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%AE%E6%AD%B4%E5%8F%B2">オープンソースソフトウェアの歴史</a>や<a href="https://ja.wikipedia.org/wiki/Linux%E3%81%AE%E6%AD%B4%E5%8F%B2">Linuxの歴史</a>が詳しい。僕が知らなかったこともいろいろと書いてある。</p>
+
+<h1>関連ページ</h1>
+<h2>コンピュータの歴史</h2>
+<p>コンピュータの歴史については<a href="../hardware/old_computer.html">古いコンピュータ（１．メインフレーム・ミニコン）</a>や<a href="../hardware/old_computer2.html">古いコンピュータ（２．パソコン）</a>や<a href="../prog_lang/computer_science.html">コンピュータ科学</a>を参照のこと。</p>
+
+<h2>UNIXの歴史</h2>
+<p>UNIXの歴史については<a href="../unix/unix.html">UNIX</a>や<a href="../unix/multics.html">Multics</a>や<a href="../unix/minix.html">MINIX</a>や<a href="gnu.html">GNU</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

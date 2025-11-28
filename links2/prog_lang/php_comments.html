@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>PHP関連の世界観（A．戯言） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PHPの世界観（A．戯言）</h1>
+<p>PHPによるプログラミングに関する世界観（A．戯言）です。</p>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考にしています。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="php.html">PHP</a></li>
+<ul>
+<li><a href="php_lang.html">１．言語</a></li>
+<li><a href="php_db.html">２．データベース</a></li>
+<li><a href="php_security.html">３．セキュリティ</a></li>
+<li><a href="php_framework.html">４．フレームワーク</a></li>
+</ul>
+<li><b>A．戯言</b></li>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>基本</h1>
+<h2>PHPの開発は簡単</h2>
+<p>実際、PHPの開発は簡単です。なぜなら、HTMLの中に埋め込んで、echo()で表示するだけでいいからです。</p>
+<p>もっと賢くしたいなら、関数で文字列を返すようにして、それをさまざまな場所から呼び出して、その結果をecho()でその都度表示することもできます。</p>
+<p>文字列を表示するだけではなく、関数からHTMLコードを返して表示することだって簡単です。</p>
+<p>関数をたくさん作れば、自由自在に関数をさまざまなところから呼び出すこともできます。</p>
+<p>また、HTMLが不得意とすることのひとつに、「繰り返しや条件分岐などのフロー制御」が挙げられますが、まさしくPHPを使うことで、繰り返し表の列と行を表示することができます。</p>
+<p>さらに応用すると、「HTMLとSQLの融合」のようなことができます。全体のビューはHTMLで作っておいて、ひとつひとつのデータ、たとえば掲示板のコメントのどうなデータを、データベースにリアルタイムで記録し、この情報をHTMLの中で表示するのです。</p>
+<p>先ほどの繰り返しや条件分岐を使って、SQLによるデータベースレコードからデータを取り出して、それを反映したHTMLを繰り返しで整形して表示することもできます。</p>
+<p>また、PHPでは、スーパーグローバル変数を使って、直観的にフォーム入力を受け取ることができます。セキュリティに注意する必要がありますが、HTMLだけではこれは実現できません。</p>
+<p>最近のPHPでは、オブジェクト指向の設計を行うことも可能ですが、まずはあまり構えずに、このように関数的にPHPを使うのが良いと思います。</p>
+<p>たとえば、ユーザー名を取得するのであれば、ユーザー名を取得するだけの関数を作って、この関数を別の関数から呼び出すことで、ユーザー名を取得するという「問題」は解決されます。</p>
+<p>動画のリストを作るのであっても、それだけの関数を作ります。コメント表示機能、コメント投稿機能、検索機能、いいね機能、フォロー機能、設定変更機能、なんでもかんでも関数を作って「問題解決」を行います。</p>
+<p>しかしながら、この方法では、関数に一時的にローカル変数を作ることはできますが、関数と関数の間でデータを共有したり保持したり、といったことが難しくなってしまうでしょう。結局、そうしたことを実現するには、やはりオブジェクト指向を用いたクラスの設計が重要になってくるでしょう。</p>
+<p>CGIやPHPの特徴として、ステートレス、すなわち状態がないことが言えます。そのため、Webアプリケーションでは、なんらかの外部のデータファイルに出力しない限り、あるデータをいつまでも保持し続ける、ということが不得意です。しかしながら、PHPではSQLデータベースにデータを永続化できます。O/Rマッピングのような技術を使えば、データを永続化できます。しかしながら、そのように本当にサービスが高度になってくると、すべてを自力で実装するのは大変です。そのために、フレームワークを使うことができるでしょう。</p>
+
+<h2>ロジックとビューを分離しよう</h2>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>でも書かれているように、ロジックとビューをできるだけ分離しましょう。</p>
+<p>PHPの良さとは、「HTMLの中にコードを埋め込める」ということでした。</p>
+<p>ですが、なんでもかんでもHTMLの中に埋め込んでしまうと、保守性の悪いプログラムができてしまいます。</p>
+<p>また、デザイナーとエンジニアで作業を分担する際に、デザイナーはデザイン用のコードファイル、エンジニアはロジック用のコードファイルをそれぞれ別のファイルとして編集できるようにしたほうがよいでしょう。</p>
+<p>なので、いくらPHPがHTMLの中にコードを埋め込めるといっても、ひとつのhoge.phpファイルの中にすべてを詰め込むようなアプリケーションは避けるべきです。</p>
+<p>できるだけ、ロジックとビューは分離するようにしましょう。</p>
+
+<h2>ロジックとデータを分離しよう</h2>
+<p>また、ロジックとビューを分離するのと同様に、ロジックとデータも分離しましょう。</p>
+<p>プログラムコードの中にデータ要素がすべて書かれていると、データを書き換えるだけの作業であっても、データと一緒にプログラムコードファイルを編集しなければなりません。</p>
+<p>また、繰り返し、データがプログラムのさまざまな場所に点在するようになると、さらに作業が難しくなります。</p>
+<p>なので、ロジックにはプログラムロジックだけを記述し、データはひとつの場所に、繰り返し要素をできるだけなくした上で記述し、ロジックとデータを分離しましょう。</p>
+<p>MVCフレームワークでは、データベースサーバーを使う際に、データベースサーバーに接続する部分や、特定のデータベーステーブルの設計に依存する部分は、ロジックとは別に「モデル」として分離します。</p>
+<p>理想的なプログラムとは、ロジックとビューとデータ（モデル）がそれぞれ分離され、保守しやすいように整理されたプログラムです。PHPを開発する際には、ビューもデータもロジックもごちゃ混ぜにするのではなく、それぞれ別のファイルに分離して、それぞれのファイルの中で保守しやすいように記述することが推奨されます。</p>
+
+<h1>余談</h1>
+<h2>PHPはダメ言語と良く言われる</h2>
+<p>プログラマの間で、PHPを推す声は強いです。たとえば、Laravelのような優れたフレームワークがあることが、このような声の由来です。</p>
+<p>ですが、同時に、PHPはダメ言語と良く言われます。</p>
+<p>僕はその理由をあまり知りませんが、言語設計やセキュリティなどの理由から、最近はPHPは「仕事で使う機会は多いが、良い言語とは思わない」という人が増えています。</p>
+<p>本当のハッカーになりたいのであれば、Pythonを使いましょう。特にDjangoはWebフレームワークとしてとても優れています。</p>
+
+<h2>LAMPスタックの中核</h2>
+<p>PHPは、Linux + Apache + MySQL + PHP (Perl/Python)のLAMPスタックの中核に位置する言語です。</p>
+<p>軽量で簡単に作れて便利なLAMPスタックですが、最近はWordPressの登場やRuby on RailsをはじめとするWebフレームワークの進歩があり、LAMPをじかで使うことは少なくなっています。</p>
+<p><a href="../network/apache.html">Apache</a>や<a href="../db/mysql.html">MySQL</a>も参照のこと。</p>
+
+<h2>扱う技術の豊富さはナンバーワン</h2>
+<p>PHPは、Web上のツールからスタートしたこともあり、「馬鹿な言語」だと言われることもあるが、HTML、XML、CSS、SQL、JavaScript、JSON、そしてMVCフレームワークやWordPressなど、その技術の豊富さはナンバーワンである。</p>
+<p>セキュリティなどの知らなければならない技術上の知識も多いし、HTTPサーバーやデータベースの常識も求められる。</p>
+<p>特に、たとえばバーチャルホストなど、Apacheの設定でさまざまな指定をすることが多く、とてもたくさんの技術がある。一部では、「人間と見分けがつかない」と言う人間が多い。</p>
+
+<h2>基本を押さえておくことは大切</h2>
+<p>Ruby on RailsやDjangoのようなWebフレームワークの時代において、PHPは既に必要のない技術なのでしょうか。</p>
+<p>それは間違いです。なぜなら、「基本を押さえておくことは大切」だからです。</p>
+<p>実際、Webフレームワークを使っていても、「このフレームワークでは簡単にできないけれど、自分でPHPコードを書けばすぐにできるような処理」というのはあると思います。</p>
+<p>また、Ruby on Railsのような技術は、新しい技術が生まれては消えていき、すぐに古いものになります。</p>
+<p>そうした時、PHPのような「基本となる技術のやり方」を知っておくと、長い間通用する「本当のスキル」というのが身につきます。</p>
+<p>PHPができなくてもRailsの開発はできるでしょうが、PHPができることで、RailsやWebの仕組みをより深く広い視点で、自分の「力」として見ることはできると思います。</p>
+<p>よって、Railsを勉強するのであっても、PHPを先に勉強しておくことは、とてもためになります。同じことを言いますが、Railsの理解がより深く、広いものになるでしょう。</p>
+
+<h2>PHP 8.0</h2>
+<p>PHP 8.0がリリースされましたが、今回の目玉はJITによる高速化です。PHPをネイティブコードにコンパイルして使いまわすことで、高速化されます。</p>
+<p><a href="https://qiita.com/rana_kualu/items/fe7998fbe773544d5d25">一部</a>では「PHP、これはもうコンパイル言語なのでは？」と言われています。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

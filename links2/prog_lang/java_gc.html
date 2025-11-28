@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観２C（ガーベッジコレクションと例外） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観２C（ガーベッジコレクションと例外）</h1>
+<p>Javaによるプログラミングに関する世界観２C（ガーベッジコレクションと例外）です。<a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="java.html">Java（１．文法）</a></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><a href="java_oop_interface.html">２B．インターフェース</a></li>
+<li><b>２C．ガーベッジコレクションと例外</b></li>
+</ul>
+<li><a href="java_lib.html">３．クラスライブラリ</a></li>
+<ul>
+<li><a href="java_lib_io.html">３A．入出力</a></li>
+<li><a href="java_lib_list.html">３B．コレクションと配列</a></li>
+<li><a href="java_lib_string.html">３C．文字列</a></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><a href="java_lib_xml.html">３E．XML</a></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>GC</h1>
+<h2>ガーベッジコレクションと例外</h2>
+<p>Javaでは、自分でメモリを解放しなくても、ガーベッジコレクションによって参照がなくなったオブジェクトを自動で破棄してくれる。</p>
+<p>また、ファイルオープンのエラー処理などは例外が行ってくれる。</p>
+<p>ガーベッジコレクションと例外があるおかげで、C/C++でプログラミングを行うのとは比べ物にならないぐらい楽で安全にプログラミングができる。</p>
+<p>その代わり、スピードや効率は遅いし、いつどのような状況でGCが行われるのかを熟知しておく必要がある。</p>
+<p><a href="c_pointer.html">C言語（配列とポインタ）</a>と<a href="programming_pointer.html">プログラミング作法（ポインタとメモリ管理）</a>も参照のこと。</p>
+
+<h2>ガーベッジコレクションとは</h2>
+<p>ガーベッジコレクションとは、Javaの参照されなくなったオブジェクトを回収し、空きメモリとして再利用する機構のこと。</p>
+<p>オブジェクトのインスタンス変数が、どこからも参照されなくなった場合、すなわち変数名としてのとっかかりが消えて「幽霊状態」になった場合、Java仮想マシンはそれをガーベッジ（ゴミ）とみなす。</p>
+<p>Java仮想マシンの使用するシステムの空きメモリが不足してきた時に、このガーベッジを掃除し、使用されていたメモリとデータを解放・消去して、空きメモリとして再利用する。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+HogeObject hoge = new HogeObject();
+hoge = null;
+</pre>
+<p>とした場合、一行目で作ったHogeObjectは二行目でhogeにnullを代入した時点で、参照がどこからもなくなり、ガーベッジとみなされる。</p>
+<p>注意点として、少しでも参照が残っているオブジェクトはガーベッジとはみなされない。また、空きメモリが足りなくならない限り、ガーベッジコレクション（GC）は起きない。</p>
+<p>プログラムの中で、強制的に手動でGCを起こすためには、java.lang.System.gc()メソッドを実行する。java.lang.*パッケージは何もしなくてもインポートされているので、単にSystem.gc()と書けばよい。</p>
+<p>GCが起きた時に行いたい処理がある場合、finalize()メソッドに書くことができる。</p>
+<p>（以上は<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://takeharu.boo.jp/java61.html">はじめてのJava入門[クラスの基礎(ガーベジコレクション)]</a></li>
+</ul>
+
+<h2>GCにおいてもオブジェクトの寿命管理は重要</h2>
+<p>Javaにはガーベッジコレクションがあります。しかしながら、GCにおいても、「いつガーベッジコレクタによってオブジェクトが破棄されるのか」という、オブジェクトの寿命を把握し、管理することはとても重要です。</p>
+<p>C/C++ではmalloc()やfree()で行っていたため、メモリ解放をし忘れる危険性はありましたが、自分でどのタイミングでメモリ解放を行うのか、きちんと知った上でプログラミングを行えました。</p>
+<p>これに対して、GCを行う言語では、「いつGCがメモリを解放するのか」を常に意識し、間違えないようにプログラミングを行わなければいけません。</p>
+<p>GCによって、「プログラムの内部で自分で取得したものは必ず自分で破棄する」という伝統的なプログラミングスタイルは一変しましたが、逆にGCのタイミングを知らなければならないため、一部では「malloc()とfree()を返してほしい」といった意見すらあるのです。</p>
+<p>これに対して、<a href="rust.html">Rust</a>のような新しいプログラミング言語では、時代の情勢に反してGCがありません。オブジェクトの寿命をきちんと厳密に正しく管理することで、GCが必要なくなるのです。</p>
+
+<h2>メモリリークの心配をしなくていい</h2>
+<p>Javaのようなガーベッジコレクションのある言語の何がいいか、それはメモリリークの心配をする必要がないということです。</p>
+<p>メモリリークとは、「メモリを使いすぎ状態になること」です。メモリをmalloc()などで動的に取得しておいて、free()などで解放するのをし忘れてしまい、必要のないメモリを確保し続けて、結果システムのリソースを使い果たしてシステム全体に影響がでるようなバグのことです。</p>
+<p>C/C++でも、きちんとメモリの解放をすれば、メモリリークは起きません。ですが、大規模な並列処理プログラムになってくると、「このポインタは解放してよかったのか、それともしてはならないのか」ということが、コードを書いているプログラマにとっても、実際に動いているプログラムにとっても、分からなくなってしまうのです。</p>
+<p>このような時、参照カウンタなどを使ったガーベッジコレクションは、どこからも参照のなくなったデータを自動的に破棄してくれます。プログラマが自分で解放するのを忘れても、メモリを使いすぎ状態になることがないのです。</p>
+<p>もちろん、デメリットもあります。ガーベッジコレクションはパフォーマンスを低下させます。自分で手動でメモリを確保・破棄するC++のプログラムは、ある意味でパフォーマンス最優先のところがあり、たとえばたくさんのメモリを動的に確保する画像処理アプリケーションなどでは、GCを使わないほうがプログラムのスピードは速くなります。</p>
+<p>ですが、スピードがそんなに必要のないプログラムで、複雑かつ大規模なプログラムであったり、あるいは参照を管理することが人間の手では不可能な高度な並列処理プログラムだったりすると、C++のように「自ら取得したものは自ら解放する」という言語では、プログラムを記述することができなくなってしまいます。</p>
+<p>要するに、スピードを重視するか、それとも安全性を重視するかということです。なので、絶対に安全性が必要で、スピードはある程度あればいいようなエンタープライズなアプリケーションであった場合、C++よりもJavaを使ったほうが適切である場合があります。たとえば、OS（そもそもOSはCのような低水準言語でしか開発できない）やWebブラウザや画像処理プログラムならC/C++で開発すべきでしょうが、金融機関のバッチ処理プログラムなどはJavaで開発すべきでしょう。</p>
+
+<h1>例外</h1>
+<h2>例外</h2>
+<p>例外。try構文の途中でエラーが出た時は、自動的にcatch文がそれを「捕捉」する。</p>
+<pre class="prettyprint">
+try {
+    ...
+} catch ( ... ) {
+    ...
+}
+</pre>
+<p>後日注記：例外を吐くにはthrowを使う。独自の例外クラスを作るにはExceptionクラスを継承する。その場でtry-catchせずにもっと上流の呼び出し側で捕捉する場合はメソッド名にthrowsをつける。</p>
+<p>後日注記：たとえば、例外をthrowで吐いた時、throwsをメソッド名につけることで、そのメソッドを使うユーザがメソッドを呼び出した時に例外をtry-catchすることができる。逆に言えばthrowsがつけられているメソッドを使う時には必ずその例外をtry-catchする必要がある（あるいはさらに上流にthrowsするか）。</p>
+
+<h2>例外をきちんとやるのは面倒くさい</h2>
+<p>Javaの例外は、C++やほかのオブジェクト指向言語にもある機能であり、使いやすく見えますが、意外ときちんと実装するのは面倒くさいです。</p>
+<p>特に、自らの独自の例外を作る際に、その例外クラスを実現するためのソースファイルをわざわざ作らなければなりませんし、その例外を扱うためのさまざまな場所に適切に記述をしなければなりません。</p>
+<p>ですが、Javaの良さというのは、そうした「面倒だけどもきちんと正しく記述すればきちんと動いてくれる」ということです。</p>
+<p>C言語のエラーチェックは、数値の比較を使ったものであり、何も知らない人が見ると、そのエラーチェックの意味を理解することができません。きちんとエラーチェックをしなかった場合、もし想定外の動作をしても対応できず、簡単にバグが生まれます。</p>
+<p>C++にも例外はありますが、Javaほどきちんと設計されたものではなく、リーナス・トーバルズなどは「C++の例外は壊れている」と言います。</p>
+<p>Javaの例外処理は、きちんとやるのは面倒くさいですが、きちんと書くときちんと動きます。面倒くさいと言えど、関数やAPIごとに異なるC言語のエラーチェックよりは使いやすいものであると言えるでしょう。</p>
+<ul>
+<li><a href="https://jp.quora.com/%E3%83%AA%E3%83%BC%E3%83%8A%E3%82%B9-%E3%83%88%E3%83%BC%E3%83%90%E3%83%AB%E3%82%BA%E6%B0%8F%E3%81%8C%E8%A8%80%E3%81%86-C-%E3%81%AE%E4%BE%8B%E5%A4%96%E5%87%A6%E7%90%86%E3%81%AF%E5%A3%8A%E3%82%8C%E3%81%A6%E3%81%84?share=1">リーナス・トーバルズ氏が言う「C++の例外処理は壊れている」とはどういう意味ですか？ - Quora</a></li>
+<li><a href="https://jp.quora.com/%E3%83%AA%E3%83%BC%E3%83%8A%E3%82%B9%E3%81%8CC-%E3%82%92%E5%AB%8C%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E7%90%86%E7%94%B1%E3%81%AF%E3%81%AA%E3%82%93%E3%81%A7%E3%81%99%E3%81%8B/answers/177567592?ch=10&share=59ca7fe3&srid=LdRPh">リーナスがC++を嫌っている理由はなんですか？に対するJunji Ueharaさんの回答 - Quora</a></li>
+</ul>
+
+<h1>書籍</h1>
+<h2>参考文献</h2>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a></li>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

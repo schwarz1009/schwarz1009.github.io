@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Lisp関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Lispの世界観</h1>
+<p>Lispによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Lispの基本</h1>
+<h2>LispのS式の例</h2>
+<p>Lispでは、S式と呼ばれる、カッコを多用したコードの記法を行います。</p>
+<p>S式においては、カッコの中の第一要素が関数名（あるいはマクロ名）となり、その後のパラメータはすべて関数の引数となります。</p>
+<p>つまり、</p>
+<pre>
+(関数名 引数1 引数2)
+</pre>
+<p>となります。カッコはネストして入れ子にすることもできます。</p>
+<p>Lispにはさまざまな方言があり、S式で記述するスタイルは変わりませんが、用意されている関数などが異なります。</p>
+<p>Lispの方言のひとつであるCommon Lispでは、自分独自の関数はdefunで宣言します。</p>
+<pre class="prettyprint lang-lisp">
+(defun add100 (x) (+ x 100))
+</pre>
+<p>この関数add100は、数値に100を足し算します（+という別の関数を使っている）。</p>
+<p>これを</p>
+<pre class="prettyprint lang-lisp">
+&gt; (add100 200)
+300
+</pre>
+<p>のように呼び出すことができます。</p>
+<div class="edit_date">
+<p>2024.08.13</p>
+</div>
+
+<h2>Lisp</h2>
+<p>S式によるカッコを多用したプログラミングでおなじみの、Lispについて。</p>
+<p>人工知能の研究で使われることが多い。（最近は、人工知能はPythonのライブラリが豊富でもある。）</p>
+<p>Emacs Lispと言う、テキストエディタEmacsの拡張言語として採用されていることで有名で、EmacsはLispによってコマンドシェルからメールクライアントまで、何でも出来る万能アプリケーションになる。</p>
+<p>コンパイラが作りやすいことで有名で、たくさんの方言がある。主に使われているのは、Common LispとSchemeである。</p>
+<p>あまり使われていないが、GNU公式のマクロ拡張言語として、Guileがある。</p>
+
+<h2>プログラム自身をS式のデータにできる</h2>
+<p>Lispでは、プログラム自身がS式と呼ばれる「括弧をたくさん使うリスト型のデータ」にすることができます。</p>
+<p>これは、Lispの持つ、「プログラム自身をデータにできる」という強力な特徴です。</p>
+<p>たとえば、Emacs Lispでは、Emacsというテキストエディタの中で、Lispをマクロとして実行できます。このため、Lispを使って「Emacsを拡張する」ことができます。</p>
+<p>また、プログラムをデータとして扱うことで、人工知能・AIの開発にも、大きくLispは貢献しています。</p>
+<p>こうしたプログラムをデータとして扱うのは、数学的です。たとえば、足し算が1+2=3である時、1と2と3はデータであり、必要なのは+という「基本となる関数」だけである、ということが言えます。Lisp的には、</p>
+<pre class="prettyprint lang-lisp">
+(+ 1 2)
+</pre>
+<p>という簡単なS式でこのプログラムを表現できると同時に、この(+ 1 2)それ自体がひとつのS式によるデータであり、このデータを他の関数に送ったりするなどが可能です。プログラム＝データ、という発想がLispの根底にあると言えるでしょう。</p>
+<p>また、Lispの神髄は、ただプログラムをデータとして扱えるだけではなく、「データを作成するように、プログラムを作成できる」ということです。プログラムからプログラムを作成することが簡単にできる、これが、Lispの人工知能・AIとの親和性が高い理由です。</p>
+<div class="edit_date">
+<p>2024.08.13編集</p>
+</div>
+
+<h2>全て関数で行う</h2>
+<p>Lispは、基本的に全てのプログラムを関数とマクロによって行う。関数型言語の先駆である。</p>
+<p>後日注記：Lispは再帰と関わり合いが深い。関数とマクロによってプログラムを記述する際、分岐やループをどのように表現するかは大きな問題となるが、Lispでループを行うためには、自らの関数を関数内部で呼び出す再帰的ループを使う。</p>
+
+<h2>S式</h2>
+<p>S式は、括弧を多用するLispのプログラムコードのスタイル。</p>
+<p>後日注記：S式では、プログラムについてもリストデータについても同じ括弧を使って記述するため、プログラムをリストとして扱ったり、リストをプログラムとして扱ったりすることができる。</p>
+
+<h2>歴史が古い</h2>
+<p>LispはFORTRANに次いで二番目に古いプログラミング言語として知られる。</p>
+<p>後日注記：要するに、FORTRANが生まれた次にLispが生まれた。Lispはプログラミング言語の最初期からある言語でありながら、今でも使われている。</p>
+
+<h1>別ページ</h1>
+<h2>Common Lispの基本</h2>
+<p><a href="common_lisp.html">Common Lisp入門</a>を参照のこと。</p>
+
+<h2>Scheme</h2>
+<p><a href="scheme.html">Scheme</a>を参照のこと。</p>
+
+<h1>Lispいろいろ</h1>
+<h2>eval</h2>
+<p>evalを使うことで、文字列をLispの式として評価できる。Lispはコンパイル言語として作られたが、evalによってインタープリタ言語として使うこともできる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Eval">eval - Wikipedia</a></li>
+</ul>
+<p><a href="reflection.html">リフレクションとeval</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.03.08編集</p>
+</div>
+
+<h2>Lisp処理系を作るのは簡単</h2>
+<p>Lispは処理系を作るのが簡単であると言われる。基本的な字句解析と構文解析、そして変数とevalぐらいしか必要でない。</p>
+<p>ただ僕はLispインタプリタを作ったことがないので、詳しいことは以下を参考にしてほしい。</p>
+<ul>
+<li><a href="https://qiita.com/takl/items/fe5ad17eccc3a9d3f98a">OCamlで動的スコープなLispを作る - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.03.08編集</p>
+</div>
+
+<h2>カッコとインデントについて</h2>
+<p>Lispのカッコとインデントについて。</p>
+<p>基本的に、カッコだけを詳しく読むのではなく、インデントに着目してコードを読むことが必要。</p>
+<p>同じ関数の引数などは、頭を揃えてインデントする（揃えインデント）。関数名に続く引数などは、一定のスペース（空白2つなど）で字下げを行う（深さインデント）。どちらを使うかは場合による。</p>
+<ul>
+<li><a href="https://www.slideshare.net/hayato_hashimoto/lisp-1-12901654">kyotolisp#1 LT3 美しいLispの書き方 (1) | PPT - SlideShare</a></li>
+<li><a href="https://knjname.hateblo.jp/entry/2014/08/05/011249">Lispのカッコは怖くないよ - knjnameのブログ</a></li>
+<li><a href="https://qiita.com/xorphitus/items/64f739e2594caba6eb4d">Lispってどう書くの? #Clojure - Qiita</a></li>
+<li><a href="https://ayatakesi.github.io/emacs/26.3/html/Lisp-Indent.html">GNU Emacs Manual (Japanese Translation): Lisp Indent</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.11.04</p>
+</div>
+
+<h1>Lispのさまざまな特徴</h1>
+<p>（<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>を参考に執筆しました。）</p>
+<h2>プログラムを書けるプログラム</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="../../diary/blog_frey/2020.09.15.html">2020/09/15</a>より。</p>
+<p>また、「プログラミング言語の通りにプログラムを書くだけではなく、プログラミング言語そのものを作ることや、プログラムを書くためのプログラムを書く」といったことが、Lisp界隈では昔から行われている。</p>
+<p>これはLispの大きな特徴である「S式」、すなわちデータもプログラムも同じ「リスト」の形式で書かれるという特徴だが、関数とマクロによって「Lisp言語そのものをLispで拡張できる」というLispでは「プログラミング言語そのものを自分の書きたいプログラムに合わせて作っていく」という方式がとられる。</p>
+<p>このように書かれたプログラムは「ボトムアップ的アプローチ」などとも呼ばれ、TeXなどは最初期のこうしたプログラムであると言われる。</p>
+<p>Lispは抽象度が高く、RubyやPythonに備わっている機能を昔から備えているほか、実行速度も他の高級言語に負けず劣らず速いため、「コードが短くやりたいけどRubyやPythonは遅くて複雑」という人には、Lispはとてもおすすめである。</p>
+
+<h2>Lispの優れた点</h2>
+<p>Lispでは、「プログラミング言語のすべてを関数とマクロで表現する」ということをした結果、「プログラムコードとリストデータが同じ記述で表現できる」という特徴と、「プログラミング言語自体を拡張して自分の好きなプログラミング言語に変更できる」という特徴をあわせもつようになった。</p>
+<p>関数を表現するのもリストデータを表現するのも括弧を使ったS式で表現するため、「プログラムコードをデータとして扱う」、すなわち「プログラム自体をプログラムで扱う」ということが容易にできる。</p>
+<p>また、言語的なキーワードからopen-close文などのほとんどを関数やマクロなどで行う結果、「自ら関数やマクロを追加することで、プログラミング言語の仕様そのものを柔軟に変えられる」ということも容易にできる。LispプログラマはLispをそのままで使うのではなく、自らカスタマイズしてLispの上に自分のLispを構築し、その上でプログラムを記述する。</p>
+<p>また、関数ポインタを使ったC言語に比べて、はるかにスマートに関数オブジェクトを変数として表現できる（たとえば無名関数を返す関数は簡単に書ける）のは、JavaScriptやRubyなどでも見られる特徴だが、古くからLispプログラマがやっていたことでもある。</p>
+
+<h2>プログラムがプログラムを書く</h2>
+<p>このような特徴のあるLispは、なんと「LispプログラムによってLispコードを書く」、すなわちプログラムを書くことのできるプログラムを書くことができます。</p>
+<p>Lispにおいては、プログラマがプログラムを人力で書くだけではなく、プログラマによって記述されたプログラムによってプログラムを自動的に生成することができるのです。</p>
+<p>まさに、Lispは「人類を超えたプログラミング言語」であると言えます。</p>
+<p>このような特徴があるLispは、人工知能の研究に昔からよく使われていました。最近では科学計算・データ解析・機械学習ライブラリの豊富なPythonに人工知能界での主力言語の座を奪われつつあります。</p>
+<p>Lispで拡張できる最強のテキストエディタEmacs（全能のテキストエディタviと最強の座を競っている）の作者であり、GNU Projectの創始者、GPLの考案者であることでも知られるリチャード・M・ストールマンは、MITのAIラボに居たことでも有名です。最近はストールマンも失言メールでFSFから追い出されるなどオープンソース界は大荒れです。</p>
+
+<h1>Lispの向かう先</h1>
+<h2>Lispは拡張性豊かな言語</h2>
+<p>Lispは拡張性豊かな言語である。まるで「プログラミング言語を作る」かのように、関数やマクロでLisp自体を拡張していける。</p>
+<p>ボトムアップアプローチで、まず「Lisp言語を作り」、その上で「作った言語でプログラムを書く」といったことが可能になる。</p>
+<p>また、Lispは関数型言語であり、「関数を返す関数」のようなものが簡単に書ける。</p>
+<p>Lispは素早いインプリメントを可能とし、プランの際に絶対的な正しい仕様を書けなくても、プラン自体を小さくし、少ない時間でインプリメントを行うことができる。</p>
+<p>このような特徴のため、C++を学ぶことでBASICが使いづらいものになるように、Lispを学ぶことでC++が使いづらいものになる。</p>
+<p>（<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>を参考に執筆しました。）</p>
+
+<h2>Lispはオブジェクト指向を超える</h2>
+<p>lambdaとクロージャを組み合わせると、関数を返す関数を作ったとして、その関数から外部のスコープにある変数を参照できる。このようなことができるということがLispのほかの言語に対する大きな優位性である。</p>
+<p>これが意味するところは、たとえば無名関数をlambdaで返す関数があったとして、それらの関数からその関数の定義されたスコープにある変数を参照できる、すなわち、すべての無名関数から同じデータにアクセスできるということを意味する。</p>
+<p><a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>では、Lispについて「オブジェクト指向を超える」と表現している。僕はまだこの本を読んでいる途中であるため、著者の真意は分からない（まったく違うことを言っているかもしれない）。だが、僕が思うに、このようなLispの特徴はまさにオブジェクト指向を超えていると思う。</p>
+
+<h2>Lispは神の言語か</h2>
+<p>Lispは「神の言語」という異名をもっていて、その理由を以下のページが解説されています。とても面白い内容で、ドメイン特化言語（専門の知識に特化した言語）と汎用言語の違いなど、多くの勉強になる点があるので、プログラミング言語について学ぼうとする人に読まれることをおすすめします。</p>
+<ul>
+<li><a href="https://muuumin.net/why-lisp-god-language/">Lispはなぜ神の言語と呼ばれるのか - SEむううみんのプログラミングパラダイス</a></li>
+</ul>
+
+<h1>Lispの素晴らしい点</h1>
+<p>（「<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>」と「<a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp</a>」を参考に執筆しました。）</p>
+
+<h2>プログラムコードとデータを同じものとして扱う</h2>
+<p>Lispの本質が何かと言えば、「プログラムコードとデータを同じものとして扱う」ということだと思います。</p>
+<p>関数型言語としては、Lisp以外にHaskellがありますが、Haskellでは「関数と変数を同じものとして扱う」という発想をします。</p>
+<p>Lispでは、これに加えて、「プログラムコードとデータを同じものとして扱う」という発想をします。</p>
+<p>たとえば、クロージャを返したり関数を引数に渡して関数を実行したりという点では、「プログラムコードをデータのように渡す」ということができます。</p>
+<p>あるいは、マクロやS式のリストを使うことで、「プログラムコードをプログラムコードからデータのように自動作成する」ということができます。</p>
+<p>あるいは、evalなどを使うことで、「データをプログラムコードのように実行し、式を評価する」ということができます。</p>
+<p>このようなLispの考え方は、UNIXとよく似ています。特に、OSとユーザーランドソフトウェア、あるいはソースコードとバイナリなどの点で、UNIXは「テキストファイルとしてプログラムを解析する」ということを行います。</p>
+<div class="edit_date">
+<p>2023.09.04</p>
+</div>
+
+<h2>レイヤーを作れる</h2>
+<p>もうひとつ、Lispの優れた点があるとしたら、階層的なレイヤーを作ることができるという点です。</p>
+<p>Lispでは、あらかじめ言語で提供されている関数やマクロと同じものを、自分で作って使うことができます。その独自に作った関数やマクロは、あらかじめ用意されている関数やマクロと、何も変わりません。</p>
+<p>なので、Lispの上に自分の言語を作り、その上でプログラムを開発できます。</p>
+<p>これはたとえば、Ruby on Railsなどと似ています。C言語のRubyインタープリタの上に、Rubyコードの水準があり、その上にさらにMVCフレームワークのRailsの水準があり、その上にWebアプリケーションを作ります。このようなことは、Railsが登場する何年も前から、Lispが、Webだけではなく多くの領域で行ってきたことなのです。</p>
+<div class="edit_date">
+<p>2023.09.04</p>
+</div>
+
+<h2>高度な抽象的なプログラムが書ける</h2>
+<p>Lispのほかの優れた点は、C言語ではできない関数型のプログラミングができることです。C言語は、プログラマに命令型で逐次的な手続き的なプログラミングを強いますが、これによってプログラマの思考能力が、C言語的な命令型プログラミングしか考えられなくなってしまい、「退化」してしまうのです。</p>
+<p>Lispを使うことで、C言語では推奨されていない、あるいはそもそもできないような、高水準の抽象的なプログラミングができます。Lispハッカーはいつもそのように、C言語ではできないような高水準の思考をしています。そのように、Lispを使うことで、C言語で退化した知性を、Lispが再び取り戻してくれるのです。</p>
+<p>（<a href="../../diary/aozora/2023.09.04.html">2023-09-04</a>の日記に関連する内容があります。）</p>
+<div class="edit_date">
+<p>2023.09.04</p>
+<p>2023.12.17編集</p>
+</div>
+
+<h1>用途</h1>
+<h2>人工知能</h2>
+<p>Lispは人工知能の研究によく使われる。<a href="../programs/ai.html">AI</a>も参照のこと。</p>
+
+<h2>Emacsの拡張言語として</h2>
+<p>特に多いのが、テキストエディタEmacsの拡張・マクロ言語としての利用である。</p>
+
+<h1>方言</h1>
+<h2>Common Lisp</h2>
+<p>標準的なLisp言語。たくさんのLisp方言のスーパーセットとして作られたため、言語仕様が巨大。</p>
+<p><a href="common_lisp.html">Common Lisp入門</a>も参照のこと。</p>
+
+<h2>Scheme</h2>
+<p>Lispの方言の1つ。真にLispに必要な機能は何かを追究して作られている。</p>
+<p><a href="scheme.html">Scheme</a>も参照のこと。</p>
+
+<h1>Lispによるソフトウェア</h1>
+<h2>GNU Emacs</h2>
+<p>ご存じGNU Emacs。viと並んで最強のテキストエディタとして有名。</p>
+<p>Emacs Lispと呼ばれるマクロ言語と内蔵の処理系によって自由に拡張することができる。そのため、テキストエディタというよりも環境に近い。テキストエディタなのに、メーラーになったりする。</p>
+<p><a href="../linux/emacs.html">Emacs</a>も参照のこと。</p>
+
+<h2>sawfish</h2>
+<p>Lispで拡張できるX11のウィンドウマネージャ。</p>
+
+<h2>GNU Guix</h2>
+<p>Lispによるパッケージマネージャ。</p>
+
+<h2>xyzzy</h2>
+<p>Windowsにおける「Emacsライク」なエディタ。Common Lispによって拡張することができる。</p>
+<p><a href="../windows_pc/xyzzy.html">xyzzy</a>を参照のこと。</p>
+
+<h1>書籍・論文など</h1>
+<h2>On Lisp/ANSI Common Lisp</h2>
+<p>僕の大好きだったLispプログラマPaul GrahamのLisp入門書「On Lisp」の日本語訳がネットで無料で公開されています。</p>
+<ul>
+<li><a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp邦訳 草稿置き場</a></li>
+<li><a href="http://www.asahi-net.or.jp/~kc7k-nd/onlispjhtml/">On Lisp（HTML版）</a></li>
+</ul>
+<p>HTML版は少しおかしなところがあるので、PDF版を印刷して見た方が良いかもしれないです。</p>
+<p>加えて、同じ著者によるCommon Lispの入門書「ANSI Common Lisp」が以下にあります。上級者向けの「On Lisp」と対になっています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a></li>
+</ul>
+<p>後日注記：ポール・グレアムによる「ANSI Common Lisp」と「On Lisp」はLispの定番の書籍であり、「ANSI Common Lisp」でCommon Lispの基本となる文法が分かり、「On Lisp」ではその先にある「そのプログラムをなぜそのように書くのか」という理由や根拠が説明されています。この二つの書籍を読めば、Lispはマスターできます。欠点があるとしたら、コードや説明がCommon Lispで書かれていること。SchemeではなくCommon Lispで書かれているために、Common Lispを学ばなければいけません。</p>
+<p>後日注記：ポール・グレアムの「On Lisp」は、多くの章がマクロに割かれています。もちろんそれ以外の内容もありますが、「On Lisp」で言わんとしていることは、「いかにLispのマクロを書くか」ということです。「On Lisp」を読むことで、Common Lispでどのようにマクロを使ったプログラミングを行うか、ということが分かります。</p>
+<div class="edit_date">
+<p>2023.09.04編集</p>
+<p>2023.09.08編集</p>
+</div>
+
+<h2>Paul Graham関係</h2>
+<p>Paul Grahamはさまざまなエッセイを書いていることでとても有名です。</p>
+<ul>
+<li><a href="http://practical-scheme.net/wiliki/wiliki.cgi?naoya_t%3A%E3%83%9D%E3%83%BC%E3%83%AB%E3%83%BB%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4%E3%81%A8%E5%92%8C%E8%A8%B3%E4%B8%80%E8%A6%A7">naoya_t:ポール・グレアムのエッセイと和訳一覧</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%83%8F%E3%83%83%E3%82%AB%E3%83%BC%E3%81%A8%E7%94%BB%E5%AE%B6-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E6%99%82%E4%BB%A3%E3%81%AE%E5%89%B5%E9%80%A0%E8%80%85%E3%81%9F%E3%81%A1-%E3%83%9D%E3%83%BC%E3%83%AB-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4274065979">ハッカーと画家 コンピュータ時代の創造者たち</a> - 昔読みました。とても面白かったです。</li>
+</ul>
+<p>以下は有名で面白い記事。</p>
+<ul>
+<li><a href="http://practical-scheme.net/trans/beating-the-averages-j.html">普通のやつらの上を行け ---Beating the Averages---</a></li>
+<li><a href="http://practical-scheme.net/trans/being-popular-j.html">人気の言語を作るには ---Being Popular---</a></li>
+<li><a href="http://practical-scheme.net/trans/iflisp-j.html">Lispがそんなにすごいなら ---If Lisp Is So Great---</a></li>
+<li><a href="http://practical-scheme.net/trans/hp-j.html">ハッカーと画家 ---Hackers and Painters---</a></li>
+</ul>
+
+<h2>その他の文書</h2>
+<p>Eric S. Raymondによる「ハッカーになろう」など。Lispについての言及がある。</p>
+<ul>
+<li><a href="http://cruel.org/freeware/hacker.html">ハッカーになろう (How To Become A Hacker）</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>関数型プログラミング</h2>
+<p><a href="functional_programming.html">関数型プログラミング</a>も参照のこと。</p>
+
+<h2>ユーティリティ開発</h2>
+<p><a href="utils_develop.html">ユーティリティ開発</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>Lisp</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a></li>
+</ul>
+
+<h2>ポール・グレアムのエッセイ集</h2>
+<p>個人的に好きなLispプログラマのポール・グレアムのベンチャー起業論など。</p>
+<ul>
+<li><a href="http://practical-scheme.net/wiliki/wiliki.cgi?naoya_t%3A%E3%83%9D%E3%83%BC%E3%83%AB%E3%83%BB%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4%E3%81%A8%E5%92%8C%E8%A8%B3%E4%B8%80%E8%A6%A7">ポール・グレアムのエッセイと和訳一覧</a></li>
+<li><a href="http://practical-scheme.net/trans/beating-the-averages-j.html">普通のやつらの上を行け ---Beating the Averages---</a></li>
+<li><a href="http://www.blog.net/nerds-jp.htm">オタクが人気者になれない理由</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%83%8F%E3%83%83%E3%82%AB%E3%83%BC%E3%81%A8%E7%94%BB%E5%AE%B6-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E6%99%82%E4%BB%A3%E3%81%AE%E5%89%B5%E9%80%A0%E8%80%85%E3%81%9F%E3%81%A1-%E3%83%9D%E3%83%BC%E3%83%AB-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4274065979">ハッカーと画家 コンピュータ時代の創造者たち</a> - 昔買って、すぐに読みました。本当に面白かったです。</li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-lisp.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

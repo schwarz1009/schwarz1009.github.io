@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>FORTRAN入門 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>FORTRAN入門</h1>
+<p>FORTRAN入門です。<a href="fortran.html">FORTRAN</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>FORTRAN入門</h1>
+<h2>FORTRANの基本</h2>
+<p>（以下は「<a href="https://www.amazon.co.jp/%E6%83%85%E5%A0%B1%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96-%E5%96%9C%E4%B9%85%E5%B7%9D-%E6%94%BF%E5%90%89/dp/4873613515">情報基礎概論 第4版 喜久川政吉・殿塚勲 共著（学術図書出版社）</a>」を参考に執筆しました。）</p>
+<p>コメントはCから始まる行、プログラムの終端はend、プログラムの終了はstop。</p>
+<p>1～6桁目は空白にする。</p>
+<p>変数の型宣言は実行文より前に書く。</p>
+<table class="some_tables">
+<tr><th class="min60">型</th><th>説明</th></tr>
+<tr><td>integer</td><td>整数型</td></tr>
+<tr><td>real</td><td>実数型</td></tr>
+<tr><td>double precision</td><td>倍精度実数型</td></tr>
+<tr><td>complex</td><td>複素数型</td></tr>
+<tr><td>logical</td><td>論理型</td></tr>
+<tr><td>charactor</td><td>文字型</td></tr>
+</table>
+<p>演算子は+, -, *, /, **（べき乗）。</p>
+<p>配列はinteger array(100)のようにする。x(0:255)で0から始まり255で終わる256個の値となる。二次元配列はb(5,10)など。</p>
+<p>定数はパラメータ文parameter(n = 256)のように表す。定数を代入式の左辺に用いることはできない。</p>
+<p>変数の初期値はdata n/1500/など。</p>
+<p>文関数は、一行で簡単な関数を書くことのできる機能で、f(x,y) = (x + y)とすれば、f(a, b)のように使うことができる。</p>
+<p>do文で繰り返すには、</p>
+<pre>
+      do 繰り返しの終端を表す文番号 i = 初期値, 終値, 増分
+</pre>
+<p>とする。たとえば</p>
+<pre>
+      sum = 0
+      addvalue = 0
+      do 100 i = 0, 50, 1
+        addvalue = addvalue + 1
+        sum = sum + addvalue
+100     write(*, *) i, sum
+</pre>
+<p>とすればよい。</p>
+<p>if文による分岐は、</p>
+<pre>
+      if (条件式) then
+        処理
+      else if (条件式) then
+        処理
+      else
+        処理
+      end if
+</pre>
+<p>となる。</p>
+<p>回数が決まっていない繰り返しは、if文とgoto文を組み合わせると実現できる。C言語でいうwhile文のようなものである。</p>
+<pre>
+100   if (条件式) then
+        処理
+        goto 100
+      end if
+</pre>
+<p>条件式には、比較演算子である</p>
+<table class="some_tables">
+<tr><th class="min60">比較演算子</th><th>意味</th></tr>
+<tr><td>.gt.</td><td>＞</td></tr>
+<tr><td>.ge.</td><td>≧</td></tr>
+<tr><td>.lt.</td><td>＜</td></tr>
+<tr><td>.le.</td><td>≦</td></tr>
+<tr><td>.eq.</td><td>＝</td></tr>
+<tr><td>.ne.</td><td>≠</td></tr>
+</table>
+<p>や、論理演算子である</p>
+<table class="some_tables">
+<tr><th class="min60">論理演算子</th><th>意味</th></tr>
+<tr><td>.not.</td><td>否定</td></tr>
+<tr><td>.and.</td><td>論理積</td></tr>
+<tr><td>.or.</td><td>論理和</td></tr>
+</table>
+<p>が使用できる。</p>
+<p>1～5カラムに書かれる数字列をラベルといい、</p>
+<pre>
+      goto ラベル
+</pre>
+<p>でラベルに移動できる。また、移動先を単に表すために、何もしない命令であるcontinueにラベルをつけることがある。</p>
+<pre>
+100   continue
+</pre>
+<p>サブルーチンは以下のように記述する。</p>
+<pre>
+      subroutine サブルーチン名(引数)
+      処理
+      end
+</pre>
+<p>サブルーチンは副プログラムであり、主プログラムと同様にendでプログラムの終わりを表す。サブルーチンを呼び出す（引用）には</p>
+<pre>
+      call サブルーチン名(引数)
+</pre>
+<p>とする。サブルーチンの内部にreturn文が記述してあった場合、その場所で引用した場所に戻る。</p>
+<p>サブルーチン副プログラムと同様に、関数副プログラムがある。関数副プログラムは</p>
+<pre>
+      integer function 関数名(引数)
+      処理
+      end
+</pre>
+<p>となる。また、関数では値を返す必要があるが、これには関数名に代入してreturnを行う。</p>
+<pre>
+      integer function add(x, y)
+      add = x + y
+      return
+      end
+</pre>
+<p>呼び出す時は単にadd(10, 5)などとする。</p>
+<p>サブルーチンは、プログラムの単位であるため、end文で終了する。これらは独立にコンパイルしてそれぞれのオブジェクトファイルを生成し、リンクすることができる。これをライブラリと呼ぶ。</p>
+<p>入出力は、write()とread()で行う。たとえば、</p>
+<pre>
+      write(*,*) 'Hoge'
+</pre>
+<p>あるいは、</p>
+<pre>
+      read(*,*) x
+</pre>
+<p>ここで、*,*は標準出力（標準入力）かつデフォルトのフォーマットで、という意味になる。</p>
+<p>IBMの伝統的に標準のCRTディスプレイは6なのでwrite(6,*)でも同じ意味になる。また、IBMの伝統的に標準のキーボードは5なのでread(5,*)でも同じ意味になる。</p>
+<p>フォーマット指定を行うなら、</p>
+<pre>
+      write(6, 999)x
+999   format(9I5)
+</pre>
+<p>とする。ここで9I5がフォーマット指定である。フォーマット指定には、</p>
+<table class="some_tables">
+<tr><th class="min60">フォーマット</th><th>意味</th></tr>
+<tr><td>nIw</td><td>整数</td></tr>
+<tr><td>nFw.d</td><td>実数</td></tr>
+<tr><td>nEw.d</td><td>指数表記</td></tr>
+<tr><td>nX</td><td>空白</td></tr>
+</table>
+<p>の形式があり、nやwには数値を記述する。</p>
+<table class="some_tables">
+<tr><th class="min60">数値</th><th>意味</th></tr>
+<tr><td>n</td><td>個数</td></tr>
+<tr><td>w</td><td>桁</td></tr>
+<tr><td>d</td><td>小数点以下の桁</td></tr>
+<tr><td>d（nEw.dの場合）</td><td>仮数部の桁数</td></tr>
+</table>
+<p>'～'は文字列。</p>
+<p>/は改行で、/を複数個並べて記述でき、その個数だけ改行する。</p>
+<p>また、open()とclose()を使うことで、ファイル処理ができる。たとえば、</p>
+<pre>
+      open(10, file="hoge.txt")
+</pre>
+<p>とすれば、装置番号10にファイルhoge.txtが割り当てられる。解除するには、</p>
+<pre>
+      close(10)
+</pre>
+<p>とする。これにより、</p>
+<pre>
+      read(10,*) n
+</pre>
+<p>のような形でファイルを読み込むことができる。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

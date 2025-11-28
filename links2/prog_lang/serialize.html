@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>シリアライズの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>シリアライズの世界観</h1>
+<p>シリアライズに関する世界観です。<a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>シリアライズ</h1>
+<h2>シリアライズ</h2>
+<p>シリアライズ（直列化）は、オブジェクトをそのままデータに保存する技術。</p>
+<p>オブジェクトの情報をそのままファイルに書き出し、そのファイルを読み込んでオブジェクトを構築したい場合に使う。</p>
+<p>MicrosoftのMFCなどでは、シリアライズは一般的なファイルの読み書き技術である。また、JavaやPythonなどでもサポートされている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%AA%E3%82%A2%E3%83%A9%E3%82%A4%E3%82%BA">シリアライズ - Wikipedia</a></li>
+</ul>
+
+<h2>C++でシリアライズ</h2>
+<p>boost::serializationでは、C++でシリアライズ・デシリアライズを行うことができる。<a href="cpp_stl_libs.html">C++（STL・ライブラリ）</a>も参照のこと。</p>
+<ul>
+<li><a href="https://boostjp.github.io/tips/serialize.html">シリアライズ - boostjp</a></li>
+<li><a href="https://www.nslabs.jp/c++serialization.rhtml">C++オブジェクトの直列化 (シリアライズ) | Netsphere Laboratories</a></li>
+</ul>
+<p>cerealなどを使う方法もある。</p>
+<ul>
+<li><a href="https://qiita.com/Chironian/items/8b98025b0a8bba9ee5a2">C++シリアライザへの挑戦 - Qiita</a></li>
+<li><a href="https://qiita.com/Ushio/items/827cf026dcf74328efb7">C++のcerealのシリアライズが快適すぎるやばい - Qiita</a></li>
+</ul>
+<p>またWindowsならばMFCのシリアライズ機能を使うこともできる。<a href="windows_mfc.html">Visual C++/MFC</a>も参照のこと。</p>
+<ul>
+<li><a href="http://sakura-tyo.com/haysan/program/program8.html">データの保存方法は？ - AIR-CON MAN</a></li>
+</ul>
+
+<h2>Pythonのpickle</h2>
+<p>Pythonのpickleは、オブジェクトをバイトストームに書き出したり、バイトストームからオブジェクトを読み込んだりする機能で、Pythonの標準ライブラリに含まれている。</p>
+<ul>
+<li><a href="https://qiita.com/hatt0519/items/f1f4c059c28cb1575a93">PythonのPickleモジュールを理解したいだけの人生だった #Chainer - Qiita</a></li>
+<li><a href="https://docs.python.org/ja/3.13/library/pickle.html">pickle --- Python オブジェクトの直列化 &#8212; Python 3.13.2 ドキュメント</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.02.15</p>
+</div>
+
+<h1>各言語のAPI</h1>
+<h2>Java</h2>
+<p><a href="java_lib_io.html">Javaクラスライブラリ（入出力）</a>や<a href="java_lib_xml.html">Javaクラスライブラリ（XML）</a>も参照のこと。</p>
+
+<h2>Python（JSONを使う方法）</h2>
+<p><a href="json.html">JSON</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>シリアライズ</h2>
+<p>シリアライズはオブジェクトをそのまま読み書きする。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
