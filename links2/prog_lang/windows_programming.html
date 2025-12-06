@@ -102,7 +102,7 @@
 <p>クライアントOSで圧倒的シェアを誇るWindowsだが、サーバーでも勢力を着実に伸ばしており、たとえばSQL ServerやWSLなどの努力はサーバーOSでは選択肢一択のLinuxをいずれ倒すことになるかもしれない。</p>
 <p><a href="dotnet_asp.html">ASP.NET</a>、<a href="dotnet_ado.html">ADO.NET</a>、<a href="../db/sql_server.html">Microsoft SQL Server</a>、<a href="../virt/wsl.html">WSL</a>を参照のこと。</p>
 
-<h1>Windows APIの基本</h1>
+<h1>Windowsメッセージ</h1>
 <h2>Windowsプログラミングの解説</h2>
 <p>（詳しいコードは<a href="https://docs.microsoft.com/ja-jp/windows/win32/learnwin32/your-first-windows-program?redirectedfrom=MSDN">Module 1. Your First Windows Program - MSDN</a>が参考になります。以下はこのコードに対する解説。）</p>
 <p>Windows APIによるプログラミングは、ウィンドウプロシージャ（システムから呼ばれるコールバック関数）とメッセージループを中心に成り立つ。</p>
@@ -139,7 +139,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 <p>2022.12.07-08編集</p>
 </div>
 
-<h1>Windowsプログラミングのトピック</h1>
 <h2>主なWindowsメッセージ</h2>
 <p>（以下は<a href="http://home.a00.itscom.net/hatada/windows/windowmessage01.html">Windowsメッセージ - Hatada's Home Page</a>を参考に執筆しました。）</p>
 <p>主なWindowsメッセージの一覧：</p>
@@ -151,6 +150,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 <tr><td>コントロールイベント</td><td>WM_COMMAND（メニュー・コントロール操作）<br>WM_NOTIFY（コントロールへの通知）<br>WM_SETFOCUS（キーボードフォーカスの取得）<br>WM_KILLFOCUS（キーボードフォーカスの離脱）<br>WM_HSCROLL（水平スクロール）<br>WM_VSCROLL（垂直スクロール）</td></tr>
 </table>
 
+<h1>コントロール</h1>
 <h2>Windows API コモンコントロール</h2>
 <p>Windows APIでは、OSのコントロールはウィンドウ内の子ウィンドウとして扱われるため、CreateWindowEx()関数で作成できる。</p>
 <p>たとえば、CreateWindowEx()関数でツールバーを作成するには、ウィンドウクラスに「TOOLBARCLASSNAME」を指定すればよい。</p>
@@ -227,6 +227,7 @@ END
 <p>2022.12.08編集</p>
 </div>
 
+<h1>さまざまなAPI</h1>
 <h2>メモリの動的確保</h2>
 <p>テキストエディタを作る場合など、サイズがどれくらいになるか分からないバッファにはメモリを動的に確保する。</p>
 <p>Windowsでは、メモリの動的確保にはGlobalAlloc()関数とGlobalLock()関数を使う。不要になったら、GlobalUnlock()関数とGlobalFree()関数で解放する。</p>
@@ -260,6 +261,7 @@ END
 <p>2023.05.13</p>
 </div>
 
+<h1>その他</h1>
 <h2>DLLを作る</h2>
 <p>Windowsの動的リンクライブラリはDLLと呼ばれる。作成するためには、Visual C++の「Win32 アプリケーション ウィザード」で「アプリケーションの種類」にDLLを指定する。</p>
 <p>以下の記事を参照のこと。</p>
