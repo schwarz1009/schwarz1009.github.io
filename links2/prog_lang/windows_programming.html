@@ -191,7 +191,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 </div>
 
 <h2>その他のコントロール</h2>
-<p>このほか、コントロールとしてクラスに指定できるのは、STATIC（文字列や画像をただ表示するだけの静的なコントロール）やBUTTON（基本的にボタンコントロールだが、ウィンドウスタイルを指定することでチェックボックスやラジオボタンにもなる）などがあります。またLISTBOX（リストボックス）やWC_TABCONTROL（タブコントロール）なども指定できます。</p>
+<p>このほか、コントロールとしてクラスに指定できるのは、STATIC（文字列や画像をただ表示するだけの静的なコントロール）やBUTTON（基本的にボタンコントロールだが、ウィンドウスタイルを指定することでチェックボックスやラジオボタンにもなる）などがあります。</p>
+<p>またLISTBOX（リストボックス）やCOMBOBOX（コンボボックス）やSCROLLBAR（スクロールバー）やWC_TABCONTROL（タブコントロール）なども指定できます。</p>
 <ul>
 <li><a href="https://programming.pc-note.net/winapi/button.html">ボタンコントロール(Win32API)(C言語) - 超初心者向けプログラミング入門</a></li>
 <li><a href="https://programming.pc-note.net/winapi/checkbox.html">チェックボックス(Win32API)(C言語) - 超初心者向けプログラミング入門</a></li>
@@ -202,6 +203,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 </ul>
 <div class="edit_date">
 <p>2025.12.01</p>
+<p>2025.12.06編集</p>
 </div>
 
 <h2>リソースファイル</h2>
@@ -240,6 +242,13 @@ END
 <p>2022.12.08</p>
 </div>
 
+<h2>レジストリを操作する</h2>
+<p>レジストリを操作するためには、RegCreateKeyEx(), RegCloseKey(), RegSetValueEx(), RegQueryValueEx(), RegOpenKeyEx()などのAPIを使います。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.12.06</p>
+</div>
+
 <h2>Windows API関数一覧</h2>
 <p>Windows APIの関数一覧は以下を参照のこと。</p>
 <ul>
@@ -252,11 +261,14 @@ END
 </div>
 
 <h2>DLLを作る</h2>
-<p>Windowsの動的リンクライブラリはDLLと呼ばれる。</p>
+<p>Windowsの動的リンクライブラリはDLLと呼ばれる。作成するためには、Visual C++の「Win32 アプリケーション ウィザード」で「アプリケーションの種類」にDLLを指定する。</p>
 <p>以下の記事を参照のこと。</p>
 <ul>
 <li><a href="https://qiita.com/false-git@github/items/2e1eb4614b1024131dd0">WindowsのDLLについて - Qiita</a></li>
 </ul>
+<div class="edit_date">
+<p>2025.12.06編集</p>
+</div>
 
 <h2>書籍</h2>
 <p>以下の書籍が参考になります。</p>
