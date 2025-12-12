@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>アセンブリ言語の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>アセンブリ言語の世界観</h1>
+<p>アセンブリ言語に関する世界観です。<a href="../hardware/hardware.html">ハードウェア（１．半導体）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>8086命令一覧</h1>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%808086%E2%80%9516%E3%83%93%E3%83%83%E3%83%88%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E3%82%A2%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4871482456">はじめて読む8086―16ビット・コンピュータをやさしく語る (アスキーブックス)</a>を参考に執筆しました。）</p>
+<p>16bitの8086のごく基本的な命令です。詳しい説明が欲しい方は書籍をご覧ください。</p>
+
+<h2>基本</h2>
+<p>基本的に、レジスタと呼ばれる高速な記憶装置に対して、演算命令を与えることで処理を行う。</p>
+<p>レジスタの中でも、AX, BX, CX, DXの4つのレジスタはよく使う。AXレジスタの上位の8ビットにはAH、下位の8ビットにはALという略称がつけられている。</p>
+<p>後日注記：AXはこの中でもよく使われるレジスタで、ほかのレジスタよりも高速。BX、CX、DXは予備として使用する。特に、BXはベースアドレスのポインタに、CXは回数などのカウントに、DXは一時的な記憶領域のために使うことが多い。</p>
+<p>16ビットCPUでは、アドレスの指定を「セグメント方式」で行う。アドレス部は「32CE:0100」といったように、セグメントアドレスとオフセットアドレスに分割される。通常はセグメントベースが固定され、オフセットアドレスだけでアドレスを指定することができる。セグメントベースにオフセットアドレスを加えた値が物理アドレスとなる。</p>
+<p>セグメントの例：
+<pre>
+-A 0100（オフセットアドレス0100Hからアセンブル）
+32CE:0100 MOV AL,10
+32CE:0102 ADD AL,20
+32CE:0104 SUB AL,10
+32CE:0106 MOV [0100],AL
+32CE:0108 MOV AH,02
+32CE:010A MOV DL,[0100]
+32CE:010C INT 21
+32CE:010E
+</pre>
+<p>ここではセグメントアドレスは32CEであり、オフセットアドレスは0100から始まる。</p>
+<p>後日注記：セグメントレジスタには、CS（コードセグメント）、DS（データセグメント）、ES（エクストラセグメント）、SS（スタックセグメント）がある。CSはプログラムの格納されているセグメントのセグメントアドレス、DSはデータを格納するセグメントのセグメントアドレスを指定する。</p>
+<p>（以上は<a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%808086%E2%80%9516%E3%83%93%E3%83%83%E3%83%88%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E3%82%A2%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4871482456">はじめて読む8086―16ビット・コンピュータをやさしく語る (アスキーブックス)</a>を参考に執筆しました。）</p>
+
+<h2>命令一覧</h2>
+<p>以下はデータを記憶に退避したり、記憶からデータを取得するMOV命令。16進数の値やレジスタがオフセットアドレスであることを示すには[]を使う。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>MOV 受ける側, 送る側</td><td>データの転送（UNIXやDOSのコマンドとは方向が逆になる）</td></tr>
+<tr><td>MOV AL, 010H</td><td>10<sub>H</sub>をALにロードする</td></tr>
+<tr><td>MOV [0100H], AL</td><td>ALをメモリ上の番地（オフセットアドレス）「100<sub>H</sub>」にストアする</td></tr>
+<tr><td>MOV AL, [0100H]</td><td>メモリ上の番地「100<sub>H</sub>」をALにロードする</td></tr>
+<tr><td>MOV [0102H], AL </td><td>ALをメモリ上の番地「102<sub>H</sub>」にストアする</td></tr>
+</table>
+<p>特定の場所にデータを記憶しておきたい場合などは、MOV XX [XX]などが大活躍します。メモリのことをなぜメモリ（記憶）というのかが良く分かります。</p>
+<p>後日注記：MOV命令では、メモリからメモリへの転写はできない。必ずメモリ→レジスタ（これをロードと呼ぶ）か、レジスタ→メモリ（これをストアと呼ぶ）か、あるいは値のレジスタあるいはメモリに対する転送になる。</p>
+<p>後日注記：MOV命令は、ある特定の場所にさまざまな場所から参照・変更する共通のデータを格納するために使うことができる。たとえば、xとyの内容を「100<sub>H</sub>」と「102<sub>H</sub>」に格納することにしておいて、ジャンプ命令を使って記述したサブルーチンの中からこの二つの領域にアクセスし、x + yの値を「104<sub>H</sub>」に格納するなどすれば、簡単なサブルーチンを機械語で書くことができる。</p>
+<p>以下は演算・比較命令。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>ADD AL, 20H</td><td>ALに「20<sub>H</sub>」を足し算</td></tr>
+<tr><td>SUB AL, 10H</td><td>ALから「10<sub>H</sub>」を引き算</td></tr>
+<tr><td>INC AL</td><td>ALをインクリメントする（+1）</td></tr>
+<tr><td>DEC AL</td><td>ALをデクリメントする（-1）</td></tr>
+<tr><td>CMP AX, XX</td><td>AXと「XX」を比較し、結果をフラグレジスタに格納</td></tr>
+<tr><td>MUL BL</td><td>ALとBLを掛け算し、結果をAXに格納<br>（ALとBLは8bit、AXは16bit）</td></tr>
+<tr><td>MUL BX</td><td>AXとBXを掛け算し、結果をDX:AXに格納<br>（AXとBXは16bit、DX:AXは32bit）</td></tr>
+<tr><td>DIV BL</td><td>AXをBLで割り算し、商をALに、余りをAHに格納<br>（AXは16bit、BLとALとAHは8bit）</td></tr>
+<tr><td>DIV BX</td><td>DX:AXをBXで割り算し、商をAXに、余りをDXに格納<br>（DX:AXは32bit、BXとAXとDXは16bit）</td></tr>
+</table>
+<p>以下はジャンプ命令。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>JMP XX</td><td>アドレス行（オフセットアドレス）「XX」にジャンプしてプログラムを実行する（無条件ジャンプ）</td></tr>
+<tr><td>JZ XX</td><td>ZF（ゼロフラグ）がセットされていれば、アドレス行「XX」にジャンプしてプログラムを実行する</td></tr>
+</table>
+<p>ジャンプ命令を使う場合は、ジャンプ先のアドレスは普通分からないので、ジャンプ先を示すにはマクロアセンブラ（MSAM）を使う。</p>
+<p>これ以外にも、「CMP AL,08H」という命令の後ならば、次のような条件ジャンプ命令を使うことができる。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>JZ XX</td><td>（AL=08<sub>H</sub>）ならばジャンプ</td></tr>
+<tr><td>JNZ XX</td><td>（AL≠08<sub>H</sub>）ならばジャンプ</td></tr>
+<tr><td>JB XX</td><td>（AL＜08<sub>H</sub>）ならばジャンプ</td></tr>
+<tr><td>JA XX</td><td>（AL＞08<sub>H</sub>）ならばジャンプ</td></tr>
+<tr><td>JBE XX</td><td>（AL≦08<sub>H</sub>）ならばジャンプ</td></tr>
+<tr><td>JAE XX</td><td>（AL≧08<sub>H</sub>）ならばジャンプ</td></tr>
+</table>
+<p>ここに示した条件ジャンプ命令は、比較に使う値を符号なしと想定した場合の命令だ。これに対して、符号ありと想定した場合の条件ジャンプ命令も用意されている。（つまり、負の数を扱う場合の条件ジャンプ命令。）</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>JL XX</td><td>（AL＜08<sub>H</sub>）ならばジャンプ</td></tr>
+<tr><td>JG XX</td><td>（AL＞08<sub>H</sub>）ならばジャンプ</td></tr>
+<tr><td>JLE XX</td><td>（AL≦08<sub>H</sub>）ならばジャンプ</td></tr>
+<tr><td>JGE XX</td><td>（AL≧08<sub>H</sub>）ならばジャンプ</td></tr>
+</table>
+<p>以下はループ命令。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>LOOP XX</td><td>アドレスXXにジャンプしてループ。<br>CXをデクリメントし、0になればループ終了。<br>0にならなければループ継続。</td></tr>
+</table>
+<p>以下はサブルーチン命令。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>CALL XX</td><td>アドレスXXからのサブルーチンを実行。</td></tr>
+<tr><td>RET</td><td>サブルーチン呼び出し以後の命令に戻る。</td></tr>
+</table>
+<p>以下はスタックポインタ命令。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>PUSH AX</td><td>スタックポインタ（SP）を-2デクリメントし、スタックにAXを積む（プッシュ）</td></tr>
+<tr><td>POP AX</td><td>スタックからAXに取り出し（ポップ）、スタックポインタを+2インクリメントする</td></tr>
+</table>
+<p>PUSHとPOPはいわばデータの避難場所。データを一時的に退避し、必要になった時点で取り出すためによく使われる。アドレスを気にしなくても手軽にデータを保持できるのが利点。最後に積んだデータが最初に取り出される。</p>
+<p>スタックポインタ（SP）はスタックの一番上にあるデータを指し示すポインタのことで、スタックの実現のためにあり、PUSHやPOPを行うごとに2ずつ減ったり増えたりする。</p>
+<p>以下は入出力命令。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>IN AL, XX</td><td>ポートXXからの入力をALに格納</td></tr>
+<tr><td>OUT XX, AL</td><td>ポートXXにALを出力</td></tr>
+</table>
+<p>このほか、ファンクションコールといって、ソフトウェア割り込みを使うことで、MS-DOSの機能を使うことができる。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>INT XX</td><td>XX番のソフトウェア割り込み命令を実行</td></tr>
+</table>
+<p>ソフトウェア割り込みのタイプ20<sub>H</sub>は、「プログラム終了」を表すシステムコール。</p>
+<p>ソフトウェア割り込みのタイプ21<sub>H</sub>を使うことで、MS-DOSの機能を使うことができる。ファンクションコールでは、AHレジスタにファンクション番号を入れて目的の機能を指定する。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>説明</th></tr>
+<tr><td>MOV AH, XXH<br>INT 21H</td><td>MS-DOSのファンクションXXの機能を<br>ソフトウェア割り込みにより呼び出す</td></tr>
+</table>
+<p>たとえば、文字の入力や出力は、すべてこのファンクションコールによって実現できる。ファンクション番号01、06、0Aはコンソールからの入力に使う。02、09はコンソールへの出力に使う。</p>
+<p>このほか、論理演算命令（AND, OR）、ストリング操作命令、ローテート・シフト命令などがある。</p>
+<p>（以上は<a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%808086%E2%80%9516%E3%83%93%E3%83%83%E3%83%88%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E3%82%A2%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4871482456">はじめて読む8086―16ビット・コンピュータをやさしく語る (アスキーブックス)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2022.12.05編集</p>
+</div>
+
+<h2>数値の後にHをつけるか否か</h2>
+<p>DEBUGコマンドを使ったアセンブラでは、数値を指定すると16進数として解釈されますが、その他のアセンブラで16進数を示すには数値のあとにHを付けます。</p>
+<p>つまり、</p>
+<pre>
+MOV [0101H], AL
+</pre>
+<p>は、DEBUGコマンドでは、</p>
+<pre>
+MOV [0101], AL
+</pre>
+<p>と書いてください。</p>
+
+<h2>マクロアセンブラ</h2>
+<p>マクロアセンブラ（MASM）によって、DEBUGコマンドなどで利用可能な16進数の数値によるアドレス指定に加えて、ラベル（LOOP_HOGE:など）を使ったり、数値の豊かな表現（'A'など）を使ったりすることができる。</p>
+<pre>
+LOOP_HOGE:
+</pre>
+<p>のように「:」が付いているのがラベルだ。ラベルはその次の命令が格納されているアドレスを意味する。ラベルを使うことで、ラベルに対応するアドレスを自動的に決定してくれる。</p>
+
+<h2>16bitと32/64bitの違い</h2>
+<p>16bitと32/64bitの違いとして、16bitではレジスタの名称がax, bx, cx, dxなどとなっていたのが、32bitではeを前につけてeax, ebx, ecx, edxとなり、64bitではeではなくrをつけてrax, rbx, rcx, rdxとなります。xやeはextendの略で、rはregister（レジスタ）の意味。よってレジスタax、レジスタbxのように考えれば分かりやすいかもしれない。このほかにもさまざまな用途に使うレジスタがたくさんあります。</p>
+<p>また、Intel構文とは別にAT&T構文があり、%や$をつけて、</p>
+<pre>
+mov $30, %eax
+</pre>
+<p>のようになります。これは、Intel構文だと</p>
+<pre>
+mov eax, 30
+</pre>
+<p>となります。ディスティネーション（格納先）とソース（値あるいは参照先）の順番も逆です。</p>
+<p>ほかに、DWORD PTRなどがでてきますが、DWORDは4バイト、WORDは2バイト、BYTEは1バイトを意味する修飾子となります。BYTE PTR 3のようにします。</p>
+<p>また、[esi]のようなアドレス指定では、esiが保持しているアドレスのデータを表します。</p>
+<p>命令の後にqがついているものは64bit、lがついているものは32bitの命令となります。たとえばmovqやmovlなど。</p>
+<p>詳しくは以下が参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/edo_m18/items/83c63cd69f119d0b9831">アセンブラに手を出してみる - Qiita</a></li>
+</ul>
+
+<h1>Intel CPU</h1>
+<h2>x86アセンブラ</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/edo_m18/items/83c63cd69f119d0b9831">アセンブラに手を出してみる - Qiita</a></li>
+<li><a href="http://labs.cybozu.co.jp/blog/mitsunari/2007/10/x863_1.html">x86入門(3) 関数の呼び出し規約 - mitsunari@cybozu labs</a></li>
+<li><a href="https://www12.atwiki.jp/linux2ch/pages/62.html">RPM 関連のFAQ。 - 2ch-Linux-Beginners</a></li>
+<li><a href="https://gigazine.net/news/20150831-intel-cpu-history/">Intel CPUの歴史を代表モデルで振り返るとこうなる - GIGAZINE</a></li>
+</ul>
+
+<h2>Intel 486のモード</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%80486%E2%80%9532%E3%83%93%E3%83%83%E3%83%88%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4756102131">はじめて読む486―32ビットコンピュータをやさしく語る</a>を参考に執筆しました。）</p>
+<p>Intel 486プロセッサには、「リアルモード」（MS-DOSのプログラムの実行）、「プロテクトモード」（Windows 3.1などのアプリケーションの実行）、「仮想8086モード」（WindowsにおけるMS-DOSのプログラムの実行）という3つの動作モードがある。</p>
+<p>リアルモードは、従来との互換性を保っているモードのことで、8086とまったく同じ動作をする。これに対してWindows 3.1は拡張機能（Windowsのメモリ管理やタスク管理のために必要）を有効にしたプロテクトモードで実行される。プロテクトモードになった時点で従来のMS-DOSプログラムは実行できないため、仮想8086モードで実行される。</p>
+<p>プロテクトモードのプログラムを実行している状態で、特権レベル0～3までの特権レベルがある。特権レベル0では、すべての命令が実行でき、すべてのメモリにアクセス可能となる。また、特権レベル0では「特権命令」という一部の命令が実行可能となる。オペレーティングシステムは特権レベル0で動作させる。</p>
+<p>また、アプリケーションソフトウェアは特権レベル3で動作させる。特権レベル3では、一部の命令は実行できず、一部のメモリにはアクセスできない。特権レベル1や2は、OSの補助プログラムやハードウェアを操作させるプログラムなどを実行させる。</p>
+
+<h1>PowerPC/ARMなど</h1>
+<h2>PowerPC命令一覧</h2>
+<p>以前のMac OS Xの命令セットで、IBM製品のほかLinuxなどでも対応していることのあるPowerPCのニーモニック（命令）の一覧は以下が参考になる。</p>
+<ul>
+<li><a href="http://www.super-computing.org/staff/ysd/public_html/yuke/ppcasm.html">ysd@KLab &gt; PowerPC &gt; ニーモニック</a></li>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-powarch/index.html">POWER アーキテクチャー開発者用ガイド - IBM</a></li>
+</ul>
+<p>ある意味、IBMはIBM-PC/AT互換機とPowerOS CPUで、本当はメインフレームだけではなくWindowsとMacも裏で牛耳っている恐ろしい会社である。プレステ3向けにCellというCPUも作っていたが、これは期待はずれだったらしい（Cellの理想であるソーシャルゲーム機という発想は革新的だったが、ゲームとの相性が悪かったとのこと）。</p>
+<p><a href="../hardware/powerpc.html">PowerPC</a>も参照のこと。</p>
+
+<h2>ARM命令セット</h2>
+<p>ARMの命令セットは以下を参照のこと。組み込み向けで、Fedoraなどでも対応しているし、Androidという成功例もある。</p>
+<ul>
+<li><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ij/Cegbgefe.html">RealView Compilation Tools アセンブラガイド - 2.2.6. 命令セットの概要 - ARM Information Center</a></li>
+</ul>
+<p><a href="../hardware/arm.html">ARM</a>も参照もこと。</p>
+
+
+<h1>関連ページ</h1>
+<h2>Intel CPU</h2>
+<p><a href="../hardware/intel.html">Intel</a>を参照のこと。</p>
+
+<h2>Intel以外のCPUアーキテクチャ</h2>
+<p><a href="../hardware/cpu_arch.html">CPUアーキテクチャ</a>を参照のこと。</p>
+
+<h2>C言語のインラインアセンブラ</h2>
+<p><a href="c_preprocessor.html">C言語（６．プリプロセッサとインラインアセンブラ）</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+
+<h2>Intel CPU</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%808086%E2%80%9516%E3%83%93%E3%83%83%E3%83%88%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E3%82%A2%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4871482456">はじめて読む8086―16ビット・コンピュータをやさしく語る (アスキーブックス)</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%80486%E2%80%9532%E3%83%93%E3%83%83%E3%83%88%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4756102131">はじめて読む486―32ビットコンピュータをやさしく語る</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

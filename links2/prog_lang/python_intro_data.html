@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Python入門（４．データ構造） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Python入門（４．データ構造）</h1>
+<p>Python入門（４．データ構造）です。</p>
+<p><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="python_intro.html">Python入門</a></li>
+<ul>
+<li><a href="python_intro_basic.html">１．基本</a></li>
+<li><a href="python_intro_flow.html">２．制御フロー</a></li>
+<li><a href="python_intro_oop.html">３．オブジェクト指向</a></li>
+<li><b>４．データ構造</b></li>
+<li><a href="python_intro_str.html">５．文字列</a></li>
+<li><a href="python_intro_file.html">６．ファイル</a></li>
+<li><a href="python_intro_functional.html">７．関数型言語の機能</a></li>
+<li><a href="python_intro_others.html">８．その他</a></li>
+<li><a href="python_intro_advanced.html">９．応用・モジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Pythonのデータ構造</h1>
+<h2>型変換とinput関数</h2>
+<p>Pythonは動的だからといって、型を意識する必要が全くないわけではない。</p>
+<p>たとえば、文字列の中身を数値に変換して計算したり、入力したメッセージを数値に戻して演算し、その後に文字列と結合して出力したいような場合、必ず型変換が必要となる。</p>
+<pre class="prettyprint">
+input_value = input('二乗にしたい数を入力してね: ')
+int_value = int(input_value)
+result = int_value ** 2
+output_msg = input_value + 'の二乗は' + str(result) + 'だよ'
+print(output_msg)
+</pre>
+<p>後日注記：型変換を行う関数には、int(), float(), str()などがある。たとえば文字列を数値型や浮動小数点型に変換できる（逆も可能）。Pythonには他にも複素数型などがある。また、type()関数でその変数が何の型であるかを知ることができる。+のような演算子を使う場合、数値型の変数と文字列型の変数を加えるとエラーになる。必ず文字列型か数値型に変換すること。</p>
+<p><a href="type.html">型</a>も参照のこと。</p>
+
+<h2>タイプヒント</h2>
+<p>最近のPythonでは、特に汎用的にモジュールなどを作って人に使ってほしい時などに、型アノテーションをつけることができるようになった。これをタイプヒントと言う。</p>
+<p>以下のように関数の引数や戻り値に型を明記できる。</p>
+<pre class="prettyprint">
+def add(x: int, y: int) -&gt; int:
+    return (x + y)
+</pre>
+<p>ジェネリクスやUnion型（いくつかの型を同時に許容するようにすること）も記述できる。</p>
+<p>しかしながら、Pythonではこうした型アノテーションをつけていても、実行時にはチェックされない。ただし、mypyというツールを使うことでチェックを行うことができる。</p>
+<p>後日注記：タイプヒントは、型だけではなく、特定のリテラル値だけを許容するようにすることもできる。たとえば'犬'と'猫'は許容するが'豚'や'鳥'あるいはそのほかの値は許容しないなどとできる。タプルとともに使うと効果を発揮するだろう。</p>
+<pre class="prettyprint">
+from typing import Literal
+
+Sex = Literal['male', 'female']
+User = tuple[str, int, Sex, str]
+
+assy: User = ('Assy', 32, 'male', 'Japan')
+</pre>
+
+<ul>
+<li><a href="https://qiita.com/icoxfog417/items/c17eb042f4735b7924a3">Pythonではじまる、型のある世界 - Qiita</a></li>
+<li><a href="https://future-architect.github.io/articles/20201223/">2021年版Pythonの型ヒントの書き方 (for Python 3.9) | フューチャー技術ブログ</a></li>
+</ul>
+
+<h2>リストとタプル</h2>
+<p>リストとタプルは良く似ていて、どちらもC言語でいう配列のように使うことができる。さまざまなオブジェクトを混ぜて入れることが出来るのが特徴。</p>
+<p>リストとタプルの違いは、記法が違い、タプルはイミュータブル（変更できない）という特性を持つ。</p>
+<p>リストは[]を用いて記述するが、タプルは()を用いて（あるいはかっこをつけずに,だけで）記述する。</p>
+<pre class="prettyprint">
+ls = ['hoge', 'fuga', 'foo', 'bar']   #リストの場合
+tp = ('Assy', 32, 'male', 'Japan')    #タプルの場合
+</pre>
+<p>値が変更できる変数のことを「ミュータブル」、変更できない変数のことを「イミュータブル」という。イミュータブルな変数束縛でも、値の参照自体は変えることが出来る。Rustや関数型言語などでも出てくる考え方なので注意しておこう。</p>
+<p>後日注記：たとえばPythonでは文字列の一部を変更することはできない。</p>
+<p>後日注記：タプルであっても、値の再代入はできる。たとえば以下のコードはイミュータブルなタプルであっても動作する。このような場合には、別々の新しいタプルが作成されている。</p>
+<pre class="prettyprint">
+tp = ('Assy', 32, 'male', 'Japan')
+tp = ('Schwarz', 18, 'male', 'Japan')
+</pre>
+<ul>
+<li><a href="https://www.lifewithpython.com/2017/12/python-tuple-list-difference.html">Python のタプルとリストの違い、タプルの使いどころ - Life with Python</a></li>
+</ul>
+<p><a href="data_structure_list.html">配列とリストとハッシュ</a>も参照のこと。</p>
+
+<h2>添え字とスライス</h2>
+<p>リストは添え字を用いてlst[0]のようにアクセスできる。</p>
+<pre class="prettyprint">
+lst = [10, 5, 0]
+lst[2] = lst[0] + lst[1]
+</pre>
+<p>一部をスライスとしてlst[1:4]のように取り出すこともできる。スライスは、添え字を範囲とする連続した要素による新しいリストを作成する。</p>
+<pre class="prettyprint">
+lst = [0, 10, 5]
+lst2 = lst[1:3]
+</pre>
+<p>スライスは、リスト名[開始地点:終了地点]となる。省略した場合は最初・最後の地点となる。また終了地点は取り出されないので、ひとつ余分にインデックスを指定する必要がある。</p>
+<p>リストは、単に代入するだけではコピーできない。別の変数に=を用いて代入した場合、同じリストを指す別名の変数となる。コピーしたい場合は</p>
+<pre class="prettyprint">
+lst2 = lst.copy()
+</pre>
+<p>とする。あるいは、</p>
+<pre class="prettyprint">
+lst2 = lst[:]
+</pre>
+<p>のようにスライスを使ってコピーすることもできる。</p>
+<p>ストライドを使えば、ステップごとに間隔を空けてスライスを作ることもできる。</p>
+<p>たとえば、文字列はリストと同様添え字を用いてアクセスできるため、以下のようにステップ数2のストライドでスライスを作ることができる。</p>
+<pre class="prettyprint">
+lst = ':A:S:S:Y:'
+lst2 = lst[1::2]
+</pre>
+<p>ただし、文字列はイミュータブル（変更不可能）ということに注意。文字列を+=などで変更すると、新しいオブジェクトが作成されるため、何度も繰り返すと実行速度が極めて遅くなる。</p>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+
+<h2>リストを操作する関数</h2>
+<p>リストへの追加は</p>
+<pre class="prettyprint">
+lst = [1, 2, 3]
+lst.append(4)
+</pre>
+<p>あるいは</p>
+<pre class="prettyprint">
+lst = [1, 2, 3]
+lst.extend([4, 5, 6])
+</pre>
+<p>となる。extend()に渡すのはリストのほかイテラブルなオブジェクト（文字列、リスト、辞書など）となる。</p>
+<p>累算代入文（+=）でリストを追加したり、スライスを用いて追加することもできる。</p>
+<p>削除は</p>
+<pre class="prettyprint">
+del lst[0]
+</pre>
+<p>とする。</p>
+<pre class="prettyprint">
+lst.remove(3)
+</pre>
+<p>とすれば、位置ではなく要素から要素を削除できる。</p>
+<p>特定位置への挿入は</p>
+<pre class="prettyprint">
+lst.insert(1, 1.5)
+</pre>
+<p>とする。</p>
+<p>また</p>
+<pre class="prettyprint">
+str = 'Assy:Schwarz:Zaidou'
+lst = str.split(':')
+</pre>
+<p>とすれば文字列を区切り文字で分割してリストにできる。逆にリストを文字列にしたい場合は</p>
+<pre class="prettyprint">
+lst = ['Assy', 'Schwarz', 'Zaidou']
+str = ':'.join(lst)
+</pre>
+<p>を使う。</p>
+<pre class="prettyprint">
+len(lst)
+</pre>
+<p>でリストの要素数を取得できる。</p>
+<p>またindex()メソッドにより、要素の位置（インデックス）を取得できる。もし複数含まれていれば最初の要素のインデックスを返す。</p>
+<pre class="prettyprint">
+lst = ['Assy', 'Schwarz', 'Zaidou']
+i = lst.index('Schwarz')
+</pre>
+<p>index()メソッドでは、開始地点や終了地点といった検索範囲を指定することもできる。</p>
+<p>後日注記：list(), tuple(), set(), dict()の各関数を使うことで、それぞれのデータ構造を作成することもできる。またslice()関数でスライスを保持するsliceオブジェクト（開始値、終了値、ステップを指定できる）を作成できる。</p>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+
+<h2>その他のリストのメソッド</h2>
+<p>リストではこのほか、pop()メソッドでスタックのポップの操作ができる。この場合append()メソッドがプッシュに相当する。</p>
+<p>また、clear()メソッドで配列の全要素をクリアできる。</p>
+<p>またsort()メソッドでソート、reverse()メソッドで逆順に並べ替えができる。</p>
+<p>count()メソッドで、リストの中にどれだけ同じ値の要素が含まれているかを数えられる。</p>
+<p>また、リストに対してmin()関数を使えば、最小の値が得られる。max()関数は最大の値を得られる。</p>
+<p>後日注記：NumPyの配列に対するall()関数やany()関数と同様に、リストやタプルに対してもall()関数やany()関数を使うことができます。<a href="../programs/ai_numpy.html">NumPy</a>を参照のこと。</p>
+<p>詳しくは以下のページ・書籍が参考になる。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/datastructures.html">5. データ構造 &#8212; Python 3.11.0b5 ドキュメント</a></li>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.05.29編集</p>
+</div>
+
+<h2>スタックとキュー</h2>
+<p>Pythonでは、リストをスタックとして利用できます。リストに対してappend()やpop()を使うことで、リストに要素を追加・取り出しできます。</p>
+<p>リストをキューとして使う場合は、注意が必要です。リストをキューとして使うことはできますが、要素をひとつひとつずらす必要があるため、効率的な操作ができません。</p>
+<p>そのため、Pythonでキューを使う場合は、両端に対して操作が効率的なcollections.dequeを使うことが推奨されています。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/datastructures.html">5. データ構造 &#8212; Python 3.10.0b2 ドキュメント</a></li>
+</ul>
+<p><a href="data_structure_stack.html">スタックとキュー</a>も参照のこと。</p>
+
+<h2>タプルの意味</h2>
+<p>タプルは、変更されない代わり、高速かつ効率的にデータを操作できます。</p>
+<p>たとえば、データベースのレコードのように、決められた規則に従った「データの組としてのデータ」があった時に、タプルを使うことで高速に操作できます。</p>
+<p>ただし、データを単にひとつの箱に詰め込んで操作する場合は、リストを用います。</p>
+<ul>
+<li><a href="https://www.python.jp/train/tuple/index.html">タプル: ゼロからのPython入門講座 - python.jp</a></li>
+</ul>
+
+<h2>辞書</h2>
+<p>Pythonでは、キーと値から成るハッシュテーブルのことを辞書と呼ぶ。</p>
+<pre class="prettyprint">
+animals = {'dog': '犬', 'cat': '猫'}
+print('dogは' + animals['dog'] + 'で、catは' + animals['cat'] + 'ですよ。')
+</pre>
+<p>以下のようにすれば、辞書をデータベース代わりに使うこともできる。</p>
+<pre class="prettyprint">
+user = {'name': 'Assy', 'age': 32, 'sex': 'male', 'location': 'Japan'}
+print(user['name'] + "さんは" + user['age'] + "歳です。")
+</pre>
+<p>後日注記：リストはlist型、辞書はdict型となる。また、リストの中に辞書を入れたり、辞書の中にリストを入れることもできる。異なる型の要素をミックスして複数入れることもできる。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/datastructures.html">5. データ構造 &#8212; Python 3.10.0b2 ドキュメント</a></li>
+</ul>
+
+<h2>集合</h2>
+<p>値が含まれているかどうかの判定には集合を使う。集合は、波括弧で作成する。</p>
+<pre class="prettyprint">
+st = {1, 3, 4, 7}
+</pre>
+<p>値が存在しない場合はset()と書く。</p>
+<p>値が含まれているかどうかは、inとnot inで判別できる。</p>
+<pre class="prettyprint">
+3 in st
+5 not in st
+</pre>
+<p>ほかにも集合に特有のさまざまな演算がある。たとえば、|、&、-、^、|=、&=、-=、^=などがある。</p>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+
+<h2>リストの内包表記</h2>
+<p>Pythonでリストを作る際に、ある式の結果の一覧となるようなリストを作りたい場合、内包表記を使うと便利。</p>
+<p>たとえば、内包表記を使わずに、0から始まる2の倍数を10個（18まで）作りたい場合、以下のように書くことがあるかもしれない。</p>
+<pre class="prettyprint">
+bi = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+</pre>
+<p>これを、内包表記を使って書くと以下のように書ける。</p>
+<pre class="prettyprint">
+bi = [x * 2 for x in range(10)]
+</pre>
+<p>if文を使ったテクニックを使うと、以下のようにも書ける。</p>
+<pre class="prettyprint">
+bi = [x for x in range(20) if x % 2 == 0]
+</pre>
+<p>ただし、このように倍数を一覧にしたい場合は、range()に開始値、終了値、ステップ値（間隔）を指定することでも実現できる。これで作られるリストの最終値には、終了値と一致する値（以下の例では20）は含まれないことに注意。</p>
+<pre class="prettyprint">
+bi = list(range(0, 20, 2))
+</pre>
+<p>range()関数はrange型のオブジェクトを返すため、list()でlist型に変換していることに注意。</p>
+<ul>
+<li><a href="https://note.nkmk.me/python-list-comprehension/">Pythonリスト内包表記の使い方 | note.nkmk.me</a></li>
+<li><a href="https://qiita.com/kokorinosoba/items/eb72dac6b68fccbac04d">リスト内包表記とif文を組み合わせるとき - Qiita</a></li>
+<li><a href="https://www.javadrive.jp/python/function/index6.html">Python | range関数の使い方(開始から終了までの連続した数値を要素として持つrange型オブジェクトを作成する) - Let'sプログラミング</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

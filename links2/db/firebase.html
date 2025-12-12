@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Firebase関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Firebaseの世界観</h1>
+<p>Firebaseに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>mBaaS</h2>
+<h2>Firebase</h2>
+<p>FirebaseはmBaaS（mobile backend as a Service）と言われている、スマートフォンアプリで良く使われている機能をクラウドから提供するサービスの1つ。</p>
+<p>Googleによって提供されている。</p>
+<ul>
+<li><a href="https://qiita.com/owen/items/c51c6ec27c9e2f5804b0">Firebaseを使い始めたら人生が変わった(ような気がした) - Qiita</a></li>
+</ul>
+
+<h2>リアルタイム同期型のデータベース</h2>
+<p>Firebaseでは、リアルタイム同期型のデータベースを利用出来る。アプリケーションはローカルにデータベースの複製を持ち、ローカルに書き込む。それがリアルタイムでサーバーと同期される。このため、応答が速く、オフライン処理にも対応できる。</p>
+<ul>
+<li><a href="https://udemy.benesse.co.jp/development/system/what-is-firabase.html">Firebaseとは？Google社の強みを活かしたメリットや…｜Udemy メディア</a></li>
+</ul>
+
+<h2>Nuxt.jsやNext.jsとの連携</h2>
+<p>FirebaseはNuxt.js（Vue.js）やNext.js（React）と組み合わせて開発することが多い。SPA + Firebaseで簡単なWebアプリケーションを開発できる。</p>
+<ul>
+<li><a href="https://qiita.com/potato4d/items/cfddeb8732fec63cb29c">【v2対応】Nuxt.jsとFirebaseを組み合わせて爆速でWebアプリケーションを構築する - Qiita</a></li>
+</ul>
+
+<h2>Firebaseを使うとバックエンドを構築する必要が無い</h2>
+<p>リアルタイム同期型のデータベースのほか、写真や動画などのバイナリファイルを保管する機能や、認証機能やメッセージ通知機能など、Firebaseにはたくさんの機能がある。iOSやAndroidのほか、WebやUnityやC++やFlutterにもSDKが対応している。</p>
+<p>このため、Firebaseを使ってモバイルアプリを開発すると、バックエンドを用意する必要が無い。バックエンドの部分は全部Firebaseを使って構築することができる。</p>
+<ul>
+<li><a href="https://www.topgate.co.jp/firebase01-what-is-firebase">【第1回】 Google の mBaaS 「 Firebase 」とは？【はじめてみよう Firebase】 | 株式会社トップゲート</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>サーバーサイドの要らないWeb開発</h2>
+<p>React/Next.jsとFirebaseを組み合わせると、バックエンドを別に用意する必要がありません。バックエンドは、データベースだけをFirebaseとして使い、ほかは全部フロントエンドのReact/Next.jsのようなJavaScriptフレームワークだけで開発できます。</p>
+<p>バックエンドが要らないということは、すなわち、サーバーサイドのプログラミングが必要ないということです。</p>
+<p>なので、PHPやRubyが動くような、リッチなサーバーを用意することなく、データベースとしてFirebaseだけをサーバーに用意し、あとは全部クライアントサイドのHTML/CSSとJavaScriptフレームワークだけで行うことができます。</p>
+<p>Firebaseを用いたWeb・モバイル開発では、PHPやMySQLの動くような、リッチなサーバーは必要ありません。サーバーとして必要なのはデータベースのFirebaseだけであり、あとは全部静的HTML技術とJavaScriptで行えます。これはとても画期的です。SPAなどと組み合わせることで、今までとはまったく違う、シンプルで柔軟なWeb開発を行うことができます。</p>
+<div class="edit_date">
+<p>2024.02.19</p>
+</div>
+
+<h2>Googleの提供するさまざまな機能がある</h2>
+<p>Firebaseには、単にバックエンドの開発・保守を省略できるだけではなく、Googleの提供するさまざまな機能があります。特にmBaaSとして知られている通り、モバイル向けの機能（リアルタイムなデータの同期など）が多いです。以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.softbanktech.co.jp/corp/hr/recruit/articles/52/">コラム：Googleの『Firebase』とは？メリットや始め方も紹介｜SBテクノロジー採用サイト</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.02.19</p>
+</div>
+
+<h1>実践Webアプリ開発</h1>
+<h2>ReactとFirebaseを使ってWebアプリを作る</h2>
+<p>ReactとFirebaseを使ってWebアプリを作る方法については、以下のようなページが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/Naoya_pro/items/a42f1ecae8acce249ef3">【超簡単】React×Firebaseで投稿機能作ってみた〜 #初心者 - Qiita</a></li>
+<li><a href="https://zenn.dev/tentel/articles/488dd8765fb059">React×Firebaseでちゃんと開発するときの環境構築手順と解説 - Zenn</a></li>
+</ul>
+<p><a href="../prog_lang/javascript_framework_react.html">React</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.07.30</p>
+</div>
+
+<h2>FlutterとFirebaseを使ってWebアプリを作る</h2>
+<p>FlutterとFirebaseを使ってWebアプリを作る方法については、以下のようなページが参考になる。</p>
+<ul>
+<li><a href="https://zenn.dev/susatthi/articles/20240309-111704-flutter-firebase-app">Flutter × Firebase ではじめる個人開発 - Zenn</a></li>
+<li><a href="https://zenn.dev/kazutxt/books/flutter_practice_introduction/viewer/29_chapter4_overview">01.Firebaseの概要｜Flutter実践入門</a></li>
+</ul>
+<p><a href="../mobile/flutter.html">Flutter</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.07.30</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Google</h2>
+<p><a href="../services/google.html">Google</a>を参照のこと。</p>
+
+<h2>JavaScriptフレームワーク</h2>
+<p><a href="../prog_lang/javascript_framework_vue_js.html">Vue.js</a>や<a href="../prog_lang/javascript_framework_react.html">React</a>や<a href="../prog_lang/javascript_framework_next_js.html">Next.js</a>を参照のこと。</p>
+
+<h2>モバイル</h2>
+<p><a href="../mobile/ios.html">iOS/iPhone</a>や<a href="../mobile/android.html">Android</a>や<a href="../mobile/flutter.html">Flutter</a>も参照のこと。</p>
+
+<h2>Unity</h2>
+<p><a href="../videogame/unity.html">Unity</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理５（ユーザーとパーミッション） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXシステム管理５（ユーザーとパーミッション）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観５（ユーザーとパーミッション）です。</p>
+
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><b>５．ユーザーとパーミッション</b></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>マルチユーザーシステム</h1>
+<h2>ユーザーとrootユーザー</h2>
+<p>UNIXでは、複数のユーザーを作ることができる。ユーザーの個人ファイルはほかのユーザーから見えない形にすることができ、複数のユーザーが同時に同じシステムを使うことができる。これを「マルチユーザー」と呼ぶ。</p>
+<p>また、一般ユーザーのほかに、システムにひとつだけ「rootユーザー」が存在する。rootユーザーは管理者権限のあるユーザーのことで、簡単に言えば「どんなことでもできる特権ユーザー」のこと。</p>
+<p>rootユーザーはシステムの破壊や変更ができ危険であるため、通常の利用では一般ユーザーを使い、必要になった時だけsuコマンド（ユーザーの切り替えコマンド）などを使ってroot権限を使えるようにして、システムの破壊行為（たとえばパッケージ管理システムによる新しいアプリケーションのインストールやアップデート）などを行えるようにする。これがUNIXにおける基本である。</p>
+<p>また、別のユーザーやグループ（ユーザーが束になったもの）に自分のファイルを見ることのできる権限を与えるには、ファイルの属性であるパーミッション（読み書き実行の権限）と、ファイルの所有ユーザー・所有グループを設定する。</p>
+<div class="edit_date">
+<p>2024.02.24</p>
+</div>
+
+<h2>ユーザーとグループ</h2>
+<p>UNIXにはユーザーとグループがある。すなわち、自分の所有するファイルについて、他のユーザーから見ることができないように権限の許可（パーミッション）を設定できる。</p>
+<p>ただし、実際のところ、他のユーザーとも共有したいファイルがあるかもしれない。そういう時に、グループという機能を利用できる。</p>
+<p>ユーザーの所有するファイルについて、所属ユーザーには読み書き実行を許可し、所属グループには読み込みだけ許可したりすることができる。このために、ファイルにはパーミッションと呼ばれる権限が定められている。</p>
+<p>こうしたユーザーの仕組みに対して、ひとつ特権的なユーザーがUNIXには必ずあり、それを「rootユーザー」という。</p>
+<p>rootユーザーは、全てのユーザーのデータにアクセスでき、全てのユーザーのプロセスに干渉できる。</p>
+<p>（「<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>」を読みながら自分で考えて書きました。）</p>
+
+<h2>プロセスの権限とファイルのパーミッションによるマルチユーザーOS</h2>
+<p>UNIXでは、そのユーザーが実行したコマンドプロセスはそのユーザーの権限において実行される、という「ユーザーの権限」がある。</p>
+<p>ファイルやディレクトリには、所有者や所属グループやその他のユーザーに対して、どのような許可を与えるか、という「パーミッション」が決められている。</p>
+<p>UNIXでは、ユーザーのプロセス権限とファイルのパーミッションにおいて、それぞれのユーザーとプログラムの「出来ること」が決まっている。これが、UNIXにおけるマルチユーザーシステムである。</p>
+<p>ある意味、「旧世代的だ」と感じられるかもしれない。昔の、UNIXが開発された頃の、「たくさんの端末に1つの共有コンピュータが使われている」という状態の再来のように感じられるかもしれない。だが、本当は今でも、そうした「1つのコンピュータとたくさんのユーザーが繋がる」という場面は多くて、たとえばHTTPサーバーなどはそうした利用の形態に当たるだろう。完全にマルチユーザーシステムと合致するわけではないが、本来そのような用途を想定し、たとえばユーザーがログインするコンピュータとデータコンピュータを分けて管理する、といったコンピュータの「柔軟な構成」が可能である。こうした点が、UNIXが「ネットワークとの親和性が高い」と言われる点かもしれない。</p>
+
+<h2>本当は今のWindows PCが必ずしも正しいわけではない</h2>
+<p>ただ、本当のことを言うと、今のWindows PCのように「全てのパソコンにOSを入れる」というモデルが正しいわけではない。</p>
+<p>たとえば、Windowsにはサポート期限というのがある。もう少しすると、Windows 7もサポートが切れてしまう。今の、全てのPCにWindowsを導入するモデルだと、全てのPCの分だけライセンスを購入しなければならない。10台あれば、ライセンスの価格は10倍になる。これは大きな出費だ。</p>
+<p>それに対して、ひとつの中央コンピュータにのみLinuxのワークステーションを使い、それぞれ個別のPCではX端末を使うようにすれば、（X端末を導入するクライアントPCのOSはどうするのかという問題はあるが）OSの管理はひとつのワークステーション分だけで済む。</p>
+<p>ただし、そもそもOSのバージョンアップが必要なのか、という問題もあるし、端末にも何らかのシステムを導入して使うことを考えると、これも考え物である。</p>
+<p>僕としては、家庭内のLANに繋がったサポートの切れたコンピュータを、ひとつの（たとえばルータのファイアーウォールのように）経路を中心にし、何らかの形で「家庭内LANの全てのコンピュータを守る」ような、新しいセキュリティとアンチウイルス技術が必要になってくるのではないかと思う。全てのOSでWindows Updateをかけなくても、ひとつの中央コンピュータだけをきちんと管理していれば、他のコンピュータはその中央システムが守ってくれるような、そういうシステムが必要ではないかと思う。</p>
+
+<h1>rootユーザー</h1>
+<h2>su -</h2>
+<p>rootユーザーになってシェルを実行する。</p>
+<pre>
+$ su -
+Password: (root のパスワードを入力)
+# (rootのシェルになった)
+</pre>
+<p>終了する時はexitを実行する。</p>
+<pre>
+# exit
+$ (ユーザーに戻る)
+</pre>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/shadow/man1/su.1.html">man su</a></li>
+</ul>
+<p><a href="linux_commands_beginner.html">UNIXコマンド（基本）</a>も参照のこと。</p>
+
+<h2>sudo</h2>
+<p>そのコマンドだけをroot権限で実行出来る。僕はあまり好きではないが、使いやすさを考えてUbuntuでは標準である。</p>
+<p>後日注記：sudoを使うことのできるユーザーは、/etc/sudoersで設定します。管理者権限を与えるのと同じことなので、注意して行いましょう。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/sudo/man8/sudo.8.html">man sudo</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/sudo/man5/sudoers.5.html">man sudoers</a></li>
+</ul>
+
+<h1>ユーザーとグループ</h1>
+<h2>ユーザーの追加</h2>
+<p>UNIXはマルチユーザー・マルチタスクのOSであるため、簡単にユーザーを追加することが出来る。</p>
+<p>ユーザーを追加するには、useraddコマンドをrootで実行する。</p>
+<p>たとえば、wheel（suを使うことができる）のグループに所属するhogeというユーザを作成する。</p>
+<pre>
+# useradd -m -G wheel -s /bin/bash hoge
+# passwd hoge
+</pre>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Finalizing/ja">インストールの締めくくり - Gentoo Handbook</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/shadow/man8/useradd.8.html">man useradd</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/shadow/man1/passwd.1.html">man passwd(1)</a></li>
+</ul>
+
+<h2>ユーザ関連のコマンド</h2>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>useradd<br>userdel<br>usermod</td><td>ユーザの追加と削除と設定。</td></tr>
+<tr><td>groupadd<br>groupdel<br>groupmod</td><td>グループの追加と削除と設定。</td></tr>
+<tr><td>passwd</td><td>パスワードの変更。</td></tr>
+<tr><td>id</td><td>ユーザーID・グループIDが表示できる。</td></tr>
+<tr><td>su</td><td>ユーザー権限を変えてログインできる。</td></tr>
+<tr><td>who</td><td>ログイン中のユーザを表示できる。</td></tr>
+</table>
+<div class="edit_date">
+<p>2023.01.17</p>
+<p>2024.10.06編集</p>
+</div>
+
+<h2>ホームディレクトリ</h2>
+<p>UNIXでは、ホームディレクトリ（/home/username）がそれぞれのユーザに与えられ、このディレクトリが基本的にユーザのデータや作業の場所になる。ホームディレクトリ以外は、一部の例外を除いてrootユーザにならなければ、どんなアプリケーションでも変更することは出来ない（読み取りや実行は出来る場合が多い）。そのため、セキュリティが高い。</p>
+<p>逆に言えば、注意すべきなのはホームディレクトリの中のデータだ。重要なデータはバックアップを取って、スパイウェアに知られないように、パスワードなどの重要なデータはネットワークに繋がった場所に置かないようにしよう。</p>
+<p>ホームディレクトリは、最近ではデスクトップやドキュメントのような便利なディレクトリが自動的に作られる。それから、ユーザそれぞれの設定ファイルとして、「.」から始まる「ドットファイル」というファイルがアプリケーションの使用時などに作られる。自動的に作られる場合もあれば、自分で設定する場合（.emacsなど）もある。ドットファイルは、ファイルマネージャなどからは隠しファイルとして扱われる。lsコマンドでドットファイルまでを一覧したい場合は、ls -aオプションを使う。</p>
+<pre>
+$ ls -a
+</pre>
+<p>ドットファイルは、.bashrcなど、アプリケーションにとってはとても重要なファイルであることが多いため、良く注意して管理しよう。</p>
+<p><a href="linux_unix_admin.html">UNIXシステム管理（６．システム情報と設定）</a>も参照のこと。</p>
+
+<h2>ホームディレクトリを指す別の表現（~とHOME）</h2>
+<p>ホームディレクトリを指す別の表現として、UNIXでは昔から~（チルダ）を用います。</p>
+<p>たとえば、ホームディレクトリの中の.bashrcをviで編集するためには、</p>
+<pre>
+$ vi ~/.bashrc
+</pre>
+<p>とします。この中の~/の部分がホームディレクトリへのパスに変換されてコマンドが実行されます。</p>
+<p>あるいは、cdでカレントディレクトリをホームディレクトリに移動してからviで編集することもできます。</p>
+<pre>
+$ cd ~
+$ vi .bashrc
+</pre>
+<p>この場合、カレントディレクトリが変わることに注意しましょう。</p>
+<p>また、cdコマンドはディレクトリ名を指定せずに実行するとホームディレクトリに移動するため、この場合はcd ~の「~」を省略できます。</p>
+<p>また、環境変数HOMEも、~と同様に、ユーザーのホームディレクトリを指し示す環境変数です。これは$HOMEから参照できます。</p>
+<ul>
+<li><a href="https://www.ibm.com/docs/ja/aix/7.1?topic=c-cd-command">cd コマンド - IBM Documentation</a></li>
+<li><a href="https://qiita.com/tmshn/items/ed4d1ca9852c1a507f19">[Linux] カレントユーザのホームディレクトリはどこから取得すべきか #Linux - Qiita</a></li>
+<li><a href="https://blog.s-giken.net/459.html">Linuxで使用される主な環境変数・PATH、HOME、PS1・printenv、set、declare | エス技研</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.03.26-27</p>
+</div>
+
+<h2>グループはユーザの権限を決める</h2>
+<p>UNIXにおけるグループは、ユーザの権限を決めるために使うことが多い。</p>
+<p>特に、wheelグループは多くのLinuxやUNIXで用いられるグループで、rootユーザーに昇格するためのsuコマンドを使うことができるようになる。rootのパスワードを知っているユーザーにroot権限を与えるのと似たような意味合いがあるので覚えておこう。また、apacheなどrootになってはならないユーザーにはできるだけ与えないようにしよう。</p>
+<p>後日注記：UNIXではグループはユーザーの権限の制限に使う、ということを覚えておきましょう。また、Webサーバーなどを管理する際、セキュリティに気を使うなら、rootでも普段使いの一般ユーザーでもない、Webの特別ユーザーを作ってもいいかもしれません。その上で/var/wwwの所有権をそのユーザーにすれば、一般ユーザーから/var/wwwは書き換えできなくなります。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Finalizing/ja">インストールの締めくくり - Gentoo Handbook</a></li>
+</ul>
+
+<h2>/etc/passwdと/etc/shadow</h2>
+<table class="some_tables">
+<tr><th class="min60">設定ファイル</th><th>説明</th></tr>
+<tr><td>/etc/passwd</td><td>ユーザーごとのさまざまな設定が書かれている設定ファイル。</td></tr>
+<tr><td>/etc/shadow</td><td>暗号化されたパスワードが記述されている設定ファイル。</td></tr>
+<table>
+<p>昔は/etc/passwdにパスワードまで含めて書かれていたが、/etc/passwdは誰でも見ることができるファイルであり、暗号化されているとは言えセキュリティ的によくないため、暗号化されたパスワードは一般ユーザには見えない/etc/shadowに記述されるようになった。</p>
+<p>/etc/passwdはそれぞれの項目が「:」で区切られており、左から「ユーザー名」「暗号化されたパスワード（大抵の場合、シャドウパスワードとして/etc/shadowに記述されている）」「ユーザーID」「グループID」「ユーザーのフルネーム」「ホームディレクトリのパス」「ログインシェルの種類」が記述されている。</p>
+<p>/etc/passwdの内容を編集する場合は、編集中にロックをかけるためにviではなく専用のvipwコマンドを使うことが推奨される。内容を間違えるとユーザーがログインできなくなるので気を付けよう。</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://www.wakhok.ac.jp/biblion/1997/sysadmin/node18.html">2.2 パスワードファイル /etc/passwd の構造 - UNIXシステム管理入門コース</a></li>
+<li><a href="http://www.wakhok.ac.jp/biblion/1997/sysadmin/node19.html">2.3 シャドウファイル /etc/shadow の構造 - UNIXシステム管理入門コース</a></li>
+<li><a href="https://linuc.org/study/knowledge/509/">「/etc/passwd」ファイル - Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="https://www.ibm.com/docs/ja/aix/7.2?topic=passwords-using-etcpasswd-file">/etc/passwd ファイルの使用 - IBM Documentation</a></li>
+</ul>
+<p>以下はman-pages。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/passwd.5.html">man passwd(5)</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/shadow/man5/shadow.5.html">man shadow</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/group.5.html">man group</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.28編集</p>
+<p>2024.10.06編集</p>
+</div>
+
+<h2>/etc/skel</h2>
+<p>/etc/skelはスケルトンディレクトリと呼ばれ、ユーザーを新規追加した際のホームディレクトリ（/home/username）の雛型（スケルトン）となる。</p>
+<p>ユーザーを新しく作った時、どのユーザーにも必要なファイルを置いておくことができる。</p>
+<ul>
+<li><a href="http://una.soragoto.net/lecture/linux/skel.html">スケルトンファイル | ウナのLinux講座 | ウナのIT資格一問一答</a></li>
+</ul>
+
+<h1>パーミッション</h1>
+<h2>パーミッションの説明</h2>
+<p>ファイルには所有ユーザーと所属グループがあり、ユーザー・グループ・その他に属するプロセスに対して、どのような権限を与えるかを決められる。これをパーミッションと言う。</p>
+<p>パーミッションには、記号表記と八進表記がある。記号表記は「rw-r--r--」など、八進表記は「644」など。</p>
+<p>まず、一番左の項目は所有者、真ん中はグループ、一番右はその他のユーザーを示す。記号表記なら「rwx」のような記号を三回並べる。八進表記では644のように三つの数字となる。</p>
+<table class="some_tables">
+<tr><th class="min60">項目</th><th>説明</th></tr>
+<tr><td>一番左</td><td>所有者</td></tr>
+<tr><td>真ん中</td><td>所有グループ</td></tr>
+<tr><td>一番右</td><td>その他のユーザー</td></tr>
+</table>
+<p>そして、rあるいは4が読み込み、wあるいは2が書き込み、xあるいは1が実行の権限を表す。</p>
+<table class="some_tables">
+<tr><th class="min60">許可</th><th>説明</th></tr>
+<tr><td>r, 4</td><td>読み込み</td></tr>
+<tr><td>w, 2</td><td>書き込み</td></tr>
+<tr><td>x, 1</td><td>実行</td></tr>
+</table>
+<p>記号表記では、rw-のようにアルファベットを並べる。八進表記ではこの数字をビット演算のように足す。4 + 2 = 6は読み込み・書き込み許可を表す。</p>
+<p>この結果、パーミッション644は「所有者に読み書き、所有グループとその他のユーザーに読み込みの許可を与える」ことを表す。</p>
+<p>また、「-rw-r--r--」や「drwxr-xr-x」のように一番左にもうひとつ表示された場合、ファイル種別を表す。「-」はファイル、「d」はディレクトリ、「l」はシンボリックリンク。</p>
+<table class="some_tables">
+<tr><th class="min60">種別</th><th>説明</th></tr>
+<tr><td>-</td><td>ファイル</td></tr>
+<tr><td>d</td><td>ディレクトリ</td></tr>
+<tr><td>l</td><td>シンボリックリンク</td></tr>
+</table>
+<p>ディレクトリの場合、rは中身を一覧で表示できるかどうか、wはそのディレクトリの中に新しくファイルを作成・削除できるかどうか、xは作業ディレクトリとしてそのディレクトリにcdできるかどうか、を表す。</p>
+<table class="some_tables">
+<tr><th class="min60">ディレクトリ</th><th>説明</th></tr>
+<tr><td>r</td><td>ファイル一覧の表示</td></tr>
+<tr><td>w</td><td>ファイル作成・削除</td></tr>
+<tr><td>x</td><td>カレントディレクトリとしてcd可能</td></tr>
+</table>
+<p>Windowsのように.exeなら実行できる、というわけではなく、実行ファイルやスクリプトを実行させたい時は基本的にパーミッションの許可が必要（厳密に言えば、スクリプトの場合、rubyなどに引数を与えて実行させることはできる）。</p>
+<p>パーミッションの確認はls -lで見ることが出来る。</p>
+<pre>
+$ ls -l
+-rw-r--r--  1 user group      9  1月 1 00:00 hoge.txt
+drwxr-xr-x  6 user group  20480  1月 1 00:00 foo_dir
+</pre>
+<ul>
+<li><a href="https://www.mdn.co.jp/di/articles/2104/?page=2">第2回 「パーミッションの意味と使い分け」 | デザインってオモシロイ -MdN Design Interactive-</a></li>
+<li><a href="http://shim0mura.hatenadiary.jp/entry/20110527/1306517437">ファイルとディレクトリのパーミッションの違い - tumblr</a></li>
+<li><a href="https://qiita.com/shisama/items/5f4c4fa768642aad9e06">Linuxの権限確認と変更（超初心者向け） - Qiita</a></li>
+</ul>
+<p><a href="../prog_lang/perl_cgi.html">Perl/CGI</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.01.17編集</p>
+</div>
+
+<h2>パーミッションの変更コマンド</h2>
+<p>以下のようなコマンドで変えるか：</p>
+<pre>
+chmod 644 hoge.html
+</pre>
+<p>あるいは、このように変えるかです。</p>
+<p>所有ユーザに読み書きの権限を与える：</p>
+<pre>
+chmod u+rw hoge.html
+</pre>
+<p>グループに実行の権限を与える：</p>
+<pre>
+chmod g+x hoge.html
+</pre>
+<p>その他のユーザからすべての権限を消す：</p>
+<pre>
+chmod o-rwx hoge.html
+</pre>
+<p>すべてのユーザに読み込みの権限を与える：</p>
+<pre>
+chmod a+r hoge.html
+</pre>
+<p>（以上は<a href="http://www.din.or.jp/~raelian/unix_permission.html">UNIXの基礎知識 - パーミッション編 - With RAELIAN</a>と<a href="https://qiita.com/shisama/items/5f4c4fa768642aad9e06">Linuxの権限確認と変更（超初心者向け） - Qiita</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.01.17編集</p>
+</div>
+
+<h2>chmod, chown, chgrp</h2>
+<p>パーミッション、オーナー、グループを変える三種の神器。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>chmod</td>
+<td>パーミッションを変更する。</td>
+</tr>
+<tr>
+<td>chown</td>
+<td>所有者を変更する。</td>
+</tr>
+<tr>
+<td>chgrp</td>
+<td>所属グループを変更する。</td>
+</tr>
+</table>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1605/24/news015.html">【 chown 】コマンド／【 chgrp 】コマンド――ファイルの所有者と所有グループを変更する：Linux基本コマンドTips（15） - ＠IT</a></li>
+<li><a href="https://webbibouroku.com/Blog/Article/chmod-permission">Linuxのファイル権限(chmod,chown,chgrp) │ Web備忘録</a></li>
+<li><a href="http://www.din.or.jp/~raelian/unix_permission.html">UNIXの基礎知識 - パーミッション編 - With RAELIAN</a></li>
+</ul>
+<p>以下はman-pages。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/chmod.1.html">man chmod</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/chown.1.html">man chown</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/chgrp.1.html">man chgrp</a></li>
+</ul>
+
+<h1>用途</h1>
+<h2>ユーザーとパーミッションの適切な使用法</h2>
+<p>UNIXにはユーザーとパーミッションの概念があるとして、どこでこれを使うか。</p>
+<p>これは、ファイルシステムの役割を柔軟にしたい時に使います。</p>
+<p>たとえば、Apacheのhtmlデータの入るディレクトリは、多くの場合/var/www/htmlですが、ユーザーassyが居たとして、Webサーバのデータをassyしか変更しないのであれば、/var/www/htmlの所有者やグループをassyに属させる、などといったことができます。ただし、実際はユーザーとグループをapache:apacheとした上で、apacheグループにユーザーassyを所属させるのが良いでしょう。</p>
+<p>また、/mnt/usbhddをassyしか使わないのであれば、これもassyに所有権を与えることができます。</p>
+<p>あるいは、/usr/local/assyのようなディレクトリを作って、このディレクトリをassyの所有とし、assyにこのディレクトリを変更する権限を与えることで、/usr/local/assy以下のprefixはassyの自由に変えられます。</p>
+<p>僕も無知のため色々と問題はあるかもしれませんが、このようにすることで、システムの一部だけをユーザーやグループに開放したりすることができます。</p>
+<p><a href="../network/apache.html">Apache</a>も参照のこと。</p>
+
+<h2>ホームディレクトリを暗号化する</h2>
+<p>Linuxではファイルシステムを暗号化することができますが、ホームディレクトリだけの暗号化も可能です。</p>
+<p>この場合、ログインパスワードを暗号化のパスワードと紐づけて、ログインした時点で暗号化が解けるようにし、もしマシンが盗まれてもハードディスクからホームディレクトリの機密情報（個人情報や仕事に使うデータなど）を守ることができます。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://allabout.co.jp/gm/gc/451274/">Ubuntu ホームフォルダは暗号化すべき？ - [Linuxの使い方] All About</a></li>
+<li><a href="http://blog.livedoor.jp/aratamete_eigo-hitoyasumi/archives/5305680.html">ubuntuに挑戦:後からホームフォルダを暗号化する</a></li>
+</ul>
+<p>しかしながら、別にSSHの設定が必要だったり（ssh接続から~/.ssh/authorized_keysが読めなくなることがある）、スワップや/tmpが暗号化されないなどの問題があるようです。</p>
+<ul>
+<li><a href="https://hnakamur.github.io/blog/2016/05/02/uninstall-encrypted-home-on-ubuntu/">Ubuntuでホームディレクトリを暗号化するのを止めた &middot; hnakamur&#39;s blog</a></li>
+</ul>
+<p>僕は、本当に「仕事用のマシンは暗号化しなさい」と上司から言われたとか、あるいは機密情報が入ったサーバーなどで使うのでなければ、ホームディレクトリの暗号化はおすすめしません。個人で使うパスワードなどを保護したいなら、データを圧縮解凍ツールで圧縮する時に暗号化を行うなどで代用することができます。LVM暗号化を使うという手もあります。</p>
+<p><a href="../network/encrypt.html">暗号</a>も参照のこと。</p>
+
+<h1>認証情報</h1>
+<h2>クレデンシャル</h2>
+<p>クレデンシャルとは、ログインの時に使われるユーザー認証情報（ユーザーID・パスワード）のこと。</p>
+<p>Linuxでは、異なるユーザーIDでプロセスを実行したい時などに使用する。</p>
+<ul>
+<li><a href="https://www.weblio.jp/content/%E3%82%AF%E3%83%AC%E3%83%87%E3%83%B3%E3%82%B7%E3%83%A3%E3%83%AB%E6%83%85%E5%A0%B1">クレデンシャル情報の意味や定義 Weblio辞書</a> - IT用語辞典バイナリ</li>
+</ul>
+
+<h2>setuid/setgid</h2>
+<p>プログラムを別のユーザー・グループで実行したい時は、setuidとsetgidを使う。実行ユーザーの権限ではなく、所有者の権限（たとえばroot）でプログラムを実行できる。root権限を持たない一般ユーザーであっても、setuidビットがファイルパーミッションに設定されていて、所有者がrootである場合、root権限でそのプログラムを実行できる。</p>
+<p>passwdやmailのように、一時的にrootなどの権限が必要なプログラムはこの仕組みを用いて実現されている。</p>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://docs.oracle.com/cd/E19455-01/806-2718/secfiles-69/index.html">特殊なファイルアクセス権 (setuid、setgid、スティッキビット) (Solaris のシステム管理 (第 2 巻))  - Oracle</a></li>
+</ul>
+
+<h2>ログインとPAM</h2>
+<p>Linuxでは、ログインのためにPAMと呼ばれるAPIを使う。</p>
+<p>昔のloginコマンドでは、認証情報の管理のために/etc/login.defsという設定ファイルを記述していた。</p>
+<p>だが、この方法では、loginコマンドと同様、ログイン処理を行う必要のあるプログラム（telnetやsshやftpなど）で、同じ設定を繰り返し記述しなければならない。</p>
+<p>これは、リモートログインを多用するUNIXの世界では非効率的で無駄が多い。そのため、Linuxでは、ライブラリを用いたログインの仕組みであるPAMを使う。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+
+<h2>クレデンシャル関係のAPI</h2>
+<p>ユーザーやグループなどの情報（クレデンシャル）が欲しい時に、/etc/passwdや/etc/groupを自前で解析するような必要はありません。専用のAPIがあります。このAPIには、</p>
+<table class="some_tables">
+<tr><th class="min60">API</th><th>説明</th></tr>
+<tr><td>getuid(), geteuid(),<br>getgid(), getegid()</td><td>ユーザーID・グループIDを得る</td></tr>
+<tr><td>setuid(), setgid()</td><td>ユーザーID・グループIDを変更する</td></tr>
+<tr><td>getgroups(), initgroups()</td><td>補足グループを取得・設定する</td></tr>
+<tr><td>getpwuid(), getpwnam()</td><td>ユーザ情報（パスワードを含む）を得る</td></tr>
+<tr><td>getgruid(), getgrnam()</td><td>グループ情報を得る</td></tr>
+</table>
+<p>などがあります。ユーザー情報は必ずしも/etc/passwdや/etc/groupだけにあるとは限らないので（NISやLDAPなど）、これらのAPIを使うようにする必要があります。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.01.21</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>セキュリティ</h2>
+<p><a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<h2>SELinux/AppArmor</h2>
+<p><a href="selinux.html">SELinux</a>や<a href="apparmor.html">AppArmor</a>も参照のこと。</p>
+
+<h2>認証</h2>
+<p><a href="../network/auth.html">認証</a>や<a href="../network/nis.html">NIS</a>や<a href="../network/ldap.html">LDAP</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

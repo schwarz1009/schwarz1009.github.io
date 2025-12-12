@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Qiitaでロボット開発中 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">AI・自作プログラムの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/programs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Qiitaでロボット開発中</h1>
+<p>僕の作っている<a href="robot.html">人間頭脳型ロボット</a>を、<a href="http://qiita.com/schwarz1009/items/6fb34bc6834b3c111f03">Qiita</a>で、<a href="http://qiita.com/shiracamus">@shiracamus</a>と言う方とともに共同開発中です。</p>
+<p>以下は、そのログのコピーです。</p>
+<div id="toc"></div>
+<div class="page_links">
+<h1>人間の頭脳を模したロボットを作りました。</h1>
+<p>@schwarz1009 - 2017年04月12日に更新</p>
+<p>僕の作ったロボットのコードまとめ。コードだけですみません。</p>
+<p><a href="/">ホームページ</a>でも公開しています。</p>
+
+<h2>思考型ロボット</h2>
+<p>一号機。</p>
+
+<p>robot1.c</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int getlp(int *p){
+    *p = rand()%2;
+    return 1;
+}
+void action(int *p){
+    if(*p==0){
+        printf("はらが減った。\n");
+    }
+    else if(*p==1){
+        printf("はらは減っていない。\n");
+    }
+}
+int main(void){
+    int p;
+    while(getlp(&p)){
+        action(&p);
+    }
+}
+</pre>
+
+<p>二号機。</p>
+
+<p>robot2.c</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+struct _obj {
+    int p;
+    int hara;
+};
+int getlp(struct _obj *obj){
+    obj-&gt;p = rand()%4;
+    return 1;
+}
+void action(struct _obj *obj){
+    if(obj-&gt;p==0){
+        printf("はらは");
+        if(obj-&gt;hara==0){
+            printf("減った。\n");
+        }
+        else{
+            printf("減っていない。\n");
+        }
+    }
+    else if(obj-&gt;p==1){
+        printf("楽しい。\n");
+    }
+    else if(obj-&gt;p==2){
+        printf("はらが減る\n");
+        obj-&gt;hara=0;
+    }
+    else if(obj-&gt;p==3){
+        printf("おいしいごはんを食べた\n");
+        obj-&gt;hara=1;
+    }
+}
+int main(void){
+    struct _obj obj;
+    obj.hara=1;
+    while(getlp(&obj)){
+        action(&obj);
+  }
+}
+</pre>
+
+<p>三号機。</p>
+
+<p>robot3.c</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+struct _obj {
+    int p;
+    int w;
+    int t;
+};
+int getlp(struct _obj *obj){
+    obj-&gt;p = rand()%5;
+    return 1;
+}
+void action(struct _obj *obj){
+    if(obj-&gt;p==0){
+        printf("ここは");
+        if(obj-&gt;w==1){
+            printf("日本です。\n");
+        }
+        else if(obj-&gt;w==2){
+            printf("ドイツです。\n");
+        }
+    }
+    else if(obj-&gt;p==1){
+        printf("日本にやってきました。\n");
+        obj-&gt;w=1;
+    }
+    else if(obj-&gt;p==2){
+        printf("ドイツにやってきました。\n");
+        obj-&gt;w=2;
+    }
+    else if(obj-&gt;p==3){
+        printf("想像力を使います。");
+        printf("りんごは赤い。\n");
+        obj-&gt;t=1;
+    }
+    else if(obj-&gt;p==4){
+        printf("想像力を使います。");
+        printf("りんごは白い。\n");
+        obj-&gt;t=0;
+    }
+    if(obj-&gt;p==3||obj-&gt;p==4){
+        if(obj-&gt;t==1){
+            printf("正しい。\n");
+        }
+        else{
+            printf("間違っている。\n");
+        }
+    }
+}
+int main(void){
+    struct _obj obj;
+    obj.w=1;
+    obj.t=1;
+    while(getlp(&obj)){
+        action(&obj);
+    }
+}
+</pre>
+
+<p>四号機。</p>
+
+<p>robot4.c</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct _obj {
+    int o;
+    int n;
+};
+
+void action(int* p, struct _obj *obj){
+    if(*p==0){
+        printf("[1] テレビは、つまらない\n");
+    }
+    else if(*p==1){
+        printf("[2] テレビは、面白い\n");
+    }
+    else if(*p==2){
+        printf("[3] パソコンは、つまらない\n");
+    }
+    else if(*p==3){
+        printf("[4] パソコンは、面白い\n");
+    }
+    else if(*p==4){
+        printf("[5] テレビやパソコンは、機械だ。\n");
+    }
+    else if(*p==5){
+        printf("[6] テレビやパソコンは、生き物ではない。\n");
+    }
+    else if(*p==6){
+        printf("[7] テレビって何なのだろう。\n");
+    }
+    else if(*p==7){
+        printf("[8] テレビとパソコンは好きだ。\n");
+    }
+    else if(*p==8){
+        printf("[9] テレビとパソコンは嫌いだ。\n");
+    }
+    else if(*p==9){
+        if(obj-&gt;n==0){
+            printf("[10] 比較すると、テレビの方が普通だ。\n");
+        }
+        else if(obj-&gt;n==1){
+            printf("[11] 比較すると、パソコンの方が普通だ。\n");
+        }
+    }
+    else if(*p==10){
+        if(obj-&gt;n==0){
+            printf("[12] テレビよりパソコンの方が普通かな。\n");
+            obj-&gt;n=1;
+        }
+        else if(obj-&gt;n==1){
+            printf("[13] パソコンよりテレビの方が普通かな。\n");
+            obj-&gt;n=0;
+        }
+    }
+    else if(*p==11){
+        if(obj-&gt;o==0){
+            printf("[14] リンゴが好きです。\n");
+        }
+        else if(obj-&gt;o==1){
+            printf("[15] みかんが好きです。\n");
+        }
+    }
+    else if(*p==12){
+        if(obj-&gt;o==0){
+            printf("[16] リンゴより、みかんが好きになりました。\n");
+            obj-&gt;o=1;
+        }
+        else if(obj-&gt;o==1){
+            printf("[17] みかんより、リンゴが好きになりました。\n");
+            obj-&gt;o=0;
+        }
+    }
+}
+
+int main(void){
+    int p;
+    struct _obj obj;
+    p=0;
+    obj.o=0;
+    obj.n=0;
+    while(1){
+        p=rand()%13;
+        action(&p, &obj);
+    }
+}
+</pre>
+
+<p>このロボットは、改善点として、普通の人工知能を乗せる、思考を覚えて思い出す、マルチスレッドにして複数にする、などが考えられる。</p>
+
+<h2>推論型ロボット</h2>
+<p>僕は、何をすべきなのか、自分の力で考えるコンピュータを作るべきだと思う。</p>
+
+<p>robot5.c</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+int main (void) {
+    struct _obj obj;
+    obj.p = 0;
+    if (check1(&obj)){
+        action1(&obj);
+    }
+    if (check2(&obj)){
+        action2(&obj);
+    }
+}
+</pre>
+
+<h1>コメント</h1>
+<h2>@shiracamus - 2017-04-11 08:09</h2>
+<p>いちいちif文を書くのは大変でしょうから、配列にしてはいかがでしょう？</p>
+<p>それと、インデントが失われているコードは、vimで gg=G するか indentコマンドで整形するといいですよ。インデント幅を指定して(vimなら :set shiftwidth=2 expandtab とか)。</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+
+struct brain {
+    int (*check)(struct _obj *obj);
+    void (*action)(struct _obj *obj);
+} brain[] = {
+    { check1, action1 },
+    { check2, action2 },
+    { NULL, NULL }
+};
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    for (struct brain *b = brain; b-&gt;check; b++) {
+        if (b-&gt;check(&obj)){
+            b-&gt;action(&obj);
+        }
+    }
+}
+</pre>
+
+<h2>@schwarz1009 - 2017-04-12 10:09</h2>
+<p>shiracamusさん、素晴らしいです。改善ありがとうございます。</p>
+<p>コードを良く分かっていないので、トンチンカンなことを言っているかもしれないのですが、無限ループでないと人間の頭脳のような思考ロボットにならないような気がします。ただ、コードが美しくなっているので、本当に嬉しいです。</p>
+
+<h2>@schwarz1009 - 2017-04-12 16:59</h2>
+<p>こうすれば良いのだと思います。</p>
+
+<p>robot7.c</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+
+struct brain {
+    int (*check)(struct _obj *obj);
+    void (*action)(struct _obj *obj);
+} brain[] = {
+    { check1, action1 },
+    { check2, action2 },
+    { NULL, NULL }
+};
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    while(1){
+        for (struct brain *b = brain; b-&gt;check; b++) {
+            if (b-&gt;check(&obj)){
+                b-&gt;action(&obj);
+            }
+        }
+    }
+}
+</pre>
+
+<h2>@schwarz1009 - 2017-04-12 17:38</h2>
+<p>なんか、ループの中がおかしくバグっている気がします。変数定義をループ外に追い出して、ポインタと配列をなんとかした方が良いかもしれません。</p>
+
+<h2>@schwarz1009 - 2017-04-12 18:49</h2>
+<p>バグを直すと、こんな風になりました。</p>
+
+<p>robot8.c</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+
+void doing (struct _obj *obj) {
+    struct brain {
+        int (*check)(struct _obj *obj);
+        void (*action)(struct _obj *obj);
+    } brain[] = {
+        { check1, action1 },
+        { check2, action2 },
+        { NULL, NULL }
+    };
+    struct brain *b;
+    for (b = brain; b-&gt;check; b++) {
+        if (b-&gt;check(obj)){
+            b-&gt;action(obj);
+        }
+    }
+}
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    struct _obj obj2 = { .p = 1 };
+    while(1){
+        doing(&obj);
+        doing(&obj2);
+    }
+}
+</pre>
+
+<h2>@schwarz1009 - 2017-04-12 19:24</h2>
+<p>すみません。今度はメモリリークしているような気がします。</p>
+
+<h2>@schwarz1009 - 2017-04-12 19:27</h2>
+<p>メモリリークの直し方が分からないです。すみません。</p>
+
+<h2>@shiracamus - 2017-04-12 20:07</h2>
+<p>静的データしかないのでメモリリークはしません。</p>
+<p>無限ループして出力が山ほどたまってメモリ消費してるというオチじゃありませんか？</p>
+<p>sleep(1); でも入れてゆっくり無限ループしてみてはいかがでしょう？</p>
+
+<h2>@schwarz1009 - 2017-04-12 20:14</h2>
+<p>すみません。メモリリークしていないのかも知れないです。</p>
+<p>自分の技術力の無さを反省します。</p>
+
+<h2>@schwarz1009 - 2017-04-12 20:27</h2>
+<p>結局こんな感じになりました。</p>
+
+<p>robot9.c</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+
+struct brain {
+    int (*check)(struct _obj *obj);
+    void (*action)(struct _obj *obj);
+} brain[] = {
+    { check1, action1 },
+    { check2, action2 },
+    { NULL, NULL }
+};
+
+void doing (struct _obj *obj) {
+    struct brain *b;
+    for (b = brain; b-&gt;check; b++) {
+        if (b-&gt;check(obj)){
+            b-&gt;action(obj);
+        }
+    }
+}
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    struct _obj obj2 = { .p = 1 };
+    while(1){
+        doing(&obj);
+        doing(&obj2);
+    }
+}
+</pre>
+
+<h2>@shiracamus - 2017-04-12 22:48</h2>
+<p>mainをこう変更してみてはいかがですか？</p>
+
+<pre class="prettyprint">
+#include &lt;unistd.h&gt;
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    struct _obj obj2 = { .p = 1 };
+    while(1){
+        doing(&obj);
+        doing(&obj2);
+        sleep(1);
+    }
+}
+</pre>
+
+<h2>@schwarz1009 - 2017-04-12 22:53</h2>
+<p>sleep(1);の必要性はちょっと分からないです。ただ、ちょっと表示が速すぎるような気はします。</p>
+
+<h2>@schwarz1009 - 2017-04-28 22:58</h2>
+<p>今度のロボットは、永遠に次の思考と主題に反応して、良いか悪いかを表示します。</p>
+
+<p>robot10.c</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int tf;
+    int sbj;
+};
+
+void next_subject (struct _obj *obj){
+    if (obj-&gt;sbj == 0){
+        obj-&gt;tf = 0;
+    }
+    if (obj-&gt;sbj == 1){
+        obj-&gt;tf = 1;
+    }
+}
+
+void mind (struct _obj *obj){
+    if (obj-&gt;tf == 0){
+        printf("それはきっと正しい\n");
+    }
+    if (obj-&gt;tf == 1){
+        printf("それはきっと間違っている\n");
+    }
+}
+
+int main(void){
+    struct _obj obj = { .tf = 0 };
+    while(1){
+        obj.sbj=0;
+        next_subject(&obj);
+        mind(&obj);
+        obj.sbj=1;
+        next_subject(&obj);
+        mind(&obj);
+    }
+}
+</pre>
+
+<h2>@shiracamus - 2017-04-28 23:51</h2>
+<pre class="prettyprint">
+void next_subject (struct _obj *obj){
+    if (obj-&gt;sbj == 0){
+        obj-&gt;tf = 0;
+    }
+    if (obj-&gt;sbj == 1){
+        obj-&gt;tf = 1;
+    }
+}
+</pre>
+<p>これって、こうしてはだめなんでしょうか？</p>
+
+<pre class="prettyprint">
+void next_subject (struct _obj *obj){
+    obj-&gt;tf = obj-&gt;sbj;
+}
+</pre>
+<p>そもそも、sbj って何？ tf って何？ 0 って何？ 1 って何？</p>
+
+<h2>@schwarz1009 - 2017-04-29 10:28</h2>
+<p>sbjは主題です。tfは真偽値です。理解出来ないかもしれないです。ごめんなさい。</p>
+
+<h2>@schwarz1009 - 2017-04-29 10:31</h2>
+<p>主題と真偽値は今のところ0と1になっていますが、これを追加して、たとえば主題2の時は正しい、3の時は間違っている、などとすることを想定しています。</p>
+<p>主題と言うのは、数値になっているのは計算しやすくするためで、「猫は動物である」の時に正しい、「猫は植物である」の時に間違っている、などとすることを想定しています。</p>
+<p>説明しないと、分からなかったかもしれないです。</p>
+
+<h2>@shiracamus - 2017-04-29 13:32</h2>
+<p>0 とか 1 はマジックナンバーと呼ばれ、プログラムの可読性、保守性が低下します。</p>
+<p>enum を使うようにしましょう。</p>
+<p>変数名はできる限り省略せず、変数に格納される値の「意味」を表す名前にしましょう。</p>
+<p>こんなことをしたいのかな？ と考えてみた例を示しておきます。参考になれば幸いです。</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+typedef const char *String;
+typedef enum { TRUE = (0 == 0), FALSE = (0 != 0) } Boolean;
+typedef enum { CORRECT, WRONG, UNKNOWN } Judge;
+
+typedef enum {
+    NONE,
+    ROBOT, CAT, DOG,
+    MACHINE, HUMAN, ANIMAL, PLANT,
+    PEACE, WAR
+} Object;
+
+typedef struct {
+    Object object;
+    Object type;
+} Category;
+
+Category categorize[] = {
+    { ROBOT, MACHINE },
+    { CAT, ANIMAL },
+    { DOG, ANIMAL },
+    { NONE, NONE }
+};
+
+Boolean Object_is(Object object, Object complement) {
+    if (object == complement)
+        return TRUE;
+    for (Category *category = categorize; category-&gt;object != NONE; category++) {
+        if (category-&gt;object == object &&
+            category-&gt;type == complement)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+typedef struct {
+    Object object;
+    Judge judge;
+} Mind;
+
+typedef struct {
+    String name;
+    Object type;
+    Mind *mind;
+} Robot;
+
+void Robot_areYou(Robot *robot, Object complement) {
+    if (Object_is(robot-&gt;type, complement)) {
+        printf("%s: はい、そうです\n", robot-&gt;name);
+    } else {
+        printf("%s: いいえ、違います\n", robot-&gt;name);
+    }
+}
+
+void Robot_isThis(Robot *robot, Object object, Object complement) {
+    if (Object_is(object, complement)) {
+        printf("%s: はい、そうです\n", robot-&gt;name);
+    } else {
+        printf("%s: いいえ、違います\n", robot-&gt;name);
+    }
+}
+
+void Robot_judge(Robot *robot, Object object) {
+    for (Mind *mind = robot-&gt;mind; mind-&gt;object != NONE; mind++) {
+        if (mind-&gt;object != object)
+            continue;
+        switch (mind-&gt;judge) {
+        case CORRECT:
+            printf("%s: それはきっと正しい\n", robot-&gt;name);
+            return;
+        case WRONG:
+            printf("%s: それはきっと間違っている\n", robot-&gt;name);
+            return;
+        default:
+            printf("%s: それは分かりません\n", robot-&gt;name);
+            return;
+        }
+    }
+    printf("%s: それは分かりません\n", robot-&gt;name);
+}
+
+int main(void) {
+    Mind mind_of_robot[] = {
+        { PEACE, CORRECT },
+        { WAR, WRONG },
+        { NONE, UNKNOWN },
+    };
+    Robot robot = {
+        .name = "Mr.Robot",
+        .type = ROBOT,
+        .mind = mind_of_robot,
+    };
+    while(1){
+        Robot_areYou(&robot, ROBOT);
+        Robot_areYou(&robot, MACHINE);
+        Robot_areYou(&robot, HUMAN);
+        Robot_isThis(&robot, CAT, ANIMAL);
+        Robot_isThis(&robot, CAT, PLANT);
+        Robot_isThis(&robot, CAT, DOG);
+        Robot_judge(&robot, PEACE);
+        Robot_judge(&robot, WAR);
+        sleep(1);
+    }
+}
+</pre>
+<p>実行結果</p>
+<pre>
+Mr.Robot: はい、そうです
+Mr.Robot: はい、そうです
+Mr.Robot: いいえ、違います
+Mr.Robot: はい、そうです
+Mr.Robot: いいえ、違います
+Mr.Robot: いいえ、違います
+Mr.Robot: それはきっと正しい
+Mr.Robot: それはきっと間違っている
+</pre>
+
+<h2>@schwarz1009 - 2017-04-29 14:22</h2>
+<p>ありがとうございます。すごいです。感謝します！</p>
+
+<h2>@schwarz1009 - 2017-04-29 15:23</h2>
+<p>shiracamusさん。本当に嬉しいです。こちらのページに、コードの引用を載せさせていただきました。</p>
+<p><a href="robot.html">ロボット</a></p>
+<p>良かったら、また教えてください。感謝します。</p>
+
+<h2>@shiracamus - 2017-04-30 10:27</h2>
+<p>列挙型から文字列の配列を作る を使って改良してみました。</p>
+
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+typedef const char *String;
+typedef enum { YES = (0 == 0), NO = (0 != 0) } Boolean;
+typedef enum { CORRECT, WRONG, UNKNOWN } Judge;
+
+#define WORD(T) \
+    T(ROBOT), T(CAT), T(DOG), \
+    T(MACHINE), T(HUMAN), T(ANIMAL), T(PLANT), \
+    T(PEACE), T(WAR), \
+    T(NONE)
+#define toEnum(name) name
+#define toString(name) #name
+
+typedef enum { WORD(toEnum) } Word;
+
+String name[] = { WORD(toString) };
+
+typedef struct {
+    Word word;
+    Word group;
+} Category;
+
+Category categories[] = {
+    { ROBOT, MACHINE },
+    { CAT, ANIMAL },
+    { DOG, ANIMAL },
+    { NONE, NONE } // terminator (Don't remove)
+};
+
+Boolean is(Word subject, Word complement) { // S+V+C
+    if (subject == complement)
+        return YES;
+    for (Category *category = categories; category-&gt;word != NONE; category++) {
+        if (subject == category-&gt;word && complement == category-&gt;group)
+            return YES;
+    }
+    return NO;
+}
+
+typedef struct {
+    Word object;
+    Judge judge;
+} Mind;
+
+typedef struct {
+    String name;
+    Word type;
+    Mind *mind;
+} Robot;
+
+void Robot_areYou(Robot *robot, Word complement) {
+    if (is(robot-&gt;type, complement)) {
+        printf("%s: はい、私は %s です\n",
+               robot-&gt;name, name[complement]);
+    } else {
+        printf("%s: いいえ、私は %s ではありません\n",
+               robot-&gt;name, name[complement]);
+    }
+}
+
+void Robot_isThis(Robot *robot, Word object, Word complement) {
+    if (is(object, complement)) {
+        printf("%s: はい、%s は %s です\n",
+               robot-&gt;name, name[object], name[complement]);
+    } else {
+        printf("%s: いいえ、%s は %s ではありません\n",
+               robot-&gt;name, name[object], name[complement]);
+    }
+}
+
+void Robot_judge(Robot *robot, Word object) {
+    for (Mind *mind = robot-&gt;mind; mind-&gt;object != NONE; mind++) {
+        if (mind-&gt;object != object)
+            continue;
+        switch (mind-&gt;judge) {
+        case CORRECT:
+            printf("%s: %s はきっと正しい\n",
+                   robot-&gt;name, name[object]);
+            return;
+        case WRONG:
+            printf("%s: %s はきっと間違っている\n",
+                   robot-&gt;name, name[object]);
+            return;
+        default:
+            printf("%s: %s は分かりません\n",
+                   robot-&gt;name, name[object]);
+            return;
+        }
+    }
+    printf("%s: %s は分かりません\n",
+           robot-&gt;name, name[object]);
+}
+
+int main(void) {
+    Mind mind_of_robot[] = {
+        { PEACE, CORRECT },
+        { WAR, WRONG },
+        { NONE, UNKNOWN }, // terminator (Don't remove)
+    };
+    Robot robot = {
+        .name = "Mr.Robot",
+        .type = ROBOT,
+        .mind = mind_of_robot,
+    };
+    for (;;) {
+        Robot_areYou(&robot, ROBOT);
+        Robot_areYou(&robot, MACHINE);
+        Robot_areYou(&robot, HUMAN);
+        Robot_isThis(&robot, CAT, ANIMAL);
+        Robot_isThis(&robot, CAT, PLANT);
+        Robot_isThis(&robot, CAT, DOG);
+        Robot_judge(&robot, PEACE);
+        Robot_judge(&robot, WAR);
+        sleep(1);
+    }
+}
+</pre>
+<p>実行結果</p>
+<pre>
+Mr.Robot: はい、私は ROBOT です
+Mr.Robot: はい、私は MACHINE です
+Mr.Robot: いいえ、私は HUMAN ではありません
+Mr.Robot: はい、CAT は ANIMAL です
+Mr.Robot: いいえ、CAT は PLANT ではありません
+Mr.Robot: いいえ、CAT は DOG ではありません
+Mr.Robot: PEACE はきっと正しい
+Mr.Robot: WAR はきっと間違っている
+</pre>
+
+<h2>@shiracamus - 2017-04-30 11:09</h2>
+<p>言葉を覚えるたびにプログラムをコンパイルするのは馬鹿げているので、いずれ言葉辞書やカテゴリー辞書を外部から読み込むことになると思います。</p>
+<p>文章の構造を分析して単語抽出や品詞分類するライブラリもありますから、そういったライブラリを使って入力された文章を解釈して答えるロボットにするのもいいと思います。</p>
+
+<h2>@schwarz1009 - 2017-04-30 12:01</h2>
+<p>自分としては、作り方や解決方法を考えたり、批判や同意をするようにすると、人間らしくなるのかな、と言う気がします。</p>
+<p>あるいは、感情表現や要求、願望などがあると良いと思います。</p>
+<p>ただし、ただ考えているように見えて、本当は表示しているだけ、となってしまうと、ロボットとは言えないかもしれません。</p>
+
+<h2>@shiracamus - 2017-04-30 14:01</h2>
+<p>指示した動作を疲れ知らずで正確に繰り返す産業ロボットもロボットですよね。</p>
+<p>人間らしくするとなると、AI(人工知能)や機械学習を取り入れると良さそうですね。</p>
+<p>Pythonのライブラリが充実してるので、C言語よりもPythonを学んだ方が楽できると思います。</p>
+
+<h2>@schwarz1009 - 2017-07-29 16:44</h2>
+<p>ロボットをPythonで書いてみました。</p>
+
+<p>robot.py</p>
+<pre class="prettyprint">
+import random
+
+class Robot:
+    def __init__(self):
+        self.p = 0
+        self.n = 0
+        self.o = 0
+    
+    def action(self):
+        if self.p == 0:
+            print("[1] テレビは、つまらない\n")
+    
+        if self.p == 1:
+            print("[2] テレビは、面白い\n")
+    
+        if self.p == 2:
+            print("[3] パソコンは、つまらない\n")
+    
+        if self.p == 3:
+            print("[4] パソコンは、面白い\n")
+    
+        if self.p == 4:
+            print("[5] テレビやパソコンは、機械だ。\n")
+    
+        if self.p == 5:
+            print("[6] テレビやパソコンは、生き物ではない。\n")
+    
+        if self.p == 6:
+            print("[7] テレビって何なのだろう。\n")
+    
+        if self.p == 7:
+            print("[8] テレビとパソコンは好きだ。\n")
+    
+        if self.p == 8:
+            print("[9] テレビとパソコンは嫌いだ。\n")
+    
+        if self.p == 9:
+            if self.n == 0:
+                print("[10] 比較すると、テレビの方が普通だ。\n")
+      
+            if self.n == 1:
+                print("[11] 比較すると、パソコンの方が普通だ。\n")
+      
+    
+        if self.p == 10:
+            if self.n == 0:
+                print("[12] テレビよりパソコンの方が普通かな。\n")
+                self.n = 1
+      
+            elif self.n == 1:
+                print("[13] パソコンよりテレビの方が普通かな。\n")
+                self.n = 0
+      
+    
+        if self.p == 11:
+            if self.o == 0:
+                print("[14] リンゴが好きです。\n")
+      
+            if self.o == 1:
+                print("[15] みかんが好きです。\n")
+      
+    
+        if self.p == 12:
+            if self.o == 0:
+                print("[16] リンゴより、みかんが好きになりました。\n")
+                self.o = 1
+      
+            elif self.o == 1:
+                print("[17] みかんより、リンゴが好きになりました。\n")
+                self.o = 0
+      
+    
+  
+
+if __name__ == "__main__":
+    rb = Robot()
+
+    while True:
+        rb.p=random.randint(0,12)
+        rb.action()
+</pre>
+
+<h2>@LouiS0616 - 2017-07-29 17:03</h2>
+<p>これを何をもってロボットと呼んでいるのか理解できませんが、とりあえずelif使いましょう。</p>
+
+<h2>@schwarz1009 - 2017-07-29 17:12</h2>
+<p>すみません。人間のように考えるロボットのつもりです。</p>
+<p>以下のようにしてみました。</p>
+
+<p>robot2.py</p>
+<pre class="prettyprint">
+import random
+
+class Robot:
+    def __init__(self):
+        self.p = 0
+        self.n = 0
+        self.o = 0
+
+    def action(self):
+        if self.p == 0:
+            print("[1] テレビは、つまらない\n")
+
+        if self.p == 1:
+            print("[2] テレビは、面白い\n")
+
+        if self.p == 2:
+            print("[3] パソコンは、つまらない\n")
+
+        if self.p == 3:
+            print("[4] パソコンは、面白い\n")
+
+        if self.p == 4:
+            print("[5] テレビやパソコンは、機械だ。\n")
+
+        if self.p == 5:
+            print("[6] テレビやパソコンは、生き物ではない。\n")
+
+        if self.p == 6:
+            print("[7] テレビって何なのだろう。\n")
+
+        if self.p == 7:
+            print("[8] テレビとパソコンは好きだ。\n")
+
+        if self.p == 8:
+            print("[9] テレビとパソコンは嫌いだ。\n")
+
+        if self.p == 9:
+            if self.n == 0:
+                print("[10] 比較すると、テレビの方が普通だ。\n")
+
+            if self.n == 1:
+                print("[11] 比較すると、パソコンの方が普通だ。\n")
+
+
+        if self.p == 10:
+            if self.n == 0:
+                print("[12] テレビよりパソコンの方が普通かな。\n")
+                self.n = 1
+
+            elif self.n == 1:
+                print("[13] パソコンよりテレビの方が普通かな。\n")
+                self.n = 0
+
+
+        if self.p == 11:
+            if self.o == 0:
+                print("[14] リンゴが好きです。\n")
+
+            if self.o == 1:
+                print("[15] みかんが好きです。\n")
+
+
+        if self.p == 12:
+            if self.o == 0:
+                print("[16] リンゴより、みかんが好きになりました。\n")
+                self.o = 1
+
+            elif self.o == 1:
+                print("[17] みかんより、リンゴが好きになりました。\n")
+                self.o = 0
+
+
+    def mainloop():
+        while True:
+            self.p=random.randint(0,12)
+            self.action()
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+
+<h2>@LouiS0616 - 2017-07-29 17:37</h2>
+<p>いや、こういうことです。</p>
+<p>元のコードだと毎回12回の比較が生じるので、実行時間が大いに無駄になります。</p>
+
+<p>robot2.py</p>
+<pre class="prettyprint">
+import random
+
+class Robot:
+    def __init__(self):
+        self.p = 0
+        self.n = 0
+        self.o = 0
+
+    def action(self):
+        if self.p == 0:
+            print("[1] テレビは、つまらない\n")
+
+        elif self.p == 1:
+            print("[2] テレビは、面白い\n")
+
+        elif self.p == 2:
+            print("[3] パソコンは、つまらない\n")
+
+        elif self.p == 3:
+            print("[4] パソコンは、面白い\n")
+
+        elif self.p == 4:
+            print("[5] テレビやパソコンは、機械だ。\n")
+
+        elif self.p == 5:
+            print("[6] テレビやパソコンは、生き物ではない。\n")
+
+        elif self.p == 6:
+            print("[7] テレビって何なのだろう。\n")
+
+        elif self.p == 7:
+            print("[8] テレビとパソコンは好きだ。\n")
+
+        elif self.p == 8:
+            print("[9] テレビとパソコンは嫌いだ。\n")
+
+        elif self.p == 9:
+            if self.n == 0:
+                print("[10] 比較すると、テレビの方が普通だ。\n")
+
+            else:
+                print("[11] 比較すると、パソコンの方が普通だ。\n")
+
+
+        elif self.p == 10:
+            if self.n == 0:
+                print("[12] テレビよりパソコンの方が普通かな。\n")
+                self.n = 1
+
+            else:
+                print("[13] パソコンよりテレビの方が普通かな。\n")
+                self.n = 0
+
+
+        elif self.p == 11:
+            if self.o == 0:
+                print("[14] リンゴが好きです。\n")
+
+            else:
+                print("[15] みかんが好きです。\n")
+
+
+        elif self.p == 12:
+            if self.o == 0:
+                print("[16] リンゴより、みかんが好きになりました。\n")
+                self.o = 1
+
+            else:
+                print("[17] みかんより、リンゴが好きになりました。\n")
+                self.o = 0
+
+
+    def mainloop():
+        while True:
+            self.p=random.randint(0,12)
+            self.action()
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+<p>『ランダムに意思を表明する』ことをロボットの要件とするならば、</p>
+<p>サイコロの各面にメッセージを張ればそれでロボットと呼べることになります。</p>
+
+<p>そして、そもそもこのコードは動かないです。self.oとself.nを定義する前に参照していますから。</p>
+
+<h2>@schwarz1009 - 2017-07-29 19:46</h2>
+<p>動かないのを承知で、こんな風にしたらどうですか？</p>
+
+<p>robot3.py</p>
+<pre class="prettyprint">
+class Robot:
+    def __init__(self):
+        self.p = 0
+        self.n = 0
+        self.o = 0
+
+    def action(self):
+        if self.p == 0:
+            print("[1] テレビは、つまらない\n")
+
+        elif self.p == 1:
+            print("[2] テレビは、面白い\n")
+
+        elif self.p == 2:
+            print("[3] パソコンは、つまらない\n")
+
+        elif self.p == 3:
+            print("[4] パソコンは、面白い\n")
+
+        elif self.p == 4:
+            print("[5] テレビやパソコンは、機械だ。\n")
+
+        elif self.p == 5:
+            print("[6] テレビやパソコンは、生き物ではない。\n")
+
+        elif self.p == 6:
+            print("[7] テレビって何なのだろう。\n")
+
+        elif self.p == 7:
+            print("[8] テレビとパソコンは好きだ。\n")
+
+        elif self.p == 8:
+            print("[9] テレビとパソコンは嫌いだ。\n")
+
+        elif self.p == 9:
+            if self.n == 0:
+                print("[10] 比較すると、テレビの方が普通だ。\n")
+
+            else:
+                print("[11] 比較すると、パソコンの方が普通だ。\n")
+
+
+        elif self.p == 10:
+            if self.n == 0:
+                print("[12] テレビよりパソコンの方が普通かな。\n")
+                self.n = 1
+
+            else:
+                print("[13] パソコンよりテレビの方が普通かな。\n")
+                self.n = 0
+
+
+        elif self.p == 11:
+            if self.o == 0:
+                print("[14] リンゴが好きです。\n")
+
+            else:
+                print("[15] みかんが好きです。\n")
+
+
+        elif self.p == 12:
+            if self.o == 0:
+                print("[16] リンゴより、みかんが好きになりました。\n")
+                self.o = 1
+
+            else:
+                print("[17] みかんより、リンゴが好きになりました。\n")
+                self.o = 0
+
+
+    def mainloop():
+        while True:
+            self.p=kanjou()
+            self.action()
+
+    def kanjou():
+        ....
+        return nanika
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+<h2>@LouiS0616 - 2017-07-29 20:02</h2>
+<p>感情を一次元、しかも離散的に扱う時点でおかしいのでは。</p>
+<p>「なんかうまい具合にする」って意味では、以下のコードとあんまりレベル変わらないですよ。</p>
+<pre class="prettyprint">
+print(nanika)
+</pre>
+
+<h2>@schwarz1009 - 2017-07-29 20:04</h2>
+<p>すごい！笑える。</p>
+
+<h2>@schwarz1009 - 2017-07-29 20:08</h2>
+<p>まあ確かに、ここでkanjou()はおかしいかもしれないですね。</p>
+<p>感情をわざわざ数値に変換して、それを別のところで思考にするのはおかしいと思います。</p>
+<p>そもそも、このようなコードから思いついたので、仕方ありません。</p>
+<pre class="prettyprint">
+main {
+    while(getlp(p))
+    {
+        if(1==getkj(p)){
+            action();
+        }
+    }
+}
+</pre>
+<h2>@LouiS0616 - 2017-07-29 20:24</h2>
+<p>最初のコードもかなり冗長ですけどね。以下で充分です。</p>
+<p>ポインタを使う必要は全くないです。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int getlp(void){
+    return rand()%2;
+}
+void action(int p){
+    if(p==0) {
+        printf("はらが減った。");
+    }
+    else {
+        printf("はらは減っていない。");
+    }
+}
+int main(void){
+    while(1){
+        action(getlp());
+    }
+
+    return 0;
+}
+</pre>
+<h2>@schwarz1009 - 2017-07-29 20:32</h2>
+<p>むしろ、勝手に改良してもらって全然構わないので、よろしくお願いします。</p>
+
+<h2>@shiracamus - 2017-07-31 23:37</h2>
+<p>if文を使わない書き方はいかが？</p>
+<pre class="prettyprint">
+import random
+
+class Robot:
+    def __init__(self):
+        self.mind = {
+            False: {
+                False: '質問がわかりません',
+            },
+            'って何': {
+                True: '{what}は{mind}です',
+                False: '知りません',
+                'テレビ': '機械',
+                'パソコン': '機械',
+            },
+            'はどう': {
+                True: '{what}は{mind}です',
+                False: '{what}はどうでもいい',
+                'テレビ': 'どうでもいい',
+                'パソコン': '面白い',
+            },
+            'どっちが普通': {
+                True: '{mind}の方が普通です',
+                False: 'わからない',
+                'テレビとパソコン': 'テレビ',
+            },
+            'どっちが好き': {
+                True: '{mind}の方が好きです',
+                False: '決められない',
+                'テレビとパソコン': 'パソコン',
+            },
+            'は何が好き': {
+                True: '{mind}が好き',
+                False: '特にない',
+                '食べ物': 'りんご',
+            },
+        }
+
+    def ask(self, question):
+        words = question.strip().rstrip("?？").split()
+        what, how = words[0], ''.join(words[1:])
+        mind = self.mind.get(how, False) or self.mind[False]
+        return mind[what in mind].format(what=what, mind=mind.get(what, ''))
+
+if __name__ == "__main__":
+  robot = Robot()
+  print('ロボットに質問しましょう。')
+  while True:
+      question = input('質問: ')
+      print(robot.ask(question))
+</pre>
+<p>実行結果</p>
+<pre>
+ロボットに質問しましょう。
+質問: パソコン
+質問がわかりません
+質問: パソコン って何？
+パソコンは機械です
+質問: テレビとパソコン どっちが好き？
+パソコンの方が好きです
+質問: テレビとパソコン どっちが普通
+テレビの方が普通です
+質問: 食べ物 は何が好き？
+りんごが好き
+</pre>
+
+<h2>@schwarz1009 - 2017-10-30 06:50</h2>
+<p>動くようにしたバージョンを作りました。手元の環境（Fedora 26）では動いています。</p>
+
+<p>robot4.py</p>
+<!--
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+
+class Robot:
+  p = 0
+  o = 0
+  n = 0
+
+  def action(self):
+    if self.p == 0:
+      print("[1] テレビは、つまらない\n")
+
+    elif self.p == 1:
+      print("[2] テレビは、面白い\n")
+
+    elif self.p == 2:
+      print("[3] パソコンは、つまらない\n")
+
+    elif self.p == 3:
+      print("[4] パソコンは、面白い\n")
+
+    elif self.p == 4:
+      print("[5] テレビやパソコンは、機械だ。\n")
+
+    elif self.p == 5:
+      print("[6] テレビやパソコンは、生き物ではない。\n")
+
+    elif self.p == 6:
+      print("[7] テレビって何なのだろう。\n")
+
+    elif self.p == 7:
+      print("[8] テレビとパソコンは好きだ。\n")
+
+    elif self.p == 8:
+      print("[9] テレビとパソコンは嫌いだ。\n")
+
+    elif self.p == 9:
+      if self.n == 0:
+        print("[10] 比較すると、テレビの方が普通だ。\n")
+
+      else:
+        print("[11] 比較すると、パソコンの方が普通だ。\n")
+
+
+    elif self.p == 10:
+      if self.n == 0:
+        print("[12] テレビよりパソコンの方が普通かな。\n")
+        self.n = 1
+
+      else:
+        print("[13] パソコンよりテレビの方が普通かな。\n")
+        self.n = 0
+
+
+    elif self.p == 11:
+      if self.o == 0:
+        print("[14] リンゴが好きです。\n")
+
+      else:
+        print("[15] みかんが好きです。\n")
+
+
+    elif self.p == 12:
+      if self.o == 0:
+        print("[16] リンゴより、みかんが好きになりました。\n")
+        self.o = 1
+
+      else:
+        print("[17] みかんより、リンゴが好きになりました。\n")
+        self.o = 0
+
+
+  def mainloop(self):
+    while True:
+      self.p=self.kanjou()
+      self.action()
+
+  def kanjou(self):
+    return random.randint(0,12)
+
+if __name__ == "__main__":
+  rb = Robot()
+  rb.mainloop()
+</pre>
+-->
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+
+class Robot:
+    def __init__(self):
+        self.p = 0
+        self.n = 0
+        self.o = 0
+
+    def action(self):
+        if self.p == 0:
+            print("[1] テレビは、つまらない")
+
+        elif self.p == 1:
+            print("[2] テレビは、面白い")
+
+        elif self.p == 2:
+            print("[3] パソコンは、つまらない")
+
+        elif self.p == 3:
+            print("[4] パソコンは、面白い")
+
+        elif self.p == 4:
+            print("[5] テレビやパソコンは、機械だ。")
+
+        elif self.p == 5:
+            print("[6] テレビやパソコンは、生き物ではない。")
+
+        elif self.p == 6:
+            print("[7] テレビって何なのだろう。")
+
+        elif self.p == 7:
+            print("[8] テレビとパソコンは好きだ。")
+
+        elif self.p == 8:
+            print("[9] テレビとパソコンは嫌いだ。")
+
+        elif self.p == 9:
+            if self.n == 0:
+                print("[10] 比較すると、テレビの方が普通だ。")
+
+            else:
+                print("[11] 比較すると、パソコンの方が普通だ。")
+
+
+        elif self.p == 10:
+            if self.n == 0:
+                print("[12] テレビよりパソコンの方が普通かな。")
+                self.n = 1
+
+            else:
+                print("[13] パソコンよりテレビの方が普通かな。")
+                self.n = 0
+
+
+        elif self.p == 11:
+            if self.o == 0:
+                print("[14] リンゴが好きです。")
+
+            else:
+                print("[15] みかんが好きです。")
+
+
+        elif self.p == 12:
+            if self.o == 0:
+                print("[16] リンゴより、みかんが好きになりました。")
+                self.o = 1
+
+            else:
+                print("[17] みかんより、リンゴが好きになりました。")
+                self.o = 0
+
+
+    def mainloop(self):
+        while True:
+            self.p=self.kanjou()
+            self.action()
+
+    def kanjou(self):
+        return random.randint(0,12)
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+
+
+<h2>@schwarz1009 - 2017-10-31 20:49</h2>
+<p>単純なランダムではロボットらしくないので、こんな感じにしてみました。</p>
+
+<p>robot5.py</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+
+class Robot:
+    def __init__(self):
+        self.nanisuru = 0
+        self.tabetai = 0
+        self.yaritai = 0
+        self.suki = 0
+        self.change_tabetai = 0
+        self.change_yaritai = 0
+        self.change_suki = 0
+        self.ima_tabetai = 0
+        self.ima_yaritai = 0
+        self.ima_suki = 0
+
+    def action(self):
+        if self.nanisuru == 0:
+            if self.ima_tabetai == 1:
+                if self.tabetai == 0:
+                    print("カツ丼が食べたい")
+                elif self.tabetai == 1:
+                    print("ステーキが食べたい")
+
+            if self.change_tabetai == 1:
+                if self.tabetai == 0:
+                    print("やっぱりステーキが良い")
+                    self.tabetai = 1
+                elif self.tabetai == 1:
+                    print("やっぱりカツ丼が良い")
+                    self.tabetai = 0
+
+        elif self.nanisuru == 1:
+            if self.ima_yaritai == 1:
+                if self.yaritai == 0:
+                    print("サッカーがしたい")
+                elif self.yaritai == 1:
+                    print("野球がしたい")
+
+            if self.change_yaritai == 1:
+                if self.yaritai == 0:
+                    print("やっぱり野球が良い")
+                    self.yaritai = 1
+                elif self.yaritai == 1:
+                    print("やっぱりサッカーが良い")
+                    self.yaritai = 0
+
+        elif self.nanisuru == 2:
+            if self.ima_suki == 1:
+                if self.suki == 0:
+                    print("Windowsが好き")
+                elif self.suki == 1:
+                    print("Linuxが好き")
+
+            if self.change_suki == 1:
+                if self.suki == 0:
+                    print("やっぱりLinuxが良い")
+                    self.suki = 1
+                elif self.suki == 1:
+                    print("やっぱりWindowsが良い")
+                    self.suki = 0
+
+    def kanjou(self):
+        if self.nanisuru &lt; 3:
+            self.nanisuru = self.nanisuru + 1
+        else:
+            self.nanisuru = 0
+
+        self.ima_tabetai = random.randint(0,1)
+        self.ima_yaritai = random.randint(0,1)
+        self.ima_suki = random.randint(0,1)
+
+        self.change_tabetai = random.randint(0,1)
+        self.change_yaritai = random.randint(0,1)
+        self.change_suki = random.randint(0,1)
+
+    def mainloop(self):
+        while True:
+            self.kanjou()
+            self.action()
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+
+<h2>@shiracamus - 2017-11-02 03:37</h2>
+<p>if文で処理するのは大変なので、リストや辞書にして楽してはいかがですか？</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+
+class Robot:
+    selection = (
+        ("食べたい", ("かつ丼", "ステーキ", "カレー", "ハンバーガー")),
+        ("したい", ("野球", "サッカー")),
+        ("好き", ("Windows", "Linux", "MacOS")),
+    )
+    mind = 0
+
+    def action(self):
+        want, selection = self.selection[self.mind]
+        select = random.choice(selection)
+        print("%sが%s" % (select, want))
+        change = random.choice(selection)
+        if select != change:
+            print("やっぱり%sが良い" % change)
+
+    def select(self):
+        self.mind = (self.mind + 1) % len(self.selection)
+
+    def mainloop(self):
+        while True:
+            self.select()
+            self.action()
+
+if __name__ == "__main__":
+  rb = Robot()
+  rb.mainloop()
+</pre>
+
+<h2>@schwarz1009 - 2020-01-27 20:34</h2>
+<p>最近こんな感じになりました。</p>
+<p>robot_ng.py</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+class Robot:
+    def __init__(self):
+        self.x = 0 # ここで状態記憶
+
+    def action(self):
+        # ここで反応
+        if self.x == 0:
+            print("考える")
+
+        elif self.x == 1:
+            print("寝る")
+
+    def kanjou(self):
+        # ここでイベントループ
+        self.x = self.getEvent()
+
+    def getEvent(self):
+        # ここでパターン認識（viewは見た景色の情報を返す。eは数値で、0は光、1は暗闇）
+        e = view()
+        return e
+
+    def mainloop(self):
+        while True:
+            self.kanjou()
+            self.action()
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+
+<h2>@schwarz1009 - 2020-01-27 21:54</h2>
+<p>実際のところ、上のコードは以下と等価です。</p>
+<p>robot_ng_r.py</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+while True:
+    e = view()
+    if e == 0:
+        print("考える")
+    elif e == 1:
+        print("寝る")
+</pre>
+<p>しかしながら、ランダムに繰り返すよりは進歩したでしょう。</p>
+
+<h2>以降のログ</h2>
+<p>以降のログは<a href="http://qiita.com/schwarz1009/items/6fb34bc6834b3c111f03">Qiita</a>をご覧ください。（コピーするのが面倒なため）</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

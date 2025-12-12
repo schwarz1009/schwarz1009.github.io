@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Ruby入門（１．基本） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Ruby入門（１．基本）</h1>
+<p>Ruby入門（１．基本）です。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%AE%E3%81%97%E3%81%84Ruby-%E7%AC%AC5%E7%89%88-%E9%AB%98%E6%A9%8B-%E5%BE%81%E7%BE%A9/dp/4797386290">たのしいRuby 第5版</a>を参考にしています。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="ruby_intro.html">Ruby入門</a></li>
+<ul>
+<li><b>１．基本</b></li>
+<li><a href="ruby_intro_class.html">２．クラス</a></li>
+<li><a href="ruby_intro_io.html">３．文字列操作とIO</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Rubyの基本</h1>
+<h2>算術演算子</h2>
+<p>基本的な算術演算子には、</p>
+<table class="some_tables">
+<tr><th class="min60">演算子</th><th>説明</th></tr>
+<tr><td>+</td><td>足し算</td></tr>
+<tr><td>-</td><td>引き算</td></tr>
+<tr><td>*</td><td>掛け算</td></tr>
+<tr><td>/</td><td>割り算</td></tr>
+<tr><td>%</td><td>割り算の余り</td></tr>
+<tr><td>**</td><td>累乗</td></tr>
+</table>
+<p>などがある。</p>
+<p>また、Math.sin()やMath.sqrt()などの数学関数を使うことができる。sqrtは平方根。</p>
+
+<h2>変数の記法</h2>
+<p>Rubyには4種類の変数がある。</p>
+<table class="some_tables">
+<tr><th class="min60">変数</th><th>記法</th></tr>
+<tr><td>ローカル変数</td><td>先頭がアルファベットの小文字か「_」で始まる。</td></tr>
+<tr><td>グローバル変数</td><td>先頭が「$」で始まる。</td></tr>
+<tr><td>インスタンス変数</td><td>先頭が「@」で始まる。</td></tr>
+<tr><td>クラス変数</td><td>先頭が「@@」で始まる。</td></tr>
+</table>
+<p>ローカル変数は、その関数の内部でしか使えない。グローバル変数はどのスクリプトファイルからでも使えるが、バグが入りやすいため使い方に注意。</p>
+<p>インスタンス変数は、そのクラスのオブジェクトの内部で保持される変数で、インスタンスごとに別々の値を使うことができる。似ているものにselfキーワードがあり、そのレシーバ自身のことを指す。</p>
+<p>インスタンス変数は、メソッドとは異なりアクセサ（アクセスするための専用のメソッド）を定義しなければアクセスできない。そのため、@valueにアクセスするためにはそのためのアクセサを定義する必要がある。しかしながらバグが入りやすいため自動的にアクセサを定義する書き方がある。</p>
+<table class="some_tables">
+<tr><th class="min60">アクセサ</th><th>意味</th></tr>
+<tr><td>attr_reader :hoge</td><td>参照のみ可能。リーダーあるいはゲッターと呼ぶ。<br>hogeメソッドの定義と同様。</td></tr>
+<tr><td>attr_writer :hoge</td><td>変更のみ可能。ライターあるいはセッターと呼ぶ。<br>hoge=メソッドの定義と同様。</td></tr>
+<tr><td>attr_accessor :hoge</td><td>参照・変更ともに可能。</td></tr>
+</table>
+<p>selfキーワードを用いることで、「自分自身のメソッド」や「自分自身のアクセサ」を通じて自分に対する参照・変更・操作を行える。</p>
+<p>クラス変数はどのクラスのオブジェクトでも保持される変数で、たとえばHogeクラスのoneオブジェクトとtwoオブジェクトがあったとして、oneオブジェクトでクラス変数@@valueを加算すると、その結果がtwoオブジェクトからも参照できる。</p>
+
+<h2>文字列の表現</h2>
+<p>Rubyでは、文字列を表現するために、ダブルクォーテーションで"～"と囲む場合と、シングルクォーテーションで'～'で囲む場合がある。</p>
+<p>"～"で囲んだ場合、内部にRubyの変数の値を埋め込むことができる。この場合、変数は#{value}のように#{変数名}で囲む。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+name = "Assy"
+puts "My name is #{name}."
+</pre>
+<p>の場合、nameという変数の値が展開され、以下のように表示される。</p>
+<pre>
+My name is Assy.
+</pre>
+<p>'～'で囲んだ場合、内部にRubyの変数の値を埋め込むことはできない。#{}が記述されていても、出力した時はそのままの状態で表示される。</p>
+
+<h2>Rubyコードの変数名のつけ方</h2>
+<p>変数名やメソッド名にはvalue_of_rubyのように小文字の単語を_で区切るが、クラス名やモジュール名はClassOfRubyのように単語と単語の区切りを大文字にするという慣例がある。</p>
+<p>また、値を変更しない定数は変数を大文字で始める。大文字で始められた定数の値を変えようとすると警告される。</p>
+
+<h2>コメント</h2>
+<p>Rubyでは、Perlと同様に#を一行コメントとして利用できる。行の中の#に続く文字列はコメントとして扱われ、無視される。</p>
+<p>また、コメントの開始行に=begin、終了行に=endを書くことで、複数行のブロックコメント（埋め込みドキュメント）を記述できる。</p>
+<ul>
+<li><a href="https://style.potepan.com/articles/34095.html">知っているようで知らない、Rubyのコメントの書き方の基本 | ポテパンスタイル</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.03</p>
+</div>
+
+<h1>配列とハッシュ</h1>
+<h2>配列</h2>
+<p>配列とは連続したデータ構造をひとつの名前と添え字で利用する方法。</p>
+<p>配列の例：</p>
+<pre class="prettyprint">
+cats = ["タマ", "シロ", "クロ", "ミケ"]
+print cats[0] #=&gt; "タマ"
+</pre>
+<p>配列はたとえば多重代入（いくつかの代入を同時に行う）を用いた際に、Perlのように以下のように使うことができる。ただし()の構造と[]の構造が一致する必要がある。</p>
+<pre class="prettyprint">
+ary = [1, 2, [3, 4, 5]]
+a, b, (ca, cb, cc) = ary
+</pre>
+<p>またeachメソッドを用いてブロックを記述することで、全ての配列の要素に同じ処理を行うことができる。これを「イテレータ」と呼ぶ。</p>
+<pre class="prettyprint">
+ary = ["Hoge", "Fuga", "Foo", "Bar"]
+ary.each {|item| puts item }
+</pre>
+<p>each_with_indexメソッドを使えば、要素が何番目かの情報（インデックス）も同時に得ることができる。</p>
+<pre class="prettyprint">
+ary = ["Hoge", "Fuga", "Foo", "Bar"]
+ary.each_with_index do |item, i|
+  puts "#{i}番目の要素は#{item}です。"
+end
+</pre>
+<ul>
+<li><a href="https://uxmilk.jp/23853">Rubyのeachでindexを取得する：each_with_index | UX MILK</a></li>
+</ul>
+<p><a href="data_structure_list.html">配列とリストとハッシュ</a>も参照のこと。</p>
+
+<h2>配列のスタック・キューとしての利用</h2>
+<p>Rubyでは、pushとpopあるいはunshiftとshiftを用いて、スタックとキューとして配列を操作できる。</p>
+<p>配列の末尾に新しい要素を加える（プッシュ）にはpush、取り出して削除する（ポップ）にはpopを使う。</p>
+<p>配列の先頭に新しい要素を加える（要素はひとつひとつずらされる）にはunshift、取り出して削除するにはshiftを使う。</p>
+<p>また、配列に格納されている先頭要素を参照するにはfirst、末尾要素を参照するにはlastを使う。</p>
+<p><a href="data_structure_stack.html">スタックとキュー</a>も参照のこと。</p>
+
+<h2>配列関連の関数</h2>
+<p>Rubyでは、splitを使うことで文字列から配列を作れる。</p>
+<pre class="prettyprint">
+array = "hoge Hoge fuga Fuga foo Foo bar Bar".split()
+</pre>
+<p>a.collectやa.collect!、a.mapやa.map!で、配列aの各要素にブロックを適用し、その結果を集めて新しい配列を作る。</p>
+<pre class="prettyprint">
+a = [1, 2, 3, 4, 5]
+a.collect! {|item| item * 3}
+p a #=&gt; [3, 6, 9, 12, 15]
+</pre>
+<p>!のついているメソッドは破壊的なメソッド。破壊的なメソッドとは、レシーバの値を変更するメソッドのこと。</p>
+<p>このほか、fillメソッドで配列のすべての要素を同じ値に埋めたり、flattenメソッドで平坦化（ネストのない配列にする）したり、reverseメソッドで逆順の並べ替えをしたり、sortメソッドでソートができる。破壊的メソッドはflatten!、reverse!、sort!となる。</p>
+
+<h2>ハッシュ</h2>
+<p>ハッシュを作るには、{}を使う。PerlやPHPと同様=&gt;を使ってキーに対する値を対応付けたデータ構造を利用できる。</p>
+<p>ハッシュはシンボル（先頭に:をつけたキーワード）を使ってPerlのようなハッシュを作ることができます：</p>
+<pre class="prettyprint">
+my_names = {:human =&gt; "Assy", :robot =&gt; "Schwarz", :god =&gt; "Frey"}
+</pre>
+<p>キーがシンボルの時は{キー:値}という書き方をすることもできる。上記はキーがシンボルなので、以下のようにも書ける：</p>
+<pre class="prettyprint">
+my_names = {human: "Assy", robot: "Schwarz", god: "Frey"}
+</pre>
+<p>ハッシュはHash.newでも作成できる。ハッシュはハッシュ名["キー"]でキーを参照・変更できる。</p>
+<pre class="prettyprint">
+hs = Hash.new
+hs["name"] = "斉藤"
+p hs["name"]
+</pre>
+<p>保管のためにhs.store("name", "斉藤")、取り出すためにhs.fetch("name")という構文も使える。</p>
+<p>ハッシュの繰り返しにはeachメソッドを使う。取り出されるのはキーと値の両方。</p>
+<pre class="prettyprint">
+hs = {"human" =&gt; "Assy", "robot" =&gt; "Schwarz", "god" =&gt; "Frey"}
+hs.each do |key, value|
+  puts "I'm #{key}, my name is #{value}."
+end
+</pre>
+<p>キーだけを取得するにはeach_keyメソッド、値だけを取得するにはeach_valueメソッドを使う。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/ruby/hash/index7.html">ハッシュに対する繰り返し - ハッシュ - Ruby入門 - JavaDrive</a></li>
+</ul>
+
+<h1>制御フロー</h1>
+<h2>if ～ elsif ～ else</h2>
+<p>条件判断：</p>
+<pre class="prettyprint">
+def cmp0(x)
+  if x &gt; 0
+    puts "#{x}は正の数。"
+  elsif x &lt; 0
+    puts "#{x}は負の数。"
+  else
+    puts "#{x}は0。"
+  end
+end
+
+cmp0(1)
+cmp0(-1)
+cmp0(0)
+</pre>
+<p>このほかunless文（ifと反対）やcase文（C言語でおなじみの値による複数分岐）がある。</p>
+<p>また!を使うことで条件判断を逆にできる。複数の条件判断を使う時は論理演算子の&&や||を使う。</p>
+<p><a href="structured_programming.html">構造化プログラミング</a>も参照のこと。</p>
+
+<h2>forとwhile</h2>
+<p>繰り返し：</p>
+<pre class="prettyprint">
+my_names = ["assy", "schwarz", "zaidou", "inoue"]
+for n in my_names
+  puts "わたしの名前は#{n}。"
+end
+</pre>
+<p>この時、for文には繰り返し可能なオブジェクトをinの後に続けて記述する。</p>
+<p>またfor i in from..toとすれば、fromからtoまでの値で反復させることもできる。from..toはfromからtoまでの連続した数値を作る。</p>
+<p>whileを使って繰り返しを書くこともできる。while文を使う時は、繰り返しが行われ続ける条件式を記述する。until文はwhile文の逆で、条件が満たされない間繰り返しを行う。</p>
+
+<h2>繰り返しに関するTips</h2>
+<p>また、繰り返しの中でbreak文を実行すると繰り返しを抜ける。next文で次の繰り返しに移行し、redo文で再度同じ処理を実行する。</p>
+<p>繰り返しだけをするloop文などもある。この場合はbreak文を適切に設定して繰り返しをどこかで抜けるようにする。</p>
+<p>また、配列の要素に対して.each do記法を使うことで、for文と同様に全ての配列要素に対する処理をブロックを使って記述できる。</p>
+<p>forはeachのシンタックスシュガー（同じ機能を用いる別の構文）であり、for文は簡単にeach文に変換できる。</p>
+<p>ちなみに、回数を指定して繰り返すだけなら、.timesメソッドとブロックを使うと便利。</p>
+<pre class="prettyprint">
+100.times {|i| puts i}
+</pre>
+
+<h2>メソッド</h2>
+<p>メソッドの定義：</p>
+<pre class="prettyprint">
+def mew(name)
+  puts "にゃーん、僕の名前は#{name}だよ。"
+end
+
+mew("タマ")
+</pre>
+<p>Rubyのメソッドにはレシーバ（メソッドが帰属するオブジェクト）を持つインスタンスメソッド、クラスメソッド、あるいはレシーバを持たない関数的メソッドがある。</p>
+<p>インスタンスメソッドでは、</p>
+<pre class="prettyprint">
+tama.mew("タマ")
+</pre>
+<p>のように.と()を使ってレシーバ名からメソッドを実行する。クラスメソッドである場合は、クラス名から.あるいは::でメソッドを実行する（.と::は同じ意味）。関数的メソッドでは単に</p>
+<pre class="prettyprint">
+mew()
+</pre>
+<p>とする。</p>
+<p><a href="function.html">関数</a>を参照のこと。</p>
+
+<h2>関数に関するTips</h2>
+<p>たくさんの不特定多数の引数を取る場合は*argsとする（argsには配列の形でたくさんの引数が入る）。また、:を使うことでキーワード引数を作ることができる。</p>
+<p>メソッドには演算子のようなものも指定できる。たとえば[]や[]=を指定したり、def +(arg)やdef -(arg)のような形で演算子も再定義できる。</p>
+<p>また、メソッドはreturnで値を返すことができるが、returnは省略できる。returnを省略した場合、最後の値がメソッドの呼び出し元に返される。そのため、</p>
+<pre class="prettyprint">
+def ave2(x, y)
+  (x + y) / 2
+end
+
+puts ave2(200, 35)
+</pre>
+<p>のように、まるでLispなどの関数型言語のような記述ができる。</p>
+
+<h2>メソッドにブロックを与える</h2>
+<p>引数では、ブロックは&blockのように引数に記述する。これにより、</p>
+<pre class="prettyprint">
+do |i|
+  ...
+end
+</pre>
+<p>のようなブロックを実行できる。</p>
+<p>ブロックをメソッドに与えた場合、それを受け取ったメソッドの側で、次のいずれかを実行することで与えられたブロックを実行できる。</p>
+<table class="some_tables">
+<tr><th class="min60">実行処理</th><th>意味</th></tr>
+<tr><td>yield</td><td>与えられたブロックを実行する。</td></tr>
+<tr><td>Procクラス</td><td>ブロックをオブジェクトとして持ち運び、操作するためのクラス。</td></tr>
+</table>
+<p>yieldはRubyではブロックを実行するのに使う。Pythonのようなジェネレータではないため注意が必要。</p>
+<p>ブロックの記述にはdo ～ end以外にも{}の形式も使える。普通は「複数行の記述にはdo endを、一行の記述には{}を使う」というやり方がある。</p>
+
+<h2>Procクラスとlambda</h2>
+<p>ブロック単体を記述して持ち運ぶにはProc.newを使う。</p>
+<pre class="prettyprint">
+ave2 = Proc.new do |x, y|
+  (x + y) / 2
+end
+
+p ave2.call(10, 4)
+</pre>
+<p>Proc.newと同様、procメソッドを使っても同じことを記述できる。</p>
+<p>また、ほかの書き方としてlambdaがある。lambdaを使うことで、Procオブジェクトを返すメソッドを書くこともできる（別の言語で言えば、関数を返す関数。）</p>
+<pre class="prettyprint">
+def ave_gen(count)
+  lambda do |*args|
+    value = 0
+    print "Items: "
+    args.each do |item|
+      value += item
+      print "#{item} "
+    end
+    puts "-- Sum: #{value}, Count: #{count}, Average: #{(value / count)}"
+  end
+end
+
+ave3 = ave_gen(3)
+ave3.call(4, 8, 10)
+ave3.call(1, 4, 8)
+
+ave5 = ave_gen(5)
+ave5.call(7, 3, 14, 7, 2)
+ave5.call(11, 5, 16, 6, 4)
+</pre>
+<p>実行結果：</p>
+<pre>
+Items: 4 8 10 -- Sum: 22, Count: 3, Average: 7
+Items: 1 4 8 -- Sum: 13, Count: 3, Average: 4
+Items: 7 3 14 7 2 -- Sum: 33, Count: 5, Average: 6
+Items: 11 5 16 6 4 -- Sum: 42, Count: 5, Average: 8
+</pre>
+<p><a href="closure.html">クロージャ・無名関数・関数オブジェクト</a>も参照のこと。</p>
+
+<h1>オブジェクト指向</h1>
+<h2>クラスとオブジェクト指向</h2>
+<p>クラスを作る：</p>
+<pre class="prettyprint">
+class Cat
+  def initialize(myname = "タマ")
+    @name = myname
+  end
+
+  def mew
+    puts "にゃーん、僕の名前は#{@name}だよ。"
+  end
+end
+
+shiro = Cat.new("シロ")
+kuro = Cat.new("クロ")
+tama = Cat.new
+
+shiro.mew
+</pre>
+<p>オブジェクトのメンバ変数には変数名に@をつける。</p>
+<p>インスタンス変数@valueには、外部からはアクセスできない。アクセスするためにはアクセサを定義する。また、インスタンスメソッドをprivateやprotectedやpublicで指定してアクセス可能範囲を設定できる。たとえばprivateにするには</p>
+<pre class="prettyprint">
+private :priv_cat
+</pre>
+<p>とする。privateに引数をつけなかった場合、それ以降に定義された全てのメソッドがprivateになる。</p>
+<p>.newはオブジェクトを作成するクラスメソッドであり、newの引数はインスタンスの初期化を行うためにnewした時に実行される、コンストラクタであるinitializeメソッドに送られる。</p>
+<p>Rubyではクラスメソッドnewによってオブジェクトを作成する。また、new以外にもリテラルを用いてオブジェクトが作成されることもある。これは文字列リテラルである"text"などが挙げられる。</p>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>継承</h2>
+<p>Rubyでは継承を行うことで、既にあるクラスに機能を付け加えたり、新しい内容で再定義できる。演算子のように見えるもの（たとえば配列の[]）などもメソッドであることがあり、多くの場合再定義が許されている。</p>
+<p>継承を行うことで、元のプログラムコードを維持したまま、機能を付け加えたりメソッドを上書きすることができる。superを使うことで親クラスのメソッドを実行できる。</p>
+<pre class="prettyprint">
+class ExCat &lt; Cat
+  def initialize(myname = "タマ", yourname = "シロ")
+    @name = myname
+    @you = yourname
+  end
+
+  def mew
+    super
+    puts "やあ、#{@you}くん、お友達になりましょう。"
+  end
+end
+
+kuro_mike = ExCat.new("クロ", "ミケ")
+kuro_mike.mew
+</pre>
+<p>継承の関係は「is-a関係」と呼ばれるが、これは英語のisとaに由来する。</p>
+
+<h2>特異クラス</h2>
+<p>また、Rubyには特異クラスと呼ばれる機能があり、通常のクラスではなく</p>
+<pre class="prettyprint">
+hoge_str = "hoge"
+
+class &lt;&lt; hoge_str
+  def print100()
+    100.times {|i| puts "#{i} : #{self}" }
+  end
+end
+
+hoge_str.print100()
+</pre>
+<p>のように、ある特定のオブジェクトだけのインスタンスメソッドを後で付け加えることができる。</p>
+
+<h2>モジュールとMix-in</h2>
+<p>Rubyではクラスによるオブジェクト指向の他に、モジュールという機能がある。モジュール内で独自の名前空間を使うことができる（特定のクラス名や変数名と重なっても大丈夫）ほか、クラス定義の中でメソッドや定数をクラスの中にincludeで取り込む（Mix-in）することができる。</p>
+<pre class="prettyprint">
+module HogeCommonModule
+  # ここに共通に使われるメソッドを書く
+end
+
+class HogeClass1
+  include HogeCommonModule
+  # HogeClass1のメソッドとしてHogeCommonModuleモジュールを読み込む
+end
+
+class HogeClass2
+  include HogeCommonModule
+  # HogeClass2のメソッドとしてHogeCommonModuleモジュールを読み込む
+end
+</pre>
+<p>また、includeではなくextendを用いることで、クラスの内部だけではなく、インスタンスとして作られたオブジェクトにも、モジュール内のメソッドを追加できる。たとえば文字列型のインスタンス変数を作って、このインスタンス変数に新しいメソッドを追加するようなことができる。</p>
+<p>ある意味、JavaScriptのプロトタイプチェーンや委譲に近いかもしれない。</p>
+<p>たとえば、クラスについて「継承関係を持たせたくはないが、同じ処理を複数のクラスで共有したい」といった場合、Mix-inを使うことが適切である。もちろん基本クラスに共通する処理を書いて、派生クラスには個別の処理を書いてもいい。</p>
+
+<h1>その他のTips</h1>
+<h2>ダックタイピング</h2>
+<p>Rubyでは、「アヒルのように歩きアヒルのように鳴くものはアヒルである」というダックタイピングのやり方がある。たとえば、同じ名前のメソッド.eachを持っているメソッドは、同じように扱うことができる。</p>
+<p>「意図していないメソッドが実行されるリスク」はあるが、たとえばゲームのキャラクターなどで、同じ継承関係に属していなくても、攻撃した時は同じように攻撃し、死んだ時は同じように死んでほしい時などに使える。</p>
+
+<h2>例外</h2>
+<p>例外はRubyのエラー処理機構で、以下のように記述する。例外が投げられた時点で処理は中断し、rescueブロックに強制的に移動する。</p>
+<pre class="prettyprint">
+begin
+  hoge()
+  fuga()
+  foo()
+  bar()
+rescue =&gt; ex
+  # ここでエラー処理を行う
+end
+</pre>
+<p>例外はraiseを使えば自分で投げることもできる。</p>
+
+<h2>ファイル処理とブロック</h2>
+<p>また、ファイル処理などを行う場合、「openした後で必ずcloseしたい」といった場合がある。こうした場合はブロックを用いることができる。</p>
+<pre class="prettyprint">
+File.open("hoge.txt") do |file|
+  file.each_line do |line|
+    # lineに対する処理をここに書く
+  end
+end
+</pre>
+<p>もしファイルの読み込みに失敗したら、このブロックは途中で中断する。また、読み込みの後でファイルをcloseする必要があれば、最後に必ずファイルをcloseする。</p>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

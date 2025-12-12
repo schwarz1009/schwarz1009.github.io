@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>LDAP関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>LDAP関連の世界観</h1>
+<p>LDAPに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>LDAP</h1>
+<h2>LDAPとは</h2>
+<p><!--僕も良く分かっていないので間違っていると申し訳ないが、-->LDAPにより、ディレクトリサービスへと接続して、個人情報やネットワーク機器などの情報を管理できる。</p>
+<p>LDAPを使うと、ひとつのユーザーアカウントの属性として、あらゆるサービスの認証情報をひとつにまとめられる。LDAPサーバを通して、あらゆるサービスにひとつのID情報でログインできる。</p>
+<p>（<a href="http://www.atmarkit.co.jp/aig/06network/ldap.html">ネットワーク用語事典 - LDAP - @IT</a>を参考に執筆・編集して引用しました。）</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0207/27/news001.html">LDAPによるパスワードの一元管理 (1/3) - @IT</a></li>
+</ul>
+
+<h2>OpenLDAP</h2>
+<p>オープンソースのLDAPサーバ。社内の人的な資源（社員や部署などの情報やユーザーIDなどの情報）や物的資源（ネットワーク機器などの情報）にネットワーク上の「ディレクトリ」と呼ばれる一覧表から一元的にアクセスできる。</p>
+<p>後日注記：どうやらOpenLDAPはかなり重要な技術であるらしい。Linuxの資格であるLinuCはOpenLDAPサーバーの設定方法が202試験や300試験にでてきます。</p>
+<ul>
+<li><a href="https://openstandia.jp/oss_info/openldap/">OpenLDAP とは？動作確認や機能、特徴などを解説 | OSSサポートのOpenStandia&trade;【NRI】</a></li>
+</ul>
+
+<h2>Active Directory</h2>
+<p>Microsoftによる商用のLDAPサーバ。<a href="file_server_windowsnetwork.html">Windowsネットワーク</a>を参照のこと。</p>
+
+<h2>Samba</h2>
+<p><a href="file_server_samba.html">Samba</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>IDとパスワードの問題</h2>
+<p>（ディレクトリサービスについて詳しくないので、もしかしたら以下の記述は間違っているかもしれません。申し訳ありません。）</p>
+<p>実際のところ、ひとつひとつの機械にIDとパスワードを設定する場合、それぞれの機器に設定していると、それを更新することが難しくなってしまう。</p>
+<p>そのような時にディレクトリサービスを使うことで、あらゆる機器でのパスワードを共通管理し、どこかを更新したのをきっかけに、すべて一気に更新できる。</p>
+<p>つまり、IDとパスワードをそれぞれの機器で個別に設定する必要がなくなる。</p>
+<div class="edit_date">
+<p>2024.11.10</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>LDAP</h2>
+<p>サービスのユーザID・パスワード情報をひとつのLDAPサーバで管理できる。</p>
+<p>全てのパスワードを覚えなくてもひとつのLDAPパスワードで全サービスにログインできる。</p>
+
+<h1>パスワード管理</h1>
+<h2>1Password</h2>
+<p>ちなみに、Windowsでパスワード管理を行うためのソフトウェアは「1Password」などがある。</p>
+
+<h1>関連ページ</h1>
+<h2>認証</h2>
+<p><a href="../linux/linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>や<a href="auth.html">認証</a>や<a href="nis.html">NIS</a>や<a href="basic_auth.html">BASIC認証</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

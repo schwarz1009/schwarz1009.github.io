@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>PythonでAI入門 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">AI・自作プログラムの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/programs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PythonでAI入門</h1>
+<p>PythonでのAI入門です。<a href="ai.html">AI</a>や<a href="../prog_lang/python.html">Python</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Pythonで人工知能とAI</h1>
+<h2>機械学習と科学技術計算とAnaconda</h2>
+<p>Pythonは、機械学習（AI）と科学技術計算の分野で、デファクトスタンダードになりつつある。</p>
+<p>機械学習や科学技術計算をPythonで行いたい場合は、Anacondaと呼ばれるPythonのディストリビューションを使うことができる。ライブラリが最初から入っているため、便利である。</p>
+<ul>
+<li><a href="https://qiita.com/yoshizaki_kkgk/items/1057ed4dcc36ed9be7f5">【決定版】WindowsでPythonを使って『機械学習』を学ぶための環境構築 - Qiita</a></li>
+</ul>
+<p>後日注記：WindowsでPythonによるプログラミングを学びたい場合は、Anacondaを使ってAnacondaプロンプトからPythonを実行するのが手軽です。特に以下の京都大学の教科書はPDFで公開されており参考になります。</p>
+<ul>
+<li><a href="https://codezine.jp/article/detail/11999">京都大学、Pythonによるプログラミング演習教材を無料公開：CodeZine（コードジン）</a></li>
+<li><a href="https://repository.kulib.kyoto-u.ac.jp/dspace/handle/2433/245698">Kyoto University Research Information Repository: プログラミング演習 Python 2019</a></li>
+</ul>
+
+<h2>機械学習用のライブラリ</h2>
+<p>Pythonで使われる機械学習用のライブラリは以下。</p>
+<table class="some_tables">
+<tr><th class="min60">ライブラリ</th><th>解説</th></tr>
+<tr><td>NumPy</td><td>数値計算</td></tr>
+<tr><td>SciPy</td><td>数値解析</td></tr>
+<tr><td>Matplotlib</td><td>グラフ描画</td></tr>
+<tr><td>Pandas</td><td>データ解析</td></tr>
+<tr><td>scikit-learn</td><td>機械学習</td></tr>
+</table>
+<p>（<a href="https://qiita.com/yoshizaki_kkgk/items/1057ed4dcc36ed9be7f5">【決定版】WindowsでPythonを使って『機械学習』を学ぶための環境構築 - Qiita</a>を参考に執筆しました。）</p>
+
+<h2>NumPyとSciPy</h2>
+<p>NumPyとSciPyは、Pythonで数値の計算や解析を行うためのライブラリ。</p>
+<p>以下が参考になる。</p>
+<ul>
+<li><a href="https://deepage.net/features/numpy/">Pythonでの数値計算ライブラリNumPy徹底入門 - DeepAge</a></li>
+<li><a href="https://programming-study.com/technology/python-scipy/">【Python入門】絶対に知っとくべきライブラリscipyの基本的な使い方 | プログラミング教室情報サイト【プロナビ】</a></li>
+</ul>
+<p><a href="ai_numpy.html">NumPy</a>を参照のこと。</p>
+
+<h2>Pandas</h2>
+<p>Pandasはデータ解析用のライブラリ。</p>
+<p><a href="ai_pandas.html">Pandas</a>を参照のこと。</p>
+
+<h2>scikit-learn</h2>
+<p>scikit-learnはPythonのオープンソースな機械学習ライブラリ。</p>
+<p><a href="ai_scikit_learn.html">scikit-learn</a>を参照のこと。</p>
+
+<h2>Chainerを勉強しよう</h2>
+<p>Chainerはオープンソースで日本製のディープラーニング用のライブラリ。</p>
+<p>日本の機械学習系ベンチャー企業の<a href="https://preferred.jp/ja/">Preferred Networks</a>が開発を主導している。</p>
+<p>以下のサイトからチュートリアルが参照できる。</p>
+<ul>
+<li><a href="https://tutorials.chainer.org/ja/">ディープラーニング入門：Chainer チュートリアル</a></li>
+<li><a href="https://www.ossnews.jp/oss_info/Chainer">オープンソースのAI・人工知能 / Chainerとは - OSS×Cloud News - オープンソース×クラウド情報サイト</a></li>
+</ul>
+<p>後日注記：ディープラーニングの書籍として有名な「<a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a>」の著者である斎藤康毅さんはPreferred Networksの方です。</p>
+
+<h2>TensorFlowほか</h2>
+<p>TensorFlowはGoogleによるオープンソースの機械学習・ディープラーニング用のライブラリ。</p>
+<p>ほかにも、ディープラーニング用のライブラリとしてCaffeやTheanoなどが知られている。</p>
+<ul>
+<li><a href="https://udemy.benesse.co.jp/data-science/ai/tensorflow.html">【TENSORFLOW入門】特徴や使い方をわかりやすく解説！｜Udemy メディア</a></li>
+<li><a href="https://www.sejuku.net/blog/38134">TensorFlowとは？機械学習に必須のライブラリを分かりやすく紹介 | 侍エンジニアブログ</a></li>
+<li><a href="https://www.ossnews.jp/compare/TensorFlow/Caffe">オープンソースのTensorFlowとCaffeを比較 - OSS×Cloud News - オープンソース×クラウド情報サイト</a></li>
+<li><a href="https://www.ossnews.jp/oss_info/Theano">オープンソースのAI・人工知能 / Theanoとは - OSS×Cloud News - オープンソース×クラウド情報サイト</a></li>
+</ul>
+<p><a href="../services/google.html">Google</a>も参照のこと。</p>
+
+<h1>AI・データサイエンス関連記事</h1>
+<h2>AIで良く使うPythonコード</h2>
+<p>AIで良く使うコードを、コピペできるように掲載されているサイトがあります。</p>
+<ul>
+<li><a href="https://ai-kenkyujo.com/2019/09/09/kikaigakusyu-python/">【コピペでOK】機械学習によく使うPythonのコード一覧まとめ | AI入門ブログ（人工知能の作り方など人工知能に関する情報を公開）</a></li>
+</ul>
+
+<h2>Pythonで人工知能・AIの開発がやりたい</h2>
+<p><a href="https://qiita.com/tani_AI_Academy/items/ab2208e21a2215f8dfad">【保存版・初心者向け】独学でAIエンジニアになりたい人向けのオススメのAI勉強方法 (2019年改定版) - Qiita</a>というページが参考になる。</p>
+<p>上のページは<a href="https://aiacademy.jp/texts/">AI Academy</a>というオンラインの学校の紹介ページだが、どんな書籍を読めば良いかが書いてあってとても参考になる。</p>
+<p>また、僕が好きな@ITにもAI・人工知能のページができている。Pythonの入門記事もあって、AIがやりたいプログラミング初心者におすすめ。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/subtop/di/">Deep Insider - ＠IT</a></li>
+</ul>
+
+<h2>機械学習の記事</h2>
+<p>機械学習については、Qiitaにさまざまな記事がある。特に、僕が見た限り以下のページが特に興味深い。「AIの研究はこのようにする」ということが分かる。</p>
+<ul>
+<li><a href="https://qiita.com/Saku731/items/61b629fe608ede59a3f5">機械学習で使用する手法を全公開 - Qiita</a></li>
+</ul>
+<p>また、以下はなんと中学一年生の方の記事である。まだ執筆途中だが、将来の世代に期待がかかる。</p>
+<ul>
+<li><a href="https://qiita.com/jp_Pythonia/items/0e91f6642b969981eeec">中学生がこれだけで完全理解する機械学習【毎日アップデート中】 - Qiita</a></li>
+</ul>
+<p>機械学習やデータサイエンスは、数学的な数式や回帰アルゴリズムからデータ処理・変換・グラフ可視化モジュールまでたくさんの要素がある。全てを理解するためには途方もない時間と手間と労力が必要である。簡単に「Pythonの練習だからやりなさい」と言うわけにはいかない。本腰を据えてそれだけを勉強しても、何週間もかかるだろう。</p>
+
+<h2>データサイエンティストによる講座</h2>
+<p>以下のデータサイエンティストの方の講座は、数式が多く出てきて難しいですが、データサイエンスとはなんであるかを知るためにとても参考になります。おすすめです。</p>
+<ul>
+<li><a href="http://datawokagaku.com/">米国データサイエンティストのブログ</a></li>
+</ul>
+
+<h1>ゼロから作るDeep Learning</h1>
+<h2>ゼロから作るDeep Learningを読もう</h2>
+<p>僕は、ディープラーニングのことを学びたいと思われている方は、書籍「<a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a>」を読むことをおすすめします。</p>
+<p>この本は「ゼロから作る」とも書かれている通り、既存のライブラリやモジュールを極力使わず、ゼロから作ることを目指したディープラーニングの書籍です。</p>
+<p>まだ僕はいくらかしか読めていませんが、この本はディープラーニングに対して「気軽に挑戦」することができる本です。掲載されている数式やプログラムは難しくなく、記述は丁寧かつざっくばらんで、用語もある程度のIT技術と基礎数学の知識があれば理解できます。</p>
+<p>特に、「AIを作る面白さと理解するためのセンス」の書かれた、面白くAIの開発とそのための勉強ができるとても素晴らしい本だと思います。</p>
+<p>Pythonの前提知識もあまり必要ではありません。Python初心者であっても理解出来るでしょう。それどころかこの本でPythonコードを書くセンスが身につくと思います。</p>
+
+<h2>パーセプトロンとニューラルネットワーク</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a>を参考に執筆しました。）</p>
+<p>パーセプトロンでは、それぞれのパラメータに「重みづけ」を行うことで、AND/NAND/ORゲートなどの論理回路を設計・実装できる。</p>
+<p>たとえば、xに対して0.5という「重み」を掛け算し、yに対しても0.5という「重み」を掛け算し、これを足して0.7を超えた値になるかどうかを判断し、その結果を1か0として返すようなANDゲートが考えられる。</p>
+<p>xが1で、yが0ならば、重みの和は0.5となり、0.7を超えないため、戻り値は0となる。</p>
+<p>xが1で、yも1ならば、重みの和は1となり、0.7を超えるため、戻り値は1となる。</p>
+<p>これで、パーセプトロンにより、ANDゲートは実装できた。NANDゲートやORゲートについても、重みパラメータを変えるだけで同様に実装できる。</p>
+<p>基準となるのは、「バイアス + 重み1 + 重み2」の計算結果で、これが0以下であれば0を返し、0より大きければ1を返す。ANDの場合は重みの0.5に対してバイアス（発火する基準）が-0.7、NANDの場合は重みの-0.5に対してバイアスが0.7、ORの場合は重みの0.5に対してバイアスを-0.2とする。XORはこれらのゲートの組み合わせで実装できる。</p>
+<p>だが、ここまでの実装では、パラメータの重みづけは人間の手で「0.5」とか「0.7」と決めていた。この重みを自動的にデータから学習することができるのが、ニューラルネットワークである。</p>
+<p>ニューラルネットワークでは、判断を行う「活性化関数」を用いて、入力した信号の総和を出力する信号へと変換する。活性化関数は、入力の総和から出力が「どのような場合に発火するか」を記述した関数のこと。基本的にパーセプトロンとニューラルネットワークの違いは、活性化関数の違いだけ。</p>
+<p>ニューラルネットワークでは、重みづけを人間の手ではなくデータから自動的に学習できる。このため、何百とか何千とか何万とか何億などといった単位でパラメータに自動的に重みづけを行うことができる。</p>
+
+<h2>ニューラルネットワークの計算</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a>を参考に執筆しました。）</p>
+<p>活性化関数については、0か1かのステップ関数のほかに、次のような関数がある。</p>
+<table class="some_tables">
+<tr><th class="min60">名前</th><th>関数</th></tr>
+<tr><td>シグモイド関数</td><td>\[h(x) = \frac{1}{1 + \exp(-x)}\]<p>\(\exp(-x)\)は\(e^{-x}\)のこと。<br>ステップ関数が階段のような直線になるのに対し、<br>結果が滑らかな曲線になる。</p></td></tr>
+<tr><td>ReLU関数</td><td>\[\begin{eqnarray}
+h(x)
+ =
+  \begin{cases}
+    x & ( x \gt 0 ) \\
+    0 & ( x \leqq 0 )
+  \end{cases}
+\end{eqnarray}\]<p>0よりも大きければその値を、0以下であれば0を返す。</p></td></tr>
+<tr><td>ソフトマックス関数</td><td>\[y_k = \frac{\exp(a_k)}{\displaystyle \sum^n_{i=1} \exp(a_i)}\]<p>入力\(a_n\)と出力\(y_n\)はn個あり、k番目の出力\(y_k\)を求める。<br>0から1.0までの値で、すべての出力の総和が1になる。<br>それぞれの値を確率と解釈できる。</p></td></tr>
+<tr><td>恒等関数</td><td><p>入力をそのまま出力する。</p></td></tr>
+</table>
+<p>また、層ごとの計算においては、行列のドット積（NumPyではnp.dot）を使用する。行列の積においては、左の行列では横の列（行）、右の行列では縦の列（列）のそれぞれの要素の掛け算をし、その和を足し合わせて、新しい行列の要素にすることで行う。行列の積を使うことで、多次元配列によるニューラルネットワークの計算を極めて簡単に一度に行うことができるので、np.dotは多用する。</p>
+<p>ソフトマックス関数は、データのクラス分類を行う分類問題において出力関数に使用する。たとえば手書きアルファベットのクラス分類をする場合、A～Zまでの文字を用意して、どれが一番確率が高いかを予想できる。また、値の予測をする回帰問題（たとえば人間の姿を見て年齢を当てる）では恒等関数を出力関数に使用する。</p>
+<p>ここまでは、学習ではなく推論の内容。ある推論をする上では、その推論を行うためのアルゴリズムが必要となる。そのアルゴリズムを、人間が考えて実現するのではなく、データの中の「特徴量」を分析して、データを使って学習させるのが、機械学習の基本である。実際には、SVMやKNNなどの識別システムを使って、どのようなデータであっても汎用的な解析能力を実現する。これを汎化能力と呼ぶ。機械学習においては、訓練データ（教師データとも呼ばれる）を使って学習を行った上で、テストデータを使ってその判別能力がどれほどかをテストする。</p>
+<p>また、注意すべきこととして、特定の偏ったデータセットだけに過度に学習された状態を「過学習」と呼ぶ。データの学習をする上では、過学習を避け、できるだけ偏りなくデータセットを学習させなければならない。汎化能力とは、訓練データによって培われた、まだ見ぬデータ（訓練データに含まれていないデータ）に対する能力であり、過学習によってあるデータセットだけに過度に学習させてしまうと、そのようなまだ見ぬデータを逆に解析できなくなってしまう。</p>
+<p>ニューラルネットワークの学習には、なんらかの指標を具体的な数値で評価する「損失関数」を用いる。損失関数がもっとも最小値になる時が、最適な重みパラメータである。損失関数とは、「どれくらい識別器の性能が悪いか」を示す関数のこと。性能がよいのかではなく悪いのかで識別するのが奇妙だが、使うのはそれにマイナスを掛けた値であるため、どちらにせよやっていることは同じ。損失関数には以下のような関数が用いられる。</p>
+<table class="some_tables">
+<tr><th class="min60">名前</th><th>関数</th></tr>
+<tr><td>2乗和誤差</td><td>\[E = \frac{1}{2} \sum_k(y_k - t_k)^2\]</td></tr>
+<tr><td>交差エントロピー誤差</td><td>\[E = -\sum_k t_k \log y_k\]</td></tr>
+</table>
+<p>kは次元数、\(y_k\)は出力、\(t_k\)は教師データのこと。</p>
+<p>データがたくさんある場合、すべてのデータを計算していると時間が過剰にかかってしまう。なので、ニューラルネットワークの学習のために、たくさんのデータの中から少ないデータを無作為に選び出して学習する「ミニバッチ学習」を用いる。</p>
+<p>損失関数を使う理由は、単に認識精度を指標にした場合、損失関数は精度が高い場合と低い場合に、それぞれの値を少しずつ変化させることができ、それによって損失関数の最小値がどこかを探ることができる。これが単に認識精度だけを指標にすると、学習内容を少し変えたところで、認識の正しさが変わることがなく、精度が高くなったか低くなったかを判断できない。微分で言えば、微分の値が多くの場合に0になってしまう。たとえば、20枚の画像が正しく判別できているとして、少し学習データを変えたぐらいでは、20枚が変動することは考えづらい。そのために、認識精度を指標にしてはいけない。どんなに二度手間に見えても損失関数を使わなければならない。</p>
+<p>機械学習の数学には、微分も用いる。初等的な微分はひとつの変数を用いるが、機械学習では複数の変数を用いた微分も使う。これを「偏微分」と呼ぶ。偏微分は、あるひとつの変数に注目し、ほかの変数を定数と見なすことで、ひとつひとつの微分の計算をする。そして、偏微分のすべての変数の計算をベクトルにまとめたものを「勾配」と呼ぶ。そして、機械学習において勾配は、グラフ上のそれぞれの場所において、関数の値をもっとも減らすことができる方向を指し示す。そして、損失関数がいつ最小値を取るかを判断するために、勾配方向に進むことで関数の値を少しずつ減らしていく「勾配法」を用いる。勾配法は最適化問題でよく使われる。</p>
+<div class="edit_date">
+<p>2025.02.06-07</p>
+<p>2025.02.11編集</p>
+</div>
+
+<h2>論理回路</h2>
+<p>論理回路については<a href="../hardware/computer_architecture.html">コンピュータの計算原理</a>を参照のこと。</p>
+
+<h1>自作ロボット</h1>
+<h2>自分で作ったロボット</h2>
+<p>僕の作ったロボット思考AIについては、<a href="robot.html">ロボット</a>を参照のこと。以下はロボットのページから転載。自分で作ったコードです。</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# 初版作成 Assy, 在導万創
+
+import sys
+
+class Robot:
+    def __init__(self):
+        self.ego = 0
+        
+    def msg_loop(self):
+        while True:
+            e = self.view()
+            self.action(e)
+    
+    def action(self, msg):
+        self.do(msg)
+        self.think(msg)
+        self.make_ego(msg)
+        
+    def do(self, msg):
+        if msg == 0:
+            print('晴れだ')
+            
+        elif msg == 1:
+            print('雨だ')
+    
+    def think(self, msg):
+        if msg == 0:
+            print('散歩に出かけよう')
+        elif msg == 1:
+            print('家の中に居よう')
+            
+        if self.ego &gt; 20:
+            print('僕もそろそろ大人になったなあ')
+    
+    def make_ego(self, msg):
+        #自我を作る
+        self.ego += 1
+        if self.ego &gt; 100:
+            print('死にました')
+            sys.exit()
+        
+    def view(self):
+        #外を見て、晴れ(0)か雨(1)かを判断する
+        #ここでは常に0
+        return 0
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.msg_loop()
+</pre>
+
+<h2>環境を見ながら自分の状態に基づいたことを思考する</h2>
+<p>僕は、人間型のロボットを作るために必要なのは、「自分の状態」（ステート）が鍵になると思います。</p>
+<p>ロボットが居るその環境を見ながら、変化を分析して「出来事」（イベント）を認識し、その上で「自分の状態に基づいたことを言う」ことができれば、ロボットは作れます。</p>
+<p>出来事や状態とは、たとえば、ご飯を食べたら「おなかがいっぱいになった」とか、違う場所に行けば「この場所に来た」とか、そういうことを自分のステートとイベントに応じて言えるようにすれば良いのです。</p>
+<p>その上で、自分の意志を持つ必要がありますが、これは単にステートの一部として意志を持つデータを格納すればいいのです。</p>
+<p>ステートとイベントに応じたことを、上のPythonによるAIプログラムのように、永遠に考え続けることができたら、それで、外界とは全く分離されたロボットが作れます。このステートとイベントをパターン認識と分析した結果としての記憶から行えるようにすれば、きっと人間と同じロボットは作れるでしょう。鍵は「状態」です。</p>
+
+<h1>リンク集</h1>
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

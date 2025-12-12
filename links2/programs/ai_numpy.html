@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>NumPy関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">AI・自作プログラムの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/programs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>NumPyの世界観</h1>
+<p>NumPyに関する世界観です。<a href="ai_python.html">PythonでAI入門</a>や<a href="ai.html">人工知能・AI・機械学習・データマイニング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>NumPy</h1>
+<h2>NumPy</h2>
+<p>NumPyは多次元の配列（1次元、2次元、3次元、…）を扱うことのできる便利なライブラリ。</p>
+<p>「ゼロから作る」と表題にある書籍「<a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a>」でも、例外的にNumPyとMatplotlibだけはライブラリを使用します。</p>
+<p>NumPyはディープラーニングの実装には不可欠であると言えるでしょう。</p>
+
+<h2>NumPyの基本</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a>を参考に執筆しました。）</p>
+<p>まず、NumPyをインポートする。</p>
+<pre class="prettyprint">
+import numpy as np
+</pre>
+<p>これで、np.array()のように、NumPyのメソッドを使うことができる。</p>
+<p>NumPyでは、要素数の一致に応じて、配列に賢く演算をかけることができる。</p>
+<p>要素数が一致する配列と配列の計算は、要素ごとに演算が行われる。たとえば、</p>
+<pre class="prettyprint">
+array1 = np.array([[1, 2, 3], [4, 5, 6]])
+array2 = np.array([[10, 20, 30], [40, 50, 60]])
+array1 + array2
+</pre>
+<p>とすれば、</p>
+<pre class="prettyprint">
+array([[11, 22, 33],
+       [44, 55, 66]])
+</pre>
+<p>という結果が返る。</p>
+<p>これに対して、要素数が違う場合は、ブロードキャストという機能により、形状を自動的に調整して計算が行われる。</p>
+<p>たとえば、複数の要素にひとつのスカラー値を与えた場合、すべての要素に対してスカラー値が与えられて計算される。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+array3 = np.array([[1, 2, 3], [4, 5, 6]])
+array3 * 10
+</pre>
+<p>とすれば、</p>
+<pre class="prettyprint">
+array([[10, 20, 30],
+       [40, 50, 60]])
+</pre>
+<p>という結果が返る。</p>
+<p>スカラー値だけではなく、より複雑な場合においても、自動的に形状が変換される。なので、</p>
+<pre class="prettyprint">
+array4 = np.array([[10, 20], [30, 40]])
+array5 = np.array([5, 7])
+array4 + array5
+</pre>
+<p>とすれば、</p>
+<pre class="prettyprint">
+array([[15, 27],
+       [35, 47]])
+</pre>
+<p>という結果が返る。</p>
+<p>このほか、配列を配列によって抜き出す方法を使うことで、配列の要素を条件式で抜き出すこともできる。たとえば、</p>
+<pre class="prettyprint">
+array6 = np.array([1, 5, 2, 3, 4])
+array6[array6 &gt;= 3]
+</pre>
+<p>とすれば、</p>
+<pre class="prettyprint">
+array([5, 3, 4])
+</pre>
+<p>となる。</p>
+<p>PythonはC/C++に比べて処理速度が遅いことで知られるが、NumPyは内部の実装にC/C++を使っているため、NumPyを使わない場合に比べて高速に配列の演算を行うことができる。</p>
+
+<h2>NumPyの主なメソッド</h2>
+<p>（<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。）</p>
+<p>NumPyの主なメソッドは以下のようになる。</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>loadtxt()</td><td>CSVファイルの読み込み</td></tr>
+<tr><td>shape</td><td>要素数（形状）を示す属性</td></tr>
+<tr><td>mean()</td><td>平均値を求める</td></tr>
+<tr><td>max()</td><td>最大値を求める</td></tr>
+<tr><td>min()</td><td>最小値を求める</td></tr>
+</table>
+<p>このほか、ブール代数インデックスといって、TrueとFalseの羅列をNumPyの配列に与えて、Trueの要素だけを取得することができる。たとえば、</p>
+<pre class="prettyprint">
+array7[:, 3] &gt;= 90
+</pre>
+<p>とすれば、array7の3列目が90以上の数値になる要素だけをTrueとし、それ以外はFalseとするようなインデックスを得られる。</p>
+<pre class="prettyprint">
+array([False, True, True, False])
+</pre>
+<p>配列にこのブール代数インデックスを与えれば、配列の要素をこの条件で抜き出すことができる。</p>
+<pre class="prettyprint">
+array7[array7[:, 3] &gt;= 90]
+</pre>
+<p>ブール代数インデックスでは、& (AND), | (OR), ^ (XOR), ~ (NOT)などのビット演算子を使用できる。</p>
+<p>また、すべての要素がTrueであればTrueを返すall()関数, いずれかひとつの要素がTrueであればTrueを返すany()関数がある。</p>
+<div class="edit_date">
+<p>2023.01.19</p>
+</div>
+
+<h2>NumPy入門記事</h2>
+<p>ネットには以下のようなNumPyの入門記事があります。</p>
+<ul>
+<li><a href="https://deepage.net/features/numpy/">Pythonでの数値計算ライブラリNumPy徹底入門 - DeepAge</a></li>
+<li><a href="https://deepage.net/features/numpy-numpy.html">10分で学ぶNumPy速習チュートリアル - DeepAge</a></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

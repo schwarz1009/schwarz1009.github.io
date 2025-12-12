@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観３B（コレクションと配列） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３B（コレクションと配列）</h1>
+<p>Javaによるプログラミングに関する世界観３B（コレクションと配列）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="java.html">Java（１．文法）</a></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><a href="java_oop_interface.html">２B．インターフェース</a></li>
+<li><a href="java_gc.html">２C．ガーベッジコレクションと例外</a></li>
+</ul>
+<li><a href="java_lib.html">３．クラスライブラリ</a></li>
+<ul>
+<li><a href="java_lib_io.html">３A．入出力</a></li>
+<li><b>３B．コレクションと配列</b></li>
+<li><a href="java_lib_string.html">３C．文字列</a></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><a href="java_lib_xml.html">３E．XML</a></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>コレクションと配列</h1>
+<h2>基本構造</h2>
+<p>以下はJavaのコレクションクラスの基本構造。</p>
+<table class="some_tables">
+<tr><th class="min60">構造</th><th>クラス</th><th>解説</th></tr>
+<tr><td>List</td><td>ArrayList<br>LinkedList</td><td>順番付けされたリスト。<br>ArrayListは取得が速く編集の遅い配列的なリスト。<br>LinkedListは取得が遅く編集が速い連結リスト。</tr>
+<tr><td>Map</td><td>HashMap<br>TreeMap</td><td>キーによって対応する値を得られるマップ。<br>TreeMapは自動ソートされる。</tr>
+<tr><td>Set</td><td>HashSet<br>TreeSet</td><td>順番付けされないセット。<br>TreeSetは自動ソートされる。</tr>
+</table>
+<p>Javaの配列は動的にサイズを変更したり、要素を追加したりすることができない。リストを使うことで、動的にサイズが変化するベクターコンテナを使うことができる。</p>
+<ul>
+<li><a href="https://java-reference.com/java_collection_compare.html">コレクションクラスの比較 - Javaちょこっとリファレンス</a></li>
+<li><a href="http://www.javaroad.jp/java_collection2.htm">Javaの道：コレクション・フレームワーク（２．List）</a></li>
+<li><a href="http://tech-blog.tsukaby.com/archives/192">Java初級者のための必須Java標準APIまとめと簡易解説 | つかびーの技術日記</a></li>
+</ul>
+<p><a href="data_structure_list.html">配列とリストとハッシュ</a>も参照のこと。</p>
+
+<h2>クラス</h2>
+<p>（<a href="http://tech-blog.tsukaby.com/archives/192">Java初級者のための必須Java標準APIまとめと簡易解説 | つかびーの技術日記</a>を参考に執筆・引用しました。）</p>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>解説</th></tr>
+<tr><td>java.util.List&lt;E&gt;<br>java.util.Map&lt;K, V&gt;<br>java.util.Set&lt;E&gt;</td><td>コレクションの基本インターフェース。</td></tr>
+<tr><td>java.util.ArrayList&lt;E&gt;<br>java.util.HashMap&lt;K, V&gt;<br>java.util.HashSet&lt;E&gt;</td><td>コレクションインターフェースの実装。</td></tr>
+<tr><td>java.util.Collections</td><td>コレクションを操作・処理するクラス。</td></tr>
+<tr><td>java.util.Arrays</td><td>配列を操作・処理するクラス。</td></tr>
+<tr><td>java.util.Comparator&lt;T&gt;<br>java.lang.Comparable&lt;T&gt;</td><td>要素と要素を比較するためのインターフェース。<br>ソートをかけるために必要となる。</td></tr>
+</table>
+<p>基本的に、以下のようにインターフェースの基本型としてListを使い、ArrayListなどのインターフェースの実装をnewしてListの変数に詰め込む。</p>
+<pre class="prettyprint">
+List&lt;String&gt; hogeList = new ArrayList&lt;String&gt;();
+</pre>
+<p>このようにすることで、「Listの操作だけで十分なオブジェクト」ということを明確にできる。</p>
+
+<h2>Listの主なメソッド</h2>
+<p>以下はListの主なメソッド。</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>解説</th></tr>
+<tr><td>ArrayList()<br>ArrayList(Collection)<br>ArrayList(int)</td><td>ArrayListのコンストラクタ。<br>引数を指定しなかった場合、初期サイズ10の空のArrayListを作成する。<br>intを引数に指定する場合、指定した数値が配列のサイズになる。</td></tr>
+<tr><td>LinkedList()<br>LinkedList(Collection)</td><td>LinkedListのコンストラクタ。</td></tr>
+<tr><td>void add(int, Object)<br>boolean add(Object)</td><td>挿入する位置を指定して要素を追加</td></tr>
+<tr><td>boolean addAll(Collection)<br>boolean addAll(int, Collection)</td><td>複数の要素を追加</td></tr>
+<tr><td>void clear()</td><td>すべての要素をクリア</td></tr>
+<tr><td>Object get(int)</td><td>インデックスを指定して要素を取得</td></tr>
+<tr><td>Object remove(int)</td><td>要素を削除</td></tr>
+<tr><td>Object set(int, Object)</td><td>要素を別の要素に置換</td></tr>
+<tr><td>int size()</td><td>要素の個数を取得</td></tr>
+</table>
+<p>（<a href="http://www.javaroad.jp/java_collection2.htm">Javaの道：コレクション・フレームワーク（２．List）</a>を参考に執筆・引用しました。）</p>
+
+<h2>コード例</h2>
+<p>たとえば、ArrayListは以下のように使う。</p>
+<pre class="prettyprint">
+List&lt;String&gt; hogeList = new ArrayList&lt;String&gt;();
+
+hogeList.add("Hoge hoge hoge");
+hogeList.add("Fuga fuga fuga");
+
+System.out.println(hogeList.get(0));
+System.out.println(hogeList.get(1));
+</pre>
+<p>また、HashMapは以下のように使う。
+<pre class="prettyprint">
+Map&lt;String, String&gt; hogeMap = new HashMap&lt;String, String&gt;();
+
+hogeMap.put("hoge", "Hoge hoge hoge");
+hogeMap.put("fuga", "Fuga fuga fuga");
+
+System.out.println(hogeMap.get("hoge"));
+System.out.println(hogeMap.get("fuga"));
+</pre>
+<p>（詳しくは<a href="https://qiita.com/takahirocook/items/f533fc8760680eaf337a">【Java】 java.util コレクションフレームワーク (List, Set, Map ) - Qiita</a>が参考になります。）</p>
+
+<h2>Arraysクラス</h2>
+<p>java.util.Arraysは配列を操作するクラスで、new int[]のように作った配列に対して、検索やソートなどの操作を実行することができます。</p>
+<p>また、Arrays.asList()を使うことで、配列をリストに変換できます。</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays (Java Platform SE 8)</a></li>
+<li><a href="https://www.fenet.jp/java/column/java_beginner/6059/">Javaでのarray（配列）操作の方法の紹介！｜arrayを正しく使いこなそう | Javaコラム</a></li>
+</ul>
+
+<h2>Collectionsクラス</h2>
+<p>java.util.Collectionsは、コレクションを操作するクラスで、ソートなどをかけることができる。</p>
+<p>コレクションをソートしたいなら、</p>
+<pre class="prettyprint">
+Collections.sort(lst1);
+</pre>
+<p>とする。lst1はリストの変数名。</p>
+<p>後述するComparatorインターフェースを使うことにより、ソートの方式を変更できる。</p>
+<p>ほかにも、Collections.reverse()で逆順の並べ替えができる。</p>
+<ul>
+<li><a href="http://teqspaces.com/Java/7">Comparatorを使ってListをソートする（Java）：技術空間</a></li>
+<li><a href="https://confrage.jp/java8%E3%81%AEcomparator%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9collections%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AEsort%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89/">Java8のComparatorの使い方(Collectionsクラスのsortメソッド) | 株式会社CONFRAGE ITソリューション事業部</a></li>
+</ul>
+
+<h2>ComparatorインターフェースとComparableインターフェース</h2>
+<p>java.util.Comparatorは配列やリストをソートする際に、大小関係を比較するためのインターフェース。</p>
+<p>降順で配列をソートしたいなら、</p>
+<pre class="prettyprint">
+Arrays.sort(ar1, Comparator.reverseOrder());
+</pre>
+<p>のようにする。ar1は配列の変数名。</p>
+<p>また、Comparatorインターフェースを実装したクラスの中でcompare()メソッドをオーバーライドすれば、自分で比較用のメソッドを実装することもできる。たとえばクラスの中の何かのメンバやパラメータに基づいて比較するといったことが可能。</p>
+<pre class="prettyprint">
+class Hoge {
+    String str_hoge;
+    
+    Hoge (String a_hoge) {
+        str_hoge = a_hoge;
+    }
+    
+    public String getHoge() {
+        return str_hoge;
+    }
+}
+
+class HogeComparator implements Comparator&lt;Hoge&gt;{
+    @Override
+    public int compare(Hoge hoge1, Hoge hoge2) {
+        return hoge1.getHoge().compareTo(hoge2.getHoge());
+    }
+}
+</pre>
+<p>これで、以下のようにできる。</p>
+<pre class="prettyprint">
+Hoge[] hoges = new Hoge[3];
+hoges[0] = new Hoge("Assy");
+hoges[1] = new Hoge("Zaidou");
+hoges[2] = new Hoge("Schwarz");
+Arrays.sort(hoges, new HogeComparator());
+</pre>
+<p>sort()にComparatorインターフェースを指定しない場合は、要素のクラスがjava.lang.Comparableインターフェースを実装している場合、その中のcompareTo()メソッドが比較に使われる。StringはComparableインターフェースを実装しているため、List&lt;String&gt;はComparatorインターフェースを指定しなくても昇順にソートできる。</p>
+<ul>
+<li><a href="https://nompor.com/2017/12/10/post-1890/">【Java】配列操作用クラスArrays | のんぽぐ</a></li>
+<li><a href="http://teqspaces.com/Java/7">Comparatorを使ってListをソートする（Java）：技術空間</a></li>
+<li><a href="https://confrage.jp/java8%E3%81%AEcomparator%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9collections%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AEsort%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89/">Java8のComparatorの使い方(Collectionsクラスのsortメソッド) | 株式会社CONFRAGE ITソリューション事業部</a></li>
+</ul>
+
+<h2>イテレータ</h2>
+<p>Iteratorインタフェースは、コレクションの中を繰り返し順番に取得・参照する仕組み。</p>
+<p>以下のようになる。</p>
+<pre class="prettyprint">
+for (Iterator i = lst1.iterator(); i.hasNext();) {
+    System.out.println(i.next());
+}
+</pre>
+<p>Iteratorインターフェースは、次の要素が存在するかしないかを確認するためのhasNext()、次の要素を取得するnext()、最後に呼び出された要素を削除するremove()を使うことができる。</p>
+<p>Listインタフェースを実装したクラスの場合、Iteratorを拡張したListIteratorを利用出来る。ListIteratorは、順番に次の要素へとアクセスするしかできないIteratorと異なり、前の要素にもアクセスできる。また、Iteratorでは削除しかできないが、ListIteratorは追加・変更もできる。ListIteratorは現在位置を知ることもできる。</p>
+<ul>
+<li><a href="http://www.javaroad.jp/java_collection5.htm">Javaの道：コレクション・フレームワーク（５．Iteratorインタフェース）</a></li>
+</ul>
+<p><a href="iterator.html">イテレータとジェネレータ</a>を参照のこと。</p>
+
+<h2>Object型とジェネリクス型</h2>
+<p>C++では、テンプレートやジェネリクスを使って、intであろうとfloatであろうと、どんな型にも対応できる汎用クラスを書くことができます。</p>
+<p>Javaにも、同様にジェネリクスは存在し、C++と同様&lt;&gt;で囲まれた型に対応するジェネリクス型を使うことができます。</p>
+<p>しかしながら、Javaの場合、継承関係を用いることで、いくらか同様のことは実現できます。</p>
+<p>なぜなら、Javaでは暗黙のうちにクラスがObjectクラスから継承されており、すべてのクラスはObjectクラスをスーパークラスとしているため、たとえば「Object型のオブジェクトを格納・取り出しを行うクラス」を作ってしまえば、すべてのオブジェクトをObject型として扱った上で、そのObject型を汎用的に操作することができるからです。</p>
+<p>しかしながら、この方法では、どんな型でも入ってしまい、逆に言えばどんな型が入っているのかが分かりません。静的型付け言語であるのに、型安全が保証されず、キャストを注意深くする必要があり、せっかくの静的型付け言語を使う意味がないのです。よって、今のJavaやC#では、ジェネリックでないリスト（C#の場合ArrayList）を使ってなんでも格納・取り出しするのではなく、型安全の保証されたジェネリクス型を使うことが推奨されています。</p>
+<p>本当のことを言えば、C/C++でもvoid型のポインタを使って、それをint型やfloat型のポインタに型キャストすれば、同じことはできます。しかしながら、この場合、intやfloatとしてその変数を扱えるかどうかは、実行時にキャストできるかにかかっています。コンパイルは通ったとしても、予期せぬエラーを引き起こすことがあります。これはmalloc()などの一部のAPIを除いて、推奨されないプログラミングスタイルです。このような時にテンプレートやジェネリクス型を使えば、型安全を保証することができます。</p>
+<p>後日注記：Object型による型キャストの方式を用いると、もしStringを意図しておきながらIntegerが使われた場合、コンパイル時にエラーが出ず、実行時にエラーになります。ジェネリクスを用いることで、エラーをコンパイル時に判明させることができます。</p>
+<ul>
+<li><a href="https://java.keicode.com/lang/generics-why-generics.php">なぜ Java でジェネリックスが必要なのか？ - Java のジェネリックス - Java の基本 - Java 入門</a></li>
+</ul>
+<p><a href="cpp_generics.html">C++（ジェネリック）</a>、<a href="cpp_stl_libs.html">C++（STL・ライブラリ）</a>も参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

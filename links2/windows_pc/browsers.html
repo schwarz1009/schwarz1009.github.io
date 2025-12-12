@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ブラウザの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Windows/PCの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/windows_pc_softs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ブラウザの世界観</h1>
+<p>Windows向けのブラウザの世界観。昔僕が使っていたものを中心に。<a href="../linux/linux_browsers.html">Linux ブラウザ</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Web標準</h1>
+<h2>W3Cと標準</h2>
+<p>Webブラウザにとって、標準への準拠はとても大切です。</p>
+<p>Webの標準は、昔からW3Cという組織が定めています。HTMLやCSSやDOMやXMLなどの標準、以前はXHTMLのような標準もこのW3Cが定めています。</p>
+<p>ここでいう標準とは、「Webブラウザのレンダリングの標準」のことです。WebブラウザがHTMLで記述されたページを表示する場合、同じHTMLであれば同じレンダリングがなされるべきです。このための標準をW3Cは定めており、各ブラウザはこの標準に準拠しなければなりません。</p>
+<p>以前からトップシェアだったWindowsのIEはバグが多く、多くの標準外の動作をしました。これに対してMozillaやOperaなどは、昔から標準への準拠の度合いが高く、Safariなどとともに「どのブラウザが一番標準に準拠しているか」を競っていました。</p>
+<p>最近では、新しいHTMLの標準であるHTML5が裁定されました。HTML5では、スマホやタブレット向けの仕様や動画再生向けの仕様、あるいはHTMLを規則的に構造化することで検索エンジンなどの解析がしやすくなるタグなどが追加されています。またCSS3にはリッチなスタイルが多く追加されました。</p>
+<ul>
+<li><a href="https://www.internetacademy.jp/it/design/homepage/web-standardization-and-w3c-recommendation-process.html">W3Cとは？Web標準化の重要性とW3Cの勧告プロセス - インターネット・アカデミー</a></li>
+</ul>
+<p><a href="../prog_lang/html.html">HTML</a>も参照のこと。</p>
+
+<h2>スマホやタブレットへの対応</h2>
+<p>スマホやタブレットといった小サイズのデバイスが普及したことを受けて、Web業界はスマホ向けの対応が重要となっている。</p>
+<p>HTMLが共通なまま、CSSなどの変更でパソコン向けにもスマホ向けにも対応する、レスポンシブ対応は、Webページをパソコンだけではなくスマホから閲覧するために必須である。</p>
+<p>また、HTML5とJavaScriptなどのWeb技術を組み合わせることで、スマホ向けのWebアプリを制作することもできる。</p>
+<p>今の時代、パソコンでWebを見るよりもスマホでWebを見る人の方が多い。スマホ向けの対応は新しいWeb界の重要事項となっている。</p>
+<p><a href="../prog_lang/css.html">CSS</a>や<a href="../mobile/smartphone.html">スマホ</a>も参照のこと。</p>
+
+<h1>エンジン</h1>
+<h2>Trident（Microsoft）</h2>
+<p>Internet Explorerに搭載されている、Microsoft由来のエンジン。</p>
+
+<h2>Gecko（Mozilla）</h2>
+<p>Mozilla Firefoxに搭載されている、Mozilla/Netscape由来のエンジン。</p>
+
+<h2>WebKit（KHTML）</h2>
+<p>Google ChromeやAppleのSafariに搭載されている、KDEのKHTML由来のエンジン。<a href="../linux/webkit.html">WebKit</a>を参照のこと。</p>
+<ul>
+<li><a href="https://myakura.github.io/n/webkit4devs.html">開発者のための WebKit</a></li>
+</ul>
+
+<h1>メジャーなWebブラウザ</h1>
+<h2>Internet Explorer</h2>
+<p>Microsoftによるブラウザ。Windows標準。</p>
+<p>だが、最近はMicrosoft Edgeと言う新しいブラウザを開発しているようである。</p>
+<p>後日注記：Microsoft EdgeはChromiumベースになり、Linux版も開発されるようである。MSは何をしたいのか良く分からない。誰が使うのだろうか。</p>
+<p>後日注記：自分の考えが足りなかった。MicrosoftのWebブラウザというのはインターネット上で事実上の標準であり、EdgeがLinuxで動くことによる、Webサービスのサポート拡大の恩恵は大きい。Edgeにしか対応しないサービスであっても、Linux上でEdgeが動けば、Linux上のEdgeからアクセスすることができる。少なくとも、OSとしてLinuxプラットフォームをサポートするのであれば、だが。</p>
+<ul>
+<li><a href="https://www.microsoft.com/ja-jp/edge">Microsoft Edge について</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h2>Google Chrome</h2>
+<p>Googleによるブラウザ。現在、僕がメインで使うブラウザである。</p>
+<p>僕ははてなブックマークとはてなのお知らせなどの拡張をインストールしている。</p>
+<p>オープンソースのWebKitという技術をベースにしている。</p>
+<p>後日注記：オープンソース版のChromiumは、Chromeのベースとなっているほか一部のフレームワークではJavaScriptエンジンとして使われることもある。<a href="../prog_lang/node_js.html">Node.js</a>ではChromeのV8エンジンを使っている。</p>
+<ul>
+<li><a href="https://www.google.com/intl/ja_jp/chrome/">Google Chrome - Google の高速で安全なブラウザをダウンロード</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>タブブラウザ</h2>
+<p><a href="tab_browsers.html">タブブラウザ</a>を参照のこと。</p>
+
+<h2>プライバシー保護ブラウザ</h2>
+<p><a href="browsers_privacy.html">プライバシー保護ブラウザ</a>を参照のこと。</p>
+
+<h1>Mozilla</h1>
+<h2>Mozilla & Mozilla Firefox</h2>
+<p>昔のMozillaは、雰囲気が独特で良かった。僕は昔のMozillaのインターフェースのデザインが好きだ。</p>
+<p>「俺たちはクローズドなIEなんか使わない」と言う、良い意味での独自性があった。逆に、今のFirefoxはちょっと無個性かもしれない。</p>
+<p>オープンソースのブラウザ、Mozillaは、Linuxなどでも昔からきちんと動く。日進月歩のブラウザだ。</p>
+<p>昔はNetscape社によるオープンソースプロジェクトのMozilla.org開始以降、Mozilla SuiteというメーラーやHTMLエディタでもあるコミュニケーションソフトウェアで、晩年のNatscapeブラウザはMozillaをベースに作られていた。その後、軽量化を図る目的で、Mozilla Firefox（昔はFirebirdという名前だった）が生まれた。時の時代ではNew York Timesで大広告を表示するなど、時代の中で流行っていた時もあったが、Google Chromeなどの誕生とともに、またインターネットの隅へと追いやられた感がある。最近は特徴的だったXMLによるUI技術であるXULによる拡張機能もやめてしまうらしい。（Google Chromeの拡張と互換性のある技術になってしまった。）</p>
+<p>昔はもじら組なる日本のコミュニティが活発だった。日本でもXPI/XULを使った拡張機能の作成は盛んで、さまざまなソフトウェアがMozillaの拡張として開発されていた。</p>
+<p>2018.02.28より、僕はメインブラウザをChromeからFirefoxに変えました。理由は、Debianに入っていたFirefoxとブックマークなどを同期したいからです。Linux版のChromeやChromiumは使いたくないので、Windowsの方をFirefoxにしました。Firefoxは最近高速で軽くなっています。</p>
+<ul>
+<li><a href="https://www.mozilla.org/ja/firefox/new/">Firefox をダウンロード — 無料ウェブブラウザー</a></li>
+</ul>
+<p><a href="../linux/mozilla.html">Mozilla</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h2>NetscapeとMozilla.orgの誕生</h2>
+<p>以下のページはとても面白いので参照してください。NetscapeとMozilla.orgの創生期が書いてあります。</p>
+<ul>
+<li><a href="http://cruel.org/jwz/nomo.html">辞職そして追悼。</a></li>
+<li><a href="http://cruel.org/jwz/aol.html">ネットスケープと aol.</a></li>
+<li><a href="http://cruel.org/jwz/aoltw.html">ネットスケープと aol/time-warner, パート2.</a></li>
+</ul>
+
+<h2>XUL</h2>
+<p>MozillaのUIで使われている、XMLによってGUIを書く技術。</p>
+<p><a href="../linux/mozilla_xul.html">XUL</a>も参照のこと。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla/Tech/XUL">XUL - Mozilla | MDN</a></li>
+</ul>
+<h2>SpiderMonkey/Rhino</h2>
+<p>MozillaのJavaScriptエンジン。</p>
+<p><a href="../prog_lang/javascript.html">JavaScript</a>も参照のこと。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/SpiderMonkey">SpiderMonkey | MDN</a></li>
+</ul>
+<h2>Gecko</h2>
+<p>MozillaのHTMLのレンダリングエンジン。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla/Gecko">Gecko - Mozilla | MDN</a></li>
+</ul>
+
+
+<h1>独自コンポーネント系のブラウザ</h1>
+<h2>Opera</h2>
+<p>僕はOperaも好きで、僕の好きだったネットゲームの作者も、Operaを使うべきだと言っていた。</p>
+<p>Opera社の開発する独自コンポーネントのブラウザだった。無料版には広告がつく。北欧の会社であるため、北欧をイメージした美しいデザインをしていた。</p>
+<p>Operaは以前Prestoと呼ばれる独自のエンジンを採用していたが、最近になってChromiumベースとなり、エンジンもWebKitやBlinkになった。昔は、NetscapeでもIEでもない第三のブラウザとして有名だった。</p>
+<ul>
+<li><a href="https://www.opera.com/ja">Opera ウェブブラウザ | 高速、安全、スマート | Opera</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Opera">Opera - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h2>Safari</h2>
+<p>Macのブラウザ。KHTML由来のWebKitを使っている。</p>
+<p>macOSだけでなく、iOSにも搭載されており、iPhoneなどからWebを見る時はSafariを使う。</p>
+<ul>
+<li><a href="https://www.apple.com/jp/safari/">Safari - Apple（日本）</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Safari">Safari - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h1>その他のブラウザ</h1>
+<h2>Brave</h2>
+<p>Brave Softwareによって開発されているウェブブラウザ。Chromiumベース。</p>
+<p>オプトイン広告によって、Webサイトの広告がBraveによる別の広告に置き換えられる。この収益をBraveや広告代理店だけでなく、Webサイトやユーザーにも分配する。</p>
+<ul>
+<li><a href="https://brave.com/ja/">進化したユーザーファーストのブラウザ | Brave</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Brave_(%E3%82%A6%E3%82%A7%E3%83%96%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6)">Brave (ウェブブラウザ) - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Linux向けのWebブラウザ</h2>
+<p><a href="../linux/linux_browsers.html">Linux ブラウザ</a>を参照のこと。</p>
+<h2>ブラウザ埋め込み</h2>
+<p><a href="../linux/webkit_embedded.html">WebKit埋め込みの世界観</a>を参照のこと。</p>
+
+
+<h1>余談</h1>
+<h2>次期Microsoft EdgeはChromiumをベースに</h2>
+<p>Microsoftの最近の発表で、次期WindowsのMicrosoft EdgeはChromiumをベースにすることが発表されている。</p>
+<p>Microsoftも変わった。完全に、オープンソースとの協調を模索しているようだ。</p>
+<ul>
+<li><a href="https://blogs.windows.com/windowsexperience/2018/12/06/microsoft-edge-making-the-web-better-through-more-open-source-collaboration/">Microsoft Edge: Making the web better through more open source collaboration | Windows Experience Blog</a></li>
+</ul>
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
