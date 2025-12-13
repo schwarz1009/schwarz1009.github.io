@@ -108,6 +108,31 @@
 <p>Windows APIによるプログラミングは、ウィンドウプロシージャ（システムから呼ばれるコールバック関数）とメッセージループを中心に成り立つ。</p>
 <p>まず、プログラムはwWinMain()から実行される。最初に、WNDCLASSのlpfnWndProcにコールバック関数WindowProc()を登録する。</p>
 <p>wWinMain()の最後にはメッセージループwhile (GetMessage()) {}が登場し、Windowsメッセージをやり取りする。</p>
+<pre class="prettyprint">
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+{
+    const wchar_t CLASS_HOGE[]  = L"Hoge Class";
+    
+    WNDCLASS wc = { };
+
+    wc.lpfnWndProc   = WindowProc;
+    wc.hInstance     = hInstance;
+    wc.lpszClassName = CLASS_HOGE;
+
+    RegisterClass(&wc);
+    
+    // ...
+    
+    MSG msg = { };
+    while (GetMessage(&msg, NULL, 0, 0) &gt; 0)
+    {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+    
+    return 0;
+}
+</pre>
 <p>ウィンドウプロシージャはCALLBACK WindowProc() {}のようにCALLBACKをつけて定義する。</p>
 <pre class="prettyprint">
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -126,7 +151,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 <p>WindowProc()のオプションは、hwndはメッセージが送り付けられるウィンドウのハンドル、uMsgはメッセージ（「WM_XX」のような形で定義されている）、wParam, lParamはメッセージの補助的な内容を含むパラメータとなる。</p>
 <p>hwndはCreateWindowEx()関数でウィンドウを作った後、ウィンドウをさまざまなところから操作するためにハンドルとして使う。</p>
 <p>switch - case文でメッセージを処理することで、システムから呼び出されたメッセージに対してイベント駆動のプログラムを書くことができる。</p>
-
+<div class="edit_date">
+<p>2025.12.13編集</p>
+</div>
 
 <h2>WM_PAINTとInvalidateRect()</h2>
 <p>ウィンドウがさまざまな理由で再描画が必要となった時、WM_PAINTメッセージが送られてくる。</p>
@@ -151,6 +178,43 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 </table>
 
 <h1>Windowsコントロール</h1>
+<h2>CreateWindowEx()関数</h2>
+<p>（詳しいコードは<a href="https://docs.microsoft.com/ja-jp/windows/win32/learnwin32/your-first-windows-program?redirectedfrom=MSDN">Module 1. Your First Windows Program - MSDN</a>が参考になります。以下はこのコードの引用。）</p>
+<p>Windows APIでは、ウィンドウはCreateWindowEx()関数で作成できる。</p>
+<pre class="prettyprint">
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+{
+    // ...
+    
+    HWND hwnd = CreateWindowEx(
+        0,                    // オプションのウィンドウスタイル
+        CLASS_HOGE,           // ウィンドウクラス
+        L"Hoge Program",      // ウィンドウテキスト
+        WS_OVERLAPPEDWINDOW,  // ウィンドウスタイル
+
+        // 大きさと位置
+        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+
+        NULL,       // 親ウィンドウ
+        NULL,       // メニュー
+        hInstance,  // インスタンスハンドル
+        NULL        // 追加的なアプリケーションのデータ
+        );
+
+    if (hwnd == NULL)
+    {
+        return 0;
+    }
+
+    ShowWindow(hwnd, nCmdShow);
+    
+    // ...
+}
+</pre>
+<div class="edit_date">
+<p>2025.12.13</p>
+</div>
+
 <h2>Windows API コモンコントロール</h2>
 <p>Windows APIでは、OSのコントロールはウィンドウ内の子ウィンドウとして扱われるため、CreateWindowEx()関数で作成できる。</p>
 <p>たとえば、CreateWindowEx()関数でツールバーを作成するには、ウィンドウクラスに「TOOLBARCLASSNAME」を指定すればよい。</p>
