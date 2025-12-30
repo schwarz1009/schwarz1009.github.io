@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Atom/Sublime Text関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Windows/PCの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/windows_pc_softs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Atom/Sublime Textの世界観</h1>
+<p>Atom/Sublime Textの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Atom</h1>
+<h2>今流行りの新しいテキストエディタ</h2>
+<p>Atomは、GitHubによる今流行りの新しいテキストエディタ。</p>
+<p>GitHubによるElectronと呼ばれる、Web技術（HTML+CSS+JavaScript）でデスクトップアプリケーションを作るクロスプラットフォームな技術によって作られた。</p>
+<p>Windows、Linux、Macで動く。また、パッケージと呼ばれるEmacsでいうELispのようなものを導入することで、自由自在に拡張できる。たとえば、自動補完のような機能を使うこともできる。メニューや設定画面を日本語にするのにもパッケージを使う。</p>
+<p>今の時代、viやEmacsのような前時代的なテキストエディタをいつまでも盲信し続けるのではなく、Atomを使ってEmacsのようなスタイルをもっと新しく使うのが流行っている。</p>
+<p>Atomは上級エンジニアから初心者のプログラミング学習者まで幅広くおすすめできるエディタで、LinuxでもEmacs/viに無理に慣れようとするよりも、最初からAtomを使った方が良いと僕は思う。</p>
+<ul>
+<li><a href="https://atom-editor.cc/">Atom</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h2>MacやLinuxでは新しい標準的存在</h2>
+<p>実際のところ、AtomはMacやLinuxでは新しい標準的な存在です。</p>
+<p>僕も、作業所のMacではAtomを使います。それは、MacもWindowsもLinuxも、標準のテキストエディタがお粗末で、「付属のエディタが全く使えない」からです。</p>
+<p>たとえば、Macのテキストエディットは、ダブルクオーテーションを「"text"」のままではなく「“text”」に強制的に変換します。これではプログラム開発に使えるはずがありません。</p>
+<p>Windowsのメモ帳も、何の機能もありませんが、メモ帳はまだマシです。GNOMEのgeditはありえないです。日本語の文字とASCII文字が別の幅で表示されるなど、日本人ユーザーのことを全く考慮できていません。Pythonで開発しようにも、geditではできません。また、KDEのエディタでは日本語入力すらできないことがあります。（ただし僕はAtomをLinuxに導入したことがないため、何らかの問題があるかどうかは分からない。僕はLinuxならviを使う。）</p>
+<p>そう、Atomを使わざるを得ません。僕はWindowsではサクラエディタを使っていますが、Atomを使うとMacやLinuxと共通の環境を使うこともできて、便利です。</p>
+<p>後日注記：Macのスマート引用符は設定でオフにできます。また、僕が使う範囲で言えば、LinuxのAtomでは日本語入力ができない場合がありました。よって僕はLinuxではVimを使い、MacではAtomを使う、という感じです。LinuxでVS-Codeがどれくらい動くかそのうち試してみたいと思っています。</p>
+
+<h2>必須パッケージ</h2>
+<p>これらのパッケージは、Settingsの+Installの「Install Packages」から入力することで導入出来る。</p>
+<table class="some_tables">
+<tr><th class="min60">パッケージ</th><th>説明</th></tr>
+<tr><td>Japanese-menu</td><td>メニューなどを日本語化してくれる。</td></tr>
+<tr><td>auto-encoding</td><td>文字エンコードを自動判別してくれる。</td></tr>
+<tr><td>autocomplete-plus</td><td>オートコンプリート（自動補完）。標準でインストールされている。</td></tr>
+<tr><td>autocomplete-paths</td><td>パスのオートコンプリート。</td></tr>
+<tr><td>テーマ</td><td>テーマを変えることで、Atomを好みのデザインにすることができる。</td></tr>
+</table>
+<p>以下のような情報が参考になる。</p>
+<ul>
+<li><a href="https://eng-entrance.com/atom-editor">【すぐわかる！】Atomエディタのインストールと日本語化、便利な使い方 - エンジニアの入り口</a></li>
+<li><a href="https://blog.codecamp.jp/atom_utility">今注目のテキストエディタ「Atom」の使い方と便利機能まとめ | CodeCampus</a></li>
+</ul>
+
+<h2>GitHub/Electron</h2>
+<p>AtomはGitHubという会社の製品であり、ElectronというJavaScriptを使ったGUI技術で開発されています。</p>
+<p><a href="../prog_lang/git.html">Git</a>や<a href="../prog_lang/electron.html">Electron</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h2>Atomは開発終了</h2>
+<p>残念ながらAtomは開発終了しました。なので、今後はMicrosoftの<a href="vscode.html">VS-Code</a>を代わりに使いましょう。（Atomの開発元であるGitHubは、以前Microsoftに買収されたため、Microsoft傘下となっています。）</p>
+<ul>
+<li><a href="https://www.itmedia.co.jp/news/articles/2206/09/news102.html">GitHub、テキストエディタ「Atom」の開発終了　12月に全プロジェクトをアーカイブ - ITmedia NEWS</a></li>
+</ul>
+
+<h1>Sublime Text</h1>
+<h2>Sublime Text</h2>
+<p>Atomと同世代のテキストエディタとして良く比較されるのが、Sublime Text。使いやすくて拡張性が高い。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

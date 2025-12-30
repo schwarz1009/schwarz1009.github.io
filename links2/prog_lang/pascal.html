@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Pascal関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div><h1>Pascalの世界観</h1>
+<p>Pascalによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Pascal</h1>
+<h2>昔の大学の教育用言語の標準</h2>
+<p>UNIXとC言語が一般的になるより以前、大学などの教育機関で学生にプログラミングを教える時の言語として一般的だったのはPascalでした。</p>
+<p>今では、UNIXが普及した影響から、C言語を教えることが多く、また最近では教育ではJavaやPythonが教えられることも増えていますが、以前はPascalが標準的でした。</p>
+<p>僕はDelphiでPascalのコードを少しだけ書いた経験があります。</p>
+<p>実際のところ、Pascalは教育用としてとても良い言語で、特にDelphiで使うのがおすすめです。それは、Object Pascalを使いながらRADのフォームデザイナーを操作することで、「僕がやりたかった素敵なプログラミング」ができるからです。</p>
+<p>Pascalは、代入に「=」ではなく「:=」を使い、また変数の宣言部と手続きの記述部と分けるなど、「きちんとしたプログラミング」を行うための入門的な要素が多いです。</p>
+
+<h2>DelphiによるPascal</h2>
+<p>旧ボーランド、現エンバカデロ社で開発・販売されているDelphiは、とても教育目的のために優れた環境です。</p>
+<p>DelphiにおけるPascalは可読性が高く、コードを読んで何が書かれているのかを把握しやすいです。フォームデザイナーも一級品で、コンポーネントとオブジェクト・インスペクタを使うことで、簡単にプロパティやイベントを設定でき、コンパイル速度や実行速度も速いです。</p>
+<p>Delphiについて詳しくは<a href="delphi.html">Delphi</a>を参照のこと。</p>
+
+<h2>GNU Pascalコンパイラ</h2>
+<p>GNU PascalコンパイラはGCCのフロントエンドとして動くPascalコンパイラ。Linuxユーザーはこれを導入しましょう。</p>
+<ul>
+<li><a href="http://www.gnu-pascal.de/gpc/h-index.html">GNU Pascal</a></li>
+<li><a href="https://lazpas.e-hiyori.org/hp1/compiler_gnupascal_mingw.html">Pascal 日和 ホームページ - GNU Pascal の設定(MinGW版)</a></li>
+</ul>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+
+<h2>Pascalの基本</h2>
+<p>たとえば、変数の定義と代入は以下のようになる（整数型）。</p>
+<pre>
+var
+  i : Integer;
+begin
+  i := 10;
+end;
+</pre>
+<p>文字列は、string[50]のように[]を使えば短い文字列型となり、明確に指定したサイズ以上の文字列は代入できなくなる。単にstringとした時は長い文字列型となり、任意の大きさの文字列を代入できる。</p>
+<pre>
+var
+  str : string;
+begin
+  str := 'Hoge';
+end;
+</pre>
+<p>配列の宣言は以下のようになる。</p>
+<pre>
+  x : array[1..10] of Integer;
+</pre>
+<p>これで、以下のようなfor文による繰り返しが記述できる。</p>
+<pre>
+for i := 1 to 10 do
+begin
+  x[i] := 0;
+end;
+</pre>
+<p>if文を書く際の注意点は、等しい場合を「=」で記述し、等しくない場合は「&lt;&gt;」で記述する点。代入は「:=」で記述する。1行の場合のみbegin～endを省略できる。</p>
+<pre>
+if x = 0 then
+  y := 1;
+else
+  y := 2;
+</pre>
+<p>レコード型は、複数の変数をまとめたもの。C言語でいう構造体。</p>
+<pre>
+type
+  THoge = record
+   Name : string;
+   Age : Integer;
+  end;
+var
+  HogeA: THoge;
+</pre>
+<p>これで、以下のように使う。</p>
+<pre>
+  HogeA : THoge;
+  HogeA.Name := 'Hoge';
+  HogeA.Age := 20;
+</pre>
+<p>ソースコードは、interfaceにインターフェース部（定義と宣言のためで、コードは記述できない）、implementationに実装部（コードを記述する）、initializationに初期化部（起動時に実行される）、finalizationに終了処理部（終了時に実行される）を記述する。</p>
+<p>インターフェース部では、usesは使うユニットを指定する。typeは型定義を記述する。varはユニットの中の変数の定義を行う。</p>
+<p>また関数はfunction、手続きはprocedureに記述する。関数名に続いて引数がある時は()の中に引数名とデータ型を記述する。Resultは関数の場合のみ、返り値として使用する特別な変数。</p>
+<pre>
+function FuncAdd100(x : Integer) : Integer;
+begin
+  Result := x + 100;
+end;
+</pre>
+<p>以下は関数を使用する例。IntToStr()は整数値を文字列型（string）に変換する関数。</p>
+<pre>
+function ReturnStr(x : Integer) : string;
+var
+  str : string;
+begin
+  str := IntToStr(x);
+  Result := str;
+end;
+</pre>
+<p>手続きを使う場合、Resultは使用できないが、引数にvarを付ければ、ポインタや参照型と同じように引数をそのまま編集できる。なので、</p>
+<pre>
+procedure ProcAdd100(x : Integer; var y : Integer);
+begin
+  y := x + 100;
+end;
+</pre>
+<p>のようにできる。</p>
+<p>（「<a href="https://www.amazon.co.jp/Borland-Delphi7%E3%82%AA%E3%83%95%E3%82%A3%E3%82%B7%E3%83%A3%E3%83%AB%E3%82%B3%E3%83%BC%E3%82%B9%E3%82%A6%E3%82%A7%E3%82%A2-%E5%9F%BA%E7%A4%8E%E7%B7%A8-official-courseware/dp/4756142281">Borland Delphi 7 オフィシャルコースウェア 基礎編</a>」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.10.31</p>
+<p>2024.08.25編集</p>
+</div>
+
+<h1>余談</h1>
+<h2>昔のソフトウェアはPascalで書かれていた</h2>
+<p>さまざまなところで、「Pascalはハッカーにとって無用の賜物である」などと言われる通り、Pascalの構造化プログラミングは「本当のハッカー」から批判の的でした。</p>
+<p>また、Pascalは旧来の言語であり、C言語のほうが主流になってきたため、「C言語は使う言語」「Pascalは大学で学ぶだけの言語」と言われました。</p>
+<p>ですが、昔のソフトウェアなんかは、けっこうPascalで書かれていたソフトが多かったです。</p>
+<p>たとえば、Apple社のOSである初期のLisaやクラシカルなMacintoshの開発環境は、Pascalが使われていたことで有名です。また、Xによれば初期のWindowsでもPascalは使われていたそうです。</p>
+<p>ほかにも、Pascalで書かれていた巨大ソフトとしてTeXが有名です。また、初期のAdobe PhotoshopはMacintoshの上でObject Pascalで書かれていたそうです。</p>
+<p>Pascalは今でこそ古い言語のひとつですが、昔は特に教育用途では大学の標準的言語であり、少し年配の方は大学で（たぶんC言語よりも先に）Pascalを学んだ経験がある人が多いと思います。</p>
+<p>後日注記：なんでも、本当のプログラマはFORTRANでAIを書き、5ページに及ぶDOループを書かないといけないそうです。今の若者からすれば、FORTRANもPascalも昔の言語であり、大差ない感覚がありますが、昔のプログラマには、「FORTRANは本物のプログラマが使う」「Pascalは本物のプログラマは使わない」という明確な区別があったようです。よく分かりません。</p>
+<ul>
+<li><a href="https://www.kaigian.co.jp/history/devtool3.html">快技庵　Macの20年：PascalからC言語へ</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Lisa_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">Lisa (コンピュータ) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Mac_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">Mac (コンピュータ) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Pascal">Pascal - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%9C%AC%E7%89%A9%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AFPascal%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84">本物のプログラマはPascalを使わない - Wikipedia</a></li>
+<li><a href="https://twitter.com/ockeghem/status/1537603255286366208">@ockeghemさんのポスト - X</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.25</p>
+<p>2025.12.29編集</p>
+</div>
+
+<h2>Pascalのよいサイト</h2>
+<p>Pascalのよいサイトとして以下のページがあります。</p>
+<ul>
+<li><a href="https://qiita.com/ht_deko/items/e2796788c65c2cda1de5">標準 Pascal 範囲内での Delphi 入門 #プログラミング - Qiita</a></li>
+</ul>
+<p>この記事を書いている<a href="https://qiita.com/ht_deko">@ht_deko</a>さん、はっきり言って、本当にスゴイ。こんなに詳しいPascalエンジニアになりたいものです。</p>
+<div class="edit_date">
+<p>2024.08.25</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-pascal.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

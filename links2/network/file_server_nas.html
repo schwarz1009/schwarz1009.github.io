@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>NASとRAID関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>NASとRAID関連の世界観</h1>
+<p>NASとRAIDに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>NAS</h1>
+<h2>NAS</h2>
+<p>NAS（Network Attached Storage）は、ネットワーク（LAN）に直接つながったストレージ（ハードディスク）のこと。</p>
+<p>ネットワーク内のどのコンピュータからもストレージにアクセスでき、家庭内・企業内のファイル共有に使うことができる。</p>
+<p>基本的にファイルサーバーと同じだが、NASはストレージに特化しているため導入が簡単で、パソコンを常時起動するよりもよりも消費電力が少ないため、経済的。</p>
+<p>中小の企業内などでファイル共有をしたい場合は、NASを購入して使うのが手軽でおすすめである。</p>
+<p>ただし、ファイルを共有するため、誰かが勝手にファイルを削除したりすることも考えられる。NASでは、それぞれのユーザーにアクセス権を設定するなどの機能がある。</p>
+<p>NASのOSにはLinuxやWindows Storage Serverなどが使われることが多く、NAS用のOSとして、FreeBSDをベースとしたFreeNASなどのOSが知られている。
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%A2%E3%82%BF%E3%83%83%E3%83%81%E3%83%88%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8">ネットワークアタッチトストレージ - Wikipedia</a></li>
+<li><a href="https://www.iodata.jp/product/nas/info/landisk/nas.htm">NAS（ネットワークHDD）とは？ | IODATA アイ・オー・データ機器</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.02.14編集</p>
+</div>
+
+<h2>NASのプロトコル</h2>
+<p>NASは、以下のような各種のプロトコルに対応していることが多い。</p>
+<table class="some_tables">
+<tr><th class="min60">プロトコル</th><th>説明</th></tr>
+<tr><td>SMB/CIFS</td><td>Windows環境でよく使われるファイル共有プロトコル</td></tr>
+<tr><td>AFP</td><td>macOS環境でよく使われるファイル共有プロトコル</td></tr>
+<tr><td>WebDAV</td><td>Webサーバ（HTTP）を拡張した分散ファイルシステム</td></tr>
+<tr><td>FTP</td><td>ファイル転送プロトコルで、FTPクライアントを使って接続する</td></tr>
+<tr><td>NFS</td><td>UNIXのマウント可能なネットワークファイルシステム</td></tr>
+<tr><td>rsync</td><td>UNIXのファイルツリー同期コマンド</td></tr>
+<tr><td>iSCSI</td><td>ネットワークを通じてSCSI接続するプロトコル</td></tr>
+</table>
+<p>これらのプロトコルからNASにアクセスできる。SMBとCIFSの違い（CIFSはSMBを拡張した過去のバージョン）や、iSCSI接続については以下を参照のこと。</p>
+<ul>
+<li><a href="https://nakaterux.hatenablog.com/entry/2024/11/10/151855">CIFSとSMBの違いを解説 - ファイル共有プロトコルの基礎知識 - なんちゃってプログラマーの日記</a></li>
+<li><a href="https://www.netattest.com/iscsi-2023_mkt_tst">iSCSIとは？ わかりやすく10分で解説 | ネットアテスト</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%A2%E3%82%BF%E3%83%83%E3%83%81%E3%83%88%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8">ネットワークアタッチトストレージ - Wikipedia</a></li>
+</ul>
+<p><a href="file_server_nfs.html">NFS</a>、<a href="file_server_ftp.html">FTP</a>、<a href="dfs.html">分散ファイルシステム</a>、<a href="../linux/linux_filetools_archive.html">Linuxアーカイブ・同期・デバイス処理</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.02.13-14編集</p>
+<p>2025.02.16編集</p>
+</div>
+
+<h2>RAID</h2>
+<p>RAIDはNASに備わっていることが多いストレージの機能で、複数のハードディスクをひとつの仮想ハードディスクとして扱い、ひとつのストレージが壊れても別のストレージにデータが残るように「冗長化」することのできる機構。</p>
+<p>大企業などでは、大容量・多ユーザーでファイル共有をするため、RAIDが備わっているとありがたい。だが、あくまで冗長化の仕組みのひとつであり、RAIDがあれば絶対に安心してバックアップがとれるわけではない。</p>
+<p>後日注記：ファイルサーバを構築するにあたって、「もしサーバが壊れたらどうしよう」と心配するのは、多くの場合必要ない。多くのサーバでは、RAIDによって冗長化構成がなされているため、ほとんどの場合データは壊れない。本当に100%に近い数値でインフラが稼働するとか、絶対に破損してはならないサーバでない限り、データが壊れることはない。</p>
+<ul>
+<li><a href="https://www.pc-koubou.jp/magazine/11623">RAIDの基礎知識 | パソコン工房 NEXMAG</a></li>
+<li><a href="https://linuc.org/study/knowledge/344/">RAID | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h1>ストレージネットワーク</h1>
+<h2>SAN</h2>
+<p>SANはStorage Area Networkのことで、ストレージ機器同士のネットワークのこと。サーバーのストレージなどではLANとは別にSANが使われることもある。</p>
+<ul>
+<li><a href="https://techtarget.itmedia.co.jp/tt/news/1704/04/news02.html">知らないとまずいことになるNASとSANの技術的な違い：ネットワーク対応ストレージを比較 - TechTargetジャパン サーバ＆ストレージ</a></li>
+</ul>
+
+<h1>NAS用のOS</h1>
+<h2>TrueNAS</h2>
+<p>TrueNASはNAS専用のFreeBSDベースのOS。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TrueNAS">TrueNAS - Wikipedia</a></li>
+</ul>
+<p><a href="../unix/freebsd.html">FreeBSD</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.27</p>
+</div>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

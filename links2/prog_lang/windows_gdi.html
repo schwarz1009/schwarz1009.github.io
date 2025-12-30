@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Windowsプログラミング関連の世界観（GDI+） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Windowsプログラミング（GDI+）</h1>
+<p>Windowsプログラミングに関する世界観（GDI+）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="windows_programming.html">Windows API</a></li>
+<li><a href="windows_programming2.html">Windows関連技術</a></li>
+<ul>
+<li><a href="windows_mfc.html">Visual C++/MFC</a></li>
+<li><a href="windows_atl_com.html">ATL/COM</a></li>
+<li><a href="windows_activex.html">ActiveX</a></li>
+<li><b>GDI</b></li>
+<li><a href="windows_winsock.html">WinSock</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>グラフィックス</h1>
+<h2>GDIとDirectX</h2>
+<p>GDIとDirectXは、Windowsでグラフィックプログラミングを行う上で欠かすことのできないAPI。</p>
+<p>基本的に、二次元のグラフィックスにはGDIを使う。簡単なカードゲームなど、3Dの必要ないゲームを作る時や、ペイントソフトをWindowsで実装したい場合には、GDIを使う。</p>
+<p>GDIはペンやブラシを用いた個性的なAPIを持っていて、C/C++以外に.NET言語などからも利用できる。</p>
+<p>3Dのより高度なグラフィックスを用いたゲームなどを作りたい時はDirectXを使う。OpenGLはLinuxなどからも利用可能なオープン系の3D技術だが、Windowsにおいて、たとえばミニ戦車で戦う3Dのネットゲームを作りたい時などは基本的にDirectXを使う。一昔前のWindowsでは、DirectXが標準では搭載されておらず、ネットゲームをインストールする際にMSのサイトからDirectXをダウンロードして導入する必要があった。</p>
+<p>最近のゲームはC/C++のほかC#などで作られることもある。特にUnityなどの最新のゲームエンジンでは、Monoを主要プラットフォームにしているため、MSとは関係がなくてもC#を使う必要がある。また、XboxなどのMS系のハードでもC#を使うことが多い。（プレステなどはカーネルにFreeBSDなどを使っていたこともある。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Graphics_Device_Interface">Graphics Device Interface - Wikipedia</a></li>
+</ul>
+
+<h2>デバイスコンテキスト</h2>
+<p>デバイスコンテキストは、Windowsとデバイスの橋渡し役のようなもの。</p>
+<p>Windowsはデバイスを直接操作するのではなく、デバイス・コンテキストを仲介役として操作する。</p>
+<p>後日注記：ある意味、何かを表示するには、まずデバイスコンテキストを取得してから。デバイスコンテキストを取得してしまえば、あとはそれに対して表示領域を操作することでグラフィックスを表示できる。そのように考えると良いかもしれない。</p>
+
+<h2>GDI+の例</h2>
+<p>以下が参考になります。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-lines-curves-and-shapes-about">Lines, Curves, and Shapes - Microsoft Docs</a></li>
+</ul>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-pens-lines-and-rectangles-about">Pens, Lines, and Rectangles - Microsoft Docs</a></li>
+</ul>
+
+<h2>とにかくCDCポインタを使う</h2>
+<p>特にVisual C++でグラフィックスの描画を行うには、とにかくCDC*を使います。</p>
+<p>CDC*で宣言されたデバイス操作用のポインタを使って、たとえば</p>
+<pre class="prettyprint">
+CDC* pDC = hoge_pict.GetDC();
+pDC-&gt;SetPixel(x,y,RGB(255,0,0));    // 赤い点を表示
+</pre>
+<p>などのように、とにかくCDC*を使って、アロー演算子でデバイスコンテキストを取得・操作しまくります。</p>
+<p>色を指定する場合は、上のようにRGBマクロを使って、</p>
+<pre class="prettyprint">
+RDB(赤, 緑, 青);
+</pre>
+<p>のように指定します。</p>
+<p>とにかくデバイスコンテキストを操作するためにCDCを使う、ということを頭においておけば、あとは簡単です。</p>
+<pre class="prettyprint">
+pDC-&gt;MoveTo(X座標1, Y座標1);
+pDC-&gt;LineTo(X座標2, Y座標2);
+</pre>
+<p>で直線を引けるほか、上手くLineTo()を繰り返し使うことで折れ線も引けます。</p>
+<p>四角形は</p>
+<pre class="prettyprint">
+pDC-&gt;Rectangle(X座標1, Y座標1, X座標2, Y座標2);
+</pre>
+<p>円は</p>
+<pre class="prettyprint">
+pDC-&gt;Ellipse(X座標1, Y座標1, X座標2, Y座標2)
+</pre>
+<p>で描けます。</p>
+<p>またCPenクラスと</p>
+<pre>
+CreatePen(ペンの種類, ペンの幅, ペンの色);
+</pre>
+<p>を使うことで色のついたペンを使うことができます。</p>
+<p>今からどのペンを使うかは</p>
+<pre>
+pDC-&gt;SelectObject(ペンへのポインタ);
+</pre>
+で設定します。</p>
+<p>（<a href="https://www.amazon.co.jp/%E6%96%B0Visual-6-0%E5%85%A5%E9%96%80-%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%93%E3%82%AE%E3%83%8A%E3%83%BC%E7%B7%A8-Visual-6-0%E5%AE%9F%E7%94%A8%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/479730975X">新Visual C++6.0入門 スーパービギナー編 (Visual C++6.0実用マスターシリーズ)</a>を参考に執筆・引用しました。）</p>
+
+<h2>ビットマップ画像を表示するプログラム</h2>
+<p>デバイスコンテキストは、たとえばビットマップリソースであれば、</p>
+<pre class="prettyprint">
+CDC* pDC = hoge_pict.GetDC();
+</pre>
+<p>のようにコントロールメンバのhoge_pictからpDCとして参照できる出力対象として使ったり、</p>
+<pre class="prettyprint">
+CDC hogeDC;
+hogeDC.CreateCompatibleDC(pDC);
+</pre>
+<p>のようにメモリ上の一時的な作業領域として「メモリデバイスコンテキスト」を確保したりできます。</p>
+<p>この状態で、たとえばSelectObject()関数を使って、CBitmap型オブジェクトのhogeBMPを、メモリデバイスコンテキストのhogeDCと関連付けられます。</p>
+<p>繰り返し関連付けすることでいくつもの画像を表示できます。</p>
+<p>（<a href="https://www.amazon.co.jp/%E6%96%B0Visual-6-0%E5%85%A5%E9%96%80-%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%93%E3%82%AE%E3%83%8A%E3%83%BC%E7%B7%A8-Visual-6-0%E5%AE%9F%E7%94%A8%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/479730975X">新Visual C++6.0入門 スーパービギナー編 (Visual C++6.0実用マスターシリーズ)</a>を参考に執筆・引用しました。）</p>
+
+<h2>必ず解放する</h2>
+<p>C++では、プログラム内で一度取得したものは、必ずプログラム内で破棄（解放）しなければなりません。</p>
+<p>デバイスコンテキストを、</p>
+<pre class="prettyprint">
+GetDC();
+</pre>
+<p>で取得したら、それを解放する</p>
+<pre class="prettyprint">
+ReleaseDC(pDC);
+</pre>
+<p>をきちんと行いましょう。</p>
+<p>（<a href="https://www.amazon.co.jp/%E4%BD%9C%E3%81%A3%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BVISUAL-C-6-0-%E6%B8%85%E6%B0%B4-%E5%BA%B7%E6%99%B6/dp/4798000035">作ってわかるVISUAL C++ 6.0</a>を参考に執筆しました。）</p>
+
+<h1>関連ページ</h1>
+<h2>DirectX</h2>
+<p><a href="../videogame/windows_directx.html">DirectX</a>も参照のこと。</p>
+
+<h2>Cairo</h2>
+<p>LinuxでのベクターグラフィックスAPIであるCairo（GTKやFirefoxなどが採用）は、WindowsプラットフォームのGDIにも対応しています。</p>
+<p><a href="../linux/cairo.html">Cairo</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

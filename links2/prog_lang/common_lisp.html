@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Common Lisp関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Common Lispの世界観</h1>
+<p>Common Lispによるプログラミングに関する世界観です。<a href="lisp.html">Lisp</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Common Lisp</h1>
+<h2>Common Lisp入門</h2>
+<p>以下はLispでの足し算の例。</p>
+<pre class="prettyprint lang-lisp">
+(+ 4 10 3)
+</pre>
+<p>これは4 + 10 + 3を意味する。</p>
+<p>そして、数値である4や10以外に、カッコの中にカッコを作ることもできる。</p>
+<pre class="prettyprint lang-lisp">
+(+ 4 (- 10 5) (/ 3 2))
+</pre>
+<p>引数の評価の順序は、引数（最初の要素以外）が左から右へと順番に評価され、その値がオペレータと呼ばれる最初の要素に渡される。</p>
+<p>このような評価のルールのことを評価ルールという。</p>
+<p>ただし、評価ルールから外れた特殊オペレータとして、関数でもマクロでもないquoteがある。quoteは、何もせずに引数をそのまま返す。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (quote (+ 10 3))
+(+ 10 3)
+</pre>
+<p>quoteは省略形である'を使って書くことができる。</p>
+<pre class="prettyprint lang-lisp">
+'(+ 10 3)
+</pre>
+<p>quoteのことを引用符と呼ぶ。</p>
+<p>なぜquoteを使うのか、それはLispでは単なるリストであっても関数として評価されてしまうため、そのような評価からリストを「保護」するためにある。</p>
+<p>Lispのデータ型には、整数（100など）、ストリング（二重引用符で囲まれた文字列、"hoge"など）などの種類があるが、これ以外にシンボルとリストがある。</p>
+<p>シンボルは単語で、元の文字列にかかわらず常に大文字となる。シンボルには引用符をつける。</p>
+<pre class="prettyprint lang-lisp">
+&gt; 'Hoge
+HOGE
+</pre>
+<p>リストは(～)のようなカッコでくくられた形式。リストに引用符をつけなかった場合、関数として評価されてしまうため、単にリストとしてデータを保持したい場合には引用符をつける。</p>
+<pre class="prettyprint lang-lisp">
+&gt; '(hoge 2 "Hoge")
+(HOGE 2 "Hoge")
+</pre>
+<p>引用符はひとつだけで内部すべての式が保護されるため、この場合hogeには'をつけなくてよい。</p>
+<p>リストを作る関数にlistがある。引数として与えた式は評価されることに注意。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (list 'hoge (+ 10 2) "Hoge")
+(HOGE 12 "Hoge")
+</pre>
+<p>リストとリストを結合したい場合はconsを使う。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (cons '1 '(2 3))
+(1 2 3)
+</pre>
+<p>リストから第一要素を取り出すにはcar、第一要素以外を取り出すにはcdrを使う。</p>
+<p>Lispでは、プログラム自体がリストとして表現されるため、たとえばプログラム自身を吐き出すようなプログラムも簡単に記述できる。</p>
+<p>ローカル変数はletを使って宣言する。letの次に変数名と値のリストが来て、その後にプログラム本体が来る。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (let ((x 10) (y 20)) (+ x y))
+30
+</pre>
+<p>変数への代入はsetfを使う。そして、プログラム本体の最後の値が、そのプログラム式の返り値となる。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (let ((x 10)) (setf x 20) x)
+20
+</pre>
+<p>任意の文字列を画面に出力するにはformatを使う。文字列"～"の中の~Aは変数や式の値の挿入位置、~%は改行を表す。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (format t "~A + ~A = ~A~%" 10 15 (+ 10 15))
+10 + 15 = 25
+NIL
+</pre>
+<p>tは真を意味し、nilは偽を意味する。ifやwhenのような条件式では、nil以外はすべて真として扱われる。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (if (= 1 1) 'true 'false)
+TRUE
+</pre>
+<p>関数はdefunで宣言する。</p>
+<pre class="prettyprint lang-lisp">
+(defun add100 (x) (+ x 100))
+&gt; (add100 200)
+300
+</pre>
+<p>関数名に対応する関数オブジェクトを取得するには、特殊オペレータのfunctionを使う。quoteの省略形が'であるように、functionの省略形は#'となる。</p>
+<p>無名関数はlambdaで宣言できる。</p>
+<pre class="prettyprint lang-lisp">
+(lambda (x) (+ x 500))
+</pre>
+<p>lambdaは以下のようにその場で実行することもできる。</p>
+<pre class="prettyprint lang-lisp">
+&gt; ((lambda (x) (+ x 500)) 100)
+600
+</pre>
+<p>lambdaはクロージャと呼ばれることもある。クロージャとは、関数の宣言の外側にあるスコープの変数を、関数の中で使うことを指す。</p>
+<p>配列は、#(1 2 3 4)のように表現する。二次元配列の場合は#2a((1 2 3) (10 20 30))とする。一次元の配列はベクターと呼ばれ、vector関数でも作成できる。</p>
+<p>キーワードは:hogeのように、識別子に:をつける。キーワードはどこからでも参照できるため使い勝手がよく、さまざまなデータ構造で使われる。</p>
+<p>リストを作成するlistの逆として、リストをコードとして実行するにはevalを使う。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (eval '(+ 100 50))
+150
+</pre>
+<p>マクロは式の変換を行う機能で、defmacroを使って記述する。defunは値を返す関数を定義するが、defmacroは式の変換（マクロ展開）を行う。</p>
+<pre class="prettyprint lang-lisp">
+(defmacro hoge! (x)
+  (list 'hoge x))
+</pre>
+<p>（<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.09.09編集</p>
+<p>2023.11.01編集</p>
+</div>
+
+<h2>Common Lispの主な関数</h2>
+<p>注意：全部ではありません。<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>の中に出てくる関数やオペレータから、僕が気になるものをピックアップしました。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>let</td><td>ローカル変数を宣言する</td></tr>
+<tr><td>setf</td><td>変数に値を代入する</td></tr>
+<tr><td>defun</td><td>グローバル関数を宣言する</td></tr>
+<tr><td>labels</td><td>ローカル関数（その式の中でのみ使える関数）を宣言する</td></tr>
+<tr><td>lambda</td><td>無名関数を宣言する</td></tr>
+<tr><td>progn</td><td>順次実行し、最後の値を返すようなブロックを作る</td></tr>
+<tr><td>block</td><td>名前と返り値のついたブロックを作る</td></tr>
+<tr><td>return-from</td><td>値を返してその時点で実行を中断する</td></tr>
+<tr><td>tagbody</td><td>gotoを使用できるブロックを作る</td></tr>
+<tr><td>go</td><td>goto（ジャンプ）を行う</td></tr>
+<tr><td>values</td><td>多値を返す</td></tr>
+<tr><td>quote</td><td>リストを評価せずそのまま返す（関数として実行しない）</td></tr>
+<tr><td>list</td><td>リストを作る<br>二つの要素からなるリストは、二分木であると考えられる（右と左の要素が子ノードの親となる）</td></tr>
+<tr><td>cons</td><td>リストを連結する</td></tr>
+<tr><td>car</td><td>リストの第一要素を取り出す</td></tr>
+<tr><td>cdr</td><td>リストの第一要素以外の要素を取り出す</td></tr>
+<tr><td>mapcar</td><td>リストの全要素に関数を実行する</td></tr>
+<tr><td>push</td><td>スタック（リスト）にプッシュ（追加）する</td></tr>
+<tr><td>pop</td><td>スタック（リスト）からポップ（取り出し）する</td></tr>
+<tr><td>make-array</td><td>配列を作る<br>#2a((1 2 3) (4 5 6))のように、#naを使うことで配列を直接記述できる（nは配列の次数）</td></tr>
+<tr><td>aref</td><td>配列の要素を取り出す</td></tr>
+<tr><td>vector</td><td>一次元の配列（ベクタ）を作る</td></tr>
+<tr><td>make-hash-table</td><td>ハッシュテーブルを作る</td></tr>
+<tr><td>gethash</td><td>ハッシュテーブルの中のキーに応じた値を取り出す</td></tr>
+<tr><td>defstruct</td><td>構造体（ストラクチャ）を作る</td></tr>
+<tr><td>typep</td><td>型を判定する</td></tr>
+<tr><td>=</td><td>値を等値であるか比較する</td></tr>
+<tr><td>&lt;</td><td>より小さい</td></tr>
+<tr><td>&gt;</td><td>より大きい</td></tr>
+<tr><td>&lt;=</td><td>より小さいかまたは等しい</td></tr>
+<tr><td>&gt;=</td><td>より大きいかまたは等しい</td></tr>
+<tr><td>/=</td><td>異なる</td></tr>
+<tr><td>eql</td><td>値に含めて型も等しいか比較する</td></tr>
+<tr><td>if</td><td>すべての条件式の基礎</td></tr>
+<tr><td>when</td><td>条件式が真である場合に本体を順々に評価する</td></tr>
+<tr><td>unless</td><td>条件式が偽である場合に本体を順々に評価する</td></tr>
+<tr><td>cond</td><td>複数の条件に対して、評価する内容を記述する</td></tr>
+<tr><td>do</td><td>反復処理を行う</td></tr>
+<tr><td>dotimes</td><td>指定した回数だけ反復処理を行う</td></tr>
+<tr><td>catch</td><td>例外をキャッチする</td></tr>
+<tr><td>throw</td><td>例外を投げる</td></tr>
+<tr><td>unwind-protect</td><td>例外に割り込まれたとしても評価される式を記述する</td></tr>
+<tr><td>open</td><td>ファイルをオープンする</td></tr>
+<tr><td>close</td><td>ファイルをクローズする</td></tr>
+<tr><td>read-line</td><td>ファイルあるいは標準入力を一行読み込む</td></tr>
+<tr><td>read</td><td>一行のLisp式を読み込む</td></tr>
+<tr><td>prin1</td><td>プログラム用に出力する</td></tr>
+<tr><td>princ</td><td>ユーザ用に出力する</td></tr>
+<tr><td>format</td><td>フォーマット指定子を指定して出力する（変数の値を埋め込むことが可能）</td></tr>
+<tr><td>+</td><td>足し算</td></tr>
+<tr><td>-</td><td>引き算</td></tr>
+<tr><td>*</td><td>掛け算</td></tr>
+<tr><td>/</td><td>割り算</td></tr>
+<tr><td>float</td><td>浮動小数点数に変換する</td></tr>
+<tr><td>expt</td><td>x<sup>n</sup>を求める</td></tr>
+<tr><td>log</td><td>log<sub>n</sub> xを求める</td></tr>
+<tr><td>exp</td><td>e<sup>x</sup>を求める</td></tr>
+<tr><td>sqrt</td><td>平方根を求める</td></tr>
+<tr><td>pi</td><td>円周率を示す定数</td></tr>
+<tr><td>sin</td><td>サイン</td></tr>
+<tr><td>cos</td><td>コサイン</td></tr>
+<tr><td>tan</td><td>タンジェント</td></tr>
+<tr><td>eval</td><td>リストをLispコードとして実行する</td></tr>
+<tr><td>defmacro</td><td>マクロ（式を別の式に置き換える）を定義する</td></tr>
+<tr><td>defclass</td><td>CLOS（Common Lispオブジェクトシステム）のクラスを定義する</td></tr>
+<tr><td>defmethod</td><td>CLOSのメソッドを定義する</td></tr>
+<tr><td>defpackage</td><td>パッケージ（シンボルの名前空間）を宣言する</td></tr>
+</table>
+<p>（<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.09.10編集</p>
+</div>
+
+<h1>Common Lispいろいろ</h1>
+<h2>Common Lispとリスト</h2>
+<p>Lispでは、括弧(～)の中に空白区切りで要素を羅列した、S式のリストでプログラムを記述する。</p>
+<p>たとえば、Common Lispで10 + 5を計算するには、</p>
+<pre class="prettyprint lang-lisp">
+&gt; (+ 10 5)
+15
+</pre>
+<p>のように、+のほうを先に書く（ポーランド記法）。</p>
+<p>リストの中身を関数として評価したくない場合（リストそのものとして保護したい場合）は「'」をつける。</p>
+<pre class="prettyprint lang-lisp">
+&gt; '(1 2 3 4)
+(1 2 3 4)
+</pre>
+<p>consを使うことで、リストを連結できる。consをすることを「コンスする」と言う。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (cons '1 '(2 3 4))
+(1 2 3 4)
+</pre>
+<p>carを使うことで、リストの最初の要素を取り出せる。また、cdrを使うことで、リストの最初以外の要素を取り出せる。</p>
+<p>また、マッピング関数mapcarを使えば、リストのすべての要素に関数を実行できる。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (mapcar #'(lambda (x) (* x 3))
+          '(1 2 3 4 5))
+(3 6 9 12 15)
+</pre>
+<p>このほか、Common Lispでは、ベクタ（一次元配列）や多次元配列、またはハッシュテーブルや構造体（ストラクチャ）などが利用できる。</p>
+<p>配列はmake-arrayや、一次元配列の場合vectorで作成する。ハッシュテーブルはmake-hash-tableで作成する。</p>
+<p>あるいは、多次元配列を作るために#na()という記法が利用できる（nは次元の数）。</p>
+<pre class="prettyprint lang-lisp">
+#2a((1 2 3 4) (5 6 7 8))
+</pre>
+<p>配列の要素を取り出すにはaref、ハッシュテーブルでキーに対応する値を取り出すにはgethashを使う。</p>
+<p>また、Common LispではCLOSを用いれば、オブジェクト指向のパッケージ（defpackage）・クラス（defclass）・メソッド（defmethod）を定義することもできる。</p>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.09.05</p>
+</div>
+
+<h2>引数の省略と可変長引数</h2>
+<p>関数を定義する際に、引数を省略できるようにするには&optionalを使う。&optional以降の引数はオプションであり、デフォルトではnilが設定される。また&keyを使うことで、オプション引数の変数名と値をシンボルによって指定できる（キーワード引数）。</p>
+<p>また、&restを使うと、最後の引数を表す変数にそれ以降のすべての引数がリストとして設定される。可変長引数を取る関数が実現できる。</p>
+<p>（<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.09.08</p>
+</div>
+
+<h2>バッククォート</h2>
+<p>マクロの入力として、バッククォート（逆引用符）を使うと、リストをテンプレートのように作れる。また、「,」や「,@」を使うことで、テンプレートの中の一部分だけを式として評価できる。</p>
+<p>たとえば：</p>
+<pre class="prettyprint lang-lisp">
+&gt; (setf x 10 y 20)
+20
+&gt; `(x and y are ,x and ,y)
+(X AND Y ARE 10 AND 20)
+</pre>
+<p>あるいは：</p>
+<pre class="prettyprint lang-lisp">
+&gt; (setf hoge '(1 2 3 4))
+(1 2 3 4)
+&gt; `(hoge are ,@hoge)
+(HOGE ARE 1 2 3 4)
+</pre>
+<p>実際にdefmacroでマクロを書く時にこの記法は多用するので、覚えておいて損はない。</p>
+<p>（<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.09.08</p>
+</div>
+
+<h2>スペシャル変数</h2>
+<p>Common Lispでは、defvarでスペシャル変数（グローバル変数）を宣言できる。スペシャル変数は*hoge*のように*～*と宣言する慣習がある。</p>
+<pre class="prettyprint lang-lisp">
+&gt; (defvar *hoge* 1000)
+*HOGE*
+</pre>
+<p>また、defparameterではスペシャル変数の値を変更できる。（defvarでスペシャル変数を書き換えることはできない。）</p>
+<p>また、defconstantでは、変数でなく定数としてスペシャル定数を宣言することもできる。スペシャル定数を変更しようとするとエラーが出る。</p>
+<p>Common Lispの旧来のダイナミックスコープ（すなわちdefvar）では、まずローカル変数が検索され、見つからない場合にグローバル変数が検索される。同じ名前のグローバル変数とローカル変数が定義されている状態では、たとえばグローバル変数にローカル変数の値が設定されたとして、設定されている状態ではグローバルにローカル変数がどこからでもアクセスでき、その状態がなくなると値が元に戻る。無用な混乱を避けるため、グローバル変数は*～*という名前にして区別すべきとされる。</p>
+<p>現在のCommon LispではSchemeなどの成果を取り入れて静的スコープ（レキシカルスコープ）が標準となっているが、defvarを使えば動的スコープ（ダイナミックスコープ）を使うこともできる。</p>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="http://www.nct9.ne.jp/m_hiroi/clisp/abcl19.html">スペシャル変数とダイナミックスコープ - お気楽 Common Lisp プログラミング入門 - M.Hiroi's Home Page</a></li>
+<li><a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Common_Lisp">Common Lisp - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Scheme">Scheme - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%8B%95%E7%9A%84%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">動的スコープ - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E9%9D%99%E7%9A%84%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">静的スコープ - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.31</p>
+</div>
+
+<h2>Common Lispの高階関数</h2>
+<p>Common Lispの高階関数（関数を引数として取る関数）には、mapcar, apply, funcallなどがある。また、無名関数（名前のない関数で、通常の名前を付けて定義した関数と同じように利用できる）はlambdaで定義できる（ラムダ式と呼ばれる）。高階関数に渡す関数は通常の関数であってもラムダ式であってもよい。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>mapcar</td><td>リストの各要素に関数を実行し、その結果を格納したリストを返す</td></tr>
+<tr><td>apply</td><td>関数の引数としてリストを渡す。関数の引数が&restのようにリストに含まれている時に使う</td></tr>
+<tr><td>funcall</td><td>関数を実行する。関数を関数の引数として渡した上でそれを関数の中から実行するために使う</td></tr>
+<tr><td>lambda</td><td>無名関数（ラムダ式）を定義する</td></tr>
+</table>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="http://www.nct9.ne.jp/m_hiroi/xyzzy_lisp/abclisp05.html">高階関数とラムダ式 - Common Lisp 入門 - M.Hiroi's Home Page</a></li>
+<li><a href="http://basicwerk.com/blog/archives/1585">[Common Lisp] apply の使いどころ&nbsp;|&nbsp;Basic Werk</a></li>
+<li><a href="https://jagaimolisp.com/apply/">【AutoLISP リスト】引数をリストでまとめて渡す　関数 apply  |  Jagaimo LISP</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.13</p>
+</div>
+
+<h2>eval</h2>
+<p>evalは与えられた文字列をLisp式として評価する関数。簡単な式埋め込み型のテンプレート文字列として使える。evalによってLispはコンパイラ言語からインタープリタ言語に変貌する。</p>
+<p><a href="reflection.html">リフレクションとeval</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.08.13</p>
+</div>
+
+<h1>書籍</h1>
+<h2>Common Lispの基本</h2>
+<p>以下の書籍が参考になります。この本はLispの入門者向けの書籍として定評があり、同じ著者の上級者向けの姉妹本であるOn LispとともにLisp入門書の標準とされています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a></li>
+</ul>
+
+<h2>On Lispをおすすめする</h2>
+<p>僕は、さらに高度なLispハッカーになるための方法として、「<a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp</a>」をおすすめします。</p>
+<p>「On Lisp」は、マクロなどの手法を使って、Lispを拡張し、Lispコードを書くことでプログラミングに必要なさまざまな技術的な方法論と具体的なコードが分かる、素晴らしい本です。</p>
+<p>はっきり言って、僕の書いたこのホームページぐらいの知識がある人は、この「On Lisp」という本以外には何も必要ありません。</p>
+<p>「On Lisp」について言えることは、「まるで中学生時代の僕のためにあった本」とか、「中学生時代にこの本を読めばきっと人生は違っていた」ということです。</p>
+<p>なぜか、「On Lisp」を読んでいると、僕は中学生時代の自分のことを思い出します。中学生時代には、僕はこの「On Lisp」と同じような「高い知性」を持っていたと僕は懐かしく思うからです。</p>
+<p>なので、僕のこのホームページを読んだ人は、さらに高度なLispハッカーになるために、「On Lisp」を読むことをおすすめします。</p>
+<div class="edit_date">
+<p>2023.11.02</p>
+</div>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-lisp.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

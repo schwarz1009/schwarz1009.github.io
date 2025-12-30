@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>XAMPP関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>XAMPP関連の世界観</h1>
+<p>XAMPPに関する世界観です。<a href="apache.html">Apache</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>XAMPP</h1>
+<h2>XAMPPとは</h2>
+<p>XAMPPは、WindowsにクロスプラットフォームなApache、MySQL、PHP、Perlをインストールしてくれるインストーラーと管理環境。</p>
+<p>「Webプログラミングをやりたい」と思った時に、初心者はいきなりLinuxで自宅サーバーを立てて公開するのではなく、ローカルのWindows環境にまずはXAMPPをインストールして、自分のパソコンの環境で動くことを確認した後、テキストエディタ、Apache、MySQL、PHPの設定をして、「ローカルでWebアプリケーションが動く環境」を作りましょう。</p>
+<p>特に、Webサーバーを自分で立てるのは、セキュリティの問題や犯罪に繋がる書き込みの削除など、たくさんの労力と手間が必要になるでしょう。まずは自分のローカル環境で、PHPとMySQLが動く環境を作った上で、「公開するかどうか」はあとで考えましょう。そのまま、プログラミング能力をつけて、他の言語に移行する可能性もあります。</p>
+<p>それから、僕の勝手な意見ですが、Webサービスを開発するために自宅サーバーを立てるのは、多くの場合僕はおすすめしません。レンタルサーバーを借りた方が良いでしょう。レンタルサーバーは有料で、安くても月900円程度は払う必要がありますが、自分でサーバーを管理するコストや規模が大きくなった時のことを考えると、自宅サーバーをLinux+Apacheで立てるのは現実的ではないと思います。あるいは、Amazon AWSのようなパブリッククラウドを利用するのも良いでしょう。<a href="../network/cloud.html">クラウド</a>や<a href="../services/cloud2.html">クラウド・レンタルサーバー</a>を参照してください。</p>
+<!--<p>実際に自宅サーバーを立てる方法については、<a href="apache.html">Apacheの世界観</a>などを参考にしてください。</p>-->
+<p>後日注記：実際のところ、自宅サーバを立てるのは悪くない選択肢である。なぜなら、さくらのVPNなどをもし購入したとしても、root権限を得てインストールした仮想サーバのOSシステムは自分で管理しなければならない。最初から自宅サーバに頼っても僕は良いと思う。クラウドでも同様。</p>
+
+<h2>Pleiades All in One</h2>
+<p>なお、Javaで開発環境を構築するEclipseの日本語版であるPleiades All in Oneは、Full Editionをインストールすることで、XAMPP環境がついてきます。XAMPPだけではなく、Tomcat（Javaサーブレットコンテナエンジン）やMinGW（GNUのC/C++コンパイラGCCのWindows版）もついてきます。これを導入することも良いでしょう。</p>
+<ul>
+<li><a href="http://mergedoc.osdn.jp/">Pleiades All in One</a></li>
+</ul>
+
+<h2>XAMPPでサーバー構築</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Apache, MySQL, Perl, PHP</h2>
+<p><a href="apache.html">Apache</a>、<a href="../db/mysql.html">MySQL</a>、<a href="../prog_lang/perl.html">Perl</a>、<a href="../prog_lang/php.html">PHP</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

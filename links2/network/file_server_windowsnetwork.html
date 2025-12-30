@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Windowsネットワーク関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Windowsネットワーク関連の世界観</h1>
+<p>Windowsネットワークに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Windowsネットワーク</h1>
+<h2>Windowsネットワークは分散ファイルシステムとして使いやすい</h2>
+<p>僕は、Windowsネットワークは好きです。それは、「分散ファイルシステムとして使いやすい」からです。</p>
+<p>たとえば、同じワークグループに所属するパソコンからは、共有したフォルダがどのパソコンからでもアクセスできます。</p>
+<p>これは、たくさんのパソコンがネットワークに繋がりながら、さまざまなコンピュータに資源やリソースがある今のパソコンの世代から言うと、NFSのようなクライアント・サーバーのネットワークファイルシステムよりも、使いやすいモデルではないかと思います。</p>
+<p>NFSについても一理あるところがあり、NFSではネットワーク上のボリュームをファイルシステムに統合的に「マウント」することができます。マウントしたファイルシステムには、ローカルのファイルと同様、シェル上の通常のファイル操作コマンドでそのままアクセスできます。</p>
+<p>このように、Windowsネットワークは使いやすいです。こうしたWindowsネットワークをLinuxで使いたい時は、Sambaを使います。SambaはWindowsネットワークで使われるSMBプロトコルのフリーソフトウェア実装で、WindowsネットワークにLinuxを繋ぐことができます。</p>
+<p>Linuxはサーバーやクラスタでは使いやすいネットワークシステムかもしれませんが、GUIのネットワークを通じたオフィス作業やグラフィカルなインターネットの閲覧を行う上では、まだまだWindowsには敵いません。Microsoftは「どのようにすれば新しいパソコンでネットワークを通じた仕事や趣味の娯楽をしやすいか」ということが良く分かっていて、ネットワークでもUNIXの一歩先を行っています。</p>
+
+<h2>Windowsネットワークの基本</h2>
+<p>まず、Windowsが所属する「ワークグループ」に参加する。</p>
+<p>ワークグループを設定したWindowsパソコンで「共有フォルダ」を設定することで、そのフォルダをワークグループに参加したどのWindowsパソコンからも共有できる。</p>
+<p>また、Active Directoryを使うことで、社内の人的・物的資源（社員の認証情報やネットワーク機器など）をネットワーク上で「ディレクトリ」と呼ばれる一覧表から一元的に管理できる。</p>
+<p>（<a href="https://www.atmarkit.co.jp/ait/articles/1612/01/news183.html">Sambaの基本を知っておこう：基礎から理解するLinuxサーバー［Cent OS 7.0編］（7） - ＠IT</a>を参考に執筆しました。）</p>
+
+<h2>Windowsネットワークでファイル共有</h2>
+<p>以下のサイトなどが参考になるかもしれない。</p>
+<ul>
+<li><a href="https://www.pc-master.jp/internet/kyoyu.html">ファイルやフォルダの共有　パソコン初心者講座</a></li>
+</ul>
+
+<h2>Samba</h2>
+<p>SambaはUNIXにおけるWindowsネットワークのフリーな実装。</p>
+<p><a href="file_server_samba.html">Samba</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>WindowsネットワークとSamba</h2>
+<p>各コンピュータに設定されたワークグループによりファイルを共有できる。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

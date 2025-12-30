@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Smalltalkの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Smalltalkの世界観</h1>
+<p>Smalltalkに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Smalltalk</h1>
+<h2>Smalltalkとダイナブック構想</h2>
+<p>先駆的なオブジェクト指向言語、およびその統合プログラミング環境。アラン・ケイの「メッセージング」と言うアイディアから作られた。</p>
+<p>アラン・ケイは「ダイナブック構想」で知られる、現在のMacやWindowsなどが採用しているGUI操作環境を考えた偉大なプログラマである。</p>
+<p>詳しくは<a href="smalltalk_dynabook.html">ダイナブック構想</a>を参照のこと。</p>
+
+<h2>Smalltalkとは</h2>
+<p>Smalltalkは、オブジェクトにメッセージを与えることでプログラムを作る、オブジェクト指向のパイオニアだった。</p>
+<p>シンプルな言語設計で、専門的なプログラマでなくても誰でも開発できることを目指した。</p>
+<p>ダイナブック構想を目指したアルトは、メインフレームやミニコンピュータの時代にモニターやマウス・キーボードのついた机ほどの小さなコンピュータを実現しようとした。</p>
+<p>ソフトウェア的な部分を担当するSmalltalkでは、ウィンドウやメニューなど、コマンドで操作することが当たり前だった当時としては、とても先駆的なGUIの環境だった。</p>
+<p>また、クラスライブラリやオブジェクト指向、デザインパターンなど、設計の側面からも評価が高い。</p>
+<p>1970年代にXerox社のパロアルト研究所（PARC）でアラン・ケイによって開発された。PARCはレーザープリンタ、イーサネット、アルトなどを創出した偉大な研究所である。</p>
+<p>以上は以下の内容を参考に執筆しました。</p>
+<ul>
+<li><a href="http://gihyo.jp/dev/serial/01/enjoy-pg/0005">もっと楽しむ！　プログラミング言語　「豆」談義 - 第5回　おしゃべり程度のプログラミング「Smalltalk」（前編） - gihyo.jp</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/enjoy-pg/0006">もっと楽しむ！　プログラミング言語　「豆」談義 - 第6回　おしゃべり程度のプログラミング「Smalltalk」（後編） - gihyo.jp</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Smalltalk">Smalltalk - Wikipedia</a></li>
+</ul>
+
+<h2>Squeak</h2>
+<p>Smalltalk環境の1つ。Smalltalkのサブセットによる仮想マシンを持っているため移植性が高く（もちろんUNIXやWindowsで動く）、アプリケーションに相当するオブジェクトやデータなど環境すべてがSmalltalkで記述されている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Squeak">Squeak - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/squeak-smalltalk">git</a></li>
+</ul>
+
+<h2>Smalltalkサンプルコード</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="http://gihyo.jp/dev/serial/01/enjoy-pg/0005?page=2">もっと楽しむ！　プログラミング言語　「豆」談義 - 第5回　おしゃべり程度のプログラミング「Smalltalk」（前編） - ページ2 - gihyo.jp</a></li>
+</ul>
+<p>注意点：Smalltalk標準では代入は:=を用いて行います。Squeakでは代入に_（アンダースコア）を使用し、表示は←となります。</p>
+<p>とても面白いSmalltalkのサンプルコードが以下にあります。</p>
+<ul>
+<li><a href="https://qiita.com/newapplesho/items/6376c90d3e9ca66d2a95">Smalltalk基本文法編 #Pharo - Qiita</a></li>
+<li><a href="https://qiita.com/newapplesho/items/323cf9d1be014861a57f">Smalltalk 基本クラス編 #Pharo - Qiita</a></li>
+</ul>
+
+<h2>Smalltalkの基本</h2>
+<p>Smalltalkには、単項メッセージ、2項メッセージ、キーワードメッセージの三種類のメッセージがある。</p>
+<p>まず、代入は:=を用いる。</p>
+<pre>
+x := 50.
+</pre>
+<p>以下は2の平方根を求める単項メッセージ。<p>
+<pre>
+2 sqrt.
+</pre>
+<p>以下は10+5の計算を行う2項メッセージ。</p>
+<pre>
+10 + 5.
+</pre>
+<p>以下は配列10, 20, 30の中から2番目の要素を取り出すキーワードメッセージ。</p>
+<pre>
+#(10 20 30) at: 2.
+</pre>
+<p>また、ブロックを使うことができる。ブロックは無名関数のこと。</p>
+<pre>
+block := [:v1 :v2 | v1 + v2].
+block value: 10 value: 5.
+</pre>
+<p>値を返すには^（キャレット）を用いる。</p>
+<pre>
+^ true.
+</pre>
+<p>条件分岐（ifTrue:やifFalse:）や反復（do:やwhileTrue:）などもブロックによって行うことができる。</p>
+<p>クラスは、たとえば順序なし、重複なしのセットを作るなら以下のようにする。add:メッセージで10と5を登録し、s includes: 5はtrueを返すためifTrue:以下のブロックが実行される。</p>
+<pre>
+s := Set new.
+s add: 10.
+s add: 5.
+s includes: 5 ifTrue: [ Transcript show: '5 is included!'; cr. ].
+</pre>
+<p>ここで、Transcript（実行結果を出力できるウィンドウ）ではshowメッセージを実行し、カスケードという方法で次に改行文字crを出力している。また文字列は'～'で囲む。</p>
+<p>詳しくは以下のページが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/newapplesho/items/6376c90d3e9ca66d2a95">Smalltalk基本文法編 #Pharo - Qiita</a></li>
+<li><a href="https://qiita.com/newapplesho/items/323cf9d1be014861a57f">Smalltalk 基本クラス編 #Pharo - Qiita</a></li>
+<li><a href="https://qiita.com/newapplesho/items/4a90c0771e15506c8484">Smalltalk開発環境入門編 #Pharo - Qiita</a></li>
+<li><a href="https://sumim.hatenablog.com/entry/20100207/p1">Smalltalk基礎文法最速マスター（Squeak版） - Smalltalkのtは小文字です</a></li>
+<li><a href="http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/Squeak/SmalltalkSyntax/index-j.html">Smalltalk Syntax（スモールトーク文法） - 青木淳（あおきあつし）のホームページ</a></li>
+<li><a href="https://www.ogis-ri.co.jp/otc/hiroba/technical/Squeak3/S3-6-3.html">Happy Squeaking!! -オブジェクト指向再入門- [第三回：オブジェクト指向の基礎固め編（Part2）]</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.25</p>
+</div>
+
+<h2>クラスを作成する</h2>
+<p>Smalltalkの開発環境はビジュアルなGUIによる開発を取り入れており、クラスはGUIのSystem Browserとその中のコードペインというテキスト記述エリアで作成することができる。以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/newapplesho/items/1bf923be87f49a496d47">Smalltalk Smalltalk クラス作成編 #Pharo - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.26</p>
+</div>
+
+<h2>Objective-C</h2>
+<p>Cにクラスやオブジェクト指向を取り入れたC++とは異なり、Objective-CはCの中にSmalltalk的なコードをインラインで書ける言語として知られる。</p>
+<p>詳しくは<a href="objective_c.html">Objective-C</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>オブジェクト指向</h2>
+<p><a href="oop.html">オブジェクト指向</a>を参照のこと。</p>
+
+<h2>関数</h2>
+<p><a href="function.html">関数</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Smalltalk</h2>
+<ul class="defaultlist list7">
+<li>昔の言語
+<ul>
+<li>昔の言語
+<ul>
+<li>Smalltalk
+<ul>
+<li>「おしゃべり程度のプログラミング」として知られるが、実際は今のプログラミング言語とは全く異なる見た目をしていて理解するのが難しい</li>
+<li>Squeak</li>
+<li>ダイナブック構想
+<ul>
+<li>WindowsやMacなどの「ワークスペースにおいてウィンドウやメニューで操作する」という操作方式を考えた、GUIの生みの親の天才</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

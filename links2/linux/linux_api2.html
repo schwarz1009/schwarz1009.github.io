@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux システムコール・API２（プロセス・メモリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux システムコール・API２（プロセス・メモリ）</h1>
+<p>Linuxのシステムコールとライブラリ関数・APIに関する世界観２（プロセス・メモリ）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_api.html">システムコール・API（１．ファイル・入出力）</a></li>
+<ul>
+<li><a href="linux_api_syscalls.html">１A．システムコール</a></li>
+<li><a href="linux_api_stdio.html">１B．stdio</a></li>
+<li><b>２．プロセス・メモリ</b></li>
+</ul>
+<li><a href="libc.html">libc</a></li>
+</ul>
+<p>X11やGTK+/Qtなどについては<a href="linux_x11.html">Linux（X11周辺）</a>を参照のこと。また<a href="linux_kernel_proc.html">Linuxカーネルの世界観（プロセス）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>プロセスとは</h1>
+
+<h2>プロセス</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>UNIXではプロセスは、fork()とそれに準ずるシステムコールによって作成する。</p>
+<p>また、デーモンを作る時は、fork()した後でsetsid()で端末を切り離す。</p>
+<p>マルチタスクにはプロセスとスレッドがあり、プロセスはそれぞれ個別にメモリ領域が与えられるが、スレッドでは共有データとなる。</p>
+<p>一応、プロセス間通信などの例外もある。</p>
+
+<h2>fork関連のAPI</h2>
+<p>fork(2)を実行すると、プロセスが親プロセスと子プロセスに分かれる。fork()を呼び出した瞬間、2つのプロセスは同じコードのfork()を呼び出した直後の状態になる。両方のプロセスで、その後のコードが実行される。</p>
+<p>fork()のエラー処理を行ったり、子プロセスと親プロセスで違った処理をさせるためには、fork()の返り値（通常はpidなどの変数に格納する）をif文で-1や0と比較する。</p>
+<p>fork()は、失敗した時は-1、成功した時は子プロセスの場合は0、親プロセスの場合は子プロセスのPIDを返す。</p>
+<p>これをif文などで比較することで、親プロセスと子プロセスのfork()後の処理を分岐できる。</p>
+<p>fork()した後で、exec(3)を実行することで、新しい別のプログラムを実行できる。exec()は、新しいプログラムをロードして、自らのプロセスに上書きして実行する。</p>
+<p>exec()にはexec*という名前で始まるさまざまなAPIがあり、多くがライブラリ関数で、execve(2)のみがシステムコールとなる。</p>
+<p>fork()した後で、親プロセスが子プロセスの終了を待つためにはwait(2)を実行する。</p>
+<p>wait()にはwaitpid()やwaitid()などの亜種もあり、より細かい制御が可能。</p>
+<p>あるいはそれぞれのプロセスを個別に終了するためには_exit(2)あるいはexit(3)を実行する。子プロセスの場合は_exit()、親プロセスの場合はexit()を使う。</p>
+<p>また、これ以外に、パイプでプロセスを連結するAPIであるpipe(2)、dup(2)、dup2(2)がある。pipe()はfork()などとともに使う。また、stdioにはpopen(3)、pclose(3)というAPIがある。</p>
+<p>fork()によって作成されたプロセスは、親子関係を持っており、これを繋ぐと1つのツリー構造となる。pstreeコマンドにより、このツリー構造の親子関係を表示できる。</p>
+<p>また、親子関係以外に、セッション（同じ端末から起動したプロセスがまとめられたもの）やプロセスグループ（パイプで連結された複数のプロセスをCtrl+Cで強制終了できる）という概念がある。ps jコマンドを実行すると、セッションやプロセスグループを表示できる。</p>
+<p>このほか、セッションリーダーやプロセスグループリーダーと呼ばれる概念がある。セッションやプロセスグループのプロセスのうち、セッションを最初に作ったのがセッションリーダー、プロセスグループを最初に作ったのがプロセスグループリーダーとなる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/fork.2.html">man fork</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/exec.3.html">man exec</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/wait.2.html">man wait</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/exit.2.html">man _exit</a></li>
+</ul>
+<p><a href="linux_net_monitoring.html">モニタリング</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.01.24編集</p>
+</div>
+
+<h2>forkの例</h2>
+<p>fork()の単純な例は以下。</p>
+<pre class="prettyprint">
+pid_t pid;
+pid = fork();
+if (pid &lt; 0) {
+    fprintf(stderr, "forkができません\n");
+    exit(1);
+} else if (pid == 0) {
+    /* 子プロセスの処理 */
+} else {
+    /* 親プロセスの処理 */
+}
+</pre>
+<p>実際は親プロセスの処理の中で、wait()を使って子プロセスの終了を待つ必要がある。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>と<a href="https://kaworu.jpn.org/c/%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%AE%E4%BD%9C%E6%88%90_fork">プロセスの作成 fork - C言語入門</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.01.18</p>
+</div>
+
+<h2>setsid(2)</h2>
+<p><!--後日注記：-->setsid(2)は、セッションを新しく作成する、デーモンを作る時にお世話になるAPI。デーモンを作る時にはfork()した後でsetsid()を実行して制御端末を持たないプロセスを作る。</p>
+<p>後日注記：Linuxにはdaemon(3)というデーモンのための専用のAPIもある。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/setsid.2.html">man setsid</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/daemon.3.html">man daemon</a></li>
+</ul>
+<p><a href="linux_daemon.html">initとデーモン</a>も参照のこと。</p>
+
+<h2>exitの引数</h2>
+<p>exit(3)はプログラムを終了する関数。引数については、exit(0)は正常終了、exit(1)は異常終了を意味する。また、EXIT_SUCCESSやEXIT_FAILUREなどが使われることも多い。</p>
+<ul>
+<li><a href="https://kaworu.jpn.org/c/C%E8%A8%80%E8%AA%9E%E3%81%AEexit%E9%96%A2%E6%95%B0%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9">C言語のexit関数の使い方 - C言語入門</a></li>
+</ul>
+<p>たとえば、以下のrealloc()のエラーチェックの例では、exit(EXIT_FAILURE)が使われている。</p>
+<ul>
+<li><a href="https://marycore.jp/prog/c-lang/realloc/">【C言語】realloc関数｜正しい使い方と注意点 メモリ断片化など | MaryCore</a></li>
+<li><a href="http://www9.plala.or.jp/sgwr-t/lib/realloc.html">realloc - 初心者のためのポイント学習Ｃ言語</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.18</p>
+</div>
+
+<h2>書籍</h2>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>マルチスレッド</h1>
+<h2>スレッドプログラミング</h2>
+<p>スレッドを用いたプログラミングをCとLinuxでするのであれば、NPTL(Native POSIX Thread Library)のpthread_create()という関数を使えば良い。</p>
+<p>後日注記：C/C++には長らく標準のライブラリにスレッドと呼ばれる概念がなかった。Pスレッドは、UNIXの標準規格であるPOSIXに存在する、プラットフォーム依存のマルチスレッドのAPI。これを使うことで、Linuxでマルチスレッドプログラミングができる。しかしながら、プラットフォーム依存であるためWindowsやDOSでは動作しない。最近はC++にも標準のマルチスレッドAPIができた（C++11のstd::thread）ので、そちらを使う手もある。MachにはCスレッドと呼ばれるものもある。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li>やねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B02%E3%80%90CD-ROM%E4%BB%98%E3%80%91-Game-developer-books-%E3%81%86%E3%82%89%E3%81%8A/dp/4798006033">Windowsプロフェッショナルゲームプログラミング2</a>」</li>
+<li><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a></li>
+</ul>
+<p>以下はLinuxでスレッドプログラミングをする際に参考になるページ。</p>
+<ul>
+<li><a href="http://www.tsoftware.jp/nptl/">Linux スレッドプログラミング - T Software</a></li>
+<li><a href="https://ota42y.com/blog/2015/06/18/c-thread/">C言語でのスレッド処理 | おおたの物置</a></li>
+<li><a href="http://www.hakodate-ct.ac.jp/~tokai/tokai/doc2009/proen/thread.html">函館高専4年 プログラミング演習 スレッドと排他処理</a></li>
+</ul>
+<p><a href="../prog_lang/cpp_stl_libs.html">C++（STL・ライブラリ）</a>や<a href="../prog_lang/java_lib_thread.html">Java（マルチスレッド）</a>も参照のこと。</p>
+
+<h2>Pスレッド (pthread_create)</h2>
+<p>Linuxでスレッドを作るためには、pthread_create(3)関数を利用する。UNIXではこのpthreads（Pスレッド、POSIXスレッド）が標準的なスレッドAPIとして用いられる。LinuxではNPTL (Native POSIX Threads Library)で実装されている。</p>
+<p>pthreads関係の各関数は複雑だが、以下にmanpageがある。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man7/pthreads.7.html">man pthreads</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/pthread_create.3.html">man pthread_create</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.19編集</p>
+</div>
+
+<h2>プロセスとスレッドの違い</h2>
+<p>一般に、複数のプロセスを作成・破棄するよりも、単一のプロセスの中で複数のスレッドを作成・破棄するほうが、軽量かつ効率的でパフォーマンスがいい。このため、スレッドは「軽量プロセス」などと呼ばれる。</p>
+<p>また、プロセス同士がデータを共有するには、共有メモリのようなIPC（プロセス間通信）の機構を使う必要があるのに比べて、単一プロセスの中でそれぞれのスレッドからデータを共有するのは容易である。</p>
+<p>マルチスレッドの欠点として言えるのは、設計や実装が複雑になること。高度なマルチスレッドアプリケーションは、複雑な設計と実装が必要であるため、開発が困難になり、バグを生み出す温床となってしまう。</p>
+<p>マルチスレッドでプログラミングを行う場合、プログラムに同期や排他制御・ロック、割り込みのような処理をきちんと記述し、マルチスレッド環境で実行しても問題のない「スレッドセーフ」なアプリケーションを実装する必要がある。</p>
+<p>（一部の記述で放送大学「コンピュータの動作と管理 ('17)」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.03.28</p>
+</div>
+
+<h1>メモリ管理</h1>
+<h2>mallocの使い方</h2>
+<p>通常のC言語の配列は要素数が固定されており、動的に要素数を決めたり、後になってからサイズを変更することができない。</p>
+<p>これに対してmalloc(3)で動的に確保された配列は、要素数を動的に決められるし、realloc(3)によって後になってからサイズを変更できる。</p>
+<p>malloc()の使い方は、</p>
+<pre class="prettyprint">
+int *mem;
+mem = (int *)malloc(sizeof(int) * 20);
+</pre>
+<p>のように、配列のサイズを指定したmalloc()関数を実行し、その返り値を型キャストして配列のポインタに代入する。</p>
+<p>（<a href="http://www.me.tokushima-u.ac.jp/~miw/wadai/IP3/Tips/Array2.html">配列の使い方 - 徳島大学大学院ソシオテクノサイエンス研究部 - 三輪昌史</a>より引用。）</p>
+<div class="edit_date">
+<p>2023.01.18編集</p>
+</div>
+
+<h2>mallocの注意点</h2>
+<p>malloc()を使って動的に生成したメモリ領域は、使わなくなった段階で必ずfree(3)で解放すること。そうでなければメモリリークが起きてしまう。</p>
+<p>malloc()を使う時には、エラーチェックをきちんとしましょう。もし、システムのメモリが使い果たされた場合など、正常にメモリを確保できなかった場合、malloc()はNULLを返します。</p>
+
+<h2>mallocとbrk</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a>を参考に執筆しました。）</p>
+<p>UNIXには、ヒープ領域と呼ばれるメモリ領域がある。これはmalloc()やcalloc()で管理されるメモリ領域のことで、プログラム実行中に領域の大きさが変わることがある。</p>
+<p>calloc()は、領域を確保する時にゼロクリアする。また、free()は領域を解放する。</p>
+<p>malloc()とfree()を繰り返していると、ヒープのメモリ領域がフラグメンテーションする原因となることがある。</p>
+<p>また、brk(2)はデータセグメントのサイズを変更するシステムコール。malloc()の内部において、brk()とmmap()システムコールが呼ばれるようになっている。注意点として、同じプログラムでmalloc()とbrk(), sbrk()を同時に使うことはできない。malloc()は自分自身以外がbrk()やsbrk()を使わないことを前提として実装されているためである。</p>
+
+<h2>malloc系のAPI</h2>
+<p>malloc()やbrk()とそれに属するAPIについては以下にmanpageがある。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/malloc.3.html">man malloc</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/brk.2.html">man brk</a></li>
+</ul>
+
+<h2>動的なメモリ割り当てについて</h2>
+<p>動的なメモリ割り当てについては、<a href="../prog_lang/c_pointer.html">C言語（配列とポインタ）</a>も参照のこと。</p>
+
+<h1>Linuxカーネルと並列処理</h1>
+<h2>Linuxカーネルのマルチタスクの仕組み</h2>
+<p><a href="linux_kernel_proc.html">Linuxカーネルの世界観（プロセス）</a>を参照のこと。</p>
+
+<h2>並列処理</h2>
+<p><a href="../prog_lang/parallel.html">並列処理</a>を参照のこと。</p>
+
+<h2>シグナル・IPC</h2>
+<p><a href="linux_kernel_signal.html">Linuxカーネル（シグナル）</a>や<a href="linux_kernel_ipc.html">Linuxカーネル（IPC）</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JavaScript関連の世界観A（戯言） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaScriptの世界観A（戯言）</h1>
+<p>JavaScriptによるプログラミングに関する世界観A（戯言）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="javascript.html">JavaScript（１．一般）</a></li>
+<ul>
+<li><a href="javascript_intro.html">JavaScript入門</a></li>
+<li><a href="javascript_dom_canvas.html">２．DOM/Canvas</a></li>
+<li><a href="javascript_prototype.html">３．プロトタイプチェーン</a></li>
+</ul>
+<li><b>A．戯言</b></li>
+</ul>
+<p><a href="javascript_framework.html">JavaScriptフレームワーク</a>や<a href="jquery.html">jQuery</a>や<a href="../linux/mozilla.html">Mozilla</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>JavaScriptの特徴</h1>
+<h2>JavaとJavaScriptは別物</h2>
+<p>JavaとJavaScriptは、同じ「Java」という名前を冠していますが、両者は別物です。</p>
+<p>元々JavaScriptはNetscapeによってブラウザ上でライブに実行されるスクリプトとして作られたもので、当初はLiveScriptという名前が付けられていましたが、当時Javaを開発していた会社であるSunとの業務提携により、Javaという名前をつけてJavaScriptという名称になりました。</p>
+<p>今ではNetscapeという会社は無くなり、後継のオープンソースなWebブラウザの開発元はMozilla.orgになりましたし、ECMAという標準化団体によってECMAScriptというJavaScriptの標準が定められていますが、Javaとは全く別の言語です。</p>
+<p><a href="java.html">Java</a>や<a href="../unix/sun.html">Sun</a>も参照のこと。</p>
+
+<h2>JavaScriptはWebでは必須だが、機能などが貧弱な側面も</h2>
+<p>現在、JavaScriptはWebでは必須の言語となっています。それは、サーバーサイドではできないクライアントサイドの処理を行うために、必ずブラウザで用意されているのはJavaScriptだからです。</p>
+<p>ですが、ブラウザはそもそもHTMLをレンダリングして観覧するためのものであり、言語処理系がメインのソフトではありません。そのため、JavaScriptの機能は、他の言語に比べると貧弱で、性能や動作も遅いです。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0">Webプログラミング - Wikipedia</a></li>
+</ul>
+
+<h2>最先端技術が多い</h2>
+<p>JavaScriptには、Webの最先端技術が多いです。特に、jQueryやNode.jsやVue.jsやReactが広く使われており、最近では必ずしも「機能が貧弱」であるとは言えず、むしろ「さまざまなAPIを使ってさまざまな高度なやり方ができる言語」になりました。</p>
+<p>JavaScriptと一言に言っても、どの技術を利用するかによって、記述される言語要素や概念が全く違うのです。</p>
+<p>JavaScriptは、最先端のWeb技術を学びたい「ギーク」には面白いでしょうが、一般のエンジニアにとっては、「今まで学んだJavaScriptの技術がもう古いものになっている」という状況になりかねません。</p>
+<p>よって、一部のJavaScriptオタクの間で（特にQiitaなどで）さまざまな技術知識を共有するだけで、実際の開発には実績がなく使えない、ということも多いです。</p>
+<p>ですが、もともとのJavaScriptは単純で、ホームページの作成などに使える、Webブラウザという名前の言語処理系が一番広く広まっている言語であり、また今一番熱い言語であると言えます。基本を知っておくことは無駄にはなりませんし、GoogleやFacebookなどの「超最先端企業」に勤めたいとか、最先端の研究がしたい人には、基本的な技術要素を知っておくと、IT業界のトレンドが良く分かるようになります。</p>
+
+<h1>主な用途</h1>
+<h2>リッチなWebサイトを作る</h2>
+<p>ブラウザ上で動くスクリプト言語であることから、Googleなどがしているように、ブラウザ上でリッチなWebアプリケーションを作るために使われる。</p>
+
+<h2>イベント駆動</h2>
+<p>JavaScriptでイベント駆動のプログラミングをすることで、サーバーの性能が高まるとされている。</p>
+<p>従来では他の言語が使われていた領域でも使われるようになってきている。</p>
+
+<h1>クライアントサイドの処理</h1>
+<h2>CGIとJavaScriptの違い</h2>
+<p>CGIでは、サーバー側でプログラムを実行し、その結果をブラウザに表示して、そこからサーバー側にリクエストを行う際でも、常にサーバー側（サーバーサイド）でプログラムが実行される。</p>
+<p>だが、JavaScriptは、HTMLのデータを受け取ってきた後で、ブラウザ側（クライアントサイド）でプログラムを実行する。</p>
+<p>JavaScriptでは、掲示板やSNSのようなプログラムではなく、グラフィックスやAjaxなどの技術を用いて、「豪華な見た目のWebサイト」を作ることができる。</p>
+
+<h2>JavaScript</h2>
+<p>クライアントサイド（Webブラウザ側）のプログラミングを書き込む技術・言語。</p>
+<!--<p><a href="../prog_lang/javascript.html">JavaScript（１．一般）</a>を参照のこと。</p>-->
+
+<h2>jQuery</h2>
+<p>JavaScriptをもっと簡単に、デザイナブルにしたようなフレームワーク。<a href="jquery.html">jQuery</a>を参照のこと。</p>
+
+<h2>Ajax</h2>
+<p>JavaScriptで動的なサーバーとの非同期通信を行う技術。Google Mapsなどが有名。<a href="ajax.html">Ajax</a>を参照のこと。</p>
+
+<h2>WebAssembly</h2>
+<p><a href="wasm.html">WebAssembly</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>クライアントサイドでもJavaScript以外で開発できるようなブラウザを</h2>
+<p>現在、WebデザイナーやWebアプリケーションエンジニアが使える言語は、サーバーサイドならPerlからRubyまでたくさんありますが、クライアントサイドではJavaScriptしかありません。</p>
+<p>僕は、クライアントサイドでも、JavaScript以外で開発できるような、そんなブラウザを作ってほしいと思います。</p>
+<p>GoogleのJavaScript代替言語にDartがありますが、これはJavaScriptと同じようにエンジンがGoogle Chromeに搭載されるという噂がありました。また、サーバーサイドでもDartが使えるようになるという声もありました。そのような世界になってほしいです。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>MySQL関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>MySQLの世界観</h1>
+<p>MySQLによるデータベース操作に関する世界観です。<a href="db.html">データベースの世界観</a>と<a href="sql.html">SQLの世界観</a>も参照のこと。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>MySQL</b></li>
+<ul>
+<li><a href="mysql_basic.html">A．基本</a></li>
+<li><a href="mysql_admin.html">B．管理と設定</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>MySQL</h1>
+<h2>MySQLとLAMP</h2>
+<p>LinuxでWebサービスを構築する時に使われるのが、Linux + Apache + MySQL + Perl/PHP/PythonというLAMPスタック。</p>
+<p>これはインターネット界では事実上の標準のようになっていて、MySQLは多くのPHPスクリプトなどから呼び出される形で使用する。</p>
+<p>また、PHPアプリケーションによってはMySQLがなければ動かないものもある。たとえばWordPressやMediaWikiなどがそれに当たる。</p>
+<p>もちろんPerl/CGIやPHPでデータファイルに書き出すこともできるが、MySQLを使うことでプログラムがより堅固かつ管理しやすくなる。</p>
+<p>MySQLでは安全かつ高速に大量のデータを取り扱うことができる。</p>
+<p>また、データの管理にデータベース管理システムを使うことで、全てのデータを一元管理しながらテーブルごとに分類することができる。たとえばとても大量のデータがあったとして、それらのデータを一元的な表で管理し、ひとつのSQLクエリで全てのデータベースからデータを検索できる。まさにこれが「データベース」である。</p>
+<p>またMySQLが物理的なデータベースとWebサービスとの仲介役となり、実際のデータベースが巨大なサーバーであっても（なったとしても）スケーラブルに対応できる。</p>
+<p>PHPからMySQLを操作する時は、SQL文とPDOオブジェクトを使う。</p>
+<p>また、最近ではRuby on RailsのようなWebフレームワークも存在し、こうした場合はMVCのMに当たるModelでデータベースを操作する。この際にもMySQLを使用できる。</p>
+
+<h2>プログラムとデータベース</h2>
+<p>データベースを使う際のメリットとして、特にMySQLなどの軽量データベースに言えるのが、プログラムから操作しやすいということ。</p>
+<p>ファイルだと、いちいちテキスト単位で解析しなければならない。データベースを使うことで、簡単にレコードを指定位置に挿入したり、検索したりできる。</p>
+<p>また、頻繁に更新しても壊れないため、ネットワーク上でさまざまな人々によって頻繁に更新される掲示板のような用途に優れている。</p>
+<p>（自分の書いたFacebookより。）</p>
+
+<h2>MySQLの利用に適した場面</h2>
+<p>Perlのデータなどでは、以下のように&lt;&gt;を使って、</p>
+<pre>
+キャラクター名&lt;&gt;レベル&lt;&gt;経験値&lt;&gt;お金&lt;&gt;ヒットポイント&lt;&gt;攻撃力&lt;&gt;防御力&lt;&gt;装備アイテム
+</pre>
+<p>のようにデータをdatファイルなどにテキストで格納することがよくありますが、こうしたデータの格納にMySQLは適しています。</p>
+<p>また、MySQLは安全なトランザクション処理を実装しているため、頻繁に更新しても壊れません。そのため、不特定多数から頻繁に更新されるWebサーバ上の掲示板スクリプトやSNSなどの用途にも、MySQLは適しています。</p>
+
+<h1>公式</h1>
+<h2>MySQL</h2>
+<p>データーベースのMySQLについて。ApacheやPHPとともに使います。最近はMariaDBがフォークしたらしい。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MySQL">MySQL - Wikipedia</a></li>
+</ul>
+
+<h2>MariaDB</h2>
+<p>MySQLを作っていたMySQL ABがSunによって買収され、SunをOracleが買収したことで、なんとMySQLをOracleが持っているという大変な事態が生じた。</p>
+<p>今のところOracleの中でMySQLは仲良くやっているようだが、MySQLのオリジナルの作者でMySQL ABの創始者ミカエル・ウィデニウスにより、MySQLをforkして作られたのがMariaDBである。</p>
+<p>多くのオープンソースプロジェクトでは、MariaDBを正式なMySQLの後継版と位置付けている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MariaDB">MariaDB - Wikipedia</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=MySQL">MySQL - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>コンテンツ</h1>
+<h2>基本</h2>
+<p><a href="mysql_basic.html">MySQL（A．基本）</a>を参照のこと。</p>
+
+<h2>管理と設定</h2>
+<p><a href="mysql_admin.html">MySQL（B．管理と設定）</a>を参照のこと。</p>
+
+<h1>MySQLの情報</h1>
+<h2>gihyo.jpの連載</h2>
+<p>MySQLの情報を知りたい方は、gihyo.jpの以下の連載が参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/list/group/MySQL%E9%81%93%E6%99%AE%E8%AB%8B%E4%BE%BF%E3%82%8A">MySQL道普請便り 記事一覧 | gihyo.jp</a></li>
+<li><a href="https://gihyo.jp/list/group/OSS%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E5%8F%96%E3%82%8A%E5%8F%96%E3%82%8A%E6%99%82%E5%A0%B1">OSSデータベース取り取り時報 記事一覧 | gihyo.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.09</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>MySQL</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

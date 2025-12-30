@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観D（Webフレームワーク） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観D（Webフレームワーク）</h1>
+<p>Javaによるプログラミングに関する世界観（D．Webフレームワーク）です。<a href="java.html">Javaの世界観１（言語）</a>や<a href="../network/web_framework.html">Webフレームワーク</a>も参照のこと。</p>
+<!--
+<p>書籍<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a>と<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a>を参考にさせていただきました。</p>
+-->
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Webフレームワークとは</h1>
+
+<h2>JavaにおけるWebフレームワーク</h2>
+<p>Javaでも、PHPやRubyと同様にWebフレームワークを使ってWebサービスを効率的に作ることができる。</p>
+<p>だが、JavaはRuby on Railsのように、「これが絶対的標準」というWebフレームワークがない。それは、Apache Strutsという標準的なフレームワークの開発の方法がいささか不評だからである。</p>
+<p>Apache Strutsは、「オブジェクト指向のJava言語なのに、せっかくのオブジェクト指向開発環境を活かしきれていない」とよく言われている。</p>
+<p>そのため、Spring FrameworkやPlay Frameworkのようなさまざまなフレームワークが乱立している。また、Hibernateのような専門的なフレームワークを組み合わせて使うことが多く、Railsのようにひとつのフルスタックフレームワークを採用することがなかなか難しい。</p>
+
+<h2>おすすめなのはSpring MVC</h2>
+<p>ネットを見たところ、僕がおすすめするのはSpring MVCです。</p>
+
+<h1>Webフレームワーク</h1>
+<p>（<a href="https://blog.codecamp.jp/java-framework-5">Javaのフレームワークとは何か？おすすめ5つを徹底解説！ - Tech2GO</a>より。）</p>
+
+<h2>Java EE</h2>
+<p>Java標準のフレームワーク。</p>
+<p>J2EEのサーブレット技術だけでもWebアプリケーションを開発することはできるが、下にあるような著名なWebフレームワークを使うことで、MVCなどに基づく生産的・効率的なWebアプリケーションの開発ができる。</p>
+<p>後日注記：Java EEはオープンソース化されてEclipse財団に寄贈され、Jakarta EEに名称変更になりました。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Jakarta_EE">Jakarta EE - Wikipedia</a></li>
+</ul>
+
+<h2>Apache Struts</h2>
+<p>Javaでよく使われるWebフレームワーク。ある意味では標準的だが、「Javaのオブジェクト指向の特徴を活かしきれていない」とよく批判される。</p>
+<p><a href="java_framework_struts.html">Struts</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h2>Spring Framework</h2>
+<p>JavaのWebフレームワークのひとつ。</p>
+<p><a href="java_framework_spring.html">Spring Framework</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h2>Seasar2</h2>
+<p>国産のオープンソースなJavaフレームワーク。</p>
+<ul>
+<li><a href="https://www.ossnews.jp/oss_info/Seasar2">オープンソースのフレームワーク／Seasar2とは - OSS×Cloud News - オープンソース×クラウド情報サイト</a></li>
+</ul>
+
+<h2>Hibernate</h2>
+<p>JavaでO/Rマッピングを実現するためのツール。永続化専門であり、ほかの機能はStrutsやWicketなどを組み合わせて利用する。</p>
+<ul>
+<li><a href="https://dev.classmethod.jp/server-side/java/spring-firstcontact/">第1回 はじめてのSpring Framework ｜ DevelopersIO</a></li>
+<li><a href="http://www.techscore.com/tech/Java/Others/Hibernate/index/">Hibernate | TECHSCORE(テックスコア)</a></li>
+</ul>
+<p><a href="orm.html">永続化とO/Rマッピング</a>も参照のこと。</p>
+
+<h2>Play Framework</h2>
+<p>JavaとScalaのためのRails風フレームワーク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Play_Framework">Play Framework - Wikipedia</a></li>
+<li><a href="https://www.publickey1.jp/blog/23/javascalawebplay_framework_30akkaapache_pekko.html">Java/Scalaの最新版Webアプリケーションフレームワーク「Play Framework 3.0」正式リリース。Akkaに代わりApache Pekkoを採用 － Publickey</a></li>
+</ul>
+<p><a href="java_langs_scala.html">Scala</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.11.30編集</p>
+</div>
+
+<h2>Spark Framework</h2>
+<p>Javaによるマイクロフレームワーク。</p>
+<ul>
+<li><a href="http://murayama.hatenablog.com/entry/2016/07/01/173245">フレームワーク初学者のためのSpark Framework入門 - Murayama blog.</a></li>
+</ul>
+
+<h2>JavaServer Faces (JSF)</h2>
+<p>Javaによるコンポーネントベースのフレームワーク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/JavaServer_Faces">JavaServer Faces - Wikipedia</a></li>
+</ul>
+
+<h2>Wicket</h2>
+<p>Javaフレームワークの1つ。</p>
+<p>StrutsのようなJavaらしさを活かしきれていないフレームワークと異なり、WicketはJavaのオブジェクト指向を活かすことを目指して開発されている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache_Wicket">Apache Wicket - Wikipedia</a></li>
+</ul>
+
+
+<h1>Rails風フレームワーク</h1>
+<h2>Lift (Scala)</h2>
+<p>ScalaによるRails風のWebフレームワーク。<a href="java_langs_scala.html">Scala</a>を参照のこと。</p>
+
+<h2>Grails (Groovy)</h2>
+<p>GroovyによるRails風のWebフレームワーク。<a href="java_langs_groovy.html">Groovy</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Webフレームワーク</h2>
+<p>JavaのWebフレームワークはフルスタックフレームワークではなく、用途によってさまざまなシステムを組み合わせて使う。</p>
+<p>Strutsが標準だが、多くの人々から「オブジェクト指向のJavaらしくない」と言って嫌われている。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

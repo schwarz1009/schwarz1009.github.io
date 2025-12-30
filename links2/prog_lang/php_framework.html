@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>PHP関連の世界観（４．フレームワーク） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PHPの世界観（４．フレームワーク）</h1>
+<p>PHPによるプログラミング（４．フレームワーク）に関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="php.html">PHP</a></li>
+<ul>
+<li><a href="php_lang.html">１．言語</a></li>
+<li><a href="php_db.html">２．データベース</a></li>
+<li><a href="php_security.html">３．セキュリティ</a></li>
+<li><b>４．フレームワーク</b></li>
+</ul>
+<li><a href="php_comments.html">A．戯言</a></li>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>独自のフレームワークを作る</h1>
+<h2>MVCフレームワークは自前で作ることもできる</h2>
+<p>最近、「パーフェクトPHP」という本を買いました。PHPの文法からWebアプリケーションの実践的な開発、セキュリティやPHPの機能などを網羅した、「PHPの全てと真髄が分かる本」です。</p>
+<p>僕は、この本は今まで自分の技術本の中で、一番良い本だと思います。</p>
+<p>その理由は、この本では、なんとMVCフレームワークを自前で作って、その上でツイッターのようなミニブログアプリケーションを作っていることです。</p>
+<p>MVCフレームワークを自前で作るのは、とても大変な作業だと思われるかもしれませんが、この本の作者は簡単に、とても綺麗なフレームワークを作ってしまいます。その全貌が記述されています。</p>
+<p>また、文法やテクニックの内容ではオブジェクト指向についてきちんと記述され（C++にあるようなthisやselfなどについても記載されています）、またセキュリティについて専門的でとても多くの内容が記述されています。</p>
+<p>僕が今まで買った技術本の中で、一番の良書だと思います。本当にPHPのマスターになれます。皆さんにおすすめします。Railsのようなオープンソースのフレームワークを使わなくても、きちんとしたアーキテクトがアプリケーションを設計するとはどういうことなのか、初めて分かりました。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a></li>
+</ul>
+
+<h2>MVCの基本</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
+<table class="some_tables">
+<tr><th class="min60">MVCの要素</th><th>説明</th></tr>
+<tr><td>モデル</td><td>モデルとはデータベースのこと。モデルでは、データベースのデータ処理を行う。</td></tr>
+<tr><td>ビュー</td><td>ビューとはHTMLのこと。ビューでは、HTMLをテンプレートから動的に作成して表示する。</td></tr>
+<tr><td>コントローラ</td><td>コントローラとはプログラミング言語によるアプリケーションのこと。コントローラでは、全体のアプリケーションの制御を担当する。</td></tr>
+</table>
+<div class="edit_date">
+<p>2024.11.22編集</p>
+</div>
+
+<h2>この本には技術的要素が満載</h2>
+<p>僕は、ぜひこの本を読んでほしいと思う。たとえばフロントコントローラのように、さまざまな技術的要素がでてきて、「プログラミングやアーキテクチャの構築とはどういうものなのか」ということが分かる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a></li>
+</ul>
+<p>ただし、そう言っている僕がこの本をあまり読めていない。とても難しくて、習得するには困難を極めるだろう。まず、気楽に読むのが一番いいと思う。</p>
+
+<h1>Webフレームワーク</h1>
+<h2>Laravel</h2>
+<p>PHPによるWebフレームワークのひとつで、一番人気。</p>
+<p><a href="php_framework_laravel.html">Laravel</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h2>CakePHP</h2>
+<p>PHPによるRails風のWebフレームワーク。</p>
+<p><a href="php_framework_cakephp.html">CakePHP</a>を参照のこと。</p>
+
+<h2>Slim3/Slim4</h2>
+<p>PHPによるマイクロフレームワーク。</p>
+<ul>
+<li><a href="https://qiita.com/Syo_pr/items/b55e18a8361b3ff882b5">PHP軽量FrameworkのSlim3 - Qiita</a> - 軽量フレームワークの何が良いのか、フルスタックと何が違うのかなどが書かれている。</li>
+</ul>
+
+<h2>Symfony</h2>
+<p>PHPによるWebフレームワーク。Laravelのベースとしても使われている。</p>
+
+<h2>Codeigniter</h2>
+<p>PHPによるWebフレームワーク。海外で人気。</p>
+
+<h2>その他のフレームワーク</h2>
+<p>フレームワークは雨後の筍のように新しく出ては消えていくが、2023年現在、PHPのフレームワークには他にYii、Phalcon、FuelPHP、Flight、ZendFrameworkなどがある。</p>
+<ul>
+<li><a href="https://freelance-start.com/articles/70">PHPフレームワークのまとめ【2023年版】| フリーランスエンジニア向けIT求人・案件サイト 【フリーランススタート】</a></li>
+<li><a href="https://tech-stock.com/magazine/php-framework/">2023年版 おすすめPHPフレームワーク10選！トレンドや今後の需要も解説 | 【テックストックMAGAZINE】エンジニア向けスキル・キャリア情報</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.12</p>
+<p>2025.07.13編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Webフレームワーク</h2>
+<p><a href="../network/web_framework.html">Webフレームワーク</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

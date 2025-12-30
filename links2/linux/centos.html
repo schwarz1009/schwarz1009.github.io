@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>CentOS - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>CentOS</h1>
+<p>CentOSに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="redhat.html">Red Hat（１．Red Hat）</a></li>
+<ul>
+<li><a href="fedora.html">Fedora</a></li>
+<li><a href="redhat_dnf_yum.html">２．DNF/Yum</a></li>
+<li><a href="redhat_rpm.html">３．RPM</a></li>
+<li><b>CentOS</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>CentOS</h1>
+<h2>Red Hat Linuxの無料版は無くなった</h2>
+<p>CentOSは、Red Hat社の有償のLinuxディストリビューションRHEL互換の、コミュニティによるクローン（RHELクローン）です。</p>
+<p>Red Hat Linuxは、昔から事実上の標準だったLinuxディストリビューションで、RPMという使いやすいパッケージ管理システムと、サーバーやエンタープライズからデスクトップまでの幅広い用途で使われる、米国Red Hat社によるディストリビューションでした。</p>
+<p>Red Hatは、Red Hat Linuxを無料で提供しながら、商用サポートのついた有料版のRed Hat Linuxを販売し、サポートやサブスクリプション（期間契約）でビジネスを行っていました。</p>
+<p>ですが、Red Hat Linuxは今はもう存在しません。Red Hatが、Red Hat Linuxの無料版の提供をやめ、オープンソースコミュニティによって開発される「Fedora」と呼ばれる新しいディストリビューションと、商用サポートのついたエンタープライズ版である「Red Hat Enterprise Linux」（RHEL）を柱とする、新しいモデルを始めたからです。</p>
+<p>Red Hatは、この時点でデスクトップ用途や個人の開発用途を全て「Fedora」に移管し、Red Hat社が開発・提供を行うのではなく、コミュニティベースで開発されるものとしました。</p>
+<p>また、RHELは企業やエンタープライズ向けの商用サポート版で、長期のサポートが受けられ、Fedoraでの開発成果をもとに、Red Hatが独自に改良・改善し、サポートとともに有償で提供されるものとしました。</p>
+<p>よって、この時点で、個人がRed Hatシステムを使うためには、どんなに不安定で使いものにならなくても、Fedoraを使うべきである、とRed Hatは宣告したわけです。</p>
+
+<h2>RHELもオープンソースライセンスで提供される</h2>
+<p>ですが、RHELの元になったLinuxカーネルやGNUのツールなど、多くのフリーソフトウェアは、オープンソースなライセンス、特にGPLなどで提供されています。</p>
+<p>GPLで公開されたソフトウェアを再配布する時は、同じようにGPLで提供しなければなりません。これをコピーレフトと言います。</p>
+<p>Red Hat社は、LinuxカーネルやGNUのツールを使う以上、GPLを守って、Red Hat社が開発を行った部分もGPLで提供しなければなりません。</p>
+<p>Red Hat社は、Fedoraは当然であるとしても、RHELのソースコードを、ソースRPMと呼ばれる形式でリポジトリで配布しています。ここで配布されたソフトウェアはGPLが適用され、他の誰がコピーして配布しても構いません。</p>
+<p>そのため、RHELのコードをコピーして、Red Hat社の商標など不必要な部分を削除した「RHELクローン」を作ることは、事実上可能です。</p>
+<p>CentOSは、このRHELクローンのひとつです。Red Hat社のサポートは受けられませんが、RHEL互換で、ほとんどのパッケージはRed Hat社によるRHELのパッケージと同等です。その上で、無料で配布されています。</p>
+
+<h2>RHELクローンとは</h2>
+<p>そもそも、Red Hat Linuxの段階で、Red Hat社による多くのソフトウェアはGPLで提供されていました。このため、TurbolinuxやVine Linuxなど、日本でも多くの「Red Hat派生ディストリビューション」が作られてきました。</p>
+<p>こうしたディストリビューションは、FedoraとRHELになってからも、FedoraやRHELのコードをベースにして、独自のディストリビューションを開発しています。</p>
+<p>Red Hat社がGPLに従う以上、RHELはオープンソースを保持します。そのため、RHELが登場し、人々が「Fedoraって何？」と困惑する当時から、RHELの「互換性のあるクローン」の提供は人々の間で囁かれてきました。</p>
+<p>最初のころは、White Box Enterprise LinuxというRHELクローンが人気でした。Red Hat Linuxを使っている企業のサーバーなどには、White Boxを代わりに導入したユーザーも多かったです。他にも、Scientific Linuxなど多くのRHELクローンがありました。</p>
+<p>今のRHELクローンの主流はCentOSです。CentOSはRHELのソースRPMをリビルドして、コミュニティのリポジトリで提供されています。RHELと内容は同じですが、無料で利用できます。その代わり、サポートは提供されません。ですが、セキュリティアップデートなどはRHELのソースRPMをリビルドして提供されています。</p>
+
+<h2>CentOSの用途</h2>
+<p>CentOSという名前は聞いたことがある方も多いと思います。それは、多くの書籍や入門サイトが、CentOSのシステムを前提に、CentOSのインストールから説明しているからです。</p>
+<p>これには、「RHELを使いたいが、その準備のためにCentOSを導入して管理の方法を学びたい」といった用途が考えられます。</p>
+<p>確かに、コミュニティの無料のディストリビューションを使いたいのであれば、Ubuntu Serverなどを使えばいいという話で、CentOSをわざわざ導入する必要はありません。</p>
+<p>ですが、今のLinuxを使ったビジネス市場では、RHELのシステムが事実上の標準となっています。</p>
+<p>そのため、RHELのシステムの管理に精通しておくことは、Linuxエンジニアになる上でどうしても必要なスキルになります。</p>
+<p>RHELクローンのCentOSを導入することは、</p>
+<p>１．RHELを実際に導入する前段階の準備や学習として導入する。</p>
+<p>２．Linuxエンジニアになる上で、RHELのシステムに精通し、エンジニアとして学習や習得のために、自分で勉強のために導入する。</p>
+<p>などといった利点があります。</p>
+<p>もちろん、CentOSを本当の「本番環境」に使うことはできますが、サポートは受けられませんし、他にも無料のコミュニティによるLinuxディストリビューションはあります。本当にセキュリティやスループレットや高信頼性・高可用性が必要な「エンタープライズシステム」なら話は別かもしれませんが、そうであったとしてもRHELを10万円ぐらい払って購入すればいいと僕なんかは思います。</p>
+<p>ですが、CentOSは立派な、それも「過剰なほどに信頼性のある」ディストリビューションであるため、企業のサーバーなどに使う場合には、コストを安く抑えられるでしょう。</p>
+
+<h2>CentOSでLinuxを学習する</h2>
+<p>CentOSの学習教材はネットにも書籍にもたくさんありますが、Linux認定試験のLinuCを運営している、LPI-Japanの標準教科書がおすすめです。</p>
+<ul>
+<li><a href="https://linuc.org/textbooks/linux/">Linux標準教科書</a></li>
+</ul>
+<p>上のLinux標準教科書は入門者向けの基本的な内容ですが、レベルに応じて「Linuxサーバー構築」「高信頼システム構築」「Linuxセキュリティ」「Linuxシステム管理」「オープンソースデータベース」などもあります。</p>
+<p>ダウンロードは無料で可能ですが、個人情報とメールアドレスを登録する必要があります。</p>
+<p>僕も、Linux標準教科書のPDF版をダウンロードして、今、勉強中です。</p>
+
+<h2>残念ながらCentOSは終了しました</h2>
+<p>残念ですが、CentOSは終了しました。</p>
+<p>今後はポイントリリースのCentOSは提供されなくなり、RHELのメジャーバージョンのブランチの開発版を追いかけるCentOS Streamが提供されます。</p>
+<p>つまり、FedoraからRHELの開発がRed Hatによって行われ、RHEL 8.3や8.4などのバージョンリリースが行われますが、このポイントのクローンのCentOSは提供されません。8系や9系の最新版であるCentOS Stream 8やCentOS Stream 9が提供されます。</p>
+<p>一部では「2029年5月までサポートしてもらえるはずだったのに2021年12月までしかサポートしないなんてどうしてくれるんだ」などといった激怒の声もあがっています。</p>
+<p>しかしながら、僕としては、むしろ今までの「CentOSというクローン版があるのにRed Hatを買う人なんて居るのだろうか」といった状況がなくなるため、外野席からの意見にはなりますが、LinuxコミュニティにとってはCentOSがなくなったことが逆にプラスになるのではないかと勝手に思っています。</p>
+<ul>
+<li><a href="https://qiita.com/yamada-hakase/items/1629d511ab4199d253b4">CentOSからCentOS Streamへ。CentOS終了の衝撃 - Qiita</a></li>
+</ul>
+
+<h1>CentOS後継</h1>
+<h2>AlmaLinux</h2>
+<p>AlmaLinuxはRHELクローンのひとつ。CentOSの後継的位置づけ。</p>
+<ul>
+<li><a href="https://centossrv.com/almalinux/">AlmaLinuxで自宅サーバー構築</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/AlmaLinux">AlmaLinux - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.27</p>
+</div>
+
+<h2>Rocky Linux</h2>
+<p>Rocky LinuxはAlmaLinuxと同じく、RHELクローンのひとつ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Rocky_Linux">Rocky Linux - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.27</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

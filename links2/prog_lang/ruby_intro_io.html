@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Ruby入門（３．文字列操作とIO） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Ruby入門（３．文字列操作とIO）</h1>
+<p>Ruby入門（３．文字列操作とIO）です。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%AE%E3%81%97%E3%81%84Ruby-%E7%AC%AC5%E7%89%88-%E9%AB%98%E6%A9%8B-%E5%BE%81%E7%BE%A9/dp/4797386290">たのしいRuby 第5版</a>を参考にしています。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="ruby_intro.html">Ruby入門</a></li>
+<ul>
+<li><a href="ruby_intro_basic.html">１．基本</a></li>
+<li><a href="ruby_intro_class.html">２．クラス</a></li>
+<li><b>３．文字列操作とIO</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>文字列操作</h1>
+<h2>文字列処理</h2>
+<p>文字列は"～"あるいは'～'で作る。'～'でくくった場合は、変数名や#{}による式展開を行わず、\nなどの特殊文字も変換しない。</p>
+<p>文字列は変数に格納でき、メソッドの引数に渡すことができる。文字列は配列との共通点が多く、さまざまな配列に用いる操作を使うことができる。</p>
+<p>また、Rubyでは+で文字列をつなげたり、==や!=で比較できる。大小比較をすると文字コードの順番に決まる。</p>
+
+<h2>文字列の長さを知る</h2>
+<p>文字列の長さは、lengthメソッドやsizeメソッドを使って得られる。</p>
+<p>バイト数を得たい時はbytesizeメソッドを使う。</p>
+<p>また、empty?メソッドで、文字列の長さが0かそうでないかを調べられる。</p>
+
+<h2>改行文字の削除</h2>
+<p>改行文字はchompやchomp!で削ることができる。</p>
+<pre class="prettyprint">
+s_hoge = "Hoge\nFuga\nFoo\nBar\n"
+s_hoge.each_line do |line|
+  line.chomp!
+  print line
+  print ':'
+end
+</pre>
+
+<h2>文字列の全ての行に対する操作</h2>
+<p>文字列の全ての行に対する操作は、.each_lineメソッドにブロックを渡すことで実現できる。</p>
+<pre class="prettyprint">
+s_hoge = "Hoge\nFuga\nFoo\nBar\n"
+s_hoge.each_line {|line| print line }
+</pre>
+<p>.lines.to_aを使えば、文字列を配列に変換できる。</p>
+<pre class="prettyprint">
+s_hoge = "Hoge\nFuga\nFoo\nBar\n"
+a_hoge = s_hoge.lines.to_a
+a_hoge.each {|item| item.chomp! }
+p a_hoge
+#=&gt; ["Hoge", "Fuga", "Foo", "Bar"]
+</pre>
+<ul>
+<li><a href="https://ref.xaio.jp/ruby/classes/string/each_line">each_line (String) - Rubyリファレンス</a></li>
+<li><a href="https://docs.ruby-lang.org/ja/latest/method/String/i/each_line.html">String#each_line (Ruby 3.1 リファレンスマニュアル)</a></li>
+</ul>
+
+<h2>長い文字列</h2>
+<p>"や'を含む文字列：</p>
+<pre class="prettyprint">
+s_hoge = %Q{「''」だろうが「""」だろうがなんでもあり。}
+s_assy = %q|Assy said, "How are you, Schwarz?", and Schwarz said, "I'm good, Thank you."|
+</pre>
+<p>また、Perl風のヒアドキュメントを使うこともできる。</p>
+<pre class="prettyprint">
+print(&lt;&lt;"EOB")
+Assy makes a robot, called "Schwarz".
+It will be the next life on the universe.
+EOB
+</pre>
+<p>EOBの位置がインデントを醜くさせると思うなら、&lt;&lt;ではなく&lt;&lt;-を使えば、EOBの前にある空白やタブが無視される。</p>
+
+<h2>文字列の分割</h2>
+<p>文字列はsplitメソッドで指定した文字（以下の例では:）で分割できる。</p>
+<pre class="prettyprint">
+s_inoue = "井上:茜:女性:20歳:大学生"
+a_inoue = s_inoue.split(/:/)
+p a_inoue
+#=&gt; ["井上", "茜", "女性", "20歳", "大学生"]
+</pre>
+
+<h2>検索と置換</h2>
+<p>文字列を検索するには、indexあるいはrindexを使う。</p>
+<p>indexは左から、rindexは右から文字列を検索し、見つかった場合は先頭部分のインデックスを、見つからなかった場合はnilを返す。</p>
+<pre class="prettyprint">
+s_hoge = "hoge is an animal."
+p s_hoge.index("hoge")
+#=&gt; 0
+</pre>
+<ul>
+<li><a href="https://uxmilk.jp/24005">Rubyで文字列の検索をする方法：index, rindex | UX MILK</a></li>
+</ul>
+<p>含まれているかどうかだけを調べたいならinclude?メソッドを使う。</p>
+<p>置換はsubメソッドとgsubメソッドを使う。</p>
+<p>また、trメソッドを使うことでも文字列を置換できる。UNIXのtrコマンドと同様に、"a-z"を"A-Z"のように文字をまとめて指定して置換できる。</p>
+
+<h2>コマンド置換</h2>
+<p>`コマンド`はコマンド置換と呼ばれ、コマンドを実行してその実行結果として出力された文字列を得ることができる。</p>
+<p>irb（対話型のRubyプロンプト）などで使うと便利である。</p>
+
+<h1>エンコーディング</h1>
+<h2>マジックコメント</h2>
+<p>Rubyスクリプト自体のエンコーディングは、以下のようにスクリプトの最初の行あるいは#! ～で始まる際には二番目の行に記述する。これをマジックコメントという。</p>
+<pre class="prettyprint">
+# encoding: utf-8
+</pre>
+<p>また、Emacsやvimと共通化できるように、
+<pre class="prettyprint">
+# -*- coding: utf-8 -*-
+# vim:set fileencoding=utf-8:
+</pre>
+<p>などでも指定できる。</p>
+
+<h2>スクリプトエンコーディングと内部・外部エンコーディング</h2>
+<p>エンコーディングには、スクリプトエンコーディング、内部エンコーディング、外部エンコーディングがある。</p>
+<table class="some_tables">
+<tr><th class="min60">エンコーディング</th><th>説明</th></tr>
+<tr><td>スクリプトエンコーディング</td><td>Rubyスクリプトのエンコーディング。</td></tr>
+<tr><td>内部エンコーディング</td><td>外部から入力して受け取ったデータのエンコーディング。</td></tr>
+<tr><td>外部エンコーディング</td><td>外部に出力として吐き出すデータのエンコーディング。</td></tr>
+</table>
+<p>エンコーディングの基本はEncodingクラス。エンコーディングの互換性を調べたり、デフォルトの外部・内部エンコーディングを調べたりできる。</p>
+<p><a href="digital.html">デジタル情報</a>も参照のこと。</p>
+
+<h2>文字コード変換</h2>
+<p>文字列の文字コード変換はString#encodeメソッドあるいはString#encode!メソッドを使う。</p>
+<pre class="prettyprint">
+# encoding: EUC-JP
+euc_str = "ほげほげ"
+utf8_str = euc_str.encode("utf-8")
+</pre>
+<p>文字列のエンコーディングを調べるにはString#encodingメソッドを使う。</p>
+
+<h2>入出力の際のエンコーディング指定</h2>
+<p>IOオブジェクトを使って入出力を行う時にエンコーディング処理を行うには、IO#external_encoding（外部エンコーディング）、IO#internal_encoding（内部エンコーディング）、IO#set_encoding（エンコーディングをIOに指定）を使う。</p>
+<p>以下はIO#set_encodingメソッドを使ったエンコーディング設定の例。エンコーディングは"外部エンコーディング:内部エンコーディング"の形式の文字列を指定する。</p>
+<pre class="prettyprint">
+$stdin.set_encoding("EUC-JP: UTF-8");
+</pre>
+
+<h1>パターンパッチング</h1>
+<h2>正規表現</h2>
+<p>RubyではPerlライクな正規表現を使うことが可能です。</p>
+<p>マッチした文字列は、自動で$1などの変数に格納される。()を使った場合、マッチ部分が複数ある時は$1, $2, $3などとなる（キャプチャ）。たとえば、</p>
+<pre class="prettyprint">
+s_hoge = "hooooooge fuuuga"
+/ho*ge/ =~ s_hoge
+print "マッチした部分: ", $1, "\n"
+</pre>
+<p>if文で使う場合：</p>
+<pre class="prettyprint">
+if /ho*ge/ =~ s_hoge
+  # マッチした場合に行う処理
+else
+  # マッチしなかった場合に行う処理
+end
+</pre>
+<p>正規表現については<a href="../linux/regex.html">正規表現</a>のページを参照のこと。</p>
+
+<h2>subメソッドとgsubメソッド</h2>
+<p>以下は最初にマッチした部分だけを置換するsubメソッドと、マッチする全ての部分を置換するgsubメソッド。</p>
+<pre class="prettyprint">
+str = "わたしは猫のクロ。真っ黒な猫だ。"
+p str.sub(/クロ/, 'ゴンタ')   #=&gt; "わたしは猫のゴンタ。真っ黒な猫だ。"
+p str.gsub(/猫/, '犬')  #=&gt; "わたしは犬のクロ。真っ黒な犬だ。"
+</pre>
+<p>scanメソッドはgsubメソッドと同様、パターンにマッチした部分を取り出す。gsubメソッドと違い、置換はせず、取り出すだけを行う。</p>
+
+<h1>IO</h1>
+<h2>標準入力と標準出力と標準エラー出力</h2>
+<p>プログラムを起動すると、標準入力、標準出力、標準エラー出力の3つが割り当てられる。</p>
+<p>標準入力は、端末からキー入力を受け取る。組み込み定数はSTDIN、グローバル変数は$stdin。レシーバを指定せずにgetsなどのメソッドを実行した場合、標準入力から入力する。</p>
+<pre class="prettyprint">
+$stdin.each_line do |line|
+  # lineに対する処理をここに書く
+end
+</pre>
+<p>標準出力は、端末に文字を出力する。組み込み定数はSTDOUT、グローバル変数は$stdout。レシーバを指定せずにputs, print, printfなどのメソッドを実行した場合、標準出力に文字を表示する。</p>
+<pre class="prettyprint">
+$stdout.puts "assy", "schwarz", "zaidou"
+</pre>
+<p>また、標準エラー出力の組み込み定数はSTDERR、グローバル変数は$stderr。</p>
+
+<h2>ファイル入出力とブロック</h2>
+<p>ファイルの入出力は、IOクラスを継承した派生クラスのFileクラスで行える。</p>
+<pre class="prettyprint">
+File.open("hoge.txt") do |file|
+  file.each_line do |line|
+    # lineに対する処理をここに書く
+  end
+end
+</pre>
+<p>このように書くことも出来ます。</p>
+<pre class="prettyprint">
+File.open("hoge.txt") do |io|
+  while line = io.gets
+    # lineに対する処理をここに書く
+  end
+end
+</pre>
+<p>Rubyではブロックを使うことで直感的なコードを書くことが出来ます。</p>
+
+<h2>ファイルオープン</h2>
+<p>ファイルを開いて新しいIOオブジェクトを得るには、</p>
+<pre class="prettyprint">
+io = File.open(file, mode)
+</pre>
+<p>あるいは</p>
+<pre class="prettyprint">
+io = open(file, mode)
+</pre>
+<p>とする。</p>
+<p>モードには、"r", "r+", "w", "w+", "a", "a+"を指定する。</p>
+<p>通常は読み込み専用ならr、書き込み専用ならw、追記ならaを指定する。読み込みと書き込みを両用する場合にはr+を指定する。wやw+を指定すると、既にファイルが存在する場合に内容を消去する。</p>
+
+<h2>IO関連のその他のAPI</h2>
+<p>その他のAPIは以下のようになる。</p>
+<table class="some_tables">
+<tr><th class="min60">API</th><th>記法</th></tr>
+<tr><td>io.close</td><td>ファイルを閉じる。</td></tr>
+<tr><td>io.closed?</td><td>閉じられたかどうかを調べる。</td></tr>
+<tr><td>File.read</td><td>ファイルを一気に全て読み込む。</td></tr>
+<tr><td>io.gets<br>io.each<br>io.each_line<br>io.readlines</td><td>1行読み込む。</td></tr>
+<tr><td>io.lineno</td><td>行ごとに読み込んだ際に記録される「今どれだけ読み込んだか」の記録を取得する。</td></tr>
+<tr><td>io.getc</td><td>一文字ずつ読み込む。</td></tr>
+<tr><td>io.ungetc</td><td>読み込みを一文字元に戻す。</td></tr>
+<tr><td>io.read</td><td>サイズを指定して読み込む。</td></tr>
+<tr><td>io.each_char</td><td>読み込んだ文字に一文字ずつブロックの処理をかける。</td></tr>
+<tr><td>io.print</td><td>文字列を出力する。</td></tr>
+<tr><td>io.puts</td><td>改行文字を加えて出力する。</td></tr>
+<tr><td>io.printf</td><td>書式を指定して出力する。</td></tr>
+<tr><td>io.write<br>io &lt;&lt; str</td><td>これらを使ってでも文字列を出力できる。</td></tr>
+</table>
+<p>C言語と同様にsprintfメソッドを使うことで、出力せずにフォーマット指定だけをして、変数などを書式指定した文字列に変換できる。</p>
+<p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

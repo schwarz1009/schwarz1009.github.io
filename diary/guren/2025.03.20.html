@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>2025-03-20 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" type="text/css" href="style_guren.css">
+<style type="text/css">
+#tab_2025_03_li {
+    background: white;
+}
+</style>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<div class="guren">
+<p><a href="../../index.html">ホームページに戻る</a> | <a href="index.html">紅蓮と黄金の出会う場所に戻る</a></p>
+<div id="guren_tab"></div>
+<script type="text/javascript" src="script_guren.js"></script>
+<script type="text/javascript">
+ChangeTab('tab_2025_03');
+</script>
+<div id="toc"></div>
+
+<h1>2025-03-20</h1>
+<h2>systemdとGNOMEを使いやすくすればいい</h2>
+<p>今日は、Linuxとオープンソースの未来について、よく考えた。</p>
+<p>結論から言うと、systemdとGNOMEを使いやすくすればいい。</p>
+<p>最近のLinux業界は、カーネルよりもinitシステムのほうが刷新されている。すなわち、SystemV initではなく、systemdが使われるようになっている。</p>
+<p>このことについて言えば、昔のSystemV initに戻る可能性は少ない。なぜなら、IntelのCPUがシングルコアで高速化しなくなってしまって、マルチコアになってしまった結果、並列処理ができない昔のSystemV initは遅すぎるからだ。</p>
+<p>systemdについて、さまざまな批判はある。だが、systemdがほかのものに変わる可能性は少ない。代替システムは多数開発されているが、これといって決定的なものはなく、systemdよりも優れた並列処理の可能なinitシステムは存在しない。</p>
+<p>だが、systemdはいろいろとみんな嫌いだ。それは簡単に言えば、開発者の設計方針が、UNIX的でないとか、スマートでないとか、そういうものだ。</p>
+<p>だが、Linuxのシステムはみんなで作っている。みんなで作るということが基本だから、systemdについても、リーナス・トーバルズはそれが最悪のクソでない限り採用する。リーナス本人が「systemdは嫌だ」と思わない限り、systemdは使われ続ける。</p>
+<p>だから、systemdをほかに取り換えるのは現実的ではない。</p>
+<p>現実的なのは、systemdを改良して、より使いやすくすることであり、それが第一の結論である。すなわち、もっとsystemdを改良し、改善するしかない。それが今のLinuxにとって必要な「カーネル以外の貢献」である。</p>
+<p>そもそも、僕が馬鹿なのは、何も考えずにカーネルの開発をしようとしている。だが、カーネルは十分成熟していて、これ以上開発者は要らない。リーナスの書いたコードを書き換える必要がない限り、誰も書き換えない。アラン・コックスのようにサブシステムをまるごと付け替える必要は、今の成熟したLinuxカーネルにはない。</p>
+<p>だから、カーネルではないほかのシステムを開発したほうがいい。そして、その代表はsystemdである。</p>
+<p>同時に、カーネル以外のLinuxとして、ユーザーの一番手に触れる部分はデスクトップ環境だ。これについては、KDEはQtという長らくフリーではないツールキットを使っていた。QtをGTKに取り替えることは現実的ではない。それはコンパイラをGCCからLLVMに取り替えるよりもはるかに難しい。</p>
+<p>だが、KDEはGNOMEよりも使いやすい。そもそも、GNOMEは標準であるにもかかわらずあまりに使いづらい。だから、GNOMEを改良して、より使いやすくすればいい。それが第二の結論である。</p>
+<p>最後に、ほかに改良できる分野があるとしたら、データベースぐらいではないか。そして、データベースについて言えるのは、スピードだけを向上させるのでも、信頼性だけを向上させるのでもなく、どちらもバランスよく向上させる必要がある。それはコンパイラやカーネルも同じだ。FreeBSDはGCCからLLVMへと移行したが、LinuxはまだGCCを使っている。スピードだけを目指すのでも、信頼性だけを目指すのでも、これらのシステムはよくならない。どちらもバランスよく改善する必要があるのである。</p>
+<p>それから、システムソフトウェアの開発は目指す必要はない。それらシステムの開発は、とても難しくて、初心者が簡単においそれとはできない。もっと、アプリケーションの開発をしたほうがいい。だから、GNOMEのさまざまなソフトウェアの開発をしたほうがいい。それが第三の結論である。</p>
+
+<h2>佐々木朗希のデビュー戦</h2>
+<p>昨日は時間の都合で佐々木朗希の登板を見ることはできなかったが、今日、Yahoo!ニュースで佐々木朗希についての批判的な記事を読んだ。</p>
+<p><a href="https://news.yahoo.co.jp/articles/7c75d4e5b6908a247c4c277b750b95135b39f760">「非常に不安定。ひどい投球」佐々木朗希のデビュー登板に米識者ら厳しい評価「衝撃的だが、制球は...」一方で「ダメージを最小限に抑えた」の声も（THE DIGEST） - Yahoo!ニュース</a></p>
+<p>ただ、僕が思うのは、佐々木朗希はあまりに若武者のように初々しいために、まるでイチローの若い頃を見ているような気分になる。</p>
+<p>確かにデビュー戦は酷かったようだが、それでも山本由伸のデビュー戦よりはマシだと思う。今後、ストレートとスプリットを磨いて、ほかの球種も開発して、猛練習と体力アップをして頑張ればいいと思う。</p>
+
+<h2>経験から場の歴史を知れ</h2>
+<p>経験から、場の歴史を分かりなさい。</p>
+<p>自らの実体験から、世界の人々の営みや活動や場の歴史を知り、そして世界そのものがどこから来たのかということを分かりなさい。</p>
+<p>歴史を経験から分かること、場所における時間的な実存から世界の営みを分かりなさい。</p>
+<p>人々の言っていることは、すべて「助けを求める叫び声」だと思いなさい。世界すべての叫び声を聞いて、この世界を真にどうすればいいか、どのように変えればどのようになるのか、ということを実感的に知り、「世界は必ず変えられる」と確信しなさい。</p>
+<p>それらが、昔の僕が考えたことだ。以上で、僕の過去に考えたことは、すべて終わりだ。</p>
+<p>最後に、ここでもうすべてが終わりになる。なぜなら、これによって昔の世界が復活した。今から、つまらない滅びた世界が終わり、昔の世界に戻る。暗闇の地獄が終わって、世界は救われた。</p>
+
+</div> <!--guren-->
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

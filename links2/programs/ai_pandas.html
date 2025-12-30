@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Pandas関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">AI・自作プログラムの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/programs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Pandasの世界観</h1>
+<p>Pandasに関する世界観です。<a href="ai_python.html">PythonでAI入門</a>や<a href="ai.html">人工知能・AI・機械学習・データマイニング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Pandas</h1>
+<h2>Pandasとは</h2>
+<p>Pandasはデータ解析用のライブラリ。</p>
+<p>実際、データマイニングやデータサイエンスをしたいなら、Pandasが便利です。</p>
+<ul>
+<li><a href="https://deepage.net/features/pandas-numpy.html">PandasとNumPyの違いと使い分け方 - DeepAge</a></li>
+<li><a href="https://qiita.com/ysdyt/items/9ccca82fc5b504e7913a">データ分析で頻出のPandas基本操作 - Qiita</a></li>
+<li><a href="https://aiacademy.jp/media/?p=152">【初心者向け】データ分析で必須のPandasを入門しよう！ | AI Academy Media</a></li>
+</ul>
+
+<h2>Pandasでデータ解析</h2>
+<p>データフレームという二次元のラベル付きデータ構造を使いながら、表形式のデータ分析ができる。CSVやExcel、RDBMSとの連携が可能で、SQLなどのデータベース管理システムでできることもできる。ピボット処理や統計計算も可能。
+<p>SQLやExcelとも、Railsでやるマイグレーションとも似ているところがある。僕個人の感想としては、UNIXのツールと同様のメソッドをPythonから使う感覚である。</p>
+<ul>
+<li><a href="https://aiacademy.jp/media/?p=152">【初心者向け】データ分析で必須のPandasを入門しよう！ | AI Academy Media</a></li>
+</ul>
+
+<h2>PandasとMatplotlibの例</h2>
+<p>Pandasの詳細を知りたい方は、<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>という書籍を読むことがおすすめです。</p>
+<p>この本では、Pythonの丁寧な解説とともに、さまざまなPythonの外部モジュールの解説がなされており、NumPy、Pandas、Matplotlib、scikit-learnなどを使ったデータ解析・機械学習の簡単な説明を理解することができます。</p>
+<p>具体例として、まず、PandasとMatplotlibをインストールします。これはpipあるいはAnacondaで導入します。</p>
+<p>たとえば、データフレームをCSVファイルから読み込み、物理の点数が80点以上のものを抽出するには以下のようにします。</p>
+<pre class="prettyprint">
+import pandas
+science_score = pandas.read_csv('science_score.csv', encoding='utf_8')
+science_score.query('Physics &gt;= 80')
+</pre>
+<p>また、Matplotlibを用いて物理の点数のヒストグラムを表示するには以下のようにします。</p>
+<pre class="prettyprint">
+import pandas
+from matplotlib import pyplot
+science_score = pandas.read_csv('science_score.csv', encoding='utf_8')
+pyplot.figure('Physics')
+pyplot.hist(science_score['Physics'])
+pyplot.savefig('physics_hist.png')
+pyplot.show()
+</pre>
+<p>（詳しくは書籍<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を読んでください。）</p>
+<p><a href="../prog_lang/python_intro_advanced.html">Python入門（応用・モジュール）</a>も参照のこと。</p>
+
+<h2>PandasとMatplotlibの基本</h2>
+<p>（<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。）</p>
+<p>Pandasの基本は、データフレームです。</p>
+<p>データフレームとは、二次元のラベル付きデータ構造で、Pandasではデータフレームを分かりやすくビジュアルで表示してくれます。</p>
+<p>また、さまざまなメソッドやインデックス操作によって、データフレームを操作することが可能です。</p>
+<p>特に、CSVファイルを読み書きするためのread_csv()メソッドとto_csv()メソッド、[]を使用したインデックスによる選択、条件式で抜き出すquery()メソッドはよく使います。</p>
+<p>Pandasと相性がいいグラフ表示のライブラリがMatplotlibです。特にpyplotモジュールをよく使います。</p>
+<p>pyplotでは、図を作るfigure(), X軸のラベルxlabel(), Y軸のラベルylabel(), ヒストグラムの表示hist(), ファイルへのセーブsavefig(), 画面への表示show()などの関数をよく使います。</p>
+<div class="edit_date">
+<p>2023.01.19</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>R言語</h2>
+<p><a href="../prog_lang/r_lang.html">R言語</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

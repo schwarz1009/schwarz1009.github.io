@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>MySQL関連の世界観（A．基本） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>MySQLの世界観（A．基本）</h1>
+<p>MySQLによるデータベース操作に関する世界観（A．基本）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="mysql.html">MySQL</a></li>
+<ul>
+<li><b>A．基本</b></li>
+<li><a href="mysql_admin.html">B．管理と設定</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>MySQLとSQL文の基本</h1>
+<p>（「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考に執筆しました。）</p>
+<p>以下はSQL文の例。</p>
+
+<h2>データベースの設計</h2>
+<p>まず、データベースを作成します。データベースの名前は「db1」とします。照合順序（データの検索する際の並び順を決める）には一般的な「utf8_general_ci」を指定します。</p>
+<p>このデータベースの中に、テーブルと呼ばれる個々のデータの保管場所を作ります。</p>
+<p>テーブルは、カラム（列）とレコード（行）から成り立ちます。まず、カラムを入念に設計し、テーブルを作成して、その中にレコードを追加していきます。</p>
+<p>以下はカラムの例。テーブルの名前は「bbs」にします。</p>
+<table class="some_tables">
+  <tr>
+    <th class="min60">役割</th>
+    <th>カラム名</th>
+    <th>型</th>
+    <th>長さ</th>
+    <th>A_I</th>
+  </tr>
+  <tr>
+    <td>通し番号</td>
+    <td>id</td>
+    <td>INT</td>
+    <td>11</td>
+    <td>あり</td>
+  </tr>
+  <tr>
+    <td>名前</td>
+    <td>name</td>
+    <td>VARCHAR</td>
+    <td>45</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>メールアドレス</td>
+    <td>email</td>
+    <td>VARCHAR</td>
+    <td>45</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>投稿日</td>
+    <td>time</td>
+    <td>DATETIME</td>
+    <td>8</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>テキスト</td>
+    <td>text</td>
+    <td>VARCHAR</td>
+    <td>300</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>いいねの数</td>
+    <td>like_count</td>
+    <td>MEDIUMINT</td>
+    <td>9</td>
+    <td>-</td>
+  </tr>
+</table>
+<p>型は、データの種類のことで、主に数値、文字列、日付と時刻という風に分かれます。また、長さとはデータの桁数のことで、数値や文字列の場合に設定します。</p>
+<p>また、idカラムにはオートインクリメント（A_I）とプライマリーキー（主キー）を設定します。オートインクリメントを設定すると、レコードが追加されるたびに1ずつ自動的に数値が加算されていきます。また、主キーを設定することで、主キー制約により、重複した値やNULL値が入らなくなります。</p>
+<p>テーブルの設計が決まったら、CREATE TABLE文あるいはphpMyAdminなどのツールを用いてテーブルを作成します。</p>
+<p>後日注記：5ちゃんねるのようなスレッドフロート型掲示板（たくさんのスレッドがあり、スレッドごとにレスがつくタイプの掲示板）を作る場合、たとえば2つの方法があります。まず、CREATE TABLE文を使って、bbs1, bbs2, bbs3のように、スレッドごとに別のテーブルを作成する方法。もうひとつは、bbsテーブルにスレッドIDを格納するtidカラムを追加し、スレッド一覧を格納するthreadsテーブルの外部キーとして、リレーションで表現し、必要に応じてテーブルを結合したり、WHERE句で抽出してSELECTしたりする方法です。後者の方法は処理効率が落ちますが、コメントを最小限のテーブルで管理できるため、掲示板ではなく学生の個人情報などの場合はこちらの方が適切かもしれません。</p>
+<p>（「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考に執筆しました。）</p>
+
+<h2>プロンプトとテーブルの作成</h2>
+<p>mysqlプロンプトを起動するには、</p>
+<pre>
+mysql -u ユーザー名 -p
+</pre>
+<p>と入力して、パスワードを聞かれたらパスワードを入力する。</p>
+<p>この状態で、SHOW DATABASESと実行すれば、データベース一覧が表示できる。また、CREATE DATABASE文でデータベースの作成、CREATE TABLE文でテーブルの作成ができる。</p>
+<p>たとえば、mysqlプロンプトで、テーブルの作成は以下のようにする。</p>
+<pre>
+mysql&gt; CREATE TABLE テーブル名 (
+    列1 型(長さ) オプション,
+    列2 型(長さ) オプション,
+    列3 型(長さ) オプション
+);
+</pre>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/knife0125/items/bb095a85d1a5d3c8f706">【MySQL, SQL】データベースを扱う基本SQL一覧 - Qiita</a></li>
+</ul>
+
+<h2>ユーザーの作成</h2>
+<p>また、新しいデータベースには必ずCREATE USER命令とGRANT命令でrootでない新しいユーザーを作って権限を付加すること。</p>
+<ul>
+<li><a href="https://proengineer.internous.co.jp/content/columnfeature/6638">MySQLでユーザを作成し、権限を設定する方法 | サービス | プロエンジニア</a></li>
+</ul>
+<p>後日注記：ユーザーの作成や権限の付加はphpMyAdminを用いて行うこともできる。動画の解説サイトなどで、GRANT命令で権限を付加するようなSQL文が示されている時は、phpMyAdminを用いて同じようにユーザーとテーブルを作成し、権限を付加することができることを知っておくと、XAMPPなどを導入した際の初期設定にも活用できる。</p>
+<p>後日注記：rootユーザーには絶大な権限があり危険であるため、ユーザーを作って権限を付加します。権限は、「データベース全体」「特定のテーブル」「特定のカラム」に対して設定できます。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a></li>
+</ul>
+
+<h1>四大命令</h1>
+<p>（「<a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a>」を参考に執筆しました。）</p>
+
+<h2>SELECT（取り出し）</h2>
+<p>データベースから項目を取得する。</p>
+<pre class="prettyprint lang-sql">
+SELECT text FROM bbs;
+SELECT name,email FROM bbs;
+SELECT * FROM bbs;
+</pre>
+<p>全てのデータを取得するには*（アスタリスク）を使うが、必要のない時はできるだけアスタリスクを用いず、明確に取り出す列を指定するべきである。</p>
+<p>後日注記：MySQLでは、SELECT文を用いることで関係演算の「選択」が、カラム名を「,」で指定して選択することで関係演算の「射影」が可能。また、JOIN句と主キー・外部キーを用いることで関係演算の「結合」が可能である。</p>
+<p>後日注記：特によく使うのはidを指定した選択。取り出す条件式を指定できるWHERE句を使う。idの値の部分はプレースホルダを用いて?などとする（?の部分が後でPHPの変数の値に置き換えられる）。</p>
+<pre class="prettyprint lang-sql">
+SELECT * FROM bbs WHERE id = ?;
+</pre>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+<li>放送大学「コンピュータとソフトウェア ('18)」</li>
+</ul>
+<div class="edit_date">
+<p>2023.04.15編集</p>
+<p>2024.05.25編集</p>
+</div>
+
+<h2>INSERT INTO（挿入）</h2>
+<p>データベースに項目を追加する。</p>
+<pre class="prettyprint lang-sql">
+INSERT INTO bbs (name,email,text) VALUES ('Assy','hoge@mail.hogehoge.com','応援しています！');
+INSERT INTO bbs VALUES (1,'Schwarz','schwarz@mail.hogehoge.com','2020-10-18 16:30:00','頑張れ',0);
+</pre>
+<p>二行目は省略構文。全ての列にデータを順番に登録する場合、省略構文を使うこともできる。ただし、データベースの構造が変わってしまった時などに命令の意味も変わってしまうことから、省略構文はあまり使うことを推奨されない。</p>
+<p>注意すべきなのは、文字列には''をつけるが、数値やNULL値には''をつけない。パスワードのように数値に見えても本当は文字列である場合には''をつけなければならない。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+</ul>
+
+<h2>UPDATE（更新）</h2>
+<p>データベースの項目を変更する。</p>
+<pre class="prettyprint lang-sql">
+UPDATE bbs SET text = '削除されました', name = '削除済み' WHERE id = 3;
+</pre>
+<p>どの行のレコードであるかをWHERE句で指定する。</p>
+
+<h2>DELETE（削除）</h2>
+<p>データベースの項目を削除する。</p>
+<pre class="prettyprint lang-sql">
+DELETE FROM bbs WHERE id = 3;
+</pre>
+<p>どの行のレコードであるかをWHERE句で指定する。</p>
+
+<h1>その他のSQL文</h1>
+<h2>SQL文一覧</h2>
+<p>以下はSQL文の一覧。</p>
+<p>データ定義言語（DDL）：</p>
+<table class="some_tables">
+<tr><th class="min60">SQL文</th><th>説明</th></tr>
+<tr><td>CREATE</td><td>テーブル（あるいはデータベース）の作成</td></tr>
+<tr><td>DROP</td><td>テーブル（あるいはデータベース）の削除</td></tr>
+<tr><td>ALTER</td><td>テーブルの設計の変更</td></tr>
+</table>
+<p>データ操作言語（DML）：</p>
+<table class="some_tables">
+<tr><th class="min60">SQL文</th><th>説明</th></tr>
+<tr><td>SELECT</td><td>行（レコード）の抽出</td></tr>
+<tr><td>INSERT</td><td>行（レコード）の挿入</td></tr>
+<tr><td>UPDATE</td><td>行（レコード）の更新</td></tr>
+<tr><td>DELETE</td><td>行（レコード）の削除</td></tr>
+</table>
+<p>データ制御言語（DCL）：</p>
+<table class="some_tables">
+<tr><th class="min60">SQL文</th><th>説明</th></tr>
+<tr><td>BEGIN</td><td>トランザクションの開始</td></tr>
+<tr><td>COMMIT</td><td>コミット</td></tr>
+<tr><td>ROLLBACK</td><td>ロールバック</td></tr>
+</table>
+<p>特に、「既存のデータを変更することなく、新しい列をテーブルに追加したい」などといった場合はALTER命令を使うことができる。また列を削除するにもALTER命令を使う。また、列の名前を変えたい場合や、データ型を別の型に変更したい場合もALTER命令を使う。</p>
+<p>後日注記：トランザクションを開始するにはBEGIN命令を使う。BEGINを実行して、なんらかのデータ操作をした後、COMMIT命令でトランザクションをコミットする。もしCOMMITが行われずにROLLBACK命令が実行された時は、BEGINが実行された状態のデータベースに戻る。</p>
+<ul>
+<li><a href="http://web.sevendays-study.com/mysql/day1.html">一週間で身につくMySQL|1日目：MySQLの基本</a></li>
+<li><a href="https://www.dbonline.jp/mysql/table/index18.html">テーブル構造を変更する(ALTER TABLE文) | MySQLの使い方</a></li>
+<li><a href="https://techacademy.jp/magazine/5199">MySQLでALTER TABLEを使ってテーブル構造を変更する方法【初心者向け】 | TechAcademyマガジン</a></li>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+</ul>
+<p>他にも、MySQLにはユーザーに権限を与えるGRANT命令などがある。</p>
+<div class="edit_date">
+<p>2023.03.25編集</p>
+</div>
+
+<h2>WHERE句</h2>
+<p>SELECT文にWHERE句をつけることで、条件式を指定して検索できる。</p>
+<pre class="prettyprint lang-sql">
+SELECT name,email FROM bbs WHERE name='Assy';
+</pre>
+<p>条件式には、一致と不一致に使う=と&lt;&gt;のほか、比較演算として&gt;, &lt;, &gt;=, &lt;=を使用できる。</p>
+<p>以下は条件式の絞り込みに使う演算子。</p>
+<table class="some_tables">
+<tr><th class="min60">演算子</th><th>説明</th></tr>
+<tr><td>ANDとOR</td><td>検索する条件式を複数指定できる。</td></tr>
+<tr><td>BETWEEN</td><td>検索するデータの数値における範囲（どこからどこまで）を指定できる。</td></tr>
+<tr><td>IN</td><td>検索する数値の含まれるリスト（AかBのいずれかなど）を指定できる。</td></tr>
+<tr><td>LIKE</td><td>検索する文字列の条件を指定できる。<br>%はなんらかの複数の文字数の文字、_はなんらかの1文字の文字を表す。</td></tr>
+</table>
+<p>また、サブクエリは以下のようにできる。</p>
+<pre class="prettyprint lang-sql">
+SELECT * FROM bbs WHERE name=(SELECT name FROM bbs WHERE time = '2020-10-18 16:30:00');
+</pre>
+<p>詳しくは以下のページが参考になります。（上記は以下を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://web.sevendays-study.com/mysql/day4.html">一週間で身につくMySQL|4日目：複雑な検索①</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.05.25編集</p>
+</div>
+
+<h2>ORDER BYとGROUP BYと集計関数</h2>
+<p>ORDER BY句を使うことで、データをソート（並べ替え）することができる。ASCはアルファベット昇順、DESCは降順にソートする。</p>
+<pre class="prettyprint lang-sql">
+SELECT * FROM bbs ORDER BY like_count ASC;
+</pre>
+<p>GROUP BY句を使うことで、集計の際にグループ化を行える（集計はグループごとに行われる）。</p>
+<pre class="prettyprint lang-sql">
+SELECT name,SUM(like_count) FROM bbs GROUP BY name;
+</pre>
+<p>グループ化を行うことで、集計関数を使うことができる。集計関数は、</p>
+<table class="some_tables">
+<tr><th class="min60">SQL文</th><th>説明</th></tr>
+<tr><td>MAX()</td><td>最大値を得る</td></tr>
+<tr><td>MIN()</td><td>最小値を得る</td></tr>
+<tr><td>SUM()</td><td>合計を求める</td></tr>
+<tr><td>AVG()</td><td>平均を求める</td></tr>
+<tr><td>COUNT()</td><td>個数を数える</td></tr>
+</table>
+<p>などが用意されている。</p>
+<p>このほか、以下のような関数がMySQLには用意されている。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>ROUND()</td><td>四捨五入する</td></tr>
+<tr><td>CHAR_LENGTH()</td><td>文字列の文字数を得る</td></tr>
+<tr><td>REPLACE()</td><td>文字列を置換する</td></tr>
+<tr><td>CEILING()</td><td>小数点以下を切り上げする</td></tr>
+<tr><td>FLOOR()</td><td>小数点以下を切り捨てする</td></tr>
+<tr><td>SQRT()</td><td>平方根を計算する</td></tr>
+<tr><td>DATE_FORMAT()</td><td>日付をフォーマットする</td></tr>
+<tr><td>NOW()</td><td>現在の日付・時刻を得る</td></tr>
+</table>
+<p>詳しくは以下のページ・書籍が参考になります。（上記は以下を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://web.sevendays-study.com/mysql/day5.html">一週間で身につくMySQL|5日目：複雑な検索②</a></li>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.03.25編集</p>
+<p>2024.10.29編集</p>
+</div>
+
+<h2>LIMIT句、DISTINCT句</h2>
+<p>このほか、MySQLには件数に上限をかけて取得するLIMIT句や、重複した行を削除して一行にまとめるDISTINCT句などがある。</p>
+
+<h2>AS句</h2>
+<p>AS句を用いることで、結合などで用いるテーブル名などが長い場合、繰り返す際に別名をつけることができる（FROM threads AS tとしてt.idとしたり、JOIN comments AS cとしてc.tidとしたりする）。</p>
+<p>また、AS句を用いることでカラムに別名をつけることもできる（カラムbasenameに対して別の名前addressなど）。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.03.26編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>結合</h2>
+<p>結合とリレーションについては<a href="db_relation.html">リレーション</a>を参照のこと。</p>
+
+<h2>インデックス</h2>
+<p>インデックスについては<a href="db_index.html">データベースインデックス</a>を参照のこと。</p>
+
+<h1>サンプルコード</h1>
+<h2>PHPからのSQLの利用</h2>
+<p>PHPからのSQL文の利用については、<a href="../prog_lang/php_db.html">PHPデータベースの世界観</a>を参照のこと。</p>
+
+<h1>参考文献</h1>
+<h2>参考文献</h2>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a></li>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+<li><a href="http://web.sevendays-study.com/mysql/index.html">一週間で身につくMySQL</a></li>
+<li><a href="https://qiita.com/knife0125/items/bb095a85d1a5d3c8f706">【MySQL, SQL】データベースを扱う基本SQL一覧 - Qiita</a></li>
+<li>放送大学「コンピュータとソフトウェア ('18)」</li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Redis関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Redisの世界観</h1>
+<p>Redisに関する世界観です。<a href="db.html">データベースの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Redis</h1>
+<h2>Redis</h2>
+<p>データ構造サーバーの実装であり、NoSQLデータベースの一つ。</p>
+
+<h2>KVS（Key-Value Store）</h2>
+<p>KVS（Key-Value Store）はNoSQLデータベースの一つで、KeyとValueの関係だけのデータベース。</p>
+<p>それぞれの分散したサーバ（分散データストア）にデータを保存する用途で使われることが多い。</p>
+<ul>
+<li><a href="https://qiita.com/uenohara/items/23eb6ee1259f8a927445">KVS（Key-Value Store）とは - Qiita</a></li>
+</ul>
+
+<h2>RDBMSの時代は終わった</h2>
+<p>KVSは表形式でデータを構造化するRDBMSよりも柔軟性が高く、そのためKVSは登場した当初「RDBMSに代わる新しい技術」としてもてはやされ、「RDBMSの時代は終わった」とまで言われた。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a>が参考になります。）</p>
+
+<h2>Redisやってみたい</h2>
+<p>Redis関連の情報はQiitaなどに多い。</p>
+<ul>
+<li><a href="https://qiita.com/tags/redis">Redis - Qiita</a></li>
+</ul>
+
+<h2>Go言語でRedis</h2>
+<p>以下はGo言語でRedisを使うなど、挑戦的な内容。</p>
+<ul>
+<li><a href="https://qiita.com/lightstaff/items/7428a37a24b4ad56f995">GolangとRedisで遊んでみた - Qiita</a></li>
+<li><a href="https://qiita.com/chan-p/items/5c5e7cc1e966f8a90422">【Redis】Go言語で高速呼び出しKVS【Redigo】 - Qiita</a></li>
+</ul>
+<p><a href="../prog_lang/golang.html">Go言語</a>も参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

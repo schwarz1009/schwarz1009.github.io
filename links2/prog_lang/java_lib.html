@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観３（クラスライブラリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３（クラスライブラリ）</h1>
+<p>Javaによるプログラミングに関する世界観３（クラスライブラリ）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="java.html">Java（１．文法）</a></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><a href="java_oop_interface.html">２B．インターフェース</a></li>
+<li><a href="java_gc.html">２C．ガーベッジコレクションと例外</a></li>
+</ul>
+<li><b>３．クラスライブラリ</b></li>
+<ul>
+<li><a href="java_lib_io.html">３A．入出力</a></li>
+<li><a href="java_lib_list.html">３B．コレクションと配列</a></li>
+<li><a href="java_lib_string.html">３C．文字列</a></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><a href="java_lib_xml.html">３E．XML</a></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>クラスライブラリ</h1>
+<h2>Javaのクラスライブラリは美しく個性的で完成されている</h2>
+<p>Javaのクラスライブラリは、ほとんどのプログラミングに必要なクラスやメソッド（関数）を網羅しており、「完成されている」ことで有名です。</p>
+<p>java.lang.Objectから階層的な「ツリー構造のクラスライブラリ」を形成しており、継承とインターフェースの実装で作られています。</p>
+<p>ほとんどのクラスがインスタンスのオブジェクトをnewして作ることで使用可能なほか、すでにあるクラスを自ら継承して、派生クラスとして自分独自の機能を追加した新しいクラスを作ることもできます。</p>
+<p>一度Javaのクラスライブラリを覚えると、他の言語のライブラリなどは覚える必要が無く、Java SE/EE/MEなどのスケーラブルなエンタープライズ機能やサブセットにも応用でき、プログラミングを行う上で「何でもできるリベラルな基本」を知ることができます。プログラミングを行う上で、先だって必要な「基礎の能力」が身に付くでしょう。</p>
+
+<h2>公式マニュアル</h2>
+<p>公式のマニュアル。Javaはとても完成されたクラスライブラリ（関数やデータ構造などの設計図であると同時に利用の仕組みである、クラスのライブラリ）があります。</p>
+<p>Microsoftの同様の技術として、.NET FrameworkとC#/VB.NETがあります。</p>
+<ul>
+<li><a href="http://docs.oracle.com/javase/jp/8/">バージョン8</a></li>
+<li><a href="http://docs.oracle.com/javase/jp/8/docs/api/">バージョン8 - API</a></li>
+<li><a href="http://docs.oracle.com/javase/jp/7/">バージョン7</a></li>
+<li><a href="http://docs.oracle.com/javase/jp/7/api/">バージョン7 - API</a></li>
+</ul>
+
+<h2>Javaのエディション</h2>
+<p>Javaには3つのエディションがある。</p>
+<table class="some_tables">
+<tr><th class="min60">エディション</th><th>解説</th></tr>
+<tr><td>Java SE</td><td>通常のJava。</td></tr>
+<tr><td>Java EE</td><td>サーバー向けのJava。サーブレットのような機能を含む。</td></tr>
+<tr><td>Java ME</td><td>組み込み・モバイルなどに向けたJavaのサブセット。Java SEの機能の一部は実装しない。</td></tr>
+</table>
+<p>エディションごとにJDK（開発キット）とJRE（実行環境）がある。</p>
+
+<h2>パッケージ</h2>
+<p>パッケージ。Javaではさまざまなパッケージをimport文で読み込んで使うことができる。特に、標準クラスライブラリにはたくさんのJavaクラスが含まれている。Javaはこのクラスライブラリがとても汎用的で優れているために利用されることが多い。</p>
+<p>java.ioパッケージをインポートするには、以下のように記述する。</p>
+<pre class="prettyprint">
+import java.io.*;
+</pre>
+<p>java.langパッケージは何も記述しなくても自動的にインポートされる。すなわち、以下は自動的に宣言される。</p>
+<pre class="prettyprint">
+import java.lang.*;
+</pre>
+<p>また、自分の書いたクラスをパッケージの一部にしたい場合は、以下のように記述する。</p>
+<pre class="prettyprint">
+package hoge;
+</pre>
+
+<h2>主なパッケージの一覧</h2>
+<p>主なパッケージの一覧は、以下の書籍やページなどに掲載されています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Java%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">Javaクラスライブラリ - Wikipedia</a></li>
+</ul>
+<p>javax.*パッケージは拡張機能。拡張機能は、Java SEのJDK（開発キット）やJRE（実行環境）には含まれない。</p>
+
+<h3>弱参照</h3>
+<p>java.lang.refは、弱参照。強参照（通常の参照）ではGCの回収の対象にならないオブジェクトも、弱参照ならGCの回収の対象になる。</p>
+<ul>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/weak.html">Java弱参照メモ(Hishidama's Java Weak reference Memo) - ひしだま's 技術メモページ</a></li>
+</ul>
+<p><a href="java_gc.html">Java（ガーベッジコレクションと例外）</a>も参照のこと。</p>
+
+<h3>リフレクション</h3>
+<p>java.lang.reflectは、リフレクション。クラスやメソッドの情報をプログラム内から取得したり、文字列変数などから動的にメソッドを実行できる。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/33252">【Java入門】リフレクションでメソッドの実行、フィールドの変更 | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+<p><a href="reflection.html">リフレクションとeval</a>も参照のこと。</p>
+
+<h3>プリファレンス</h3>
+<p>java.util.prefsは、プリファレンス。データを設定ファイルに読み書きできる。</p>
+<ul>
+<li><a href="https://www.javainthebox.net/publication/200209JP26/preferences.html">Preferences API 入門 - 知っておくと便利なアプリケーション設定 API - JAVA PRESS Vol.26</a></li>
+</ul>
+<p><a href="java_lib_xml.html">Javaクラスライブラリ（XML）</a>も参照のこと。</p>
+
+<h3>RMI</h3>
+<p>java.rmiとjavax.rmiは、RMI。ネットワーク上にあるJavaのメソッドを参照して実行できる。</p>
+<ul>
+<li><a href="http://ash.jp/java/rmi.htm">RMIについて - ASH のホームページ</a></li>
+</ul>
+<p><a href="java_servlet_javabeans.html">JavaBeans</a>も参照のこと。</p>
+
+<h3>その他</h3>
+<p>その他、それぞれのパッケージについての解説は以下が参考になります。</p>
+<ul>
+<li><a href="http://tech-blog.tsukaby.com/archives/192">Java初級者のための必須Java標準APIまとめと簡易解説 | つかびーの技術日記</a></li>
+<li><a href="https://www.javadrive.jp/start/math/">Mathクラス | Java入門</a></li>
+<li><a href="https://eng-entrance.com/java-math-random">【簡単理解】Javaでの乱数の使い方まとめ - エンジニアの入り口</a></li>
+<li><a href="https://eng-entrance.com/java-date">一覧で確認！Java日付の取得方法と日付クラスまとめ - エンジニアの入り口</a></li>
+</ul>
+
+<h2>java.lang.Object</h2>
+<p>java.lang.Objectは、全てのクラスの基盤となるクラス。すべてのクラスはObject型を継承している。</p>
+
+<h1>API各ページ</h1>
+<p><a href="java_lib_io.html">Java（３A．入出力）</a></p>
+<p><a href="java_lib_list.html">Java（３B．コレクションと配列）</a></p>
+<p><a href="java_lib_string.html">Java（３C．文字列）</a></p>
+<p><a href="java_lib_thread.html">Java（３D．マルチスレッド）</a></p>
+<p><a href="java_lib_xml.html">Java（３E．XML）</a></p>
+<p><a href="java_lib_image.html">Java（３F．画像処理）</a></p>
+<p><a href="java_lib_net.html">Java（３G．ネットワーク・データベース）</a></p>
+
+<h1>Javaクラスライブラリと継承</h1>
+<h2>機能が足りなければ継承しよう</h2>
+<p>Javaのクラスライブラリは、美しく機能的に設計されており、機能をそのまま使うだけでもとても便利です。</p>
+<p>ですが、時によっては、標準の機能では足りなかったり、「こんな機能やデータへのアクセス方法があればいいな」と思うこともあります。</p>
+<p>そのような時には、Javaのオブジェクト指向の「継承」を使って、機能を付け加えることができます。</p>
+<p>Javaのクラスライブラリは、多くがpublicクラスとして公開されており、継承ができます。いわば、最初からプログラマが自分で機能を拡張したりすることを見越して設計されていると言えます。</p>
+<p>Javaプログラミングは、もちろん最初からクラス設計をしてすべてのコードを書く場合もありますが、このように、既にあるクラスを流用して、機能を付け加える形で目的のプログラム機能を実装することも多くあります。</p>
+<p>つまり、Javaのクラスライブラリは、プログラム機能やデータ型として使うことも一般的ですが、それ以上に、「既にあるJava資産を自分で強化していく」ために作られています。</p>
+<p>Javaはこのように、最初からオープンかつ柔軟な設計をしています。そのため、Javaはオープンソースとも親和性が高いです。かつて、長らくJava自身はオープンソースではありませんでしたが、OpenJDKによってオープンソースになりました。またかつてのApache Jakartaのように、サーバーサイドJavaでは多くのコンポーネントがオープンソースで提供されていました。「Javaとオープンは密接な仲にある」と言えます。</p>
+<p>後日注記：GUIアプリケーションの開発では、「コンポーネントの作成」ということをよく行います。僕も昔Delphiで少しだけ触ったことがありますが、DelphiやC#/VB.NETやGTKなどのアプリケーションでは、独自のGUIコントロールやウィジェットを作るために、既にあるクラスを継承してコンポーネントを作成します。そのため、Javaと同様に、クラスライブラリを継承して独自のクラスを作るという手法は、ほかの言語でも、特にGUI開発系の言語でよく見られます。</p>
+
+<h2>Javaの真に偉大な点は、優れたクラスライブラリを作った点</h2>
+<p>Javaの真に偉大な点は、優れたクラスライブラリを作った点であると思います。</p>
+<p>はっきり言って、プログラミング言語という存在が占める範囲は、本当は言語機能よりもモジュールやライブラリが大きな領域を占めるのではないかと思います。</p>
+<p>Pythonがこれだけ普及したのは、言語機能よりも、優れたモジュールやライブラリがあるということが大きいです。</p>
+<p>よく考えると、PHPやRubyのようなほかの言語であっても、ほとんどはライブラリです。ライブラリのAPIリファレンスを覚えることこそが、言語の習得において真に必要です。</p>
+<p>そのような中で、Javaがなぜ偉大かと言えば、それは優れたクラスライブラリを作った、ということにあるでしょう。</p>
+<p>Javaのクラスライブラリは美しく、またScalaやKotlinやClojureのようなJava VMで動くほかの言語から、そのライブラリ資産を使うことができます。</p>
+<p>また、Javaの基本となるクラスライブラリAPIを覚えてしまえば、Swingやサーブレットなどの応用分野であっても、同じライブラリAPIを使うことができます。</p>
+<p>そして、Javaの強力なオブジェクト指向の機能である「継承」を使うことで、このライブラリは使うだけではなく、自ら機能を付け足すための「プログラムの土台」にもなってくれるのです。</p>
+<p>またJava VMは別のCPUアーキテクチャでも仮想マシン上で同じプログラムが動くため、同じAPIでさまざまなJava VMの動くアーキテクチャに対応できます。主にモバイル向けに、移植性の高いプログラミング環境を得ることができます。</p>
+<p>SmalltalkやSqueakがオブジェクト指向の「環境」であったように、Javaもまたそのような「環境」であると言えます。その環境は、Java VMとクラスライブラリが支えているのです。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

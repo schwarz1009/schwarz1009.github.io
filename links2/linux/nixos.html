@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>NixOS - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>NixOS</h1>
+<p>NixOSについての世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>NixOS</h1>
+<h2>NixOS</h2>
+<p>NixOSは再現性・宣言型・信頼性を掲げるパッケージマネージャNixをベースとしたディストリビューション。</p>
+<p>同じソースコードをどんな環境でビルドしても同じバイナリを吐き出す「再現性100%」を目指して開発されている。</p>
+<p>もし、なんらかの悪意ある作用によってソースコードが改竄されていれば、それを検証できるため、信頼性が高い。</p>
+<p>現在（2021年6月21日）では最小ISOイメージにおいて、100%の再現性があることを報告した。次の目標はGNOME ISO版の再現性100%である。</p>
+<p>詳しくは以下の記事が参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/202106/29">2021年6月29日　Is NixOS Reproducible? ―NixOS，最小イメージのビルドを100％再現可能に：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>システムの状態を設定ファイルにできる</h2>
+<p>パッケージマネージャNixは、インストールするパッケージを設定ファイルで記述できる。これは、パッケージ管理に構成管理（Puppet/Chef/Ansible/Itamae）を付け足したという感覚。</p>
+<p>また、システムの状態をそのまま設定ファイルにできる。システム状態（/etc/nixos/）をgitで管理することも可能。もしシステムが動かなくなったら、過去の状態へロールバックすることも出来る。</p>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://zenn.dev/nyarla/articles/7e56547058bc5190fb83">NixOS を WSL2 で使えるようにする - Zenn</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

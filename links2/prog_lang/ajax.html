@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Ajax関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>Ajaxの世界観</h1>
+<p>Ajaxに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Ajax</h1>
+<h2>WebでもGUIに負けないサービスを作れる</h2>
+<p>Ajaxを上手く使うことで、WebサービスでもGUIアプリケーションに負けない操作性を持ったアプリケーションを作ることができます。</p>
+<p>きっかけは、Google Mapsのような、Webサービスなのにボタンやリンクが備わっていて、インタラクティブに操作・反応するWebアプリケーションの登場です。</p>
+<p>そのごろは、XMLHttpRequestとXMLを上手く使うことで、Google Mapsのような操作性を実現していました。今では、JSONを使ったり、時にはjQueryを使うこともあります。</p>
+
+<h2>インタラクティブかつ非同期にデータをサーバーとやり取りする</h2>
+<p>Ajaxの特徴は、「インタラクティブ」であることと、その上で「非同期にサーバーとデータをやり取りする」ということです。</p>
+<p>JavaScriptとDOMを用いて、ページ遷移だけではなく、さまざまなボタンやクリックに反応して、インタラクティブにマウスなどの操作に反応する、という、「GUIと同じことをHTMLとJavaScriptでやる」というのが、まず重要です。</p>
+<p>そして、インタラクティブな操作の中で、非同期にサーバーとデータをやり取りします。これにより、アメリカの地図を拡大した時に、ページ遷移は起きず、ブラウザの地図の描画領域の中に、拡大したアメリカの地図を、サーバーから非同期にダウンロードして、それを表示します。</p>
+<p>この非同期のデータのやり取りのために、XMLHttpRequestを使います。また、データの形式にはXMLあるいはJSONを使います。</p>
+
+<h2>Ajax</h2>
+<p>Ajaxは非同期通信の技術で、Google Mapsなどに使われている。最近はXMLよりJSONが使われることが多い。</p>
+<ul>
+<li><a href="https://qiita.com/hisamura333/items/e3ea6ae549eb09b7efb9">初心者目線でAjaxの説明 - Qiita</a></li>
+<li><a href="https://www.sria.co.jp/blog/2014/10/lets-use-ajax-part-1-try-it-with-ajax-and-json/">使ってみようAjax！前編〜AjaxとJSONを合わせて使ってみる〜 - SRIA BLOG</a></li>
+</ul>
+
+<h2>Ajax基本技術</h2>
+<p>基本的に、JavaScriptとXML/JSONを用いて、XMLHttpRequest APIを利用する。</p>
+<table class="some_tables">
+<tr><th class="min60">技術</th><th>説明</th></tr>
+<tr><td>XMLHttpRequest</td><td>ブラウザとサーバーの間でHTTP通信を行うAPI。</td></tr>
+<tr><td>DOM</td><td>XMLをツリー構造のドキュメントモデルで操作することのできるAPI。</td></tr>
+<tr><td>XML/JSON</td><td>Ajaxで使われることの多いデータ形式。<br>最近はXMLよりJSONというデータ形式が使われることが多い。</td></tr>
+</table>
+<p>また、素のJavaScriptを触らなくても、jQueryやJavaScriptフレームワークを用いてAjaxを行うことも一般的である。あるいはRuby on Railsなどの機能を使う方法もある。</p>
+
+<h2>Ajaxコードの基本</h2>
+<p>基本的に、最初にvar xhr = new XMLHttpRequest()とする。</p>
+<p>xhrに対して、xhr.open()で'GET'とサーバのURL（データが格納されている場所）を設定し、xhr.setRequestHeader()でリクエストヘッダを指定し、xhr.send()でリクエストを送信する。</p>
+<p>レスポンスに対して、テキストの場合は、xhr.responseTextが得られる。</p>
+<p>XMLの場合は、var xml = xhr.responseXMLを得た後で、DOM操作を使って要素の値にアクセスする。</p>
+<p>JSONの場合は、var json = JSON.parse(xhr.responseText)とする。ここでJSONデータは、</p>
+<pre>
+{ "hoge": "Hoge" }
+</pre>
+<p>となっているとする。この状態でjson.hogeにアクセスすると値"Hoge"が得られる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+
+<h1>関連技術</h1>
+<h2>jQueryでAjax</h2>
+<p>jQueryでAjaxをやるには、以下が参考になります。</p>
+<ul>
+<li><a href="https://www.buildinsider.net/web/jqueryref/059">jQuery： 一般的なAjax通信を実装するには？（$.ajax） - Build Insider</a></li>
+</ul>
+
+<h2>RailsでAjax</h2>
+<p>Ruby on Railsでは人間が読むHTMLデータだけではなく、機械が読むJSONデータを吐き出すことができるが、これは主にAjaxで読み取られることを想定している。</p>
+<p>また、Railsでは、turbolinkを有効にすることで、Ajaxが自動的に有効になる。</p>
+<p>また、RailsでAjaxを実現するためには、jQueryを使うこともできる。</p>
+<p>詳しい仕組みは以下の記事が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/t-yama-3/items/7148d25b17e70ceb48d6">RailsにおけるAjaxの実装（JavaScriptとjQueryのコード比較） - Qiita</a></li>
+</ul>
+<p><a href="ruby_on_rails.html">Ruby on Rails</a>も参照のこと。</p>
+
+<h2>SPA（シングルページアプリケーション）</h2>
+<p>SPAは、シングルページアプリケーションの略で、Ajaxを用いた、画面遷移を行わない、単一ページのWebページの形式のこと。</p>
+<p>SPAは、Angular、Vue.js、ReactなどのJavaScriptフレームワークとAjaxによって実現される。</p>
+<p>RailsでAjaxを行うには、以下の記事がとても参考になる。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/28967">【Rails入門】ajaxの使い方まとめ | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+<p><a href="javascript_framework.html">JavaScriptフレームワーク</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>DOM/Canvas</h2>
+<p><a href="javascript_dom_canvas.html">DOM/Canvas</a>を参照のこと。</p>
+
+<h2>XML/JSON</h2>
+<p><a href="xml.html">XML</a>や<a href="json.html">JSON</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

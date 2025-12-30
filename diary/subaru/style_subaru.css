@@ -1,0 +1,134 @@
+body {
+    background: #1D1F21; padding: 25px; font-size: 15px;
+    line-height: 1.8;
+    font-family: Cantarell, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "Lucida Grande", "Lucida Sans Unicode", "メイリオ", Meiryo, "MS Pゴシック", "MS P Gothic", Helvetica, Verdana, sans-serif;
+    color: #bac1c7;
+}
+
+A:link { color: #c6e2f8; }
+A:visited { color: #92a1a6; }
+A:active { }
+A:hover { }
+
+/*
+.top_footer {
+    margin-top: 85px;
+}
+*/
+
+.menu_index,
+.menu_index ul {
+    padding-left:15px;
+    margin:0px;
+    list-style-type:none;
+    list-style-image:none;
+}
+
+.menu_index{
+    padding:0;
+    margin:0;
+}
+
+.menu_index li{
+    list-style-type:none;
+    list-style-image:none;
+    margin: 5px 0px 5px 0px;
+}
+
+.menu_index li{
+    position:relative;
+    padding-left:22px;
+    padding-top: 0px;
+}
+
+.menu_index li:before{
+    content:'';
+    display:inline-block; 
+    position:relative; 
+    /*    background:#92a1a6 !important;*/
+    border-top: 1px solid #82c0cd;
+    border-right: 1px solid #82c0cd;
+    width:5px !important;
+    height:5px !important;
+    top:-2px !important;
+    left:-10px !important;
+    transform:rotate(45deg) !important;
+    -webkit-transform:rotate(45deg) !important;
+    -o-transform:rotate(45deg) !important;
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+h3 {
+    margin: 30px 0 20px 0; /* 上マージン30px、右マージン0、下マージン30px、左マージン0 */
+    background: #1D1F21;
+    padding: 5px 15px;
+    font-size: 140%;
+    color: #c6e2f8;
+    border: 0;
+    border-left: 5px solid #487ca3;
+}
+
+.iframe_menu {
+    width: 350px;
+    height: 500px;
+    border: solid 2px #487ca3;
+    border-top: solid 5px #487ca3;
+    max-width: 90%;
+}
+
+pre {
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid #4d639f;
+    border-top: 5px solid #4d639f;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.2;
+    background: #1D1F21;
+    color: #ffffff;
+    overflow: auto;
+    overflow-y: hidden;
+}
+
+pre.prettyprint {
+    color: #ffffff;
+}
+
+pre.code {
+    background-color: #1D1F21;
+    color: #C5C8C6;
+}
+
+.synSpecial { color: #CC6666 } /* Red    */
+.synType { color: #F0C674 } /* Yellow */
+.synComment { color: #7D8C93 } /* Base   */
+.synPreProc { color: #CB4b16 } /* Orange */
+.synIdentifier { color: #81A2BE } /* Blue   */
+.synConstant { color: #8ABEB7 } /* Cyan   */
+.synStatement { color: #B5BD68 } /* Green  */
+
+.tl-tweet {
+    padding: 20px;
+    margin: 10px 0 10px 0;
+    border: #487ca3 1px dashed;
+}
+
+.tl-tweet a:link { color: #c6e2f8; }
+.tl-tweet a:visited { color: #c6e2f8; }
+
+.date { font-size: 14px; color: #82c0cd; }
+
+@media screen and (max-device-width: 480px) {
+
+    body {
+        padding: 5px;
+    }
+
+    pre {
+        white-space: pre-wrap;
+        width: calc(100% - 60px);
+    }
+}

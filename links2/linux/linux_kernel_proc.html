@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（プロセス管理） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（プロセス管理）</h1>
+<p>Linuxのカーネルの開発に関する世界観（プロセス管理）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><b>プロセス</b></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>マルチタスクの仕組み</h1>
+<h2>OSのマルチタスク</h2>
+<p>OSでプログラムを同時に並列実行するためには、「プロセスの数だけ、専用のCPUとメモリが用意されているかのように見せる」ことが必要。</p>
+<p>このために、メモリでは仮想アドレス空間を用いて、論理アドレスを物理アドレスに翻訳し、異なるアドレス空間を同時に持てるようにする。</p>
+<p>また、CPUではレジスタの内容を退避し、小さな時間で次々に停止と再実行を切り替えることで、プログラムそれぞれに「タイムスライス」と呼ばれる時間ごとのスケジューリングを行う。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>が参考になります。）</p>
+
+<h2>プロセスとスレッド</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>まず、LinuxカーネルはマルチタスクなOSのカーネルである。</p>
+<p>マルチタスクとは、「複数のプログラムを同時に並列実行できる」ということ。</p>
+<p>ここで、プログラムにはプロセスとスレッドがあることが重要である。</p>
+<p>プロセスは、それぞれに個別の独立したメモリ領域が与えられる。</p>
+<p>それに対して、スレッドはプロセスの中に存在する並列処理であり、同じメモリ領域を参照することができる。</p>
+<p>このため、マルチスレッド環境では、排他制御を行う「ロック」が肝心となる。</p>
+<p>ロックを適切に行うことで、スレッドセーフな関数を作らなければならない。</p>
+<p>プロセスにおいても、プロセス間通信（IPC）と呼ばれる機構を使うことで、メモリを共有したり、簡単な排他制御を行う（セマフォ）ことが可能となっている。</p>
+
+<h2>コンテキスト切り替え</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>プログラムがもしあったとして、それをマルチタスクで実行するためにどうするか。</p>
+<p>プログラムは、実際、機械語でCPU命令とメモリアドレスが記述されているため、単純に考えれば、CPUとメモリがそれぞれのプログラムに必要となる。</p>
+<p>しかしながら、マルチタスクのOSでは、プログラムの命令を、とても小さな時間で切り替えながら実行することで、CPUの仮想化を実現する。</p>
+<p>つまり、プログラムの実行しているレジスタの内容や、プログラムカウンタなどを、task_structと呼ばれる構造体に退避させて、プログラムを「安全に停止させる」ことができればいい。</p>
+<p>この上で、プログラムを次々に停止・再実行する。</p>
+<p>これを「コンテキスト切り替え」と呼ぶ。</p>
+<p>後日注記：スケジューラによるスケジューリングは、それぞれのプロセスに与えられる個別の時間である「タイムスライス」の配分と管理を行う。</p>
+
+<h2>プロセスディスクリプタ</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>カーネルはプロセスを管理するために、「プロセスディスクリプタ」と呼ばれるプロセスの情報によってプロセスを管理する。</p>
+<p>カーネルがプロセスの実行を停止すると、CPUレジスタ内のさまざまな情報がプロセスディスクリプタの中に退避される。</p>
+<p>この情報には、プログラムカウンタや汎用レジスタ、浮動小数点レジスタ、プロセッサ制御レジスタ、メモリ管理レジスタなどが含まれる。</p>
+<p>カーネルがプログラムの再開を決めると、プロセスディスクリプタに退避された情報を使って、停止されたCPUレジスタを復旧する。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>が参考になります。）</p>
+
+<h2>プロセスの状態とプロセステーブル</h2>
+<p>（以下は「<a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a>」を参考に執筆しました。）</p>
+<p>プロセスには、3つの状態がある。「実行中」「実行可能」「ブロック（待ち状態）」である。</p>
+<p>プロセスが実行と停止を繰り返す中で、実行中と実行可能の2つの状態があることは分かる。では、ブロック（待ち状態とも呼ばれる）とは何だろうか。</p>
+<p>ブロックとは、たとえば、「プログラムが実行可能ではあるものの、別のプロセスの終了を待機しなければならない」といった状況である。</p>
+<p>たとえば、パイプで、あるコマンドの実行（たとえばfind）を別のコマンド（たとえばgrep）が待機している時、grepはfindの実行が終わるまでブロックされる。</p>
+<p>このプロセスの3つの状態は、推移する。ある状態は常に別の状態に変わる可能性がある。</p>
+<p>また、プロセステーブルには、プロセスの実行の際に必要となるデータが格納されている。プロセスを安全に停止・再実行ができるのは、プロセステーブルにプロセスの状態が保管・維持されているからである。</p>
+<p>後日注記：ブロック（待ち状態）には、ほかにもI/Oデバイスから転送されるデータなどを待っている状態などについても言える。問題が解決し次第、実行状態に戻る。（詳しくは放送大学「コンピュータの動作と管理 ('17)」が参考になる。）</p>
+<div class="edit_date">
+<p>2023.05.15編集</p>
+</div>
+
+<h2>プロセスとマルチタスク</h2>
+<p>UNIXでは、プロセスという「実行コンテキスト」を持っている。</p>
+<p>プロセスはプログラムの意味でもあるが、複数のプログラムを連続して順次的に実行するプロセスや、同じプログラムを実行する複数のプロセスというのも考えられる。</p>
+<p>昔のOSでは、プロセスはひとつしか存在せず、CPUはプロセスが専有し、メモリのアドレス空間はひとつだけだった。</p>
+<p>UNIXはマルチタスクと呼ばれる仕組みを採用しており、タイムシェアリングシステムとも呼ばれる。</p>
+<p>UNIXでは、プロセスは複数同時に実行でき、それぞれのプロセスが別々のアドレス空間を持つ。</p>
+<p>そのために、プログラムをそれぞれ別々に実行するスケジューラと呼ばれる機構があり、複数のプログラムを時間ベースで次々に切り替えて実行する。</p>
+<p>実際は、プログラムを実行している時に別のプログラムの実行が要求されると、プログラムはレジスタなどの必要なデータをレジスタ外に退避させ、そのプログラムを停止する。そして新しいプロセスが実行される。スケジューラによって次々にこの切り替え命令が実行される。切り替えが行われると、今動いているプロセスを停止して別のプロセスを実行できる。</p>
+<p>また、プロセスの持つアドレス空間は、実際にアクセスされる前にカーネルによって翻訳される。よって、プログラムがメモリを使用するために必要なアドレス空間を、それぞれのプログラムの中に「閉じる」ことができる。</p>
+<p>後日注記：現代的なUNIXカーネルでは、カーネルの中の設計はカーネルスレッドの集合体となることがある。このような場合、通常のプロセスの切り替えよりも、カーネルスレッドの切り替えは効率的に行われる。ただし、Linuxでは限定的な手法でしかカーネルスレッドを利用していない。</p>
+<p>（「<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>」を読みながら自分で考えて書きました。）</p>
+<div class="edit_date">
+<p>2023.05.12編集</p>
+</div>
+
+<h2>schedule()関数</h2>
+<p>（以下は「<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>」を参考に執筆しました。）</p>
+<p>プロセスを再開するに当たって、休止した状態のCPUのレジスタを復元する必要がある。このデータのことをハードウェアコンテキストと呼ぶ。Linuxカーネルにおいては、プロセスディスクリプタとカーネルモードスタックに、このデータが保管される。</p>
+<p>プロセスは、schedule()関数によってスケジューリングされる。ここでは二つの切り替えが行われる。</p>
+<table class="some_tables">
+<tr><th class="min60">切り替え対象</th><th>説明</th></tr>
+<tr><td>ページグローバルディレクトリ</td><td>ページアドレッシングの中でもっとも最上部にあるディレクトリのこと。<br>ページグローバルディレクトリを新しいメモリアドレス空間へと変更する。</td></tr>
+<tr><td>ハードウェアコンテキスト</td><td>ハードウェアコンテキストは、レジスタの中の状態のこと。<br>カーネルの中に格納されたカーネルモードスタックをレジスタに復元する。</td></tr>
+</table>
+<p>ハードウェアコンテキストの切り替え処理は、switch_to()マクロが実行する。</p>
+<pre>
+switch_to(prev, next, last);
+</pre>
+<p>元あったプロセスへの参照を失わないためにprev、next、lastの3つの引数を取る（2つではない）ことに注意。</p>
+<p>スケジューリングが行われている実際のコードは以下から参照できます。</p>
+<ul>
+<li><a href="https://elixir.bootlin.com/linux/latest/A/ident/schedule">schedule - lxr</a> - 「kernel/sched/core.c, line 4595 (as a function)」を参照しよう。</li>
+<li><a href="https://elixir.bootlin.com/linux/latest/source/arch/x86/include/asm/switch_to.h">switch_toマクロ(x86) - lxr</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.04.22編集</p>
+</div>
+
+<h2>タイマ</h2>
+<p>タイマは、特定の時間に特定の処理を行う機能。</p>
+<p>カーネル内部で使用されるダイナミックタイマと、プロセスで使用されるインターバルタイマがある。</p>
+<p>タイマはさまざまなところで使われている「縁の下の力持ち」的な機能である。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.13編集</p>
+</div>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+</ul>
+<p>また、以下のページに参考になる内容があります。日本語版もあります。</p>
+<ul>
+<li><a href="http://en.tldp.org/LDP/tlk/tlk.html">The Linux Kernel</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-images/frame.html">The Linux Kernel日本語訳</a></li>
+</ul>
+
+
+
+<h1>スケジューリング</h1>
+<h2>スケジューリングのアルゴリズム</h2>
+<p>スケジューリングとは、タイムスライスをそれぞれのプロセスに公平かつ効率的に与えるための管理機構のこと。</p>
+<p>スケジューリングのアルゴリズムについては以下を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">スケジューリング - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.18編集</p>
+</div>
+
+<h2>ラウンドロビン</h2>
+<p>ラウンドロビンは、実行可能なプロセスをひとつひとつ順番に交代して実行するアルゴリズム。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%82%A6%E3%83%B3%E3%83%89%E3%83%AD%E3%83%93%E3%83%B3%E3%83%BB%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">ラウンドロビン・スケジューリング - Wikipedia</a></li>
+</ul>
+
+<h2>多段フィードバックキュー</h2>
+<p>多段フィードバックキューは、複数のFIFOキューを持ち、上位キューから最初に発見した実行可能なプロセスを実行するアルゴリズム。</p>
+<p>多くのOSでプリエンプション（一時的なタスクの停止）ありの多段フィードバックキューが使われている。昔は協調的スケジューラが使われていたOSが多かった。</p>
+<p>Linux 2.4では多段フィードバックキューのO(N)スケジューラ、Linux 2.6からはO(1)スケジューラを採用していた。（オーダー記法については<a href="../prog_lang/algorithm_example.html">具体的なアルゴリズム</a>を参照のこと。）</p>
+<p>また、Linux 2.6.23以降では均等化キューイングベース（汎用OSでは初）のCompletely Fair Scheduler（CFS）が使われている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">スケジューリング - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%A4%9A%E6%AE%B5%E3%83%95%E3%82%A3%E3%83%BC%E3%83%89%E3%83%90%E3%83%83%E3%82%AF%E3%82%AD%E3%83%A5%E3%83%BC">多段フィードバックキュー - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%82%A8%E3%83%B3%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3">プリエンプション - Wikipedia</a></li>
+</ul>
+<p><a href="../prog_lang/data_structure_stack.html">スタックとキュー</a>や<a href="../prog_lang/message_queue.html">メッセージキュー</a>も参照のこと。</p>
+
+<h1>そのほか</h1>
+<h2>プロセスファイルシステム（/proc）</h2>
+<p>プロセスやカーネルの情報を得ることのできる特殊なディレクトリ。以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p><a href="linux_unix_admin.html">UNIXシステム管理（システム情報と設定）</a>も参照のこと。</p>
+
+<h2>MINIX本</h2>
+<p>MINIX本では、プロセス管理・スケジューリングについて詳細が記述されています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+</ul>
+
+<h1>Linuxカーネルドキュメントプロジェクト</h1>
+<h2>Linuxカーネル2.6解読室</h2>
+<p>以下のサイトに、Linuxカーネル2.6解読室という書籍の第2章までが公開されています。</p>
+<ul>
+<li><a href="https://ja.osdn.net/projects/linux-kernel-docs/wiki/FrontPage">Linux Kernel Documents Wiki - Linux Kernel Documents - OSDN</a></li>
+</ul>
+
+<h1>CPU関連ページ</h1>
+<h2>CPU</h2>
+<p>CPUについては<a href="../hardware/cpu.html">CPU</a>や<a href="../hardware/intel.html">Intel</a>や<a href="../hardware/cpu_arch.html">CPUアーキテクチャ</a>や<a href="../prog_lang/assembly.html">アセンブリ言語</a>を参照のこと。</p>
+
+<h2>仮想メモリ</h2>
+<p>仮想メモリについては<a href="linux_kernel_mm.html">Linuxカーネル（メモリ管理）</a>を参照のこと。</p>
+
+<h2>マルチタスク</h2>
+<p>マルチタスクについては<a href="linux_api2.html">Linux API（２．プロセス・メモリ）</a>や<a href="../prog_lang/parallel.html">並列処理</a>を参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

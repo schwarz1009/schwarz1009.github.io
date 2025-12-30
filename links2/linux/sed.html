@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>sed - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>sed</h1>
+<p>sedに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="grep_find_sed_awk.html">grep, find, sed, awk</a></li>
+<ul>
+<li><a href="grep.html">grep</a></li>
+<li><a href="find.html">find</a></li>
+<li><b>sed</b></li>
+<li><a href="awk.html">awk</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>sed</h1>
+
+<h2>sed</h2>
+<!--<p>ストリーム操作の例。</p>-->
+<p><!--特定のカラムだけを表示させたいとか、-->正規表現で検索や置換を行ったり、パターンにマッチする行だけを抜き出したい・削除したいなど、ストリームの編集を行いたい時は、sedを使う。</p>
+<p>コマンド行に変換してbashに送る、などといった荒業も可能だ。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_sed/man1/sed.1.html">man sed</a></li>
+</ul>
+
+<h2>sedの各種コマンド</h2>
+<p>（以下は<a href="http://www.atmarkit.co.jp/ait/articles/1610/17/news015.html">【 sed 】コマンド（基礎編その4）――文字列を置き換える／置換した行を出力する：Linux基本コマンドTips（56） - ＠IT</a>を参考に執筆しました。）</p>
+<p>基本的にsコマンドを使って文字を置換することが多い。s/old/new/という記法となる。また-nはコマンドによる出力以外を出力しない。pは結果を出力する（-nをつけた場合、pをつけないと何も出力されなくなる。）</p>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>解説</th></tr>
+<tr><td>sed s/Linux/FreeBSD/</td><td>sは文字列の置換を行う。</td></tr>
+<tr><td>sed -n s/Linux/FreeBSD/p</td><td>-nでデフォルトの内容を出力せず、<br>pで置換した行だけを出力する。</td></tr>
+<tr><td>sed -n s/Linux/FreeBSD/pg</td><td>gは行に含まれる全てのパターンを置換する。</td></tr>
+<tr><td>sed -n 20,50s/Linux/FreeBSD/p</td><td>sオプションでは、sの前にアドレスシンボルとして<br>行番号（たとえば20,50で20～50行目）か、/パターン/を<br>指定することで、その行だけを対象にできる。<br>たとえば、あるパターンを含む行において、別のパターンの置換を行える。</td></tr>
+<tr><td>sed -n /Linux/s/FreeBSD/OpenBSD/p</td><td>「Linux」というパターンが含まれる行の「FreeBSD」を「OpenBSD」に置換し、<br>置換した行だけを出力する。</td></tr>
+</table>
+<p>他には、行を削除するdコマンドや、UNIXやPerlでよく使われるtrコマンドで置換する（たとえばa-zをA-Zにする）のと同等のyコマンドなどがあります。</p>
+<p>オプションとしては、ストリーム操作して置換した内容をファイルに直接上書きする-iや、コマンドで出力された以外の一切の出力をしない-n、コマンドに追加するためのスクリプトを直接指定する-e、スクリプトのファイルを指定する-f、拡張正規表現を使う-rがよく使われます。</p>
+
+<h2>sedの応用例</h2>
+<p>sedは、使いこなすことでめちゃくちゃ色んなことができます。正規表現と単純なコマンドが威力を発揮します。テキストエディタで手動でテキストを編集する前に、「そのやりたいことがsedでできないか？」を検討するといいでしょう。複数ファイルを編集するなら<a href="find.html">find</a>やxargsを使うことができます。</p>
+<ul>
+<li><a href="http://qiita.com/hirohiro77/items/7fe2f68781c41777e507">sedでこういう時はどう書く? - Qiita</a></li>
+<li><a href="https://hydrocul.github.io/wiki/commands/sed.html">sed コマンド - hydroculのメモ</a></li>
+<li><a href="http://qiita.com/shima_529/items/e68fc81c341249a0cbaa">sedで各種コマンドを作ってみよう - Qiita</a></li>
+</ul>
+
+<h2>sedとパイプでファイル名を一括で変更</h2>
+<p>sedを使ってファイル名を一括で変更する応用テクニック（lsの出力結果をsedでmvのコマンド行に変換してbashに渡す）については以下を参照してください。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1610/18/news008.html">【 sed 】コマンド（応用編）――正規表現を使って文字を置き換える - @IT</a></li>
+</ul>
+<p><a href="linux_bash.html">Bash</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.05.23編集</p>
+</div>
+
+<h2>sedと一緒にviも使おう</h2>
+<p>viは入力されたデータをそのまま出力するためビジュアルエディタと呼ばれる。sedは入力されたデータを行単位で処理するためストリームエディタと呼ばれる。</p>
+<p>sedはコマンドで使うと強力だが、テキストを編集する際にはviを使おう。とても便利で簡単にテキスト処理ができる。sedとviを制するものはLinuxを制す。</p>
+<p><a href="vi.html">vi</a>も参照のこと。</p>
+
+<h2>正規表現</h2>
+<p>grepやsedで使う正規表現については<a href="regex.html">正規表現</a>を参照のこと。</p>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

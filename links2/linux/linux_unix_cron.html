@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理８B（cron） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXシステム管理８B（cron）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観８B（cron）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><b>８B．cron</b></li>
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>cron</h2>
+<h2>cronデーモン</h2>
+<p>定期的に特定の処理を実行してくれる。決まった時間にコマンドを実行することが出来る。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/cron/man8/cron.8.html">man cron</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/cron/man1/crontab.1.html">man crontab(1)</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/cron/man5/crontab.5.html">man crontab(5)</a></li>
+</ul>
+
+<h2>サーバーのバックアップを勝手にやってほしいならcron</h2>
+<p>「サーバーマシンのバックアップやアーカイブの作成なんか、勝手にやってほしい」とか、「NFSに適当に定期的にコピーしてほしい、それもバックグラウンドで」とか、そういう、「バックグラウンドで定期的にやってほしい」というサーバー管理者の想いを叶えてくれるのがcronです。</p>
+<p>基本的には、定期的に実行する「スケジュール」と、やってほしい「処理」を書くだけです。処理にはシェルスクリプトを書くこともできます。</p>
+<p>特に、サーバー管理者のタスクとして、Apacheの設定やSSHでのリモートログインに匹敵する重要なタスクがcronです。ただ、書く処理を間違えると悲惨なことになるので、良く確認しましょう。</p>
+<p>バックアップをUNIXで行う時は、rsyncを使って全ファイルをフォルダごと同期するか、tarを使ってアーカイブを日ごとに作っていくか、どちらかを選択することが多いでしょう。古いアーカイブは自動的に消すようにしても良いでしょう。簡単に一行では書けないところもあるので、詳しくはネットで検索してその情報に頼ってください。</p>
+<p>自分でサーバーのWebアプリケーションを開発するのであれば、最初からMySQLなどで一元的にデータベースを管理することも、信頼性の確保に繋がります。ですが、レンタルサーバーのような場合、全ての顧客のデータをSQLで一元化することは難しいこともあります。cronでrsync/tarを行うのは、そういうニーズが根強いためです。SQLデータベースの使える環境では、最初からRDBMSを使いましょう。</p>
+<p>SQLデータベースを使う場合は、「差分のバックアップ」と「全体のバックアップ」を上手く管理する必要があります。それぞれのデータベース管理システムで、こうした機能は必ずあります。UNIXのファイルシステムには、そもそも、バージョンを管理する機能もありません。バージョンを管理したい時は、gitなどのバージョン管理システムでひとつひとつコミットするか、あるいはtarで毎日バックアップするしかありません。そういうわけで、cronには限界がありますが、使えないわけではありません。</p>
+<p>注意：UNIXでのバックアップとしてtarやrsyncが一般的であるかのようなことを書きましたが、FreeBSDハンドブックにもあるように、多くの場合UNIXで最も一般的なのはdumpとrestoreというコマンドで、/dev/sda1のようなブロック型のデバイスをいっぺんにバックアップ・復旧することができます。ですが、イメージファイルが巨大になる上に、イメージ単位でのバックアップになるため、ファイルシステムの一部だけをバックアップしたり、複数のファイルシステムにまたがるディレクトリツリーをバックアップすることができません。dumpとrestoreは、大事なデータのバックアップというよりも、システム全体の復旧をしたい時に有効です。通常、大事なデータのバックアップには、tar, rsync, cpioなどのコマンドを使います。ですが、システム管理者になりたいのであれば、dump, restore, ddなどのコマンドも覚えておくと良いでしょう。</p>
+<p>後日注記：そもそも、データベース管理システムを使う場面というのは、「億単位のデータから瞬時に検索する」場合のように、本当にデータの信頼性と性能が必要な場合だけです。多くの設定ファイルや個人データなどで、データベース管理システムを使うというのは考えられません。よって、そうしたデータはcronでバックアップを取りましょう。その代り、上手くやらなければ「たくさん圧縮ファイルが生まれて訳が分からない」ことになるので、古いデータは自動で削除するなどの処理をスクリプトに書いて、そのスクリプトをcronで実行するようにします。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-backup">【概要を一通り】Linuxのバックアップについてのまとめ - エンジニアの入り口</a></li>
+<li><a href="https://www.freebsd.org/doc/ja_JP.eucJP/books/handbook/backup-basics.html">15.9. バックアップの基本 - FreeBSD ハンドブック</a></li>
+</ul>
+
+<h2>設定の例</h2>
+<p>システムのcrontab（/etc/crontab）の書式は以下のようになる。</p>
+<pre>
+* * * * * 実行ユーザー名 コマンド
+</pre>
+<p>設定項目は左から分、時、日、月、曜日となっている。*を指定すると指定しないことになる。</p>
+<p>ユーザーのcrontabは、crontab -eコマンドで設定する。このファイルは/var/spool/cron/以下に配置される。</p>
+<pre>
+$ crontab -e
+</pre>
+<p>crontab -eコマンドを使用した場合、実行ユーザー名については記述しなくてよい。</p>
+<p>たとえば、</p>
+<pre>
+00 23 * * 5 bash /home/assy/for_cron.sh
+</pre>
+<p>とすれば、毎週金曜日の23:00にスクリプトを実行してくれる。</p>
+<p>/etc/crontabはこのようになっていることが多い（一部分のみ）。</p>
+<pre>
+17 * * * * root run-parts /etc/cron.hourly
+25 6 * * * root run-parts /etc/cron.daily
+47 6 * * 7 root run-parts /etc/cron.weekly
+52 6 1 * * root run-parts /etc/cron.monthly
+</pre>
+<p>run-partsはディレクトリ以下にあるすべてのスクリプト・プログラムを実行するコマンド。</p>
+<p>設定ファイルはこのように使い分ける。</p>
+<table class="some_tables">
+<tr>
+<th>ファイル</th>
+<th>ユーザ</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>/var/spool/cron/[ユーザー名]</td><td>全ユーザ</td><td>ユーザ別のcron設定ファイル</td>
+</tr>
+<tr>
+<td>/etc/crontab</td><td>root</td><td>メインのcron設定ファイル</td>
+</tr>
+<tr>
+<td>/etc/cron.hourly</td><td>root</td><td>毎時一回実行されるディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.daily</td><td>root</td><td>毎日一回実行されるディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.monthly</td><td>root</td><td>毎月一回実行されるディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.weekly</td><td>root</td><td>毎週一回実行されるディレクトリ</td>
+</tr>
+<tr>
+<td>/etc/cron.d</td><td>root</td><td>その他の設定を入れるディレクトリ</td>
+</tr>
+</table>
+<p>（<a href="https://www.express.nec.co.jp/linux/distributions/knowledge/system/crond.html">cron の設定ガイド - Linuxべんりな動作情報 ナレッジベース：環境設定 - Express5800シリーズポータル - NEC</a>を参考に執筆しました。/etc/crontabの記述についてはDebian 11の/etc/crontabを参考に編集しています。）</p>
+
+<h2>例：毎日のデータをアーカイブしてバックアップ</h2>
+<p>以下は、毎日のデータをアーカイブしてバックアップする例。</p>
+<p>まず、以下のようなシェルスクリプトを書く。</p>
+<pre class="prettyprint">
+#!/bin/bash
+
+DATA_DIR=/home/assy/data
+BACKUP_DIR=/home/assy/data_backup
+FILENAME=$(date +%Y.%m.%d).data_backup.tar.gz
+
+cd $BACKUP_DIR
+tar czpf $FILENAME $DATA_DIR
+</pre>
+<p>まず、dateは現在の年と月と日を得る。+の後に続く文字列がフォーマットを表し、%Yが年、%mが月、%dが日に自動で変換される。</p>
+<p>次に、tarのオプションは、cがアーカイブ作成、zがgzip形式で圧縮、pが所有者やパーミッションなどのファイル属性の保持、fがファイル名の指定を意味する。</p>
+<p>このファイルを/home/assy/assy_data_backup.shとし、実行可能のパーミッション属性を与える。</p>
+<pre>
+$ chmod u+x /home/assy/assy_data_backup.sh
+</pre>
+<p>そしてcrontab -eコマンドを実行し、</p>
+<pre>
+$ crontab -e
+</pre>
+<p>以下のように記述する。</p>
+<pre>
+30 23 * * * bash /home/assy/assy_data_backup.sh
+</pre>
+<p>/etc/crontabを編集する場合は、実行ユーザー名を指定する。</p>
+<pre>
+30 23 * * * assy bash /home/assy/assy_data_backup.sh
+</pre>
+<p>これで、毎日23時30分にバックアップファイルをアーカイブしてくれる。</p>
+<p>一度、cronではなく直接実行してみて、きちんと動くかどうかを試してみよう。</p>
+<pre>
+$ bash /home/assy/assy_data_backup.sh
+</pre>
+<ul>
+<li><a href="https://hydrocul.github.io/wiki/commands/date.html">date コマンド | コマンドの使い方(Linux) | hydroculのメモ</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/1608/15/news015.html">【 tar 】コマンド――アーカイブファイルを作成する／展開する：Linux基本コマンドTips（40） - ＠IT</a></li>
+<li><a href="https://bacchi.me/linux/backup-by-cron/">Linuxで定期的にバックアップを取得する | bacchi.me</a></li>
+<li><a href="https://self-development.info/crontab%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9%E3%80%8C%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E3%83%95%E3%83%AB%E3%83%91%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A/">crontabの書き方「シェルスクリプトのフルパスを設定する」  |  ジコログ</a></li>
+<li><a href="https://frontend-engineer.net/cron/196">CRONでシェルスクリプトを動かす方法 &#8211; 魔王様、フロントエンドエンジニアを目指す</a></li>
+<li><a href="http://www.server-memo.net/tips/crontab.html">crontabの書き方 - server-memo.net</a></li>
+</ul>
+
+<h2>crontab参考ページ</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.server-memo.net/tips/crontab.html">crontabの書き方 | server-memo.net</a></li>
+<li><a href="https://www.server-memo.net/tips/etc-crontab.html">/etc/crontabと/etc/cron.d設定ファイルの書き方 | server-memo.net</a></li>
+</ul>
+
+<h2>rsyncとcron+tarで自動バックアップ</h2>
+<p>以下が参考になる。</p>
+<ul>
+<li><a href="http://arakanoj.com/tips/rsync-%E3%81%A7%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97.html">rsync でバックアップ | Linux実践講座</a></li>
+<li><a href="https://bacchi.me/linux/backup-by-cron/">Linuxで定期的にバックアップを取得する | bacchi.me</a></li>
+</ul>
+
+<h2>bcron, dcron, fcron, cronie</h2>
+<p>bcron, dcron, fcron, cronieはそれぞれ、cronデーモンを提供するパッケージ。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Tools/ja">ツールのインストール - Gentoo Wiki</a></li>
+</ul>
+
+<h2>anacron</h2>
+<p>anacronはcronと同等の定期的実行システムだが、システムが24時間常に稼働することを前提としない。たまに起動するシステムであってもcronと同等の定期実行が行える。</p>
+<p>cronと異なり最小でも一日単位でしか定期実行できないが、もし実行すべきタイミングでシステムが稼働していなかったら、後になってその実行をもう一度行ってくれる。</p>
+<ul>
+<li><a href="https://e-words.jp/w/anacron.html">anacronとは - 意味をわかりやすく - IT用語辞典 e-Words</a></li>
+<li><a href="https://wa3.i-3-i.info/word11749.html">anacronとは｜「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典</a></li>
+</ul>
+
+<h2>systemd timer</h2>
+<p>システムロガーと同様、長らくcronだった定期的な時間処理は、systemd timerを使ってやるようになった。</p>
+<p><a href="systemd.html">systemd</a>を参照のこと。</p>
+
+<h2>シェルスクリプトを作ってcron.dailyなどに放り込めばよい</h2>
+<p>cronは難しいと思われるかもしれないが、基本的にシェルスクリプトを作ってcron.dailyなどに放り込めばよい。</p>
+<p>スクリプトにchmodで実行権限をつけておこう。</p>
+<p>systemdに移行したディストリビューションであっても、引き続きcronを使い続けられることが多い。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

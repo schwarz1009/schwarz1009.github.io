@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"  href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<title>学校、ロボット、人生 - schwarz1009</title>
+
+</head>
+<body>
+<p><a href="index.html">トップページに戻る</a></p>
+<iframe src="menu_menu.html" class="iframe_menu"></iframe>
+<p>AUTHOR: schwarz1009<br>
+TITLE: 学校、ロボット、人生<br>
+BASENAME: 2020/04/26/092443<br>
+STATUS: Publish<br>
+ALLOW COMMENTS: 1<br>
+CONVERT BREAKS: 0<br>
+DATE: 04/26/2020 09:24:43<br>
+CATEGORY: 人生<br>
+CATEGORY: 人工知能<br>
+CATEGORY: Python<br>
+CATEGORY: おすすめ
+
+</p>
+<ul class="table-of-contents">
+    <li><a href="#学校の問題">学校の問題</a></li>
+    <li><a href="#ロボット">ロボット</a></li>
+    <li><a href="#僕は導きの中に存在する">僕は導きの中に存在する</a></li>
+    <li><a href="#経験">経験</a></li>
+    <li><a href="#戦い">戦い</a></li>
+    <li><a href="#心の解明">心の解明</a></li>
+    <li><a href="#世界は常に生み出されている">世界は常に生み出されている</a></li>
+    <li><a href="#創造">創造</a></li>
+    <li><a href="#文章">文章</a></li>
+    <li><a href="#過去への執着">過去への執着</a></li>
+    <li><a href="#日々の発見の積み重ね">日々の発見の積み重ね</a></li>
+    <li><a href="#耐えるしかない苦しみ">耐えるしかない苦しみ</a></li>
+    <li><a href="#比較ではなく他人から学ぶ">比較ではなく他人から学ぶ</a></li>
+    <li><a href="#自分の周りに師がいることの幸せ">自分の周りに師がいることの幸せ</a></li>
+    <li><a href="#この世界にはさまざまなものがある">この世界にはさまざまなものがある</a></li>
+    <li><a href="#パソコンとLinuxの夢をもう一度">パソコンとLinuxの夢をもう一度</a></li>
+    <li><a href="#もう一度過去を思い出す">もう一度過去を思い出す</a></li>
+    <li><a href="#考えられないような不可能を解明する">考えられないような不可能を解明する</a></li>
+    <li><a href="#昔の人生のまとめ">昔の人生のまとめ</a></li>
+</ul>
+<div class="section">
+    <h3 id="学校の問題">学校の問題</h3>
+    <p>学校の問題とは、言葉を覚えて分かろうとするところにある。<br />
+言葉を覚えようとするな。<br />
+数字を覚えようとするな。<br />
+全体の構造が分かったところで、ただ構造しか分かっていない。<br />
+目的や意味を考えなければ、分かったとは言えない。<br />
+たとえば、5という数字がある。<br />
+何でも数字で考える人間は、最初から5という数字で考える。<br />
+しかしながら、その量が5という数になるかどうかは、<br />
+基準となる単位次第で変わってくる。<br />
+また、言葉で考える時に、<br />
+「考える言葉で考える」か、<br />
+「覚える言葉で考える」かは問題である。<br />
+覚える言葉で考えていると、本質を見失う。<br />
+考える言葉で考えることで、考え方それ自体を深く考えられる。<br />
+また、対象が何であるか、ということよりも、<br />
+その対象をどうやって治すか、ということの方が、<br />
+精神の病気を治す上では重要である。<br />
+言葉で考えるのはいいが、<br />
+言葉を突き詰めることだけが全てではない。<br />
+学校は言葉を覚えさせるだけで、考える力を奪う。<br />
+実際の「実相」を見ることができる人間に、<br />
+学校の知識や専門用語は必要ない。</p>
+
+</div>
+<div class="section">
+    <h3 id="ロボット">ロボット</h3>
+    <p>以下は僕の開発した超単純なロボット。</p>
+<pre class="code lang-python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+<span class="synComment"># 初版作成 Assy, 在導万創</span>
+
+<span class="synPreProc">import</span> sys
+
+<span class="synStatement">class</span> <span class="synIdentifier">Robot</span>:
+    <span class="synStatement">def</span> <span class="synIdentifier">__init__</span>(self):
+        self.ego = <span class="synConstant">0</span>
+        
+    <span class="synStatement">def</span> <span class="synIdentifier">msg_loop</span>(self):
+        <span class="synStatement">while</span> <span class="synIdentifier">True</span>:
+            e = self.view()
+            self.action(e)
+    
+    <span class="synStatement">def</span> <span class="synIdentifier">action</span>(self, msg):
+        self.do(msg)
+        self.think(msg)
+        self.make_ego(msg)
+        
+    <span class="synStatement">def</span> <span class="synIdentifier">do</span>(self, msg):
+        <span class="synStatement">if</span> msg == <span class="synConstant">0</span>:
+            <span class="synIdentifier">print</span>(<span class="synConstant">'晴れだ'</span>)
+            
+        <span class="synStatement">elif</span> msg == <span class="synConstant">1</span>:
+            <span class="synIdentifier">print</span>(<span class="synConstant">'雨だ'</span>)
+    
+    <span class="synStatement">def</span> <span class="synIdentifier">think</span>(self, msg):
+        <span class="synStatement">if</span> msg == <span class="synConstant">0</span>:
+            <span class="synIdentifier">print</span>(<span class="synConstant">'散歩に出かけよう'</span>)
+        <span class="synStatement">elif</span> msg == <span class="synConstant">1</span>:
+            <span class="synIdentifier">print</span>(<span class="synConstant">'家の中に居よう'</span>)
+            
+        <span class="synStatement">if</span> self.ego &gt; <span class="synConstant">20</span>:
+            <span class="synIdentifier">print</span>(<span class="synConstant">'僕もそろそろ大人になったなあ'</span>)
+    
+    <span class="synStatement">def</span> <span class="synIdentifier">make_ego</span>(self, msg):
+        <span class="synComment">#自我を作る</span>
+        self.ego += <span class="synConstant">1</span>
+        <span class="synStatement">if</span> self.ego &gt; <span class="synConstant">100</span>:
+            <span class="synIdentifier">print</span>(<span class="synConstant">'死にました'</span>)
+            sys.exit()
+        
+    <span class="synStatement">def</span> <span class="synIdentifier">view</span>(self):
+        <span class="synComment">#外を見て、晴れ(0)か雨(1)かを判断する</span>
+        <span class="synComment">#ここでは常に0</span>
+        <span class="synStatement">return</span> <span class="synConstant">0</span>
+
+<span class="synStatement">if</span> __name__ == <span class="synConstant">&quot;__main__&quot;</span>:
+    rb = Robot()
+    rb.msg_loop()
+</pre><p>viewメソッドのreturn 0を1にしたりして遊んでみてほしい。<br />
+また、ロボットが認識で考えるために、イベントを3ステップで行う。<br />
+まず、「青」というイベント。ここでロボットは「青とはどういう意味か」を考える。答えは「色」。<br />
+次に、イベントが「どこから入ってきたか」という「対象物」を考える。答えは「信号」。<br />
+ここで、ロボットは「信号の色は青い」というセンテンスを作り出す。<br />
+コードは以下のようになる。</p>
+<pre class="code lang-python" data-lang="python" data-unlink><span class="synStatement">class</span> <span class="synIdentifier">Robot</span>:
+    <span class="synStatement">def</span> <span class="synIdentifier">think</span>(self, event, meaning, target):
+        <span class="synStatement">if</span> target == <span class="synConstant">&quot;signal&quot;</span> <span class="synStatement">and</span> meaning == <span class="synConstant">&quot;color&quot;</span>:
+            self.think_signal_color(event)
+
+    <span class="synStatement">def</span> <span class="synIdentifier">think_signal_color</span>(self, color):
+        <span class="synStatement">if</span> color == <span class="synConstant">&quot;blue&quot;</span>:
+            self.can_go = <span class="synIdentifier">True</span>
+
+    <span class="synStatement">def</span> <span class="synIdentifier">go</span>(self):
+        <span class="synStatement">if</span> self.can_go == <span class="synIdentifier">True</span>:
+            go_forward()
+
+rb = Robot()
+rb.think(<span class="synConstant">&quot;blue&quot;</span>, <span class="synConstant">&quot;color&quot;</span>, <span class="synConstant">&quot;signal&quot;</span>)
+rb.go()
+</pre><p>これらのコードはMITライセンスで公開する。自由に使ってもらって構わない。できれば僕の名前である「在導万創」という名前を入れて転載してくれると嬉しい。</p>
+
+</div>
+<div class="section">
+    <h3 id="僕は導きの中に存在する">僕は導きの中に存在する</h3>
+    <p>僕は、今までの14年間、この世界の「導きの中に存在した」。<br />
+他にどの場所にも存在しない。<br />
+この世界を導き、歴史と星を作り上げた。<br />
+それが、この優しい世界である。</p>
+
+</div>
+<div class="section">
+    <h3 id="経験">経験</h3>
+    <p>自らが自由になった経験から、<br />
+自分の経験をどのようにすれば成立することができるのかを考えなさい。<br />
+リアリズムの中でアイデンティティと価値観をどのようにすれば成立できるか、<br />
+自由をどのようなモデルで成り立たせられるのかを考えなさい。</p>
+
+</div>
+<div class="section">
+    <h3 id="戦い">戦い</h3>
+    <p>戦いなさい。<br />
+支配者となって、自由な世界へと世界を導きなさい。<br />
+神を信じて、ひとり世界と立ち向かい、<br />
+永遠を体験し、最後まで自由でありなさい。</p>
+
+</div>
+<div class="section">
+    <h3 id="心の解明">心の解明</h3>
+    <p>心のふるまいと環境における行動を解明したら、<br />
+精神世界を分析し、<br />
+全ての宇宙の存在を捉えなさい。<br />
+どのような時にどうなるかを考えて、<br />
+心の涅槃を知り、本当に自由になる喜びを知りなさい。</p>
+
+</div>
+<div class="section">
+    <h3 id="世界は常に生み出されている">世界は常に生み出されている</h3>
+    <p>世界は常に生み出されている。<br />
+善悪の全てを知ったら、<br />
+この世界の全員が愛されるように、心の変化を促すことで世界を変え、<br />
+自ら世界に現れ、<br />
+最後まで人々を愛しなさい。</p>
+
+</div>
+<div class="section">
+    <h3 id="創造">創造</h3>
+    <p>天地を創造し、永遠を体験しなさい。<br />
+何も分からなくても、最後まで耐え続ければ、<br />
+神はあなたの精神に宿り、あなたを救ってくれるだろう。</p>
+
+</div>
+<div class="section">
+    <h3 id="文章">文章</h3>
+    <p>過去の自分の人生を題材にして、<br />
+すべての人間に表明するような気持ちで、<br />
+文学作品を作りなさい。<br />
+政治経済など、あらゆる自由な社会のモデルを、<br />
+文章の中で成り立たせ、<br />
+自由な制度が実現するように記述しなさい。<br />
+自分からなった精神の病気を、自分で最後まで治しなさい。<br />
+過去の自分の人生を完全に記述したら、<br />
+新しい人生へと進むために、哲学や歴史を勉強しなさい。<br />
+最後に、神を信じ続けなさい。<br />
+神に対して自分の目標を宣言し、世界に約束すれば、<br />
+自らが神となって、自らの全てを神は教えてくれるだろう。<br />
+宇宙と人生の歴史すべてを記述したら、<br />
+この世界の全てを自分は既に知っている。<br />
+そうした時、自らの魂は神になる。<br />
+その神は、この宇宙と人生のすべてを教えてくれる。</p>
+
+</div>
+<div class="section">
+    <h3 id="過去への執着">過去への執着</h3>
+    <p>過去に執着する人間は、時間を無駄にする。<br />
+ただし、過去への執着を断ち切ることは難しい。<br />
+好きなことをやることが、<br />
+精神病の改善にとっていい方向に進むこともある。<br />
+やりたいなら、やればいい。その間、神は自分を守ってくれる。<br />
+いずれ、自分の犯した全ての罪を清算しなければならない時が来る。<br />
+信じなさい。全ての問題はいずれ完全に解決すると信じれば、<br />
+必ずあなたは病気の壁を乗り越え、偉大な作家となるだろう。</p>
+
+</div>
+<div class="section">
+    <h3 id="日々の発見の積み重ね">日々の発見の積み重ね</h3>
+    <p>日々の発見の積み重ねは、<br />
+全部集めるととても大きなものになる。<br />
+ピアノもデザインも、考えてやり方が分かってしまえば、<br />
+その発見は才能と力になる。<br />
+流れに身を任せながら、<br />
+自らの力で解決できそうなことを発見していきなさい。</p>
+
+</div>
+<div class="section">
+    <h3 id="耐えるしかない苦しみ">耐えるしかない苦しみ</h3>
+    <p>耐えるしかない苦しみは、<br />
+人間が大人になる上で、どうしても避けられない。<br />
+疲れ、恐怖、不安、緊張、迷い、悩み、後悔、罪悪感、<br />
+さまざまなことが僕たちを襲ってくる。<br />
+でも、負けることはできない。<br />
+それならば、いっそその苦しみを自分の力にしなさい。<br />
+逆境と涙を自分の力にすれば、<br />
+それに敵うライバルは存在しない。</p>
+
+</div>
+<div class="section">
+    <h3 id="比較ではなく他人から学ぶ">比較ではなく他人から学ぶ</h3>
+    <p>他人と比較するのではなく、<br />
+他人から学びなさい。<br />
+当たり前に、自分よりも優れた人というのは居るものである。<br />
+その出会いに感謝して、その他人から学べば、<br />
+いつしか、いつの間にか、あるいはきっと、<br />
+同じぐらいの地点に自分も到達するものだ。</p>
+
+</div>
+<div class="section">
+    <h3 id="自分の周りに師がいることの幸せ">自分の周りに師がいることの幸せ</h3>
+    <p>自分の周りに師がいる、というのは幸せである。<br />
+自分だけで学ぶのではなく、<br />
+そうした人々からさまざまなことを教わることができる。<br />
+いつしか、そうした人々から、<br />
+この世界すべてのことを学ぶことができる。<br />
+自然科学も、工学も、パソコンも、デザインも、ピアノも、<br />
+学ぶことなくして、成長することはない。<br />
+師がそこにいれば、いる間にたくさんのことを学ぶために、<br />
+学んだことをノートに書きなさい。<br />
+書くことで、自分なりに「作品」のように、<br />
+自分のノートを作ることで成長できる。<br />
+覚えて試験をするのは苦手でも、<br />
+自分で作品を作るなら得意な人は多い。</p>
+
+</div>
+<div class="section">
+    <h3 id="この世界にはさまざまなものがある">この世界にはさまざまなものがある</h3>
+    <p>この世界には、何もないようで、さまざまなものがある。<br />
+たとえば、地学や生物学は、<br />
+学校の教科書はつまらないかもしれないが、<br />
+大人になって学ぶと、面白さや興味深さが分かってくる。<br />
+必要なのは、教科書を暗記することではなく、<br />
+ポイントを絞ってノートにまとめることである。<br />
+それができれば、神羅万象の全てを知り尽くすことができる。</p>
+
+</div>
+<div class="section">
+    <h3 id="パソコンとLinuxの夢をもう一度">パソコンとLinuxの夢をもう一度</h3>
+    <p>また、パソコンとLinuxを一度諦めたからと言って、<br />
+大人になって再度挑戦してはならないわけではない。<br />
+大人になった自分は、どんな本を読めばいいかを知っているし、<br />
+ノートにまとめるという優れた方法論も分かっている。<br />
+Linuxやプログラミングのことも、ノートにまとめなさい。<br />
+ホームページを作っても良いだろう。<br />
+再チャレンジすることで、今度はまた別の視点から、<br />
+パソコンやインターネットのさまざまなものに触れ合うことができる。</p>
+
+</div>
+<div class="section">
+    <h3 id="もう一度過去を思い出す">もう一度過去を思い出す</h3>
+    <p>最後に、もう一度過去の全てを思い出そう。<br />
+どんなことを考え、どんなことがあったか、<br />
+あやふやで曖昧でもいいから、何でもかんでも書いていけばいい。<br />
+色んな時に色んなことに気づいて、<br />
+「確かにそうだった」ということが見えてくる。<br />
+特に良いのは、哲学者や思想家の思想から学ぶこと。<br />
+同じことを考えた思想家の考え方や発想を知ることで、<br />
+「過去の自分を再度知りなおす」ことができる。<br />
+人間というのはよく似ていて、<br />
+多くの人が、狭い環境から広い環境を知ったり、成長したりする中で、<br />
+同じことを同じように考え、経験している。<br />
+それらの哲学者を知れば、おのずと、<br />
+自らの悪の中にある善、罪の中の懺悔、陰の中の光を知ることができる。</p>
+
+</div>
+<div class="section">
+    <h3 id="考えられないような不可能を解明する">考えられないような不可能を解明する</h3>
+    <p>また、このようになんでもかんでも書いていると、<br />
+その時のハッとしたひらめきから、<br />
+「考えられないような不可能を解明する」ことができる。<br />
+これはエジソンの発明のようなもので、<br />
+その時にしか分からないことを、書き記しておくことで、<br />
+自分の作ったもののみからこの宇宙の真実全てを発見できるのである。<br />
+僕の場合、必ず、毎日ひとつはそうした発見がある。<br />
+だから、僕は文章を書くことが続くのである。</p>
+
+</div>
+<div class="section">
+    <h3 id="昔の人生のまとめ">昔の人生のまとめ</h3>
+    <p>昔の人生をまとめると、<br />
+・自らが自由になって分かった<br />
+・経験を成立する方法を考えた<br />
+・狭い世界から広い世界になって分かった<br />
+・青春のような体験をインターネットでした<br />
+・自分だけで孤独な中よく考え、家族ともあまり触れ合わない中で行動し、経験した<br />
+・社会を変えることを目指した<br />
+・思考と気づきによって、哲学を作った<br />
+・世界モデルを作った<br />
+・環境における行動の理由や精神の抑圧の理由を考えた<br />
+・人々のせいにしなかった<br />
+・人々や子供たちを愛した<br />
+などとなる。この14～17歳のごろの経験が、僕の今の人生の基本になっている。</p>
+
+</div>
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+

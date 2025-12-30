@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Emacs関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Emacsの世界観</h1>
+<p>Emacsの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>GNU Emacs</h1>
+
+<h2>Emacsとは</h2>
+<p>Emacsは、GNUプロジェクト創始者のリチャード・M・ストールマンによるテキストエディタ。</p>
+<p>テキストエディタとは言われているものの、実際はEmacs Lispの実装を内蔵していることから、「Lispによって拡張可能なエディタ兼環境」として知られている。</p>
+<p>エディタ兼環境と呼ばれる理由は、そのELispによるたくさんのアプリケーションがあることから言われている。たとえば、メールクライアントになったり、コマンドラインシェルになったり、時には２ちゃんねるブラウザになったりもする。</p>
+<p>.emacsと呼ばれるファイルによって、Lispで高度な設定をすることで、Emacsの内部を途方もないほどにカスタマイズできる。そしてそこにELispを投入すれば、まさに「何でもできる」。ビル・ジョイによるUNIX標準のテキストエディタviとともに、「どちらが最強か」を議論することが多く、良く「宗教戦争」と呼ばれている。viはexエディタを前身としながら、ありえないキーバインドをしていることで、「最高のテキストエディタはどちらか」という永遠の命題がUNIXでは定番である。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Emacs">Emacs - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/emacs.git">git</a></li>
+</ul>
+
+<h2>Emacsの特徴</h2>
+<p>Emacsの特徴として、「Emacsはテキストエディタでありながら環境である」という標語が有名である。</p>
+<p>Emacsは、単にテキストエディタとして使っても優秀である。それぞれのプログラミング言語を識別し（メジャーモード）、自動補完や日本語入力などの機能（マイナーモード）も使うことができる。</p>
+<p>だが、Emacsを単なるテキストエディタとして使っている人は多くない。多くの人々が、Emacsを「環境」として使っている。</p>
+<p>Emacsは、Emacsそれ自体がさまざまなアプリケーション、たとえばメールクライアントなどになることができるような、アプリケーションを動かすための「環境」として使用できる。</p>
+<p>インターネットには膨大なEmacsアプリケーション（Emacs Lispアプリケーション）があり、そのすべてをEmacsに導入することができる。</p>
+<p>また、EmacsはLisp処理系でもある。EmacsはEmacs Lispという独自のLisp方言が動作する処理系として使用できる。これが、UNIXハッカーを魅了する点である。多くのUNIXハッカーは、BASICやC/C++のような、抽象度の低い手続き型言語ではなく、Lispのような抽象度の高い関数型言語を好む。LispではBASICやC/C++では簡単にできないことが簡単にできる。なので、Lispで簡単なアプリケーションを書くために、Emacsを「環境」として使用できる。つまり、Emacsは一種のOSのようなものなのである。</p>
+<p>Emacsは、GTKのGUIインターフェースもある（昔はMotifインターフェースだった）が、CUIのコンソールで動く黒画面のEmacsもある。CUIのEmacsはX11の入っていない環境（たとえばサーバーなど）でも使用できる。なので、「Linuxは黒画面でEmacsを使うために使う」という人も多い。</p>
+<p>Emacsはカスタマイズ性がとても高い。.emacsというファイルにLispコードを書くことでカスタマイズできるし、EmacsアプリケーションはすべてEmacs Lispで書かれているため、Emacs Lispアプリケーションを導入することで無限にカスタマイズできる。このような「カスタマイズ性が高い」あるいは「拡張性が高い」ということは、Linuxととても親和性が高い。Mozilla FirefoxやGNOMEなどが「拡張によってカスタマイズできる環境」を作っているのは、ひとえにEmacsが「拡張可能なエディタの元祖」として存在していたからであると言える。</p>
+<p>また、Emacsがviに比べて優れているのは、キーボードショートカットがまともだということだ。確かに、M-xとかC-xのような独自の表記法に慣れる必要はあるし、Windowsとは異なるキーボードショートカットこそ使うが、viに比べればはるかに癖がなく、現代的な普通のエディタとして使うことができる。</p>
+<div class="edit_date">
+<p>2024.01.05</p>
+</div>
+
+<h2>公式のチュートリアル</h2>
+<p>Emacsには標準で「チュートリアル」が含まれており、'C-h t'（Ctrlキーを押しながらhキーを押し、次にCtrlキーを離してtキーを押す」で表示できる。</p>
+<p>言語を変えるには、'help-with-tutorial-spec-language'コマンドを使う（Alt+xの後にこれを記述して実行）。日本語（ja）にも対応してある。</p>
+<p>公式のチュートリアルを読めばきっと人並みに使えるようになるはずである。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://www.emacswiki.org/emacs/Emacs%E3%83%93%E3%82%AE%E3%83%8A%E3%83%BC">Emacsビギナー - EmacsWiki</a></li>
+</ul>
+
+<h2>Emacsの日本語マニュアル</h2>
+<p>Emacsドキュメントの日本語版について、昔は「Emacs 電子書棚」という多くのEmacsやGNUユーティリティなどのドキュメントを日本語に訳されていた方がいらっしゃったのですが、どうやら無くなった模様です。</p>
+<p>GNU Emacsの日本語の情報は以下のようなページがあります。</p>
+<ul>
+<li><a href="https://ayatakesi.github.io/">GNU Emacs 和訳マニュアルの公開</a></li>
+<li><a href="http://flex.phys.tohoku.ac.jp/texi/emacs-jp/emacs-jp_toc.html">GNU Emacs Manual</a></li>
+</ul>
+<p>後日注記：Emacs電子書棚さんのサイトは再び閲覧できるようになっています。</p>
+<ul>
+<li><a href="https://bookshelf.jp/">Emacs 電子書棚</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.09.25編集</p>
+</div>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Emacs">Emacs - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>Emacsの基本</h1>
+<h2>キーバインド</h2>
+<p>Emacsのキーバインド。</p>
+<table class="some_tables">
+<tr><th class="min60">キー</th><th>説明</th></tr>
+<tr><td>C-x</td><td>Ctrlキーを押しながらxを押す。</td></tr>
+<tr><td>M-x</td><td>AltキーやESCキーを押しながらxを押す。</td></tr>
+</table>
+<ul>
+<li><a href="http://www.aise.ics.saitama-u.ac.jp/~gotoh/EmacsKeybind.html">Emacsのキーバインド覚書 - Yuichi Goto's page</a></li>
+<li><a href="https://qiita.com/ikep/items/45f08a34e3d8cc3e2e40">Emacs基本操作を含めたコマンドまとめ - Qiita</a></li>
+</ul>
+
+<h2>Emacsの使い方</h2>
+<p>基本的に、</p>
+<pre>
+emacs ファイル名
+</pre>
+<p>としてファイルを読み込み、作成。</p>
+<p>C-zで、保存して終了。C-x C-cで強制終了。C-x C-fでファイルの読み込み。C-x C-sでファイルの保存。C-x C-wで名前を付けてファイルの保存。</p>
+<p>文字列検索は、前方がC-s（search）、後方がC-r（reverse）。置換モードは、M-%。</p>
+<p>C-gで、入力や実行を取りやめる。</p>
+<p>（以上は「<a href="https://www.amazon.co.jp/%E6%83%85%E5%A0%B1%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96-%E5%96%9C%E4%B9%85%E5%B7%9D-%E6%94%BF%E5%90%89/dp/4873613515">情報基礎概論 第4版 喜久川政吉・殿塚勲 共著（学術図書出版社）</a>」を参考に執筆しました。）</p>
+
+<h2>Emacsの使い方２</h2>
+<p>基本的に、C-xで基本的なEmacsの機能を呼び出す。また、C-cでメジャーモードの機能を呼び出す。</p>
+<p>またM-xはコマンドを直接名前で指定して実行することができる。キーボードショートカットを覚えていない時に有用。</p>
+<p>C-/で元に戻す（アンドゥ）。C-spc（スペース）で選択を開始する。C-x hですべてを選択。C-wで切り取り。M-wでコピー。C-kで行の切り取り。C-yで貼り付け。</p>
+<p>C-vで一画面下へ。M-vで一画面上へ。M-&lt;でバッファの最初に移動。M-&gt;でバッファの最後に移動。</p>
+<p>（以上は<a href="https://emacs-jp.github.io/tips/emacs-in-2020">2020年代のEmacs入門 | Emacs JP</a>を参考に執筆しました。）</p>
+
+<h2>Emacs Lisp</h2>
+<p>テキストエディタのEmacsはLispインタプリタを内蔵していることで有名です。Lispの実行環境になっているので、エディタなのにメールクライアントになったりします。</p>
+<p><a href="../prog_lang/lisp.html">Lisp</a>も参照のこと。</p>
+
+<h1>モード</h1>
+<h2>モードについて</h2>
+<p>Emacsには状況によってEmacsの動作を変える「モード」というものがあり、これをLispで設定したりLispを導入することによって、動作を変えられる。</p>
+
+<h2>メジャーモード</h2>
+<p>メジャーモードは、1つのモードが多くの（唯一の）動作を決める。</p>
+<p>C言語のソースファイルを開くと自動的にc-modeになるのがこれに当たる。</p>
+<p>sh-modeはシェルスクリプトの編集のためのモード。</p>
+<p>メジャーモードはキーワードの色づけやキーバインドを設定するだけでなく、M-x shellのようにEmacsをコマンドラインシェルにするようなモードもある。</p>
+<p>後日注記：シェルモードにはいくつか種類があります。M-x shellは標準のシェルモードです。ほかにansi-termやmulti-termやeshellがあります。以下のページが参考になります。</p>
+<ul>
+<li><a href="https://blog.inouetakuya.info/entry/20110627/1309175529">Emacs のシェルモード比較 - shell、ansi-term、multi-term - 彼女からは、おいちゃんと呼ばれています</a></li>
+</ul>
+
+<h2>マイナーモード</h2>
+<p>マイナーモードは、たくさんのモードにおいて共通の小さなモードを決める。</p>
+<p>仮名漢字変換エンジンのSKKのマイナーモードがこれに当たる（設定するとSKKで日本語入力ができるようになる）。</p>
+
+<h2>モードの起動</h2>
+<p>モードは、M-x c-modeと入力することで起動できる。このM-xは良く使うので覚えておこう。EmacsではM-xを使うことで、コマンド入力を行うことができる。</p>
+<ul>
+<li><a href="http://cns-guide.sfc.keio.ac.jp/2000/4/3/6.html">3.6 編集モード - Emacs入門 - SFC-CNS GUIDE</a></li>
+</ul>
+<p>注意：c-modeとは言うが、なぜかネットを見ているとcc-modeの情報が多い。どちらが正しいのかは分からないが、M-x c-modeでもM-x cc-modeでもどちらでもいけるっぽい。</p>
+
+<h1>.emacsと設定</h1>
+<h2>.emacs</h2>
+<p>Emacsの設定はホームフォルダの中の.emacsと言うファイルを編集して行います。</p>
+<p>まず、日本語環境の設定を最初に書いておこう。</p>
+<pre class="prettyprint lang-lisp">
+(set-language-environment "Japanese")
+</pre>
+<p>ほかには、パッケージ管理の設定や、自動補完の設定をすることをおすすめする。詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/blue0513/items/ff8b5822701aeb2e9aae">Emacs初心者だがオススメ設定を晒させてくれ - Qiita</a></li>
+</ul>
+<p>ちなみに、<a href="../windows_pc/xyzzy.html">xyzzy</a>では.emacsと同じように.xyzzyを編集して設定を行います。以下は僕の.xyzzyの設定より：</p>
+<pre class="prettyprint lang-lisp">
+(setq *default-fileio-encoding* *encoding-utf8n*)
+</pre>
+<p>Emacsやxyzzyでは、Lispによって高度なカスタマイズが可能です。最近僕はしていませんが、昔はNavi2chを入れたり、ネットワークインストーラを入れたり、色んなことをしていました。</p>
+
+<h2>init.el</h2>
+<p>最近のEmacsの設定ファイルは、~/.emacs.d/init.elになります。ここにleaf（パッケージを設定するパッケージ）でパッケージの設定を行います。</p>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://emacs-jp.github.io/tips/emacs-in-2020">2020年代のEmacs入門 | Emacs JP</a></li>
+</ul>
+<p>設定は、~/.emacs、~/.emacs.el、~/.emacs.d/init.elのどれかひとつに記述すればいい。詳しくは以下のページが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/tadsan/items/a2018379ffaadf07a418">.emacsなの? .emacs.elなの? init.elなの? - Qiita</a></li>
+</ul>
+
+<h2>設定例</h2>
+<p>Emacsの設定例はネットにたくさんあります。</p>
+<ul>
+<li><a href="https://qiita.com/yn01/items/b8d3dcb5be9078a6e27f">Emacsのオススメ基本設定まとめ（.emacs.el） - Qiita</a></li>
+<li><a href="https://qiita.com/blue0513/items/ff8b5822701aeb2e9aae">Emacs初心者だがオススメ設定を晒させてくれ - Qiita</a></li>
+<li><a href="http://yohshiy.blog.fc2.com/blog-entry-324.html">Emacs のおすすめ基本設定 | プログラマーズ雑記帳</a></li>
+</ul>
+<p>また、ArchWikiには詳細なカスタマイズ方法が掲載されています。Emacsを自分好みにコーディネートしたい方におすすめです。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Emacs">Emacs - ArchWiki</a></li>
+</ul>
+
+<h2>フォントの設定</h2>
+<p>Linux上のEmacsはフォントが綺麗でないため、設定で変更しましょう。</p>
+<ul>
+<li><a href="https://asukiaaa.blogspot.com/2017/11/ubuntuemacs.html">試行錯誤な日々: ubuntuで動かすemacsの日本語フォントを調整する方法</a></li>
+<li><a href="https://qiita.com/Maizu/items/fee34328f559c7dc59d8">Emacsで快適な研究環境を整えよう2~パッケージ導入&amp;日本語入力編~ - Qiita</a></li>
+</ul>
+
+<h1>Emacsパッケージ</h1>
+<h2>Emacs Lispパッケージマネージャ</h2>
+<p>Emacsには最近変化があり、パッケージを簡単に導入出来るようになった。さまざまなパッケージがある。以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/tadsan/items/6c658cc471be61cbc8f6">2015年Emacsパッケージ事情 - Qiita</a></li>
+</ul>
+<p>M-x list-packagesでインストールできるパッケージの一覧を見ることができる。初期状態では、GNU Emacs Lisp Package Archive(ELPA)が登録されている。</p>
+<ul>
+<li>package.el/ELPA</li>
+<ul>
+<li><a href="http://emacs-jp.github.io/packages/package-management/package-el.html">package.el - Emacs JP</a></li>
+<li><a href="https://elpa.gnu.org/">GNU Emacs Lisp Package Archive</a></li>
+</ul>
+<li>MELPA（もっとも活発なリポジトリ）</li>
+<ul>
+<li><a href="http://melpa.org/#/">MELPA (Milkypostman’s Emacs Lisp Package Archive)</a></li>
+<li><a href="https://twitter.com/melpa_emacs">MELPAツイッターアカウント</a> - 更新の活発さが分かる。</li>
+</ul>
+<li>Cask（RubyでいうBundler的なツール）</li>
+<ul>
+<li><a href="https://github.com/cask/cask">GitHub - cask/cask: Project management tool for Emacs</a></li>
+<li><a href="http://syohex.hatenablog.com/entry/20140424/1398310931">package.elから Caskに切り替えました - syohex’s diary</a></li>
+</ul>
+<li>Pallet（package.elとCaskを一緒にまとめる）</li>
+<ul>
+<li><a href="https://github.com/rdallasgray/pallet">GitHub - rdallasgray/pallet: A package management tool for Emacs, built on Cask.</a></li>
+</ul>
+<li>El-Get（もうひとつのパッケージマネージャ）</li>
+<ul>
+<li><a href="https://github.com/dimitri/el-get">GitHub - dimitri/el-get: Manage the external elisp bits and pieces upon which you depend!</a></li>
+<li><a href="https://tarao.hatenablog.com/entry/20150221/1424518030">Caskはもう古い、これからはEl-Get - いまどきのEmacsパッケージ管理 - 貳佰伍拾陸夜日記</a></li>
+</ul>
+</ul>
+
+<h2>主なパッケージ</h2>
+<p>以下のようなページを参照のこと。</p>
+<ul>
+<li><a href="http://imkitchen.hatenablog.com/entry/2015/06/06/230000">個人的Emacsパッケージまとめ</a></li>
+<li><a href="https://qiita.com/hottestseason/items/1e8a46ad1ebcf7d0e11c">Emacsパッケージ特集 - Qiita</a></li>
+<li>auto-complete & popup（自動補完）</li>
+<ul>
+<li><a href="https://github.com/auto-complete/auto-complete">GitHub - auto-complete/auto-complete: Emacs auto-complete package</a></li>
+<li><a href="https://github.com/auto-complete/popup-el">GitHub - auto-complete/popup-el: Visual Popup Interface Library for Emacs</a></li>
+</ul>
+<li>helm（検索絞り込みUI）</li>
+<ul>
+<li><a href="https://github.com/emacs-helm/helm">GitHub - emacs-helm/helm: Emacs incremental completion and selection narrowing framework</a></li>
+<li><a href="https://abicky.net/2014/01/04/170448/">Emacs で Helm をストレスなく使うための個人的な設定 - あらびき日記</a></li>
+<li><a href="http://d.hatena.ne.jp/tomoya/20090423/1240456834">もう初心者なんて言わせない、Anything で始まる Emacs 道。 - 日々、とんは語る。</a></li>
+</ul>
+<li>undo-tree（undoの履歴をビジュアル化）</li>
+<ul>
+<li><a href="https://qiita.com/takc923/items/c3d64b55fc4f3a3b0838">Emacs24.3の導入とundo-tree.elの紹介 - Qiita</a></li>
+<li><a href="https://www.emacswiki.org/emacs/UndoTree">[Home] Undo Tree</a></li>
+</ul>
+<li>undohist（undoを永続化）</li>
+<ul>
+<li><a href="https://github.com/m2ym/undohist-el">GitHub - m2ym/undohist-el: Persistent Undo History for GNU Emacs</a></li>
+<li><a href="http://emacs.rubikitch.com/undohist/">undohist.el : ファイルを閉じてもEmacsを再起動してもundoできるようにする - るびきち「新生日刊Emacs」</a></li>
+</ul>
+<li>eldoc & eldoc-extension（入力中に関数定義を表示）</li>
+<ul>
+<li><a href="http://d.hatena.ne.jp/mooz/20100421/p1">c-eldoc.el で C 言語プログラミング革命 - mooz deceives you</a></li>
+<li><a href="http://yohshiy.blog.fc2.com/blog-entry-251.html">Emacs Lisp モードを便利にする機能 3 選(auto-complete, eldoc, rainbow-delimiters) | プログラマーズ雑記帳</a></li>
+</ul>
+<li>rainbow-delimiters-mode（深さに応じて括弧を色分け）</li>
+<ul>
+<li><a href="http://yohshiy.blog.fc2.com/blog-entry-251.html">Emacs Lisp モードを便利にする機能 3 選(auto-complete, eldoc, rainbow-delimiters) | プログラマーズ雑記帳</a></li>
+</ul>
+</ul>
+<p>このほか、基本的なパッケージについては以下のようなページが参考になります。</p>
+<ul>
+<li><a href="https://emacs-jp.github.io/tips/emacs-in-2020">2020年代のEmacs入門 | Emacs JP</a></li>
+<li><a href="https://emacs-jp.github.io/packages/">Emacsパッケージ紹介 | Emacs JP</a></li>
+</ul>
+
+<h2>Mew</h2>
+<p>Emacs上で動作するメールクライアント。使いやすい。</p>
+<ul>
+<li><a href="https://www.mew.org/ja/">Mew のオフィシャルページ</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.01.05編集</p>
+</div>
+
+<h2>howm</h2>
+<p>Emacs上で動作するWikiライクなメモ書き環境。単にプレーンテキストでメモを取る以上のことが手軽にできる。</p>
+<ul>
+<li><a href="https://howm.osdn.jp/index-j.html">howm: 一人お手軽 Wiki もどき</a></li>
+<li><a href="https://howm.osdn.jp/uu/">書きちらかし指向メモツール howm</a></li>
+<li><a href="https://techblog.harolabo.com/entry/20230728/1690535207">howmというメモツール - HAROLABO Tech Blog</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.01.05編集</p>
+</div>
+
+<h2>Navi2ch</h2>
+<p>Emacs上で動作する２ちゃんねる専用ブラウザのひとつ。残念ながら５ちゃんねるの仕様変更により使うことが難しくなった。</p>
+<ul>
+<li><a href="http://navi2ch.sourceforge.net/">Navi2ch Project Home Page</a></li>
+</ul>
+<p><a href="../services/2ch_browsers.html">２ちゃんねる専用ブラウザ</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.01.05編集</p>
+</div>
+
+<h2>emacs-mozc</h2>
+<p>emacs-mozcはEmacs上でMozcを使用するためのパッケージ。Linux環境で日本語入力にMozcを使っている人はぜひ導入を。</p>
+<ul>
+<li><a href="https://qiita.com/Maizu/items/fee34328f559c7dc59d8">Emacsで快適な研究環境を整えよう2~パッケージ導入&amp;日本語入力編~ - Qiita</a></li>
+<li><a href="https://compress.hatenadiary.com/entry/2014/02/24/001932">Emacs:mozcで日本語入力 - 何があっても喰らいついていくスタイル</a></li>
+<li><a href="http://ubiqlog.com/archives/8538">EmacsでMozcを使うための設定  |  UBIQLOG 2.0</a></li>
+</ul>
+
+<h1>Emacsライクなエディタ（Emacsen）</h1>
+<h2>WindowsでEmacs</h2>
+<p>WindowsでEmacsライクなエディタを使うためには、僕はxyzzyを使っているが、過去にはMeadowと呼ばれる日本語の対応バージョンがあった。</p>
+<p>以下はMeadow/Emacsを使う上で非常に参考になるページ。</p>
+<ul>
+<li><a href="https://bookshelf.jp/soft/meadow.html">Meadow/Emacs memo</a></li>
+</ul>
+<p><a href="../windows_pc/xyzzy.html">xyzzy</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.09.25編集</p>
+</div>
+
+<h2>XEmacs</h2>
+<p>XEmacsはかつて存在したEmacsの派生版。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/XEmacs">XEmacs - Wikipedia</a></li>
+</ul>
+
+<h1>Emacs on Windows</h1>
+<h2>WindowsにEmacsを導入する</h2>
+<p>WindowsにEmacsを導入するには、以下のようなページが参考になります。</p>
+<ul>
+<li><a href="https://tech-blog.rakus.co.jp/entry/20201027/emacs">Emacs入門まとめ（インストール手順 for Windows・コマンド付き） - RAKUS Developers Blog | ラクス エンジニアブログ</a></li>
+<li><a href="https://proengineer.internous.co.jp/content/columnfeature/10015">WindowsでEmacsをインストールするには？設定について解説！ - elife[イーライフ]</a></li>
+</ul>
+
+<h2>IMEパッチ</h2>
+<p>IMEパッチは、Windows上のEmacsでIME（日本語入力）の挙動を改善するためのパッチ。</p>
+<ul>
+<li><a href="http://cha.la.coocan.jp/doc/NTEmacsIMEpatch.html">NTEmacs IMEパッチ - Wurly's HOMEPAGE</a></li>
+<li><a href="https://github.com/mhatta/emacs-27-x86_64-win-ime">mhatta/emacs-27-x86_64-win-ime: Emacs27 for Windows, 64bit build w/ Japanese IME support improvement</a></li>
+</ul>
+<p>どうやら最近のEmacs（GNU Emacs 27.1）では、公式のバイナリでもIMEの挙動が改善されているそうです。</p>
+<ul>
+<li><a href="https://github.com/trueroad/tr-emacs-ime-module">trueroad/tr-emacs-ime-module: Emulator of GNU Emacs IME patch for Windows (tr-ime)</a></li>
+<li><a href="https://nosubject.io/windows10-emacs-27-w32-ime/">[Emacs] Windows10 で Emacs 27 を使う | ** nosubject.io **</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>GNU</h2>
+<p><a href="gnu.html">GNU</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Emacs</h2>
+<p>Lispで拡張できるエディタ。</p>
+<p>テキストエディタというよりも環境であり、Emacs向けのLispアプリケーションを動かすことのできる一種のOSである。</p>
+<p>C/C++などはメジャーモードと言い、メジャーモードとさまざまなマイナーモードを組み合わせて使う。</p>
+<p>C-xはCtrl-x、M-xはAlt-x（あるいはESC-x）を表す。M-xでコマンド入力モードになり、Tabでコマンド候補の一覧も表示されるので、使い方や機能が分からなかったらM-xとTab補完を積極的に使うといいかも。</p>
+<p>使い方は公式のチュートリアルを見よう。</p>
+
+<h1>リンク集</h1>
+<h2>Emacs</h2>
+<p>UNIXのLispで拡張可能なテキストエディタ。</p>
+<ul>
+<li><a href="http://qiita.com/bussorenre/items/bbe757ef87e16c3d31ff">突然だがEmacs を始めよう - Qiita</a></li>
+</ul>
+
+<h2>基本</h2>
+<p>基本的な使い方：</p>
+<ul>
+<li><a href="https://employment.en-japan.com/engineerhub/entry/2016/11/17/110000">保存版！ 今だからこそ使いたい、若手エンジニア向けEmacs実践入門</a></li>
+</ul>
+
+<h2>参考になるサイト</h2>
+<p>以下のサイトでは、とてもたくさんのEmacs関連情報があり、Emacsユーザーは必見です。</p>
+<ul>
+<li><a href="http://emacs.rubikitch.com/">るびきち「新生日刊Emacs」</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-lisp.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

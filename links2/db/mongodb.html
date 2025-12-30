@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>MongoDB関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>MongoDBの世界観</h1>
+<p>MongoDBに関する世界観です。<a href="db.html">データベースの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>MongoDB</h1>
+<h2>MongoDB</h2>
+<p>ドキュメント指向データベース。</p>
+<p>SQLなどのリレーショナルデータベースマネジメントシステム（RDBMS）とは異なるアプローチを取る。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MongoDB">MongoDB - Wikipedia</a></li>
+</ul>
+
+<h2>ドキュメント指向データベース</h2>
+<p>MongoDBではJSONライクな形式の「ドキュメント」とその集合である「コレクション」を管理することで、RDBMSではない形で新しいデータベース管理システムを利用することができる。</p>
+<p>データベースを作成する前にテーブルのカラムなどのデータ構造をあらかじめ設計しておく必要があるSQLのRDBMSに比べて、MongoDBではデータ構造を必要に応じてあとから変えることができる。またスケーラビリティを重視しており、容易にスケールすることができる。</p>
+<ul>
+<li><a href="https://qiita.com/Brutus/items/8a67a4db0fdc5a33d549">やってみようNoSQL　MongoDBを最速で理解する - Qiita</a></li>
+</ul>
+
+<h2>要するに、JSONをそのまま格納できるデータベース</h2>
+<p>要するに、JSONライクな形式のデータをそのまま格納できるデータベース管理システムだと思えばいい。</p>
+<p>JSONは、最近Ajaxなどでよく使われている、PythonやJavaScriptと親和性の高い、シンプルな構造をもった単純なデータ形式。</p>
+<p>RDBMSのように、がちがちに表形式でデータベースを設計するよりも、あとあとのデータ構造の変更がやりやすく、小さなデータベースを大きなデータベースにスケールしやすい。</p>
+<p><a href="../prog_lang/json.html">JSON</a>も参照のこと。</p>
+
+<h2>mongoose</h2>
+<p>mongooseは、MongoDBを扱うためのnpmモジュール。実際にMongoDBをJavaScript（Node.js/Express）から操作するために使う。</p>
+<ul>
+<li><a href="https://qiita.com/Molly95554907/items/595a7d3f525d6774d50d">mongooseを使ってmongoDBを記述する - Qiita</a></li>
+<li><a href="https://qiita.com/teradonburi/items/e8bad98112515ec7e96e">MongoDB(Mongoose)上級者への道 - Qiita</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Learn/Server-side/Express_Nodejs/mongoose">Express チュートリアル Part 3: データベースの使用 (Mongoose を使用) - ウェブ開発を学ぶ | MDN</a></li>
+</ul>
+<p>mongooseのインストールは以下のようにnpmから行える。</p>
+<pre>
+npm install mongoose
+</pre>
+<p>ただし、これだけではMongoDBはインストールされない。MongoDBを別途インストールすること。</p>
+<p><a href="../prog_lang/node_js.html">Node.js</a>も参照のこと。</p>
+
+<h2>MongoDBとSSPL</h2>
+<p>MongoDBは、独自のWebサービスの公開を強制するライセンス（SSPL）を定めた結果、オープンソース業界で「これは本当にオープンソースのライセンスなのか」と議論された結果、多くのディストリビューションで配布を取りやめされている。オープンソースが好きな所以ではあるが、過激すぎるのも考えどころである。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201901/17">2019年1月17日　SSPLはオープンソースライセンスにあらず！？ Fedora，リポジトリからSSPLソフトを削除へ：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理３（シェル） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>UNIXシステム管理３（シェル）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観３（シェル）です。</p>
+
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><b>３．シェル</b></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>シェルとコマンド</h1>
+<h2>シェルとコマンド</h2>
+<p>コンソールのUNIXが起動すると、ログインするユーザ名とパスワードを要求する。パスワードを入力するとパスワードを確認し、ログインできるとコマンドが入力できるようなシェルが実行される。</p>
+<p>ただし、XなどのGUI環境ではこの限りではない。通常はウィンドウシステムと、ウィンドウの操作を行う「ウィンドウマネージャ」が別プロセスとして起動し、それぞれの画面を構成するそれぞれのプロセスがたくさん起動する。ターミナルエミュレータを開くと、そのターミナルのウィンドウとシェルのプロセスが起動し、シェルから別のプロセスを実行する。</p>
+<p>コマンド操作環境では、プログラムのバイナリ名を指定して、その後にスペースを開けて引数やオプションを指定する。バイナリは環境変数のPATHの中から検索される。引数にはプログラムに与えるファイルのファイル名などを指定する。オプションは-abcのようなショートオプションと、--helpのようなロングオプションがある。</p>
+<p>（「<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>」を読みながら自分で考えて書きました。）</p>
+
+<h2>ユーザーとカレントディレクトリ・ホームディレクトリ</h2>
+<p>UNIXにはユーザーやパーミッションという考え方があり、シェルにログインしプログラムを実行するユーザーによってプログラムが実行される「権限」が決められる。</p>
+<p>また、UNIXのコマンドラインシェルには「カレントディレクトリ」という考え方がある。これは、今の作業ディレクトリを意味しており、シェルには常にカレントディレクトリがどこであるか、という情報とともに、プログラムを「環境として」実行することができる。</p>
+<p>また、各ユーザーには「ホームディレクトリ」というディレクトリが与えられる。これは/home/usernameに存在する。この中で、ユーザーは自由なデータやファイルを保管し、自由に作業することが出来る。</p>
+<p>また、システムには管理権限を持つrootユーザーが一人存在し、システムを変更・破壊する権限を持つ。パッケージ管理システムなどでシステムをアップデートする場合は、root権限が必要な場合がある。シェルでrootユーザーになるためには、</p>
+<pre>
+$ su -
+(rootユーザーのパスワードを入力)
+#
+</pre>
+<p>と実行する。一般的に、通常ユーザーのシェルは$から、rootユーザーのシェルは#から始まる。コマンド入力例などでこの例があった時、$や#を入力する必要はない。（上の例では、通常ユーザーのシェルにsu -と入力すれば良い。$を入力する必要はない。）</p>
+<p>sudoというコマンドを使うことで、いちいちrootユーザーにならなくても、特定のコマンドをrootユーザーで実行することが出来る。Ubuntuなどの一部の初心者向けディストリビューションではこちらのスタイルがとられる場合もある。</p>
+
+<h2>パイプとリダイレクト</h2>
+<p>あるコマンドを実行した結果の出力を、他のコマンドの入力として渡せる「パイプ」と、入出力とファイルを変換できる「リダイレクト」。</p>
+<p>たとえば</p>
+<pre>
+find ~ | grep hoge
+</pre>
+<p>とすることで、ホームディレクトリにある、「2012」を名前とパスに含むファイルを列挙出来る。</p>
+<p>findで~の中を「サブディレクトリまで含めて」列挙し、そこからgrepで名前を検索する。</p>
+<p>パイプは、使うとやみつきになる。UNIXは、こうした多数のコマンドプログラムに分けながら、ユーザーが自分の力で環境を操作することを哲学としている。</p>
+
+<h2>シェルスクリプト</h2>
+<p>基本的に、コマンドをそのまま列挙したファイルを作って、実行すればシェルスクリプト。</p>
+<p>だが、引数や関数定義が使えたり、if文なども出来るなど、応用範囲は多い。</p>
+<p>UNIXでは、何でもかんでも再利用することで、応用性のあるシステム設計を行っている。</p>
+
+<h2>シェル変数と環境変数</h2>
+<p>コマンドライン環境の中で利用できる、変数のようなもの。</p>
+<p>シェル変数と環境変数がある。シェル変数はシェルの中だけで保たれ、起動したプロセスには引き継がれない。シェル変数は、</p>
+<pre>
+$ HOGE=hoge
+</pre>
+<p>と設定する。</p>
+<p>一度シェル変数を設定した上でexportすることで、環境変数を設定できる。</p>
+<pre>
+$ export HOGE
+</pre>
+<p>コマンドのバイナリファイルを探すPATHやユーザーのホームディレクトリを探すHOMEなどが有名である。</p>
+
+<h2>コマンドの詳細</h2>
+<p>コマンドの詳細は、manと言うコマンドで見ることが出来る。</p>
+<pre>
+man ls
+</pre>
+<p>コマンドラインオプションは、例えば、詳細表示をしたい時は、以下のように使う。</p>
+<pre>
+ls -al
+</pre>
+<p>それ以上のコマンドの詳しいことは、manを参照のこと。manは、設定ファイルについても調べることが出来る。</p>
+<p>以下のサイトから、オンラインでブラウザからmanを見ることが出来る。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/">JM Project</a></li>
+</ul>
+
+<h2>PATHを通す</h2>
+<p>PATHを通すことで、新しいバイナリをインストールしたフォルダを追加することが出来ます。</p>
+
+<h3>PATHの確認</h3>
+<p>PATHの確認方法。</p>
+<pre>
+$ echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin
+</pre>
+<h3>PATHの設定</h3>
+<p>PATHの設定方法。</p>
+<pre>
+$ PATH=$PATH:/home/assy/bin
+$ export PATH
+</pre>
+
+<h3>設定ファイル</h3>
+<p>PATHの設定ファイル。</p>
+<p>.bash_profileに以下の設定を記述することで、ログインした時に自動でPATHを設定してくれます。</p>
+<pre>
+PATH=$PATH:/home/assy/bin
+export PATH
+</pre>
+<p>システム全体（すべてのユーザーのシェル）で設定する場合は、/etc/profileに記述します。</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://pocketstudio.jp/linux/?%A5%D1%A5%B9(PATH)%A4%CE%B3%CE%C7%A7%A4%C8%C0%DF%C4%EA%CA%FD%CB%A1%A4%CF%A1%A9">パス(PATH)の確認と設定方法は？ - Pocketstudio.jp Linux Wiki</a></li>
+</ul>
+
+<h2>エイリアス</h2>
+<p>エイリアスとは、コマンドの別名。</p>
+<pre>
+$ alias rm='rm -i'
+</pre>
+<p>このようにすると、rmコマンドを入力して実行した際、rm -iコマンドとして扱ってくれる。引数を指定せずにaliasを実行するとエイリアス一覧が見れる。</p>
+<p>後日注記：面倒な長いシェルコマンドは、エイリアスにするのが楽。注意点として、.bashrcにaliasを書く時はシングルクオーテーションに変なエスケープ'\'が必要。</p>
+<ul>
+<li><a href="https://inuz.hatenablog.com/entry/20050124/p2">sed で空行削除 - inuzのブログ</a></li>
+<li><a href="http://min117.hatenablog.com/entry/2015/11/07/152302">.bashrcにエイリアス書くときのシングルクオート対策（source ~/.bashrc エラー対処） - min117の日記</a></li>
+</ul>
+
+<h2>シェルのカスタマイズ</h2>
+<p>たとえば、echoで色を付けるには</p>
+<pre>
+\e[色属性m
+</pre>
+<p>とする。</p>
+<p>また、プロンプトを変更するには、PS1環境変数を変更する。</p>
+<p>以下のページを参考に執筆・引用しました。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/flinux/rensai/linuxtips/002cngprmpt.html">bashのプロンプトを変更するには - @IT</a></li>
+<li><a href="http://site.m-bsys.com/linux/echo-color-1">シェル - echoで文字に色をつける その1 - Miuran Business Systems</a></li>
+<li><a href="https://qiita.com/fernet/items/4dcb6f82520d87227121">Bashのプロンプトに色を付けてサーバやユーザを区別する - Qiita</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/Bash/%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA">Bash/プロンプトのカスタマイズ - ArchWiki</a></li>
+</ul>
+
+<h1>非同期処理</h1>
+<h2>Bashで非同期実行</h2>
+<p>単純に非同期でプロセスを実行させたいのであれば、Bashで&をつけて実行させれば良い。</p>
+<ul>
+<li><a href="https://qiita.com/inosy22/items/341cfc589494b8211844">Linuxコマンド(Bash)でバックグラウンド実行する方法のまとめメモ - Qiita</a></li>
+</ul>
+
+<h1>UNIXにおけるユーザーとシェル</h1>
+<h2>ログイン・ネットワーク・セキュリティ</h2>
+<p>UNIXではマルチユーザーという仕組みを採用している。これによって、端末にログインし、その中のリソースにどのようにアクセスするかを、パーミッションという仕組みで管理することができる。</p>
+<p>Windowsなどに慣れたユーザーからは考えづらいかもしれないが、Linuxはユーザーにログインして作業する、ということが一般的である。</p>
+<p>ログインはローカル資源だけではなく、ネットワーク資源についても言える。SSHなどを使ってネットワークログインし、ネットワーク上で作業することもある。また、Apache httpdなどでは、外部ユーザーにネットワークからプロセス実行要求することもある。</p>
+<p>ログインとパーミッションでは、コマンドを実行するユーザーに対して、そのファイルにどれだけアクセスできるのか、という考え方をする。一般ユーザーは/usr/binなどのシステムディレクトリは「破壊」することはできないが、自分の作業ディレクトリの中で自分のファイルを操作・処理するために「利用」することはできる。</p>
+<p>ユーザーにはホームディレクトリが与えられ、この中にデータを保存して作業する。だが、大切な顧客のデータをホームディレクトリに保存することはできるだけ避けたい。SQLの関係データベース管理システムを用いて、バックアップも定期的にとることが勧められる。ホームディレクトリを簡単な作業のために使うか、あるいは大事なデータの置き場所にも使うかは議論の分かれるところであるが、SQLサーバーなどを使うこともできるし、専用のユーザーを作って普段そのユーザーを使わないようにしても良いだろう。ApacheはホームページデータをDocumentRootで指定するが、/var/www/htmlなどを指定することが多い。</p>
+<p>このほか、システムを「破壊」できるrootユーザーに制限をかけたり、HTTPなどのプロセス単位で制限をすることのできる、SELinuxというセキュアなLinuxも利用することができる。</p>
+<p>UNIX系のOSでは、ログイン端末とユーザーの使うコンピュータを分けるなど、「コンピュータの分業化」が比較的やりやすいと言われる。ネットワーク透過なX端末のような発想はここから生まれている。だが、現代的な「パーソナルユーザー」が使うパソコン用OSとしては、少し古びて見えるかもしれない。だが、今日のGNOME/KDEなどは、Windowsの統合などを大きく超えている。GmailやGoogle Driveのようなネットワーク上のサービスにログインしてファイルマネージャからアクセスしたりすることは容易である。だが、伝統的な仕組みも今なお提供されており、NFSなどを用いてネットワーク上にファイルサーバーを作ることも簡単にできる。</p>
+
+<h2>環境変数とは</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.02.22.html">2021/02/22</a>より。</p>
+<p>UNIXにおける環境変数は、シェルからプロセスに引き継がれる変数で、使っている環境そのものを設定するために使う。</p>
+<p>コマンドとして実行されるバイナリのあるパスを示すPATH、表示されるメッセージなどの言語を決めるLANG、デフォルトのページャやエディタを設定するPAGERやEDITORなどが有名。</p>
+<p>X11などでは日本語入力のインプットエンジンなどの設定に使われることもある。</p>
+
+<h1>関連ページ</h1>
+<h2>Bashの詳細</h2>
+<p>Bashの詳細は<a href="linux_bash.html">Bashの世界観</a>をご覧ください。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

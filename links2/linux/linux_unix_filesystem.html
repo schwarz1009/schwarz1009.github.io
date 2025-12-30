@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理４（ファイルシステム） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXシステム管理４（ファイルシステム）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観４（ファイルシステム）です。</p>
+
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><b>４．ファイルシステム</b></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ファイルシステム</h1>
+<h2>ファイルとディレクトリ</h2>
+<p>ファイルはデータの保管を抽象的に扱ったもので、プログラムはデータをストレージに保管する際にファイルとして保管する。</p>
+<p>UNIXでは「原則ファイルとして扱う」という哲学があり、デバイスドライバによって操作されるデバイスもファイルとして扱われる。</p>
+<p>また、ディレクトリはファイルを集めてひとつの場所に格納するもの。</p>
+<p>絶対パスはルートディレクトリ（/）から始まる絶対的なファイルの場所のこと。</p>
+<p>相対パスは、今の自分のいるディレクトリ、すなわち「作業ディレクトリ」から始まる相対的な場所のこと。</p>
+<p>通常、ファイル名だけでアクセスする時は、作業ディレクトリからの相対パスとして扱われるが、「/」から始まるパスを指定すると絶対パスとして扱われる。</p>
+<p>相対パスにおいて、「.」は現在のディレクトリ、「..」は現在のディレクトリの上のディレクトリ（親ディレクトリ）を表す。「./hogehoge」とすることで、現在のディレクトリの中にあるhogehogeを指定できる。</p>
+<p>ファイルには、名前が設定されるが、この名前は本当は複数設定できる。名前のことをリンクあるいはハードリンクという。</p>
+<p>だが、さまざまな制約があることから、通常ハードリンクは使われなくなった。ハードリンクは名前を複数設定するだけのものだが、これに対して、小さなリンク専用のファイルを作ってそこからパスを辿っていく、ソフトリンクあるいはシンボリックリンクが広く使われている。</p>
+<p>ファイル、ディレクトリ、シンボリックリンク、ブロック型デバイスファイル、キャラクタ型デバイスファイルのほか、名前付きパイプやソケットなどもファイルとして扱われることがある。</p>
+<p>（「<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>」を読みながら自分で考えて書きました。）</p>
+
+<h2>マウントとファイルシステムの基本</h2>
+<p>Linuxでは、ストレージデバイスは使う際にマウントする必要がある。</p>
+<p>Windowsでは、システムの入るドライブはC:ドライブであり、外部ストレージを接続するとD:ドライブやE:ドライブから直接操作することができるが、Linuxの場合、マウント専用のディレクトリ（マウントポイント）を切って、マウントしなければストレージデバイスを使うことはできない。</p>
+<p>マウントするためにはmountコマンド、マウントを取り外す（アンマウント）ためにはumountコマンドを使う。</p>
+<p>mountコマンドを使う際には、マウントポイントとなるディレクトリと、/dev/以下に存在するブロック型デバイスファイルを、マウントを行うための「とっかかり」として指定する。</p>
+<p>マウントする前に、必ずLinuxで使うことのできるファイルシステムにストレージをフォーマットしておかなければならない。たとえばext2/3/4のようなフォーマットで一度ファイルシステムを作成しておく必要がある。</p>
+<p>また、ファイルシステムを作る際に、事前にパーティションを切っておくことで、複数の領域を分割し、別々のファイルシステムを作り、別々のマウントポイントへとマウントすることができる。たとえば、WindowsとLinuxのデュアルブート構成で、NTFSとext4のファイルシステムを作成するパーティションを切ったり、ルートディレクトリ/とホームディレクトリ/homeをあらかじめ分割しておくことで、個人データだけを残したままディストリビューションを再インストールすることなどができる。</p>
+<p>Linuxの起動時にマウントするディレクトリは、/etc/fstabで指定できる。/etc/fstabではローカルのディレクトリだけではなくNFSでリモートにあるディレクトリも指定できる。なので、/usr以下をNFSサーバで共有する、などといった昔のワークステーションで見られた使用法なども可能である。</p>
+<div class="edit_date">
+<p>2023.05.18</p>
+</div>
+
+<h1>Linuxとファイルシステム</h1>
+<h2>ファイルシステムが分かればLinuxは分かる</h2>
+<p>僕が思うに、ファイルシステムが分かれば、Linuxのほとんどは分かります。</p>
+<p>ファイルシステムとは、ストレージの中のデータを整理するシステムのことです。</p>
+<p>Linuxでは、プログラム、データファイル、設定ファイル、ログファイル、ドキュメント、ホームディレクトリの中の個人用のデータ、その他のOSのために必要とされるリソースなど、すべてファイルシステムに保管されます。</p>
+<p>同時に、UNIXではファイルをリソースの統一された共通の表現として使うため、ハードウェアデバイス（デバイスファイル）やネットワーク接続（ソケット）などもファイルAPIを通じた読み書きとして行います。</p>
+<p>Linuxでは、まず、ストレージにファイルシステムを作成します。そのためには、デバイスをfdiskなどでパーティションに分割し、パーティションにext2などのファイルシステムを作成し、ルートディレクトリ（/）を頂点とするディレクトリ階層を構築し、それぞれのパーティションをそれぞれのマウントポイントにマウントします。</p>
+<p>もし、新しいデバイスが接続された時は、手動でマウントするか、あるいはホットプラグ（頻繁に抜き差しされるデバイス）の場合udevによって自動的にマウントされます。</p>
+<p>ファイルシステムには、プログラムのバイナリファイルや共有ライブラリも含まれます。コマンドシェルなどからプログラムを実行する場合、プログラムをロードし、実行した時、それはプロセスとなって、それぞれのメモリ領域を与えられ、マルチタスクで実行されます。この時、作業ディレクトリ（カレントディレクトリ）や絶対パス・相対パスで指定されたファイルやディレクトリを、プログラムが読み書きし、プログラムがそのファイルに仕事を行うことで、ユーザーが目的とする仕事が行われます。</p>
+<p>つまり、プログラムとファイルシステムがあること、これがLinuxのもっとも大切な基本です。そして、プログラムをシェルから実行した場合、そのプログラムはプロセスとなり、記憶領域を与えられた上で、そのプログラムはファイルシステムを読み書きします。</p>
+<p>プログラムがファイルシステムの中のファイルを読み書きするには、「オープン」という作業が必要です。これはファイルを開くということであり、オープンしなければ読むことも書くこともできません。オープンができるかどうか、その内容を変更することができるかどうかは、所有ユーザー、所属グループ、その他のユーザーに対して決められた、読み書き実行の権限であるパーミッションに基づきます。しかしながら、システムにおいて必ずひとり用意されている、システムの管理者であるrootユーザーは、このパーミッションを無視して、どんな破壊行為でも行うことができます。</p>
+<p>実際のコマンドラインの作業では、まず、cdディレクトリでカレントディレクトリを移動できます。cdディレクトリの引数には、ディレクトリの名前を相対パス（今の作業ディレクトリからの相対的なパス）あるいは絶対パス（ルートディレクトリからの絶対的なパス）で与えます。lsで、ファイル一覧を見ることができます。catでファイルの内容すべてを出力できます。lessで、ファイルの内容をスクロールして見ることができます。mkdirでディレクトリを作成できます。rmでファイルを削除できます。mvでファイルを移動あるいは名前変更できます。そして、viでテキストエディタviを開いてファイルを編集することができます。viの中では、iで挿入モードに移動して内容を編集でき、ESCキーで挿入モードからコマンドモードに戻り、exコマンドである:wqでファイルを保存してviを終了することができます。</p>
+<p><a href="linux_commands_beginner.html">UNIXコマンド（基本）</a>や<a href="vi.html">vi</a>も参照のこと。</p>
+
+<h2>ファイルシステムの基本</h2>
+<p>マウントの基本は、まずマウントポイントがあり、どのディレクトリであっても、マウントポイントにしてしまえば、そこにファイルシステムの作成されたブロック型デバイスファイルをマウントし、ストレージデバイス内のファイルやディレクトリにアクセスできるということです。</p>
+<p>Windowsとの違いは、WindowsではC:やD:といった複数のドライブがあり、その中にファイルができますが、UNIXでは、ひとつのルートディレクトリである/があり、/の下のディレクトリにすべてのファイルツリーが作成され、マウントポイントは必ずその中のサブディレクトリ（多くの場合/mnt以下）に設定されるということです。</p>
+<p>また、ファイルシステムのトップディレクトリ（/以下）には、慣習的にUNIXシステムで共通の名前付けが行われます。これはたとえば/binや/usrや/varや/etcです。これらのディレクトリには、それぞれの「役割」から名前がつけられており、/bin（あるいは/usr/bin）にはプログラム、/usrにはUNIXシステムに必要なシステムリソース、/varには頻繁に変更されるファイルやネットワークで共有されないローカルで用意されるファイル、/etcには一度設定したら変更されることのない設定ファイルを置きます。</p>
+<p>Windowsよりも劣っている点（と僕が考える点）は、基本的にアプリケーションごとにサブディレクトリは切りません。なので、/usr/bin以下にはあらゆるアプリケーションのバイナリ実行ファイルがごちゃまぜになってしまい、管理しづらくなります。このため、アプリケーション単位でインストールやアンインストールのできるパッケージ管理システムを使うことが多いです。パッケージ管理システムを使うと、/usrや/etcなどに分散されたファイルを、パッケージという単位で導入したり削除したりできます。</p>
+<p>Windowsよりも優れているのは、耐障害性や管理のしやすさです。たとえばあるディレクトリだけをほかのファイルツリーへのマウントポイントとしてしまい、それだけを別のストレージあるいはパーティションにすることで、ほかのストレージやパーティションが破損したとしても、そのディレクトリだけは破損の影響を受けません。また、UNIXにはNFSというネットワーク上でファイルシステムを共有する機能があり、NFSを上手く使うことで、たとえば/usr/nfsをネットワーク上の複数のホストで共有するといったこともできます。また、単純に/etcだけを複製バックアップすることで、/etcの設定ファイルだけをバックアップしておき、もし破損したとしてもバックアップから復旧できるようにしたり、あるいは別のマシンであっても構成が同じであれば設定ファイルを複製することができます（最近のサーバーでは、設定を自動化できる構成管理ツールを使うこともあります）。</p>
+<p>また、パーミッションという考え方があるため、マルチユーザーで使う時のセキュリティにも優れています。基本的に、/home/assyというホームディレクトリがあったとして、このディレクトリの中を別のユーザーは見ることができないように、所有ユーザー・所有グループ・パーミッションを適切に設定することができます。ただし、rootユーザーだけは超越的な権限を持っており、全ファイルを破壊できるので注意が必要です。UNIXを使う際には、できるだけrootユーザーの権限が必要ない場合は一般ユーザーで操作することが推奨されます。これにより、システムの大事なファイルがなんらかの理由で破壊されるのを防ぐことができます。</p>
+
+<h1>ファイルシステムとは</h1>
+<h2>ファイルシステムの概要</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>Linuxでは、ファイルシステムはまずパーティションを作成し、その中にファイルシステムを作成し、それをマウントすることでディレクトリツリーとファイルを操作できる。</p>
+<p>/etc/fstabには、起動時にマウントされるファイルシステムボリュームの設定をする。</p>
+<p>Linuxのファイルシステムでは、VFSと呼ばれる仕組みによって、さまざまな別のファイルシステムを使うことができる。</p>
+<p>ブロック型のext2やジャーナリング（途中で強制終了しても壊れない）に対応したext3/ext4などがある。</p>
+<p>また、ReiserFSやXFSはB-Treeファイルシステムと知られる。</p>
+<p>ブロック型のext4ではなくデータベースと同様のインデックス技術を用いた高速な検索が可能。</p>
+<p>また、ZFSやBtrFSのようなコピーオンライトのファイルシステムでは、ファイルをコピーしてもほとんどのデータを共有データとし、書き換えられた時点で複製を作る（コピーオンライト）仕組みを採用している。</p>
+<p>これにより、データリソースを大幅な削減ができるほか、毎日スナップショットをとってもデータの大幅な利用に繋がらないため、いつでも好きな地点にスナップショットからデータを復旧させることができ、信頼性の確保に繋がる。</p>
+<p>ファイルシステム階層としては、基本的に/usrにはシステム全体で共有される、あまり頻繁に変更されないファイルを置く。</p>
+<p>/varには、頻繁に変更されるファイル、たとえばログやスプールファイルを置く。</p>
+<p>そして、/etcにはシステム管理者が設定する設定ファイルなどを置く。</p>
+<p>/usr/localは、/usrと同様だが、パッケージ管理システムではなく、システム管理者が手動で管理するmakeビルドのプログラムを置く。</p>
+<p>そして、/home/usernameにはユーザー個別のホームディレクトリが置かれる。</p>
+<p>これらは、所有者、所有グループ、その他のユーザーに対する、実行、読み込み、書き込みの許可権限であるパーミッションで守られる。</p>
+<p>しかしながら、特権ユーザーであるrootに莫大な権限があることが問題だったり、Webサーバなどのプロセスに権限を付加させたい場合などは、SELinuxなどのより強固なセキュアOSモジュールを使うこともできる。</p>
+
+<h2>ファイルシステムの基本</h2>
+<p>UNIXでは、ハードディスクやUSBメモリのようなストレージデバイスの中のデータは、ファイルシステムと呼ばれる決まりによって扱われる。</p>
+<p>ファイルシステムにおいては、全てのデータはファイルという単位で格納され、複数のファイルをひとつにまとめる（ひとつの場所に置いてまとめて管理する）ためにディレクトリと呼ばれるツリー構造の階層を作る。</p>
+<p>ディレクトリは、/（ルートディレクトリ）を一番上に、/usrや/homeや/etcなどの重要なディレクトリがある。<a href="linux_fhs.html">ファイルシステム階層</a>を参照のこと。</p>
+<p>ストレージデバイスがデバイスドライバによって認識されると、/devディレクトリにデバイスファイルができる。これは/dev/sdaのようになる（パーティションが区切られている場合は/dev/sda1や/dev/sda2のようになる）。デバイスファイルについては<a href="linux_devicefile.html">Linux デバイスファイル</a>を参照のこと。</p>
+<p>このデバイスファイルを、ext2のようなLinuxカーネルで使うことのできるファイルシステムにフォーマットすることで、このデバイスをマウントして使えるようになる。マウントとは、ブロック型デバイスファイルにアクセスするカーネルの機構であり、ext2ファイルシステムを一度作ってしまえば、そのデバイスは/以下のどこにディレクトリにもマウントすることができる。ファイルシステムを作ってマウントすることで、その中にファイルやディレクトリを作ったり、プログラムから読み書きしてデータを保存することが可能となる。ext2などのファイルシステムの詳細は<a href="linux_kernel_fs_ext2.html">ext2</a>や<a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>を参照のこと。</p>
+<p>また、/dev/sdaxの最後のxはハードディスクを複数に分割するパーティションを意味する。パーティションはハードディスクを複数に分割する機能で、それぞれのパーティションを個別に別々のディレクトリにマウントすることができる。この時、それぞれのパーティションには別々のファイルシステムを構築できる（たとえば、/bootをext2で、/をext4で、といった具合）。パーティションはファイルシステムをフォーマットする前に、事前にfdiskなどで作る必要がある。</p>
+<p>Linuxでは、ファイルはコマンドに対して「ls /usr/bin」のように引数として与えることで、「/usr/binの中のファイルの一覧を表示しろ」という命令として使える。また、コマンドプログラムの中からは、open(), write(), read(), close()のようなカーネルのシステムコールや、システムコールにバッファ操作など使いやすい機能を加えたlibcのライブラリ関数（stdio）からファイルを操作できる。<a href="linux_api.html">Linuxのシステムコール・APIに関する世界観</a>を参照のこと。</p>
+
+<h2>パーティションの分け方</h2>
+<p>パーティションの分け方。パーティションはマウントポイントにマウントされて利用される。そのマウントポイント以下のディレクトリがマウントされていれば、ファイルはそのマウントされたパーティションの中にできる。簡単に言えば、/と/usrを分けると、/binなどは/に出来て、/usr/binなどは/usrに出来る。</p>
+<p>後日注記：よくやる方法としては、/bootだけを別パーティションにして、もしディスクのどこかが破損したとしても、システムが起動できなくなるのを防ぐとか、/homeだけを分割してディストリビューションを再インストールする必要があっても個人用のデータを残しておきたいなどといった方法がある。過激な方法としては/usrをNFSに置いてネットワーク上でシステムを共有するなどといったやり方もある。ほかにも/varのWebサーバ用のデータを分割するとか、/etcの設定ファイルだけ別パーティションに分割して保管するなどといった方法もあるかもしれない。</p>
+<p>後日注記：ディレクトリを分割して破損を防ぐ以外に、そのディレクトリの容量が肥大化することで、別のディレクトリに影響が起きるのを防ぐという目的でパーティションを分割することもある。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0107/04/news001.html">パーティション分割／非分割のセオリー (1/2) - @IT</a></li>
+</ul>
+
+<h2>リンク</h2>
+<p>ソフトリンクあるいはシンボリックリンクは、Windowsで言うショートカットのようなもので、小さなリンク用のファイルを作り、それがファイルシステムの別のパス階層にリンクする。</p>
+<p>UNIXにはもともとハードリンクというものがあり、ファイルの別名を設定できる。だが、ハードリンクはさまざまな制約があるため使われなくなった。</p>
+<p>シンボリックリンクを作るには以下のようにする。</p>
+<pre>
+ln -s /usr/src/linux-5.17-hoge /usr/src/linux
+</pre>
+<p>後日注記：Linuxの世界では、シンボリックリンクは非常に多用されます。/etcにある設定ファイルなどで、システムのデフォルトのファイル（たとえば/usr/libなどに存在する）をコピーする代わりにシンボリックリンクにする、といった使われ方がよくされます。逆にハードリンクはほとんど使われません。</p>
+
+<h1>ファイルシステム管理とマウント</h1>
+<h2>パーティションの切り方</h2>
+<p>fdiskの場合は以下を参照のこと。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1803/01/news034.html">【 fdisk 】コマンド――パーティションを作成、削除する - @IT</a></li>
+</ul>
+<p>最近ではpartedを代わりに使いますが、僕も昔はfdiskを使っていました。難しいようで慣れれば簡単です。対話的なcfdiskというプログラムもある。</p>
+<ul>
+<li><a href="http://kazmax.zpp.jp/linux_beginner/fdisk.html">Linux fdiskコマンドでパーティションを作成する - kazmax - Linuxで自宅サーバー</a></li>
+</ul>
+
+<h2>fdiskでパーティションを切る</h2>
+<p>以下はUEFIを用いた新しいシステムの場合。</p>
+<p>まず、以下でfdiskを起動。</p>
+<pre>
+fdisk /dev/sda
+</pre>
+<p>pでパーティションを確認し、gで新しいGPTラベルを作成（全パーティションの削除）するか、既に存在する場合はdと番号でひとつひとつパーティションを削除していく。</p>
+<p>全て削除したら、ブートパーティションを作るためにn（新規パーティション作成）, 1（1番目のパーティション）, 2048, +256Mとする。</p>
+<p>ブートパーティションをESP（EFIシステムパーティション）に設定するためにt, 1とする。</p>
+<p>スワップパーティションを作成するには、n, 2（2番目のパーティション）, 空行でEnter（開始セクタはデフォルト）, +4Gとする。</p>
+<p>パーティションタイプをswapにするために、t, 2, 19（Linux Swapを意味する）とする。</p>
+<p>最後にシステムがインストールされるルートパーティションを作る。n, 3, 空行, 空行（残り全ての空き領域を当てる）としてEnter。</p>
+<p>最後に、このパーティションのレイアウトを書き出すためにwとする。</p>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks/ja">ディスクの準備 - Gentoo Handbook</a></li>
+</ul>
+
+<h2>ext2, ext4ファイルシステムの作成方法</h2>
+<p>ファイルシステムの作成。</p>
+<p>基本的には以下のようにする。</p>
+<pre>
+# mkfs.ext2 /dev/sda1
+# mkfs.ext4 /dev/sda3
+</pre>
+<p>mkfs.ext2に-jオプションをつけると、ジャーナリングを有効にできる（ext3）。</p>
+<p>UEFIを用いた新しいシステムの場合、ESPパーティションはFAT32でフォーマットする。なので以下のようにする。</p>
+<pre>
+# mkfs.vfat -F 32 /dev/sda1
+</pre>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks/ja">ディスクの準備 - Gentoo Handbook</a></li>
+</ul>
+<p><a href="linux_kernel_fs_ext2.html">ext2</a>や<a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>も参照のこと。</p>
+
+<h2>スワップ領域とブートパーティション</h2>
+<p>スワップ領域は、メモリが足りなくなった時にハードディスクを代わりに使う機構。メモリが急に必要になった時に、使われていないメモリ領域をハードディスクに退避させる。512MB～4GB程度が必要とされる。</p>
+<p>swapパーティションはfdiskなどでパーティションを作った上（ファイルシステムのタイプに"Linux Swap"を設定すること）で、以下のコマンドで作成する。</p>
+<pre>
+# mkswap /dev/sda2
+</pre>
+<p>また、以下でswap領域を有効にする。</p>
+<pre>
+# swapon /dev/sda2
+</pre>
+<p>また、ブートパーティションはカーネルやブートローダのファイルが置かれるパーティションで、伝統的にジャーナリングのないext2ファイルシステムで作る。（後日注記：ESPの場合、ブートパーティションはFAT32となる。）</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks/ja">ディスクの準備 - Gentoo Handbook</a></li>
+</ul>
+<p><a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>や<a href="linux_boot.html">Linuxブート</a>も参照のこと。</p>
+
+<h2>マウント</h2>
+<p>マウントによって、デバイスをファイルシステムとして、ディレクトリとして使うことができる。</p>
+<p>UNIXではマウントという概念があり、ファイルシステムを作成したデバイスをデバイスファイルをとっかかりにマウントすることで、ディレクトリツリーにそのファイルシステムを追加し、ファイルシステムとしてその中のファイルを編集・操作することができるようになる。</p>
+<p>マウントはこんな感じ：</p>
+<pre>
+# mkdir /media/usb
+# mount /dev/sdb1 /media/usb
+</pre>
+<p>オプションは、たとえばext4であることを指示するには以下のようにする。</p>
+<pre>
+# mount -t ext4 /dev/sdb1 /media/usb
+</pre>
+<p>あるいは、読み取り専用でマウントするには以下のようにする。</p>
+<pre>
+# mount -o ro /dev/sdb1 /media/usb
+</pre>
+<p>アンマウントはumountコマンドで行う。</p>
+<pre>
+# umount /media/usb
+</pre>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Mount">Mount - Gentoo Wiki</a></li>
+</ul>
+<p>以下はmountのman-page。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/util-linux/man8/mount.8.html">man mount</a></li>
+</ul>
+
+<h2>パーティション設定ファイル（/etc/fstab）</h2>
+<p>パーティションを記載する設定ファイル。ここに記述されたボリュームはOS起動時に自動的にマウントされる。</p>
+<p>たとえばこうなる：</p>
+<pre>
+/dev/sda1   /boot        vfat    defaults,noatime     0 2
+/dev/sda2   none         swap    defaults             0 0
+/dev/sda3   /            ext4    defaults,noatime     0 1
+
+/dev/sda4   /mnt/fedora  ext4    defaults,noatime     0 2
+/dev/sda5   /mnt/suse    ext4    defaults,noatime     0 2
+
+UUID=...    /mnt/backup  exfat   defaults,nofail,x-systemd.device-timeout=1    0 2
+</pre>
+<p>左から、「ファイルシステムの含まれるパーティション（/dev/sda1など）」「マウントポイント（/など）」「ファイルシステムの種類（ext4など）」「オプション」「dumpの対象指定（1か0）」「fsckチェックの順番（1が優先順位最大で/などに指定。2はほかのファイルシステムに指定。0はチェックされない）」となる。</p>
+<p>defaultsはファイルシステムのデフォルトのオプションを指定する。noatimeを付けるとアクセス時にi-nodeアクセス時間を更新しなくなり、パフォーマンスが向上する。サーバでなくデスクトップで使う場合はnoatimeを付けたほうがベター。nofailはデバイスが存在しない時に無視する。またsystemd 219の仕様により、nofailを指定する際にはx-systemd.device-timeout=1も一緒に指定することが推奨される。（詳しくは<a href="https://wiki.archlinux.jp/index.php/Fstab">fstab - ArchWiki</a>を参照のこと。）</p>
+<p>ファイルシステムをマウントするデバイスの指定方法には、カーネルの識別子によって指定する方法（/dev/sda1など）、UUID=によってUUIDで指定する方法、LABEL=によってGPTラベルで指定する方法の三種類がある。UUIDなどの情報は以下のコマンドで確認できる。</p>
+<pre>
+lsblk -f
+</pre>
+<p>NFSでネットワーク上にあるボリュームをマウントする場合も、同様に/etc/fstabを編集する。</p>
+<ul>
+<li><a href="https://qiita.com/kihoair/items/03635447591358210772">fstabについて - Qiita</a></li>
+<li><a href="https://www.linuxmaster.jp/linux_skill/2013/06/etcfstab.html">/etc/fstabファイル（ファイルシステムテーブル）｜Linux入門・初心者</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System/ja">システムの設定 - Gentoo Wiki</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/Fstab">fstab - ArchWiki</a></li>
+<li><a href="https://qiita.com/local0125/items/40f47550ea0f1e415275">exFATでフォーマットされた外部ストレージを任意のパーミッションでマウントする - Qiita</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man5/fstab.5.html">man fstab</a></li>
+</ul>
+
+<h1>システム管理</h1>
+<h2>chroot</h2>
+<p>ルートディレクトリを変更してシェルを実行する。</p>
+<p>特に、ディストリビューションの手動によるインストールなどの際、マウントしたディレクトリに入る時などに使われる。</p>
+<p>Gentoo Linuxではハンドブックによるインストールの時の必須ツールである。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/chroot.1.html">man chroot</a></li>
+</ul>
+
+<h2>chrootコマンド</h2>
+<p>自分の書いた「ニュース - 2021-04-第五週（2021-05-第一週）」<a href="../../diary/news/2021.04.w5.html">2021/04/30</a>より。</p>
+<p>Linuxには、chrootというコマンドがある。</p>
+<p>これは「ルートディレクトリを別のディレクトリに変える」というコマンドで、新しい環境を構築する時に役に立つ。</p>
+<p>たとえば、/mnt/redhatにchrootすると、新しいbashが開いて、そのbashのルートディレクトリが/mnt/redhatになる。</p>
+<p>つまり、新しいシェルにおいては/mnt/redhat/binが/binになり、/mnt/redhat/usrが/usrとなる。</p>
+<p>たとえば、Gentoo Linuxのインストールの時、まずネットワークなどの設定をしたら、最低限のファイルを/mnt/gentooに展開し、/mnt/gentooにchrootしてそこで作業をする。</p>
+<p>こうすることで、新しい/mnt/gentoo環境で、すべての作業を行うことができる。</p>
+<p>注意点としては、カーネルはもとのままであるということ。カーネルのコンパイルはできるが、新しいカーネルを立ち上げさせるためには再起動をしなければならない。普通は、この再起動を最後に行う。</p>
+
+<h1>アーカイブと同期・NFS</h1>
+<h2>tar/rsyncでバックアップ</h2>
+<p>ファイルのバックアップを取りたい場合、さまざまな方法がある。</p>
+<p>まず、tarコマンドで全体のアーカイブを取る。全体のファイル容量が小さい場合や、全体をまるごとバックアップしたい場合に有効。</p>
+<p>次に、rsyncコマンドで同期する。ディレクトリ全体をミラーリングして、常に最新版にしたい場合、変更点が少ない場合に有効。</p>
+<p>あとは、cpコマンドで全てコピーするとか、dumpとrestoreを使うとかいう方法がある。</p>
+<p><a href="linux_filetools_archive.html">Linuxアーカイブ・同期・デバイス処理</a>も参照のこと。</p>
+
+<h2>find/diffで更新日と差異をチェック</h2>
+<p>使えるコマンドとしては、diffで差分を取るとか、findを上手く使うことで「更新日が最近の10日以内のファイルを一覧する」といったことも出来る。</p>
+<ul>
+<li><a href="https://www.softel.co.jp/blogs/tech/archives/1332">【linux】更新日が最近のファイルを見つける（findコマンド） - SOFTELメモ</a></li>
+</ul>
+<p>特に、「どのフォルダで最新の更新をしたのか分からない」などといった場合は、findコマンドを上手く使おう。</p>
+<p>diffコマンドも、上手く使えば「どのファイルが変更されているのかを突き止める」といった場合に使える。どこを変更したのかまで分かる。だが、実行速度は遅い。</p>
+<p><a href="find.html">find</a>や<a href="linux_filetools_diff.html">Linux diffとpatch・テキスト処理</a>も参照のこと。</p>
+
+<h2>git</h2>
+<p>最近は、gitなどの便利なシステムもある。たとえばローカルのデータをgitにコミットし、GitHubのリポジトリにプッシュ（アップロード）し、職場の環境からプル（ダウンロード）することで、いつでも職場とローカルの同期を簡単に実現できる。とても便利なシステムだが、たまに誤動作したり良く分からないアーカイブの取り方をするので、慣れないと使い辛いかもしれない。gitはWindowsから使うこともできる。</p>
+<p>GitHubはリポジトリを公開する場合は無料だが、非公開にしたい場合は有料なため、ビジネス用のデータをアップロードすることは避けるべきである。ホームページのデータとか、オープンソースソフトウェアのプロジェクトのホスティングなどに使うことはできるが、公的・私的な利用をしたい場合は、Google Driveのようなオンラインストレージサービスを使おう。</p>
+<p><a href="../prog_lang/git.html">Git</a>も参照のこと。</p>
+
+<h2>NFS</h2>
+<p>NFS（ネットワークファイルシステム）を使うことで、ネットワーク上のファイルシステムをマウントすることもできる。この場合、普通のディレクトリと全く同じようにコマンドやプログラムからアクセスできる。</p>
+<p><a href="../network/file_server_nfs.html">NFS</a>を参照のこと。</p>
+
+
+<h1>カーネルとファイルシステム</h1>
+<h2>カーネルのVFS</h2>
+<p>LinuxカーネルはVFS（仮想ファイルシステム）という仕組みを採用している。これにより、実際のファイルシステムが違っていても、プログラムは統一したインターフェースからシステムコールとしてファイルを操作することができる。</p>
+<p><a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>も参照のこと。</p>
+
+<h2>ジャーナリングの有無</h2>
+<p>ジャーナリングが備わったファイルシステムでは、突然システムが停止してもファイルシステムが壊れることがない。Ext2ではジャーナリングに対応していないが、Ext3/4ではジャーナリングに対応している。</p>
+
+<h2>Linuxのファイルシステム</h2>
+<p>Linuxのファイルシステム。基本的にExt4, ReiserFS, JFS, XFSなどがある。FreeBSDなどにはZFSと言うのも存在する。（ライセンスのGPLとの兼ね合いで、LinuxではZFSは基本的に対応していない。）</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0305/20/news002.html">Linuxファイルシステム技術解説（1） - @IT</a></li>
+</ul>
+
+<h2>さまざまなファイルシステム</h2>
+<p>ext2-4以外にも、</p>
+<table class="some_tables">
+<tr><th class="min60">ファイルシステム</th><th>解説</th></tr>
+<tr><td>btrfs</td><td>さまざまな機能があるがまだ未熟</td></tr>
+<tr><td>f2fs</td><td>フラッシュメモリ向け</td></tr>
+<tr><td>JFS</td><td>IBMの信頼できるファイルシステム</td></tr>
+<tr><td>ReiserFS</td><td>たくさんの小さなファイルがある場合向け</td></tr>
+<tr><td>XFS</td><td>堅牢でスケーラブル</td></tr>
+</table>
+<p>などの先進的なファイルシステムがあります。Windows向けのものとしてはvfat, NTFSなどがあります。</p>
+<p>詳しくは<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks/ja">ディスクの準備 - Gentoo Handbook</a>が参考になります。</p>
+<p><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a>も参照のこと。</p>
+
+<h2>XFS</h2>
+<p>RHEL 7では標準のファイルシステムがXFSになったとのこと。結構メモリを食うらしい。</p>
+<ul>
+<li><a href="http://www.intellilink.co.jp/article/column/oss-rh02.html">今から始めるRHEL 7 第2回 標準ファイルシステムとなったXFS | NTTデータ先端技術株式会社</a></li>
+</ul>
+
+<h2>Btrfs</h2>
+<p>Btrfsは進歩の期待度が高い。将来デフォルトになるかもしれないそうだ。</p>
+<ul>
+<li><a href="https://qiita.com/sion_cojp/items/c8e015db39ddbf43012e">Linuxファイルシステムをまとめてみました - Qiita</a></li>
+</ul>
+<p><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a>も参照のこと。</p>
+
+<h2>ZFS</h2>
+<p>ZFSはLinuxではGPLとの兼ね合いで利用できないが、Btrfsの機能と良く似ているとのこと。</p>
+<p>後日注記：最近はLinuxでもZFSを利用することができる。ライセンス問題を何とか解決しているようである。詳しくは自分で調べてほしい。</p>
+
+<h1>ファイルシステムの管理と修復</h1>
+<h2>fsck</h2>
+<p>ファイルシステムの一貫性を検査・修復するソフトウェア。OSが正しくシャットダウンしなかった場合などに実行され、問題を自動的に修復してくれる。</p>
+<p>Windowsにおけるchkdskと同様のツールである。</p>
+<p>後日注記：ジャーナリングファイルシステムでは、OSが正しくシャットダウンされなかった場合、ファイルがジャーナリングから自動的に復旧されるため、fsckが実行されることは少ない。ジャーナリングの備わっていないファイルシステムの場合、正しくシャットダウンしなかった時は、再起動時にfsckが実行されることがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Fsck">fsck - Wikipedia</a></li>
+</ul>
+<p><a href="../hardware/harddisk.html">ハードディスク</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.02.13編集</p>
+</div>
+
+<h1>論理ボリュームマネージャ</h1>
+<h2>LVM</h2>
+<p>LVMは、複数のストレージをひとつの論理的なボリュームに見せかけることのできる技術。</p>
+<p>複数のハードディスクをひとつのボリュームとして扱ったり、後々になってからボリュームを拡大・縮小したり、別の装置を後で付け足すこともできる。</p>
+<p>ただし、LVMが間に入るので、ファイル処理のパフォーマンスが低下するとか、破損した時に復旧が困難になるというデメリットもある。</p>
+<ul>
+<li><a href="https://e-words.jp/w/LVM.html">LVM（Logical Volume Manager）とは - IT用語辞典 e-Words</a></li>
+<li><a href="https://emgr.jp/lvm/">LVM を個人が使う必要があるのか | 技術系管理職の基礎知識</a></li>
+</ul>
+
+
+
+<h1>ファイルシステム関係のコマンド</h1>
+<p><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>を参考にしています。</p>
+
+<h2>mknod</h2>
+<p>スペシャルファイル（デバイスファイル）を作成する。/dev以下のデバイスファイルの作成に使う。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/mknod.1.html">man mknod</a></li>
+</ul>
+
+<h2>mkfs, mkswap</h2>
+<p>ファイルシステムやスワップ領域を作成するコマンド。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man8/mkfs.8.html">man mkfs</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man8/mkswap.8.html">man mkswap</a></li>
+</ul>
+
+<h2>fdisk, parted</h2>
+<p>パーティションを切るコマンド。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man8/fdisk.8.html">man fdisk</a></li>
+</ul>
+
+<h2>mount, umount</h2>
+<p>ファイルシステムをマウント・アンマウントするコマンド。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man8/mount.8.html">man mount</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man8/umount.8.html">man umount</a></li>
+</ul>
+
+<h2>sync</h2>
+<p>syncはディスクにキャッシュを書き込むコマンド。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/sync.1.html">man sync</a></li>
+</ul>
+
+<h2>fsck</h2>
+<p>fsckはファイルシステムの整合性を修復するコマンド。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/e2fsprogs/man8/fsck.8.html">man fsck</a></li>
+</ul>
+
+<h2>edquota</h2>
+<p>各ユーザの単位で一定容量を上限とするストレージの利用制限をかけることを「ディスククォータ」と呼ぶ。Linuxではソフトリミット（警告を表示する）とハードリミット（書き込みができなくなる）の2つの方法でディスククォータを管理できる。以下を参照のこと。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/403/">ディスククォータ（クォータ） | Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/quota/man8/edquota.8.html">man edquota</a></li>
+</ul>
+
+<h2>hdparm, sdparm, partx</h2>
+<p>ストレージのパラメータやパーティションの情報を表示するコマンド。</p>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/hdparm/man8/hdparm.8.html">man hdpram</a></li>
+<li><a href="https://linux.die.net/man/8/sdparm">man sdparm</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man8/partx.8.html">man partx</a></li>
+</ul>
+
+<h2>df</h2>
+<p>ディスクの使用容量を確認する。<a href="linux_filetools_archive.html">Linux アーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+<h2>du</h2>
+<p>ファイルやディレクトリの使用容量を確認する。<a href="linux_filetools_archive.html">Linux アーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+<h2>mktemp</h2>
+<p>mktempは一時ファイルを作成するコマンド。-dオプションでディレクトリも作成できる。</p>
+<p>一部（ツイッターなど）ではエイリアスとしてcd $(mktemp -d)を設定しておくと便利だということらしい。</p>
+<ul>
+<li><a href="https://twitter.com/Sheeeeepla/status/1690259066856353792">@Sheeeeeplaさんのツイート</a></li>
+<li><a href="https://twitter.com/Watasuke102/status/1690273319348785153">@Watasuke102さんのツイート</a></li>
+<li><a href="https://twitter.com/TwoSquirrels/status/1690280909399072768">@TwoSquirrelsさんのツイート</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.14</p>
+</div>
+
+<h1>別ページ</h1>
+<h2>ファイルシステムの詳細</h2>
+<p>さらなるファイルシステムの詳細については、<a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>や<a href="linux_kernel_fs_ext2.html">ext2</a>を参照のこと。</p>
+
+<h2>ファイル関係のAPI</h2>
+<p>ファイルを操作するAPIについては、<a href="linux_api.html">Linuxのシステムコール・APIに関する世界観</a>を参照のこと。</p>
+
+<h2>ファイルシステム階層</h2>
+<p>ファイルシステム階層については、<a href="linux_fhs.html">ファイルシステム階層</a>を参照のこと。</p>
+
+<h2>特殊なディレクトリ</h2>
+<p>/devや/procのような特殊なディレクトリとデバイスファイルについては、<a href="linux_devicefile.html">Linux デバイスファイル</a>や<a href="linux_kernel_device.html">Linuxカーネル（デバイス）</a>や<a href="linux_unix_admin.html">UNIXシステム管理（システム情報と設定）</a>を参照のこと。</p>
+
+<h2>ファイル関係のツール</h2>
+<p><a href="linux_filetools_archive.html">Linuxアーカイブ・同期・デバイス処理</a>や<a href="linux_filetools_diff.html">Linux diffとpatch・テキスト処理</a>を参照のこと。</p>
+
+<h2>ソケット</h2>
+<p>ソケットを用いたネットワーク通信については、<a href="linux_kernel_socket.html">Linuxカーネル（ソケット）</a>を参照のこと。</p>
+
+<h2>Gentoo Linux</h2>
+<p>Linuxのファイルシステムの管理については、Gentoo Linuxを設定・管理すると理解しやすいです。<a href="gentoo.html">Gentoo</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

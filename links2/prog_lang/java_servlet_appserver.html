@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Javaアプリケーションサーバ関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaアプリケーションサーバの世界観</h1>
+<p>Javaアプリケーションサーバに関する世界観です。<a href="java_servlet.html">Javaの世界観B（サーブレット）</a>も参照のこと。</p>
+
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>アプリケーションサーバ</h1>
+<h2>アプリケーションサーバ</h2>
+<p>アプリケーションサーバとは、Javaのサーブレット（サーバーサイドのWebサービスで動くJavaアプリケーション）を動かすために必要なミドルウェアのこと。</p>
+<p>主なアプリケーションサーバとして、Tomcat, JBoss, GlassFish, WebSphereなどがある。これらはWebコンテナやサーブレットコンテナとも呼ばれる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B5%E3%83%BC%E3%83%90">アプリケーションサーバ - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Web%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">Webコンテナ - Wikipedia</a></li>
+</ul>
+<p>それぞれのサーバの比較については以下の記事が参考になる。</p>
+<ul>
+<li><a href="https://cloudear.jp/blog/?p=985">Java 最近のアプリケーションサーバー事情（2015年） - 技術ブログ | 株式会社クラウディア</a></li>
+</ul>
+
+<h1>オープンソース製品</h1>
+<h2>Apache Tomcat</h2>
+<p>Javaサーブレット（あるいはJSP）を実行するためのサーブレットコンテナエンジン。</p>
+<p>オープンソースでスタンダードなサーバーとして知られる。</p>
+<p>TomcatだけでWeb・APの両方のサーバーを構成することも、Apacheと組み合わせて構成することもできる。</p>
+<p><a href="../network/apache.html">Apache</a>も参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/yuji38kwmt/items/267d4ce618e80785f03d">【社内勉強会】ApacheとTomcat(2017/03/09) - Qiita</a></li>
+<li><a href="http://www.atmarkit.co.jp/fjava/channel/appserver.html">アプリケーションサーバ（Tomcatなど） - @IT</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache Tomcat">Apache Tomcat - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/apache/tomcat">git</a></li>
+</ul>
+
+<h2>Apache Geronimo</h2>
+<p>ApacheによるJavaアプリケーションサーバ。コンポーネント指向で、サーブレットコンテナにはTomcatを採用し、EJBコンテナなどは各コンポーネントが担当する。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache_Geronimo">Apache Geronimo - Wikipedia</a></li>
+<li><a href="https://geronimo-jp.osdn.jp/">日本 Apache Geronimo ユーザグループ</a></li>
+</ul>
+
+<h2>JBoss (WildFly)</h2>
+<p>Red HatによるオープンソースのJava EEアプリケーションサーバ。Tomcatより高機能で、EJBコンテナとしても動作する。</p>
+<p>商用版の名前はJBossで、オープンソース版の名前はWildFly。Red HatのLinuxディストリビューションのRHELとFedoraと似た関係を模索している。</p>
+<p><a href="../linux/redhat.html">Red Hat</a>や<a href="../linux/fedora.html">Fedora</a>や<a href="java_servlet_javabeans.html">JavaBeans</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/JBoss">JBoss - Wikipedia</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0909/10/news124.html">企業向けアプリの常識を学び、JBossの環境構築 (1/2) - @IT</a></li>
+</ul>
+
+<h2>Jetty</h2>
+<p>100%Javaによる、軽量なサーバー。オープンソース。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Jetty">Jetty - Wikipedia</a></li>
+</ul>
+
+<h2>GlassFish</h2>
+<p>Sun（現在はOracle）によるオープンソースのサーバー。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GlassFish">GlassFish - Wikipedia</a></li>
+</ul>
+<p>後日注記：Java EEのSDKにはGlassFishが付属されています。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/21417">【Java入門】Java EEとは？(WebProfile/Glassfish/JakartaEEも解説) | 侍エンジニアブログ</a></li>
+</ul>
+
+<h1>商用製品</h1>
+<h2>WebLogic</h2>
+<p>Oracleの商用サーバー。<a href="../db/oracle.html">Oracle</a>も参照のこと。</p>
+
+<h2>WebSphere Application Server</h2>
+<p>IBMのJava EEアプリケーションサーバ。メインフレームからWindowsまでを網羅する高いスケーラビリティが特徴。<a href="../hardware/mainframe.html">メインフレーム</a>を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/WebSphere_Application_Server">WebSphere Application Server - Wikipedia</a></li>
+</ul>
+
+
+<h1>Jakarta</h1>
+<h2>Jakarta</h2>
+<p>JakartaはApache Software Foundationの中のJavaサーバーサイド関連のオープンソースプロジェクトのための関連プロジェクト群。</p>
+<p>主な製品はTomcat（サーブレットコンテナ）、Ant（ビルドツール）、Struts（Webフレームワーク）、JSTL（JSPタグライブラリ）など。他にも、数多くのツールを開発・提供していた。</p>
+<p>しかしながら、2011年に全てのプロジェクトがJakartaから卒業し、Jakartaは廃止になった。</p>
+<p><a href="../network/apache.html">Apache</a>、<a href="java_framework_struts.html">Struts</a>、<a href="java_devtools_build.html">Javaビルドツール</a>も参照のこと。</p>
+<ul>
+<li><a href="https://allabout.co.jp/gm/gc/80604/">Jakartaってなに？ [Javaプログラミング] All About</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Jakarta_Project">Jakarta Project - Wikipedia</a></li>
+</ul>
+
+<h2>Java EEはJakarta EEへ</h2>
+<p>サンを吸収合併したオラクルがJava EEをオープンソース化してEclipse財団に寄贈することが発表され、名前もJakarta EEへと変更になった。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Jakarta_EE">Jakarta EE - Wikipedia</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

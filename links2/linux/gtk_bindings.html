@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>GTK言語バインディング関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div><h1>GTK言語バインディングの世界観</h1>
+<p>GTK言語バインディングの世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="gtk.html">GTK</a></li>
+<ul>
+<li><b>GTK言語バインディング</b></li>
+<li><a href="vala.html">ValaとGenie</a></li>
+<li><a href="glade.html">Glade</a></li>
+<li><a href="cairo.html">Cairo</a></li>
+</ul>
+<li><a href="gnome.html">GNOME（アーキテクチャ）</a></li>
+<ul>
+<li><a href="gnome_desktop.html">GNOME（デスクトップ）</a></li>
+<li><a href="gnome_apps.html">GNOME（アプリケーション）</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>言語バインディング</h1>
+<h2>Cによるオブジェクト指向と言語バインディング</h2>
+<p>GTK+/GNOMEはC言語で書かれながら、GLib/GObjectという仕組みを使うことでオブジェクト指向を実現しています。</p>
+<p>これにより、さまざまな言語のラッパーを作ることが可能です。それによって、言語バインディングが用意されています。</p>
+<p>ArchWikiにGTK+の各種言語バインディングのサンプル一覧があります。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/GTK%2B/%E9%96%8B%E7%99%BA">GTK+/開発 - ArchWiki</a></li>
+</ul>
+
+<h2>言語バインディング一覧</h2>
+<table class="some_tables">
+<tr><th class="min60">バインディング</th><th>言語</th></tr>
+<tr><td>GTK+</td><td>C言語</td></tr>
+<tr><td>gtkmm</td><td>C++</td></tr>
+<tr><td>GTK#</td><td>mono (C#/VB.NET)</td></tr>
+<tr><td>Java-GNOME</td><td>Java</td></tr>
+<tr><td>GTK-Perl</td><td>Perl</td></tr>
+<tr><td>PyGTK</td><td>Python</td></tr>
+<tr><td>Ruby/GTK+</td><td>Ruby</td></tr>
+<tr><td>gjs</td><td>JavaScript</td></tr>
+</table>
+<p>ただ、これらのAPIの問題は、C言語のラッパーであるせいか、「init()関数やrun()関数をわざわざ記述する必要があって、意外と美しくない」ということがある。</p>
+<p>C++やPythonを最初から使うのであれば、KDEのQt/PyQtを試しても良いかもしれない。ただしQtの場合もapp.exec();を実行する必要はある。どっこいどっこいだ。</p>
+
+<h2>公式サポートの対応バインディング</h2>
+<p>たくさんのバインディングに対応しているとは言っても、本当は「一部分だけしか対応していない」とか、「開発状況が遅れていてバグや動かない機能が多い」となりがちである。</p>
+<p><a href="https://www.gtk.org/language-bindings.php">GTK Language Bindings</a>に、公式のバインディングのサポート状況がある。</p>
+<p>C/C++, JavaScript, Python, Valaが公式でサポートされている。よって、できるだけこれらの言語で開発するように心がけよう。</p>
+<p>ちなみに、これらの言語でどのようなコードになるかは、<a href="https://developer.gnome.org/gnome-devel-demos/stable/">GNOME Developer Platform Demos</a>から参照できる。</p>
+
+<h1>Ruby/GTK</h1>
+
+<h2>Ruby/GTK (Ruby)</h2>
+<p>以下はRuby/GTKの例。</p>
+<ul>
+<li><a href="https://ruby-gnome2.osdn.jp/ja/hiki.cgi?gtk2-tut-helloworld">gtk2-tut-helloworld - Ruby-GNOME2 Project Website</a></li>
+</ul>
+<p><a href="../prog_lang/ruby.html">Ruby</a>も参照のこと。</p>
+
+<h2>Ruby/GTK + glade</h2>
+<p>以下はGtk::Builderを使って<a href="glade.html">Glade</a>のUIファイルを読み込む例。</p>
+<ul>
+<li><a href="https://qiita.com/kojix2/items/d9da8e08757dcc6b1a7d">【Ruby】10分でGladeを使って作るRuby/GTK3 GUIアプリ - Qiita</a></li>
+</ul>
+<p>gladeを使う例。GladeのUIファイルを読み込んでいる。<!--そのため、これだけでは動かない。-->Rubyのコード以外にGladeで作ったUIファイルを別途用意する必要がある。
+
+<h2>Ruby/GTKでカスタムウィジェット</h2>
+<p>標準のウィジェットを使うだけではなく、自分独自のウィジェットを作りたい場合は、GTK+では以下のようにカスタムウィジェットを開発できる。</p>
+<ul>
+<li><a href="https://plonk123.hatenadiary.org/entry/20140520/1400576943">Ruby/Gtk2 でカスタムウィジェットを作る - plonk123の日記</a></li>
+</ul>
+
+<h1>PyGObject</h1>
+<h2>PyGObject</h2>
+<p>PyGObjectは、PythonからGTKアプリケーションを書くための言語バインディングです。</p>
+<p><a href="../prog_lang/python_tools.html">Pythonのツール</a>も参照のこと。</p>
+
+<h2>PyGTK/PyGObject (Python)</h2>
+<p>以下はPyGTKの例。</p>
+<ul>
+<li><a href="https://pygobject.readthedocs.io/en/latest/">Overview — PyGObject</a></li>
+</ul>
+<p>後日注記：GTK3においてはPyGTKはPyGObjectへと置き換えられる。これはGObjectへのPythonやその他言語のバインディング（GObject Introspectionというライブラリ）で、GTKなどGNOME系デスクトップライブラリをPythonやさまざまな言語から使えるようにする。言語バインディングの開発が楽になり、対応が遅れることも少なくなる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/PyGTK">PyGTK - Wikipedia</a></li>
+</ul>
+
+
+<h1>各バインディングについて</h1>
+<h2>gtkmm (C++)</h2>
+<p>以下はgtkmmの例。</p>
+<ul>
+<li><a href="https://developer.gnome.org/gtkmm-tutorial/stable/sec-basics-simple-example.html.en">Simple Example - Programming with gtkmm 3</a></li>
+</ul>
+<p><a href="../prog_lang/cpp.html">C++</a>も参照のこと。</p>
+
+<h2>gjs (JavaScript)</h2>
+<p>以下はgjsの例。</p>
+<ul>
+<li><a href="https://gjs-tutorial.readthedocs.io/en/latest/introduction.html">Getting Started — Gjs/GTK+ 3 Tutorial 0 documentation</a></li>
+</ul>
+<p>GNOME-Shellと拡張機能は、gjsを用いてJavaScriptで記述されています。<a href="gnome_desktop.html">GNOMEデスクトップ</a>も参照のこと。</p>
+<p><a href="../prog_lang/javascript.html">JavaScript</a>も参照のこと。</p>
+
+<h2>GTK# (mono)</h2>
+<p>C#/GTK#による.NETアプリケーション開発については<a href="../prog_lang/mono.html">Mono</a>を参照のこと。</p>
+
+<h2>ValaとGenie</h2>
+<p>ValaとGenieはGLibを使ったGNOME専用のオブジェクト指向言語です。C#/Monoを置き換えます。<a href="vala.html">ValaとGenie</a>を参照のこと。</p>
+
+<h2>Rust</h2>
+<p>OSS界隈の一部で流行っているのが、Rustバインディング。以下のリンクが参考になります。</p>
+<ul>
+<li><a href="https://www.gtk.org/docs/language-bindings/rust/">GTK and Rust - The GTK Project</a></li>
+</ul>
+<p><a href="../prog_lang/rust.html">Rust</a>も参照のこと。</p>
+
+<h2>その他のバインディング</h2>
+<p>もっとたくさんの例は<a href="https://wiki.archlinux.jp/index.php/GTK%2B/%E9%96%8B%E7%99%BA">GTK+/開発 - ArchWiki</a>からも参照できる。</p>
+
+<h1>Tcl/Tk</h1>
+<h2>Tkを使うこともできる</h2>
+<p>GTK以外のスクリプト言語として、Tcl/Tkツールキットを使うこともできます。<a href="../prog_lang/tcl_tk.html">Tcl/Tk</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+
+<h2>GNOME/KDEをC(C++)以外の言語で</h2>
+<p>全般</p>
+<ul>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0424">第424回　GUIプログラムをPython／Ruby／ECMAScriptで書く - gihyo.jp</a></li>
+</ul>
+<p>C++</p>
+<ul>
+<li><a href="http://www.hakodate-ct.ac.jp/~tokai/tokai/gtkmm/">gtkmm 入門 - 函館工業高等専門学校 生産システム工学科 システム工学実験室</a></li>
+<li><a href="http://book.geocities.jp/gtkmm_ja/docs/tutorial/html/">gtkmmプログラミング</a></li>
+</ul>
+<p>C#</p>
+<ul>
+<li><a href="http://www.mono-project.com/docs/gui/gtksharp/">Gtk# - Mono</a></li>
+</ul>
+<p>Python</p>
+<ul>
+<li><a href="https://python-gtk-3-tutorial.readthedocs.io/en/latest/">The Python GTK+ 3 Tutorial</a></li>
+</ul>
+<p>Ruby</p>
+<ul>
+<li><a href="https://ruby-gnome2.osdn.jp/">Ruby-GNOME2 Project Website</a></li>
+</ul>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

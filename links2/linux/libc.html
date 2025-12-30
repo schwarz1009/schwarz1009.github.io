@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>libc関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>libcの世界観</h1>
+<p>libcに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_api.html">システムコール・API（１．ファイル・入出力）</a></li>
+<ul>
+<li><a href="linux_api_syscalls.html">１A．システムコール</a></li>
+<li><a href="linux_api_stdio.html">１B．stdio</a></li>
+<li><a href="linux_api2.html">２．プロセス・メモリ</a></li>
+</ul>
+<li><b>libc</b></li>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>libc</h1>
+<h2>libcの重要性</h2>
+<p>libcは、その名の通りCの標準ライブラリの実装。</p>
+<p>カーネルやコンパイラだけでは、Cのプログラムは動かない。カーネルのシステムコールやコンパイラの言語処理系と合わせて、「C言語の関数を実行できる」ようなライブラリが必要である。</p>
+<p>libcはカーネルと並んでとても重要で、さまざまなCのライブラリ関数を使うためにはカーネルとlibcがタッグを組む必要がある。その上でgccなどの言語処理系が必要。Linuxではこれらは全てフリーソフトウェアで入手できる。GNUプロジェクトがglibcを開発し、Linuxカーネルの開発者と緊密に協力した結果である。</p>
+<p>Linuxで利用できるlibcには、GNUによるglibcのほかさまざまな軽量版libcが存在する。また、FreeBSDやNetBSDなどもそれぞれのOSカーネルと合わせてlibcを開発しており、組み込みシステムなどではglibcではなくNetBSDのlibcを使うなどといった事例もある。</p>
+
+<h2>C++については</h2>
+<p>また、C++で開発を行うためにも、同様にC++の標準ライブラリが必要である。LinuxではGCCプロジェクトのlibstdc++などが利用できる。</p>
+
+<h2>FreeBSD man intro(3)</h2>
+<p>FreeBSD man-pagesのintro(3)はCのライブラリ関数を知る上で参考になります。</p>
+<ul>
+<li><a href="https://www.freebsd.org/cgi/man.cgi?query=intro&sektion=3&manpath=freebsd-release-ports">intro(3) - FreeBSD Manual Pages</a></li>
+</ul>
+
+<h1>libcの実装</h1>
+<h2>GlibcとLinux libc</h2>
+<p>GNUによるlibc（標準Cライブラリ）の実装。かつてはLinuxの開発者が「Linux libc」をフォークさせたこともあったが、glibc 2.0でたくさんの機能追加と移植性の向上が行なわれ、Linuxの開発者はglibcに戻った。</p>
+<p>フル機能のGlibcは多機能だが、サイズが大きく、サイズを小型化するためにmuslのようなCライブラリの実装も使われることがある。また、ライセンスにコピーレフトのものを使いたくない場合や移植性などを考えて、*BSDのlibc実装が使われることもあり、AndroidではNetBSDのlibcが使われている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_C%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">GNU Cライブラリ - Wikipedia</a></li>
+</ul>
+
+<h2>Musl</h2>
+<p>Muslは軽量なglibcの代替。Void Linuxなどで標準とは違う軽量なCライブラリとして利用出来る。</p>
+<p>アプリケーションのバイナリをポータブルな単一ファイルとして配布できるように、静的リンクに最適化している。</p>
+<p>Linux向けのCライブラリは他にもあるが、機能を増やせば巨大になり、機能を減らせば軽量になるという関係にある。Muslは最低限の機能でありながらPOSIX互換を保っている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Musl">musl - Wikipedia</a></li>
+<li><a href="https://news.mynavi.jp/article/20140325-a057/">標準Cライブラリ「musl 1.0.0」登場 | マイナビニュース</a></li>
+</ul>
+<p><a href="void_linux.html">Void Linux</a>も参照のこと。</p>
+
+<h2>uClibc/Newlib/dietlibc</h2>
+<p>uClibcは、小型のCライブラリで、μClinux向けに開発された。</p>
+<p>uClibcはglibcと比べてずっと小さく、任意の機能を有効にしたり無効にしたりできる。また、組み込みなどでMMUのないマシンにも対応している。</p>
+<p>Newlib/dietlibcも、小型のCライブラリ。組み込み向けに用いる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/UClibc">uClibc - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Newlib">Newlib - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Dietlibc">dietlibc - Wikipedia</a></li>
+</ul>
+<p><a href="../os/rtos.html">リアルタイムOS</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>Glibc</h2>
+<ul>
+<li><a href="https://www.gnu.org/software/libc/">The GNU C Library (glibc)</a></li>
+<li><a href="https://www.gnu.org/software/libc/manual/">マニュアル - glibc</a></li>
+</ul>
+
+<h1>libc関連ページ</h1>
+<h2>GNUツールチェイン</h2>
+<p>GNUツールチェインについては<a href="gnu_toolchain.html">GNUツールチェイン</a>や<a href="make.html">Make</a>を参照のこと。</p>
+
+<h2>C言語</h2>
+<p>C言語については<a href="../prog_lang/c.html">C言語</a>を参照のこと。</p>
+
+<h2>共有ライブラリ</h2>
+<p><a href="linux_lib.html">共有ライブラリ</a>も参照のこと。</p>
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Ruby入門 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Ruby入門</h1>
+<p>Ruby入門です。<a href="ruby.html">Ruby</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%AE%E3%81%97%E3%81%84Ruby-%E7%AC%AC5%E7%89%88-%E9%AB%98%E6%A9%8B-%E5%BE%81%E7%BE%A9/dp/4797386290">たのしいRuby 第5版</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+
+<h1>コンテンツ</h1>
+<p><a href="ruby_intro_basic.html">１．基本</a></p>
+<p><a href="ruby_intro_class.html">２．クラス</a></p>
+<p><a href="ruby_intro_io.html">３．文字列操作とIO</a></p>
+
+<h1>簡単な説明</h1>
+<h2>Ruby</h2>
+<ul class="defaultlist list7">
+<li>Ruby
+<ul>
+<li>Ruby
+<ul>
+<li>演算子</li>
+<li>データ構造</li>
+<li>制御フロー</li>
+<li>メソッド</li>
+<li>クラスとオブジェクト</li>
+<li>ブロックとProcクラス</li>
+<li>モジュールとMix-in</li>
+<li>ライブラリ</li>
+<li>gems</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>演算子</h2>
+<p>基本は加減乗除。+, -, *, /, %などが使えるほかMathモジュールで数学関数を使える。</p>
+
+<h2>データ構造</h2>
+<p>ローカル変数はvalue、グローバル変数は$value、インスタンス変数は@value、クラス変数は@@value。</p>
+<p>リストやハッシュもある。</p>
+
+<h2>制御フロー</h2>
+<p>ifなどの制御ブロックや関数の終了はend。</p>
+<p>for文ではJavaの拡張for文のような記法（反復可能オブジェクトを1つ1つ操作する）も可能。</p>
+
+<h2>メソッド</h2>
+<p>メソッドの定義はdef。</p>
+<p>returnは省略した場合最後の値を返す。</p>
+
+<h2>クラスとオブジェクト</h2>
+<p>クラスの定義はclass。</p>
+<p>classの中にdefでメソッドを作り、@valueでインスタンス変数を操作する。</p>
+<p>インスタンスの作成はnewメソッド。</p>
+<p>メソッドはレシーバ名.メソッド名()というように「.」をつけて呼び出す（ブロックを付加することも可能）。</p>
+<p>継承は「&lt;」を使う。演算子オーバーロードが使えるため配列の[]を再定義することもできる。また特異メソッドを使ってインスタンスに直接メソッドを追加するなどの荒業も可能。</p>
+
+<h2>ブロックとProcクラス</h2>
+<p>ブロックはdo |x| 〜 endや波括弧も使える。</p>
+<p>ブロックは無名関数だが、ブロックがあるだけでRubyは極めて直観的で使いやすい。</p>
+
+<h2>モジュールとMix-in</h2>
+<p>モジュールはクラスと似ているが、特定のメソッドをインクルードして使い回せる。</p>
+
+<h2>EnumerableモジュールやComparableモジュール</h2>
+<p>これらのモジュールは、eachや&lt;=&gt;など最低限のメソッドを必要とし、最低限のメソッドだけ定義すれば、自分のクラスでもインクルードできる。</p>
+<p>eachだけを実装してEnumerableモジュールをインクルードすれば、mapやfindも使えて便利。</p>
+<p>Arrayクラスのメソッドに見えて、実際はEnumerableモジュールのメソッドという場合も多い。</p>
+<p>ダックタイピング（アヒルのように鳴き、アヒルのように歩くものは、アヒルに違いない）との相性も良い。</p>
+
+<h2>ライブラリ</h2>
+<p>Rubyにはさまざまなライブラリが用意されている。</p>
+<p>特にArray, Hash, File, Dir, IO, String, Regexp, Procなどは不可欠。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

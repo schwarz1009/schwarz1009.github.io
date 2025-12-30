@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C#関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C#の世界観</h1>
+<p>C#に関する世界観です。<a href="dotnet.html">.NET</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>C#の基本</h1>
+<h2>C#とは</h2>
+<p>C#とは、Microsoftが開発したプログラミング言語です。</p>
+<p>Microsoftは、以前からJava仮想マシンの独自の実装を開発するなど、Javaに対する対抗意識を燃やしていました。</p>
+<p>Microsoftは、BorlandのDelphiの開発メンバーから、主要開発者のひとり、アンダース・ヘルスバーグを引き抜いて、新しいプログラミング言語、C#を開発します。</p>
+<p>同時に、Java VMと同じ仮想マシンで動くプラットフォームとして、.NET Frameworkを開発し、Windowsネイティブの俊敏かつ調和されたGUI環境であるWindows.Formsを搭載しながら、Javaのクラスライブラリと同様の優れたクラスライブラリを開発し、この.NETの機能とクラスライブラリのAPIに、複数の言語（C#, Visual Basic.NET, C++/CLI, F#など）からアクセスできるようにしました。この仕組みは、単一言語であるJavaを使用するJREの仕組みよりも優れており、COMやActiveXのような従来のWindowsのコア機能の、VMを使用したさらに進歩した形態として、Windowsだけではなく、UNIX界隈などでも新規性を見出され、GNOME開発者のミゲル・デ・イカザなどは、UNIX環境で動くオープンソースの.NET FrameworkやC#/VB.NETコンパイラのMonoを開発し、.NETでX11のGTKツールキットを用いてGTKネイティブなGUIアプリケーションを開発できるGtk#などを開発しました。</p>
+
+<h2>Javaによく似ているが、たくさんの賢い機能がある</h2>
+<p>C#言語の特徴は、まず、「Javaによく似ている」ということ。</p>
+<p>C#のソースコードを見ると、一見、Javaとキーワードだけが変わった、Microsoft版のJavaに見えます。もし、Javaだけを知っていてC#を知らないプログラマがC#のソースコードを見たら、Javaのコードのキーワードだけを置き換えたように見えるでしょう。</p>
+<p>オブジェクト指向をサポートすることや、クラスライブラリとしてまとまったAPIを持つこと、またVMの上で動くことなども、Javaと同様です。</p>
+<p>ですが、大きく異なる点があります。それは、Windowsネイティブに対応しているということです。</p>
+<p>開発者から見ると、C#のプログラムはJavaによく似ています。ですが、GUIで実行する際、アプリケーションの見た目、すなわちルック・フィールが異なります。JavaのSwingアプリケーションは、Windowsネイティブアプリケーションとは異なる、独自のメタリックなルック・フィールをしています。それに比べて、C#/VB.NETのWindows.Formsで作られたアプリケーションは、従来のWindows APIやVisual Basicアプリケーションが持っていたような、Windowsネイティブの見た目をしており、ほかのWindowsアプリケーションと比べて違いがありません。もし、ソースコードが公開されていなければ、ユーザーは気付くことがないでしょう。</p>
+<p>しかしながら、C#はJavaをコピーして奪っただけの言語ではありません。それは、たくさんの賢い機能が加えられているからです。</p>
+<p>Javaと比べた改良点は、たくさんありますが、たとえばunsafeコードを実行できることです。Javaにはポインタがありませんが、C#にはポインタがあります。unsafeコードの中でだけ、ポインタを使うことができます。</p>
+<p>ほかの改良点として有名なのは、プロパティとLINQです。プロパティは、アクセサをgetとsetブロックを用いて変数名と代入演算子だけでアクセスできる機能です。Javaでは、getなんちゃらとかsetなんちゃらという、アクセサと呼ばれるメソッドをひとつひとつ丁寧に（言い方を変えれば面倒くさい）作らなければなりませんが、C#ではこれをsetとgetと呼ばれるブロックの中に記述し、通常のメンバ変数と同じように代入することができます。</p>
+<p>また、LINQはデータベースのクエリとして使うことのできる専用の記法です。PHPなどでは、全体のプログラムがPHPで記述されていても、データベースに対するクエリの部分は、SELECT文などのSQLで書かなければいけません。C#は、早くからこのようなSQL文をLINQと呼ばれる独自の記法で、C#プログラムと同様に記述することができます。</p>
+<p>これ以外にも、C#にはさまざまな便利な機能があります。このような機能はJavaに対する改善であるだけではありません。ヘルスバーグは、Delphi開発者であることで知られていますが、多くの機能や設計のアーキテクチャが、Delphiを参考にしています。よって、言語的な部分はJavaを参考にしながら、アーキテクチャ的な部分はDelphiを参考にしていると言われます。そもそもJavaをそんなに模倣したいわけでもなく、JavaがC++に対するSunによる別の回答だったのだと同じように、C#もC++に対するMicrosoftによる別の回答であることを目指しています。そのことが、言語の名称であるC#（C++++とも読むことができる）に表れています。</p>
+<p><a href="java.html">Java</a>も参照のこと。</p>
+
+<h2>C#は標準化されており、オープンソースでもある</h2>
+<p>C#についてもうひとつ、メリットとして言えるのは、標準化されているということです。</p>
+<p>Microsoftは、以前のJavaとMicrosoft独自のJVMのような、高圧的な方法でJava市場を獲得するのではなく、言語の仕様を公開し、標準化することで、新しいC#という言語を作り出しました。</p>
+<p>標準化されているため、同じ仕様を持った別の実装を開発することができます。これが、LinuxやUNIXにおいて、CLIコードを実行できるMonoに繋がります。</p>
+<p>以前は、そのように、Microsoft独自の実装である.NET Frameworkに対する、UNIXのオープンソースなMonoという位置づけでしたが、最近の大きな動きとして、Microsoftは.NETをオープンソース化することにし、ライブラリやVM、コンパイラなどを含めて、オープンソースかつ、LinuxやUNIXでも動くようなクロスプラットフォームなもの（以前は.NET Coreと呼ばれていた）にすることにしました。</p>
+<p>結果、今の.NETはオープンソースでありながらクロスプラットフォームです。Windowsでも、Linuxでも、クライアントでもサーバーでも、同じMicrosoftのオープンソースな.NETが動きます。</p>
+<p>また、Monoプロジェクトを開発していたXimian社がNovellに買収され、その後にまた買収されるなどして、新しい会社において存在意義を疑問視され、ミゲル・デ・イカザなどのMonoチームはレイオフされることになり、ミゲルはXamarinという新しい会社を立ち上げて、UNIXやLinuxだけではなくモバイル向けに.NETを提供し、AndroidでもiOSでも同じコードベースでモバイルアプリを開発することのできるXamarinというプラットフォームを開発しますが、これがMicrosoftによって買収されます。</p>
+<p>よって、今の.NETは、オープンソースでありながら、WindowsネイティブのGUIを備え、同時にAndorid/iOSのモバイル端末やLinuxのサーバーでも動き、Javaと同様の親しみやすい記法でクラスライブラリを使用することができる、いわば「完璧なプラットフォーム」となりつつあります。</p>
+<p>最近は、JavaにはKotlinという新しいAltJava（Java代替言語）が生まれており、モバイルで多く使われています。巨大化し、かつてのシンプルで使いやすかったJavaが、たくさんの機能を追加しすぎたために、もともとあった良さを失ってきています。KotlinはそれをJava代替言語で再構築する試みであると言えるかもしれません。また、長年オープンソースでなかった（オープンソースにすると約束はされていた）Javaも、OpenJDKの登場によって、オープンソース化されました。Javaは最初あったようなブラウザのアプレットではなく、クライアント側ではなくサーバー側で使われる言語となって生き延びています。また、モバイル向けにはAndroidという強力なJavaの援軍が居ます。今後、Javaと.NETがどのようになっていくのか、Log4jの脆弱性問題（Log4Shell）などで騒がれているJava界隈と.NET界隈がどうなるのか、大いに見物です。</p>
+<p><a href="mono.html">Mono</a>や<a href="dotnet_core.html">.NET Core</a>も参照のこと。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=C%23">C# - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>C#</h1>
+<h2>僕はC#が大好き</h2>
+<p>実際のところ、僕はC#が大好きである。</p>
+<p>そもそも、僕はDelphiが好きだった。昔、Delphi 6のフリー版を使ってOpenJaneなどをコンパイルし、その後にDelphi 7の有料版を買った。</p>
+<p>C#は、Microsoftが.NET Frameworkを開発した時に作った言語で、Delphiの主要な開発者を引き抜いて設計した。</p>
+<p>そのこともあってか、C#や.NET FrameworkにはDelphiの影響が随所にみられる。特にフォームデザイナーの仕様などはそれそのものである。</p>
+
+<h2>Javaを参考にした.NETの言語</h2>
+<p>C#はJavaを参考にした.NETの言語である。</p>
+<p>Javaとの違いは、プロパティの実現やデリゲート・無名関数、LINQ、yield returnなどもあるが、大きく違うのは、「WindowsのネイティブGUIに対応」したことと、「.NET Framerowkの上で動くVBやF#などの多様な言語を使える」ということである。</p>
+
+<h2>Windows.Forms</h2>
+<p>C#のWindows.Formsは、とても美しく、数学的である。JavaではSwingというPure JavaのGUIを使うが、ルック＆フィールがとても独自で個性的、悪く言えば醜い。C#やVB.NETを使えば、Windowsのネイティブなアプリケーションを開発できる。</p>
+<p>Windows.Formsは大人気で、「Windows APIやMFCに比べて分かりやすく、可読性も高く美しい」と評判である。Windows APIのメッセージループのコードなどがとにかく醜かったWindowsだが、C#によって一転とても美しいAPIに変わった。</p>
+
+<h2>.NETではVBやF#も使える</h2>
+<p>また、.NETではVBやF#、Managed C++を使うこともできる。これらは同じ.NET Frameworkのライブラリを使っていて、一度覚えれば他の言語でも同じように使える。</p>
+
+<h2>Windows以外にはmonoがある</h2>
+<p>Windows以外のプラットフォームとしてはmonoがある。monoでGTK#を使うことで、GTKでもC#でプログラミングを行うことができる。</p>
+
+<h2>UnityでもC#を使う</h2>
+<p>ゲームエンジンのUnityでも、monoを主要プラットフォームとしているためC#を用いてゲームプログラミングを行う。</p>
+<p><a href="../videogame/unity.html">Unity</a>も参照のこと。</p>
+
+<h2>とても洗練されたGUI開発ができる</h2>
+<p>実際のところ、C#とVisual Studioと.NETを使うことで、とても洗練されたGUIアプリケーション開発ができます。</p>
+<p>Microsoftは賢いです。特に、Visual StudioのフォームデザイナーとC#によるイベントドリブンを体験すると、感動します。本当に「最高のプログラミング環境」になります。</p>
+<p>僕が思うに、Delphiの開発メンバーを引き抜いたことが大きく貢献していると思います。C#は最高です。</p>
+<p><a href="vb_form.html">VB（フォームデザイナー）</a>も参照のこと。</p>
+
+<h2>Tabキーを2回押そう</h2>
+<p>Visual StudioでのC#の開発のコツは、Tabキーを2回押すこと。Tabキーを2回押すことで、自動補完され、効率的に開発できる。</p>
+<p>以下の参考リンクに、簡単な（おそらく最速の）C#の開発方法が載っているので参考になる。</p>
+<ul>
+<li><a href="https://ufcpp.net/study/csharp/devenv/getstarted_csharp/">はじめての C# 実演編 - C# によるプログラミング入門 | ++C++; // 未確認飛行 C</a></li>
+</ul>
+
+<h2>C#によるWindows.Formsは天才的に使いやすい</h2>
+<p>また、C#によるWindows.Formsは、言ってしまえば「天才的に使いやすい」です。</p>
+<p>C#とTypeScriptには、旧ボーランドでTurbo PascalやDelphiを開発していて、マイクロソフトへと引き抜かれたアンダース・ヘルスバーグが開発に携わっているとされていますが、彼は本当に天才だと思います。</p>
+<p>C#によるWindows.Formsは、C/C++などの開発と比べて、簡単かつ平易で、本質が分かりやすいです。本質的にどのようにGUIアプリケーションを開発すれば良いのか、直観的に分かった上で、コードをすらすらと書くことができます。</p>
+<p>僕はC#の開発の経験は少ないですが、Delphiで２ちゃんねる専用ブラウザOpenJaneの派生版を開発していたことがあります。そのごろから、Delphiの設計は素晴らしいと思っていましたが、C#などの言語の概要を知ってさらに素晴らしいと思いました。ヘルスバーグは本当に最高の天才だと思います。</p>
+<p><a href="delphi.html">Delphi</a>や<a href="javascript_framework_typescript.html">TypeScript</a>や<a href="../services/2ch_browsers.html">2ch専用ブラウザ</a>も参照のこと。</p>
+
+<h2>その他の情報</h2>
+<p><a href="dotnet.html">.NET</a>にC#関係の内容があるので参照してください。</p>
+
+<h1>C#の特徴</h1>
+<h2>イベント駆動（イベントハンドラとデリゲート）</h2>
+<p>イベントハンドラはデリゲートの1つで、C#におけるイベント駆動で、コールバック関数をイベントに追加するのに使う。</p>
+<p>デリゲートとは、関数を格納できる変数のこと。</p>
+<p>まず、以下のようなコードがあったとする。</p>
+<pre class="prettyprint">
+// Formを継承してクラスHogeFormを定義する
+class HogeForm : Form
+{
+    // クラスHogeFormのメンバとしてボタンhoge_buttonを宣言する
+    Button hoge_button;
+    
+    // ...
+}
+</pre>
+<p>ここで、以下のようなコールバック関数がある。</p>
+<pre class="prettyprint">
+class HogeForm : Form
+{
+    Button hoge_button;
+    
+    // コールバック関数hoge_button_Clickを定義する
+    private void hoge_button_Click(object sender, EventArgs e)
+    {
+        // hoge_buttonがクリックされた時の処理をここに書く
+        
+        // ...
+    }
+}
+</pre>
+<p>この時、以下のようにEventHandlerを用いてイベントを登録できる。</p>
+<pre class="prettyprint">
+class HogeForm : Form
+{
+    // ...
+    
+    // HogeFormの初期化を行うコンストラクタを定義する
+    public HogeForm()
+    {
+        // hoge_buttonを作る
+        hoge_button = new Button();
+        
+        // hoge_buttonのプロパティに値を代入する
+        hoge_button.Text = "Hoge";
+        
+        // ...
+
+        // hoge_buttonのClickイベントにイベントハンドラを追加する
+        hoge_button.Click += new EventHandler(hoge_button_Click);
+
+        // hoge_buttonコントロールをフォームに追加する
+        this.Controls.Add(hoge_button);
+    }
+}
+</pre>
+<p>これにより、ボタンhoge_buttonがクリックされると、メソッドhoge_button_Click()が実行されるようになる。ボタンhoge_buttonのClickイベントにイベントハンドラが登録されている。</p>
+<p>オブジェクトの初期化（hoge_buttonのプロパティへの代入）は、=を使ってひとつひとつ代入する以外に、{}を用いたより簡潔な構文が用意されており、それを使うこともできる。</p>
+<p>（<a href="http://home.a00.itscom.net/hatada/visual-studio/windows-forms/csforms01.html">Windows Forms入門 - Hatada's Home Page</a>と<a href="http://gomocool.net/gomokulog/?p=255">[C#]イベントハンドラとはなんぞや – gomokulog</a>を参考に執筆・編集して引用しました。）</p>
+<div class="edit_date">
+<p>2025.04.25編集</p>
+</div>
+
+<h2>ラムダ式</h2>
+<p>C# 3.0ではラムダ式が導入された。たとえば以下のように使用する。</p>
+<pre class="prettyprint">
+(x, y) =&gt; (x + y) / 2;
+(double x, double y) =&gt; { return (x + y) / 2; };
+</pre>
+<p>従来のC#でも、delegateを用いることで匿名メソッドを記述することはできる。</p>
+<pre class="prettyprint">
+delegate (double x, double y) { return (x + y) / 2; }
+</pre>
+<p>またデリゲートは関数を格納できる変数のことで、ラムダ式とともに使用する。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/C_Sharp">C Sharp - Wikipedia</a></li>
+<li><a href="https://qiita.com/toRisouP/items/98cc4966d392b7f21c30">【C#】わかった&quot;つもり&quot;になれる「ラムダ式」解説 - Qiita</a></li>
+</ul>
+
+<h2>set/get</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="http://ufcpp.net/study/csharp/oo_property.html">プロパティ - C# によるプログラミング入門 | ++C++; // 未確認飛行 C</a></li>
+</ul>
+<p>C#では、setとgetを使うことで、プロパティをエレガントな記述にできます。基本的に、取得する時はgetで、代入する時はset。過去にはC#がJavaのパクリと言われましたが、Javaにはない機能です。</p>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>グローバル変数やグローバルメソッドはない</h2>
+<p>C#にはグローバル変数やグローバルメソッドはありません。グローバルスコープに変数や関数を定義することはできません。</p>
+
+<h2>ポインタがある（unsafeコード）</h2>
+<p>C#にはポインタがあります。unsafeコードの中でのみ、ポインタを使うことができます。ただし推奨されているわけではなく、できるだけ使うべきではありません。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/C_Sharp">C Sharp - Wikipedia</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/fdotnet/csharp_abc/csharp_abc_021/csharp_abc01.html">連載：C#入門　第21回 ポインタを使用できるunsafe（1/5） - ＠IT</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.11</p>
+</div>
+
+<h2>具体的なGUIコンポーネント</h2>
+<p>.NETの具体的なGUIコンポーネントについては、<a href="dotnet.html">.NET</a>や<a href="vb_form.html">Visual Basic（３．フォームデザイナー）</a>を参照のこと。</p>
+
+<h2>サンプルコード</h2>
+<p><a href="csharp_samplecode.html">C#サンプルコード</a>も参照のこと。</p>
+
+<h1>C#の優れた点</h1>
+<h2>C#のコレクションとイテレータ</h2>
+<p>C#では、インターフェースであるIEnumerable/IEnumeratorを用いることで、コレクションとイテレータをとても美しく使うことができます。</p>
+<p>C#ではforeach文とイテレータとコレクションは、IEnumerable/IEnumeratorインターフェースを中心とした「とても密接で美しい関係」にあります。foreach文はイテレータを用いた糖衣構文にすぎません。イテレータがあって、はじめてC#のforeach文とコレクションあるいはそれ以外の反復可能なインターフェースがあるのです。</p>
+<p>本当に、こんなによく考えられた、美しい言語はないと思います。C#は最高です。</p>
+<ul>
+<li><a href="https://www.fenet.jp/infla/column/technology/ienumerable%E3%81%A8%E3%81%AF%EF%BC%9Fienumerable%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E8%87%AA%E4%BD%9C%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%A7%A3%E8%AA%AC%EF%BC%81/">IEnumerableとは？IEnumerableを使った自作クラスについて解説！ | テックマガジン from ネプラス</a></li>
+<li><a href="https://qiita.com/dj_kusuha/items/2048391d821cb94fa489">[C#]IEnumeratorとIEnumerableを調べた #Unity - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.06.18</p>
+</div>
+
+<h2>C#のasync/await</h2>
+<p>C#では非同期処理としてasync/awaitがサポートされています。このためにジェネリックなTask型を使用します。</p>
+<ul>
+<li><a href="https://zenn.dev/vatscy/articles/ba2263bdfadfeb805379">async/await を完全に理解する - Zenn</a></li>
+</ul>
+<p><a href="parallel.html">並列処理</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.06.18</p>
+</div>
+
+<h1>WebBrowser埋め込み</h1>
+<h2>C#でWebBrowser</h2>
+<p>以下のリンクが参考になります。</p>
+<ul>
+<li><a href="https://code.msdn.microsoft.com/windowsdesktop/10-WebBrowser-C-0131de80">10 行でズバリ!! 簡単 WebBrowser の作成 (C#) - MSDN</a></li>
+</ul>
+<p><a href="../linux/webkit_embedded.html">WebKit埋め込み</a>も参照のこと。</p>
+
+<h1>C#とJava</h1>
+<h2>C#とJavaはよく似ている</h2>
+<p>大まかに言って、C#とJavaはほとんど同じです。</p>
+<p>文法的に言って、C#とJavaは非常に似通っています。「Javaのキーワードを変えただけ」であると言えるかもしれません。なので、Javaの経験があればC#はすぐにマスター出来ます。</p>
+<p>C#とJavaのどこに違いがあるかと言えば、それはクラスライブラリやWindows.Formsです。</p>
+<p>クラスライブラリは、Javaと.NETは、よく似ていますが違いがあります。C#とVB.NETは同等のクラスライブラリを使用しているため、どちらかというとVB.NETの経験があればC#はマスターしやすいでしょう。</p>
+<p>問題は、Windows.Formsです。はっきり言って、JavaとC#のもっとも大きな違いは、「GUIフォームの実現方法」にあります。</p>
+<p>Javaは、主なGUIウィジェットツールキットとしてSwingを採用していますが、SwingはどんなプラットフォームでもPure Javaで動くという優位性はありますが、Windowsで使おうとすると、Windowsのネイティブアプリケーションと異なるルック・フィール（見た目や操作感）になります。</p>
+<p>これに対して、Windows.Formsは、Windows APIのラッパーであり、Windowsのネイティブアプリケーションのルック・フィールとなるため、Windowsとの調和性が高いです。</p>
+<p>ほかにも、JavaとC#は、最初にC#が登場した時点では「まるでJavaのパクリ」と言えるものでしたが、その後にさまざまな機能が追加され、C#とJavaの差別化や独自性が少しずつ生まれていきました。</p>
+<p>また、Windows.Formsよりも進歩した方法として、XMLでGUIのデザインを行うXAMLを用いたWPFという新しいGUIフォームの開発手法も生まれています。</p>
+<p>このような結果、確かにC#とJavaは（今でも）よく似ていますが、実際には異なる点が多くある（新しく生まれている）と考えるべきでしょう。</p>
+
+<h2>C#はWindows開発とゲームで使う</h2>
+<p>このようなC#ですが、決してJavaのパクリ言語で終わることなく、C#の主戦場となる「C#を主に使う分野」が二つ存在します。それはWindows開発とゲームです。</p>
+<p>まず、Windows開発では、C/C++、C#、VB.NETのどれかを使うことがほとんどです。特に先進的な機能を多く有するC#は、これらの言語の中でもっとも生産性が高いと言えます。</p>
+<p>C/C++とC#の違いは、「仮想マシンを必要とするかどうか」です。</p>
+<p>C/C++は、仮想マシンである.NET Frameworkを必要とせず、ネイティブで動作します。なので、本当にパフォーマンスや処理速度が重要なGUIアプリケーションは、Windows APIを用いてC/C++で開発します。</p>
+<p>ですが、パフォーマンスや処理速度が重要でないのであれば、C#/VB.NETを使用するべきです。なぜなら、C#/VB.NETは、C/C++を使った開発に比べて、はるかに生産性が高いからです。</p>
+<p>確かに、DelphiなどのMicrosoftとは別の会社が開発した言語を用いることもできますが、場面としてはほとんどありません。Microsoftの開発する言語を用いることのほうが多いです。</p>
+<p>また、ゲーム開発でもC#が大きく使われます。これはUnityなどのゲームエンジンが、プログラミング言語としてMono/C#を採用したことが大きいです。このため、ゲームでは、ゲームエンジンを使うのであればC#を使います。</p>
+<p>ゲームエンジンを使わず、ネイティブなC/C++を、3DCGなどのグラフィックAPIであるOpenGLやDirectXを直接触って使うこともありますが、最近はゲームを簡単かつ手軽に作れるゲームエンジンというのが流行しています。Unityの場合、個人や小規模な会社であれば無料でダウンロードして使用できることも大きいです。</p>
+<p>ゲームエンジンはさまざまなプラットフォームに対応しているため、Windows上のPCゲームだけではなく、スマホやさまざまなゲームハードにも対応できます。エンジンには多くの機能があり、エンジンを使わずにゲームを作るよりも生産性も高いです。</p>
+<p>なので、Windowsアプリケーションを作りたい場合や、ゲームを開発したい場合には、C#はとても重要なプログラミング言語となります。</p>
+
+<h1>関連ページ</h1>
+<h2>GUI開発</h2>
+<p>GUIの開発全般については<a href="gui_develop.html">GUI開発</a>を参照のこと。</p>
+
+<h2>オブジェクト指向</h2>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>イベント駆動</h2>
+<p><a href="event.html">イベント駆動</a>を参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-vb.js"></script>
+<script type="text/javascript" src="../../js/lang-ml.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

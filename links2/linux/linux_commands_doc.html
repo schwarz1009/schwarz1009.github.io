@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXコマンド（応用３．ドキュメント） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXコマンド（応用３．ドキュメント）</h1>
+<p>UNIXやLinuxのコマンドに関する世界観（応用３．ドキュメント）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_commands_beginner.html">UNIXコマンド（基本）</a></li>
+<ul>
+<li><a href="linux_commands.html">応用１．ユーザープログラム</a></li>
+<li><a href="linux_commands_proc.html">応用２．プロセス</a></li>
+<li><b>応用３．ドキュメント</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>マニュアル・ドキュメント</h1>
+<h2>manコマンドとは</h2>
+<p>コマンド・設定ファイル・関数などのマニュアルページを表示する。初心者から上級者まで知っておくべきコマンド。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/man-db/man1/man.1.html">man man</a></li>
+</ul>
+
+<h2>man</h2>
+<p>manは、マニュアルドキュメントを表示する。以下はlsコマンドのマニュアルを表示する例。</p>
+<pre>
+$ man ls
+</pre>
+<p>よく使うオプションは-k（キーワードから検索）。</p>
+<p>英語のmanページを表示したい時は、以下のようにする。</p>
+<pre>
+$ LANG=en_US man ls
+</pre>
+<p>コマンドの概要や詳細なコマンドラインオプションなどが表示される。また、manのマニュアルは設定ファイルやシステムコール・ライブラリ関数などのドキュメントも表示することができる。これが分かっていないと、Linuxをそもそも使うことができない。だが、manのマニュアルは詳しい反面、とても理解するのが難しい。</p>
+
+<h2>とりあえずmanコマンド</h2>
+<p>Linuxのコマンドで困った時は、まずmanコマンド。とりあえずmanコマンドをすることで、何でもすぐに分かる。</p>
+<p>catコマンドについて知りたい時は、端末に</p>
+<pre>
+man cat
+</pre>
+<p>と入力してエンター。そうすると、troffで書かれたcatについてのmanページがすぐに出てくる。ここに詳細なcatの使い方が全部書いてある。端末で読むのが見づらいのであれば、Mozilla FirefoxなどでブラウザからJMプロジェクトなどの検索欄にcatと叩けば良い。</p>
+<p>GNUのツールであれば、infoコマンドの方が文書が整備されていることもある。</p>
+<pre>
+info cat
+</pre>
+<p>と入力してエンター。文書内のリンクなどが整備されており、特定の機能だけにアクセスしやすくなっている。</p>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>使い方が分からない時はmanを見ろ</h2>
+<p>Linuxのコマンドについて言えることは、「使い方が分からない時はmanを見ろ」ということです。</p>
+<p>たとえば、dpkgの-Sオプションはファイルが含まれているパッケージの検索ですが、このようなオプションは</p>
+<pre>
+man dpkg
+</pre>
+<p>を見るときちんと説明されています。</p>
+<p>たとえば、gdmの設定をやり直したい場合、</p>
+<pre>
+dpkg-reconfigure gdm
+</pre>
+<p>と実行すると、「そのようなパッケージはシステムにインストールされていない」と出ます。</p>
+<p>このような時、正確なパッケージ名（今回はgdmではなくgdm3）を知りたい時、dpkgで検索オプションを使いたくても、-Sオプションであることを知るためには、manを読まなければなりません。</p>
+<pre>
+man dpkg
+</pre>
+<p>を読んで、-Sオプションを突き止め、</p>
+<pre>
+dpkg -S gdm
+</pre>
+<p>を実行して、パッケージ名がgdm3であることが分かったら、</p>
+<pre>
+dpkg-reconfigure gdm3
+</pre>
+<p>と実行することで、目的を達成することができます。</p>
+<p>また、Debianの黒画面のコンソールでmanを実行するには注意が必要です。標準のコンソールでは日本語の文字列が表示されないからです。日本語の文字をコンソールで表示するには、あらかじめfbtermを実行して、その上でmanを実行しましょう。</p>
+<p><a href="debian_deb.html">Debian（Deb/Dpkg）</a>や<a href="linux_japanese_console.html">Linux日本語入力・表示（コンソール・コマンドライン）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>apropos</h2>
+<p>manの不便な点は、コマンド名が分からないと検索できないこと。aproposコマンドを使えば、man-pagesの概要欄をキーワードで検索できる。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1702/24/news016.html">【 apropos 】コマンド――キーワードに関連するコマンドを検索する：Linux基本コマンドTips（89） - ＠IT</a></li>
+</ul>
+
+<h2>groff (troff)</h2>
+<p>groffはUNIXの文書整形コマンドroffのGNUによる実装で、manページの整形に使われている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Groff">groff - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Roff">roff - Wikipedia</a></li>
+</ul>
+
+<h2>info/Texinfo</h2>
+<p>GNU系のアプリでは「info」コマンドでinfoページを表示することもできる。リンクなどがそろっていて利用しやすい。</p>
+<p>infoでは、manとは違い章ごとにページが分かれており、リンクを辿ってテキストブラウザのように各ページを表示できる。ただ、「manと何が違うのか良く分からない」というユーザも多く、良く嫌われている。</p>
+<p>TexinfoはGNU infoで使われているドキュメント形式。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?info">infoコマンドの使い方: UNIX/Linuxの部屋</a></li>
+</ul>
+
+<h1>マニュアル</h1>
+<h2>JM Project</h2>
+<p>JM Projectから、APIのマニュアルを読むことが出来ます。セクションは2がシステムコール、3がライブラリ関数です。検索機能もあるので、ここに記述された関数名からすぐにAPIのドキュメントを検索できます。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/">JM Project</a></li>
+</ul>
+<p>manのセクション番号は以下のページで説明されている。基本的に1がユーザーコマンド、2がシステムコール、3がライブラリ関数、5がファイル形式、8がシステム管理者向けのコマンドであることを覚えておこう。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/section.html">セクションとは? - JM Project</a></li>
+</ul>
+
+<h1>オフィシャル的な情報</h1>
+<h2>情報の探し方</h2>
+<p>Linuxに関する情報を探す際に、良く言われることは既知の情報があるかどうかを探すことです。たとえば、以下のような方法があります。</p>
+<p>・コマンドに類することであれば、manコマンド・infoコマンドの実行。</p>
+<p>・ソフトウェア個別のことであれば、tarballの中にあるREADME（インストール方法であればINSTALL）や、システムのdocディレクトリ（/usr/share/doc/や/usr/docや/usr/share/[アプリケーション名]などのディレクトリ）を参照する。</p>
+<p>・TLDPやJFなどでLinux関連のマニュアルを読む。</p>
+<p>・Webブラウザを起動し、アプリケーションを開発しているプロジェクトのサイトに行って、公式のドキュメントやリファレンスを探す。特にチュートリアルやAPIリファレンスなど。</p>
+<p>・ディストリビューション付属のマニュアルを読む。</p>
+<p>・GNOMEやKDEのヘルプなどのヘルプ機能から使い方を探す。</p>
+<p>・Googleで検索する。ブログや個人サイトを検索できるほか、エラーメッセージや設定ファイル名などを検索するとピンポイントでダイレクトに分かる場合が多い。</p>
+<p>・フォーラムやメーリングリストやIRCで教えてもらう。過去のアーカイブなどから同じ質問がないか調べてみる。</p>
+<p>以下のサイトが参考になるかもしれない。</p>
+<ul>
+<li><a href="http://www.mlb.co.jp/linux/science/where-doc/index.html">ドキュメントはどこに？ - Linux で科学しよう！ - メディアラボ株式会社</a></li>
+</ul>
+
+<h2>とりあえずこれだけ読んどけば何とかなる！</h2>
+<p>とりあえずこれだけ読んどけばなんとかなる、という文書は多い。僕は以下の2つをお勧めする。</p>
+<ul>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/">Debian 管理者ハンドブック</a> - Linuxについて何も知らないよ、という人向け。</li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/ja">Gentoo AMD64 Handbook</a> - Gentoo Linuxのインストールを通じてUNIXのシステム管理の方法を知りたいという人向け。</li>
+</ul>
+<p>UNIXのことぐらい知っているよ、という人は、Linuxカーネルの仕組みを解説したThe Linux Kernelを読むことをお勧めする。日本語訳もあります。</p>
+<ul>
+<li><a href="http://en.tldp.org/LDP/tlk/tlk.html">The Linux Kernel</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-images/frame.html">The Linux Kernel日本語訳</a></li>
+</ul>
+<p>難しすぎる、量が多すぎる、と言う方は、まさに僕の書いたこの文章がお勧め。だが、結構それでも難しいという人がたくさん居ると思う。Googleの検索結果はあまり参考にならない（古い情報や馬鹿が多すぎる）ので、色んなところでリンクされている定番サイトを見るのをお勧めする。ディストリビューションや公式のマニュアルを見るのも良いが、Red HatカスタマーポータルとArchWikiは内容が良いので見てみても良いだろう。</p>
+<ul>
+<li><a href="https://access.redhat.com/">Red Hat Customer Portal</a> - 右上の地球アイコンから日本語を選べます。</li>
+<li><a href="https://wiki.archlinux.jp/">ArchWiki</a></li>
+</ul>
+<p>簡単なディストリビューションの紹介は以下のサイトにある。</p>
+<ul>
+<li><a href="https://distrowatch.com/">distrowatch.com</a></li>
+</ul>
+<p>あるいは、僕個人の意見としては、@ITとgihyo.jpがお勧め。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/">@IT</a></li>
+<li><a href="http://gihyo.jp/">gihyo.jp</a></li>
+</ul>
+<p>あるいは、個人サイトやブログはたくさんあって網羅できない。自分で検索してほしい。検索していると、qiitaがかかることが多い。だが、僕が思うにqiitaの内容はあまり良くない。みんなの知っていることを共有することはできるが、品質が高くない。</p>
+<ul>
+<li><a href="https://qiita.com/trend">Qiita</a></li>
+</ul>
+<p>灯台元暮らしというが、意外なことにJF Projectに賢い内容が多いので、疑わず参考にしてほしい。</p>
+<ul>
+<li><a href="https://linuxjf.osdn.jp/">Linux JF (Japanese FAQ) Project.</a></li>
+</ul>
+<p>我こそは、と思う方は、</p>
+<ul>
+<li><a href="http://www.tldp.org/guides.html">Linux Documentation Project Guides</a></li>
+<li><a href="http://www.tldp.org/HOWTO/HOWTO-INDEX/index.html">LDP HOWTO-INDEX</a></li>
+</ul>
+<p>を参照しても良いだろう。英語でも頑張って読めば良いさ。そうさ。ハハハ…。</p>
+<p>無駄に<!--[英会話教室]-->英会話教室で何年も学習しても、こんなページすら読めない自分が不甲斐ない。上のJF Projctに翻訳があるのでそこに頼っても良いかもしれない。英語の勉強にはなる。</p>
+
+<h1>ドキュメント形式</h1>
+<h2>XMLとドキュメント形式</h2>
+<p><a href="../prog_lang/xml.html">XMLと文書形式</a>を参照してください。</p>
+
+<h2>GNUツールチェイン</h2>
+<p><a href="gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>man-pages</h2>
+<p>man-pages</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/">JM Project</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

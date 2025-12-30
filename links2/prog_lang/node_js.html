@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Node.js関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Node.jsの世界観</h1>
+<p>Node.jsに関する世界観です。<a href="javascript.html">JavaScript１（一般）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Node.js</h1>
+<h2>Node.jsとは</h2>
+<p>サーバーサイドのJavaScript技術。</p>
+<p>ChromeのJavaScriptエンジンV8を用いて、サーバーサイドのJavaScript環境を実現する。クライアントサイドだけではなく、サーバーサイドもJavaScriptで書ける。</p>
+<p>JavaScriptでビューを実現する技術にVue.jsなどがあるが、Node.jsとExpressを組み合わせることでRuby on Railsなどを完全に代替できる。</p>
+<p>また、<a href="../network/nginx.html">Nginx</a>と同様、ノンブロッキングI/Oとイベントループによるモデルを採用し、スレッドやプロセスを使わない。これにより、高速で軽量でメモリを大きく使用せずにWebサーバーを実現できる。</p>
+<ul>
+<li><a href="https://liginc.co.jp/web/programming/node-js/85318">いまアツいJavaScript！ゼロから始めるNode.js入門 5分で環境構築編 - 株式会社LIG</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/nodejs">基礎から学ぶNode.js - gihyo.jp</a></li>
+</ul>
+
+<h2>Node.jsについて</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.02.05.html">2021/02/05</a>より。</p>
+<p>クライアントサイドのJavaScriptに加えて、サーバーサイドもJavaScriptで書いてやろうという、Node.jsも流行っています。</p>
+<p>JavaScriptは、DOMなどの事実上の標準APIについては、ECMAScriptのような形で、Netscapeの後継であるMozilla.orgなどが標準規格を定めていますが、サーバーサイドにはそれがありません。</p>
+<p>そのため、JavaScriptには標準のファイル操作APIもありません。</p>
+<p>そのため、CommonJSという規格があります。</p>
+<p>Node.jsはこのCommonJSに則り、サーバーサイドに必要なモジュールを提供しています。</p>
+<p>Node.jsは、たとえば、非同期のファイル操作APIなどを提供しています。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>が参考になります。）</p>
+
+<h2>サンプルコード</h2>
+<p>公式の<a href="https://nodejs.org/ja/about/">Node.js とは | Node.js</a>にサンプルコードがあります。</p>
+<p>Node.jsでは、Apache/CGIやJavaサーブレットとは違い、コンテナとなるWebサーバもアプリケーションもどちらもまとめて実装する。</p>
+
+<h2>ノンブロッキングI/Oとイベント駆動</h2>
+<p>ノンブロッキングI/Oとイベント駆動の仕組みについては<a href="../network/nginx.html">Nginx</a>を参照のこと。</p>
+
+<h2>Node.jsの導入</h2>
+<p>以下の動画が参考になります。Node.jsのバージョン管理のためにnodebrewを導入します。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=wtb0V6a4FXQ">2021年版｜Node.js入門！使い方〜インストールまで - YouTube</a></li>
+</ul>
+<p>標準のzipファイルからNode.jsを導入することもできるが、Node.jsはバージョンを切り替えることが多いので、zipファイルから導入すると、バージョンを変えるたびに別のバージョンをインストールしなければならず、面倒である。</p>
+<p>このため、nodebrewというNode.jsのバージョン管理ツールを使う。</p>
+<p>まずhomebrewを先にインストールする。それが終わったら、homebrewを通じてnodebrewを導入する。</p>
+<pre>
+brew install nodebrew
+</pre>
+<p>PATHなどを通したら、以下のコマンドでNode.jsの安定板あるいは最新版をインストールできる。</p>
+<pre>
+nodebrew install-binary stable
+nodebrew install-binary latest
+</pre>
+<p>インストールされたバージョンは以下で確認する。</p>
+<pre>
+nodebrew list
+</pre>
+<p>しかしながら、この状態では、インストールされただけで、どのバージョンを使うかを指定していない。使うバージョンを指定するには以下のコマンドを使う。</p>
+<pre>
+nodebrew use latest
+</pre>
+<p>stableやlatestの代わりにバージョンを指定する（v14.15.4など）こともできる。</p>
+<p>インストールが終わったら、nodeコマンドを実行すると、プロンプトにJavaScriptコードを入力可能となる。</p>
+<pre>
+$ node
+&gt; console.log('hello');
+hello
+</pre>
+<p>また、PATHを毎回通すのではなく、シェルの初期化スクリプトに書くことで自動でPATHを通すようにしておこう。</p>
+<p>以上は、以下の動画を見て、自分なりに書きました。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=wtb0V6a4FXQ">2021年版｜Node.js入門！使い方〜インストールまで - YouTube</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Node.js">Node.js - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>Node.jsの基本</h1>
+<p>（以下は<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆・引用しました。）</p>
+
+<h2>モジュール</h2>
+<p>CommonJSで特に開発が進んでいるのがモジュールシステムで、require()関数でインポートし、exportsオブジェクトで変数や関数をエクスポートする。</p>
+<p>以下は主なモジュール。</p>
+<table class="some_tables">
+<tr><th class="min60">モジュールなど</th><th>説明</th></tr>
+<tr><td>console</td><td>log()など、端末への出力などが可能で、デバッグに使う。<br>標準で読み込まれるため自分でロードする必要はない。</td></tr>
+<tr><td>util</td><td>consoleと同様によく使われるモジュールで、print()での出力などが可能。明示的に読み込んで使う。</td></tr>
+<tr><td>process</td><td>processオブジェクトは、Node.jsにおけるホストオブジェクト（グローバル変数）のひとつ。<br>基本的にひとつのインスタンスしか存在しない。<br>プロパティにstdin/stdout/stderrなどのストリームや、プロセス（argv, chdir(), pid, kill()など）の機能を持つ。</td></tr>
+<tr><td>Buffer</td><td>ほかの言語にあるような連続的な配列。<br>サイズが変更できず、必ずメモリの連続領域となる。</td></tr>
+<tr><td>Stream</td><td>Node.jsのストリームは、必ず非同期になる（非同期しかできない）という特徴がある。<br>コールバック関数によって非同期での読み書きを処理する。</td></tr>
+<tr><td>fs</td><td>fsモジュールにより、Node.jsでファイル処理ができる。<br>ファイル処理のAPIには同期版と非同期版（コールバック関数を使う）がある。</td></tr>
+</table>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2022.11.28編集</p>
+</div>
+
+<h2>イベント処理</h2>
+<p>Node.jsの非同期処理は、たとえばhttp.createServer()の中にコールバック関数を指定する。これにより、指定ポート（たとえば8080番など）にHTTPの接続があると、イベントループからコールバック関数が呼ばれる。</p>
+<p>createServer()だけで書くこともできるが、より明確に書く場合は、基本的に、</p>
+<pre class="prettyprint">
+var httpd = http.createServer();
+</pre>
+<p>でサーバを作成し、これに対して</p>
+<pre class="prettyprint">
+httpd.listen(8080);
+</pre>
+<p>などでポートを指定し、</p>
+<pre class="prettyprint">
+httpd.on('イベント名', イベントハンドラの関数);
+</pre>
+<p>でコールバック関数を登録する。</p>
+<p>後日注記：Node.jsのプログラミングでは、基本的に同期処理ではなく非同期処理を使います。なので、コールバック関数（イベントが発生した際に実行される無名関数）をよく使います。</p>
+<p>後日注記：このほか、Socket.IOとWebSocketを使うことで、Node.jsでソケットを用いたネットワーク通信ができます。ソケットはクライアントとサーバ両方の処理が必要となるため、サーバ側の処理を実装するためにNode.jsがよく使われます。ソケットを使うことで、単なるCGIではなく、自由に双方向でやり取りすることができます。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.08.15編集</p>
+</div>
+
+<h2>Node.jsのファイル処理</h2>
+<p>Node.jsでファイル処理を行うには、fsモジュールとパス情報を操作するpathモジュールを使用する。</p>
+<p>以下はファイル読み書きのための主なメソッド。</p>
+<table class="some_tables">
+<tr><th class="min60">API</th><th>説明</th></tr>
+<tr><td>stat()</td><td>ファイル情報を得る（非同期版）</td></tr>
+<tr><td>fstat()</td><td>ファイル情報を得る。<br>ファイルパスではなくファイルディスクリプタを引数に指定する。</td></tr>
+<tr><td>lstat()</td><td>ファイル情報を得る。<br>シンボリックリンクの場合にリンク先を参照しない。</td></tr>
+<tr><td>statSync()</td><td>ファイル情報を得る（同期版）</td></tr>
+<tr><td>open()</td><td>ファイルを開く（非同期版）</td></tr>
+<tr><td>openSync()</td><td>ファイルを開く（同期版）</td></tr>
+<tr><td>read()</td><td>ファイルを読み込む（非同期版）</td></tr>
+<tr><td>readSync()</td><td>ファイルを読み込む（同期版）</td></tr>
+<tr><td>readFile()</td><td>ファイルを読み込む（簡易版・非同期版）</td></tr>
+<tr><td>readFileSync()</td><td>ファイルを読み込む（簡易版・同期版）</td></tr>
+<tr><td>write()</td><td>ファイルを書き込む（非同期版）</td></tr>
+<tr><td>writeSync()</td><td>ファイルを書き込む（同期版）</td></tr>
+<tr><td>writeFile()</td><td>ファイルを書き込む（簡易版・非同期版）</td></tr>
+<tr><td>writeFileSync()</td><td>ファイルを書き込む（簡易版・同期版）</td></tr>
+</table>
+<p>これらのAPIのほか、バッファを表すBufferオブジェクトをデータの保持に使用する。また非同期APIをつかう場合はコールバック関数を指定する必要がある。</p>
+<p>後日注記：このほか、watchFile()というAPIを使うことで、ファイルの変更を監視し、ファイルが変更された時にコールバック関数を呼ぶようにできます。監視を解除するにはunwatchFile()を使います。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.09.10</p>
+<p>2025.08.15編集</p>
+</div>
+
+<h2>Node.jsとMongoDB</h2>
+<p>Node.jsではバックエンドのデータベースとして、RDBMSのほか、NoSQLのひとつであるMongoDBを使うことができる。</p>
+<p><a href="../db/mongodb.html">MongoDB</a>も参照のこと。</p>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>TypeScript + Node.js + Next.jsが最強</h2>
+<p>ツイッターなどを見ていると、最新のWeb開発の技術スタックとして流行しているのは、TypeScript + Node.js + Next.jsの組み合わせです。</p>
+<p>まず、TypeScriptを使うことで、JavaScriptで型のある開発ができます。動的に型が決まるのではなく、自らその変数に入る値の種類をきちんと明示的に決められます。</p>
+<p>TypeScriptは、JavaScriptの開発では必須であり、TypeScriptのない開発は考えられません。</p>
+<p>同時に、サーバーサイドのJavaScript技術としてNode.js、フレームワークとしてNext.jsを使うのが最新の流行です。</p>
+<p>Ruby on Railsなどは今でも流行しているように見えるかもしれませんが、実際はもはや古い技術です。唯一Railsに優れた点があるとしたら、ActiveRecordだけです。</p>
+<p>今の時代のWebエンジニアを目指すなら、TypeScript + Node.js + Next.jsでプロダクトやサービスを作りましょう。</p>
+<p><a href="javascript_framework_typescript.html">TypeScript</a>や<a href="javascript_framework_react.html">React</a>や<a href="javascript_framework_next_js.html">Next.js</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.06.14</p>
+</div>
+
+<h2>サーバーサイドでなくてもランタイムとして利用できる</h2>
+<p>Node.jsはサーバーサイドJavaScriptのための環境としてよく知られているが、実際はサーバーサイドでなくても、JavaScriptコードを動かすランタイムとして利用できる。</p>
+<p>たとえば、Pythonコードを動かすためにPythonインタープリタをランタイムとして利用したり、Rubyコードを動かすためにRubyインタープリタをランタイムとして利用したりできるのと同じように、JavaScriptコードを動かすためにNode.jsをランタイムとして利用できる。</p>
+<p>JavaScriptはGoogle ChromeやMozilla FirefoxのようなWebブラウザで動くため、Webブラウザ上で動かすのであればランタイムは必要なく見えるかもしれないが、Node.jsはWebブラウザで実行される環境よりも多くの機能を提供しており、たとえばストリーム処理（標準入出力など）やファイル処理やプロセス処理を使うために、Node.jsをサーバーサイドではなくローカルにランタイムとして導入することができる。</p>
+<div class="edit_date">
+<p>2023.09.10</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>npm</h2>
+<p><a href="javascript_framework_npm.html">npm</a>を参照のこと。</p>
+
+<h2>Express</h2>
+<p><a href="node_js_express.html">Express</a>を参照のこと。</p>
+
+<h2>Deno</h2>
+<p><a href="node_js_deno.html">Deno</a>も参照のこと。</p>
+
+<h2>MongoDB</h2>
+<p><a href="../db/mongodb.html">MongoDB</a>を参照のこと。</p>
+
+<h2>Nginx</h2>
+<p><a href="../network/nginx.html">Nginx</a>を参照のこと。</p>
+
+<h2>Linuxのファイル処理API</h2>
+<p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+<h2>Heroku</h2>
+<p><a href="../services/heroku.html">Heroku</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Node.js</h2>
+<p>サーバーサイドのJavaScript環境。クライアントサイドだけではなくサーバーサイドでもJavaScriptを使う。</p>
+<p>一部ではPHPやRubyよりも流行っている。</p>
+
+<h1>リンク集</h1>
+<h2>Node.js</h2>
+<p>Node.jsはサーバーサイドで動くJavaScriptの実行環境。イベント駆動とノンブロッキング I/O モデルによって、高性能な動作が可能です。</p>
+<ul>
+<li><a href="http://nodejs.jp/nodejs.org_ja/">Node.js</a></li>
+<li><a href="https://liginc.co.jp/web/programming/node-js/85318">いまアツいJavaScript！ゼロから始めるNode.js入門～5分で環境構築編～</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/nodejs">基礎から学ぶNode.js - gihyo.jp</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1606/02/news034.html">Dev Basics／Keyword：Node.js - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1601/08/news040.html">Tech Basics／Keyword：Node.js - @IT</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

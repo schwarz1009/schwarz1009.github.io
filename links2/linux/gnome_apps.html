@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>GNOMEアプリケーション関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>GNOMEアプリケーションの世界観</h1>
+<p>GNOMEアプリケーションの世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="gtk.html">GTK</a></li>
+<ul>
+<li><a href="gtk_bindings.html">GTK言語バインディング</a></li>
+<li><a href="vala.html">ValaとGenie</a></li>
+<li><a href="glade.html">Glade</a></li>
+<li><a href="cairo.html">Cairo</a></li>
+</ul>
+<li><a href="gnome.html">GNOME（アーキテクチャ）</a></li>
+<ul>
+<li><a href="gnome_desktop.html">GNOME（デスクトップ）</a></li>
+<li><b>GNOME（アプリケーション）</b></li>
+</ul>
+</ul>
+<p><a href="linux_desktop_apps.html">Linuxデスクトップアプリケーション</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>概要</h1>
+<h2>最近のGNOMEアプリについての批判</h2>
+<p>最近のGNOMEアプリについては、みんな同じことを批判します。</p>
+<p>すなわち、「タイトルバーにすべてのボタンを入れ込もうとするな」とか、「メニューバーを返せ」とかいった批判です。</p>
+<p>しかしながら、僕は最近のGNOMEアプリは、基本的な考え方である「WindowsやMacのパクリではなく、独自のものを作る」という観点から言えば、間違ってはいないと思います。</p>
+<p>ですが、実際のところ、GNOMEアプリは、そういう基本的なUIデザインができておらず、まったく使いやすくありません。</p>
+<p>僕が思うに、Xfceなどの環境を最初から入れたほうがいいと思います。僕もDebianでXfceを使っています。</p>
+<p>ですが、Xfceについて言えるのは、たまにきちんと動かないことがあります。</p>
+<p>たとえば、Xfceアプリから「ファイルを開く」ダイアログや「ファイルを保存」ダイアログを開いた時に、少し点滅して不安定な挙動を示すなどの問題が、DebianのXfceにはあります。</p>
+<p>なので、GNOMEアプリのUIには賛否両論があるでしょうが、残念ながらGNOMEアプリしかまともに動かないような環境では、GNOMEアプリを使うしかありません。</p>
+<p>GNOMEの開発者には残念ですが、「GNOMEよ、もう少しなんとかしろ」と言うしかありません。</p>
+<p><a href="xfce.html">Xfce</a>も参照のこと。</p>
+
+<h1>基本ユーティリティ</h1>
+<h2>GNOME 端末</h2>
+<p>GNOMEの端末エミュレータ。GNOMEデスクトップを使いながらコマンドラインの操作が出来る。むしろ、ただの真っ黒い端末を使うより、こっちの方がはるかに使いやすい。</p>
+<p>代替としておすすめなのはrxvt(rxvt-unicode)。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME_%E7%AB%AF%E6%9C%AB">GNOME 端末 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Rxvt">rxvt - Wikipedia</a></li>
+</ul>
+<h2>gedit/geany</h2>
+<p>geditはGNOMEのテキストエディタ。geditやPluma（MATE版）は日本語の入力と表示にまだ欠陥があるので、別のテキストエディタを使いましょう。代替としておススメはやっぱりEmacsとgvim。どちらもGTK+インターフェースになっています。geanyというかっこいいテキストエディタもあります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gedit">gedit - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Geany">Geany - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/GNOME/gedit">git - gedit</a></li>
+<li><a href="https://github.com/geany/geany">git - geany</a></li>
+</ul>
+
+<h2>アーカイブマネージャー(File Roller)</h2>
+<p>アーカイブの圧縮・解凍ソフト。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC">アーカイブマネージャー - Wikipedia</a></li>
+</ul>
+
+<h2>Eye of GNOME</h2>
+<p>画像ビューア。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Eye_of_GNOME">Eye of GNOME - Wikipedia</a></li>
+</ul>
+
+<h2>Beagle</h2>
+<p>デスクトップ向け検索ソフト。</p>
+
+<h2>Tomboy</h2>
+<p>メモ作成・編集ソフトウェア。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Tomboy_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">Tomboy (ソフトウェア) - Wikipedia</a></li>
+</ul>
+
+<h2>ArchWikiより</h2>
+<p>ArchWikiの以下の一覧が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3">アプリケーション一覧/ユーティリティ - ArchWiki</a></li>
+</ul>
+
+<h1>インターネット</h1>
+<h2>Epiphany（Web）</h2>
+<p>GNOMEによるWebKitを用いたWebブラウザ。</p>
+<p><a href="linux_browsers.html">Linux Webブラウザ</a>や<a href="webkit.html">WebKit</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Web_(%E3%82%A6%E3%82%A7%E3%83%96%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6)">Web (ウェブブラウザ) - Wikipedia</a></li>
+</ul>
+<h2>Galeon</h2>
+<p>GTK+/GNOMEによるGecko（Mozillaのレンダリングエンジン）を用いたWebブラウザ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Galeon">Galeon - Wikipedia</a></li>
+</ul>
+<h2>Evolution</h2>
+<p>GNOMEのメールソフト・グループウェア。Microsoft Exchange Serverにも接続出来る。</p>
+<p>後日注記：GNOMEのオンラインアカウント認証で、Gmailに接続すると、EvolutionからGmailのメールを見ることができる。</p>
+<p><a href="linux_mail.html">Linux メール</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Evolution_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">Evolution (ソフトウェア) - Wikipedia</a></li>
+</ul>
+<h2>Claws Mail/Sylpheed</h2>
+<p>GTK+を用いた軽量なメールソフト。Sylpheedは国産である。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Claws_Mail">Claws Mail - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Sylpheed">Sylpheed - Wikipedia</a></li>
+</ul>
+
+<h2>Empathy</h2>
+<p>インスタントメッセンジャー。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Empathy">Empathy - Wikipedia</a></li>
+</ul>
+
+<h2>Pidgin</h2>
+<p>メッセンジャー。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Pidgin">Pidgin - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/tieto/pidgin">git</a></li>
+</ul>
+
+<h2>X-Chat</h2>
+<p>IRCクライアント。</p>
+<p><a href="../services/irc.html">IRC</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/X-Chat">X-Chat - Wikipedia</a></li>
+</ul>
+
+<h2>Liferea</h2>
+<p>RSSのフィードリーダー。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Liferea">Liferea - Wikipedia</a></li>
+</ul>
+
+<h2>ArchWikiより</h2>
+<p>ArchWikiの以下の一覧が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88">アプリケーション一覧/インターネット - ArchWiki</a></li>
+</ul>
+
+<h1>GNOME Office (AbiWord/Gnumeric)</h1>
+<h2>概要</h3>
+<p>GNOMEのオフィススイート。ワープロのAbiWordと表計算のGnumericが有名。開発中だが、普通はLibreOfficeを使った方が良い。</p>
+<p><a href="../windows_pc/office_softwares.html">Officeソフトウェア</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME_Office">GNOME Office - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/AbiWord">AbiWord - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Gnumeric">Gnumeric - Wikipedia</a></li>
+</ul>
+<p>Wikiなど</p>
+<ul>
+<li><a href="https://wiki.gnome.org/Projects/GnomeOffice">Wiki</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/AbiWord/abiword">git: AbiWord</a></li>
+<li><a href="https://github.com/GNOME/gnumeric">git: Gnumeric</a></li>
+</ul>
+
+<h2>AbiWord</h2>
+<p>ワープロ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/AbiWord">AbiWord - Wikipedia</a></li>
+</ul>
+<h2>Evince</h2>
+<p>文書ビューア。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Evince">Evince - Wikipedia</a></li>
+</ul>
+<h2>Evolution</h2>
+<p>グループウェア・メールクライアント。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Evolution_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">Evolution (ソフトウェア) - Wikipedia</a></li>
+</ul>
+<h2>Gnumeric</h2>
+<p>表計算。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gnumeric">Gnumeric - Wikipedia</a></li>
+</ul>
+<h2>Inkscape</h2>
+<p>ベクター系描画ソフト。</p>
+<p><a href="../art/inkscape.html">Inkscape</a>を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Inkscape">Inkscape - Wikipedia</a></li>
+</ul>
+<h2>Ease</h2>
+<p>プレゼンテーション。</p>
+
+<h2>GNOME-DB</h2>
+<p>データベース。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME-DB">GNOME-DB - Wikipedia</a></li>
+</ul>
+
+<h2>ArchWikiより</h2>
+<p>ArchWikiの以下の一覧が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88">アプリケーション一覧/ドキュメント - ArchWiki</a></li>
+</ul>
+
+<h1>マルチメディア</h1>
+
+<h2>Rhythmbox/Banshee</h2>
+<p>Rhythmboxは、GNOMEの音楽プレイヤー。Windowsで言うところのiTunes。パクリで、純正ではないが、一応iPodなどとの同期などが出来るプレイヤーを目指しているはずだ。</p>
+<p>使い勝手が悪くて嫌いな方は、Bansheeなど、他のGNOME音楽プレイヤーもある。</p>
+<p><a href="linux_multimedia_player.html">Linux マルチメディア（プレイヤー）</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Rhythmbox">Rhythmbox - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Banshee">Banshee - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/GNOME/banshee">git - Banshee</a></li>
+</ul>
+
+<h2>Totem/GStreamer</h2>
+<p>GNOMEの動画プレイヤー。Windowsで言うところのWindows Media Player。GStreamerと言うストリーミング・フレームワークをベースにしている。代替としてはVLCがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%93%E3%83%87%E3%82%AA_(GNOME)">ビデオ (GNOME) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/GStreamer">GStreamer - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/GNOME/totem">git - Totem</a></li>
+</ul>
+
+<h2>Brasero</h2>
+<p>CD/DVD焼き込みソフト。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Brasero">Brasero - Wikipedia</a></li>
+</ul>
+
+<h2>PiTiVi</h2>
+<p>動画編集ソフト。</p>
+<p><a href="linux_multimedia_edit.html">Linux マルチメディア（動画・音楽編集）</a>も参照のこと。</p>
+<ul>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0104">第104回　標準搭載予定のPiTiViでビデオ編集 ：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0285">第285回　機能が追加されたPiTiViで動画編集：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>Diva</h2>
+<p>動画編集ソフト。</p>
+
+<h2>Shotwell/F-Spot</h2>
+<p>写真管理ソフト。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/F-Spot">F-Spot - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Shotwell">Shotwell - Wikipedia</a></li>
+</ul>
+
+<h2>gPhoto</h2>
+<p>写真管理ソフト。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/gPhoto">gPhoto - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/gphoto">git</a></li>
+</ul>
+
+<h2>GIMP/Inkscapeなど</h2>
+<p>Adobe製品の代替を目指して頑張っているペイント系やドロー系のイラスト描画ソフトウェア。機能も少ないし、オフィススイートと同様フォントが汚くて少ないが、印刷や組版などの用途ではなく、デジタル・グラフィックだけをやるなら使えるようだ。Adobe製品はライセンスが高いことで有名なので、頑張ってほしい。</p>
+<p><a href="../art/gimp.html">GIMP</a>と<a href="../art/inkscape.html">Inkscape</a>を参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GIMP">GIMP - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Inkscape">Inkscape - Wikipedia</a></li>
+</ul>
+
+<h2>ArchWikiより</h2>
+<p>ArchWikiの以下の一覧が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7/%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2">アプリケーション一覧/マルチメディア - ArchWiki</a></li>
+</ul>
+
+<h1>開発</h1>
+<h2>Anjuta</h2>
+<p>GNOMEの統合開発環境（IDE）。各種言語でのGTK+プログラミングをすることが出来る。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Anjuta">Anjuta - Wikipedia</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0249">第249回　AnjutaとGTK+で休日プログラミング</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/GNOME/anjuta">git</a></li>
+</ul>
+
+
+<h2>BlueFish</h2>
+<p>プログラマ向けのテキストエディタ。</p>
+
+<!--
+<h1>コンテンツ</h1>
+<h2>基本ユーティリティ</h2>
+<p><a href="gnome_apps_utils.html">GNOME基本ユーティリティ</a>を参照のこと。</p>
+
+<h2>インターネット</h2>
+<p><a href="gnome_apps_net.html">GNOMEインターネット</a>を参照のこと。</p>
+
+<h2>オフィス</h2>
+<p><a href="gnome_apps_office.html">GNOMEオフィス</a>を参照のこと。</p>
+
+<h2>マルチメディア</h2>
+<p><a href="gnome_apps_multimedia.html">GNOMEマルチメディア</a>を参照のこと。</p>
+
+<h2>開発</h2>
+<p><a href="gnome_apps_develop.html">GNOME開発</a>を参照のこと。</p>
+-->
+
+
+
+
+<h1>その他のGNOME(GTK+)アプリケーション</h1>
+<h2>GNOMEアプリケーション一覧</h2>
+<p>他にもGNOMEアプリケーションはたくさんある。Wikipediaを参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7">GNOMEアプリケーション一覧 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME">GNOME - Wikipeida</a></li>
+</ul>
+<p>ArchWikiのアプリケーション一覧からさまざまなサード・パーティのアプリケーションを参照できます。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7">アプリケーション一覧 - ArchWiki</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

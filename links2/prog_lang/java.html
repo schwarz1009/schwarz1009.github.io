@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div><h1>Javaの世界観</h1>
+<p>Javaによるプログラミングに関する世界観です。</p>
+<p>書籍<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a>と<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a>を参考にさせていただきました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>Java（１．文法）</b></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><a href="java_oop_interface.html">２B．インターフェース</a></li>
+<li><a href="java_gc.html">２C．ガーベッジコレクションと例外</a></li>
+</ul>
+<li><a href="java_lib.html">３．クラスライブラリ</a></li>
+<ul>
+<li><a href="java_lib_io.html">３A．入出力</a></li>
+<li><a href="java_lib_list.html">３B．コレクションと配列</a></li>
+<li><a href="java_lib_string.html">３C．文字列</a></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><a href="java_lib_xml.html">３E．XML</a></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+</ul>
+<p><a href="design_pattern.html">デザインパターン</a>や<a href="../unix/sun.html">Sun</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Javaの基本</h1>
+<h2>Javaとは</h2>
+<p>Javaは、静的型付けのオブジェクト指向言語であり、バイトコードにコンパイルされる仮想マシン向けの言語。</p>
+<p>Javaでは、intなどをはじめとする基本型と、基本型以外のクラスベースのオブジェクトを表す参照型の変数で、静的型付けによってデータを変数宣言する。Javaは静的型付け言語であるため、PHPやRubyのように型を意識せずに「いいかげんに扱うことはできない」。クラスライブラリによって提供されるクラスは、すべてObject型から派生したクラスであり、自分でクラスを定義した場合にも暗黙的にObject型かそれから派生した派生クラスの型を親クラスとした子クラスとして扱われる。int型のような基本型は、さまざまなクラスの機能を利用するためにラッパークラス（intであればInteger）が用意されている。</p>
+<p>Javaは、オブジェクト指向で記述されることを念頭においた「オブジェクト指向言語」の中でも著名な言語であり、メソッド（関数）を実現するだけであっても必ずクラスの中のメソッドとして定義し、アクセス修飾子を定義しなければならない。C/C++と同様にif文やfor文を使うことができ、連続要素を順番に操作する拡張for文も可能だが、gotoは存在しない。gotoの代わりとして、ラベル付きのbreakを使用できる。</p>
+<p>Javaは、コンパイラ言語でもインタープリタ言語でもない、中間言語・バイトコードを使用したVM言語である。プログラムはclassファイルにコンパイルされ、これを実行するにはJavaの仮想マシン（VM）が必要となる。Javaの仮想マシンは、オープンソースのOpenJDKか、あるいはOpenJDKに由来する各社のバイナリ（Oracle JDKやAdoptOpenJDKなど）、あるいはたとえばIBMのJDKのような別の仮想マシンが必要である。このメリットは、VMさえあればどこでも動くということ。Javaのclassファイルは、バイトコードになった段階では、まだどんなプラットフォームにも依存しておらず、VMで実行される段階ではじめてバイトコードがJITコンパイラによってコンパイルされて実行される。このため、あらゆる機械語やプラットフォームにJava VMが対応することができ、再コンパイルを行わなくても、同じバイトコードをどの環境でも実行できる。これはWindowsとLinuxの間で開発と運用を行うサーバー開発や、携帯電話やAndroidのようなモバイル機器、あるいは組み込み向けに開発する際、Windowsで開発して別の機器でプログラムを実行するような場合に便利である。欠点としては、プログラムを実行するために必ずVMというランタイムが必要であり、VMがなくプログラムだけではプログラムを実行することはできない。</p>
+<p>また、Javaにはガーベッジコレクションの機能があり、不要になったオブジェクトを自動で回収し、参照がなくなった段階で削除してくれる。</p>
+<p>また、Javaのクラスライブラリは、静的型付けでありながらとても整っている。Javaを使う大きなメリットは、「優れたクラスライブラリを使うことで簡単にプログラミングが可能である」ことである。これを模倣したWindowsの.NET Frameworkでもはやり整ったクラスライブラリがある。Microsoftによる.NET Frameworkは「Microsoft製のJava」とも言えるような存在であり、VMによって実行されることも共通だが、どちらかというと「プラットフォーム依存性の排除」よりも「多様なプログラミング言語から同じライブラリを使えること」を目指しており、C#やVB.NETのような高水準のJavaによく似たオブジェクト指向言語でGUIなどのアプリケーションが開発できる。MicrosoftはLinux向けに.NET Coreをリリースしたが、以前からLinuxではUNIX向けの.NET実装としてMonoを開発している。このMonoはゲームエンジンのUnityで使われており、Unity向けの開発では.NET言語であるC#を用いるが、このC#はとてもJavaとよく似た言語である。</p>
+<p>.NET向けの言語と同様、Java VMにもJava以外の言語が存在し、「AltJava」と呼ばれる。AltJavaの中で有名なのはScalaとKotlinであり、KoltinはAndroidアプリ開発の公式の標準言語となっている。</p>
+<p>Javaでは、コマンドラインアプリの開発のほか、Swingと呼ばれる「プラットフォーム非依存のGUIライブラリ」があり、Swingを用いることでPure JavaなGUIアプリが開発できる。このほか、ブラウザで動くJavaアプレットや、PHPと同様サーバーサイドでHTMLを動的に作成するサーブレット・JSPのような仕組みも存在する。JavaBeansやEJBやRMIを用いた分散コンピューティングは、エンタープライズシステムではよく使われている。また、Javaのコンパイル実行コマンドであるjavacには変更されたモジュールだけを再コンパイルしてくれる機能があるが、Makeの代替のプロジェクト管理ツールとしてApache AntやApache Mavenなどがある。</p>
+
+<h2>昔からJavaはオープンソースと相性がいい</h2>
+<p>昔から、Javaはオープンソースと相性がいいことで知られています。</p>
+<p>特に、Apacheソフトウェア財団のJakartaは、Java関連のオープンソースソフトウェアプロジェクトをたくさんホストしていて、「Javaと言えばJakarta」と呼ばれるような状況でした。</p>
+<p>今でこそJakartaプロジェクトはなくなりましたが、それでも、いまだにJavaはオープンソースと相性がよいです。</p>
+<p>オープンソース以外について言えば、JavaはXMLとも相性がいいことで知られています。多くのJavaソフトウェアが、設定ファイルなどの記述にXML形式のファイルを用いています。</p>
+<p>このようなJavaですが、肝心のJava仮想マシンとJITコンパイラはオープンソースではなく、長らくSun Microsystemsの製品でした。</p>
+<p>そのSunは、かつてよりJavaをオープンソースにするつもりであると言っていて、そのためにOpenJDKというオープンソース版のJava JDKが最近になって提供されるようになりました。</p>
+<p>その結果、Javaはオープンソースになりましたが、SunがOracleに買収されると、Oracleは逆にJavaの有料化を決めます。</p>
+<p>Javaの有料化は、オープンソース版でありながらサポート期限の短いOpenJDKとともに提供されるものであり、この有料化に反発する企業や組織などが、OpenJDKをビルドした独自のJava JDKを配布したりして、一時期は混乱していました。</p>
+<p>今ではJavaはOracle版であっても無料で使用できるような新しいライセンスが提供されるようになりました。</p>
+<p>そのように、いろいろとありましたが、今でもJavaがオープンソースと密接な関わり合いを持っていることは変わりません。</p>
+<p>それでハッピーエンドである、と言いたいところですが、そのようなJavaも、最近では古くなりつつあります。</p>
+<p>特に、PythonやJavaScriptのような新しい言語と比較すると、Javaは非常に古株であり、最新の流行やトレンドから、Javaは取り残され、まるで「新しいCOBOLのような存在」になりつつあります。</p>
+<p>ですが、仮想マシンによって高い移植性を持つこと、オブジェクト指向言語として抜群の生産性を持つこと、クラスライブラリが優れていて使いやすいこと、長い間使われている実績を持つことなどの点で、Javaは今でも使われる「もっとも主力とされるプログラミング言語のひとつ」だと思います。</p>
+<p>それこそ、サーブレットで使われるエンタープライズのJavaは、今でもエンタープライズの用途で多く使われており、Javaはメインフレームでもオープン系のクラスタでも安価なサーバーでもデスクトップでもモバイルでも、非常によく使われています。</p>
+<p>決して、Javaは古くなって使えなくなってしまった、衰えた言語ではありません。今でも最先端から枯れたシステムまで多くの分野で使われる言語であり、多くの人が知識とスキルを持っているとても有力な言語です。ネット上での情報も多く、本や書籍も多く書店に並んでいます。PythonやJavaScriptには、まだまだ全然負けていません。</p>
+<p><a href="java_servlet_appserver.html">Java（アプリケーションサーバ）</a>や<a href="java_openjdk.html">OpenJDK</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.01.25</p>
+</div>
+
+<h1>Java</h1>
+<h2>基本</h2>
+<p>Java言語の基本。基本的に、Java VMという仮想マシンの上でコマンドラインで動きます。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/channel/javaentry/javaentry.html">初心者におすすめのJava入門まとめ - @IT</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Java">Java - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>基本文法</h1>
+<p>（<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a>を参考に執筆・引用しました。）</p>
+<h2>Hello, World</h2>
+<p>Javaプログラムはこんな見た目になります。最初からたくさんのキーワードがでてきますが、最初は「おまじない」だと思うしかないでしょう。</p>
+<pre class="prettyprint">
+public class HogeHello {
+    public static void main(String[] args) {
+        System.out.println("Hello, and Hoge.");
+    }
+}
+</pre>
+<h2>加減乗除</h2>
+<p>簡単な計算ができます。</p>
+<pre class="prettyprint">
+public class HogeCalc {
+    public static void main(String[] args) {
+        System.out.println("32 + 22 = " + (32 + 22));
+    }
+}
+</pre>
+<p>同様に、+で足し算、-で引き算、*で掛け算、/で割り算が出来る。</p>
+<h2>変数と型</h2>
+<p>変数はC言語と同じように使えますが、ポインタはありません。（ポインタと同じことをしたい場合は、参照型でオブジェクトを操作します。Javaでは基本型は値型、クラスのオブジェクトは参照型として扱われます。）</p>
+<p>後日注記：Javaには「ラッパークラス」というものが存在する。intなどの基本型を操作する際に、ラッパークラスが基本型を扱う上で便利なメソッドをいろいろと提供してくれる。ラッパークラスの名称は、int型ならばIntegerクラス、double型ならばDoubleクラスとなる。</p>
+<p><a href="type.html">型</a>も参照のこと。</p>
+
+<h2>制御構造（if, switch, for, while)</h2>
+<p><a href="structured_programming.html">構造化プログラミング</a>も参照のこと。</p>
+
+<h3>if</h3>
+<p>if文。条件分岐ができます。</p>
+<pre class="prettyprint">
+if (i &lt; limit) {
+    ... //条件式が真（true）になる時の処理
+} else {
+    ... //条件式が偽（false）になる時の処理
+}
+</pre>
+<p>後日注記：Javaでは、if文などの条件式にboolean型の値しか置くことはできない。このため、C/C++などのように==を誤って=と書いてしまい、変数に代入された左辺の値が条件式の評価に使われることを防ぐことができる。</p>
+
+<h3>switch</h3>
+<p>switch文。if文と同様の条件分岐ができます。</p>
+<pre class="prettyprint">
+switch (number) {
+case 1:
+    ... //処理1
+    break;
+
+case 2:
+    ... //処理2
+    break;
+
+default:
+    ... //処理3
+    break;
+}
+</pre>
+<p>後日注記：条件式によって判断するif文に比べて、switch文では定数式による「値ごとの分岐」を簡単に記述できる。switch文の定数式には値だけではなく式を書くことができるが、浮動小数点数や文字列を使うことはできない。break文を書かないとフォールスルーになってしまい、今のラベルに続いて次のラベルの処理が実行されるので注意しよう。</p>
+
+<h3>for</h3>
+<p>for文。繰り返し処理ができます。</p>
+<pre class="prettyprint">
+for (int i = 0; i &lt; count; i++) {
+  ... //繰り返す処理
+}
+</pre>
+<p>後日注記：C/C++言語と同様に、break（ブロックから脱出）やcontinue（残りの処理をスキップして次の繰り返しに継続）を使うこともできる。Javaにはgoto文は存在しないが、ラベル付きのbreakやcontinueを使うことで、ブロックの中から（たとえブロックがネストされていても）ラベルの位置に脱出・継続することができる。</p>
+<p>後日注記：また、Javaには拡張for文というものがあり、配列やコレクションのようにシーケンス（順番）があるものについて、全ての要素をひとつひとつ辿っていくfor文を簡単に書くことができる。Perlのforeach文やPythonのfor文と同様。またこれ以外にもIterator（イテレータ、反復子）を用いてシーケンスを順番に処理することもできる。拡張for文には暗黙のうちにIteratorが使われている。</p>
+
+<h3>while</h3>
+<p>while文。for文と同様の繰り返し処理ができます。</p>
+<pre class="prettyprint">
+while (i &lt; count) {
+    ... //繰り返す処理
+}
+</pre>
+
+<h2>メソッド</h2>
+<p>Javaではオブジェクト指向を実現しているため、関数のことをメソッド（直訳すると「手法」）と呼びます。おそらく、関数のように値を返すよりも、メンバ変数の操作を目的としているからです。</p><p>（ちなみに、オブジェクトを直訳すると「もの」です。クラスは「階級」、インスタンスは「実例」、フィールドは「野原」、メモリは「記憶」、アドレスは「住所」です。）</p>
+<p>以下は自分で書いたメソッドの例。</p>
+<pre class="prettyprint">
+public class Commands {
+    public static void main(String[] args) {
+        System.out.println(calc("add", 2, 10));
+        System.out.println(calc("sub", 22, 3));
+        System.out.println(calc("mul", 3, 2));
+        System.out.println(calc("div", 20, 4));
+        
+        printLoop(5, "5回表示されます。");
+    }
+    
+    public static int calc(String type, int x, int y) {
+        if (type.equals("add")) {
+            return x + y;
+        } else if (type.equals("sub")) {
+            return x - y;
+        } else if (type.equals("mul")) {
+            return x * y;
+        } else if (type.equals("div")) {
+            return x / y;
+        }
+    }
+    
+    public static void printLoop(int c, String str) {
+        for (int i = 0; i &lt; c; i++) {
+            System.out.println(str);
+        }
+    }
+}
+</pre>
+<p>よく「public static void main()」というメソッドを宣言するが、ここでのstaticは静的なメソッドといって、インスタンスを作成しなくてもいつでも実行できる静的なメソッドのことを表す。メソッドだけではなく変数についても同様にstaticをつければインスタンス化しなくてもアクセスできる。</p>
+<p><a href="function.html">関数</a>も参照のこと。</p>
+
+<h2>配列</h2>
+<h3>参照型変数</h3>
+<p>配列を作成する時にnew int[]とつける必要があるのは、配列が参照型だからです。</p>
+<p>Javaには基本的数値のような基本型に加えて、クラスによる変数を定義する際に使う「参照型」の変数があり、配列や文字列は参照型になります。</p>
+<p>参照型では、インスタンスを作成するためにnew演算子でコンストラクタを呼ばなければなりません（文字列の場合は、"～"でくくられた文字列リテラルが記述された時点でnew演算子が呼び出されているために明示的に書く必要はない）。</p>
+<p>配列や文字列だけではなく、オブジェクト指向のクラスを用いて、オブジェクトのインスタンスを作る際にはnewが必ず必要です。</p>
+<p>しかしながら、C++と違い、ガーベッジコレクションが自動的に参照のなくなったインスタンスを破棄してくれるので、delete演算子を用いてデストラクタを呼び出す必要はありません。</p>
+<p><a href="java_lib_list.html">Javaクラスライブラリ（コレクションと配列）</a>も参照のこと。</p>
+
+<h3>配列</h3>
+<p>たとえば、newで配列を作成するには、以下のようにします。</p>
+<pre class="prettyprint">
+String[] array = new String[3];
+array[0] = "Java";
+array[1] = "C";
+array[2] = "Python";
+</pre>
+<p>あるいは、{}で一度に初期化する方法もあります。</p>
+<pre class="prettyprint">
+String[] array = { "Java", "C", "Python" };
+</pre>
+<p>拡張for文では、配列のような連続したデータをひとつひとつ取り出して処理することができます。</p>
+<pre class="prettyprint">
+for (String item : array) {
+    System.out.println(item);
+}
+</pre>
+<p>java.util.Arraysは配列を操作するクラスです。たとえば、すべての要素を同じ値で埋めるfill()、配列のコピーを作るclone()とcopyOf()、ソートするsort()などのメソッドがあります。また要素の個数を得るためにはlengthを使います。また要素を追加する方法はありませんが、arraycopy()メソッドを使って要素数の大きな新しい配列に配列をコピーすることができます。もし動的にサイズの変えられる配列を使いたい時はリストを使います。asList()で配列をリストに変換できます。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/14461">【Java入門】配列の使い方総まとめ(宣言、初期化、追加、要素数) | 侍エンジニアブログ</a></li>
+<li><a href="https://www.fenet.jp/java/column/java_beginner/6059/">Javaでのarray（配列）操作の方法の紹介！｜arrayを正しく使いこなそう | Javaコラム</a></li>
+<li><a href="https://nompor.com/2017/12/10/post-1890/">【Java】配列操作用クラスArrays | のんぽぐ</a></li>
+<li><a href="https://www.sejuku.net/blog/22219">【Java入門】for文、拡張for文、forEachの使い方 | 侍エンジニアブログ</a></li>
+</ul>
+
+<h2>コメント</h2>
+<p>Javaでは、C/C++と同様に、複数行のブロックコメントである/* ～ */と一行コメントである//が利用できるほか、ソースコードから自動的にドキュメントを作成するJavadocというツールのための/** ～ */というコメント（開始部分の*がひとつ多い）も利用できる。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/start/const/index6.html">コメントを記述する | Java入門 | Let'sプログラミング</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.03</p>
+</div>
+
+<h1>Javaの発展と応用</h1>
+<h2>オブジェクト指向</h2>
+<p><a href="java_oop.html">Java（２．オブジェクト指向）</a>を参照のこと。</p>
+
+<h2>クラスライブラリ</h2>
+<p><a href="java_lib.html">Java（３．クラスライブラリ）</a>を参照のこと。</p>
+
+<h2>Java関連技術</h2>
+<p>以下を参照のこと。</p>
+<p>・<a href="java_gui.html">A．GUI</a></p>
+<p>・<a href="java_servlet.html">B．サーブレット</a></p>
+<p>・<a href="java_langs.html">C．各種言語</a></p>
+<p>・<a href="java_framework.html">D．Webフレームワーク</a></p>
+<p>・<a href="java_devtools.html">E．開発ツール</a></p>
+<p>・<a href="java_advanced.html">F．発展</a></p>
+<p>・<a href="java_comments.html">G．戯言</a></p>
+
+<h2>サンプルコード</h2>
+<p><a href="java_samplecode.html">Javaサンプルコード</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Java</h2>
+<ul class="defaultlist list7">
+<li>Java
+<ul>
+<li>Java
+<ul>
+<li>基本文法</li>
+<li>オブジェクト指向
+<ul>
+<li>クラス</li>
+<li>継承</li>
+<li>インターフェイス</li>
+</ul></li>
+<li>クラスライブラリ</li>
+<li>Javaアプレット</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>Java応用</h2>
+<ul class="defaultlist list7">
+<li>Java
+<ul>
+<li>Java応用
+<ul>
+<li>Swing</li>
+<li>JavaFX</li>
+<li>AltJava
+<ul>
+<li>Scala</li>
+<li>Kotlin</li>
+</ul></li>
+<li>サーブレット・JSP
+<ul>
+<li>Jakarta</li>
+<li>Tomcat</li>
+<li>JBoss</li>
+<li>doGet, doPost</li>
+</ul></li>
+<li>Webフレームワーク
+<ul>
+<li>Struts</li>
+<li>Spring
+<ul>
+<li>DI（依存性注入）</li>
+</ul></li>
+</ul></li>
+<li>Ant</li>
+<li>Maven</li>
+<li>Eclipse</li>
+<li>IntelliJ IDEA</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>Java</h2>
+<p>「Write once, run anywhere」（一度書けばどこでも実行できる）を目指したオブジェクト指向言語。</p>
+<p>VM（仮想マシン）の上でバイトコードが動き、デスクトップで開発したアプリケーションがそのままモバイルやサーバーでも動く。</p>
+<p>オブジェクト指向を大々的に取り入れ、洗練されたクラスライブラリを持つ。</p>
+<p>大規模なエンタープライズ向けの開発に使える。</p>
+
+<h2>クラスライブラリ</h2>
+<p>Javaのクラスライブラリは整理されていて使いやすい。</p>
+<p>命令の文字列が長いためEclipseなどのIDEによる補完が必須とされる。</p>
+
+<h1>本当に詳しくJavaをやりたい</h1>
+<h2>Java言語規定</h2>
+<p>以下のページはとても参考になる。</p>
+<ul>
+<li><a href="http://www.y-adagio.com/public/standards/tr_javalang/">Java言語規定　目次</a> - 「Java Language Specification」の翻訳。</li>
+</ul>
+
+<h1>Javaの資格</h1>
+<h2>Oracle認定Javaプログラマ</h2>
+<p>Sunから継承されたOracleのJavaの資格。ブロンズ、シルバー、ゴールドの3種類。</p>
+
+<h2>Javaプログラミング能力認定試験</h2>
+<p>サーティファイによる日本国内の民間資格。3級、2級、1級。</p>
+
+<h2>Android技術者認定試験</h2>
+<p>Androidの資格。</p>
+
+<h1>余談</h1>
+<h2>Javaはエンタープライズに使う</h2>
+<p>実際のところ、Javaは最近、エンタープライズの開発によく使います。エンタープライズとは、ビジネスや商用のシステムのことです。</p>
+<p>たとえば、工場の生産システム。工場でひとつひとつのラインが成り立つように、工場のラインを制御するシステムとして、メインフレームと一緒にJavaを使います。</p>
+<p>ほかにも、たとえば世界中の運輸・運送されている物品を一元的に把握して、どのような経路を辿るのか、今どこにいるのかを管理したり、といったことにも使います。</p>
+<p>ほかにも、国中の信号機の調整とか電力供給のバランスを管理する、などといったことにも使われています。航空、医療、金融、軍事などの専門領域でも使われています。</p>
+<p>そのように、ビジネスの基幹システムのことを総称して「エンタープライズ」と呼びます。</p>
+<p>エンタープライズでは、たとえば金融システムなど向けにCOBOLなども使われますが、JavaはCOBOLなどに取って代わる新しい言語であると言われています（Javaは新しいCOBOLとも）。</p>
+<p>エンタープライズはかっこいい領域ですが、新米エンジニアにやらせるべきではありません。</p>
+<p>ここに書いた中でも、航空や医療は間違えると死人が出ます。航空機が墜落したり、病気の人が亡くなったりしてしまいます。また、金融は間違えると銀行預金者やトレーダーに大損が発生し、弁償責任が発生します。軍事を間違えると兵士が犠牲になりますし、国が戦争で負けます。</p>
+<p>そのような「本当に動かなければいけない領域」は、正直言って、新米エンジニアにはできません。ベテランのチーフがきちんと設計するか、あるいは多額の費用を払ってIBMに直々に作ってもらうしかないことになります。</p>
+<div class="edit_date">
+<p>2024.11.10</p>
+</div>
+
+<h2>Javaはモバイルや組み込みにも使う</h2>
+<p>エンタープライズ以外のJavaの用途として、Javaはモバイルや組み込み向けにもよく使われます。</p>
+<p>モバイルとは、携帯電話やスマホやタブレットのような携帯端末のことです。</p>
+<p>Javaはモバイル向けのOSであるAndroidで使われています。</p>
+<p>Javaはスマホアプリを書くために使えます。最近はAltJava（Java言語の代わりに使えるJava VMで動く言語）として、特にAndroidのスマホアプリではKotlinがよく使われますが、スマホアプリならJava VMの標準言語であるJavaも選択肢のひとつです。アプリだけではなくゲームも作れます。3DCGやネットワークも使えます。</p>
+<p>組み込みとは、たとえばお風呂の湯沸かし器やエアコンや洗濯機、あるいはバスや列車や自動車のような交通車両、さらにはトースターや炊飯器のように、家電製品のような機械製品に組み込みで使われる、ブラックボックス（中身の隠された箱という意味）なICを使った機器のことです。</p>
+<p>組み込みでは機械語やC言語のクロスコンパイラも使われることがありますが、Javaは移植性が高いため、移植性を求められる場面でよく使われます。</p>
+<p>Javaの移植性が高い理由は、JavaはVM（仮想マシン）の上で動く言語だからです。それぞれのプラットフォームごとに異なるAPIを、仮想マシンが上手く吸収してくれるため、Windowsで作ったアプリがLinuxとかモバイル環境で、何も手を加えなくてもそのまま動きます。なので、Javaは組み込み用途でよく使われます。特にモバイルではJavaが圧倒的な人気です。</p>
+<p>Javaではコンパイラがクラスファイルという中間コード（バイトコード）にプログラムを翻訳します。この時点では、まだどのCPUの命令にも依存していません。そして、それを実行する段階で、バイトコードをその都度機械語に翻訳します。そのように二段階のコンパイル方式になっているため、単にC言語のソースコードを機械語にコンパイルするよりも移植性が高いのです。C言語では、Intel向けにコンパイルするとIntel CPUでしか動きませんが、Javaでは同じバイトコードがJava VM上でARMやSPARCやPOWERでも動きます。特にモバイル端末はARMを使っていることが多いので、この機能は重要です。</p>
+<div class="edit_date">
+<p>2024.11.10</p>
+</div>
+
+<h2>Javaはスケーラブル</h2>
+<p>このように、Javaは大規模なシステムから小規模なシステムまで、汎用的に広く使われます。</p>
+<p>ここに書いた用途以外にも、たとえばJavaはWebサービスのサーバーサイドのバックエンドを書くためにも使われますし、WindowsやLinuxで動くクロスプラットフォームなGUIのアプリケーションを開発するためにも使えますし、大規模なスパコンのクラスタの分散システムを書くためにも使えます。いわば「Javaさえできればなんでもできる」といった具合です。</p>
+<p>このような、「大規模なシステムにも小規模なシステムにも対応できる」という特徴を「スケーラブル」といいます。Javaは極めてスケーラブルな言語です。</p>
+<p>Javaはオブジェクト指向言語で、クラスライブラリも整備されており、大規模な複数人での開発に向いています。何十～何百人というエンジニアが協力してシステムを開発するためにJavaは適しています。</p>
+<p>Javaには3つのエディションがあり、それぞれ、エンタープライズ向けのJava EE (Enterprise Edition)、パソコン向けのJava SE (Standard Edition)、組み込み向けのJava ME (Micro Edition)となっています。</p>
+<p>JavaはSun Microsystemsという会社によって開発されていましたが、SunはOracleに買収されました。Oracleの下、Java EEはEclipse財団に譲渡され、Jakarta EEという名前に変更されました。</p>
+<div class="edit_date">
+<p>2024.11.10</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>Java</h2>
+<p>Java</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/channel/javaentry/javaentry.html">初心者におすすめのJava入門まとめ - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/subtop/java/">Java Agile : Java技術者とアジャイル開発者のための総合情報提供フォーラム - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/fjava/javatips/index.html">Java Tips - @IT</a></li>
+</ul>
+<p>Qiita</p>
+<ul>
+<li><a href="https://qiita.com/tags/java">Java - Qiita</a></li>
+</ul>
+<p>個人サイトなど</p>
+<ul>
+<li><a href="https://java.keicode.com/">Java 入門 - keicode.com 技術入門シリーズ</a> - ある程度Javaの知識がある方におすすめ。</li>
+</ul>
+
+<h2>Javaチュートリアル</h2>
+<p>Javaのチュートリアル。</p>
+<ul>
+<li><a href="http://www.oracle.com/technetwork/jp/java/javase/documentation/tutorials-jsp-316042-ja.html">Java SE チュートリアル - Oracle Technology Network</a></li>
+</ul>
+
+<h2>Java API</h2>
+<p>オラクルのサイト。公式のドキュメントが読めます。</p>
+<ul>
+<li><a href="http://www.oracle.com/technetwork/jp/java/javase/documentation/api-jsp-316041-ja.html">Java SE API & ドキュメント - Oracle</a></li>
+<li><a href="http://www.oracle.com/technetwork/jp/java/index.html">OTN Japan Java Home Page - Oracle</a></li>
+</ul>
+
+<h2>Javaリファレンス</h2>
+<p>Java</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/">Overview (Java Platform SE 8)</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a></li>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

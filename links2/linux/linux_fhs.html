@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ファイルシステム階層 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ファイルシステム階層</h1>
+<p>Linuxのファイルシステム階層に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ディレクトリ階層とファイルシステム</h1>
+<h2>基本</h2>
+<p>ディレクトリの階層構造。</p>
+<p>ルートディレクトリには以下のようなディレクトリツリーがある。</p>
+<table class="some_tables">
+<tr><th class="min60">ディレクトリ</th><th>説明</th></tr>
+<tr><td>/</td><td>ルートディレクトリ。</td></tr>
+<tr><td>/home</td><td>ユーザーのホームディレクトリ。たとえば/home/schwarz/.bashrcなどとなります。</td></tr>
+<tr><td>/root</td><td>rootのホームディレクトリ。</td></tr>
+<tr><td>/bin</td><td>OSの基本プログラム。アプリケーションのプログラムは/usr/binにあります。<br>基本的に、/binは起動に最低限必要なUNIXのプログラムが入るためにあるが、<br>最近は/binを/usr/binのシンボリックリンクにする場合もある。<br>これはハードディスクが大きなサイズになって、<br>/usrは破損したが/binは残っているなどという状況がレガシーなものになってきたためである。</td></tr>
+<tr><td>/sbin</td><td>OSのシステムプログラム。アプリケーションのシステムプログラムは/usr/sbinにあります。<br>基本的に、rootユーザーでしか実行できないシステムプログラムは/sbinや/usr/sbinに入れられます。</td></tr>
+<tr><td>/usr</td><td>アプリケーションなどのファイル。あとで記述するように、さらに階層があります。<br>/usrは「ユーザー」と読む人も多いが、<br>「UNIXシステムリソース」あるいは「UNIXサービスとルーチン」などの略だとされている。<br>このディレクトリにはUNIXシステムのさまざまな場所から使われるシステムリソースを置く。</td></tr>
+<tr><td>/etc</td><td>設定ファイル。使っていてもファイルのサイズが変化しないファイルを置く。<br>設定ファイルである*.confファイルや*.iniファイルはだいたいここに置かれる。<br>/etc/fstabのようなシステムに必要な設定ファイルのほか、<br>apache, php, aptなどランタイムレベルで必要なあらゆる設定ファイルが置かれる。<br>システムを管理する上で非常に重要なディレクトリ。<br>設定ファイルを自分で書き替える時、<br>デフォルトの設定ファイルを*.origなどの名前でバックアップを取っておく習慣をつけるとなおよい。<br>コマンド名と/etcさえ覚えてしまえばLinuxの最低限の管理はできるかもしれない。</td></tr>
+<tr><td>/var</td><td>ログなどの使っていて変化するファイルを置く。<br>たとえばApacheのHTMLファイルを置くドキュメントルートは/var/www/htmlに設定されていることが多い。<br>このような時は、/var/www/htmlの所有者を自分（一般ユーザー）にする選択肢もある。<br>スプールファイルやログファイルも置かれるため、システム管理における重要なディレクトリ。</td></tr>
+<tr><td>/tmp</td><td>一時的なディレクトリ。一時ファイルが置かれる場所。</td></tr>
+<tr><td>/dev</td><td>デバイスファイル。<br>/udevによって自動的に作成されるデバイスファイルがあります。<br>特にファイルシステムを/mnt以下にマウントする時や、パーティションを切る時などには必須のディレクトリ。</td></tr>
+<tr><td>/mnt</td><td>デバイスをマウントするためのディレクトリ。<br>/mediaはホットプラグデバイスを自動でマウントしてくれますが、<br>たとえば別のLinuxが入ったパーティションなどを/mnt/redhatなどに手動でマウントする際には/mntを使います。</td></tr>
+<tr><td>/proc</td><td>システム情報。<br>そもそもはデバッグのための仕組みで、プロセスをファイルとして表現したもの。<br>最近はカーネルの情報を参照するためにも使われる。</td></tr>
+<tr><td>/sys</td><td>sysfsをマウントするディレクトリ。<br>従来/procにあった情報のうちプロセスとは無関係のものを/sysに移動した。</td></tr>
+<tr><td>/lib</td><td>共有ライブラリ。ダイナミックリンクされる*.soファイルがある。</td></tr>
+<tr><td>/boot</td><td>OSのブート用ファイル。<br>基本的にカーネルとブートローダのみが置かれ、壊れにくいext2でフォーマットされる。</td></tr>
+</table>
+<p>また、/usr以下にはアプリケーションをパッケージ管理システムでインストールした時のアプリケーションの構成ファイルの入るサブディレクトリツリーがある。</p>
+<table class="some_tables">
+<tr><th class="min60">ディレクトリ</th><th>説明</th></tr>
+<tr><td>/usr/bin</td><td>アプリケーションの基本プログラム。沢山のプログラムがあります。<br>コマンドラインプログラムもGUIのプログラムも、区別せずに全部/usr/binに導入されます。<br>パッケージ管理システムによって管理されるため、<br>自分で変更したり削除したりするのは非推奨。<br>複数バージョンのアプリケーションを同時に入れることが困難なのがたまに傷。</td></tr>
+<tr><td>/usr/sbin</td><td>アプリケーションのシステムプログラム。<br>特にroot権限が必要なプログラムが置かれます。</td></tr>
+<tr><td>/usr/lib</td><td>アプリケーションのライブラリ。<br>システムに必要な*.soファイルがある。<br>最近の64bitシステムでは/usr/lib64を/usr/libの代わりに使う。<br>/usr/lib/systemdにはsystemdのデフォルトのUnitファイルがあり、<br>/usr/lib/udev/rules.dにはデフォルトのudevルールがあります。</td></tr>
+<tr><td>/usr/share</td><td>ドキュメントなど、アーキテクチャに依存しないファイル。<br>基本的に、プログラムのうち実行可能ファイルやx86などのアーキテクチャに依存するファイルは/usr/binや/usr/libに置き、<br>アーキテクチャに依存しないファイルは/usr/shareに置く。</td></tr>
+<tr><td>/usr/include</td><td>C言語用ヘッダファイル。<br>たとえばgccやmakeでGTKアプリのビルドがしたいなら、ここにヘッダファイルが必要。<br>ヘッダファイルはパッケージ管理システムで-develパッケージをインストールすれば導入できます。</td></tr>
+<tr><td>/usr/local</td><td>アプリケーションのローカルなインストール場所。<br>/usr/localはパッケージ管理システムによって管理されないため、自分で好きなように使ってよい。<br>使う時は/usr/local/binなどにPATHが入っているかを確認しておこう。<br>/usr/local/mysqlのようにさらに深いディレクトリを作ってもよいし、<br>自分で使うだけなら/usrを使わずprefixを/home以下にしてもよい。</td></tr>
+</table>
+<p>後日注記：/usrと/varのワークステーション的な使い方として、/usrをNFSで共有し、/varでマシン個別のファイルを置いたりすることが考えられる。全てのネットワーク上のマシンで同一環境を共有出来て便利。</p>
+<p>後日注記：/usrには、システムから利用され、システム全体で共有されるシステムリソースを置く。プログラムだけではなく、ライブラリ、ドキュメント、設定ファイルのひな形やデフォルトの設定、参照されるさまざまなリソース、あるいは辞書やフォントなどさまざまなシステムリソースすべてがここにある。UNIXはネットワークで繋がることもあり、そのような時には/varを個別のマシンごとのリソースの置き場に使う。また、アプリケーションによっては、システム管理者が/usr以下にあるデフォルトの設定を上書き設定するために/etc以下に必要なファイルを/usrからコピーして書き換えたり、さまざまなファイルが存在する/usr以下から特定のファイルをコピーあるいはシンボリックリンクして/etcに置くこともある。</p>
+<p>詳しくは以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man7/hier.7.html">Man page of HIER</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0108/07/news002.html">各ディレクトリの役割を知ろう（ルートディレクトリ編） (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0109/07/news002.html">各ディレクトリの役割を知ろう（サブディレクトリ編） (1/2) - @IT</a></li>
+<li><a href="https://www.wdic.org/w/TECH//sys">/sys ‐ 通信用語の基礎知識</a></li>
+</ul>
+
+<h2>アプリケーションのインストール先の違い</h2>
+<p>アプリケーションのインストール先の違いは、以下のようになります。</p>
+<table class="some_tables">
+<tr><th class="min60">ディレクトリ</th><th>説明</th></tr>
+<tr><td>/bin と /sbin</td><td>システムの最低限の起動、操作、管理に必要なバイナリファイル。<br>最近は/usr/binにリンクが張られていることもある。</td></tr>
+<tr><td>/usr/bin</td><td>通常のアプリケーションのインストール先。<br>パッケージ管理システムでインストールしたディストリビュータ公式の配布ファイルがインストールされる。</td></tr>
+<tr><td>/usr/local/bin</td><td>システムの管理者が、ソースコードをコンパイルしてインストールしたバイナリファイル。</td></tr>
+<tr><td>/opt</td><td>Google Chromeのように、ディストリビューション公式ではない配布ファイルや、オープンソースでない配布ファイルなど。<br>システムによって/optディレクトリの用途が違う。</td></tr>
+<tr><td>/home/hoge/bin</td><td>hogeユーザーが自分で入れたバイナリファイル。</td></tr>
+</table>
+<p>最近はAppImageのように、ディストリビューションによらない、共通の簡単インストールの可能な仕組みも用意されています。Windowsのフリーソフトようにダウンロードして簡単に実行出来るようになっていくでしょう。</p>
+
+
+<!--
+<h2>PATHを通す</h2>
+<p><a href="linuxlinks10.html">１０．コマンド・設定</a>に移動しました。</p>
+-->
+
+<h2>ファイルシステム</h2>
+<p>Linuxでは、様々なファイルシステムが利用出来ます。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/series/2376/">Linuxファイルシステム技術解説 - @IT</a></li>
+</ul>
+
+<h2>パーティションのマウントの仕組み</h2>
+<p>パーティションを分けると、その部分のディレクトリ以下が別パーティションとしてマウントされる。</p>
+<p>たとえば、/と/usrを分けると、/binや/sbinは/パーティションの中に、/usr/binや/usr/sbinなどは/usrパーティションの中に出来る。</p>
+<p>これによって、大量のファイルがある場合などに、/homeのようなデータを分けることで、/homeだけを使いまわしたり、バックアップをしたり、障害があった時にシステムが起動不可能にならないようにするなどの対応がしやすくなる。</p>
+<p>だが、今日のLinuxデスクトップの用途では、ハードディスクを一時的にメモリの代わりに使うswapパーティションを作り、/bootパーティションをext2で保持し、それから/パーティションぐらいの、最低限の分け方をしていれば、問題になることは少ない。</p>
+
+<h2>このようなディレクトリ編成になっている理由</h2>
+<p>このようなディレクトリ編成になっている理由は、いくつかあります。</p>
+<p>まずひとつは、上に書いたように、パーティションで簡単にディレクトリを分けることができます。/homeや/varや/etcを簡単に/と分けられるほか、それぞれに独自のファイルシステムを適用することもできます。</p>
+<p>そして、もうひとつは、コマンドで操作しやすい、ということが挙げられます。たとえば、ソースコードだけを編集したいなら、find /usr/src | xargs sed -iなどで簡単にソースコードだけを自動編集できます。</p>
+<p>さらに言えば、シェルから見て、PATHなどを設定する都合が良いということが言えます。シェルはPATHのような環境変数から、システムにある全てのバイナリへと簡単にアクセスできます。</p>
+<p>反面、難点としては、「パッケージをさくっと削除できない」というのが挙げられます。もし/usr/firefox/binのようなディレクトリ構成をしていれば、firefoxディレクトリだけを簡単に削除できます。ですが、そのためにRed HatはRPMというパッケージ管理システムを作りました。そのため、Windowsよりもはるかに簡単にパッケージを依存関係を含めて管理・更新できるようになっています。</p>
+
+<h1>詳しい解説</h1>
+<h2>/var/spoolとスプールファイル</h2>
+<p>/var/spoolにはスプールファイルやキューファイルが置かれる。</p>
+<p>スプールとは、コンピュータよりも速度の遅いプリンターへの印刷ジョブの転送のように、転送に時間がかかる場合にデータをスプールファイルというファイルに書き出した上で、徐々に転送する仕組み。</p>
+<ul>
+<li><a href="https://e-words.jp/w/%E3%82%B9%E3%83%97%E3%83%BC%E3%83%AB.html">スプール（Simultaneous Peripheral Operations On-Line）とは - IT用語辞典 e-Words</a></li>
+</ul>
+<p>後日注記：/varは頻繁に書き換えられるファイルを置きます。共有することは非推奨です。たとえば、/var/spool/mailにはメールボックスが置かれる。/var/runにはサーバのプロセスIDがPIDファイルとして置かれる（起動時に保存し、終了時に破棄される）。/var/logにはログが記録される。</p>
+<p>詳しくは以下の書籍を参照のこと。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.17-18編集</p>
+</div>
+
+<h2>/srv</h2>
+<p>/srvはサービス用のデータを格納するディレクトリ。たとえばApache用のHTMLコンテンツは/var/www/htmlとか/usr/local/apache2/htdocsとか/home/www/htdocsなどに置かれることが多いが、これらの代わりに/srvに格納することもできる。</p>
+<ul>
+<li><a href="https://www.harumaki.net/2011/11/12/fhs_directory_srv/">[メモ]ディレクトリ&quot;/srv&quot;の使いみち - harumaki.net</a></li>
+</ul>
+<p><a href="../network/apache.html">Apache</a>も参照のこと。</p>
+
+<h2>/usr/libexec</h2>
+<p>/usr/libexecは/usr/binのコマンドなどから呼ばれる補助コマンドが置かれるディレクトリ。</p>
+<p>多くがシステムの背後で動くようなサービスやデーモン関連のプログラム。BSD系のシステムにおけるディレクトリだそうである。</p>
+<p>Debianなどでps axをすると、/usr/libexecに置かれているプログラムのプロセスがたくさんあって、知らない人は驚かれるかもしれない。</p>
+<ul>
+<li><a href="https://oswald.hatenablog.com/entry/20100416/1271368477">補助コマンドは /usr/libexec に - ソフトウェアエンジニア現役続行</a></li>
+<li><a href="https://news.mynavi.jp/article/osxhack-214/">パスの通っていないディレクトリにある「新たな発見」 - 新・OS X ハッキング!(214) | マイナビニュース</a></li>
+</ul>
+<p><a href="linux_daemon.html">initとデーモン</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.01.23</p>
+</div>
+
+<h1>新技術</h1>
+<h2>GoboLinux</h2>
+<p>Filesystem Hierarchy Standardからの脱却を目指すディストリビューション。「ファイルシステムがパッケージ管理データベース」であることを目指している。<a href="gobolinux.html">GoboLinux</a>を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GoboLinux">GoboLinux - Wikipedia</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>udev</h2>
+<p><a href="linux_devicefile.html">デバイスファイル</a>を参照のこと。</p>
+
+<h2>systemd</h2>
+<p><a href="systemd.html">systemd</a>を参照のこと。</p>
+
+<h2>共有ライブラリ・ヘッダファイル</h2>
+<p><a href="linux_lib.html">共有ライブラリ</a>や<a href="linux_header.html">ヘッダファイル</a>を参照のこと。</p>
+
+<h2>ログ</h2>
+<p><a href="linux_unix_logger.html">UNIXシステム管理（システムロガー）</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

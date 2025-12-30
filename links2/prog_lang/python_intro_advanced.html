@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Python入門（９．応用・モジュール） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Python入門（９．応用・モジュール）</h1>
+<p>Python入門（９．応用・モジュール）です。</p>
+<p><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="python_intro.html">Python入門</a></li>
+<ul>
+<li><a href="python_intro_basic.html">１．基本</a></li>
+<li><a href="python_intro_flow.html">２．制御フロー</a></li>
+<li><a href="python_intro_oop.html">３．オブジェクト指向</a></li>
+<li><a href="python_intro_data.html">４．データ構造</a></li>
+<li><a href="python_intro_str.html">５．文字列</a></li>
+<li><a href="python_intro_file.html">６．ファイル</a></li>
+<li><a href="python_intro_functional.html">７．関数型言語の機能</a></li>
+<li><a href="python_intro_others.html">８．その他</a></li>
+<li><b>９．応用・モジュール</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Pythonモジュールとは</h1>
+<h2>Pythonがこれほどまでに流行っているのは、言語機能よりもモジュールの豊富さが大きい</h2>
+<p>Pythonは、今のIT業界で非常に流行っています。「猫も杓子もPython」という状況です。</p>
+<p>この理由は、もちろんPythonの言語仕様がコンパクトで分かりやすく、「初心者が学びやすい言語」であることも一因ですが、それ以上に「モジュールが豊富で使いやすいから」というのが言えます。</p>
+<p>Pythonには、必要な基本機能を提供する幅広いモジュールを、言語処理系と一緒に提供するという「電池が付属しています」の精神があり、ほとんどのことは標準モジュールだけで行うことができます。</p>
+<p>また、Pythonには科学数値計算やデータ処理、機械学習などの外部モジュールが豊富です。</p>
+<p>言ってしまえば、「自分で何もアルゴリズムを書かなくても、モジュールを使うだけで3分ハッキングができる」ということを意味しています。</p>
+<p>同時に、Pythonがプログラミング初心者向けである理由は、余計な機能が存在せず、誰が書いても同じような構造・見た目のプログラムになるため、「模範的な正しいプログラムを書きやすい」ということが言えます。</p>
+<p>Pythonはモジュールが豊富で、どんなに高度な処理であってもモジュールを使って簡単に問題を解決することができるだけではなく、自らアルゴリズムを書こうとした時にも、初心者にとって正しいプログラムを書くことが簡単である、という「両方バランスの取れたプログラミングの簡単さ」が存在するのです。</p>
+
+<h1>応用</h1>
+<h2>ライブラリとモジュール</h2>
+<p>Pythonプログラミングを行う上で、ライブラリ（モジュール）の使い方を覚えることはとても大切です。</p>
+<p>モジュールの使い方を知ると、さまざまなことが簡単に実現出来るようになります。</p>
+<p>以下に公式のドキュメントの標準ライブラリの日本語訳のページをリンクしておきます。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/index.html">Python 標準ライブラリ &#8212; Python 3.9.4 ドキュメント</a></li>
+</ul>
+
+<h2>標準ライブラリのミニツアー</h2>
+<p>公式のチュートリアルに含まれる、以下のツアーは必読。Pythonユーザー全員が知っておくべき、標準ライブラリモジュールが掲載されている。内容は多くなく、簡単に読めるため、この2ページだけは読んでおこう。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/stdlib.html">10. 標準ライブラリミニツアー &#8212; Python 3.10.4 ドキュメント</a></li>
+<li><a href="https://docs.python.org/ja/3/tutorial/stdlib2.html">11. 標準ライブラリミニツアー --- その 2 &#8212; Python 3.10.4 ドキュメント</a></li>
+</ul>
+<p>特に、以下のモジュール（注意：すべてではありません）は、Pythonでプログラミングを行う時に活躍する必須の標準モジュールです。</p>
+<table class="some_tables">
+<tr><th class="min60">モジュール</th><th>説明</th></tr>
+<tr><td>os</td><td>OSのインターフェース</td></tr>
+<tr><td>glob</td><td>ディレクトリの中のファイル一覧を得る</td></tr>
+<tr><td>sys</td><td>インタプリタの環境（コマンドライン引数など）</td></tr>
+<tr><td>re</td><td>正規表現</td></tr>
+<tr><td>math</td><td>数学</td></tr>
+<tr><td>urllib</td><td>URLを用いたインターネットアクセス</td></tr>
+<tr><td>datetime</td><td>日付と時刻</td></tr>
+<tr><td>threading</td><td>マルチスレッド</td></tr>
+</table>
+
+<h2>C/C++でモジュールを作る方法</h2>
+<p>PythonのモジュールをC/C++で書くと高速になる場合があります。以下に、C/C++でモジュールを作るための公式のチュートリアルとリファレンスがあります。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/extending/index.html">Python インタプリタの拡張と埋め込み &#8212; Python 3.11.1 ドキュメント</a></li>
+<li><a href="https://docs.python.org/ja/3/c-api/index.html">Python/C API リファレンスマニュアル &#8212; Python 3.11.1 ドキュメント</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.22</p>
+</div>
+
+<h1>パッケージ管理</h1>
+<h2>pipとAnaconda</h2>
+<p>pipとAnacondaを使うことで、標準では含まれていないパッケージをパッケージ管理システムで簡単に導入できます。</p>
+<p>pipかAnacondaのどちらの場合になるかはPythonを導入した方法や環境によって異なります。</p>
+<p>具体例として、たとえばPandasとMatplotlibをインストールする場合、pipの場合は以下のようにします。</p>
+<pre>
+pip install pandas
+pip install matplotlib
+</pre>
+<p>Anacondaの場合は以下のようにします。</p>
+<pre>
+conda install -y pandas
+conda install -y matplotlib
+</pre>
+<p>（詳しくは<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>が参考になります。）</p>
+<p><a href="../programs/ai_pandas.html">Pandas</a>も参照のこと。</p>
+
+<h1>スクレイピング</h1>
+<h2>Pythonでスクレイピングに挑戦</h2>
+<p>スクレイピングとは、Webページの情報を取得して自動で処理を実行する技術のこと。</p>
+<p>Pythonの練習にはスクレイピングが有効である。以下のページが参考になる。</p>
+<ul>
+<li><a href="https://dividable.net/python/python-scraping/">【保存版】Pythonでスクレイピングする方法を初心者向けに徹底解説！【サンプルコードあり】 | DAINOTE</a></li>
+<li><a href="https://www.sejuku.net/blog/51241">【初心者向け】PythonでWebスクレイピングをしてみよう!手順まとめ - 侍エンジニア塾ブログ</a></li>
+</ul>
+
+<h2>スクレイピングに使えるモジュール</h2>
+<p>スクレイピングに使えるモジュールとして、以下のようなものがあります。</p>
+<table class="some_tables">
+<tr><th class="min60">モジュール</th><th>説明</th></tr>
+<tr><td>urllib</td><td>Webページを取得する</td></tr>
+<tr><td>Requests</td><td>Webにアクセスする</td></tr>
+<tr><td>re</td><td>正規表現</td></tr>
+<tr><td>BeautifulSoup</td><td>HTMLファイルの構造を解析</td></tr>
+<tr><td>schedule</td><td>スケジュールに基づいて定期的に実行</td></tr>
+</table>
+<p>（詳しくは<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>が参考になります。）</p>
+
+<h1>画像処理</h1>
+<h2>Pillowライブラリ</h2>
+<p>Pythonで画像処理を行うには、Pillowというライブラリが使えます。画像を読み書きしたり、編集して作成したりすることができます。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>が参考になります。）</p>
+
+<h1>GUIプログラミング</h1>
+<h2>Tkinter</h2>
+<p>Tkinterについては<a href="tcl_tk.html">Tcl/Tk</a>を参照のこと。</p>
+
+<h2>PyGObject</h2>
+<p>PythonからGTKを使うPyGObjectについては<a href="../linux/gtk_bindings.html">GTK言語バインディング</a>を参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

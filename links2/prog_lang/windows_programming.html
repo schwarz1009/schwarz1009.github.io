@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Windowsプログラミング関連の世界観１（Windows API） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Windowsプログラミングの世界観１（Windows API）</h1>
+<p>Windowsプログラミングに関する世界観１（Windows API）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>Windows API</b></li>
+<li><a href="windows_programming2.html">Windows関連技術</a></li>
+<ul>
+<li><a href="windows_mfc.html">Visual C++/MFC</a></li>
+<li><a href="windows_atl_com.html">ATL/COM</a></li>
+<li><a href="windows_activex.html">ActiveX</a></li>
+<li><a href="windows_gdi.html">GDI</a></li>
+<li><a href="windows_winsock.html">WinSock</a></li>
+</ul>
+</ul>
+<p><a href="c.html">C</a>や<a href="cpp.html">C++</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Windowsプログラミングの前提知識</h1>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="../../diary/blog_frey/2020.12.20.html">2020/12/20</a>より。</p>
+
+<h2>ハンガリアン記法</h2>
+<p>Windowsプログラミングでは、ハンガリアン記法という統一されたルールで、変数や構造体メンバの名前を付ける。</p>
+<p>たとえば、ポインタには必ずlpが付く。</p>
+<p>これが分からないと、構造体メンバの意味が分からない。</p>
+<p>（詳しくはやねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」が参考になります。）</p>
+
+<h2>関数の戻り値</h2>
+<p>素のC++では、関数に複数の値を渡すことはできるが、複数の値を返すことはできない。</p>
+<p>しかしながら、複数の値を実行結果として、呼び出し元に返したい時もある。</p>
+<p>このような時、構造体のポインタあるいは参照を渡して、関数の中から構造体を操作することができる。</p>
+<p>返り値はエラーチェックに使う。</p>
+<p>Windowsでは、こうしたやり方で関数に変数を与える。</p>
+<p>（詳しくはやねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」が参考になります。）</p>
+
+<h2>メッセージループ</h2>
+<p>Windowsでは、コールバック関数とハンドルを多用し、メッセージループでイベント駆動をする。</p>
+<p>ここで使われるのが、Windowsメッセージ。</p>
+<p>WM_という名前で定義されており、イベントの発生に対してメッセージが送られ、コールバック関数を実行する。</p>
+<p>たとえば、「マウスがクリックされた時」とか、「画面が再描画された時」などに、場合や状況に応じてメッセージに応答する。</p>
+<p>これを、メッセージループとか、イベントループと呼ぶ。</p>
+<p>また、それぞれのウィンドウやアプリケーションインスタンスを識別するため、ハンドルを使用してOSとやり取りを行う。</p>
+<p><a href="event.html">イベント駆動</a>を参照のこと。</p>
+
+<h2>MFC</h2>
+<p>MFCでは、メッセージマップによって、Onから始まるメソッドにメッセージをマップする。</p>
+<p>ドキュメントデータを表すドキュメントクラスと、画面を表すビュークラスを継承する。</p>
+<p>特に、データを保存するために、オブジェクトをファイルに書き出すことのできる、シリアライズを使用する。</p>
+<p>ブラウザなどを作るのであれば、Visual C++のAppWizardやClassWizardなどを使って、スケルトンを作成したりメソッドを自動作成して関連づけながら、ビュークラスを継承していけば、IEコンポーネントを使った簡単なウェブブラウザを開発できる。</p>
+<p><a href="windows_mfc.html">Visual C++/MFC</a>を参照のこと。</p>
+
+<h2>デバイスコンテキスト</h2>
+<p>Windowsでは、グラフィック操作などをする際に、Windowsとデバイスの仲介役として、デバイスコンテキストを使用する。</p>
+<p>たとえばGDIなどの操作で、ペンやブラシから線や円、四角形などのグラフィックを描く時などに、必要となる。</p>
+<p><a href="windows_gdi.html">GDI</a>を参照のこと。</p>
+
+<h2>リソースファイルとコントロール</h2>
+<p>GUIのインターフェイスは、リソースファイルからデザインしたり、メソッドからコントロールを作成したり操作したりできる。</p>
+<p>メニューはリソースファイルで作るのが一般的だが、ビュー画面などはさまざまな処理をするために、動的にコントロールを操作する。</p>
+
+<h2>.NET</h2>
+<p>また、VBやC#などでは、ポトペタ操作でデザインし、プロパティを操作したり、イベントハンドラを用いてイベントに応じてメソッドを実行したりして、イベント駆動で開発ができる。</p>
+<p>Windowsは既にこうした.NET言語で開発することが一般的だが、Javaと同様、仮想マシンである.NET Frameworkが必要であり、ネイティブなコンパイル言語を使う場合よりも速度や効率のようなパフォーマンスは劣る。</p>
+<p>しかしながら、優れたクラスライブラリを用いて、とても簡単にアプリケーションが開発できるとエンジニアから評判である。</p>
+<p>Windows開発だけでなく、Unityなどのゲームエンジンにも、C#が採用されており、C++と並んでゲーム開発の標準言語になっている。</p>
+<p><a href="dotnet.html">.NET</a>や<a href="../videogame/unity.html">Unity</a>を参照のこと。</p>
+
+<h2>サーバーにもWindowsを使う</h2>
+<p>最近は、サーバーにもWindowsを使う事例が増えた。</p>
+<p>これは、NTカーネルが安定して動いていることや、ActiveXやASP.NETなどのネットワーク技術が成熟し、UNIXと同等に使えるものになったこと、それから、契約や取引などの意味で、マイクロソフトと合意する政治的な判断などが、理由として挙げられる。</p>
+<p>クライアントOSで圧倒的シェアを誇るWindowsだが、サーバーでも勢力を着実に伸ばしており、たとえばSQL ServerやWSLなどの努力はサーバーOSでは選択肢一択のLinuxをいずれ倒すことになるかもしれない。</p>
+<p><a href="dotnet_asp.html">ASP.NET</a>、<a href="dotnet_ado.html">ADO.NET</a>、<a href="../db/sql_server.html">Microsoft SQL Server</a>、<a href="../virt/wsl.html">WSL</a>を参照のこと。</p>
+
+<h1>Windowsメッセージ</h1>
+<h2>Windowsプログラミングの解説</h2>
+<p>（詳しいコードは<a href="https://docs.microsoft.com/ja-jp/windows/win32/learnwin32/your-first-windows-program?redirectedfrom=MSDN">Module 1. Your First Windows Program - MSDN</a>が参考になります。以下はこのコードに対する解説。）</p>
+<p>Windows APIによるプログラミングは、ウィンドウプロシージャ（システムから呼ばれるコールバック関数）とメッセージループを中心に成り立つ。</p>
+<p>まず、プログラムはwWinMain()から実行される。最初に、WNDCLASSのlpfnWndProcにコールバック関数WindowProc()を登録する。</p>
+<p>wWinMain()の最後にはメッセージループwhile (GetMessage()) {}が登場し、Windowsメッセージをやり取りする。</p>
+<pre class="prettyprint">
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+{
+    const wchar_t CLASS_HOGE[]  = L"Hoge Class";
+    
+    WNDCLASS wc = { };
+
+    wc.lpfnWndProc   = WindowProc;
+    wc.hInstance     = hInstance;
+    wc.lpszClassName = CLASS_HOGE;
+
+    RegisterClass(&wc);
+    
+    // ...
+    
+    MSG msg = { };
+    while (GetMessage(&msg, NULL, 0, 0) &gt; 0)
+    {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+    
+    return 0;
+}
+</pre>
+<p>ウィンドウプロシージャはCALLBACK WindowProc() {}のようにCALLBACKをつけて定義する。</p>
+<pre class="prettyprint">
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch (uMsg)
+    {
+    case WM_DESTROY:
+        /* 処理 */
+
+    case WM_PAINT:
+        /* 処理 */
+
+    }
+}
+</pre>
+<p>WindowProc()のオプションは、hwndはメッセージが送り付けられるウィンドウのハンドル、uMsgはメッセージ（「WM_XX」のような形で定義されている）、wParam, lParamはメッセージの補助的な内容を含むパラメータとなる。</p>
+<p>hwndはCreateWindowEx()関数でウィンドウを作った後、ウィンドウをさまざまなところから操作するためにハンドルとして使う。</p>
+<p>switch - case文でメッセージを処理することで、システムから呼び出されたメッセージに対してイベント駆動のプログラムを書くことができる。</p>
+<div class="edit_date">
+<p>2025.12.13編集</p>
+</div>
+
+<h2>WM_PAINTとInvalidateRect()</h2>
+<p>ウィンドウがさまざまな理由で再描画が必要となった時、WM_PAINTメッセージが送られてくる。</p>
+<p>このWM_PAINTメッセージに応じる形で、描画すべき処理を記述することで、ウィンドウの表示処理を行うことができる。</p>
+<p>もし、自分のタイミングでウィンドウを再描画させたくなった時は、InvalidateRect()関数を実行することで、システムに「再描画の実行をお願いします」と要求することができる。</p>
+<ul>
+<li><a href="http://www-higashi.ist.osaka-u.ac.jp/~k-maeda/vcpp/sec2-1paint.html">VC++ Windows Programming - Section2.1 描画の基本 - 前田久美子</a></li>
+</ul>
+<div class="edit_date">
+<p>2022.12.07-08編集</p>
+</div>
+
+<h2>主なWindowsメッセージ</h2>
+<p>（以下は<a href="http://home.a00.itscom.net/hatada/windows/windowmessage01.html">Windowsメッセージ - Hatada's Home Page</a>を参考に執筆しました。）</p>
+<p>主なWindowsメッセージの一覧：</p>
+<table class="some_tables">
+<tr><th class="min60">関連</th><th>メッセージ</th></tr>
+<tr><td>ウィンドウの作成・破棄</td><td>WM_CREATE（作成）<br>WM_CLOSE（閉じる）<br>WM_DESTROY（破棄）</td></tr>
+<tr><td>ウィンドウの変更</td><td>WM_PAINT（描画）<br>WM_SIZE（サイズ変更）<br>WM_DRAWITEM（アイテムのオーナードロー描画）<br>WM_CTLCOLORSTATIC（描画の直前）<br>WM_ACTIVATE（アクティブ化）</td></tr>
+<tr><td>マウスイベント</td><td>WM_LBUTTONDOWN（左ボタンクリック）<br>WM_LBUTTONDBLCLK（左ボタンダブルクリック）<br>WM_RBUTTONDOWN（右ボタンクリック）<br>WM_MOUSEMOVE（カーソル移動）<br>WM_MOUSELEAVE（カーソルの領域外への移動）</td></tr>
+<tr><td>コントロールイベント</td><td>WM_COMMAND（メニュー・コントロール操作）<br>WM_NOTIFY（コントロールへの通知）<br>WM_SETFOCUS（キーボードフォーカスの取得）<br>WM_KILLFOCUS（キーボードフォーカスの離脱）<br>WM_HSCROLL（水平スクロール）<br>WM_VSCROLL（垂直スクロール）</td></tr>
+</table>
+
+<h1>Windowsコントロール</h1>
+<h2>CreateWindowEx()関数</h2>
+<p>（詳しいコードは<a href="https://docs.microsoft.com/ja-jp/windows/win32/learnwin32/your-first-windows-program?redirectedfrom=MSDN">Module 1. Your First Windows Program - MSDN</a>が参考になります。以下はこのコードの引用。）</p>
+<p>Windows APIでは、ウィンドウはCreateWindowEx()関数で作成できる。</p>
+<pre class="prettyprint">
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+{
+    // ...
+    
+    HWND hwnd = CreateWindowEx(
+        0,                    // オプションのウィンドウスタイル
+        CLASS_HOGE,           // ウィンドウクラス
+        L"Hoge Program",      // ウィンドウテキスト
+        WS_OVERLAPPEDWINDOW,  // ウィンドウスタイル
+
+        // 大きさと位置
+        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+
+        NULL,       // 親ウィンドウ
+        NULL,       // メニュー
+        hInstance,  // インスタンスハンドル
+        NULL        // 追加的なアプリケーションのデータ
+        );
+
+    if (hwnd == NULL)
+    {
+        return 0;
+    }
+
+    ShowWindow(hwnd, nCmdShow);
+    
+    // ...
+}
+</pre>
+<div class="edit_date">
+<p>2025.12.13</p>
+</div>
+
+<h2>Windows API コモンコントロール</h2>
+<p>Windows APIでは、OSのコントロールはウィンドウ内の子ウィンドウとして扱われるため、CreateWindowEx()関数で作成できる。</p>
+<p>たとえば、CreateWindowEx()関数でツールバーを作成するには、ウィンドウクラスに「TOOLBARCLASSNAME」を指定すればよい。</p>
+<p>以下のMicrosoftの記事が参考になる。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/windows/win32/controls/create-toolbars">ツール バーを作成する方法 - Win32 apps | Microsoft Docs</a></li>
+</ul>
+<p>TOOLBARCLASSNAME以外にも、さまざまなコントロールを指定できる。以下に一覧がある。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/windows/win32/controls/common-control-window-classes">ウィンドウ クラス (CommCtrl.h) - Win32 apps | Microsoft Docs</a></li>
+</ul>
+<p>単にツールバーを作りたいだけであれば、CreateWindowEx()関数ではなくCreateToolbarEx()関数を使用することもできる。</p>
+<ul>
+<li><a href="http://wisdom.sakura.ne.jp/system/winapi/common/common8.html">ツールバー - コモンコントロール - Win32 API入門 - WisdomSoft（旧）</a></li>
+</ul>
+<p>ツールバーやリストビューなど、Windows APIのコモンコントロールについては以下のサイトが参考になる。</p>
+<ul>
+<li><a href="http://wisdom.sakura.ne.jp/system/winapi/">Win32 API入門 - WisdomSoft（旧）</a></li>
+<li><a href="http://home.a00.itscom.net/hatada/_toc/winc.html">Windowsプログラミング入門[WIN32 APIベース] - Hatada's Home Page</a></li>
+</ul>
+
+<h2>エディットコントロール</h2>
+<p>エディットコントロールを使いたい場合、CreateWindow()関数あるいはCreateWindowEx()関数にEDITクラスを指定する。</p>
+<ul>
+<li><a href="https://learn.microsoft.com/ja-jp/windows/win32/controls/edit-control-styles">コントロール スタイルの編集 (Winuser.h) - Win32 apps | Microsoft Learn</a></li>
+<li><a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a></li>
+</ul>
+<p>これに対して、リッチエディットコントロールを使いたい場合、dllを読み込まなければならない。リッチエディットコントロールは、フォントの色やサイズや太字・斜体などが変えられて便利で、画像も貼り付けられる。</p>
+<ul>
+<li><a href="https://learn.microsoft.com/ja-jp/windows/win32/controls/create-rich-edit-controls">リッチ エディット コントロールを作成する方法 - Win32 apps | Microsoft Learn</a></li>
+<li><a href="https://qiita.com/tanakah/items/552ce52072c94080909f">リッチエディット大好き！ #Win32API - Qiita</a></li>
+</ul>
+<p>リッチエディットコントロールでもまだ表現力が劣る場合、MFCのCHtmlViewや.NETのWebBrowserのように、IEコンポーネントやWebブラウザの力に頼ることもできる。ただし表示は重い。</p>
+<p>後日注記：このように書いた理由は、僕の好きだったOpenJaneという２ちゃんねる専用ブラウザでは、通常のビルド版ではIEコンポーネントを使っていましたが、Doeと呼ばれるビルド版では独自に実装された軽量なビューを使っていました。通常版ではスキンのような豪華な見た目を利用できますが、Doe版はそれが利用できない代わりとても軽量でした。ほかのギコナビやホットゾヌなどの専用ブラウザもほとんどがIEコンポーネントを使っていたため、この「Doeが軽量」ということがOpenJaneの人気のある点でした。OpenJaneはオープンソースだったので、派生版などでも必ず通常版とDoe版の両方がビルドできるようになっていました。</p>
+<div class="edit_date">
+<p>2025.01.16</p>
+<p>2025.12.01編集</p>
+</div>
+
+<h2>その他のコントロール</h2>
+<p>このほか、コントロールとしてクラスに指定できるのは、STATIC（文字列や画像をただ表示するだけの静的なコントロール）やBUTTON（基本的にボタンコントロールだが、ウィンドウスタイルを指定することでチェックボックスやラジオボタンにもなる）などがあります。</p>
+<p>またLISTBOX（リストボックス）やCOMBOBOX（コンボボックス）やSCROLLBAR（スクロールバー）やWC_TABCONTROL（タブコントロール）なども指定できます。</p>
+<ul>
+<li><a href="https://programming.pc-note.net/winapi/button.html">ボタンコントロール(Win32API)(C言語) - 超初心者向けプログラミング入門</a></li>
+<li><a href="https://programming.pc-note.net/winapi/checkbox.html">チェックボックス(Win32API)(C言語) - 超初心者向けプログラミング入門</a></li>
+<li><a href="https://programming.pc-note.net/winapi/radiobutton.html">ラジオボタン(Win32API)(C言語) - 超初心者向けプログラミング入門</a></li>
+<li><a href="https://programming.pc-note.net/winapi/staticcontrol.html">スタティックコントロール(Win32API)(C言語) - 超初心者向けプログラミング入門</a></li>
+<li><a href="https://programming.pc-note.net/winapi/listbox1.html">リストボックス(Win32API)(C言語) - 超初心者向けプログラミング入門</a></li>
+<li><a href="http://www.kumei.ne.jp/c_lang/sdk/sdk_69.htm">第６９章 タブコントロールを作る - Windows SDK編 第１部 - 猫でもわかるプログラミング</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.01</p>
+<p>2025.12.06編集</p>
+</div>
+
+<h2>リソースファイル</h2>
+<p>メニューやアイコンなどのコントロールは、リソースファイルを用いて使うことが多いです。</p>
+<p>たとえば以下のようになる。</p>
+<pre>
+HOGEMENU MENU
+BEGIN
+    POPUP "ファイル(&F)"
+    BEGIN
+        MENUITEM "実行(&E)", IDM_EXE
+        MENUITEM "終了(&Q)", IDM_QUIT
+    END
+END
+</pre>
+<p>上のようなリソーススクリプトをプロジェクトに登録し、</p>
+<pre class="prettyprint">
+    WNDCLASSEX wc;
+    
+    wc.lpszMenuName = "HOGEMENU";
+</pre>
+<p>とする。あるいはIDR_*などの数値で指定する場合、MAKEINTRESOURCE()を使って指定する。あるいはCreateWindowEx()関数で指定する方法もある。</p>
+<ul>
+<li><a href="https://www.keicode.com/winprimer/wp13.php">メニュー、アイコン、バージョン情報の設定 ～ リソースファイルの作成 - Web/DB プログラミング徹底解説</a></li>
+<li><a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a></li>
+</ul>
+<div class="edit_date">
+<p>2022.12.08編集</p>
+<p>2025.12.17編集</p>
+</div>
+
+<h1>さまざまなWindows API</h1>
+<h2>メモリの動的確保</h2>
+<p>テキストエディタを作る場合など、サイズがどれくらいになるか分からないバッファにはメモリを動的に確保する。</p>
+<p>Windowsでは、メモリの動的確保にはGlobalAlloc()関数とGlobalLock()関数を使う。不要になったら、GlobalUnlock()関数とGlobalFree()関数で解放する。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a>を参考に執筆しました。）</p>
+
+<h2>文字を表示する</h2>
+<p>ウィンドウに単純に文字を表示するには、TextOut()関数やDrawText()関数を使う。</p>
+<p>TextOut()関数やDrawText()関数では、第一引数にデバイスコンテキストハンドルを指定する。</p>
+<p>このデバイスコンテキストハンドルはGetDC()関数で取得できる。GetDC()関数の引数にはウィンドウハンドル（hwndのこと）を指定する。必要がなくなればReleaseDC()関数で解放する。</p>
+<p>あるいは、WM_PAINTメッセージが送られてきた時、BeginPaint()関数を実行する方法でも、デバイスコンテキストハンドルが得られる。描画が終わったらEndPaint()関数で終了する。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2022.12.08</p>
+</div>
+
+<h2>SendMessage()関数</h2>
+<p>また、ウィンドウにメッセージを送り付けるには、SendMessage()関数が使えます。</p>
+<p>たとえば、エディットコントロールにWM_SETTEXTメッセージを送り付けることで、文字列を表示させることができます。</p>
+<p>ほかにも、SetWindowText()関数を使ったり、便利なマクロ集であるwindowsx.hに含まれるEdit_SetText()というマクロを使うこともできます。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.12.06</p>
+</div>
+
+<h2>ファイルを操作する</h2>
+<p>ファイルを操作するためには、WindowsではCreateFile(), ReadFile(), WriteFile(), CloseHandle()などのAPIを使います。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.12.06</p>
+</div>
+
+<h2>レジストリを操作する</h2>
+<p>レジストリを操作するためには、RegCreateKeyEx(), RegCloseKey(), RegSetValueEx(), RegQueryValueEx(), RegOpenKeyEx()などのAPIを使います。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.12.06</p>
+</div>
+
+<h2>グラフィックスを表示する</h2>
+<p>グラフィックスを表示するには、SetPixel(), MoveToEx(), LineTo(), CreatePen(), CreateSolidBrush(), Rectangle(), Polygon(), Ellipse(), SelectObject(), DeleteObject()などのAPIを使います。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.12.06</p>
+</div>
+
+<h2>Windows API関数一覧</h2>
+<p>Windows APIの関数一覧は以下を参照のこと。</p>
+<ul>
+<li><a href="http://chokuto.ifdef.jp/urawaza/api/index.html">Win32 API関数リスト - HSPの裏技？？ - ちょくとのページ</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/windows/win32/apiindex/api-index-portal">API インデックス - Win32 apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/windows/win32/apiindex/windows-api-list">Windows API インデックス - Win32 apps | Microsoft Learn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.13</p>
+</div>
+
+<h1>Windowsその他</h1>
+<h2>DLLを作る</h2>
+<p>Windowsの動的リンクライブラリはDLLと呼ばれる。作成するためには、Visual C++の「Win32 アプリケーション ウィザード」で「アプリケーションの種類」にDLLを指定する。</p>
+<p>以下の記事を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/false-git@github/items/2e1eb4614b1024131dd0">WindowsのDLLについて - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.06編集</p>
+</div>
+
+<h2>Windowsの独自の型</h2>
+<p>Windows APIで使われる、Windows独自の型については以下が参考になる。</p>
+<p>主なものに数値型のDWORD (unsigned long)、LONG (long)、UINT (unsigned int)、BOOL (真偽値、TRUEとFALSE)などがある。</p>
+<p>覚えておくべきは文字列のTCHARで、環境によってcharとwchar_t（マルチバイト文字、ワイド文字）に切り替わる。文字列（*STR）では、constの文字列には「C」、ワイド文字には「W」、TCHARには「T」、ポインタには「P」あるいは「LP」（二種類あるのは16ビット時代の名残りで現在においては同じ）、NULL終端には「N」が含まれる。</p>
+<p>また、グラフィックスなどで使うための構造体に、POINT (X座標とY座標)や、RECT (left, top, right, bottom)がある。</p>
+<p>それから、メッセージループにはMSG構造体、ウィンドウハンドルにはHWND型、デバイスコンテキストハンドルにはHDC型、ファイルやスレッドなどリソース一般の操作にはHANDLE型などが使われる。</p>
+<ul>
+<li><a href="https://programming.pc-note.net/winapi/features.html">Windows APIプログラミングの概要(C言語) - 超初心者向けプログラミング入門</a></li>
+<li><a href="https://program.note-toself.info/windowsapidata/">WindowsAPIでよく使われるUINTやLPSTRといったデータ型 | プログラミングTips</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.13</p>
+</div>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング</a></li>
+</ul>
+<p>後日注記：初心者は、黙ってこの本を読みましょう。Windowsにまつわるさまざまなこと（Windowsメッセージ、ウィンドウやコントロール、関数・マクロ、デバイスコンテキストまで）が、この書籍に一通り書いてあります。</p>
+<div class="edit_date">
+<p>2023.01.22編集</p>
+</div>
+
+<h1>Windows標準技術</h1>
+<h2>Visual Studio</h2>
+<p>Microsoftが開発する有料の統合開発環境・コンパイラ。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1704/10/news026.html">連載：簡単！ Visual Studio 2017入門 - @IT</a></li>
+</ul>
+
+<h2>Eclipse CDT</h2>
+<p>Visual Studioの無料の代替ソフトウェアとして、EclipseのC/C++バージョン（CDT）を入れると言う手もあります。僕はC言語で人工知能のプログラムを作る時はEclipse CDTを使っています。ただ、MSのライブラリが使えるのかどうかは定かではありません。ですが、GNUによるC/C++コンパイラのWindows版（MinGW）はWindowsでもきちんと動きます。</p>
+<p><a href="eclipse.html">Eclipse</a>も参照のこと。</p>
+
+<h2>C/C++ & Visual C++</h2>
+<p>C/C++言語とVisual C++について。</p>
+<ul>
+<li><a href="http://www7b.biglobe.ne.jp/~robe/cpphtml/">ロベールのＣ＋＋教室</a></li>
+<li><a href="http://www.kumei.ne.jp/c_lang/">猫でもわかるプログラミング</a></li>
+</ul>
+
+<h2>Windows API</h2>
+<p>C/C++による、Windows APIプログラミング。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/windows/desktop/ff381399(v=vs.85).aspx">C++ による Windows プログラミングの学習 - MSDN</a></li>
+</ul>
+
+<h2>COM</h2>
+<p><a href="windows_atl_com.html">ATL/COM</a>を参照のこと。</p>
+
+<h2>MFC</h2>
+<p><a href="windows_mfc.html">MFC</a>を参照のこと。</p>
+
+<h1>Windows API</h1>
+<h2>概要</h2>
+<p>MicrosoftによるWindowsのAPI。</p>
+
+<h2>MSDNにおけるサンプル</h2>
+<p>MSDNにおけるサンプルです。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/windows/desktop/ff381399(v=vs.85).aspx">C++ による Windows プログラミングの学習 - MSDN</a></li>
+</ul>
+
+<h2>サンプルコード</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/windows/desktop/ff381409(v=vs.85).aspx">モジュール 1. 初めての Windows プログラム - MSDN</a></li>
+</ul>
+
+<h2>サンプルコードその２</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="http://wisdom.sakura.ne.jp/system/winapi/common/common15.html">リストビュー - WisdomSoft（旧）</a></li>
+</ul>
+
+<h2>Windows APIでカスタムコントロール</h2>
+<p>Windows APIでカスタムコントロールを作る方法：</p>
+<ul>
+<li><a href="http://wisdom.sakura.ne.jp/system/winapi/win32/win87.html">カスタムコントロール - WisdomSoft（旧）</a></li>
+</ul>
+
+<h2>参考情報</h2>
+<p>Windowsプログラミングの入門サイトとしては、以下の参考リンクが良いと思います。</p>
+<ul>
+<li><a href="http://kaitei.net/">かいてい.net</a></li>
+</ul>
+
+<h1>Windows旧来の技術</h1>
+<h2>MS-DOS</h2>
+<p>昔の16bitのコマンドラインOS。UNIXに比べると低機能だが、絶対に使えないわけではない。</p>
+<p><a href="../windows_pc/dos.html">DOS</a>を参照のこと。</p>
+
+
+<h1>Windows互換API</h1>
+<h2>WineとReactOS</h2>
+<p>WineはWindows APIのUNIXにおける実装で、Linux上でWindowsアプリケーションを動かすことができる。</p>
+<p>ReactOSはオープンソースのWindows NT（2000以降）のアプリケーションとドライバにおけるバイナリ互換性を目指すOS。言ってみればオープンソースのWindows 2000互換のOSだ。</p>
+<p>どちらも、Microsoftの牙城を倒そうとするOS・APIだ。Wineは開発中で、エミュレータではなく、APIを作ることでWindowsアプリケーションをそのまま動かすことを目指している。</p>
+<p><a href="../virt/wine.html">Wine</a>や<a href="../windows_pc/windows_oss.html">Windows OSS</a>を参照のこと。</p>
+
+<h1>類似システム</h1>
+<h2>Windows APIとX11</h2>
+<p>Windows APIとX11は、同じイベントループを用いてメッセージを処理することが似通っている。<a href="../linux/linux_x11_admin.html">X11設定とプログラミング</a>を参照のこと。</p>
+
+<h2>Java Swing</h2>
+<p>JavaのSwingも、Windows APIとよく似た「リスナ」をベースにしたイベント処理を行う。<a href="java_gui_swing.html">Java Swing</a>を参照のこと。</p>
+
+<h2>GUI開発</h2>
+<p>GUIの開発全般については<a href="gui_develop.html">GUI開発</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>Windowsプログラミングは、OSの機能を使うだけに終始するため、おすすめしない</h2>
+<p>僕は、Windowsが大好きでプログラマになりたいとか、Windowsのフリーソフトを開発したいとなった時に、Windowsプログラミングからプログラミングの道に入ることをおすすめしません。</p>
+<p>なぜなら、Windowsプログラミングは、OSの機能を使うことだけに終始し、自分でボタンやメニューのほとんどの機能を作っておらず、多くが既にあるコントロールを継承するだけで開発できてしまうからです。</p>
+<p>Windowsプログラミングは、一見、デザインされたUIを持ちながら、機能はパソコンのできる多くの万能性を備えており、ゲームを開発するのと同じように面白く見えます。</p>
+<p>ですが、実際のWindowsプログラミングは、Windows APIを使う場合であっても、MFCやC#/VB.NETを使う場合であっても、ほとんどが最初から用意されているものを使うだけです。</p>
+<p>確かに、デザインをすることはありますが、ボタンやメニューを自分で作っているかというとそうではなく、カスタムコントロールを作る場合であっても、既に存在するOSの標準コントロールを継承して、いくらかカスタマイズするだけです。</p>
+<p>Windowsプログラミングは、かっこよく見えて、本当はつまらないものです。もしかしたら、あなたがやりたかったことは、オープンソースやLinuxの世界にあるかもしれません。なぜなら、オープンソースやLinuxでは、GUIツールキットであるGTKやQtを使って、デスクトップ環境であるGNOMEやKDEを作っています。ウィンドウシステムのX11やWaylandすら、きちんと作っています。何より、OSの基本的な機能であるカーネルを共同開発でみんなで作っています。</p>
+<p>そう、僕が、そしてあなたが、本当に進みたかった道は、WindowsではなくLinuxの方向にあるのです。</p>
+<p>後日注記：僕は、GUIプログラミングがやりたいプログラミング入門者には、Visual StudioよりもDelphiをおすすめします。Delphiはとても素晴らしい環境であり、Object PascalというPascalをベースとした独自の言語ではありますが、コンポーネントとRADを使ったとても分かりやすい環境で、「プログラミングとはどのようなものであるか」ということが良く分かります。僕の経験から言って、いきなりVisual Studioを購入したところで、「どのようにプログラミングを行えばいいのか」ということは全く分かりません。高いお金を出して購入しても、無駄になります。Delphi 6 Personalは昔無料版がありましたが、僕はDelphi 7を購入して使っていました。僕はDelphiでOpen Jane（２ちゃんねる専用ブラウザ）のビルドに成功して、プログラミングとはなんであるかが分かりました。</p>
+
+<h2>Delphiのほうがおすすめ</h2>
+<p>Windowsプログラミングについて言うと、最初はDelphiのほうがおすすめです。</p>
+<p>僕個人の意見として、C/C++でWindowsアプリを作ると、Windowsネイティブな実行ファイルは作れますが、その代わり、初心者にとってはわけの分からないコードを大量に書かなければならず、C/C++やWindowsの仕様も大きすぎてカオスを極めるなど、いろいろと初心者には難しいことばかりで、挫折してしまうと思います。</p>
+<p>そのような人には、僕はDelphiをおすすめします。</p>
+<p>Windows APIやVisual C++による開発を行うよりも、Delphiは直感的でありながら初心者や入門者に優しく、経験のない素人であってもある程度のプログラミング能力とセンスがつきます。</p>
+<p>Delphiで初心者が中級者になってバリバリに開発することは、Windows APIやVisual C++で開発を行うよりも容易です。</p>
+<p>最近どうなっているかは知りませんが、僕がDelphi 7を購入した時は、公式のマニュアル本と「オフィシャルコースウェア」と呼ばれるDelphiやPascalの入門本が開発環境とセットで含まれていて、この本を一通り読めばDelphiでプログラミングを行うことができるようになっていました。</p>
+<p>なので、なんにも前提知識がなくても、Delphiだけを買えばプログラミングができるようにはなります。</p>
+<p>ですが、本当のところを言うと、僕はあまりこの本は読んでいません。この本を読まなくても、Delphiの直感的なユーザーインターフェースとコンポーネントを使って、プログラミングが簡単にできるような優れた「環境」がすぐに使えることが、Delphiの大きなメリットです。</p>
+<p>なので、僕はWindows APIの開発にもし挫折したら、それだけでプログラミングを諦めずに、まずはDelphiから入ってみることをおすすめします。</p>
+<p><a href="delphi.html">Delphi</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.09</p>
+</div>
+
+<h2>言語だけ覚えてもAPIを知らなければ何もできない</h2>
+<p>Windows APIを学ぶことの意義とは、「APIを知らなければプログラミングの世界では何もできない」ということです。</p>
+<p>言語の文法だけ覚えても、関数やクラスのような、用意されているAPIを覚えなければ何もできません。</p>
+<p>確かに、言語だけですべてが完結し、言語の仕様だけ覚えればなんでもできるような、Delphiのような言語もあります（詳しくは<a href="https://www.amazon.co.jp/Delphi%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%83%B3%E3%82%B9-%E6%97%A5%E9%AB%98-%E5%BE%B9/dp/479731883X">Delphiゲームプログラミングのエッセンス</a>を参照のこと）。</p>
+<p>ですが、多くの言語では、言語の文法を覚えるだけでなく、OSに用意されているAPIを覚えなければなりません。</p>
+<p>LinuxやUNIXにおいては、POSIXのシステムコールを覚えればいいのですが、WindowsにおいてはWindows APIを覚えなければなりません。</p>
+<p>なので、C/C++のエンジニアになりたいなら、C/C++の言語仕様だけを覚えても、最初のステップを攻略しただけにすぎません。特に、Windows向けのまともなGUIアプリケーションを開発するためには、Windows APIを必ず覚えなければならないのです。</p>
+<p>ひとつ、注意点として、必ずしもC/C++のAPIを選ぶ必要はありません。</p>
+<p>たとえば、WindowsのGUIアプリケーションを作りたいのであれば、C#やVB.NETのような言語と、.NETのAPIを選ぶこともできます。</p>
+<p>そして、多くの場合、C/C++を選ぶことはよい選択ではありません。C/C++はネイティブなアプリケーションを作ることはできますが、開発が極めて困難で、生産性が低いです。</p>
+<p>新しいアプリケーションを開発する言語を選ぶなら、C/C++のような低水準言語といつまでも無駄な格闘をする選択をするよりも、C#あるいはPythonのような新しい言語を選びましょう。あるいはGolangやRustのようなもっと新しい言語もあります。新しい言語は新しいだけあって生産性が高いです。C/C++を選ぶ必要は絶対ではありません。</p>
+<div class="edit_date">
+<p>2023.05.11</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>Windows</h2>
+<ul class="defaultlist list7">
+<li>Windows
+<ul>
+<li>Windows/.NET
+<ul>
+<li>Windows API
+<ul>
+<li>Windowsメッセージ</li>
+<li>メッセージループ</li>
+<li>コールバック関数</li>
+<li>Windowsコントロール</li>
+</ul></li>
+<li>Visual C++
+<ul>
+<li>MFC</li>
+<li>AppWizard, ClassWizard</li>
+<li>コードエディタ、ダイアログエディタ</li>
+<li>デバッガ</li>
+<li>ドキュメント・ビュー</li>
+<li>メッセージマップ</li>
+<li>ATL, COM, ActiveX, WTL</li>
+<li>GDI</li>
+<li>デバイスコンテキスト</li>
+<li>DirectX</li>
+</ul></li>
+<li>.NET
+<ul>
+<li>Windows.Forms</li>
+<li>WPF</li>
+<li>.NET Core</li>
+<li>Mono</li>
+<li>Xamarin</li>
+</ul></li>
+<li>Visual C#, Visual Basic
+<ul>
+<li>イベントハンドラー</li>
+</ul></li>
+<li>Windowsコモンコントロール</li>
+<li>ASP.NET
+<ul>
+<li>Windowsでサーバーサイドプログラミングができる</li>
+</ul></li>
+<li>ADO.NET
+<ul>
+<li>Windowsでデータベース操作ができる</li>
+<li>LINQ
+<ul>
+<li>.NET版のSQLとも言えるような、C#でSQLクエリを記述する際のスマートな言語機能</li>
+</ul></li>
+</ul></li>
+<li>Microsoft SQL Server
+<ul>
+<li>Microsoftによるデータベースサーバ</li>
+<li>OracleやMySQLに次ぐシェア率</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>Windowsコントロール</h2>
+<p>Windowsコントロールは、一般のユーザーとしては使いやすいのだが、Windows APIやMFCなどから使おうと思うと、「超わけの分からないAPI」である。</p>
+
+<h2>デバイスコンテキスト</h2>
+<p>Windowsとデバイスの仲介役。</p>
+<p>MFCでグラフィックス処理を行う上では、「何をするにもまずはデバイスコンテキスト」。ここが難しい。</p>
+
+<h1>リンク集</h1>
+<h2>MSDN</h2>
+<p>MSDN</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/dn308572.aspx">MSDN</a></li>
+</ul>
+
+<h2>Windowsサンプルコード集</h2>
+<p>サンプル</p>
+<ul>
+<li><a href="https://code.msdn.microsoft.com/windowsdesktop/">Windows desktop code samples - MSDN</a></li>
+</ul>
+<p>Windowsは、基本的に、MSDNを見れば事が足ります。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp">Microsoft Developer Network で開発を学ぶ - MSDN</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8BWindows%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%AC%AC4%E7%89%88-%E7%8C%AB%E3%81%A7%E3%82%82%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E7%B2%82%E4%BA%95-%E5%BA%B7%E5%AD%9D/dp/4797370890">猫でもわかるWindowsプログラミング 第4版 (猫でもわかるプログラミング)</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

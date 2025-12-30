@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>リレーション関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>リレーションの世界観</h1>
+<p>リレーションに関する世界観です。<a href="db.html">データベース</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>リレーショナルデータベース</h1>
+<h2>リレーショナルデータベースの基本</h2>
+<p>リレーショナルデータベースは、表形式でそれぞれの列と行によってデータを格納し、データごとの属性を参照し、それぞれは小さなテーブルとしてデータベースに蓄積され、そのテーブル同士の関係性によって高度なデータを表現するデータベースです。</p>
+<p>データベースとは、ある目的を持って格納されたデータの蓄積であると言えます。</p>
+<p>リレーショナルデータベースでは、ひとつのテーブルに全てのデータを詰め込むことは基本的にしません。それぞれの小さなたくさんのテーブルを作って、そのテーブルとテーブルを互いに「リレーション」で関連付けて、より大きなテーブルを作成し、テーブルを参照したり、更新したり、挿入したり、削除したり、あるいは結合させたりして扱うことのできるデータベースです。</p>
+<p>リレーショナルデータベースの良い点は、最初から完璧なデータ構造を作らず、小さなテーブルを作って関連付けることができる点です。</p>
+<p>たとえば、学生の個人情報と、学生の単位や試験の点数などは、別々のテーブルに格納し、それを互いに関連付けて、その場その場で別の表にして扱うことができます。</p>
+
+<h2>主キーと外部キー</h2>
+<p>たとえば、以下の表（学生テーブル）があったとします。</p>
+<table class="some_tables">
+<tr><th>名前</th><th>年齢</th><th>学生番号</th></tr>
+<tr><td>村上</td><td>21</td><td>AAAAAAAA</td></tr>
+<tr><td>吉田</td><td>20</td><td>BBBBBBBB</td></tr>
+</table>
+<!--
+<pre>
++------+------+----------+
+| 名前 | 年齢 | 学生番号 |
++------+------+----------+
+| 村上 |  21  | AAAAAAAA |
+| 吉田 |  20  | BBBBBBBB |
++------+------+----------+
+</pre>
+-->
+<p>ここで、同じ「学生番号」という列を持つ別の表（学部テーブル）があったとします。</p>
+<table class="some_tables">
+<tr><th>学生番号</th><th>学部</th><th>担任</th></tr>
+<tr><td>AAAAAAAA</td><td>数学部</td><td>松坂</td></tr>
+<tr><td>BBBBBBBB</td><td>医学部</td><td>松井</td></tr>
+</table>
+<!--
+<pre>
++----------+--------+------+
+| 学生番号 |  学部  | 担任 |
++----------+--------+------+
+| AAAAAAAA | 数学部 | 松坂 |
+| BBBBBBBB | 医学部 | 松井 |
++----------+--------+------+
+</pre>
+-->
+<p>ここで、学生番号という同じ列を用いて、この2つのテーブルを関連付けることができます。</p>
+<table class="some_tables">
+<tr><th class="min60">名前</th><th>年齢</th><th>学生番号<br>（外部キー）</th><th></th><th>学生番号<br>（主キー）</th><th class="min60">学部</th><th class="min60">担任</th></tr>
+<tr><td>村上</td><td>21</td><td>AAAAAAAA</td><td>→</td><td>AAAAAAAA</td><td>数学部</td><td>松坂</td></tr>
+<tr><td>吉田</td><td>20</td><td>BBBBBBBB</td><td>→</td><td>BBBBBBBB</td><td>医学部</td><td>松井</td></tr>
+</table>
+<!--
+<pre>
++------+------+----------+    +----------+--------+------+
+| 名前 | 年齢 | 学生番号 |    | 学生番号 |  学部  | 担任 |
++------+------+----------+    +----------+--------+------+
+| 村上 |  21  | AAAAAAAA | → | AAAAAAAA | 数学部 | 松坂 |
+| 吉田 |  20  | BBBBBBBB | → | BBBBBBBB | 医学部 | 松井 |
++------+------+----------+    +----------+--------+------+
+</pre>
+-->
+<p>ここで、学部テーブルにおける学生番号（AAAAAAAAまたはBBBBBBBB）のことを、学部テーブルの「主キー」と呼びます。主キーは「そのテーブルにおいてそれぞれの項目を一意に定めることのできる主となるキー」のことです。この主キーを用いて、テーブルを関連付けました。</p>
+<p>また、学生テーブルにおける学生番号のことを、「外部キー」と呼びます。外部キーは、別のテーブルの主キーと結びつけるために用いられる、特別なキーのことです。</p>
+<p>また、学生番号キーにおいては、同じ学生番号を同時に持つことは許されません。これを「制約」と呼びます。（このような場合は一意性制約と呼び、他にもさまざまな制約がある。また、一意性制約に加えてNULL値を禁止する制約のことを主キー制約と呼ぶ。）</p>
+<p>このような考え方に基づいて、リレーショナルデータベースの操作は行われます。</p>
+<p>後日注記：外部キーには「外部キー制約」を適用できます。これは外部キーの追加・更新・削除の時に対応する主キーが存在するかどうかを確認させる機能です。</p>
+<div class="edit_date">
+<p>2024.05.26編集</p>
+</div>
+
+<h2>参考文献</h2>
+<p>リレーションについて詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+<li>放送大学「情報学へのとびら ('16)」</li>
+</ul>
+
+<h1>MySQLにおけるテーブル結合</h1>
+<h2>テーブルの結合</h2>
+<p>SELECTとJOINを用いてテーブルの結合を行うことで、複数のテーブルを結合することができる。</p>
+<p>内部結合、外部結合、クロス結合がある。内部結合と外部結合は、指定されたキーが一致する場合、二つの行を一つの行として結合する。この時、内部結合では、片方だけにデータが存在する場合、それを含めない（消え去る）。外部結合では、片方だけにデータが存在する場合においても含め、データが存在しない場所にはNULLを入れて結合する。</p>
+<p>また、交差結合（クロス結合）は、組み合わせとなる行をすべて生成する。A - A, A - B, B - A, B - Bをすべて作成する。</p>
+<ul>
+<li><a href="http://web.sevendays-study.com/mysql/day6.html">一週間で身につくMySQL|6日目：テーブルの結合①</a></li>
+<li><a href="http://web.sevendays-study.com/mysql/day7.html">一週間で身につくMySQL|7日目：テーブルの結合②</a></li>
+</ul>
+<p>後日注記：一番よく使われるのは内部結合です。外部結合には、さらにLEFT、RIGHT、FULLの3つがあります（FULLは使えない環境もあります）。逆に、クロス結合はほとんど使われません。</p>
+<p>後日注記：分かりやすく言うと、どちらにも含まれるデータだけを抽出するのが内部結合である。列の中で値が一致するデータを全て含めて、新しい表を作る。この時、一致しないデータは無視される。一方、どちらかにしか含まれないデータも一緒に結合し、存在しないデータについてはNULL値でデータを挿入するのが外部結合。外部結合には、左のデータを全て含める左外部結合と、右のデータを全て含める右外部結合がある。</p>
+
+
+<h2>内部結合と外部結合の例</h2>
+<p>たとえば、以下のような二つのテーブルがあるとする。</p>
+<table class="some_tables">
+<tr><th>id</th><th>sei</th><th>bid</th></tr>
+<tr><td>1</td><td>吉田</td><td>C</td></tr>
+<tr><td>2</td><td>村上</td><td>B</td></tr>
+<tr><td>3</td><td>大谷</td><td>E</td></tr>
+<tr><td>4</td><td>近藤</td><td>F</td></tr>
+</table>
+<!--
+<pre>
++----+------+-----+
+| id | sei  | bid |
++----+------+-----+
+|  1 | 吉田 |  C  |
+|  2 | 村上 |  B  |
+|  3 | 大谷 |  E  |
+|  4 | 近藤 |  F  |
++----+------+-----+
+-->
+<table class="some_tables">
+<tr><th>bid</th><th>name</th></tr>
+<tr><td>A</td><td>太郎</td></tr>
+<tr><td>B</td><td>次郎</td></tr>
+<tr><td>C</td><td>三郎</td></tr>
+<tr><td>D</td><td>四郎</td></tr>
+</table>
+<!--
++-----+------+
+| bid | name |
++-----+------+
+|  A  | 太郎 |
+|  B  | 次郎 |
+|  C  | 三郎 |
+|  D  | 四郎 |
++-----+------+
+</pre>
+-->
+<p>この時、内部結合をすると以下のようになるだろう。</p>
+<table class="some_tables">
+<tr><th>id</th><th>sei</th><th>bid</th><th>name</th></tr>
+<tr><td>1</td><td>吉田</td><td>C</td><td>三郎</td></tr>
+<tr><td>2</td><td>村上</td><td>B</td><td>次郎</td></tr>
+</table>
+<!--
+<pre>
++----+------+-----+------+
+| id | sei  | bid | name |
++----+------+-----+------+
+|  1 | 吉田 |  C  | 三郎 |
+|  2 | 村上 |  B  | 次郎 |
++----+------+-----+------+
+</pre>
+-->
+<p>また、左外部結合をすると以下のようになる。</p>
+<table class="some_tables">
+<tr><th>id</th><th>sei</th><th>bid</th><th>name</th></tr>
+<tr><td>1</td><td>吉田</td><td>C</td><td>三郎</td></tr>
+<tr><td>2</td><td>村上</td><td>B</td><td>次郎</td></tr>
+<tr><td>3</td><td>大谷</td><td>E</td><td>NULL</td></tr>
+<tr><td>4</td><td>近藤</td><td>F</td><td>NULL</td></tr>
+</table>
+<!--
+<pre>
++----+------+-----+------+
+| id | sei  | bid | name |
++----+------+-----+------+
+|  1 | 吉田 |  C  | 三郎 |
+|  2 | 村上 |  B  | 次郎 |
+|  3 | 大谷 |  E  | NULL |
+|  4 | 近藤 |  F  | NULL |
++----+------+-----+------+
+</pre>
+-->
+<p>右外部結合をすると以下のようになる。</p>
+<table class="some_tables">
+<tr><th>id</th><th>sei</th><th>bid</th><th>name</th></tr>
+<tr><td>NULL</td><td>NULL</td><td>A</td><td>太郎</td></tr>
+<tr><td>2</td><td>村上</td><td>B</td><td>次郎</td></tr>
+<tr><td>1</td><td>吉田</td><td>C</td><td>三郎</td></tr>
+<tr><td>NULL</td><td>NULL</td><td>D</td><td>四郎</td></tr>
+</table>
+<!--
+<pre>
++------+------+-----+------+
+|  id  | sei  | bid | name |
++------+------+-----+------+
+| NULL | NULL |  A  | 太郎 |
+|   2  | 村上 |  B  | 次郎 |
+|   1  | 吉田 |  C  | 三郎 |
+| NULL | NULL |  D  | 四郎 |
++------+------+-----+------+
+</pre>
+-->
+
+<div class="edit_date">
+<p>2024.05.26編集</p>
+</div>
+
+<h2>内部結合と外部結合のSQL文</h2>
+<p>内部結合のSQL文は、</p>
+<pre class="prettyprint lang-sql">
+SELECT field_name, ... FROM table1 INNER JOIN table2 ON table1.bid = table2.bid;
+</pre>
+<p>となります。</p>
+<p>そして、左外部結合のSQL文は、</p>
+<pre class="prettyprint lang-sql">
+SELECT field_name, ... FROM table1 LEFT OUTER JOIN table2 ON table1.bid = table2.bid;
+</pre>
+<p>となるのです。</p>
+<p>（<a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a>を参考に執筆・引用しました。）</p>
+
+<h1>余談</h1>
+<h2>SQLクエリとリレーショナルデータベースの親和性</h2>
+<p>自分の書いた「ニュース - 2021-04-第五週（2021-05-第一週）」<a href="../../diary/news/2021.04.w5.html">2021/04/29</a>より。</p>
+<p>データを表で管理するリレーショナルデータベースと、SQLによるクエリは、親和性が高い。</p>
+<p>注目すべき項目や属性の範囲を選択して、その時その時のテーブルを自動で生成することができるため、「検索による自動作成」に向いている。</p>
+<p>逆に、さまざまな人間が別々にデータを生成したり関連付けたりするのには、ネットワーク型が向いている。リンクによって外部と内部の区別をなくすことができるからである。</p>
+<p>また、ファイルシステムのようなディレクトリ型は、ファイルを統一した規則で整理整頓するのに向いている。ファイルだけではなく、「規則そのものを規則的に作り上げる」ために、ディレクトリ型が使えるのである。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

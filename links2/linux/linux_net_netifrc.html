@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ネットワーク設定C（Netifrc） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ネットワーク設定C（Netifrc）</h1>
+<p>Linuxのネットワーク設定に関する世界観C（Netifrc）です。<a href="linux_net2.html">Linuxネットワーク２（設定）</a>や<a href="../network/network.html">ネットワークの世界観</a>も参照してください。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Gentoo</h1>
+<h2>Netifrc (Gentoo)</h2>
+<table class="some_tables">
+<tr>
+<th class="min60">設定ファイル</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>/etc/conf.d/hostname</td>
+<td>Gentooでのホスト名の設定。</td>
+</tr>
+<tr>
+<td>/etc/conf.d/net</td>
+<td>Gentoo Linuxでは/etc/conf.d/netでネットワークを設定します。</td>
+</tr>
+</table>
+<p>参考リンク：</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System/ja">システムの設定 - Gentoo</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation/ja">Gentoo Linux amd64 ハンドブック: Gentoo をインストールする - Gentoo Wiki</a></li>
+</ul>
+
+<h2>net-setup</h2>
+<p>Gentoo Linuxでは、net-setupスクリプトを実行することで手動で簡単にネットワークを設定することができる。</p>
+<p>後日注記：net-setupは質問に答えることで静的IP環境や無線ネットワーク環境を構成できる対話的なスクリプトで、Gentooのインストール時などに使用できる。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking/ja"> ネットワーク設定 - Gentoo</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.06.12編集</p>
+</div>
+
+<h2>/etc/conf.d/net</h2>
+<p>Gentoo Linuxでは、ネットワーク設定（IPアドレス、サブネットマスク、ブロードキャストアドレス、ルーティング）は/etc/conf.d/netですべて行います。DHCPを設定するのも簡単です。</p>
+<p>たとえば、静的IPアドレスを設定する場合、/etc/conf.d/netは以下のようになる。</p>
+<pre>
+config_eth0="192.168.0.3 netmask 255.255.255.0 brd 192.168.0.255"
+routes_eth0="default via 192.168.1.1"
+</pre>
+<p>あるいは、DHCPの場合はこうなる。</p>
+<pre>
+config_eth0="dhcp"
+</pre>
+<p>システムの起動時にこのeth0のインターフェースを有効にする場合は、/etc/init.dにnet.eth0からnet.loへのシンボリックリンクを追加し、rc-updateでデフォルトのランレベルにnet.eth0を追加する。</p>
+<p>（<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System/ja">システムの設定 - Gentoo</a>を参考にして執筆しました。）</p>
+<div class="edit_date">
+<p>2024.06.12編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Gentoo</h2>
+<p>Gentooについては<a href="gentoo.html">Gentoo</a>を参照のこと。</p>
+
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="../network/network.html">ネットワーク</a>や<a href="../network/network_intro.html">ネットワーク入門</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

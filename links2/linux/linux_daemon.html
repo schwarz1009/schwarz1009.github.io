@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux initとデーモン - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux initとデーモン</h1>
+<p>Linuxのinitとデーモンに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>init</h1>
+<h2>SysV init</h2>
+<p>最近はsystemdにとってかわられてしまったが、昔のシンプルだったごろのSysV initを解説する。</p>
+<p>まず、ファイルシステムの方に、起動時に実行するスクリプトが存在する。/etc/rc.d/などにあることが多い。</p>
+<p>init.dディレクトリの中に、それぞれのデーモン（コマンドではなく、起動時に実行され、システムで恒常的に実行されるプログラム）を実行させるスクリプトがある。</p>
+<p>rc0.dのように、rc[数字].dの中に、それぞれのランレベルごとに実行される、先ほどのスクリプトへの、シンボリックリンクがある。</p>
+<p>このスクリプトは、S85httpdのように、実行順（実行の順序）の数字とともにファイル名が付けられている。ファイル名がS*で始まる場合は起動、K*の場合は停止を意味する。</p>
+<p>Red Hat系ではランレベルは以下のようになる。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">ランレベル</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>0</td><td>停止</td>
+</tr>
+<tr>
+<td>1</td><td>シングルユーザモード</td>
+</tr>
+<tr>
+<td>2</td><td>マルチユーザモード（テキストログイン、NFSなし）</td>
+</tr>
+<tr>
+<td>3</td><td>マルチユーザモード（テキストログイン）</td>
+</tr>
+<tr>
+<td>4</td><td>未使用</td>
+</tr>
+<tr>
+<td>5</td><td>マルチユーザモード（GUI/X11ログイン）</td>
+</tr>
+<tr>
+<td>6</td><td>再起動</td>
+</tr>
+</table>
+<p>そして、OSの起動・終了時に/etc/inittabの設定を見て、initと言うプログラムがランレベルによって実行される。</p>
+<p>詳しくは以下をご覧あれ：</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0204/02/news002.html">Linux起動の仕組みを理解しよう［init/inittab編］ (1/2) - @IT</a></li>
+<li><a href="https://w.atwiki.jp/linux2ch/pages/56.html">ServersGeneralFAQs - 5ch-Linux-Beginners - atwiki（アットウィキ）</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/SysVinit/man8/init.8.html">man init</a></li>
+</ul>
+
+<h2>initで終了・再起動</h2>
+<p>initコマンドとともにランレベルを指定することで、再起動や終了の処理を行うことが出来る。</p>
+<pre>
+init 0
+</pre>
+<p>は</p>
+<pre>
+halt
+</pre>
+<p>と同じで、システムの終了を表す。</p>
+<pre>
+init 6
+</pre>
+<p>は</p>
+<pre>
+reboot
+</pre>
+<p>と同じで再起動を表す。基本的にはshutdownコマンドを使うことが推奨される。</p>
+<ul>
+<li><a href="https://aoi-f.blog.so-net.ne.jp/2010-10-02">Linuxでシャットダウン、再起動をするshutdown、init、halt、rebootコマンドの違い：while(1) { ;}：So-netブログ</a></li>
+</ul>
+
+<h2>ランレベルと起動スクリプト</h2>
+<p>OSをどのように起動するかを決めるシステム。</p>
+<p>起動スクリプトは、デーモンを起動するために使います。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/156whatrunlv.html">ランレベルとは - @IT</a></li>
+</ul>
+
+<h2>runlevelコマンド</h2>
+<p>runlevelコマンドは、現在のランレベルと前回起動時（ひとつ前）のランレベルを表示する。</p>
+<p>（<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/SysVinit/man8/runlevel.8.html">man runlevel</a></li>
+</ul>
+
+<h1>デーモン</h1>
+<h2>デーモン</h2>
+<p>コマンドで入力するのではなく、システムの最初から最後まで、起動しておいて常駐し、サービスのように恒常的に使われるプログラム。サーバーなどが多い。</p>
+
+<h2>デーモンとは</h2>
+<p>デーモンとは、コマンドによってその時の処理を行うプログラムではなく、システムに常駐して常に実行されるプログラムのこと。</p>
+<p>HTTPサーバーデーモン（httpd）などがそれに当たる。httpdは、外部のクライアントに対して、常に応答を待ち、常に実行され得る「サーバー」と呼ばれるプログラムである。</p>
+<p>Linuxにおいて、デーモンは主にシステムの起動時に実行され、システムの終了前に停止される。</p>
+<p>そのためのスクリプト（デーモンを起動させたり停止させたりする小さなスクリプト）が、/etc/init.dや/etc/rc.d/init.dにスクリプトとして存在し、さらにランレベルごとにrc0.dからrc6.dまでフォルダが存在し、それぞれのランレベルによって、起動スクリプトが配置され、init.dのスクリプト実体にリンクされる、という風になっている。</p>
+<p>複雑に見えるが、分かってしまえば単純だ。スクリプトには、start, stop, restartなどの各場合に応じた処理が記載されており、またどのプログラムをシステムの起動時に自動的に起動させたいか、という情報はchkconfigなどのツールで追加・削除して設定する。</p>
+<p>（注意：最近のLinuxではsystemdを使っていることに注意。ここでの説明は全て昔のSysV initの説明であり、既に古い。）</p>
+<p>Linuxの起動の流れについて詳しくは以下が参考になります。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0204/02/news002.html">Linux起動の仕組みを理解しよう［init/inittab編］ (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0206/04/news001.html">Linux起動の仕組みを理解しよう［rcスクリプト編］ - @IT</a></li>
+</ul>
+
+<h2>デーモンを作る</h2>
+<p>通常のプログラムをデーモンとして実行させるには、whileでループするプログラムを作って、SysV initならシェルスクリプトの中で&をつけてバックグラウンドで実行すればよい。</p>
+<p>デーモンのプロセスやスレッドは、カーネルによってマルチタスクで実行される。</p>
+<ul>
+<li><a href="http://7ujm.net/linux/daemon.html">自作プログラムをデーモンとして起動させる - プログラミング色々</a></li>
+</ul>
+<p>後日注記：よりきちんとしたデーモンの生成方法やデーモンをfork()する仕組みは以下の記事が参考になります。</p>
+<ul>
+<li><a href="https://gigazine.net/news/20200907-unix-linux-daemon/">UNIX/Linuxの「デーモン」はこうやって作る - GIGAZINE</a></li>
+</ul>
+<p>後日注記：基本的に、デーモンになるためには、fork()した後でsetsid()で制御端末を切り離す。あるいは、Linuxにはデーモンになるためのdaemon(3)というAPIもある。詳しくは<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>に記述されています。</p>
+<p>詳しくは<a href="linux_api2.html">Linux API（プロセス・メモリ）</a>も参照のこと。</p>
+
+<h2>/etc/services</h2>
+<p>/etc/servicesは、デーモンとポート番号を対応させるファイル。システムサービス名とTCP/UDPのポート番号を記述する。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/511/">「/etc/services」ファイル | Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/services.5.html">man services</a></li>
+</ul>
+
+<!--
+<h1>デーモン系のコマンド</h1>
+-->
+<h1>サービスの起動、終了、再起動</h1>
+
+<h2>デーモンの起動、終了、再起動</h2>
+<p>デーモンは、起動スクリプトを実行することで起動・停止・再起動・状態確認ができる。また、直接スクリプトを触らずに、serviceコマンドを使う方法もある。デーモンはWindowsなどで良く使われる呼称として、サービスと呼ばれることもある。</p>
+<p>基本的に、Apache httpdなどサーバーの設定を変更した場合、サービスを再起動しなければ設定は反映されない。こうした時にこの方法で再起動を実行する。</p>
+
+<h2>rc.dスクリプトの例</h2>
+<p>基本的に、start, stop, restartに対応したBashスクリプトを書けば良い。</p>
+<p>/etc/rc.d/daemonnameなど</p>
+<pre class="prettyprint">
+#!/bin/bash
+
+case "$1" in
+ start)
+   #処理
+   ;;
+ stop)
+   #処理
+   ;;
+ restart)
+   #処理
+   ;;
+ *)
+   echo "使い方: $0 start, stop, restartのいずれかを指定してください。"
+esac
+</pre>
+<p>詳しくは以下のようなサイトを参考のこと。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/0206/04/news001.html">Linux起動の仕組みを理解しよう［rcスクリプト編］：Windowsユーザーに教えるLinuxの常識（最終回） - ＠IT</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/SysVinit">SysVinit - ArchWiki</a></li>
+</ul>
+<p><a href="linux_bash_script.html">Bash（シェルスクリプト）</a>も参照のこと。</p>
+
+<h2>起動スクリプトの直接の実行</h2>
+<p>起動スクリプトを直接実行する場合：</p>
+<pre>
+/etc/init.d/daemonname start
+</pre>
+<p>start（サービスを起動する）、stop（サービスを停止する）、restart（サービスを再起動する）、status（サービスの状態を表示する）がある。</p>
+<ul>
+<li><a href="http://www.infraeye.com/study/linuxz56.html">Service start / stop / restart / status - LPICイージス</a></li>
+</ul>
+
+<h2>serviceコマンド</h2>
+<p>serviceコマンドで実行する場合：</p>
+<pre>
+/sbin/service daemonname start
+</pre>
+<p>init.dのスクリプトと同様に、start、stop、restart、statusがある。</p>
+<p>たとえば、Apache httpdを再起動して設定を再度読み込む場合は以下のようにする。</p>
+<pre>
+# service httpd restart
+</pre>
+<p>/sbinがPATHに入っている場合、コマンドの前の「/sbin/」は必要ない。</p>
+<p>現在のLinuxでは、init.dではなくserviceコマンドを主に使う。</p>
+<ul>
+<li><a href="https://heartbeats.jp/hbblog/2013/06/service-start-stop.html">デーモンの起動・終了にはserviceコマンドを利用しよう - インフラエンジニアway</a></li>
+</ul>
+
+<h2>systemctl</h2>
+<p>systemdでは、systemctlコマンドを使ってサービスを起動・停止する。<a href="systemd.html">systemd</a>を参照のこと。</p>
+
+
+<h1>自動起動の管理</h1>
+<h2>デーモンの自動起動</h2>
+<p>デーモンの自動起動を設定しておくことで、システムの起動時に自動でサービスが起動されるようになる。</p>
+<p>それぞれのディストリビューションによって管理の方法が違う。</p>
+
+<h2>chkconfig</h2>
+<p>Red Hat系ではデーモンの自動起動の管理は、/sbin/chkconfigを用いて行う。</p>
+<p>追加：</p>
+<pre>
+/sbin/chkconfig --add daemonname
+/sbin/chkconfig daemonname on
+</pre>
+<p>解除：</p>
+<pre>
+/sbin/chkconfig daemonname off
+</pre>
+<p>確認：</p>
+<pre>
+/sbin/chkconfig --list
+</pre>
+<ul>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html">10.2.3. chkconfig ユーティリティの使用 - Red Hat</a></li>
+</ul>
+
+<h2>update-rc.dとinsserv</h2>
+<p>Debian系ではデーモンの自動起動の管理は、update-rc.dあるいはinsservを用いて行う。</p>
+<p>追加：</p>
+<pre>
+/usr/sbin/update-rc.d daemonname defaults
+</pre>
+<p>解除：</p>
+<pre>
+/usr/sbin/update-rc.d daemonname remove
+</pre>
+<p>最近のDebianでは、update-rc.dコマンドを使うことは推奨されていません。代わりにinsservを使ってください。</p>
+<pre>
+# insserv daemonname
+</pre>
+<ul>
+<li><a href="http://lotus.hatenablog.com/entry/20120727/1343331806">Debianでinsservを使って起動時に実行されるスクリプトを登録する - ゆとりIT</a></li>
+</ul>
+
+<h2>rc-update</h2>
+<p>Gentoo Linuxでは、rc-update(OpenRC)を使います。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/OpenRC">OpenRC - Gentoo</a></li>
+<li><a href="https://gentoo-handbook.lugons.org/doc/ja/handbook/handbook-x86.xml?part=2&chap=4">4. initスクリプト - Gentoo</a></li>
+</ul>
+
+<h1>その他のinit方式</h1>
+
+<h2>/etc/rc.conf（BSD方式とGentoo方式）</h2>
+<p>BSDのrcファイルの方式では、/etc/rc.confという設定ファイルに基づく起動処理を記述する。SysV initに比べて簡素な反面、記述を間違えたり誤ってファイルを削除するとシステムが起動しなくなるという欠点も併せ持つ。</p>
+<p>Gentoo Linuxでは、OpenRCという独自の起動処理を行うが、これはBSDと同様に/etc/rc.confをグローバル設定ファイルとしながら、/etc/conf.dや/etc/init.dに設定ファイル・スクリプトを置き、その上でrc-updateコマンドを使って動的に設定を追加・削除することができる。</p>
+<p>Gentoo LinuxのOpenRCはとても独自で、多くのディストリビューションがSysV initからsystemdに移った今でも、GentooだけはOpenRCを固持している。これは、OpenRCがとても使いやすく、BSDライクということもあって分かりやすく、そしてGentooの独自の文化の一部になっているからである。</p>
+<p><a href="../unix/bsd.html">BSD</a>や<a href="../unix/freebsd.html">FreeBSD</a>や<a href="gentoo.html">Gentoo</a>も参照のこと。</p>
+
+<h2>systemd</h2>
+<p>systemdは並列処理による効率化を目指した新しいinit方式。</p>
+<p><a href="systemd.html">systemd</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>スーパーサーバ</h1>
+<h2>inetd</h2>
+<p>通常、ネットワークのサーバーデーモンはそれぞれのデーモンが常駐起動し、それぞれがポートを監視するが、あまり使われないサーバでは、ポートの数だけデーモンが起動してしまい、資源の無駄遣いとなってしまう。そのため、「inetd」と呼ばれる専用の「スーパーサーバ」だけを起動し、inetdだけがポートを監視して、ポートに要求が来た場合に、あらかじめ決められたデーモンを起動する、という方式がとられるようになった。</p>
+<p>inetdを使うメリットは、資源の無駄遣い（メモリの浪費）を防ぐことだが、inetdが中継動作するため、レスポンスが遅れてしまう。そのため、httpdなどはinetdを経由せず、常駐動作させておくことが多い。</p>
+<p>inetdの改良版としてxinetdがある。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Inetd">inetd - Wikipedia</a></li>
+<li><a href="http://www.wakhok.ac.jp/~kanayama/summer/02/site/node44.html">/etc/inetd.conf -  Site Administration Course - 金山 典世</a></li>
+</ul>
+
+<h1>ブートログ</h1>
+<h2>デーモンの起動に関するログファイル</h2>
+<p>デーモンの起動に関するログファイルについては、<a href="linux_unix_logger.html">UNIXシステム管理（システムロガー）</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>デーモンの優れた点</h2>
+<p>デーモンの優れた点として、システムに常に常駐するため、パフォーマンスがいい、ということが言える。</p>
+<p>デーモンは、メモリに常に常駐し、いちいちコマンドが実行されるたびにプロセスを起動したり破棄したりしないため、パフォーマンスがいい。</p>
+<p>たとえば、アンチウイルスソフトのClamAVで、デーモン型のclamdscanはデーモン型でないclamscanに比べてはるかに高速にスキャンできる。</p>
+<p>ただし、デーモンのために常に一定のメモリ領域を使うため、デーモンをたくさん起動するとメモリは圧迫される。</p>
+<p>また、デーモンは、外部のリクエストに対して応答する、サービス型のソフトウェアにとって都合がいい。</p>
+<p>Webサーバやデータベースサーバなどは、サーバーとして実行される。そのようなサーバーとして実行されるソフトウェアは、常に敏速に多数のリクエストに対応することが求められるため、コマンドよりもデーモンの形でプロセスを実行することが適している。</p>
+<p>デーモンの特徴として、「普段は何もせず、リクエストが来た時にそれに応じて仕事をする」というのがある。コマンドは、実行された時に瞬時に仕事を実行するが、デーモンはすぐには仕事をせず、リクエストに応じて要求された仕事を行う。そのため、カーネルとよく似ている。マイクロカーネルのOSでは、カーネルの機能をサービス（サーバー）として分離し、カーネル自体をとても小さく（マイクロに）することができる。</p>
+<div class="edit_date">
+<p>2023.09.20</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>ファイアーウォール</h2>
+<p><a href="linux_net_firewall.html">ファイアウォール</a>と<a href="linux_net_firewall_iptables.html">iptables</a>も参照のこと。</p>
+
+<h2>Webサーバ</h2>
+<p><a href="../network/web.html">Webサーバー</a>と<a href="../network/apache.html">Apache</a>も参照のこと。</p>
+
+<h2>ファイルサーバ</h2>
+<p><a href="../network/file_server.html">ファイルサーバー</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

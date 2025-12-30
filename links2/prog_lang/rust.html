@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Rustの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Rustの世界観</h1>
+<p>Rustに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Rustの基本</h1>
+<h2>Rust</h2>
+<p>Mozillaによるシステムプログラミング言語。</p>
+<p>みんなから愛されて、2016-2017年のStack Overflowで「最も愛されているプログラミング言語」で一位を獲得している。</p>
+<p>主な特徴は公式を参照のこと。</p>
+<ul>
+<li><a href="https://www.rust-lang.org/ja-JP/">プログラミング言語 Rust</a></li>
+</ul>
+<p>公式の入門本は以下にあります。</p>
+<ul>
+<li><a href="https://rust-lang-ja.github.io/the-rust-programming-language-ja/1.6/book/">プログラミング言語Rust</a> (1.6の訳)</li>
+<li><a href="https://doc.rust-jp.rs/book-ja/index.html">The Rust Programming Language</a> (second-editionの訳)</li>
+<li><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a></li>
+</ul>
+<p>以下は参考までに。</p>
+<ul>
+<li><a href="https://qiita.com/tatsuya6502/items/00612dbc26442e43783d">[翻訳] Rustの正式リリースから１年を振り返って（米Rust公式ブログより、DropboxやFirefoxの事例、開発状況やコミュニティの動向など） - Qiita</a></li>
+</ul>
+<h2>Rustリンク集</h2>
+<p>関連リンク集：</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/">std - Rust</a></li>
+<li><a href="https://rustbyexample.com/">Rust by Example</a></li>
+<li><a href="https://rust.connpass.com/">Rust - connpass</a></li>
+<li><a href="http://rust-jp.herokuapp.com/">rust-jp on Slack!</a></li>
+</ul>
+
+<h2>Rustの根本原理はエンパワーメント</h2>
+<p>Rustの根本原理は、エンパワーメント（empowerment）にあります。</p>
+<p>これは、「プログラマとしてしっかりと活躍するための能力を与える」ということを意味しています。</p>
+<p>僕が思うに、たしかにRust自体がとても優れた神のような言語であり、最高のツールである、ということも正しいですが、それだけではなく、「Rustを学ぶことで一流のエンジニアとして活躍できるようになるための基礎的能力を得られる」という側面が強い言語ではないかと思います。</p>
+<p>Rustで本当にプログラミングを行うこともできますが、それよりもRustは「力を与えてくれる」のです。</p>
+<p>なので、以下のRust Bookのsecond-editionの最初にも、エンパワーメントの原則が登場します。この本は難しいように見えて本当は簡単であるため、時間のある時に流し読みをしましょう。</p>
+<ul>
+<li><a href="https://doc.rust-jp.rs/book-ja/index.html">Rust Book</a></li>
+</ul>
+<p>Rustは、「今まで職人や限られた技術者にしかできなかった低レベルなレイヤーの処理で、古い制限や間違いを起こしやすい原因を撤廃し、きちんと正しいやり方で書くことができやすくする」といったことを目的としています。もちろんWebAssemblyなどを使うことで、Web向けにもシステムを構築できます。</p>
+
+<h2>RustとRubyの違い</h2>
+<p>今までRubyを使ってきたプログラミングの初心者向けに、Rustの特徴を説明します。</p>
+<p>RubyとRustはまったく異なる言語ではありません。似ている点を挙げると、RustはRubyと似たような記法のクロージャを導入しました。Rubyではブロックと呼ばれているものです。Rubyの中で賢いのはブロックだけだと言えます。</p>
+<p>異なる点を挙げると、RubyやPythonはインタープリタ言語ですが、Rustはコンパイラ言語です。そして、Rustはその気になればC/C++と同等のスピードのプログラムが書けます。C/C++よりもはるかに遅いRubyやPythonとは雲泥の差です。RubyやPythonは動的型付け言語ですが、RustはTypeScriptと同様の静的型付け言語である、という点も異なります。</p>
+<p>RustはJavaのようなガーベッジコレクションのある言語ではなく、C++のようなガーベッジコレクションのない言語です。それは「メモリ領域はスタックに積む」という発想をしているからです。Rustでは、メモリをスタックに積み、寿命を管理することで、C++にもJavaにもない、極めてスマートなメモリ管理を実現します。これについては、ヒープ領域にメモリを格納する方法（Boxと呼ばれる）もありますし、参照カウント方式のスマートポインタを使う方法（Rcと呼ばれる）もあります。そのように、RustはJavaよりもC++に近い言語です。</p>
+<p>それでも、Rustではさまざまな言語的な新しい方法を導入しています。メモリをスタックに積むことにより、メモリ安全なためメモリの破損がC/C++に比べて極めて起こりにくく、また洗練された並列処理も標準で存在します。そして、Kotlinと同様にnull安全です。また、例外機構を使わず、Result型でエラー処理を行います。そうした点はC++でもJavaでもない、「さらに新しい別の発想」であると言えます。</p>
+<p>そのような特徴だけを見ても、Rubyをいつまでも触り続けるのではなく、Rustを触ることが上級者になるために重要だと言えます。要するに、初心者はRubyを早々に卒業して、Rustを使うべきです。</p>
+<p><a href="ruby_comments.html">Ruby戯言</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.02.20</p>
+</div>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Rust+%E8%A8%80%E8%AA%9E">Rust 言語 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>Rustの基本概念</h1>
+<h2>面白い要素が満載</h2>
+<p>Rustには、言語として面白い要素が満載です。たとえば、同じ名前の変数を覆い隠して命名することができ、一度let x = 2;と不変変数を束縛した場合、このxをx = 3;と変更することはできない（これをするためにはmutを明示的に宣言して可変変数にしなければならない）ですが、もう一度変数xをlet x = x + 1;と「同じ名前で新しい宣言を行う」ことはできます。</p>
+<p>例外の処理やmatch式なども独自で面白いですし、所有権や参照・借用や寿命の概念によるGCの要らない安全でハイパフォーマンスなメモリ管理や、安全な並列プログラミングができる、というところは、「本当にRustを使ってやろう」という気を起こさせてくれます。ムーブセマンティクスの概念は、最初は難しいですが、「値でなく所有権を渡す」と思えば理解できます。</p>
+<p>構造体とタプルもあり、構造体はインスタンス化できます。また、トレイトの考え方や「型に対して追加でメソッドを実装する」という考え方は、単なるクラス継承による拡張性をさらにエレガントに超越しています。標準の数値型にすら新しいメソッドを簡単に実装できます。</p>
+<p>またCargoという開発ツールがバンドルされており、最初から依存関係を高度にこなしてくれるパッケージ管理システム兼ビルドツールとして利用できます。</p>
+<p>また、言語的に見ていると、「やり方がC++の全面的改良版」であるという特徴があり、たとえば入力処理などでも関数に参照（ポインタと同じ）を渡すなど、今までC++でやってきたやり方（たとえばWindowsなどでのポインタの使い方）とよく似ています。全体的に見てもC++に似ているため、C++エンジニアにとってみれば「ベターC++」のように使うことができます。</p>
+<p>こういう「言語的に面白い、新しいアイディアが満載」であるという特徴があるため、「自分の言語を設計したい」という言語設計者にとっても知っておくべき言語ではないかと思います。</p>
+
+<h1>Rustのトレイト</h1>
+<h2>トレイト</h2>
+<p>Rustでは、トレイトによってオブジェクト指向を行うことができる。</p>
+<p>メソッドの集合体であるトレイトを、型に対して実装すれば、その型でそのトレイトのメソッドを実行できるようになる。</p>
+<p>Rustではクラスのように、型とメソッドは最初から一緒のものとしてまとめられていない。特定の型に対して、後からメソッドを「実装」する。</p>
+<p>また、トレイトの「ミックスイン」という機能を使うことで継承も実現できる。</p>
+<ul>
+<li><a href="https://qiita.com/mandel59/items/e9a5438f4c1d70cffb7a">Rustにおけるオブジェクト指向の考え方 - Qiita</a></li>
+</ul>
+
+<h2>トレイトの例</h2>
+<p>トレイトは、さまざまな型で共通に利用できるような抽象的な部分を作るために使う。ほかの言語においてはインターフェースに相当する。</p>
+<p>たとえば、動物が自己紹介をするためにAnimalIntroduceトレイトの中でintroduce()メソッドの枠組みを作る。</p>
+<pre class="prettyprint lang-rust">
+pub trait AnimalIntroduce {
+    fn introduce(&self) -&gt; String;
+}
+</pre>
+<p>これを、まず、犬と猫に実装するためには、</p>
+<pre class="prettyprint lang-rust">
+pub struct Dog {
+    pub name: String,
+}
+
+pub struct Cat {
+    pub name: String,
+}
+</pre>
+<p>とした上で、</p>
+<pre class="prettyprint lang-rust">
+impl AnimalIntroduce for Dog {
+    fn introduce(&self) -&gt; String {
+        format!("僕は犬だよ、名前は{}だ、ワン！", self.name)
+    }
+}
+
+impl AnimalIntroduce for Cat {
+    fn introduce(&self) -&gt; String {
+        format!("僕は猫だよ、名前は{}だ、ニャア！", self.name)
+    }
+}
+</pre>
+<p>のようにする。</p>
+<p>（<a href="https://doc.rust-jp.rs/book-ja/ch10-02-traits.html">トレイト：共通の振る舞いを定義する - The Rust Programming Language 日本語版</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.02.21</p>
+</div>
+
+<h1>Rustのメモリ管理</h1>
+<h2>所有権</h2>
+<p>Rustの変数では、値を複製してコピーするのではなく、変数の所有権をムーブするのが標準。</p>
+<p>Rustの所有権は、以下の特徴を持つ。</p>
+<p>１．変数の所有権を別の変数に束縛してムーブした場合、ムーブされたもともとの変数は使えなくなる（所有権はひとつだけ）。</p>
+<p>２．その代り、参照はいくらでも自由に作成できる（借用）。</p>
+<p>３．値を変更できるミュータブルな参照はひとつだけ。</p>
+<p>そして、変数はスタックに確保される。これにより、ガーベッジコレクションがなくてもメモリとリソースを正しく自動的に解放できる。</p>
+<p>後日注記：すなわち、データをコピーするだけでも所有権は移動し、もとの変数は使えなくなる。例外はCopyが用意されている基本的データ型だけ。ただし、参照はいくらでも作ることができるため、関数呼び出しの際には参照を与えることで、所有権を移動させることなく同じデータを参照できる。また、値を変更できるミュータブルな参照は同一スコープの同一データに対してひとつだけであるため、関数に参照を変えてほしい時はミュータブルな宣言をして参照を渡せばいい。このようにすることで、メモリの競合と破損を防ぐ。</p>
+<ul>
+<li><a href="https://rust-lang-ja.github.io/the-rust-programming-language-ja/1.6/book/ownership.html">所有権 - プログラミング言語Rust</a></li>
+<li><a href="https://qiita.com/myhr47/items/262b8b8f1edd8097d03c">Rustの所有権システムについて - Qiita</a></li>
+<li><a href="https://qiita.com/cactaceae/items/2c70a9947364c60ec100">Rustの所有権に親しむ - Qiita</a></li>
+<li><a href="https://qiita.com/nebutalab/items/1d7a03c36c087c3f6360">Rustのポインタ（所有権・参照）・可変性についての簡単なまとめ - Qiita</a></li>
+</ul>
+
+<h2>神のようなメモリ管理</h2>
+<p>Rustでは、所有権と寿命の概念に基づいて、GC（ガーベッジコレクション）を行わなくても寿命以上変数が生き残る術は最初から存在しない。そして、参照はたくさんあっても、値を変更できるミュータブルな参照はひとつだけである。これによって、多くの場合、ほとんど絶対にメモリ破損が起きない。それは並列性を意識したプログラミングで有効であり、同時にGCを行わないためにC言語ほどにスピードが速く、効率的である。</p>
+<p>まさに、神のようなメモリ管理である。最初から寿命をはっきりさせ、所有権をブロックや関数と変数の間で明確にすることで、寿命以上の参照を行おうとすると、コンパイルエラーが出る。</p>
+<!--<p>後日注記：実際は寿命をどれだけ伸ばすのか、ということは自分で管理することもできる模様。僕はまだそこまでBookを読めていない。</p>-->
+<p>詳細は以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/elipmoc101/items/3c8b6d8332a9019e578c">プログラミング言語Rustのススメ - Qiita</a></li>
+</ul>
+<p><a href="java_gc.html">Java（２C．ガーベッジコレクションと例外）</a>も参照のこと。</p>
+
+<h2>責任の所在はひとつの変数だけ、あとは借用でなんとかせい</h2>
+<p>Rustのポイントは、「責任の所在はひとつの変数だけ」ということらしい。</p>
+<p>ひとつの変数に値が格納されるから、ヒープ領域に格納したデータのように、どこかから変数が使われているかもしれないことを意識せず、ひとつしか値を保持する変数がないため、GCなしでもスコープを外れれば変数を自動的に破棄してくれる。</p>
+<p>複数の変数にコピーすることができないのは残念かもしれないが、借用とかcloneでなんとかせい、ということ。</p>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/temmaru/items/6da42ede23aeabe8c263">RustでCコンパイラ作ってみた - Qiita</a></li>
+</ul>
+
+<h2>参照カウント方式は馬鹿だった</h2>
+<p>Rustを使うと、今までほかのガーベッジコレクションのある言語で使ってきた、参照カウント方式が、実際は馬鹿なのだということが分かる。</p>
+<p>参照となる変数を増やすたびに、その参照をカウントすることで変数の寿命を延ばしたのでは、どこかにあるはずの参照を維持するために、元あった変数がいつまでも消えなくなってしまう。</p>
+<p>そのような「どこかに存在するかもしれない参照の亡霊」という発想を、Rustは断ち切る。</p>
+<p>Rustでは、変数には所有権がひとつしかない。ひとつしかないから、その所有権を持つ変数がスタックから消えた時点でその変数は消え去る。</p>
+<p>だが、参照はいくらでも作ることができる。なので、関数に値を渡したい時は参照を与えればいい。</p>
+<p>また、ミュータブルな値を変えられる参照は必ずひとつしかないため、変数を書き換えている際に別の場所から変数を書き換えるということは絶対に起こらない。</p>
+<div class="edit_date">
+<p>2025.02.20-21</p>
+</div>
+
+<h2>寿命（ライフタイム）</h2>
+<p>Rustにおける寿命（ライフタイム）は、スコープに付けられたラベルのような名前のことで、'aや'bのように「'」から始まる名前となる。</p>
+<p>letによる変数の宣言あるいは参照（あるいは参照を含む構造体）を作る時に、「ジェネリックパラメータ」として&lt;'a&gt;のようにライフタイムを指定し（ライフタイムの宣言）、そのライフタイムを&'aのように使う（ライフタイムの使用）。このライフタイムが、変数が有効なスコープ（そのスコープを終えると変数が削除されるスコープ）を意味している。</p>
+<p>すべての参照はライフタイムを持つが、コンパイラがそれを省略する。なので、通常は'aとわざわざ書かなくてもコードは動く。</p>
+<p>スコープにライフタイムをつける時は、</p>
+<pre class="prettyprint lang-rust">
+'b: {
+    ...
+}
+</pre>
+<p>のようにする。ここでは'bというライフタイムを作っている。</p>
+<p>たとえば、</p>
+<pre class="prettyprint lang-rust">
+fn hoge&lt;'a&gt;(x: &'a i32, y: &'a i32) -&gt; &'a i32 {
+    'b: {
+        ...
+    }
+}
+</pre>
+<p>のようにした場合、ライフタイム'aの中にライフタイム'bを作る。</p>
+<p>通常、ここで</p>
+<pre class="prettyprint lang-rust">
+fn hoge&lt;'a&gt;(x: &'a i32, y: &'a i32) -&gt; &'a i32 {
+    'b: {
+        let result: &i32;
+        
+        ...
+    }
+}
+</pre>
+<p>とした場合、resultが'bのライフタイムになってしまう。もしresultをreturnで返したい場合、コンパイルエラーとなる。ここでresultを'aのライフタイムにするには、</p>
+<pre class="prettyprint lang-rust">
+fn hoge&lt;'a&gt;(x: &'a i32, y: &'a i32) -&gt; &'a i32 {
+    'b: {
+        let result: &'a i32;
+        
+        ...
+    }
+}
+</pre>
+<p>のように&'aを付ける。</p>
+<p>また、'staticは特別なライフタイムで、プログラムの全体（実行から終了まで）を意味する。</p>
+<p>上に、参照はいくらでも作ることができるが、所有権のある変数はひとつだけであるため、所有権のある変数がスコープを外れると、元の変数は問答無用で破棄されると書いた。</p>
+<p>だが、参照がいくらでも残っているにもかかわらず、参照先の変数がなくなると、その参照が参照先の変数を参照しようとした時にnull参照が起きてしまう。</p>
+<p>この問題を解決するために、Rustではライフタイムの仕組みを用いる。Rustでは、参照先の変数と参照のライフタイムを一致させる必要がある。参照先の変数よりも長く生きる参照や短く生きる参照を作ろうとするとコンパイルエラーになる。</p>
+<ul>
+<li><a href="https://doc.rust-jp.rs/rust-nomicon-ja/lifetimes.html">ライフタイム - Rust 裏本</a></li>
+<li><a href="https://qiita.com/lechatthecat/items/863198824bbb8c4ab1f4">Rustのライフタイムを理解する #初心者 - Qiita</a></li>
+<li><a href="https://doc.rust-jp.rs/the-rust-programming-language-ja/1.6/book/lifetimes.html">ライフタイム - プログラミング言語Rust</a></li>
+<li><a href="https://doc.rust-jp.rs/book-ja/ch10-03-lifetime-syntax.html">ライフタイムで参照を検証する - The Rust Programming Language 日本語版</a></li>
+<li><a href="https://zenn.dev/skanehira/articles/2022-12-18-rust-liftime-elision">Rustのライフタイム推論入門 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.02.21</p>
+</div>
+
+<h1>Rustのその他の言語仕様</h1>
+<h2>パターン</h2>
+<p>Rustでは、さまざまな場面で「パターン」が登場する。パターンを使うことで、変数の値の構造を記述できる。パターンの応用例は、match式を使ったパターンマッチング。</p>
+<p>以下のページが参考になる。</p>
+<ul>
+<li><a href="https://frozenlib.net/blog/2018-03-11_rust-pattern-match/">Rustのパターンマッチを完全に理解した | FrozenLib</a></li>
+<li><a href="https://doc.rust-jp.rs/book-ja/ch18-01-all-the-places-for-patterns.html">パターンが使用されることのある箇所全部 - The Rust Programming Language 日本語版</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.07.05</p>
+<p>2023.08.14編集</p>
+</div>
+
+<h2>Result型</h2>
+<p>Rustでは、エラーハンドリングのために例外機構は使わない。代わりに、成功したか失敗したかを判別できる型であるResult型を使う。メソッドがResult型を返す場合、エラーハンドリングを行わないとコンパイラから警告が出される。</p>
+<p>Result型はRust以外のさまざまな言語に移植されていて、try-catchを使うよりもはるかに使いやすいと評判である。一部では「try-catchはgotoのようなもの」と言われている。</p>
+<ul>
+<li><a href="https://maku77.github.io/p/us2ahpw/">Rust の Result 型の基本 ─ 成功と失敗を表現する型 - まくまく Rust ノート</a></li>
+<li><a href="https://twitter.com/Sheeeeepla/status/1676168008249802753">@Sheeeeeplaさんのツイート</a></li>
+<li><a href="https://twitter.com/totto0727/status/1676195897456345088">@totto0727さんのツイート</a></li>
+<li><a href="https://twitter.com/Comamoca_/status/1676218580105588737">@Comamoca_さんのツイート</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.07.05</p>
+</div>
+
+<h2>null安全</h2>
+<p>Kotlinはnull安全で有名（標準では変数にnullは入らない）だが、Rustにはnullそのものが存在しない。nullを扱いたい場合は特別なOption型を用いる。<a href="java_langs_kotlin.html">Kotlin</a>を参照のこと。</p>
+<div class="edit_date">
+<P>2023.07.05</p>
+</div>
+
+<h2>Box&lt;T&gt;とRc&lt;T&gt;</h2>
+<p>Rustではヒープ領域にデータを格納することも可能。そのような場合はBox&lt;T&gt;を使う。</p>
+<p>また、参照カウント方式によるスマートポインタを使うことも可能。そのような場合はRc&lt;T&gt;を使う。</p>
+<ul>
+<li><a href="https://doc.rust-jp.rs/book-ja/ch15-01-box.html">ヒープのデータを指すBox&lt;T&gt;を使用する - The Rust Programming Language 日本語版</a></li>
+<li><a href="https://doc.rust-jp.rs/book-ja/ch15-04-rc.html">Rc&lt;T&gt;は、参照カウント方式のスマートポインタ - The Rust Programming Language 日本語版</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.14</p>
+</div>
+
+<h2>クロージャとスレッド</h2>
+<p>Rustでは環境の状態を持つ無名関数としてクロージャを使用できる。</p>
+<p>クロージャの記法には、Rubyのブロックとよく似た|arg1, arg2| { ... }という縦線を使った記法を使う。</p>
+<p>また、スレッドはthread::spawn()に対してクロージャを与えることで新しいスレッドを作れる。</p>
+<pre class="prettyprint lang-rust">
+use std::thread;
+
+fn main() {
+    thread::spawn(|| {
+        for i in 1..20 {
+            println!("スレッドの処理: {}回目", i);
+        }
+    });
+    
+    for i in 1..20 {
+        println!("メインの処理: {}回目", i);
+    }
+}
+</pre>
+<ul>
+<li><a href="https://doc.rust-jp.rs/book-ja/ch13-01-closures.html">クロージャ：環境をキャプチャできる匿名関数 - The Rust Programming Language 日本語版</a></li>
+<li><a href="https://doc.rust-jp.rs/book-ja/ch16-01-threads.html">スレッドを使用してコードを同時に走らせる - The Rust Programming Language 日本語版</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.14</p>
+</div>
+
+<h1>Rustでの開発</h1>
+<h2>Cargoでの開発</h2>
+<p>（<a href="https://doc.rust-jp.rs/book-ja/ch01-03-hello-cargo.html">Hello, Cargo! - The Rust Programming Language 日本語版</a>と<a href="https://qiita.com/elipmoc101/items/3c8b6d8332a9019e578c">プログラミング言語Rustのススメ - Qiita</a>を参考に執筆・引用しました。）</p>
+<p>まず、ビルドツール＆パッケージマネージャのcargoでプロジェクトを作る。</p>
+<pre>
+$ cargo new hoge --bin
+$ cd hoge
+</pre>
+<p>src/main.rsを以下のように編集する。</p>
+<pre class="prettyprint lang-rust">
+fn main() {
+    println!("Hoge!");
+}
+</pre>
+<p>あとは、</p>
+<pre>
+$ cargo run
+</pre>
+<p>でOK。自動的にビルドして実行してくれる。</p>
+
+<h2>サンプルコード</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="https://employment.en-japan.com/engineerhub/entry/2017/07/19/110000">実践的なアプリケーションを書いてみよう！ Rustの構造化プログラミング【第二言語としてのRust】 - エンジニアHub</a></li>
+</ul>
+
+<h2>人間でも分からないバグをたくさん言い当ててくれる</h2>
+<p>実際のところ、Rustのコンパイラはとても優れている。人間でも分からないようなバグをたくさん言い当ててくれるからだ。</p>
+<p>あの蟹は、めちゃくちゃ賢い。</p>
+
+<h2>自分で作った簡単な計算プログラム</h2>
+<p>自分で作った簡単なプログラムです。攻撃力が10のキャラと、攻撃力が1だが「1ターンごとに攻撃力が1上がっていく」キャラが戦って、いつ上がっていく方のキャラが上回るか、を計算する。</p>
+<p>正確にいうと、「いつ上回るかを計算する」というより、その「上回っていく過程」を表示する。</p>
+<pre class="prettyprint lang-rust">
+fn main() {
+    let mut x = 10;
+    let mut y = 1;
+    let mut count = 1;
+    loop {
+        print!("{} ", x);
+        println!("{}", y);
+        x += 10;
+        count += 1;
+        y += count;
+        if (count &gt; 100) {
+            break;
+        }
+    }
+}
+</pre>
+<p>少し変えたバージョン：</p>
+<pre class="prettyprint lang-rust">
+fn main() {
+    let mut x = 10;
+    let mut y = 1;
+    let mut power = 1;
+    while (power &lt;= 100) {
+        println!("{} {} {}", x, y, power);
+        x += 10;
+        power += 1;
+        y += power;
+    }
+}
+</pre>
+
+<h2>電卓アプリ</h2>
+<p>以下は簡単な電卓アプリ。</p>
+<pre class="prettyprint lang-rust">
+struct Calc {
+    x: i32,
+    y: i32,
+}
+
+impl Calc {
+    fn add(&self) -&gt; i32 {
+        self.x + self.y
+    }
+    
+    fn sub(&self) -&gt; i32 {
+        self.x - self.y
+    }
+    
+    fn mul(&self) -&gt; i32 {
+        self.x * self.y
+    }
+    
+    fn div(&self) -&gt; i32 {
+        self.x / self.y
+    }
+}
+
+fn main() {
+    let cl = Calc { x: 10, y: 5 };
+    println!("{} + {} = {}", cl.x, cl.y, cl.add());
+    println!("{} - {} = {}", cl.x, cl.y, cl.sub());
+    println!("{} * {} = {}", cl.x, cl.y, cl.mul());
+    println!("{} / {} = {}", cl.x, cl.y, cl.div());
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+10 + 5 = 15
+10 - 5 = 5
+10 * 5 = 50
+10 / 5 = 2
+</pre>
+<ul>
+<li><a href="https://doc.rust-jp.rs/book-ja/ch05-03-method-syntax.html">メソッド記法 - The Rust Programming Language 日本語版</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.14</p>
+<p>2025.02.21編集</p>
+</div>
+
+<h1>Rustで書かれたアプリケーション</h1>
+<h2>Servo</h2>
+<p>Mozilla FirefoxのHTMLレンダリングエンジン。</p>
+<p><a href="../linux/mozilla_firefox.html">Mozilla Firefox</a>も参照のこと。</p>
+
+<h2>Cargo</h2>
+<p>Rustのビルドツール＆パッケージマネージャ。</p>
+
+<h2>crates.io</h2>
+<p>crates.ioでは、Rustのライブラリである「クレート」が公開されている。</p>
+<ul>
+<li><a href="https://crates.io/">crates.io</a></li>
+</ul>
+
+<h2>Redox</h2>
+<p>RedoxはRustで書かれたOS。UNIX系でマイクロカーネル。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Redox_(%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0)">Redox (オペレーティングシステム) - Wikipedia</a></li>
+<li><a href="https://doc.redox-os.org/book/">Overview - The Redox Operating System</a></li>
+<li><a href="https://doc.redox-os.org/book/introduction/side_projects.html">Side projects - The Redox Operating System</a></li>
+</ul>
+
+<h2>Tauri</h2>
+<p>TauriはRustで書かれたElectronと同種のGUIフレームワーク。</p>
+<p><a href="electron.html">Electron</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>Axum</h2>
+<p>AxumはRustによる新しいWebフレームワーク。</p>
+<ul>
+<li><a href="https://zenn.dev/techno_tanoc/articles/99e54c82cb049f">Rustの新しいWEBフレームワークaxumを触ってみた - Zenn</a></li>
+<li><a href="https://zenn.dev/hkdord/articles/axum-request-id">Rust の Web フレームワーク Axum のミドルウェアと戯れる - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>Yew</h2>
+<p>YewはRustによるフロントエンド向けのフレームワーク。VueやReactと同様のフレームワーク。</p>
+<ul>
+<li><a href="https://zenn.dev/azukiazusa/articles/rust-base-web-front-fremework-yew">Web フロントエンドエンジニアのための Rust 製 Web フロントフレームワーク Yew 入門 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>nu</h2>
+<p>nuは今までとは異なる新しいシェル。Rustで作られている。</p>
+<p><a href="../linux/linux_sh.html">Linuxシェル</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>Eyra</h2>
+<p>Eyraはプログラムのすべて（libcを含む）をRust化することを目指したプロジェクト。</p>
+<ul>
+<li><a href="https://notgull.net/eyra/">Eyra is an interesting Rust project – notgull – The world's \#1 source of notgull</a></li>
+<li><a href="https://twitter.com/blackenedgold/status/1708037592284004475">@blackenedgoldさんのポスト - X</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>その他</h2>
+<p><a href="https://ja.wikipedia.org/wiki/Rust_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)">Rust (プログラミング言語) - Wikipedia</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>MicrosoftもRustベースのプログラミング言語を</h2>
+<p>今僕が知ったニュースとして、マイクロソフトはRustの特徴を取り入れたプログラミング言語である「Project Verona」をGitHubにオープンソース化して提示したとのこと。</p>
+<p>いよいよ、WindowsもRustで書かれる日が来るかもしれない。MSはWindowsの低水準コンポーネントにRustを試しているとも公にしている。僕が思うに、.NET FrameworkやC#で書かれた部分をRustで書き直せば安全かつ安定化・高速化するだろう。</p>
+<ul>
+<li><a href="https://japan.zdnet.com/article/35148191/">マイクロソフト、「Rust」に基づくプログラミング言語プロジェクト「Project Verona」がGitHubに - ZDNet Japan</a></li>
+</ul>
+
+<h2>ついにLinuxカーネルもRust化されるのか</h2>
+<p>LinuxカーネルでのRust言語の利用については、以下が参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/202104/15">2021年4月15日　パニックお断り―Linus，"Rust for Linux"の盛り上がりに釘を刺す：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>後日注記：以下の記事が面白いです。</p>
+<ul>
+<li><a href="https://qiita.com/hisaho/items/09362b9efdc5f21ab1f2">祝・実験終了 🎉 Linux カーネルの Rust 採用が正式化！ C から Rust へ ─ AI コードエージェントが Linux カーネルコードを書き換えるとどうなるか？ #sdd - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.20編集</p>
+</div>
+
+<h2>生成AIとRust</h2>
+<p>以下は生成AIとRustに関する記事。Rustは型安全やメモリ安全、コンパイラの厳密性（多くのバグがコンパイルエラーで分かるため、コンパイラを通れば多くの場合バグがない）のようなさまざまな素晴らしい「Rustでしか味わえないメリット」があるが、その代わりコードが難しい。コードを書くのも難しいし、コードを理解するのも難しい。</p>
+<p>そのような際に、生成AIを使えば、コードをAIが正しく書いてくれるし、またその理由をメンターとなって教えてくれる。コンパイルエラーが出た時にバグを直せと言えば、人間には分からないバグをAIが直してくれる。だから、Rustのコンパイラの安全性と生成AIを組み合わせるのはベストマッチングである。</p>
+<ul>
+<li><a href="https://zenn.dev/ryugotoo/articles/691c08f844a5e1">Rustは生成AI時代の覇権言語になる説 - Zenn</a></li>
+<li><a href="https://zenn.dev/kbwok/articles/eb0c36467ebbec">AI時代にこそRustだと思う話 - Zenn</a></li>
+<li><a href="https://zenn.dev/h_shinaoka/articles/203fb232cc3f61">なぜC++からRustへ移行したか (生成AI時代の開発体験) - Zenn</a></li>
+</ul>
+<p><a href="../programs/ai.html">AI</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.26-27</p>
+</div>
+
+<h2>みんな早くC++になくなってほしいからRustが流行っている</h2>
+<p>最近Rustが流行っている理由は、Rustという言語がとても面白くて、そしてメモリ安全などの賢い機能があり、所有権や参照のような考え方が新しい、という意見があります。</p>
+<p>ですが、僕が思うに、Rustが流行るのはもうひとつの理由があると思います。</p>
+<p>それは、みんな早くC++になくなってほしいからです。</p>
+<p>最近も、C++とPythonのユーザーが、互いを汚い言葉で罵り合ったりしますが、僕はそれを見ていると、昔の「本物のプログラマはPascalを使わない」という議論を思い出します。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%9C%AC%E7%89%A9%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AFPascal%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84">本物のプログラマはPascalを使わない - Wikipedia</a></li>
+</ul>
+<p>ですが、C++とPythonは、互いに譲り合うことができません。その理由は、PythonにはC++を置き換えるほどの力はないからです。</p>
+<p>かつてPascalがFORTRANを駆逐したように、PythonがC++を駆逐すればいいのですが、Pythonは残念ながら動的型付けのインタープリタ言語であり、コンパイラ言語のC++を置き換えることはできません。</p>
+<p>今まで、長い間、どんなにクソであってもC++を使う必要がありました。C++よりも賢い言語が、完全なC++の代わりになることができなかったからです。</p>
+<p>ですが、RustはC++と同じ静的型付けのコンパイラ言語です。そして、ガーベッジコレクションもなく、パフォーマンス的にC++に劣りません。</p>
+<p>なので、ようやく、クソだったC++を使うことをやめて、新しい代わりの言語であるRustを使うことが、現実味を帯びてきたのです。</p>
+<p>Linuxカーネルの分野で、「わたしの領域を最近の流行り言語で汚染しないでくれ」と主要開発者Christoph Hellwig氏が言うように（以下の記事を参照のこと）、Rustには反対論もありますが、リーナス・トーバルズは大のC++嫌いで知られています。本当にC++が嫌いなのか、それとも自らがC言語ばかりをやっているせいで、好きなのに嫌いになったのかは分かりませんが、リーナスはRustを正式に使うようになると思います。それは「あまりにC++がクソだから」という理由です。</p>
+<ul>
+<li><a href="https://qiita.com/hisaho/items/09362b9efdc5f21ab1f2">祝・実験終了 🎉 Linux カーネルの Rust 採用が正式化！ C から Rust へ ─ AI コードエージェントが Linux カーネルコードを書き換えるとどうなるか？ #sdd - Qiita</a></li>
+</ul>
+<p>なので、僕はやっと、C++から決別することの日が訪れるのに、ワクワクしています。ようやくクソのようなC++を使うのをやめることができるのです。こんなに嬉しいことはありません。</p>
+<p>そもそも、すべての元凶はC++にあります。malloc()とfree()で動的に行うメモリ管理は、素人でもきちんとfree()されない場合があるということが分かります。C++にはスマートポインタも導入されましたが、実際は全然スマートじゃない。Javaはガーベッジコレクションを導入しましたが、パフォーマンスが落ちてしまうし、VMが必要になるため、カーネルには使えない。そこへきて、所有権と参照という考え方を持って、メモリ安全でありながらガーベッジコレクションのないRustが登場しました。それならばC++の代わりになってくれる。だから、賢いエンジニアはみんなRustに期待しているのです。</p>
+<div class="edit_date">
+<p>2025.12.29</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>WebAssembly</h2>
+<p>WebAssemblyを使うことで、Rustで書いたプログラムをWebブラウザ上あるいはNode.js上で動かすことができます。</p>
+<p><a href="wasm.html">WebAssembly</a>を参照のこと。</p>
+
+<h2>並列処理</h2>
+<p><a href="parallel.html">並列処理</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>その他の言語</h2>
+<ul class="defaultlist list7">
+<li>その他の言語
+<ul>
+<li>Rust
+<ul>
+<li>ムーブセマンティクス</li>
+<li>寿命</li>
+<li>所有権、参照、借用</li>
+<li>トレイト</li>
+<li>所有権はひとつだけ</li>
+<li>参照はいくらでも作れるが、ミュータブルな参照はひとつだけ</li>
+</ul></li>
+<li>Golang
+<ul>
+<li>goroutine</li>
+</ul></li>
+<li>Erlang, Elixirなど</li>
+</ul></li>
+</ul>
+
+<h2>所有権について</h2>
+<p>まず、ヒープに確保される型については、束縛した時にムーブされ、もともとあった変数は使えなくなる。これはメモリ解放の二重化を防ぐ。明示的に変数のクローンを作りたいときはcloneメソッドを読みだす。</p>
+<p>しかしながら、Copyの型については、コピーされる。これはスタックに積まれる基本型の場合が多い。数値などはCopyであるため、もともとの変数を使うことはできる。</p>
+<p>所有権はひとつだけであり、そのため関数の呼び出しの際の引数や返り値であっても、所有権が移動するため、もとの変数は使えなくなる。</p>
+<p>しかしながら、これではやりづらい。そのため、参照が用意されている。関数の引数に参照を与えることで、いろんな関数から変数を参照でき、所有権はもとの変数にあったままにできる。関数の引数として参照を与えることを借用と呼ぶ。</p>
+<p>参照はいくらでも作ることができるが、通常参照は不変である。</p>
+<p>関数の中から変数を書き換えるために参照を使う場合、ミュータブルな可変の参照を使う。この際、ミュータブルな参照は1つのスコープに必ずひとつしかないと決まっている。この制約により、データの競合を防ぐ。</p>
+<ul>
+<li><a href="https://doc.rust-jp.rs/book-ja/">The Rust Programming Language 日本語版</a> - 所有権に関するページを参照のこと。</li>
+</ul>
+
+<h1>リンク集</h1>
+<h2>Rust</h2>
+<p>Mozillaが開発した新しいプログラミング言語。</p>
+<ul>
+<li><a href="https://rust-lang-ja.github.io/the-rust-programming-language-ja/1.6/book/">プログラミング言語Rust</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-rust.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

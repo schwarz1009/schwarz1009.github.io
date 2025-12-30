@@ -1,0 +1,121 @@
+.guren h1 {
+    font-size: 175%;
+    color: #c50030; 
+    background: white;
+    border-bottom: 1px solid #ebc175;
+    border-left: 5px solid #a67b2d;
+    box-shadow: none;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+    padding-left: 17.5px;
+    padding-bottom: 5px;
+}
+
+.guren h2 {
+    font-size: 120%;
+    color: #a67b2d; 
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+A:link {
+    color: #c50030;
+}
+
+A:visited {
+    color: #bf5116;
+}
+
+.tab_menu { }
+
+.tab_list {
+    margin: 0;
+    padding: 0;
+}
+
+.tab_list li {
+    list-style-type:none;
+    list-style-image:none;
+    display: inline-block;
+    margin: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 3px 10px 3px 10px;
+    width: auto;
+    border-top: 2px solid #c50030;
+    border-right: 1px solid #c50030;
+    border-left: 1px solid #c50030;
+    background: #f2dae8;
+}
+
+.tab_list A:link,
+.tab_list A:visited {
+    color: #c50030;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.box {
+    border: 1px solid #c50030;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 20px;
+}
+
+.box ul {
+    padding: 0;
+    margin: 0;
+}
+
+.box li {
+    list-style-type:none;
+    list-style-image:none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+.tl-tweet {
+    border: 1px solid #c50030;
+    border-left: 3px solid #c50030;
+    background: white;
+    padding: 10px;
+}
+
+.tl-tweet A:link,
+.tl-tweet A:visited {
+    color: #a67b2d;
+}
+
+#toc {
+    background: #f2dae8;
+    border: 1px solid #c50030;
+    border-top: 3px solid #c50030;
+    box-shadow: none;
+}
+
+#toc A:link,
+#toc A:visited {
+    color: #c50030;
+}
+
+#toc:before {
+    color: #c50030;
+}
+
+#toc li:before {
+    border-top: 1px solid #c50030;
+    border-right: 1px solid #c50030;
+}

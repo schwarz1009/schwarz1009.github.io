@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JavaScript関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaScriptの世界観</h1>
+<p>JavaScriptによるプログラミングに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>JavaScript（１．一般）</b></li>
+<ul>
+<li><a href="javascript_intro.html">JavaScript入門</a></li>
+<li><a href="javascript_dom_canvas.html">２．DOM/Canvas</a></li>
+<li><a href="javascript_prototype.html">３．プロトタイプチェーン</a></li>
+</ul>
+<li><a href="javascript_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="javascript_framework.html">JavaScriptフレームワーク</a>や<a href="jquery.html">jQuery</a>や<a href="../linux/mozilla.html">Mozilla</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>JavaScriptの面白さ</h1>
+<h2>JavaScriptは素のHTMLではできないことをやる</h2>
+<p>JavaScriptは、Webページ上で、素のHTMLだけではできないことをやるために使います。</p>
+<p>たとえば、ページを下にスクロールしたらメッセージのログが自動的に表示されるようにしたり、ページの内容をタブでポチポチ切り替えられるようにしたり、画像をスライドして左から右へと次の画像が切り替わるようにしたり、画像をクリックしたら中央に拡大表示されるようにしたり、閉じるボタンでその拡大画像が消えるようにしたり、あるいはメニューや目次といった素のHTMLではできないパーツを作ったり、マウスやキーボードの動作や入力に対応したり、ソースコードをシンタックスハイライトしたり、ということができます。</p>
+<p>これらの機能は、素のHTMLでは実現できませんが、JavaScriptを使ってHTMLやその構成要素となるDOMツリーを操作することで実現出来ます。</p>
+<p>また、最近はJavaScriptフレームワークという、より高度かつ保守性の高いJavaScriptプログラミングを簡単にできるフレームワークもあります。これを使うことで、シングルページアプリケーション（SPA）を開発したりできます。認証や永続化には、Firebaseのようなサービスを使うこともできます。</p>
+<p>このように、ある意味でUIツールキットのような側面があるJavaScriptですが、最近ではサーバーサイドやデスクトップアプリケーションもJavaScriptでできるようになってきています。「JavaScriptさえ覚えればなんでもできる」ような世界が訪れるかもしれません。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=JavaScript">JavaScript - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>JavaScript</h1>
+<h2>JavaScriptフレームワークの誕生</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.02.05.html">2021/02/05</a>より。</p>
+
+<h3>JavaScriptとは</h3>
+<p>JavaScriptと聞くと、僕のような昔の世代は、「Webページを読みづらくするお邪魔なスクリプト」と思う人がいるかもしれません。</p>
+<p>JavaScriptは、WebブラウザのNetscape社が開発した言語で、Webページをブラウザ上で書き換えたり、ブラウザに組み込まれた機能を使って、さまざまなことができるマクロ言語として、開発されました。</p>
+<p><a href="../linux/mozilla.html">Mozilla</a>も参照のこと。</p>
+
+<h3>JavaとJavaScript</h3>
+<p>当時、Javaと言えば、サン・マイクロシステムズによって開発された、Java言語が知られていました。</p>
+<p>Javaはさまざまな環境で動くオブジェクト指向言語でしたが、インターネットユーザーによく知られていたのが、アプレットと呼ばれる機能で、Webブラウザ上で描画領域を表示したり、アニメーションをしたり、HTMLでは簡単にできない計算処理ができました。</p>
+<p>アプレットから、Javaの存在を知った方も多いでしょう。</p>
+<p>また、当時はオブジェクト指向が大流行しており、C++に代わる新しい設計のJavaは大成功していました。</p>
+<p>JavaScriptは、このJavaの成功にあやかって、アプレットと同じようにブラウザ上で動く言語として、サンとネットスケープの業務提携から、JavaScriptという名前になりました。</p>
+<p>しかしながら、この2つは、名前が似ているだけで全く異なる言語です。</p>
+<p>Javaは、仮想マシンのサンドボックス環境で、ブラウザとは全く異なるVMの上で実行されます。</p>
+<p>これに対して、JavaScriptでは、ブラウザのHTMLをツリー構造にした、DOMツリーを直接操作でき、エンジンも完全にブラウザに組み込まれています。</p>
+<p><a href="java.html">Java</a>も参照のこと。</p>
+
+<h3>Webの嫌われ者</h3>
+<p>さて、そのようなJavaScriptですが、Webの世界では嫌われ者でした。</p>
+<p>ポップアップ広告を勝手に表示したり、ブラクラとしてブラウザをクラッシュさせたりなど、まともでない用途に使われることが多かったためです。</p>
+<p>もう少しマシな用途では、文字列を横スクロールさせたり、画面に雪を降らせたりなど、ほとんどが「ページを見づらくするだけ」だったのです。</p>
+
+<h3>Ajaxブーム</h3>
+<p>しかしながら、JavaScriptには潜在的な可能性があり、それに目を付けたのがGoogleです。</p>
+<p>Googleは、Google Mapsという地図アプリで、Ajaxと呼ばれる非同期通信技術を用いて、JavaScriptをふんだんに使った、GUIのウィンドウアプリケーションと同等の、使いやすいサービスを開発しました。</p>
+<p>これが「Ajaxブーム」を引き起こします。</p>
+<p>その後も、GoogleはGmailなど、多くのアプリケーションをJavaScriptで作成します。</p>
+<p>ここから、「JavaScriptは上手に使えば良いものである」と人々は気付き、従来PHPなどで行っていたことを、Ajaxを使えばインタラクティブにできると知られます。</p>
+<p><a href="ajax.html">Ajax</a>も参照のこと。</p>
+
+<h3>Railsの登場</h3>
+<p>次のキーパーソンは、Railsです。</p>
+<p>RailsをはじめとするMVCフレームワークは、Webにとっての一種の革命で、モデル、ビュー、コントローラの構成で、繰り返しを排除し、設定より規約を守ることで、とても簡単にWebアプリケーションを開発できるようになりました。</p>
+<p>従来PHPなどで行っていたことが、RubyとRailsによってとても生産性が向上したのです。</p>
+<p><a href="ruby_on_rails.html">Ruby on Rails</a>も参照のこと。</p>
+
+<h3>JavaScriptフレームワーク</h3>
+<p>しかしながら、RailsのようなMVCフレームワークは、モデル、ビュー、コントローラを、全てサーバーサイドで処理していました。</p>
+<p>データベースを担当するモデルや、全体のコントロールを担当するコントローラは、確かにサーバーサイドの処理が必要ですが、HTMLを担当するビューについては、JavaScriptを上手く使うことで、クライアントサイドでも実現できるということが、次第に分かってきました。</p>
+<p>また、先のAjaxのように、Web業界が高度化し、JavaScriptアプリケーションが複雑になるにつれて、サーバーサイドのMVCフレームワークだけでなく、クライアントサイドのHTML/CSS/JavaScriptの環境でも、同様の生産性の高いフレームワークが要求されます。</p>
+<p>ここに登場したのが、React, Angular, Vue.jsをはじめとする、JavaScriptフレームワークです。</p>
+<p>はじめのうち優勢だったのはGoogleのフルスタックのAngularでしたが、今ではビューだけに特化したFacebookのReactが勝っています。</p>
+<p>また、簡単なテンプレート処理にも使えて、少しずつたくさんの機能を使えていける、Vue.jsは日本などのアジア地域で、Reactと同じくらい流行しています。</p>
+<ul>
+<li><a href="https://gihyo.jp/dev/serial/01/tech_community_site/0001">第1回　JavaScript／Node.jsのこれまでとこれから：教えて！ 最新技術―テックコミュニティの現場から｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p><a href="javascript_framework.html">JavaScriptフレームワーク</a>や<a href="node_js.html">Node.js</a>も参照のこと。</p>
+
+<h1>コンテンツ</h1>
+<h2>JavaScript入門</h2>
+<p><a href="javascript_intro.html">JavaScript入門</a></p>
+<p><a href="javascript_samplecode.html">JavaScriptサンプルコード</a></p>
+<p><a href="javascript_tools.html">JavaScriptのツール</a></p>
+
+<h2>基本技術</h2>
+<p><a href="javascript_dom_canvas.html">DOM/Canvas</a></p>
+<p><a href="javascript_prototype.html">プロトタイプチェーン</a></p>
+
+<h2>戯言</h2>
+<p><a href="javascript_comments.html">JavaScript戯言</a></p>
+
+<h2>応用技術</h2>
+<p><a href="ajax.html">Ajax</a></p>
+<p><a href="jquery.html">jQuery</a></p>
+<p><a href="jquery_samplecode.html">jQueryサンプルコード</a></p>
+<p><a href="node_js.html">Node.js</a></p>
+<p><a href="javascript_framework.html">JavaScriptフレームワーク</a></p>
+
+<h1>ドキュメント</h1>
+<h2>MozillaのMDNがほぼ公式</h2>
+<p>JavaScriptには、公式のドキュメントのようなものはありませんが、MozillaのMDNがほとんど公式と言ってよいでしょう。JavaScriptだけではなく、HTML/CSSなどのWeb技術をやりたい人にとって準公式の情報源になります。困ったらMDNの記述に頼りましょう。</p>
+<p>また、ブラウザとして使う場合では、IEなんか使っていてはいけません。Google ChromeかMozilla Firefoxを使いましょう。開発のために使える機能がたくさんあります。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/">MDN Web Docs</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>JavaScript</h2>
+<ul class="defaultlist list7">
+<li>JavaScript
+<ul>
+<li>JavaScript
+<ul>
+<li>varとlet
+<ul>
+<li>varは関数スコープ、letはブロックスコープ</li>
+</ul></li>
+<li>関数呼び出し
+<ul>
+<li>リンクやボタンからJavaScriptを実行するにはonclickに関数を指定する</li>
+</ul></li>
+<li>windowオブジェクト
+<ul>
+<li>JavaScriptでは基本的にブラウザに用意されているwindowオブジェクトからブラウザやドキュメントを操作する</li>
+</ul></li>
+<li>DOM
+<ul>
+<li>HTMLはDOMと呼ばれるツリーで操作する</li>
+</ul></li>
+<li>プロトタイプチェーン</li>
+<li>クロージャ</li>
+<li>Ajax</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>JavaScript</h2>
+<p>JavaScriptはクライアントサイドのプログラミング言語。</p>
+<p>Perl/PHPのようにサーバーサイドでHTMLを吐くために使うのではなく、ブラウザ上でHTMLを操作するために使う。</p>
+<p>Perl/PHPが掲示板やブログを作るためにあるとするなら、JavaScriptはブラウザ上でインタラクティブな操作や処理を行うためにある。</p>
+
+<h2>DOM</h2>
+<p>DOMではHTMLを「ノード」の階層構造として表現する。</p>
+<p>ドキュメント要素を取得するには、たとえばgetElementByIdなどで行い、書き換えるにはinnerHTMLなどで行う。</p>
+<p>最近はdocument.writeよりもinnerHTMLやinsertAdjacentHTMLやappendChildを使うべきだとされている。</p>
+
+<h2>プロトタイプチェーン</h2>
+<p>クラスとはまた違う、「プロトタイプを作ってオブジェクトを量産する」かのようなオブジェクト指向のスタイル。</p>
+<p>特に「委譲」と呼ばれる新しいオブジェクト指向の概念（あるオブジェクトの操作を別のオブジェクトにしてもらうようにお願いを立てる）がある。</p>
+
+<h2>クロージャ</h2>
+<p>関数定義と同一スコープの変数に関数内部からアクセスできる。</p>
+
+<h2>Ajax</h2>
+<p>Ajaxを使うことで、Google MapsのようにWebサービスでもGUI並みのインタラクティブな処理が可能となる。</p>
+
+<h1>リンク集</h1>
+<h2>JavaScript</h2>
+<p>基本文法。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/fcoding/index/js.html">初心者のためのJavaScript入門 - @IT</a></li>
+</ul>
+
+<h2>JavaScriptリファレンス</h2>
+<p>JavaScript</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference">JavaScript リファレンス - JavaScript | MDN</a></li>
+<li><a href="http://www.htmq.com/js/">JavaScriptリファレンス（オブジェクト別） - HTMLクイックリファレンス</a></li>
+</ul>
+
+<h2>プロトタイプベースのオブジェクト指向</h2>
+<p>スライド。JavaScriptでは、クラスベースではなく、プロトタイプベースと呼ばれる独自のオブジェクト指向を行います。クラスはありません。</p>
+<ul>
+<li><a href="http://www.slideshare.net/yuka2py/javascript-23768378">最強オブジェクト指向言語 JavaScript 再入門！ - SlideShares</a></li>
+</ul>
+
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

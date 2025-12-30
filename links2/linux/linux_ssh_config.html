@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>SSHの設定 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>SSHの設定</h1>
+<p>SSHの設定に関する世界観です。<a href="linux_ssh.html">SSH</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>SSHの設定</h1>
+
+<h2>セキュリティ上の注意</h2>
+<p>sshdの設定は/etc/ssh/sshd_configで行います。また、ログイン時の秘密鍵の設定などは~/.ssh/configに記述できます。</p>
+<p>基本的に、</p>
+<p>・デフォルトの22番ポートからポートを変える。</p>
+<p>・rootログインを禁止する。</p>
+<p>・ssh可能なユーザーを制限する。</p>
+<p>・認証時の時間と試行回数を制限する。</p>
+<p>・パスワード認証を禁止する。</p>
+<p>などの制限をしておこう。</p>
+
+<h2>最低限のSSH設定</h2>
+<p>以下はsshの最低限のセキュリティ設定。</p>
+<p>デフォルトの22番ポートは危険。ボットに攻撃される。/etc/servicesにある予約ポートではないポートで、適当に決めよう。</p>
+<pre>
+Port 2367
+</pre>
+<p>デフォルトのポート番号を変えるだけで、多くの場合ボットは狙わないでくれる。</p>
+<p>また、rootログインは絶対に禁止すべき。</p>
+<pre>
+PermitRootLogin no
+</pre>
+<p>rootログインを禁止することで、もしハッキングされてもroot権限は使われないで済む。</p>
+<p>ssh可能なユーザーは以下で限定できる。</p>
+<pre>
+AllowUsers assy zaidou
+# DenyUsers schwarz inoue
+</pre>
+<p>AllowUsersはそのユーザーだけ許可する。DenyUsersはそのユーザーだけ排除する。</p>
+<p>また、認証時の時間と試行回数を制限する。これをしておくと、ハッキングされづらい。</p>
+<pre>
+LoginGraceTime 60
+MaxAuthTries 5
+</pre>
+<p>また、パスワード認証はとても危険なため、必ず公開鍵暗号方式を使うこと。</p>
+<pre>
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+</pre>
+<p>上記の設定例は以下のページを参考に記述しました。</p>
+<ul>
+<li><a href="http://qiita.com/cocuh/items/e7c305ccffb6841d109c">そこそこセキュアなlinuxサーバーを作る - Qiita</a></li>
+</ul>
+
+<h2>公開鍵と秘密鍵の作り方</h2>
+<p>公開鍵はssh-keygenコマンドで作成する。</p>
+<pre>
+$ ssh-keygen -t rsa
+</pre>
+<p>上のコマンドで秘密鍵のid_rsaと公開鍵のid_rsa.pubの鍵ペアが作成できる。</p>
+<p>秘密鍵のid_rsaはローカルマシンに置き、公開鍵のid_rsa.pubはリモートマシンの~/.ssh/authorized_keysにコピー（既にある場合は追記）する。</p>
+<p>ログインは、以下のようにする。</p>
+<pre>
+$ ssh assy@hogehoge.com -i ~/ssh_keys/id_rsa
+</pre>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://gomocool.net/gomokulog/?p=557">ssh-keygenで鍵作成し、sshでログインできるようにする。 – gomokulog</a></li>
+</ul>
+<p><a href="../network/encrypt.html">暗号</a>も参照のこと。</p>
+
+<h2>sshの設定ファイル</h2>
+<p>~/.ssh/configを書くことで、鍵さえあれば認証作業なく、簡単にリモートログインできます。</p>
+<p>~/.ssh/configの設定は</p>
+<pre>
+Host assy
+    HostName hogehoge.com
+    User assy
+    Port 2367
+    IdentityFile ~/.ssh/id_rsa
+</pre>
+<p>のようになります。これで、</p>
+<pre>
+$ ssh assy
+</pre>
+<p>のようにログインできます。</p>
+<p>（<a href="https://qiita.com/passol78/items/2ad123e39efeb1a5286b">~/.ssh/configについて - Qiita</a>と<a href="https://tech-blog.rakus.co.jp/entry/20210512/ssh">~/.ssh/configを使ってSSH接続を楽にする - RAKUS Developers Blog | ラクス エンジニアブログ</a>を参考に執筆しました。）</p>
+
+<h2>sshdの再起動</h2>
+<p>sshdの設定を変えたら、</p>
+<pre>
+service sshd restart
+</pre>
+<p>か、systemdの場合は</p>
+<pre>
+systemctl restart sshd
+</pre>
+<p>でsshdを再起動しよう。</p>
+
+<h2>SSHログインで二段階認証を有効にする</h2>
+<p>SSHログインでは、セキュリティ上の不安がつきまとう。鍵ファイルが漏れたら終わりである。</p>
+<p>そのため、SSHで二段階認証・ワンタイムパスワードを有効にすることができる。</p>
+<p>詳しくは以下のようなページを参照のこと。</p>
+<ul>
+<li><a href="http://muramasa64.fprog.org/diary/?date=20140912">SSHの認証でワンタイムパスワードを使う（導入編） - 雑記帳(2014-09-12)</a></li>
+<li><a href="https://orebibou.com/2017/01/ssh%E3%81%AE%E4%BA%8C%E6%AE%B5%E9%9A%8E%E8%AA%8D%E8%A8%BC%E4%BA%8C%E8%A6%81%E7%B4%A0%E8%AA%8D%E8%A8%BC%E8%A8%AD%E5%AE%9A%E3%81%AE%E6%96%B9%E6%B3%953%E5%80%8B/">sshの二段階認証(二要素認証)設定の方法3個 | 俺的備忘録 〜なんかいろいろ〜</a></li>
+<li><a href="https://qiita.com/_kazuya/items/883fbcdb66cf4b51c8b1">SSHログインを二段階認証（ワンタイムパスワード）したお話。 - Qiita</a></li>
+<li><a href="https://qiita.com/ttm_ben/items/a994bca5dc5d13375b20">SSHログインで2段階認証 - Qiita</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

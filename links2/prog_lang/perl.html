@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Perl関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div><h1>Perlの世界観</h1>
+<p>Perlによるプログラミングに関する世界観です。<a href="perl_cgi.html">Perl/CGI</a>も参照のこと。</p>
+<p><a href="http://www.tohoho-web.com/wwwperl.htm">とほほのperl入門</a>、<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考にしています。</p>
+
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Perlとは</h1>
+<h2>プログラミングの基本が分かる入門者のとびら</h2>
+<p>Perlは、インタープリタ式のスクリプト言語で、プログラミング入門者から熟練のプログラマまで、多くのプログラマに広く使われている言語です。</p>
+<p>実際のところ、「Perlを一度触るとプログラミングの基本が分かる」ということが言えます。</p>
+<p>プログラミングを行う上で、プログラミングとはどのようなものなのか、どのようにコードを書いて実行するのか、ということが分かりやすいため、「入門者向き」と言えます。</p>
+<p>PerlはUNIXのフィルターコマンドやシェルスクリプトやsedコマンドなどの考え方をベースとしているため、標準入出力やファイル処理など、Perlの教科書にはUNIXの用語が飛び交うこともしばしばです。そのため、UNIXの基本的な知識を知っていれば、習得の助けとなります。</p>
+<p>また、PerlはUNIXのフィルターコマンドと同様に、パイプなどで他のUNIXコマンドやシェルスクリプトと組み合わせて、Perlスクリプトを使えます。このため、「このコマンドで実行した結果を簡単に再処理したい」といった場合に、Perlで簡単なスクリプトを書いてその中に「はめこむ」といった使い方をすることができ、システム管理に役立ちます。</p>
+<p>C/C++言語などと違い、Perlには変数の型指定がなく、型はその場その場で動的に決まります。ですから、</p>
+<pre class="prettyprint">
+$s = ("100" . "000") x 2;
+</pre>
+<p>として"100000100000"という文字列を作った後で、それを</p>
+<pre class="prettyprint">
+$s += 500;
+</pre>
+<p>などとし、「数値を文字列にし、その上でまた数値にする」といったことができます。</p>
+<p>Perlは正規表現も強力で、「リスト@listの中のisという文字列が含まれている要素を表示する」のようなことをパターンマッチングで処理することができます。</p>
+<p>正規表現は、たとえばログファイルやUNIXの設定ファイルのように、「ある一定の形式で書かれているテキストを整形する」場合に役に立ちます。これはUNIXでは多くの場合タブや空白で区切られており、場合によってはawkやsedなどでも処理できるところを、より高度にPerlで行うこともできます。</p>
+<p>PerlはUNIXと親和性が高く、UNIXシステムでは最初からインストールされていることがほとんどですが、Windowsからも使えます。ActiveState社のActivePerlとStrawberry Perlがあり、僕個人の意見ではStrawberry Perlがおすすめです。ActivePerlのように導入のためにアカウントを作成する必要が無く、msiファイルだけをダウンロードして実行することで簡単に導入でき、必要なバイナリはgccなども含めて全てインストールされるため、CPANのあらゆるモジュールを利用できます。僕もWindowsにおけるPerlはStrawberry Perlを使っています。</p>
+<ul>
+<li><a href="http://strawberryperl.com/">Strawberry Perl for Windows</a></li>
+<li><a href="https://tutorial.perlzemi.com/blog/20180808153368.html">Strawberry PerlをWindowsにインストールする - Perl入門ゼミ</a></li>
+</ul>
+
+<h1>Perl入門サイト</h1>
+
+<h2>Perl</h2>
+<p>Perlについて。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Perl">Perl - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://perl5.git.perl.org/perl.git">git</a></li>
+</ul>
+
+<h2>入門</h2>
+<p>Perl言語の入門。</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/perlcodesample/">Perl学習サイト - サンプルコードPerl入門</a></li>
+<li><a href="http://www.kent-web.com/perl/">Perl基礎入門 | KentWeb</a></li>
+</ul>
+<h2>Perl/CGI</h2>
+<p>PerlはWebサーバーのCGIとして実行されることが多いです。</p>
+<ul>
+<li><a href="http://www.kent-web.com/perl/chap1.html">第1章 Perlの概要 - Perl基礎入門 - KentWeb</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Perl">Perl - YouTube</a></li>
+</ul>
+<p>以下は英語の勉強にもなります。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=WEghIXs8F6c">Perl Tutorial - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>基本</h1>
+<h2>推奨されている記述</h2>
+<p>Perlでは、常に以下の二行を書くことが推奨されている。</p>
+<pre class="prettyprint">
+use strict;
+use warnings;
+</pre>
+<p>これにより、strictとwarningsの厳密なエラー・警告がONになる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Perl">Perl - Wikipedia</a></li>
+</ul>
+
+<h2>シングルクォーテーションとダブルクォーテーション</h2>
+<p>Perlでは、文字列を</p>
+<pre class="prettyprint">
+'hoge'
+</pre>
+<p>とシングルクォーテーションで囲った場合、\'と\\を除いて変数や特殊文字の展開などがされないが、</p>
+<pre class="prettyprint">
+"$nameさん\n"
+</pre>
+<p>とダブルクォーテーションで囲った場合は、変数や特殊文字の展開がされる。</p>
+<p>このため、変数の中身を表示したい時は</p>
+<pre class="prettyprint">
+print "$nameさん\n";
+</pre>
+<p>のように実行する。</p>
+
+<h2>演算子</h2>
+<p>Perlの算術演算子には、+, -, *, /, %, **などがあるほか、インクリメント・デクリメント演算子である++や--もある。</p>
+<p>また、文字列用の演算子として、文字列を連結する.などがある。</p>
+
+<h2>コメント</h2>
+<p>Perlでは、一行コメントの#が利用できる。行の中の#に続く文字列は行末まで無視される。複数行コメントは存在しない。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/perl/ini/index3.html">Perl | コメントの記述 - プログラムの基本構成 | Let'sプログラミング</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.03</p>
+</div>
+
+<h1>変数</h1>
+<h2>変数と代入</h2>
+<p>Perlでは変数の頭に$をつけます。</p>
+<pre class="prettyprint">
+$x = 100;
+$y = 200;
+$sum = $x + $y;
+print "$sum\n";
+</pre>
+<p>Perlでは数値や文字列のような単純なデータをスカラーデータと呼び、その変数をスカラー変数と呼ぶ。Perlにはスカラー変数、配列、連想配列（ハッシュ）の3つの変数が存在する。</p>
+
+<h2>配列とリスト</h2>
+<p>配列（リスト）には@をつけます。</p>
+<pre class="prettyprint">
+@array = (1..100);
+foreach $item (@array) {
+    print "$item\n";
+}
+</pre>
+<p>1..4のように書くと(1, 2, 3, 4)というリストを表す。また@array[1, 2, 3]と書くとリストの2, 3, 4番目の要素からなるスライスを作ることができる。添え字は0から始まり、$list[0]は一番目の要素を表す。逆からアクセスする時は$list[-1]などのように-1から始まる。</p>
+<p><a href="data_structure_list.html">配列とリストとハッシュ</a>も参照のこと。</p>
+
+<h2>ハッシュ</h2>
+<p>ハッシュには%をつけます。</p>
+<pre class="prettyprint">
+%player = ('HP' =&gt; 100, 'ATK' =&gt; 200, 'DEF' =&gt; 50);
+%enemy  = ('HP' =&gt; 610, 'ATK' =&gt;  70, 'DEF' =&gt; 10);
+
+while ($enemy{'HP'} &gt; 0 && $player{'HP'} &gt; 0) {
+    $enemy{'HP'}  = $enemy{'HP'}  - ($player{'ATK'} - $enemy{'DEF'} );
+    $player{'HP'} = $player{'HP'} - ($enemy{'ATK'}  - $player{'DEF'});
+
+    print "プレイヤーの残りHP: $player{'HP'}\n";
+    print "敵の残りHP: $enemy{'HP'}\n";
+}
+
+if ($player{'HP'} &lt;= 0) {
+    print "プレイヤーの敗北\n";
+} else {
+    print "プレイヤーの勝利\n";
+}
+</pre>
+<p>リストでは[]を添え字に使うが、ハッシュでは{}を添え字に使う。@arrayの最初の要素は$array[0]となり、%hashのキーschwarzの値は$hash{'schwarz'}となる。値は重複してもよいがキーは重複できないため、同じキーに対する値の代入は追加ではなく上書きになる。</p>
+<p>後日注記：上のゲームのプログラムにはバグがあります。プレイヤーのDEFよりも敵のATKが低い場合、数値がマイナスとなってそれを減算しているため、プレイヤーのHPが上がってしまいます。上のプログラムは簡単なサンプルであるため、簡素さを重視してそのままで掲載しています。本当にゲームプログラミングをするつもりなら、そういうところを自分の力で直すと良いでしょう。</p>
+<p><a href="../videogame/games_devel.html">ゲーム開発</a>も参照のこと。</p>
+
+<h2>push/pop/shift/unshift</h2>
+<p>push()とpop()はスタックをあつかうための関数。push()は配列の最後の位置に新しい要素を追加し、pop()は配列の最後の位置にある要素を取り出して削除する。</p>
+<pre class="prettyprint">
+@names = ('Assy', 'Schwarz');
+push(@names, 'Zaidou');
+$name = pop(@names);
+</pre>
+<p>また、shift()は配列の最初の位置にある要素を取り出して削除し、unshift()は配列の最初の位置に新しい要素を追加する。要素はひとつひとつシフト（ずらす）される。</p>
+<p>push()とshift()を使うことで、スタックではなくキューを実現できる。</p>
+<p><a href="data_structure_stack.html">スタックとキュー</a>も参照のこと。</p>
+
+<h2>splice</h2>
+<p>また、配列の途中から要素を抜き出したり、要素を挿入するには、splice()という関数を使う。</p>
+<pre>
+splice(配列, 削除を開始する位置, 削除する要素の数, 挿入する別のリスト);
+</pre>
+<p>splice()を上手く使うことで、配列が楽に操作できる。</p>
+
+<h2>reverse/sort</h2>
+<p>reverse()はリストを逆順にする関数。</p>
+<pre class="prettyprint">
+@array = (1, 2, 3, 4, 5);
+@rev = reverse(@array);
+</pre>
+<p>sort()はリストをソート（並び替え）する関数。</p>
+<pre class="prettyprint">
+@names = ('Schwarz', 'Zaidou', 'Assy');
+@sorted = sort(@names);
+</pre>
+<p>リストを逆順でソートしたい場合は、sort()したリストに対してさらにreverse()をかける。reverse(sort(@list))のようになる。
+
+<h2>srandとrand</h2>
+<p>rand()関数を使うことで、乱数（ランダムな値）を発生させることができる。</p>
+<p>rand()関数を使う前に、srand()関数を使ってrand()関数の初期化を行う。</p>
+<p>以下は僕の書いたコード。rand()は浮動小数点数を返すため、int()で型を変換している。</p>
+<pre class="prettyprint">
+for ($i = 0; $i &lt; 10; $i++) {
+    srand();
+    $x = int(rand(2));
+    if ($x == 0) {
+        print "攻撃が命中した！\n";
+    } elsif ($x == 1) {
+        print "攻撃は外れた！\n";
+    }
+}
+</pre>
+<p><a href="../videogame/games_devel.html">ゲーム開発</a>も参照のこと。</p>
+
+<h1>条件分岐と繰り返し</h1>
+<p><a href="structured_programming.html">構造化プログラミング</a>も参照のこと。</p>
+<h2>if ～ elsif ～ else</h2>
+<p>条件式はif ～ elsif ～ elseで行う。</p>
+<p>&lt;STDIN&gt;とともに用いれば、入力に対して条件判断を行える。</p>
+<pre class="prettyprint">
+print "物理攻撃は1, 魔法攻撃は2, 逃げるは3を入力してください。\n";
+$line = &lt;STDIN&gt;;
+if ($line == 1) {
+    print "$nameは物理攻撃を行った！\n";
+} elsif ($line == 2) {
+    print "$nameは魔法攻撃を行った！\n";
+} elsif ($line == 3) {
+    print "$nameは逃亡した！\n";
+}
+</pre>
+<p>以下のようにすれば数値ではなく文字列として比較できる。比較の前に、改行文字を削除するためにchomp()が必要。</p>
+<pre class="prettyprint">
+print "物理攻撃はA, 魔法攻撃はB, 逃げるはCを入力してください。\n";
+$line = &lt;STDIN&gt;;
+chomp($line);
+if ($line eq "A") {
+    print "$nameは物理攻撃を行った！\n";
+} elsif ($line eq "B") {
+    print "$nameは魔法攻撃を行った！\n";
+} elsif ($line eq "C") {
+    print "$nameは逃亡した！\n";
+}
+</pre>
+<p>unless文はif文と逆の意味で使える。</p>
+<p>条件式は==（等値）が=（代入）とは別の演算子であることに注意しよう。また条件式の範囲に注意。$x &gt;= 3と$x &gt; 3はまったく範囲が異なる。</p>
+
+<h2>forとwhileとforeach</h2>
+<p>繰り返しは、C言語と同じfor文を用いる。</p>
+<pre class="prettyprint">
+for ($i = 0; $i &lt; 10; $i++) {
+    print (($i + 1) . "回目のターンです。\n");
+}
+</pre>
+<p>while文を使って繰り返しを行うこともできる。while()の括弧の中には条件式を記述する。以下は上のfor文と同等のwhile文。</p>
+<pre class="prettyprint">
+$i = 0;
+while ($i &lt; 10) {
+    print (($i + 1) . "回目のターンです。\n");
+    $i++;
+}
+</pre>
+<p>またuntil文やdo文を使うこともできる。次の繰り返しの前に何かを行いたい時はcontinueブロックに記述できる。</p>
+<p>リストの全要素に処理をかけたい時は、インデックスを用いずにforeach文を使う。</p>
+<p>foreach文はリストに対してひとつひとつの要素に繰り返し処理を行うことができる。また、ファイルハンドルを使うことでファイルの各行に処理を行うこともできる。</p>
+<p>foreach文のひとつひとつのインデックス変数は省略した場合$_からアクセスできる。またインデックス変数は複製ではなく別名であるため、要素を書き換えて代入するためにも使える。</p>
+<pre class="prettyprint">
+@names = ('Assy', 'Schwarz', 'Zaidou');
+foreach $name (@names) {
+    $name = $name . "さん";
+}
+</pre>
+<p>C言語におけるbreakはlast、continueはnextが同等の文に相当する。</p>
+
+<h2>map関数</h2>
+<p>リストの全てに処理を行って別のリストを作りたい時はmap()関数を使うのが便利。</p>
+<pre class="prettyprint">
+@names = ('Assy', 'Schwarz', 'Zaidou');
+@sans = map { $_ . "さん" } @names;
+</pre>
+<p>Perlではデフォルト引数の$_を使うことでmap()に与えるリストの各要素を指定できる。</p>
+<ul>
+<li><a href="https://perlzemi.com/blog/20100118126425.html">map関数 -  配列のすべての要素の変換 - Perlゼミ|Perlの基礎をインストールからサンプルで丁寧に解説</a></li>
+</ul>
+
+<h1>ファイル入出力</h1>
+<h2>ファイル入力</h2>
+<p>ファイル入力。</p>
+<pre class="prettyprint">
+print "&lt;p&gt;掲示板のログ: $thread\n";
+
+open(IN, "data_$thread.txt") or die "$!";
+while ($line = &lt;IN&gt;) {
+    print "&lt;br&gt;$line\n";
+}
+close(IN);
+
+print "&lt;/p&gt;\n";
+</pre>
+<p>Perlでは本来そこにリストが記述されるべき場所に&lt;FILE&gt;と記述されていると、対応するファイルハンドルから全部の行を読み込む。またスカラーコンテキストで$x = &lt;IN&gt;と記述されているとファイルから一行読み込む。ファイルハンドルはopen()で開き、close()で閉じる。</p>
+<p>ファイルではなくディレクトリを扱う場合は、opendir(), readdir(), closedir()などとする。ファイル一覧の取得にはglob()関数も便利。</p>
+<p>$x = &lt;STDIN&gt;とすることで、標準入力から一行読み込める。代入されるコマンドライン入力行には改行が含まれているので、chomp()関数を使って改行を取り除く。</p>
+<p>後日注記：or dieはエラー処理。ファイルが存在しなかった場合などに呼ばれる。</p>
+
+<h2>ファイル出力</h2>
+<p>ファイル出力。</p>
+<pre class="prettyprint">
+open(OUT, "&gt;&gt; data_$thread.txt") or die "$!";
+print(OUT "$usernameさんのメッセージ:\n");
+print(OUT "$comment");
+print(OUT "\n----\n");
+close(OUT);
+</pre>
+<p>掲示板を作る時などは、スレッドを示すファイルにどんどん投稿のHTMLを追記していけば簡単に作れる。</p>
+<p>後日注記：ファイル名に&gt;を付加するだけで、書き込みオープンが実現できる。&gt;&gt;は追記を表す。</p>
+<ul>
+<li><a href="https://www.nishishi.com/perltips/file3.html">ファイルに追記するには？ - にししの Perl/CGI Tips ふぁくとりー</a></li>
+</ul>
+<p><a href="bbs_develop.html">掲示板開発</a>も参照のこと。</p>
+
+<h2>ファイル操作関連ページ</h2>
+<p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+<h1>サブルーチン</h1>
+<h2>サブルーチン</h2>
+<p>サブルーチンには&をつけます。</p>
+<p>Perlのサブルーチンでは、関数を呼び出した時に渡す引数は、サブルーチンの中では@_というリストに格納される。これを、$_[0]や$_[1]のようにアクセスできる。@_はサブルーチンの中のローカル変数で、参照はできるが代入はできない。与えられていない要素はundef（定義されていない）となる。</p>
+<p>サブルーチンの&は省略することもできます。</p>
+<p>my変数を用いると、その変数がサブルーチンの内部だけで使われるものであることを表すことができる。</p>
+<pre class="prettyprint">
+sub calc {
+    my ($a, $b) = @_;
+    my $add = $a + $b;
+    my $sub = $a - $b;
+    my $mul = $a * $b;
+    my $div = $a / $b;
+    
+    print "$a + $b = $add\n";
+    print "$a - $b = $sub\n";
+    print "$a * $b = $mul\n";
+    print "$a / $b = $div\n";
+}
+
+calc(2, 20);
+calc(5, 3);
+calc(12, 4);
+</pre>
+<p><a href="function.html">関数</a>も参照のこと。</p>
+
+<h2>Perlのサブルーチンと可変長引数</h2>
+<p>Perlのサブルーチンでは、引数を@_で受け取り、$_[0]のようにアクセスする。</p>
+<p>これは、Perlのサブルーチンが可変長引数、すなわち引数を何個得るか分からないような関数呼び出しを想定している、ということから設計されている。</p>
+<p>C言語では、関数の引数の個数はあらかじめ決まっている。例外はprintf()などで、そのような場合は無理やり可変長引数を実装している。</p>
+<p>Perlのサブルーチンは、最初から可変長引数をベースに設計されており、引数が何個あるか分からないようなサブルーチンの呼び出しであっても上手く実行されるようにできている。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Perl-%E6%94%B9%E8%A8%82%E7%89%88-%E3%83%A9%E3%83%AA%E3%83%BC-%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB/dp/4900900486">プログラミングPerl 改訂版</a>が参考になります。）</p>
+
+<h2>requireとuse</h2>
+<p>別のファイルのサブルーチンを使うには、requireを使う。requireでファイルを読み込むと、ファイルの中に記述されたサブルーチンが使えるようになる。</p>
+<p>モジュールを使う時はuseを使う。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%9F%BA%E7%A4%8E%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/479730507X">Perlで作るCGI入門 基礎編―生きたホームページを作るために (SOFTBANK BOOKS)</a></li>
+</ul>
+
+<h1>正規表現</h1>
+<p>Perlは強力な正規表現が使えることで有名。</p>
+<ul>
+<li><a href="http://www.kent-web.com/perl/chap7.html">第7章 正規表現 - KentWeb</a></li>
+</ul>
+
+<h2>正規表現の例</h2>
+<p>（<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考に執筆しました。）</p>
+<pre class="prettyprint">
+$str = 'hooooge';
+if ($str =~ /ho*ge/) {
+    print "マッチしました。\n";
+else {
+    print "マッチしませんでした。\n";
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+マッチしました。
+</pre>
+<p>$&は特殊な変数で、マッチした範囲を取り出すことができる。パターンマッチを行うと自動的に設定される。</p>
+<pre class="prettyprint">
+$str = 'Hoge is 23 years old.';
+if ($str =~ /\d+/) {
+    print "Age is $&.\n";
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+Age is 23.
+</pre>
+</blockquote>
+<p>以下は正規表現による置換の例：</p>
+<pre class="prettyprint">
+$str = "Who is Hoge?\n";
+$str =~ s/Hoge/he/;
+print $str;
+</pre>
+<p>このように、s///構文を使うことで簡単に正規表現による置換ができる。また、パターンの末尾に</p>
+<pre class="prettyprint">
+$str =~ s/Hoge/he/g;
+</pre>
+<p>のように修飾子を付けることができる。</p>
+<table class="some_tables">
+<tr><th class="min60">修飾子</th><th>意味</th></tr>
+<tr><td>/g</td><td>繰り返してすべてのマッチする場所にパターンマッチを行う</td></tr>
+<tr><td>/s</td><td>文字列を1行のように操作する（.が改行にもマッチする）</td></tr>
+<tr><td>/m</td><td>文字列を複数行のように操作する（改行ごとに^や$がマッチする）</td></tr>
+</table>
+<p>また、tr///による置換を行うことで、小文字a-zを大文字A-Zに変換したりすることができる。</p>
+<pre class="prettyprint">
+$str =~ tr/a-z/A-Z/;
+</pre>
+<p>ほかにも、HTMLタグを消したい場合などは以下のような正規表現が使える。</p>
+<pre class="prettyprint">
+$str =~ s/&lt;[^&gt;]*&gt;//g;
+</pre>
+<p>Perlではデフォルト引数$_を上手く使うことで、まったく変数を使わなくても、「それに対してそれを処理する」ような形で処理を行うこともできる。たとえば、</p>
+<pre class="prettyprint">
+while (&lt;STDIN&gt;) {
+    if(/^map/) {
+        print;
+    }
+}
+</pre>
+<p>などとできる。</p>
+<p>パターンを()でかこって、$1や$2などから複数のマッチした場所を後で使うこともできる。パターンマッチの中で置換する場合などは$1ではなく\1を使うことに注意。</p>
+<p>正規表現については<a href="../linux/regex.html">正規表現</a>のページを参照のこと。</p>
+
+<h2>joinとsplit</h2>
+<p>（<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考に執筆しました。）</p>
+<p>ちなみに、あるパターンで区切られている文字列をリストにしたい場合は、</p>
+<pre class="prettyprint">
+@score = split(/,/, '70,95,50');
+print "@score\n";
+</pre>
+<p>のようにする。これは,で区切られた文字列を複数の文字列にする。また、join()を使うことで、複数の文字列を1つに連結できる。</p>
+<pre class="prettyprint">
+print join(':', @array);
+</pre>
+<p>split()に//を与えた場合、1文字ずつ分割してリストを作れる。このため、以下のようにできる。</p>
+<pre class="prettyprint">
+$line = 'Hoge, schwarz!';
+@array = split(//, $line);
+print join('-', @array);
+</pre>
+<p>実行結果：</p>
+<pre>
+H-o-g-e-,- -s-c-h-w-a-r-z-!
+</pre>
+
+
+<h1>リファレンス</h1>
+
+<h2>配列のリファレンス</h2>
+<p>リファレンスは、C言語のポインタと同様の参照型のスカラー変数。</p>
+<p>リファレンスを作るためには、変数名の頭に\をつける。</p>
+<pre class="prettyprint">
+@array1 = (14, 23, 3, 5);
+$ref_array1 = \@array1;
+$ref_array2 = $ref_array1;
+</pre>
+<p>リファレンスはスカラー変数となるため$を付ける。$ref_array1と$ref_array2は同じ配列@array1を指す。</p>
+<p>配列のリファレンスの場合、[]を使って以下のように記述できる。</p>
+<pre class="prettyprint">
+$ref_array3 = [14, 23, 3, 5];
+</pre>
+<p>配列のリファレンスに対して、デリファレンスを行うためには、リファレンスの変数名に対して@を頭に付ける。たとえば@$ref_array3となる。</p>
+<pre class="prettyprint">
+@val_array1 = @$ref_array3;
+</pre>
+<p>また、配列のリファレンスから要素を取得するには、-&gt;を使うこともできる。</p>
+<pre class="prettyprint">
+$item1 = $ref_array3-&gt;[0];
+</pre>
+<p>リストの中にスカラー値しか格納することのできないPerlでは、リストのままでは多次元配列を作ることができない。スカラー値として表現されるリファレンスを用いれば、Perlでも多次元配列を使うことができる。</p>
+<pre class="prettyprint">
+$ref_array4 = [
+    [1, 2, 3],
+    [4, 5, 6]
+];
+
+$item2 = $ref_array4-&gt;[0]-&gt;[0];
+</pre>
+<ul>
+<li><a href="https://tutorial.perlzemi.com/blog/20100930127859.html">リファレンスと多次元データ構造 - Perl入門ゼミ</a></li>
+<li><a href="https://tutorial.perlzemi.com/blog/20180214151861.html">配列のリファレンス - Perl入門ゼミ</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.03編集</p>
+</div>
+
+<h2>その他のリファレンス</h2>
+<p>配列ではなく、スカラー、ハッシュ、サブルーチンのリファレンスは以下のようになる。</p>
+<pre class="prettyprint">
+$x = 15;
+%y = ( hoge =&gt; "Hoge", fuga =&gt; "Fuga" );
+sub sub_hoge {
+    print "Hoge\n";
+}
+
+$ref_sc1 = \$x;
+$ref_hs1 = \%y;
+$ref_sb1 = \&sub_hoge;
+</pre>
+<p>としてそれぞれのリファレンスを得られる。これらをデリファレンスするためには</p>
+<pre class="prettyprint">
+$val_sc1 = $$ref_sc1;
+%val_hs1 = %$ref_hs1;
+&$ref_sb1;
+</pre>
+<p>などとする。</p>
+<p>ハッシュのリファレンスは、以下のようにすることでキーから値を取得することもできる。</p>
+<pre class="prettyprint">
+$hoge = $ref_hs1-&gt;{"hoge"};
+</pre>
+<p>また、サブルーチンのリファレンスを実行するには以下のようにすることもできる。</p>
+<pre class="prettyprint">
+$ref_sb1-&gt;();
+</pre>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Perl">Perl - Wikipedia</a></li>
+<li><a href="https://ja.wikibooks.org/wiki/Perl/%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">Perl/リファレンス - Wikibooks</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.03編集</p>
+</div>
+
+<h1>オブジェクト指向</h1>
+<h2>オブジェクト</h2>
+<p>リファレンスとパッケージを組み合わせることにより、Perlでオブジェクト指向プログラミングを行うことができる。</p>
+<p>オブジェクトのインスタンスは、コンストラクタの中で、bless()関数で作り出す。そしてコンストラクタとメソッドは、第一引数にそのオブジェクトへのリファレンスを取る。</p>
+<p>たとえば以下のようなコードがあったとして、</p>
+<pre class="prettyprint">
+$cat = Cat-&gt;new();
+$cat-&gt;mew();
+</pre>
+<p>とした時、Cat::mew()の第一引数が$catとなる（要するにCat::mew($cat)となる。）</p>
+<p>このCatは以下のように実装する。</p>
+<pre class="prettyprint">
+package Cat;
+
+sub new {
+    my $class = shift;
+    my $self = {
+        hello =&gt; 'mew',
+        @_,
+    };
+    return bless $self, $class;
+}
+
+sub mew {
+    my $self = shift;
+  
+    print $self-&gt;{hello};
+}
+1
+</pre>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Perl">Perl - Wikipedia</a></li>
+</ul>
+
+<h2>Object::Simple</h2>
+<p>以下のサイトでは、Object::Simpleというモジュールを用いて、オブジェクト指向を実現している。</p>
+<ul>
+<li><a href="https://tutorial.perlzemi.com/blog/20130305136248.html">オブジェクト指向入門 - Perl入門ゼミ</a></li>
+</ul>
+
+
+<h1>実行と評価</h1>
+<h2>system関数</h2>
+<p>system()関数を使うことで、Linuxのシェル入力のように新しいプロセスを実行できる。</p>
+<ul>
+<li><a href="https://tutorial.perlzemi.com/blog/20180124151680.html">system関数 - 別プロセスを実行する - Perl入門ゼミ</a></li>
+</ul>
+<p>後日注記：プログラムの実行後の出力を得たい時は、バッククォートを使って`～`とする。</p>
+
+<h2>eval</h2>
+<p>eval()を使うことで、文字列の格納された変数をPerlの文として実行できる。</p>
+
+<h1>その他</h1>
+<h2>コンテキストによって変わる人間臭い言語</h2>
+<p>Perlの文法は文脈（コンテキスト）のよって変化する場合があり、このため「人間臭い言語」として知られている。たとえば、配列へ代入する場合はリストコンテキストで、スカラー変数へ代入する場合はスカラーコンテキストで評価される。一行ずつ読み出すか全体全てを読み出すかがコンテキストによって変わったりする。</p>
+<p>次の場合、ファイルハンドルHOGEから読み出されて$lineに代入されるのは一行だけ。</p>
+<pre class="prettyprint">
+$line = &lt;HOGE&gt;;
+</pre>
+<p>これをループすることで、一行ずつ読み出して処理することができる。</p>
+<p>次の場合、HOGEからすべての行が一気に読み出されて@bufに代入される。</p>
+<pre class="prettyprint">
+@buf = &lt;HOGE&gt;;
+</pre>
+<p>後日注記：Perlには型がないが、変数が数値として扱われるか文字列として扱われるかはコンテキストによって決定する。</p>
+<p>（<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考に執筆しました。）</p>
+
+<h2>ヒアドキュメント</h2>
+<p>ヒアドキュメントは、長い文章を表示する際に便利な機能で、キーワードまでの文字列を一気にprintしたりできる。</p>
+<pre class="prettyprint">
+$header = &lt;&lt;"EndHeader";
+&lt;!DOCTYPE html&gt;
+&lt;html dir="ltr"&gt;
+    &lt;head&gt;
+        &lt;title&gt;$title&lt;/title&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+EndHeader
+
+$footer = &lt;&lt;"EndFooter";
+    &lt;/body&gt;
+&lt;/html&gt;
+EndFooter
+
+print $header;
+hogehoge();
+print $footer;
+</pre>
+
+<h1>ライブラリ集</h1>
+<h2>CPAN</h2>
+<p>Perlのライブラリやモジュール、Perlで書かれたソフトウェアのアーカイブ。</p>
+<ul>
+<li><a href="https://www.cpan.org/">CPAN</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>戯言</h2>
+<p><a href="perl_comments.html">Perl（戯言）</a>を参照のこと。</p>
+
+<h2>CGI</h2>
+<p><a href="perl_cgi.html">Perl/CGI</a>を参照のこと。</p>
+
+<h1>参考文献</h1>
+<h2>書籍・ページ</h2>
+<p>以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.seshop.com/product/detail/1579">Perl教科書</a></li>
+<li><a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a></li>
+<li><a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%9F%BA%E7%A4%8E%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/479730507X">Perlで作るCGI入門 基礎編―生きたホームページを作るために (SOFTBANK BOOKS)</a></li>
+<li><a href="http://www.tohoho-web.com/wwwperl.htm">とほほのperl入門</a></li>
+<li><a href="https://perldoc.jp/docs/perl/5.14.1/perltoot.pod">perltoot - トムによる Perl オブジェクト指向チュートリアル - perldoc.jp</a></li>
+</ul>
+
+<h1>サンプルコード</h1>
+<h2>簡単な計算プログラム</h2>
+<blockquote class="inyou2">
+<p>自分で作った簡単なプログラムです。攻撃力が10のキャラと、攻撃力が1だが「1ターンごとに攻撃力が1上がっていく」キャラが戦って、いつ上がっていく方のキャラが上回るか、を計算する。</p>
+<p>正確にいうと、「いつ上回るかを計算する」というより、その「上回っていく過程」を表示する。</p>
+</blockquote>
+<p><a href="rust.html">Rust</a>で書いたコードをPerlに移植しました。</p>
+<pre class="prettyprint">
+$x = 0;
+$y = 0;
+$count = 1;
+
+while ($count &lt;= 100) {
+    $x += 10;
+    $y += $count;
+    print "$x\t$y\t$count\n";
+    $count++;
+}
+</pre>
+
+<h1>簡単な説明</h1>
+<h2>Perl</h2>
+<ul class="defaultlist list7">
+<li>Perl
+<ul>
+<li>Perl
+<ul>
+<li>シジル</li>
+<li>正規表現</li>
+<li>ファイル処理</li>
+<li>CGI
+<ul>
+<li>Perl/CGIは一時期インターネット上で猛威を振るっていた</li>
+</ul></li>
+<li>オブジェクト指向
+<ul>
+<li>記述は変だが、継承も委譲もできる強力なオブジェクト指向を備える</li>
+</ul></li>
+<li>リファレンス
+<ul>
+<li>Cで言うポインタ。\を使う。</li>
+</ul></li>
+<li>ライブラリ</li>
+<li>CPAN</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>シジル</h2>
+<p>$はスカラー変数、@はリスト、%はハッシュ、&はサブルーチン。</p>
+
+<h2>正規表現</h2>
+<p>「=~」で簡単に正規表現処理ができる。</p>
+
+<h2>ファイル処理</h2>
+<p>UNIXに慣れ親しんだ人なら直観的に使いやすいファイル処理を行える。</p>
+
+<h1>リンク集</h1>
+<h2>Perl</h2>
+<p>Perl</p>
+<ul>
+<li><a href="http://www.kent-web.com/perl/">Perl基礎入門 - KentWeb</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/perl-hackers-hub">Perl Hackers Hub - gihyo.jp</a></li>
+</ul>
+
+<h2>Perlリファレンス</h2>
+<p>Perl</p>
+<ul>
+<li><a href="http://perldoc.jp/">perldoc.jp</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

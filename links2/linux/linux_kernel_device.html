@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（デバイス） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（デバイス）</h1>
+<p>Linuxのカーネルの開発に関する世界観（デバイス）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><b>デバイス</b></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>デバイスドライバ</h1>
+<h2>デバイスドライバ</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>実際のところ、カーネルはデバイスコントローラの詳細をデバイスドライバという小さなソフトウェアモジュールによって知っている。</p>
+<p>カーネルにおいて、実際のデバイスの詳細を知っているのは、デバイスドライバだけである。</p>
+<p>デバイスには、キャラクタ型デバイスとブロック型デバイスがある。</p>
+<p>キャラクタ型デバイスは、その時その時の状況を、バイト列（文字列）によって知らせるようなデバイスであり、システムコールのストリームを通じて操作できる。</p>
+<p>ブロック型デバイスは、内部にファイルシステムが存在するデバイスであり、ファイル処理APIを通じてアクセスする。</p>
+<p>キャラクタ型デバイスは、ランダムアクセス（好きな時に好きな場所のデータを知ること）ができないが、ブロック型デバイスは、ランダムアクセスができる。</p>
+
+<h2>デバイスドライバの基本</h2>
+<p>自分の書いたブログ「未来のわたしの心より今のあなたへ」<a href="../../diary/blog_frey/2021.03.16.html">2021/03/16</a>より。</p>
+<p>一般的なハードウェアデバイスの仕様というのは、とても複雑であり、プログラマがハードウェアデバイスの仕様通り、プログラムを書くというのは、とても現実的ではない。</p>
+<p>そのため、OSはデバイスドライバを用意して、ハードウェアデバイスの仕様を抽象化する。</p>
+<p>デバイスドライバは、カーネルの共通のAPIで、ハードウェアデバイスを操作する。</p>
+<p>デバイスドライバがあることによって、プログラマはシステムコールだけを知っておけば、ハードウェアデバイスの操作はOSがやってくれる。</p>
+<p>カーネルもまた、デバイスの操作にデバイスドライバを使い、カーネルの中でハードウェアデバイスの仕様を詳細に知っているのは、デバイスドライバのみである。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a>が参考になります。）</p>
+
+<h2>BIOS</h2>
+<p>BIOSは、起動時に最初に実行されてブートローダを読み込むだけではなく、接続された機器のI/Oを直接操作し、その操作の方法を共通したインターフェースを通じてOSが行うための基本的なI/O操作方式を提供する。</p>
+<p>現代的なOSでは、こうしたI/Oの共通インターフェースの提供はデバイスドライバを通じて行うことが多く、BIOSによるI/O操作はあまり行われなくなっている。</p>
+
+<h2>デバイスドライバ</h3>
+<p>デバイスドライバは、この世界にあまたあるハードウェアデバイスそれぞれを共有のインターフェースで操作する仕組みで、デバイスドライバが用意されていないハードウェアについてはOSは操作することができない。Linuxカーネルの大部分のコードはデバイスドライバに充てられている。Linuxはプリンターなど一部のデバイスについては今でもドライバが十分ではなく、プリンターについては「ドライバレス」と呼ばれる新しい仕組みも開発されている。</p>
+<p>最近はLinuxカーネルもX11もモジュールを自動でロードするので、自分でデバイスドライバを導入したり設定したりすることは少なくなっている。組み込みシステム向けにLinuxカーネルを使う場合などは、カーネルを手動コンパイルすることで、必要のないモジュールを全て消去できる。また、リアルタイム向けのパッチを当てることで、プリエンティブルなRTOSの機能（要求が起きてからタスクを実行する時間を最短にする）を実現できる。特に自動車などLinux+Pythonの環境を組み込みでも使いたい場合など（人工知能を乗せるなど）の時は、PC向けの要らない機能（デバイスドライバだけではなくファイルシステムなど）は全部消去させることができる。</p>
+<ul>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers">linux.git - drivers</a></li>
+<li><a href="https://qiita.com/take-iwiw/items/1fdd2e0faaaa868a2db2">組み込みLinuxデバイスドライバの作り方 (1) - Qiita</a></li>
+</ul>
+
+<h2>ブロック型デバイスとキャラクタ型デバイス</h2>
+<p>デバイスドライバには、大きく分けてブロック型デバイスとキャラクタ型デバイスがある。</p>
+<p>基本的に、ブロック型デバイスというのは、ハードディスクやCD-ROMのような「データ」を扱うためのもので、キャラクタ型デバイスというのは、モデムやプリンタやキーボードやマウスといった「やり取り」を行うためのもの。</p>
+<p>ブロック型とキャラクタ型の違いは、「好きな時に好きなところにアクセスできるかどうか」。</p>
+<table class="some_tables">
+<tr><th class="min60">デバイスの種別</th><th>説明</th></tr>
+<tr><td>ブロック型デバイス</td><td>ランダムアクセス（ランダムに前後してデータを読み書き）ができる。<br>たとえばハードディスクをファイルシステムとしてマウントして利用できる。</td></tr>
+<tr><td>キャラクタ型デバイス</td><td>ランダムアクセスができず、シーケンシャル（順序的）なアクセスだけが可能。<br>デバイスファイルをストリームの読み書きに使うことができる。</td></tr>
+</table>
+<p>また、このどちらにも当たらないネットワークインターフェースのデバイスドライバがある。デバイスファイルからの読み書きはできない。</p>
+<p>デバイスドライバによってデバイスがシステムに認識されると、現在のLinuxではudevを用いて/devディレクトリにデバイスファイルが自動作成される。</p>
+<p>プログラムがデバイスファイルにアクセスすると、デバイスドライバに対応するI/Oデバイスを用いて、デバイスを直接触ることができる。</p>
+<ul>
+<li><a href="https://www.ace.ec.saga-u.ac.jp/members/master/kenji/Syuron_htm/node35.html">デバイスドライバの種類と使い方 - インターネットを援用した 遠隔操作可能な動画・計測データ配信システムの構築に関する研究（倉垣 健治）</a></li>
+</ul>
+
+<h2>ioctl</h2>
+<p>ioctl()はシステムコールのひとつで、デバイスドライバをAPIレベルで操作する。スペシャルファイル（特にキャラクタ型デバイスファイル）のファイルディスクリプタと、ioctlリクエスト番号、そして追加的なパラメータを引数に与えることで、デバイスドライバに直接命令やパラメータを渡すことができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ioctl">ioctl - Wikipedia</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/ioctl.2.html">man ioctl</a></li>
+</ul>
+
+<h2>デバイスドライバの開発</h2>
+<p>以下のサイトが参考になります。</p>
+<ul>
+<li><a href="http://linux-dvr.biz/">Linuxデバイスドライバ開発入門</a></li>
+</ul>
+<p>Linuxカーネルの公式のデバイスドライバ開発のためのAPIのドキュメントは以下にあります。（英語）</p>
+<ul>
+<li><a href="https://www.kernel.org/doc/html/latest/driver-api/index.html">The Linux driver implementer’s API guide</a></li>
+</ul>
+<p>また、書籍は以下がおすすめです。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Linux%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90-%E7%AC%AC3%E7%89%88-Jonathan-Corbet/dp/4873112532">Linuxデバイスドライバ 第3版</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+</ul>
+
+<h2>MINIX本</h2>
+<p>MINIX本では、デバイスドライバについて詳細が記述されています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+</ul>
+
+<h1>ファームウェア</h1>
+<h2>LVFS</h2>
+<p>LVFSはThe Linux Foundationによる再配布可能なファームウェアの提供・更新サービス。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201903/29">2019年3月29日　ファームウェア提供のスタンダードに! Linux Foundationの新プロジェクト「Linux Vendor Firmware Service」がスタート：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>OMG! Ubuntu!によれば、新しくHPから販売されるPop!_OSのLinuxラップトップは、LVFSを用いてファームウェアが更新される。</p>
+<ul>
+<li><a href="https://www.omgubuntu.co.uk/2022/05/hp-dev-one-laptop-pop-os">HP Team Up With System76 for New Linux Laptop - OMG! Ubuntu!</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>デバイスドライバがなければハードウェアデバイスは動かない</h2>
+<p>Linuxにおいて、デバイスドライバがなければハードウェアデバイスは動かない。</p>
+<p>open(), close(), read(), write()といった入出力APIが動くのは、裏でそれらに対応するデバイスドライバが存在するおかげである。</p>
+<p>ネットワーク通信やプリンターのデバイスドライバも同様。</p>
+<p>デバイスドライバを書くことで、デバイスがLinuxで動くようになる。基本的にデバイスドライバがなければ、Linuxにおいてハードウェアデバイスは動かない。</p>
+<p>また、GUI環境において、モニター（ビデオカード）や入力デバイスなどはX11でドライバを設定する。<a href="linux_x11_admin.html">X11設定とプログラミング</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.09.16</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>デバイスファイル</h2>
+<p>/devディレクトリにあるデバイスファイルは、<a href="linux_devicefile.html">Linux デバイスファイル</a>を参照のこと。</p>
+
+<h2>I/O</h2>
+<p>I/Oについては<a href="linux_kernel_io.html">Linuxカーネル（IO・入出力）</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

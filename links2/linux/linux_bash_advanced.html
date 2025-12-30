@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Bashのさまざまな機能 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>Bashのさまざまな機能</h1>
+<p>Bashのさまざまな機能です。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_bash.html">Bash（１．シェル）</a></li>
+<ul>
+<li><a href="linux_bash_script.html">２．シェルスクリプト</a></li>
+<li><b>Bashのさまざまな機能</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>シェルの記法</h1>
+<h2>複数行に渡るコマンド（\）</h2>
+<p>行末に\を付けることで、コマンドを複数行にわたって記述出来ます。</p>
+<h2>パイプとリダイレクト（| &lt; &gt; &gt;&gt;）</h2>
+<p>パイプは、プログラムが出力した内容を別のプログラムに入力として再度渡す機能。上手く使うことで、たくさんの処理をひとつのテキストデータ（ストリーム）に対して複数行うことができる。また、リダイレクトはストリームとファイル入出力を変換する機能。読み込み、書き込み、追記が存在する。</p>
+<p>言ってしまえば、オブジェクト指向の「.」と同じような考え方である。UNIXのコマンドは、多くがこのパイプによって使われることを意図して設計されている。</p>
+
+<h3>リダイレクト</h3>
+<p>リダイレクトは、&lt;は読み込み、&gt;は書き込み、&gt;&gt;は追記です。</p>
+<p>リダイレクトの例１：</p>
+<pre>
+$ echo hoge &gt; hoge.txt
+$ echo hoge2 &gt;&gt; hoge.txt
+$ cat hoge.txt
+hoge
+hoge2
+</pre>
+<p>リダイレクトの例２：</p>
+<pre>
+$ patch -u &lt; diff1.patch
+</pre>
+<p>その他にも、既にファイルが存在しても書く場合、エラー出力も取る場合などがあり、またCシェルとBシェルでも違う。以下のようなページを参照のこと。</p>
+<p>普通のリダイレクトでは、標準出力しかリダイレクトされず、標準エラー出力は無視される。標準エラー出力もリダイレクトしたい場合は「&amp;&gt; hoge.txt」などとする。また、標準出力を1&gt;、標準エラー出力を2&gt;と分けて使うこともできる。（Windowsのコマンドプロンプトも同様に1&gt;と2&gt;で標準出力と標準エラー出力を区別できる。）</p>
+<ul>
+<li><a href="http://www.rsch.tuis.ac.jp/~ohmi/literacy/stdio.html">UNIXの標準入出力とリダイレクション - コンピュータリテラシー演習</a></li>
+<li><a href="https://qiita.com/kite_999/items/05eef645dd6274610509">UNIXのリダイレクトについてのまとめ - Qiita</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1603/24/news018.html">パイプとリダイレクトでコマンドを組み合わせて実行しよう (1/4)：“応用力”をつけるためのLinux再入門（6） - ＠IT</a></li>
+</ul>
+<p>標準エラー出力を除外したい場合は、「2&gt; /dev/null」のようにリダイレクトする。このようにした場合、標準エラー出力はどこにも表示されず、保存もされない。</p>
+
+<h3>パイプ</h3>
+<p>パイプを使うことで、あるコマンドの結果を別のコマンドに渡すことができる。</p>
+<pre>
+$ find / | grep hoge
+</pre>
+<p>標準エラー出力も合わせてパイプに渡したい場合は、「|& less」などとする。
+
+<h2>コマンドの同時実行（; && ||）</h2>
+<p>;を使うことで、複数のコマンドを同時に実行出来ます。また、&&や||を使うことで、コマンドが正常に終了した場合、異常に終了した場合に次のコマンドを実行出来ます。</p>
+<p>たとえばこんな感じ：</p>
+<pre>
+# ./configure && make && make install
+</pre>
+<p>（<a href="http://qiita.com/egawa_kun/items/714394609eef6be8e0bf">Linuxコマンドを連続して使うには - Qiita</a>より引用。）</p>
+
+<h2>グロブとワイルドカード（* ? []）</h2>
+<p>ファイル名展開（グロブ）は以下のようになる。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">変数</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>*</td><td>文字列にマッチ（0文字以上）</td>
+</tr>
+<tr>
+<td>?</td><td>文字にマッチ（1文字）</td>
+</tr>
+<tr>
+<td>[...]</td><td>どれかの文字にマッチ</td>
+</tr>
+</table>
+<p>たとえば、カレントディレクトリにある末尾に拡張子.txtの付くファイルだけ、ファイル名を一覧表示させるなら、</p>
+<pre>
+$ ls *.txt
+</pre>
+<p>とする。</p>
+<p>（<a href="https://rat.cis.k.hosei.ac.jp/article/linux/bash_intro.html">bash 入門 - RAT Portal Site</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2024.07.28編集</p>
+</div>
+
+<h2>ブレース展開 ({})</h2>
+<p>ブレース展開はmkdirなどに与えることで、まとめてパスを切ることができる。</p>
+<pre>
+$ mkdir -p data/{schwarz,zaidou}/{2019,2020,2021}
+</pre>
+<p>（<a href="https://rat.cis.k.hosei.ac.jp/article/linux/bash_intro.html">bash 入門 - RAT Portal Site</a>を参考に執筆しました。）</p>
+
+<h2>チルダ展開 (~)</h2>
+<p>チルダ（~）はホームディレクトリを指す。</p>
+<pre>
+cd ~
+</pre>
+<p>「cd ~」とすることでホームディレクトリに移動できるほか、ホームディレクトリ内のディレクトリやファイルを「vi ~/.emacs」などと表すことができる。
+
+<h2>変数展開 ($)</h2>
+<p>変数を使うことで、シェルスクリプトなどが綺麗に書けることがある。</p>
+<pre>
+変数名=値
+</pre>
+<p>のように代入し、展開する時は
+<pre>
+$変数名
+</pre>
+<p>または</p>
+<pre>
+${変数名}
+</pre>
+<p>のように使う。</p>
+<p>文字列の値を変数に代入したい時は"～"などで囲む。そのため、</p>
+<pre>
+$ HOGE="Hoge is an art."
+$ echo $HOGE
+Hoge is an art.
+</pre>
+<p>などとなる。</p>
+<ul>
+<li><a href="https://qiita.com/t_nakayama0714/items/80b4c94de43643f4be51">【シェル芸人への道】Bashの変数展開と真摯に向き合う #ShellScript - Qiita</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/1905/24/news015.html">【 unset 】コマンド――変数や関数を削除する：Linux基本コマンドTips（307） - ＠IT</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.28編集</p>
+</div>
+
+<h2>コマンド置換 (``)</h2>
+<p>コマンド名をそのコマンドを実行した出力で置き換えられる。</p>
+<pre>
+$(コマンド)
+</pre>
+<p>または</p>
+<pre>
+`コマンド`
+</pre>
+<p>のように使う。</p>
+<p>後日注記：コマンド置換はパイプと同様の技術で、コマンドの出力結果を使って別のコマンドを実行できる。応用するとさまざまなことができる。find, grep, sed, awkのようなコマンドと組み合わせて、dpkgやbashなどに送ることで、ワンライナーで簡単に自動処理ができる。</p>
+<ul>
+<li><a href="https://qiita.com/yamikoo@github/items/5643644613f51f7a30a7">bash コマンド置換 - Qiita</a></li>
+</ul>
+
+<h2>具体例</h2>
+<p>変数展開とコマンド置換を使うことで、たとえば、</p>
+<pre>
+DATA_DIR=/home/assy/data
+BACKUP_DIR=/home/assy/data_backup
+FILENAME=$(date +%Y.%m.%d).tar.gz
+
+cd $BACKUP_DIR
+tar czpf $FILENAME $DATA_DIR
+</pre>
+<p>のように、dateコマンドの結果をtarで作成するアーカイブのファイル名に指定できる。</p>
+<p><a href="linux_unix_cron.html">UNIXシステム管理（cron）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.07.28</p>
+</div>
+
+<h1>シェル変数と環境変数</h1>
+<h2>シェル変数とset</h2>
+<p>シェル変数の一覧を見るためには、setコマンドを使う。</p>
+<pre>
+$ set
+（シェル変数の一覧が表示される）
+</pre>
+<p>シェル変数の設定は以下のように行う。</p>
+<pre>
+$ HOGE=hoge
+</pre>
+<p>（<a href="https://rat.cis.k.hosei.ac.jp/article/linux/bash_intro.html">bash 入門 - RAT Portal Site</a>を参考に執筆しました。）</p>
+
+<h2>環境変数とenv/export</h2>
+<p>環境変数の一覧を見るためには、envコマンドを使う。</p>
+<pre>
+$ env
+（環境変数の一覧が表示される）
+</pre>
+<p>あるいは、printenvコマンドを使うことでも環境変数の一覧を参照できる。</p>
+<pre>
+$ printenv
+（環境変数の一覧が表示される）
+</pre>
+<p>環境変数は、シェル変数をexportすることで設定できる。</p>
+<pre>
+$ HOGE=hoge
+$ export HOGE
+</pre>
+<p>環境変数を削除するにはunsetコマンドを使う。</p>
+<pre>
+$ unset HOGE
+</pre>
+<p>シェル変数はプロセスには引き継がれないが、環境変数はプロセスの中から参照できる。</p>
+<p>（<a href="https://rat.cis.k.hosei.ac.jp/article/linux/bash_intro.html">bash 入門 - RAT Portal Site</a>と<a href="https://qiita.com/Naggi-Goishi/items/2c49ea50602ea80bf015">Linux入門 ~「パスを通す」とは~ #Linux - Qiita</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2024.07.28編集</p>
+</div>
+
+<h2>環境変数の例</h2>
+<p>環境変数の例として、コマンドの実行ファイルのある場所を指すPATHや、ホームディレクトリを指すHOME、Bashで表示されるプロンプトを変更できるPS1などがある。</p>
+<ul>
+<li><a href="https://qiita.com/Naggi-Goishi/items/2c49ea50602ea80bf015">Linux入門 ~「パスを通す」とは~ #Linux - Qiita</a></li>
+<li><a href="https://qiita.com/tmshn/items/ed4d1ca9852c1a507f19">[Linux] カレントユーザのホームディレクトリはどこから取得すべきか #環境変数 - Qiita</a></li>
+<li><a href="https://linlinrh.hatenadiary.jp/entry/2017/11/29/000000">プロンプトの表示形式の環境変数「PS1」をひたすら変えてみた。 - Linuxの缶詰</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.28</p>
+</div>
+
+<h2>sourceコマンド</h2>
+<p>sourceコマンドは、ファイルの内容を起動中のシェルで実行する。初期化スクリプトなどの設定を反映させることができる。</p>
+<pre>
+source .bashrc
+</pre>
+<p>（<a href="http://www.atmarkit.co.jp/ait/articles/1712/21/news015.html">【 source 】コマンド／【 . 】コマンド――シェルの設定を即座に反映させる：Linux基本コマンドTips（169） - ＠IT</a>を参考に執筆しました。）</p>
+
+<h1>ジョブ制御</h1>
+<h2>フォアグラウンドで実行</h2>
+<p>コマンドをフォアグラウンドで実行する時は、単にコマンドを実行します。</p>
+<h2>バックグラウンドで実行（&）</h2>
+<p>コマンドの最後に&を付けると、バックグランドで並列的にコマンドを実行出来ます。</p>
+<pre>
+$ cp /home/hoge/test1 /home/hoge/test2 &
+</pre>
+<p>&をつけたバックグラウンド実行はとても良く使うので覚えておきましょう。特に、GUIアプリケーションをコマンドラインから実行したりする時に良く使います。サーバーデーモンも&と同じ仕組みで動いています。</p>
+<p>基本的に、コマンドをマルチタスクで実行したい時は、なんでもコマンド行の最後に&をつければ並列で実行される。特にXのターミナルからGUIアプリケーションを実行する時、&をつけずに実行すると、ターミナルエミュレータのウィンドウを閉じた時にGUIアプリケーションも一緒に終了してしまう。必ず「firefox &」のように最後に&をつけて並列で実行させるようにしよう。</p>
+
+<h2>ジョブ制御のコマンド一覧</h2>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>Ctrl+z</td><td>一時停止。<br>プロセスを一時停止する（サスペンド）。</td></tr>
+<tr><td>Ctrl+c</td><td>強制終了。<br>フォアグランドで実行中のプロセスを強制終了する。</td></tr>
+<tr><td>jobs</td><td>ジョブの一覧。<br>サスペンド中・バックグラウンドで実行中のジョブの一覧を表示する。</td></tr>
+<tr><td>bg</td><td>バックグラウンドへジョブの実行を切り替え。<br>サスペンド中のジョブをバックグラウンドで実行する。</td></tr>
+<tr><td>fg</td><td>フォアグラウンドへジョブの実行を切り替え。<br>サスペンド中・バックグラウンドで実行中のジョブをフォアグラウンドで実行する。</td></tr>
+<tr><td>ps</td><td>プロセス一覧。<br>実行中のプロセス一覧を表示する。</td></tr>
+<tr><td>kill</td><td>強制終了。<br>バックグラウンドで実行中のプロセスを強制終了する。</td></tr>
+</table>
+<p>（<a href="https://www12.atwiki.jp/linux2ch/pages/54.html">初心者のためのシェル(bash)入門 - 2ch-Linux-Beginners</a>を参考に執筆しました。）</p>
+
+
+
+
+<h1>初期化スクリプト</h1>
+<h2>初期化スクリプト</h2>
+<p>~/はホームディレクトリのことを表す。</p>
+<table class="some_tables">
+<tr><th class="min60">ファイル名</th><th>説明</th></tr>
+<tr><td>~/.bash_profile</td><td>ログインシェルにログインした時に実行される。</td></tr>
+<tr><td>~/.bashrc</td><td>シェルを起動する度に実行される。</td></tr>
+<tr><td>~/.bash_logout</td><td>シェルをログアウトした時に実行される。</td></tr>
+</table>
+
+<h2>.bachrcのカスタマイズ</h2>
+<p>ホームディレクトリにある.bachrcをカスタマイズすることで、さまざまなユーザー環境の設定を変更できる。</p>
+<p>Bashの設定（ひいてはユーザーごとのシステムの設定）は.bachrcで行う。環境変数PATHなども.bachrcで恒久的な設定を行う。</p>
+<p>詳しくは以下のページを参照のこと。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Bash">Bash - ArchWiki</a></li>
+<li><a href="https://docs.oracle.com/cd/E19062-01/sun.mgmt.ctr36/819-4835/gaznb/index.html">Linux で PATH を設定する (Sun Management Center 3.6 インストールと構成ガイド)</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.28編集</p>
+</div>
+
+<h1>コマンドライン入力</h1>
+<h2>Readline</h2>
+<p>Readlineは、Bashで使われているコマンドライン入力用のライブラリ。さまざまなショートカットがあり、履歴の管理やコマンドラインの補完などもReadlineによって行われている。</p>
+<p>NetBSDのeditlineというライブラリもある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_Readline">GNU Readline - Wikipedia</a></li>
+</ul>
+
+
+<h1>参考ページ</h1>
+<h2>参考文献</h2>
+<p>詳しくは以下が参考になります。</p>
+<ul>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/linux/bash_intro.html">bash 入門 - RAT Portal Site</a></li>
+<li><a href="https://www12.atwiki.jp/linux2ch/pages/54.html">初心者のためのシェル(bash)入門 - 2ch-Linux-Beginners</a></li>
+<li><a href="http://qiita.com/egawa_kun/items/714394609eef6be8e0bf">Linuxコマンドを連続して使うには - Qiita</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1712/21/news015.html">【 source 】コマンド／【 . 】コマンド――シェルの設定を即座に反映させる：Linux基本コマンドTips（169） - ＠IT</a></ul>
+
+<h2>Bashの機能紹介</h2>
+<p>また、以下のページはPlamo Linux作者のこじまみつひろ氏によってBashの機能が紹介されており、参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2022/08/ganshiki-soushi2-0042">続・玩式草子 ―戯れせんとや生まれけん― - 第42回　bashの便利な機能 | gihyo.jp</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

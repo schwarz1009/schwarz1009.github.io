@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Mach - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">UNIXの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/unix_menu.html" class="sideiframe"></iframe>
+</div><h1>Mach</h1>
+<p>Machに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Mach</h1>
+<h2>マイクロカーネルの特徴</h2>
+<p>ファイルシステムやデバイスドライバのようなユーザーランドに近いカーネルの機能を、モノリシックカーネルでは一番下の巨大なカーネルの一部として実装するが、マイクロカーネルではユーザー空間で動く「サーバ」として実装する。このことによって、カーネルは小さく（マイクロ）になり、それぞれの個別のサーバはアプリケーションとして動かすことができる。</p>
+<p>Linuxではカーネルの一部としてファイルシステムやデバイスドライバを実装しているが、Machなどではカーネルは最低限のプロセス管理やメモリ管理やIPCだけを行い、サーバによってファイルシステムなどが実現されている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB">マイクロカーネル - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Mach">Mach - Wikipedia</a></li>
+</ul>
+
+<h2>マイクロカーネルの優位性</h2>
+<p>マイクロカーネルの優位性はいくつかある。</p>
+<p>まず、マイクロカーネルでは、必要のない機能はサーバを停止するだけでいつでもON/OFFできる。そのため、ファイルシステムやネットワークなどが必要ない組み込みシステムやリアルタイムOSでは、大きなメリットになる。</p>
+<p>それから、メモリ管理の効率が良い。全てのカーネル機能をメモリに置かず、必要になった段階でサーバーを起動すれば良いため、効率的なメモリ管理ができる。</p>
+<p>デメリットとしては、カーネルの設計が複雑になる。特に、スレッドやポートを用いてメッセージによるタスクの管理を行うMach/Hurdのモデルは、設計上複雑すぎて、きちんと動かない。動作速度も遅く不安定になる。</p>
+<p>こうしたデメリットについては、L4のように、「注意深く設計することで高性能なIPC性能をたたき出す」というマイクロカーネルも誕生している。</p>
+<p>逆に、サーバのON/OFFやメモリ効率性のメリットについては、Linuxや*BSDなどはモジュールによってカーネルにいつでも機能を組み込むことができるようにすることで、モノリシックカーネルでも可能となる。</p>
+<p>GNU Hurdがなかなか完成しなかったことについて、ストールマンは「マイクロカーネルのデバッグが予想以上に難しかった」という点を挙げており、サーバーとユーザーランドのプロセスが相互に通信し合うマイクロカーネルの設計は、デバッグや開発も難しい。</p>
+
+<h2>Machの基本概念</h2>
+<p>Machでは、タスク、スレッド、ポート、メッセージ、メモリオブジェクトによるマイクロカーネルを実現する。</p>
+<p>僕のイメージとしては、それぞれのタスク内のスレッドがポートに対してメッセージを送るような形になるのかもしれない。Hurdのロゴのようになる。</p>
+<p>後日注記：要するに、プロセスとメモリを分離し、別々のタスクのスレッドからメモリにアクセスできるようにした上で、ポートに対してメッセージをやり取りすることでプログラムを構築する。メモリオブジェクトと仮想記憶の管理はユーザー空間に開放され、同時にネットワークなどの状況にもメッセージとポートが新しい通信経路となって対応する。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Mach">Mach - Wikipedia</a></li>
+</ul>
+
+<h2>GNU Hurd/GNU Mach</h2>
+<p>Machはカーネギーメロン大学のリチャード・ラシッド教授によって開発され、Mach 3.0までリリースされたが、その後はユタ大学のMach 4プロジェクトや、FSFでのMach 4をベースにしたGNU Machとして開発・公開されている。</p>
+<p>GNU MachはGNU Hurdでのマイクロカーネルとして採用されている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_Mach">GNU Mach - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_Hurd">GNU Hurd - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/hurd">git</a></li>
+</ul>
+<p><a href="hurd.html">Hurd</a>や<a href="../linux/gnu.html">GNU</a>も参照のこと。</p>
+
+<h2>L4</h2>
+<p><a href="l4.html">L4</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>マイクロカーネルのほうが単純なシステムになる可能性</h2>
+<p>僕は、MachのようなマイクロカーネルOSの問題とは、カーネルを小さくすることで、単純なシステムにできるかもしれなかったにもかかわらず、それをせずに、複雑で高度なシステムにしてしまったことだと思います。</p>
+<p>マイクロカーネルとは、文字通り「小さなカーネル」あるいは「必要最小限のカーネル」という意味です。</p>
+<p>モノリシックカーネルとは、「一枚岩の巨大なカーネル」という意味です。</p>
+<p>そう、文字通りの意味でいえば、シンプルなのはマイクロカーネルのほうだったはずなのです。</p>
+<p>マイクロカーネルにすることで、カーネルの中のカーネル内にある必要のない機能は、すべてカーネルの外に追い出して、カーネルは最低限の処理だけを行えばよかったはずです。</p>
+<p>マイクロカーネルは、上手くモジュール化して、プロセスを分離することで、モノリシックカーネルのように、今稼働中のシステムにとって不要であるはずの機能をすべて読み込まず、シンプルなシステムを実現できるはずです。</p>
+<p>システム全体から見ても、プロセスやサーバーにカーネルの機能を明け渡すことで、さらにユーザーランドのプログラムも、シンプルで単純なシステムの上で動くはずです。</p>
+<p>Machのように、高度で複雑なマイクロカーネルOSというのは、僕は本来のマイクロカーネルではないと思います。よりシンプルで、L4のように上手く設計されたマイクロカーネルOSが開発されれば、UNIXの肥大化したカーネルをスリムにし、システムをシンプルにするような、そのような「今のマイクロカーネルの反対のマイクロカーネルOS」を作ることができると思います。</p>
+<div class="edit_date">
+<p>2023.01.30</p>
+</div>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

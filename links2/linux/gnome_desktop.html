@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>GNOMEデスクトップ関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>GNOMEデスクトップの世界観</h1>
+<p>GNOMEデスクトップの世界観です。</p>
+
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="gtk.html">GTK</a></li>
+<ul>
+<li><a href="gtk_bindings.html">GTK言語バインディング</a></li>
+<li><a href="vala.html">ValaとGenie</a></li>
+<li><a href="glade.html">Glade</a></li>
+<li><a href="cairo.html">Cairo</a></li>
+</ul>
+<li><a href="gnome.html">GNOME（アーキテクチャ）</a></li>
+<ul>
+<li><b>GNOME（デスクトップ）</b></li>
+<li><a href="gnome_apps.html">GNOME（アプリケーション）</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>GNOMEデスクトップ</h1>
+<h2>GNOMEデスクトップの概要</h2>
+<p>GNOMEは3から新しくなり、GNOME Shellと呼ばれる独自のインターフェースを備えるようになった。</p>
+<p>GNOME Shellは、左上の「アクティビティ」バーを中心に、簡単で分かりやすいインターフェースを備える。</p>
+<p>今までの「Windowsと良く似ているUI」ではなく、独自のスマートなUIとして開発されたが、あまり評判は良くない。なぜか、賢いUIなのに使い勝手がとても悪い。だが、エクステンションを入れることで、使い勝手は改善できる。</p>
+<p>アプリケーションは、メニューバーや機能をざっくりと削除するなど、大胆なインターフェース設計をしているが、これも評判が良くない。「低機能になった」と言われることが多い。</p>
+<p>だが、FirefoxやGoogle Chromeなどに見られるように、メニューバーの削除はある意味最近の流行りである。GNOMEの特徴である「シンプルで易しい（初心者向けの）UI」が目標とされている。また、高機能なアプリケーションではメニューバーが存在していることが多い。</p>
+<p>UbuntuのUnityなどでは、Mac風の「上にアプリケーションメニューがある」UIをやっているが、Ubuntuは最近GNOME 3に戻った。</p>
+<p>また、Mac風のDockを使いたい場合は、エクステンションをインストールしたりすることで実現できる。エクステンションで拡張できるのはある意味画期的で、「どんなUIにもなれるデスクトップ」にはなっている。Avant Window Navigatorなどを入れても良いだろう。</p>
+<p>昔のGNOME2が良かった、昔のGNOME2を使いたい、という場合は、MATEと呼ばれるGNOME2のforkが存在する。また、Cinnamonという、GNOME3のままでWindows XPライクなUIを持つ新しいデスクトップ環境も登場している。</p>
+
+<h2>メニューバーとタスクバーがなくなった</h2>
+<p>GNOME 3の開発者は、メニューバーとタスクバーを無くし、アプリケーションの起動やウィンドウの切り替えをアクティビティバーに統合した。</p>
+<p>慣れるまでは操作が難しいかもしれないが、慣れるとあまり使いづらくない。</p>
+<p>また、拡張機能を入れることで、タスクバーを復活したり、macOS/Windows 10風のDashにすることもできる。メニューバーについては、主要アプリケーションの操作が分かりやすくなったほか、高度な専門的GUIアプリケーションについては引き続きメニューバーを利用できるため、そんなに違和感がない。</p>
+<p>また。GNOME-Tweak-Toolを入れることで、最大化ボタンを復活させたり、拡張機能を管理したりすることができる。</p>
+<p>一時期GNOME 3に反発してXfceに移っていたリーナス・トーバルズも、GNOME 3が改善されたとしてGNOME 3に戻っている。リーナスは「GNOME-Tweak-Toolを（最初から）含めるべき」と言っている。</p>
+<p>GNOME 3の評判はいまひとつだが、中には熱心な愛好家もいて、「画面がすっきりして余計なものがなくなって分かりやすくなった」とか、「拡張機能を入れれば何とか使える」などといった意見もある。</p>
+
+<h2>かつては初心者向け・シンプルデスクトップの代名詞だった</h2>
+<p>今でこそ、独自のモダンでスマートな拡張指向のデスクトップ環境となったGNOME 3ですが、GNOME 2の頃は、シンプルかつ初心者向けの代名詞でした。</p>
+<p>アイコンやボタンを大きくして、分かりやすい絵のアイコンを採用し、簡単に使い方の分かる、Windows風のアプリケーションメニューかつMac風のトップバーを採用。上にも下にもバーがあるデスクトップとして有名でした。</p>
+<p>この「初心者向け」という哲学には批判もあり、リーナス・トーバルズからも「ユーザーを馬鹿だとみなすGNOMEの姿勢は根本的に誤りである」と言われました。</p>
+<p>それでも、標準のデスクトップ環境が初心者向けでシンプルであることは大きな優位性でした。</p>
+<p>KDEよりも起動も早く、今でもGNOME 2をforkした<a href="mate.html">MATE</a>がありますが、MATEは今のデュアルコアの64bitプロセッサで使うと、とても軽いです。</p>
+<p>今のGNOME 3も、こうした初心者向け路線の継続である点があります。たとえば、標準のGNOME 3には、アクティビティバーだけがあり、ユーザーは「アクティビティをクリックする」ということが分かれば、あとはアプリケーションのアイコンが大きく表示され、ウィンドウ一覧も最大に表示されるため、分かりやすいのです。慣れるとこちらの方が使いやすいと言われることもあります。</p>
+<p>また、GNOMEが標準に選ばれるのは、単に初心者向けなだけではありません。CORBAあるいはD-Busを用いた「分散ネットワークオブジェクトモデル」や、CのGTK APIとC++やPythonやJavaScriptなどへの「言語バインディング」によって、開発の多様性があります。こうした「プログラマにとって賢くて、なおかつ初心者向け」という路線で、KDEと対峙してきたのです。逆に、昔からデザインが醜く、KDEの方がデザインや機能性は高いという弱点もあります。</p>
+
+<h2>馬鹿でも簡単に使えて、真の意味で使いやすいデスクトップ環境</h2>
+<p>GNOMEは、よく「ユーザーを馬鹿だとみなしている」と言われて批判されますが（これはリーナス・トーバルズの言葉）、実際は「馬鹿でも使えるぐらい分かりやすいデスクトップ環境」を目指しています。</p>
+<p>対象は、Windowsも使うことのできないパソコン初心者ユーザーです。パソコン初心者が分かりづらいと思う点をできるだけなくし、使い方を覚えやすくします。</p>
+<p>そのため、デフォルトではメニューバーもタスクバーもなく、アクティビティバーをクリックすることだけを覚えれば、あとはスマホのインターフェースと同じように、アプリケーションアイコンをシングルクリックするだけで使えます。UNIXに多く存在するような、複雑で分かりにくいシステムを極力なくしています。デフォルトで、最低限の使い方を学べる動画のマニュアルが最初に表示されます。日本語入力環境の導入も、iBusが統合されているためGUIだけで行えます。</p>
+<p>デスクトップとしては、そうしたアクティビティメニュー（アプリケーションランチャー、ウィンドウ切り替え、仮想デスクトップなどのほとんどの機能を兼ねる）と、通知メニューしか提供していません。背後のGNOMEアーキテクチャとしては、分散オブジェクト指向の環境を提供していますが、ユーザーにはそうした内部のシステムが隠蔽されており、知らなくてもスマホライクに簡単に使えるようになっています。最大化ボタンや最小化ボタンもなく、閉じるボタンだけが用意され、macOSと同じようにタイトルバーをダブルクリックして最大化を行えます。こうした使い方はデスクトップに最初にログインした時に表示される動画のマニュアルで数分で学べます。</p>
+<p>デフォルトのアプリケーションについても、シンプルさが追求されています。デフォルトでは、低機能で簡単に使えるシンプルなアプリケーション群しか提供されていません。ゲームなどは最初から入っていますが、多くのディストリビューションでは、Mozilla FirefoxやLibreOffice（OpenOffice.orgの後継）がバンドルされているぐらいで、あとはソフトウェアというGUIのパッケージ管理ツールで、ガイダンスにそって簡単にアプリケーションを導入できます。</p>
+<p>しかしながら、GNOMEは使いやすいデスクトップ環境を目指しており、拡張機能を使うことで、自分でデスクトップ環境の操作や配置を自分らしく自分が使いやすいようにカスタマイズできるようになっています。低機能なアプリケーションしか存在しないかと言えばそんなことはなく、ソフトウェアと呼ばれるパッケージ管理ツールから、とても多くの高機能なアプリケーションを使用可能です。GTKはQtよりも広く使われているため、一部のKDEアプリケーションを除いて、多くのGTKアプリケーションが統一・統合されたルック・フィール（ボタンやメニューなどの見た目や使用感）で利用できます。</p>
+<p>同時に、GNOME2は多くのユーザーから「Windowsのパクリだ」と言われていました。スタートボタンと同じアプリケーションやファイルシステムのバーがあり、タスクバーとメニューバーの見た目はWindows 95とまったく同じでした。しかしながら、GNOME3は独自のデスクトップ環境を目指しています。そのため、ほとんどのデスクトップ環境が目指しているのとは違って、ウィンドウ一覧を切り替えるタスクバーもありません。しかしながら、拡張で自分でカスタマイズすることができます。Windows 9x/2000/XP風にすることも、Windows 7/10風にすることもできます。</p>
+
+<h2>GNOME 3、意外と使いやすい</h2>
+<p>僕は、以前使っていたGNOME 3の最初の使用感で書いていたため、「タスクバーがないのは使いづらい」と思っていましたが、Debian 10でもう一度GNOME 3を使って、その考え方を改めました。</p>
+<p>すなわち、アクティビティ画面の何が使いやすいのか、分かってきたのです。</p>
+<p>アクティビティボタンから、ウィンドウの切り替えができるのは、Windowsのような「ワンクリック」ではなく、「ツークリック」が必要ですが、むしろ、今、自分が開いているウィンドウがどんな風になっているかを覚えていなくても、「適当に別のウィンドウに切り替えたくなった時に、大きな画面で今開いているウィンドウを一覧できる」というメリットがあります。</p>
+<p>また、メニューバーは要りません。なぜなら、Firefoxでメニューバーを非表示にして、Dash to Panelも使わずにアクティビティバーだけを表示すると、画面がすっきりして、「もっとも広い画面でYouTubeを見ることができる」からです。</p>
+<p>また、最大化ボタンは必要ありません。僕はMacを使いますが、Macではタイトルバーを上にくっつけて最大化をするのが普通であり、慣れると最大化ボタンよりもこの方式の方が使いやすいのです。（後日注記：この記述は間違い。Macではタイトルバーをダブルクリックして最大化でした。）</p>
+<p>また、アクティビティ画面のDockからアプリケーションを起動するのは、「Dockからアプリケーションを起動し、開いたウィンドウをウィンドウ一覧で切り替える」ということが明確であり、それを一画面でそのまま理解できるため、初心者にとってGNOMEとはなんであるかということが分かりやすいと思います。Windowsを使えない高齢者の人にも理解・習得しやすいでしょう。</p>
+<p>そう、GNOME 3はデフォルトでも十分使いやすいです。「デフォルトならではのよさがある」と言えると思います。</p>
+
+<h2>やっぱりGNOME 3は使いづらい</h2>
+<p>しかしながら、やっぱりGNOME 3は使いづらいです。</p>
+<p>まず、タスクバーに一覧でウィンドウ一覧が表示された方が、「常にどれくらいのウィンドウを開いているか確認」できます。オーバービュー画面を表示しなければ今開いているウィンドウが分からないのは、たとえばウィンドウが開いているにもかかわらず、最小化しているだけでそのウィンドウの存在を忘れてしまったりすると思います。また、タスクバーを一クリックでポチポチと切り替えできないのは、使いづらすぎます。</p>
+<p>また、タイトルバーを上端にもっていってニョインと最大化するのは、最大化したいわけでもないのに最大化してしまい、使いづらいとしか言いようがありません。</p>
+<p>ウィンドウのメニューバーを無くしたことで、GNOMEアプリケーションはさらに初心者向けになりましたが、なぜ、必要な機能を削ってまで初心者向けにするのでしょうか。今までのままでいいのにアプリがどんどん低機能・シンプル化していく問題は、以下のスラドの記事でも取り上げられています。</p>
+<ul>
+<li><a href="https://it.srad.jp/story/21/08/15/1533246/">アプリは劣化を続けている | スラド IT</a></li>
+</ul>
+
+<h1>基本コンポーネント</h1>
+<h2>GNOME Shell</h2>
+<p>GNOMEの新しいシェル。ユーザーには「使い辛い」と不評だが、エクステンションを入れることで使いやすくなる。</p>
+
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME_Shell">GNOME Shell - Wikipedia</a></li>
+</ul>
+<h2>Mutter/Metacity</h2>
+<p>GNOMEのウィンドウマネージャ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Metacity">Metacity - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Mutter">Mutter - Wikipedia</a></li>
+</ul>
+<h2>Nautilus</h2>
+<p>GNOMEのファイルマネージャ。最近はGoogle Driveなんかにも簡単にログイン出来る。GNOME 3のNautilusは低機能だが、MATEのCajaは使いやすい。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB_(GNOME)">Nautilus - Wikipedia</a></li>
+</ul>
+
+<h2>GNOME3 エクステンション</h2>
+<p>僕は、GNOME 3に以下のエクステンションを入れて使っています。</p>
+<h3>GNOME 2/Windows XP風にする場合</h3>
+<p>GNOME 2に使用感が近くなります。</p>
+<ul>
+<li><a href="https://extensions.gnome.org/extension/6/applications-menu/">Applications Menu</a></li>
+<li><a href="https://extensions.gnome.org/extension/8/places-status-indicator/">Places Status Indicator</a></li>
+<li><a href="https://extensions.gnome.org/extension/602/window-list/">Window List</a></li>
+</ul>
+
+<h3>Windows 7/10風にする場合</h3>
+<p>これだけでWindows 10と見分けがつかないほどに。</p>
+<ul>
+<li><a href="https://extensions.gnome.org/extension/1160/dash-to-panel/">Dash to Panel</a></li>
+</ul>
+
+<h3>追加で</h3>
+<p>追加の拡張。</p>
+<ul>
+<li><a href="https://extensions.gnome.org/extension/1031/topicons/">TopIcons Plus</a></li>
+</ul>
+
+<h3>その他の詳細</h3>
+<p>詳しくは以下をご覧ください。</p>
+<ul>
+<!--
+<li><a href="http://fedorajp.jimdo.com/%E5%88%9D%E6%9C%9F%E7%92%B0%E5%A2%83/">初期環境 - フェドラをつかおう</a></li>
+-->
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0467?page=3">Ubuntu Weekly Recipe - 第467回　Ubuntu GNOME 17.04の変更点と，入門者向け情報（インストール，拡張機能の導入） - gihyo.jp</a></li>
+<li><a href="https://qiita.com/sei40kr/items/91d6fab2c9b3c621e169">GNOME3のオススメ拡張機能7コ - Qiita</a></li>
+</ul>
+<!--
+<p>ただし、僕はMATEとKDEを使います。それは、geditやNautilusなど、標準のアプリケーションの機能の問題です。</p>
+-->
+
+<h2>GNOME Tweak Tool</h2>
+<p>エクステンションではありませんが、GNOME Tweak Toolは必須です。必ず入れましょう。GNOMEの詳細で追加的な設定ができるようになります。最大化ボタンが復活し、拡張機能の管理が出来るようになります。</p>
+<p>GNOMEだけでなく、MATE Tweak ToolやUnity Tweak Toolというのもあります。</p>
+
+<h2>Plank（Mac風のDock）</h2>
+<p>Plankを導入することで、Mac風のDockを使うことが出来る。</p>
+<ul>
+<li><a href="https://omoiji.com/ubuntu-mate-dock-luncher-plank/">Ubuntu MATEでmacOS風ドックランチャー Plankを使う | 思い立ったら弄る！</a></li>
+<li><a href="https://qiita.com/aktsh/items/e1b6b1c96f138c2823ed">Ubuntuの使い勝手をできるだけMacに近づける - Qiita</a></li>
+</ul>
+
+
+<h1>設定・管理</h1>
+<h2>GNOMEコントロールセンター</h2>
+<p>GNOMEでは、コントロールセンターの設定を変えることで、GNOMEデスクトップやアプリケーションの設定を変えることが出来る。</p>
+<p>GNOMEを実際に使う前に、さまざまな設定が出来るので、目を通しておこう。</p>
+
+<h2>オンラインアカウント</h2>
+<p>GNOME3から、オンラインアカウントの登録情報を設定できるようになった。</p>
+<p>特に、Googleアカウントにログインすると、ファイルマネージャからGoogle Driveにアクセスすることが出来る。Google依存とはいうが、便利である。</p>
+<p>また、EvolutionからGmailなどのメールデータにもアクセスできる。</p>
+<p>クラウドへの対応は興味深いものがあるが、不要ならできるだけ設定しない方が無難かもしれないので、注意してほしい。（どこまでが安全か、という問題であり、たとえばMozillaのパスワードを保存するのはどうか、それをSyncで同期するのはどうなのか、という問題である。）</p>
+<p><a href="../services/web_mail.html">Webメール</a>や<a href="../services/online_storage.html">オンラインストレージ</a>も参照のこと。</p>
+
+<h2>テーマエンジン</h2>
+<p>GNOMEの設定で面白いのは、見た目とスタイルの設定である。</p>
+<p>特に、GTK+はテーマエンジンを搭載しているため、テーマを変えることで見た目を変えることが出来る。</p>
+<p>壁紙やアイコンも変えられる。特に、壁紙はお気に入りのものに変えると、気分が変わるだろう。</p>
+<p>標準で搭載しているテーマは、落ち着いていて無難なテーマだが、もっと色んなテーマをインストールしたい時は、GNOME-Look.orgにテーマが存在する。</p>
+<ul>
+<li><a href="https://www.gnome-look.org/">GMOME-Look.org</a></li>
+</ul>
+
+<h2>MIMEタイプ</h2>
+<p>GNOMEでは、アイコンをダブルクリックしたファイルのファイル形式をMIMEタイプで自動で判別し、関連付けられているデフォルトのアプリケーションを認識して開くことができる。</p>
+<p>関連づけられているアプリケーションは、右クリックから他のアプリケーションを選択できる。コマンドでファイル形式を確認したい場合はfileコマンドを使うことができる。</p>
+<ul>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/desktop_migration_and_administration_guide/file_formats">12.3. ファイルの関連付けの設定 - Red Hat Customer Portal</a></li>
+</ul>
+
+<h1>拡張とデバッグシェル</h1>
+<h2>拡張とLooking Glass</h2>
+<p>Looking GlassはGNOMEに用意されている、プログラマ向けのデバッグシェル。任意のJavaScriptのコードスニペットを実行できる。</p>
+<p>Looking Glassは、GNOME3の拡張を作る際に、インタラクティブなコードを試すために使える。</p>
+<p>GNOME-Shellにおける拡張機能や、GNOME-Shellそのものは、内部のアーキテクチャとして、JavaScript/CSSといったWeb技術が使われている。gjsは、MozillaのSpiderMonkeyから切り出されたmozjsをベースにしたJavaScriptバインディング。</p>
+<p>GNOME-Shellにおいて、UIの要素（エレメント）をgjsから操作することができる。</p>
+<p>GNOME-Shellの実行中に、「Alt+F2」を押すと「コマンドを入力」ダイアログが表示される。ここに「lg」と入力すると、Looking Glassの画面が表示される。このLooking Glassのシェルの中で、GNOME-ShellをJavaScriptで操作することができる。</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0492">第492回　GNOME Shellの拡張機能を作ってみよう：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://wiki.gnome.org/Projects/GnomeShell/LookingGlass">Projects/GnomeShell/LookingGlass - GNOME Wiki!</a></li>
+</ul>
+
+<h1>その他のデスクトップ環境</h1>
+<h2>Unity</h2>
+<p>Ubuntuが独自に開発している新しいLinuxのインターフェース。一部では使いやすいと評判である。Ubuntuの開発元であるカノニカルは「ユーザーインターフェースの再考」であると言っているが、実態はWindows 7とMac OS Xをパクったようなインターフェースである。雰囲気がいかにも「黒人が開発している」と言う感じだ。（Ubuntuはアフリカで生まれたディストリビューションである。）</p>
+<p>Unityでは、アプリケーション上部にあることの多いアプリケーションのメインメニューを、スクリーン画面のトップに持ってきている。Mac風でかっこいいが、この変更には技術力が必要である。</p>
+<p>後日注記：次世代Unity開発が頓挫したため、今ではUbuntuもGNOME 3を採用している。Unity風のDashの拡張が最初から導入されており、Unity使いにはそんなに違和感がない。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Unity_(%E3%83%A6%E3%83%BC%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9)">Unity (ユーザインタフェース) - Wikipedia</a></li>
+</ul>
+
+<h2>MATE</h2>
+<p>GNOME 2のfork。MATEは使える。きちんと動くし、起動も速いし、動作も軽い。僕がメインで使うデスクトップ環境は、FedoraのMATEだ。</p>
+<p>「昔のGNOMEはこんなに使いやすくて機能があったのか」というほどに使いやすい。当時は重かったが、今使うと、本当に高速で軽く、また安定している。</p>
+<p>僕がLinuxを他人に進めるなら、Ubuntuの日本語リミックスとMATEを勧めるだろう。だが、それでもWindowsのパクリだと言われてしまうと思う。</p>
+<p><a href="mate.html">MATE</a>も参照のこと。</p>
+
+<h2>Cinnamon</h2>
+<p>僕は昔はDebianでCinnamonを使っていたが、最近はFedoraでMATEを使っている。</p>
+<p>CinnamonはWindows XPと全く同じインターフェースで、操作性が良い。GNOME 3と比べてとても使いやすい。だが、そんなに軽くは無い。GNOME並みに重い。</p>
+<p><a href="cinnamon.html">Cinnamon</a>も参照のこと。</p>
+
+
+<h1>GNOMEデスクトップについて余談</h1>
+<h2>GNOME 3の気持ち悪さは、拡張指向にある</h2>
+<p>GNOME 3の気持ち悪さはどこにあるのかといえば、「デフォルトをシンプルにし、機能を拡張で追加する」という拡張指向にあると思います。</p>
+<p>GNOME 3は、デフォルトで何も機能がなく、拡張やTweak Toolを入れなければ全く使えません。そして、その拡張は自分で入れろと言うのです。</p>
+<p>GNOMEアプリケーションについても同様で、デフォルトのアプリケーションには何もありません。自分で高度なアプリケーションを入れて使えと言うのです。</p>
+<p>僕は、Mozilla Firefoxによってはじまった、このような「なんでもかんでも拡張を入れて使うシステム」は大嫌いです。なぜなら、「最低限のソフトウェアを入れて、ポートも開けず、サービスも停止する」という、ミニマム化の理想の逆を行っているからです。</p>
+<p>特に、iPhoneやAndroidを使っている方は、たくさんのアプリを入れているとは思いますが、その多くは普段使うものではなく、インストールしたが使わなくなって、削除するのが面倒だから残している、というものが多いでしょう。このようなシステムには、セキュリティ上の問題があるだけではなく、あとで正しく管理することも大変です。ミニマム化すべきなのです。</p>
+<p>そもそも、導入すべきでないものを導入しろと言うから、気持ちが悪いのです。導入しなければ使い物にならないのであれば、誰もそんなデスクトップ環境は使いたくありません。</p>
+<p>言ってしまえば、LibreOfficeすら、デフォルトでインストールすべきではありません。自分でソフトウェアを導入し、どのように導入し設定したかをきちんと把握する、それが正しいソフトウェアシステムの姿ではないかと僕は思います。</p>
+<p>後日注記：たとえば、Firefoxの拡張は怪しい拡張を入れると不安定になることがあるし、GNOME 3をデフォルトで使わず拡張で使う場合、その拡張を導入した環境の責任は自分で取ることになる。最初から拡張機能やTweak Toolをプリインストールで搭載していた方がはるかに良いと僕は思う。</p>
+
+<h2>なぜWindowsやMacと同じものを目指すのか</h2>
+<p>実際、GNOMEやKDEのような統合デスクトップ環境は、「WindowsやMacと同じものを目指している」という気持ち悪さがあります。</p>
+<p>Linuxは、そもそもエンジニアやシステム管理者向けの、ある意味「オタクにしか分からない文化」が面白かったのであり、それをWindowsやMacと同じものにしようとすると、当たり前にそれらと同じ欠点を受け継いでしまいます。</p>
+<p>GNOMEやKDEは、Windowsが重くてフリーズして不安定で動かなかったのと同様に、バグが多くてもっさりして不安定です。どんなに改善しても、「LinuxはWindowsより軽くない」という評判がぬぐえません。</p>
+<p>しかしながら、GNOMEやKDEの開発者はこうした声を知っており、WindowsやMacとは違った異なるデスクトップ環境を最近は目指しています。なので、最近のGNOMEはWindowsよりもMacやスマホに近いです。昔からMac風でしたが、最近はMacからも外れた「とても異質な環境」になっています。KDEも同様に、Windowsとよく似ていたルック・フィールを改め、「WindowsやMacよりもさらに美しいデザイン」を目指しています。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

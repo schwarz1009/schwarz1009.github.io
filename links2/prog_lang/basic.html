@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>BASIC関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>BASICの世界観</h1>
+<p>BASICに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>BASICの基本</h1>
+<p>昔のコンピュータ技術に詳しい父親の話を参考にしています。</p>
+
+<h2>BASICとは</h2>
+<p>そもそも、BASICは小さくて誰でも使える高級言語として、ワンボードマイコンのようなものに付けられて売られたことで普及した。</p>
+<p>BASICのポリシーは、「コンピュータは誰でも扱え、使え、持てるもの」といった感じ。</p>
+<p>まだ若かったアップルのスティーブ・ジョブズやマイクロソフトのビル・ゲイツなどが、半ばお遊びのような感じで、だがとても大真面目に、BASICのインタープリタをつけたパソコンを売り出した。</p>
+<p>当時のハードウェアは、AppleによるApple IIなどで、マイクロソフトはAppleなど向けに数キロバイトの「極小のBASIC」を開発して提供した。</p>
+<p>極小ということもあって、関数などは少なかったが、基本的なことはできた。これを使って、大人からガキンチョまで、みんなで遊んだり、ゲームやユーティリティ系のツールやバッチ処理コマンド、あるいは有益なサブルーチンなどを作って雑誌に掲載したり、などということをしていた。</p>
+<p>そのうち、マイクロソフトはIBM PC向けにMS-DOSを開発・販売したが、ここらへんからマイクロソフトは「これは儲かる」と気付いた。IBMの「オマケ」としてMS-DOSを売り出し、そのうちWindowsなんてものを作って、ビル・ゲイツは億万長者になったが、ビルゲイツも最初から金儲けがしたかったわけではない。本当は、純粋な趣味と情熱の延長線上にあったのである。</p>
+<p><a href="../hardware/hobby_pc.html">ホビーパソコン</a>や<a href="../hardware/old_computer2.html">古いコンピュータ（パソコン）</a>や<a href="../windows_pc/dos.html">DOS</a>や<a href="../os/mac.html">Mac</a>や<a href="../windows_pc/bill_gates.html">ビル・ゲイツ</a>や<a href="../hardware/intel.html">Intel</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.02.05編集</p>
+</div>
+
+<h2>基本的な命令</h2>
+<p>BASICはインタープリタで、コードを書きながらいつでもRUN命令をすればコードを実行出来る。バグがあった場合は途中で止まる。</p>
+<p>基本的な命令は少ないが、以下のような命令があった。</p>
+<table class="some_tables">
+<tr><th class="min60">命令</th><th>意味</th></tr>
+<tr><td>RUN</td><td>プログラムの実行。</td></tr>
+<tr><td>INPUT</td><td>入力。INPUT Xとすると「X?」と言う画面が出て、データを変数に入力できる。</td></tr>
+<tr><td>PRINT</td><td>出力。変数の内容を書き出す。</td></tr>
+<tr><td>A=0</td><td>変数定義と代入。</td></tr>
+<tr><td>IF</td><td>条件分岐。</td></tr>
+<tr><td>GOTO</td><td>ジャンプ。</td></tr>
+<tr><td>FOR NEXT</td><td>繰り返し。</td></tr>
+</table>
+
+<h2>コードの例</h2>
+<p>コードは以下のようになる（自分で適当に書いたコード）。</p>
+<pre>
+10 A = 0
+20 B = 0
+30 C = 0
+40 INPUT A
+50 INPUT B
+60 C = A + B
+70 FOR D = 0 TO C
+80 PRINT "HELLO"
+90 PRINT D
+100 NEXT D
+RUN
+</pre>
+<p>行番号が10ごとに並ぶのは、途中で間に数値を入れられるようにするため。90と100の間に命令を加えたい時は、「95 ...」と言う風にする。</p>
+
+<h2>昔のBASICのゲーム</h2>
+<p>今のように、ゲーム会社がゲームを作るのではなく、昔は個人がBASICでゲームを作っていました。</p>
+<p>ゲームを作るためには、まず、どのようなゲームを作るのかを考えて、そのために必要な計算式を、BASICで記述します。</p>
+<p>たとえば、ボールがバーや壁にぶつかって跳ね返るような、ピンボールやブロック崩しのようなゲームは、入射角と反射角の角度の大きさを一致させる必要があり、そのために物理の計算が必要です。</p>
+<p>ほかにも、カードをめくって合わせるようなゲームでは、プラスとマイナスでカードの裏表をコンピュータが保持し、裏の時はカードの裏面を、表の時は表面を表示します。</p>
+<p>また、昔のグラフィックスは貧弱で、色をつけることもできず、文字と同じ大きさのドット絵を文字単位で表示していました。</p>
+<p>昔のBASICについて言えることは、使えるリソースがとても貧弱です。CPUも遅く、メモリも少なく、グラフィックスの画素も小さく、BASICインタープリタも8キロバイト程度ととても小さかったです。</p>
+<p>そのような中で、ホビーパソコンを買った趣味のホビイストがゲームを開発し、雑誌などに載せる文化が、かつての日本にはあったのです。</p>
+<div class="edit_date">
+<p>2025.06.08</p>
+</div>
+
+<h1>BASIC</h1>
+<h2>マイコン</h2>
+<p>初期のBASICマイコンは、8bitでプログラミングが体験出来る個人向けコンピュータとして始まった。</p>
+<p>純粋なプログラミングが出来る個人向けコンピュータだった。</p>
+
+<h2>BASICによるプログラミング</h2>
+<p>以下はBASICによるプログラミング解説。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/BASIC">BASIC - Wikipedia</a></li>
+<li><a href="https://ja.wikibooks.org/wiki/BASIC">BASIC - Wikibooks</a></li>
+</ul>
+
+<h2>BASICのJavaによる再現</h2>
+<p>以下はBASICのJavaによる再現。昔のコンソールベースのグラフィックスを持ったBASICをJavaで再現している。</p>
+<ul>
+<li><a href="http://www.edu.tuis.ac.jp/~mackin/basic/">Basic Graphics - マッキンゼミ</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.06.08</p>
+</div>
+
+<h1>オープンソースなBASICの実装</h1>
+<h2>FreeBASIC</h2>
+<p>オープンソースのBASICであるFreeBASICと言うプロジェクトもある。</p>
+<p>言語仕様はQuickBASICに近い。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FreeBASIC">FreeBASIC - Wikipedia</a></li>
+</ul>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>ゲーム開発</h2>
+<p><a href="../videogame/games_devel.html">ゲーム開発</a>を参照のこと。</p>
+
+<h2>Visual Basic</h2>
+<p>BASIC言語はMicrosoftによってGUIの開発が手軽にできるVisual Basicに進歩しました。<a href="vb.html">Visual Basic</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

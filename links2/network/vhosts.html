@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>バーチャルホスト関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div><h1>バーチャルホスト関連の世界観</h1>
+<p>バーチャルホストに関する世界観です。<a href="web.html">Webサーバー</a>や<a href="apache.html">Apache</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>バーチャルホスト</h1>
+<h2>バーチャルホスト</h2>
+<p>バーチャルホストを使うことで、マシンが一台しかなくても複数のWebサイト（あるいは別々のネットワークサービス）をそれぞれ別個のドメインで運用できる。</p>
+<p>作られるのはネットワーク上の仮想的なホスト（ホストとはひとつひとつのマシンのこと）であるため、バーチャルホストと呼ばれる。</p>
+<ul>
+<li><a href="https://httpd.apache.org/docs/2.4/vhosts/">Apache バーチャルホスト説明書 - Apache HTTP サーバ バージョン 2.4</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%83%81%E3%83%A3%E3%83%AB%E3%83%9B%E3%82%B9%E3%83%88">バーチャルホスト - Wikipedia</a></li>
+</ul>
+
+<h2>Apacheでバーチャルホスト</h2>
+<p>Apacheでバーチャルホストの設定をすることで、ディレクトリ/var/www/hoge.localhostを作った上で、hoge.localhostというドメインでApacheにアクセスが来ると、/var/www/hoge.localhost以下のファイルを閲覧できるようにすることができる。</p>
+<p>Debian/Ubuntuの場合、Apacheのバーチャルホストの設定は、/etc/apache2/sites-available/hoge.localhostを作って、以下の設定をする。</p>
+<pre>
+&lt;VirtualHost *.80&gt;
+    ServerName hoge.localhost
+    DocumentRoot /var/www/hoge.localhost
+    
+    &lt;Directory "/var/www/hoge.localhost"&gt;
+        AllowOverride All
+        Allow from all
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</pre>
+<p>設定したバーチャルホストは、a2ensiteコマンドで有効化する。</p>
+<pre>
+# a2ensite hoge.localhost
+</pre>
+<p>無効化するにはa2dissiteコマンドを使う。</p>
+<p>そして、ApacheとMySQLを起動する。</p>
+<p>/etc/hostsの編集（127.0.0.1 hoge.localhost）も忘れずに。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</a>
+
+<h1>関連ページ</h1>
+<h2>Apahce</h2>
+<p><a href="apache.html">Apache</a>も参照のこと。</p>
+
+<h2>DNS</h2>
+<p><a href="dns.html">DNSサーバ</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

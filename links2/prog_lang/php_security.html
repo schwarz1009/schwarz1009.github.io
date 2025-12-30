@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>PHP関連の世界観（３．セキュリティ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PHPの世界観（３．セキュリティ）</h1>
+<p>PHPのセキュリティに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="php.html">PHP</a></li>
+<ul>
+<li><a href="php_lang.html">１．言語</a></li>
+<li><a href="php_db.html">２．データベース</a></li>
+<li><b>３．セキュリティ</b></li>
+<li><a href="php_framework.html">４．フレームワーク</a></li>
+</ul>
+<li><a href="php_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>PHPのセキュリティ</h1>
+<h2>PHPのセキュリティ</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.02.02.html">2021/02/02</a>より。</p>
+<p>PHPのセキュリティに言えるのは、「絶対に任意の悪意あるコードを実行させてはならない」ということ。</p>
+<p>JavaScriptを挿入されて実行されたり、別のサイトからコードを実行、あるいはセッションを乗っとられたり、SQLを挿入されたり、コマンドを実行されたりするのに共通するのは、任意の悪意あるコードを実行されるということ。</p>
+<p>実際には、セッションハイジャックやパスやエラーから情報が流出するなど、ほかにもセキュリティ攻撃はある。</p>
+<p>しかしながら、任意の悪意あるコードの実行を防ぐなら、HTMLタグのエスケープ、トークン、SQLでのプレースホルダなど、対策における「本質」を知った上での対策ができる。</p>
+
+<h2>セキュリティ対策</h2>
+<p>Web上にPHPのWebアプリケーションを公開する前に、必ずセキュリティ対策を確認しましょう。</p>
+<p>たとえば、ユーザーが投稿したデータを表示する時には、htmlspecialchars()関数を使って、JavaScriptなどのコードが含まれていた場合（&lt;script&gt;～&lt;/script&gt;を含む投稿が投稿された場合）、HTMLタグの特殊な文字を変換し、HTMLタグをただの文字として表示することができます。</p>
+<p>すなわち、</p>
+<pre class="prettyprint">
+&lt;?php
+echo $_POST['howto'];
+?&gt;
+</pre>
+<p>とする部分を、常に</p>
+<pre class="prettyprint">
+&lt;?php
+echo htmlspecialchars($_POST['howto'],ENT_QUOTES,'UTF-8');
+?&gt;
+</pre>
+<p>と書くべきです。そうでなければ、$_POST['howto']の中にJavaScriptコードを埋め込まれ、それをHTMLに吐き出されて実行される可能性があります。</p>
+<p>以下は具体的なセキュリティ対策。</p>
+<ul>
+<li><a href="https://blog.codecamp.jp/php_security">PHP開発者必見！最低限知っておくべきセキュリティ対策まとめ - Tech2GO テクノロジーの「学ぶ・働く」を知るメディア</a></li>
+<li><a href="http://www.hp-stylelink.com/news/2013/09/20130913.php">PHP開発エンジニア必読！最低限必要なセキュリティ対策 - ホームページ制作なら渋谷のウェブ制作会社【スタイル】</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.14編集</p>
+</div>
+
+<h2>セキュリティアタック一覧</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>はさまざまなセキュリティ対策についてとても詳しく記述されている。一読の価値あり。）</p>
+
+<h3>バリデーション</h3>
+<p>まず、セキュリティ対策の一般的な方法として、バリデーションを行う。バリデーションは、入力に使うデータの値の種類や範囲をあらかじめ決めておくこと。</p>
+<p>後日注記：バリデーションを行うことで、入力するデータを制限し、誕生日なら日付以外を入力できなくするなどの安全性対策が行える。</p>
+
+<h3>スクリプト挿入攻撃/クロスサイトスクリプティング(XSS)</h3>
+<p>セキュリティアタックで、特に多いアタックの方法が、任意の悪意あるスクリプトやコードを外部から挿入されて実行されること。</p>
+<p>入力されるコンテンツの中にJavaScriptコードを挿入される方法を、スクリプト挿入攻撃と呼ぶ。</p>
+<p>また、クロスサイトスクリプティング（XSS）は、リンクから悪意あるページに誘導するなどの間接的な方法でスクリプトを実行させる。</p>
+<p>意図しないスクリプトの実行を防ぐには、htmlspecialchars()関数を使って&lt;script&gt;～&lt;/script&gt;タグなどをエスケープすることで対策できる。</p>
+<p>後日注記：たとえばCGIで作られたサービスなどがあって、そのサービスに脆弱性があった時、他人のサイトからサービスのCGIへとサイトを横断して悪意あるコードを実行し、情報を盗み出すのがXSS。</p>
+
+<h3>SQLインジェクション</h3>
+<p>JavaScriptだけではなく、SQLのデータベース操作文が狙われることもある。</p>
+<p>SQL文の中に不正に悪意あるSQL文を挿入されて実行される攻撃をSQLインジェクションと呼ぶ。</p>
+<p>SQLインジェクションは、プリペアドステートメントやプレースホルダを使うことで回避できる。</p>
+<p>後日注記：SQL文を書く時に、どうしてもSQL文とユーザーから与えられた変数の値を.で繋げてしまいがちだが、この場合ユーザーがSQL文の中に埋め込まれることを意図した悪意ある文を投稿してくる場合がある。プレースホルダを使うことで、そのようなユーザーから与えられた値が、悪意あるSQL文ではなく、あくまで値であるということを明確に指定できる。</p>
+<p><a href="../db/sql.html">SQL</a>も参照のこと。</p>
+
+<h3>クロスサイトリクエストフォージェリ(CSRF)/セッション関連の攻撃</h3>
+<p>また、これら以外に、ユーザーの権限やセッションを乗っ取ったり不正に取得することで攻撃に使う方法もある。</p>
+<p>クロスサイトリクエストフォージェリ（CSRF）は、正規に得られたユーザーの権限を利用して別の人間が悪意ある意図しない操作を誘導させる方法。</p>
+<p>CSRFは、攻撃者に推測されにくい合言葉であるワンタイムトークンをページに埋め込んでチェックすることで回避できる。</p>
+<p>また、ユーザーが取得したセッションを不正に使った攻撃の例として、セッション固定攻撃やセッションハイジャックが挙げられる。</p>
+<p>後日注記：ユーザーの正規に取得した権限を使って、ユーザーに間違った行為を行わせるのがCSRF。XSSと組み合わせることで、知らない間に大切なデータを消させたりすることを誘導できる。</p>
+
+<h3>その他のセキュリティ攻撃</h3>
+<p>ほかには、外部からの値やデータを使う際には、それが本当に信頼できるデータなのか、内部で実行に使っても大丈夫なのかを注意しなければならない。</p>
+<p>セキュリティ攻撃は、PHPだけで対策できるものもあれば、そうではないものもある。PHPで対策できるものについては、<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>が参考になる。</p>
+<ul>
+<li><a href="http://www.hp-stylelink.com/news/2013/09/20130913.php">PHP開発エンジニア必読！最低限必要なセキュリティ対策 - ホームページ制作なら渋谷のウェブ制作会社【スタイル】</a></li>
+<li><a href="https://www.trendmicro.com/ja_jp/security-intelligence/research-reports/threat-solution/csrf.html">クロスサイトリクエストフォージェリ（CSRF） | トレンドマイクロ</a></li>
+</ul>
+<p>その他のセキュリティ攻撃（PHPで対策できる以外）については、<a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.08.14-15編集</p>
+</div>
+
+<h1>セキュリティのその他のトピック</h1>
+<h2>==と===</h2>
+<p>==は型をキャストして値を比較するが、===は型をキャストせずに値を比較する（厳密な比較）。</p>
+<p>Webサービスを作る上で、不用意に==を使うと、大変なことになることがある。</p>
+<p>たとえば、IDやパスワードを比較する際に、0164が164と同じものとして比較されたり、0164で登録したのに164で処理が通ってしまい、164で登録されたりする。</p>
+<p>特に理由がない時は、厳密な比較をするように心がけよう。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a></li>
+</ul>
+
+<h2>余計な情報は出さない</h2>
+<p>また、エラーなどで余計な情報を出さないようにしよう。</p>
+<p>たとえば、IDとパスワードのどちらかが間違っていたとして、どちらが間違っている、という情報はいらない。どちらかが間違っている、という情報で良い。ハッカーにできるだけ情報を与えすぎないようにしよう。</p>
+<p>わざわざ親切に「IDが間違っています」とか「パスワードが間違っています」と言うのではなく、「IDあるいはパスワードが間違っています」と言う方が良い。</p>
+
+<h2>パスワードはハッシュで保管する</h2>
+<p>パスワードを保管する上で、パスワードをそのままの状態で保存するのではなく、ハッシュで計算して保存するのがおすすめです。</p>
+<p>そのままのパスワードを保管すると、もしシステムがハッキングされた時に流出するリスクがあるほか、フレームワークなどの開発においては、そのフレームワークを使ってアプリケーションを開発する開発者の中に、悪意を持った開発者がいる場合があります。</p>
+<p>なので、SHA-2/SHA-3のような安全なハッシュでパスワードを保管しましょう（SHA-1は今では安全ではなく、利用が推奨されない）。ハッシュであれば、ほとんどの場合パスワードの推測は不可能です。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2025.08.14</p>
+</div>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

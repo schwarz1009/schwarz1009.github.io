@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（シグナル） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（シグナル）</h1>
+<p>Linuxのカーネルの開発に関する世界観（シグナル）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><b>シグナル</b></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>シグナル</h1>
+<h2>シグナルとは</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>プログラムを強制終了するためには、シグナルを使う。</p>
+<p>シグナルにはいくらかの種類があるが、カーネルがシグナルを処理する際のデフォルトの挙動は、</p>
+<table class="some_tables">
+<tr><th class="min60">処理方法</th><th>説明</th></tr>
+<tr><td>Ign</td><td>無視する</td></tr>
+<tr><td>Term</td><td>強制終了</td></tr>
+<tr><td>Core</td><td>強制終了してコアダンプを吐く</td></tr>
+<tr><td>Stop</td><td>一時停止する</td></tr>
+<tr><td>Cont</td><td>一時停止中だった場合に再開する</td></tr>
+</table>
+<p>の5種類。（<a href="https://www.atmarkit.co.jp/ait/articles/1708/04/news015.html">@IT</a>、<a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man7/signal.7.html">Man page of SIGNAL</a>より）</p>
+<p>シグナルは、たとえばSIGHUP, SIGINT, SIGQUITのように、SIG*という名前がついている。これらのシグナルに対して、TermやCoreやIgnといったデフォルトの動作が決まっている。</p>
+<p>しかしながら、シグナルはプロセス側で処理を書き換えることができる。</p>
+<p>これを「シグナルを捕捉する」あるいは「トラップする」と言う。</p>
+<p>シグナルを上手くプロセス側で捕捉することで、標準で無視されるシグナルも活用できる。</p>
+<!--
+<p>後日注記：シグナルを捕捉するAPIであるsignal()は単純だがさまざまな点から問題があり古いため、新しいプログラムであればsigaction()を使うべきだとされている。</p>
+-->
+
+<h2>signal(2)</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>基本的に、signal(2)あるいはsigaction(2)を使うことで、プロセスの中でシグナルを受けた場合の挙動を捕捉して変えられる。</p>
+<p>シグナルは、デフォルトの処理をカーネル任せにするのではなく、自ら「シグナルを捕捉（トラップ）する」ことで処理を自由に変えられる。</p>
+<p>signal()はUNIXの最初の時代から存在する、単純なシグナルの捕捉API。第一引数にシグナルの値（数値）、第二引数に実行する関数の関数ポインタを取る。</p>
+<p>後日注記：signal()の使い方は以下が参考になります。</p>
+<ul>
+<li><a href="https://miyanetdev.com/archives/244">【C言語】シグナルを使ってUNIXのプロセス間通信をする方法｜miyanetdev</a></li>
+</ul>
+<p>後日注記：signal()は単純だがさまざまな点から問題があり古いため、新しいプログラムであればsigaction()を使うべきだとされている。</p>
+<div class="edit_date">
+<p>2023.01.21編集</p>
+</div>
+
+<h2>kill(2)</h2>
+<p>シグナルを送信する。名前は「kill」（殺す）だが実際には強制終了だけではなくさまざまなシグナルを送信できる。</p>
+
+<h2>シグナルと割り込み</h2>
+<p>UNIXのシグナルは、ソフトウェア割り込みを実装した機構のひとつ。そもそもはハードウェアの非同期割り込みのための機構だったが、それをソフトウェアで実装した。</p>
+<p>（<a href="http://linuxc.info/signal/signal1.html">シグナルの概念 | LinuxC</a>を参考に執筆しました。）</p>
+
+<h1>参考文献</h1>
+<h2>書籍</h2>
+<p>シグナルについては、以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1708/04/news015.html">@IT - Linuxの「シグナル」って何だろう？ - “応用力”をつけるためのLinux再入門（16）</a></li>
+<li><a href="https://miyanetdev.com/archives/244">【C言語】シグナルを使ってUNIXのプロセス間通信をする方法｜miyanetdev</a></li>
+</ul>
+
+<h2>Man page of SIGNAL</h2>
+<p>また、シグナルのman pagesが以下にあります。詳しい仕様を知りたい方は以下を参照のこと。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man7/signal.7.html">Man page of SIGNAL</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>プロセス関係のコマンド</h2>
+<p><a href="linux_commands_proc.html">UNIXコマンド（プロセス）</a>も参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

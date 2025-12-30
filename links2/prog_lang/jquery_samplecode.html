@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>jQueryサンプルコードの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>jQueryサンプルコード</h1>
+<p>jQueryのサンプルコードです。<a href="jquery.html">jQuery</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>サンプルコード</h1>
+<h2>jQueryの読み込み</h2>
+<p>jquery-3.2.1.min.jsを/に配置し、ホームページに以下を追加。</p>
+<pre class="prettyprint">
+&lt;script type="text/javascript" src="/jquery-3.2.1.min.js"&gt;&lt;/script&gt;
+</pre>
+
+<h2>/の意味</h2>
+<p>注意：/とはシステムのルートディレクトリではありません。</p>
+<p>ホームページアドレスの最上部という意味で、多くの場合作業ディレクトリの一番上です。</p>
+<p>index.htmlと一緒にjquery-x.x.x.min.jsを配置して、サーバーの/にFTPでアップロードしてください。</p>
+<p>分からない方は、相対アドレスと絶対アドレスについて調べていただければ幸いです。</p>
+<p>むしろ、/に配置しなくても、相対アドレスで参照することもできます。その場合/jquery-3.2.1.min.jsの左端の/は要りません。</p>
+
+<h2>jQueryサンプル</h2>
+<p>僕のホームページより、jQueryのサンプル。</p>
+<pre class="prettyprint">
+$(document).ready(function(){
+    $(".sidebar").before('&lt;div class="navi"&gt;&lt;button class="sidebar_button"&gt;サイドバーを開閉&lt;/button&gt;&lt;/div&gt;');
+    $(".sidebar_profile").before('&lt;div class="navi"&gt;&lt;button class="sidebar_profile_button"&gt;プロフィールを開閉&lt;/button&gt;&lt;/div&gt;');
+    $("button.sidebar_button").click(function () {
+        $(".sidebar").slideToggle('fast');
+    });
+    $("button.sidebar_profile_button").click(function () {
+        $(".sidebar_profile").slideToggle('fast');
+    });
+
+    var sizevar = Cookies.get('cookieFontSize');
+    if (sizevar== 'xbig') {
+        $("body").css("fontSize","200%"); 
+    }
+    else if (sizevar== 'big') {
+        $("body").css("fontSize","150%"); 
+    }
+    else if (sizevar== 'normal') {
+        $("body").css("fontSize","100%"); 
+    }
+    else if (sizevar== 'small') {
+        $("body").css("fontSize","14px"); 
+    }
+    else if (sizevar== 'xsmall') {
+        $("body").css("fontSize","13px"); 
+    }
+
+    $("button.xbig").click(function(){
+        $("body").css("fontSize","200%"); 
+        Cookies.set('cookieFontSize', 'xbig', { expires: 7 });
+    });
+    $("button.big").click(function(){
+        $("body").css("fontSize","150%"); 
+        Cookies.set('cookieFontSize', 'big', { expires: 7 });
+    });
+    $("button.normal").click(function(){
+        $("body").css("fontSize","100%"); 
+        Cookies.set('cookieFontSize', 'normal', { expires: 7 });
+    });
+    $("button.small").click(function(){
+        $("body").css("fontSize","14px"); 
+        Cookies.set('cookieFontSize', 'small', { expires: 7 });
+    });
+    $("button.xsmall").click(function(){
+        $("body").css("fontSize","13px"); 
+        Cookies.set('cookieFontSize', 'xsmall', { expires: 7 });
+    });
+
+    var familyvar = Cookies.get('cookieFontFamily');
+    if (familyvar == 'mincho') {
+        $("body").addClass('font_mincho');
+        $("body").removeClass('font_gothic');
+    }
+    else if (familyvar== 'gothic') {
+        $("body").addClass('font_gothic');
+        $("body").removeClass('font_mincho');
+    }
+
+    $("button.bt_mincho").click(function(){
+        $("body").addClass('font_mincho');
+        $("body").removeClass('font_gothic');
+        Cookies.set('cookieFontFamily', 'mincho', { expires: 7 });
+    });
+    $("button.bt_gothic").click(function(){
+        $("body").addClass('font_gothic');
+        $("body").removeClass('font_mincho');
+        Cookies.set('cookieFontFamily', 'gothic', { expires: 7 });
+    });
+    $("button.bt_clean").click(function(){
+        $("body").css("fontSize","14px"); 
+        $("body").removeClass('font_mincho');
+        $("body").removeClass('font_gothic');
+        Cookies.remove('cookieFontSize');
+        Cookies.remove('cookieFontFamily');
+    });
+
+});
+</pre>
+<h2>HTML</h2>
+<p>上のコードをjsファイルにして読み込んだ上で、HTMLに以下のように記述する。（これもdocument.writeなどを使ってやると良い。）</p>
+<pre class="prettyprint">
+&lt;div class="sidebar"&gt;
+&lt;iframe src="../../menu/new_diary2_2017.06.html" class="sideiframe"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;div class="page_after_profile"&gt;
+&lt;p&gt;文字サイズ: 
+&lt;button class="xbig""&gt;極大&lt;/button&gt; - 
+&lt;button class="big"&gt;大&lt;/button&gt; - 
+&lt;button class="normal"&gt;中&lt;/button&gt; - 
+&lt;button class="small"&gt;小(標準)&lt;/button&gt; - 
+&lt;button class="xsmall"&gt;極小&lt;/button&gt;&lt;/p&gt;
+&lt;p&gt;字体: 
+&lt;button class="bt_mincho"&gt;明朝体&lt;/button&gt; - 
+&lt;button class="bt_gothic"&gt;ゴシック&lt;/button&gt; - 
+&lt;button class="bt_clean"&gt;Cookieを削除&lt;/button&gt;&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<h2>CSS</h2>
+<p>また、CSSに以下のように記述する。（Mac向けも指定する時はヒラギノを追加してください。）</p>
+<pre class="prettyprint lang-css">
+.font_mincho{
+    font-family: "MS P明朝", "MS P Mincho", serif;
+}
+.font_gothic{
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "メイリオ", Meiryo, "MS Pゴシック", "MS P Gothic", Helvetica, Verdana, sans-serif;
+}
+
+.sidebar,.sidebar_profile,.image {
+    float: right;
+    background-color: rgba(221,255,221,0.6);
+    border: solid 2px #8cc;
+    margin: 0px 0px 30px 30px;
+    padding: 6px 3px 3px 3px;
+    clear: right;
+}
+</pre>
+<p>その他、divなどで指定したもろもろのクラスのCSSを自由に記述してください。</p>
+<h2>注意点</h2>
+<p>注意点：jQueryなので、動かす前にjqueryを読み込む必要がある。</p>
+<p>また、Cookieを操作するためには<a href="https://github.com/js-cookie/js-cookie">js-cookie</a>を読み込む必要がある。</p>
+<p>配置して実行されるように記述するだけで簡単に読み込めるので、試してみても良いだろう。</p>
+<pre class="prettyprint">
+&lt;script src="/js.cookie.js"&gt;&lt;/script&gt;
+</pre>
+<p>後日注記：僕のサイトでCookieを使っていたのは過去のことであり、今ではCookieは一切使っていません。</p>
+<div class="edit_date">
+<p>2025.06.16編集</p>
+</div>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

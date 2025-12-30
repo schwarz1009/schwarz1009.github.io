@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Apache関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div><h1>Apache関連の世界観</h1>
+<p>Apacheに関する世界観です。<a href="web.html">Webサーバー</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Apache</h1>
+<h2>Apache HTTP Server</h2>
+<p>HTTPDデーモン。Webサーバーを構築する時に中核となるソフトウェアです。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache HTTP Server">Apache HTTP Server - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/apache/httpd">git</a></li>
+</ul>
+
+<h1>Apacheの設定</h1>
+<h2>HTMLドキュメントの格納場所</h2>
+<p>ApacheでHTMLドキュメントを格納する場所は、htdocsなどのディレクトリ名がついていることが多く、通常は/usr/local/apache2/htdocs/などにある。</p>
+<p>htdocsにHTMLを入れる慣習は、XAMPPなどでも同じで、XAMPPでApacheをWindowsに導入した場合は、htdocsというディレクトリの中にHTMLファイルをつめこめばよい。</p>
+<p>ディストリビューションのパッケージで入れた場合は、/var/www/htmlなど、/varディレクトリ以下に格納することもある。</p>
+<p>あるいは、ホームディレクトリ以下のpublic_htmlをユーザー別の格納場所として使うこともある。</p>
+<p>ディレクトリの所有者がrootになっていると扱いづらいので、chownなどで所有者を一般ユーザーに変えておくと、所有者となっているユーザー（あるいはグループ）から直接ファイルをコピー出来て扱いやすくなる。</p>
+<p>/var/www/htmlは「みんなが見れるディレクトリにデータを格納するのはなんだか嫌だ」という人も居るので、ユーザー別のディレクトリを新しく設定したい場合は、
+<pre>
+&lt;IfModule mod_userdir.c&gt;
+    UserDir disabled
+    UserDir enabled username
+    UserDir public_html
+&lt;/IfModule&gt;
+</pre>
+<p>と設定する。この設定はusernameだけにユーザーディレクトリを有効にし（username以外の全てのユーザからはユーザーディレクトリを無効にする）、ユーザーディレクトリの場所をpublic_htmlとする。</p>
+<p>ユーザーディレクトリを設定すると、http://hogehoge.com/~username/pagename.htmlから目的のHTMLファイル（/home/username/public_html/pagename.html）にアクセスできる。</p>
+<p>また、cgi-binでCGIを有効にする場合は、以下のようにする。</p>
+<pre>
+&lt;Directory /home/*/public_html/cgi-bin/&gt;
+    Options ExecCGI
+    SetHandler cgi-script
+&lt;/Directory&gt;
+</pre>
+<p>パス内のアスタリスク（*）はユーザー名に置換される。</p>
+<p>詳しくは以下のリンク先が参考になる。</p>
+<ul>
+<li><a href="https://httpd.apache.org/docs/2.4/ja/howto/public_html.html">ユーザ毎のウェブディレクトリ - Apache HTTP サーバ バージョン 2.4</a></li>
+<li><a href="https://tsujimotter.hatenablog.com/entry/2014/06/20/184945">CentOS 6.5 で ユーザーディレクトリに public_html を作り、その中の html ファイルを Apache で公開するためには - tsujimotterのノートブック</a></li>
+<li><a href="https://centossrv.com/apache-userdir.shtml">ユーザーディレクトリ作成(/~ユーザー名/) - CentOSで自宅サーバー構築</a></li>
+</ul>
+<p><a href="../linux/linux_unix_user.html">UNIXシステム管理（５．ユーザーとパーミッション）</a>や<a href="../linux/linux_fhs.html">Linuxファイルシステム階層</a>も参照のこと。</p>
+
+<h2>2種類の設定方法（全体とディレクティブ）</h2>
+<p>Apacheの設定方法は、Apache全体に適用される設定のほかに、ディレクトリやパスなどに部分的に適用される設定（ディレクティブ設定）がある。</p>
+<ul>
+<li><a href="https://qiita.com/YasuyukiKawai/items/b32bd94cde7f928c0753">Apache:インストール(httpd)、初期設定、その他 - Qiita</a></li>
+<li><a href="https://liginc.co.jp/212410">これで読める！Apache設定ファイルの中身をディレクティブで把握しよう | 東京上野のWeb制作会社LIG</a></li>
+</ul>
+
+<h2>設定の参考例</h2>
+<p>以下は設定ファイルの例など参考になるサイト。</p>
+<ul>
+<li><a href="https://qiita.com/100/items/ab31e57fcc66ac661d5c">Apache 2.4 設定ファイルの記述例 - Qiita</a></li>
+<li><a href="http://linux.kororo.jp/cont/server/httpd_conf.php">httpd.conf の設定 - コロのLinuxサーバー構築</a></li>
+<li><a href="https://www.server-world.info/query?os=Fedora_27&p=httpd&f=1">Fedora 27: Apache httpd インストール - Server World</a></li>
+</ul>
+<p>以下はDebianの場合。DebianのApacheは設定ファイルなどのディレクトリとファイル名が異なる（柔軟性のある配置になっている）ので注意が必要。</p>
+<ul>
+<li><a href="https://qiita.com/hikachan/items/3801c8f1c088817d6d53">Apache2 Debian conf どこになにを置けばいいのか - Qiita</a></li>
+<li><a href="https://qiita.com/ninneko/items/87a76f0f1dc6d82500fb">Apache2@Debianでのバーチャルホスト設定まとめ - Qiita</a></li>
+<li><a href="http://namotch.hatenablog.com/entry/2015/06/08/074935">Debian Jessie に apache2 を入れてみた - 残しときます（自分用）</a></li>
+</ul>
+<p>以下は公式のマニュアル。</p>
+<ul>
+<li><a href="https://httpd.apache.org/docs/2.4/ja/">Apache HTTP サーバ バージョン 2.4 ドキュメント</a></li>
+</ul>
+
+<h2>httpd.confの記述例</h2>
+<p>以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/YasuyukiKawai/items/b32bd94cde7f928c0753">Apache:インストール(httpd)、初期設定、その他 - Qiita</a></li>
+</ul>
+<p>特に、ポート番号とDocumentRootの設定は管理する上で必要な最低限の設定。</p>
+<pre>
+Listen 80
+DocumentRoot "/usr/local/apache2/htdocs"
+</pre>
+<p>管理者のメールアドレスとサーバーのホスト名の設定は以下のようにする。</p>
+<pre>
+ServerAdmin hoge@hogehoge.com
+ServerName www.hogehoge.com:80
+UseCanonicalName On
+</pre>
+<p>（<a href="https://qiita.com/YasuyukiKawai/items/b32bd94cde7f928c0753">Apache:インストール(httpd)、初期設定、その他 - Qiita</a>を参考に執筆しました。）</p>
+<p>Apacheをソースからインストールする場合は、DocumentRootを/usr/local/apache2/htdocsなどに設定する。パッケージから導入する場合は/var/www/htmlなどでも良いだろう。</p>
+<p>後日注記：サービス用のディレクトリとして、/var/www/htmlなどの代わりに/srvを使うこともできます。<a href="../linux/linux_fhs.html">Linuxファイルシステム階層</a>も参照のこと。</p>
+
+<h2>その他のApacheの主な設定</h2>
+<p>その他のApacheの主な設定として、以下のような項目がある。</p>
+<table class="some_tables">
+<tr><th class="min60">設定</th><th>説明</th></tr>
+<tr><td>ServerRoot</td><td>設定ファイルの場所を指定する。</td></tr>
+<tr><td>Timeout</td><td>タイムアウト時間を設定する。</td></tr>
+<tr><td>KeepAlive</td><td>クライアントとの接続の継続をするかどうか。<br>タイムアウト時間はKeepAliveTimeoutで設定する。</td></tr>
+<tr><td>LoadModule</td><td>読み込むモジュールを設定する。</td></tr>
+<tr><td>Include</td><td>設定ファイルとしてファイルを取り込む。</td></tr>
+<tr><td>UserとGroup</td><td>Apacheを起動する際のユーザとグループを設定する。<br>クラッキングされた時のことを考えてrootにはしてはならない。<br>普通はapacheユーザ・apacheグループとする。</td></tr>
+<tr><td>DirectoryIndex</td><td>index.htmlやindex.phpのようなディレクトリインデックスのファイル名を指定する。</td></tr>
+<tr><td>AccessFileName</td><td>.htaccessのようなディレクトリごとのアクセス制御を行うファイル名を指定する。</td></tr>
+</table>
+<p>（詳しくは<a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a>を参照のこと。）</p>
+<div class="edit_date">
+<p>2023.03.08-09</p>
+</div>
+
+<h2>ディレクティブ設定</h2>
+<p>以下が参考になる。</p>
+<ul>
+<li><a href="https://liginc.co.jp/212410">これで読める！Apache設定ファイルの中身をディレクティブで把握しよう | 東京上野のWeb制作会社LIG</a></li>
+<li><a href="http://httpd.apache.org/docs/2.0/ja/mod/directives.html">ディレクティブ一覧 - Apache HTTP サーバ</a></li>
+</ul>
+
+<h3>ディレクティブ設定の書式</h3>
+<p>基本的にこんな感じ：</p>
+<pre>
+&lt;Directory "/var/www/hoge.localhost"&gt;
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+&lt;/Directory&gt;
+</pre>
+<p>AllowOverrideはユーザーによる設定の変更を許可するかどうか。Orderはallowとdenyの順番。Allow from allはすべてのアクセスを許可。</p>
+<p>（<a href="https://qiita.com/YasuyukiKawai/items/b32bd94cde7f928c0753">Apache:インストール(httpd)、初期設定、その他 - Qiita</a>と<a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.03.08編集</p>
+</div>
+
+<h3>ディレクティブ設定の基本</h3>
+<p>基本的なディレクティブの設定は以下のようになる。</p>
+<pre>
+&lt;Directory ディレクトリ&gt;&lt;/Directory&gt;
+&lt;Files ファイル名&gt;&lt;/Files&gt;
+&lt;Location URL&gt;&lt;/Location&gt;
+&lt;Virtualhost ホスト名&gt;&lt;/Virtualhost&gt;
+</pre>
+<p>このほか、&lt;ifmodule mod_ssl.c&gt;&lt;/ifmodule&gt;のように、条件判定（この場合はmod_sslモジュールがインストールされている場合）を設定することもできる。</p>
+<p>また、Allow, Denyでアクセス許可を、Orderでアクセス許可の順番を指定できる。またIncludeで外部に記述された設定ファイルをインクルードすることができる。</p>
+<p>（<a href="https://liginc.co.jp/212410">これで読める！Apache設定ファイルの中身をディレクティブで把握しよう | 東京上野のWeb制作会社LIG</a>を参考に執筆しました。）</p>
+
+<h2>.htaccess</h2>
+<p>.htaccessファイルは、そのファイルが置かれているディレクトリに対して設定することのできるファイル。</p>
+<p>サーバを設定するroot権限を持っていないけれど、Webサーバの設定を変えたい時、たとえばレンタルサーバの設定を変えたい時などに配置すると良い。</p>
+<p>だが、基本的にはhttpd.confで設定すること。</p>
+<ul>
+<li><a href="https://qiita.com/gnk0096/items/7e5bd6e8dc9b04c9978e">.htaccessとは？ - Qiita</a></li>
+</ul>
+<p><a href="basic_auth.html">BASIC認証</a>も参照のこと。</p>
+
+<h2>自宅サーバーの公開までの手順</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://cos.linux-dvr.biz/archives/47">Apacheを起動してWebページを表示する - CentOSサーバー構築入門</a></li>
+</ul>
+
+<h2>動かなくなった時のために元の設定ファイルのコピーをバックアップしよう</h2>
+<p>Apacheのhttpd.confのようなシステムにとって重要な設定ファイルは、もしサーバが正常に稼働しなくなった時に元に戻せるように、編集する前に元の設定ファイルのコピーを取って、バックアップしておきましょう。</p>
+<p>たとえば、httpd.confをhttpd_backup.confとして、どこかに取っておきます。オリジナルであることを示したいなら、origという名前をつけてもいいでしょう。</p>
+<p>Apacheだけではなく、PHPのphp.iniやMySQLのmy.cnf（Windowsではmy.ini）なども、編集する際には元のファイルのコピーをとりましょう。</p>
+<p><a href="../linux/linux_unix_admin.html">UNIXシステム管理（システム情報と設定）</a>も参照のこと。</p>
+
+<h2>構成管理ツールやDockefile</h2>
+<p>僕もあまり分かっていませんが、最近はサーバの設定をChefやPuppetのような構成管理ツールで自動化することができます。</p>
+<p>また、Dockerのコンテナ上で動かす場合は、Dockerfileを用いることも可能です。</p>
+<p>Chefを用いたApacheの設定手順は、以下が参考になります。</p>
+<ul>
+<li><a href="https://tracpath.com/works/development/make-lamp-development-environment-with-chef/">Chefを用いたLAMP開発環境の構築方法～LAMP環境構築編 | tracpath:Works</a></li>
+</ul>
+<p><a href="cm.html">構成管理</a>や<a href="../virt/docker.html">Docker</a>も参照のこと。</p>
+
+<h1>応用</h1>
+<h2>BASIC認証</h2>
+<p><a href="basic_auth.html">BASIC認証</a>を参照のこと。</p>
+
+<h2>Cookie</h2>
+<p><a href="cookie.html">Cookie</a>を参照のこと。</p>
+
+<h2>CGI</h2>
+<p><a href="cgi.html">CGI</a>を参照のこと。</p>
+
+<h2>FastCGI</h2>
+<p><a href="fastcgi.html">FastCGI</a>を参照のこと。</p>
+
+<h2>バーチャルホスト</h2>
+<p><a href="vhosts.html">バーチャルホスト</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>XAMPP</h2>
+<p><a href="xampp.html">XAMPP</a>も参照のこと。</p>
+
+<h2>デーモン</h2>
+<p><a href="../linux/linux_daemon.html">initとデーモン</a>も参照のこと。</p>
+
+<h2>ファイアーウォール</h2>
+<p><a href="../linux/linux_net_firewall.html">Linuxファイアウォール</a>と<a href="../linux/linux_net_firewall_iptables.html">iptables</a>も参照のこと。</p>
+
+<h2>セキュリティ</h2>
+<p><a href="security.html">セキュリティ</a>も参照のこと。</p>
+
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="network.html">ネットワーク</a>や<a href="network_intro.html">ネットワーク入門</a>を参照のこと。</p>
+
+<h1>プロジェクト</h1>
+<h2>Apacheの歴史</h2>
+<p>もともとはNCSA httpd（NCSA httpdはApache以前にとても普及していたサーバで、CGIを初めて導入して動的なページを生成できるなどの特徴があった。クライアントのWebブラウザである同じNCSAのMosaicあるいは後のNetscapeと一緒に使われていた）をベースにしていたが、コードとメンテナンスが停滞し、1995年にApacheの開発が始まる。現在は書き直されたため、NCSA httpdのコードは含まれていない。</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache_HTTP_Server">Apache HTTP Server - Wikipedia</a></li>
+</ul>
+
+<h2>Apacheソフトウェア財団のソフトウェア</h2>
+<p>Apacheソフトウェア財団（ASF）はApacheやその他のオープンソースプロジェクトを管轄する組織。</p>
+<p>ApacheはWebサーバであるApache HTTPサーバーだけではなく、さまざまなオープンソースソフトウェアを開発し、プロジェクトをホストしている。Javaサーバー関連ソフトウェア開発プロジェクトのJakartaがあった影響から、Javaの関連プロジェクトが多く、JavaサーブレットコンテナサーバーのTomcat、ビルドシステムのAnt、WebフレームワークのStruts、JSPタグライブラリのJSTLなどが有名。</p>
+<p>Java関連以外では、オープンソースのMS-Office互換Officeスイートである旧OpenOffice.orgから由来し、LibreOfficeと分裂したApache OpenOfficeなどが有名。</p>
+<p><a href="../prog_lang/java_servlet_appserver.html">Java（アプリケーションサーバ）</a>も参照のこと。</p>
+
+<h2>Apacheライセンス</h2>
+<p>Apacheライセンスは、主としてApacheで開発されたソフトウェアに適用されることの多いライセンス。ASFのソフトウェアは全てApacheライセンスであるほか、Appleによるプログラミング言語SwiftもApacheライセンスである。</p>
+<p>ほかのライセンスに見られない特徴として、作者が自ら権利を有する特許技術を利用してソフトウェアを開発した場合、利用者に特許の利用を許諾したとみなす、という記述がある。特許を使ってソフトウェアの利用者や派生物の作成者を起訴した場合、その時点でライセンスは無効になる。</p>
+<p>Apacheはコピーレフトなライセンスではないため、派生物を作った場合にソースコードを公開せずに配布したり、異なるライセンスで配布することもできる。これに対してGPLなどコピーレフトなライセンスでは必ず派生物をGPLのままで配布しなければならない。</p>
+<p><a href="../linux/oss_permissive.html">オープンソース（パーミッシブ・ライセンス）</a>も参照のこと。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://reikawatanabe.com/whats-apache-license-v2/">Apache License 2.0とは？ライセンス内容をやさしく解説 | Beginner&#039;s Design Note</a></li>
+<li><a href="https://e-words.jp/w/Apache%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9.html">Apacheライセンスとは - IT用語辞典</a></li>
+</ul>
+
+
+<h1>簡単な説明</h1>
+<h2>Apache</h2>
+<p>Apacheの設定はサーバ全体あるいはディレクティブ単位で行う。</p>
+<p>動的WebサイトはCGIで実行するかモジュールとして実行する。</p>
+
+
+<h1>リンク集</h1>
+<h2>Webアプリ開発など</h2>
+<p>Apache</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/series/2640/">いまさら聞けない!? Web系開発者のためのサーバ知識 - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/series/2203/">ApacheによるWebサーバ構築 - @IT</a></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

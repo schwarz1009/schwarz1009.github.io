@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Scheme関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Schemeの世界観</h1>
+<p>Schemeによるプログラミングに関する世界観です。<a href="lisp.html">Lisp</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Scheme</h1>
+<h2>Schemeとは</h2>
+<p>Schemeは、Lispの方言のひとつ。</p>
+<p>Common LispがさまざまなLispの仕様を取り入れて巨大になったのとは異なり、Schemeは真にLispに必要な言語仕様とは何かを追究して作られている。</p>
+<p>また、言語の大きな特徴として、「静的スコープ」をあるべき正しいスコープであるとしている。Lisp界に静的スコープを普及させた功労者的な存在でもある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Scheme">Scheme - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.07-08</p>
+</div>
+
+<h2>Scheme入門サイト</h2>
+<p>以下のようなページが参考になる。</p>
+<ul>
+<li><a href="https://www.shido.info/lisp/idx_scm.html">もうひとつの Scheme 入門 - 紫藤のページ</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.07</p>
+</div>
+
+<h1>Schemeの特徴</h1>
+<h2>Common LispとSchemeの違い</h2>
+<p>Schemeでは、define命令をグローバル変数と関数の両方の宣言に使う。</p>
+<p>Schemeには、変数と関数が同じものとして、区別されずに扱われるため、グローバル変数であっても関数であってもdefine命令で宣言する。</p>
+<p>これは、Common Lispでいえばdefvalとdefunの両方の機能をdefineが持っているのと同じことである。</p>
+<p>また、Schemeには名前空間がひとつしかないので、代入する命令は複数個別に必要なく、define（Common Lispのdefval）とset!（Common Lispのsetq）を使う。</p>
+<p>ローカル変数を宣言するにはletを使えばいい。</p>
+<p>また、Common Lispではシンボルとして値と関数が区別されるが、Schemeでは区別されない。Schemeでは、変数に紐づけされる値はオブジェクトであっても関数であってもいい。なのでCommon Lispでlambda式などに付けられる#'は、Schemeでは必要なく、単にlambdaと書くだけで構わない。</p>
+<p>また、Common Lispのtやnilの代わりのものとして、Schemeでは#tと#fがある。</p>
+<p>ほかにもCommon LispとSchemeにはさまざまな違いがある。「<a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp</a>」などが参考になる。</p>
+<p>以下の書籍を参考に執筆しました。</p>
+<ul>
+<li><a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp</a></li>
+<li><a href="https://www.shido.info/lisp/scheme4.html">Scheme 入門 4. 関数を定義しよう - 紫藤のページ</a></li>
+<li><a href="https://www.shido.info/lisp/scheme6.html">Scheme 入門 6. 局所変数 - 紫藤のページ</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.31</p>
+<p>2024.07.12編集</p>
+</div>
+
+<h2>Schemeは最高のプログラミング言語</h2>
+<p>おそらく、Schemeは「最高のプログラミング言語」でしょう。</p>
+<p>多くのエンジニアが言っているように、プログラミング言語の中でもっとも高水準な言語は、Lispです。</p>
+<p>しかしながら、Lispの共通標準として作られたはずのCommon Lispは、Lisp界に当時存在した要素を全部取り入れようとしたため、たくさんのLisp方言のすべての機能を網羅した、超スーパーセットのような言語になってしまいました。</p>
+<p>また、Common Lispは値としての変数と関数の区別がまだ残っていたため、変数と関数を区別しないHaskellなどに比べると、「関数型なんだけど、関数型言語のいいところがない」ような言語になってしまいました。</p>
+<p>Schemeは違います。さまざまなLispのスーパーセットであるCommon Lispと異なり、Schemeは機能と仕様を厳選し、Lispハッカーのセンスを体現させるような言語を目指して、言語仕様が追究されています。また、Schemeでは変数と関数の区別がありません。なので、Haskellなどのような関数型言語のエレガントな言語仕様を本格的に味わうことができます。</p>
+<p>そのような理由で、僕はSchemeは「世界最高のプログラミング言語」だと思います。</p>
+<div class="edit_date">
+<p>2024.07.12</p>
+</div>
+
+
+<h1>言語処理系</h1>
+<h2>GNU Guile</h2>
+<p>GNUによるSchemeの処理系の1つ。GNUの公式の拡張言語であり、Libguileを使うことでGuileを別のアプリケーションの中に埋め込んで使うことが出来る。ただ、採用しているソフトウェアはあまり多くない。（Pythonなどに負けている。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_Guile">GNU Guile - Wikipedia</a></li>
+</ul>
+
+<h2>Gauche</h2>
+<p>Schemeの処理系の1つ。ハワイ在住の日本人であり、僕が大好きだったポール・グレアムのエッセイの翻訳者としても知られる川合史朗氏による、Schemeのオープンソースな言語処理系。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0810/31/news148.html">Gaucheでメタプログラミング（1）：ちょっと変わったLisp入門 (1/5) - @IT</a></li>
+<li><a href="http://practical-scheme.net/gauche/index-j.html">Gauche - A Scheme Implementation</a></li>
+<li><a href="http://practical-scheme.net/index-j.html">Practical Scheme</a></li>
+</ul>
+<p>特に、<a href="https://www.amazon.co.jp/%E3%83%8F%E3%83%83%E3%82%AB%E3%83%BC%E3%81%A8%E7%94%BB%E5%AE%B6-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E6%99%82%E4%BB%A3%E3%81%AE%E5%89%B5%E9%80%A0%E8%80%85%E3%81%9F%E3%81%A1-%E3%83%9D%E3%83%BC%E3%83%AB-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4274065979">ハッカーと画家 コンピュータ時代の創造者たち</a>（ポール・グレアムのエッセイを川合史朗氏が翻訳した書籍）はとても面白かったです。</p>
+<div class="edit_date">
+<p>2023.06.08編集</p>
+</div>
+
+<h1>書籍</h1>
+<h2>Schemeを使った名著</h2>
+<p>「<a href="https://www.amazon.co.jp/%E8%A8%88%E7%AE%97%E6%A9%9F%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E6%A7%8B%E9%80%A0%E3%81%A8%E8%A7%A3%E9%87%88-%E7%AC%AC2%E7%89%88-%E3%83%8F%E3%83%AD%E3%83%AB%E3%83%89-%E3%82%A8%E3%82%A4%E3%83%96%E3%83%AB%E3%82%BD%E3%83%B3/dp/4798135984">計算機プログラムの構造と解釈</a>」（SICP）は、コンピュータ科学における古典的な名著です。</p>
+<p>プログラミング言語としてSchemeを用いながら、コンピュータ科学と関数型プログラミングの真髄を教えてくれる、上級者向けの一冊です。</p>
+<p>初心者向けの本を一通り読み終えた方におすすめします。</p>
+<p>著者はMIT（マサチューセッツ工科大学）の教授陣であり、かつてMITで入門者向けの講義に使われていた標準的な教科書。ウィザード（魔術師）の描かれた表紙から「Wizard Book」とも呼ばれます。表紙には「lambda」「eval/apply」というSchemeの中核技術が明示されています。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E6%A9%9F%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E6%A7%8B%E9%80%A0%E3%81%A8%E8%A7%A3%E9%87%88">計算機プログラムの構造と解釈 - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.12-13</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-lisp.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

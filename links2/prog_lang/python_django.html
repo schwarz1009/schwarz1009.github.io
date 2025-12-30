@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Django関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Djangoの世界観</h1>
+<p>Djangoによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Django</h1>
+<h2>Django</h2>
+<p>Pythonによる、MVCのWebアプリケーションフレームワーク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Django">Django - Wikipedia</a></li>
+<li><a href="https://docs.djangoproject.com/ja/2.2/">Django ドキュメント | Django</a> - チュートリアルをやれば一通り分かるかも。</li>
+</ul>
+
+<h2>Djangoの優れた点</h2>
+<p>Djangoの優れた点は、最初から多くのWebアプリケーションに必要な機能が数多く用意されていることです。</p>
+<p>たとえば、管理画面は最初から用意されていますし、ユーザー認証やRSSフィードなども使えます。パスワードなどは暗号化して保管されてハッシュ値によって比較され、さまざまなセキュリティ攻撃についても最初から対処されています。分散キャッシュのような機能もあり、高速なWebサイトが作成できます。</p>
+<p>Railsのような他のフレームワークに比べると、Pythonで書かれているため、Python言語を使うことができます。このため、人工知能や機械学習やデータ解析機能がほかのフレームワークよりも使いやすいです。Djangoは数多くの有名サイト（たとえばInstagram）で使われています。</p>
+<ul>
+<li><a href="https://udemy.benesse.co.jp/development/system/django.html">Django(ジャンゴ)とは？Pythonのフレームワークを活…｜Udemy メディア</a></li>
+</ul>
+
+<h2>DjangoとMVC</h2>
+<p>DjangoはMVCフレームワークのひとつだが、コントローラを「ビュー」と呼び、ビューを「テンプレート」と呼ぶ。詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/ja/3.0/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names">Django は MVC フレームワークのように思えるのですが、コントローラ (Controller) を「ビュー (view)」と呼び、ビュー (View) を「テンプレート (template)」と呼んでいます。なぜ標準的な呼び方をしないのですか？ - Django FAQ</a></li>
+</ul>
+
+<h2>Djangoの基本</h2>
+<p>まず、django-adminでプロジェクトを作成し、manage.pyでサーバーを起動して小さなスケルトンを作成する。</p>
+<p>Djangoではmanage.pyというスクリプトがプロジェクトごとに用意され、これを実行することでプロジェクトの管理を行う。</p>
+<p>ルーティングはhoge/urls.pyで行う（URLconf）。モデルはhoge/models.pyに、ビューはhoge/views.pyに、テンプレートはhoge/templates/hoge/index.htmlなどに記述する。</p>
+<p>Pythonを埋め込んだHTMLファイルでは、{% ～ %}で埋め込みコードを記述し、{{ }}で変数を展開し、ifに対してendif、forに対してendforでかっこを閉じる。</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/ja/3.0/intro/tutorial01/">はじめての Django アプリ作成、その 1 | Django ドキュメント</a></li>
+<li><a href="https://docs.djangoproject.com/ja/3.0/intro/tutorial03/">はじめての Django アプリ作成、その 3 | Django ドキュメント</a></li>
+<li><a href="https://docs.djangoproject.com/ja/3.0/">Django ドキュメント</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Django">Django - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Webフレームワーク</h2>
+<p><a href="../network/web_framework.html">Webフレームワーク</a>を参照のこと。</p>
+
+<h2>Python</h2>
+<p><a href="python.html">Python</a>や<a href="python_tools.html">Pythonのツール</a>も参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

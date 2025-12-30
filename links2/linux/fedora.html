@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Fedora - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Fedora</h1>
+<p>Fedoraに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="redhat.html">Red Hat（１．Red Hat）</a></li>
+<ul>
+<li><b>Fedora</b></li>
+<li><a href="redhat_dnf_yum.html">２．DNF/Yum</a></li>
+<li><a href="redhat_rpm.html">３．RPM</a></li>
+<li><a href="centos.html">CentOS</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Fedora</h1>
+<h2>Red Hat Linuxの無料版はなくなってコミュニティ開発のFedoraになった</h2>
+<p>ほとんどの人は知っていると思いますが、Red Hatという会社によって開発されていた、Red Hat Linuxというディストリビューションの無料版はなくなって、コミュニティ開発のFedoraになりました。</p>
+<p>かつて、Linuxは、商用のディストリビューションであるRed Hat Linuxが標準的でした。</p>
+<p>その理由は、RPMという初心者でもLinuxを使うことができるパッケージ管理システムを、Red Hatが開発したからです。</p>
+<p>RPMにより、パッケージの依存関係の管理が楽になり、Linuxシステムを破壊させるリスクが大幅に減少し、Linuxをハッカーやオタクではない普通の人間でも使えるようになりました。</p>
+<p>そのRPMを開発した会社がRed Hatであり、Red Hatはかつてより、RPMを採用した商用のディストリビューションとして、Red Hat Linuxを開発していました。</p>
+<p>Red Hat Linuxは、商用のディストリビューションでありながら無料版があったため、多くの人はこの無料版のRed Hat Linuxを使っていました。</p>
+<p>そのような結果、昔のLinux業界では、Red Hat Linuxが標準的ディストリビューションだったのです。</p>
+<p>ですが、Red Hatは、Red Hat Linuxの無料版を提供するのをやめてしまいました。</p>
+<p>かつてのRed Hat Linuxという名前のディストリビューションはなくなり、代わりにコミュニティとRed Hatが共同で開発するFedoraというディストリビューションが生まれました。</p>
+<p>このFedoraは無料で提供されます。</p>
+<p>そして、このFedoraをベースに、Red Hatが開発し、ビジネスやエンタープライズ向けに提供されるRHEL (Red Hat Enterprise Linux)という商用のディストリビューションが、新しく有料で提供されるようになりました。</p>
+<p>Fedoraの位置づけとしては、「Linuxで最先端の開発に参加するコミュニティのギーク（オタク）向け」のディストリビューションです。また、RHELの位置づけとしては、「Linuxをエンタープライズの開発で使うビジネスや商用システムの開発・運用向け」のディストリビューションです。</p>
+<p>これまでのように、無料でRHELを使うことはできません。RHELの利用にはお金がかかります。その代わり、Fedoraという新しいRed Hat Linuxの後継版のディストリビューションが無料で提供され続けます。このFedoraはコミュニティによって開発され、FedoraをベースにRHELがRed Hatによって開発されます。</p>
+<p>ただし、RHELが完全に有料かつクローズドかというと、そうでもありません。オープンソースのライセンスであるGPLを守るために、Red HatはRHELのソースコードを利用者向けに公開します。そのため、このRHELのソースコードを使った「RHELクローン」と呼ばれるディストリビューションが、無料あるいは低価格のサポートで販売されています。たとえばCentOS、AlmaLinux、Rocky Linuxなどがこれに当たります。</p>
+<p>ただし、RHELクローンを使った場合は、Red Hatという会社による手厚い商用サポートは受けられません。何があっても自己責任で、自分自身の手で問題を解決できる人間だけが利用できます。Red Hatの商用サポートを得たいならば、引き続きRHELを購入する必要があります。そして、RHELを購入して使う場合、RHELの動作がきちんと働くという「責任」をRed Hatが担ってくれるということになっています。</p>
+<p>このように、旧来のRed Hat Linuxはなくなり、FeodraとRHELに受け継がれました。Fedoraについて言えば、RHELの実験版・ベータ版的な位置づけになるため、「不安定で動かないことを承知で使う」というのがFedoraの基本となります。なので、FedoraでLinuxサーバーを構築・運用するのは適切ではありません。Fedoraはあくまで最先端のLinuxを体験するためのコミュニティのギーク・オタク向けのディストリビューションです。</p>
+<p>このように書くと、「FedoraはRHELの開発版だから誰も使っていない」と指摘する人もいるかもしれませんが、FedoraはさまざまなLinuxの最先端の実験的な技術要素が試される面白いディストリビューションです。ほかのディストリビューションが「きちんと使える安定版の製品」を目指していても、Feodraはそうではありません。FeodraはLinuxやオープンソース業界で、もっとも最先端とされる技術要素を試し、その技術要素をバグのない安定したものに変えるために存在します。そして、このFedoraをベースにRed HatがRHELを開発することで、RHELは真に安定した信頼できる製品になり、最先端でありながらビジネスやエンタープライズのシステムの基盤に使えるOSになる、ということです。</p>
+<div class="edit_date">
+<p>2023.08.17</p>
+</div>
+
+<h2>Fedoraは遊び用途</h2>
+<p>また、Fedoraについて言うと、完全に遊び用途です。</p>
+<p>壊れても構わないシステムで、最新の技術を触ってLinuxで純粋に遊びたい方向けのLinuxディストリビューションであると言えます。</p>
+<p>たとえば、SELinuxやwaylandのような新技術は、他のどのディストリビューションで採用されるよりも前に、Fedoraで採用され、Fedoraで開発されることが多いと僕は感じています。</p>
+<p>Ubuntuはきちんと使うマシンに、Fedoraは壊れても構わない遊び用途のマシンに入れると良いでしょう。</p>
+<p>また、Fedoraを使うのであれば、僕は思い切って開発版のrawhideにすることをおすすめします。いつ使えなくなるかは分かりませんが、リリース版のFedoraでは「開発最新版」という感じが薄く、遊ぶと言ってもただ使うだけになってしまうからです。rawhideで最新のLinuxを試すことで、今Linuxで何が開発されているか、良く分かると思います。</p>
+
+<h1>Fedoraのさまざまなエディション</h1>
+<h2>Fedora Modular</h2>
+<p>最近進められているFedora Modular Serverでは、パッケージのモジュラー化が進んでいる。</p>
+<p><!--これだけでは何のことやらと思うかもしれないが、-->RHELやFedoraといったOS（Base）と、アプリケーション（AppStream）との間で、独立してバージョニングを管理できるようにする仕組み。Fedoraとしては30を使うが、Node.jsはもっと新しい（古い）バージョンを使いたいといった時に、OSそのもののバージョンに縛られるのではなく、アプリケーションのバージョンだけを独立して変えられる。</p>
+<ul>
+<li><a href="https://mag.osdn.jp/17/11/16/090000">モジュラー化を進めた「Fedora 27」リリース | OSDN Magazine</a></li>
+<li><a href="https://mag.osdn.jp/18/10/31/163000">Fedora 29リリース、モジュラーリポジトリが全エディションで利用可能に | OSDN Magazine</a></li>
+<li><a href="https://rheb.hatenablog.com/entry/201812-modularity">RHEL 8/Fedora 28で導入されたModularity - 赤帽エンジニアブログ</a></li>
+</ul>
+
+<h2>Fedora SilverblueとOSTree</h2>
+<p>Fedora SilverblueではOSTreeという技術を用いて「イミュータブルOS（不変のOS）」を作ろうとしている。</p>
+<p>OSTreeはgitの考え方によるパッケージ管理のアプローチで、複数のパッケージをgitと同じ仕組みで管理する。</p>
+<p>gitのようにロールバックして昔の環境に戻したり、別のリビジョンへの切り替えをすることが可能で、リポジトリからパッケージを簡単に取得できる。</p>
+<ul>
+<li><a href="https://www.slideshare.net/i_yudai/ostree-osgit">OSTree: OSイメージとパッケージシステムの間にGitのアプローチを</a></li>
+<li><a href="https://silverblue.fedoraproject.org/">Team Silverblue</a></li>
+</ul>
+<p>OSTreeのファイルシステムは、immutable（不変）すなわち読み込み専用であり、このためセキュリティが高い。イメージはGitのように管理することができる。</p>
+<ul>
+<li><a href="https://bitwalk.blogspot.com/2019/11/linux-fedora-silverblue.html">Linux ディストロ探訪（１０） 〜 Fedora Silverblue 〜</a></li>
+</ul>
+<p><a href="ostree.html">OSTree</a>や<a href="../prog_lang/git.html">Git</a>も参照のこと。</p>
+
+<h2>Fedora Kinoite</h2>
+<p>Fedora KinoiteはFedora Silverblueと同じrpm-ostree、Flatpak、Podmanなどの技術による、KDE Plasmaデスクトップを搭載したFedora。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/202102/19">2021年2月19日　“木のいて”！？ Fedora，KDE実装のイミュータブルデスクトップOS「Fedora Kinoite」を2021年秋にリリースへ：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p><a href="flatpak.html">Flatpak/AppImage</a>や<a href="../virt/podman.html">Podman</a>や<a href="kde.html">KDE</a>も参照のこと。</p>
+
+<h2>Fedora CoreOS</h2>
+<p>Fedoraによるクラウド向けOS。CoreOS Container LinuxとFedora Atomic Hostの両者の後継（いいとこどり）のような感じ。</p>
+<ul>
+<li><a href="https://coreos.fedoraproject.org/">Fedora CoreOS | coreos.fedoraproject.org</a></li>
+</ul>
+
+<h1>情報</h1>
+<h2>Fedora Magazine</h2>
+<p>Linuxの使い方を知るためには、Fedora Magazineという手があります。特に、PodmanやBtrfsなどの最新技術について知ることが出来て便利です。</p>
+<ul>
+<li><a href="https://fedoramagazine.org/">Fedora Magazine</a></li>
+</ul>
+
+<h1>余談</h1>
+
+<h2>Fedoraの特徴は、我々こそがLinuxの開発者であるということ</h2>
+<p>Fedoraの特徴として、まず、「Red Hatが何をやりたいのか分からない」と言える。</p>
+<p>Fedoraは、開発版であり不安定版であり、最新版でありオタク版であると言っておきながら、通常の利用に使えるとか、サーバー版を出してみたりとか、良く分からないことをRed hatは主張する。</p>
+<p>どうやら、Red Hatへの技術貢献版であるだけではなく、Red Hatからの技術貢献版でもあるようである。</p>
+<p>コミュニティの力を信じているように見えて、「Red Hatが後援しています」的なことを大きく打ち出して宣伝したりもしている。</p>
+<p>GNUとの関係性やフリーソフトウェアの選定に厳しいのと裏腹に、Debianのように「GNU/Linux」と言う名前を大きく打ち出すこともしない。</p>
+<p>だが、見ていると、むしろ、「UNIX時代から続く、技術的な面白いこと」をやっている、ということが言える。</p>
+<p>たとえば、Fedora Serverは最近モジュラー指向になって、パッケージのバージョンを選べるようになっただけではなく、なぜか「パッケージを機能ごとにアップデートし、互換性を維持したままで新機能を使える」というありえないことをやっていたりする。</p>
+<p>新しいパッケージに果敢に取り組む姿勢は鮮明で、ありえない最新バージョンのGCCをどんどん取り入れて、動くわけがないのに全システムを最新GCCでコンパイルし、アップストリームに貢献している。</p>
+<p>要するに、「我々がLinuxの開発者である」ということを言いたいのだろう。我々こそが、Linuxなのである、と言いたい。本当はDebianと仲が悪いわけでもないから、DebianとUbuntuとFedoraには融合してほしい。できればopenSUSEやArch Lnuxにも。だが、最近のLinuxは完全に住み分けが出来ているので、統一しなくてもきっと良いものになるだろう。</p>
+
+<h2>デスクトップLinuxならFedora</h2>
+<p>僕は、デスクトップLinuxならFedoraをおすすめする。それは「楽しい」からである。</p>
+<p>まさにUbuntuやDebianをすすめる人も居るだろう。だが、それらのOSは、実用的で、使ってみると分かるが、「つまらない」のである。</p>
+<p>Fedoraは、やりたいことが明確、「オープンソースの最先端技術をつめこむ」ことを目指したディストリビューションだが、使うと、「面白い」ということが言える。</p>
+<p>何もかも、面白いものが優れている、それがLinuxとオープンソースの業界である。Fedoraは十分デスクトップLinuxとして使えるし、何よりも面白い。だから、僕はデスクトップにFedoraをおすすめする。</p>
+<p>また、僕の個人的な経験から言うと、UbuntuはFedoraと同程度に不安定でバグが多い。Ubuntuは特にパッケージや設定・管理のバグが多く、まともに使えない品質である。そして、Debianは軽く安定しているが、標準的な最新の先端性がない。古いパッケージばかりで、つまらない。Fedoraは作りかけの最新機能が多く、面白い。それに、Red Hatは仕事で使える。むしろ、RHELも無料版を作ってほしいと僕は願っている。</p>
+
+<h1>リンク集</h1>
+<h2>パッケージ</h2>
+<p>パッケージ</p>
+<ul>
+<li><a href="https://dl.fedoraproject.org/pub/fedora/linux/releases/">Index of /pub/fedora/linux/releases</a></li>
+</ul>
+
+<h2>Fedora</h2>
+<p>Fedora</p>
+<ul>
+<li><a href="https://docs.fedoraproject.org/">Fedora Documentation</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

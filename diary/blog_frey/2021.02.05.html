@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"  href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<title>JavaScriptフレームワークの誕生 - schwarz1009</title>
+
+</head>
+<body>
+<p><a href="index.html">トップページに戻る</a></p>
+<iframe src="menu3_menu.html" class="iframe_menu"></iframe>
+<p>AUTHOR: schwarz1009<br>
+TITLE: JavaScriptフレームワークの誕生<br>
+BASENAME: 2021/02/05/170240<br>
+STATUS: Publish<br>
+ALLOW COMMENTS: 1<br>
+CONVERT BREAKS: 0<br>
+DATE: 02/05/2021 17:02:40<br>
+CATEGORY: JavaScript
+
+
+</p>
+<ul class="table-of-contents">
+    <li><a href="#JavaScriptについて">JavaScriptについて</a></li>
+    <li><a href="#気持ち悪いままを保ちそのままで治せば精神は治る">気持ち悪いままを保ち、そのままで治せば精神は治る</a></li>
+</ul>
+<div class="section">
+    <h3 id="JavaScriptについて">JavaScriptについて</h3>
+    <p>JavaScriptと聞くと、僕のような昔の世代は、<br />
+「Webページを読みづらくするお邪魔なスクリプト」と<br />
+思う人がいるかもしれません。<br />
+JavaScriptは、WebブラウザのNetscape社が開発した言語で、<br />
+Webページをブラウザ上で書き換えたり、<br />
+ブラウザに組み込まれた機能を使って、<br />
+さまざまなことができるマクロ言語として、<br />
+開発されました。<br />
+当時、Javaと言えば、<br />
+サン・マイクロシステムズによって開発された、<br />
+Java言語が知られていました。<br />
+Javaはさまざまな環境で動くオブジェクト指向言語でしたが、<br />
+インターネットユーザーによく知られていたのが、<br />
+アプレットと呼ばれる機能で、<br />
+Webブラウザ上で描画領域を表示したり、<br />
+アニメーションをしたり、<br />
+HTMLでは簡単にできない計算処理ができました。<br />
+アプレットから、Javaの存在を知った方も多いでしょう。<br />
+また、当時はオブジェクト指向が大流行しており、<br />
+C++に代わる新しい設計のJavaは大成功していました。<br />
+JavaScriptは、このJavaの成功にあやかって、<br />
+アプレットと同じようにブラウザ上で動く言語として、<br />
+サンとネットスケープの業務提携から、<br />
+JavaScriptという名前になりました。<br />
+しかしながら、この2つは、<br />
+名前が似ているだけで全く異なる言語です。<br />
+Javaは、仮想マシンのサンドボックス環境で、<br />
+ブラウザとは全く異なるVMの上で実行されます。<br />
+これに対して、JavaScriptでは、<br />
+ブラウザのHTMLをツリー構造にした、<br />
+DOMツリーを直接操作でき、<br />
+エンジンも完全にブラウザに組み込まれています。<br />
+さて、そのようなJavaScriptですが、<br />
+Webの世界では嫌われ者でした。<br />
+ポップアップ広告を勝手に表示したり、<br />
+ブラクラとしてブラウザをクラッシュさせたりなど、<br />
+まともでない用途に使われることが多かったためです。<br />
+もう少しマシな用途では、<br />
+文字列を横スクロールさせたり、<br />
+画面に雪を降らせたりなど、<br />
+ほとんどが「ページを見づらくするだけ」だったのです。<br />
+しかしながら、JavaScriptには潜在的な可能性があり、<br />
+それに目を付けたのがGoogleです。<br />
+Googleは、Google Mapsという地図アプリで、<br />
+Ajaxと呼ばれる非同期通信技術を用いて、<br />
+JavaScriptをふんだんに使った、<br />
+GUIのウィンドウアプリケーションと同等の、<br />
+使いやすいサービスを開発しました。<br />
+これが「Ajaxブーム」を引き起こします。<br />
+その後も、GoogleはGmailなど、<br />
+多くのアプリケーションをJavaScriptで作成します。<br />
+ここから、「JavaScriptは上手に使えば良いものである」と人々は気付き、<br />
+従来PHPなどで行っていたことを、<br />
+Ajaxを使えばインタラクティブにできると知られます。<br />
+次のキーパーソンは、Railsです。<br />
+RailsをはじめとするMVCフレームワークは、<br />
+Webにとっての一種の革命で、<br />
+モデル、ビュー、コントローラの構成で、<br />
+繰り返しを排除し、設定より規約を守ることで、<br />
+とても簡単にWebアプリケーションを開発できるようになりました。<br />
+従来PHPなどで行っていたことが、<br />
+RubyとRailsによってとても生産性が向上したのです。<br />
+しかしながら、RailsのようなMVCフレームワークは、<br />
+モデル、ビュー、コントローラを、<br />
+全てサーバーサイドで処理していました。<br />
+データベースを担当するモデルや、<br />
+全体のコントロールを担当するコントローラは、<br />
+確かにサーバーサイドの処理が必要ですが、<br />
+HTMLを担当するビューについては、<br />
+JavaScriptを上手く使うことで、<br />
+クライアントサイドでも実現できるということが、<br />
+次第に分かってきました。<br />
+また、先のAjaxのように、<br />
+Web業界が高度化し、<br />
+JavaScriptアプリケーションが複雑になるにつれて、<br />
+サーバーサイドのMVCフレームワークだけでなく、<br />
+クライアントサイドのHTML/CSS/JavaScriptの環境でも、<br />
+同様の生産性の高いフレームワークが要求されます。<br />
+ここに登場したのが、React, Angular, Vue.jsをはじめとする、<br />
+JavaScriptフレームワークです。<br />
+はじめのうち優勢だったのはGoogleのフルスタックのAngularでしたが、<br />
+今ではビューだけに特化したFacebookのReactが勝っています。<br />
+また、簡単なテンプレート処理にも使えて、<br />
+少しずつたくさんの機能を使えていける、<br />
+Vue.jsは日本などのアジア地域で、<br />
+Reactと同じくらい流行しています。<br />
+これに加えて、サーバーサイドもJavaScriptで書いてやろうという、<br />
+Node.jsも流行っています。<br />
+JavaScriptは、DOMなどの事実上の標準APIについては、<br />
+ECMAScriptのような形で、<br />
+Netscapeの後継であるMozilla.orgなどが標準規格を定めていますが、<br />
+サーバーサイドにはそれがありません。<br />
+そのため、JavaScriptには標準のファイル操作APIもありません。<br />
+そのため、CommonJSという規格があります。<br />
+Node.jsはこのCommonJSに則り、<br />
+サーバーサイドに必要なモジュールを提供しています。<br />
+Node.jsは、たとえば、<br />
+非同期のファイル操作APIなどを提供しています。<br />
+（詳しくは<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>が参考になります。）</p>
+
+</div>
+<div class="section">
+    <h3 id="気持ち悪いままを保ちそのままで治せば精神は治る">気持ち悪いままを保ち、そのままで治せば精神は治る</h3>
+    <p>気持ち悪いままを保ち、<br />
+そのままで治せば精神は治る。<br />
+休まずに動こうが、動きが変わろうが、<br />
+そのままで治そうとすれば治るものである。<br />
+また、気持ち悪いもの全てを治そうとすると、<br />
+「逆に真の意味で治ろうとしている良いものまで治してしまっている」。<br />
+あえて気持ち悪いままを保つことで、<br />
+脳が精神を治すだけではなく、精神が脳を治すこともある。</p>
+
+</div>
+
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+

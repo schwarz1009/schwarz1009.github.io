@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>データ構造（スタックとキュー）の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div><h1>データ構造（スタックとキュー）の世界観</h1>
+<p>データ構造（スタックとキュー）に関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="data_structure.html">データ構造</a></li>
+<ul>
+<li><a href="data_structure_list.html">配列とリストとハッシュ</a></li>
+<li><b>スタックとキュー</b></li>
+<li><a href="data_structure_tree.html">ツリー</a></li>
+<li><a href="data_structure_graph.html">グラフ</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>スタックとキュー</h1>
+<h2>スタックとキュー</h2>
+<table class="some_tables">
+<tr><th class="min60">データ構造</th><th>意味</th></tr>
+<tr><td>スタック</td><td>最後に入れたものが最初に取り出される。<br>どんどん上に重ね、上から取る。<br>スタックにデータを積む操作をプッシュ、取り出す操作をポップという。</td></tr>
+<tr><td>キュー</td><td>最初に入れたものが最初に取り出される。<br>列に並んで、最初に並んだ人から順に待機する。<br>キューに入れる操作をエンキュー、取り出す操作をデキューという。</td></tr>
+</table>
+<p>（<a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://www.yamamo10.jp/yamamoto/lecture/2005/2E/test_4/html/node2.html">2 スタックとキュー - 情報工学概論 (C言語:アルゴリズムとデータ構造)</a></li>
+</ul>
+<p><a href="message_queue.html">メッセージキュー</a>も参照のこと。</p>
+
+<h2>スタックとキューを使う場面</h2>
+<p>スタックとキューは、さまざまな場面で使われます。</p>
+<p>特に、スタックは非常に一般的で、たとえばカッコを処理する際に、最後に開いたカッコが最初に閉じたカッコに対応します。</p>
+<p>このように、「最後が最初に対応する」という場面は、意外と多く、そのため、スタックはさまざまな用途に使われます。</p>
+<p>一方キューについては、カーネルのような低レベルレイヤーやプリンターのようなデバイス処理の中で、サブシステム同士を繋ぐインターフェースとして使うことが多いです。</p>
+<p>特に、効率的な処理と非効率的な処理が一緒になる時に、非同期で処理をやり取りするような場合に、キューは使われることが多いです。</p>
+<p>たとえば、Linuxのファイルシステムの中の、ダーティビットが付けられたi-nodeを順次書き込むために使われる、I/Oリクエストキューなどがこれに当たります。</p>
+<p>そのように、スタックやキューはわりとよく使われます。配列や連結リストやツリーなど、単純なデータ構造よりも、少し癖のある形で使われるので、習得や理解は難しいですが、それらのデータ構造と同じぐらいよく使われるデータ構造だと言えます。</p>
+<div class="edit_date">
+<p>2023.07.28</p>
+</div>
+
+<h2>リストをスタックやキューとして使う</h2>
+<p>Perl, PHP, Python, Rubyなどでは、リストに対してポップやプッシュなどのスタックやキューとしての操作を行うことができる。</p>
+<p><a href="perl.html">Perl</a>、<a href="php_lang.html">PHP（言語）</a>、<a href="python_intro_data.html">Python（データ構造）</a>、<a href="ruby_intro_basic.html">Ruby（基本）</a>などを参照のこと。</p>
+<div class="edit_date">
+<p>2023.09.05</p>
+</div>
+
+<h2>スタックを作るのは簡単</h2>
+<p>C言語でスタックを作るのは、意外と簡単です。</p>
+<p>まず、スタックのアドレスを保持するスタックポインタを作り、スタックの値として配列を確保します。</p>
+<p>その上で、スタックポインタをインクリメントして配列の最後に値を追加するpush()関数と、スタックポインタをデクリメントして値を配列の最後から削除してreturnで返すpop()関数を作ればいいのです。</p>
+<p>キューも同様の方法で作れますが、キューを作る際にはシフト（全体をひとつずつずらす操作）が必要となるので、効率的なキューを作るのは難易度が高めです。</p>
+<p>詳しくは以下の書籍に書かれているので、参照してください。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EC-%E7%AC%AC2%E7%89%88-ANSI%E8%A6%8F%E6%A0%BC%E6%BA%96%E6%8B%A0-B-W-%E3%82%AB%E3%83%BC%E3%83%8B%E3%83%8F%E3%83%B3/dp/4320026926">プログラミング言語C（K&R）</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.15</p>
+</div>
+
+<h2>キューを実装する方法</h2>
+<p>Cでキューを実装する場合、配列を用いて実装しようとすると、メモリをできるだけ効率的に確保するようにしたいなら、両端のどちらかの端で要素を追加・削除する際にシフト操作（要素を全部ひとつひとつずらす操作）が必要となるため、効率的な実装ができません。</p>
+<p>このような場合、メモリを余剰分に確保する方法もありますが（キューの要素数の最大数が決まっていて、その数が大きすぎないのであれば、それもいいでしょう）、配列ではなく連結リストを使うことで、要素を追加・削除する際に要素とともにポインタによる紐づけを追加・削除するだけで済みます。</p>
+<p>なので、効率的なキューを実装したいなら、配列ではなく連結リストを使うといいでしょう。</p>
+<p>と、ここまで配列によるキューを否定する内容を書きましたが、「<a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading</a>」という書籍によると、リングバッファ（循環バッファ）という方法で、配列でも効率的なキューを実装できるようです。</p>
+<p>リングバッファにおいては、配列インデックスを追加する位置と削除する位置の二つ持ちます。追加する末尾の位置をテール、削除する先頭の位置をヘッドとします（あるいはその逆でもいい）。そして、配列インデックスが配列の終端の位置に達したら、配列の先頭の位置に戻ります。そのようにすることで、配列でも効率的なキューを実装できます。</p>
+<p>後日注記：両終端キュー（前と後ろどちらの端にも要素を追加したり削除したりできるキューで、dequeとも呼ばれる）では、ダブル連結リスト（前にも後ろにもリンクされたリスト）がよく使われます。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li></ul>
+<div class="edit_date">
+<p>2024.10.31</p>
+<p>2025.08.12編集</p>
+</div>
+
+<h2>参考文献</h2>
+<p>以下の書籍を参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a></li>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

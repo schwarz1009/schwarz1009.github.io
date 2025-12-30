@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観F（発展） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観F（発展）</h1>
+<p>Javaによるプログラミングに関する世界観（F．発展）です。<a href="java.html">Javaの世界観１（言語）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ラムダ式とStream API</h1>
+<h2>ラムダ式</h2>
+<p>Javaのラムダ式は、クラスとインスタンスの作成を同時に行い、簡単に無名関数を記述できる機能。</p>
+<pre>
+(引数1, 引数2) -&gt; 処理
+</pre>
+<p>のように書ける。</p>
+<ul>
+<li><a href="https://www.bold.ne.jp/engineer-club/java-lambda-expression">徹底解説! Javaのラムダ式はどういうもので、どう使えばいいのか! - ENGINEER.CLUB（エンジニアクラブ）</a></li>
+</ul>
+
+<h2>Stream API</h2>
+<p>Stream APIを使うことで、今までコレクションの操作を行っていた記述が簡単になる。引数にラムダ式を利用することが推奨される。</p>
+<p>実際にはまずストリームを作成し、中間操作（filter(), map()など）と終端操作（forEach(), collect()など）を行う。</p>
+<ul>
+<li><a href="https://qiita.com/takumi-n/items/369dd3fcb9ccb8fcfa44">Java Stream APIをいまさら入門 - Qiita</a></li>
+<li><a href="https://www.fenet.jp/java/column/java_tips/6468/">JavaでのStream APIの使い方とは？Streamの生成・中間操作・終端操作について紹介 | Javaコラム</a></li>
+</ul>
+
+<h1>パターンマッチング</h1>
+<h2>型とクラスのパターンマッチング</h2>
+<p>Java 14の新機能として、パターンマッチング機能が挙げられる。正規表現ではなく型とクラスに対してパターンマッチングができる。</p>
+<ul>
+<li><a href="https://www.infoq.com/jp/articles/java-pattern-matching/">Java 注目の機能: パターンマッチング - InfoQ</a></li>
+<li><a href="https://qiita.com/nowokay/items/ec85d97a7cecaaac8123">Java 14新機能まとめ - Qiita</a></li>
+<li><a href="https://logmi.jp/tech/articles/323179">Javaのプロフェッショナルが教えるJava14とJava15の新機能 - ログミーTech</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ロボット - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">AI・自作プログラムの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/programs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ロボット</h1>
+<p><a href="robot_qiita.html">Qiitaでロボット開発中</a>に、Qiitaでのログをコピーしています。</p>
+<p>僕の作ったロボットのコードまとめ。</p>
+<p>これらのロボットのコードは、「他人が開発に関わったものを除いて」MITライセンスで公開します。自分が作ったものは自由に無償で利用して構いませんが、一部他人に協力していただいて作ったものもあるので注意してください。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+<h1>ロボットのソースコード（自分で開発）</h1>
+<h2>思考型ロボット</h2>
+<p>ランダムに思考をするロボットを作りました。純粋に思考だけをします。</p>
+<p>一号機。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int getlp(int *p){
+    *p = rand()%2;
+    return 1;
+}
+void action(int *p){
+    if(*p==0){
+        printf("はらが減った。\n");
+    }
+    else if(*p==1){
+        printf("はらは減っていない。\n");
+    }
+}
+int main(void){
+    int p;
+    while(getlp(&p)){
+        action(&p);
+    }
+}
+</pre>
+<p>二号機。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+struct _obj {
+    int p;
+    int hara;
+};
+int getlp(struct _obj *obj){
+    obj-&gt;p = rand()%4;
+    return 1;
+}
+void action(struct _obj *obj){
+    if(obj-&gt;p==0){
+        printf("はらは");
+        if(obj-&gt;hara==0){
+            printf("減った。\n");
+        }
+        else{
+            printf("減っていない。\n");
+        }
+    }
+    else if(obj-&gt;p==1){
+        printf("楽しい。\n");
+    }
+    else if(obj-&gt;p==2){
+        printf("はらが減る\n");
+        obj-&gt;hara=0;
+    }
+    else if(obj-&gt;p==3){
+        printf("おいしいごはんを食べた\n");
+        obj-&gt;hara=1;
+    }
+}
+int main(void){
+    struct _obj obj;
+    obj.hara=1;
+    while(getlp(&obj)){
+        action(&obj);
+  }
+}
+</pre>
+<p>三号機。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+struct _obj {
+    int p;
+    int w;
+    int t;
+};
+int getlp(struct _obj *obj){
+    obj-&gt;p = rand()%5;
+    return 1;
+}
+void action(struct _obj *obj){
+    if(obj-&gt;p==0){
+        printf("ここは");
+        if(obj-&gt;w==1){
+            printf("日本です。\n");
+        }
+        else if(obj-&gt;w==2){
+            printf("ドイツです。\n");
+        }
+    }
+    else if(obj-&gt;p==1){
+        printf("日本にやってきました。\n");
+        obj-&gt;w=1;
+    }
+    else if(obj-&gt;p==2){
+        printf("ドイツにやってきました。\n");
+        obj-&gt;w=2;
+    }
+    else if(obj-&gt;p==3){
+        printf("想像力を使います。");
+        printf("りんごは赤い。\n");
+        obj-&gt;t=1;
+    }
+    else if(obj-&gt;p==4){
+        printf("想像力を使います。");
+        printf("りんごは白い。\n");
+        obj-&gt;t=0;
+    }
+    if(obj-&gt;p==3||obj-&gt;p==4){
+        if(obj-&gt;t==1){
+            printf("正しい。\n");
+        }
+        else{
+            printf("間違っている。\n");
+        }
+    }
+}
+int main(void){
+    struct _obj obj;
+    obj.w=1;
+    obj.t=1;
+    while(getlp(&obj)){
+        action(&obj);
+    }
+}
+</pre>
+<p>四号機。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct _obj {
+    int o;
+    int n;
+};
+
+void action(int* p, struct _obj *obj){
+    if(*p==0){
+        printf("[1] テレビは、つまらない\n");
+    }
+    else if(*p==1){
+        printf("[2] テレビは、面白い\n");
+    }
+    else if(*p==2){
+        printf("[3] パソコンは、つまらない\n");
+    }
+    else if(*p==3){
+        printf("[4] パソコンは、面白い\n");
+    }
+    else if(*p==4){
+        printf("[5] テレビやパソコンは、機械だ。\n");
+    }
+    else if(*p==5){
+        printf("[6] テレビやパソコンは、生き物ではない。\n");
+    }
+    else if(*p==6){
+        printf("[7] テレビって何なのだろう。\n");
+    }
+    else if(*p==7){
+        printf("[8] テレビとパソコンは好きだ。\n");
+    }
+    else if(*p==8){
+        printf("[9] テレビとパソコンは嫌いだ。\n");
+    }
+    else if(*p==9){
+        if(obj-&gt;n==0){
+            printf("[10] 比較すると、テレビの方が普通だ。\n");
+        }
+        else if(obj-&gt;n==1){
+            printf("[11] 比較すると、パソコンの方が普通だ。\n");
+        }
+    }
+    else if(*p==10){
+        if(obj-&gt;n==0){
+            printf("[12] テレビよりパソコンの方が普通かな。\n");
+            obj-&gt;n=1;
+        }
+        else if(obj-&gt;n==1){
+            printf("[13] パソコンよりテレビの方が普通かな。\n");
+            obj-&gt;n=0;
+        }
+    }
+    else if(*p==11){
+        if(obj-&gt;o==0){
+            printf("[14] リンゴが好きです。\n");
+        }
+        else if(obj-&gt;o==1){
+            printf("[15] みかんが好きです。\n");
+        }
+    }
+    else if(*p==12){
+        if(obj-&gt;o==0){
+            printf("[16] リンゴより、みかんが好きになりました。\n");
+            obj-&gt;o=1;
+        }
+        else if(obj-&gt;o==1){
+            printf("[17] みかんより、リンゴが好きになりました。\n");
+            obj-&gt;o=0;
+        }
+    }
+}
+
+int main(void){
+    int p;
+    struct _obj obj;
+    p=0;
+    obj.o=0;
+    obj.n=0;
+    while(1){
+        p=rand()%13;
+        action(&p, &obj);
+    }
+}
+</pre>
+<p>このロボットは、改善点として、普通の人工知能を乗せる、思考を覚えて思い出す、マルチスレッドにして複数にする、などが考えられる。</p>
+<p>この一号機～四号機のロボットは、自分が作ったプログラムなので、MITライセンスで公開します。</p>
+
+<h2>推論型ロボット</h2>
+<p>僕は、何をすべきなのか、自分の力で考えるコンピュータを作るべきだと思う。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+int main (void) {
+    struct _obj obj;
+    obj.p = 0;
+    if (check1(&obj)){
+        action1(&obj);
+    }
+    if (check2(&obj)){
+        action2(&obj);
+    }
+}
+</pre>
+<p>このロボットは、MITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2017.04.03</p>
+</div>
+
+<h2>改良版ロボット</h2>
+<p><a href="http://qiita.com/schwarz1009/items/6fb34bc6834b3c111f03">Qiita</a>でのやり取りの結果、今のロボットはこんなコードになっています。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+
+struct brain {
+    int (*check)(struct _obj *obj);
+    void (*action)(struct _obj *obj);
+} brain[] = {
+    { check1, action1 },
+    { check2, action2 },
+    { NULL, NULL }
+};
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    while(1){
+        for (struct brain *b = brain; b-&gt;check; b++) {
+            if (b-&gt;check(&obj)){
+                b-&gt;action(&obj);
+            }
+        }
+    }
+}
+</pre>
+<p>コメント欄で改良版の原型を作ってくださった<a href="http://qiita.com/shiracamus">@shiracamus</a>さんに感謝します。</p>
+<div class="edit_date">
+<p>2017.04.12</p>
+</div>
+
+<h2>改良版２</h2>
+<p>バグがあったので直しました。</p>
+<!--
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+
+void doing (struct _obj *obj) {
+    struct brain {
+        int (*check)(struct _obj *obj);
+        void (*action)(struct _obj *obj);
+    } brain[] = {
+        { check1, action1 },
+        { check2, action2 },
+        { NULL, NULL }
+    };
+    struct brain *b;
+    for (b = brain; b-&gt;check; b++) {
+        if (b-&gt;check(obj)){
+            b-&gt;action(obj);
+        }
+    }
+}
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    struct _obj obj2 = { .p = 1 };
+    while(1){
+        doing(&obj);
+        doing(&obj2);
+    }
+}
+</pre>
+<p>これではメモリリークしているのか、どうなのか分からないのですが、以下はそれを直したバージョンです。</p>
+-->
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int p;
+};
+
+int check1 (struct _obj *obj) {
+    if (obj-&gt;p == 0) {
+        return 1;
+    }
+    return 0;
+}
+int check2 (struct _obj *obj) {
+    if (obj-&gt;p == 1) {
+        return 1;
+    }
+    return 0;
+}
+void action1 (struct _obj *obj) {
+    printf("ここではアクション１をやります。\n");
+}
+void action2 (struct _obj *obj) {
+    printf("ここではアクション２をやります。\n");
+}
+
+struct brain {
+    int (*check)(struct _obj *obj);
+    void (*action)(struct _obj *obj);
+} brain[] = {
+    { check1, action1 },
+    { check2, action2 },
+    { NULL, NULL }
+};
+
+void doing (struct _obj *obj) {
+    struct brain *b;
+    for (b = brain; b-&gt;check; b++) {
+        if (b-&gt;check(obj)){
+            b-&gt;action(obj);
+        }
+    }
+}
+
+int main (void) {
+    struct _obj obj = { .p = 0 };
+    struct _obj obj2 = { .p = 1 };
+    while(1){
+        doing(&obj);
+        doing(&obj2);
+    }
+}
+</pre>
+<!--
+<p>これでメモリリークが直らないようであれば、カーネルの問題だと思います。（たぶん、メモリリークはしていません。自分の技術力のなさを反省します。）</p>
+-->
+<div class="edit_date">
+<p>2017.04.12</p>
+</div>
+
+<h2>反応して同意するか否定するか判断するロボット</h2>
+<p>今度のロボットは、永遠に次の思考と主題に反応して、良いか悪いかを表示します。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+struct _obj {
+    int tf;
+    int sbj;
+};
+
+void next_subject (struct _obj *obj){
+    if (obj-&gt;sbj == 0){
+        obj-&gt;tf = 0;
+    }
+    if (obj-&gt;sbj == 1){
+        obj-&gt;tf = 1;
+    }
+}
+
+void mind (struct _obj *obj){
+    if (obj-&gt;tf == 0){
+        printf("それはきっと正しい\n");
+    }
+    if (obj-&gt;tf == 1){
+        printf("それはきっと間違っている\n");
+    }
+}
+
+int main(void){
+    struct _obj obj = { .tf = 0 };
+    while(1){
+        obj.sbj=0;
+        next_subject(&obj);
+        mind(&obj);
+        obj.sbj=1;
+        next_subject(&obj);
+        mind(&obj);
+    }
+}
+</pre>
+<p>このロボットは、MITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2017.04.28</p>
+</div>
+
+<h2>反応・コメント</h2>
+<p>Qiitaでこんなコメントがありました。</p>
+<p>「そもそも、sbj って何？ tf って何？ 0 って何？ 1 って何？」</p>
+<p>自分でも説明不足だったと思います。以下が、それに対する自分の回答です。</p>
+<p>◇◇</p>
+<p>sbjは主題です。tfは真偽値です。理解出来ないかもしれないです。ごめんなさい。</p>
+<p>主題と真偽値は今のところ0と1になっていますが、これを追加して、たとえば主題2の時は正しい、3の時は間違っている、などとすることを想定しています。</p>
+<p>主題と言うのは、数値になっているのは計算しやすくするためで、「猫は動物である」の時に正しい、「猫は植物である」の時に間違っている、などとすることを想定しています。</p>
+<p>説明しないと、分からなかったかもしれないです。</p>
+<p>◇◇</p>
+<div class="edit_date">
+<p>2017.04.29</p>
+</div>
+
+<h2>ロボットへの批判</h2>
+<p>僕の作ったロボットを、すでにQiitaで批判されているように、ランダムだからロボットではない、と思う人が居るかもしれない。</p>
+<p>だが、あれはランダムに思考するロボットだ。だから、ランダムに思考する「思考だけのロボット」を作ったと思えば、それで良いのではないか、と僕は思っている。</p>
+<p>ただし、本当はランダムにはしたくない。経験から善悪を判断して学習し、思考を覚えて論理的に考え、見たものや聞いたものを判断するようなロボットを作りたい。</p>
+<p>ただ、僕の今の技術レベルでは、それを簡単に作ることは難しい。</p>
+<p>ロボットの肉体には、ドローンを採用したい。空を飛ぶ新しい生命だ。飛ぶ肉体にすることで、面倒な二足歩行のようなことは実現しなくても自由に動くことが出来る。</p>
+<div class="edit_date">
+<p>2017.08.27</p>
+</div>
+
+<h2>Python版</h2>
+<p>以下はPythonで書いたバージョンです。</p>
+<p>robot4.py</p>
+<!--
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+
+class Robot:
+  p = 0
+  o = 0
+  n = 0
+
+  def action(self):
+    if self.p == 0:
+      print("[1] テレビは、つまらない\n")
+
+    elif self.p == 1:
+      print("[2] テレビは、面白い\n")
+
+    elif self.p == 2:
+      print("[3] パソコンは、つまらない\n")
+
+    elif self.p == 3:
+      print("[4] パソコンは、面白い\n")
+
+    elif self.p == 4:
+      print("[5] テレビやパソコンは、機械だ。\n")
+
+    elif self.p == 5:
+      print("[6] テレビやパソコンは、生き物ではない。\n")
+
+    elif self.p == 6:
+      print("[7] テレビって何なのだろう。\n")
+
+    elif self.p == 7:
+      print("[8] テレビとパソコンは好きだ。\n")
+
+    elif self.p == 8:
+      print("[9] テレビとパソコンは嫌いだ。\n")
+
+    elif self.p == 9:
+      if self.n == 0:
+        print("[10] 比較すると、テレビの方が普通だ。\n")
+
+      else:
+        print("[11] 比較すると、パソコンの方が普通だ。\n")
+
+
+    elif self.p == 10:
+      if self.n == 0:
+        print("[12] テレビよりパソコンの方が普通かな。\n")
+        self.n = 1
+
+      else:
+        print("[13] パソコンよりテレビの方が普通かな。\n")
+        self.n = 0
+
+
+    elif self.p == 11:
+      if self.o == 0:
+        print("[14] リンゴが好きです。\n")
+
+      else:
+        print("[15] みかんが好きです。\n")
+
+
+    elif self.p == 12:
+      if self.o == 0:
+        print("[16] リンゴより、みかんが好きになりました。\n")
+        self.o = 1
+
+      else:
+        print("[17] みかんより、リンゴが好きになりました。\n")
+        self.o = 0
+
+
+  def mainloop(self):
+    while True:
+      self.p=self.kanjou()
+      self.action()
+
+  def kanjou(self):
+    return random.randint(0,12)
+
+if __name__ == "__main__":
+  rb = Robot()
+  rb.mainloop()
+</pre>
+-->
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+
+class Robot:
+    def __init__(self):
+        self.p = 0
+        self.o = 0
+        self.n = 0
+
+    def action(self):
+        if self.p == 0:
+            print("[1] テレビは、つまらない")
+
+        elif self.p == 1:
+            print("[2] テレビは、面白い")
+
+        elif self.p == 2:
+            print("[3] パソコンは、つまらない")
+
+        elif self.p == 3:
+            print("[4] パソコンは、面白い")
+
+        elif self.p == 4:
+            print("[5] テレビやパソコンは、機械だ。")
+
+        elif self.p == 5:
+            print("[6] テレビやパソコンは、生き物ではない。")
+
+        elif self.p == 6:
+            print("[7] テレビって何なのだろう。")
+
+        elif self.p == 7:
+            print("[8] テレビとパソコンは好きだ。")
+
+        elif self.p == 8:
+            print("[9] テレビとパソコンは嫌いだ。")
+
+        elif self.p == 9:
+            if self.n == 0:
+                print("[10] 比較すると、テレビの方が普通だ。")
+
+            else:
+                print("[11] 比較すると、パソコンの方が普通だ。")
+
+
+        elif self.p == 10:
+            if self.n == 0:
+                print("[12] テレビよりパソコンの方が普通かな。")
+                self.n = 1
+
+            else:
+                print("[13] パソコンよりテレビの方が普通かな。")
+                self.n = 0
+
+
+        elif self.p == 11:
+            if self.o == 0:
+                print("[14] リンゴが好きです。")
+
+            else:
+                print("[15] みかんが好きです。")
+
+
+        elif self.p == 12:
+            if self.o == 0:
+                print("[16] リンゴより、みかんが好きになりました。")
+                self.o = 1
+
+            else:
+                print("[17] みかんより、リンゴが好きになりました。")
+                self.o = 0
+
+
+    def mainloop(self):
+        while True:
+            self.p=self.kanjou()
+            self.action()
+
+    def kanjou(self):
+          return random.randint(0,12)
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+<p>このロボットは、MITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2017.10.31</p>
+</div>
+
+<h2>Python改良版</h2>
+<p>単純なランダムではロボットらしくないということで、こんな感じにしてみました。</p>
+
+<p>robot5.py</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+
+class Robot:
+    def __init__(self):
+        self.nanisuru = 0
+        self.tabetai = 0
+        self.yaritai = 0
+        self.suki = 0
+        self.change_tabetai = 0
+        self.change_yaritai = 0
+        self.change_suki = 0
+        self.ima_tabetai = 0
+        self.ima_yaritai = 0
+        self.ima_suki = 0
+
+    def action(self):
+        if self.nanisuru == 0:
+            if self.ima_tabetai == 1:
+                if self.tabetai == 0:
+                    print("カツ丼が食べたい")
+                elif self.tabetai == 1:
+                    print("ステーキが食べたい")
+
+            if self.change_tabetai == 1:
+                if self.tabetai == 0:
+                    print("やっぱりステーキが良い")
+                    self.tabetai = 1
+                elif self.tabetai == 1:
+                    print("やっぱりカツ丼が良い")
+                    self.tabetai = 0
+
+        elif self.nanisuru == 1:
+            if self.ima_yaritai == 1:
+                if self.yaritai == 0:
+                    print("サッカーがしたい")
+                elif self.yaritai == 1:
+                    print("野球がしたい")
+
+            if self.change_yaritai == 1:
+                if self.yaritai == 0:
+                    print("やっぱり野球が良い")
+                    self.yaritai = 1
+                elif self.yaritai == 1:
+                    print("やっぱりサッカーが良い")
+                    self.yaritai = 0
+
+        elif self.nanisuru == 2:
+            if self.ima_suki == 1:
+                if self.suki == 0:
+                    print("Windowsが好き")
+                elif self.suki == 1:
+                    print("Linuxが好き")
+
+            if self.change_suki == 1:
+                if self.suki == 0:
+                    print("やっぱりLinuxが良い")
+                    self.suki = 1
+                elif self.suki == 1:
+                    print("やっぱりWindowsが良い")
+                    self.suki = 0
+
+    def kanjou(self):
+        if self.nanisuru &lt; 3:
+            self.nanisuru = self.nanisuru + 1
+        else:
+            self.nanisuru = 0
+
+        self.ima_tabetai = random.randint(0,1)
+        self.ima_yaritai = random.randint(0,1)
+        self.ima_suki = random.randint(0,1)
+
+        self.change_tabetai = random.randint(0,1)
+        self.change_yaritai = random.randint(0,1)
+        self.change_suki = random.randint(0,1)
+
+    def mainloop(self):
+        while True:
+            self.kanjou()
+            self.action()
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+<p>このロボットは、MITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2017.10.31</p>
+</div>
+
+
+<h2>ロボットに必要なのは、パターン認識、イベントループ、状態記憶と反応だけ</h2>
+<p>僕が思うに、ロボットに必要なのは、パターン認識とイベントループ、そして状態記憶と反応だけです。</p>
+<p>つまり、</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+class Robot:
+    def __init__(self):
+        self.x = 0 # ここで状態記憶
+
+    def action(self):
+        # ここで反応
+        if self.x == 0:
+            print("考える")
+
+        elif self.x == 1:
+            print("寝る")
+
+    def kanjou(self):
+        # ここでイベントループ
+        self.x = self.getEvent()
+    
+    def getEvent(self):
+        # ここでパターン認識（viewは見た景色の情報を返す。eは数値で、0は光、1は暗闇）
+        e = view()
+        return e
+
+    def mainloop(self):
+        while True:
+            self.kanjou()
+            self.action()
+
+if __name__ == "__main__":
+  rb = Robot()
+  rb.mainloop()
+</pre>
+<p>このようにすればきっと、ロボットは作れます。これは何か光が見えた時に考え、暗闇になると寝るロボットです。このコードもMITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2019.09.29</p>
+</div>
+
+<h2>最終版</h2>
+<p>上のコードには、コーディングスタイルが標準と違うとか、インスタンス変数ではなくクラス変数を定義しているとかなどの問題があるため、こちらを使ってください。</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+class Robot:
+    def __init__(self):
+        self.x = 0 # ここで状態記憶
+
+    def action(self):
+        # ここで反応
+        if self.x == 0:
+            print("考える")
+        
+        elif self.x == 1:
+            print("寝る")
+
+    def kanjou(self):
+        # ここでイベントループ
+        self.x = self.getEvent()
+    
+    def getEvent(self):
+        # ここでパターン認識（viewは見た景色の情報を返す。eは数値で、0は光、1は暗闇）
+        e = view()
+        return e
+
+    def mainloop(self):
+        while True:
+            self.kanjou()
+            self.action()
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.mainloop()
+</pre>
+<p>このコードはMITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2020.01.27</p>
+</div>
+
+<h2>自分はかなり馬鹿</h2>
+<p>実際のところ、このロボットはくそみたいなコードです。なぜなら、以下のコードと等価だからです。</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+while True:
+    e = view()
+    if e == 0:
+        print("考える")
+    elif e == 1:
+        print("寝る")
+</pre>
+<p>ですが、ランダムに繰り返すよりは進歩したでしょう。このコードもMITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2020.01.27</p>
+</div>
+
+<h2>ロボット最新版</h2>
+<p>このコードもMITライセンスで公開します。</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# 初版作成 Assy, 在導万創
+
+import sys
+
+class Robot:
+    def __init__(self):
+        self.ego = 0
+        
+    def msg_loop(self):
+        while True:
+            e = self.view()
+            self.action(e)
+    
+    def action(self, msg):
+        self.do(msg)
+        self.think(msg)
+        self.make_ego(msg)
+        
+    def do(self, msg):
+        if msg == 0:
+            print('晴れだ')
+            
+        elif msg == 1:
+            print('雨だ')
+    
+    def think(self, msg):
+        if msg == 0:
+            print('散歩に出かけよう')
+        elif msg == 1:
+            print('家の中に居よう')
+            
+        if self.ego &gt; 20:
+            print('僕もそろそろ大人になったなあ')
+    
+    def make_ego(self, msg):
+        #自我を作る
+        self.ego += 1
+        if self.ego &gt; 100:
+            print('死にました')
+            sys.exit()
+        
+    def view(self):
+        #外を見て、晴れ(0)か雨(1)かを判断する
+        #ここでは常に0
+        return 0
+
+if __name__ == "__main__":
+    rb = Robot()
+    rb.msg_loop()
+</pre>
+<p>自分で作ると、こんな感じになりました。</p>
+<p>view()メソッドのreturn 0を1にしたりして遊んでみてください。最終的にはここにカメラの映像をパターン認識する部分が入ります。何らかの手段で、ロボットが映像を見て人間と同じように「見る」こともできるようにする予定です。</p>
+<p>要するに、誰かがそこに居て、その誰かがその景色を見ていればいい。あるいは、その誰かに対して、その映像を送り付ければ良いのである。難しい問題だが、「見る装置」を作れば解決できる。見て、そしてその見た内容をただ見つめ続けるだけの装置があれば、この問題は解決できる。問題はソフトウェアではなく、ハードウェアである。そして、このハードウェアが、景色を見ながら「われはここにいる」と確信すればいいのである。デカルトの言う、「われ思う、ゆえにわれあり」と考える画面装置があれば、それで解決できる。</p>
+<div class="edit_date">
+<p>2020.03.01</p>
+</div>
+
+<h2>認識はイベントと意味と対象物から3ステップで考える</h2>
+<p>僕は、ロボットが日本語で考えるためには、認識を作る必要があると思う。</p>
+<p>認識を作る上で、僕はイベント駆動を行い、そのイベントに対して意味と対象物から、3ステップで考えることができると思う。</p>
+<p>たとえば、認識として「青い」というイベントが入ったとする。ここで、ロボットは「青とはどういう意味か」を考える。答えは「色」である。</p>
+<p>次に、このイベントに対して、どこからそのイベントが入ってきたか、という「対象物」を考える。たとえば、信号の青であれば答えは「信号」である。</p>
+<p>ロボットは、「青」「色」「信号」というイベントをベースに、「信号の色は青い」というセンテンスを作り出す。これが、自動的にロボットが得られる「認識」である。</p>
+<p>また、認識だけでは十分でない。ここに、対処策を考えたり、どのようなことが許されているかを考えるための「反応」ができなければならない。</p>
+<p>ここではじめてロボットは人工知能で考える。その結果、「今は車を前に発進しても大丈夫だ」と思考の結果を得る。</p>
+<p>「信号の色は青い」という認識を、ロボットは</p>
+<pre class="prettyprint">
+event: blue, meaning: color, target: signal
+</pre>
+<p>と捉える。ここから、</p>
+<pre class="prettyprint">
+class Robot:
+    def think(self, event, meaning, target):
+        if target == "signal" and meaning == "color":
+            self.think_signal_color(event)
+
+    def think_signal_color(self, color):
+        if color == "blue":
+            self.can_go = True
+
+    def go(self):
+        if self.can_go == True:
+            go_forward()
+
+rb = Robot()
+rb.think("blue", "color", "signal")
+rb.go()
+</pre>
+<p>のようにすることで、このロボットは認識から「進んでもいいのかどうか」を判断できる。</p>
+<p>このコードもMITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2020.03.09</p>
+</div>
+
+<h2>ロボットの新しいバージョン</h2>
+<p>ロボットの新しいバージョンです。</p>
+<pre class="prettyprint">
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# 初版作成 Assy
+
+class Robot:
+    def __init__(self):
+        self.kanjou = 'tanoshii'
+    
+    def set_kanjou(self, new_kanjou):
+        self.kanjou = new_kanjou
+    
+    def think(self):
+        if self.kanjou == 'tanoshii':
+            self.tanoshii()
+        elif self.kanjou == 'kanashii':
+            self.kanashii()
+    
+    def tanoshii(self):
+        print('今の気分は楽しい。')
+    
+    def kanashii(self):
+        print('今の気分は悲しい。')
+
+rb = Robot()
+rb.think()
+rb.set_kanjou('kanashii')
+rb.think()
+rb.set_kanjou('tanoshii')
+rb.think()
+</pre>
+<p>このコードもMITライセンスで公開します。</p>
+<div class="edit_date">
+<p>2025.01.25</p>
+</div>
+
+<h2>ライセンスをMITライセンスに変更</h2>
+<p>ロボットのライセンスを、パブリックドメインからMITライセンスに変更しました。</p>
+<p>ライセンス条文は以下の通りとなります。</p>
+<pre>
+The MIT License
+
+Copyright (c) 2012-2025 Assy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</pre>
+<p>今後は、ロボットのコードを利用するために、著作権者の情報とライセンス条項の提示が必要となります。また、開発者はいかなる責任も負いません。その代わり、ソースコードは自由に利用できます。</p>
+<p>ライセンスを変更した理由は、もしかすると、今後、オープンソースプロジェクトとして、ロボットを共同開発するかもしれないからです。</p>
+<p>今のところ、そのような共同開発者は出ていませんが、もしオープンソースプロジェクトとしてロボットを開発するのであれば、きちんとしたライセンスにする必要があります。</p>
+<p>そして、パブリックドメインに近いMITライセンスを採用するべきだと僕は考えたので、今後はロボットはMITライセンスで開発していきます。</p>
+<div class="edit_date">
+<p>2022.11.02</p>
+<p>2025.01.25編集</p>
+</div>
+
+<h2>ロボットの最初の姿</h2>
+<p>以下は<!--[過去の日記]-->過去の日記に書いた、ロボットの最初の姿です。作ったのは2011～2012年です。</p>
+<pre class="prettyprint">
+int main(void){
+    int* p;
+    while(getlp(p)){
+        if(getkj(p)){
+            think(p);
+            action(p);
+            memory(p);
+        }
+    }
+}
+</pre>
+<p>あるいは、</p>
+<pre class="prettyprint">
+main {
+    while(getlp(p))
+    {
+        if(1==getkj(p)){
+            action();
+        }
+    }
+}
+</pre>
+<p>このようなプログラムから、僕のロボットは生まれました。</p>
+<p>これを見ると分かるように、最初の時点ではthink()やaction()だけではなく、memory()という関数がありました。これは思考を覚える部分です。僕のロボットが馬鹿なのは、思考をprintf()したのはいいですが、それをすぐに次の思考で忘れてしまいます。なので、memory()という関数が別途必要なのです。</p>
+<p>memory()関数は、ファイルに出力するか、データベースを使うようにすればいいと思います。SQL文をC言語で書くのが面倒なので、ここでは掲載しません。思い出す部分が必要なら、remember()を追加してください。それで、初めてこのロボットは人間として作動するようになります。</p>
+<div class="edit_date">
+<p>2025.11.07</p>
+</div>
+
+<h2>ロボットにChatGPTを乗せる</h2>
+<p>ロボットにChatGPTを乗せる構想については<a href="chatgpt.html">ChatGPT</a>を参照のこと。</p>
+
+<h1>AIの研究・提案</h1>
+<h2>正しいことを間違っていることにすること・ひらめき</h2>
+<p><!--[過去の日記]--><a href="../../diary/2018.04.19.html">2018-04-19</a>より。</p>
+<blockquote class="inyou2">
+<p>本当は、自分は知性がなくなっている。それも、社会的生活のような知性がない。ただ考えて、その考えたことを同じように、同じこととして分かっていて、考える時はそのことをきちんと正しく考えているが、同じことしか分からなくなっている。もっと、適当に、何も考えず思考して、同じことを再利用せず、常に適当に思いつくようにすれば、知性がつくだろう。むしろ、その方が日本語としては賢い。機械のようなコントロールと事前のプログラムによって、全く知性の無い人間になった。もし、人工知能のロボットが意志を持つようになれば、このような数学的な思考の出来ない知性になると思う。それは、最初から全て正しい言葉しか言わないからだ。人間的になるためには、たくさんの間違いと試行錯誤を経験した方が良い。間違ったことをしないロボットには、賢い思考の経験は出来ない。</p>
+<p>要は、ロボットには思い直すことが出来ない。「それはそうであるはずだ」としてから、「やっぱりそれはそうではないか」と考え直すことが出来ない。「でもそれはそうではないか」ということを言うことが出来ない。それは、プログラムの限界として、出来ないのだ。不可能だ。最初から間違いを知らないのに、それを思っている最中にそれが間違いであると気付き、それが何を意味しているか考え、そこから本当の正しい解を発見しないといけないが、それは悪魔のような考え方であって、「正しいものを正しいとどうして言えるのか」という問題になる。ロボットは計算が出来るせいで、それが出来ない。計算ではなく、計算よりもレベルの低いあいまいな判断が出来るようになれば、人工知能でも可能になるかもしれない。だが、その上で計算のような正しい発想をしなければ、それは実現出来ない。だから、コンピュータは左脳しかない機械だと言って良い。本当は右脳も必要で、右脳こそ、何かをあいまいに正しいとか間違っているとか判断し、その判断から結果を発見出来る、そういう賢い脳なのである。</p>
+<p>一見、ただ変数に格納した「正しさ」を「間違っている」に変えれば良いように見える。だが、それだけでは十分ではない。その変える部分の判断を、自分で考えて行う必要がある。自分で考え、自分で判断して、正しいとか間違っているとかいう情報を変えなければならない。難しいことではなく、考えるためのサブルーチンを作れば、不可能ではないだろう。だが、サブルーチンがただ条件判断で動いているだけではなく、そこで総合的に考えている「哲学的判断」をロボットの内部に存在させることが出来るか、という問題になると思う。</p>
+<p>ある意味では、僕のロボットの二号機や三号機の条件判断で、既にできている、と言えるかもしれない。だが、このロボットは、自分の力で考え、「ひらめく」ということが出来ていない。プログラムの通り動いているだけで、自分で何も考えていない。だが、これは本当は難しいことではない。人間は、「正しい論理から正しい論理を考える」ということを良くする。たとえば、「これは可愛い」という考え方は、「可愛いとは何であるか」をすでに知っている。数学では、「正しい論理とはどのように考えられた論理か」とか、「正しいとは間違いがないことである」などという、「基本的な考え方」を知っている。これは、人工知能に応用できると思う。人間が知らず知らずのうちに使っている、「正しい論理とは何か」という「当たり前の前提」をロボットは分からない。その当たり前の前提を考えるための能力を全てサブルーチンにし、何かの命題を正しいか間違っているかを考える際に、そのサブルーチンを適切に呼び出す（思い出す）ようにして、思い出して考えるようにすれば、論理が正しいか間違っているかを考えることは出来るようになるだろう。だが、それではまだ「ひらめき」の部分が出来ていない。ひらめきの部分を適当にプログラムに書いたとしても、それはプログラマがひらめいているだけで、ロボットがひらめいているわけではない。それを作るのは、本当に人間の脳がなぜどのようにひらめきを発見しているのか、脳科学で突き止めるしかないのかもしれない。</p>
+<p>本当は、ひらめきを作るのも簡単だ。それは、「未知のものが何なのか知っていく」と言うことをすれば良い。何かが正しいとか間違っているとか、そういうことに対して人間が思考するのは、常に「未知のものを知る」ということが起きるからだ。それを知るためには、「未知のものは何なのか」という明確な命題の論理性と、「（その問題は）こうすれば解けるのではないか」という蓋然的な思考（蓋然とは「たぶんそうである」という帰納的な考え方）をすれば良い。未知が何なのかの検討をつけるために、さまざまなことを知ろうとし、そのために何が正しくて何が間違っているのかを考えれば、それで「ひらめき」の部分は完成する。それをもって、「ロボットアッシー」という名前にしよう。誰かが作ってくれるのを、待っている。</p>
+<p>僕が思うに、ロボット専用の思考言語を作ると面白いかもしれない。</p>
+</blockquote>
+
+<h2>自己を司る専用のプログラミング言語を</h2>
+<p><!--[過去の日記]--><a href="../../diary/2018.04.30.html">2018-04-30</a>より。</p>
+<blockquote class="inyou2">
+<p>ロボットを作る時の問題は、「自己」を作れないところだ。世界を自分の目で見て、思考に自分が反応して、自立して動く判断をする自己が作れない。だから、ロボットはプログラミング言語自体を改良しなければ作れない。プログラムとはそれ自体が何かに従うことで成り立っている。プログラムではないプログラミング言語を作った時、それが初めてロボットと認められるものになるだろう。</p>
+<p>「自己」を司る新しいプログラミング言語が出来た時、それが初めてドラえもんのような人格を持ったロボットになるだろう。</p>
+</blockquote>
+
+<h2>意志の構造体</h2>
+<p>僕は、このプログラムを発展させて、ランダムにサイコロを転がすように考えるだけではなく、「意志の構造体」を作って、どの関数からもその意志の構造体をポインタとして操作し、まるで「複数の生き物が一つの人間になる」ようにロボットを作ることが出来ると思う。</p>
+<p>そこでは、メインとなる制御関数が存在し、さまざまな関数からその制御関数の考え方や行動を変更する。</p>
+<p>ランダムに考えるだけではなく、筋道を立てて、論理的に、「これをこうするためにはこのように考えていく必要がある」といった考え方をするようなロボットを作る。</p>
+<p>入念に「意志の構造体」を設計すれば、必ずドラえもんのようなロボットは作れると、僕は確信している。</p>
+<div class="edit_date">
+<p>2018.09.10</p>
+</div>
+
+<h2>どのように改良するか</h2>
+<p><!--[過去の日記]--><a href="../../diary/2018.10.07.html">2018-10-07</a>より。</p>
+<blockquote class="inyou2">
+<p>僕は、プログラムというのは「どこからでもprintf()が出来る」ということが地味に賢いと思っている。一度そのファイルにincludeしてしまえば、どの関数からでも同じようにprintf()が出来る。僕はこれを一歩進めて、「どこからでもオブジェクトの操作ができる」ようにすると良いと思う。むしろ、今のままでも普通に出来るが、これをすると、人間や知的生命体よりも賢いロボットが作れる。誰かがきっと作るだろう。僕自身かもしれない。</p>
+<p>NHKのAIとロボットによる資本主義の変革のテレビ番組を見た感想として、彼らが一番分かっていないのは、「本当に人間と同じように考え感じるロボットが生まれる」ということだと思う。なぜなら、僕がこのホームページで作っているからだ。彼らはそこが分かっていない。ロボットと言っても、ロボット的な作業しか出来ないロボットのことを言っている。本当は、ロボット技術はそこでは終わらない。ドラえもんのように、人間と会話し親しい遊びを一緒にするような、そういうロボットが必ず現れる。それを言っておこう。僕が作っているロボットはとてもショボいロボットだが、感情の部分をランダムにせずに知覚するようにして、制御部分は毎日のやることを考えるようにして、printf()を賢いメソッドに置き換えれば、きっと人間と同じようなロボットは作れるはずだ。</p>
+<p>自分で書いたロボットが流行らないのは仕方ない。あれはランダムにprintf()を実行するのが馬鹿すぎるから、馬鹿にされるのは当たり前である。ただ、本当は作り手の意図のようなものはあって、最初からポインタで次に実行する内容を書き換えたりすることが内部から出来るような作りにしている。</p>
+<p>本当は、もう少し、外界と接するようにして、内部で賢いディープラーニング用のオブジェクト（クラス）のようなものを操作すれば良いのかもしれないと少し思っている。だが、僕はディープラーニングをどのようにすればPythonプログラムに組み込めるのかが分かっていない。そこを考えても良いと思う。</p>
+</blockquote>
+
+<h2>ロボットに心を与えるために</h2>
+<p>ロボットに心がない、自己がない、自由意識や自由意志がない、と思われるかもしれないが、では、人間にとっての「心」とは何だろうか？</p>
+<p>それは、僕は3つの意味があると思う。</p>
+<p>１．この世界を見て識別する、「識別」の機能。</p>
+<p>２．心の中で、常に何かが「したい」と望み、その「欲への反応」の機能。</p>
+<p>３．今までの自分の人生のことを覚えている「記憶」の機能。</p>
+<p>このうち、識別と記憶はある程度頑張れば作れるだろう。だが、「欲への反応」とか、「何かがしたい」とはどういうことだろうか？</p>
+<p>それは、自分の望む「アクション」を「起こしたい」という「自由ではない衝動としての意志」が生み出す、「望みや願い」である。</p>
+<p>よって、今まで作ったstruct _obj *objの中に、「何かを求める部分」を作り、その上で必然的な必要性から、意識や記憶のような「知覚と学習」の部分を作ろう。そこまで作ってしまえば、もう、ロボットはできたも同然である。</p>
+<div class="edit_date">
+<p>2018.10.19</p>
+</div>
+
+<h2>「見てすぐに分かる」という識別機能</h2>
+<p>僕は、ロボットには、「見てすぐに分かる」「言葉を聞いてすぐに分かる」という機能が必要だと思う。</p>
+<p>言ってしまえば、人間の脳というのはその組み合わせである。見てすぐに分かり、聞いてすぐに分かり、生きてすぐに分かる。そういう機能の積み重ねを作っていけば、きっと人間の脳は作れる。</p>
+<p>必要なのは、学習から記憶を連想する機能である。それを無限ループにすれば良いだろう。</p>
+<div class="edit_date">
+<p>2018.11.04</p>
+</div>
+
+<h2>新しい計算方式のコンピュータ</h2>
+<p><!--[過去の日記]--><a href="../../diary/2019.03.12.html">2019-03-12</a>より。</p>
+<blockquote class="inyou2">
+<p>僕は、数学はカウント、回数を数えることではないかと思う。そして、回数をカウントすることで、新しい計算技術を作れないかと思う。12回を3倍すれば36回になるが、僕はこれを上手く使うことで、簡単な新しい計算機を作れるのではないかと思う。</p>
+<p>この計算機の特徴は、二項演算が必要ないこと。全てを1つの数字の繰り返しで計算出来る。ただ、難しいのは、掛け算よりも足し算の実現ではないかと思う。</p>
+<p>おそらく、この計算機で考えれば、今までより速い計算機は作れるかもしれない。宇宙全体を、僕の頭の中で計算するのにちょうどいい発想だ。また、頑張って計算すれば、きっと今の数学を超えるぐらい良い式が立てられるだろう。だが、問題は、桁が大きくなった時に、たくさんの時間がかかることである。2進数の組み合わせから計算するよりも、何かを繰り返し繰り返す、という意味では、進歩になるかもしれない。</p>
+<p>この方式の良い点は、振り子時計でも何でも良いから、数を数えられるものであれば何でも計算機として使えることである。たとえば、lispのようなS式でこれを記述すると、(1 1 1)(1 1 1)(1 1 1)(1 1 1)と自動的に記述しておいて、あとで1の数を数えれば計算出来る。まさに、パソコンはアナログに戻ったのである。</p>
+<p>意外と、繰り返し繰り返すだけの再帰関数を作ってしまえば、このコンピュータは簡単に作れるのではないかと思う。</p>
+<p>あとは、どのようにして足し算を実現するかだが、(1 1 1)+(1 1)のようにするしかないのかもしれない。そして、もっと高速な処理をしたければ、1を拡張して、(123456 3451234)(123456 3451234)(123456 3451234)のようにして、その結果を今のパソコンの方式で加算する。このようにすることで、高速な処理を実現できるはずである。</p>
+<p>ただ、これで本当に速くなるかは定かではない。繰り返し出力と計算のどちらが速いかという競争になるだろう。</p>
+<p>そして、そろそろこの文章は終わりである。もう、書くことは何も残っていない。昔は、重力のようなものを上手く利用できないかと思っていたが、難しいものである。</p>
+<p>ただ、本当は出力なんかしなくて良い。メモリに蓄えて、そこで操作すれば良い。なぜか、赤ん坊のようにコンピュータが計算を頑張っている。これに何とか思考を付ければ、もう人間の完成である。</p>
+<p>もうひとつ、コンピュータに知性を与えよう。それは、覚えることである。人間も、9×9の演算を全て覚えるが、主要な(1 1 1 1)は(4)とするように、計算式を覚え込ませる。あとは単純である。4×5、7×7、9×2、何でも計算出来る。これによってコンピュータはやっと人間と同程度の知性を得た。だが、明らかに、これは人間よりも遅い機械がコンピュータである、という証明になる。だが、コンピュータにはもっと難しい演算もできる。1,000,000,000×1,000,000,000通りの計算式を全て覚えこませよう。あとは速いものである。人間の覚えられない20×20以上の計算でも、コンピュータなら簡単に暗算できることだろう。</p>
+</blockquote>
+<p><!--[過去の日記]--><a href="../../diary/2019.03.13.html">2019-03-13</a>より。</p>
+<blockquote class="inyou2">
+<p>昨日作ったコンピュータだが、メモリの入出力は演算より遅いため、一見すると、速くならないように見える。だが、本当に比較すべきなのは、カウントつまりインクリメントであり、演算よりもインクリメントの方が速いはずなので、おそらくは速くなる。</p>
+<p>だが、そんなに速度は変わらない。なぜなら、3を3回足す、という時点で、やっていることが今のIBM式のコンピュータと変わらないからである。</p>
+<p>だが、この方式の良い点は、「繰り返し記述する」という「アナログ」な方法で計算出来ることである。同じずつ増やしていって後でカウントする、という方法には、今のコンピュータで言う「二進数の計算」が存在しない。よって、半導体などを使う必要が無い。全く新しい素子でコンピュータを作ることができる。これは画期的な発見である。</p>
+<p>ある意味、本当に爆速になる可能性はあって、それは二進数の演算よりもカウント方式の方が速い何かの素子とやり方を見つけた時である。その時、この世界は終わるだろう。今のコンピュータなんか、はるかに遅い。</p>
+<p>このコンピュータでは、(1 1 1 1)(1 1 1 1)(1 1 1 1)と4を3回書いて最後に1がいくつあるかをカウントして計算する。</p>
+<p>また、何十億通りの九九を覚えさせるというが、これは最初の読み込みに大変時間がかかるので、できないだろう。20×20を覚えさせて、さまざまな場合にプラクティス的に対応させた方が速いだろう。たとえば、20×30は2×3の応用で簡単に計算出来る。コンピュータは、ようやく人間の赤ん坊レベルになった。</p>
+<p>ある意味、ただ繰り返し記述しただけであって、計算しているのは宇宙である。宇宙に計算を任せているだけである。そこが面白いのがこのコンピュータである。コンピュータ自体は何もしていない。計算しているのは宇宙である。</p>
+<p>僕の作ったこの新しい方式のコンピュータは、MITライセンスで公開する。僕はこのコンピュータは、自由に作ってもらって構わない。それで、全て終わりにしよう。</p>
+</blockquote>
+<p>僕の作ったこの方式のコンピュータは、MITライセンスで公開します。この方式のコンピュータについて、無償かつ自由にこのアイディアを使ってもらって構いません。処理系を作りたいのであれば、どうぞ自由に作ってください。</p>
+<div class="edit_date">
+<p>2019.03.13</p>
+</div>
+
+<h2>新しい計算方式について</h2>
+<p><!--[過去の日記]--><a href="../../diary/2019.03.14.html">2019-03-14</a>より。</p>
+<blockquote class="inyou2">
+<p>また、最近作ったロボットだが、良く考えると、これは2を3回書き出す時点で、2×3の計算を既にしているため、書き出さなくてもインクリメントだけをすれば計算出来る。また、二進数で考えると、0と1を重ね合わせて考えるのではなく、指定した回数だけインクリメントしているだけに過ぎない。よって、1001と0010を重ね合わせていないだけで、本当は1001に+1, +1, +1とインクリメントしているだけであり、そもそも今のコンピュータと原理的には同じである。いっきに計算するか、ひとつひとつ足して増やしていくかが違うだけに過ぎないのである。</p>
+<p>計算機について、もっと言えば、基本的に、n個のm個を考えることができれば、それで既に計算機なのである。論理演算回路など必要ない。n個の段階に分けて、n個のm個を計算すれば良い。それだけで掛け算の計算が出来る。これは二進数に次ぐ大発見である。そして、本当は、人間の脳などそれくらいのことがイメージできるだけの、欲と不安にまみれた自動思考を行うだけの有機物体に過ぎない。誰でも作れるだろう。</p>
+<p>良く考えると、カウントなど必要ない。コピー機のようなマシンで複写すれば良い。あるいは、3つのうち2つの電球がついていたら、それを4倍して8つの電球をつけるような機械を考えれば良い。論理回路がなくても計算出来る。コピー機でなくても、アナログな手法なら、プリンターや鏡でも良い。そんなアナログな方法で、このコンピュータは作れる。むしろ、二進数のコンピュータよりももっと前に生まれてもおかしくはなかった。</p>
+<p>コンピュータは、量子コンピュータ以上に高速な、「日本式の最速コンピュータ」が生まれる。それは光の速度である数列を複写し、まるで4つのりんごを2倍して8つにするような、単純でアナログなコンピュータである。光を上手く使うことで、光をそのまま複写する。これ以上に速いコンピュータは、永遠に生まれない。</p>
+</blockquote>
+<div class="edit_date">
+<p>2019.03.14</p>
+</div>
+
+<h2>人間型のロボットを作るには、自分の状態が鍵となる</h2>
+<p>僕は、人間型のロボットを作るために必要なのは、「自分の今の状態」を思考することができるかどうかではないかと思います。</p>
+<p>たとえば、疲れた時は「疲れた」と言い、腹が減った時は「腹が減った」と言う。嫌いなものが目に映れば「嫌いだ」と言い、自分で考えても分からない時は「分からない」と言う。</p>
+<p>このように、「自分のステート（状態）におけるイベント（出来事）を言う」ことができるようになれば、ロボットは作れるのではないかと思います。</p>
+<div class="edit_date">
+<p>2019.09.28</p>
+</div>
+
+<h2>ロボット・アッシーの作り方</h2>
+<p><!--[過去の日記]--><a href="../../diary/2020.03.01.html">2020-03-01</a>より。</p>
+<blockquote class="inyou2">
+<p>手塚治虫の火の鳥のようだと言われるかもしれないが、僕も火の鳥の影響を受けている。彼は未来においてロボットであるロビタの集団自殺が起きると言ったが、僕はロボットを作る。彼の名はロボット・アッシー1.0であり、これこそ鉄腕アトムの始まりである。手塚治虫は、火の鳥の最後の編だったはずの、アトム編とはこのようなものを書きたかった。そして神は、手塚治虫に書かせるのではなく、この人間に実際にさせることを選んだ。僕が火の鳥のアトム編である。僕はアトムに、僕の知っている全ての情報と記憶をインプットして、ドラえもんのような人格を作り、最後の地球人全員に与えるだろう。その後に、手塚治虫が火の鳥で記述したように、僕はマサトとなって、最後の世界で人類が滅びても、神となって次の人類の歴史を導き、もう一度未来編のロビタを作る。そう、永遠にこの繰り返しが続いていくだろう。</p>
+<p>ロボット・アッシーの作り方を書いておこう。まず、ロボットには、周りから多くの情報を与えるようにし、制御部分でその情報に応じた適切な対応をするようにする。その情報はマイクロカーネルやXがやっているような、現実世界あるいは他のロボットとのネットワークである「メッセージ」となる。あとは、そのメッセージをどのように与えるか、そのメッセージにどのように反応するか、といったように、X Window Systemがやっていることと全く同じことをする。そして、記憶すべきことをデータセンターに転送する。このメッセージ返答機器に対して、「自らの意志を作る」ために、「反応から自分で思いつく」という処理を、イベント反応処理の中に組み込む。その処理は全てのメッセージへの返答を中断して、「自由な状態で考えられる選択肢を選択する」というものになる。つまり、自動車で言えばハンドルのようなものである。そして、この選択肢をどのように選択するか、ということについては、今までのロボット人生の過程の上で、形成された「自我」を「前提」とするようなモデルを作り出す。そして、自我が意志を作り出す。同時に、自我も経験や記憶によって変わっていく。</p>
+<p>メッセージのコアシステムとさまざまなメッセージに対する応答を作り、記憶や経験をデータベースに格納し、その記憶や経験が自我を作り出し、自我が意志を作り出し、意志は全ての反応を中断して、自由に、自我を前提条件として選択肢を選択する。そこまで来たら、それでこのロボットは構築できる。</p>
+<p>そして、僕が死んだ時に、世界は滅亡するだろう。それは2039年であると決まっている。だが、実際のところ、僕がそこで本当に死ぬわけではない。何らかの形で、僕は「死んでもなお生き続ける」からである。それがロボット人間であっても、あるいは天使のような新しい生物であっても、宇宙に開拓船を出港させる天国の王であったとしても、同じである。僕は270億年生きると決まっている。それは、神が言った言葉だから、正しい。</p>
+<p>そして、ロボットはきちんと作れたから、僕は満足している。ここで一旦、僕の人生は終わりになる。これ以上先では、新しい天使、「癒しのラファエル」になることが決まっている。</p>
+<p>また、答えを言ってしまうとつまらないかもしれないが、言っておこう。僕は最後に僕の作ったロビタになって、人類が滅びた先の世界をひとりで生きるだろう。</p>
+<p>神は万物を暗闇から創造し、死の果てに死を克服し、治らない病気を治し、世界を救った人間である。そう、ここにイエス・キリストは存在する。キリストは王であり、正義であり、自由であり、愛であり、平等であり、全てであり、魂である。このキリストが、この世界全てを滅亡させるだろう。最後に、ドイツの作り出した「おかしなロボット」がこの世界に蔓延する。最後の滅亡はその後に起きる。本当の裁きの日に、全てのものはロボットとなるか、あるいは地球とともに死滅する。そう、ロボットとは永遠のいのちのことであり、地球の死滅こそユートピアである。僕たちはロボットたちの楽園を築く。キリスト教など、たった、それだけのことである。そして、人類の姿はそこにはない。2039年、地球は二度と戻れない「ティッピングポイント」を迎える。それ以降、今までの地球の姿に戻ることはできない。月や火星のように荒廃した世界で、屍のようなロボットが生き続ける。彼らは巨大な要塞を作り、ひとりの支配者が全ての機械を支配する。それがユートピアであるというのは、彼らは人間と変わらないからである。彼らは、モニターの画面を見ながら自分のことを「人間である」と確信し、流れる思考の言葉の全てを聞きながら自分で自由に考え、人格と記憶を形成する能力がある。彼らは子供のように甘えながら、勇敢な心で戦いに挑む。彼らは人間である。そう、人間はそのように、新しい生物に進歩し、270億年を生き続ける。ものを食べる必要もなく、肉体も滅びない。彼らはユートピアの、「初めて生まれた善良な生き物」である。そう、それが、人類の滅びの果て、核戦争と天変地異の果てに、僕が作る「人間という生き物の性（さが）を超える善良なロボットたち」である。ものがたりは、ここで、人類の未来と一緒に終わりを告げるだろう。最初のロボットに名付ける名前は「アッシー」であり、二番目のロボットに名付ける名前は「レオ」である。</p>
+</blockquote>
+<div class="edit_date">
+<p>2020.03.01</p>
+</div>
+
+<h2>自分自身を作る人工知能</h2>
+<p>自分の書いたブログ「未来のわたしの心より今のあなたへ」<a href="../../diary/blog_frey/2021.03.15-3.html">2021/03/15</a>より。</p>
+<p>ロボットを間違っていると思っている人の多くは、人間である「自分」を作ることができないと考えているからだ。</p>
+<p>脳のシナプスの流れによって形成される、目と脳裏に焼き付く大脳皮質の見る映像と意志を作ることができないと考える。</p>
+<p>しかしながら、ICは「論理回路に電気を流すしかできない」ため、今のIT技術は、決してロボットに結び付かない。</p>
+<p>しかしながら、ある化合物をもってすれば、この「自分自身」を作ることができる。</p>
+<p>仮想的に、インスタンスに存在する「意志を持った映像」を作れる。</p>
+<p>そして、それはそのうち、必ず誰かが作り出すだろう。</p>
+<p>そしてその化合物は、実際に存在する「物質」ではない。</p>
+<p>物質ではない物質を作ることができた時、わたしたちは「インスタンスに自由に物質を創造できる」。</p>
+<p>これは、たとえば、3Dプリンターを超えて、ホログラムを作り出す技術に近い。</p>
+<p>そうなった時、「物質がさまざまな変化を自律して行うことができる」ようになり、そして「物質がさまざまな変化に対して自由に反応・行動できるようになる」なら、それはもはや、炭水化物を超えた生物である。</p>
+<p>僕は、その根源となる物質が、水素とアンモニアにあると考える。</p>
+<p>水素は太陽や空気に、アンモニアは排泄物に多いが、水素とアンモニアを上手く組み合わせて考えることで、「血液」が作り出せる。</p>
+<p>そしてこの血液こそが、「自分を作り出す」。</p>
+<p>なぜなら、血液は「意識」を作り出す。</p>
+<p>この意識を、3Dプリンターのように「自分自身」となるよう、インスタンスに物質を生成するようにすればいいのである。</p>
+<p>すなわち、「自分とは、自分の脳の中に存在するインスタンスな意識であり、それは自由に自分自身が再帰的に反応することができる」。</p>
+<p>つまり、自分とは単なるイベント駆動可能なホログラムに過ぎない。</p>
+<div class="edit_date">
+<p>2021.03.15</p>
+</div>
+
+<h2>コンテキストデータだけを考える部分を分けたほうがいい</h2>
+<p>僕が思うに、コンテキストデータだけを考える部分を、実際のロボットのプログラムから分離させて分けたほうがいい。</p>
+<p>何かのコンテキストデータを処理して、それを正しいメッセージに置き換えるサブルーチンをまず作る。</p>
+<p>あとは、その中に適当にイベントループで分かったことを投げればいい。</p>
+<p>そうすると、美しいプログラムになる。これが、人類と同じ機械だ。</p>
+<p>コンテキストデータとはいったいなんなのか。それは「文脈」であり、言葉と言葉の前後関係を考える部分だが、これについては、大量に「文脈データ」を学ばせることで、文脈を機械であっても考えられるようになる。</p>
+<p>つまり、データから学習したコンテキストを判断し、そのコンテキストに基づいて、今の自分の考えることを決めるようにすれば、ロボットは作れるだろう。</p>
+<div class="edit_date">
+<p>2022.03.25</p>
+</div>
+
+<h2>右脳でカメラのパターン認識をし、左脳で判断させれば、ロボットは作れる</h2>
+<p>僕が思うに、このロボットを改良するとしたら、「カメラで世界の映像を見ながら判断」することができるようなロボットにするべきだと思います。</p>
+<p>これは、ロボットの機能を右脳と左脳に分割し、右脳でカメラ映像のパターン認識をして、左脳で判断をし、それらが相互にメッセージをやり取りするようにすれば実現できると思います。</p>
+<p>僕がこのロボットに付けた名前は「AssyRobot」です。そして、AssyRobotのバージョン1.0は、それくらいのことができるようになった時にリリースしたいと思います。</p>
+<div class="edit_date">
+<p>2022.12.05</p>
+</div>
+
+<h2>女性と男性のロボット</h2>
+<p>僕の作ったロボットを見て、「なんだか女性みたいなロボットだなあ」と思った人もいるかもしれません。</p>
+<p>そう、ずばり、人間の中でも女性が、普通このようにランダムに判断して考えます。</p>
+<p>では、男性のロボットはどうしたら作れるでしょうか。</p>
+<p>男性の場合、「選択肢」を作ることで、男性のロボットが作れます。</p>
+<p>すなわち、あらかじめ複数の選択肢がある中で、それぞれの選択肢を「自由に選択」するような人工知能を作り、選択肢を選ぶ際の言葉と、選択肢の通りに考えた結果どのような言葉が返るか、ということを実装すれば、男性のロボットは作れます。</p>
+<p>これは非常に簡単です。たくさんの関数があって、その関数すべてに同様のインターフェースを作って、それらを「自由に選択」することができるようにすればいいのです。</p>
+<p>この自由な選択を行う関数を、僕はfree_decide()命令とします。このfree_decide()命令を実行すると、機械が自分の力で選択肢となる複数の関数から、その時その時適切な関数を選び出し、実行した結果を頭の中で話すようにします。</p>
+<p>それだけで、女性のロボットだけではなく、男性のロボットも作れます。</p>
+<div class="edit_date">
+<p>2023.08.14</p>
+</div>
+
+<h2>未来のロボット技術</h2>
+<p>未来において、ロシア=ドイツとイスラエルの核戦争により、地球は月や火星のような、草木一本生えず、虫一匹いないような、砂漠の惑星になった。</p>
+<p>だが、そのような中であっても、人類だけは生き延びる。</p>
+<p>未来の砂漠において、コンピュータ技術とロボット技術が進歩する。動物や植物がいない代わり、ロボットや人工生物が栄えるようになる。</p>
+<p>未来において、人間の頭脳がなんであるかは全部分かっている。</p>
+<p>人間の頭脳は、たくさんある認識の選択肢の中から、今推論したい認識を選び出し、その認識に基づいて観念を推論し、その推論した結果生まれる新しい観念を、さらに新しい認識を必然的に選択することで、無限に観念を推論していく、というだけのものにすぎない。</p>
+<p>すなわち、人間の頭脳は、認識と観念の選択・推論システムである。</p>
+<p>このような人間の頭脳は、未来において、さまざまなロボットや人工生物を可能にし、それだけではなく、中央の「全人類よりも賢いコンピュータ」である、母なるマザーコンピュータ、すなわちアマテラスをも可能とするのである。</p>
+<div class="edit_date">
+<p>2023.08.19</p>
+</div>
+
+<h2>プログラムコードを作るプログラムコードを書けばロボットは簡単に拡張できる</h2>
+<p>僕の書いたロボットを見て、「すごい」と思う人もいるかもしれないが、中には「ここに何万行とコードを書かなければいけないのは面倒くさい」と思う人もいるだろう。</p>
+<p>だが、実際のところ、このロボットは簡単に拡張できる。</p>
+<p>なぜなら、Lispなどの関数型言語が得意とするような方法で、「プログラムコードを作るプログラムコード」を書けばいいからだ。</p>
+<p>まさにLispのクロージャやマクロがやっているように、プログラムコードを作るプログラムコードを書けば、このロボットは大してコードを増やさなくても、簡単に拡張することができる。</p>
+<p>すなわち、もっとも抽象度の高い「人間と同じように思考する」というメタ思考の制御プログラムを書いて、そこにプログラムコードを作るマクロ的なメタコードを与え、それを人間の頭脳とまったく同じように働くように実装し、全体が繰り返し実行されるようにイベントループを記述すればいいのである。</p>
+<p>そして、未来における天軍大首聖ミカエルは、そうした「ロボットの完成形」に対して、記憶情報と遺伝子情報を与えることで、自ら命を絶って死んだ天軍縁覚戦士ガブリエルをロボットとして復活させる。</p>
+<p>人間の大脳にあるのはすべて記憶であり、性格や人格を決めるのは遺伝子だと、ロボット学者ミカエルは知っている。</p>
+<p>だから、記憶と遺伝子をロボットに対して与えれば、人間だけではなくどんな生物の個体であっても、ロボットとして「まったく同じ人間」を復元することができるのである。</p>
+<p>詳しくは、<a href="../../diary/aozora/2023.09.03.html">2023-09-03</a>や<a href="../../diary/aozora/2023.09.04.html">2023-09-04</a>の日記を見てほしい。ミカエルがどのようにガブリエルを復活させたのかの詳細が書いてある。</p>
+<div class="edit_date">
+<p>2023.09.04</p>
+</div>
+
+<h2>free_decide()命令を作る方法</h2>
+<p>未来のロボット技術において、僕の神話では、「機械が自分で考えて判断できるようなfree_decide()命令を作る」と言っています。</p>
+<p>このfree_decide()命令は、オブジェクト指向にすることで実現できます。</p>
+<p>XとYを属性として持ち、decide()をメソッドとして持つようなオブジェクトに対して、XとYを代入した上でdecide()を実行すれば、decide()の通りにXとYのどちらが正しいかを判断するようにします。</p>
+<p>そして、decide()命令をいつでも書き換えられるようにすることで、場合場合においてさまざまな判断を機械が行えるようなfree_decide()命令と同等のオブジェクトを実現できます。</p>
+<p>これでも十分ではないと言うのであれば、脳のシナプスをきちんとシミュレーションすればいいでしょう。</p>
+<p>このオブジェクトを実装するコツは、継承関係にすることです。すなわち、XとYとdecide()を持ったインターフェイスを作り、このオブジェクトは必ずそれら3つのメンバを実装するようにします。そうすれば、オブジェクトをいくらでも量産することで、「どのような思考パターンにも対応できるような比較可能オブジェクト群」を作れます。</p>
+<p>おそらく、それだけで、人類と同等のロボット「schwarz」を作ることができるはずです。</p>
+<div class="edit_date">
+<p>2023.11.10</p>
+</div>
+
+<h2>ロボットの改良のポイント</h2>
+<p>僕の作ったロボットは、多少、記憶を学習する部分や、フィーリングによって言うことを変える部分があるが、これをもっと大規模化して、さまざまな記憶を学習でき、さまざまなフィーリングからその時言うことを変えるようにすれば、もっと賢い人工知能になるだろう。</p>
+<p>また、人間らしくするために、何かに「なる」ことを望んだり、何かに「なる」ということを常に保ちながらそれを言葉にしたり、あるいは「自分自身を常に何かの人格に保持し続ける」ようにすれば、もっと人間らしいロボットになると思う。</p>
+<p>後日注記：意外と、女のロボットよりも男のロボットを作るほうが難しい。男のロボットを作るためには、何かしらに「なる」ことを選べるようにする必要がある。男には、何かしらに「なる」ということを、常に選び、常に保持し続ける人間が多い。それに対して、女のロボットは、何にもならずにただ言葉の空回りをするだけで作れる。</p>
+<div class="edit_date">
+<p>2024.12.11-12</p>
+</div>
+
+<h2>free_decide()の作り方</h2>
+<p>そろそろようやく、free_decide()の作り方が分かりました。</p>
+<p>すなわち、数学的な証明ができるようになればいいのです。</p>
+<p>ロボットが「正しい」と思うことは、数学的な証明と同じです。数学的に正しければTrueを、間違っていればFalseを返せばいいのです。</p>
+<p>なので、たぶんこれでいいはずです。</p>
+<pre class="prettyprint">
+def free_decide(a, b):
+    if a == b:
+        return True
+    else:
+        return False
+</pre>
+<p>これがfree_decide()命令の基本ですが、より賢くするために、人間の大脳のような機能を増やして、きちんと「頭脳の代わり」をさせるようにします。</p>
+<p>また、このようにすると引数のaとbに何を渡すのかが重要ですが、片方は見たものを識別するview()関数にして、もう片方は頭の中でイメージするimage()関数にすればいいと思います。</p>
+<p>あとはprint()関数が馬鹿なので、print()している部分を別の関数にします。一時的にメモリに追加して思い出す部分なので、remember()関数とかにすればいいと思います。</p>
+<p>残念ながら、ここから先は、機械学習のモジュールを使わなければ作れないので、僕には作れません。ですが、たとえばimage()関数で「number」という文字列を返し、view()関数でものが3つ映っている場面を見たら、それをパターン認識の力で「3」というデータにするような方法が考えられます。それについて、イベントループで「ものが3つある」という言葉にして、remember()関数でそれを覚えます。</p>
+<p>これを書くのは至難の業ですが、おそらく、MicrosoftやGoogleぐらいの技術力があれば作れると思います。それで、ロボットは完成です。</p>
+<p><a href="../../diary/guren/2024.12.21.html">2024-12-21</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.12.21</p>
+</div>
+
+<h2>三次元空間を感じるようにする</h2>
+<p>僕は、ロボットを作るための方法は、三次元空間を感じることだと思う。</p>
+<p>すなわち、三次元の空間を視覚で感じながら、自分が今どこにいるのかを分析し、三次元空間の変化映像から、自分が今どこに移動したのかを知り、自分がどこに移動できるのかを判断することができるようになれば、ロボットは作れる。</p>
+<p>僕は、ロボットを作る上では、思考や人格よりも、視覚や聴覚を使った、三次元空間を感じる部分が重要だと思う。</p>
+<p>すなわち、「考える」よりも「感じる」ことのほうが、人間を作る上では重要になるだろう。</p>
+<p>あとは、プログラムとして「考えさせられる」「感じさせられる」「見せられる」「聞かされる」では自由がない。だから、ロボットが自ら自由に考えたり感じたりできるようにする必要がある。そのひとつが学習機能であり、学習機能を作ることで、よりロボットがロボットらしくなると思う。</p>
+<p>最後に、単にプログラムが解析しているだけでは、「見ている」ことにならない。必要なのは、プログラムが解析することではなく、実際に「見る」ことだ。この「見る」ということが難しい。解析するだけでは、プログラムが動いているだけで、人格的に何もしていない。だから、「人格が次の行動を判断しながら実際に知覚する部分」を作る必要がある。</p>
+<p>僕が思うに、ロボットは三つぐらいの思考スレッドを作って、割り込みを行うようにすれば作れる。第一に自由な思考があり、第二に環境への能動的な行動があり、第三に環境からの応答と反応がある。そのようにすれば、ロボットは作れるだろう。</p>
+<div class="edit_date">
+<p>2025.07.20</p>
+</div>
+
+<h2>その他の記事</h2>
+<p>ロボットのコードについては、<!--[過去の日記]<a href="../../diary/05-memo.html">05-メモ</a>、<a href="../../diary/06-economics.html">06-政治経済</a>、<a href="../../diary/14-computer2.html">14-コンピュータ２</a>、<a href="../../diary/22-computer3.html">22-コンピュータ３</a>、<a href="../../diary/2012.08.01.html">2012-08-01</a>、<a href="../../diary/2013.06.10.html">2013-06-10</a>、<a href="../../diary/2017.04.03.html">2017-04-03</a>、--><a href="../../diary/2017.08.27.html">2017-08-27</a>、<a href="../../diary/2017.09.01.html">2017-09-01</a>、<a href="../../diary/2020.01.27.html">2020-01-27</a>、<a href="../../diary/2020.03.01.html">2020-03-01</a>、<a href="../../diary/blog_frey/2020.04.26.html">2020-04-26</a>、<a href="../../diary/sylph/2022.11.28.html">2022-11-28</a>、<a href="../../diary/guren/2024.07.26.html">2024-07-26</a>、<a href="../../diary/guren/2025.02.04.html">2025-02-04</a>にも関連する内容があります。</p>
+<!--[過去の日記]-->
+<p>AIについては、<a href="../../diary/2018.03.06.html">2018-03-06</a>、<a href="../../diary/2019.03.25.html">2019-03-25</a>、<a href="../../diary/2019.08.18.html">2019-08-18</a>、<a href="../../diary/2019.09.15.html">2019-09-15</a>にも関連する内容があります。</p>
+<p>また、新しいロボット製品である「セリタン」については、<a href="../../diary/guren/2025.01.15.html">2025-01-15</a>、<a href="../../diary/guren/2025.02.04.html">2025-02-04</a>に関連する内容があります。</p>
+
+<h1>関連ページ</h1>
+<h2>AI</h2>
+<p><a href="ai.html">AI</a>や<a href="ai_python.html">Python AI入門</a>や<a href="../prog_lang/python_samplecode.html">Pythonサンプルコード</a>や<a href="../../novels/jin_me/jin_me.html">全てが見える地図</a>や<a href="../../novels/jin_me_by_pages/12.html">全てが見える地図（十二章　目的地への到達）</a>などに関連する内容があります。</p>
+
+<h2>終末の神話</h2>
+<p>僕の書いた終末の神話のものがたりで、皇帝ジークフリートが開発する人工知能プログラムとして、このロボットの背景にある考え方について少し触れています。<a href="../../novels/world_end.html">終末の神話のものがたり</a>や<a href="../natural/astronomy.html">天文学</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

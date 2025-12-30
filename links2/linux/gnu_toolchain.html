@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>GNUツールチェイン関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>GNUツールチェインの世界観</h1>
+<p>GNUツールチェインに関する世界観です。<a href="libc.html">libc</a>や<a href="make.html">Make</a>や<a href="linux_unix.html">UNIXシステム管理</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>gcc</h1>
+<h2>GNUコンパイラコレクション</h2>
+<p>GNUによるコンパイラ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNUコンパイラコレクション">GNUコンパイラコレクション - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/gcc-mirror/gcc">git</a></li>
+</ul>
+
+
+<h2>gccの例</h2>
+<p>gccはC言語のコンパイラ。<a href="../prog_lang/c.html">C</a>も参照のこと。</p>
+<p>例：</p>
+<pre>
+gcc -o hoge hoge.c
+</pre>
+<p>hoge.cをコンパイル・リンクして、実行ファイルhogeを作成する。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_gcc/man1/gcc.1.html">man gcc</a></li>
+</ul>
+
+<h2>g++の例</h2>
+<p>g++はC++のコンパイラ。<a href="../prog_lang/cpp.html">C++</a>も参照のこと。</p>
+<p>C++の場合：</p>
+<pre>
+g++ -o hoge2 hoge2.cpp
+</pre>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://kaworu.jpn.org/cpp/g++">g++ - C++入門</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_gcc/man1/g++.1.html">man g++</a></li>
+</ul>
+
+<h2>gfortranの例</h2>
+<p>gfortranはFortranのコンパイラ。<a href="../prog_lang/fortran.html">FORTRAN</a>も参照のこと。</p>
+<p>GCCではFortranもコンパイルできる：</p>
+<pre>
+gfortran hoge3.f90
+</pre>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="http://katakago.sakura.ne.jp/pgm/gfortran.html">gfortranをとりあえず使うには - プログラミングあれこれ - かたかご</a></li>
+</ul>
+
+<h2>その他の言語</h2>
+<p>このほか、GCCではObjective-C、Ada、Go、Dなどをコンパイルできる。<a href="../prog_lang/objective_c.html">Objective-C</a>や<a href="../prog_lang/golang.html">Go</a>も参照のこと。</p>
+<p>また、GCCのフロントエンドとして、PascalをコンパイルできるGNU Pascalコンパイラが知られています。<a href="../prog_lang/pascal.html">Pascal</a>を参照のこと。</p>
+
+<h2>gccのオプション</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.02.08.html">2021/02/08</a>より。</p>
+<p>基本は</p>
+<pre>
+gcc -o hoge hoge.c
+</pre>
+<p>デバッグ情報を付加してhoge.oとlibm.aをリンクする場合は以下のようにする（ライブラリlibmをリンクする時はlibを削除して-lmとする）：</p>
+<pre>
+gcc -g -o hoge -lm hoge.o
+</pre>
+<p>gccのデフォルトの最適化は-O2。-O3とするとより強固な最適化をする。</p>
+<p>gcc -Eでプリプロセスのみを行う。gcc -Sでアセンブリ言語までを出力する。gcc -cでオブジェクトファイルまでを出力する。</p>
+<p><a href="linux_unix_compiler.html">UNIXシステム管理（２．コンパイラ）</a>も参照のこと。</p>
+
+<h2>その他のオプション</h2>
+<p>-Wallで警告オプションをすべて有効にできる。</p>
+<p>-g3とすると、デバッグ情報の付加に加え、gdbでマクロも使えるようになる。</p>
+<p>-Lや-Iを使うことで、ライブラリやインクルードヘッダを別のディレクトリから探せるようになる。</p>
+
+<h2>gccのオプション一覧</h2>
+<table class="some_tables">
+<tr>
+<th class="min60">オプション</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>-c</td>
+<td>ソースファイルのコンパイルのみを行う。（オブジェクトファイルを作成する。）</td>
+</tr>
+<tr>
+<td>-o hoge.o</td>
+<td>ソースファイルをコンパイルしてその結果をhoge.oとする。</td>
+</tr>
+<tr>
+<td>-O0</td>
+<td>最適化をすべて無効とする。</td>
+</tr>
+<tr>
+<td>-O1</td>
+<td>特定の最適化を無効とする。</td>
+</tr>
+<tr>
+<td>-O2 (または -O)</td>
+<td>標準の最適化を行う。デフォルト設定。</td>
+</tr>
+<tr>
+<td>-O3</td>
+<td>標準よりも強力な最適化を行う。</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>吐き出されるバイナリにデバッグ情報を付加する。</td>
+</tr>
+<tr>
+<td>-g3</td>
+<td>吐き出されるバイナリにデバッグ情報を付加する。gdbでマクロも使えるようになる。</td>
+</tr>
+<tr>
+<td>-Wall</td>
+<td>コンパイル時に警告されるすべての警告オプションを有効にする。</td>
+</tr>
+<tr>
+<td>-lm</td>
+<td>ライブラリとリンクを行う。mはライブラリの名前（libm.a）を意味する。</td>
+</tr>
+<tr>
+<td>-Ldir</td>
+<td>ライブラリを探すための場所となるディレクトリを追加する。</td>
+</tr>
+<tr>
+<td>-Idir</td>
+<td>ヘッダファイルを探すための場所となるディレクトリを追加する。</td>
+</tr>
+</table>
+<p>共有ライブラリ・ヘッダファイルについては<a href="linux_lib.html">Linux 共有ライブラリ</a>や<a href="linux_header.html">Linux ヘッダファイル</a>を参照のこと。</p>
+
+<h2>gccを使う際の注意点</h2>
+<p>gccを使う際の注意点として、ソースファイルやライブラリの名前を並べる際に、必ず、関数を使うソースファイルが前で、関数が使われるソースファイルが後になるように引数を書かないといけない。</p>
+<p>なので、もしlibmの関数を使うmain.cファイルがあるとしたら、</p>
+<pre>
+gcc -o hoge main.c -lm
+</pre>
+<p>とする。-lmをmain.cよりも先に書いてはいけない。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+
+<h2>gccリンク集</h2>
+<p>gccリンク集：</p>
+<ul>
+<li><a href="http://www.ysr.net.it-chiba.ac.jp/data/cc.html">コンパイラ(gccコマンド)の使い方 - 千葉工業大学 情報科学部 情報ネットワーク学科 屋代 研究室 データライブラリ</a></li>
+<li><a href="http://wwweic.eri.u-tokyo.ac.jp/computer/manual/altix/compile/Fortran/Intel_Fdoc91/main_for/mergedProjects/optaps_for/common/optaps_lev_opts.htm">最適化オプションのまとめ</a></li>
+<li><a href="http://www.clear-code.com/blog/2013/5/8.html">GDBでデバッグするなら-g3オプション - ククログ(2013-05-08)</a></li>
+<li><a href="http://www.unixuser.org/~euske/doc/gccopts/">知っていると便利な gcc のオプション - Yusuke Shinyama</a></li>
+</ul>
+
+<h2>共有ライブラリの作成・ヘッダファイル</h2>
+<p><a href="linux_lib.html">Linux 共有ライブラリ</a>と<a href="linux_header.html">Linux ヘッダファイル</a>と<a href="linux_unix_compiler.html">UNIXシステム管理（２．コンパイラ）</a>を参照のこと。</p>
+
+<h1>GCCの設計</h1>
+<h2>フロントエンドとバックエンド</h2>
+<p>GCCは、「フロントエンド - 最適化部（中間コード） - バックエンド」という設計をしている。</p>
+<table class="some_tables">
+<tr><th class="min60">機構</th><th>説明</th></tr>
+<tr><td>フロントエンド</td><td>さまざまなプログラミング言語を中間コードに変換する。</td></tr>
+<tr><td>バックエンド</td><td>中間コードをさまざまなプラットフォームやCPUのアセンブリ言語に変換する。</td></tr>
+</table>
+<p>こうすることによって、フロントエンドとバックエンドの部分を開発するだけで、さまざまなプログラミング言語とさまざまなCPUプロセッサ向けの機械語に対応できる。</p>
+<p>フロントエンドを作るだけで新しいプログラミング言語（自作のプログラミング言語の場合も含む）にも対応でき、バックエンドを作るだけで新しいCPUプロセッサに対応できる。</p>
+<p>そのため、新しいプログラミング言語を作りたい場合は、GCCのフロントエンドだけを開発すれば良い。</p>
+<p>フロントエンドは構文解析のbisonや字句解析のflexというツールが使われている。</p>
+
+<h2>中間コードと最適化</h2>
+<p>GCCでは、中間形式としてRTLを使用し、段階的に中間コードを作成・最適化する。</p>
+<p>GCC 4から、GENERICとGIMPLEの2種類の新しい中間形式が追加された。まず、GENERIC（フロントエンドのツリー構造を保持したままの形式）→GIMPLE（ツリーの最適化SSAを行うための形式）→その後にRTLの最適化となる。</p>
+<p>中間コードと最適化については、Wikipediaの記事が参考になる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">GNUコンパイラコレクション - Wikipedia</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/GCC_optimization/ja">GCCの最適化 - Gentoo Wiki</a></li>
+</ul>
+
+<h2>macOS/Windows版</h2>
+<p>GCCはmacOSでも動かすことができ、Xcodeを導入すると自動的にgccがインストールされる。</p>
+<p>また、Windows版としてMinGWがあり、Visual Studioの代替C/C++コンパイラとして利用できる。</p>
+
+<h2>プログラムができるまで</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>その他のトピック</h1>
+<h2>クロスコンパイラ環境の導入</h2>
+<p>クロスコンパイルとは、組み込みシステムなどで、x86のパソコンから別のCPUアーキテクチャ向けのバイナリ実行ファイルを出力すること。</p>
+<p>PowerPC向けのクロスコンパイルを行いたい時は、「--target=powerpc-elf」をつけてgccやbinutilsをビルドし、できたpowerpc-elf-gccコマンドでCのソースファイルをコンパイルすればよい。</p>
+<pre>
+$ powerpc-elf-gcc -nostdlib -g -O hoge.c
+</pre>
+<p>のようにビルドする。gccやbinutilsをビルドする際、targetを変えるだけで別のアーキテクチャ向けにビルドできる。</p>
+<ul>
+<li><a href="https://qiita.com/xecus/items/1660c826f0b8ec14a3a6">Linux上に各種クロスコンパイラ環境を構築する - Qiita</a></li>
+</ul>
+<p><a href="../hardware/cpu_arch.html">CPUアーキテクチャ</a>や<a href="../hardware/powerpc.html">PowerPC</a>や<a href="../prog_lang/portability.html">移植性</a>も参照のこと。</p>
+
+<h2>LLVM/Clang</h2>
+<p>LLVM/Clangは新しいC/C++など向けのコンパイラ。gccを置きかえるのではないかと期待されている。Linuxでも使えるし、Macや*BSDなどでも最近使われるようになってきている。</p>
+<p><a href="llvm.html">LLVM/Clang</a>も参照のこと。</p>
+
+<h2>lex/yacc</h2>
+<p>コンパイラを作る時に使われる技術。字句解析器・構文解析器を自動作成する。</p>
+<p>lexのGNUによる実装がflex、yaccのGNUによる実装がbison。</p>
+<p>lexとyaccを上手く使うことで、プログラミング言語を手軽に自作することができる。</p>
+<ul>
+<li><a href="http://kmaebashi.com/programmer/devlang/yacclex.html">yaccとlex - K.Maebashi's home page</a></li>
+<li><a href="http://kmaebashi.com/programmer/devlang/index.html">プログラミング言語を作る - K.Maebashi's home page</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/flex/man1/flex.1.html">man flex</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/byacc/man1/yacc.1.html">man yacc</a></li>
+</ul>
+<p><a href="../prog_lang/compiler_develop.html">コンパイラ開発</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>GNU</h2>
+<p><a href="gnu.html">GNU</a>を参照のこと。</p>
+
+<h2>libc</h2>
+<p><a href="libc.html">libc</a>を参照のこと。</p>
+
+<h2>Make/Autotools</h2>
+<p><a href="make.html">Make</a>と<a href="autotools.html">Autotools</a>を参照のこと。</p>
+
+<h2>gdb</h2>
+<p><a href="../prog_lang/debug.html">デバッグ（gdb）</a>を参照のこと。</p>
+
+<h2>Gentoo Linux</h2>
+<p><a href="gentoo.html">Gentoo</a>も参照のこと。</p>
+
+<h1>その他のツール</h1>
+<h2>Binutils (as, ldなど)</h2>
+<p>バイナリ（オブジェクトファイル）系のユーティリティ。たとえば、アセンブラasやリンカldが含まれる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_Binutils">GNU Binutils - Wikipedia</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_binutils/man1/as.1.html">man as</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_binutils/man1/ld.1.html">man ld</a></li>
+</ul>
+
+<h2>gettext</h2>
+<p>GNUで翻訳のために使われているライブラリ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/gettext">gettext - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/gettext.git">git</a></li>
+</ul>
+<p><a href="linux_unix_timezone_locale.html">UNIXシステム管理（タイムゾーンとロケール）</a>を参照のこと。</p>
+
+<h2>m4</h2>
+<p>m4はマクロ言語で、Sendmailの設定ファイルやautoconfなどで使われている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/M4_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)">m4 (プログラミング言語) - Wikipedia</a></li>
+</ul>
+
+<h2>groffとtexinfo</h2>
+<p>groffはGNUによるroff/troff形式のドキュメントの実装。manページの整形に使われている。</p>
+<p>TexinfoはGNUによるinfoページに使われているドキュメント形式。ノードを分けてリンクからアクセスすることができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Groff">groff - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Texinfo">Texinfo - Wikipedia</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_groff/man1/groff.1.html">man groff(1)</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_groff/man7/groff.7.html">man groff(7)</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_texinfo/man5/texinfo.5.html">man Texinfo</a></li>
+</ul>
+<p><a href="linux_commands_doc.html">Linuxコマンド（ドキュメント）</a>や<a href="../prog_lang/xml.html">XMLと文書形式</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>持論：コンパイラはフリーでなければならない</h2>
+<p>僕の持論として、「コンパイラだけはフリーでなければならない」というのがあります。</p>
+<p>それは、「プログラミングは、万人に手段が平等に与えられるものでなければ、万人がコンピュータを使ってプログラミングすることができない」からです。</p>
+<p>Windowsのフリーソフトには、Visual C++で作られたソフトウェアが多いですが、この場合、ソースコードをコンパイルしたり、自分で作ったり開発に参加するためには、Visual C++を買わなければなりません。</p>
+<p>たとえ、ソフト自体がフリーであっても、それを作るための手段はフリーではないのです。</p>
+<p>GNUというプロジェクトが、コンパイラなどの開発ツールから始まり、GNU OSが実用化される以前から、「フリーなコンパイラ」として有名だったのは、その理由があると思います。みんな、開発ツールがフリーでほしかったのです。だから、GNUはGNU OSが完成する前から、UNIXで使える開発ツールとして有名になったのでしょう。そして、さまざまな人間に改良され、Linuxカーネルの開発者がLinuxの上でのコンパイラや標準のツールなどとして使うに至ったのでしょう。</p>
+<p>コンパイラがフリー（無料）であることは、教育においても良い効果を発揮します。誰もが、コストを支払わずにプログラミングの勉強や入門ができます。また、自由という側面で言えば、ソースコードが公開されているため、ただWindows APIを使うだけではなく、自分でコマンドやライブラリのソースコードを見ることができます。これはプログラミングの学習環境として、とても優れています。Pythonなどもオープンソースですが、コンパイルした実行ファイルを簡単に再配布できる、という点で言えば、コンパイル言語の優位性も依然としてあるでしょう。ですが、Linuxをインストールせず、Windowsのままで実行ファイルが作れる、Windows APIやVisual C++のライブラリを完備した互換コンパイラとライブラリがあれば良いのですが、そこまですると、逆にMicrosoftの開発意欲を損ねてしまうでしょう。</p>
+<p>本当は、コンパイラが有料であることは良い側面もあります。コンパイラは、プログラミング界でもっとも作るのが難しいソフトウェアのひとつです。オープンソースでは作れない領域でも、Microsoftなら作れるでしょう。ですが、PHPやRubyを見るように、言語処理系の流行はオープンソースの機運に乗っているように思います。Rustなどが最たる例でしょう。</p>
+<p>後日注記：MicrosoftはWindowsに標準でVisual Studioを含めるようにすれば良いと思います。短期的な利益は少なくなるかもしれませんが、Windowsアプリケーションを開発する人が増えて、Windowsエコ・システムは拡大し、Windowsアプリケーションは豊かになるでしょう。</p>
+
+<h1>リンク集</h1>
+<h2>GCC</h2>
+<p>C/C++など、多言語に対応したフリーのコンパイラ集。</p>
+<ul>
+<li><a href="https://gcc.gnu.org/">GCC</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/GNU_gcc/man1/gcc.1.html">Man page of GCC</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/">GCC online documentation</a></li>
+<li><a href="http://www.asahi-net.or.jp/~wg5k-ickw/">私的 GNU マニュアル翻訳プロジェクト</a></li>
+</ul>
+
+<h2>Emacs電子書棚</h2>
+<p>Emacs電子書棚さんというサイトが、GNU関連のツールやEmacsの情報としてとても参考になります。</p>
+<ul>
+<li><a href="https://bookshelf.jp/">Emacs 電子書棚</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

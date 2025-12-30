@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>認証関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>認証の世界観</h1>
+<p>認証に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>認証</h1>
+<h2>二段階認証 (Two-Factor Authentication)</h2>
+<p>今、7payで話題となっているように、二段階認証の必要性が注目されています。</p>
+<p>二段階認証とは、IDとパスワードにログインした時に、携帯電話などにコードの記載されたSMSが送られてきてそれを入力したり、その時だけ使えるワンタイムパスワードを使ったりして、「二段階でログインする技術」です。</p>
+<p>二段階認証を行うことで、Webサービスに対するセキュリティを強化することができます。二段階認証が使えるサービスであれば、ぜひ使いましょう。</p>
+
+<h2>2段階認証ワンタイムパスワード(TOTP, HOTP)</h2>
+<p>TOTPとは2段階認証ワンタイムパスワード(TOTP)のこと。</p>
+<p>Mozilla FirefoxのSyncなどで2段階認証を使う場合、WindowsではAuthyなどの2段階認証システムを使うことができる。</p>
+<p>AuthyはLinuxにも対応している模様だが、LinuxのCLIでTOTPを使うためには、oathtoolなどが使える。</p>
+<p>後日注記：AuthyはsnapcraftからLinux向けに導入できます。</p>
+<ul>
+<li><a href="https://support.mozilla.org/ja/kb/secure-firefox-account-two-step-authentication">二段階認証で Firefox アカウントを保護する | Firefox ヘルプ</a></li>
+<li><a href="https://qiita.com/u-minor/items/daa6579998da0c534a6d">CLI で Authy と共通の MFA Token を生成する - Qiita</a></li>
+<li><a href="https://okadahiroshi.hatenablog.com/entry/2018/10/17/163921">2段階認証ワンタイムパスワード (TOTP) クライアント を Ubuntu (コマンドライン) で - Okada Hiroshi の blog</a></li>
+</ul>
+<p>TOTPは時間をベースに、HOTPはカウンターをベースにして二段階認証（Two-Factor Authentication）を行う。TOTPよりもHOTPはより安全だということは知っておくと良いだろう。</p>
+<ul>
+<li><a href="https://blog.ohgaki.net/2fa-totp-hotp-which-is-safer">2要素認証のTOTPとHOTP、どちらがより安全か？ – yohgaki's blog</a></li>
+</ul>
+
+<h2>二段階認証アプリ</h2>
+<p>二段階認証アプリでメジャーなのはAuthyとGoogle Authenticator。特にスマホで使うことを想定しており、二段階認証を有効にしたWebサービスにログインする時には、スマホからAuthyあるいはGoogle Authenticatorを起動して、ワンタイムパスワードを確認してログインを行う。</p>
+<p>フリーソフトウェアの実装としてはFreeOTPがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FreeOTP">FreeOTP - Wikipedia</a></li>
+</ul>
+
+<h2>OAuth</h2>
+<p>（「<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>」を参考に執筆しました。）</p>
+<p>OAuthは、信頼された関係にあるサービスとサービスの間で、ユーザの合意とセキュリティの確保のもとに、ユーザの認証情報と権限を受け渡しする技術。</p>
+<p>Twitterのアカウントを使った外部サービスでの認証などに使うことができる。</p>
+
+<h2>認証プロトコル</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>パスワード認証そのものが間違っている可能性</h2>
+<p>僕は、今のコンピュータやネットワークでのセキュリティとして一般的な、IDとパスワードによる認証方式そのものが間違っている可能性があると思います。</p>
+<p>最近のネットバンキング詐欺などでも、メールを使って不正サイトに誘導し、本物そっくりの不正サイトでIDとパスワードを入力させることで、銀行の口座にある莫大な金を不正に別の口座に送金して、盗まれてしまいます。</p>
+<p>犯人はリアルタイムで不正サイトの入力を確認しているため、ワンタイムパスワードによるセキュリティも破られてしまいます。</p>
+<p>僕は、コンピュータネットワークそのものの認証方法のあり方を変える必要があるように思います。</p>
+<p>指紋認証や顔認証をするためには、指紋を採取する機器やカメラなど専用の機器が必要になりますが、こうした「パスワード以外の認証方式」を普及させなければいけないのではないでしょうか。そして、そもそも「本人であることを証明する手段」として、パスワードという簡単に盗むことができるものを、使ってはいけないと僕は思います。何らかの別の方法を考えなければいけません。</p>
+<p>僕は、今回のネットバンキングの詐欺は、銀行にお金を預ける意味が何なのか、という根源的な問いを発する段階に来ていると思う。ネットバンキングで不正ログインの可能性があるのであれば、銀行にお金を預ける意味があるのかどうか、そういう考え方に至る。</p>
+<p>後日注記：僕は新しく買ったパソコンで指紋認証を有効にしています。ですが、たまにきちんと読み取られないことがあり、PINと併用して使う必要があります。</p>
+
+<h2>ツイッターやGoogleなどのアカウントでログインする</h2>
+<p>最近のWebサービスでは、OAuthを用いて、ツイッターやGoogleなどのアカウントでログインすることのできるサイトやサービスが増えてきました。</p>
+<p>これらの認証のメリットは、まず、サービスを管理しているシステム管理者にとっては、「認証をツイッターやGoogle任せにできる」というのがあります。</p>
+<p>自分のサービスでIDとパスワードを管理しなくても、ツイッターやGoogleが管理してくれるため、管理の不備などによる情報漏洩などの対策になります。</p>
+<p>また、サービスの利用者にとっては、セキュリティの高い認証方法が選択できます。</p>
+<p>今の日本のWebサービスでは、二段階認証が使えるサービスは、残念ながら多くありません。多くのサービスが、IDとパスワードによる単一要素認証を採用しています。</p>
+<p>そのため、たとえば誰にでも推測できるパスワードを使っていたり、別々のサービスでパスワードを使いまわしていたりすると、ハッカーに不正ログインされる可能性があります。</p>
+<p>二段階認証を使うことのできる、ツイッターやGoogleアカウントを使ってログインする場合は、このようなセキュリティの甘いログイン方法を使用せず、セキュリティの高いログイン方法を選択できるため、セキュリティの向上に繋がります。</p>
+<p>ただし、ツイッターアカウントを使う際には、ツイッターアカウントひとつに多くの権限が集中することや、ツイッターアカウントをもし削除してしまった場合、すべてのサービスでログインができなくなることなどに注意しましょう。</p>
+<p>このほか、アカウントを増やしすぎないことで、パスワードをたくさん覚える必要がなくなり、またさまざまなサービスにアカウントを作りすぎないで済むため、管理の手間が省けるなどといったメリットもあります。</p>
+
+<h1>関連ページ</h1>
+<h2>認証</h2>
+<p><a href="../linux/linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>や<a href="nis.html">NIS</a>や<a href="ldap.html">LDAP</a>や<a href="basic_auth.html">BASIC認証</a>も参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

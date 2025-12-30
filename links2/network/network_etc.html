@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ネットワーク関連の雑多なことの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ネットワークの雑多なことの世界観</h1>
+<p>ネットワークの雑多なことに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>IPアドレスとMACアドレス</h1>
+<h2>IPアドレスとMACアドレスとは</h2>
+<p>まず、IPアドレスは通信元、通信先の住所です。ひとつのネットワーク通信で変わることはなく、相手のサーバーと自分のクライアントPCを交互に結び付けます。</p>
+<p>また、IPアドレスにはホスト名が対応します。ホスト名はユニークなIPアドレスを識別するための人間が解することのできる言葉で、DNSという仕組みを用いてIPアドレスとホスト名を変換できます。</p>
+<p>それに比べて、MACアドレスは個々の機器の識別番号です。パソコン、ルーター、ハブなどで変わる、個々の機器を識別するための番号です。</p>
+<p>ARPとRARPを使うことで、MACアドレスとIPアドレスを変換できます。</p>
+
+<h2>ARP</h2>
+<p>ARPは、IPアドレスからMACアドレスを求めるプロトコル。</p>
+<p>仕組みとしては、ブロードキャストを使ってネットワーク上のすべての機器に、「このIPアドレスを持った機器は居ませんか？」とIPアドレスを確認するパケットを投げる。</p>
+<p>そして、そのIPアドレスを持っている機器がそれに応答する。</p>
+<ul>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/0305/09/news003_3.html">第11回　MACアドレスを解決するARPプロトコル：基礎から学ぶWindowsネットワーク（3/4 ページ） - ＠IT</a></li>
+</ul>
+
+<h2>IPv6</h2>
+<p>IPv6は新しいIPアドレスの仕様。32ビットのIPアドレスが表せたIPv4に比べ、IPv6では128ビットのIPアドレスが表せる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IPv6">IPv6 - Wikipedia</a></li>
+</ul>
+<p>IPv6はとてもたくさんのIPアドレスが実現できるため、「そこらへんにある石ころにすらIPアドレスをふれる」と言われる。</p>
+
+<h1>DHCP</h1>
+<h2>DHCP</h2>
+<p>DHCPは、ネットワーク上の機器のIPアドレスを自動的に割り振るプロトコル。</p>
+<p>DHCPはクライアント・サーバ方式で、DCHPサーバがIPアドレスなどのネットワーク設定をネットワーク上の各デバイスに動的に割り当てる。</p>
+<p>それぞれの機器にアドレスを静的に割り当てる必要が無く、自動で割り当てられるため、家庭内や会社内にさまざまなインターネットと通信するデバイスがある場合は、DHCPを使うことで管理がしやすくなる。</p>
+<p>後日注記：DHCPを使うことで、PCのTCP/IPの設定を自動化できる。たとえば、それぞれに静的にIPアドレスを設定する場合、192.168.0.11の最後の「11」の部分を自分で管理・設定しなければならないが、DHCPを使えばこれを自動化（自動的に割り振る）ことができる。普段使いのPCならばこれでも問題が無いが、PCをサーバにする場合はDHCPが必ずしも最適ではない場合がある（ダイナミックDNSを使うこともできる）。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">Dynamic Host Configuration Protocol - Wikipedia</a></li>
+<li><a href="http://www.ccjc-net.or.jp/~kouza/199805/dhcp1.html">おもしろインターネット活用講座 &lt;DHCPって何？&gt;</a></li>
+</ul>
+
+<h2>DHCPとブロードキャスト</h2>
+<p>ARPと同様、DHCPでも、最初にIPアドレスの分からない状態でDHCPサーバとやり取りをできるようにするためにブロードキャストを使用する。</p>
+<p>ブロードキャストについては以下を参照のこと。</p>
+<ul>
+<li><a href="https://xtech.nikkei.com/atcl/nxt/column/18/00780/062000008/">すべての相手に一斉送信、必殺技の「ブロードキャスト」を完全図解 | 日経クロステック（xTECH）</a></li>
+</ul>
+
+<h2>dhcpd</h2>
+<p>DHCPサーバー。家庭用ネットワークなどで、IPアドレスを自動的に割り振る。</p>
+
+<h2>ダイナミックDNS</h2>
+<p>ダイナミックDNSは、DHCPのような動的にIPアドレスが変化する環境でも、固定化されたホスト名と対応付けることができる仕組み。</p>
+<p>たとえば家庭内のDHCPなどを利用したアドレスが動的に変わるデバイスを自宅サーバにしたい場合、ダイナミックDNSが使える。</p>
+<p>ダイナミックDNSでは、一定の時間間隔でサーバに変動する中での現在のIPアドレスを定期的に伝達する。</p>
+<p>ダイナミックDNSで得られるドメイン名はあるドメインのサブドメインとなることが多く、無料または有料でダイナミックDNSサーバを提供しているさまざまなドメインを自分の自宅サーバに利用することができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%80%E3%82%A4%E3%83%8A%E3%83%9F%E3%83%83%E3%82%AF%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%8D%E3%83%BC%E3%83%A0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">ダイナミックドメインネームシステム - Wikipedia</a></li>
+<li><a href="http://www.eastcourt-rokko.com/domain/dyndns.html">Free Dynamic DNS(無料ダイナミックDNS一覧)</a></li>
+</ul>
+<p><a href="web.html">Webサーバ</a>も参照のこと。</p>
+
+<h1>プロキシ</h1>
+<h2>プロキシ</h2>
+<p>プロキシは「代理」という意味で、サーバとクライアントの両者の間に入る中継サーバのこと。キャッシュによる高速化や負荷分散、セキュリティの確保された通信などの目的で用いる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7">プロキシ - Wikipedia</a></li>
+</ul>
+
+<h2>プロキシサーバSquid</h2>
+<p>プロキシサーバとしてはキャッシュ型プロキシであるSquidが1996年から開発されている。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/485/">Squid | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h2>Proxomitron</h2>
+<p>Webブラウザとホームページの間に入るフィルタープロキシソフト。</p>
+<p><a href="../windows_pc/proxomitron.html">Proxomitron</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>ITインフラの仕組み</h1>
+<h2>サーバー・クライアント</h2>
+<p>サーバーとは、一つのコンピュータがたくさんのクライアントに接続し、サービスを行うアプリケーション。</p>
+<p>クライアントとは、サーバーに接続し、それぞれのアプリケーションがサーバーのサービスを得られるようにするアプリケーション。</p>
+<p>HTTPサーバーなどでは、サーバーはリモートのコンピュータ、クライアントはローカルのコンピュータとなるが、X11などでは逆にサーバーがローカルのコンピュータ、クライアントがリモートのコンピュータになる場合もある。</p>
+
+<h2>ITインフラについて</h2>
+<p>ITインフラはクラスタや高信頼性システムとして、データセンターのような巨大サーバーに使われる。</p>
+<p><a href="cluster.html">クラスタ・分散・高信頼システム</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>設定と管理</h1>
+<h2>無線LANの設定</h2>
+<p>無線LANは無線（コードレスな電波）で繋がるネットワークのこと。</p>
+<p><a href="network_wifi.html">無線通信</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>ルーターの設定</h2>
+<p>ルーターの設定も、無線LANと良く似ていて、基本的に繋いだ後は192.168.1.1などの設定画面で行います。</p>
+<p>ルーターの設定で何が出来るかと言うと、たとえば、Webサーバーを立ち上げた後で、ポート80番を開けたりすることができます。各IPアドレスへの割り振りや、DHCPの割り振りもルータで行います。</p><p>ルーターにはとても多くの機能があります。以下のようなサイトが参考になるかもしれません。</p>
+<ul>
+<li><a href="http://www.obenri.com/_network/routerset1.html">◇ルーターの設定～その１◇初心者のためのLinuxサーバー構築講座(CentOS 自宅サーバー対応)☆お便利サーバー.com☆</a></li>
+</ul>
+<p><a href="../linux/linux_net_firewall.html">Linuxファイアウォール</a>も参照のこと。</p>
+
+<h1>標準</h1>
+<h2>IEEEとIETF</h2>
+<p>IEEEとIETFはともにネットワーク関連の標準化団体。IEEEは多少ハードウェア寄り、IETFはソフトウェア寄りの標準規格を裁定している。</p>
+<p>IEEEは業界の標準化組織だが、IETFはそれよりも比較的オープンな組織。IETFで定められた標準はRFCという名前で公開される。</p>
+<ul>
+<li><a href="https://zenn.dev/masahiro_toba/articles/1e4ab995b8da95">IEEEとIETFについて(TCP/IP) - Zenn</a></li>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.01</p>
+</div>
+
+<h2>RFC</h2>
+<p>RFCは、インターネットにおける技術の標準を定めたもの。以下が参考になる。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/382/">RFC | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h1>ネットワーク関係の資格</h1>
+<h2>CCNA</h2>
+<p>シスコ技術者認定のCCNA（Cisco Certified Network Associate）は、ネットワークエンジニアのエントリー資格。ネットワークの世界では最も有名な資格。</p>
+<ul>
+<li><a href="http://proengineer.internous.co.jp/content/columnfeature/3365">CCNAとはどんな資格？難易度から気になる受験料までまとめました | サービス | プロエンジニア</a></li>
+<li><a href="https://www.internetacademy.jp/it/server/network/what-is-ccna.html">CCNAとは？受験するメリット、試験内容、対策方法を徹底解説！ - Webデザイン・プログラミングスクール 【インターネット・アカデミー】</a></li>
+</ul>
+<p><a href="../prog_lang/kihonjouhou.html">基本情報</a>や<a href="../linux/lpic_linuc.html">LPIC/LinuC</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

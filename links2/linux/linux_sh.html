@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux シェル - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux シェル</h1>
+<p>Linuxのシェルに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Linuxのシェル</h1>
+<h2>シェルは選べる</h2>
+<p>Linuxでは、コマンドラインシェルを別のシェルに変えることができる。</p>
+<p>これは、X11でウィンドウマネージャやデスクトップ環境を別のものにするのと同じ。</p>
+<p>Bashを使う上でもカスタマイズが可能だが、シェルを別のものに変えることで、別の操作性や便利な機能を使うことができる。</p>
+<p>また、シェルスクリプトなどの文法も違う。そのため、Bashで動くコマンドが別のシェルでも同じコマンドになるとは限らない。</p>
+
+<h2>Bash</h2>
+<p>BashはLinuxで標準的に使われているシェル。Bourneシェルの後継。</p>
+<p>GNUプロジェクトの開発したシェルであり、Linuxのほか以前のMac OS Xでも標準的に使われていた。</p>
+<p><a href="linux_bash.html">Bash</a>を参照のこと。</p>
+
+<h2>csh</h2>
+<p>Cシェルは、BSDやviの開発者でスーパープログラマのビル・ジョイによって開発された、C風の文法を持つシェル。</p>
+<p>FreeBSDなどのBSD系UNIXでは、csh/tcshを標準的に使う。</p>
+<p><a href="csh.html">csh</a>を参照のこと。</p>
+
+<h2>ksh</h2>
+<p>kshはデビッド・コーンによるシェルで、Solaris 11で標準。</p>
+<p><a href="ksh.html">ksh</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>zsh</h2>
+<p>zshは「究極のシェル」と呼ばれる多機能なシェル。</p>
+<p><a href="zsh.html">zsh</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>fish</h2>
+<p>fishは最近の使いやすくてユーザーフレンドリーなシェル。</p>
+<p><a href="fish.html">fish</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>nu</h2>
+<p>nuは今までと異なる新しいシェル。Rustで作られている。</p>
+<p>多くのUNIXコマンドがシェルに組み込みでありながら独自仕様で、出力結果に型がある（文字列ではない）という特徴がある。</p>
+<ul>
+<li><a href="https://www.nushell.sh/ja/">Nushell</a></li>
+<li><a href="https://qiita.com/sl2/items/f923ed0768475b0a40c8">Rust製のシェルNushellを使ってみる - Qiita</a></li>
+</ul>
+<p><a href="../prog_lang/rust.html">Rust</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>dash</h2>
+<p>dashはDebianの/bin/sh。sh互換でありながらbashより機能が少なく高速。主にsh互換のシェルスクリプトを高速に実行するために用意されている。Bashの機能を使いたければshebangを#!/bin/bashにすること。</p>
+<p>通常の対話型シェルは、今まで通りBashを使う。</p>
+<p><a href="debian.html">Debian</a>も参照のこと。</p>
+
+<h1>Windows</h1>
+<h2>PowerShell</h2>
+<p>Windows向けの新しいシェルであるPowerShellはLinuxで使うこともできる。</p>
+<p><a href="../windows_pc/powershell.html">PowerShell</a>を参照のこと。</p>
+
+<h1>GNU Screen</h1>
+<h2>GNU Screenを使おう</h2>
+<p>X11上のターミナルエミュレータを使う場合に比べて、黒画面のコンソールではシェルのコマンドライン操作を行うにもさまざまな制約があります。</p>
+<p>そのような時には、超便利なソフトウェア、GNU Screenを使いましょう。</p>
+<p>詳しくは<a href="linux_terminal.html">Linux端末</a>を参照のこと。</p>
+
+<h1>カスタマイズプロンプト</h1>
+<h2>Starship</h2>
+<p>Starshipはカスタマイズの可能なプロンプト。シェルの入力画面が豪華になる。</p>
+<ul>
+<li><a href="https://starship.rs/ja-jp/">Starship: Cross-Shell Prompt</a></li>
+<li><a href="https://dev.classmethod.jp/articles/customize-prompt-with-starship/">手軽に導入できるStarshipでプロンプトをおしゃれにする | DevelopersIO</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.09.28</p>
+</div>
+
+<h1>シェルの設定</h1>
+<h2>/etc/shells</h2>
+<p>シェルの一覧は/etc/shellsファイルに存在する。</p>
+<ul>
+<li><a href="https://docs.oracle.com/cd/E19683-01/817-3493/6mj36smgl/index.html">/etc/shells ファイルの作成方法 (Solaris のシステム管理 (資源管理とネットワークサービス))</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.28</p>
+</div>
+
+<h2>/etc/passwd</h2>
+<p>ユーザーのログインシェルは/etc/passwdファイルに記述されている。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/509/">「/etc/passwd」ファイル - Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.28</p>
+</div>
+
+<h2>chshコマンド</h2>
+<p>ユーザーのログインシェルの変更はchshコマンドで行える。</p>
+<ul>
+<li><a href="https://www.ibm.com/docs/ja/aix/7.1?topic=c-chsh-command">chsh コマンド - IBM Documentation</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.28</p>
+</div>
+
+<h2>useraddコマンドの-sオプション</h2>
+<p>新規ユーザーを作る時は、useraddコマンドの-sオプションでログインに使うシェルを設定できる。</p>
+<ul>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/1811/02/news035.html">【 useradd 】コマンド――新規ユーザーを作成する：Linux基本コマンドTips（255） - ＠IT</a></li>
+</ul>
+<p><a href="linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2024.07.28</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

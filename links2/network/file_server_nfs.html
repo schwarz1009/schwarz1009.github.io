@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>NFS関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>NFS関連の世界観</h1>
+<p>NFSに関する世界観です。<a href="../unix/sun.html">Sun</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ファイルサーバー</h1>
+<h2>NFS</h2>
+<p>ネットワーク・ファイルシステム。マウントしたボリュームはネットワーク上にあることを意識せず、ローカルのファイルシステムと同じように利用出来る。</p>
+<p>ファイルシステムあるいはNFSサーバーがネットワーク上にあるかローカル上にあるかを一切考えなくても、同じファイルシステムとしてクライアントにマウントして使うことができる。Linuxだけではなく、多くのUNIXでも対応していて、もともとは商用UNIXベンダーのSun Microsystemsが開発した。</p>
+<ul>
+<li><a href="http://qiita.com/tanuki-project/items/5c706b2eab6e7eed71fd">CentOS 7でNFSサーバを構築してみた - Qiita</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Storage_Administration_Guide/ch-nfs.html">第9章 NFS (Network File System) - Red Hat</a></li>
+<li><a href="https://thinkit.co.jp/free/article/0612/6/2/">第２回：3つのファイルサーバ「NFS & FTP & Samba」 - ThinkIT</a></li>
+</ul>
+
+<h2>NFSのマウント</h2>
+<p>NFS（ネットワークファイルシステム）を使うことで、ネットワーク上のファイルシステムをマウントすることもできる。この場合、普通のディレクトリと全く同じようにコマンドやプログラムからアクセスできる。</p>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/NFS-HOWTO/">Linux NFS-HOWTO</a></li>
+</ul>
+
+<h2>NFSの設定と管理</h2>
+<p>NFSボリュームのマウントは、mountコマンドで行える。</p>
+<pre>
+# mount nfs.hogeserver.com:/home/assy /mnt/nfs_assy
+</pre>
+<p>起動時にマウントするには/etc/fstabに一行を追加する。</p>
+<pre>
+nfs.hogeserver.com:/home/assy    /mnt/nfs_assy    nfs    rw,hard,intr    0    0
+</pre>
+<p>NFSサーバを立ち上げる場合、アクセスを許すためには/etc/exportsを設定する。</p>
+<pre>
+/home/assy    192.168.0.3(rw)
+</pre>
+<p>また、安全性を考えると/etc/hosts.allow, /etc/hosts.denyも設定する必要がある。</p>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/NFS-HOWTO/server.html">3. NFS サーバの設定 - Linux NFS-HOWTO</a></li>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/NFS-HOWTO/client.html">4. NFS クライアントの設定 - Linux NFS-HOWTO</a></li>
+</ul>
+<p><a href="../linux/linux_unix_filesystem.html">UNIXシステム管理（ファイルシステム）</a>や<a href="../linux/linux_net_firewall_iptables.html">iptables</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>NFS</h2>
+<p>ネットワーク上のストレージをローカルと同じようにファイルシステムにマウントできる。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

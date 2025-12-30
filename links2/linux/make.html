@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Make関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Makeの世界観</h1>
+<p>Makeに関する世界観です。<a href="gnu_toolchain.html">GNUツールチェイン</a>や<a href="linux_unix.html">UNIXシステム管理</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Make</h1>
+<h2>Make</h2>
+<p>GNU makeは、プログラムのソースコードをコンパイルする時、更新されたファイルだけをコンパイルするなど、色んなことが出来ます。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_make/man1/make.1.html">man make</a></li>
+</ul>
+<p>以下はMakefileの基本。</p>
+<ul>
+<li><a href="http://www.ie.u-ryukyu.ac.jp/~e085739/c.makefile.tuts.html">Makefile の書き方 (C 言語) - WTOPIA v1.0 documentation</a></li>
+</ul>
+<p>後日注記：UNIXのタスクランナーの基本は、シェルスクリプトとMakefile。この二つがどのように使われているかが分かると、UNIXシステム（主にSystemVとBSD系のUNIX）の仕組みがよく分かります。</p>
+<div class="edit_date">
+<p>2025.08.05編集</p>
+</div>
+
+<h2>Makefile</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.02.08.html">2021/02/08</a>より。</p>
+<p>Makefileは、基本的に作られるもののあとに:で依存ファイルを書き、それ以下の行でTABに続いて作成方法を書く。</p>
+<pre>
+prog: main.o hoge1.o hoge2.o
+	gcc -o prog main.o hoge1.o hoge2.o
+
+main.o: main.c
+	gcc -c main.c
+
+hoge1.o: hoge1.c
+	gcc -c hoge1.c
+
+hoge2.o: hoge2.c
+	gcc -c hoge2.c
+</pre>
+<p>これで、main.cが更新された場合、</p>
+<pre>
+gcc -c main.c
+gcc -o prog main.o hoge1.o hoge2.o
+</pre>
+<p>のみが実行される。</p>
+<p>実際のMakefileでは、変数やマクロを使ってより抽象的な書き方をする。</p>
+<p>（「<a href="https://www.amazon.co.jp/make-nutshell-handbook-Andrew-Oram/dp/4900900605">make 改訂版 - オライリー・ジャパン</a>」と<a href="http://www.ie.u-ryukyu.ac.jp/~e085739/c.makefile.tuts.html">Makefile の書き方 (C 言語) - WTOPIA v1.0 documentation</a>を参考にして執筆しました。）</p>
+
+<h2>Makefileの例２</h2>
+<p>たとえばユーザー変数を使う場合以下のようになります。</p>
+<pre>
+CC       = gcc
+OBJS     = main.o hoge.o
+LIBS     = -lfuga
+PROGRAM  = prog
+
+all: $(PROGRAM)
+
+$(PROGRAM): $(OBJS)
+	$(CC) $(OBJS) $(LIBS) -o $(PROGRAM)
+</pre>
+<p>（<a href="http://omilab.naist.jp/~mukaigawa/misc/Makefile.html">Makefileの解説 - Yasuhiro Mukaigawa</a>を参考に執筆しました。）</p>
+
+<h2>参考になる書籍</h2>
+<p>Makefileで良く使われるユーザー変数やmakeが保持する変数は以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+</ul>
+<p>マクロや内部マクロを使ったスマートなバージョンが以下の書籍にあります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p>また、以下のサイトにも、一般的に使われるMakefileの一例があります。</p>
+<ul>
+<li><a href="http://omilab.naist.jp/~mukaigawa/misc/Makefile.html">Makefileの解説 - Yasuhiro Mukaigawa</a></li>
+</ul>
+
+<h2>MakefileでCFLAGS</h2>
+<p>gccを使う時は、Makefileの中でCFLAGSやCXXFLAGSを記述することで、最適化に関する環境変数を設定することが出来る。</p>
+<p>GentooのPortageは先進的で、/etc/portage/make.confでこの設定をコンパイルする全てのパッケージに対して行うことが出来る。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/GCC_optimization/ja">GCCの最適化 - Gentoo Wiki</a></li>
+</ul>
+<p><a href="gentoo.html">Gentoo</a>も参照のこと。</p>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/make-nutshell-handbook-Andrew-Oram/dp/4900900605">make 改訂版 - オライリー・ジャパン</a></li>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>その他のシステム</h1>
+<h2>Autotools</h2>
+<p>Autotoolsを使うことで、Makefileを自動的に吐き出し、移植性の高いプログラムを作ることができる。</p>
+<p><a href="autotools.html">Autotools</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>Apache Ant</h2>
+<p>Javaによるビルドシステム。XMLを用いてビルドを行う。</p>
+<p><a href="../prog_lang/java_devtools_build.html">Javaビルドツール</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Apache_Ant">Apache Ant - Wikipedia</a></li>
+</ul>
+
+<h2>pkg-config</h2>
+<p>GTK+アプリケーションは、pkg-configを用いてコンパイルすることが多い。単にgccだけではコンパイルできないことがあるので注意が必要。</p>
+<p><a href="gtk.html">GTK+</a>も参照のこと。</p>
+<ul>
+<li><a href="http://onoono-life.blogspot.com/2013/11/cc-hello-world-gtk.html">各々の生き方: C/C++ Hello World ウィンドウ表示(GTK+)</a></li>
+<li><a href="https://developer.gnome.org/gtk3/stable/gtk-compiling.html">Compiling GTK+ Applications: GTK+ 3 Reference Manual</a></li>
+<li><a href="https://developer.gnome.org/gtk2/stable/gtk-compiling.html">Compiling GTK+ Applications: GTK+ 2 Reference Manual</a></li>
+</ul>
+
+<h2>CMake</h2>
+<p>KDEアプリケーションはCMakeをビルドシステムに使う。</p>
+<p><a href="cmake.html">CMake</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/CMake">CMake - Wikipedia</a></li>
+<li><a href="https://qiita.com/shohirose/items/45fb49c6b429e8b204ac">CMakeの使い方（その１） - Qiita</a></li>
+</ul>
+
+<h2>Meson+Ninja</h2>
+<p>新しいビルドシステム。</p>
+<p><a href="meson_ninja.html">Meson+Ninja</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>JavaScript系タスクランナー</h2>
+<p>npmにはJavaScript系の新しいタスクランナーのツールがあります。</p>
+<p><a href="../prog_lang/javascript_framework_npm.html">npm</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>リンク集</h1>
+
+<h2>make</h2>
+<p>make</p>
+<ul>
+<li><a href="http://quruli.ivory.ne.jp/document/make_3.79.1/make-jp_toc.html">GNU make - 私的文書置場</a></li>
+<li><a href="http://www.ecoop.net/coop/translated/GNUMake3.77/make_toc.jp.html">GNU make 日本語訳(Coop編) - ecoop.net</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

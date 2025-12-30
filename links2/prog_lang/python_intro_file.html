@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Python入門（６．ファイル） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Python入門（６．ファイル）</h1>
+<p>Python入門（６．ファイル）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="python_intro.html">Python入門</a></li>
+<ul>
+<li><a href="python_intro_basic.html">１．基本</a></li>
+<li><a href="python_intro_flow.html">２．制御フロー</a></li>
+<li><a href="python_intro_oop.html">３．オブジェクト指向</a></li>
+<li><a href="python_intro_data.html">４．データ構造</a></li>
+<li><a href="python_intro_str.html">５．文字列</a></li>
+<li><b>６．ファイル</b></li>
+<li><a href="python_intro_functional.html">７．関数型言語の機能</a></li>
+<li><a href="python_intro_others.html">８．その他</a></li>
+<li><a href="python_intro_advanced.html">９．応用・モジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>ファイル処理</h1>
+<h2>ファイルへのアクセス</h2>
+<p>ファイルとディレクトリのアクセスについては以下が参考になります。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/filesys.html">ファイルとディレクトリへのアクセス &#8212; Python 3.9.4 ドキュメント</a></li>
+</ul>
+<p>また、osモジュール、ioモジュール、open()関数についても参照してください。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/os.html">os --- 雑多なオペレーティングシステムインタフェース &#8212; Python 3.9.4 ドキュメント</a></li>
+<li><a href="https://docs.python.org/ja/3/library/io.html">io --- ストリームを扱うコアツール &#8212; Python 3.9.4 ドキュメント</a></li>
+<li><a href="https://docs.python.org/ja/3/library/functions.html#open">open() 組み込み関数 &#8212; Python 3.9.4 ドキュメント</a></li>
+</ul>
+<p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+<h2>ファイルの読み書き</h2>
+<p>まず、open()とwithでファイルを開く。modeは'r'が読み込み、'w'が書き込み、'x'が新規作成、'a'が追記。</p>
+<p>ファイルを読み込むには、read()はファイル内容を全て読み込む、readline()は一行読み込む、readlines()はすべて読み込んだ上で、行ごとのリストにする、などがある。</p>
+<p>ファイルを書き込むには、write()は文字列を書き込む、writelines()はリストを書き込む、がある。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+hogefile = open("hoge.txt")
+lines = hogefile.read()
+print(lines)
+hogefile.close()
+</pre>
+<p>となる。</p>
+<p>あるいは、withを使った場合、</p>
+<pre class="prettyprint">
+with open("hoge.txt") as hogefile:
+    lines = hogefile.read()
+    print(lines)
+</pre>
+<p>などとなる。withを使う場合、ブロックが終了した段階で自動的にclose()される。</p>
+<p>一行ずつ読み込むならば、readline()を使う方法もあるが、ファイルオブジェクトをそのままfor文に渡しても一行ずつ読み込める。</p>
+<pre class="prettyprint">
+with open("hoge.txt") as hogefile:
+    for line in hogefile:
+        print(line)
+</pre>
+<p>書き込む際にはmodeにwを指定してopen()する。</p>
+<pre class="prettyprint">
+str = "Hoge Fuga Foo Bar"
+with open("hoge.txt", mode='w') as hogefile:
+    hogefile.write(str)
+</pre>
+<p>「mode=」を記述せずopen()の第二引数にそのまま'w'を指定してもよい。</p>
+<ul>
+<li><a href="https://note.nkmk.me/python-file-io-open-with/">Pythonでファイルの読み込み、書き込み（作成・追記） | note.nkmk.me</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1909/17/news030.html">［Python入門］ファイル操作の基本 - @IT</a></li>
+</ul>
+
+<h2>CSVファイルの読み書き</h2>
+<p>CSVファイルの読み書きは、csvモジュールから行える。</p>
+<p>たとえば、CSVファイルを出力するには、</p>
+<pre class="prettyprint">
+import csv
+hoge_data = [('Assy', 32), ('Schwarz', 18), ('Zaidou', 28)]
+with open('hoge.csv', 'w', encoding="utf-8", newline='') as hoge_file:
+    csv.writer(hoge_file).writerows(hoge_data)
+</pre>
+<p>とする。</p>
+<p>CSVファイルを入力するには、</p>
+<pre class="prettyprint">
+import csv
+with open('hoge.csv', encoding="utf-8") as hoge_file:
+    hoge_reader = csv.reader(hoge_file, delimiter=',')
+    for row in hoge_reader:
+        print(row)
+</pre>
+<p>とする。</p>
+<p>詳しくは以下の書籍・ページが参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+<li><a href="https://techacademy.jp/magazine/15638">PythonでCSVの読み書きを行う方法【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+<p><a href="xml.html">XMLと文書形式</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>pickle</h2>
+<p>pickleを用いてPythonのオブジェクトを直列化する方法については<a href="serialize.html">シリアライズ</a>を参照のこと。</p>
+
+<h2>JSON</h2>
+<p>JSONを用いてPythonのオブジェクトを直列化する方法については<a href="json.html">JSON</a>を参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C++関連の世界観１（オブジェクト指向） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C++の世界観１（オブジェクト指向）</h1>
+<p>C++によるプログラミングに関する世界観１（オブジェクト指向）です。<a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>C++（１．オブジェクト指向）</b></li>
+<ul>
+<li><a href="cpp_generics.html">２．ジェネリック</a></li>
+<li><a href="cpp_stl_libs.html">３．STL・ライブラリ</a></li>
+</ul>
+<li><a href="cpp_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="c.html">C</a>も参照のこと。</p>
+<p>ツール関係は<a href="c_cpp_tools.html">C/C++ツール</a>に移動しました。</p>
+<p>システムに依存する部分は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>や<a href="windows_programming.html">Windowsプログラミング</a>も参照のこと。</p>
+<p><a href="windows_mfc.html">Visual C++/MFC</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>C++の特徴</h1>
+<h2>C++とは</h2>
+<p>C++は、C言語のスーパーセットとなる言語で、C言語の全ての機能を引継ぎながら、追加的な機能、特にオブジェクト指向やテンプレート、STLといった機能を使うことができる。</p>
+<p>C++では、C言語で用意されている基本型に加えて、ユーザーによって定義可能な「クラス」と呼ばれるデータ構造を利用できる。</p>
+<p>クラスは、構造体のようなデータ構造を表現したものでありながら、データ構造を操作する関数である「メソッド」を含めることができる。また、クラスはそのまま構造体のように使うだけではなく、ユーザーが後で別の機能を付け足したり、クラスを作るために既存のクラスをベースに作ることができ、これを「継承」と呼ぶ。また、クラス内部のデータに対するメソッドは、外部からどれくらいアクセスできるのか（外部に公開するのか、継承する時だけアクセスできるようにするのか、禁止してクラス内部だけのメソッドにするのか）を指定することができる。これを「カプセル化」と呼ぶ。</p>
+<p>Javaのような言語では、クラスを実体化したインスタンスは参照型として扱われるため、別のメソッドにインスタンスを渡した際には、ポインタと同じように同じデータに別の場所からアクセスできるが、C++ではコピーコンストラクタの実行を避けるため、ポインタと同じように*をつけて参照渡しを行うことで、オブジェクトを別のメソッドに参照渡しすることができる。</p>
+<p>C言語では、どんな型でも入る型のように、別々の型であっても汎用的に操作することは困難だが、C++ではテンプレートを使うことで、このような汎用型を実現出来る。これをジェネリックプログラミングと言う。また、テンプレートによる標準C++ライブラリであるSTLを使うことで、vectorやそれに類するコンテナクラスを利用できる。C言語では任意の位置に挿入・削除を行う可変長の配列を実現することは困難だが、STLのコンテナクラスはサイズの変わるコンテナとして利用できる。STLではこのほか反復子やアルゴリズムなどを利用して、シーケンス（コンテナのような連続量）を操作できる。</p>
+<p>また、C++はコンパイル言語であり、ガーベッジコレクションなどは用意されていない。これは、「使わない機能のためにパフォーマンスの劣化をもたらさない」という設計思想のもとに設計されているからである。newで動的にクラスのインスタンスを作成した場合、必ずdeleteで消さなくてはならない。これは楽ではないものの、きちんと自分でメモリ領域の利用と解放を把握できるという利点もある。ガーベッジコレクションの代わりとして、自動的に削除されるスマートポインタを利用することができる。</p>
+<p>C++のバイナリはネイティブコンパイルされるため、速度や効率などのパフォーマンスは高い。オブジェクト指向の機能が必要で、かつパフォーマンスが必要な場合、ソフトウェアはC++で書かれることがもっとも多い。たとえば、WindowsやMozillaなどはC/C++とその他の言語（MozillaはXULとJavaScriptやRustなども用いる）で書かれている。C言語でオブジェクト指向を実現するGLib/GTKなどは、言語バインディングのGTKmmなどを用いることでC++での開発が可能であり、KDEやQtも主にC++で書かれている。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=C%2B%2B">C++ - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>C++の基本</h1>
+<h2>iostreamによる入出力</h2>
+<p>C++では、iostreamによる「ストリーム」という概念を用いた演算子的な入出力を行う。</p>
+<p>まず、iostreamをincludeする。.hは必要なく、名前空間はstdを使う。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+using namespace std;
+</pre>
+<p>実際のコードは、</p>
+<pre class="prettyprint">
+char str[256];
+cout &lt;&lt; "文字列を入力せよ: "
+cin &gt;&gt; str;
+cout &lt;&lt; "入力した内容は: " &lt;&lt; str &lt;&lt; endl;
+</pre>
+<p>printf()やscanf()には、「システムに用意されている単純な型しか使えない」という問題がある。iostreamの演算子は、あらゆる型について定義できる。また、ストリームの概念を用いることで、物理システム（モニタ、キーボード、ファイル、プリンタなど）が変わっても同じ手法で操作できる。</p>
+<p>ストリームの種類にはcin（標準入力）, cout（標準出力）, cerr（標準エラー出力）, clog（標準ログ出力）がある。また、マニュピレータという書式コマンドを使うことができる。マニュピレータにはdec（10進数）, hex（16進数）, oct（8進数）などの他endl（改行文字を出力する）などがある。</p>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a></li>
+</ul>
+<p><a href="c_io.html">C言語（入出力）</a>や<a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+<h2>ネームスペース（名前空間）</h2>
+<p>C++では、大規模な開発のためにネームスペース（名前空間）と呼ばれる機能がある。</p>
+<p>たとえば、coutやcinなどの標準入出力関数を使うには以下のように記述する。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+using namespace std;
+</pre>
+<p>あるいは、「::」を用いてstd::coutとしてもアクセスできる。</p>
+<p>自分でネームスペースを定義するには、</p>
+<pre class="prettyprint">
+namespace dog
+{
+    int age;
+}
+
+namespace cat
+{
+    int age;
+}
+</pre>
+<p>などとする。int ageはどちらも同じ名前のグローバル変数だが、互いに競合しなくなる。</p>
+
+<h2>参照渡しと値渡し</h2>
+<p>参照型を使うことで、変数の参照渡しをすることができる。参照型の変数には変数宣言の際に変数名の前に&をつける。</p>
+<p>後日注記：関数の引数としてオブジェクトを渡すには、const参照渡しを使うとよい。値渡しでは不要なコピーコンストラクタが実行されることがあるためである。また、constが使える時は可能な限りconstを使うことが推奨される。詳しくは<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>を参照のこと。</p>
+<p>後日注記：オブジェクトの参照渡しは、オブジェクトの同一インスタンスを関数の内外から操作するために多用される。C言語のポインタや、Javaの参照型と同じことをC++流に行える。多くのプロジェクトで、C++のオブジェクトのインスタンスを関数に渡す際には、慣習的に引数名に&をつけて参照渡しが使用される。僕個人の意見から言うと、Javaのように参照型をデフォルトにしてもいいのではないかとは思うが、C++では標準では値渡しであり、&を付けた場合のみ参照渡しになる。</p>
+
+<h2>コメント</h2>
+<p>C++では、C言語の複数行コメントである/* ～ */のほかに、一行コメントである//が使用できる。行の中の//以降にある文字列は無視される。</p>
+<div class="edit_date">
+<p>2023.02.03</p>
+</div>
+
+<h1>C++オブジェクト指向入門</h1>
+<h2>C++におけるクラス</h2>
+<p>クラスは同じ機能を持つオブジェクトを量産する仕組みで、メンバ変数とメンバ関数の設計図を書いてしまえば、あとはそれを使う側が宣言して呼び出すだけで、ひとまとめにした機能とデータを処理することができる。基本的に、C言語で言う構造体の中にそのデータを操作する関数を詰め込んだものだと考えれば良い。</p>
+<p>クラスの中のメソッドの宣言とメソッドの実装を分離するには、C言語のようにメソッドをクラス内で宣言した上で、分離した実装部のクラス名とメソッド名の間に「::」をつける。</p>
+<p>基本的に、各メソッドからインスタンス内のメンバ変数は「共有」されると考えると分かりやすい。どのメソッドからも同じメンバ変数を参照する。そして、インスタンス作成の時にコンストラクタによって初期化され、各メンバ変数はメモリを割り当てられる。</p>
+<p>時に、動的に割り当てたい時もある。その時はnew/delete演算子を使う。C++では、メモリをnewで動的確保した場合は、使わなくなった時にdeleteで削除しなければならない。</p>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>C++のクラスには、データ、メソッド、インスタンスの作成の3つの記述部がある</h2>
+<p>C++のクラスについて言えることは、データの記述部、メソッドの記述部、そしてオブジェクトのインスタンスの作成とメソッドの呼び出しの記述部、という、3つの記述部があると言うことです。</p>
+<p>たとえば、データの記述部は以下のようになります。</p>
+<pre class="prettyprint">
+class Hoge
+{
+private:
+    char buff[256];
+    int result;
+public:
+    void printAdd(int x, int y);
+    void setBuff(char* text);
+};
+</pre>
+<p>次に、メソッドの記述部は以下のようになります。</p>
+<pre class="prettyprint">
+void Hoge::printAdd(int x, int y) {
+    this-&gt;result = x + y;
+    cout &lt;&lt; this-&gt;buff &lt;&lt; ":" &lt;&lt; this-&gt;result &lt;&lt; endl;
+}
+
+void Hoge::setBuff(char* text)
+{
+    strcpy_s(this-&gt;buff, 256, text);
+}
+</pre>
+<p>そして、インスタンスの作成とメソッドの呼び出しは以下のようになります。</p>
+<pre class="prettyprint">
+int main() {
+    Hoge* obj = new Hoge();
+    
+    obj-&gt;setBuff("hogehoge");
+    obj-&gt;printAdd(3, 4);
+    
+    delete obj;
+}
+</pre>
+<p>後日注記：ちなみに、メソッドは以下のようにクラス宣言の中に定義することもできます。</p>
+<pre class="prettyprint">
+class Hoge
+{
+private:
+    char buff[256];
+    int result;
+    
+public:
+    void printAdd(int x, int y) {
+        this-&gt;result = x + y;
+        cout &lt;&lt; this-&gt;buff &lt;&lt; ":" &lt;&lt; this-&gt;result &lt;&lt; endl;
+    }
+    
+    void setBuff(char* text) {
+        strcpy_s(this-&gt;buff, 256, text);
+    }
+};
+</pre>
+<p>このように、C++によるオブジェクト指向は、データ、メソッド、そしてインスタンスの作成と呼び出しで成立します。このようにすることで、データをどの場所からでも操作でき、全てのメンバのメソッドから同じデータを参照でき、またインスタンスをいっぺんに動的に作成して、同じオブジェクトをポインタから参照できます。</p>
+<p>C++では、obj-&gt;show()のようにオブジェクトのメソッドを実行しますが、この時objがshow()を参照しているように見えて、逆にshow()がobjを参照している、ということは注意が必要です。関数の方がポインタの先にあるデータを参照しています。</p>
+<p>このように、データには「オブジェクトの状態」が保管され、メソッドでは「オブジェクトに対する変更と取得」が行われます。そして、実際にインスタンスを作る場所で、「オブジェクトの作成」が行われます。</p>
+<p>（ここでオブジェクトの操作にポインタを用いたのは、ポインタによる操作の方がC++では一般的だからです。多くのコードで、「.」よりも「-&gt;」が使われます。また、thisポインタを使っているのは説明のためで、必ずしも使う必要はありません。普通に名前で参照できます。）</p>
+<p>後日注記：こうしたC++の書き方を理解するためには、上述した「レシーバとメッセージ」の関係を理解することが有用です。あるレシーバオブジェクトに対して、メッセージを与え、オブジェクトのふるまいとして操作や処理を行うのです。</p>
+
+<h1>C++によるオブジェクト指向</h1>
+<p>（以下の内容は<a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a>を参考に執筆しました。）</p>
+
+<h2>クラスと実装の隠蔽</h2>
+<p>クラス。</p>
+<p>C++では、クラスとして実装の詳細を隠蔽することで、外部からアクセス不可能にし、クラス内部のメソッドの中だけでデータを共有して、インスタンス作成の時のインスタンス変数にそのデータを包括し、オブジェクトとして生成することができる。</p>
+<p>これにより、データのアクセスは公開インターフェース用のメソッドを通じてしかできなくなる。</p>
+<p>また、インスタンスはまるで「もの」であるかのように、必要なメンバ変数をメモリ上にいっぺんに割り当て、メソッドを通じてその「ものの属性」をさまざまに操作・変更することができる。</p>
+<p>この時、変数の初期化をしたい場合はコンストラクタと呼ばれるクラス名と同じメソッドを実行する。</p>
+<p>後始末はデストラクタで行う。デストラクタにはクラス名に~（チルダ）をつける。</p>
+
+<h2>アクセス属性とstatic</h2>
+<p>以下のアクセス属性を使うことで、クラスをカプセル化出来る。これにより、データへのアクセスが制限され、実装の詳細は外部から隠蔽できる。</p>
+<table class="some_tables">
+<tr><th class="min60">アクセス属性</th><th>説明</th></tr>
+<tr><td>private</td><td>非公開</td></tr>
+<tr><td>protected</td><td>派生クラスにのみ公開</td></tr>
+<tr><td>public</td><td>すべて公開</td></tr>
+</table>
+<p>後日注記：また、データメンバにstaticを付けると、そのメンバは同一クラスのすべてのオブジェクトで共有される「クラス変数」になる。</p>
+<div class="edit_date">
+<p>2023.01.20編集</p>
+</div>
+
+<h2>コンストラクタとデストラクタ</h2>
+<p>コンストラクタは初期化、デストラクタは後始末のために使う。</p>
+<p>コンストラクタはクラス名と同じメソッド名として作る。デストラクタは~Hoge()のように「~」をつける。</p>
+<pre class="prettyprint">
+class TwoNumbers {
+private:
+    int x;
+    int y;
+
+public:
+    TwoNumbers(int x, int y);
+    int getX();
+    int getY();
+};
+
+TwoNumbers::TwoNumbers(int x, int y) {
+    this-&gt;x = x;
+    this-&gt;y = y;
+}
+
+int TwoNumbers::getX() {
+    return this-&gt;x;
+}
+
+int TwoNumbers::getY() {
+    return this-&gt;y;
+}
+
+class Calc {
+private:
+    TwoNumbers* num;
+
+public:
+    Calc(int x, int y);
+    ~Calc();
+    int add();
+};
+
+Calc::Calc(int x, int y) {
+    this-&gt;num = new TwoNumbers(x, y);
+}
+
+Calc::~Calc() {
+    delete this-&gt;num;
+}
+
+int Calc::add() {
+    return this-&gt;num-&gt;getX() + this-&gt;num-&gt;getY();
+}
+</pre>
+<p>後日注記：コンストラクタは、たとえばGUIコンポーネントのクラスであれば、メンバに（たとえばprivateな）GUIフォームやコントロールのオブジェクトがあったとして、それを自身が（newなどで）作られた時に自動的に一緒に作りたい時などに多く使われる。</p>
+<p>後日注記：また、デストラクタは、メンバに（たとえばprivateな）別のオブジェクトがあったとして、それをどこかでnewして作っているとして、それを自身が（deleteなどで）破棄された時に自動的に一緒に破棄したい時などによく使われる。</p>
+<p>後日注記：引数の型と個数の違う複数の同名のメソッドやコンストラクタを定義することもできます。これをオーバーロードといいます。この場合、どのような型でそのメソッドやコンストラクタが呼び出されたかによって、実行されるメソッドやコンストラクタが変わります。</p>
+<div class="edit_date">
+<p>2023.05.10編集</p>
+</div>
+
+<h2>コピーコンストラクタとコピー代入演算子</h2>
+<p>コンストラクタの中でも特殊なコンストラクタとして、コピーコンストラクタがある。</p>
+<p>コピーコンストラクタは、そのオブジェクトの型と同じ型の参照型の引数を持つコンストラクタのことで、オブジェクトの初期化の際に、別のオブジェクトをコピーして初期化した時に呼び出される。</p>
+<p>もし、コピーコンストラクタが定義されていない時は、デフォルトのコピーコンストラクタが実行される。これはビットごとのオブジェクトのコピーを行う。</p>
+<p>コピーコンストラクタは以下のように定義できる。</p>
+<pre class="prettyprint">
+class Hoge {
+private:
+   int hoge;
+   
+public:
+    Hoge() {
+        this-&gt;hoge = 0;
+    }
+    
+    Hoge(int a_hoge) {
+        this-&gt;hoge = a_hoge;
+    }
+    
+    Hoge(Hoge &hoge_obj2) {
+        this-&gt;hoge = hoge_obj2.getHoge();
+    }
+    
+    int getHoge() {
+        return this-&gt;hoge;
+    }
+}
+</pre>
+<p>これで、以下のような時にこのコンストラクタを呼び出すことができる。</p>
+<pre class="prettyprint">
+Hoge hoge1;
+Hoge hoge2(hoge1);
+</pre>
+<p>コピー代入演算子operator=()はコピーコンストラクタと似ているが、初期化ではなく=で代入した時に実行される。</p>
+<p>コピー代入演算子は以下のように定義する。</p>
+<pre class="prettyprint">
+class Hoge {
+private:
+   int hoge;
+   
+public:
+    Hoge() {
+        this-&gt;hoge = 0;
+    }
+    
+    Hoge(int a_hoge) {
+        this-&gt;hoge = a_hoge;
+    }
+    
+    Hoge& operator=(Hoge &hoge_obj2) {
+        if (this != &hoge_obj2) {
+            this-&gt;hoge = hoge_obj2.getHoge();
+        }
+        return *this;
+    }
+    
+    int getHoge() {
+        return this-&gt;hoge;
+    }
+}
+</pre>
+<p>これで、以下のような時にコピー代入演算子を実行できる。</p>
+<pre class="prettyprint">
+Hoge hoge1;
+Hoge hoge2(20);
+hoge1 = hoge2;
+</pre>
+<p><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>の記述に従い、コピー代入演算子では*thisを返すようにする（戻り値なしでも実装はできる）。</p>
+<p>通常のコンストラクタHoge()も忘れずに定義しよう。</p>
+<p>以下の書籍・ページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a></li>
+<li><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a></li>
+<li><a href="http://yohshiy.blog.fc2.com/blog-entry-303.html">C++ のコピーコンストラクターと代入演算子 | プログラマーズ雑記帳</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.10-11編集</p>
+</div>
+
+<h2>継承</h2>
+<p>継承を行うことで、クラスに別の機能を「追加」することができる。これを「差分プログラミング」という。</p>
+<pre class="prettyprint">
+class Dog: public Animal {
+    ...
+};
+
+class Cat: public Animal {
+    ...
+};
+</pre>
+<p>Windowsコントロールなどでは、継承を行うことで元にあったコントロールに機能を追加できる。たとえばテキストボックスにシンタックスハイライトの機能をつけたりすることが考えられる。</p>
+
+<h2>public継承（is-a関係）</h2>
+<p>C++のpublic継承は、is-a関係を表す。</p>
+<p>たとえば、AnimalクラスからCatクラスあるいはDogクラスを継承する。</p>
+<p>この時、CatであろうとDogであろうと、Animalに実装されたメソッドはどちらにも含まれる。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>を参照のこと。）</p>
+<p>後日注記：Effective C++では、さまざまなis-a関係の基本が述べられています。たとえば、鳥のすべてが飛べるわけではありません。鳥の中にはペンギンのような飛べない鳥も含まれます。このような時は、鳥の中でも「飛ぶ鳥」という派生クラスを作り、その飛ぶ鳥から飛ぶ鳥のさらなる派生クラスを作ります。この「飛ぶ鳥」の中で、「飛ぶ」というメソッドを仮想関数とし、派生クラスはこの仮想関数をオーバーライドするのです。ですが、「飛ぶ」という法則が重要でない場合には、このような方法は冗長になるだけであり、必ずしも必要ではないでしょう。</p>
+
+<h2>private継承（has-a関係）</h2>
+<p>C++では、public継承だけではなく、private継承やprotected継承もある。</p>
+<p>private継承では、親クラスでpublicあるいはprotectedだったメソッドが、private継承をするとprivateなメソッドになる。protected継承ではprotectedになる。</p>
+<p>このような方法はis-a関係ではなく、has-a関係と呼ばれる。また、同様にhas-a関係である合成（インスタンスをメンバ変数として保持する）を使う場合もある。</p>
+<ul>
+<li><a href="https://programming.pc-note.net/cpp/inheritance_private.html">非公開継承と限定公開継承(C++) - 超初心者向けプログラミング入門</a></li>
+</ul>
+
+<h2>オーバーライド</h2>
+<p>クラスの継承を行った際、親クラスに含まれるメソッドの名前と同じ名前のメソッドを、そのクラスを継承した派生クラスのメソッドとして宣言することで、メソッドを上書き（オーバーライド）できる。</p>
+<p>この時、親クラスのメソッドを呼ぶタイミングで、派生クラスのメソッドを呼ぶことができる。このため、「イベントに応じて適切なメソッドを書き換える」ことで、クラスのふるまいや動き方の中で必要な部分だけを書き換えることができる。「OnDraw()メソッドが呼ばれる時だけ違うことをさせたい」時に利用できる。MFCなど多くのGUIフレームワークがこの特徴を使ってオーバーライドすることを前提にOSのAPIをラッピングしたクラスライブラリを提供している。</p>
+<p>継承とオーバーライドの例は以下のようになる。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Animal {
+protected:
+    string name;
+
+public:
+    Animal(string a_name) {
+        this-&gt;name = a_name;
+    }
+    
+    void printName() {
+        cout &lt;&lt; "My name is " &lt;&lt;  this-&gt;name &lt;&lt; "." &lt;&lt; endl;
+    }
+}
+
+class Cat: public Animal {
+public:
+    Cat(string a_name) : Animal(a_name) {}
+    
+    void printName() override {
+        cout &lt;&lt; "I'm a cat. My name is " &lt;&lt;  this-&gt;name &lt;&lt; "." &lt;&lt; endl;
+    }
+}
+</pre>
+<p>ここでは文字列の代入を簡単にするためにstd::stringを使っています。char*型の文字列と異なり、=でサイズの違う文字列を代入できます。strcpy_s()は必要ありません。</p>
+<ul>
+<li><a href="https://bituse.info/cp/8">string型 | C++入門～bituse～</a></li>
+<li><a href="https://programming.pc-note.net/cpp/string.html">C++の文字列1(C++) - 超初心者向けプログラミング入門</a></li>
+</ul>
+<p>注意するべきは、派生クラスでのコンストラクタ「Cat(string name) : Animal(name) {}」の部分。派生クラスから基底クラスの引数付きのコンストラクタを呼び出すためには、このように「:」に続いて実行したい処理を記述する。</p>
+<p>また、C++にsuperは無いが、スコープ解決演算子「::」を使えば、基底クラスのメソッドを派生クラスから呼ぶことができる。</p>
+<ul>
+<li><a href="http://www7b.biglobe.ne.jp/~robe/cpphtml/html02/cpp02016.html">ロベールのＣ＋＋教室 - 第１６章 派生と構築 -</a></li>
+<li><a href="http://program.station.ez-net.jp/special/handbook/cpp/class/super.asp">EZ-NET: 基底クラスの関数やコンストラクタを呼び出す - C++ プログラミング</a></li>
+</ul>
+<p>また、C++11ではoverrideキーワードとfinalキーワードが追加された。overrideキーワードを使うことで、メソッドがオーバーライドされていることを明示的に示すことができ、正しくオーバーライドされていなければエラーを出してくれる。また、finalを指定したメソッドはオーバーライドできない。</p>
+<ul>
+<li><a href="https://cpprefjp.github.io/lang/cpp11/override_final.html">overrideとfinal - cpprefjp C++日本語リファレンス</a></li>
+<li><a href="https://itsakura.com/cpp-override">C++ オーバーライドのサンプル | ITSakura</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.20編集</p>
+</div>
+
+<h2>オーバーライドとオーバーロード</h2>
+<p>オーバーライドは、クラスを継承した派生クラスで基底クラスにあるものと同名のメソッドを定義することで上書きする機能。</p>
+<p>これに対してオーバーロードは、同名でありながら引数の型や引数の数の違うメソッドを複数用意し、メソッドを呼び出した時の引数によってバインディングし、同名でありながら別のメソッドを実行する機能。</p>
+<p>また、C++には演算子のオーバーロードという機能があり、演算子（+や=、[]や()のような記号）の機能を独自の用途でメソッドのように定義することができる。この場合、メソッド名をoperator+()のように定義する。</p>
+<div class="edit_date">
+<p>2023.01.20編集</p>
+</div>
+
+<h2>friend関数・friendクラス</h2>
+<p>friend関数・friendクラスを指定することにより、private/protectedが指定されたメンバに別のクラスや関数からアクセスできる。「友達だけには教えてあげる」という感じ。</p>
+<ul>
+<li><a href="https://ja.cppreference.com/w/cpp/language/friend">フレンド宣言 - cppreference.com</a></li>
+</ul>
+
+<h2>thisポインタ</h2>
+<p>thisポインタは、メンバ関数を呼び出したそれ自体のインスタンス（オブジェクト）を指すポインタのこと。</p>
+<p>簡単な使い方（Javaなどで良く使うのと同様）として、Humanクラスの中のageにアクセスするために、メソッドなどから</p>
+<pre class="prettyprint">
+this-&gt;age = arg_age;
+</pre>
+<p>のようにアクセスする。</p>
+<p>実際のプログラミングでは、return this（自分へのアドレスを返す）やreturn *this（自分を値型のオブジェクトとして返す）のように、メンバ関数を実行した際の戻り値として使ったりする。</p>
+<p>後日注記：<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>では、コピー代入演算子を使う際に、a = b = cのように使われるのを想定した上で、右から左へと評価される順序規則（コンベンション）を守るために、コピー代入演算子の定義については*thisを返すようにすべきであると説明されています。このように、C++ではさまざまなところに「細かい基本的なルール」があり、そのルールを守るためにクラス設計を行います。Effective C++を読むと、そのようなクラス設計の基本が分かります。</p>
+<ul>
+<li><a href="http://www7b.biglobe.ne.jp/~robe/cpphtml/html02/cpp02025.html">ロベールのＣ＋＋教室 - 第２５章 これ。</a></li>
+<li><a href="https://monozukuri-c.com/langcpp-this-pointer/">C++ thisポインタ【オブジェクト自身を示す隠されたポインタ】 - モノづくりC言語塾</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.20編集</p>
+</div>
+
+<h2>多重継承</h2>
+<p>C++では、多重継承、つまり複数のクラスを同時に継承することができる。さまざまな問題があるため、JavaやPHPやRubyなどでは多重継承はサポートしていない。</p>
+<p>しかしながら、C++のプログラマには多重継承を使いこなす人が結構いて、さまざまなプログラムのソースコードなどでも多重継承をバリバリに使いまくっていることがあったりして、一概に多重継承を悪であるとは否定できない。</p>
+<p>多重継承には、同じメソッド名が使われていた場合に衝突する問題や、同じ親クラスが祖先（親クラスの親クラス）の間で共通して継承されていた場合に複数回継承してしまう菱形継承の問題がある。</p>
+<p>Javaなどではこれに対してインターフェースを実装することで、この問題を解決している。Javaでは多重継承は許されないが、複数のインターフェースを同時に実装することは許される。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://e-words.jp/w/%E5%A4%9A%E9%87%8D%E7%B6%99%E6%89%BF.html">多重継承とは - IT用語辞典 e-Words</a></li>
+</ul>
+
+<h1>ポリモーフィズム</h1>
+<h2>仮想関数を使えば、どんな派生クラスであっても同じクラスのように扱える</h2>
+<p>仮想関数とポリモーフィズムを使うことで、どんな派生クラスであっても同じクラスのように扱えます。</p>
+<p>単に派生クラスを基底クラスのインターフェースとして操作するだけでなく、派生クラスで同じ名前のメソッドがオーバーライドされていた場合、仮想関数とすることで、それぞれの派生クラスのメソッドを動的バインディングで実行することができます。</p>
+<p>たとえば、ゲームのさまざまな職業のキャラクターのクラスを管理する際や、HTMLのタグのクラスを管理する際に、ひとつの「基本職業クラス」や「基本タグクラス」を作って、すべての職業やタグをそこからの派生クラスとするような利用の用途が考えられます。</p>
+<p>このような場合、それぞれの職業の成長パラメータや能力は違い、またそれぞれのタグの性質は違いますが、多くのそれに関連する「ふるまい」、たとえば攻撃するとか表示するとかいった機能の基本的APIは共通の様相になります。機能の内容は違いますが、インターフェースと目的や役割は同じです。</p>
+<p>そのため、たとえばソシアルナイトであってもアーマーナイトであっても（ファイアーエムブレムというゲームの中のキャラクターの職業です）、ひとつの「一般職業クラス」で対応することができます。たとえば、ソシアルナイトもアーマーナイトも、槍を使って相手に攻撃を行いますが、ソシアルナイトにだけは馬に乗ったり下りたりする機能が必要であり、馬に乗った状態と下りた状態の別々の機能を作らなければなりません。また、攻撃の際に表示されるエフェクト画面や、移動する際に流れるサウンド音楽も違います。このような時に、仮想関数を用いれば、ひとつの基底クラスとして一般職業クラス型の変数にさまざまな職業のキャラクターのクラスの変数を詰め込んで、同じインターフェースから操作し、機能が異なる場合にだけ、派生クラスの機能を呼び出すことができます。これによって、プログラムが書きやすくなり、あとあと拡張や変更もしやすくなります。</p>
+<p>仮想関数を使う際の注意点として、基底クラスの関数にvirtualを指定すれば、派生クラスでは指定する必要はありません。自動的に仮想関数と認識されます。また、仮想関数を用いたポリモーフィズムでは、動的バインディングが行われます。すなわち、基底クラスのメソッドが派生クラスでオーバーライドされていた場合、派生クラスのメソッドが動的に実行されます。virtualを指定しなかった場合、基底クラスのメソッドが実行されます。</p>
+
+<h2>仮想関数の例</h2>
+<p>以下は自分で適当に書いたコードです。</p>
+<p>基本クラス(hello.h)：</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class HelloBase {
+public:
+    virtual void hello() { cout &lt;&lt; "Hello." &lt;&lt; endl; }
+};
+</pre>
+<p>派生クラス１(hello_german.h)：</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class HelloGerman: public HelloBase {
+public:
+    void hello() { cout &lt;&lt; "Guten Tag." &lt;&lt; endl; }
+};
+</pre>
+<p>派生クラス２(helllo_french.h)：</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class HelloFrench: public HelloBase {
+public:
+    void hello() { cout &lt;&lt; "Bonjour." &lt;&lt; endl; }
+};
+</pre>
+<p>main.cpp：</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include "hello.h"
+#include "hello_german.h"
+#include "hello_french.h"
+using namespace std;
+
+int main() {
+    HelloBase *hl_en, *hl_de, *hl_fr;
+    
+    hl_en = new HelloBase();
+    hl_de = new HelloGerman();
+    hl_fr = new HelloFrench();
+    
+    hl_en-&gt;hello();
+    hl_de-&gt;hello();
+    hl_fr-&gt;hello();
+    
+    delete hl_en;
+    delete hl_de;
+    delete hl_fr;
+    
+    return 0;
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+Hello.
+Guten Tag.
+Bonjour.
+</pre>
+<ul>
+<li><a href="http://cpp-lang.sevendays-study.com/ex-day6.html">一週間で身につくC++言語の基本|第６日目：virtualと仮想関数</a></li>
+</ul>
+<p>親クラスのメソッドにvirtualキーワードをつけないと、こういうことはできない。この例の場合、virtualキーワードをつけないと、親クラス「HelloBase」のhello()メソッドが3回実行される。</p>
+
+<h1>動的なオブジェクトの作成</h1>
+<h2>ポインタのようにスコープと無関係のオブジェクトを作成できる</h2>
+<p>C++では、動的なオブジェクトの作成（よくオブジェクトのポインタと呼ばれる）を使うことで、スコープと無関係に作ったり参照したりできるオブジェクトを作ることができる。</p>
+<p>型を宣言する時は、ポインタと同じように「Class *obj」と「*」（アスタリスク）をつけて宣言する。ここに、new演算子を用いてコンストラクタを実行する。newで動的に作られたインスタンスは、deleteで削除するまで、スコープとは無関係に保持され続ける。そして、その変数の実体はポインタからどこからでも参照できる。</p>
+<p>ただし、ポインタがnullを参照したままでオブジェクトのメソッドを実行しようとしたり、参照しているポインタがなくなってもオブジェクトが幽霊状態のまま削除もされずに残ってしまったり、場合によっては削除されずにメモリ領域をどんどん占領していってメモリリークの原因になったりすることもある。</p>
+<p>Javaのような言語では、仮想マシンがガーベッジコレクションを行うことで、参照されなくなったオブジェクトは自動的に仮想マシンによって削除される。C++でも、最近の仕様であるスマートポインタを使うことで、自動的に要らなくなったオブジェクトを回収できる。また、Rustのような先進的な言語では、ムーブセマンティクスと所有権・寿命の考え方によって、ポインタを使わなくても、ミュータブルな参照の限定（所有権はひとつだけで、参照はいくらでも作れるが、ミュータブルな参照はひとつだけ）を行った上でスタックにデータを置くことで、「メモリ管理問題の最終的な解決」を行っている。</p>
+<p>C++の優位な点は、高速であること。Javaのような仮想マシンによる言語に比べて、自分でメモリを生成・削除の管理をしなくてはいけないが、その分だけ高速かつ効率的にアプリケーションを開発できる。また細かい点として、Javaには変数の型によって値型と参照型があり、オブジェクトや配列は参照型だが、int型などは値型である、などといった規定がある。C++では、ポインタあるいは参照型を使うことで、こうした値型と参照型を自分で明示的に指定できる。</p>
+<p><a href="c_pointer.html">C言語（配列とポインタ）</a>も参照のこと。</p>
+
+<h2>動的なオブジェクトの作成とは</h2>
+<p>C++では、オブジェクトを動的に作成する（静的な変数として宣言せず、ポインタのような同じアドレスを参照する参照型の変数として、実行時に作り、スコープを超えても削除されない変数）を扱うことができる。</p>
+<p>まず、オブジェクトのインスタンスのクラス名に*をつけて、</p>
+<pre class="prettyprint">
+Tab *ptab;
+</pre>
+<p>のように宣言する。この上で、変数を動的に作成したい時に、</p>
+<pre class="prettyprint">
+ptab = new Tab();
+</pre>
+<p>を行い、このように先ほどのptabに代入して操作する。ここで、ptabがTabを参照するための「参照型変数」であり、C言語でいうアドレスだけを保管したポインタのようなものである。このインスタンスからメソッドを実行するために、-&gt;をつけて</p>
+<pre class="prettyprint">
+ptab-&gt;Clear();
+</pre>
+<p>のようにメソッドを実行する。</p>
+<p>動的な変数であり、ローカルスコープを超えてもインスタンスが残るため、ptabが「どこも参照していない状態」になっても、new Tabで作った「幽霊オブジェクト」は残り続ける。よって、オブジェクトは幽霊状態になる前に</p>
+<pre class="prettyprint">
+delete ptab;
+</pre>
+<p>で消さなければならない。</p>
+<p>Javaなどでは、値型と参照型の変数の種類があって、クラスは最初から参照型に決まっている。よって、ポインタのように*を付ける必要はない。また、Javaはガーベッジコレクション機能があり、「どこからも参照されていないメモリ上のオブジェクトを自動的にゴミ掃除する」機能があるため、deleteも必要ない。その代り、速度が遅い。C++では自分でfreeやdeleteを行う代わり、ガーベッジコレクションに頼らないため、速度が桁違いに速い、という特徴がある。また、最近ではC++でもスマートポインタのような自動的に削除される賢いポインタの機能もある。</p>
+<ul>
+<li><a href="http://cpp-lang.sevendays-study.com/day4.html">一週間で身につくC++言語の基本|第4日目：生成と消去</a></li>
+</ul>
+
+<h2>基本クラスに派生クラスのオブジェクトをつめこむ</h2>
+<p>また、オブジェクトをポインタで扱う用途として、基本クラスのオブジェクトのポインタに派生クラスのオブジェクトのインスタンスを格納したりすることができる。</p>
+<pre class="prettyprint">
+HelloBase *hello_obj;
+
+hello_obj = new HelloFrench();
+hello_obj-&gt;hello();
+delete hello_obj;
+
+hello_obj = new HelloGerman();
+hello_obj-&gt;hello();
+delete hello_obj;
+</pre>
+
+<h2>newとdelete</h2>
+<p>C言語のmalloc()/free()関数と同じことを、C++ではnew演算子とdelete演算子を使って行うことができる。</p>
+<p>動的に作成する場合、C言語のポインタと同じように変数名（クラス名）に*をつける。動的に作成したオブジェクトからのメソッドは-&gt;をつけて実行する。</p>
+<p>後日注記：newとdeleteは、オーバーロードすることでメモリリークの発見をするためのデバッグ機構などを実現できる。ただしスタックに置かれた変数については作動しないことに注意。詳しくはやねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」が参考になります。</p>
+
+<h2>スマートポインタ</h2>
+<p>最近のC++ではスマートポインタを使って、自動的にポインタのメモリ解放を行ってくれる仕組みがあります。</p>
+<p>所有権やムーブセマンティクスのような考え方は、<a href="rust.html">Rust</a>に近いところがあるかもしれません。</p>
+<ul>
+<li><a href="https://qiita.com/hmito/items/db3b14917120b285112f">C++11スマートポインタ入門</a></li>
+</ul>
+<p>後日注記：以前のC++にはスマートポインタがなかった。これが、JavaやC#などのほかのオブジェクト指向言語に比べて、「オブジェクト指向言語として決定的に欠けた部分」と言われていた。現在のC++にはスマートポインタがあるため、どんどん使いましょう。詳しくはやねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」が参考になります。</p>
+<p><a href="java_gc.html">Java（２C．ガーベッジコレクションと例外）</a>も参照のこと。</p>
+
+<h2>動的スコープにおけるC++のオブジェクト指向</h2>
+<p>まず、ローカルスコープでスタックに置かれたデータは、スコープ外にでるとアクセスできなくなります。</p>
+<p>このため、たとえば関数の中でint型の変数を宣言した場合、これを関数の外にreturnでポインタとして返すことはできません。</p>
+<p>しかしながら、newで動的スコープに宣言した変数の場合、スコープ外にでても変数のデータを保つことができます。</p>
+<p>C++では、このような動的スコープを用いて、「変数のアドレスを返す」ということを関数でよく行います。</p>
+<p>そして、この変数は、ポインタによって参照されます。</p>
+<p>動的スコープすなわちnewで作成したオブジェクトのインスタンス変数を関数から返した場合、ポインタによってメモリアドレスで操作するか、あるいは関数で返されたメモリアドレスをそのまま-&gt;でアクセスして、このアドレスの指し示すオブジェクトにアクセスことができます。返されたメモリアドレスをポインタで管理するなら、</p>
+<pre class="prettyprint">
+Object *p = GetObject();
+p-&gt;Show();
+</pre>
+<p>のようになります。</p>
+<p>通常の変数であっても、ポインタであっても、変数名で管理するかメモリアドレスによって管理するか、ということが若干違うぐらいで、newで作成した動的スコープのインスタンスはdeleteで消さなければいけないとか、どこから参照しても同じメモリ上のデータにアクセスできるといった違いはありますが、基本的にはメモリ上のオブジェクトであることには変わりません。</p>
+<p>そして、このオブジェクトは、すなわち「インスタンスに固有のデータを格納するメソッドを含む構造体」であるため、たとえばGetObject()関数がもしあって、これがreturnでアドレスを返すような時に</p>
+<pre class="prettyprint">
+GetObject()-&gt;Show();
+</pre>
+<p>のように実行するかもしれませんが、このGetObject()関数はクラスのさまざまなデータメンバを含んでそのいわば「クラス化された構造体データ」のメモリアドレス（ポインタ）を返します。</p>
+<p>そして、Show()はまさしくこのデータを操作する関数、すなわちメソッドです。「オブジェクトというデータがどこかにあって、それをメソッドみんなで書き換えたり参照したりする」と考えましょう。データが3と4であれば、GetObject()はたとえばデータメンバに3や4を含むオブジェクトのアドレスを返し、Show()関数はたとえばこの3と4を+すなわち足し算で足した上で画面に表示するメソッドかもしれません。</p>
+<p>そして、このようなオブジェクトは「どこかにあって、それをみんなで操作する」「参照型として、ポインタやメモリアドレスで参照する」「現在のデータの状態がメモリ上のインスタンス変数に格納される」などの特徴があります。</p>
+<p>クラスから生成したオブジェクトのインスタンス変数は、通常のプリミティブ型（int型やchar型のように、C言語にもともと用意されていて、構造体やクラスによって構造化されていない基本型）の変数と同じように、内部にデータメンバを持つひとつの変数です。変数であるため、中にはクラスによってコード化されている、オブジェクトによって重要なさまざまなデータメンバがあります。メモリアドレスやポインタによってアクセスする場合も、構造体のポインタと同じように、プログラムのさまざまな場所から共通のどこかの場所にあるデータにアクセスできます。この変数は、生成した後で内容のデータメンバがインスタンスに変わることがあり、オブジェクトのインスタンスごとに別の値を格納した状態でオブジェクトをメソッドから操作して中身の状態を変えられるため、「インスタンス変数」と呼ばれます。</p>
+<p>オブジェクトのインスタンス変数は、メモリ上にアドレスを持ち、メモリ上にデータメンバとともに格納される構造化データです。スタックにインスタンスを作った場合は変数名に「.」をつけて、このデータにアクセスできます。newを用いて動的に作成する場合は、メモリアドレスやポインタの変数名に「-&gt;」をつけて、同じデータにさまざまな場所からアクセスできます。</p>
+<p>このインスタンス変数の中身がどうなっているかは、クラスを見なければ分かりません。逆に、「分からないからこそいい」と言えます。実装の詳細までプログラマが分かった上で操作するのではなく、ある程度の仕様化されたインターフェースを提供しておいて、プログラマはそのAPIに基づいてデータメンバにメソッドやアクセサ（データメンバのプロパティや属性にアクセスするためだけに用意された専用のメソッド）からアクセスすべきです。</p>
+<p>クラスでコード化されたデータメンバには、クラスの内部からは自由にアクセスできますが、上述した理由により、この中身を完全に外部に公開して自由にアクセスすることは望ましくありません。このため、「メソッド」と呼ばれるインターフェースを提供し、この公開範囲を制限するアクセス修飾子を用いてクラス設計をします。このインターフェースはオブジェクトの設計図であるクラスに記述します。どの程度アクセスできるかを指定しながら、データメンバの数や種類や名前、メソッドの中に記述される「CPUで計算される処理」をクラスに記述します。</p>
+<p>そして、メモリ上にあるオブジェクトをスタック変数あるいはポインタで保持し、これにメソッドを通じてアクセスするようにします。メソッドはレシーバとも呼ばれます。これらのインターフェースはクラスに記述され、クラスの内部は外部に隠蔽され、クラスの内部からはデータメンバに自由にアクセスできます。</p>
+<p>このようにすることで、大事な部分を隠すことができ、プログラマはインターフェースが共通であれば、プログラム全体を直さなくても一部だけの実装の内部だけを直すことができます。このようにすることで、大規模なプログラムの設計と開発がやりやすくなります。また、メモリ上のデータメンバを外部から自由に操作できないようにすることで、プログラムが堅牢になり、壊れることが少なくなり、データの矛盾が起きないようにすることができます。</p>
+<p>後日注記：基本的に、C/C++で書かれたソースコードが言語の文法通りに動くように、まず実際に動く機械語のプログラムをコンパイラが吐き出します。このプログラムがその通りきちんと動くようにOSが介入し、OSがメモリ上にプログラムのデータを配置し、OSがマルチタスクで並列的に切り替えながらCPUでプログラムのコードを実行します。今のコンピュータはそのように動いています。</p>
+
+<h2>デストラクタとスマートポインタを上手く使おう</h2>
+<p><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>にも書かれていますが、newして得られたリソースが、必ずしもdeleteで解放されるとは限りません。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+Object* obj = new Object();
+
+// 処理
+
+delete obj;
+</pre>
+<p>というコードがあったとして、これは上手くnewしたオブジェクトを解放するように見えますが、実際は処理の部分でreturn, break, goto, あるいは例外などが投げられた場合、deleteされずに処理が終わってしまいます。</p>
+<p>このような時には、デストラクタ（あるいはスマートポインタ）を上手く使って、リソースを管理する専門のオブジェクトを使いましょう。このオブジェクトのリソースを管理するための専門のクラスのデストラクタで必ずnewされたオブジェクトが解放されるようにすると、得たリソースが必ず解放できます。</p>
+
+<h1>その他の重要な機能</h1>
+<h2>例外</h2>
+<p>例外はthrowで吐き、try ～ catchブロックのcatchで捕捉する。</p>
+<pre class="prettyprint">
+try {
+    throw "例外を吐きます";
+} catch (char const *error) {
+    cout &lt;&lt; error &lt;&lt; endl;
+}
+</pre>
+<p>後日注記：Linuxカーネル開発者のリーナス・トーバルズは、「C++の例外は壊れている」と言っています。JavaやPythonなど後続の言語に比べて、C++の例外処理は、C言語のエラーチェックに後付けで付け足したような仕様をしていて、実際カーネルやOSの開発には向いていません。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a>が参考になります。）</p>
+
+<h2>インライン関数</h2>
+<p>インライン関数は、関数の呼び出しオーバーヘッドを避けるために、関数を呼び出すのではなく、マクロのように行の中にインラインで関数コードを埋め込むことができる機能。</p>
+<p>インライン関数を使うには、inlineを関数につければよい。<!--この時、staticをつけないとコンパイルが通らないことがあるので、慣習的にstaticをつける。--></p>
+
+<h1>書籍</h1>
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a></li>
+<li><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a></li>
+<li>やねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B02%E3%80%90CD-ROM%E4%BB%98%E3%80%91-Game-developer-books-%E3%81%86%E3%82%89%E3%81%8A/dp/4798006033">Windowsプロフェッショナルゲームプログラミング2</a>」</li>
+<li><a href="http://www.asahi-net.or.jp/~wv7y-kmr/memo/old/cpp_cls.html">C++クラス - 個人的なメモと備忘録</a></li>
+</ul>
+
+<h1>C/C++の別の分野</h1>
+<h2>C言語</h2>
+<p>C++では、C言語を上位互換性で引き継いでおり、C言語で利用出来る言語仕様がそのまま使用できる。<a href="c.html">C</a>を参照のこと。</p>
+
+<h2>ジェネリック・STL</h2>
+<p>C++はクラスによるオブジェクト指向だけでは終わらない。テンプレートを用いたジェネリックプログラミングや、標準ライブラリに含まれるSTLを使ったコンテナ・反復子・アルゴリズムを用いた「C++流に何でもできる美しいライブラリ」によるプログラミングができる。これらが分からなければ、C++で何かをすることはできない。<a href="cpp_generics.html">C++２（ジェネリック）</a>や<a href="cpp_stl_libs.html">C++３（STL・ライブラリ）</a>を参照のこと。</p>
+<p>また、Windowsプログラミング、特にVisual C++やMFCを用いたプログラミングでは、Windows依存のさまざまなクラスを用いてプログラミングができる。<a href="windows_programming.html">Windows API</a>や<a href="windows_mfc.html">Visual C++/MFC</a>を参照のこと。</p>
+
+<h2>C++ミニツアー</h2>
+<p><a href="cpp_tour.html">C++ミニツアー</a>を参照のこと。</p>
+
+<h2>C++について戯言</h2>
+<p><a href="cpp_comments.html">C++（A．戯言）</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>C++</h2>
+<ul class="defaultlist list7">
+<li>C++
+<ul>
+<li>C/C++
+<ul>
+<li>C++
+<ul>
+<li>オブジェクト指向
+<ul>
+<li>カプセル化</li>
+<li>コンストラクタ、デストラクタ</li>
+<li>継承</li>
+<li>仮想関数</li>
+<li>オーバーライド</li>
+<li>演算子のオーバーロード</li>
+</ul></li>
+<li>ジェネリクス
+<ul>
+<li>汎用関数</li>
+<li>汎用クラス</li>
+</ul></li>
+<li>STL
+<ul>
+<li>複数の要素を格納するさまざまな種類のコンテナに対し、イテレータで反復でき、アルゴリズムで操作できる</li>
+<li>コンテナ</li>
+<li>イテレータ</li>
+<li>アルゴリズム</li>
+<li>関数オブジェクト</li>
+</ul></li>
+<li>boost</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>仮想関数</h2>
+<p>基本クラスで型付けされた変数に派生クラスのインスタンスを格納した場合、virtualキーワードを基本クラスのメソッドに付けることで、基本クラスのメソッドなのか派生クラスのメソッドなのか、動的バインディングでアクセスできる。</p>
+<p>たとえばHelloクラスのsay()メソッドについて、Helloクラスを継承したHelloJapaneseクラスのsay()メソッドを、動的にバインディングして呼び出したりできる。</p>
+<p>Hello.say()かHelloJapanese.say()かはインスタンスがどの型のクラスのインスタンスかによって動的に決まる。</p>
+
+
+<h1>リンク集</h1>
+
+
+<h2>C++</h2>
+<p>C++の入門。</p>
+<ul>
+<li><a href="http://www7b.biglobe.ne.jp/~robe/cpphtml/">ロベールのＣ＋＋教室</a></li>
+<li><a href="http://www5c.biglobe.ne.jp/~ecb/cpp/cpp00.html">C++入門 - 目指せプログラマー！</a></li>
+</ul>
+<p>以下はマイクロソフトのサイトですが。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/hh875057.aspx">C++ 言語および標準ライブラリ - MSDN</a></li>
+</ul>
+<p>GCC/G++のマニュアルも参考にしてください。</p>
+
+<h2>C++リファレンス</h2>
+<p>C++</p>
+<ul>
+<li><a href="https://cpprefjp.github.io/">cpprefjp - C++日本語リファレンス</a></li>
+</ul>
+
+<h2>C++サンプルコード集</h2>
+<p>サンプルコード集</p>
+<ul>
+<li><a href="http://www.officeuchida.com/pcp/pcpindex.html">速習　CプログラマのためのC++プログラミング入門　サンプルプログラム集 - The Office Uchida, School of Computer</a></li>
+<li><a href="http://www.cppsamples.com/">c++ samples - C++ Patterns</a></li>
+</ul>
+
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a></li>
+<li><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（ソースコード・カーネルモジュール） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（ソースコード・カーネルモジュール）</h1>
+<p>Linuxのカーネルの開発に関する世界観（ソースコード・カーネルモジュール）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><b>ソースコード・カーネルモジュール</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Linuxカーネルソース探検</h1>
+
+<h2>Linuxカーネルソースコード</h2>
+<p>実際にカーネルの探索を行う場合は、「どこから見るべきか」が以下のページに書いてあるので、参照してください。</p>
+<ul>
+<li><a href="http://archive.linux.or.jp/JF/JFdocs/The-Linux-Kernel-15.html">The Linux Kernel: Linux カーネルソース</a></li>
+</ul>
+<p>以下からgitリポジトリの中の実際のコードを探すことができます。</p>
+<ul>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/">git.kernel.orgのtree</a></li>
+</ul>
+
+<!--
+<h2>Linuxカーネルの主なソースファイル</h2>
+<p><a href="http://archive.linux.or.jp/JF/JFdocs/The-Linux-Kernel-15.html">The Linux Kernel: Linux カーネルソース</a>に掲載されていたものを、今のカーネルバージョンのファイルパスに変更しました。</p>
+<p>注意：原文の意図はあくまで「カーネルのどこから見るべきか」ということであり、上記のファイルが重要なソースファイルのすべてであるという意味ではありません。また、原文のカーネルバージョンが古く、現在のLinuxカーネルでは全く違っている可能性があります。僕がカーネルについての知識や常識が欠如しているため、このリンクは全く意味を成さない可能性もあります。原文にあるように、「これからカーネルをハッキングしたい方がどこから見るべきか」という意図で閲覧してください。</p>
+-->
+
+<h2>今のカーネルの読み方</h2>
+<p>基本的に<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/init/main.c">init/main.c</a>の中の「start_kernel()」から読めば良い。</p>
+<p>最後のarch_call_rest_init()からrest_init()を呼び、その中のcpu_startup_entry()を呼ぶ。</p>
+<p>cpu_startup_entry()は<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/idle.c">kernel/sched/idle.c</a>にある。</p>
+<p>そして、do_idle()でアイドルループに入る。</p>
+<p>（<a href="https://qiita.com/peo3/items/263d167eceedf89a9d67">Linuxのブートプロセスを追うときに見るべきファイル(x86_64編) - Qiita</a>を参考に執筆しました。このページは今のカーネルの読み方について詳しい。）</p>
+
+<h1>カーネルのコンパイル</h1>
+<h2>カーネルの手動コンパイルの方法</h2>
+<p>Linuxカーネルは、手動でコンパイルすることで、さまざまなオプション機能を有効にしたり、無効にしたりすることが出来る。各機能は有効・無効あるいは動的にいつでも読み込めるモジュールにすることができる。</p>
+<p>カーネルの手動コンパイルの方法は、</p>
+<p>１．まず、カーネルソースを展開する。Linuxシステムにおいて、Linuxカーネルのソースコードを保管する一般的なディレクトリとしては、/usr/src/linux-*などとなる（*はバージョン）。/usr/src/linuxにリンクを張ることが多い。</p>
+<p>２．以下のコマンドで、クリーンナップを行う。</p>
+<pre>
+make clean && make mrproper
+</pre>
+<p>３．以下のコマンドで、カーネルの機能の有効・無効を設定し、.configファイルを吐き出す。</p>
+<pre>
+make menuconfig
+</pre>
+<p>４．以下のコマンドで、カーネルやカーネルモジュールをコンパイルする。</p>
+<pre>
+make && make modules_install
+</pre>
+<p>５．以下のコマンドで、ブートパーティションにbzImage（カーネルイメージ）をインストールする。</p>
+<pre>
+make install
+</pre>
+<p>Linuxカーネルをコンパイルするにあたって、良く設定するのはCPU関係とファイルシステム関係のサポートだ。特に以下のような設定をするかもしれない。</p>
+<pre>
+File systems ---&gt;
+  &lt;*&gt; Second extended fs support
+  &lt;*&gt; The Extended 3 (ext3) filesystem
+  &lt;*&gt; The Extended 4 (ext4) filesystem
+  &lt;*&gt; Reiserfs support
+  &lt;*&gt; JFS filesystem support
+  &lt;*&gt; XFS filesystem support
+  &lt;*&gt; Btrfs filesystem support
+  DOS/FAT/NT Filesystems  ---&gt;
+    &lt;*&gt; MSDOS fs support
+    &lt;*&gt; VFAT (Windows-95) fs support
+ 
+Pseudo Filesystems ---&gt;
+    [*] /proc file system support
+    [*] Tmpfs virtual memory file system support (former shm fs)
+</pre>
+<p>それ以外の詳しい設定項目については、<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel/ja">カーネルの設定 - Gentoo Wiki</a>が参考になる。</p>
+<p>以下はカーネルのコンパイルについてのリンク。カーネルのコンパイル方法はバージョンとともに良く変わるので、上の方法は古い可能性があります。必ず下のリンクのような情報から、そのコンパイルしようとしているバージョンのカーネルのコンパイル方法について調べた上で、コンパイルを行ってください。</p>
+<ul>
+<li><a href="https://wiki.archlinuxjp.org/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB/%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB/%E4%BC%9D%E7%B5%B1%E7%9A%84%E3%81%AA%E6%96%B9%E6%B3%95">カーネル/コンパイル/伝統的な方法 - ArchWiki</a></li>
+<li><a href="https://debian-handbook.info/browse/ja-JP/stable/sect.kernel-compilation.html">8.10. カーネルのコンパイル - Debian</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel/ja">カーネルの設定 - Gentoo Wiki</a></li>
+<li><a href="http://www.geocities.co.jp/SiliconValley-Cupertino/9120/kernel_recompile.html">Linux Kernelの再構築 - RedHat Linuxでサーバ構築 </a></li>
+</ul>
+<p><a href="ncurses.html">ncurses</a>も参照のこと。</p>
+
+<h2>カーネルヘッダー</h2>
+<p>自分でLinuxのプログラムをコンパイルしたい時に、カーネルヘッダーが必要となる時がある。カーネルのAPIを使うプログラムをコンパイルするために必要。</p>
+<p>カーネルヘッダーは、少し前の状況だと、カーネルがメジャーアップデートされた場合（2.4から2.6への移行の時など）、プログラムが正常に動かなくなったり、コンパイルできなくなる時があった。なので、大切な基盤システムなどでは、注意してアップデートすること。</p>
+<p>カーネルヘッダーだけではなく、gcc, glibc, pythonなどの重要コンポーネントは、メジャーアップデートに失敗すると悲惨なことになる。Red Hatの開発者などでも、注意して開発している。特に、Pythonなどは本当に動かなくなる（Python2とPython3には全く互換性がない）。気を付けてシステムを管理しよう。</p>
+
+<h1>カーネルモジュール</h1>
+<h2>カーネルモジュールとは</h2>
+<p>最近のLinuxカーネルでは、モノリシックカーネルでありながら実行時に動的に機能を追加・削除する仕組みとして、カーネルモジュールを使用したモジュール化が進んでいます。</p>
+<p>モジュール化を行うために、メモリ上の任意の場所にコードやデータを追加できる、実行ファイル形式ELFを使います。</p>
+<p>ELFにより、実行中のソフトウェアに新しいコードを追加することができます。</p>
+<p>詳しくは以下の記事が参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0084">第84回　Linuxの成長過程をふりかえる［その3］：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>カーネルモジュールのロード</h2>
+<p>カーネルモジュールは*.koという拡張子で、/lib/modules/にある。</p>
+<p>カレントディレクトリにあるkoファイルのロードは以下のようにする。</p>
+<pre>
+# insmod hoge.ko
+</pre>
+<p>ロードされたドライバはlsmodで確認できる。</p>
+<pre>
+# lsmod
+（ドライバが表示される）
+</pre>
+<p>アンロードはrmmodで行う。</p>
+<pre>
+# rmmod hoge
+</pre>
+<p>modprobeコマンドを使うことで、カレントディレクトリのkoファイルではなく、「/lib/modules/`uname -r`」からドライバを探す。RCスクリプトなどでLinux起動時にドライバをロードしたい時などによく使われる。</p>
+<ul>
+<li><a href="http://linux-dvr.biz/archives/57">ドライバのロード・アンロード | Linuxデバイスドライバ開発入門</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/modutils/man8/modprobe.8.html">man modprobe</a></li>
+</ul>
+
+<h2>カーネルモジュールの設定</h2>
+<p>カーネルモジュールを手動で読み込むためには、/etc/modules-load.d/*.confに読み込みたいモジュールを記述する。</p>
+<p>モジュールのオプションは/etc/modprobe.d/*.confに記述する。</p>
+<p>基本的にはudevが自動で検知したハードウェアのモジュールを読み込むため、手作業で行う必要は稀である。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel/ja">カーネルの設定 - Gentoo Wiki</a></li>
+</ul>
+
+<h2>lsmod/insmod/rmmodコマンド</h2>
+<p>lsmodはカーネルモジュールの状態を表示する。insmodはモジュールを読み込み、rmmodはモジュールを取り出す。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/modutils/man8/lsmod.8.html">man lsmod</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/modutils/man8/insmod.8.html">man insmod</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/modutils/man8/rmmod.8.html">man rmmod</a></li>
+</ul>
+
+<h2>カーネルモジュールについて</h2>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://linux-dvr.biz/archives/57">ドライバのロード・アンロード | Linuxデバイスドライバ開発入門</a></li>
+<li><a href="http://www.tldp.org/LDP/lkmpg/2.6/html/">The Linux Kernel Module Programming Guide</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel/ja">カーネルの設定 - Gentoo Wiki</a></li>
+</ul>
+
+<h1>カーネル系のコマンド</h1>
+<h2>カーネルのバージョンを調べる</h2>
+<p>今使用しているカーネルのバージョンを調べるには、unameコマンドを使う。</p>
+<pre>
+$ uname -a
+</pre>
+<p>オプションは、-a（すべての情報を表示）、-r（カーネルのバージョンを表示）、-n（ホスト名を表示）、-p（プロセッサの種類を表示）。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/554/">unameコマンド | Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/uname.1.html">man uname</a></li>
+</ul>
+
+<h2>/etc/sysctl.conf</h2>
+<p>/etc/sysctl.confは、カーネルパラメータの設定をチューニングするファイル。カーネルのあらゆる設定を変更できる。</p>
+<p>このファイルの記述は、/proc/sys/以下にあるパラメータに反映される。設定できる項目の一覧はsysctl -aコマンドを実行すれば表示される（ただしめちゃくちゃ多い）。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/431/">/etc/sysctl.conf | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h1>Linuxカーネルガイド</h1>
+<h2>RHELとGentooとArchのガイド</h2>
+<p>カーネルのコンパイルやモジュールなどの管理については、RHELとGentooとArchのガイドが参考になる。</p>
+<ul>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/index">カーネルの管理、監視、および更新 Red Hat Enterprise Linux 8 | Red Hat Customer Portal</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/kernel_administration_guide/index">カーネル管理ガイド Red Hat Enterprise Linux 7 | Red Hat Customer Portal</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Kernel/Gentoo_Kernel_Configuration_Guide/ja">カーネル / Gentoo カーネルコンフィグレーションガイド - Gentoo Wiki</a></li>
+</ul>
+<p>特に以下のArchのガイドは分かりやすくて参考になる。カーネルモジュールを管理する場合は一読の必要あり。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB">カーネルモジュール - ArchWiki</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB">カーネルモジュールのコンパイル - ArchWiki</a></li>
+</ul>
+
+<h1>カスタムカーネル</h1>
+<h2>ZEN Kernel</h2>
+<p>ZEN KernelはカスタムLinuxカーネルのひとつ。「カーネルハッカーたちの知恵の結晶」であるとのこと（<a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB">カーネル - ArchWiki</a>より）。</p>
+<p>日本のLinuxディストリビューションAlter Linuxで採用されている。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB">カーネル - ArchWiki</a></li>
+<li><a href="https://liquorix.net/">Liquorix Kernel</a></li>
+<li><a href="https://linuxja.miraheze.org/wiki/Arch_Linux/Alter_Linux">Alter Linux - LinuxJapanWiki</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>libc</h2>
+<p>libcについては<a href="libc.html">libc</a>を参照のこと。</p>
+
+<h2>GNUツールチェイン</h2>
+<p>GNUツールチェインについては<a href="gnu_toolchain.html">GNUツールチェイン</a>や<a href="make.html">Make</a>を参照のこと。</p>
+
+<h2>コマンドのソースコード</h2>
+<p>コマンドのソースコードについては<a href="linux_src_install.html">ソースからのインストール</a>や<a href="linux_commands_beginner.html">UNIXコマンド（基本）</a>を参照のこと。</p>
+
+<h2>アセンブラとC言語</h2>
+<p>アセンブラとC言語については<a href="../prog_lang/assembly.html">アセンブリ言語</a>と<a href="../hardware/intel.html">Intel</a>と<a href="../prog_lang/c.html">C言語</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

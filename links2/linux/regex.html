@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>正規表現 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>正規表現</h1>
+<p>正規表現に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>正規表現とエスケープシーケンス</h1>
+<h2>正規表現とは</h2>
+<p>正規表現は、文字とパターンをマッチングさせる手段。多くの場合、言語のライブラリやUNIXなどのOSのコマンドで利用できる。</p>
+<p>主に、検索と置換のために使われる。「どんな文字に一致させるか」を考えながら、パターンマッチングを行う。また、特殊文字（改行やタブなど）はエスケープシーケンスと言って、バックスラッシュ（\）によってマッチングさせることができる。PerlやRubyなどでは、マッチングした場合としなかった場合において条件分岐したり、マッチングした部分を取り出して変数に格納したりすることもできる。</p>
+<p>正規表現は一見すると記号的で読みにくさを感じるかもしれないが、慣れるととても便利である。特に、テキストエディタにgrep置換機能が付いている時は、正規表現を使うことで膨大なファイルを一瞬にして編集することができる。</p>
+
+<h2>正規表現の例</h2>
+<p>たとえば、以下のようにすることで、*から始まる全ての行にh3タグを付加できる。</p>
+<p>検索：</p>
+<pre>
+^\*(.*)$
+</pre>
+<p>置換：</p>
+<pre>
+&lt;h3&gt;\1&lt;/h3&gt;
+</pre>
+<p>さらに以下のようにすれば、&lt;以外の文字から始まる全ての行にpタグを付加できる。</p>
+<p>検索：</p>
+<pre>
+^([^&lt;].*)$
+</pre>
+<p>置換：</p>
+<pre>
+&lt;p&gt;\1&lt;/p&gt;
+</pre>
+
+<h2>高度な実例・一覧</h2>
+<p>正規表現の高度な実例や記法の一覧は以下のリンク先が参考になります。</p>
+<ul>
+<li><a href="https://www.megasoft.co.jp/mifes/seiki/s310.html">URL（ホームページアドレス） - 正規表現サンプル集</a></li>
+<li><a href="https://www.mnet.ne.jp/~nakama/">サルにもわかる正規表現入門</a></li>
+</ul>
+
+<h2>ちょっと面倒でも正規表現を使った方が確実で速い</h2>
+<p>正規表現は、書くのがちょっと面倒でも、正規表現を使って置換をした方が、確実で、速いです。</p>
+<p>たとえば、全ての行に&lt;p&gt; ～ &lt;/p&gt;をつけたいなら、^(.*)$を&lt;p&gt;\1&lt;/p&gt;で置換します。</p>
+<p>こうすることで、確実で簡単で速いだけではなく、たくさんのファイルを置き換える時にも管理しやすくなります。</p>
+<p>しかしながら、間違えることもあるので注意しましょう。たとえば.*でタグの中身だけを置換したい時に、マッチする部分が最小マッチではなく最大マッチになっていると、タグの外側までマッチしてしまって、&lt;p&gt;から&lt;/p&gt;までを置き換えたいのに&lt;p&gt;～&lt;/p&gt;～&lt;p&gt;～&lt;/p&gt;までを置き換えたりすることがあります。このような時には.*ではなく[^&lt;]*でマッチさせます。</p>
+<p>そのため、たくさんのファイルを置換する時は気を付けましょう。バックアップを取ることも大切です。</p>
+
+<h2>基本</h2>
+<p>正規表現とエスケープシーケンスの基本。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">正規表現</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>.*</td><td>任意の文字列。</td>
+</tr>
+<tr>
+<td>.*?</td><td>任意の文字列の、最小限のマッチ。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>0回以上の繰り返し</td>
+</tr>
+<tr>
+<td>+</td>
+<td>1回以上の繰り返し</td>
+</tr>
+<tr>
+<td>?</td>
+<td>0回または1回（あるかないか分からない時に使う）<br>*?、+?、??のようにつけた場合は、最長一致ではなく最短一致を行う。</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n回の繰り返し</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>n回以上の繰り返し</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>n回以上m回以下の繰り返し</td>
+</tr>
+<tr>
+<td>^</td>
+<td>行の先頭</td>
+</tr>
+<tr>
+<td>$</td>
+<td>行の最後</td>
+</tr>
+<tr>
+<td>.</td><td>任意の一文字。</td>
+</tr>
+<tr>
+<td>\w</td><td>英単語を構成する文字。</td>
+</tr>
+<tr>
+<td>\W</td><td>英単語を構成する文字以外。</td>
+</tr>
+<tr>
+<td>\d</td><td>数字。</td>
+</tr>
+<tr>
+<td>\D</td><td>数字以外。</td>
+</tr>
+<tr>
+<td>[a-z]</td><td>aからzまで。</td>
+</tr>
+<tr>
+<td>(hoge)</td><td>(～)内は一文字であるかのように扱われる（グループ化）。<br>置換後の文字列を取り出すためにも使う（キャプチャ）。</td>
+</tr>
+<tr>
+<td>(foo|bar)</td><td>指定したパターンのどれか。</td>
+</tr>
+<tr>
+<td>~</td><td>最後に使った正規表現のパターンにマッチする。</td>
+</tr>
+<tr>
+<td>&</td><td>置換文字列で、パターンにマッチした部分全体を表す。<br>viでは<br>:%s/Hello/&, Assy/<br>などとできる。</td>
+</tr>
+<tr>
+<td>\uまたは\l</td><td>次の文字を大文字あるいは小文字に変える。</td>
+</tr>
+<tr>
+<td>\Uまたは\L<br>\eまたは\E</td><td>置換文字列の最後の位置までか、あるいは\eか\Eの位置までを、文字を大文字あるいは小文字に変える。<br>たとえば、viなら:%s/Gnome/\U&/で、GnomeをGNOMEに変えることができる。</td>
+</tr>
+<tr>
+<td>\n</td><td>改行。</td>
+</tr>
+<tr>
+<td>\r\n</td><td>改行。Windowsの場合は\r\nを使う。<br>テキストエディタによってはWindowsの場合でも\nで改行にマッチすることが多い。</td>
+</tr>
+<tr>
+<td>\s</td><td>スペース。</td>
+</tr>
+<tr>
+<td>\t</td><td>タブ。</td>
+</tr>
+<tr>
+<td>[～]</td><td>いずれかの文字。</td>
+</tr>
+<tr>
+<td>[^～]</td><td>それ以外の文字。</td>
+</tr>
+</table>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>や<a href="https://www.mnet.ne.jp/~nakama/">サルにもわかる正規表現入門</a>を参照のこと。）</p>
+
+<h2>キャプチャ</h2>
+<p>( ～ )でくくったパターンは、\1や\2として、置換後のテキストに含めることが出来る（キャプチャ）。</p>
+<p>たとえば、</p>
+<table class="some_tables">
+<tr>
+<th>置換前</th>
+<th>置換後</th>
+</tr>
+<tr>
+<td>(.*)\t(.*)\n</td>
+<td>&lt;h2&gt;\1&lt;/h2&gt;\n&lt;p&gt;\2\n</td>
+</tr>
+</table>
+<p>などと置換出来る。</p>
+<p>エディタによっては( ～ )ではなく\( ～ \)のように\が要る場合もあるので注意が必要。xyzzyでは\が必要だが、サクラエディタでは\は必要ない。サクラエディタの場合、複数行の置換には対応していないので注意が必要。（後日注記：基本正規表現と拡張正規表現の違いがあるのかもしれない。不勉強なので分からない。申し訳ない。）</p>
+<p>キャプチャせずにグループ化だけをしたい場合は(?:pattern)という記法を行う。</p>
+<p>viでも\が必要。viではexコマンドを使って以下のように置換できる。</p>
+<pre>
+:%s/\(Ho*ge\) or \(Fu*ga\)/\2 or \1/
+</pre>
+<p>たとえばHooooge or FuuuugaをFuuuuga or Hoooogeに置換できる。</p>
+<p>\( ～ \)でくくられたパターンは、ホールドバッファと呼ばれる特別な領域に保管され、1行の中に含まれる9つのパターンまで、\1や\2などの形で保存・利用できる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>も参照のこと。）</p>
+
+<h2>エスケープ</h2>
+<p>特殊文字をそのまま文字としてマッチさせたい時は、\.のように\をつけてエスケープする。</p>
+
+<h2>Perlでの一括置換と修飾子</h2>
+<p>Perlなどでの正規表現の修飾子は/pattern/mのようにパターンの最後に付加して使う。viでマッチする全ての文字について置換を行う場合は:%s/old/new/gなどとする。</p>
+<p>Perlでの正規表現の置換は、s/old/new/とする。修飾子/gを使ってすべてのマッチする場所に対する一括置換を行う場合はs/old/new/gとする。</p>
+<p>Perlでの一括置換は、=~を使って</p>
+<pre class="prettyprint">
+$str = "I am a Linux user. Linux is a good OS.\n";
+$str =~ s/Linux/FreeBSD/g;
+print $str;
+</pre>
+<p>などと記述すればよい。</p>
+<p>デフォルトでは正規表現は一回のマッチングしか行われないが、/gを使うとマッチする全ての場所にマッチや置換を行うことができる。</p>
+<p>/sを使うと、.が改行にもマッチするようになる。</p>
+<p>また/mを使うと、文字列は行ごとのリストになって、行ごとに^や$がマッチし、繰り返し処理が行える。</p>
+<p>また便利なのは/eで、マッチした文字列ごとにPerlの関数をかけることができる。置換後として記述された文字列をPerlのコードとして実行できる。たとえば、</p>
+<pre class="prettyprint">
+$str =~ s/.*\n/chomp($&) . ","/eg;
+</pre>
+<p>などとできる。</p>
+<p>/xを使うと改行やコメントができるようになるため、正規表現が長くなっても見やすい記述をすることができる。</p>
+<ul>
+<li><a href="https://qiita.com/akatsuki174/items/af170a4db20bda5d51ef">正規表現：正規表現修飾子編 - Qiita</a></li>
+<li><a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a></li>
+<li><a href="https://www.javadrive.jp/perl/func/index10.html">Perl | chomp関数：文字列の末尾の改行文字を削除する - Let'sプログラミング</a></li>
+</ul>
+<p><a href="../prog_lang/perl.html">Perl</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.03.24編集</p>
+</div>
+
+<h2>tr</h2>
+<p>正規表現以外の一括置換に使えるUNIXのコマンドとして、trコマンドがある。a-zをA-Zに置換するように、置換する文字をまとめて書くことができることが特徴。</p>
+<p>Perlなどでも、s///記法による正規表現のパターンマッチングの一括置換のほかに、tr///記法を使ってtrコマンドと同様の方式で一括置換をすることもできる。</p>
+<pre class="prettyprint">
+$str =~ tr/a-z/A-Z/;
+</pre>
+<p>（詳しくは<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>が参考になる。）</p>
+<p><a href="linux_commands.html">UNIXコマンド（ユーザープログラム）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.03.24</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>正規表現</h2>
+<p>Perlなどのプログラミング言語だけではなく、UNIXのコマンドやサクラエディタなどからも検索・置換のために使う。</p>
+<p>大量のファイルを編集する際には正規表現は必須である。</p>
+<p>使うツールによって正規表現に若干の差異があったり、サクラエディタでは複数行の検索・置換ができないなど制限もあったりするので、使うツールをよく選ぶこと。</p>
+
+<h1>リンク集</h1>
+<h2>正規表現（xyzzy）</h2>
+<p>大量のテキストファイルを編集するためには、正規表現は必須です。僕は、xyzzyと言うテキストエディタを使っています。</p>
+<ul>
+<li><a href="http://xyzzy.s53.xrea.com/reference/wiki.cgi?p=%C0%B5%B5%AC%C9%BD%B8%BD%A4%CE%C9%BD%B5%AD">正規表現の表記</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</body>
+</html>

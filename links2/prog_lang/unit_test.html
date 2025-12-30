@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ユニットテスト関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ユニットテストの世界観</h1>
+<p>ユニットテストに関する世界観です。</p>
+
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>ユニットテスト</h1>
+<h2>テストが大切</h2>
+<p>プログラミングやシステム開発を行う上で、実際のコードを書くよりも大切な工程があります。</p>
+<p>それはテストです。</p>
+<p>システム開発を行う上で、実際にコードを書く時間は、全体からすると少ないです。より多くの時間をテストに割きます。</p>
+<p>テストとは、そのシステムがきちんと動くかどうか、きちんとすべて確認するということです。</p>
+<p>通常、テストは人間の力で行います。プログラムを書いた後で、システムがきちんと動くかどうか、あらゆる状況で人間が確認します。</p>
+<p>ですが、ユニットテストを書くことで、これを少しばかり楽にできます。人間が状況ごとに手作業でテストを行わなくても、ユニットテストを書くことで半自動的にテストを行うことができます。</p>
+
+<h2>ユニットテストとは</h2>
+<p>JavaやC/C++でプログラムを書いて、コンパイルエラーが出ることなく、プログラムを実行して不正終了もなかったからといって、そのプログラムにバグや誤動作が無いとは限りません。</p>
+<p>プログラムを実行して、その実行した結果が正常だったからといって、別の条件で実行した時は、果たしてプログラムは期待通り動くでしょうか？</p>
+<p>バグを修正する手助けとなる、ブレークポイントやステップ実行のできる「デバッガ」は、あくまで、バグを見つけてそのバグを直すものであり、「プログラムの実行の結果にバグがあるかどうか」までは判断してくれません。</p>
+<p>このような時に、ひとつでも多く不正終了や誤動作を検出するために、「テスト」が重要になります。ユニットテストをするとプログラムの品質が上がります。</p>
+<ul>
+<li><a href="https://qiita.com/kompiro/items/78f2c8d2022a685baa83">ユニットテストを書こう！ - Qiita</a></li>
+</ul>
+
+<h2>開発プロセスとテスト</h2>
+<p>（<a href="http://www.atmarkit.co.jp/ait/articles/0907/10/news110.html">JUnitとEclipseを使って学ぶ、“テスト”の常識 (1/4) - @IT</a>を参考に執筆しました。）</p>
+<p>要求分析（システムにおける要求の定義）→外部設計（システムを利用する顧客から見た外部的なシステム設計の定義）→内部設計（内部のプログラムとしてのシステム設計の定義）と下へ下がっていくように設計したソフトウェアシステムは、逆に単体テスト（内部設計に相当するテスト）→結合テスト（外部設計に相当するテスト）→総合テスト（要求分析に相当するテスト）と上に上がっていく。</p>
+<p>システム開発の後々になってバグの存在に気付くよりも、できるだけ早期に少ないコストでバグを発見・修正することができるように考える必要がある。</p>
+
+<h1>ユニットテスト・フレームワーク</h1>
+<h2>JUnit</h2>
+<p>Javaで開発された、ユニットテストの自動化を行うためのフレームワーク。</p>
+<ul>
+<li><a href="https://qiita.com/takehiro224/items/a5d4265c4a1b36b0919c">JUnit 入門 - Qiita</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0907/10/news110.html">JUnitとEclipseを使って学ぶ、“テスト”の常識 (1/4) - @IT</a></li>
+</ul>
+<p><a href="java.html">Java</a>を参照のこと。</p>
+
+<h2>C/C++向け</h2>
+<p>C/C++向けには、Unity, CppUTest, Google Testなどがある。</p>
+<ul>
+<li><a href="https://yukblog.net/c-unit-test-recommended/">C言語用のユニットテスト・フレームワークおすすめ3選</a></li>
+</ul>
+<p><a href="cpp.html">C++</a>を参照のこと。</p>
+
+<h2>PHPUnit</h2>
+<p>PHPUnitはPHPのユニットテストフレームワーク。</p>
+<ul>
+<li><a href="https://phpunit.readthedocs.io/ja/latest/">PHPUnit マニュアル</a></li>
+<li><a href="https://qiita.com/__init__/items/a4c314c330b87fa03ba1">PHPUnitの使い方メモ - Qiita</a></li>
+</ul>
+<p><a href="php.html">PHP</a>を参照のこと。</p>
+
+<h2>Pythonのunittest</h2>
+<p>Python標準のunittestについては以下を参照のこと。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/unittest.html">unittest --- ユニットテストフレームワーク - Python 3.8.2 ドキュメント</a></li>
+<li><a href="https://techacademy.jp/magazine/18783">ユニットテストの書き方！Pythonのunittestを使う方法 | TechAcademyマガジン</a></li>
+</ul>
+<p><a href="python.html">Python</a>を参照のこと。</p>
+
+<h2>MinitestとTest::Unit (Ruby)</h2>
+<p>RubyならMinitestが使える。Railsでも標準で使うのはMinitest。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/19968">Rubyのテスト用フレームワークminitestの使い方を現役エンジニアが解説【初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+<p>これに対して、gemでリリースされているTest::Unitというフレームワークもある。</p>
+<ul>
+<li><a href="https://qiita.com/repeatedly/items/727b08599d87af7fa671">Test::Unitでテストを書く - Qiita</a></li>
+</ul>
+<p><a href="ruby.html">Ruby</a>を参照のこと。</p>
+
+<h2>その他の言語</h2>
+<p>Wikipediaに一覧がある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%83%BB%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E4%B8%80%E8%A6%A7">ユニットテスト・フレームワーク一覧 - Wikipedia</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>ウォーターフォール</h2>
+<p><a href="waterfall.html">ウォーターフォール</a>も参照のこと。</p>
+
+<h2>Docker</h2>
+<p><a href="../virt/docker.html">Docker</a>も参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

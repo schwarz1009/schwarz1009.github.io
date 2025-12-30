@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>gnuplot関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>gnuplotの世界観</h1>
+<p>gnuplotの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>gnuplot</h1>
+<h2>gnuplotでグラフを描こう</h2>
+<p>gnuplotは二次元から三次元まであらゆるグラフを描けるソフトウェア。</p>
+<p>手描きでは絶対に描けないような高度で美しいグラフを描ける。</p>
+<ul>
+<li><a href="http://www.gnuplot.info/">gnuplot homepage</a></li>
+</ul>
+
+<h2>基本</h2>
+<p>基本的に、gnuplotシェルが起動したら、setコマンドとplotコマンドで数式や表示する範囲などを入力し、replotで再描画できる。</p>
+<p>基本的に、グラフを描画するためには、</p>
+<pre>
+gnuplot&gt; plot xに関する関数式
+</pre>
+<p>とする。</p>
+<p>たとえば、</p>
+<pre>
+gnuplot&gt; plot cos(x)
+</pre>
+<p>また、resetで表示を初期状態に戻し、splotで三次元のグラフを描画できる。</p>
+<p>詳しいことはネット上にいくらでもあるので、そうしたページを参照して欲しい。</p>
+<ul>
+<li><a href="http://www.cse.kyoto-su.ac.jp/~oomoto/lecture/program/gnuplot/gnuplot.html">GNUPLOTを用いたグラフ作成 - 基礎プログラミング演習I資料 - 大本英徹</a></li>
+<li><a href="http://takeno.iee.niit.ac.jp/~foo/gp-jman/">gnuplot マニュアルの日本語訳</a></li>
+</ul>
+
+<h2>setとplot</h2>
+<p>gnuplotを使うコツはsetとplot。setでは、グラフの細かい設定、たとえばx軸やy軸の表示範囲の設定や、ラベルの設定、出力端末（X11の画面に表示するか、PNG形式の画像ファイルやPostScript (eps)で出力するかなど）の設定ができる。</p>
+<p>たとえば、デフォルトの表示端末はx11に設定されている。なんらかの理由でこのデフォルトに戻したい場合は以下を実行する。</p>
+<pre>
+gnuplot&gt; set terminal x11
+</pre>
+<p>macOSの場合、デフォルトはaquaに設定されている。</p>
+<pre>
+gnuplot&gt; set terminal aqua
+</pre>
+<p>これをPNGに設定するには、以下のようにpngに変更した上で、出力ファイル名を設定する。</p>
+<pre>
+gnuplot&gt; set terminal png
+gnuplot&gt; set output "hoge.png"
+</pre>
+<p>epsに設定するためには、PostScriptに設定した上でepsオプションをつける。</p>
+<pre>
+gnuplot&gt; set terminal postscript eps
+</pre>
+<p>setでは、グラフの表示範囲も設定できる。x軸はset xrange、y軸はset yrangeで設定する。</p>
+<p>たとえば、x軸の範囲を-100から100にしたいなら以下のようにする。</p>
+<pre>
+gnuplot&gt; set xrange [-100:100]
+</pre>
+<p>また、エクセルのように文字列を表示させたいならラベルを設定する。set labelで設定できるほか、set xlabelでx軸のラベル、set ylabelでy軸のラベルを設定できる。</p>
+<p>この状態で、\(y = x^2\)のグラフを表示させたいなら以下のようにする。</p>
+<pre>
+gnuplot&gt; plot x ** 2 with lines
+</pre>
+<p>**は累乗を表す。また、withは描画に使用する線などの形式の設定で、lines（実線で表示）のほかにpoints（点で表示）やboxes（棒グラフ）など多数ある。</p>
+
+<h2>設定の保存と読み込み・スクリプト</h2>
+<p>しかしながら、上記のようにコマンドで操作するのはあまり一般的ではない。gnuplotを立ち上げる度、あるいは別のグラフを描画する度に、もう一度最初からコマンドを打ち込まなければならないからである。</p>
+<p>設定を保存するsaveコマンドや、設定をロードするloadコマンドを使って、設定内容を保存・読み込みすることもできる。</p>
+<pre>
+gnuplot&gt; save "hoge.plt"
+gnuplot&gt; load "hoge.plt"
+</pre>
+<p>しかしながら、gnuplotにはコマンド操作を使うのではなく、スクリプトを使ってコマンドの羅列を実行することができる。</p>
+<p>スクリプトを使うことで、わざわざコマンドを実行するのではなく、スクリプトにあらかじめコマンドを書いておいて、必要になったら実行し、変更が必要なら特定の場所だけを簡単に編集できる。</p>
+<p>たとえば、（set terminalの設定を除いた）上のグラフ描画をスクリプトにすると以下のようになる。</p>
+<pre>
+set xrange [-100:100]
+
+plot x ** 2 with lines
+</pre>
+
+<h2>ユーザ変数とユーザ関数</h2>
+<p>gnuplotでは、ユーザ変数とユーザ関数が利用できる。これは自分で変数や関数を定義する機能で、以下のように利用する。</p>
+<pre>
+v = 100
+f(x) = x ** 2
+
+plot f(v)
+</pre>
+
+<h2>データプロット</h2>
+<p>また、関数的な利用だけではなく、データファイルを読み込んでそのデータの値を座標に表示する「データプロット」と呼ばれる機能がある。</p>
+<p>まず、データファイルhoge.datに、x軸とy軸の組をスペース区切りで記述する。</p>
+<pre>
+-10 6
+-5 8
+0 10
+5 12
+10 14
+</pre>
+<p>これを以下のように表示することができる。</p>
+<pre>
+gnuplot&gt; plot "hoge.dat"
+</pre>
+
+<h2>そのほか</h2>
+<p>そのほか、gnuplotには数多くの機能がある。三項演算子（式 ? 真の場合の値 : 偽の場合の値）を使えば簡単な条件分岐もできるし、ループも可能で、繰り返しグラフを再描画することでアニメーションのようにもできる。</p>
+<p>また、C言語の関数をインポートして使う、などといったことも可能。</p>
+<p>2次元のグラフだけではなく、3次元のグラフを書くこともできる。</p>
+<p>gnuplotが使えない環境では、エクセルでグラフを書くこともあるかもしれない。Windows版のgnuplotはwgnuplotなどがある。エクセルはビジネス向け、gnuplotは科学向けの「硬派な」人向けであると言われることが多い。理工系の大学生なら、TeXとgnuplotは必ず使ったことがあるはずである。</p>
+
+<h2>参考文献</h2>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://www.cse.kyoto-su.ac.jp/~oomoto/lecture/program/gnuplot/gnuplot.html">GNUPLOTを用いたグラフ作成 - 基礎プログラミング演習I資料　（歴史的アーカイブとして） - 大本英徹</a></li>
+<li><a href="https://ss.scphys.kyoto-u.ac.jp/person/yonezawa/contents/program/gnuplot/index.html">gnuplotスクリプトの解説 - 米澤進吾 ホームページ</a></li>
+</ul>
+
+<h2>デモ一覧</h2>
+<p>gnuplotではコマンド操作でどんなグラフも描けるが、以下にデモがある。</p>
+<ul>
+<li><a href="http://gnuplot.sourceforge.net/demo/">Demos for gnuplot version 5.2</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>gnuplot</h2>
+<p>簡単なコマンド入力で関数のグラフが描ける。</p>
+<p>人間が鉛筆で描くのでは絶対に描けないような綺麗なグラフが出力できる。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</html>

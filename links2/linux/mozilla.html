@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Mozilla - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Mozilla</h1>
+<p>Mozillaに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>Mozilla</b></li>
+<ul>
+<li><a href="mozilla_firefox.html">Mozilla Firefox</a></li>
+<li><a href="mozilla_thunderbird.html">Mozilla Thunderbird</a></li>
+<li><a href="mozilla_xul.html">XUL</a></li>
+</ul>
+</ul>
+<p><a href="../windows_pc/browsers.html">ブラウザ</a>や<a href="../network/web_tools.html">Webツール</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Mozilla</h1>
+
+<h2>バザール開発とMozilla.org</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p><!--また、-->フリーソフトウェアという言葉とよく似た言葉として、オープンソースという言葉がある。</p>
+<p>これは、開発をオープンにし、みんなのパッチをどんどん取り込むことで、片手間のボランティアによって一流のカーネルが開発された、Linuxカーネルの開発手法から生まれた言葉で、「伽藍とバザール」というエリック・レイモンドの文書を代表として、作られた造語である。</p>
+<p>伽藍とバザールでは、GNUのように、一部のきちんと分かっているエンジニアが慎重に作り上げる開発手法のことを、「伽藍」すなわち教会のカテドラルになぞらえ、これに対して「乱交まがいにオープンにする」Linuxカーネルの開発手法を、「バザール」と呼んだ。</p>
+<p>この伽藍とバザールは、インターネットの多くの人々に衝撃と称賛を与え、これにならってオープンソース開発をしようとする企業が現れた。</p>
+<p>それが、マイクロソフトのIEとのブラウザ戦争に負けたNetscapeである。</p>
+<p>Netscapeはインターネットの黎明期にWebブラウザの覇者として君臨したが、Windowsの成功と、バンドルされたIEとのブラウザ戦争に負け、その時「伽藍とバザール」の影響を受けて、ブラウザの存続をかけて、Netscapeブラウザのオープンソース化を決める。</p>
+<p>新しいブラウザの名前は「Mozilla」となり（「Mozilla」は昔からのNetscapeの愛称だった）、そのプロジェクトはオープンなMozilla.orgによって行われる。</p>
+<p>しかしながら、Mozillaはなかなか安定したバージョンをリリースできず、開発は遅れ、開発の中心メンバーもコミュニティのボランティアではなく、Netscape社員であるままが続いた。</p>
+<p>Netscapeの業績不振もあり、Netscape社はAOLに買収される。</p>
+<p>しかしながら、その後もMozillaの開発は続く。</p>
+<p>MozillaはXULと呼ばれるXMLとJavaScriptを用いた抽象的なUI言語を持っており、ブラウザだけではなくメールクライアントやHTML編集エディタもあったが、このせいでIEに比べてとても巨大で重かった。</p>
+<p>しかしながら、XULの機構を用いることで、拡張機能をEmacsのLispのように分離することができる。</p>
+<p>いつまでもMozillaは日進月歩で開発されたが、こうした機能を上手く使って、メールクライアントやHTML編集エディタを削除し、最低限の機能を持った軽量なWebブラウザである、Mozilla Firefox（以前の名はPhoenixあるいはFirebird）を新たにリリースし、使いたい機能を拡張機能としてユーザーが自由に拡張できるようにした。</p>
+<p>Firefoxと同様、メールクライアントもThunderbirdとして分離。</p>
+<p>一時期はIEに次ぐ第二のブラウザとして、NewYork Timesに広告を掲載するなどの流行を見せていたが、GoogleによるWebKit系のブラウザであるGoogle Chromeなどに第二位の座を奪われ、今ではFirefoxは「商用企業ではなくユーザーのためのブラウザ」としてなんとかインターネット上で続いている。</p>
+<p>Linuxにおいては、GNOMEではFirefoxがデフォルトのブラウザになっていることが多いが、KDEではKonqueror（WebKitの元になったKHTMLをベース）が標準であり、XfceではMidoriなどが軽量ブラウザとして提供されており、またGNOMEにおいてもGNOME Webなどが開発されており、サーバーサイドJavaScriptのNode.jsはChromeのV8エンジンの上で動くなど、しだいにFirefoxも草葉の陰に隠れつつある。</p>
+<p>WindowsやMacでも、決してFirefoxはマイナーなブラウザではないが、メインのブラウザとしてはChromeを使う人が増えてきている。</p>
+
+<h2>Mozillaとは</h2>
+<p>Mozillaは、オープンソースで開発されるWebブラウザ、あるいはその開発母体のプロジェクト。</p>
+<p>もともとは、NetscapeがMS-IEとのブラウザ戦争に負けて、エリック・レイモンドのオープンソースに関する文書をきっかけに、ブラウザの存続を賭けてオープンソースにしたことが始まり。</p>
+<p>以来、Mozillaというブラウザが長い間開発されてきて、そのMozillaというブラウザをNetscapeが名前をかえてリリースする、というのが定番になっていた。</p>
+<p>だが、最近はMozillaやNetscapeというブラウザは無くなり、代わりにMozillaをWebブラウザ単体に分割したMozilla Firefoxと、メールクライアントを取り出したMozilla Thunderbirdが開発されてきた。これは、Mozillaというブラウザがあまりに巨大だったため、軽量化するためであり、その結果、標準の機能を制限して、エクステンション（拡張）で機能を増やすことのできるブラウザとしてFirefoxは知られている。</p>
+<p>Mozillaによる「日進月歩の開発」によって、Geckoと呼ばれる独自のHTMLレンダリングエンジンを開発した。昔は、IEよりも標準化の度合いが高いことで知られていた。また、Google ChromeやSafariのようなブラウザがWebKitと呼ばれるKHTMLベースのレンダリングエンジンを開発している。IEによるIEコンポーネント（Trident）が広く使われていたネット世界だが、最近では動作の軽さを理由にGoogle Chromeを使うユーザーも増えている。だが、Mozilla Firefoxが普及する日は、Google Chromeによってさらに遠のいた印象がある。</p>
+<p>Mozillaのような独自コンポーネントのWebブラウザは、Geckoのように独自にHTMLレンダリングエンジンを開発していることで知られている。これに対して、SleipnirやDonutのような「タブブラウザ」は、IEコンポーネントを使っている場合が多い（最近のSleipnirではWebKit系のエンジンを積んでいるようである）。Mozillaが重たい理由は、WindowsとIEが密接に結び付きすぎていることや、MozillaがUIの描画に使っているXULと呼ばれるXMLベースのUI言語を搭載していることなどが理由である。最近も、軽くなったとは言うが、最初の起動はとても遅い。僕もMozillaユーザーだが、XULはそのうち廃止されるかもしれないということで、嘆いているところである。</p>
+<ul>
+<li><a href="https://www.mozilla.org/ja/">Mozilla.org</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h2>Mozillaのソースコードを読もう</h2>
+<p>DXRからMozillaのソースコードをブラウザから閲覧できる。</p>
+<ul>
+<li><a href="https://dxr.mozilla.org/mozilla-central/source/">mozilla-central - DXR</a></li>
+</ul>
+<p>Mozillaのソースコードのサブディレクトリの解説が以下にある。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla_Source_Code_Directory_Structure">Mozilla ソースコードのディレクトリ構造 | MDN</a></li>
+</ul>
+<p>他にも以下の情報からMozillaのソースコードに関する技術情報にアクセスできる。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla/Developer_Guide/Source_Code">Mozilla のソースコードに貢献する - Mozilla | MDN</a></li>
+</ul>
+
+<h1>Mozillaの歴史</h1>
+<h2>Netscape</h2>
+<p>Netscapeの歴史は、イリノイ大学の米国立スーパーコンピュータ応用研究所（NCSA）のマーク・アンドリーセンによるNCSA MosaicというWebブラウザに端を発する。</p>
+<p>マーク・アンドリーセンのほか、NCSA Mosaicに魅了された実業家のジム・クラークや、ジェイミー・ザウィンスキー（僕はこの人が大好き）などとともに、モザイクコミュニケーションズ（後にネットスケープコミュニケーションズに社名変更）によるNetscape Navigatorが開発され、1994年、まだベータ版ではあったが、高機能かつ使うのが簡単ということで大きく広まった。</p>
+<p>1995年のバージョン2.0ではWebブラウザだけではなくメーラーともなった。ブラウザに情報を記録するCookie、ページを分割するフレーム、マクロ言語エンジンであるJavaScriptなどがここで追加される。</p>
+<p>1996年のバージョン3.0では、MicrosoftのInternet Explorer 3.0と競争することになったが、この頃はまだNetscapeが勝っていた。WYSIWYG（結果を見ながら編集できる）のHTMLエディタなどもここで追加される。この3.0はシェアが70%に達して、Netscapeの黄金期だった。</p>
+<p>しかし、MicrosoftのWindows 95にバンドルされたIEとの「ブラウザ戦争」が勃発。また、この頃AOLがネットスケープ社を買収する。次第にNescapeはIEにシェアが奪われていく。</p>
+<p>後日注記：NetscapeがWebブラウザのデファクトスタンダードだったのは、1990年代の中頃までです。Windows 95にはMicrosoft社によるInternet Explorer (IE)がバンドルされ、抱き合わせ戦略によってNetscapeはブラウザ戦争に敗北します。Windowsに付属の無料のIEに、有料（機能制限版は無料）のNetscapeは勝つことができませんでした。当時からNetscapeの愛称は「Mozilla」でした。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Netscape%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA">Netscapeシリーズ - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Netscape_Navigator_(%E3%83%8D%E3%83%83%E3%83%88%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%BA)">Netscape Navigator (ネットスケープコミュニケーションズ) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E6%88%A6%E4%BA%89">ブラウザ戦争 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%8D%E3%83%83%E3%83%88%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%BA">ネットスケープコミュニケーションズ - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.30-31編集</p>
+<p>2025.12.01編集</p>
+<p>2025.12.18編集</p>
+</div>
+
+<h2>Mozilla.orgの発足</h2>
+<p>Netscapeは、Linuxなどのフリーソフトウェア/オープンソースソフトウェアの開発を注視し、オープンソース開発とコミュニティの可能性を感じて、ブラウザの存続のためにMozilla.orgプロジェクトを開始した。これは、Netscapeという会社を主導としてはじめられた、オープンソースのコミュニティプロジェクトで、Netscapeブラウザのソースコードを開示し、Mozillaという名前の新しいブラウザを作る、というものだった。</p>
+<p>だが、Mozillaの開発は功を奏さず、ほとんどがNetscapeの社員が開発しているだけになり、Mozilla 1.0も一向にリリースされなかった。特に、MozillaというWebブラウザは起動も遅く、操作も重く、IEに比べて操作性が悪かった。NetscapeはAOLに買収される。だが、Mozilla.orgはコミュニティによるプロジェクトとして、引き続きMozillaの開発は続いた。</p>
+<p>後日注記：Netscape社は自らのブラウザを存続させるために、Linuxカーネルと同じようなオープンソースプロジェクトMozilla.orgを発足させました。Mozilla 1.0のリリースには時間がかかりましたが、それでもMozillaをリリースして、それをNetscapeの製品としてブランド化して同時リリースする、という方法が取られていき、Mozillaのサポート版として、Netscapeも存続していきました。</p>
+<ul>
+<li><a href="http://cruel.org/jwz/nomo.html">辞職そして追悼。</a></li>
+<li><a href="http://cruel.org/jwz/aol.html">ネットスケープと aol.</a></li>
+<li><a href="http://cruel.org/jwz/aoltw.html">ネットスケープと aol/time-warner, パート2.</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.01編集</p>
+</div>
+
+<h2>日進月歩のブラウザ開発</h2>
+<p>MozillaはWindowsやLinuxなどで動くクロスプラットフォームなブラウザであり、LinuxユーザーやWindowsパワーユーザーなどに一定のシェアを集めた。</p>
+<p>当時のMozillaの印象は、「日進月歩」に開発されるブラウザというイメージだった。メタリックな独特なテーマをしていたこともあり、「Mozillaを知っている奴は普通の人間じゃない」的な「ハッカーの標準ブラウザ」のような印象だった。</p>
+<p>当時はMozillaとNetscapeが連携しており、Mozillaをオープンソースで開発し、リリースしながら、そのソースコードを用いてNetscapeも同時にリリースされる、というものだった。</p>
+<p>当時はOperaというライバルも存在していた。Operaは広告をつけた無料のブラウザで、独自のレンダリングエンジンを搭載していた。IE/Mozilla/Operaのどのレンダリングエンジンが一番標準に準拠しているかを競っていた。</p>
+<p>後日注記：新しいレンダリングエンジンGeckoを開発するなど、Mozilla.orgは必ずしも何も生み出せなかったわけではない。</p>
+<p>後日注記：当時のMozillaの特徴は、クロスプラットフォームなXPCOMとWeb技術を使ったXULで作られていて、拡張可能で、独自の標準に準拠したGeckoというIE以外のレンダリングエンジンを開発していましたが、その代わりとても重い。XPCOMとXULにより、Microsoftに頼ることなく、XMLとJavaScriptでブラウザのインターフェイスを書いていて、このインターフェイスはWebページを見るのと同じように、第三者によって拡張できます。そのような「スマートさと拡張の無限の可能性」の代わり、恐竜のようにめちゃくちゃ重たいブラウザでした。また、当時のフリーソフトのタブブラウザは多くがIEコンポーネントを使っていましたが、独自のエンジンを採用しているのはMozillaのGeckoエンジンとOperaのPrestoエンジンぐらいでした。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Mozilla_Application_Suite">Mozilla Application Suite - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.01編集</p>
+</div>
+
+<h2>Firefox/Thunderbirdの誕生</h2>
+<p>Mozillaは、操作性の悪さや動作の重さを改善するために、Webブラウザだけを切り離した軽量ブラウザPhoenix（のちに名前をFirebird/Firefoxと改称）と、メールクライアントだけを切り離したThunderbirdを開発した。軽量さを保つために、多機能性をやめ、機能は拡張機能（エクステンション）を導入することで拡張されるようになった。しばらくは並行してMozillaも開発されたが、しだいにFirefoxへと開発の主体が移っていった（Mozillaの開発はされなくなる）。また、MozillaやコミュニティによってFirefoxの普及活動が行われた。</p>
+<p>New York Timesに大型広告を載せるなど、当時のMozillaの熱気はとても強かった。それは、IEの開発が停滞していたこともある。IEは今でこそタブブラウザだが、昔はタブをつけておらず、日本ではIEコンポーネントを使ったたくさんのタブブラウザが開発されていた。シンプルなIE6はシェアも大きく一定の人気があったが、SleipnirやDonutなどの使いやすく高機能なタブブラウザをインストールする人も多かった。そして、IE/Mozillaだけではなく、当時のインターネットやWebはとても栄えていた。PHPによるブログなどのインタラクティブなWebサービスを「Web 2.0」と呼び、オープンソースもその中に含まれることもあった。</p>
+<p>後日注記：拡張可能なMozillaが自らのブラウザを普及させるために取った方法は、「最低限の機能だけを切り出して、あとは個々人の必要な機能だけを拡張として導入してもらう」ことでした。Mozillaは巨大インターネットスイートだったNetscapeをそのまま踏襲し、ブラウザだけではなくメーラーやHTMLエディタも含まれていましたが、Firefoxはそのような巨大インターネットスイートを改めて、最低限のブラウザ機能だけに制限しました。それによっていくらかMozillaの重さは改善されました。メーラーはThunderbirdという名前で分離され、HTMLエディタやスケジュール管理ソフトなども分離されていきました。また、XULのランチャー部分だけを取り出して、XULのアプリケーションを作りやすくするような、基本のフレームワークのようなものも開発されました。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Mozilla_Firefox">Mozilla Firefox - Wikipedia</a>
+</ul>
+<div class="edit_date">
+<p>2025.12.01編集</p>
+</div>
+
+<h2>現在</h2>
+<p>だが、一向にIEに競争で勝てる気配はなく、Google Chromeなどの登場もあり、現在は日蔭ブラウザに戻ってしまった気配がある。</p>
+<p>またMozillaのXML/JavaScriptによるインターフェース技術であるXULも廃止されつつある。</p>
+<p>Firefox Quantumという高速化・軽量化したバージョンもリリースされているが、Chromeなどに比べて起動速度などは遅いままである。</p>
+<p>後日注記：最近はAndroidなどのスマホ向けのFirefoxなども登場していますが、一向にMicrosoft Edge（IEの後継版）やGoogle Chromeに勝つ道筋は見えていません。ですがLinuxなどのオープンソース陣営との親和性は高く、Linuxで使えるまともなWebブラウザは今でもMozilla Firefoxです。
+<div class="edit_date">
+<p>2025.12.01編集</p>
+</div>
+
+<h1>個別ページ</h1>
+<h2>Mozilla Firefox</h2>
+<p><a href="mozilla_firefox.html">Mozilla Firefox</a>を参照のこと。</p>
+
+<h2>Mozilla Thunderbird</h2>
+<p><a href="mozilla_thunderbird.html">Mozilla Thunderbird</a>を参照のこと。</p>
+
+<h2>XUL</h2>
+<p><a href="mozilla_xul.html">XUL</a>を参照のこと。</p>
+
+
+<h1>Mozillaの技術</h1>
+<h2>Gecko</h2>
+<p>GeckoはMozillaのレンダリングエンジン。Web標準への準拠の度合いが高いが、最近はGoogle ChromeやSafari（AppleのmacOS/iOSなど用ブラウザ）で使われているオープンソースのWebKitに押され気味である。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla/Gecko">Gecko - Mozilla | MDN</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gecko">Gecko - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/mozilla/gecko-dev">git</a></li>
+</ul>
+
+<h2>XUL</h2>
+<p>XULはXMLでGUIウィジェットを描画する技術。Mozillaアプリケーション本体の開発や拡張機能に使われるほか、XULアプリケーションを実行するランチャーのようなものもある。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla/Tech/XUL">XUL - Mozilla | MDN</a></li>
+</ul>
+
+<h2>SpiderMonkey/Rhino</h2>
+<p>MozillaのJavaScriptエンジン。</p>
+<p><a href="../prog_lang/javascript.html">JavaScript</a>も参照のこと。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/SpiderMonkey">SpiderMonkey | MDN</a></li>
+</ul>
+
+<h2>XPCOM</h2>
+<p>Microsoft COMと同様のクロスプラットフォームなコンポーネントモデル。Mozillaで開発されている。</p>
+<p>C++, JavaScript, Java, Pythonなどの言語で使用でき、XPIDLという名前のIDLの方言でインターフェースを記述する。WindowsだけではなくLinuxやmacOSでも動作する。</p>
+<p>既に古い技術であり、現在のFirefoxの拡張からXPCOMを使うことはできない。</p>
+<p>後日注記：XPCOMはクロスプラットフォームかつオープンソースなMicrosoft COMのMozillaによる実装である。</p>
+<p><a href="../prog_lang/windows_atl_com.html">Windowsプログラミング（ATL/COM）</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/XPCOM">XPCOM - Wikipedia</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Mozilla/Tech/XPCOM">XPCOM - Mozilla | MDN</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.07.03編集</p>
+</div>
+
+<h2>Rust</h2>
+<p>Mozillaによる新しいプログラミング言語。エンジニアを中心に大人気である。</p>
+<p><a href="../prog_lang/rust.html">Rust</a>も参照のこと。</p>
+<ul>
+<li><a href="https://www.rust-lang.org/ja-JP/">プログラミング言語 Rust</a></li>
+</ul>
+
+<h2>Camino</h2>
+<p>MacでGeckoを用いたWebブラウザ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Camino">Camino - Wikipedia</a></li>
+</ul>
+
+<h2>SeaMonkey</h2>
+<p>昔のMozillaのインターフェースをした統合ブラウザを保守するプロジェクト。</p>
+<p>実際のところ、SeaMonkeyは昔のMozilla/Netscapeのブラウザのまま、Firefox ESRのコードベースに追従している。面白いプロジェクトである。</p>
+<ul>
+<li><a href="http://www.seamonkey-project.org/">The SeaMonkey® Project</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/SeaMonkey">SeaMonkey - Wikipedia</a></li>
+</ul>
+
+<h2>Firefox OS</h2>
+<p>Firefox OSは一時期モバイル業界をにぎわせていたスマホ向けのOSで、僕はけっこう興味深いと感じていた。</p>
+<p>たとえば、Firefox OSでは全てのアプリがWebページ。ページを実行することでアプリを実行できる。</p>
+<p>今では、B2G OSとして提供が行われている。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Archive/B2G_OS">B2G OS - Archive of obsolete content | MDN</a></li>
+</ul>
+
+<h2>Bugzilla</h2>
+<p>バグを共有するWebシステム。<a href="../prog_lang/pm_tools.html">プロジェクト管理ツール</a>や<a href="../services/project_hosting.html">プロジェクト・ホスティング</a>を参照のこと。</p>
+
+<h1>Gecko</h1>
+<h2>Gecko埋め込み</h2>
+<p>以下のリンクが参考になります。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Gecko/Embedding_Mozilla">Embedding Mozilla - MDN</a></li>
+</ul>
+<p>後日注記：Gecko埋め込みの実例として、UIはWindowsネイティブでありながらエンジンにGeckoを用いたSyleraというブラウザが昔ありました。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Sylera">Sylera - Wikipedia</a></li>
+</ul>
+<p>後日注記：また、GNOME向けにはGaleonというGecko埋め込みブラウザがあります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Galeon">Galeon - Wikipedia</a></li>
+</ul>
+<p><a href="webkit_embedded.html">WebKit埋め込み</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.01編集</p>
+</div>
+
+<h1>余談</h1>
+<h2>ゴジラのパクリではない（はず）</h2>
+<p>Mozillaという名前は「ゴジラのパクリではないか」と言われることが多いが、たぶん違う。Netscapeの愛称がMozillaであり、Mozilla.orgの発足の時にブラウザ名として名づけられた。</p>
+<p>むしろ、ブラウザ史的に言えば、一番オリジナルに近いブラウザだと言えるかもしれない。</p>
+
+<h2>GTK+には対応しているが、Qtに対応していない</h2>
+<p>Linux版のMozilla FirefoxはGTK+には対応しているが、Qtには対応していない。よって、KDEアプリケーションと見た目が違ってしまう。LibreOfficeなどはGTK+/GNOMEもKDEも両方のルック・フィールに対応しているが、KDEでブラウザを使いたい時はKDEの有名なWebブラウザであるKonquerorを使うことがおすすめである。KonquerorはKHTMLという独自のHTMLレンダリングエンジンを持っており、これからAppleなどがWebKitを派生させた。よって、KHTMLもある意味オリジナル的である。</p>
+
+<h2>Mozillaとターミナルが使えれば、大抵は何とかなる</h2>
+<p>GNOME 3は使えないなどと酷評されていますが、それでも、ターミナルとMozillaが動けば、大抵のことは何とかなります。</p>
+<p>ターミナルとMozilla、これがLinuxデスクトップで使う主なアプリケーションです。まさに、ショボいものです。</p>
+<p>日本のユーザーは、日本語入力環境ぐらいを整備すれば、あとはデフォルトのFirefoxとターミナルで何とかなります。</p>
+<p>ただ、僕が使った感触では、LinuxのMozilla Firefoxは日本語のサイトを英語で表示してしまうなど、馬鹿みたいな点があります。</p>
+<p>僕はWindowsでもMozillaを使いますが、ブックマークが同期できるなどの特徴は良いと思います。</p>
+
+<h2>昔のMozillaが良かった。そんな人はどうすれば？</h2>
+<p>Firefoxが分岐する前、昔の古代人ハッカーたちはNetscapeによるメタリックインターフェースのMozillaを使っていた。</p>
+<p>現在では、Mozillaというブラウザは無くなったものの、SeaMonkeyというMozillaを引き継いだプロジェクトが存在する。だが、どこまで最新の内容に追従しているかは定かではない。</p>
+<p>昔のMozillaを知らない方は、Google検索で「Mozilla 1.8」などと検索すれば画像が見れる。昔は劣ったインターフェースだったが、あのころの方がオープンソースも面白かったし、今のFirefoxのインターフェースはChromeなどを模倣した結果つまらないものになっている。ここらで一発「昔のMozillaに戻します」的な動きが起きれば良いのになと思う。</p>
+
+<h2>最近の僕はMozilla使い</h2>
+<p>僕は最近、Mozilla Firefoxをメインブラウザにしました。Windowsでも、AndroidでもFirefoxを使っています。</p>
+<p>二段階認証もして、セキュリティも万全です。また、検索エンジンにはDuckDuckGoを使っています。</p>
+<p>僕の多くの時間は、Mozilla Firefoxとサクラエディタを使ってホームページを更新しています。また、WinSCPとRealSyncと7-zipをFTP更新とバックアップに使っています。</p>
+<p>他には、音楽を聴いているだけです。前はYouTubeから聴いていましたが、最近は家入レオのCDを買ったため、AndroidやiPodから聴いています。</p>
+<p>快適で現代的なIT生活を送っています。</p>
+<p>2019.11.18追記：DuckDuckGoを使うのはやめました。DuckDuckGoを使っていると、Firefoxがたまに不正停止することがあり、はてなブログの編集機能もおかしくなることがあります。</p>
+
+<h2>Googleとは仲間でありながら敵</h2>
+<p>Mozillaは、Googleとは仲間であると同時に敵です。</p>
+<p>Googleは独自のWebブラウザGoogle Chromeを開発していて、Mozillaとは競合関係にありますが、以前はFirefox向けのGoogle公式ページを用意するなど、Mozillaに対して友好的でした。</p>
+<p>ですが、最近では、Firefoxユーザーに対して、Googleサービスの速度や性能を不当に制限するなど、Mozillaとは仲が悪くなっています。</p>
+<p>同時に、Mozillaの方も、Googleによるトラッキングやユーザーの追跡をブロックするなど、両者の中は次第に険悪になってきています。</p>
+<p>Googleはトラッキングと広告で莫大な利益を上げていますが、YouTubeには広告を見たくないという方もたくさんいます。Mozillaでは、拡張機能を導入することで、YouTubeの広告を完全にカットできます。</p>
+<p>両者は仲の良い盟友であると同時に、敵対的な関係を持っています。最近はMicrosoftのEgdeがChromiumベースになってLinuxで動くようになるらしいなど、情勢は常に変わっています。</p>
+<p><a href="../services/google.html">Google</a>も参照のこと。</p>
+
+<h2>昔のNetscapeとMozilla Suiteの時代がよかった</h2>
+<p>僕が思うことは、昔のNetscapeとMozilla Suiteの時代がよかった、ということです。</p>
+<p>昔、Firefoxがまだなかった頃、Netscape/AOLはオープンソースのMozillaの商用版をNetscapeという名前で製品化していました。</p>
+<p>オープンソースのMozillaに対して、Mozillaをベースにした商用版のNetscape、といったように、両者は区別されながらどちらもリリースされていました。</p>
+<p>あの頃の、メタリックなデザインだったMozillaとNetscapeが僕は好きでした。</p>
+<p>当時のMozillaは、残念ながら安定しているとはあまり言えない「重たくてのろいもっさりしたブラウザ」でした。そのため、軽量化するためにブラウザ部分だけを切り離したFirefox（昔の名前はFirebird）が派生したのです。</p>
+<p>その後のFirefoxも、残念ながらみんなに受け入れられたブラウザとは言えません。国産のSlepinirなどと比較して、Mozillaのプロダクトは何かが独自性が強すぎて、よく言えば個性的ですが、悪く言えばまるで「独自の左翼的フリーソフトの雰囲気のするブラウザ」であり、Windows標準のIEには太刀打ちできていませんでした。</p>
+<p>結局、今でもFirefoxはGoogle Chromeなどに比べて完全に負けています。MozillaにはなんとかしてMozilla勢力を増やしていってほしいと思います。</p>
+<div class="edit_date">
+<p>2023.08.16</p>
+</div>
+
+<h2>Mozillaは面白かった</h2>
+<p>昔のインターネットは面白かったですが、その中でも、中核部分を担っていたのは、僕はMozillaを始めとするWebブラウザだと思います。</p>
+<p>あの頃は、Windowsと抱き合わせのIEが強すぎて、Mozilla Firefoxはどんなに頑張ってもシェアで勝つことができませんでした。</p>
+<p>今のようなGoogle Chromeのようなものはなかったですし、オープンソースソフトウェアと言えばMozilla、という状況でした。</p>
+<p>僕は最近もMozilla Firefoxをメインブラウザとして使っていますが、昔のように、バージョンアップして機能を試すとか、そういうレベルではなく、まったくの実用用途として、Mozilla Firefoxは十分使える水準に達しています。</p>
+<p>昔が懐かしいなあ。昔のネットは面白かった。今のネットはスマホやSNSが普及して、つまらなくなったような気がします。やっぱり、僕はMozillaとオープンソースが好きです。僕が一番好きなハッカーは、いつまでもNetscapeのジェイミー・ザウィンスキー氏 (Jamie Zawinski)です。</p>
+<div class="edit_date">
+<p>2024.12.07</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>Mozilla</h2>
+<ul class="defaultlist list7">
+<li>GUIアプリケーション
+<ul>
+<li>基本・インターネット
+<ul>
+<li>Mozilla Firefox, Mozilla Thunderbird
+<ul>
+<li>Gecko</li>
+<li>XUL</li>
+<li>XPCOM</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>Mozilla.org</h2>
+<p>Mozilla.orgはNetscapeがMicrosoftにブラウザ戦争で負けた結果、Netscapeブラウザをオープンソースにして存続させるために生まれた。</p>
+<p>レンダリングエンジンGeckoなどを開発。</p>
+<p>しかしながらなかなか安定バージョンがリリースされず、また多機能なインターネットスイートだったため「重い」ということがネックになった。</p>
+<p>Mozillaはブラウザだけを取り出して軽量化したMozilla Firefox（以前はPhoenixとかFirebirdとも呼ばれていた）と、メーラだけを取り出したMozilla Thunderbirdをリリース。</p>
+<p>ブラウザは極力たくさんの機能を標準で搭載せず、拡張機能によって拡張できる形に。</p>
+<p>重い原因はブラウザの巨大さだけではなく、ブラウザUIをXMLとJavaScript/CSSで記述するXULにも問題がある。</p>
+<p>ブラウザとしての標準化度合いはIEよりも高く、一時期は標準化によって普及するかのように見えた。</p>
+<p>いろいろとムーブメントはあった（NY TimesにFirefoxの広告を載せるなど）が結局流行らず、Google Chromeなどに負けている。</p>
+
+<h1>リンク集</h1>
+<h2>Mozilla</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/">Mozilla Developer Network</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

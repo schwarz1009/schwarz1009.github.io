@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（ファイルシステム） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（ファイルシステム）</h1>
+<p>Linuxのカーネルの開発に関する世界観（ファイルシステム）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><b>ファイルシステム</b></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Linuxのファイルシステム</h1>
+<h2>ファイルシステム</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>Linuxカーネルでは、モノリシックカーネルであるため、ファイルシステム処理がカーネルに統合されている。</p>
+<p>ブロック型ファイルシステムのext2やext4が標準的に使われるが、B-Tree型のファイルシステムであるReiserFS, XFS, JFSなども使うことができる。</p>
+<p>また、次世代の（おそらくZFSを超える）ファイルシステムであるBtrfsも開発されている。</p>
+<p>LinuxカーネルではVFSの仕組みにより、ファイルシステムが変わってもシステムコールのAPIは変わらない。</p>
+<p>どのファイルシステムにも、同じようにプログラムからアクセスできる。</p>
+<p>また、ジャーナリングに対応したファイルシステムでは、一度マシンを強制終了しても、ファイルやデータが消え去ることがない。</p>
+<p>また、内部的にはi-nodeと呼ばれるインデックス処理を行っている。</p>
+<p>全てのファイルにはi-nodeから参照できる。</p>
+
+<h2>ファイルシステムの考え方</h2>
+<p>基本的にext2, ext3, ext4, JFS, XFS, Btrfs, FAT, FAT32などがある。</p>
+<p>Linuxでしかファイルシステムを使わない場合は、一番優れていて安心できるのはext4。Linuxのルートファイルシステム（Linuxのシステムをインストールするファイルシステム）にはext4を使うのが無難。Bツリーファイルシステムはまだまだ未熟である。</p>
+<p>LinuxでもWindowsでも読み書きできるようにファイルシステムをフォーマットしたい時はFAT形式がおすすめである。USBハードディスクなどを使う場合でも、WindowsからもLinuxからも読む場合はFAT形式を使おう。</p>
+<p>ext3やext4（現在のLinuxの標準）などのファイルシステムはジャーナリングファイルシステムと呼ばれ、ジャーナリングによってシステムの整合性を保つ機能が搭載されている。</p>
+<p>ジャーナリングに対応していないと、不意に異常終了した時にファイルシステムが破損する場合がある。</p>
+<p>LinuxではVFSという機構を使うことで、各ファイルシステムの差異を吸収することが出来る。</p>
+<p>プログラマやプログラムは各ファイルシステムの実装の詳細を知らなくても、VFSのインターフェイスだけを使ってあらゆるファイルシステムに対応することができる。</p>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-make-filesystem">【ざっくり概要】Linuxファイルシステムの種類や作成方法まとめ！ - エンジニアの入り口</a></li>
+<li><a href="https://qiita.com/tutuz/items/539d429729d5819de0aa">知っておきたいLinuxファイルシステムの概念 - Qiita</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0305/20/news002.html">Linuxファイルシステム技術解説（1）：VFSとファイルシステムの基礎技術 (1/2) - @IT</a></li>
+</ul>
+
+<h1>i-nodeとディスクの読み書き</h1>
+<h2>i-node</h2>
+<p>i-nodeはファイルがストレージのどこにあるかを記録したインデックスのこと。</p>
+<p><a href="linux_kernel_fs_inode.html">Linuxカーネル（i-node）</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>ディスクの読み書き</h2>
+<p>ディスクはファイルシステムにおいてキャッシュや先読みされながら読み書きが行われる。</p>
+<p><a href="linux_kernel_fs_read_write.html">Linuxカーネル（ディスクの読み書き）</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>さまざまなファイルシステム</h1>
+<h2>VFSの詳細</h2>
+<p>VFSでは、通常使うファイル処理のシステムコールが用意されている。たとえばmount(), chdir(), mkdir(), open(), close(), creat(), read(), write()など。</p>
+<p>VFSに対してread()やwrite()といった命令が与えられると、VFSはLinuxカーネルの中のシステムコールであるsys_read()やsys_write()を実行する。Linuxカーネルの中でこれらのシステムコールが「トランスレーション」というVFSの置き換え機能により、ファイルシステム固有（ext2など）の関数へと置き換えられる。</p>
+<p>詳しくは以下の書籍・ページを参照のこと。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/0305/20/news002_2.html">VFSとファイルシステムの基礎技術：Linuxファイルシステム技術解説（1）（2/2 ページ） - ＠IT</a></li>
+<li><a href="http://archive.linux.or.jp/JF/JFdocs/Linux-Kernel-Internals-3.html">Linux Kernel 2.4 Internals - 3. 仮想ファイルシステム (VFS) </a></li>
+</ul>
+<p><a href="linux_api_syscalls.html">Linux API（システムコール）</a>も参照のこと。</p>
+
+<h2>ext2</h2>
+<p>ext2は長年使われてきたLinuxのブロック型ファイルシステム。長い間使われ続けてきたため、信頼度は高い。</p>
+<p>サーバーやエンタープライズなど、信頼性が必要ならばext2あるいはジャーナリングのあるext3/4を選ぼう。</p>
+<p><a href="linux_kernel_fs_ext2.html">ext2</a>を参照のこと。</p>
+
+<h2>B-Treeファイルシステム</h2>
+<p>ファイルシステム技術に対して、データベースの分野で培われた「Bツリー」（B木）というインデックス技術を使った、さらに高速で堅固なファイルシステムがある。これをB-Treeファイルシステムと呼ぶ。</p>
+<p>その中でもReiserFSやXFSなどが有名だが、将来の標準候補であると注目されているのがBtrFS。</p>
+<p><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a>を参照のこと。</p>
+
+<h2>Btrfs/ZFS</h2>
+<p>Btrfs/ZFSは次世代の堅牢かつ高機能なファイルシステム。</p>
+<p><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>特殊ファイルシステム</h1>
+<h2>tmpfs</h2>
+<p>tmpfsは、メモリ上に作成することのできるファイルシステム。メモリ上であるため非常にアクセスが高速で、かつ、マウントポイントにマウントして利用できる。</p>
+<p>名前の通り、一時ファイルを作成するのに適している。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/441/">tmpfs | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h2>その他の特殊ファイルシステム</h2>
+<p>主な特殊ファイルシステムとしては、bdev, binfmt_misc, devfs, devpts, pipefs, proc, rootfs, shm, sockfs, tmpfsなどがある。</p>
+<p>（<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>を参考に執筆しました。）</p>
+
+<h1>新技術</h1>
+<h2>FUSE</h2>
+<p>FUSEは、カーネル空間ではなくユーザー空間で、ユーザー独自のファイルシステムを実現するシステム。たとえばGNOMEの仮想ファイルシステム機能（FTPなどにアクセスする）とか、Google DriveやGmailなどへアクセスするなどの用途がある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Filesystem_in_Userspace">Filesystem in Userspace - Wikipedia</a></li>
+</ul>
+<p><a href="gnome.html">GNOMEアーキテクチャ</a>も参照のこと。</p>
+
+<h2>AuFS/Overlayfs</h2>
+<p>AuFS/Overlayfsは、複数のディレクトリツリーを重ね合わせることのできるファイルシステム。Dockerなどで利用されている。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Overlayfs">Overlayfs - ArchWiki</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/linux_containers/0018">第18回　Linuxカーネルのコンテナ機能 [7] ─ overlayfs：LXCで学ぶコンテナ入門 －軽量仮想化環境を実現する技術｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Aufs">aufs - Wikipedia</a></li>
+</ul>
+<p><a href="../virt/docker.html">Docker</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>ファイルシステム関連ページ</h2>
+<p>ファイルシステムの基本操作については、<a href="linux_unix_filesystem.html">UNIX管理（４．ファイルシステム）</a>を参照のこと。</p>
+<p>ファイルシステム関係のAPIについては、<a href="linux_api.html">Linux システムコール・API</a>を参照のこと。</p>
+<p>ハードディスクなどのストレージについては、<a href="../hardware/harddisk.html">ハードディスク</a>を参照のこと。</p>
+
+<h1>書籍</h1>
+<h2>MINIX本</h2>
+<p>MINIX本では、ファイルシステムについて詳細が記述されています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

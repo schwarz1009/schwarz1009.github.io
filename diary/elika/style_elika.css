@@ -1,0 +1,162 @@
+body {
+    background: #FCECEA;
+}
+
+A:link { color: #665990; }
+A:visited { color: #AAA5D1; }
+A:active { }
+A:hover { }
+
+.header_text {
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+/*
+    background: white;
+    border: 1px solid #FC9D9D;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,.2);
+*/
+}
+
+.footer_text {
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: white;
+    border: 1px solid #FC9D9D;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,.2);
+}
+
+.elika h1 {
+    background: #FC9D9D;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,.2);
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 5px 15px 5px 15px;
+}
+
+.elika h1:before {
+    content: '';
+}
+
+.elika h2{
+    margin: 0;
+    padding: 5px;
+    padding-left: 10px;
+    border: none;
+    border-bottom: 1px solid #FC9D9D;
+    color: #EB8686;
+    background: none;
+}
+
+.elika h2:before {
+    content: '';
+}
+
+.elika h3{
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0px;
+    color: #EB8686;
+    background: none;
+}
+
+.elika h3:before {
+    content: '';
+}
+
+
+.elika .article {
+    background: white;
+    color: black;
+    border: 1px solid #FC9D9D;
+    box-shadow: 0px 1px 3px rgba(0,0,0,.2);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.elika .section {
+    padding: 10px;
+}
+
+.sidebar,.sidebar_profile,.image {
+    background: white;
+    border: 1px solid #FC9D9D;
+    border-top: 5px solid #FC9D9D;
+}
+
+#toc {
+    background: white;
+    color: #FC9D9D;
+    border: 1px solid #AAA5D1;
+    border-top: 5px solid #AAA5D1;
+    width: /*272px*/375px;
+    box-shadow: none;
+}
+
+#toc:before {
+    color: #665990;
+}
+
+#toc li:before {
+    border-top: 1px solid #665990;
+    border-right: 1px solid #665990;
+}
+
+#toc a:link {
+    background: white;
+    color: #665990;
+}
+
+#toc a:visited{
+    background: white;
+    color: #665990;
+}
+
+.list_elika li:before {
+    border-top: 1px solid #665990;
+    border-right: 1px solid #665990;
+}
+
+/*
+.top_footer {
+    margin-top: 0px;
+}
+
+.banner2 {
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.banner_image {
+    border: 1px solid #AAA5D1;
+    border-top: 5px solid #AAA5D1;
+}
+
+.banner_image:before {
+    color: #665990;
+}
+*/
+
+.tl-tweet {
+    border: 1px dashed #FC9D9D;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.tl-tweet A:link { color: #665990; }
+.tl-tweet A:visited { color: #AAA5D1; }
+
+@media screen and (max-device-width: 480px) {
+    #toc {
+        width: auto;
+    }
+}

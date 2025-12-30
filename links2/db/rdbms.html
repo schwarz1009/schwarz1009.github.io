@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>RDBMS関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>RDBMSの世界観</h1>
+<p>RDBMSに関する世界観です。<a href="db.html">データベースの世界観</a>と<a href="mysql.html">MySQLの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>オープンソースのデータベースサーバ</h1>
+<h2>PostgreSQLとMySQL</h2>
+<p>OSSデータベースのPostgreSQLとMySQLを比べると、PostgreSQLの方が機能は多いが、MySQLは軽量かつ性能が良い。</p>
+
+<h2>MySQL</h2>
+<p>オープンソースのSQLサーバ。事実上の標準。<a href="mysql.html">MySQL</a>を参照のこと。</p>
+
+<h2>PostgreSQL</h2>
+<p>オープンソースのSQLサーバ。MySQLのライバル。<a href="postgresql.html">PostgreSQL</a>を参照のこと。</p>
+
+<h2>SQLite</h2>
+<p>小規模向けのSQLエンジン。アプリケーションに組み込みで利用出来る。<a href="sqlite.html">SQLite</a>を参照のこと。</p>
+
+<h2>Berkeley DB</h2>
+<p>アプリケーションに埋め込む形式のデータベースのオープンソースなライブラリ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Berkeley DB">Berkeley DB - Wikipedia</a></li>
+</ul>
+
+<h2>Firebird</h2>
+<p>ボーランドのInterBaseからオープンソース化されたRDBMS。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Firebird_(%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9)">Firebird (データベース) - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/FirebirdSQL/firebird">git</a></li>
+</ul>
+
+<h2>LibreOffice Base</h2>
+<p>デスクトップデータベースのフロントエンド。Microsoft Accessに相当する。<a href="../linux/libreoffice.html">LibreOffice</a>を参照のこと。</p>
+
+
+<h1>NoSQLデータベース</h1>
+<!--
+<p><a href="nosql.html">NoSQL</a>を参照のこと。</p>
+-->
+<h2>MongoDB</h2>
+<p>JSON形式のデータを操作できるデータベース。<a href="mongodb.html">MongoDB</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>Redis</h2>
+<p>KVSデータベースのひとつ。<a href="redis.html">Redis</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>商用のデータベースサーバ</h1>
+<h2>Microsoft SQL Server</h2>
+<p>MicrosoftによるSQLサーバ。C#/VB.NETやASP.NET/ADO.NETとともに利用する。<a href="sql_server.html">Microsoft SQL Server</a>を参照のこと。</p>
+
+<h2>Microsoft Access</h2>
+<p>Microsoftによるカード型データベースで、MS-Officeの上位版に同梱されている。<a href="../windows_pc/msoffice.html">MS-Office</a>も参照のこと。</p>
+
+<h2>Oracle DB</h2>
+<p>Oracleによるとても高額なデータベースサーバ。<a href="oracle.html">Oracle</a>を参照のこと。</p>
+
+<h2>InterBase</h2>
+<p>Delphiの開発元であるエンバカデロ社によるデータベース管理システム。</p>
+
+<h2>IBM Db2 (DB2)</h2>
+<p>IBMによるデータベース管理システム。IBMのメインフレーム用のRDBMSである。<a href="ibm_db2.html">IBM Db2</a>を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IBM_Db2">IBM Db2 - Wikipedia</a></li>
+</ul>
+
+<h2>商用のDBMS</h2>
+<p>商用のDBMSについては以下が参考になります。</p>
+<ul>
+<li><a href="http://db-study.com/archives/24">たくさんあるDBMS ｜ PostgreSQLではじめるDB入門</a></li>
+</ul>
+
+<h1>独自データベース</h1>
+<h2>データベースを独自に実装する</h2>
+<p>データベース管理システムは、既存のMySQLやPostgreSQLを使わなくても、独自に実装する場合もあります。</p>
+<p>たとえば、リレーショナルデータベースをデータモデルとしない場合。自社でデータセンターを運用したり、あるいはシステムの構成上別のデータモデルを使用したい場合などに、独自のデータベース管理システムを作ることができます。</p>
+<p>また、スケーラビリティが必要な場合。モバイルやゲームなどで小さな環境で動くデータベースが欲しいとか、あるいはクラスタやスーパーコンピュータなどで並列性を高めて性能や信頼性に妥協しないデータベースを作りたい場合など、独自のエンジンを作ってデータベース管理システムを設計します。</p>
+<p>ほかにも、プラットフォームやシステム構成が特殊だったり制限されていたりする場合や、セキュリティやネットワークなどで独自の機能が欲しい場合などにも、データベースを特殊に設計することができます。</p>
+<p>また、そもそもデータベースを使う用途が特殊である場合もあります。</p>
+<p>たとえば、バージョン管理システムなどは、たくさんの新しいファイルが常にコミットされ、古いデータはアーカイブに格納します。この時、新規のファイルと過去のアーカイブの管理の方法を分けることで、処理を高速化できます。たくさんのテキストファイルの差分を扱う上で、テキスト処理を何度も繰り返すことも多く、リレーショナルモデルが適切でない場合もあります。</p>
+<p>また、P2Pのネットワーク通信アプリなどでは、どのネットワークノードがファイルの断片を持っているかを適切に判断しなければなりません。匿名性を高めるためにネットワークセキュリティの機能も必要です。このような場合にも、特殊なデータベースが設計できるかもしれません。</p>
+<p>また、Oracleなどの商用データベースを使うよりもコストが安くついて制限もないとか、あるいは自社の別の既存技術を再利用できるといった利点もあります。</p>
+<p>こうしたデータベースのバックエンドを作る上で必要となるのは、アルゴリズムの知識です。特に、B-Treeのようなインデックスや検索のアルゴリズムが必要となります。また、トランザクションやロールバック、排他制御のような「きちんと信頼できるデータベース」を作るためには、人並み外れた経験が必要です。簡単にはいかないでしょう。</p>
+<p>後日注記：僕は基本的にデータベースについて何も分かっていないので、これ以外にも多くの理由があるだろう。たとえば、冗長性（データを二重にコピーして破損に備える）やフェイルオーバ（ひとつのサーバがダウンしても別のサーバが代わりを務める）を高めるなどといった理由で独自のデータベースを設計する場合もあるだろう。</p>
+<p><a href="../prog_lang/algorithm.html">アルゴリズム</a>も参照のこと。</p>
+
+<h2>データベースの実装の基本</h2>
+<p>データベースを独自に実装するのは、とても難しいことだと思われるかもしれません。</p>
+<p>ですが、実装の基本から言えば、「ハッシュテーブルを上手く使う」ということが基本となります。</p>
+<p>すなわち、Perlにおけるハッシュのようなものを使って、データを複数格納することができたら、それでデータベースの独自実装の最初の一歩は実現できています。</p>
+<p>確かに、高速なインデックスを作ったり、SQLのクエリ命令やテーブルの選択・射影・結合などの論理演算を作って、RDBMSにするのは難しいでしょう。</p>
+<p>ですが、実際のところ、きちんとしたRDBMSを作る必要はどこにもありません。</p>
+<p>そう、独自のデータベースなのだから、独自の仕様にしても構わないのです。</p>
+<p>まずは、任意の個数のハッシュテーブルにキーと値を格納できるようなデータベースを作り、それを改良し続ければ、独自のデータベースを実装することはできるでしょう。</p>
+<p>後日注記：要するに、表形式のテーブルによって紐づけされたハッシュによるデータを格納・参照・記録できるようにすればいいのです。それだけでRDBMSは実装できます。</p>
+<div class="edit_date">
+<p>2023.08.17-18</p>
+</div>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

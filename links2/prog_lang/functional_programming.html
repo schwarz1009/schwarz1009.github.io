@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>関数型プログラミングの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>関数型プログラミングの世界観</h1>
+<p>関数型プログラミングに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>関数型プログラミング</h1>
+<h2>関数型プログラミングとは</h2>
+<p>関数型プログラミングとは、<a href="lisp.html">Lisp</a>、<a href="haskell.html">Haskell</a>、<a href="ml.html">ML</a>などの関数型プログラミング言語にみられる考え方。</p>
+<p>関数型プログラミングでは、ステートメントが「文」ではなく「式」として扱われる。このため、ほとんどすべての記述が返り値を持つ。</p>
+<p>また、関数は第一級オブジェクトとなる。このため、関数オブジェクトを変数に格納したり、関数への引数として関数を渡すことができる。そして、map()のような関数を引数とする関数（高階関数）を多用する。</p>
+<p>また、変数は代入ではなく束縛される。値を変更することができず、基本的に値から新しい値を作成すること、関数として引数から新しい値を返すことで計算を行う。</p>
+<p>また、繰り返しはfor文のような手続き的なループを用いることなく、関数から自分自身の関数を呼び出す「再帰」を用いて行う。</p>
+<p>イテレータ、クロージャ、無名関数・ラムダ式などは、関数型プログラミング言語における特有の言語機能であり、上手く使うことでC/C++を使うよりもエレガントにプログラムを記述できる。</p>
+<ul>
+<li><a href="https://ocaml.org/learn/tutorials/functional_programming.ja.html">関数型プログラミング - OCaml</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E7%AC%AC%E4%B8%80%E7%B4%9A%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88">第一級オブジェクト - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.19編集</p>
+</div>
+
+<h2>純粋関数型言語</h2>
+<p>また、純粋関数型言語では、式や関数が評価される時に、副作用が生まれない。</p>
+<p>副作用とは、参照している変数の状態を破壊するという意味。</p>
+<p>また、「同じ引数と同じ式を与えれば必ず同じ結果が返る」という性質を「参照透過性」という。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%89%AF%E4%BD%9C%E7%94%A8_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0)">副作用 (プログラム) - Wikipedia</a></li>
+<li><a href="https://zenn.dev/masahiro_toba/articles/92407ee1027f3c">参照透過性について(Haskell) - Zenn</a></li>
+<li><a href="https://web.sfc.keio.ac.jp/~hattori/prog-theory/ja/11.html">11. 関数型言語 &#8212; プログラミング言語論  ドキュメント</a></li>
+</ul>
+
+<h2>副作用なんか必要ない</h2>
+<p>C/C++のような手続き型のプログラミング言語では、変数を代入したり変更したりすること、すなわち「副作用」が前提となってプログラミングパラダイムとなっている。</p>
+<p>だが、Lispのような関数型言語では、副作用を嫌い、多くのことを関数呼び出しによる返り値で行う。</p>
+<p>すなわち、値を「変更」するのではなく、新しく「新作成」するのである。</p>
+<p>このようなプログラミングパラダイムは関数型プログラミングと呼ばれる。最初のうちは、「副作用なしでどうやったらプログラムが書けるの？」と思うかもしれない。だが、実際やってみると、副作用が必要となる場合は、特にLispのような関数型プログラミング言語においては「とてもレアケース」であることが分かる。</p>
+<p>そう、わたしたちは関数型プログラミングを行うことで、副作用なしでもプログラムを書けるのである。</p>
+<p>後日注記：確かに、変更できる変数は便利です。たとえば、インデックスのカウンタとして、1回目、2回目、3回目をカウントする時に、記憶を変更してインクリメントすることは、手続き型プログラミングでは慣習となっています。しかしながら、このような場合、関数をその回数の分だけ実行して、その引数として連続した値を与えることでも、反復処理は実現できます。副作用を用いずカプセル化をする、関数型プログラミングはこのようなところから始まります。</p>
+<p>後日注記：そもそも、人間の頭脳として、記憶を「変更」する必要があるというのは稀だと思います。多くの場合、記憶を「新しく作り出す」ことのほうが多いでしょう。しかしながら、例外があります。それはIO処理です。入出力は、相手と自分の情報を「手紙という媒体によって渡す」ということであり、IO処理を副作用なしに書くことは難しいです。Haskellでは、IO処理について、圏論のアイデアを使った「モナド」という方法を使っています。</p>
+<p>後日注記：変更可能な変数をミュータブル、変更不可能な変数をイミュータブルと言います。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a></li>
+</ul>
+
+<h1>再帰とS式</h1>
+<h2>再帰</h2>
+<p>関数型言語などで使われる関数の再帰的呼び出しの方法。</p>
+<p>自分の中で自分を呼び出す関数のことを言う。<!--説明するのは難しいですが、-->「関数の中でその関数を呼び出す」ことを呼ぶ、と言うのが定義らしい。</p>
+<p>Lispなどで計算する時に、良く使われる。</p>
+<p>僕も昔は再帰処理を色んなところで書くのが好きだった。</p>
+<p>オブジェクト指向、ポインタ、再帰は、プログラムを書く時の三大重要概念だと僕は思っています（ビル・ジョイがポインタと再帰の重要性について言っていました）。出来れば使いこなせることが望ましいでしょう。</p>
+<p>後日注記：再帰は、データ構造のスタックと相性がいい。たとえば、算術式のカッコを処理する時、最後に開いたカッコが最初に閉じるべきカッコとして対応する。このような時、オペコード・オペランドと式の操作は再帰的に処理される。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+</ul>
+
+<h2>再帰とfor文の比較</h2>
+<p>以下は自分で書いたコード。</p>
+<p>再帰を使う場合：</p>
+<pre class="prettyprint">
+int funcA(int x)
+{
+    static int i = 0;
+    
+    printf("%d : %d\n", i, x);
+    i++;
+    
+    if (i &gt;= 10) {
+        return 0;
+    } else {
+        funcA(x + 10);
+    }
+}
+
+int main()
+{
+    funcA(1);
+}
+</pre>
+<p>for文を使う場合：</p>
+<pre class="prettyprint">
+int main()
+{
+    int i = 0;
+    int x = 1;
+    for (i = 0; i &lt; 10; i++) {
+        printf("%d : %d\n", i, x);
+        x = x + 10;
+    }
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+0 : 1
+1 : 11
+2 : 21
+3 : 31
+4 : 41
+5 : 51
+6 : 61
+7 : 71
+8 : 81
+9 : 91
+</pre>
+<p>「値を変えて同じルーチンを繰り返す」という意味では、for文のブロックと再帰関数は変わらない。</p>
+<p>funcA()関数では、関数を繰り返し実行してもローカル変数iを静的に保持するために、static宣言をつけている。</p>
+<p>繰り返し処理を行うには、これら「for文による反復」と「再帰」以外に、イテレータ（反復子）を使う方法がある。大規模なプログラミングでは、イテレータを使ってプログラムを記述することもある。</p>
+<pre class="prettyprint">
+for (Iterator i = lst1.iterator(); i.hasNext();) {
+    System.out.println(i.next());
+}
+</pre>
+<p><a href="java_lib_list.html">Java（コレクションと配列）</a>も参照のこと。</p>
+<ul>
+<li><a href="http://ylb.jp/2007b/proc/recursion/">再帰呼出し - 安田 豊</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.02.10編集</p>
+</div>
+
+<h2>S式</h2>
+<p>Lispでプログラムを書く時に記述する文章の形式をS式と言います。特に、(lisp (lisp lisp (lisp lisp)))のように、「カッコの中にいくらでもカッコが出来る」のが特徴です。</p>
+<p><a href="lisp.html">Lisp</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>変数を変更する必要がない理由</h2>
+<p>関数型プログラミングにおいては、破壊的操作や副作用を嫌います。すなわち、変数に対して、代入したり、変更したりといったことを行うのではなく、それぞれの値を束縛して、関数的に、その時その時値を作り出します。</p>
+<p>この意味を理解するためには、従来の手続き型のプログラミングを「箱に入れる型」とし、関数型のプログラミングを「ラベルを付ける型」であると考えると分かりやすいです。</p>
+<p>C言語などでは、変数を入れるボックスとしてxを作ります。このxに、最初は2を入れるとしたら、xには2が入っています。次に、このxに3を入れると、今はxには3が入っています。同様に、4, 5, 6と変更していきます。そうすると、同じxというボックスの名前であっても、その時ボックスの中にある値は異なります。</p>
+<p>ですが、わざわざボックスの中に入れなくても、それぞれの入れようとする値に対して、ラベルをつければどうでしょうか。</p>
+<p>まず、xに入れる2について、twoというラベルをつけます。3にはthree、4にはfour、5にはfive、6にはsixとラベルをつけます。こうすることで、ボックスであるxの中に入れなくても、入れる前の段階でラベルを付けることで、それぞれの値にラベルがつき、そのラベルを使って、xというボックスの名前を使わずに、それぞれの値を参照できるのです。</p>
+<p>ラベルの場合、2は必ずtwoです。2がthreeになることはありません。なので、xに今何が入っているのか、ということを気にする必要がありません。また、もし4をfourとして参照して、その前の値だったthreeから3を参照することが、fourを参照した後でもできます。すなわち、前の値が消え去らず、全部残った上で作業できるのです。</p>
+<p>ほかの例としては、アンドゥのような元に戻す機能を作る際に、「ひとつ前に戻す」という機能しかなく、そのひとつ前に戻すアクションを、ひとつひとつの行動のたびに書き換えるのではなく、すべての履歴を取っておいて、その履歴をいつでもひとつ前に戻すことができるようにすること、そのような感覚が、関数型言語に近いと言えるでしょう。そうすることで、ひとつ前だけではなく二つ前、三つ前、あるいは履歴すべての前に戻ることも簡単にできるようになるのです。</p>
+<div class="edit_date">
+<p>2025.06.09</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>イテレータとジェネレータ</h2>
+<p><a href="iterator.html">イテレータとジェネレータ</a>を参照のこと。</p>
+
+<h2>クロージャ・関数オブジェクト</h2>
+<p><a href="closure.html">クロージャ・無名関数・関数オブジェクト</a>を参照のこと。</p>
+
+<!--
+<h1>参考文献</h1>
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+<li><a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a></li>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+<li><a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a></li>
+<li><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a></li>
+<li><a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a></li>
+</ul>
+-->
+
+<h1>簡単な説明</h1>
+<h2>関数型プログラミング</h2>
+<ul class="defaultlist list7">
+<li>関数型プログラミング
+<ul>
+<li>イテレータ</li>
+<li>ジェネレータ</li>
+<li>mapとfilter
+<ul>
+<li>関数に関数名を渡して、関数から任意の関数を実行する</li>
+</ul></li>
+<li>再帰</li>
+<li>クロージャ</li>
+<li>eval</li>
+</ul></li>
+</ul>
+
+<h2>関数型言語</h2>
+<ul class="defaultlist list7">
+<li>関数型言語
+<ul>
+<li>Haskell
+<ul>
+<li>「できることが制限された言語」として知られる</li>
+<li>理解すると人生が変わるらしい。悟りが開けるとか</li>
+<li>ミュータブル、イミュータブル</li>
+<li>パターンマッチング、ガード</li>
+</ul></li>
+<li>OCaml
+<ul>
+<li>F#</li>
+</ul></li>
+<li>Lisp
+<ul>
+<li>S式
+<ul>
+<li>かっこをたくさん使うLisp特有の記法</li>
+<li>プログラムコードとリスト式のデータを同等に扱うことができるという利点がある</li>
+</ul></li>
+<li>関数とマクロ
+<ul>
+<li>Lispでは一部を除いて全てが関数あるいはマクロ</li>
+</ul></li>
+<li>リスト
+<ul>
+<li>プログラムコードと同様だが、'（クオーテーション）をつける</li>
+</ul></li>
+<li>eval</li>
+<li>自分の言語を作り、その言語でプログラムを書く</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+<h2>再帰</h2>
+<p>for文を使うのではなく、関数の内部から「自身の関数を呼び出す」ことで、繰り返しを「引数とreturn」で表現する。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Nginx関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Nginx関連の世界観</h1>
+<p>Nginxに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Nginx</h1>
+<h2>Nginxとは</h2>
+<p>とてもたくさんのアクセス数のあるWebサイトで、高速かつ少ないメモリ使用量で高い並列性と高性能を誇る、最近流行りのサーバー。</p>
+<p>Apacheがプロセス・スレッドベースの並列処理を行うのに対して、Nginxはイベント駆動のアプローチを取る。</p>
+<p>第三のWebサーバーとして、注目を集めている。</p>
+<!--<p>僕も良く分かっていないので、間違っていたら申し訳ない。</p>-->
+
+<h2>ノンブロッキングI/O</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.02.02.html">2021/02/02</a>より。</p>
+<p>Apacheなどのプロセス・スレッドベースのサーバでは、接続の数だけプロセスやスレッドを作成する。</p>
+<p>一つ一つの接続のリソース消費は微々たるものでも、ものすごく多い接続になるとメモリを食う。</p>
+<p>特に、1万接続ぐらいから、不安定になる（C10K問題）が知られている。</p>
+<p>これに対してnginxやNode.jsでは、イベント駆動と非同期処理を上手く使う、ノンブロッキングI/Oを採用し、ひとつのプロセスだけで複数の接続を処理する。</p>
+<p>イベント駆動で、必要になった時点で、その接続に必要な処理を行う。</p>
+<p>このようにすることで、メモリの消費を抑えることができ、ものすごくたくさんの接続でも安定してサービスを提供することができる。</p>
+
+<h2>1プロセスの中で接続ごとにイベント処理</h2>
+<p>Apacheは、接続が増えるたびにプロセスやスレッドの数を増やす。それぞれの接続の数だけメモリを大きく消費する。</p>
+<p>これに対して、NginxやNode.jsでは、プロセスやスレッドはひとつだけのままで、イベントループで接続相手から要求されるごとに非同期でその相手と処理を行う。</p>
+<p>このため、軽量かつ消費するメモリの量が少ない。</p>
+<p>スクリプト言語の処理を組み込むためには、プロキシサーバとして動作させれば良い。</p>
+<p>（<a href="https://qiita.com/tomoyamachi/items/06b2eca14987a30b8fda">NginxとApache HTTP Serverの違いメモ - Qiita</a>を参考に執筆しました。）</p>
+
+<h2>ノンブロッキングI/Oとは</h2>
+<p>ノンブロッキングI/Oは非同期でひとつのプロセスが複数の接続を処理する方法。</p>
+<p>たとえるならば以下のようになる。</p>
+<table class="some_tables">
+<tr><th class="min60">方式</th><th>説明</th></tr>
+<tr><td>プロセスやスレッドベースのサーバ</td><td>それぞれの生徒の数だけ控え教師を用意する<br>ただしどんなに頑張っても一万人が限界</td></tr>
+<tr><td>1プロセスに1接続のブロッキングI/O</td><td>ひとりに専属の教師（家庭教師など）</td></tr>
+<tr><td>1プロセスに複数接続のノンブロッキングI/O</td><td>複数の生徒を同時に見るひとりの教師（塾の教師など）</td></tr>
+</table>
+<p>ノンブロッキングI/OはNginxの他Node.jsなどで取り入れられている。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/C10K%E5%95%8F%E9%A1%8C">C10K問題 - Wikipedia</a></li>
+</ul>
+
+<h2>同期と非同期、ブロッキングとノンブロッキング</h2>
+<p>データ通信を行う際の用語として、データが受信されるまでプログラムが待機する方式のことを「同期式」あるいは「ブロッキング型」と呼ぶ。</p>
+<p>これに対して、データが受信されるまでプログラムが待機せず、別の処理に戻って実行を続ける方式のことを「非同期式」あるいは「ノンブロッキング型」と呼ぶ。</p>
+<p>（放送大学「コンピュータの動作と管理 ('17)」を参考に執筆しました。）</p>
+<p><a href="../prog_lang/parallel.html">並列処理</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.18</p>
+</div>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/C10K%E5%95%8F%E9%A1%8C">C10K問題 - Wikipedia</a></li>
+<li>放送大学「コンピュータの動作と管理 ('17)」</li>
+</ul>
+
+<h2>Nginx参考リンク</h2>
+<p>Nginxの参考リンク集。</p>
+<ul>
+<li><a href="https://qiita.com/tomoyamachi/items/06b2eca14987a30b8fda">NginxとApache HTTP Serverの違いメモ - Qiita</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1406/17/news013.html">高速・軽量・高機能……Nginxの基礎知識 (1/2) - @IT</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/nginx">nginx - Wikipedia</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Node.js</h2>
+<p><a href="../prog_lang/node_js.html">Node.js</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Nginx, Node.js</h2>
+<p>NginxやNode.jsでは、Apacheのようにプロセス・スレッドベースではなく、ひとつのプロセスが一度にたくさんの相手と接続を行いながら、非同期のイベント駆動で必要な時に必要な相手に必要な処理を行う。メモリの使用量が少なく高速。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

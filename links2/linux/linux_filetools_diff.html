@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux diffとpatch・テキスト処理 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux diffとpatch・テキスト処理</h1>
+<p>Linuxのdiffとpatch・テキスト処理に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>diff</h1>
+<h2>diff</h2>
+<p>ファイルやテキストを比較するコマンド。開発中のソースコードの比較に便利。</p>
+<pre>
+diff -u before.txt after.txt &gt; diff1.patch
+</pre>
+<p>-uはunified形式、-cはcontext形式で出力される。普通は-uを使う。</p>
+<p>サブディレクトリまで再帰的に全部比較する場合は-rオプションを付ける。</p>
+<pre>
+diff -u -r before after &gt; diff2.patch
+</pre>
+<p>ディレクトリの内容を比較する際には必ず-rを付ける。</p>
+<p>また、-pオプションでC言語の関数名を表示できる。Linuxカーネルでは、1つのファイルに対するdiffは-up、複数のファイルに対するdiffは-uprNを付けることを推奨している。</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/mrgoofy33/20101019/1287500809">diff & patch コマンドでのパッチを適用する方法 - hogehoge foobar Blog Style5</a></li>
+<li><a href="http://qiita.com/astro_super_nova/items/e30dcaf4d106deebc63c">Linuxエンジニアらしいパッチのつくりかた - Qiita</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?diff">UNIX/Linuxの部屋 diffコマンドの使い方</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/gnumaniak/man1/diff.1.html">man diff</a></li>
+</ul>
+
+<h2>Windowsでdiffを使う</h2>
+<p>diffは使えます。僕はWindowsでもcygwinをインストールしてdiffを使っています。</p>
+<p>Windowsで使う場合は、オプション--strip-trailing-crをつけて改行コードCRを削除しましょう。</p>
+<pre>
+$ diff -ru --strip-trailing-cr dir1/ dir2/
+</pre>
+<p>ちなみに、Windowsで使えるサクラエディタにもDiffの機能があります。</p>
+
+<h1>patch</h1>
+<h2>patch</h2>
+<p>diffで取った変更差分（パッチ）を、ディレクトリツリーに適用できるコマンド。</p>
+<pre>
+patch -u &lt; diff1.patch
+</pre>
+<p>-uはunified形式、-cはcontext形式で適用される。</p>
+<p>パッチの適用を元に戻すには-Rオプションを付ける。</p>
+<p>また、「-d ディレクトリ」と指定することで、ディレクトリに対してパッチを適用できる。</p>
+<pre>
+patch -u -p1 -d before &lt; diff2.patch
+</pre>
+<p>オプションに「-p数」を指定すると、その数だけパスからプレフィックスを取り除ける。</p>
+<p>たとえば「-p1」とした場合、「before/foo/hoge.txt」であれば「foo/hoge.txt」というパスで適用できる。</p>
+<p>ディレクトリにパッチを適用した場合、変更されたファイルは変更されるが、新規作成されたファイルは作成されないことに注意。diffに-Nオプションを付けることで、同名のファイルがない場合、空ファイルがあるのと同じ動作にすることができる。</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/mrgoofy33/20101019/1287500809">diff & patch コマンドでのパッチを適用する方法 - hogehoge foobar Blog Style5</a></li>
+<li><a href="http://qiita.com/astro_super_nova/items/e30dcaf4d106deebc63c">Linuxエンジニアらしいパッチのつくりかた - Qiita</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_patch/man1/patch.1.html">man patch</a></li>
+</ul>
+
+<h1>その他の比較ツール</h1>
+<h2>comm/cmp</h2>
+<p>diffのほかにも、comm（行ごとに比較）やcmp（1バイトごとに比較）などのツールがある。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/comm.1.html">man comm</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/gnumaniak/man1/cmp.1.html">man cmp</a></li>
+</ul>
+
+<h1>ファイル分割</h1>
+<h2>split/csplit</h2>
+<p>splitは、サイズごとあるいは行数ごとにファイルを分割するコマンド。</p>
+<p>csplitは、特定の文字列でファイルを分割するコマンド。</p>
+<p>csplitを使うことで、こんな風に出来る。</p>
+<pre>
+$ cat mike.txt
+-1章
+
+三毛猫のミケは、今日もつまらない日々を生きていた。...
+
+
+-2章
+
+三毛猫のミケの親友、クロに大事件が起きる。...
+
+
+-3章
+
+ミケはクロを助けるため、異世界にひとり向かう。...
+
+
+-4章
+
+ミケはクロを探し求めて、魔界の中を彷徨う。...
+
+
+-5章
+
+ミケはクロを発見するが、そこにはラスボスが待ち構えていた。...
+
+
+$ csplit mike.txt /^-[1-5]章/ {*}
+</pre>
+<p>上を実行すると、「xx00」から「xx05」という名前でファイルが作成される。</p>
+<p>ただし、この例ではファイルの先頭に「-1章」があるため、ゼロバイトのファイルxx00が作成されてしまう。これを作成したくない場合は-zオプションを付ける。</p>
+<p>（<a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/a072csplit.html">テキストファイルを任意の文字列で分割するには - @IT</a>を参考に執筆・編集して引用しました。）</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/a072csplit.html">テキストファイルを任意の文字列で分割するには - @IT</a></li>
+<li><a href="http://takuya-1st.hatenablog.jp/entry/20110823/1314108412">csplitコマンド の使い方 csplit は区切り単語でファイル分割 - それマグで！</a></li>
+<li><a href="https://linuxjm.osdn.jp/info/GNU_coreutils/coreutils-ja.html">GNU Coreutils - GNU</a></li>
+<li><a href="https://eng-entrance.com/linux-command-split">splitコマンドについて詳しくまとめました 【Linuxコマンド集】 - エンジニアの入り口</a></li>
+</ul>
+
+<h1>ソート</h1>
+<h2>sort</h2>
+<p>テキストをソートするコマンド。シェルから実行できるほか、viなどで:1,10!sortとすれば、1～10行目をソートできる。</p>
+<p><a href="linux_commands.html">Linuxコマンド（ユーザープログラム）</a>や<a href="vi.html">vi</a>を参照のこと。</p>
+
+<h1>ハッシュ・エンコード処理</h1>
+<h2>md5sum/sha1sum</h2>
+<p>MD5/SHA1のハッシュ値（ファイルの整合性を保証する値）を表示する。</p>
+<p>MD5/SHA1ハッシュはLinuxディストリビューションのISOファイルのダウンロードの際などに使われており、ファイルが壊れていないか（あるいは改竄されていないか）のチェックに使うことができる。</p>
+<p>ファイル内容が完全に同じであれば、同じハッシュ値となる。もし少しでも壊れていれば、ハッシュ値は同じにならない。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/md5sum.1.html">man md5sum</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/sha1sum.1.html">man sha1sum</a></li>
+</ul>
+<p><a href="../network/encrypt.html">暗号</a>も参照のこと。</p>
+
+<h2>エンコード処理</h2>
+<p>そのほか、</p>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>uuencode/uudecode</td><td>バイナリデータのエンコード処理。</td></tr>
+<tr><td>base64</td><td>base64エンコード処理。</td></tr>
+</table>
+<p>などのコマンドがある。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_sharutils/man1/uuencode.1.html">man uuencode</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/base64.1.html">man base64</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>ソースからのインストール</h2>
+<p><a href="linux_src_install.html">ソースからのインストール</a>を参照のこと。</p>
+
+<h2>アーカイブ</h2>
+<p><a href="linux_filetools_archive.html">Linuxアーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

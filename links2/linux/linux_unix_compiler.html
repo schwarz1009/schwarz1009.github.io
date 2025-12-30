@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理２（コンパイラ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXシステム管理２（コンパイラ）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観２（コンパイラ）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><b>２．コンパイラ</b></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>コンパイラとリンカ</h1>
+<h2>コンパイラ</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>Linuxでは、主にC言語を用いてプログラムを記述し、それをGCCなどのコンパイラを用いてコンパイルする。</p>
+<p>GCCでは、コンパイラの前段階としてプリプロセス（#defineや#includeなどの処理）を行い、コンパイル可能なC言語の完全なソースコードを生成したら、それをアセンブリ言語にコンパイルする。</p>
+<p>コンパイラの手順としては、字句解析でトークンを解析し、構文解析で構文ルールからパースツリーを作成し、三番地コードなどの中間言語を作成し、最適化を行ってアセンブリ言語を出力する。</p>
+<p>GCCでは、フロントエンドとバックエンドに構造が分かれており、フロントエンドではFORTRANなどのC/C++以外の言語にも対応して解析でき、バックエンドではさまざまなCPUアーキテクチャのアセンブリ言語を吐き出せる。</p>
+<p>コンパイルが終わったら、アセンブルして機械語のオブジェクトファイルを生成し、リンクを行う。</p>
+<p>機械語のオブジェクトファイルになった段階で、プログラムは実行可能なプログラムとライブラリに分かれている。</p>
+<p>ライブラリには二つの種類があり、スタティックリンク（*.a）では、リンクの時点で完全に実行プログラムと結合される。</p>
+<p>一方、ダイナミックリンク（*.so）では、リンクの時点では結合を行わず、実行時にリンクローダ（/lib/ld-linux.so.2）が動的にリンクを行う。</p>
+<p>最近のUNIXでは、ダイナミックリンクを使うのが一般的だが、一部の軽量libc（Muslなど）ではスタティックリンクに最適化されたものもある。</p>
+<p>また、全てのプログラムは暗黙のうちに、libc.so.6にダイナミックリンクされている。</p>
+<p>バイナリがどの共有ライブラリに依存しているかはlddコマンドで確認できる。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a></li>
+</ul>
+
+<h2>コンパイラ・インタプリタ</h2>
+<p>コンパイラとは、プログラミング言語で書かれたソースコードを機械語に翻訳するアプリケーション。一度のコンパイルで全てを機械語に変換する。</p>
+<p>インタプリタとは、プログラミング言語を「動的に」読み込みながら、逐次機械語の命令に翻訳していくアプリケーション。</p>
+
+<h2>プログラムとライブラリ</h2>
+<p>UNIXにおいては、プログラムには二種類ある。それは「プログラム」と「ライブラリ」である。</p>
+<p>main()関数が含まれたプログラムには、実行命令が下ると即座にmain()関数から実行を始める。多くのコマンドプログラムや自立したアプリケーションはこちらに当たる。</p>
+<p>これに対して、main()関数が含まれていないライブラリと呼ばれるプログラムは、それ単体では実行できない。</p>
+<p>ライブラリは、別のプログラムから呼び出される形で実行される。</p>
+<p>ライブラリは、さまざまなプログラムに点在する「呼び出し命令」に基づいて、プログラムの中で下請けの専門業者のように、必要なところで必要な時に実行される。</p>
+<p>ライブラリやその呼び出し規約を「API」と呼ぶ。このAPIに基づいた命令によって、プログラムは「難しい機能でも簡単に呼び出せる」ようになり、たとえばCの標準APIが含まれるlibcや、X11のAPIが含まれるxlib、あるいはGTK+やQtのようなツールキットなど、さまざまな命令や機能を「自分のプログラムから呼び出したい」時に、こうしたAPIを使う。</p>
+<p>ライブラリAPIを使うことで、全てのことを自分で作る必要はなく、ライブラリを呼び出す形で簡単に高度で複雑なプログラムを開発できる。</p>
+
+<h2>/binと/lib</h2>
+<p>/binディレクトリには、実行可能ファイルを置き、/libディレクトリには共有ライブラリ（*.so）を置くのが一般的。</p>
+<p>また、/usr/binや/usr/libがある環境では、/binや/libにはシステムを起動し管理するための最低限のプログラムを置き、アプリケーションプログラムなどは/usr/binや/usr/libに置く。これにより、もし/usrディレクトリが破壊されても、/binや/libが残っていればシステムの復旧や最低限の管理を行うことができる。</p>
+<p><a href="linux_fhs.html">Linuxファイルシステム階層</a>も参照のこと。</p>
+
+<h2>/etc/ld.so.confとldconfig</h2>
+<p>/etc/ld.so.confは、共有ライブラリがどこにあるかを指定するパスが含まれた設定ファイルで、ldconfigはこの情報をOSに伝えるコマンド。</p>
+<p><a href="linux_lib.html">共有ライブラリ</a>を参照のこと。</p>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>GNUツールチェイン</h1>
+<h2>GCC</h2>
+<p>C/C++など、多言語に対応したフリーのコンパイラ集。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/GNU_gcc/man1/gcc.1.html">Man page of GCC</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/">GCC online documentation</a></li>
+<li><a href="http://www.asahi-net.or.jp/~wg5k-ickw/">私的 GNU マニュアル翻訳プロジェクト</a></li>
+</ul>
+<p><a href="gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+
+<h2>GDB</h2>
+<p>デバッガ。</p>
+<ul>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb1.html">gcc+gdbによるプログラムのデバッグ 第1回 ステップ実行、変数の操作、ブレークポイント - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb2.html">gcc+gdbによるプログラムのデバッグ 第2回 変数の監視、バックトレース、その他のコマンド - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb3.html">gcc+gdbによるプログラムのデバッグ 第3回 gdbの便利な機能、デバッグの例 - RAT Portal Site</a></li>
+</ul>
+<p><a href="../prog_lang/debug.html">デバッグ</a>も参照のこと。</p>
+
+<h1>コンパイラなど</h1>
+<h2>GCC</h2>
+<p>GCCは、様々な言語に対応しているが、フロントエンドでC、C++、Objective-C、Fortran、Ada、Goをコンパイル出来る。中間コードで最適化処理（コードをもっと高速にする改変）を加えて、バックエンドでさまざまなCPUアーキテクチャに対応する。</p>
+<p>GCCもLLVM/Clangにとってかわられようとしている。</p>
+<ul>
+<li><a href="http://www.ysr.net.it-chiba.ac.jp/data/cc.html">コンパイラ(gccコマンド)の使い方 - 千葉工業大学 情報科学部 情報ネットワーク学科 屋代 研究室 データライブラリ</a></li>
+<li><a href="https://makandat.wordpress.com/2016/08/31/gcc-%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9/">gcc コンパイラの使い方 - Jura-Zakki 樹羅雑記</a></li>
+</ul>
+
+<h3>コマンド例</h3>
+<p>基本：</p>
+<pre>
+gcc -o hoge hoge.c
+</pre>
+<p>デバッグ情報を付加してhoge.oとlibm.aをリンクする場合は以下のようにする：</p>
+<pre>
+gcc -g -o hoge -lm hoge.o
+</pre>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://seesaawiki.jp/system-engineer/d/gcc">gcc - ＠SE ～ Linux 備忘録 ～</a></li>
+</ul>
+
+<h2>GNU make</h2>
+<p>GNU makeは、プログラムのソースコードをコンパイルする時、更新されたファイルだけをコンパイルするなど、色んなことが出来ます。</p>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/make-nutshell-handbook-Andrew-Oram/dp/4900900605">make 改訂版 - オライリー・ジャパン</a></li>
+</ul>
+<p><a href="make.html">Make</a>も参照のこと。</p>
+
+<h2>Autotools</h2>
+<p>Autotoolsは、色んなプラットフォームでソフトウェアをコンパイルする時に自動で設定・処理してくれるGNUの仕組みですが、結構理解し辛いので嫌われています。</p>
+<p>このコマンドを実行することで簡単にソフトウェアがインストール出来るのは、Autotoolsのおかげ：</p>
+<pre>
+./configure &amp;&amp; make &amp;&amp; make install
+</pre>
+<p>--prefix=dirでインストール先を変更できる。</p>
+<p><a href="autotools.html">Autotools</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>共有ライブラリ・ヘッダファイル</h2>
+<p><a href="linux_lib.html">共有ライブラリ</a>や<a href="linux_header.html">ヘッダファイル</a>を参照のこと。</p>
+
+<h2>GNUツールチェインの詳細</h2>
+<p>GNUツールチェインの詳細は<a href="gnu_toolchain.html">GNUツールチェイン</a>をご覧ください。</p>
+
+<h2>コンパイラ開発</h2>
+<p>コンパイラの仕組みについては<a href="../prog_lang/compiler_develop.html">コンパイラ開発</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>テキストとバイナリ</h2>
+<p>僕は、UNIXのシステムを考える上で、「テキストのソースコード」と「機械語のバイナリ」が重要だと思います。</p>
+<p>実際のところ、プログラミングを行う上でもシステムを管理する上でも、大切なのは「機械語のバイナリ」であり、同時に、バイナリから読み書きしたりバイナリの外部に保管したりするものは「テキストデータ」であり、バイナリのほとんどは「テキストデータが元にできている」ということです。</p>
+<p>僕は、これを直観的に理解するために、Gentoo LinuxのPortageを使ってみることをおすすめします。全てのプログラムがテキストからバイナリへと変換されていく過程が分かりますし、設定は全てテキストファイルを手動で編集します。Gentoo Linuxを触ることで、「UNIXのどの部分がテキストで、どの部分がバイナリで、どのようにテキストからバイナリが形成されていくか」が、目で見て分かるのです。システムの全てのファイルを最初から最後まで全て形成していく過程が、Gentoo Linuxのインストールによってしかと見れます。またマウントやフォーマットなどのUNIXに必須のスキルも、Gentooのインストールと設定を行うことで、管理することができるようになります。</p>
+<p><a href="gentoo.html">Gentoo</a>や<a href="../prog_lang/code_file.html">コードとファイル</a>も参照のこと。</p>
+
+<h2>コンパイラが重要</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.14.html">2021/01/14</a>より。</p>
+<p>Linuxについて言えるのは、コンパイラが重要ということ。</p>
+<p>システム全体をビルドするコンパイラが、きちんと動かないと、何も動かない。</p>
+<p>逆に、動かなくても最新のコンパイラを使うことで、バグ潰しになる。</p>
+<p>カーネルと同様、コンパイラが重要である。</p>
+
+<h1>簡単な説明</h1>
+<h2>コンパイラとテキストエディタ</h2>
+<ul class="defaultlist list7">
+<li>コンパイラとテキストエディタ
+<ul>
+<li>コンパイラ
+<ul>
+<li>GCC
+<ul>
+<li>フロントエンドとバックエンドに分かれている
+<ul>
+<li>フロントエンドでCやC++やFortranなどの言語を理解</li>
+<li>中間コードで最適化</li>
+<li>バックエンドでx86やPowerPCなどのCPU命令のオブジェクトファイルを吐き出す</li>
+</ul></li>
+<li>プリプロセス、コンパイル、アセンブル、リンク
+<ul>
+<li>プリプロセスでマクロ（#includeなど）をC言語のソースコードに変換</li>
+<li>コンパイルでC言語のソースコードをアセンブリ言語に変換</li>
+<li>アセンブルでアセンブリ言語を機械語のオブジェクトファイルに変換</li>
+<li>リンクで機械語のオブジェクトファイルをリンクし、実行可能ファイルにする</li>
+</ul></li>
+<li>スタティックリンク、ダイナミックリンク</li>
+<li>組み込み、クロスコンパイル
+<ul>
+<li>PowerPC向けのクロスコンパイルを行いたいときは、PowerPC専用のクロスコンパイラを特別にビルドする</li>
+</ul></li>
+</ul></li>
+<li>LLVM/Clang</li>
+<li>make
+<ul>
+<li>再コンパイルすべきファイル（新しく変更されたソースファイル）だけをコンパイル</li>
+<li>Makefileに依存関係とコマンドを記述する</li>
+<li>一般的な変数名を使う</li>
+</ul></li>
+<li>autotools
+<ul>
+<li>移植性の向上</li>
+<li>単にautotoolsだけでは移植性は向上せず、configureスクリプトなどの仕組みをうまく使ってプログラマが必要なコードを書く必要がある</li>
+</ul></li>
+<li>gettext
+<ul>
+<li>翻訳・国際化</li>
+<li>poファイルで簡単にプログラム内のメッセージを翻訳できる。OSSの日本ユーザー会などではなじみ深いソフトウェアではないか</li>
+</ul></li>
+<li>meson + ninja</li>
+</ul></li>
+</ul></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

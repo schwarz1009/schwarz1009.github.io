@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（割り込み） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（割り込み）</h1>
+<p>Linuxのカーネルの開発に関する世界観（割り込み）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><b>割り込み</b></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>割り込み</h1>
+<h2>割り込み</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>カーネルは、IOデバイスにアクセスする時点で、IOデバイスの処理の終了を待機するが、IOデバイスはプログラムの命令よりも動作が遅いので、いちいちIOデバイス処理を待っていたのでは効率が悪い。</p>
+<p>そのため、カーネルはIOデバイス処理を待つ間に、必要とあれば別の処理を行う。</p>
+<p>そして、IOデバイスの処理が終わった段階で、カーネルに対して「割り込み」を行う。</p>
+<p>割り込まれた時、カーネルはIOデバイスの処理の完了を知り、その後の命令を実行する。</p>
+<ul>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-8.html">The Linux Kernel: 割り込みと割り込み処理</a></li>
+</ul>
+
+<h2>割り込みとは</h2>
+<p>要するに、ハードウェアの要求をカーネルが待っていると遅いので、カーネルが待っている間別の処理をし、ハードウェア側で何かあったら「割り込み」としてカーネルの処理に割り込んでくる、という仕組み。</p>
+<p>注意されたい。</p>
+<ul>
+<li><a href="http://www.mech.tohoku-gakuin.ac.jp/rde/contents/linux/drivers/irq.html">割り込みをつかう - 機械知能工学科 - 東北学院大学 - 熊谷正朗</a></li>
+<li><a href="http://wiki.bit-hive.com/linuxkernelmemo/pg/%E5%89%B2%E3%82%8A%E8%BE%BC%E3%81%BF%E5%87%A6%E7%90%86">割り込み処理 - Linuxカーネルメモ</a></li>
+<li><a href="http://www.coins.tsukuba.ac.jp/~yas/coins/os2-2013/2014-01-16/">デバイスドライバと割り込み処理、inb()とoutb() - 情報科学類 - 筑波大学 - 新城靖</a></li>
+<li><a href="http://www.coins.tsukuba.ac.jp/~yas/coins/os2-2011/2012-02-07/">割り込み処理 - 情報科学類 - 筑波大学 - 新城靖</a></li>
+</ul>
+
+<h2>さまざまな割り込み</h2>
+<p>割り込みはこれ以外にもある。</p>
+<p>マウスやキーボードのイベントを取りこぼすことなく伝えるのも割り込みだし、ハードウェアの割り込みとは別にソフトウェアの割り込みもある。</p>
+<p>また、ハードウェアに障害が発生した場合や、効率化や正確なタイミングのために例外を使うこともある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%89%B2%E3%82%8A%E8%BE%BC%E3%81%BF_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">割り込み (コンピュータ) - Wikipedia</a></li>
+</ul>
+
+<h2>割り込みと例外</h2>
+<p>割り込みとは、つまり「なんらかの作業をしていた時に、別の処理が割り込んでくること」。割り込みは、いつ、どこからやってくるか分からない。</p>
+<p>割り込みが発生すると、カーネルは、もともとあったプログラムの現在位置（プログラムカウンタ）を退避させ、割り込みによるアドレスをプログラムカウンタに代入する。</p>
+<p>割り込みには同期割り込みと非同期割り込みがあり、これはCPUの実行中にCPUが生成する割り込みか（同期割り込み）、あるいは別ハードウェアによる割り込みか（非同期割り込み）という意味。</p>
+<p>同期割り込みのことを例外と呼ぶ。ほとんどの例外は、シグナルをプロセスに送信することで例外に対応処理できる。</p>
+<p>後日注記：UNIXのカーネルは常に割り込みの対象であり、プログラムの切り替えや割り込みに対処するために必要であれば同期処理やロックを行う。</p>
+<p>詳しくは以下の書籍を参照のこと。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.12編集</p>
+</div>
+
+<h2>内部割込みと外部割込み</h2>
+<p>内部割込みは実行中のプログラムの内部からの割り込みのことで、ソフトウェア割込みとも言う。</p>
+<table class="some_tables">
+<tr><th class="min60">内部割込み</th><th>説明</th></tr>
+<tr><td>プログラム割込み</td><td>0での割り算やオーバーフローなど、プログラムが原因</td></tr>
+<tr><td>SVC割込み</td><td>OSの入出力システムコールが原因</td></tr>
+<tr><td>ページフォールト</td><td>仮想記憶においてページが存在しないことが原因</td></tr>
+</table>
+<p>外部割込みはハードウェア関連の割込み。ハードウェア割込みとも言う。</p>
+<table class="some_tables">
+<tr><th class="min60">外部割込み</th><th>説明</th></tr>
+<tr><td>タイマ割込み</td><td>タイマが原因</td></tr>
+<tr><td>機械チェック割込み</td><td>ハードウェア障害や異常が原因</td></tr>
+<tr><td>入出力割込み</td><td>キーボードや入出力機器が原因</td></tr>
+<tr><td>コンソール割込み</td><td>コンソールのスイッチが原因</td></tr>
+</table>
+<p>詳しくは以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+<li><a href="https://kotobank.jp/word/SVC%E5%89%B2%E3%82%8A%E8%BE%BC%E3%81%BF-1505">SVC割り込み(えすぶいしーわりこみ)とは？ 意味や使い方 - コトバンク</a> - ASCII.jpデジタル用語辞典 「SVC割り込み」</li>
+</ul>
+<div class="edit_date">
+<p>2023.05.07編集</p>
+</div>
+
+<h2>割り込みはシステムの至るところで使われる</h2>
+<p>割り込みは、コンピュータシステムの至るところで使われます。</p>
+<p>単に、エラーが出た時に割り込むだけではなく、たとえばCPUやメモリの演算命令を行う際に、演算のたびにエラーチェックをしていたのでは効率が悪くなってしまいます。このような際に、不正な値が入らないかどうかを常に監視しておき、不正な値が出た時点で演算処理に割り込むような割り込み処理が行われることがあります。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A8%88%E7%AE%97%E6%A9%9F%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3-%E6%83%85%E5%A0%B1%E5%B7%A5%E5%AD%A6%E5%85%A5%E9%96%80%E9%81%B8%E6%9B%B8-%E6%A9%8B%E6%9C%AC-%E6%98%AD%E6%B4%8B/dp/4785620277">計算機アーキテクチャ (情報工学入門選書)</a></li>
+</ul>
+
+<h2>割り込みの種類</h2>
+<p>割り込みの種類については、以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A8%88%E7%AE%97%E6%A9%9F%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3-%E6%83%85%E5%A0%B1%E5%B7%A5%E5%AD%A6%E5%85%A5%E9%96%80%E9%81%B8%E6%9B%B8-%E6%A9%8B%E6%9C%AC-%E6%98%AD%E6%B4%8B/dp/4785620277">計算機アーキテクチャ (情報工学入門選書)</a></li>
+<li>放送大学「コンピュータの動作と管理 ('17)」</li>
+</ul>
+
+<h2>割り込みによる並列処理</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+</ul>
+<p>また、以下のページに参考になる内容があります。日本語版もあります。</p>
+<ul>
+<li><a href="http://en.tldp.org/LDP/tlk/tlk.html">The Linux Kernel</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-images/frame.html">The Linux Kernel日本語訳</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>入出力</h2>
+<p>入出力については<a href="linux_kernel_io.html">Linuxカーネル（IO・入出力）</a>、<a href="linux_kernel_device.html">Linuxカーネル（デバイス）</a>、<a href="../hardware/hardware2.html">ハードウェア（周辺機器）</a>を参照のこと。</p>
+
+<h2>リアルタイムOS</h2>
+<p>リアルタイムOSについては<a href="../os/rtos.html">リアルタイムOS</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

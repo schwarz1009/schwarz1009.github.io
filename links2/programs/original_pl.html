@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>独自のプログラミング言語 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">AI・自作プログラムの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/programs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>独自のプログラミング言語</h1>
+<p>独自のプログラミング言語のページです。</p>
+<div id="toc"></div>
+<div class="page_links">
+<h2>辿らない言語</h2>
+<p>NoFollowは僕の作ったプログラミング言語です。その名の通り、「辿らないこと」を目標にしています。</p>
+<p>普通、Cのコードはこのように書きます。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+int test(int x, int y){
+    return (x + y);
+}
+int main(void){
+    int x;
+    int y;
+    int a;
+    x = 5;
+    y = 7;
+    a = test(x,y);
+    printf("%d\n", a);
+}
+</pre>
+<p>このC言語のコードでは、testを辿っていくことで、プログラムの理解へと近づきます。</p>
+<p>NFは、こういう時、「プログラマが明示することで、辿らなくても大体のプログラムは分かる」ようにするための言語です。</p>
+<p>例えば、</p>
+<p>int main(void)</p>
+<p>だけでも、このように分析出来ます。</p>
+<p>int: func type;</p>
+<p>main: func name;</p>
+<p>void: func argument;</p>
+<p>そして、それらはdefinitionです。</p>
+<p>ですが、長くなってしまうと、そういうことを、コードを見て少し考えないと、分からなくなってしまいます。</p>
+<p>このNFでは、このような「プログラムをあとで理解する思考コスト」を削減します。</p>
+<p>そして、出来る限り、見ただけで分かるようにします。入門書を読む必要を無くします。</p>
+<p>そういうわけで、NFでは以下のようなプログラムになります。</p>
+<pre>
+@def &main {
+  @head {
+    @type: main
+    @return_type: int
+    @arguments{
+      $$_ { @type: void }
+    }
+  }
+  @body {
+    @def {
+      $x { @type: int }
+      $y { @type: int }
+      $a { @type: int }
+    }
+    @run {
+      $x = 5
+      $y = 7
+      $a = [return] [run] &test {
+        $$value1 = $x
+        $$value2 = $y
+      }
+      [run] &printf {
+        $$format = "%d\n"
+        $$option = $a
+      }
+    }
+  }
+}
+@def &test {
+  @head {
+    @type: method
+    @return_type: int
+    @arguments{
+      $$value1 { @type: int }
+      $$value2 { @type: int }
+    }
+  }
+  @body {
+    @run {
+      [run] &return { [run] &calculation { ($$value1 + $$value2) } }
+    }
+  }
+}
+</pre>
+<p>なんとなく、最後の方のreturnやcalculationを何故引数の名前を明記しないのか、など、課題は残りますが、とりあえず、変数の引数まで名前をきちんと明記するような、そういう言語にしたいと思っています。</p>
+<p>あまり意味がないですが、最近Rustと言う言語に関心があります。自分が見て、こうしたら良いと思うな、などと思うこともあります。技術力をつけて、Rustの改良が出来るようになったら良いなと思っています。</p>
+<div class="edit_date">
+<p>2016.12.15</p>
+</div>
+
+<h2>ロボット</h2>
+<p>この言語を用いて、僕の人工知能のロボットを書いてみました。</p>
+<pre>
+[headers]
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+@def _obj:: {
+  @type: struct
+  @items {
+    $o { @type: int }
+    $n { @type: int }
+  }
+}
+
+@def &action {
+  @head {
+    @type: mathod
+    @return_type: void
+    @arguments{
+      $$[p]p { @type: [p]int }
+      $$[p]obj { @type: [p]struct _obj:: }
+    }
+  }
+  @body {
+[block "action-body"] //インデントを一度解除します。
+
+[run] &case {
+
+  @if "1" : //今回はPython風のインデントです。
+    @match: { ($$*p == 0) }
+    @run { [run] &printf { $$format = "[1] テレビは、つまらない\n"} }
+
+  @if "2" :
+    @match: { ($$*p == 1) }
+    @run { [run] &printf { $$format = "[2] テレビは、面白い\n"} }
+
+  @if "3" :
+    @match: { ($$*p == 2) }
+    @run { [run] &printf { $$format = "[3] パソコンは、つまらない\n"} }
+
+  @if "4" :
+    @match: { ($$*p == 3) }
+    @run { [run] &printf { $$format = "[4] パソコンは、面白い\n"} }
+
+  @if "5" :
+    @match: { ($$*p == 4) }
+    @run { [run] &printf { $$format = "[5] テレビやパソコンは、機械だ。\n"} }
+
+  @if "6" :
+    @match: { ($$*p == 5) }
+    @run { [run] &printf { $$format = "[6] テレビやパソコンは、生き物ではない。\n"} }
+
+  @if "7" :
+    @match: { ($$*p == 6) }
+    @run { [run] &printf { $$format = "[7] テレビって何なのだろう。\n"} }
+
+  @if "8" :
+    @match: { ($$*p == 7) }
+    @run { [run] &printf { $$format = "[8] テレビとパソコンは好きだ。\n"} }
+
+  @if "9" :
+    @match: { ($$*p == 8) }
+    @run { [run] &printf { $$format = "[9] テレビとパソコンは嫌いだ。\n"} }
+
+  @if "10" :
+    @match: { ($$*p == 9) }
+    @run { [run] &case {
+      @if "A" :
+        @match: { ($$obj-&gt;$n == 0) }
+        @run { [run] &printf { $$format = "[10] 比較すると、テレビの方が普通だ。\n"} }
+
+      @if "B" :
+        @match: { ($$obj-&gt;$n == 1) }
+        @run { [run] &printf { $$format = "[11] 比較すると、パソコンの方が普通だ。\n"} }
+
+    }
+
+  @if "11":
+    @match: { ($$*p == 10) }
+    @run { [run] &case {
+      @if "C" :
+        @match: { ($$obj-&gt;$n == 0) }
+        @run {
+          [run] &printf { $$format = "[12] テレビよりパソコンの方が普通かな。\n"}
+          $$obj-&gt;$n = 1
+        }
+
+      @else_if "D" :
+        @match: { ($$obj-&gt;$n == 1) }
+        @run {
+          [run] &printf { $$format = "[13] パソコンよりテレビの方が普通かな。\n"}
+          $$obj-&gt;$n = 0
+        }
+    }
+
+
+  @if "12":
+    @match: { ($$*p == 11) }
+    @run { [run] &case {
+      @if "E" :
+        @match: { ($$obj-&gt;$o == 0) }
+        @run { [run] &printf { $$format = "[14] リンゴが好きです。\n"} }
+
+      @if "F" :
+        @match: { ($$obj-&gt;$o == 1) }
+        @run { [run] &printf { $$format = "[15] みかんが好きです。\n"} }
+    }
+
+  @if "13":
+    @match: { ($$*p == 12) }
+    @run { [run] &case {
+      @if "G" :
+        @match: { ($$obj-&gt;$o == 0) }
+        @run {
+          [run] &printf { $$format = "[16] リンゴより、みかんが好きになりました。\n"}
+          $$obj-&gt;$o = 1
+        }
+
+      @else_if "H" :
+        @match: { ($$obj-&gt;$o == 1) }
+        @run {
+          [run] &printf { $$format = "[17] みかんより、リンゴが好きになりました。\n"}
+          $$obj-&gt;$o = 0
+        }
+    }
+  }
+[/block "action-body"]
+
+  }
+}
+
+@def &main {
+  @head {
+    @type: main
+    @return_type: int
+    @arguments{
+      $$_ { @type: void }
+    }
+  }
+  @body {
+    @def {
+      $p { @type: int }
+      $obj { @type: struct _obj:: }
+    }
+    @run {
+      $p = 0
+      $obj.$o = 0
+      $obj.$n = 0
+
+      [run] &loop {
+        @terms { (1) }
+        @run {
+          $p = [run] &calc { [run] &rand {} % 13 }
+          [run] &action {
+            $$[p]p = &($p)
+            $$[p]obj = &($obj)
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+<p>色々と大変だ。これで読みやすくなったとは言うが、自分が見てもただ無駄に長くなっただけだ。</p>
+<div class="edit_date">
+<p>2016.12.16</p>
+</div>
+
+<h2>マクロテンプレート</h2>
+<p>ちなみに、この言語ではマクロテンプレートと言うものを用意して、ファイル処理やWindowsメッセージループを簡単に見やすく書けるようにします。</p>
+<p>メッセージループの場合：</p>
+<pre>
+@@windows_msg {
+  @msg "button1のクリック" {
+    @event: button_click
+    @select: button1
+    @run: { }
+  }
+
+  @msg "button2のクリック" {
+    @event: button_click
+    @select: button2
+    @run: { }
+  }
+}
+</pre>
+<p>ファイル処理の場合</p>
+<pre>
+@@file_open {
+  @open {
+    @file: &lt;DATAFILE&gt;
+    @path: /home/myname/file
+    @loop {
+      @get { $line = &lt;DATAFILE&gt }
+      @run {
+        [run] &print { $$format =  "$line\n" }
+      }
+    }
+}
+</pre>
+<p>WindowsからPerlまで、何でもこなせる優れた言語が、NFです。</p>
+<p>出来れば、jQueryのような、セレクタに対してイベントが起きた時の処理をするような、そういう言語にしたいです。</p>
+<p>マクロテンプレートは、プラグインのようなものだと思ってください。標準では、メッセージループとファイル処理を搭載して、誰もが手軽に作れるようにします。</p>
+<p>コンパイラはありません。頑張って、C言語に変換出来るようになると良いと思います。誰か、作ってください！</p>
+<div class="edit_date">
+<p>2016.12.17</p>
+</div>
+
+<h2>テキスト処理</h2>
+<p>テキスト処理はこういう風に書く。</p>
+<pre>
+@@text {
+  @file: "file.txt"
+  @block '&lt;p&gt;' to '&lt;/p&gt;' {
+    @rep {'\(.*\):\(.*\)&lt;br&gt;' to '\1-&gt;\2\n'}
+  }
+}
+</pre>
+<p>どこからどこまでの範囲で - @block、何をどのように置換するか - \(.*\) to \1、を簡単に書ける。</p>
+<p>以下のようにすると、最初の1～2行だけを編集できる。</p>
+<pre>
+@@text {
+  @line (1-2) { }
+}
+</pre>
+<div class="edit_date">
+<p>2017.02.07</p>
+</div>
+
+<h2>GUI</h2>
+<p>GUIはこういう風にする。</p>
+<pre>
+@@method_def {
+  @def: { %image: &show/&amp;copy }
+  @def: { %text: &edit/&amp;copy }
+  @def: { %link: &go}
+}
+</pre>
+<p>まず、マウスをクリックした時は、その領域を選択（処理ではなく、選択）する。</p>
+<p>そして、画像なら、showとcopyのメニューを表示する。</p>
+<p>テキストなら、editとcopyのメニューを表示する。</p>
+<p>リンクなら、goのメニューを表示する。</p>
+<p>そして、それらのメニューをクリックした時に、それぞれの処理を行う。</p>
+<p>メインメニューと言うよりは、コンテキスト・メニューに近い。</p>
+<div class="edit_date">
+<p>2017.03.06</p>
+</div>
+
+<h2>奴隷的言語</h2>
+<p>ツイッターに投稿した、奴隷的言語について。</p>
+<p><!--[過去の日記]--><a href="../../diary/2017.03.20.html">2017-03-20</a>より。</p>
+<blockquote class="inyou2">
+<p>僕は、今のところパソコンが人間に忠実に従っているが、これがパソコンが人間に意見するようになると、それですでにパソコンは人間だと思う。何かをする時に、パソコンの方から「こういう風に操作してはいかがですか？」と言ったことを問いかけるようにする。人工知能を作るより、その方が先進的だ。</p>
+<p>ただ、プログラムを描く、と言う中で、いつも関数の実行の側に主導権があるが、これを関数の呼ばれる側に主導権を作っても良い。関数を呼び出した時の処理を、関数の中で変えられるようにし、関数を変えることで全ての処理を変えられるようにする。グローバル・メソッドと言う名前にしても良い。</p>
+<p>自分でも、グローバル・メソッドが何を意味しているのか、良く分かっていない。要は、実行の主導権を呼び出される側に与える、と言うことだから、</p>
+<pre>
+gm(3,4);
+</pre>
+<p>とするのではなく、</p>
+<pre>
+[id:1]gm();
+</pre>
+<p>として</p>
+<pre>
+gm(void){
+  if(id==1) action1(3,4);
+}
+</pre>
+<p>とするのだと思う。</p>
+<p>分からない。書いている本人も分かっていない。本当は、ただ従うだけではなく、相手から注文をつけてくるような、そういう言語を作りたかった。</p>
+<pre>
+int calc(int x, int y){
+  [method1: x=3;y=4;]
+  [method2: x=2;y=1;]
+  return x+y;
+}
+
+int method1{
+  calc[method1](?);
+}
+
+int method2{
+  calc[method2](?);
+}
+</pre>
+<p>とする。</p>
+<p>ある意味、相手によって言うことを変える、二枚舌のようなプログラミング言語になった。</p>
+<p>僕は、もう少し改良して、人間が呼び出すコードを関数の方で変えられるようにしたい。</p>
+<pre>
+int main(){
+  [action(block1)]
+  printf("\n");
+  [action(block2)]
+}
+
+void action(){
+  [block1]{gm1();}
+  [block2]{gm2();}
+}
+</pre>
+<p>これで、呼び出し元にあるblock1とblock2の宣言場所で、action()関数を実行し、gm1()関数とgm2()関数を関数の中で実行することが出来る。</p>
+<p>人間みたいになった。今までは人間が主導権を持って関数を実行していた。人間がコマンドを打ち込む感覚だ。今からは、関数が主導権を持つ。コマンドの方が人間がやることを決める、と言う感覚だ。</p>
+<p>ただ、それならもっと違う形態で、main()関数の中にあるブロックを関数から実行出来る。</p>
+<pre>
+int main(){
+  [action(): test(int x) {printf("%d", x); } ]
+}
+
+void action(){
+  test(2);
+}
+</pre>
+<p>となる。</p>
+<p>要は、パソコンの方にコマンドを打ってほしい。その中でやることは自分が決める。そういう、「奴隷的言語」がこの言語だ。</p>
+</blockquote>
+
+<div class="edit_date">
+<p>2017.03.20</p>
+</div>
+
+<h2>MetaC</h2>
+<p>ツイッターに投稿した、構文を関数として実装することで、自由に構文を定義することの出来るメタ言語「MetaC」について。</p>
+<p><!--[過去の日記]--><a href="../../diary/2017.04.03.html">2017-04-03</a>より。</p>
+<blockquote class="inyou2">
+<p>僕は、C言語で言うifやforなどの文で、特に{}で囲まれた部分を変数や引数とすることで、C言語の構文を少なくし、ユーザーが自由に定義出来るようにし、ifやforも関数で実現することが出来ると思う。それは、エレガントで美しい。</p>
+<p>ある意味、言語的仕様を少なくすることで、構文を関数の範疇として、全てを関数にすることが出来る。あるいは、関数でもなく、全てをブロック的実行とすることも出来る。ある意味、代入や演算も何かもっと根源的なものとして、実装出来るかもしれない。</p>
+<p>オブジェクト指向では全てをオブジェクトにするが、それは僕はあまり良い実装ではないような気がする。()と{}の違いを無くするならLispのようにも出来る。Rubyのようにしても良い。if () {}をもっと変えることで、if () {} {} {}のようにも出来るのだ。</p>
+<p>例えば、spifと言う関数を宣言して、if(){}とする代わりに、spif(){}(){}と出来るかもしれない。そこでどんな風に処理を実行するかは、プログラマの自由だ。</p>
+<p>ある意味、この言語はNFと融和して、「言語を作る言語」にすると面白い。Java、C++、Perl、Ruby、PHPなど、全部の言語をこの言語の拡張として実装する。そして、誰でも外部の人間が自由に言語を作れるようにする。spifだけではなく、newを改良してspnewにも出来る。</p>
+<p>例えば、</p>
+<pre>
+spnew(Object_name, Class_name).Function_name(x,y,z).{print;save;}
+</pre>
+<p>のように、ありえないほど高度で複雑怪奇な言語を作れる。ただ、全てを関数として実行するだけで、構文を独自に定義し、メタ言語を作れる。</p>
+<p>むしろ、</p>
+<pre>
+Class::Object.Function(values){Messages(Events){Code}}
+</pre>
+<p>と言う風にするのは、美しい。そういう風に、関数を定義すると良いかもしれない。</p>
+<p>例えば、</p>
+<pre>
+View::v.list(page1){open(clicked(menu1)){new_open(this)};close(clicked(menu2)){kill(this)};}
+</pre>
+<p>と言うコードが書ける。</p>
+<p>頑張れば、GUIのイベント駆動型プログラムを一行で書くことも出来るだろう。メタ言語のCだから、名前は「MetaC」とする。</p>
+</blockquote>
+<div class="edit_date">
+<p>2017.04.03</p>
+</div>
+
+<h2>マルチスレッド言語</h2>
+<p><!--[過去の日記]--><a href="../../diary/2017.04.05.html">2017-04-05</a>より。</p>
+<blockquote class="inyou2">
+<p>なんとなく、こんな並列処理言語があっても良い。</p>
+<pre>
+multi-thread {
+    while(1){printf("1\n");}
+} {
+    while(1){printf("2\n");}
+}
+</pre>
+<p>これを、ifやforの拡張として、関数として実現すると、面白い。</p>
+</blockquote>
+<div class="edit_date">
+<p>2017.04.05</p>
+</div>
+
+<h2>オペレーション言語</h2>
+<p>オペレーション言語と言うものを作ってみた。プログラミングを技術や計算ではなく、操作と考える。</p>
+<pre>
+file_open ($file) {
+  @name: 'text.txt';
+  %message(1) 'convert' {
+    @run: { &amp;regex ($file, 'right' to 'left') };
+  }
+  %message(2) 'print' {
+    @before: { &amp;display ( 'Document is coverting from "right" to "left"' ) };
+    @after: { &amp;display ( 'end' ) };
+    @main: { &amp;loop { 'print $1', (&amp;read_line_next($file)) }; }
+  }
+}
+file_close($file);
+</pre>
+<p>もっと、いかにも「メッセージを送ってオペレーションするぞ」と言った言語にしたい。</p>
+<div class="edit_date">
+<p>2017.05.09</p>
+</div>
+
+<h2>文章の書式と変数の型・オブジェクト</h2>
+<p>文章の書式を指定したい時は、以下のようにする。</p>
+<pre>
+string:"text\n" //textに改行を加えた文字列
+string_noformat:"text\a\a" //text\a\aと言う文字列（\が付けられても特殊文字と解釈しない）
+int:3 //数字の3
+string:3 //文字列の3
+</pre>
+<p>また、オブジェクト指向については、「型」と「オブジェクト」を同一のものと見なす。</p>
+<p>int型は即座にintオブジェクトであり、WindowForm型は即座にWindowFormオブジェクトである。</p>
+<p>そして、型は継承やカプセル化の出来るオブジェクトであると同時に、コンパイルする時の静的な型チェックもすることが出来る。</p>
+<p>また、オブジェクト指向として、プロパティ操作指向を行う。全てはメソッドを呼び出した時、そのクラスの「内部処理」として操作を行う。</p>
+<p>これにより、CORBAのような万能コンポーネントを一言語的に実現することが出来る。</p>
+<p>printを行った時にも、setやgetを行って変数を変えた時にも、クラスとオブジェクトの内部で処理を行う。</p>
+<p>そのために、それぞれに処理が分散するのではなく、それぞれのオブジェクトの関係性として、メッセージの伝達をすることが出来る。</p>
+<p>そうすることで、コンポーネントを作りやすくする。</p>
+<p>Adobe Illustratorのようなソフトウェアを作る時に、何かを「伝える側」はメッセージを送るだけにし、「伝わった側」はその時その時の処理を単純に行う。</p>
+<p>その上で、「伝える側」が「高度に伝えること」も可能にする。そのように、「アーキテクチャ指向」のようなプログラミングが可能になる。</p>
+<pre>
+$filename = string_path:"text.txt";
+@def: window::&open (FILE: $$file) { 処理 }
+@def: window::&view (string: $$output) { 処理 }
+@def: window::&update (string: $$output) { 処理 }
+@def: window::&calc (int: $$int) { 処理 }
+$w = window: new window{};
+@@messages =&gt; $w {
+  [run] &open{ $$file = (FILE)$filename};
+  [run] &view{ $$output = string:"hello"};
+  [run] &update{ $$output = string:"world"};
+  [run] &calc{ $$int = int:2+3};
+}
+@def_ex window_ex @ex_from window;
+@def_ex window_ex:: @ex_method:&open (FILE: $$file) { 処理 };
+$w2 = window_ex: new window_ex{};
+@@messages =&gt; $w2 {
+  [run] &open { $$file = (FILE)string_path:"image.jpg"};
+}
+</pre>
+<div class="edit_date">
+<p>2017.07.10</p>
+</div>
+
+<h2>新言語「Emerald」</h2>
+<p>こんな言語を作ってみた。</p>
+<pre>
+shared_datas ClassType {
+  int num;
+  String str;
+}
+
+method func1 (val int x, ref String y) for ClassType @ct {
+  print(x);
+  y = "text";
+  @ct.num = x;
+  @ct.str = y;
+}
+
+method func2 (ref ClassType ct) {
+  func1 (42, "format") using ct;
+}
+
+method main(val int argc, val String[] argv) {
+  ClassType ct = new ClassType;
+  String str = "document";
+  func1(32, str) using ct;
+  func2(ct);
+}
+</pre>
+<p>継承や委譲、インターフェースの実装もできるようにしたい。</p>
+<div class="edit_date">
+<p>2018.11.05</p>
+</div>
+
+<h2>宣言、代入、変数、関数をエレガントに</h2>
+<p>僕は、プログラミング言語の基本は、宣言、代入、変数、関数だと思う。これをエレガントに書きたい。</p>
+<p>たとえば、クラスの宣言は以下のように書ける。</p>
+<pre>
+Test = class;
+Test.datas = {
+  @num = int;
+  @str = String;
+};
+Test.methods = {
+  func1 = func (return int) (args val int x, ref String y) {
+    print(x);
+    y = "text";
+    @num = x;
+    @str = y;
+    return (x * 2);
+  }
+};
+test = (Test) new Test;
+str = (String) "document";
+print(test.func1());
+</pre>
+<p>頭を柔らかくして考えること。ある意味、宣言と代入は同じものであると考えることができる。変数や関数も、一種の宣言であり、代入であると考えられる。</p>
+<p>このコードはJavaScriptのプロトタイプチェーンに近いかもしれない。上の方のコードはDelphiやAdaに近い。</p>
+<div class="edit_date">
+<p>2018.12.09</p>
+</div>
+
+<h2>新しい言語Gold</h2>
+<p>こんな言語はどうか。</p>
+<pre>
+main.start();
+
+  data1 is data named XAndY = { int x; int y; };
+  
+  data1.new();
+  
+  func1 is func (d is data as XAndY) = {
+    print("{0}, {1}", d.x, d.y);
+  }
+  
+  func1.run(-d=data1);
+  
+  data.end();
+
+main.end();
+</pre>
+<p>メソッドの始まりと終わりであるstart();とend();は、他のプログラム言語である{}に相当する。この言語では{}すら関数として書く。</p>
+<p>そして、変数はnew();とend();でインスタンスを作る。上のstart()とend()と全く同じ仕組みであり、関数のend()と変数のend()を統一的に記述できる。</p>
+<p>ガーベッジコレクションは行わない。その代り、ヒープ領域をリアルタイムで監視する「ヒープ監視ツール」を作る。これをモニタリングすることで、メモリリークを「デバッガのように」監視できるようにする。</p>
+<p>関数に引数を与える時は、UNIXのコマンドのように-d=dataとする。これにより、可読性が向上する。</p>
+<p>上のコードはstart(), end()と{}が混在しているが、これをどうするかが課題である。</p>
+<p>また、この言語では、単なる関数だけではなく、組み込みの命令文を多くサポートする。シェルスクリプトのようなものに近い。ifやforなどは、この組み込みの命令文で実現する。よってifではなく%ifと表記する。また、ポインタはpointerで宣言する。ただしアロー演算子（-&gt;）は使わない。</p>
+<pre>
+func1 is func(d is pointer to data as XAndY) = {
+    %if (d.x == d.y) {
+        print("x = y");
+    }
+}
+</pre>
+<p>returnは関数定義に記述する。また、dataは省略できる。データ構造体は-d.x=1, -d.y=2のように、引数や代入で使う場合、Perlのリストのように要素の羅列として書くことができる。</p>
+<pre>
+func2 is func(d is pointer as XAndY) return as int = {
+    return d.x + d.y;
+}
+
+c = func2.run(-d.x = 1, -d.y = 2);
+print("{0}", c);
+</pre>
+<p>関数定義は単なる代入であるため、変数に格納して持ち運んだり、別の関数の引数に渡すことができる。実行はfunc1.run();とする。func1();では実行できない。</p>
+<div class="edit_date">
+<p>2019.02.21</p>
+</div>
+
+<h2>UNIXのオプションやsed, viのアドレス指定を取り入れた言語</h2>
+<p>僕は、UNIXのオプションを模した「オプション引数」や、sed, viのアドレス指定を取り入れた言語を作れないかと思う。</p>
+<p>まず、通常の関数は以下のように記述する。</p>
+<pre>
+function grep(text: string, pat: pattern): string {
+    ...
+}
+</pre>
+<p>ここで、改行文字を選択できるオプション-end_linesをつける場合、オプション引数という機能を使う。オプション引数は「-」を先につける。</p>
+<pre>
+function grep(text: string, pat: pattern, -end_lines: string): string {
+    ...
+}
+</pre>
+<p>オプション引数は、「指定しても指定しなくてもよい」「指定する場合は必ず引数名をつける」という特徴がある。</p>
+<p>このgrep()関数は以下のように呼び出す。</p>
+<pre>
+str:string = grep("test document\ntest document2\n", /test/, -end-lines="\r\n");
+</pre>
+<p>また、sedやviのアドレス指定のように、「パターンマッチングで選択されたこの行からこの行までを別のパターンで置換する」ということができるようにする。</p>
+<p>たとえば、&lt;pre&gt;から&lt;/pre&gt;の中のstringをnumberに置換するには、</p>
+<pre>
+str:string = replace(s/string/number/g, -select=range/&lt;pre&gt;\(.*?\)&lt;/pre&gt;/\1/sg);
+</pre>
+<p>となる。ここで独自の正規表現コマンドrange///を使っている。これは「&lt;pre&gt;\(.*?\)&lt;/pre&gt;にマッチングした中で、\1の中身を編集の対象とする」という意味。</p>
+<p>この言語は、コンパイラを独自に作るのではなく、既にあるコンパイラの機能を組み合わせて、ライブラリとして実現するといいかもしれない。</p>
+<div class="edit_date">
+<p>2021.08.15</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

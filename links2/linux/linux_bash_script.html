@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux シェル（Bash）２（シェルスクリプト） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux シェル（Bash）２（シェルスクリプト）</h1>
+<p>Linuxのシェル（Bash）に関する世界観２（シェルスクリプト）です。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_bash.html">Bash（１．シェル）</a></li>
+<ul>
+<li><b>２．シェルスクリプト</b></li>
+<li><a href="linux_bash_advanced.html">Bashのさまざまな機能</a></li>
+</ul>
+</ul>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>シェルスクリプトの使い道</h1>
+<h2>簡単な定型処理やバッチ処理、コマンド行のメモに使える</h2>
+<p>シェルスクリプトは、簡単な定型処理やバッチ処理、そしてコマンド行のメモに使えます。</p>
+<p>たとえば、ホームページのデータを更新して、gitコミットし、lftpでサーバーに送信し、rsyncで同期し、tarでアーカイブしてコピーすると言った具合です。</p>
+<p>行をたくさん書く必要は必ずしも無く、コマンドのヒストリーをカーソルキーで参照するように、「数行だけ書かれたシェルスクリプト」を作って、それをbashから実行すれば、まるでWindowsでショートカットアイコンをダブルクリックするように、ひとつのアクションでコマンドを実行できます。シェルでは「./hoge.sh」と実行するか、GNOMEなどではダブルクリックで実行できます。</p>
+<p>lftpについては専用のスクリプト記法があるのでそれを参照すれば良いでしょう。<a href="../network/lftp.html">lftp</a>を参照のこと。他のUNIXコマンドについてはただそのコマンドを一行に書けばそれで実行できます。変数や条件分岐、繰り返しや関数呼び出しなどもできます。特に引数を指定してそれを変数として使えるようにスクリプトを書けば、状況によって別の処理を実行させられます。</p>
+<p>また、システムの内部では、bashやX11の初期化スクリプトや、デーモンやサービスを適切に実行させるRCスクリプト（SysV initの場合）でシェルスクリプトが使われているほか、automake/autoconfでもソフトウェアのコンパイル・インストールの際にシステムの構成をチェックして移植性を高めるためにシェルスクリプトが多用されています。またGentoo LinuxのPortageはPythonで書かれていますが、それぞれのパッケージのビルドやインストール情報を記述したebuildファイルはbashで書かれています。</p>
+<p>ファイルのバックアップなどは、きちんと端末で入力するとさまざまなコマンドを覚えなければなりませんが、面倒ならシェルスクリプトに一度書いてしまいましょう。何度でも手軽に使えます。シェルスクリプトの利用は強制ではないので、使いたいコマンドだけ好きに使ってください。</p>
+<p><a href="linux_unix_admin.html">UNIXシステム管理（システム情報と設定）</a>や<a href="linux_daemon.html">initとデーモン</a>や<a href="linux_unix_cron.html">UNIXシステム管理（cron）</a>なども参照のこと。</p>
+
+<h2>シェルスクリプトは上手く使おう</h2>
+<p>シェルスクリプトは、上手く使いましょう。</p>
+<p>たとえば、大事なファイルをUSBハードディスクにrsyncで同期しているとします。この時、対話型シェルでrsyncをかけると、コマンド行を間違えるかもしれません。ファイルが多いと、大変なことになります。</p>
+<p>こうした時に、「間違えることのないようにシェルスクリプトに記述して、それを実行する」といったことができます。</p>
+
+<h2>コマンドで実行できることはシェルスクリプトに書ける</h2>
+<p>シェルスクリプトは、シェルのスクリプトです。よって、シェルの中でコマンドで実行できることは、シェルスクリプトに書いて実行できます。「シェルにおけるコマンド実行は、シェルスクリプトに書くのと同じ」であるため、「シェルで自分が行うことは全てスクリプトに書ける」と言えます。</p>
+<p>たとえば、メールの送信は、sendmailコマンドをシェルスクリプトに記述することで可能です。</p>
+<ul>
+<li><a href="https://qiita.com/tiida26/items/3a2486a75132e159e4ea">メールを送信するシェルスクリプト - Qiita</a></li>
+<li><a href="https://qiita.com/richmikan@github/items/0aea653765e485e16945">シェルスクリプトでメール送信、「さようならnkf」編 - Qiita</a></li>
+</ul>
+<p>応用すれば、「何かのタイミングでメールを送信する」といったことも可能です。たとえばcronデーモンでスクリプトを定期実行したり、サーバーのCGIからエラーが発生した時にスクリプトを実行して、異常を感知した時にメールを管理者に送信する、といった用途が考えられます。</p>
+
+<h2>シェルスクリプトはUNIX哲学の体現</h2>
+<p>UNIXには、「システムの力はプログラム単体ではなく、複数の小さなプログラムの関係から生まれる」という基本哲学があります。</p>
+<p>そして、シェルスクリプトはまさに、このUNIX哲学の体現です。</p>
+<p>すなわち、ひとつのプログラムだけを使うのではなく、プログラムそれぞれをシェルスクリプトの中で、「どのように組み合わせるか」ということを記述し、その組み合わせられた結果として、より柔軟に、複雑に、高度に、必要な場合に適した実行内容を実行するのです。</p>
+<p>このようにすることは、自動化といった点からも強力です。すべてのコマンド入力を、手作業で入力する必要はありません。シェルスクリプトにすべてのコマンド列を事前に書いておいて、そのスクリプトを自動的に、たとえばcronから定期的に実行することができるのです。</p>
+<p>シェルスクリプト以外にもviやemacsからはそれをひとつの環境であるかのように、UNIXコマンドをターミナルのように実行することができます。基本的に、自動化する場合はシェルスクリプト、インタラクティブに操作・編集して使う場合はviやemacs、という使い分けをするといいでしょう。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=bash">bash - YouTube</a></li>
+</ul>
+<p>以下は英語の勉強にもなります。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=PNhq_4d-5ek">Bash Scripting Tutorial for Beginners - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>シェルスクリプトの基本</h1>
+<h2>変数と関数</h2>
+<p>変数の例：</p>
+<pre class="prettyprint">
+#!/bin/bash
+HOGE=Assy
+echo $HOGE
+</pre>
+<p>シェルに引数を与えた場合、$1, $2, $3のように引数の値にアクセスできる。</p>
+<p>関数の例：</p>
+<pre class="prettyprint">
+HOGE=Assy
+function hoge() {
+    echo "My name is $HOGE."
+}
+</pre>
+<p>functionは省略可能。</p>
+<pre class="prettyprint">
+HOGE=Assy
+hoge() {
+    echo "My name is $HOGE."
+}
+</pre>
+<p>"～"とダブルクォーテーションでくくった場合は$の変数展開がされる。'～'とシングルクォーテーションでくくった場合は変数展開がされない。</p>
+<p>変数HOGEを上手く使うことで、以下のようなシェル入力ができる。</p>
+<pre class="prettyprint">
+$ HOGE=Assy
+$ hoge(){
+&gt; echo "My name is $HOGE."
+&gt; }
+$ hoge
+My name is Assy.
+$ HOGE=Schwarz
+$ hoge
+My name is Schwarz.
+</pre>
+<p>また、関数の引数はスペース（空白）によって引数と引数の間を区切って渡し、関数の中から$1, $2, $3のようにアクセスできる。</p>
+<pre class="prettyprint">
+#!/bin/bash
+hoge() {
+    echo "My name is $1, and your name is $2."
+}
+hoge Assy Schwarz
+</pre>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="http://www.k4.dion.ne.jp/~mms/unix/">UNIX入門 ～初心者のためのUNIX/Linux講座～</a> (<a href="https://web.archive.org/web/20130625052944/http://www.k4.dion.ne.jp/~mms/unix/">webarchive</a>)</li>
+</ul>
+
+<h2>Bashの記法</h2>
+<p>BashはCシェルと違い独特の記法がある。</p>
+<p>たとえば、if文やwhile文は</p>
+<pre class="prettyprint">
+if [ 式 ]; then
+    ～
+fi
+</pre>
+<p>や</p>
+<pre class="prettyprint">
+while [ 式 ]; do
+    ～
+done
+</pre>
+<p>のようにブラケットを使い、case文は閉じ括弧を使って</p>
+<pre class="prettyprint">
+case $HOGE in
+    "f") echo Foo;;
+    "b") echo Bar;;
+esac
+</pre>
+<p>のように用いる。</p>
+<p>比較式も特殊であり、</p>
+<pre class="prettyprint">
+数値1 -eq 数値2
+</pre>
+<p>のように独自の短縮されたキーワードを使う。</p>
+<p>ifブロックを閉じるのはfi、caseブロックを閉じるのはesac、for/whileブロックはdo～doneで記述するなど、訳が分からない。</p>
+<p>まるでジョークのようだが、むしろbashで操作中にコマンドのような形で制御を行いたい、という視点から見ると逆にこれが良いのかもしれない。</p>
+<p>コマンドでls -aを打つ感覚で、</p>
+<pre class="prettyprint">
+if [ $HOGE = $FUGA ]; then
+    echo "Hoge and Fuga is same."
+fi
+</pre>
+<p>とか、</p>
+<pre class="prettyprint">
+if [ $HOGE -eq 0 ]; then
+    echo "Don't use zero."
+fi
+</pre>
+<p>のように、「コマンドラインのコマンド行ライクなスクリプト記法」であると言える。</p>
+
+<h2>活用例・参考文献</h2>
+<p>以下はBashによるシェルスクリプトの活用例。制御文、ファイル読み込み、while read line、演算や比較、関数などについての方法が参照できる。</p>
+<ul>
+<li><a href="http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-7.html">BASH Programming - Introduction HOW-TO: Loops for, while and until</a></li>
+<li><a href="https://www.server-memo.net/shellscript/read-file.html">【シェルスクリプト】ファイルの中身を一行ずつ読み込む方法 | server-memo.net</a></li>
+<li><a href="https://server.etutsplus.com/sh-while-read-line-4pattern/">シェルスクリプトでよく使われる while read line 4パターン - eTuts+ Server Tutorial</a></li>
+<li><a href="https://web.archive.org/web/20130625052944/http://www.k4.dion.ne.jp/~mms/unix/shellscript/shell_calc.html">シェルスクリプト入門 [演算・比較] - UNIX入門 ～初心者のためのUNIX/Linux講座～</a></li>
+<li><a href="https://qiita.com/kaw/items/034bc4221c4526fe8866">シェルスクリプトで関数を利用する - Qiita</a></li>
+</ul>
+
+<h1>応用</h1>
+<h2>コマンド置換と数学的演算</h2>
+<p>コマンド置換は$()あるいは``で行える。また、二重かっこ(())は数学的な演算に使える。</p>
+<ul>
+<li><a href="https://fedoramagazine.org/bash-shell-scripting-for-beginners-part-1/">Bash Shell Scripting for beginners (Part 1) - Fedora Magazine</a></li>
+</ul>
+
+<h2>標準出力と標準入力</h2>
+<p>標準出力はecho、標準入力はreadで行える。パイプやリダイレクトも使用できる。</p>
+<ul>
+<li><a href="https://fedoramagazine.org/bash-shell-scripting-for-beginners-part-2/">Bash Shell Scripting for beginners (Part 2) - Fedora Magazine</a></li>
+</ul>
+
+<h2>文字列の比較</h2>
+<p>ちなみに、二重ブラケット[[]]は文字列の比較に使える。</p>
+<ul>
+<li><a href="https://fedoramagazine.org/bash-shell-scripting-for-beginners-part-3/">Bash Shell Scripting for beginners (Part 3) - Fedora Magazine</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>途中で失敗しなければ連続した処理を実行するために使える</h2>
+<p>Bashのようなシェルスクリプトは、連続した処理を実行するために使えます。</p>
+<p>ですが、それはあくまで、途中で失敗しなければです。</p>
+<p>たとえば、僕は先日、少しずつ増分で増えていく同名の複数のファイルについて、ひとつの場所にコピーしながらgitでコミットし続ける、ということを行いました。</p>
+<p>これは、シェルスクリプトが書ける人ならば、全部自動でできたかもしれません。</p>
+<p>ですが、途中の処理で失敗してしまうのが怖かったため、僕はこの作業を手動でファイルマネージャから行いました。</p>
+<p>今書くとしたら、以下のようになるかもしれません。</p>
+<pre class="prettyprint">
+TEXTS=/home/assy/hoges
+GIT=/home/assy/git_hoge
+FILE=hoge.txt
+
+copy_git() {
+    cd $TEXTS
+    cd 2023.$1.$2
+    cp $FILE $GIT
+    cd $GIT
+    git commit -m "2023.$1.$2"
+}
+
+copy_git 01 01
+copy_git 01 02
+copy_git 01 03
+copy_git 01 04
+# 以下続く
+</pre>
+<p>ですが、これが本当にきちんと動くかどうかは不安なところです。</p>
+<p>シェルスクリプトを書くということは、本当はとても怖い作業です。慣れない人間にはさせるべきではないと思います。</p>
+<div class="edit_date">
+<p>2023.04.06</p>
+</div>
+
+<h2>//は/と解釈される</h2>
+<p>かつてツイッターで<a href="https://twitter.com/Hayao0819">山田ハヤオ (@Hayao0819)</a>さんに教えてもらったこととして、Bashでは、二重のスラッシュ//はひとつのスラッシュ/と解釈されます。</p>
+<p>そのため、</p>
+<pre class="prettyprint">
+ASSYHOME=/home/assy/
+cd $ASSYHOME/hoge/
+</pre>
+<p>のようなコードが動作します。cd /home/assy//hoge/が問題なく解釈されて/home/assy/hoge/にcdできます。</p>
+<ul>
+<li><a href="https://twitter.com/Hayao0819/status/1651945277887221762">X - @Hayao0819のスレッド</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.09.22</p>
+</div>
+
+<h2>壊れるかもしれないことは仮想マシンのテスト環境で試そう</h2>
+<p>実際、Bashのシェルスクリプトを実行する際に、「壊れるかもしれないから怖い」と思う人には、最近は仮想マシンという優れ物があります。</p>
+<p>すなわち、壊れるかもしれないことをやる前に、テスト用の仮想マシンを作ってそのテスト環境でまず試して、壊れた時は仮想マシンごと消して新しい仮想マシンを作るということができます。</p>
+<p>なので、壊れるかもしれないことをやる前に、仮想マシンを作ってその環境の中で行い、もし成功した時はその中から必要なデータを取り出してそれを使うようにすると、比較的安全だと思います。</p>
+<p>後日注記：Dockerをわざわざ使わなくても、処理するデータあるいは処理前のデータを一時的なディレクトリにコピーしてから処理をするとか、gitのようなバージョン管理システムを使うとか、元のデータをtarでアーカイブしてバックアップするとか、やりようはいくらでもあります。いきなり本番環境のデータを間違えて処理して、システムをぶち壊すという失敗が絶対にないようにしましょう。Windowsを使うのであっても同じで、僕はサクラエディタでgrep置換を行う際に、間違えた時はバックアップから復旧できるようにしています。</p>
+<p><a href="../virt/docker.html">Docker</a>や<a href="find.html">find</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.05.22</p>
+<p>2024.05.25編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Cシェル</h2>
+<p>ビル・ジョイによるCに近い記法のCシェルについては<a href="csh.html">Cシェル</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>Bashシェルスクリプト</h2>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_bash/man1/bash.1.html">Man page of BASH</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0202/05/news001.html">bashで始めるシェルスクリプト基礎の基礎 (1/2) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/shellsindex.html">連載記事 「ステップ・バイ・ステップ・シェルスクリプト」 - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/smart_shell.html">連載記事 「スマートな紳士のためのシェルスクリプト」 - @IT</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

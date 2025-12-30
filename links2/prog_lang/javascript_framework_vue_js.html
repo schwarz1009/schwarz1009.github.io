@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Vue.js関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>Vue.jsの世界観</h1>
+<p>Vue.jsによるプログラミングに関する世界観です。</p>
+<p><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Vue.js</h1>
+<h2>学習コストが低く、テンプレートに使える</h2>
+<p>Vue.jsの特徴は、学習コストが低く、HTMLのテンプレートに使えること。</p>
+<p>最初のとっかかりが分かりやすく、簡単に習得出来る。しかしながら、ビューをHTMLで作る時に、「このようにしたいのだけど素のHTMLではたくさんの場所に重複する内容を記述しないといけない」といった時に、JavaScriptとVue.jsを使うことで、まるでWikipediaのテンプレートを書いているように、簡単に部品化やコンポーネント化ができる。</p>
+<p>導入は、MathJaxなどと同じようにscriptタグで読み込むか、あるいはnpmなどを使えば導入できる。ホームページを作る上で、「素のHTMLではやりづらい」といった時にVue.jsを使うことができる。</p>
+
+<h2>リアルタイムなユーザーの操作の反映</h2>
+<p>Vue.jsのようなJavaScriptフレームワークを使う主な目的として、画面表示やデータの変更を、ユーザーによる入力や操作に対して、リアルタイムに反映できるということがあります。</p>
+<p>従来のサーバーサイドによるWebの開発では、このようなユーザーの操作の画面やデータへの反映は、どうしても遅れがちになります。</p>
+<p>Vue.jsを使うことで、ユーザーの操作に対してインタラクティブにプログラムが対応することができます。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.07.04</p>
+</div>
+
+<h2>Vue.jsのインストール</h2>
+<p>以下のようにnpmからインストールできる。npm自体はNode.jsをインストールすれば利用できる。</p>
+<pre>
+npm install vue
+</pre>
+<p>あるいは、HTMLの内部で使う場合、CDNを使うこともできる。</p>
+<pre class="prettyprint">
+&lt;script src="https://npmcdn.com/vue/dist/vue.js"&gt;&lt;/script&gt;
+</pre>
+
+<h2>Vue.jsの基本</h2>
+<p>Vue.jsでは、Vueというオブジェクトを使って、データと画面のマッピングを行う。Vueの引数に渡すelが対応するHTMLのタグを示し、dataがそのタグに渡すデータとなる。波括弧二つの{{ msg }}という記述は、Mustasheタグと呼ばれ、データをHTMLに埋め込むために使う。
+<p>HTMLの例：</p>
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;あなたのお気に入り情報&lt;/title&gt;
+    &lt;script src="https://npmcdn.com/vue/dist/vue.js"&gt;&lt;/script&gt;
+    &lt;script src="vue_main.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload="vue_active();"&gt;
+    &lt;h1&gt;あなたのお気に入り情報&lt;/h1&gt;
+    &lt;div id="vue_information"&gt;
+        &lt;p&gt;あなたの名前は{{ name }}さんです。&lt;/p&gt;
+        &lt;p&gt;あなたの好きなOSは{{ favorite_os }}です。&lt;/p&gt;
+        &lt;p&gt;あなたの好きなプログラミング言語は{{ favorite_proglang }}です。&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>スクリプトの例（vue_main.js）：</p>
+<pre class="prettyprint">
+function vue_active(){
+  new Vue({
+    el: '#vue_information',
+    data: {
+      name: 'Assy',
+      favorite_os: 'Gentoo Linux',
+      favorite_proglang: 'Delphi'
+    }
+  })
+}
+</pre>
+<p>注記：この記述は古いバージョンであるVue.js ver.2系列の記法です。最新版のver.3系列では異なる記法となります。</p>
+<p>（<a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考に執筆しました。）</p>
+
+<h2>Vue.jsでのプログラミング</h2>
+<p>Vue.jsでは、v-on（たとえばv-on:click）でメソッドを実行したり、v-bind（たとえばv-bind:class）でクラスやスタイルを編集したり、v-model（v-onとv-bindをまとめて設定する）でフォームを構築したりできる。また、コンポーネントを使うことで、独自のタグを使って固定的なHTMLを挿入できる。またv-ifやv-forなどを使うことでサーバーサイドの処理の代わりにもなる（v-ifとv-forは同時には使うべきではない）。</p>
+<p>また、propsが便利で、テンプレートの一部の記述だけを変えるためにpropsが使える。たとえばリンクの文字列だけを変えて固定的なHTMLを任意の位置に挿入できる。</p>
+<p>Vue.jsは学習コストが少なく、簡単に習得できる。以下のチュートリアル動画で、最新のVue.js 3の基本を学ぶことができる。（上記は以下の動画を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=wlCwyouRbtE">Vue.js入門講座【最新のバージョン3対応】基礎から学ぶVue js 3 - YouTube</a></li>
+</ul>
+
+<h2>アジア圏では流行っているが、世界ではReactに負けている</h2>
+<p>Vue.jsは、アジア圏では流行っていますが、世界ではReactに負けています（2021年1月現在）。</p>
+<p>日本などのアジア圏だけを見ると、Vue.jsはReact並みに使われていますが、世界ではReactに圧倒的に負けています。</p>
+<p>まだ決着がついたわけではありませんが、今後もTypeScriptとReactを学んでおけば何とかなると思います。</p>
+<p>以上は以下の動画を参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=1Jk-Lw366gI">2021年、Web/IT業界のトレンド7選！(DX, NoCode, TypeScript, Flutter...) - YouTube</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+</ul>
+
+<h1>関連技術</h1>
+<h2>Nuxt.js</h2>
+<p>Vue.jsで作られているNuxt.jsは、Next.jsのようなフレームワークで、サーバサイドレンダリング（SSR）ができる。</p>
+<p>後日注記：実際はNuxt.jsは単なるSSRではなく、さまざまな機能のあるフレームワーク。Vue.jsを単体で使うことは少なく、多くがNuxt.jsを使ってVue-routerやVuexを用いて使います（もちろんデフォルトでSSRが使えるため処理も高速になる）。そしてFirebaseなどと組み合わせます。</p>
+
+<h2>Vuex</h2>
+<p>Vue.js向けの状態管理のためのフレームワーク。</p>
+<p><a href="state.html">状態</a>も参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/kahirokunn/items/7001fe934bbaf08d3033">2018年Vue.jsとVuexを使ってる人には必ず知っていてほしい開発やメンテナンスの際に役立つ設計とTipsとサンプルコード - Qiita</a></li>
+</ul>
+
+<h2>Firebase</h2>
+<p>FirebaseはmBaaSというシステムで、バックエンドの永続化や認証などを補うために使う。Nuxt.js + Firebaseの組み合わせでシステムを開発することが多い。</p>
+<p><a href="../db/firebase.html">Firebase</a>も参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/potato4d/items/cfddeb8732fec63cb29c">【v2対応】Nuxt.jsとFirebaseを組み合わせて爆速でWebアプリケーションを構築する - Qiita</a></li>
+</ul>
+
+<h2>SPA</h2>
+<p>SPAはシングルページアプリケーションの略。単一のページでアプリケーションを提供する。</p>
+<p><a href="ajax.html">Ajax</a>も参照のこと。</p>
+<ul>
+<li><a href="https://digitalidentity.co.jp/blog/creative/about-single-page-application.html">SPA(Single Page Application)ってなに？ - デジタルマーケティングブログ</a></li>
+</ul>
+
+<h2>Vite</h2>
+<p>ViteはVue.jsの作者によるフロントエンドのビルドツール。</p>
+<ul>
+<li><a href="https://zenn.dev/comm_vue_nuxt/articles/what-is-vite">Vite ってよく聞くけど何なんですか？ あれは - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.13</p>
+</div>
+
+<h2>Vuetify</h2>
+<p>VuetifyはVue.js対応のUIライブラリ。Googleのマテリアルデザインに対応する。</p>
+<ul>
+<li><a href="https://qiita.com/azukiazusa/items/16ebffd361af8fa58333">Vuetifyに入門する #Vue.js - Qiita</a></li>
+<li><a href="https://zenn.dev/joo_hashi/articles/50c77b03d195de">Vuetifyについて学んでみた🧑‍🎨 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.16</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>Vue.js, Angular, Reactなど</h2>
+<p>クライアントサイドのフレームワーク。MVVMあるいはコンポーネント指向。</p>
+<p>学習コストが低く、手軽に使え、日本語の情報も多いVue.jsがおすすめ。</p>
+
+<h2>Vue.js</h2>
+<p>まず、div idタグでテンプレートとJavaScriptを紐づける。</p>
+<p>HTMLテンプレートの中のエレメントの子要素に、属性を付加する。</p>
+<p>二重波かっこ{{ }}でテンプレートの中のメッセージを書く。</p>
+<p>v-onはイベントを処理する。省略形は「@」。</p>
+<p>v-bindはHTMLタグの属性値に変数名を割り当てる。省略形は「:」。</p>
+<p>v-modelはVueオブジェクトのデータとフォーム値を関係づける。</p>
+<p>ほかにもいろいろとv-からはじまる属性がある。</p>
+<p>JavaScriptの方で独自のコーディングをして、テンプレート内のメッセージを動的に変更したり色んなことができる。</p>
+<p>複雑になってきたらCLIツールや複数の.vueファイルを用いてより高度な管理もできる。</p>
+<p>ビルドしてindex.htmlとbuild.jsができたらそれを本番環境にデプロイする。</p>
+
+<h2>サーバーサイドレンダリング</h2>
+<p>サーバ側でDOMレンダリングを終えた上で、クライアントがアクセスした時点ですぐに画面描画が行えるようにする（サーバーサイドレンダリング・SSR）。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

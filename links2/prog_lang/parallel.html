@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>並列処理の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>並列処理の世界観</h1>
+<p>並列処理の世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>並列性と制御モデル</h1>
+<h2>複数のプログラムコードを同時に実行する</h2>
+<p>プログラミングにおいて、一度にひとつのコードを流れるように実行するだけではなく、複数のコードを並列して同時に動かしたいことがあります。</p>
+<p>たとえば、クライアントと接続するサーバは、ひとつのクライアントだけと接続するのではなく、たくさんのクライアントと同時に接続します。</p>
+<p>ですが、並列処理は、ネットワークだけのものではありません。たとえば、GUIアプリケーションなどは、プログラムの処理が行われている間にも、GUIツールキットのコントロールに機敏に反応しなければなりません。</p>
+<p>また、ゲームプログラミングにおいては、ひとりのキャラクターが動いている間に、別のキャラクターが停止してしまったのではいけません。</p>
+<p>このような時、並列処理を行うために、スレッドやプロセスの概念を使用します。</p>
+<p>たとえば、サーバはクライアントの数だけスレッドを用意して、そのスレッドを同時に実行するでしょう。GUIアプリケーションは、GUIのイベントが発生したら、そのためのスレッドを作成するでしょう。また、ゲームの場合、キャラクターの数だけスレッドを作成するでしょう。</p>
+<p>実際はもっと別のやり方をしているかもしれませんが、僕が今思いついた方法ではそのようにするかもしれません。</p>
+<p>ですが、並列処理、あるいはマルチスレッドでは注意が必要です。マルチスレッドのプログラムを書くことは、シングルスレッドのプログラムを書くよりもはるかに難しいです。共有データを排他制御し、壊れないように管理しなければなりませんし、デバッグをすることも困難を極めます。</p>
+<p>しかしながら、IntelのCPUがマルチコア化したように、時代はもはやマルチスレッドから逃げようとしても逃れることはできません。</p>
+
+<h2>並列性とは</h2>
+<p>並列性とは、UNIXのようなマルチタスクのOSにおいて、複数のプログラムや処理を同時に（並列して）動かすことのできる仕組み。</p>
+<p>単純で開発しやすいモデルは、UNIXのコマンドラインシェルから実行されるプログラムのように、「小さなプログラム」がたくさんあって、そのプログラムを複数同時に実行させる、「プロセス」と呼ばれるモデル。</p>
+<p>プロセスは、単に小さなプログラムを開発し、OSの側が並列で実行させるため、シンプルで、開発もしやすいが、同時に実行されるプロセス同士がどのように通信し合うか（プロセス間通信やCORBA/D-Busなどを使うことはできる）という課題がある。また、プロセスを作成・破棄させるためにオーバーヘッドが大きいという問題もある。</p>
+<p>これに対して、ひとつのプロセスの中で、関数レベルで処理を並列実行させる「スレッド」と呼ばれる仕組みもある。これはオーバーヘッドも少なくパフォーマンスが向上するため、ApacheやJavaサーブレットなどのサーバーソフトウェアで多く採用されている。また、プログラムの中で、それぞれのスレッドが同じ情報にアクセスして通信し合うことも容易である。だが、同じデータに同時にアクセスしたり、読み書きを同時にしたりした時に、データに矛盾や破損が起きないように、ロックをかけて排他制御して「スレッドセーフ」な関数にする必要がある。</p>
+<p>後日注記：実際のところ、プロセスとスレッドの大きな違いは、プロセスはそれぞれのプロセスに独立したメモリ空間を持つが、スレッドはひとつのプロセスの中で同じメモリ空間を各スレッドが共有する、ということ。また、プロセスは独立性が高いため、ひとつのプロセスが破壊しても別のプロセスに影響はでないが、スレッドでは同時に破壊されてしまう。スレッドの場合は同じデータを同時に読み書きすることで破壊される恐れがあるため、排他制御やロックを用いてスレッドセーフな関数にする必要がある。また、プロセスにおいても共有メモリによってメモリ空間を共有する（独立メモリと別に共有メモリを持つ）ことはできる。OracleなどのDBでは、キャッシュや表や索引など多くのデータを各DBプロセスが共有している。</p>
+
+<h2>UNIXと並列処理</h2>
+<p>ある意味、UNIX系のOSは、こうした「並列実行」がとても得意で、タスクをたくさん実行させても、落ちることなく負荷が高くなっても正常に実行し続ける。これはひとえにUNIXのカーネルとユーザーランドを分ける仕組みが安全であるからである。たとえば、UNIXではプログラムはハードウェアに直接アクセスすることは基本的にできず、カーネルを介す必要があるが、DOSではユーザーランドのプログラムがハードウェアに直接アクセスできる。UNIXは安全なやり方を提供するが、その代わり融通が利かないところがあり、DOSの方がゲームなどは作りやすい。また、歴史的にUNIXのカーネルはパブリックドメインで開発されており、「とても枯れた技術」であるため、簡単には壊れない「長年の蓄積」があると言える。これはBSDソケットなどのネットワークインターフェースシステムについても言え、UNIXには長年のネットワークの経験の蓄積がある。</p>
+
+<h2>非同期処理</h2>
+<p>並列処理とよく似ているものに非同期処理がある。非同期処理とは同期処理と対になる言葉で、何かの時間のかかる処理を行っている時に、それが終わってから次の処理に移るのが同期処理で、処理が終わる前に別の処理を並行して行うのが非同期処理。</p>
+<p>たとえば、I/O処理はCPUの処理よりも時間がかかる。I/O処理が終わるまで待っていたのではCPUの計算が長い間待機状態になってしまい、時間がもったいない。I/O処理をしている間にCPUの別の処理を行い、I/O処理が終わってから必要な処理に戻る。これを「割り込み」とも呼ぶ。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a>を参照のこと。）</p>
+<p><a href="../linux/linux_kernel_interrupt.html">Linuxカーネル（割り込み）</a>や<a href="../network/nginx.html">Nginx</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.02.14</p>
+</div>
+
+<h2>イベント駆動</h2>
+<p><a href="event.html">イベント駆動</a>を参照のこと。</p>
+
+<h1>ロックによる並列処理</h1>
+<h2>並列性の制御モデル</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p><!--ネットワーク以外にも、-->一般的に並列処理を行うには、スレッドセーフを考えた設計が重要になる。</p>
+<p>スレッドセーフでは、データの競り合い状況が発生しないように、共有データを処理する間ロックして、処理した後でロックを解除する。</p>
+<p>この仕組みのことをmutexと呼ぶ。mutexとは、mutual exclusion（相互排他）の略です。</p>
+<p>C++には長らくスレッドの概念がなかったため、マルチスレッドコードはプラットフォーム依存のコードを書く必要があったが、Javaでは標準でスレッドの概念があり、ロックはsynchronizedメソッド・ブロックで可能となっており、スレッドの待機や割り込み（中断）もできるようになっている。</p>
+<p>また、制御モデルにおいて、並列処理には3つのモデルがある。</p>
+<p>まず、同じ処理を全てのスレッドで行う単純な並列処理モデル。</p>
+<p>次に、マスター（主人）がスレーブ（奴隷）を従えるマスター・スレーブモデル。</p>
+<p>最後に、プログラムの出力を次のプログラムの入力として次々に渡していく、パイプラインモデルである。</p>
+<p>並列処理以外の制御モデルとしては、これ以外にも、コールバック関数をイベントループのリスナとして設定する、イベントドリブン（イベント駆動）モデルなどがある。</p>
+<p>イベントドリブンは、Windowsのウィンドウプログラムのほか、Linuxカーネルのシステムコールなどにもみられる考え方である。</p>
+<p>（一部の内容で<a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a>を参考にしました。）</p>
+
+<h2>排他制御</h2>
+<p>排他制御とは、何かしらのリソースにアクセスしている際に、ほかの人がそのリソースにアクセスできないように、排他的に制御する仕組みのこと。</p>
+<p>誰かがリソースを書き込んでいる最中にほかの誰かがそのリソースを読み込んだり、複数の人が同時にリソースを書き換えたりできないように「ロック」を行う。</p>
+<p>リソースの読み込みだけを許して書き込みを許さないロックを「共有ロック」、リソースの書き込みだけではなく読み込みも許さないロックを「専有ロック」と呼ぶ。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a>と<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>を参考に執筆しました。）</p>
+<p><a href="../db/db_intro.html">データベース入門</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.02.14</p>
+</div>
+
+<h2>クリティカルリージョンとmutexフラグ</h2>
+<p>並列処理を行う上で、プロセスの競合状態を避ける必要がある。競合状態とは、複数のプロセスがひとつのリソースをどちらも欲しいというような状況のこと。</p>
+<p>並列プログラムを実行する上で、実行中にプロセス切り替えを起こしてはいけないような重要な領域を、クリティカルリージョンあるいはクリティカルセクションと言う。</p>
+<p>プロセス切り替えを禁止するために、割り込みを禁止することができる。プロセス切り替えはタイマー割り込みなどによって行われるため、割り込みを禁止することでクリティカルリージョンを持つプロセスがひとつだけ実行されることを保証できる。</p>
+<p>mutex（相互排他）を実現するために、フラグを使う方法がある。フラグは、int mutex_flag = 0;とした上で、ロックをかける際にmutex_flag++とし、ロックを解除する際に--mutex_flagとすることで、フラグの上げ下げによって相互排他を実現できる。</p>
+<p>このほか、セマフォによって排他制御を行う方法もある。セマフォは、同時に使える人数のうちあとどれくらいがリソースを利用できるかを管理するための整数値であり、OSによって管理される。</p>
+<p>以上は以下の書籍・ページを参考に執筆しました。</p>
+<ul>
+<li>放送大学「コンピュータの動作と管理 ('17)」</li>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+<li><a href="https://wa3.i-3-i.info/word13357.html">セマフォとは｜「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典</a></li>
+</ul>
+<p><a href="../linux/linux_kernel_ipc.html">Linuxカーネル（プロセス間通信）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.18</p>
+</div>
+
+<h2>UNIXでスレッドプログラミング</h2>
+<p>CとLinuxで非同期処理やスレッドプログラミングを行うなら、NPTL(Native POSIX Thread Library)のpthread_create()という関数を使う。</p>
+<p>後日注記：C++11でstd::threadが提供されるまで、長らくC/C++には標準のマルチスレッドAPIがなかったため、プラットフォーム依存のAPIを使う必要があった。UNIXやLinuxではPOSIX標準のpthreadを使うことが一般的。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/glibc-linuxthreads/man3/pthread_create.3.html">man pthread_create</a></li>
+<li><a href="http://www.tsoftware.jp/nptl/">Linux スレッドプログラミング - T Software</a></li>
+<li><a href="https://ota42y.com/blog/2015/06/18/c-thread/">C言語でのスレッド処理 | おおたの物置</a></li>
+<li><a href="http://www.hakodate-ct.ac.jp/~tokai/tokai/doc2009/proen/thread.html">函館高専4年 プログラミング演習 スレッドと排他処理</a></li>
+</ul>
+<p><a href="cpp_stl_libs.html">C++（STL・ライブラリ）</a>や<a href="../linux/linux_api2.html">Linux API（プロセス・メモリ）</a>も参照のこと。</p>
+
+<h2>Windowsの排他制御とCriticalSection</h2>
+<p>スレッド間の排他制御は、Win32ではCriticalSectionを利用すれば実現出来ます。</p>
+<p>スレッド間の排他制御に対して、アプリケーション間の排他制御はMutexで行います。しかしながらOSレベルで排他を行うMutexはCriticalSectionよりもはるかに遅くなります。</p>
+<p>（詳しくはやねうらお氏による「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」を参照してください。）</p>
+<p>やねうらお氏は、書籍「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B02%E3%80%90CD-ROM%E4%BB%98%E3%80%91-Game-developer-books-%E3%81%86%E3%82%89%E3%81%8A/dp/4798006033">Windowsプロフェッショナルゲームプログラミング2</a>」でタスクシステムやマイクロスレッド、マルチスレッドのデザインパターンを紹介されています。WindowsでマルチスレッドのC++プログラミングをされる方皆さんに読まれることをおすすめします。</p>
+<p>後日注記：Windowsでスレッドを作るためには、Windows APIのCreateThread()関数を使います。あるいは、.NETならばSystem.Threading.Threadクラスを利用できます。</p>
+<ul>
+<li><a href="https://programming.pc-note.net/winapi/multithread.html">マルチスレッド(Win32API)(C言語) - 超初心者向けプログラミング入門</a></li>
+<li><a href="https://www.divakk.co.jp/aoyagi/csharp_winexe_06.html">C#で作るWindowsアプリ －スレッドを使う－</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.13編集</p>
+</div>
+
+<h2>Javaにおけるマルチスレッド</h2>
+<p>標準のマルチスレッドAPIがなかったC/C++に対して、Javaでは早くからマルチスレッドのAPIを標準で提供していた。</p>
+<p>スレッド間の排他制御は、Javaではsynchronizedをメソッドあるいはブロックにつけます。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a></li>
+<li>やねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B02%E3%80%90CD-ROM%E4%BB%98%E3%80%91-Game-developer-books-%E3%81%86%E3%82%89%E3%81%8A/dp/4798006033">Windowsプロフェッショナルゲームプログラミング2</a>」</li>
+<li><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a></li>
+</ul>
+<p><a href="java_lib_thread.html">Javaクラスライブラリ（マルチスレッド）</a>も参照のこと。</p>
+
+<h2>マルチスレッドのデザインパターン</h2>
+<p>また、以下の書籍は、マルチスレッドのさまざまな設計を、実際に実装する際にどのようにすればいいかの参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80-%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797319127">Java言語で学ぶデザインパターン入門 マルチスレッド編</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+<li>放送大学「コンピュータの動作と管理 ('17)」</li>
+</ul>
+
+<h1>並列処理の新技術</h1>
+<h2>Promiseとasync/await</h2>
+<p>非同期処理を行う上で、「何かの処理がきちんと完了してから次の処理を行いたい」とか、「処理を行った結果を別の処理に渡したい」などとすることがあります。</p>
+<p>これを同期処理で書くことは簡単ですが、非同期処理にすることで、長い時間がかかる処理を行っている間、CPUはそれに待たされることなく別の関係のない処理を行えます。</p>
+<p>コールバック関数で実現することもできますが、コールバック地獄になることもあります。コールバックを複数使うと、ネストが深くなりすぎ、見通しも悪くなります。</p>
+<p>JavaScriptでは、このような時に、Promiseと呼ばれる仕組みを使うことができます。</p>
+<p>Promiseでは、関数の引数として、resolve（処理の成功）とreject（処理の失敗）の二つの関数をとります。まず、処理がきちんと完了した時点で、resolve()を実行します。ここで、処理は「解決」されます。これがreturnやyieldに相当します。処理が解決したら、then()に記述された次の関数の処理が実行されます。thenはいくらでも続けることができます（メソッドチェーン）。また、正しく処理が解決せず、不正に終了する場合はreject()を実行します。これをcatch()で捕捉します。catch()は処理中にthrowで吐かれた例外を捕捉することもできます。</p>
+<p>また、このようなPromiseによる非同期処理を、もっと同期処理と同じような記述で書くことのできる仕組みとして、async/awaitがあります。asyncを関数定義につけると、その関数は非同期関数となります。awaitはasyncをつけた関数の中にしか記述できませんが、awaitが記述された時点で、awaitをつけた関数のPromiseの結果が返されるまで、非同期関数を一時的に停止して、Promiseの解決を待機します。そして、解決した時点で非同期関数の実行を再開します。</p>
+<p>非同期処理をasync/awaitを用いて書く仕組みは、C#やPythonなどにも存在します。C#では、ジェネリックなTaskクラスをasync/awaitとともに記述することで、同期関数と同じように非同期関数を実行できます。ある意味、golangのgoルーチンに近いと思います。また、Pythonではイベントループとともにasync/awaitを実行できます。Pythonでは従来からジェネレータを使うことでコルーチンの作成が可能でしたが、それと区別するために、async/awaitのコルーチンのことをネイティブコルーチンと呼びます。</p>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise - JavaScript | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Using_promises">Promiseを使う - JavaScript | MDN</a></li>
+<li><a href="https://techplay.jp/column/581">【JavaScript】初心者にもわかるPromiseの使い方｜TECH PLAY Magazine ［テックプレイマガジン］</a></li>
+<li><a href="https://qiita.com/cheez921/items/41b744e4e002b966391a">【ES6】 JavaScript初心者でもわかるPromise講座 - Qiita</a></li>
+<li><a href="https://www.tohoho-web.com/ex/promise.html">とほほのPromise入門 - とほほのWWW入門</a></li>
+<li><a href="https://qiita.com/kerupani129/items/2619316d6ba0ccd7be6a">Promise, async, await がやっていること (Promise と async は書き換え可能？) - Qiita</a></li>
+<li><a href="https://qiita.com/soarflat/items/1a9613e023200bbebcb3">async/await 入門（JavaScript） - Qiita</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/async_function">非同期関数 - JavaScript | MDN</a></li>
+<li><a href="https://ja.javascript.info/async-await">Async/await - 現代の JavaScript チュートリアル</a></li>
+<li><a href="https://dev.classmethod.jp/articles/explain-promise-and-async-await-for-primary-javascript/">JSの初心者にPromiseとasync/awaitの使い方を雑に説明してみる | DevelopersIO</a></li>
+<li><a href="https://tech-lab.sios.jp/archives/15711">多分わかりやすいC#の非同期処理その2 〜 asyncとawait 〜 | SIOS Tech. Lab</a></li>
+<li><a href="https://www.tohoho-web.com/ex/c-sharp.html#async-await">async と await - とほほのC#入門 - とほほのWWW入門</a></li>
+<li><a href="https://qiita.com/maueki/items/8f1e190681682ea11c98">python3 の async/awaitを理解する - Qiita</a></li>
+<li><a href="https://qiita.com/yasuo-ozu/items/acf341297e05f2b1adc4">Pythonの非同期処理 ~async, awaitを完全に理解する~ - Qiita</a></li>
+<li><a href="https://www.rhoboro.com/2019/02/09/coroutine-abstract.html">コルーチンは怖くない - Minimum Viable Programmer</a></li>
+</ul>
+
+<h2>マルチスレッドとnull参照</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.21.html">2021/01/21</a>より。</p>
+<p>マルチスレッドや、externを使って複数のファイルで同じ変数を使う場合は、null参照に注意しましょう。</p>
+<p>特に、共有オブジェクトの寿命があいまいな状況下での、マルチスレッド環境では、null参照が起こりやすくなります。</p>
+<p>null参照とは、たとえばpがnullであるにもかかわらずp-&gt;meth()を実行するようなこと。</p>
+<p>pにオブジェクトがあるかどうか分からない場合、たとえばpがほかのさまざまな関連する処理の中で動的に生成される場合などでは、これはやっかいなバグになります。</p>
+<p>このような場合に例外処理をして処理を強制終了するのは簡単ですが、絶対に落ちてはならないシステムでは、どうにかしてnull参照を排除しなければなりません。</p>
+<p>しかしながら、希望の光はあります。</p>
+<p>Kotlinなどでは、そもそもnullそのものを許容せず、null値を代入したい場合には専用のnull許容型を使う必要があります。</p>
+<p>これにより、null参照そのものがなくなります。</p>
+<p>詳しくは<a href="java_langs_kotlin.html">Kotlin</a>を参照のこと。</p>
+
+<h2>並列処理とScala</h2>
+<p>「<a href="https://www.amazon.co.jp/Scala%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%A9%E3%83%96%E3%83%AB%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%AC%AC3%E7%89%88-Martin-Odersky/dp/4844381490/">Scalaスケーラブルプログラミング第3版</a>」の中の言葉の受け売りですが、プログラミングにおいて、並列処理は鬼門です。</p>
+<p>Javaは、共有データと排他制御によるマルチスレッドの方式を採用していますが、この方式では、信頼性の高いマルチスレッドアプリケーションを開発することは難しいということが分かってきました。</p>
+<p>プログラムのさまざまな場面で、ロックされているかどうか、どのデータをどこのスレッドが参照しているか、その変数をどこで変更する可能性があるか、ということを考えなければならず、またテストも信頼性が低くて、仮にテストで1,000回成功したとしても、本番のシステムでバグが起きることがあり、プログラマは簡単にバグを見つけられず、プログラマが頭で推論して信頼性を確保するしかないのです。</p>
+<p>そのようなロックによる方式で、マルチスレッドアプリケーションを開発するのは、熟練のプログラマでも非常に難しいものです。</p>
+<p>Scalaでは、この問題を解決するために、Futureという仕組みを利用します。Futureは成功・失敗・完了といった状態を戻り値の型で判別可能な、計算のまとまりを記述したオブジェクトで、あるFutureから新しいFutureが生まれ、非同期に実行されます。この時、複数の処理を非同期に実行する新しい「合成されたFuture」を作ることもできます。このため、イミュータブル（変更不可）の値の連続としてマルチスレッドを捉えられるので、さまざまなスレッドから同じデータを変更するための共有データと排他制御のような問題を考える必要がありません。Futureに必要とされる「実行コンテキスト」だけで、Scalaはユーザーが待機している間に処理を行ってくれます。実行コンテキストはどのように並列処理を行うかというルールのことで、グローバル実行コンテキスト（Scalaが提供）であればJVMの場合スレッドプールを使用します。</p
+<p>最近のプログラミング言語には、Scala以外にも、並列処理について革新的な発想が試されています。たとえばRustやGo言語やClojureのような言語は、従来のマルチスレッドではなく、新しい方式で、スマートに並列処理を記述できるような特徴があります。</p>
+<p>詳しくは<a href="java_langs_scala.html">Scala</a>、<a href="rust.html">Rust</a>、<a href="golang.html">Go言語</a>、<a href="clojure.html">Clojure</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.06.19</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>ハードウェアとカーネル</h2>
+<p><a href="../hardware/cpu.html">CPU</a>や<a href="../hardware/gpu.html">GPU</a>や<a href="../linux/linux_kernel_proc.html">Linuxカーネル（プロセス）</a>や<a href="../linux/linux_kernel_ipc.html">Linuxカーネル（IPC）</a>を参照のこと。</p>
+
+<h2>Linux API</h2>
+<p><a href="../linux/linux_api2.html">Linux API（プロセス・メモリ）</a>を参照のこと。</p>
+
+<h2>Java API</h2>
+<p><a href="java_lib_thread.html">Java（マルチスレッド）</a>を参照のこと。</p>
+
+<h2>データベース</h2>
+<p><a href="../db/db.html">データベース</a>や<a href="../db/db_intro.html">データベース入門</a>を参照のこと。</p>
+
+<h2>クラスター</h2>
+<p><a href="../network/cluster.html">クラスタ・分散・高信頼システム</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>並列処理・制御モデル</h2>
+<ul class="defaultlist list7">
+<li>並列処理
+<ul>
+<li>プロセス、スレッド</li>
+<li>非同期処理</li>
+<li>排他制御（ロック）、mutex</li>
+</ul></li>
+<li>制御モデル
+<ul>
+<li>マスター・スレーブ
+<ul>
+<li>主従関係のこと</li>
+</ul></li>
+<li>イベント駆動
+<ul>
+<li>イベント駆動は、イベントを通知してその時に割込み処理を行う</li>
+</ul></li>
+<li>ポーリング
+<ul>
+<li>ポーリングは、待機した状態で定期的に確認して、何かあれば処理を行う</li>
+</ul></li>
+<li>メッセージキューイング</li>
+</ul></li>
+</ul>
+
+<h2>プロセスとスレッド</h2>
+<p>プロセスはひとつひとつ独立したメモリ領域を持つ。</p>
+<p>スレッドは同じメモリ領域を共有しながら並列処理ができる。</p>
+<p>プロセスよりもスレッドの方が軽量。</p>
+
+<h2>排他制御</h2>
+<p>スレッドセーフな関数を作るためには、別の関数からのアクセスによって壊れる可能性のあるデータは誰かがアクセスする間別の関数からアクセスできないようにロックする。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

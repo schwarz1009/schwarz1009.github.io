@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>SELinux - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>SELinux</h1>
+<p>SELinuxに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>SELinux</h1>
+<h2>SELinuxの概念</h2>
+<p>SELinuxでは、ファイルやディレクトリごとのパーミッションの仕組みだけではなく、HTTP/FTPなどのプロセスごとにアクセス制限をかけられる。また、rootユーザーにも制限がかけられる。</p>
+<p>rootの絶大な権限を制限することができ、プロセスにドメインを、リソースにタイプを付加し、これらにアクセスベクタ（許可された操作）をセキュリティポリシーとすることで、細かく権限を制限できる。たとえば、Web管理プロセスにはWeb管理に必要なファイルのみアクセスできる。</p>
+<p>後日注記：メインフレームでは、セキュアOS環境で運用や管理を行うのが基本。これに対してオープン系では基本的にセキュアOSではない。このような時にSELinuxのようなセキュアOSモジュールを利用できる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Security-Enhanced_Linux">Security-Enhanced Linux - Wikipedia</a></li>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/security">linux.git - security</a></li>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/security/selinux">linux.git - SELinux</a></li>
+</ul>
+
+<h2>SELinuxシステム</h2>
+<p>（以下は<a href="https://blog.fenrir-inc.com/jp/2016/09/selinux.html">理由がわかれば怖くない！SELinux とのつきあい方 (フェンリル | デベロッパーズブログ)</a>を参考に執筆しました。）</p>
+<p>基本的に、動作モードが3つ（有効のEnforcing, ログに記録のPermissive, 無効のDisable）あり、getenforceとsetenforceでその時のモードを、/etc/selinux/configでシステムのモードを変更できる。</p>
+<p>ファイルはパーミッションだけではなくSELinuxコンテキストを持つ。lsやpsに-Zオプションを付けることでコンテキストを表示できる。コンテキストは4つの項目に区切られており、それぞれ「ユーザ:ロール:タイプ:機密ラベル」となる。中でも基本となるのがタイプ。</p>
+<p>動作拒否時のログは、/var/log/audit/audit.logに出力される。</p>
+
+<h2>タイプ変更の方法</h2>
+<p>（以下は<a href="https://qiita.com/chi9rin/items/af532d0dd9237cc65741">SELinux を使おう．使ってくれ． - Qiita</a>を参考に執筆しました。）</p>
+<p>タイプを変更するには、chconで個別的にタイプを変更する以外に、システムの既定のディレクトリ（/var/wwwなど）のために用意されている基本テンプレートを使うことで、restoreconコマンドを使ってタイプを楽に変更できる。</p>
+<pre>
+# restorecon -RF /var/www/html/
+</pre>
+
+<h2>SELinuxとの付き合い方</h2>
+<p>SELinuxと上手く付き合うためには、以下のようなページが参考になるかもしれない。</p>
+<ul>
+<li><a href="https://blog.fenrir-inc.com/jp/2016/09/selinux.html">理由がわかれば怖くない！SELinux とのつきあい方 (フェンリル | デベロッパーズブログ)</a> - なんとSleipnirの開発でおなじみなフェンリルさんである。</li>
+<li><a href="https://qiita.com/chi9rin/items/af532d0dd9237cc65741">SELinux を使おう．使ってくれ． - Qiita</a></li>
+<li><a href="https://eng-entrance.com/linux-selinux">【ざっくりと理解する】SELinuxとは？ - エンジニアの入り口</a></li>
+</ul>
+
+<h1>AppArmor</h1>
+<h2>AppArmor</h2>
+<p>AppArmorはもうひとつのセキュアOSモジュール。</p>
+<p><a href="apparmor.html">AppArmor</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>TOMOYO Linux</h1>
+<h2>TOMOYO Linux</h2>
+<p>Linux用のセキュアOSモジュール。セキュリティポリシーを自動的に学習する機能を備える。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TOMOYO_Linux">TOMOYO Linux - Wikipedia</a></li>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/security/tomoyo">linux.git - tomoyo</a></li>
+</ul>
+
+<h2>使おうと思えばきちんと使えます（ネタではありません）</h2>
+<p>TOMOYO Linuxは名前がネタすぎるせいで実用のことを考えられていませんが、使おうと思えば真面目に使えます。以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/phase-d/items/9e309b149891710ba42e">DebianにTOMOYO Linuxをインストールする - Qiita</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>ユーザーとパーミッション</h2>
+<p><a href="linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>も参照のこと。</p>
+
+<h2>セキュリティ</h2>
+<p><a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>SELinux</h2>
+<p>HTTPなどのプロセス単位で実行・アクセス許可ができる。</p>
+<p>rootユーザに全ての特権を認めず、rootユーザにおいても権限を制限できる。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

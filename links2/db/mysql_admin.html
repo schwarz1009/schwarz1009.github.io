@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>MySQL関連の世界観（B．管理と設定） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>MySQLの世界観（B．管理と設定）</h1>
+<p>MySQLによるデータベース操作に関する世界観（B．管理と設定）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="mysql.html">MySQL</a></li>
+<ul>
+<li><a href="mysql_basic.html">A．基本</a></li>
+<li><b>B．管理と設定</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>MySQLの設定と管理</h1>
+<h2>MySQLの初期設定</h2>
+<p>MySQLの初期設定は「mysql_secure_installation」コマンドから行う。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/ritukiii/items/08df5be6d50871124aaf">MySQL5.7の初期設定まとめ - Qiita</a></li>
+</ul>
+<p>MySQLはデフォルトでtestデータベースというテスト用のデータベースが含まれているので、これは必ず削除する。またMySQLにはmysqlデータベースとinformation_schemaデータベースが最初から存在するが、これらはMySQLの動作と管理に必要な大切なデータベースなので間違って削除したりしないように注意しよう。</p>
+
+<h2>my.cnfとmy.ini</h2>
+<p>MySQLの設定はmy.cnfファイルあるいはmy.iniファイルで行う。</p>
+<p>Linuxではmy.cnfだが、Windowsではmy.ini。</p>
+<p>小さな規模から大きな規模の順に、my-small.cnf、my-medium.cnf、my-large.cnf、my-huge.cnf、my-innodb-heavy-4G.cnfのように、/usr/share/mysql/にサンプル設定がある。</p>
+<p>よって、</p>
+<pre>
+$ mv /usr/share/mysql/my-medium.cnf /etc/my.cnf
+</pre>
+<p>などとする。</p>
+<p>（<a href="http://okdtsk.hateblo.jp/entry/20111219/1324249008">MySQLを入れてまずやること（my.cnfとか） - Glitch</a>を参考に執筆しました。）</p>
+<!--<p>日本語文字コードに対応させるなどの具体例は<a href="../network/apache.html">Apacheの世界観</a>にあります。</p>-->
+
+<h2>MySQLの設定</h2>
+<p>（書籍「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考にさせていただきました。）</p>
+<p>MySQLの設定は、phpMyAdminという管理ツールを用いて行いますが、設定ファイルを編集することもあります。</p>
+<p>MySQLの設定ファイルは、Windowsではmy.iniです。ここで、文字コードをUTF-8に設定しましょう。</p>
+<p>以下はmy.iniの設定。</p>
+<pre>
+[client]
+</pre>
+<p>の下の行に</p>
+<pre>
+default-character-set=utf8
+</pre>
+<p>を追加。</p>
+<pre>
+[mysqld]
+</pre>
+<p>の下の行に</p>
+<pre>
+character-set-server=utf8
+</pre>
+<p>を追加。</p>
+<pre>
+[mysql]
+</pre>
+<p>の下の行に</p>
+<pre>
+default-character-set=utf8
+</pre>
+<p>を追加。</p>
+
+<h1>MySQLのコマンド</h1>
+<h2>mysqlコマンド</h2>
+<p>mysqlコマンドを使うことで、コマンドラインからMySQLデータベースを操作できる。</p>
+<ul>
+<li><a href="https://qiita.com/CyberMergina/items/f889519e6be19c46f5f4">よく使うMySQLコマンド集 - Qiita</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.6/ja/mysql-commands.html">MySQL :: MySQL 5.6 リファレンスマニュアル :: 4.5.1.2 mysql コマンド</a></li>
+</ul>
+
+<h2>ダンプをとる</h2>
+<p>ダンプは、mysqldumpコマンドでダンプファイルを作成し、復元はダンプファイルをmysqlコマンドで復元する。</p>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://kiyotakakubo.hatenablog.com/entry/20090131/1233420834">MySQLのdump(ダンプ)でデータをバックアップ/復元：MySQLの基礎知識 - 久保清隆のブログ</a></li>
+</ul>
+
+<h1>MySQLストレージエンジンとロック</h1>
+<h2>InnoDBとMyISAM</h2>
+<p>MySQLのストレージエンジンは、MySQLの中で「データの読み書き」を行っている基盤となるエンジンのこと。</p>
+<p>主に、InnoDBとMyISAMという2つが有名。</p>
+<p>MyISAMはロックをテーブル単位で行うが、InnoDBはレコード（行）単位で行う。</p>
+<p>InnoDBに存在するトランザクション機能は、MyISAMでは存在しない。</p>
+<ul>
+<li><a href="http://shindolog.hatenablog.com/entry/2015/04/01/185703">MySQLの「InnoDB」と「MyISAM」についての易しめな違い - （2015年までの）odaillyjp blog</a></li>
+</ul>
+
+<h2>テーブルロック</h2>
+<p>MySQLには複数のロック用の構文がある。テーブルロックをかけるにはLOCK TABLES構文を用いる。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2023/06/mysql-rcn0198">第198回　MySQLのロック構文LOCK TABLESとLOCK INSTANCE FOR BACKUPについて | gihyo.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.16</p>
+</div>
+
+<h1>MySQL管理ツール</h1>
+<h2>MySQL Workbench</h2>
+<p>MySQL公式のグラフィカルなDB操作ツール。</p>
+<ul>
+<li><a href="https://proengineer.internous.co.jp/content/columnfeature/6605">便利な公式ツールMySQL Workbenchの使い方と日本語化方法 | サービス | プロエンジニア</a>
+<li><a href="https://qiita.com/hiesiea/items/01dde88d8062c3d16910">やさしい MySQL Workbench の使い方 for MacOS - Qiita</a></li>
+</ul>
+
+<h2>phpMyAdmin</h2>
+<p>MySQLのPHPによる管理ツール。昔から有名で、知っている方も多いはず。SQLのデータベース定義言語でテーブルを作るよりも簡単。</p>
+
+<h1>MySQL/MariaDB公式</h1>
+
+<h2>MySQL公式ドキュメント</h2>
+<p>MySQLのドキュメント。MySQLはSunに買収され、SunがOracleに買収されたことで、Oracleのものになりました。</p>
+<p>OracleがMySQLを持っていると、冗談のように見えますが、forkしてMariaDBになりました。</p>
+<p>ただ、Oracleは積極的にオープンソースと友好しているので、あまり敵ではないと思います。</p>
+<ul>
+<li><a href="https://dev.mysql.com/doc/">MySQL Documentation</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MySQL">MySQL - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/mysql">git</a></li>
+</ul>
+
+<h2>MariaDB公式ドキュメント</h2>
+<p>MariaDBのドキュメント。</p>
+<ul>
+<li><a href="https://mariadb.com/kb/ja/documentation/">ドキュメント - MariaDB</a></li>
+</ul>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MariaDB">MariaDB - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/MariaDB">git</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

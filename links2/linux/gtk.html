@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>GTK関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div><h1>GTKの世界観</h1>
+<p>GTKの世界観です。<a href="linux_x11.html">Linux（X11周辺）</a>や<a href="qt.html">Qt</a>も参照のこと。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>GTK</b></li>
+<ul>
+<li><a href="gtk_bindings.html">GTK言語バインディング</a></li>
+<li><a href="vala.html">ValaとGenie</a></li>
+<li><a href="glade.html">Glade</a></li>
+<li><a href="cairo.html">Cairo</a></li>
+</ul>
+<li><a href="gnome.html">GNOME（アーキテクチャ）</a></li>
+<ul>
+<li><a href="gnome_desktop.html">GNOME（デスクトップ）</a></li>
+<li><a href="gnome_apps.html">GNOME（アプリケーション）</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>GTK+/GLib</h1>
+<h2>GTK+とは</h2>
+<p>X11やGNOMEで使われるGUIツールキット。ライバルはQt。</p>
+<p>C言語でオブジェクト指向を行う独自のGLibという仕組みを使いながら、C++だけではなくC#やPythonなどにも対応することで、「ハッカー界の多くの言語」に門を開きながら、ウィジェットとイベント・シグナルをベースとした「オブジェクト指向のツールキット」を提供している。</p>
+<p>GNOMEでの標準ツールキット。KDEで使われているQtが当時フリーでは無かったため、GNUによってGNOMEとともに開発された。開発元はPhotoshopキラーとして有名なGIMP。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GTK+">GTK+ - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/GNOME/gtk">git</a></li>
+</ul>
+
+<h2>GTKの特徴</h2>
+<p>GTKは、Motifの代わりになるために開発された、GIMPの開発メンバーによるツールキット。</p>
+<p>特徴として、オブジェクト指向の考え方に基づいて設計されていること、シグナルハンドラの考え方に基づいてイベントドリブンなGUIアプリケーションの開発ができることなどがある。</p>
+<p>また、C言語で書かれていることから、言語バインディング（GTKをさまざまなプログラミング言語で利用するためのラッパー）を作りやすく、C/C++以外にもC#やPythonやRubyなどさまざまな言語バインディングが開発されている（対応状況に違いがあるため、全ての言語バインディングで目的の機能が使えるとは限らない）。</p>
+<p>下位ライブラリとして、ピクセル描画ライブラリのGDK、ベクターグラフィックス描画ライブラリのCairo、オブジェクト指向を実現する低レベルライブラリのGLib/GObject、多言語文字ライブラリのPango、アクセシビリティ支援のATK、仮想ファイルシステムのGIOなどが知られる。</p>
+<p>また「コンテナ」と呼ばれる概念があり、ひとつまたは複数のウィジェットを含めることができる。1つのウィジェットを含めることができるのはBinで、複数のウィジェットを含めることができるのはBoxとTableである。</p>
+<p>GTKの開発元はBSDと同じカリフォルニア大学バークレー校。フォトレタッチ・デザインソフトウェアGIMPの副産物として開発された。</p>
+<p>（一部の内容で<a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a>を参考に執筆しました。）</p>
+
+<h2>GTK+からGTKに名称変更</h2>
+<p>GTK+は「GTK」に名称を変更した。以下の記述は執筆時の「GTK+」のままだが、これから書く新しい記事は「GTK」としたい。</p>
+
+<h1>GTKプログラミング</h1>
+<h2>GObjectの基本</h2>
+<p>GTK/GLibでは、型名や関数名などなんにでもgをつけます。</p>
+<p>たとえば、型名ならgint, gchar*, gboolean, gpointer, 関数名ならg_signal_connect()のようにです。</p>
+<p>これは、C言語でオブジェクト指向を行うGLib/GObjectのおかげで、標準には存在しないオブジェクト指向の型や関数を使うからです。慣れるまでは醜いかもしれませんが、論理的な「オブジェクト指向のデスクトップ環境」を作る上で、C言語のままで優れたやり方をしています。</p>
+<p>g_object_new()は、オブジェクトを作成するためのGObjectの関数です。ウィジェットは、g_object_new()あるいはウィジェットごとの関数で作成します。ウィジェットは、GtkWidget*, GtkWindow*, GtkTextView*などのポインタ変数で保持・参照します。</p>
+<p>GObjectにおいては、g_object_new()に、型名であるGTypeを指定し、プロパティ名と値の組（必ずNULLで終わる）を指定することで、オブジェクトを作成できます。GTypeにはGTK_TYPE_WINDOW（ウィンドウ）やGTK_TYPE_LABEL（ラベル）やGTK_TYPE_BUTTON（ボタン）などがあります。</p>
+<p>このほか、g_object_set()でプロパティ値を設定し、g_signal_connect()でイベントとコールバック関数を関連付け、gtk_container_add()でコンテナ（別のウィジェットを格納できるウィジェット）に格納します。</p>
+<p>GObjectにおいては、g_signal_connect()でシグナルハンドラを追加します。これにより、ボタンがクリックされた時などに、コールバック関数を実行するように登録できます。</p>
+<p>ほかにも、g_やgtk_やgdk_やgnome_ではじまる関数が多数登場します。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Official-GNOME-developers-guide/dp/1593270305">The Official GNOME 2 developer's guide</a></li>
+<li><a href="https://developer.gnome.org/glib/stable/glib-Basic-Types.html">Basic Types: GLib Reference Manual</a></li>
+<li><a href="https://decafish.blog.ss-blog.jp/2019-07-06">aravis解析 その6：腰も砕けよ 膝も折れよ：So-net blog</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.19編集</p>
+</div>
+
+<h2>コード例と解説</h2>
+<p>g_signal_connect()の引数は、g_signal_connect(対象オブジェクト, シグナル名, 新しいシグナルハンドラとなる関数, オプションのデータ)となる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+GtkWindow *window;
+GtkButton *button;
+
+gtk_init(&argc, &argv);
+
+window = g_object_new(GTK_TYPE_WINDOW, "title", "Application 1", NULL);
+
+g_signal_connect(window, "delete-event", G_CALLBACK(delete_func), NULL);
+g_signal_connect(window, "destory", G_CALLBACK(end_func), NULL);
+
+button = g_object_new(GTK_TYPE_BUTTON, "label", "_Button 1", NULL);
+
+g_signal_connect(button, "clicked", G_CALLBACK(button_clicked_func), NULL);
+
+gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(button));
+
+gtk_widget_show_all(GTK_WIDGET(window));
+
+gtk_main();
+
+return 0;
+</pre>
+<p>のようになる。実際はmain()関数に上記のコードを記述し、delete_func(), end_func(), button_clicked_func()の関数をそれぞれ作成する。</p>
+<p>まず、gtk_init()関数で初期化を行い、ウィンドウwindowをg_object_new()関数で作る。</p>
+<p>そして、g_signal_connect()関数を使って、windowのdelete-eventイベントに自分で作ったdelete_func()関数を、destroyイベントに自分で作ったend_func()関数をコールバック関数として（関数名にG_CALLBACK()をつける）登録している。</p>
+<p>同様に、ボタンbuttonを作った上でbuttonのclickedイベントに自分で作ったbutton_clicked_func()関数をコールバック関数として登録している。</p>
+<p>それらが終わった後で、gtk_container_add()関数を使ってコンテナとしてのwindowにウィジェットとしてのbuttonを追加し、gtk_widget_show_all()関数でそれらを表示している。</p>
+<p>最後に、gtk_main()関数でアプリケーションのイベントループを開始している。</p>
+<p>（<a href="https://www.amazon.co.jp/Official-GNOME-developers-guide/dp/1593270305">The Official GNOME 2 developer's guide</a>を参考に執筆しました。115～116ページに類似のコードが出てきます。）</p>
+<div class="edit_date">
+<p>2023.02.19編集</p>
+</div>
+
+<h2>ウィジェットの対応関数</h2>
+<p>実際のGTKでは、g_object_new()だけではなく、gtk_window_new()やgtk_button_new_with_label()のようなさまざまなウィジェットに対応する関数が用意されている。</p>
+<p>これらを使った方が、簡潔で簡素なコードとなる。</p>
+<ul>
+<li><a href="http://lmj.nagaokaut.ac.jp/~lu/programming/gtk_tut_ja/gtk_tut_ja.html">GTK Tutorial</a></li>
+</ul>
+
+<h2>GTK+ウィジェットの例</h2>
+<p>主なウィジェットには、GtkWindow, GtkDialog, GtkButton, GtkLabel, GtkMenu, GtkMenuItem, GtkToolbar, GtkHBox, GtkVBoxなどがある。</p>
+<p>また画像やグラフィックスを表示するためにGtkImageや、GDKのGdkPixbufなどもよく使う。</p>
+<p>ウィジェットの作成は、g_object_new()でオブジェクトを作成し、gtk_container_add()でウィジェットを別のコンテナ系ウィジェットに格納し、g_signal_connect()でシグナルハンドラを登録する。</p>
+<ul>
+<li><a href="http://ossforum.jp/en/node/947">II-14-7. GTK+によるGUIプログラミング | 日本OSS推進フォーラム</a></li>
+<li><a href="https://www.amazon.co.jp/Official-GNOME-developers-guide/dp/1593270305">The Official GNOME 2 developer's guide</a></li>
+</ul>
+<!--
+<p>GTK+ウィジェットのギャラリー（一覧）は以下にあります。</p>
+<ul>
+<li><a href="https://developer.gnome.org/gtk3/stable/ch03.html">Widget Gallery: GTK+ 3 Reference Manual</a></li>
+<li><a href="https://developer.gnome.org/gtk3/stable/index.html">GTK+ 3 Reference Manual: GTK+ 3 Reference Manual</a></li>
+</ul>
+-->
+<div class="edit_date">
+<p>2023.02.19編集</p>
+</div>
+
+<!--
+<h2>ウェジェット階層</h2>
+<p>以下にウィジェット階層があります。</p>
+<ul>
+<li><a href="http://lmj.nagaokaut.ac.jp/~lu/programming/gtk_tut_ja/gtk_tut_ja-5.html">GTK Tutorial: ウィジェット概観</a></li>
+</ul>
+<p>GTK+のバージョンが古いかもしれないので、最新のウィジェットを一覧したい場合は以下を参照のこと。</p>
+<ul>
+<li><a href="https://developer.gnome.org/gtk3/stable/index.html">GTK+ 3 Reference Manual: GTK+ 3 Reference Manual</a></li>
+</ul>
+<p>後日注記：最新版（GTK4）のウィジェット階層は以下から一覧できます。</p>
+<ul>
+<li><a href="https://developer.gnome.org/gtk4/stable/ch07.html">Object Hierarchy - GTK 4 Reference Manual</a></li>
+</ul>
+-->
+
+<h2>継承も可能</h2>
+<p>GObjectでは継承も可能。GTypeは単一継承で、基底クラスを継承して派生クラスにできる。</p>
+<p>また、GTKではほかのプラットフォームネイティブなツールキットにあるように既に用意されているウィジェットだけではなく独自のウィジェットを作れる。</p>
+<p>詳しいことは以下が参考になる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GObject">GObject - Wikipedia</a></li>
+<li><a href="http://lmj.nagaokaut.ac.jp/~lu/programming/gtk_tut_ja/gtk_tut_ja-24.html">24. 独自のウィジェットを書く - GTK Tutorial</a></li>
+</ul>
+
+<h2>GTK+でカスタムウィジェット</h2>
+<p>カスタムウィジェットを作る方法は以下（RubyとC++とValaとC言語）。以下はさまざまな種類のカスタムウィジェットを作っていて、それぞれ違うため参考になる：</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/plonk123/20140520/1400576943">Ruby/Gtk2 でカスタムウィジェットを作る - plonk123の日記</a> (Ruby)</li>
+<li><a href="http://book.geocities.jp/gtkmm_ja/docs/tutorial/html/sec-custom-widgets.html">Chapter 25. カスタムウィジット -  gtkmmプログラミング</a> (gtkmm)</li>
+<li><a href="https://wiki.gnome.org/Projects/Vala/CustomWidgetSamples">Creating Custom GTK+ Widgets - GNOME Wiki</a> (Vala)</li>
+<li><a href="http://zetcode.com/gui/gtk2/customwidget/">Custom GTK+ widget - ZetCode</a> - (C言語)</li>
+</ul>
+<p>他の言語バインディングについても検索するとたくさん出てきます。</p>
+
+<h2>書籍・ページ</h2>
+<p>以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a></li>
+<li><a href="https://developer.gnome.org/glib/stable/glib-Basic-Types.html">Basic Types: GLib Reference Manual</a></li>
+<li><a href="https://www.amazon.co.jp/Official-GNOME-developers-guide/dp/1593270305">The Official GNOME 2 developer's guide</a></li>
+<li><a href="http://ossforum.jp/en/node/947">II-14-7. GTK+によるGUIプログラミング | 日本OSS推進フォーラム</a></li>
+</ul>
+
+<h1>GTKの内部アーキテクチャ</h1>
+<h2>GObject/GLib</h2>
+<p>GNOMEのオブジェクトシステム。C言語などを通じて、オブジェクト指向のプログラミングが出来る。応用言語にVala（GLibをベースにC#/.NETを模したコンパイル言語）などがある。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GObject">GObject - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/GLib">GLib - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Vala">Vala - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/GNOME/glib">git - GLib</a></li>
+</ul>
+
+<h2>GTK+</h2>
+<p>GIMPの開発チームによって作られたウィジェット・ツールキット。動作が遅くのっぺりしているがきちんと動くことで有名。ライバルはQt。</p>
+<p>Cで書かれていて、さまざまな言語フロントエンドがあり、色んなオープンソースのプログラミング言語でGUIアプリケーションを表示・操作することが出来る。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GTK%2B">GTK+ - Wikipedia</a></li>
+</ul>
+
+<h2>GDK</h2>
+<p>GDKはGTK+で使われている低レベルなグラフィックライブラリ。低レベルな描画処理・イベント処理などを担当する。</p>
+<p>GDKはWindows APIやQuartzにも対応しているため、GIMPなどはWindows版も存在する。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/GDK">GDK - Wikipedia(英語)</a></li>
+</ul>
+
+<h2>Cairo</h2>
+<p>CairoはベクターグラフィックスのプログラミングAPI。GDKと一緒に使う。<a href="cairo.html">Cairo</a>を参照のこと。</p>
+
+<h2>GTKのレイヤー</h2>
+<p>以下はGNOMEで使われているGTKのレイヤー。</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/GTK#/media/File:GTK+_software_architecture.svg">Simplified software architecture of GTK. Pango, GDK, ATK, GIO, Cairo and GLib (Shmuel Csaba Otto Traian)</a></li>
+</ul>
+<p>ここでは、以下のようなレイヤーがあることが分かる。</p>
+<table class="some_tables">
+<tr><th class="min60">レイヤー</th><th>コンポーネント</th></tr>
+<tr><td>高水準</td><td>GNOME（デスクトップ環境・アプリケーション）<br>GTK（ウィジェットツールキット）</td></tr>
+<tr><td>中水準</td><td>Pango（多言語テキスト表示）<br>GDK（ピクセルグラフィックス描画）<br>ATK（アクセシビリティ）<br>GIO（IO・仮想ファイルシステム）</td></tr>
+<tr><td>低水準</td><td>Cairo（ベクターグラフィックス描画）<br>GLib（型・オブジェクト指向）</td></tr>
+<tr><td>ディスプレイサーバ</td><td>Xlib（X11）<br>Wayland（ディスプレイサーバ）<br>Linux（カーネル）</td></tr>
+</table>
+<p>詳しくは<a href="../prog_lang/system_layer.html">システムレイヤー</a>を参照のこと。</p>
+
+<h2>GTKのコードを読もう</h2>
+<p>GTKはオンラインからGitLabのリポジトリを参照することでコードを参照できる。</p>
+<p>パソコンの初心者がパソコンを操作して、まず最初に興味を持つのはGUIツールキットではないかと思う。世間ではカーネルやコンパイラばかりの内部仕様（インターナル）が解説されるが、本当は誰もが知りたいのはX11やGTK/Qtのコードではないかと思う。</p>
+<ul>
+<li><a href="https://www.gtk.org/download/">Download GTK</a></li>
+<li><a href="https://gitlab.gnome.org/GNOME/gtk">GNOME / gtk · GitLab</a></li>
+<li><a href="https://gitlab.gnome.org/GNOME/glib">GNOME / GLib · GitLab</a></li>
+<li><a href="https://gitlab.gnome.org/GNOME/pango">GNOME / pango · GitLab</a></li>
+<li><a href="https://gitlab.gnome.org/GNOME/gdk-pixbuf">GNOME / gdk-pixbuf · GitLab</a></li>
+<li><a href="https://gitlab.gnome.org/GNOME/atk">GNOME / atk · GitLab</a></li>
+<li><a href="https://developer.gnome.org/gtk3/">GTK+ 3 Reference Manual</a></li>
+</ul>
+
+<h1>GTKその他</h1>
+<h2>GTKのテーマ</h2>
+<p>テーマ集サイトとしてはgnome-look.orgがあります。Qtほど美しくありませんが見た目を綺麗なものに変えられます。</p>
+<ul>
+<li><a href="https://www.gnome-look.org/">gnome-look.org</a></li>
+</ul>
+
+<h2>GTK+をWindowsで動かす</h2>
+<p>あまり一般的ではないが、GTK+もクロスプラットフォームに対応していて、WindowsでもGTK+アプリケーションを開発することができる。以下のようなページを参照のこと。</p>
+<ul>
+<li><a href="https://ameblo.jp/concello/entry-10621559694.html">GTK+ Windows編 | くらいまーず　はい</a></li>
+</ul>
+<p>たとえば、GTK+で作られたGIMPやInkscapeはWindowsでも動くようになっている。</p>
+
+<h1>GTK関連ツール</h1>
+<h2>ATK/ORCA</h2>
+<p>アクセシビリティツールキット。主に視覚障害や聴力障害など、さまざまな程度の障害がある人などを対象に、GNOMEを使いやすくする。</p>
+<p>アクセシビリティはA11y（Accessibilityの短縮形）と呼ばれ、i18n（internationalizationの短縮形で、アプリケーションを国際的に使いやすくする）やl10n（localizationの短縮形で、その地域によって使いやすくする）やm17n（multilingualizationの短縮形で、たくさんの言語で使いやすくする）などと同様にGNOMEでは重要視されている。</p>
+<p>以下のopenSUSE 評議会(Board)などでは、評議会メンバーに視聴覚障害を持った方が居ることが分かる。<!--おそらくとても素晴らしい人間だ。--></p>
+<ul>
+<li><a href="https://ja.opensuse.org/Board">openSUSE 評議会(Board)</a></li>
+</ul>
+<p>ORCAと呼ばれるアクセシビリティ用のツールもある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3">コンピュータアクセシビリティ - Wikipedia</a></li>
+</ul>
+
+<h2>Pango</h2>
+<p>PangoはGNOMEで使われている多言語・多文字の表示システム。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Pango">Pango - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/GNOME/pango">git</a></li>
+</ul>
+
+<h2>pkg-config</h3>
+<p>GTK+アプリケーションはpkg-configを用いて独自のコマンドでコンパイルする。</p>
+<!--
+<p>GTK+アプリケーションは、pkg-configを用いてコンパイルすることが多い。単にgccだけではコンパイルできないことがあるので注意が必要。</p>
+-->
+<p>pkg-configによるコンパイルは以下のようになる。</p>
+<pre>
+$ gcc hoge.c `pkg-config --cflags --libs gtk+-3.0`
+</pre>
+<p>（<a href="http://onoono-life.blogspot.com/2013/11/cc-hello-world-gtk.html">各々の生き方: C/C++ Hello World ウィンドウ表示(GTK+)</a>より引用。）</p>
+<p>主にC言語によるGTK+プログラムでは、pkg-configを用いてコンパイルを実行しなければコンパイルが通らない。</p>
+<p><a href="make.html">Make</a>も参照のこと。</p>
+<ul>
+<li><a href="http://onoono-life.blogspot.com/2013/11/cc-hello-world-gtk.html">各々の生き方: C/C++ Hello World ウィンドウ表示(GTK+)</a></li>
+<li><a href="https://developer.gnome.org/gtk3/stable/gtk-compiling.html">Compiling GTK+ Applications: GTK+ 3 Reference Manual</a></li>
+<li><a href="https://developer.gnome.org/gtk2/stable/gtk-compiling.html">Compiling GTK+ Applications: GTK+ 2 Reference Manual</a></li>
+</ul>
+
+<h1>開発</h1>
+<h2>GTK+/GNOMEアプリケーションを開発したい</h2>
+<p>英語だけど、以下のリソースが参考になるかもしれない。</p>
+<ul>
+<li><a href="https://developer.gnome.org/platform-overview/unstable/">GNOME application development overview</a> - 辿っていくと既存アプリケーションのソースコードをブラウズできる。</li>
+<li><a href="https://developer.gnome.org/guides">ガイド - GNOME</a></li>
+</ul>
+<p>あるいは、自分で検索してください。さまざまな言語が使えるし、GladeというGUIデザインツールもあります。</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=gtk+application+development">gtk application development - Google検索</a></li>
+<li><a href="https://www.google.co.jp/search?q=gnome+application+development">gnome application development - Google検索</a></li>
+</ul>
+
+<h2>Glade</h2>
+<p>Gladeと呼ばれるGTK+用のGUIデザイナーがあります。<a href="glade.html">Glade</a>を参照のこと。</p>
+
+<h2>GTKをさまざまな言語で</h2>
+<p>GTKアプリケーションをさまざまな言語で開発できる言語バインディングについては、<a href="gtk_bindings.html">GTK言語バインディング</a>を参照のこと。</p>
+
+<h1>GTK関連のリンク</h1>
+<h2>GTK+での開発</h2>
+<p>基本的には、C言語の関数でウィジェットを作っていって、イベント関数を登録していく感じになるのかなと思います。</p>
+<p>相花毅氏がとても有用なドキュメントをたくさん翻訳されてくださっているので、そちらを参考にしてください。</p>
+<ul>
+<li><a href="https://documents.mikeforce.net/">GNOME ドキュメント翻訳 - Mikeforce::Homepage</a></li>
+<li><a href="https://documents.mikeforce.net/gtk+-2.0.x-tut/html/gtk-tut.html">GTK+ 2.0 チュートリアル (2003-01-24版)</a></li>
+<li><a href="https://documents.mikeforce.net/PyGObject-Tutorial/html/index.html">Python GTK+ 3 チュートリアル</a></li>
+</ul>
+<p>具体的にどんなコードになるのかは、以下のような感じ：</p>
+<ul>
+<li><a href="https://documents.mikeforce.net/gtk+-2.0.x-tut/html/ch-gettingstarted.html">3. はじめてみよう - GTK+ 2.0 チュートリアル (2003-01-24版)</a></li>
+</ul>
+<p>実際のところ、GTK+とVBは良く似ている。VBで作るのと全く同じように、ツールキットに対して関数を設定することで、GTK+プログラムは出来上がる。</p>
+
+<h2>GTK+ 3.0入門サイト</h2>
+<p>以下のサイトが参考になる。</p>
+<ul>
+<li><a href="http://uchigo.main.jp/gtk3/index.html">素人の独学GTK+3.0 - 内郷茶館</a></li>
+</ul>
+
+<h1>デスクトップ環境・アプリケーション</h1>
+<h2>GNOME</h2>
+<p><a href="gnome.html">GNOME</a>、<a href="gnome_desktop.html">GNOMEデスクトップ</a>、<a href="gnome_apps.html">GNOMEアプリケーション</a>を参照のこと。</p>
+
+<h2>Xfce</h2>
+<p><a href="xfce.html">Xfce</a>を参照のこと。</p>
+
+<h2>MATE/Cinnamon</h2>
+<p><a href="mate.html">MATE</a>や<a href="cinnamon.html">Cinnamon</a>を参照のこと。</p>
+
+<h2>GIMP</h2>
+<p><a href="../art/gimp.html">GIMP</a>を参照のこと。</p>
+
+<h1>X11・GUI開発</h1>
+<h2>X11 API</h2>
+<p>X11のAPIについては、<a href="linux_x11.html">X11</a>やその子ページを参照のこと。</p>
+
+<h2>GUI開発</h2>
+<p>GUIの開発全般については<a href="../prog_lang/gui_develop.html">GUI開発</a>を参照のこと。</p>
+
+<h2>イベント駆動</h2>
+<p><a href="../prog_lang/event.html">イベント駆動</a>を参照のこと。</p>
+
+<h1>余談</h1>
+
+
+<h2>GTK+はクラス設計が未熟</h2>
+<p>GTK+/GLibの問題として、クラスやAPIの設計が未熟である、というのが挙げられる。C言語で完結できて、さまざまな言語で開発できるとは言うが、クラスライブラリやAPIの設計が、DelphiやBeOSほど美しくない。</p>
+<p>MSが.NET、OracleがJava、MacがCocoaなどで「美しいクラス設計」をしているのとは対照的に、たとえばgpointerのように型名に「g」をつける必要があるなど、「醜くて、使い辛くて、分かりにくくて、美しくない」という特徴がある。</p>
+<p>だが、そういう人は、一度GTK#/Monoを試してみよう。LinuxでもGTK+とMonoを使うことで、C#/.NETで開発ができる。VMが邪魔だと言う人は、Valaを試してほしい。</p>
+<p>GTK+はさまざまな言語で開発ができる。特に、PythonやRubyで開発できるのは、「Cの関数なんか使いたくないよ」という「高水準な言語オタク」にとってはとても優れた長所である。どんどんC#やRubyでGNOMEアプリを開発してほしい。GNOMEのネットワーク・オブジェクト・モデルのアーキテクチャは、そうした人々のためにある。</p>
+
+<h2>もっとウィジェットを、もっとコンポーネントを</h2>
+<p>僕は、GTK+やBonoboなどに言えることとして、もっとウィジェットを用意して、その上でカスタムコントロールやコンポーネントをもっとたくさん用意すれば、面白いことに成るのではないかと思います。</p>
+<p>たとえば、MS-Wordを簡単に作れるような「ワープロコンポーネント」を用意します。これによって、どんなプログラマでも簡単にコンポーネントを使うだけで、独自の自分のワープロソフトが作れるようになるでしょう。</p>
+<p>今のところ、Gnumericのコンポーネントのようなものはあるようですが、僕はもっとGNOMEでコンポーネントを用意し、「GUIアプリケーションがたくさん生まれるような土壌」を作り出しても良いと思います。</p>
+
+<h2>libadwaita問題</h2>
+<p>最近のGTK界隈では、「libadwaita」と呼ばれる新しいライブラリが問題となっています。</p>
+<p>libadwaitaは、GTK4のためのライブラリで、「新しいGNOMEの標準テーマ」でありながら、「HIGに準拠するためにテーマやウィジェットの描画をライブラリに一任させるもの」です。</p>
+<p>今までのGNOMEでは、HIG（GNOMEの一貫したユーザーインターフェースのガイドライン）を守るために、HIGという文書を作って、あとはそれぞれのアプリケーションの開発者がそれに準拠して開発を行ってきました。</p>
+<p>ですが、このモデルだと、手作業でHIGに準拠しなければならず、大変です。</p>
+<p>そこで、ライブラリとして、このHIGに準拠したUI描画を行うようなライブラリを作って、それに一任しよう、という発想が今回のlibadwaita問題です。</p>
+<p>libadwaitaを使うと、HIGへの準拠がスマートにでき、また今までGTKとGNOMEプロジェクトがやっていたことをひとつのライブラリに分離できますが、libadwaitaが標準テーマとなってしまい、そのためlibadwaitaの見た目（醜いという人も居る）を、今までのテーマエンジンのように変えることが難しくなってしまうのではないか（あるいは違うやり方になってしまうのではないか）、ということが問題です。</p>
+<p>ただし、多くの人が指摘しているように、そもそもGNOMEでカスタムテーマを使うということは、GNOME公式の推奨ではありません。カスタムテーマは公式でも標準では推奨されておらず、もともとは外部ユーザーがハックする形で実現していたのです。</p>
+<p>というわけで、libadwaitaを使うことで、GNOMEではテーマがlibadwaita一択になってしまい、これまで以上に「醜いインターフェースを変えられない」ようになることが予想されます。</p>
+<p>このことにより問題が出てくるのは、カスタムテーマを採用しているカスタムディストリビューションです。自分たちが独自に採用した、ディストリビューションのデスクトップの独自テーマを変更できなくなってしまいます。そのため、System76によるPop!_OSなどでは、Rustを用いた新しいデスクトップ環境であるCOSMICなどの開発が始められています。</p>
+<ul>
+<li><a href="https://www.omgubuntu.co.uk/2021/12/libadwaita-1-0-arrives-to-kickstart-a-new-era-of-gtk-app-development">Libadwaita 1.0 Arrives to Kickstart a New Era of GTK App Development - OMG! Ubuntu!</a></li>
+<li><a href="https://adrienplazas.com/blog/2021/03/31/introducing-libadwaita.html">Introducing Libadwaita | Adrien Plazas</a></li>
+<li><a href="https://slacknotebook.com/gnome-41-what-is-libadwaita-and-theming/">GNOME 41から導入されたLibadwaitaとはなにか、カスタムテーマ問題  |  SlackNote</a></li>
+</ul>
+
+<h2>GTKにおけるGUI開発（コンテナとイベント・プロパティと動的なビューの生成）</h2>
+<p>GTKを開発のために使う際に、知っておくべきことは「コンテナ」の概念です。</p>
+<p>コンテナとは、ウィジェットコントロールを内包するウィジェットコントロールのことで、GTKではHBoxやVBoxのようなウィジェットの中に、さまざまなウィジェットを詰め込むことができます。</p>
+<p>もうひとつは、「イベント」や「プロパティ」の概念です。</p>
+<p>GTKはオブジェクト指向のGUIツールキットであり、ウィジェットにはそのウィジェットの性質を示すさまざまな「プロパティ」と、イベント駆動で関数を実行する「イベント」の概念があります。</p>
+<p>GUIプログラミングとは、多くがそのようなイベントやプロパティとの格闘です。イベントやプロパティを操作することが、GUIプログラミングの大きな部分となります。</p>
+<p>最後に、静的にウィジェットを作るだけではなく、動的にウィジェットを生成したり破棄したりする方法を学びましょう。</p>
+<p>ひとつのビュー画面だけで作られるアプリケーションを作るのは楽です。ですが、タブなどを用いて複数のビュー画面をひとつのアプリケーションの中に内包する場合、タブと一緒に動的にビュー画面を作れなければなりません。</p>
+<p>そのようなビュー画面の動的な生成と破棄の方法を知ることで、GUIアプリケーションの開発がとても簡単になるでしょう。</p>
+<p>ほかにもGUIプログラミングにはさまざまな要素があるので、詳しくは<a href="../prog_lang/gui_develop.html">GUI開発</a>のページを参照のこと。</p>
+<div class="edit_date">
+<p>2024.06.18</p>
+</div>
+
+<h2>GTKは遅すぎる</h2>
+<p>なぜか、GTKは遅すぎる。GUIツールキットとして、あまりに遅い。</p>
+<p>キーを入力して、文字が表示されるまでの時間が遅いし、マウスのクリックに対する感度や反応も遅い。</p>
+<p>たぶん、C言語でオブジェクト指向をする、というやり方が間違っているのだと思う。</p>
+<p>GTKでは、C言語でオブジェクト指向をするために、GLibやGObjectという仕組みを使っている。また、描画するためにGDKやCairoを、多言語の文字を表示するためにPangoを使っている。テーマエンジンで見た目も豪華に変えられる。</p>
+<p>そのようなことを、Linuxカーネルの上で動くX11やWayland上で行っているせいで、あまりにも遅すぎる。</p>
+<p>はっきり言って、クソみたいな設計をしているWindowsのほうが、はるかに軽くて速い。Windowsなら、カーネルレベルで瞬時にメッセージが大量に送られる。カーネルとウィンドウシステムを統合しているから当たり前だが、GTKはそれをのらりくらりやっているように思う。</p>
+<p>こんなに遅いなら、まだQtのほうがマシだ。</p>
+<div class="edit_date">
+<p>2024.12.07</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>GNOME/GTK+/GLib</h2>
+<p>GTK+</p>
+<ul>
+<li><a href="http://www.gtk.org/documentation.php">GTK+ Documentation</a></li>
+<li><a href="http://lmj.nagaokaut.ac.jp/~lu/programming/gtk_tut_ja/gtk_tut_ja.html">GTK Tutorial</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0249">第249回　AnjutaとGTK+で休日プログラミング - gihyo.jp</a></li>
+<li><a href="https://wiki.archlinuxjp.org/index.php/GTK%2B/%E9%96%8B%E7%99%BA">GTK+/開発 - ArchWiki</a></li>
+</ul>
+
+<p>Takeshi AIHANAさんによるドキュメント和訳。</p>
+<ul>
+<li><a href="http://documents.mikeforce.net/">GNOME ドキュメント翻訳 - Mikeforce::Homepage</a></li>
+<li><a href="https://documents.mikeforce.net/gtk+-2.0.x-tut/html/gtk-tut.html">GTK+ 2.0 チュートリアル (2003-01-24版) - Mikeforce::Homepage</a></li>
+<li><a href="http://documents.mikeforce.net/gtk+-2.14.x-refs/gtk/html/index.html">GTK+ リファレンスマニュアル - Mikeforce::Homepage</a></li>
+<li><a href="http://wp.mikeforce.net/gnome/2015/04/gtk_ref_translation_is_finally_completed.html">GTK+ Ref. translation is finally finished. - Mikeforce::Homepage</a></li>
+</ul>
+
+<h2>GTK+によるプログラミング</h2>
+<p>GTK+によるプログラミング。</p>
+<ul>
+<li><a href="http://uchigo.main.jp/gtk3/index.html">素人の独学GTK+3.0 - 内郷茶館</a></li>
+<li><a href="https://ja.wikibooks.org/wiki/GNOME%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF">GNOMEフレームワーク - Wikibooks</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

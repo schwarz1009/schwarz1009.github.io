@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ML/OCamlの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ML/OCamlの世界観</h1>
+<p>ML/OCamlに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ML/OCaml</h1>
+<h2>ML/OCaml</h2>
+<p>関数型言語。MicrosoftがOCamlをベースとした.NET Framework用のF#をリリースしているが、それ以前からHaskellとともに「使える関数型言語」として有名である。</p>
+
+<h2>MLとOCamlの特徴</h2>
+<p>MLは純粋関数型でない関数型言語として有名で、関数型言語でありながら破壊可能なレコード型を書くことができ、遅延評価ではなく先行評価といった特徴を持つ。</p>
+<p>OCamlはMLをベースとしながらオブジェクト指向の考え方を取り入れている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OCaml">OCaml - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/ML_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)">ML (プログラミング言語) - Wikipedia</a></li>
+</ul>
+
+<h2>Ocamlでオブジェクト指向</h2>
+<p>（オブジェクト指向：<a href="https://ocaml.org/learn/tutorials/objects.ja.html">オブジェクト – OCaml</a>にサンプルコードがあります。以下に「オブジェクトとクラス」の中の「整数のスタックを提供する基本コード」より、Ocamlの技術的要素を説明します。）</p>
+<table class="some_tables">
+<tr><th class="min60">要素</th><th>説明</th></tr>
+<tr><td>val mutable the_list</td><td>ミュータブル（変更可能）なインスタンス変数。値を再代入できる。</td></tr>
+<tr><td>( [] : int list )</td><td>空のリスト。</td></tr>
+<tr><td>push, pop, peek, size</td><td>スタックの各機能（プッシュ・ポップ）。</td></tr>
+<tr><td>List.hd, List.tl, List.length</td><td>リストの要素・長さを返す。</td></tr>
+<tr><td>::</td><td>要素とリストからリストを作る（cons）。</td></tr>
+<tr><td>@</td><td>リストとリストの連結を行う（append）。</td></tr>
+<tr><td>&lt;-</td><td>割り当て演算子。<br>書き換え可能なインスタンス変数や、<br>レコード内のフィールドに破壊的作用を与える。</td></tr>
+</table>
+<p>詳しくは以下が参考になるかも。</p>
+<ul>
+<li><a href="http://ocaml.jp/?OCaml%E5%85%A5%E9%96%80%282%29">OCaml入門(2) - OCaml.jp</a></li>
+<li><a href="http://ocaml.jp/archive/ocaml-manual-3.06-ja/libref/List.html">Module List</a></li>
+<li><a href="https://ocaml.org/learn/tutorials/functional_programming.ja.html">関数型プログラミング – OCaml</a></li>
+</ul>
+
+<h2>F#</h2>
+<p>F#はMicrosoftによる.NET向けのOCamlベースの関数型とオブジェクト指向を兼ね備えた言語。一部では「書いていて一番気持ちいい」ととても評判である。</p>
+<ul>
+<li><a href="https://qiita.com/cannorin/items/59d79cc9a3b64c761cd4">F# を知ってほしい - Qiita</a></li>
+</ul>
+<p><a href="dotnet.html">.NET</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.08.29</p>
+</div>
+
+<h1>Webフレームワーク</h1>
+<h2>Dream</h2>
+<p>DreamはOCamlによるWebフレームワーク。</p>
+<ul>
+<li><a href="https://aantron.github.io/dream/">Dream — Tidy, feature-complete web framework</a></li>
+<li><a href="https://tars0x9752.com/posts/ocaml-dream-web">OCaml初心者はDreamでWebの夢をみるか - tars0x9752</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.29</p>
+</div>
+
+<h2>Falco</h2>
+<p>FalcoはF#によるWebフレームワーク。</p>
+<ul>
+<li><a href="https://twitter.com/Sheeeeepla/status/1713457804906991849">@Sheeeeeplaさんのポスト - X</a></li>
+<li><a href="https://twitter.com/RyushiAok/status/1713460572615041116">@RyushiAokさんのポスト - X</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.20</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>関数型プログラミング</h2>
+<p><a href="functional_programming.html">関数型プログラミング</a>も参照のこと。</p>
+
+<h2>オブジェクト指向</h2>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>OCaml</h2>
+<p>OCamlのチュートリアル。</p>
+<ul>
+<li><a href="http://ocaml.jp/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB">OCamlチュートリアル</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-ml.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

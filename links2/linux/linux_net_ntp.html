@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>NTP・時刻同期 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>NTP・時刻同期</h1>
+<p>NTP・時刻同期に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>時刻同期</h1>
+<h2>時刻同期とntpd</h2>
+<p>Linuxサーバを管理する上で、正確な時間をシステムが刻むことは重要。</p>
+<p>単に表示される時刻が変わるだけではなく、ログに残される時間なども、正確な時刻でなければ復旧作業などに問題が出る。</p>
+<p>正しい時刻をシステムが刻むために、NTPというプロトコルを使ってタイムサーバとの時刻同期を行う。</p>
+<p>このために、ntpdをインストールし、ntp.confで同期するNTPサーバーの設定を行う。</p>
+<p>Debianならaptでntpdをインストールする。</p>
+<pre>
+# apt install ntp
+</pre>
+<p>/etc/ntp.confで、サーバにNICTを指定する（日本国内の場合）。</p>
+<pre>
+server ntp.nict.jp
+</pre>
+<p>あるいは、ntpdateコマンドで今すぐに時刻を合わせる。</p>
+<pre>
+# ntpdate ntp.nict.jp
+</pre>
+<p>これ以外に、サーバーを自動的に起動したり、ハードウェアクロックをシステムクロックに合わせたりなどの必要な設定がある。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/megu_ma/items/bb902740ee7de9ddd102">Linuxサーバの時刻設定手順とエラー（the NTP socket is in use, exiting） - Qiita</a></li>
+<li><a href="https://qiita.com/yuba/items/66d2d45a61b28737c098">Linux/UNIXサーバは立てたらまず時刻同期の設定 - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.19</p>
+</div>
+
+<h2>システムクロックとハードウェアクロック</h2>
+<p>コンピュータの時刻はシステムクロックとハードウェアクロックの二種類がある。</p>
+<p>システムクロックを表示するには、</p>
+<pre>
+$ date
+</pre>
+<p>とする。これに対してハードウェアクロックを表示するには、</p>
+<pre>
+# hwclock -r
+</pre>
+<p>とする。そして、システムクロックをハードウェアクロックに適用するには、</p>
+<pre>
+# hwclock -w
+</pre>
+<p>とする。</p>
+<ul>
+<li><a href="https://qiita.com/megu_ma/items/bb902740ee7de9ddd102">Linuxサーバの時刻設定手順とエラー（the NTP socket is in use, exiting） - Qiita</a></li>
+<li><a href="https://qiita.com/yuba/items/66d2d45a61b28737c098">Linux/UNIXサーバは立てたらまず時刻同期の設定 - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.19</p>
+</div>
+
+<h2>ntpdate/ntpq</h2>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>ntpdate</td><td>タイムサーバを利用して時刻を設定するコマンド。</td></tr>
+<tr><td>ntpq</td><td>ntpdの情報を表示するコマンド。</td></tr>
+<tr><td>hwclock</td><td>ハードウェアクロックを設定するコマンド。</td></tr>
+</table>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.19編集</p>
+<p>2024.10.06編集</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

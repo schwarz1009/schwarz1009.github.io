@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Qt関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Qtの世界観</h1>
+<p>Qtに関する世界観です。<a href="linux_x11.html">Linux（X11周辺）</a>や<a href="gtk.html">GTK+</a>も参照のこと。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>Qt</b></li>
+<li><a href="kde.html">KDE（アーキテクチャ）</a></li>
+<ul>
+<li><a href="kde_desktop.html">KDE（デスクトップ）</a></li>
+<li><a href="kde_apps.html">KDE（アプリケーション）</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Qt</h1>
+<h2>Qt</h2>
+<p>KDEで採用されている、X11のウィジェットツールキット。昔はこれがオープンソースでなくて、GNOMEと言うもう一つのプロジェクトを作る必要があった。今はオープンソース。Trolltechと言う会社で開発されていた。</p>
+<p>後日注記：Qtはかつては「フリーでないにもかかわらずKDEで使われているツールキット」として、GNUなどから問題視され、GNOMEなどが開発されるきっかけになりました。今のQtは商用ライセンスのほかにLGPL/GPL版があり、名実ともにQtはオープンソースになったので、そのような批判は当たりません。Qtを採用するKDEを安心して自由に使うことができます。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Qt">Qt - Wikipedia</a></li>
+</ul>
+<p>テーマ集サイトとしてはstore.kde.orgがあります。</p>
+<ul>
+<li><a href="https://store.kde.org/">store.kde.org</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="http://code.qt.io/cgit/">git</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.18編集</p>
+</div>
+
+<h2>Qtの特徴</h2>
+<p>Qtにはいくつかの特徴がある。</p>
+<p>まず、クロスプラットフォームであること。「一度コードを書けばどこでも動く」というコンセプトのもと、LinuxのX11だけではなく、Windows, Mac, モバイルなど多くの環境で動く。特に組み込み製品において実績が多い。</p>
+<p>次に、ネイティブと同等の効率性・スピードがあること。初期のQtは独自の描画エンジンを持っていて、ターゲットプラットフォームの見た目をエミュレートしていたが、今ではネイティブに用意されているAPIを使うようになり、C++で書かれていることもあって、ネイティブと同等の見た目と効率性・スピードを持つようになった。</p>
+<p>そして、Qtにはシグナル＆スロットと呼ばれる仕組みがある。これはObserverパターンを実装したもので、素のC++では実現しづらい仕組みだが、QtではC++の記述の中にアノテーションを記述することでこれを可能としている。ここで、moc（メタオブジェクトコンパイラ）と呼ばれるC++の変換ツールを使う。</p>
+<p>そして、QtはGUIアプリケーション開発のためのウィジェットツールキットだけではなく、コマンドラインのツールやサーバーデーモンの開発にも使える多くの機能を有する。</p>
+<p>このようなQtは、見た目にも美しく、スピードも速く、KDEなどのオープンソースプロジェクトでの採用実績もあり、商用ライセンスとしては組み込み用途に実績がある。Qtのライセンスがフリーではなかったり、GPLと互換でなかったりしたことから、GNOMEの開発など多くの問題があったが、今では商用ライセンス以外にGPL/LGPLでの利用が認められている。LGPLでの利用が許可されたこともあり、商用製品で使うためには大きな障害は無くなったとみられる。</p>
+<p>詳しくは以下の英語版Wikipediaの記事が参考になります。</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Qt_(software)">Qt (software) - Wikipedia（英語）</a></li>
+</ul>
+
+<h1>サンプルコード</h1>
+<h2>Qtサンプルコード</h2>
+<p>Qtのサンプルコードは以下：</p>
+<ul>
+<li><a href="https://wiki.qt.io/Getting_Started_on_the_Commandline/ja">Qt ではじめる GUI プログラミング - Qt Wiki</a></li>
+<li><a href="https://doc.qt.io/qt-5/qtwidgets-tutorials-notepad-example.html">Getting Started Programming with Qt Widgets | Qt Widgets 5.12.3</a></li>
+<li><a href="http://doc.qt.io/qt-5/gettingstarted.html">Getting Started with Qt | Qt 5.11</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0284">第284回　クロスプラットフォームなアプリケーション開発フレームワークQtでプログラミングをはじめる：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>KDEアプリケーションを開発したい</h2>
+<p><a href="kde.html">KDE</a>を参照のこと。</p>
+
+<h1>言語バインディング</h1>
+<h2>PyQt</h2>
+<p>QtにはPythonバインディングのPyQtがあります。これを用いることでPythonでQtプログラミングができます。</p>
+<ul>
+<li><a href="https://wiki.qt.io/Qt_for_Python">Qt for Python - Qt Wiki</a></li>
+</ul>
+
+<h2>QtRuby</h2>
+<p>また、最近ではQt/KDEのRubyのバインディングも開発されています。
+<ul>
+<li><a href="https://techbase.kde.org/Languages/Ruby">Languages/Ruby - KDE TechBase</a></li>
+</ul>
+
+<h1>ウィジェット</h1>
+<h2>Qtのウィジェットについて</h2>
+<p>以下からウィジェットについての説明に触れることができる。英語だが頑張って読んでほしい。</p>
+<ul>
+<li><a href="https://doc.qt.io/qt-5/qtwidgets-index.html">Qt Widgets 5.12.2 - Qt Documentation</a></li>
+</ul>
+
+<h1>その他の情報</h1>
+<h2>Qt/KDEの情報源</h2>
+<p>Qtについての情報は以下から参照できる。</p>
+<ul>
+<li><a href="https://doc.qt.io/">Qt Documentation</a></li>
+<li><a href="https://wiki.qt.io/Main">Qt Wiki</a></li>
+</ul>
+<p>QtだけではなくKDE全般の情報は以下も参考になる。</p>
+<ul>
+<li><a href="https://techbase.kde.org/Welcome_to_KDE_TechBase">KDE TechBase</a></li>
+</ul>
+
+<h2>QtはWindowsでも動く</h2>
+<p>QtはそもそもクロスプラットフォームのC++のGUIツールキットとして開発されており、Windowsでも動く。ソースコードをコンパイルし直すことで、QtアプリケーションをLinuxからWindowsに移植できる。</p>
+<p>特に、Windows APIでGUIをやっていると不安だとかうんざりした人におすすめ。旧ボーランドのDelphiのように、Windows APIのオープンソースなオルタナティブとしても利用できる。</p>
+<ul>
+<li><a href="http://peanutice.hatenablog.com/entry/2016/03/19/%EF%BC%88Windows%EF%BC%89Qt%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95">（Windows）Qtの開発環境を構築（Qtのインストール） - peanutice’s blog</a></li>
+<li><a href="https://qiita.com/dais_k/items/b54acf15bb9fab50511b">Qtでキュートなツールを作る(導入編) - Qiita</a></li>
+</ul>
+
+<h1>開発ツール</h1>
+<h2>Qt Creator</h2>
+<p>Qt向けの統合開発環境。</p>
+<ul>
+<li><a href="https://blog.qt.io/jp/2010/03/24/helloworld-from-qt-creator/">Qt をはじめよう！ 第5回: Qt Creator を使ってみよう！ - Qt Japanese Blog</a></li>
+</ul>
+
+<h2>QtDesigner</h2>
+<p>Qt向けのフォームエディター。</p>
+<ul>
+<li><a href="http://vivi.dyndns.org/tech/Qt/QtDesigner.html">QtDesigner 使い方入門 - ViVi web site</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>KDE</h2>
+<p><a href="kde.html">KDEアーキテクチャ</a>、<a href="kde_desktop.html">KDEデスクトップ</a>、<a href="kde_apps.html">KDEアプリケーション</a>を参照のこと。</p>
+
+<h2>X11 API</h2>
+<p>X11のAPIについては、<a href="linux_x11.html">X11</a>やその子ページを参照のこと。</p>
+
+<h2>GUI開発</h2>
+<p>GUIの開発全般については<a href="../prog_lang/gui_develop.html">GUI開発</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>KDE/Qt</h2>
+<p>Qt</p>
+<ul>
+<li><a href="http://doc.qt.io/">Qt Documentation</a></li>
+<li><a href="http://qt-users.jp/">日本 Qt ユーザー会</a></li>
+<li><a href="https://www.sra.co.jp/qt/relation/index.html">Qt関連情報｜Qt キュート - 株式会社SRA</a></li>
+<li><a href="http://elisp.net/qt-doc-ja_JP/index.html">Qt 開発者ガイド - elisp.net</a></li>
+<li><a href="http://elisp.net/qt-doc-ja_JP/tutorials.html">Qt チュートリアル - elisp.net</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

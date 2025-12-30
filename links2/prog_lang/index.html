@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>プログラミング言語の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="../../index.html">ホームページに戻る</a></p>
+<h1>プログラミング言語の世界観</h1>
+<h2>目次</h2>
+<div id="toc" class="toc2"></div>
+
+<h2>プログラミングスキル（１）</h2>
+<div class="container">
+<div class="index_box">
+<h3>プログラミング言語</h3>
+<ul class="defaultlist list6">
+<li><a href="programming_languages_intro.html">プログラミング言語入門</a></li>
+</ul>
+<h3>プログラミング全般</h3>
+<ul class="defaultlist list6">
+<li><a href="programming_intro.html">プログラミングをはじめよう</a></li>
+<li><a href="programming_basic.html">プログラミング作法（１．基本）</a></li>
+<ul>
+<li><a href="programming_method.html">２．プログラミング入門</a></li>
+<li><a href="programming_expert.html">３．エキスパート</a></li>
+<ul>
+<li><a href="programming_flow.html">３A．制御フロー</a></li>
+<li><a href="programming_data.html">３B．データ操作</a></li>
+<li><a href="programming_pointer.html">３C．ポインタとメモリ管理</a></li>
+</ul>
+<li><a href="programming_tech.html">４．テクニック</a></li>
+</ul>
+</ul>
+
+<h3>アルゴリズムとデータ構造</h3>
+<ul class="defaultlist list6">
+<li><a href="algorithm.html">アルゴリズム</a></li>
+<ul>
+<li><a href="algorithm_example.html">具体的なアルゴリズム</a></li>
+<li><a href="structured_programming.html">構造化プログラミング</a></li>
+</ul>
+<li><a href="data_structure.html">データ構造</a></li>
+<ul>
+<li><a href="data_structure_list.html">配列とリストとハッシュ</a></li>
+<li><a href="data_structure_stack.html">スタックとキュー</a></li>
+<li><a href="data_structure_tree.html">ツリー</a></li>
+<li><a href="data_structure_graph.html">グラフ</a></li>
+<li><a href="message_queue.html">メッセージキュー</a></li>
+</ul>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>オブジェクト指向</h3>
+<ul class="defaultlist list6">
+<li><a href="oop.html">オブジェクト指向</a></li>
+<ul>
+<li><a href="oop_intro.html">A．考え方</a></li>
+<li><a href="oop_intro2.html">B．考え方２</a></li>
+<li><a href="oop_intro3.html">C．考え方３</a></li>
+
+</ul>
+</ul>
+
+<h3>デザインパターン</h3>
+<ul class="defaultlist list6">
+<li><a href="design_pattern.html">デザインパターン</a></li>
+</ul>
+
+<h3>アスペクト指向</h3>
+<ul class="defaultlist list6">
+<li><a href="aspect.html">アスペクト指向</a></li>
+</ul>
+
+<h3>関数型プログラミング</h3>
+<ul class="defaultlist list6">
+<li><a href="functional_programming.html">関数型プログラミング</a></li>
+<ul>
+<li><a href="iterator.html">イテレータとジェネレータ</a></li>
+<li><a href="closure.html">クロージャ・無名関数・関数オブジェクト</a></li>
+</ul>
+<li><a href="reflection.html">リフレクションとeval</a></li>
+</ul>
+
+<h3>永続化</h3>
+<ul class="defaultlist list6">
+<li><a href="serialize.html">シリアライズ</a></li>
+<li><a href="orm.html">永続化とO/Rマッピング</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>並列処理・制御モデル</h3>
+<ul class="defaultlist list6">
+<li><a href="parallel.html">並列処理</a></li>
+<ul>
+<li><a href="event.html">イベント駆動</a></li>
+</ul>
+</ul>
+
+<h3>デバッグ</h3>
+<ul class="defaultlist list6">
+<li><a href="debug.html">デバッグ（gdb）</a></li>
+<ul>
+<li><a href="debug2.html">バグのないプログラム</a></li>
+</ul>
+</ul>
+<h3>テスト</h3>
+<ul class="defaultlist list6">
+<li><a href="unit_test.html">ユニットテスト</a></li>
+</ul>
+
+<h3>ソースコード閲覧支援・解析</h3>
+<ul class="defaultlist list6">
+<li><a href="ctags.html">ctags</a></li>
+<li><a href="linter.html">lintツール</a></li>
+</ul>
+
+<h3>バージョン管理</h3>
+<ul class="defaultlist list6">
+<li><a href="scm.html">バージョン管理システム</a></li>
+<ul>
+<li><a href="cvs.html">CVS</a></li>
+<li><a href="git.html">Git</a></li>
+</ul>
+</ul>
+</div>
+</div>
+
+<h2>プログラミングスキル（２）</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>さまざまなモデル</h3>
+<ul class="defaultlist list6">
+<li><a href="system_layer.html">システムレイヤー</a></li>
+<li><a href="code_file.html">コードとファイル</a></li>
+<li><a href="state.html">状態</a></li>
+<li><a href="interface.html">インターフェース</a></li>
+<li><a href="function.html">関数</a></li>
+<li><a href="type.html">型</a></li>
+<li><a href="maintenance.html">保守性</a></li>
+<li><a href="portability.html">移植性</a></li>
+<li><a href="utils_develop.html">ユーティリティ開発</a></li>
+<li><a href="data_manipulation.html">データ処理</a></li>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>アプリケーション開発</h3>
+<ul class="defaultlist list6">
+<li><a href="apps_develop.html">アプリケーション開発</a></li>
+<ul>
+<li><a href="browser_develop.html">Webブラウザ</a></li>
+<li><a href="paintsoft_develop.html">ペイントソフト</a></li>
+<li><a href="bbs_develop.html">掲示板</a></li>
+<li><a href="compiler_develop.html">コンパイラ</a></li>
+</ul>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../programs/original_pl.html">独自のプログラミング言語</a></li>
+<li><a href="../videogame/games_devel.html">ゲーム開発</a></li>
+<li><a href="../videogame/opengl.html">OpenGL</a></li>
+</ul>
+</div>
+</div>
+<div class="index_box">
+
+<h3>GUI開発</h3>
+<ul class="defaultlist list6">
+<li><a href="gui_develop.html">GUI開発</a></li>
+</ul>
+
+<h3>チュートリアル・リファレンス</h3>
+<ul class="defaultlist list6">
+<li><a href="tutorials.html">チュートリアル</a></li>
+<li><a href="reference.html">リファレンス</a></li>
+</ul>
+
+<h3>情報科学</h3>
+<ul class="defaultlist list6">
+<li><a href="computer_science.html">コンピュータ科学</a></li>
+</ul>
+
+</div>
+</div>
+
+
+<h2>アセンブラ・C/C++</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>デジタル情報</h3>
+<ul class="defaultlist list6">
+<li><a href="digital.html">デジタル情報</a></li>
+</ul>
+
+<h3>機械語・アセンブラ</h3>
+<ul class="defaultlist list6">
+<li><a href="assembly.html">アセンブリ言語</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../hardware/hardware.html">ハードウェア（１．半導体）</a></li>
+<li><a href="../hardware/hardware2.html">ハードウェア（２．周辺機器）</a></li>
+</ul>
+</div>
+
+<h3>C言語</h3>
+<ul class="defaultlist list6">
+<li><a href="c.html">C言語（１．基本）</a></li>
+<ul>
+<li><a href="c_flow.html">２．制御フロー</a></li>
+<li><a href="c_data.html">３．データ構造</a></li>
+<li><a href="c_pointer.html">４．配列とポインタ</a></li>
+<li><a href="c_io.html">５．入出力</a></li>
+<li><a href="c_preprocessor.html">６．プリプロセッサとインラインアセンブラ</a></li>
+</ul>
+<li><a href="c_comments.html">A．戯言</a></li>
+<li><a href="c_samplecode.html">C言語サンプルコード</a></li>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>C++</h3>
+<ul class="defaultlist list6">
+<li><a href="cpp.html">C++（１．オブジェクト指向）</a></li>
+<ul>
+<li><a href="cpp_generics.html">２．ジェネリック</a></li>
+<li><a href="cpp_stl_libs.html">３．STL・ライブラリ</a></li>
+</ul>
+<li><a href="cpp_comments.html">A．戯言</a></li>
+<li><a href="cpp_tour.html">C++ミニツアー</a></li>
+<li><a href="c_cpp_tools.html">C/C++開発ツール</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../linux/linux_api.html">Linux システムコール・API（１．ファイル・入出力）</a></li>
+<li><a href="../linux/linux_api2.html">Linux システムコール・API（２．プロセス・メモリ）</a></li>
+<!--
+<li><a href="../linux/linux_api3.html">Linux システムコール・API（３．ネットワーク・ソケット）</a></li>
+-->
+<li><a href="../linux/linux_x11.html">Linux X11周辺</a></li>
+<li><a href="../linux/gtk.html">GTK+</a></li>
+<li><a href="../linux/qt.html">Qt</a></li>
+<li><a href="../linux/linux_bash_script.html">Bash（２．シェルスクリプト）</a></li>
+<li><a href="../linux/libc.html">libc</a></li>
+<li><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a></li>
+<li><a href="../linux/llvm.html">LLVM/Clang</a></li>
+<!--
+<li><a href="../linux/make_autotools.html">Make/Autotools</a></li>
+-->
+<li><a href="../linux/make.html">Make</a></li>
+<li><a href="../linux/autotools.html">Autotools</a></li>
+</ul>
+</div>
+</div>
+<div class="index_box">
+
+<h3>Windows API</h3>
+<ul class="defaultlist list6">
+<li><a href="windows_programming.html">Windows API</a></li>
+<li><a href="windows_programming2.html">Windows関連技術</a></li>
+<ul>
+<li><a href="windows_mfc.html">Visual C++/MFC</a></li>
+<li><a href="windows_atl_com.html">ATL/COM</a></li>
+<li><a href="windows_activex.html">ActiveX</a></li>
+<li><a href="windows_gdi.html">GDI</a></li>
+<li><a href="windows_winsock.html">WinSock</a></li>
+</ul>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../videogame/windows_directx.html">DirectX</a></li>
+<li><a href="../windows_pc/vscode.html">VS-Code</a></li>
+</ul>
+</div>
+
+<h3>Mac</h3>
+<ul class="defaultlist list6">
+<li><a href="objective_c.html">Objective-C</a></li>
+<li><a href="swift.html">Swift</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../os/mac.html">Mac</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<h2>Java/.NET</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>Java（１）</h3>
+<ul class="defaultlist list6">
+<li><a href="java.html">Java（１．文法）</a></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><a href="java_oop_interface.html">２B．インターフェース</a></li>
+<li><a href="java_gc.html">２C．ガーベッジコレクションと例外</a></li>
+</ul>
+<li><a href="java_lib.html">３．クラスライブラリ</a></li>
+<ul>
+<li><a href="java_lib_io.html">３A．入出力</a></li>
+<li><a href="java_lib_list.html">３B．コレクションと配列</a></li>
+<li><a href="java_lib_string.html">３C．文字列</a></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><a href="java_lib_xml.html">３E．XML</a></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+<li><a href="java_samplecode.html">Javaサンプルコード</a></li>
+<li><a href="java_gui.html">A．GUI</a></li>
+<ul>
+<li><a href="java_gui_awt.html">AWT</a></li>
+<li><a href="java_gui_swing.html">Swing</a></li>
+<li><a href="java_gui_swt.html">SWT</a></li>
+<li><a href="java_gui_javafx.html">JavaFX</a></li>
+</ul>
+</ul>
+</div>
+<div class="index_box">
+
+
+<h3>Java（２）</h3>
+<ul class="defaultlist list6">
+<li><a href="java_servlet.html">B．サーブレット</a></li>
+<ul>
+<li><a href="java_servlet_appserver.html">アプリケーションサーバ</a></li>
+<li><a href="java_servlet_javabeans.html">JavaBeans</a></li>
+</ul>
+<li><a href="java_langs.html">C．各種言語</a></li>
+<ul>
+<li><a href="java_langs_groovy.html">Groovy</a></li>
+<li><a href="java_langs_scala.html">Scala</a></li>
+<li><a href="java_langs_kotlin.html">Kotlin</a></li>
+</ul>
+<li><a href="java_framework.html">D．Webフレームワーク</a></li>
+<ul>
+<li><a href="java_framework_struts.html">Struts</a></li>
+<li><a href="java_framework_spring.html">Spring Framework</a></li>
+</ul>
+<li><a href="java_devtools.html">E．開発ツール</a></li>
+<ul>
+<li><a href="eclipse.html">Eclipse</a></li>
+<li><a href="intellij.html">IntelliJ IDEA</a></li>
+<li><a href="netbeans.html">NetBeans</a></li>
+<li><a href="java_devtools_build.html">Javaビルドツール</a></li>
+<li><a href="java_openjdk.html">OpenJDK</a></li>
+<li><a href="java_embedded.html">Java組み込み</a></li>
+</ul>
+<li><a href="java_advanced.html">F．発展</a></li>
+<li><a href="java_comments.html">G．戯言</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+<h3>.NET</h3>
+<ul class="defaultlist list6">
+<li><a href="dotnet.html">.NET</a></li>
+<li><a href="csharp.html">C#</a></li>
+<ul>
+<li><a href="csharp_samplecode.html">C#サンプルコード</a></li>
+</ul>
+<li><a href="vb.html">Visual Basic（１．基本）</a></li>
+<ul>
+<li><a href="vb_lib.html">２．クラスライブラリ</a></li>
+<li><a href="vb_form.html">３．フォームデザイナー</a></li>
+</ul>
+<li><a href="dotnet_asp.html">ASP.NET</a></li>
+<li><a href="dotnet_ado.html">ADO.NET</a></li>
+<li><a href="dotnet_wpf.html">WPF</a></li>
+<li><a href="dotnet_core.html">.NET Core</a></li>
+<li><a href="mono.html">Mono</a></li>
+<li><a href="uwp.html">UWP</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<!--
+<li><a href="../windows_pc/windows2.html">Windows（２．開発）</a></li>
+-->
+<li><a href="../windows_pc/msexcel_vba.html">MS-Excel VBA</a></li>
+<li><a href="../linux/ximian.html">Ximian</a></li>
+<li><a href="../mobile/xamarin.html">Xamarin</a></li>
+<li><a href="../videogame/unity.html">Unity</a></li>
+<li><a href="../db/sql_server.html">Microsoft SQL Server</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<h2>マークアップ言語</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>HTML/CSS</h3>
+<ul class="defaultlist list6">
+<li><a href="html.html">HTML</a></li>
+<li><a href="css.html">CSS</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../network/wordpress.html">WordPress</a></li>
+</ul>
+</div>
+</div>
+<div class="index_box">
+
+<h3>XMLと文書形式</h3>
+<ul class="defaultlist list6">
+<li><a href="xml.html">XMLと文書形式</a></li>
+<ul>
+<li><a href="xml_gui.html">XML＆GUI</a></li>
+</ul>
+<li><a href="docbook.html">DocBook</a></li>
+<li><a href="markdown.html">Markdown</a></li>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>JSON</h3>
+<ul class="defaultlist list6">
+<li><a href="json.html">JSON</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../linux/tex.html">TeX</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<h2>Perl/PHP</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>Perl</h3>
+<ul class="defaultlist list6">
+<li><a href="perl.html">Perl</a></li>
+<ul>
+<li><a href="perl_comments.html">Perl戯言</a></li>
+<li><a href="perl_cgi.html">Perl/CGI</a></li>
+</ul>
+<li><a href="perl_catalyst.html">Catalyst</a></li>
+<li><a href="perl_mojolicious.html">Mojolicious</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../network/web.html">Web・サーバー</a></li>
+<li><a href="../network/apache.html">Apache</a></li>
+<li><a href="../network/cgi.html">CGI</a></li>
+<li><a href="../network/fastcgi.html">FastCGI</a></li>
+</ul>
+</div>
+
+</div>
+<div class="index_box">
+
+<h3>PHP</h3>
+<ul class="defaultlist list6">
+<li><a href="php.html">PHP</a></li>
+<ul>
+<li><a href="php_lang.html">１．言語</a></li>
+<!--
+<li><a href="php_lib.html">２．ライブラリ</a></li>
+-->
+<li><a href="php_db.html">２．データベース</a></li>
+<li><a href="php_security.html">３．セキュリティ</a></li>
+<li><a href="php_framework.html">４．フレームワーク</a></li>
+</ul>
+<li><a href="php_comments.html">A．戯言</a></li>
+<li><a href="php_framework_cakephp.html">CakePHP</a></li>
+<li><a href="php_framework_laravel.html">Laravel</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<!--
+<li><a href="../network/web_serverside.html">サーバーサイド</a></li>
+<li><a href="../network/web_clientside.html">クライアントサイド</a></li>
+-->
+<li><a href="../db/mysql.html">MySQL</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Python/R</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>Python（１）</h3>
+<ul class="defaultlist list6">
+<li><a href="python.html">Python</a></li>
+<ul>
+<li><a href="python_intro.html">Python入門</a></li>
+<ul>
+<li><a href="python_intro_basic.html">１．基本</a></li>
+<li><a href="python_intro_flow.html">２．制御フロー</a></li>
+<li><a href="python_intro_oop.html">３．オブジェクト指向</a></li>
+<li><a href="python_intro_data.html">４．データ構造</a></li>
+<li><a href="python_intro_str.html">５．文字列</a></li>
+<li><a href="python_intro_file.html">６．ファイル</a></li>
+<li><a href="python_intro_functional.html">７．関数型言語の機能</a></li>
+<li><a href="python_intro_others.html">８．その他</a></li>
+<li><a href="python_intro_advanced.html">９．応用・モジュール</a></li>
+</ul>
+</ul>
+</ul>
+</div>
+<div class="index_box">
+<h3>Python（２）</h3>
+<ul class="defaultlist list6">
+<li><a href="python_comments.html">Python戯言</a></li>
+<li><a href="python_samplecode.html">Pythonサンプルコード</a></li>
+<li><a href="python_tools.html">Pythonのツール</a></li>
+</ul>
+<h3>Django</h3>
+<ul class="defaultlist list6">
+<li><a href="python_django.html">Django</a></li>
+</ul>
+<h3>Tcl/Tk</h3>
+<ul class="defaultlist list6">
+<li><a href="tcl_tk.html">Tcl/Tk</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>R言語</h3>
+<ul class="defaultlist list6">
+<li><a href="r_lang.html">R言語</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../programs/ai.html">人工知能・AI・機械学習・データマイニング</a></li>
+<li><a href="../programs/ai_python.html">PythonでAI入門</a></li>
+<li><a href="../programs/ai_numpy.html">NumPy</a></li>
+<li><a href="../programs/ai_pandas.html">Pandas</a></li>
+<li><a href="../programs/ai_scikit_learn.html">scikit-learn</a></li>
+<li><a href="../programs/ai_image.html">画像生成AI</a></li>
+<li><a href="../programs/chatgpt.html">ChatGPT</a></li>
+<li><a href="../programs/robot.html">ロボット</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<h2>Ruby</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>Ruby（１）</h3>
+<ul class="defaultlist list6">
+<li><a href="ruby.html">Ruby</a></li>
+<ul>
+<li><a href="ruby_intro.html">Ruby入門</a></li>
+<ul>
+<li><a href="ruby_intro_basic.html">１．基本</a></li>
+<li><a href="ruby_intro_class.html">２．クラス</a></li>
+<li><a href="ruby_intro_io.html">３．文字列操作とIO</a></li>
+</ul>
+</ul>
+</ul>
+</div>
+<div class="index_box">
+<h3>Ruby（２）</h3>
+<ul class="defaultlist list6">
+<li><a href="ruby_comments.html">Ruby戯言</a></li>
+<li><a href="ruby_samplecode.html">Rubyサンプルコード</a></li>
+<li><a href="ruby_tools.html">Rubyのツール</a></li>
+</ul>
+<h3>gems</h3>
+<ul class="defaultlist list6">
+<li><a href="ruby_gems.html">gems</a></li>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>Ruby on Rails</h3>
+<ul class="defaultlist list6">
+<li><a href="ruby_on_rails.html">Ruby on Rails</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../network/web_framework.html">Webフレームワーク</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+
+<h2>JavaScript</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>JavaScript基本</h3>
+<ul class="defaultlist list6">
+<li><a href="javascript.html">JavaScript（１．一般）</a></li>
+<ul>
+<li><a href="javascript_intro.html">JavaScript入門</a></li>
+<li><a href="javascript_dom_canvas.html">２．DOM/Canvas</a></li>
+<li><a href="javascript_prototype.html">３．プロトタイプチェーン</a></li>
+</ul>
+<li><a href="javascript_comments.html">JavaScript戯言</a></li>
+<li><a href="javascript_samplecode.html">JavaScriptサンプルコード</a></li>
+<li><a href="javascript_tools.html">JavaScriptのツール</a></li>
+</ul>
+
+<h3>AltJS</h3>
+<ul class="defaultlist list6">
+<li><a href="javascript_framework_typescript.html">TypeScript</a></li>
+<li><a href="javascript_framework_dart.html">Dart</a></li>
+<li><a href="elm.html">Elm</a></li>
+<li><a href="wasm.html">WebAssembly</a></li>
+</ul>
+</div>
+<div class="index_box">
+<h3>JavaScript技術</h3>
+<ul class="defaultlist list6">
+<li><a href="ajax.html">Ajax</a></li>
+<li><a href="jquery.html">jQuery</a></li>
+<ul>
+<li><a href="jquery_samplecode.html">jQueryサンプルコード</a></li>
+</ul>
+</ul>
+
+<h3>JavaScriptフレームワーク</h3>
+<ul class="defaultlist list6">
+<li><a href="javascript_framework.html">JavaScriptフレームワーク</a></li>
+<ul>
+<li><a href="javascript_framework_bootstrap.html">Bootstrap</a></li>
+<li><a href="tailwind_unocss.html">Tailwind CSS/UnoCSS</a></li>
+<li><a href="javascript_framework_vue_js.html">Vue.js</a></li>
+<li><a href="javascript_framework_backbone_js.html">Backbone.js</a></li>
+<li><a href="javascript_framework_angular.html">Angular</a></li>
+<li><a href="javascript_framework_react.html">React</a></li>
+<li><a href="javascript_framework_next_js.html">Next.js</a></li>
+<li><a href="javascript_framework_svelte.html">Svelte</a></li>
+</ul>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>Node.js</h3>
+<ul class="defaultlist list6">
+<li><a href="node_js.html">Node.js</a></li>
+<ul>
+<li><a href="node_js_express.html">Express</a></li>
+<li><a href="node_js_deno.html">Deno</a></li>
+</ul>
+<li><a href="bun.html">Bun</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../db/mongodb.html">MongoDB</a></li>
+</ul>
+</div>
+
+<h3>パッケージ管理</h3>
+<ul class="defaultlist list6">
+<li><a href="javascript_framework_npm.html">npm</a></li>
+</ul>
+
+<h3>JavaScriptでデスクトップ</h3>
+<ul class="defaultlist list6">
+<li><a href="electron.html">Electron</a></li>
+</ul>
+
+</div>
+</div>
+
+
+
+<h2>昔の言語</h2>
+<div class="container">
+<div class="index_box">
+<h3>メインフレームの言語</h3>
+<ul class="defaultlist list6">
+<li><a href="oldpl.html">昔の言語</a></li>
+<li><a href="fortran.html">FORTRAN</a></li>
+<ul>
+<li><a href="fortran_intro.html">FORTRAN入門</a></li>
+</ul>
+<li><a href="cobol.html">COBOL</a></li>
+</ul>
+
+<h3>ALGOL系言語</h3>
+<ul class="defaultlist list6">
+<li><a href="algol.html">ALGOL</a></li>
+<li><a href="pascal.html">Pascal</a></li>
+<li><a href="delphi.html">Delphi</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>関数型言語</h3>
+<ul class="defaultlist list6">
+<li><a href="lisp.html">Lisp</a></li>
+<ul>
+<li><a href="common_lisp.html">Common Lisp入門</a></li>
+<li><a href="scheme.html">Scheme</a></li>
+<li><a href="clojure.html">Clojure</a></li>
+<li><a href="egison.html">Egison</a></li>
+</ul>
+<li><a href="haskell.html">Haskell</a></li>
+<li><a href="ml.html">ML/OCaml</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../linux/emacs.html">Emacs</a></li>
+</ul>
+</div>
+
+</div>
+<div class="index_box">
+
+<h3>BASIC</h3>
+<ul class="defaultlist list6">
+<li><a href="basic.html">BASIC</a></li>
+</ul>
+
+<h3>Smalltalk</h3>
+<ul class="defaultlist list6">
+<li><a href="smalltalk.html">Smalltalk</a></li>
+<li><a href="smalltalk_dynabook.html">ダイナブック構想</a></li>
+</ul>
+
+<h3>論理型言語</h3>
+<ul class="defaultlist list6">
+<li><a href="prolog.html">Prolog</a></li>
+</ul>
+
+</div>
+</div>
+
+<h2>新しい言語</h2>
+<div class="container">
+<div class="index_box">
+<h3>並列処理言語</h3>
+<ul class="defaultlist list6">
+<li><a href="erlang.html">Erlang</a></li>
+<li><a href="golang.html">Go言語</a></li>
+<li><a href="rust.html">Rust</a></li>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>新しい言語（１）</h3>
+<ul class="defaultlist list6">
+<li><a href="newpl.html">新しい言語</a></li>
+<li><a href="julia.html">Julia</a></li>
+<li><a href="lua.html">Lua</a></li>
+<li><a href="processing.html">Processing</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>新しい言語（２）</h3>
+<ul class="defaultlist list6">
+<li><a href="nim.html">Nim</a></li>
+<li><a href="haxe.html">Haxe</a></li>
+<li><a href="vlang.html">V言語</a></li>
+<li><a href="zig.html">Zig</a></li>
+</ul>
+
+</div>
+</div>
+
+<h2>IT社会</h2>
+<div class="container">
+<div class="index_box">
+<h3>マネジメント</h3>
+<ul class="defaultlist list6">
+<li><a href="waterfall.html">ウォーターフォール</a></li>
+<li><a href="oom.html">オブジェクト指向モデリング</a></li>
+<li><a href="agile.html">アジャイル</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../social/management.html">経営・マネジメント</a></li>
+<li><a href="../network/cloud.html">クラウド</a></li>
+<li><a href="../virt/docker.html">Docker</a></li>
+<li><a href="../network/cm.html">構成管理</a></li>
+<li><a href="../network/ci.html">継続的インテグレーション</a></li>
+</ul>
+</div>
+
+</div>
+<div class="index_box">
+<h3>資格試験</h3>
+<ul class="defaultlist list6">
+<li><a href="kihonjouhou.html">基本情報技術者試験</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../linux/lpic_linuc.html">LPIC/LinuC</a></li>
+</ul>
+</div>
+
+<h3>OSS</h3>
+<ul class="defaultlist list6">
+<li><a href="oss_develop.html">オープンソース開発</a></li>
+<li><a href="programming_code_reading.html">Code Reading</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../linux/oss.html">オープンソース</a></li>
+</ul>
+</div>
+
+</div>
+<div class="index_box">
+
+<h3>プロジェクト管理ツール</h3>
+<ul class="defaultlist list6">
+<li><a href="pm_tools.html">プロジェクト管理ツール</a></li>
+</ul>
+
+<h3>IT企業</h3>
+<ul class="defaultlist list6">
+<li><a href="itcompanys.html">IT企業（海外）</a></li>
+<li><a href="itcompanys_japan.html">IT企業（日本）</a></li>
+</ul>
+
+<h3>IT社会</h3>
+<ul class="defaultlist list6">
+<li><a href="it_society.html">IT社会</a></li>
+<li><a href="it_society_copy.html">デジタルコピー</a></li>
+</ul>
+
+</div>
+</div>
+
+</div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

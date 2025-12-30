@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>暗号関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>暗号の世界観</h1>
+<p>暗号に関する世界観です。<!--<a href="encrypt2.html">暗号化技術</a>や--><a href="security.html">セキュリティ</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>暗号化とは</h1>
+<h2>暗号化技術</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>ネットワーク上でセキュリティを確保するためには、暗号化という仕組みを用いる。</p>
+<p>共通鍵暗号方式では、暗号化と復号化に用いる鍵が同じだが、公開鍵暗号方式では、公開鍵と秘密鍵を使う。</p>
+<p>秘密鍵は知られてはならないが、公開鍵は誰に知られても構わない。</p>
+<p>暗号化通信においては、公開鍵暗号方式を使うことが多い。</p>
+<p>まず、受信者が公開鍵と秘密鍵のペアを作り、自分の公開鍵を相手に送る。</p>
+<p>送信者は、その公開鍵を使ってデータを暗号化する。</p>
+<p>そしてデータを受信した受信者は、秘密鍵を用いてデータを復号化する。</p>
+<p>（<a href="https://www.amazon.co.jp/%E6%9A%97%E5%8F%B7%E6%8A%80%E8%A1%93%E5%85%A5%E9%96%80-%E7%AC%AC3%E7%89%88-%E7%A7%98%E5%AF%86%E3%81%AE%E5%9B%BD%E3%81%AE%E3%82%A2%E3%83%AA%E3%82%B9-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797382228">暗号技術入門 第3版 秘密の国のアリス</a>を参考に執筆しました。）</p>
+
+<h2>現在使われている暗号方式</h2>
+<p>現在使われている暗号方式はDES（共通鍵暗号）やRSA（公開鍵暗号）です。DESについてはトリプルDES（高速なコンピュータによって解読されないように三段階にDESをかける）も使われています。</p>
+<p>このほか、MD5/SHA-*によるハッシュ（データが改竄されていないことを証明する）により、ファイルの同一性を確認できます。LinuxのISOイメージなどにおいては、巨大なイメージファイルが破損していないかどうかの確認によく使われます。</p>
+<p>また、デジタル署名（本当の本人であることを秘密鍵を持っているかどうかで確認する）も広く使われています。当人が持っている秘密鍵で暗号化したデータを相手側の公開鍵で復号化できるかどうかで、本人であるかどうかを確認します。</p>
+<p><a href="../linux/linux_filetools_diff.html">diffとpatch・テキスト処理</a>も参照のこと。</p>
+
+<h2>暗号化の仕組み</h2>
+<p>（<a href="https://www.amazon.co.jp/%E6%9A%97%E5%8F%B7%E6%8A%80%E8%A1%93%E5%85%A5%E9%96%80-%E7%AC%AC3%E7%89%88-%E7%A7%98%E5%AF%86%E3%81%AE%E5%9B%BD%E3%81%AE%E3%82%A2%E3%83%AA%E3%82%B9-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797382228">暗号技術入門 第3版 秘密の国のアリス</a>を参考に執筆しました。）</p>
+<h3>XOR</h3>
+<p>XOR（排他的論理和）は基本的な論理演算のひとつで、0 XOR 0 = 0、0 XOR 1 = 1、1 XOR 0 = 1、1 XOR 1 = 0となる。</p>
+<p>Aがもし平文を表すビット列であったとして、あらかじめ決められたビット列BをAに対してかけることで、以下のように暗号化された値を作れる。</p>
+<table class="some_tables">
+<tr><td>A</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>B</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>A XOR B</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+</table>
+<p>同じ数でのXORは必ず0になるから（0 XOR 0 = 0, 1 XOR 1 = 0）、A XOR Bに対してもう一度BとのXORを取ると、必ずAに戻る。</p>
+<table class="some_tables">
+<tr><td>A XOR B</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>B</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>A</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+</table>
+<p>これは暗号化・復号化の手順に良く似ている。Bとなるビット列を上手く選んだ場合、XORを使ってとても強い暗号を作れる。</p>
+<p>使い捨てパッドは、「平文に対してランダムに作られたビット列でXORをかける」というだけのシンプルな暗号。シンプルだが、絶対に解読できない暗号である。なぜなら、復号化されたとしても、それが正しい平文なのかどうかが分からないからである。</p>
+<p><a href="../hardware/computer_architecture.html">コンピュータの計算原理</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2022.12.05編集</p>
+</div>
+
+<h3>DES</h3>
+<p>DESは共通鍵暗号方式のブロック暗号。</p>
+<p>DRSは、何度も暗号化をラウンドごとに繰り返すことで強固な暗号化を行う。</p>
+<p>まず64bitの平文を32bitの「右」と「左」に分ける。ここで、サブ鍵と右を使って、ラウンド関数fが、一見ランダムのように見えるビット列を計算する。このビット列と左とのXORを取る。これで「暗号化された左」が生み出される。</p>
+<p>ここで、左は暗号化されているが、右は暗号化されていないため、別々のサブ鍵によって何度もラウンドを繰り返し、何度も左と右を交換する。</p>
+<p>復号化は、たとえば同じサブ鍵で1ラウンド分の出力を再び入れてみる。そうすると、ラウンド関数fがどのような関数であっても必ず元に戻る。暗号化と復号化にはまったく違いが無く、サブ鍵を使う順番を逆にするだけでよい。</p>
+<p>現代では、DESはブルートフォース攻撃で少しの時間で解読されてしまう。トリプルDESは、DESを3段重ねにして強力にしたアルゴリズム。</p>
+
+<h3>RSA</h3>
+<p>RSAは公開鍵暗号方式。公開鍵は相手に渡し、秘密鍵は自分で保管する。</p>
+<p>公開鍵で暗号化すると、同じ人の秘密鍵で復号できる。秘密鍵で暗号化すると、同じ人の公開鍵で復号できる。</p>
+
+<h3>RSAの仕組み</h3>
+<p>8<sup>3</sup> mod 5のような式は、「8を3乗して5で割った余り」のことを表す。</p>
+<p>RSAによる暗号化は、</p>
+<p>暗号文 = 平文<sup>E</sup> mod N</p>
+<p>となる。</p>
+<p>EとNの組が公開鍵。</p>
+<p>RSAによる複合化は、</p>
+<p>平文 = 暗号文<sup>D</sup> mod N</p>
+<p>となる。</p>
+<p>DとNの組が秘密鍵。</p>
+
+<h3>鍵ペアを作る方法</h3>
+<p>以下に出てくる数、N, L, E, Dを求めることで、鍵ペアを作ることができる。</p>
+<p>大きな素数、pとqを用意する。大きければ大きいほど暗号解読は難しくなるが、それだけ処理時間が長くなる。</p>
+<p>この二つの数を掛け合わせると、Nになる。つまり、N = p × q (pとqは素数)</p>
+<p>この二つの数から、p - 1とq - 1の最小公倍数を求め、それをLとする。</p>
+<p>次に、数Eを求める。</p>
+<p>Eは、1よりも大きく、Lよりも小さな数（1 &lt; E &lt; L）であり、同時にEとLの最大公約数は1となる（数Dの存在を保証するため）。</p>
+<p>最後にDを求める。</p>
+<p>DはEから計算し、1 &lt; D &lt; Lでありながら、E × D mod L = 1（平文に戻ることを保証）となる。</p>
+<p>この条件を満たす数Dを見つければ、EとNで暗号化した暗号文を、DとNで復号化できる。</p>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+<li><a href="https://www.amazon.co.jp/%E6%9A%97%E5%8F%B7%E6%8A%80%E8%A1%93%E5%85%A5%E9%96%80-%E7%AC%AC3%E7%89%88-%E7%A7%98%E5%AF%86%E3%81%AE%E5%9B%BD%E3%81%AE%E3%82%A2%E3%83%AA%E3%82%B9-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797382228">暗号技術入門 第3版 秘密の国のアリス</a></li>
+</ul>
+
+<h1>UNIXソフトウェアとコマンド</h1>
+<h2>OpenSSLとopensslコマンド</h2>
+<p>Linuxや*BSDでは、opensslコマンドでOpenSSLのさまざまな暗号化の機能を使用できる。</p>
+<p>とてもたくさんの機能が詰め込まれているため、opensslコマンドだけでとてもたくさんのことができる。</p>
+<p>たとえばRSAの公開鍵・秘密鍵の作成や暗号化・複合化などが可能。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?openssl">opensslコマンドの使い方: UNIX/Linuxの部屋</a></li>
+</ul>
+<p><a href="../unix/openbsd.html">OpenBSD</a>も参照のこと。</p>
+
+<h2>LibreSSL</h2>
+<p>LibreSSLはOpenSSLからのfork。OpenSSLのハートブリード脆弱性をきっかけにソースコードを検査したところ、forkの必要性があると判断した。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/LibreSSL">LibreSSL - Wikipedia</a></li>
+</ul>
+
+<h1>電子署名</h1>
+<h2>SSL/TLS</h2>
+<p>SSL/TLSは、暗号化技術とハッシュ値を用いた電子署名を兼ね備えた技術であり、本人であることを保証し、通信を暗号化し、改竄を防止する。</p>
+<p>SSLは、公開鍵暗号を用いた暗号化技術であるとともに電子署名としても働き、</p>
+<p>・暗号化された本文あるいは通信が誰かに傍受されないようにする（公開鍵暗号を用いた暗号化通信）</p>
+<p>・本人の確認（自分がその公開鍵で復号化することのできる秘密鍵を持っているということが、本人であることの証明になる）</p>
+<p>・その内容が改竄されていないかどうかを保証する（ハッシュ値を用いる）</p>
+<p>などのことができる。</p>
+<p>通信相手の正当性を保証するために、認証局（CA）から発行される証明書を利用する。サーバ側がサーバ証明書をクライアントに送って正当性を保証する。逆に、クライアント側がクライアント証明書をサーバ側に送ることもある。</p>
+<p>（「<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>」を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://jp.globalsign.com/documentsigning/about/digitalsignature.html">電子署名とは〜仕組みとメリット〜  | 電子署名サービス | GMOグローバルサイン</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.06編集</p>
+</div>
+
+<h2>PGPとS/MIME</h2>
+<p>特に、電子メールの暗号化と電子署名には、PGPとS/MIMEを利用する。</p>
+<p>PGPは、信頼できるグループの間で公開鍵を共有する。自分の信頼している人が信頼している人の公開鍵を信頼する。</p>
+<p>これに対してS/MIMEでは、公開されている認証局（CA）を用いて、鍵の正当性を保証する。公開鍵暗号による社会基盤のことを公開鍵暗号基盤（PKI）と言う。</p>
+<p>S/MIMEでは公開鍵と共通鍵のハイブリッド暗号（メール本文を共通鍵で暗号化し、共通鍵を受信者の公開鍵で暗号化して添付する。こうすることで高速なメール本文の暗号化が可能）を用いる。</p>
+<p>後日注記：PGPを用いることで、メールやファイルの暗号化、盗聴防止、改竄防止、デジタル署名が可能となる。ネットでは、本人確認のためにPGPの公開鍵を公開している人が多く見受けられる。</p>
+<p>詳しくは以下のページ・書籍が参考になる。</p>
+<ul>
+<li><a href="http://atnetwork.info/tcpip2/tcpip243.html">電子メール（S/MIMEとPGP）　TCP/IP入門 - ＠network Cisco・アライド実機で学ぶ</a></li>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+<li><a href="https://www.fortinet.com/jp/resources/cyberglossary/pgp-encryption">PGP暗号化とは？ PGP（Pretty Good Privacy）の説明|フォーティネット</a></li>
+<li><a href="https://www.invoice-kohyo.nta.go.jp/download/pgp_key.html">PGP公開鍵について｜国税庁インボイス制度適格請求書発行事業者公表サイト</a></li>
+</ul>
+<p><a href="mail.html">メール</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.08.06編集</p>
+</div>
+
+<h1>認証局サービス</h1>
+<h2>Let's Encrypt</h2>
+<p>Let's Encryptは無料で使えるSSL/TLSの認証局サービス。自分のサイトでHTTPSでの暗号化通信に対応させるにはこれを使うのが手軽。ただし有効期限が90日と短いことに注意が必要。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Let%27s_Encrypt">Let's Encrypt - Wikipedia</a></li>
+<li><a href="https://www.dx-portal.biz/lets-encrypt-1/">無料SSL証明書【Let’s Encrypt】自動更新設定の必要性と注意点 - DXportal</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h1>未来技術</h1>
+<h2>量子コンピュータと量子暗号</h2>
+<p>現在広く使われているRSA暗号や楕円曲線暗号は、ただ解読に時間がかかるだけであり、超高速な量子コンピュータが実現すればいとも簡単に破られるということが数学的に証明されている。</p>
+<p>これに対して、量子暗号という、量子状態の特性に基づく未来の暗号がある。観測者が観察すると光はゆがみを起こすという量子力学の特性に基づいたもので、第三者が傍受しようとした時に、ほんのわずかであってもノイズが入ってしまう。このノイズをチェックすれば、秘密鍵が有効であるかどうかを判断し、傍受されれば別の秘密鍵に変える、というやり方である。</p>
+<p>「量子コンピュータか、あるいは量子暗号か、どちらが先に実現するか」とよく言われている。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://pc.watch.impress.co.jp/docs/news/1100569.html">量子コンピュータでも解読が困難な新暗号方式が国内で開発 - PC Watch</a></li>
+<li><a href="https://eset-info.canon-its.jp/malware_info/trend/detail/160225.html">最強と思われた量子暗号に脆弱性の疑い | マルウェア情報局</a></li>
+</ul>
+<p><a href="../hardware/quantum_computer.html">量子コンピュータ</a>も参照のこと。</p>
+
+<h1>歴史的な暗号技術</h1>
+<h2>エニグマ</h2>
+<p>エニグマはナチス・ドイツが第二次世界大戦で使っていた暗号化技術で、当時もっとも最先端の強固な暗号機械だった。解読したのはイギリスのアラン・チューリングで、その解読のベースになったのはポーランドの暗号解読の努力である。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%8B%E3%82%B0%E3%83%9E_(%E6%9A%97%E5%8F%B7%E6%A9%9F)">エニグマ (暗号機) - Wikipedia</a></li>
+<li><a href="https://japan.cnet.com/article/35115908/">ナチスの暗号機「エニグマ」誕生から100年--解読までの道のり - CNET Japan</a></li>
+<li><a href="https://www.thcu.ac.jp/research/column/detail.html?id=224">アラン・チューリングと現代の情報技術 | 東京医療保健大学</a></li>
+<li><a href="https://www.hummingheads.co.jp/reports/series/ser01/110811.html">連載：暗号と暗号史：【第6回】エニグマ解読～第2次世界大戦とコンピュータ誕生：HH News &amp; Reports：ハミングヘッズ</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.01.19</p>
+<p>2025.01.21編集</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>共通鍵暗号と公開鍵暗号</h2>
+<p>共通鍵暗号は、暗号化と復号化の鍵が同じ。公開鍵暗号は、暗号化と復号化の鍵が異なる。</p>
+<p>公開鍵暗号を使うことで、データを公開鍵で暗号化して秘密鍵で復号化し、暗号化通信を実現できる。</p>
+
+<h1>セキュリティ関係のソフトウェア</h1>
+<h2>GnuTLS</h2>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GnuTLS">GnuTLS - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://gitlab.com/gnutls/gnutls/">git</a></li>
+</ul>
+
+<h2>OpenSSL</h2>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OpenSSL">OpenSSL - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/openssl/openssl">git</a></li>
+</ul>
+
+<h2>LibreSSL</h2>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/LibreSSL">LibreSSL - Wikipedia</a></li>
+</ul>
+
+<h2>GNU Privacy Guard (GnuPG)</h2>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU Privacy Guard">GNU Privacy Guard - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://git.gnupg.org/">git</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Linuxのコマンド</h2>
+<p><a href="../linux/linux_filetools_diff.html">diffとpatch・テキスト処理</a>や<a href="../linux/linux_filetools_archive.html">アーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+<h2>セキュリティ</h2>
+<p><a href="security.html">セキュリティ</a>や<a href="auth.html">認証</a>を参照のこと。</p>
+
+<h2>SSH</h2>
+<p><a href="../linux/linux_ssh.html">SSH</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>暗号化技術</h2>
+<p>暗号化技術。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1504/27/news032.html">マスターIT／暗号技術 - @IT</a></li>
+<li><a href="http://www.hyuki.com/cr/">暗号技術入門 第3版 - 秘密の国のアリス</a> - 昔買って読みました。</li>
+</ul>
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%9A%97%E5%8F%B7%E6%8A%80%E8%A1%93%E5%85%A5%E9%96%80-%E7%AC%AC3%E7%89%88-%E7%A7%98%E5%AF%86%E3%81%AE%E5%9B%BD%E3%81%AE%E3%82%A2%E3%83%AA%E3%82%B9-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797382228">暗号技術入門 第3版 秘密の国のアリス</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Git関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Gitの世界観</h1>
+<p>バージョン管理システムGitに関する世界観です。<a href="scm.html">バージョン管理システム</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Git</h1>
+<h2>Gitとは</h2>
+<p>Gitは、バージョン管理システム。ファイルツリーの過去のすべての履歴を残した上で、ツリーへの新しい変更をコミット（登録）し、いつでも過去の状態に戻したり、複数人で開発する場合にオンラインのリポジトリを使ってプッシュ（ローカルからリポジトリへ更新）、プル（別の人の行った変更をリポジトリからローカルへ反映）、プルリクエスト（自分の変更を他の人にプルしてもらうようにマージのリクエストをする）などを行うことができる。</p>
+<p>そもそもは、Linuxカーネルの開発のために作られたバージョン管理システム。Linuxカーネルでは、CVSへのリーナス個人の嫌悪からBitKeeperという商用のバージョン管理システムを使っていたが、いろいろとあって使えなくなった。CVSは設計の問題から、リーナスは個人的に憎むぐらい嫌いだった。Git以外に乱立していた他のバージョン管理システムの問題は、スピードが遅いこと。たくさんのパッチを管理するLinuxカーネルの開発では、パッチを取り込むスピードが重要になる。GitはLinuxカーネル開発者のリーナス・トーバルズにより、高パフォーマンスであることを優先してCVSやBitKeeperなどの代わりのシステムとして開発された。「他のバージョン管理システムの10倍ぐらい、時には100倍近い性能を誇ることもある」とのこと。</p>
+<p>リーナスのネームバリューだけではなく、Gitはとても使いやすいシステムであり、そしてGitHubのようなリポジトリのホスティングサイトが生まれたことで、プログラマなどにとっては必須の開発ツールとなった。基本的に、管理するファイルをgit init（初期化）とgit add（ファイル登録）コマンドで登録すると、.gitと呼ばれるディレクトリが作成される。この状態で、変更するたびにその変更をコミットする。GitHubなどの中央リポジトリを使う場合は、そのリポジトリを設定してログインした上で、コミットの際に同時にプッシュする。他の人のプッシュしたコミットは、プルすることでそれぞれのローカルのファイルツリーに適用できる。</p>
+<p>このgitは、プログラミングの際に使うバージョン管理システムとしてもとても有用だが、僕はホームページの管理に使っている。僕個人の感想から言って、FTPでアップロードするよりも、gitでコミットをGitHubにプッシュし、GitHub Pagesを利用した方がストレスがなくホームページを更新できる。FTPのミラーリングアップロードは時間がかかることもあり、大量にあると失敗することもある。gitで差分だけをコミット・プッシュした方が使いやすい。</p>
+<p>余談だが、GitHubはなんとLinuxの宿敵だったはずのMicrosoftに買収された。GitHubはAtomというテキストエディタでも有名だが、Atomに使われているGitHubのWeb技術によるGUIアプリケーション開発技術であるElectronは、MicrosoftのテキストエディタであるVS-Codeの開発にも使われている。「ようやくMSも分かってくれたか」という言葉はまさに正しく、LinuxカーネルをそのままWindowsで動作させるWSL v.2を今Microsoftは全力で開発している。WindowsでLinuxアプリケーションを動作させることにも成功しつつある。昔はFUD戦略のように、「Linuxを使うと逆にコストがかかる」と主張していたMSだが、このような状況が、WindowsとLinuxの敵対関係の終結に寄与してくれたら良いと思う。</p>
+<p>ちなみに、LinuxだけではなくWindowsでも動作する。Windowsでは、Windows版のgitと、TortoiseGitなどのWindows用のフロントエンドを使うことで、あまりコマンドを使う必要が無い。たまにコマンドを使うと便利だが、基本的にGUIから操作できる。</p>
+<p>（詳しくは<a href="https://ja.wikipedia.org/wiki/Git">Git - Wikipedia</a>が参考になります。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Git">Git - Wikipedia</a></li>
+</ul>
+
+<h2>データベースよりもGitを使った方が管理しやすい</h2>
+<p>ここまでGitが普及した背景には、Gitを使ったシステムの管理がとてもしやすい、ということが言えます。</p>
+<p>たとえば、データベース管理システムを使った場合、できるのは検索と変更が主になりますが、Gitを使ったテキストファイルの管理の場合、UNIXのツールやテキストエディタで編集することもできますし、さまざまなことがデータベース管理システムよりもやりやすい、と言えます。</p>
+<p>これが、Jekyllのようなデータベースを使わない静的サイトジェネレータがGitHubなどの界隈で流行っていることの理由として言えます。データベースでWebサイトのコンテンツを管理するよりも、HTMLやプレーンテキストなどの「ファイル」で、Gitを用いて管理した方が、さまざまな管理が楽になります。</p>
+<p>OSTreeのような新技術では、ファイルシステムツリーをGitと同様のシステムで管理します。これも、Git技術を使うことで管理しやすいシステムになるということが言えるからです。NixOSというLinuxディストリビューションでは、システムの状態を設定ファイルにできます。このため、/etc/nixos/をGitで管理すれば、システムの状態を上手く管理することができるのです。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Git">Git - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>導入</h1>
+
+<h2>gitとTortoiseGitのインストール</h2>
+<p>以下を参考にしてgitのWindows版とTortoiseGitと日本語化ファイルをインストールしてください。</p>
+<ul>
+<li><a href="https://backlog.com/ja/git-tutorial/intro/intro2_1.html">Gitのインストール【チュートリアル1 Gitの基本】 | サルでもわかるGit入門 〜バージョン管理を使いこなそう〜 | どこでもプロジェクト管理バックログ</a></li>
+<li><a href="https://qiita.com/taiponrock/items/632c117220e57d555099">コマンドラインからGitを使う（for Windows） - Qiita</a></li>
+</ul>
+<p>後日注記：Windowsでは、GitHubの認証情報は「資格情報マネージャー」に保存される。コントロールパネルから資格情報マネージャーを検索して起動することで、GitHubのパスワード情報を削除できる。</p>
+
+<h2>git add .</h2>
+<p>大量にファイルがある場合、</p>
+<pre>
+git add .
+</pre>
+<p>とすると、そのディレクトリ下の全てのファイルをgitの管理対象にできる。この上でファイルをコミットすれば良い。</p>
+<p>コミットは、</p>
+<pre>
+git commit -m "コミットメッセージ"
+</pre>
+<ul>
+<li><a href="https://naokirin.hatenablog.com/entry/20111201/1322576109">私の使うGitコマンドまとめ 基本コマンド編 - what is it, naokirin?</a></li>
+</ul>
+
+<h2>git clone</h2>
+<p>自分で作ったプロジェクトではなく、既にプロジェクトとして成立しているgitリポジトリの内容をローカルにコピーするには、git cloneを行なう。</p>
+<pre>
+git clone リポジトリ ディレクトリ
+</pre>
+<p>ディレクトリは省略可能。たとえば、</p>
+<pre>
+git clone https://github.com/schwarz1009/schwarz1009.github.io.git
+</pre>
+<p>基本的に、「git clone」→「git commit」→「git push / git pull」→「git commitに戻る」という使い方をする。gitはその繰り返しである。</p>
+
+
+<h2>.gitignoreでThumbs.dbを無視する</h2>
+<p>.gitignoreには、gitで無視したいファイルを列挙する。特に、僕は</p>
+<pre>
+Thumbs.db
+</pre>
+<p>を設定している。（Thumbs.dbはWindowsのサムネイル画像のキャッシュファイル。）</p>
+<ul>
+<li><a href="http://hrst.hatenablog.jp/entry/20100214/1266151716">gitリポジトリで共通する無視ファイルリスト - たぐってつづる</a></li>
+</ul>
+
+
+<h1>用語と基本的な使い方</h1>
+<h2>インデックスへの登録とコミット</h2>
+<p>gitでは、まず管理対象とするファイルをインデックスに追加し、その上でファイルを編集するたびに、コミットを行う。（コミットは複数のファイルを一気に行える。ひとつひとつコミットする必要はない。）</p>
+<p>ファイルをインデックスに追加するためには、git addなどを使うほか、git/TortoiseGitをインストールしたWindowsであれば、右クリックやGUIから登録を行なえる。</p>
+<p>コミットも、Windowsであれば右クリックメニューから簡単に行える（編集したファイルは勝手に検出される）。この時、サマリー（変更点の要約）をつけることが必須である。</p>
+
+<h2>リポジトリとプッシュ・クローン・プル</h2>
+<p>ネットワークでさまざまな人と一緒にリポジトリを共有している時は、リポジトリにプッシュすることで、自分の変更履歴を共有できる。</p>
+<p>逆に、他の人の変更履歴を共有するために最新のリポジトリの情報をローカルに反映するためには、プルを行う。</p>
+<p>自分が管理するためにリポジトリを複製するためには、クローンを行う。</p>
+<p>GitHubとよばれるオンラインサービスを使うことで、オンラインのリポジトリを簡単にホスティングすることができる。全てのファイルを公開するならば無料、非公開にしたいなら有料で、アカウントを作成してGitHubの共有リポジトリを作ることができる。</p>
+
+<h2>ブランチ</h2>
+<p>ブランチは、並行して同じファイルの複数のバージョンを管理する機能。特に設定していない場合はマスターブランチへとファイルをコミットする。</p>
+
+<h2>GitHubの使い方</h2>
+<p>基本的に、</p>
+<pre>
+git remote add origin https://github.com/schwarz1009/schwarz1009.github.io.git
+</pre>
+<p>としてアドレスを登録し、プッシュする。</p>
+<pre>
+git push origin master
+</pre>
+<p>GitHubにリポジトリを公開し、プッシュする方法：</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/6235">今さら聞けない！GitHubの使い方【超初心者向け】 | TechAcademyマガジン</a></li>
+</ul>
+
+<h2>GitHubで同期</h2>
+<p>GitHubとpush/pullを上手く使うことで、さまざまなパソコンの中でデータを同期・共有できます。</p>
+<p>オンラインのGitHubリポジトリを中央のファイルサーバに見立てて、最新の状態をGitHubに更新し、全てのパソコンで同じデータを同期できます。</p>
+<p>家庭内だけではなく、職場など離れた環境でも、インターネットでGitHubに繋げる環境があり、gitがインストールされていれば、どこでも最新のデータを同期することができて、便利です。</p>
+<p>ですが、GitHubはプライベートなデータの共有には向いていないので注意が必要です。私的なファイル、特にビジネスに必要なファイルのような場合は、Google Driveのようなオンラインストレージサービスを使いましょう。</p>
+
+<h2>プルリクエスト</h2>
+<p>プルリクエストは、コードの編集をレビュワーに通知してマージを依頼する機能。</p>
+<p>GitHubのリポジトリに、自分で開発した成果を取り込んでもらいたい場合などに使用する。</p>
+<ul>
+<li><a href="https://ics.media/entry/14449/">GitHubでのプルリクエスト活用方法まとめ - ICS MEDIA</a></li>
+</ul>
+
+<h1>基本</h1>
+<h2>Git入門記事</h2>
+<p>Gitの入門。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/5816">よく使う基本Gitコマンド集【厳選21選】 - 侍エンジニア塾</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Git">Git - Wikipedia</a></li>
+<li><a href="https://qiita.com/satoshi1335/items/ead109412430a078feaa">Gitの基礎 - Qiita</a></li>
+<li><a href="https://dotinstall.com/lessons/basic_git">git入門 (全22回) - プログラミングならドットインストール</a></li>
+<li><a href="https://git-scm.com/book/ja/v2/">Git - Book</a> (<a href="https://git-scm.com/book/ja/v1/">v1</a>)</li>
+<li><a href="http://tracpath.com/bootcamp/learning_git_firststep.html">Git の基礎勉強 〜Git によるバージョン管理を使う〜 - tracpath.com</a></li>
+</ul>
+
+<h2>GitHub/GitLab</h2>
+<p>みんなで共有出来るソフトウェア開発プロジェクトのためのWebサービス。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GitHub">GitHub - Wikipedia</a></li>
+<li><a href="https://qiita.com/ay3/items/8d758ebde41d256a32dc">GitHub 入門 - Qiita</a></li>
+<li><a href="https://employment.en-japan.com/engineerhub/entry/2017/01/31/110000">今日からはじめるGitHub 〜 初心者がGitをインストールして、プルリクできるようになるまでを解説 - エンジニアHub</a></li>
+</ul>
+<p>最近ではGitLabというGitHubに代わるサイトも流行している模様。</p>
+
+<h2>gitの基本コマンド</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/5816">よく使う基本Gitコマンド集【厳選21選】 - 侍エンジニア塾</a></li>
+</ul>
+
+<h1>gitの応用</h1>
+<h2>git-ftpを使おう</h2>
+<p>最近僕が使い始めたgitの応用ソフトに、git-ftpがある。gitで更新したコミットだけをftpサーバーに転送できてとても便利。</p>
+<p>注意点として、git-ftpをインストールする時に/binディレクトリにシンボリックリンクを作る時は、WindowsではスタートメニューのGit Bashの項目を右クリックして「管理者として実行」をクリックして実行したターミナルからコマンドを実行する。</p>
+<p>それから、最初はgit ftp initを行うが、すでにFTPサーバーにファイルがある時はgit ftp catchupコマンドを使う。この時、FTPサーバーとローカルgitリポジトリで同じサイトの状態にしなければならない。</p>
+<p>そして、ホスト名やユーザー名・パスワードなどのスコープ（名前を複数用意してたくさんのサーバーにデプロイできる）を作る時は</p>
+<pre>
+$ git config git-ftp.hogehoge.url FTPサーバのURL
+</pre>
+<p>のようにgit-ftp.hogehoge.urlとスペースを空けずに記述する必要がある。.userと.passwordも同様に設定する。URLは明示的なTLSを使う時はftpes://から始まる。</p>
+<p>それから、デプロイ（FTP転送）の際にスコープを使う時はgit ftp pushに-s hogehogeなどとする。PASVモードで接続する時は--disable-epsvオプションを使う。</p>
+<ul>
+<li><a href="https://qiita.com/sayama0402/items/d3d11bbc6b09b9b78527">git ftpを使えるようにする(Windows, Mac) - Qiita</a></li>
+<li><a href="https://github.com/git-ftp/git-ftp/blob/master/man/git-ftp.1.md">git-ftp/git-ftp.1.md at master · git-ftp/git-ftp</a></li>
+</ul>
+
+<h2>git reset</h2>
+<p>gitで、昔のバージョンに戻したい時があれば、git resetが使えます。</p>
+<p>--hard、--mixed、--softの3つのオプションがありますが、「インデックスとワーキングツリーの状態を完全に戻してほしい」時は--hardを使います。</p>
+<p>たとえばこのようにします。</p>
+<pre>
+git reset --hard 元に戻す先のコミットのハッシュ値
+</pre>
+<p>この状態で、ローカルディレクトリのHEADは以前の状態に戻りますが、この状態でgit pullをしてしまうと、GitHubの最新に戻ってしまいます。つまり、昔のバージョンに戻しても、pullをすると最新に戻ってしまうのです。</p>
+<p>pullをせずにここでpushをするとエラーがでることがあり、ここではpullをして最新に戻すように勧められますが、GitHubにこの状態でpushを行いたい（リポジトリも元のデータのままで作業したい）時は、以下のように強制pushを行います。</p>
+<pre>
+git push -f origin ハッシュ値:master
+</pre>
+<ul>
+<li><a href="https://qiita.com/shuntaro_tamura/items/db1aef9cf9d78db50ffe">[git reset (--hard/--soft)]ワーキングツリー、インデックス、HEADを使いこなす方法 - Qiita</a></li>
+<li><a href="https://qiita.com/ezrider/items/a14fe192a66180b95cfb">メモ）Gitリセットをリモートに強制プッシュしたい。 - Qiita</a></li>
+</ul>
+
+<h2>git diffでパッチを作成する</h2>
+<p>パッチファイルを作成するにはgit diffを使う。</p>
+<pre>
+git diff &gt; diff.patch
+</pre>
+<p>できたパッチファイルはUNIXのpatchコマンドで適用できる。</p>
+<p>二つのコミットIDの比較は以下のようにする。</p>
+<pre>
+git diff 1つ目のコミットID 2つ目のコミットID
+</pre>
+<p>さまざまなオプションがあるので詳細は以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/sea_mountain/items/7d9c812e68a26bd1a292">Git で変更を patch ファイルにする / patch コマンドで適用する - Qiita</a></li>
+<li><a href="https://qiita.com/shibukk/items/8c9362a5bd399b9c56be">忘れやすい人のための git diff チートシート - Qiita</a></li>
+<li><a href="https://qiita.com/rana_kualu/items/09d2dd379019b8ef0335">git diffの全オプション一覧 - Qiita</a></li>
+<li><a href="https://qiita.com/kasyuu/items/bc8489831e200b641456">gitでcommit間の差分を出力する - Qiita</a></li>
+</ul>
+
+<h2>黒歴史を履歴を含めて削除する</h2>
+<p>（以下は<a href="https://qiita.com/go_astrayer/items/6e39d3ab16ae8094496c">Git リポジトリに上がっているファイルを履歴ごと消すには？ - Qiita</a>を参考に執筆・引用しました。）</p>
+<p>誤って個人情報やパスワードをリポジトリに公開してしまった場合、履歴を含めて全部消したい場合がある。</p>
+<p>このような時は、git filter-branchを使って、以下のようにスナップショット全てを消せる。</p>
+<pre>
+git filter-branch --tree-filter "rm -f hogefile" HEAD
+git filter-branch --tree-filter "rm -rf hogedir/" HEAD
+</pre>
+<p>上は指定ファイルhogefileを消す、下は指定ディレクトリhogedir以下を消す。ディレクトリの場合は/で終わる必要がある。またトップディレクトリで実行する必要がある。</p>
+<p>けっこう時間がかかるが、以下のようなメッセージがでれば正常に完了。</p>
+<pre>
+Rewrite (ハッシュ値が表示される) (4/4)
+Ref 'refs/heads/master' was rewritten
+</pre>
+<p>この状態で、リポジトリにまだ情報が残っているため、リポジトリを最適化する。</p>
+<pre>
+git gc --aggressive --prune=now
+</pre>
+<p>そして、リポジトリにpushする。普通にpushしようとするとハッシュが別物になってしまっていてpushできないので、-fで強制pushを行う。</p>
+<pre>
+git push -f --set-upstream origin master
+</pre>
+<ul>
+<li><a href="https://qiita.com/Spring_MT/items/f60c391b5dbf569a1d12">git最強のオプション filter-branch - Qiita</a></li>
+<li><a href="https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%81%95%E3%81%BE%E3%81%96%E3%81%BE%E3%81%AA%E3%83%84%E3%83%BC%E3%83%AB-%E6%AD%B4%E5%8F%B2%E3%81%AE%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88">Git - 歴史の書き換え</a></li>
+</ul>
+
+<h2>GitHub Pages</h2>
+<p>また、GitHubなどでは静的HTMLを公開できるGitHub Pagesと呼ばれる機能があり、僕も利用しています。ファイルを公開する必要はありますが、無料ホームページなどを使わず、広告なしでホームページを公開できます。</p>
+<p>GitHub Pagesを使う利点は、「リポジトリへのプッシュだけで差分ファイルを更新できる」という点。FTPに比べて、ミラーリングや同期に必要なチェックの時間が短く、さっと公開できます。また、複数のマシンでリポジトリを共有すれば、別のマシンでもホームページを更新できます。</p>
+
+<h2>gitは過去のコミットをアーカイブするので、バックアップしている時は注意</h2>
+<p>gitは、過去に溜まったコミットをたまに単一ファイルにアーカイブするので、バックアップしている時は注意が必要です。</p>
+<p>僕はWindowsでUNIXのrsyncのようなフリーの同期ソフトであるRealSyncをバックアップに使っていましたが、同期しようとした時.gitディレクトリ以下のファイルが大量に消えていたので、「gitが壊れたのかな」と勘違いをしました。</p>
+<p>実際は、gitが過去に溜まったコミットをアーカイブしていただけで、単一のファイル（packファイル）の中に消えてしまったファイルの情報は残っていたため（コミットを記録したルースオブジェクトが一連の変更の差分のみを保存したpackファイルにパッキングされただけ）、gitは壊れていないことが分かりました。</p>
+<p>このアーカイブ化を手動で行いたい場合は、git gcコマンドを実行します。巨大なリポジトリを操作していると、たまにgit gcコマンドが実行され、リポジトリの中のお掃除をしてくれるようになっています。</p>
+<ul>
+<li><a href="https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E3%83%AA%E3%82%AB%E3%83%90%E3%83%AA">Git - メンテナンスとデータリカバリ</a></li>
+<li><a href="https://tech.mobilefactory.jp/entry/2020/12/11/000000">git gcで起きることをトレース情報から追ってみる - Mobile Factory Tech Blog</a></li>
+</ul>
+
+<h1>歴史</h1>
+<h2>昔は他にたくさんの次世代バージョン管理システムの候補があった</h2>
+<p>Gitが出来る前、ITの世界にはさまざまなバージョン管理システムがありました。</p>
+<p>昔からバージョン管理システムの標準として使われていたCVSは設計面で劣悪で、そのために次世代のバージョン管理システムとしてSubversionが開発されました。</p>
+<p>また、他にもたくさんのバージョン管理システムの候補がありました。GNU arch, Bazaar, Darcs, Mercurial, Monotone, Veracityなど。</p>
+<p><a href="cvs.html">CVS</a>や<a href="scm.html">バージョン管理システム</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">バージョン管理システム - Wikipedia</a></li>
+</ul>
+
+<h2>GitはLinuxカーネルの開発のために作られた</h2>
+<p>GitはLinuxカーネルの開発のために作られました。Linux創始者のリーナス・トーバルズによって開発されました。</p>
+<p>Linuxカーネルの開発には、昔はオープンソースではないBitKeeperというソフトウェアが使われていた。CVSは劣悪で使えない。リーナスはBitKeeperの代替品として、自らGitを書くことを決めた。特に、パフォーマンスの点で妥協したくなかったらしい。</p>
+<ul>
+<li><a href="https://yakst.com/ja/posts/4005">LinuxとBitKeeperとGitの関係 - Yakst</a></li>
+</ul>
+
+<h2>GitHubはマイクロソフトによって買収</h2>
+<p>GitHubはなんとマイクロソフトによって買収された。マイクロソフトも、本気でオープンソースをやるようになった。</p>
+<p>以前、オープンソースを「癌だ」と言っていた時代とは全く逆である。マイクロソフトは最近はLinuxカーネルの開発にも貢献しているオープンソース企業である。</p>
+
+<h2>gitのおかげでオープンソースの開発はとても簡単になった</h2>
+<p>gitについて言えることは、「オープンソースの開発がとても簡単になった」ということです。</p>
+<p>適当にgit cloneするだけで、誰でも簡単にオープンソースプロジェクトに開発者として参加できるようになってしまったのです。</p>
+<p>gitを開発したのはLinuxカーネル開発者のリーナス・トーバルズですが、彼自身はインポスター症候群（ある程度以上の能力を持って成功しているのにもかかわらず、自分の能力を過小に評価し、「自分は詐欺師である」と感じる症状のこと。詐欺師症候群とも）の傾向があると言って、「LinuxはUNIXの再実装を作っただけ」であると語り、「gitを開発したことで、自分が単なる改良以上のことを成すことができたと自信を持てた」とか「一発屋ではないことの証明になった」と言っていますが、僕はgitは素晴らしいソフトウェアであると思います。リーナスは自分のことを過小評価しすぎです。</p>
+<ul>
+<li><a href="https://japan.zdnet.com/article/35144738/">"Linuxの生みの親"トーバルズ氏：「私はもうプログラマーではない」 - ZDNet Japan</a></li>
+</ul>
+<p>ツイッターなどでは、「リーナスが自信を持てないなら自分が自信を持てないのは当たり前だな」などと言った意見があり、面白いです。</p>
+
+<h2>git cloneでパッケージ管理システムは不要になる？</h2>
+<p>余談だが、最近はGitHubなどの普及によって、今までのLinuxにおけるソフトウェアパッケージの導入の方法が変わってきた。いきなりgit cloneしてそれを使えばいいだけ、という風になってきて、FedoraやDebianのようなパッケージ管理システムが必要なくなってきたのである。</p>
+<p>ただ、C/C++などのビルドが必要なコンパイラ言語はあるが、逆にいきなりRustで書いてしまって、cargoでインストールを行うような強者アプリも現れてきている。JavaScriptやEmacsにもパッケージ管理システムはあるが、gitがそうした役目の全てを担い始めてきているのである。</p>
+<p>ただし、完全にシステムのパッケージ管理システムが不要になるかというとそうではなく、依存関係の処理やアップデートなど今でもパッケージ管理システムは必要である。だが、手軽に開発者と同じ感覚でアプリを導入したいなら、GitHubからgit cloneという方法も今では普通になりつつある。</p>
+
+<h2>最近のオープンソースはプルリクエストだけで成り立つ</h2>
+<p>また、最近のオープンソースに言えることは、「プルリクエストだけで開発が成り立つようになってきている」ということです。</p>
+<p>gitを使えば、既存のリポジトリからgit cloneし、ローカルでファイルを編集し、自分のリポジトリを作った上で編集したコードを公開し、プルリクエストを行ってマージしてもらうだけで、簡単に開発ができます。</p>
+<p>確かにメーリングリストでパッチを受け入れるプロジェクトは、まだまだたくさんありますが、時代は少しずつgitに移行してきています。</p>
+
+<h1>簡単な説明</h1>
+<h2>Git</h2>
+<ul class="defaultlist list7">
+<li>git
+<ul>
+<li>git</li>
+</ul></li>
+</ul>
+
+<h2>gitの使い方</h2>
+<p>最初は既存リポジトリからcloneしてコピーをローカルに作るか、自分で作ったプロジェクトであればinitとaddでファイルを登録する。</p>
+<p>基本的にファイル編集→コミット→リポジトリにプッシュ・リポジトリからプル→ファイル編集の流れを繰り返す。</p>
+<p>さまざまな使えるコマンドがあるので知っておこう。</p>
+
+<h2>git用語</h2>
+<h3>クローン</h3>
+<p>リポジトリのコピーを作る。</p>
+
+<h3>コミット</h3>
+<p>ファイルの変更を登録する。</p>
+
+<h3>プッシュ</h3>
+<p>コミットした内容でネットワーク上のリポジトリを更新する。</p>
+
+<h3>プル</h3>
+<p>リポジトリの内容（他人や他のコンピュータが更新した内容）をローカルに反映する。</p>
+
+<h3>プルリクエスト</h3>
+<p>自分のリポジトリにプッシュした内容を他のリポジトリでもプルして反映するようにお願いを立てる。</p>
+
+<h2>GitHub、GitLab</h2>
+<p>gitを使う上で自分のリポジトリとして使うことができる無料のホスティングサービス。</p>
+<p>GitHub Pagesという機能を使うことで静的HTMLを公開するホームページ公開サービスとしても使うことができる。</p>
+
+<h1>リンク集</h1>
+<h2>Git</h2>
+<ul>
+<li><a href="http://www.backlog.jp/git-guide/">サルでもわかるGit入門</a></li>
+<li><a href="https://jp.linux.com/news/linuxcom-exclusive/424446-lco2014121101">Linux ユーザーのための Git と Github 入門 - Linux.com</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

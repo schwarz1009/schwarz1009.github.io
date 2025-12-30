@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>CGI関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div><h1>CGI関連の世界観</h1>
+<p>CGIに関する世界観です。<a href="../prog_lang/perl_cgi.html">Perl/CGI</a>や<a href="web.html">Webサーバー</a>や<a href="apache.html">Apache</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>サーバーサイドの処理</h1>
+
+<h2>静的HTMLとの違い</h2>
+<p>HTMLは、単純にHTMLファイルをダウンロードしてWebブラウザに表示させるだけで、リンクを使って別のページに移動する。</p>
+<p>これに対してCGIやPHPは、プログラミングとしてのコードをHTML内部に記述したり、HTMLを吐き出すプログラムを作ることで、プログラムを実行した結果をブラウザに表示する。</p>
+<p>よって、ただ表示することしか出来ない「静的HTML」とは違い、掲示板やSNSなどの高度な「プログラマブルなWebサイト」を作ることができる。</p>
+<p>後日注記：CGIやPHPを使うことで、Webページをサーバーが自動作成することができる。上手く使えば、GUIのアプリケーションと同じことをWeb上で行うことができる。たとえば掲示板やチャットやブラウザゲームのようなWebアプリケーションが作れる。データは基本的にサーバーに保存され、Webページを通じてデータにアクセスしたり、ネットワークのどこからでも共通のアプリケーションの機能を使うことができる。</p>
+<p><a href="../prog_lang/html.html">HTML</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.03.28編集</p>
+</div>
+
+<h2>クライアントサイドとサーバーサイド</h2>
+<p>Perl/CGIはサーバーサイドのダイナミックなWebページの開発技術。サーバーサイドとは、ネットワーク上でサーバー・クライアントの通信を行う時、サーバー側（Webサーバー）で処理するプログラムのこと。これに対してクライアント側（Webブラウザ）で処理するプログラムのことをクライアントサイドと呼ぶ。サーバーサイドには主にPerl/CGI, PHP, Javaサーブレット, ASP.NETのような技術が用いられるのに対して、クライアントサイドにはWebブラウザの組み込み言語であるJavaScriptを用いる。また、サーバーサイドにおけるJavaScriptランタイムであるNode.jsを使えば、サーバーサイドでもJavaScriptを使うことができる。</p>
+<p>サーバーサイドで行われる主な処理は、データそのもの（HTMLなど）の自動作成や加工と操作などで、たとえば掲示板やチャットなどが代表的。クライアントサイドで行われる主な処理は、さまざまなダイナミックなブラウザ上のインタラクティブな処理で、ブラウザ上で項目を移動したり作成・削除したりUI処理を行ったりなどのために使われる。</p>
+<p>サーバーサイドでは、データがサーバー上に保存されるため、インターネット上の不特定多数の投稿をサーバーで保管するために使うことが多い。このため、掲示板やチャットを作る際にはサーバーサイドの処理が必要となる。</p>
+<p>逆に、クライアントサイドはサーバーと通信せず、クライアントのブラウザの中だけで完結する。また、HTMLの自動作成しかできないサーバーサイドに比べて、クライアントサイドではWebブラウザの持つ機能をフルで使うことができ、ページ遷移（別々のページを行ったり来たり）なしでページを操作できる。</p>
+<p>そのため、クライアントサイドだけでは基本的にインターネット上のデータの共有はできないが、わざわざネットワーク通信を介してページを遷移しなくても、ローカルのブラウザの機能を使うことで、GUIアプリケーションに負けないインタラクティブなエフェクトや操作性をWebページに持たせることができる。なので、JavaScriptを上手く使えば、GUIアプリケーションと遜色のないアプリケーションをWebで作ることができる。</p>
+<p>例外として、Ajaxなどを用いれば、クライアントサイドであってもページ遷移と関係なくネットワーク通信を非同期で行うことは可能である。</p>
+<p><a href="../prog_lang/javascript.html">JavaScript</a>や<a href="../prog_lang/ajax.html">Ajax</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.03.28</p>
+</div>
+
+<h1>主な言語と技術</h1>
+<h2>Perl/CGI</h2>
+<p>HTMLの代わりにCGIを用いて、動的なWebページを作ることが出来る。ブラウザにデータを伝達する前の、サーバーサイドの処理。</p>
+<p>同様の技術に、PHP、ERB (Ruby)、Javaサーブレット/JSP、ASP.NETのようなものがある。</p>
+<ul>
+<li><a href="http://www.tohoho-web.com/wwwcgi.htm">とほほのCGI入門</a></li>
+</ul>
+<p>Perl/CGIについては<a href="../prog_lang/perl_cgi.html">Perl/CGI</a>を参照のこと。</p>
+
+<!--
+<h2>CGI</h2>
+<p>Apacheでサーバー側のプログラミングを行う技術。</p>
+-->
+<h2>PHP</h2>
+<p>HTMLに埋め込む形でサーバーサイドのプログラミングを行う技術・言語。</p>
+<p>PHPによるWebプログラミングの入門は以下。</p>
+<ul>
+<li><a href="https://oku.edu.mie-u.ac.jp/~okumura/php/">PHPによるWebプログラミング - 奥村晴彦</a></li>
+</ul>
+<p>PHPについては<a href="../prog_lang/php.html">PHP</a>を参照のこと。</p>
+<p>以下はPHPのセキュリティ対策。</p>
+<ul>
+<li><a href="https://blog.codecamp.jp/php_security">PHP開発者必見！最低限知っておくべきセキュリティ対策まとめ - Tech2GO</a></li>
+<li><a href="http://www.hp-stylelink.com/news/2013/09/20130913.php">PHP開発エンジニア必読！最低限必要なセキュリティ対策 - ホームページ制作なら渋谷のウェブ制作会社【スタイル】</a></li>
+</ul>
+
+<h2>他のサーバーサイド言語（Perl/Python/Ruby/Javaなど）</h2>
+<p>Perl/Python/Ruby/Javaなどの言語は、PHPと同様にサーバーサイドで使うことが出来ます。</p>
+<p><a href="../prog_lang/python.html">Python</a>、<a href="../prog_lang/ruby.html">Ruby</a>、<a href="../prog_lang/java_servlet.html">Java（サーブレット）</a>を参照のこと。</p>
+
+<h1>CGI関連のトピック</h1>
+<h2>CGIとApacheモジュールの違い</h2>
+<p>CGIとApacheモジュールの違いは、CGIはリクエストごとにプロセスを起動し、プロセスが終わったら破棄するのに比べて、mod_phpなどのApacheモジュールは、Apacheのプロセス内部でのスレッドで処理を行う。</p>
+<p>これはJavaサーブレットなどにもみられる優位性であり、一般的にCGIよりもmod_phpやJavaサーブレットの方がオーバーヘッドが少なく効率が良いとされている。</p>
+<p>後日注記：一般に、複数のプロセスを作成・破棄するよりも、単一のプロセスの中でスレッドを作成・破棄するほうが軽量かつ効率的でパフォーマンスがいい。そのため、Perl/CGIでWebアプリケーションを開発するよりも、PHPやJavaサーブレットのようなスレッドベースの機構を用いてWebアプリケーションを開発したほうが、高速かつ軽量なサービスを開発できる。</p>
+<p><a href="../linux/linux_api2.html">Linuxシステムコール・API（プロセス・メモリ）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.03.28編集</p>
+</div>
+
+<h2>FastCGI</h2>
+<p>CGIがPHPやJavaサーブレットに比べてパフォーマンスが悪いと言われるのに対し、FastCGIという機構も存在する。FastCGIでは、FastCGIサーバーが常に常駐してメモリに起動することで、PHPやJavaサーブレットに負けないパフォーマンスを発揮する。</p>
+<p><a href="fastcgi.html">FastCGI</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.03.28編集</p>
+</div>
+
+<h2>CGIはステートレス</h2>
+<p>CGIは、一回の送信と受信で処理が完結される、という特徴を持つ。一回リクエストして、それでHTMLが返ってきたらそこで終わりである。逆に言えば、セッションをまたいで一時的な情報を保持しておくことができない。これを「ステートレス」（状態なし）と言う。</p>
+<p>CGIのようにステートレスではなく、状態を保持しておきたい場合は、ソケット通信でサーバーとクライアントを繋ぐプログラムを書く必要があるだろう。Cookieを使って一時的にサイトの情報をローカル環境に保存しておいてそれを確認する、というやり方や、ログイン情報を保持しておきたいだけであればBASIC認証のような機能を使うこともできる。</p>
+<p>ただし、これはあくまで一時的な状態をプログラムの中で保持できないということであり、サーバー側でファイル読み書きをしたりして一時的な情報を確保することは可能である。Perlで作られたネットゲームなどでも、プレイヤーの情報などは一時的な専用のファイルやデータベースに保持されている。また、Googleなどがやっているように、ビッグデータをAIが解析する、という方法も最近では良く使われるようになりつつある。最近のWebアプリケーションは、YouTubeのミックスリストのように、機械学習で表示内容を変えるのが主流になりつつある。よって、CGIで必ずしもデータの記録が不可能であるわけでは全くなく、その逆に、クラウドアプリケーションはデータの置き場所をどんどんローカルからリモートに移動させようとしている。これはサービスがどのように運営されているのかをよく確認しなければ危険である。たとえば、Yahoo!のサービスは長期間ログインしていないと勝手に削除される。できるだけ、Googleのような安心できるサービスを使うこと。それもIT能力のひとつである。</p>
+<p>後日注記：ステートフル・ステートレスについては、以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+</ul>
+<p><a href="../prog_lang/state.html">状態</a>も参照のこと。</p>
+
+<h1>フロントエンドとバックエンド</h1>
+<h2>フロントエンドとバックエンド</h2>
+<p>クライアントサイドとサーバーサイドという言葉以外に、Webの開発ではフロントエンドとバックエンドという用語があります。</p>
+<p>基本的に、フロントエンドとはクライアントサイドのことで、バックエンドはサーバーサイドあるいはデータベースのことです。</p>
+<p>あるいは、フロントエンドはサービスの目に見える部分の開発のことで、サーバーサイドは目に見えない部分の開発のことです。</p>
+<p>フロントエンドエンジニアは、HTML/CSS/JavaScriptを使って、ユーザーの操作するWeb画面を作ります。</p>
+<p>バックエンドエンジニアは、PHPやRubyあるいはそれ以外のさまざまなプログラミング言語を用いて、サーバー側のプログラミング処理とデータベース処理を行います。</p>
+<p>フロントエンドとバックエンドは、APIによって結ばれます。フロントエンドがAPIを使い、バックエンドがそのAPIに対応した処理を記述します。</p>
+<ul>
+<li><a href="https://hnavi.co.jp/knowledge/blog/front-end-back-end/">フロントエンドとバックエンドとは？何が違うの？押さえておきたい基礎知識 - システム開発のプロが発注成功を手助けする【発注ラウンジ】</a></li>
+<li><a href="https://qiita.com/heiwa/items/10d1a74d0b141999220f">フロントエンドとバックエンドをわけて開発する - Qiita</a></li>
+</ul>
+<p><a href="rest.html">REST</a>や<a href="web_api.html">Web API</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.12</p>
+</div>
+
+<h2>フロントエンドとバックエンドの開発</h2>
+<p>実際の開発では、フロントエンドにReactやNext.jsのようなクライアントで動くフレームワークを使い、バックエンドにはNode.jsやExpressのようなサーバーサイドのフレームワークと、MySQLやPostgreSQLのようなデータベース管理システムを使い、REST APIとJSONで両者を結合します。</p>
+<p>実際のAPIを実現するのはたとえばNode.jsとExpressです。Node.jsとExpressを使うことで、フロントエンドとバックエンドをどちらもJavaScriptで開発できます。</p>
+<p><a href="../prog_lang/node_js.html">Node.js</a>や<a href="../prog_lang/node_js_express.html">Express</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.06.30</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>CGI</h2>
+<p>CGIはリクエストのたびにプロセスを起動するためオーバーヘッドが大きい。これに対してApacheのモジュールとして動くPHPやアプリケーションサーバとして動くJavaサーブレットはスレッドベースであるためオーバーヘッドが少なくCGIよりも性能が高い。</p>
+
+<h2>ステートレス、ステートフル</h2>
+<p>CGIはステートレス（状態の情報がない）が、クッキーやセッションを使うことでスレートフルな状態の情報を扱える。</p>
+
+<h2>FastCGI</h2>
+<p>Perlのような言語でも、CGIではなくFastCGIを使うことでオーバーヘッドの問題を解決できる。FastCGIは常にメモリに常駐する。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

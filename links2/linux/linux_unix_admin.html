@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理６（システム情報と設定） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>UNIXシステム管理６（システム情報と設定）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観６（システム情報と設定）です。</p>
+
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><b>６．システム情報と設定</b></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>設定ファイル</h1>
+<h2>/etcディレクトリ</h2>
+<p>Linuxの設定ファイルは、基本的に/etcディレクトリに存在する。</p>
+<p>/etcディレクトリの中に、システムの設定はほとんどある。特に重要なディレクトリは/etc/rc.d/や/etc/init.d/で、Linuxが起動時にinitで実行する設定スクリプトがある。</p>
+<p>また、Red Hat系のLinuxでは、/etc/sysconfig/にさまざまなシステムの設定ファイルがあり、/etc/init.d/networkや/etc/sysconfig/network、/etc/sysconfig/network-scripts/ifcfg-eth0などは見慣れて久しい。</p>
+<p>Linuxでは、/usr以下のディレクトリは個人で変更するのは控えた方が良いところがあるが（システムのバイナリリソースが置かれており、パッケージ管理システムで管理すべき）、逆に/etc以下のディレクトリはどんどん個人で変更して構わない。</p>
+<p>また、/etc以外のディレクトリにも、Linuxの管理に必要なディレクトリがいくつかある。</p>
+<p>/varディレクトリは、/etcとは違い「使っていて容量が変化するファイル」を置くディレクトリで、システムによって使っている間に変化していく。ログファイルやスプールファイルが置かれる。全てのログファイルは/var/log/以下にある。</p>
+<p>/tmpディレクトリには、一時的なファイルが保管される。一時的に生まれては消えていく。</p>
+<p>/mntディレクトリには、静的にマウントしたデバイスのファイルシステムが置かれる。</p>
+<p>/mediaディレクトリには、/mntディレクトリと同じようにマウントしたディレクトリが置かれるが、デバイスを接続するたびに自動的にマウントされる。</p>
+<p>/devディレクトリには、デバイスドライバによって利用可能となったデバイスファイルが置かれる。今のLinuxではudevがこのデバイスファイルを自動作成する。</p>
+<p>/sysにはカーネルの情報やudevのためのデバイスの情報が入っている。</p>
+<p>/procにはプロセスの情報が入っている。/sysに移動する前は、カーネルの情報も/procに含まれていた。</p>
+<p>また、これら以外にも、/usr以下にシステム管理のためのファイルが入っていることがある。たとえばudevでは、カスタマイズしたルールファイルは/etc/udev/rules.dにあるが、そのデフォルトの設定は/usr/lib/udev/rules.dにある。また、/usr/share/docにはドキュメントが置かれ、/usr/share/fontsにはフォントが置かれる。</p>
+<p><a href="linux_fhs.html">Linuxファイルシステム階層</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.02.13編集</p>
+</div>
+
+<h2>ドットファイル</h2>
+<p>こうしたシステムの設定ファイルの他に、ユーザー個人個人のための設定ファイルが、原則ホームディレクトリ（/home/username/以下）に置かれる。</p>
+<p>これらのファイルは、UNIXの慣習から、ファイル名の最初が「.」から始まる。たとえば、「.emacs」とか「.bashrc」といった具合である。これらを「ドットファイル」と呼ぶ。</p>
+<p>ドットファイルは、標準のlsなどのコマンドやファイルマネージャなどでは「隠しファイル」として扱われるため、表示されないことがある。適切なコマンドオプションやアプリケーションの設定を変えることで、これらのドットファイルを含めて全てのファイルを表示できる。</p>
+<p>ドットファイルにアクセスするためには、ホームディレクトリにcdしてvi .bashrcのようにするか、ホームディレクトリを表す「~」を使って~/.bashrcとしたり、/home/username/.bashrcとすれば良い。</p>
+<p>Linuxでは、/etcの設定を空白のタブで区切られたプレーンテキストで行い、ドットファイルは「初期化スクリプト」とすることが慣習的にままある（そうでない場合も多い）。特に.bashrcや.xinitrcなどは内部がシェルスクリプトであり、アプリケーションの起動時に自動的に読み込まれ実行される。</p>
+<p>ドットファイルには、こうしたホームディレクトリに置かれるファイルの他、いくつか例外的に、それぞれのデータディレクトリの中に作られることもある。Apacheのディレクトリ単位での設定ファイルである.htaccessや、gitの.gitディレクトリなどがこれに当たる。</p>
+
+<h2>シェル変数と環境変数</h2>
+<p>シェル変数は、シェルの中だけで保たれる。</p>
+<pre>
+$ HOGE=hoge
+</pre>
+<p>シェル変数を参照するには、$を変数名につける。</p>
+<pre>
+$ echo $HOGE
+hoge
+</pre>
+<p>環境変数は、システム全体に適用される変数。設定するにはシェル変数を指定した後でexportする。</p>
+<pre>
+$ HOGE=hoge
+$ export HOGE
+</pre>
+<p>たとえば以下のようにPATHを変更できる。</p>
+<pre>
+$ echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin
+$ PATH=$PATH:/home/assy/bin
+$ export PATH
+</pre>
+<p>.bash_profileや.bashrc、.xsessionや.xinitrcなどに上記設定を記述することで、システムで常に同じ設定を使用できる。</p>
+<p>シェル変数の一覧はsetコマンド、環境変数の一覧はenvコマンドで表示できる。</p>
+<p>現在のシェルでのスクリプトの読み込みにはsourceコマンドを使う。</p>
+<pre>
+$ source .bashrc
+</pre>
+<p>一時的に設定を変えることで、「LANG=Cの状態でmanを見る」などということもできる。</p>
+<pre>
+$ LANG=C man ls
+</pre>
+
+<h2>設定・初期化ファイル</h2>
+<p>以下の設定・初期化ファイルに環境変数などの設定を行う。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">設定ファイル</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>.bash_profile</td>
+<td>Bashにログインした時に実行される。</td>
+</tr>
+<tr>
+<td>.bash_logout</td>
+<td>Bashからログアウトした時に実行される。</td>
+</tr>
+<tr>
+<td>.bashrc</td>
+<td>Bashの起動時（ログイン後の起動を含む）に毎回実行される。</td>
+</tr>
+<tr>
+<td>.bash_history</td>
+<td>コマンド履歴が記録される。</pre></td>
+</tr>
+<tr>
+<td>.xsession</td>
+<td>Xのディスプレイマネージャ（GNOMEなどのログイン画面）からログインした時に実行される。</td>
+</tr>
+<tr>
+<td>.xinitrc</td>
+<td>xinitやstartxなど、手動でXを立ち上げた時に実行される。</td>
+</tr>
+</table>
+<p>このほか、Xアプリケーション（たとえばkterm）のリソース（たとえば背景や文字の色）を設定できる.Xdefaultsや.Xresources、Xにおけるキーマップを変更できる.Xmodmapがある。詳しくは<a href="linux_x11_admin.html">X11設定とプログラミング</a>を参照のこと。</p>
+<p>（以上は<a href="http://157.82.240.165/~yousuke/keisannki/init.html">初期設定 - 山下陽介のページ</a>を参考に執筆しました。）</p>
+<p>標準のシェルでshを使うことは少ないとは言うが、Debianなどでは/bin/shにsh互換のdashを使うため、シェルスクリプトでbashの機能は利用できない。注意すること。</p>
+
+<h2>主なシステムの設定ファイル（一部のみ）</h2>
+
+<table class="some_tables">
+<tr>
+<th class="min60">設定ファイル</th>
+<th>説明</th>
+</tr>
+
+<tr>
+<td>/etc/ld.so.conf</td>
+<td>ライブラリのパスを記述する。</td>
+</tr>
+
+<tr>
+<td>/etc/fstab</td>
+<td>マウント設定。</td>
+</tr>
+
+<tr>
+<td>/etc/crontab</td>
+<td>cronに実行させる処理。</td>
+</tr>
+
+<tr>
+<td>/etc/passwd</td>
+<td>パスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/shadow</td>
+<td>シャドウパスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/group</td>
+<td>グループの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/gshadow</td>
+<td>グループのシャドウパスワードの設定。</td>
+</tr>
+
+<tr>
+<td>/etc/sudoers</td>
+<td>sudo設定ファイル。</td>
+</tr>
+
+<tr>
+<td>/etc/shells</td>
+<td>ログインシェルの一覧。</td>
+</tr>
+</table>
+
+<h2>参考ページ</h1>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://157.82.240.165/~yousuke/keisannki/init.html">初期設定 - 山下陽介のページ</a></li>
+</ul>
+
+<h2>設定ファイルのman-pages</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man5/fstab.5.html">man fstab</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/cron/man5/crontab.5.html">man crontab</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/passwd.5.html">man passwd</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/shadow/man5/shadow.5.html">man shadow</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/group.5.html">man group</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/sudo/man5/sudoers.5.html">man sudoers</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/shells.5.html">man shells</a></li>
+</ul>
+
+<h1>ハードウェア情報関連のコマンド</h1>
+<p><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>を参考にしています。</p>
+
+<h2>arch/uname/hostname/sysctl</h2>
+<p>システムの基本的な情報を表示・設定する4つのコマンド。</p>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>arch</td><td>マシンのアーキテクチャ名を表示する。</td></tr>
+<tr><td>uname</td><td>システム情報（カーネルの名前とかバージョンとか。uname -aで全部の情報を表示）を表示する。</td></tr>
+<tr><td>hostname</td><td>ホスト名を表示・設定する。システムのホスト名の設定ファイルは/etc/hostnameとなる。</td></tr>
+<tr><td>sysctl</td><td>カーネルパラメータを表示・設定する。</td></tr>
+</table>
+<p>以下を参照のこと。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/arch.1.html">man arch</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/uname.1.html">man uname</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_coreutils/man1/hostname.1.html">man hostname</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/procps/man8/sysctl.8.html">man sysctl</a></li>
+</ul>
+
+<h2>lspci/lsusb/lsscsi/lscpu/lsblk</h2>
+<p>以下のコマンドは以下のハードウェア情報を表示する。</p>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>lspci</td><td>PCIバスについてのデバイス情報。</td></tr>
+<tr><td>lsusb</td><td>USBデバイス。</td></tr>
+<tr><td>lsscsi</td><td>SCSIデバイス。</td></tr>
+<tr><td>lscpu</td><td>CPU情報。</td></tr>
+<tr><td>lsblk</td><td>ブロックデバイス一覧。</td></tr>
+</table>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/pciutils/man8/lspci.8.html">man lspci</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/util-linux/man8/lsblk.8.html">man lsblk</a></li>
+</ul>
+
+<h2>df/du</h2>
+<p>ディスクの空き領域を表示するdfコマンド、ディレクトリ内のファイル容量を表示するduコマンドなどもある。</p>
+<p><a href="linux_filetools_archive.html">Linux アーカイブ・同期・デバイス処理</a>も参照のこと。</p>
+
+<h1>/procと/sys</h1>
+<h2>プロセスファイルシステム（/procと/sys）</h2>
+<p><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。</p>
+<p>/procディレクトリはプロセスファイルシステム（procfs）で、プロセスやカーネルの情報を取得したり変更したりすることができる。</p>
+<p>たとえば、プロセスIDが1ならば、/proc/1からプロセスの情報を得ることができる。</p>
+<p>もともとはプロセスだけの仕組みだったが、次第にカーネルの中のシステム情報をリアルタイムで取得したり、動的に設定を変更することができる機構として使われるようになった。</p>
+<p>後日注記：Linux 2.6では、/procに存在したプロセスとは無関係のカーネルの情報を/sysディレクトリ（sysfs）に移動しました。</p>
+<ul>
+<li><a href="https://www.wdic.org/w/TECH//sys">/sys ‐ 通信用語の基礎知識</a></li>
+</ul>
+
+<h2>コンピュータ情報の表示</h2>
+<p>/procファイルシステムには、カーネルやコンピュータのさまざまな情報がアクセスできるようになっている。</p>
+<p>コンピュータのCPUを見る場合、</p>
+<pre>
+cat /proc/cpuinfo
+</pre>
+<p>を実行すると、CPUの情報にアクセスできる。また、</p>
+<pre>
+cat /proc/meminfo
+</pre>でメモリの情報を確認できる。</p>
+<ul>
+<li><a href="http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-ja-4/ch-proc.html">5章. proc ファイルシステム - Red Hat Enterprise Linux 4: リファレンスガイド</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h1>システム管理</h1>
+<h2>ロギング</h2>
+<p>ロギングとは、ログを取ること。システムの基本的なログは/var/log/syslogにある。</p>
+<p><a href="linux_unix_logger.html">UNIXシステム管理（８A．システムロガー）</a>を参照のこと。</p>
+
+<h2>モニタリング</h2>
+<p>モニタリングとは、システムの稼働状況を監視すること。特にサーバーなどのマシンでは、自分からプロセスを実行しなくても、稼働中のシステムが勝手にプロセスを動かす。</p>
+<p>プロセスやスレッドの情報を監視するためには、topコマンドを使う。</p>
+<p><a href="linux_net_monitoring.html">Linux モニタリング</a>を参照のこと。</p>
+
+<h1>各種設定</h1>
+<h2>WebminでGUIからLinuxを設定</h2>
+<p>WebminはWebブラウザを使ってGUIでLinuxの設定や管理ができるソフトウェア。</p>
+<p><a href="webmin_cockpit.html">Webmin/Cockpit</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>設定ファイルのバックアップファイル</h2>
+<p>hoge.confはhoge.conf.org、さらにhoge.conf.org1やhoge.conf.org2のようにバックアップファイルを作りましょう。</p>
+<ul>
+<li><a href="http://oxynotes.com/?p=3865">Linux初心者こそ押さえたい、失敗しない設定ファイルの編集方法 - OXY NOTES</a></li>
+</ul>
+<p><a href="../network/apache.html">Apache</a>も参照のこと。</p>
+
+<h1>いろいろ</h1>
+<h2>用語について</h2>
+<p>wdはworking directory（作業ディレクトリ）の略。</p>
+<p>また、pgはprocess group（プロセスグループ）の略。policy group（ポリシーグループ）と間違えやすいので注意しよう。</p>
+
+<h1>余談</h1>
+<h2>dotfilesをリポジトリで管理する</h2>
+<p>最近は、dotfiles（ユーザーのホームディレクトリにある、ユーザー設定を行うためのドットから始まるファイル）をGitHubのようなリポジトリで管理する手法が流行っています。</p>
+<p>dotfilesをリポジトリ管理することで、複数の環境で設定を共通化でき、新しい環境を設定することが簡単になります。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/yutkat/items/c6c7584d9795799ee164">ようこそdotfilesの世界へ - Qiita</a></li>
+</ul>
+<p><a href="../prog_lang/git.html">Git</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.06.29</p>
+</div>
+
+<h2>一時的な設定と永続的な設定</h2>
+<p>Linuxの設定には、一時的な設定と永続的（恒久的）な設定があります。</p>
+<p>一時的な設定とは、すぐさま設定が有効になる代わり、システムを再起動すると失われてしまう設定のことで、多くがコマンドの実行で設定します。</p>
+<p>永続的な設定とは、システムを再起動しても残り続ける設定のことで、次回の起動時から有効になります。</p>
+<p>永続的な設定をするには、設定ファイルを編集します。LinuxやUNIXの共通の設定ファイル（/etc/*.confなど。名前に.confが付かない場合もある）である場合もあれば、sysconfigのようにディストリビューション固有の設定になる場合もあります。あるいは、.bashrcのように、ドットファイルの初期化スクリプトで設定する場合もあります。デーモンの起動スクリプト（RCスクリプト）の場合は、chkconfigなどのコマンドで設定・管理する場合もあります。</p>
+<p>また、設定を有効にするためのコマンドを、間隔をあけて定期的に実行したい場合もあります。このような時にはcronを使います。cronで実行したいスクリプトを書いて、それをcronの設定ファイルであるcrontabに、実行する時間・間隔と一緒に指定します。そうすると、cronデーモンが指定した時間にスクリプトを実行してくれるようになります。</p>
+<p>よりユーザーフレンドリーな設定の方法として、ディストリビューションによって用意されているGUIの設定フロントエンドを使う方法もあります。設定ファイルをviなどのテキストエディタで編集するのと同じことが、GUIから直感的に行えます。ユーザーがLinuxの初心者・入門者で、設定ファイルの記法や構成を何も知らない場合は、そのようなGUIの設定ツールを使うこともできます。ただし、このようなツールはディストリビューションごとに異なり、またどの設定ファイルの項目に設定内容が反映されるか分かりづらいため、上級者を目指すのであれば、設定ファイルを手動で設定する方法も知っておくべきでしょう。</p>
+<div class="edit_date">
+<p>2023.08.26</p>
+</div>
+
+<h1>関連ページ</h1>
+
+<h2>ネットワークの設定</h2>
+<p><a href="linux_net.html">Linuxネットワーク（１．コマンド）</a>と<a href="linux_net2.html">Linuxネットワーク（２．設定）</a>を参照のこと。</p>
+
+<h2>タイムゾーンとロケール</h2>
+<p><a href="linux_unix_timezone_locale.html">UNIXシステム管理７（タイムゾーンとロケール）</a>を参照のこと。</p>
+
+
+<h1>設定</h1>
+<h2>設定ファイル</h2>
+<p>設定ファイル。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_setting.html">Linux Tips［環境設定］ - @IT</a></li>
+<li><a href="http://www.yoshinobrain.com/set.html">Linux入門 その４  設定ファイル - Yoshino Brain</a></li>
+<li><a href="http://net-newbie.com/linux/user/envfiles.html">環境ファイル - ネットワーク管理者（の卵）養成講座</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/config.html">システム設定ファイル - UNIX/Linux の部屋</a></li>
+</ul>
+<h2>ネットワーク</h2>
+<p>ネットワークの設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_net.html">Linux Tips［ネットワーク］ - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/series/1634/">ネットワーク管理の基本Tips - @IT</a></li>
+</ul>
+<h2>ハードウェア</h2>
+<p>ハードウェアの設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_hard.html">Linux Tips［ハードウェア］ - @IT</a></li>
+</ul>
+<h2>印刷</h2>
+<p>印刷とプリンターの設定。</p>
+<p><a href="linux_printer.html">Linuxプリンター</a>を参照のこと。</p>
+
+<h2>X11</h2>
+<p>X11の設定。</p>
+<p><a href="linux_x11_admin.html">X11設定とプログラミング</a>を参照のこと。</p>
+
+<h2>フォント</h2>
+<p>フォントの設定。</p>
+<p><a href="linux_font.html">Linuxフォント</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

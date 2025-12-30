@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>scikit-learn関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">AI・自作プログラムの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/programs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>scikit-learnの世界観</h1>
+<p>scikit-learnに関する世界観です。<a href="ai_python.html">PythonでAI入門</a>や<a href="ai.html">人工知能・AI・機械学習・データマイニング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>scikit-learn</h1>
+<h2>scikit-learnを勉強しよう</h2>
+<p>scikit-learnはPythonのオープンソースな機械学習ライブラリ。「機械学習と言えばScikit-Learn」と呼ばれる。</p>
+<p>scikit-learnには、分類（classification, 所属するクラスの分類）、回帰（regression, 値の予測）、クラスタリング（clustering, データの振り分け）、次元削減などの手法がある。</p>
+<p>（以上は<a href="https://techacademy.jp/magazine/17375">機械学習のライブラリ！scikit-learnとは【初心者向け】 | TechAcademyマガジン</a>と<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。）</p>
+<p>以下が参考になる。</p>
+<ul>
+<li><a href="https://dev.classmethod.jp/machine-learning/introduction-scikit-learn/">いまさら聞けない？scikit-learnのキホン ｜ Developers.IO</a></li>
+<li><a href="https://data.wingarc.com/scikit-learn-18608">Pythonの代表的な機械学習のオープンソースライブラリ『scikit-learn（サイキットラーン）』とは？ | データのじかん</a></li>
+<li><a href="https://www.ossnews.jp/oss_info/scikit-learn">オープンソースのAI・人工知能 / scikit-learnとは - OSS×Cloud News - オープンソース×クラウド情報サイト</a></li>
+<li><a href="https://techacademy.jp/magazine/17375">機械学習のライブラリ！scikit-learnとは【初心者向け】 | TechAcademyマガジン</a></li>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+
+<h2>公式を読もう</h2>
+<p>scikit-learnについては、公式のドキュメントを読みましょう。公式のドキュメントが丁寧であることがscikit-learnの特徴です。</p>
+<ul>
+<li><a href="https://scikit-learn.org/stable/index.html">scikit-learn: machine learning in Python &mdash; scikit-learn 0.24.2 documentation</a></li>
+</ul>
+<p>日本語の徹底的な解説がほしい方は以下の記事がおすすめです。</p>
+<ul>
+<li><a href="https://www.codexa.net/scikit-learn-intro/">scikit-learn 入門：6つの機能と分類・回帰の実装方法を徹底解説！ - codexa</a></li>
+</ul>
+
+<h2>k-means法によるクラスタリング</h2>
+<p>たとえば、<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>では、k-means（k平均法）を用いて、似たような傾向を持つデータをクラスタリングし、クラスタリングの結果を可視化したり散布図にしたりするプログラムが掲載されています。</p>
+<p>これにより、なんらかの科目は得意だがなんらかの科目は不得意な学生を色分けして表示したりできます。</p>
+<!--<p>ですが、k-means法の知識のない僕にとっては、何が行われているのかよく分かりません。なので、「超難しい」と言うしかありません。</p>-->
+<p>scikit-learnの中のk-means法を使うには以下のようにする。KMeansクラスのn_clusters=にクラスタ数を指定し、クラスタリングするデータフレームをfit()メソッドに指定し、その結果となるモデルのlabels_属性を取得する。</p>
+<pre class="prettyprint">
+import pandas
+from sklearn.cluster import KMeans
+
+science_score = pandas.read_csv('science_score.csv', encoding='utf_8')
+kmeans_model = KMeans(n_clusters=3).fit(science_score[['Physics', 'Chemistry']])
+print(kmeans_model.labels_)
+</pre>
+<p>このプログラムにより、データフレームにおける列である物理（Physics）と化学（Chemistry）の点数でクラスタリングを行うことができる。</p>
+<p>ただし、このままではデータの羅列が表示されるだけで、なんのことやら分かりづらい。そのため、散布図を表示するためにplot.scatter()などを使うことが多い。</p>
+<p>（<a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。）</p>
+<p>k-meansについては以下のようなページが参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/maskot1977/items/34158d044711231c4292">K-meansクラスタリング - Qiita</a></li>
+<li><a href="https://aizine.ai/k-means-0413/">【クラスタリング入門編】k-means（k平均法）を基礎から実装まで説明 | AIZINE（エーアイジン）</a></li>
+<li><a href="https://laid-back-scientist.com/k-means">k-means法のpythonによる実装とクラスター数の決定方法 エルボー法、シルエット分析 | Yukkuri Machine Learning</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.19編集</p>
+</div>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

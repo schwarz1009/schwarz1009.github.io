@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>データ構造（グラフ）の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div><h1>データ構造（グラフ）の世界観</h1>
+<p>データ構造（グラフ）に関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="data_structure.html">データ構造</a></li>
+<ul>
+<li><a href="data_structure_list.html">配列とリストとハッシュ</a></li>
+<li><a href="data_structure_stack.html">スタックとキュー</a></li>
+<li><a href="data_structure_tree.html">ツリー</a></li>
+<li><b>グラフ</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>グラフ</h1>
+
+<h2>グラフ</h2>
+<p>グラフは、点を表すノードと、ノードとノードを繋げる線を表すエッジによって表現されたデータ構造のこと。</p>
+<p>ひとつひとつの点（ノード）がまずあり、それが線（エッジ）によって縦横無尽に繋がっている。</p>
+<p>ノードは、ひとつのノードに複数の数のエッジが接続されることもある。また、エッジ数が0である（どことも繋がっていない）ノードもある。エッジは、ノードが相互に実線で結ばれる場合もあれば、あるノードから別のノードに向けて矢印のように伸びている場合もある。</p>
+<p>グラフは、単純な丸と線を並べた図によっても表現できるが、隣接行列を用いて表現することもできる。</p>
+<p>グラフの繋がり方を考える理論として、離散数学の一つの分野であるグラフ理論がある。</p>
+<p>コンピュータネットワーク、電子回路、道路地図・バスや駅の路線図などをグラフによって表現することができる。この場合、形状としての「都市や回路の形」は失われ、純粋な「点と線の繋がり方」だけが残る。</p>
+<p>ツリーはグラフの一種であると考えることもできる。</p>
+<p>最近の学校では、情報科学やプログラミングを積極的に教えるため、グラフ理論を高校の科目に盛り込もうという動きが活発となっている。</p>
+<p>詳しくは以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a></li>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%A9%E3%83%95%E7%90%86%E8%AB%96">グラフ理論 - Wikipedia</a></li>
+<li><a href="https://dev.classmethod.jp/articles/graph-theory/">グラフ理論入門 | DevelopersIO</a></li>
+</ul>
+<p>後日注記：Boost Graph Libraryでは、C++でグラフを扱うことができる。<a href="cpp_stl_libs.html">C++（STL・ライブラリ）</a>も参照のこと。</p>
+<ul>
+<li><a href="https://boostjp.github.io/tips/graph.html">グラフ - boostjp</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

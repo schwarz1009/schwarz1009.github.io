@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観３E（XML） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３E（XML）</h1>
+<p>Javaによるプログラミングに関する世界観３E（XML）です。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="java.html">Java（１．文法）</a></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><a href="java_oop_interface.html">２B．インターフェース</a></li>
+<li><a href="java_gc.html">２C．ガーベッジコレクションと例外</a></li>
+</ul>
+<li><a href="java_lib.html">３．クラスライブラリ</a></li>
+<ul>
+<li><a href="java_lib_io.html">３A．入出力</a></li>
+<li><a href="java_lib_list.html">３B．コレクションと配列</a></li>
+<li><a href="java_lib_string.html">３C．文字列</a></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><b>３E．XML</b></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>JavaでXMLを扱う</h1>
+<h2>SAXとDOM</h2>
+<p>JavaでXMLを扱うためには、DOM（Document Object Model）およびSAX（Simple API for XML）を使う。</p>
+<p>SAXは、XMLを読み込みながら、ひとつひとつの要素が読み込まれるたびにイベントを通知する。</p>
+<p>DOMは、ドキュメントに含まれるノードから成るツリーを作り、ツリー構造でXMLドキュメントの要素にアクセスできる。</p>
+<ul>
+<li><a href="https://eng-entrance.com/java-xml">【詳しくわかる】JavaでXMLを扱う方法まとめてご紹介 - エンジニアの入り口</a></li>
+<li><a href="https://www.sejuku.net/blog/64635">【Java入門】XMLの扱い方(DOM、SAX、プロパティファイルも解説) | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+<li><a href="https://engineer-club.jp/java-xml-read">Java標準APIでのXML読み込み方4つを大紹介 サンプルで比較しよう - ENGINEER.CLUB（エンジニアクラブ）</a></li>
+</ul>
+
+<h2>SAXを使う場合</h2>
+<p>SAXを使う場合、javax.xml.parsersパッケージのSAXParserFactoryクラスのnewSAXParser()とSAXParserクラスを使う。</p>
+<p>org.xml.sax.helpers.DefaultHandlerを継承してstartDocument()、endDocument()、startElement()、endElement()、characters()などにイベント通知時の処理を記述する。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://eng-entrance.com/java-xml">【詳しくわかる】JavaでXMLを扱う方法まとめてご紹介 - エンジニアの入り口</a></li>
+</ul>
+
+<h2>DOMを使う場合</h2>
+<p>DOMを使う場合、javax.xml.parsersパッケージのDocumentBuilderFactoryクラスのnewInstance()とnewDocumentBuilder()とDocumentBuilderクラスを使う。</p>
+<p>getDocumentElement()を用いてノードを取得する。</p>
+<p>org.w3c.domパッケージの中に、DocumentクラスやNodeクラスやElementクラスがある。</p>
+<p>ノードの値はgetFirstChild()、getNodeType()、getNodeValue()、getNextSibling()で取得できる。</p>
+<p>ノードの名前はgetNodeName()、属性値はgetAttribute()で取得できる。</p>
+<p>ノードのリストはorg.w3c.dom.NodeListクラスで取得できる。</p>
+<p>ノードツリーの作成はcreateElement()、setAttribute()、appendChild()、createTextNode()で行う。</p>
+<p>作成したノードツリーはTransformerFactoryクラス、Transformerクラスで変換する。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://eng-entrance.com/java-xml">【詳しくわかる】JavaでXMLを扱う方法まとめてご紹介 - エンジニアの入り口</a></li>
+<li><a href="https://www.sejuku.net/blog/64635">【Java入門】XMLの扱い方(DOM、SAX、プロパティファイルも解説) | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+
+<h2>XMLでシリアライズ</h2>
+<p>JavaBeansのパッケージにはオブジェクトのデータをシリアライズ、デシリアライズするためにXMLEncoderクラス（JavaBeansのデータをXMLに変換）とXMLDecoderクラス（XMLからデータを復元）が用意されている。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/64635">【Java入門】XMLの扱い方(DOM、SAX、プロパティファイルも解説) | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+<p><a href="java_lib_io.html">Javaクラスライブラリ（入出力）</a>や<a href="serialize.html">シリアライズ</a>も参照のこと。</p>
+
+<h1>プロパティファイル</h1>
+<h2>プロパティファイルとは</h2>
+<p>Javaにはプロパティファイルと呼ばれるものがある。これは各種の設定値を記述するもので、Java 5以降からはXML形式でも出力が可能になった。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/64635">【Java入門】XMLの扱い方(DOM、SAX、プロパティファイルも解説) | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0711/29/news143.html">コードから情報を追い出せ！プロパティファイルの常識 (1/3)：プログラマーの常識をJavaで身につける（9） - ＠IT</a></li>
+</ul>
+<p>Boost.PropertyTreeを用いたC++でのiniファイルの読み書きは<a href="cpp_stl_libs.html">C++（STL・ライブラリ）</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>XML</h2>
+<p><a href="xml.html">XMLと文書形式</a>や<a href="xml_gui.html">XML＆GUI</a>を参照のこと。</p>
+
+<h2>JavaScript DOM/Canvas</h2>
+<p><a href="javascript_dom_canvas.html">JavaScript（２．DOM/Canvas）</a>を参照のこと。</p>
+
+<h2>JSON</h2>
+<p><a href="json.html">JSON</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

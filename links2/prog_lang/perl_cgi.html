@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Perl/CGI関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div><h1>Perl/CGIの世界観</h1>
+<p>Perl/CGIによるプログラミングに関する世界観です。<a href="perl.html">Perl</a>も参照のこと。</p>
+<!--
+<p><a href="http://www.tohoho-web.com/wwwperl.htm">とほほのperl入門</a>、<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>を参考にしています。</p>
+-->
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>CGI</h1>
+<h2>CGIとは</h2>
+<p>CGIとは、Webサーバーのサーバーサイド処理としてPerlスクリプト（CGIスクリプト）を実行し、そのCGIスクリプトが吐き出した結果をWebブラウザに表示させる仕組み。</p>
+<p>Webサイトを動的に作るのに使える。たとえば、たくさんの人が同じWebサイトにアクセスして、トピックごとにコメントを残して指定のコメントを表示させる「メッセージ掲示板」や、たくさんの人間がリアルタイムに最新のメッセージを投稿し表示し合う「チャット」のようなものを作ることができる。</p>
+<p>こうしたWebサービスにはたくさんの人が同時にアクセスし、みんなでメッセージを共有するため、「楽しい」という一面があるが、不特定多数がその掲示板を利用するため、「犯罪のような書き込み」をされることもあり、運営者には正しい管理が求められる。</p>
+<p>最近ではCGIに代わる技術としてPHPやJavaサーブレットなどの技術があり、またRubyやPythonなどの動的な言語で「Webフレームワーク」と呼ばれるシステムを使うことで、簡単にSNSのような高度なWebサービスを構築できるが、Perl/CGIはこうした技術の草分け的な存在であり、「Webサーバーの下でPerlスクリプトが動く」という技術は画期的で大流行した。その基本を知るためにCGIを勉強することは無駄ではない。逆に、PHPなどに対する理解が深まるだろう。僕も、最初に遊んだネットゲームは、Perl/CGIで書かれたブラウザゲーム（HTMLとボタンだけのシンプルなキャラクター育成・対戦ゲーム）だった。</p>
+<p><a href="../network/cgi.html">CGI</a>も参照のこと。</p>
+
+<h2>Perlの強力なテキスト編集機能で、HTMLを出力する</h2>
+<p>Perlのテキスト編集機能は強力。正規表現が使えるほか、ヒアドキュメントを使うこともできる。</p>
+<p>そんなPerlの強力な文字処理能力で、HTMLのタグやページも出力してやろう、というのがPerl/CGIの技術である。</p>
+<p>実際のところ、HTMLではボタンやテキストボックスすら、ページの一部としてHTMLで書かれる。このため、Perl/CGIを使うことで、そうしたページそのものをPerlのprint()関数で出力し、ページを自動で整形し、別に存在するデータを読み書きすることで、「リアルタイムに自動で作成する」ことができる。</p>
+<p>同時に、GETやPOSTを用いることで、ユーザーからの投稿を取得し、そうしたデータを出力して保存できる。</p>
+<p>Perl/CGIにはプロセスをその都度作成するためプロセスの作成・破棄のオーバーヘッドの問題があり、PHPなどのさらに高度な技術も存在する。どうしてもPerlで書きたい場合は、FastCGIと呼ばれる新しい技術がある。</p>
+<p><a href="perl.html">Perl</a>や<a href="html.html">HTML</a>も参照のこと。</p>
+
+<h2>Perl/CGIサンプルコード</h2>
+<p>Perlをサーバーサイドで実行し、HTMLを吐き出してホームページを動的に表示できる。</p>
+<ul>
+<li><a href="http://www.web-liberty.net/improve/perl/syntax.html">Perlの基本的な文法 - Web Liberty</a></li>
+<li><a href="http://ponk.jp/perl/bbs/form">フォーム内容を表示する - CGI(Perl)の基本と掲示板作成 - ポンクソフト</a></li>
+</ul>
+
+<h1>CGIの作り方</h1>
+<h2>掲示板の作り方</h2>
+<p>Perl/CGIは、主に掲示板やチャットなどのWebサービスの開発に使われる。自分で開発しなくても、誰かの作ったCGIスクリプトをサーバーに配置することで、自分のWebサイトに掲示板やチャットを設置できる。</p>
+<p><a href="bbs_develop.html">掲示板開発</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h2>データファイルの読み書き</h2>
+<p>Perl/CGIでは、rand()関数や変数を使うことで簡単に育成・バトルのようなゲームを作れますが、外部のファイルを全く使わずにゲームを作ってしまうと、実行するたびにキャラクターのステータスが初期値に戻ってしまいます。</p>
+<p>こういう時は、データファイルを使って、外部の設定・データファイルに「その時の状態」を書き出すことで、連続したゲームプログラムを実現できます。</p>
+<p>こういう時、便利なのが、文字列を分割するsplit()関数と、文字列を連結するjoin()関数です。これらを上手く使うことで、簡単にデータ形式を実現することができます。</p>
+<p>たとえば、:で区切られたファイルを読み込むには、</p>
+<pre class="prettyprint">
+$player = 'Assy';
+@id = (1, 2, 3, 4);
+@name = ('a', 'b', 'c', 'd');
+@hp = (0, 0, 0, 0);
+@atk = (0, 0, 0, 0);
+@money = (0, 0, 0, 0);
+open(FILE, "${player}.txt") or die "$!";
+$i = 0;
+foreach $line (&lt;FILE&gt;) {
+    chomp($line);
+    ($id[i], $name[i], $hp[i] $atk[i], $money[i]) = split(/:/, $line);
+    $i++;
+}
+close(FILE);
+@character1 = ($id[0], $name[0], $hp[0], $atk[0], $money[0]);
+@character2 = ($id[1], $name[1], $hp[1], $atk[1], $money[1]);
+@character3 = ($id[2], $name[2], $hp[2], $atk[2], $money[2]);
+@character4 = ($id[3], $name[3], $hp[3], $atk[3], $money[3]);
+</pre>
+<p>とし、逆にファイルに書き出すには、</p>
+<pre class="prettyprint">
+open(NEWFILE, "&gt; ${player}.txt") or die "$!";
+print NEWFILE join(':', @character1), "\n";
+print NEWFILE join(':', @character2), "\n";
+print NEWFILE join(':', @character3), "\n";
+print NEWFILE join(':', @character4), "\n";
+close(FILE);
+</pre>
+<p>のようにします。いささかデータ構造の設計上の問題は見受けられますが、@idや@nameは読み書きの時に一時的に格納する変数として使用し、通常は@character1などを通じてデータを操作します。</p>
+
+<h1>サーバーの設定とPerl</h1>
+<p><a href="../linux/linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>も参照のこと。</p>
+
+<h2>文字コードの設定とPerlのパス</h2>
+<p>CGIを作った時、文字コードをきちんと指定しないと出力されたHTMLの日本語部分が文字化けしてしまう。ソースファイルを記述した環境やエディタの設定に合わせて、「charset=Shift_JIS」や「charset=utf-8」を指定すること。HTMLの指示でも&lt;meta charset="utf-8"&gt;の部分を適切に設定すること。</p>
+<p>また、Perl処理系のパスは、#!/usr/local/bin/perl（ソースからインストールした場合）や#!/usr/bin/perl（パッケージ管理システムからインストールした場合）を適切に設定すること。</p>
+<ul>
+<li><a href="http://www.mermaid-tavern.com/pluto/tpc/tp2/tpc_0136.html">CGIのソースとUTF-8の使用(No.0136) - Web Visual Storage</a></li>
+</ul>
+
+<h2>パーミッションの設定</h2>
+<p>LinuxなどのUNIX互換OSにおけるサーバーでは、パーミッション（読み込み・書き込み・実行の権限）を設定する仕組みになっていて、Perl/CGIで実行スクリプトを作っても、パーミッションが適切に設定されていないと実行できない（実行のための権限が必要）。</p>
+<p>パーミッションの意味は、数値は読み込みを4、書き込みを2、実行を1として、これらを足した数値で権限を指定する。0の場合は何もできない。左からオーナー（所有者）、グループ（ファイルが属しているグループ）、その他（オーナー・グループ以外）を意味している。</p>
+<table class="some_tables">
+<tr><th class="min60">パーミッション</th><th>説明</th></tr>
+<tr><td>644</td><td>実行されず読み取りだけを行うファイル</td></tr>
+<tr><td>755</td><td>実行可能属性を付ける場合</td></tr>
+<tr><td>666</td><td>CGIスクリプトから書き換えられるファイル（データファイルなど）</td></tr>
+</table>
+<p>所有者も間違って書き換えられないようにするために444や555を設定したり、自分しか読めないようにする場合は600を設定したり、グループの権限を無くして604を設定したりすることもできる。</p>
+<p>ディレクトリについては基本的に755を設定する。</p>
+<p>（<a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%9F%BA%E7%A4%8E%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/479730507X">Perlで作るCGI入門 基礎編―生きたホームページを作るために (SOFTBANK BOOKS)</a>を参考に執筆しました。）</p>
+
+<h3>chmodコマンドによるパーミッションの設定</h3>
+<p>Linuxマシンにじかにログインして変える場合や、SSH（リモートログインソフト）でリモートログインして変える場合は、以下のようにchmod（パーミッションの設定コマンド）でパーミッションに755を指定する。また、.htaccessファイルやHTMLファイル、画像ファイルなどは、644に設定する。</p>
+<pre>
+$ chmod 755 hoge.cgi
+$ chmod 644 hoge_image.gif
+</pre>
+<p>（<a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%9F%BA%E7%A4%8E%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/479730507X">Perlで作るCGI入門 基礎編―生きたホームページを作るために (SOFTBANK BOOKS)</a>を参考に執筆しました。）</p>
+
+<h3>WinSCPでのパーミッションの設定</h3>
+<p>FTPクライアント（ファイル転送ソフト）でファイルを転送する場合は、UNIXコマンドが使えない代わり、FTPクライアントでファイルの属性を設定する。</p>
+<p>WinSCPでは、「オプション→環境設定」を開いて、「転送」から「デフォルト」を選択して「編集」をクリックし、「アップロード時の設定」から「パーミッションの設定」にチェックを入れることで、ファイル転送全体のデフォルトのパーミッションの設定ができる。また、個別のファイルのパーミッションの設定は「ファイル→プロパティ」から行える（右クリック→プロパティでも良い）。全体を644、CGIスクリプトだけを755とするのが良いだろう。</p>
+<ul>
+<li><a href="https://winscp.net/eng/docs/ui_permissions">Permissions :: WinSCP</a></li>
+<li><a href="https://winscp.net/eng/docs/ui_transfer_custom">Transfer Settings Dialog :: WinSCP</a></li>
+<li><a href="https://winscp.net/eng/docs/ui_pref_transfer">Transfer Page (Preferences Dialog) :: WinSCP</a></li>
+<li><a href="https://winscp.net/eng/docs/ui_properties">Properties Dialog :: WinSCP</a></li>
+</ul>
+<p><a href="../network/winscp.html">WinSCP</a>も参照のこと。</p>
+
+<h2>単独テスト</h2>
+<p>サーバーに公開したCGIについては、./をつけてスクリプト名を実行する（PATHに含まれていなくても、相対パスで./hoge.cgiとすれば今居るディレクトリの中にあるスクリプトを実行出来る）ことで、単独テストを行うことができる。</p>
+<pre>
+$ ./hoge.cgi
+（HTMLの出力）
+</pre>
+<p>HTMLの出力が画面に表示されれば成功。</p>
+<p>（<a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%9F%BA%E7%A4%8E%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/479730507X">Perlで作るCGI入門 基礎編―生きたホームページを作るために (SOFTBANK BOOKS)</a>を参考に執筆しました。）</p>
+
+<h1>モジュール</h1>
+<h2>CGI用のモジュール</h2>
+<p>CGIを作るためには、cgi-lib.plやCGI.pmなどの便利なモジュールを使うことができる。以下のリンク先に、cgi-lib.plを用いたCGIプログラムのサンプルがある。</p>
+<ul>
+<li><a href="http://ponk.jp/perl/bbs/form">フォーム内容を表示する - CGI(Perl)の基本と掲示板作成 - ポンクソフト</a></li>
+</ul>
+
+<h1>Fastcgi</h2>
+<h2>Fastcgi</h2>
+<p>Perl/CGIがPHPなどに置き換わった理由として、リクエストのたびにプロセスを作成・破棄するCGIの仕組みは、Apacheの内部スレッドを使うPHPやJavaサーブレットに比べて非効率的だから、という理由が挙げられる。</p>
+<p>このため、常にメモリに常駐してCGIの処理を行うFastCGIという仕組みがあり、PerlやPHPから使うことができる。</p>
+<p><a href="../network/fastcgi.html">FastCGI</a>を参照のこと。</p>
+
+<h1>Webフレームワーク</h1>
+<h2>Catalyst</h2>
+<p><a href="perl_catalyst.html">Catalyst</a>を参照のこと。</p>
+
+<h2>Mojolicious</h2>
+<p><a href="perl_mojolicious.html">Mojolicious</a>を参照のこと。</p>
+
+<h1>ネットで配布されているPerl/CGIスクリプト</h1>
+<h2>ネットのCGIスクリプトとCMS</h2>
+<p>昔から、インターネットには、Perl/CGIやPHPで作られたスクリプトを無償で配布しているサイトがたくさんあります。</p>
+<p>最近は、<a href="../network/web_cms.html">CMS</a>や<a href="../network/wordpress.html">WordPress</a>のプラグインなどのようなものもあり、簡単に高度な掲示板やSNSを自分のサーバーに配置することができるようになっています。</p>
+
+<h2>KENT-WEB</h2>
+<p>Perl/CGIによるスクリプトを無料で配布されています。</p>
+<ul>
+<li><a href="http://www.kent-web.com/">KENT-WEB</a></li>
+</ul>
+
+<h2>FF BATTLE（ブラウザゲーム）</h2>
+<p>僕の好きだったCGIのブラウザゲームであるFF BATTLEは、Perlで作られています。</p>
+<p>僕が好きだったのは次のサイトです。</p>
+<ul>
+<li><a href="https://kroko.jp/ffbattle/others.cgi">FF BATTLE</a></li>
+</ul>
+<p>このサイトのゲームはかなり書き換えられていますが、オリジナルのスクリプトがどこかで配布されていると思います。今見た感じでは、どこが元々の配布者のサイトなのかは分かりませんでした。既に今は閉鎖されているのかもしれないです。</p>
+<p>Perlではありませんが、昔僕が好きだった２ちゃんねる専用ブラウザはオープンソースで作られているものがあるので、参考にされても良いでしょう。p2はPHP、twintailはC#、ギコナビやOpenJaneはDelphiで作られています。</p>
+<p>昔の僕は、そういう風に、オープンソースのソフトウェアに憧れて、どうにかして自分の手で改造出来ないか、と思ったところからプログラミングを志す夢が始まりました。実際、OpenJaneやtwintailは適当な機能をつけて改造していました。また、ブラウザゲームは簡単な戦闘場面のようなものをCGIで作っていたことがあります。</p>
+<p><a href="../videogame/videogame.html">テレビゲーム</a>も参照のこと。</p>
+
+<h2>CGIスクリプトの入手とサーバーへの設置</h2>
+<p>ネットには、Perl/CGIやPHPで作られたフリーなスクリプトを配布しているサイトがたくさんあります。たとえば掲示板であれば、「CGI スクリプト 掲示板」などで検索してください。</p>
+<p>チャットや簡単な掲示板スクリプトのほか、２ちゃんねる型のスレッドフロート型掲示板や、後述するFF BATTLEなどのブラウザゲームスクリプトなど、さまざまなスクリプトが配布されています。</p>
+<p>これらのスクリプトの設置を行うには、レンタルサーバーを契約してアップロードを行います。このためには、Apacheの設定や、UNIXのパーミッションの基本知識、それから文字コードの適切な設定についての知識が必要です。必要に応じて、FFFTPやWinSCPのようなFTPファイル転送クライアントソフトウェアをインストールしましょう。テキストエディタも、Unicodeが扱えて、シンタックスハイライト（PerlやPHPの文法に応じてキーワード色分けをしてくれる機能）があるものをインストールしましょう。初心者におすすめなのはサクラエディタです。EmacsライクなxyzzyやAtomのような最先端のエディタもおすすめです。</p>
+<p>実際にWebアプリケーションを運営するためには、常にリクエストに対してサービスを返すサーバーマシンを用意しなければなりませんが、無料ホームページスペースでは、HTMLだけをサポートしていて、Perl/CGIやPHPは使えないことが多いです。また、容量も決まっていて、大規模な掲示板は運営できません。この場合、自宅サーバを作ることもできますが、スキルと管理コストが必要ですし、セキュリティやネットワーク負荷の問題もあり、現実的ではありません。思い切って、月1000円ぐらいのレンタルサーバーを購入しましょう。この時、PerlやPHPだけではなく、SQLデータベースも使えるサーバーを選択すると、WordPressのような高度なシステムを使うことができます。掲示板だけではなく、MediaWikiのようなWikiシステムを利用したい場合も、PHP/SQLが使えれば動かせることが多いです。</p>
+<p>ただし、不特定多数の利用する掲示板を運営する上で必要なのは、名誉棄損や誹謗中傷のような書き込みがあった時に、それを削除しなければならない、ということです。２ちゃんねるでは、運営者の西村ひろゆき氏が、裁判所に通いづめになるほどに、悪いことをたくさん書かれます。犯罪予告やストーカー行為、ハッキングや著作権違反のほう助のような罪もあります。それを覚悟して管理しなければなりません。</p>
+<p>掲示板を運営したいのであれば、スクリプトをダウンロードしてサーバーにアップロードしなくても、したらばBBSのような「レンタル掲示板サイト」を利用することもできます。ホームページをレンタルするように、自分の掲示板サイトをレンタルして運営することができます。これは、個人のホームページのような場合では、手軽なため良いでしょう。</p>
+<p>CGIによる掲示板を運営する上で僕が言えることは、古い書き込み全てを保持するよりも、何か月も前の書き込みは自動的に削除されていくような仕組みを作ることです。それによって、良い内容も悪い内容も自動的に消えていってくれます。また、SNSのように、アカウント制にして、悪いアカウントは凍結できる仕組みを作ることで、犯罪予告のような悪い書き込みの防止に繋がるかもしれません。Facebookは実名制を採用していますが、これは特に良い方法であると同時に、個人情報を集めすぎて逆に批判されるリスクもあります。Wikipediaのように不特定多数の特定の書き込みは最初からIPアドレスを表示するようにするというやり方もアリ。</p>
+<p><a href="../network/web.html">Webサーバ</a>や<a href="../network/apache.html">Apache</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>昔はPerl/CGIが猛威を振るっていた</h2>
+<p>昔は、Web上の掲示板やチャットなど、ほとんどのCGIプログラムがPerlで書かれており、CGIと言えばPerl、Webアプリケーションと言えばPerlだった。PHPやRubyのような後続の言語が現れて、JavaやC#なども使うようになって、状況は変わってきたが、当時のPHPやRubyは多くがPerlをとても参考にした言語だった。</p>
+<p>Perl/CGIを今でも使っているサイトは多い。Perlはスクリプトとして簡単にHTMLを吐くことができるし、C/C++よりも簡単で、コンパイルも必要ない。Apache 1系列とPerlは昔から事実上の標準だった。Webフレームワークがたくさん出て、もう昔の話となりつつあるが、それでも基本的な部分はPerlと変わっていない。</p>
+<p><a href="../services/services.html">Webサービス</a>や<a href="../network/web_framework.html">Webフレームワーク</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>CGI</h2>
+<p>CGI</p>
+<ul>
+<li><a href="http://www.tohoho-web.com/wwwcgi.htm">とほほのCGI入門</a></li>
+<li><a href="http://www.perl-labo.org/">Perl/CGI研究室 'PERL-LABO'</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%9F%BA%E7%A4%8E%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/479730507X">Perlで作るCGI入門 基礎編―生きたホームページを作るために (SOFTBANK BOOKS)</a></li>
+<li><a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%BF%9C%E7%94%A8%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797305819">Perlで作るCGI入門 応用編―生きたホームページを作るために (SOFTBANK BOOKS)</a></li>
+<li><a href="https://www.amazon.co.jp/Perl-CGI%E8%B6%85%E5%85%A5%E9%96%80-%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E9%80%9F%E7%BF%92Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E8%97%A4%E6%A3%AE/dp/4774116629">Perl/CGI超入門 ゼロからのプログラミング (速習Webプログラミング)</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

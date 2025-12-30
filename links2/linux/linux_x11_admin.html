@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>X11設定とプログラミング - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div><h1>X11設定とプログラミング</h1>
+<p>X11設定とプログラミングです。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_x11.html">X11 (X Window System)</a></li>
+<ul>
+<li><a href="linux_x11_basic.html">１．アーキテクチャ</a></li>
+<li><a href="linux_x11_advanced.html">２．ツールキットとデスクトップ環境</a></li>
+<li><b>X11設定とプログラミング</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Xのソースコード</h1>
+
+<h2>X11のソースコード</h2>
+<p>X11のソースコードは以下から参照できる。カーネルと併せてコードを見ることで、実際のところどんなプログラムが低レベルな領域で動いているのかを確認できる。GTK/GNOMEやQt/KDEの開発がしたい時も、ウィンドウシステムのコードを知ることで、実際にどんなことがデスクトップ環境で行われているのか、全貌を概観できる。</p>
+<ul>
+<li><a href="https://cgit.freedesktop.org/xorg/xserver/">git</a></li>
+</ul>
+
+
+<h1>Xlibによるプログラミング</h1>
+
+<h2>Xlib</h2>
+<p>X11とXアプリケーションのやり取りをするライブラリ。これを使うことで、Xプロトコルの詳細を知らなくてもXアプリケーションが作れる。GTK+やQtはこれを使って実現されている。内容はWindowsプログラミングと良く似たメッセージループを利用する。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Xlib">Xlib - Wikipedia</a></li>
+</ul>
+<h2>Xlibサンプルコード</h2>
+<p>以下はXlibのサンプルコード。
+<ul>
+<li><a href="http://mech.math.msu.su/~nap/2/GWindow/xintro.html">A Brief intro to X11 Programming</a></li>
+</ul>
+<p>まず、XNextEvent()関数にXEvent型の変数eventのポインタを渡す。これによって次のイベント（マウスやキーボード、ウィンドウの変化などでイベントが発生した時にメッセージを与える）を取り出すことができる。</p>
+<p>event.typeがExpose（再描画要求）になった時やButtonPress（マウスボタンが押された）になった時などに応じて、適切な処理を実行するように記述する。</p>
+<p><a href="../prog_lang/event.html">イベント駆動</a>を参照のこと。</p>
+
+<h2>グラフィックコンテキスト</h2>
+<p>Xlibでは、グラフィックスの描画のためにグラフィックコンテキスト（GC）を作成・設定・解放する。</p>
+<p>GCには描画する色や線や背景のスタイルなどの情報が含まれる。</p>
+<p>GCの作成にはXCreateGC()を、GCの解放にはXFreeGC()を、GCの設定には構造体のXGCValuesやXSet*系の関数を用いる。</p>
+<ul>
+<li><a href="http://rio.la.coocan.jp/lab/xlib/006gc.htm">LECTURE 6 グラフィックスコンテキスト - Xlib Programming Lectures - Rio's Home Page</a></li>
+<li><a href="https://xjman.dsl.gr.jp/X11R6/X11/CH07.html">7章: グラフィックコンテキスト関数 - Xlib - C Language X Interface - xjman</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.07.02</p>
+</div>
+
+<h2>イベント</h2>
+<p>Xはイベント駆動で動作する。XNextEvent()によって次のイベントを取得できる。中でも特別なのがExposeイベントで、ウィンドウの再描画が必要になった時に発生する。</p>
+<ul>
+<li><a href="http://rio.la.coocan.jp/lab/xlib/004event.htm">LECTURE 4 イベント処理 - Xlib Programming Lectures - Rio's Home Page</a></li>
+<li><a href="http://rio.la.coocan.jp/lab/xlib/007expose.htm">LECTURE 7 Expose イベント - Xlib Programming Lectures - Rio's Home Page</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.07.02</p>
+</div>
+
+<h2>Xlibをもっと詳しく知りたい</h2>
+<p>以下が参考になります。</p>
+<ul>
+<li><a href="http://xjman.dsl.gr.jp/X11R6/X11/">Xlib - C Language X Interface 目次 - xjman</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/xprogram/">X アプリケーション工房 - 68user's page</a></li>
+<li><a href="http://doilab.net/web/jisyu/xprg/index.html">X Window System プログラミング HTML版 - 土井研究室</a> (<a href="https://web.archive.org/web/20170622173454/http://doilab.net/web/jisyu/xprg/index.html">webarchive</a>)</li>
+</ul>
+
+<h2>XCB</h2>
+<p>XCB（X C Binding）は、Xlibを置換するための、XのC言語によるバインディング。</p>
+<p>サイズをできるだけ小さくし、シンプルにした上で、直接Xプロトコルを操作できるようなライブラリを目標としている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/XCB">XCB - Wikipedia</a></li>
+</ul>
+
+<h1>Xディスプレイサーバの設定</h1>
+<h2>xorg.conf</h2>
+<p>X11の設定ファイルです。</p>
+<p>最近はハードウェアを自動認識するため、あまりいじることはありませんが、昔から超複雑で、一番厄介な設定ファイルです。<!--初心者にはさっぱりです。--></p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Xorg/Guide/ja">Xorg / ガイド - Gentoo Wiki</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/Xorg">Xorg - ArchWiki</a></li>
+<li><a href="https://www.freebsd.org/doc/ja_JP.eucJP/books/handbook/x-config.html">5.4. Xorg の設定 - FreeBSD</a></li>
+</ul>
+
+<h2>xorg.confの設定項目</h2>
+<p>Section "section-name"～EndSectionは各セクションを表し、各セクションはエントリ行から成り立つ。エントリはオプション名と1つ以上のオプションから成り立つ。</p>
+<table class="some_tables">
+<tr><th class="min60">セクション</th><th>説明</th><tr>
+<tr><td>ServerLayout</td><td>1つのスクリーン（Screen）と2つの入力デバイスすなわちキーボードとマウス（InputDevice）を指定する。</td></tr>
+<tr><td>Files</td><td>FontPathでフォントのパスを指定する。</td></tr>
+<tr><td>Module</td><td>ロードされるX11のモジュールを指定する。</td></tr>
+<tr><td>InputDevice</td><td>それぞれの入力デバイスのドライバ（Driver）やオプションなどの設定をする。</td></tr>
+<tr><td>Monitor</td><td>モニタの設定をする。</td></tr>
+<tr><td>Device</td><td>ビデオカードの設定をする。ドライバはDriverで指定する。</td></tr>
+<tr><td>Screen</td><td>DeviceセクションとMonitorセクションで設定した内容を指定し、ひとつのスクリーンとして設定する。</td></tr>
+<tr><td>DRI</td><td>オプション設定。DRI(Direct Rendering Infrastructure)を設定する。</td></tr>
+</table>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://www.ne.jp/asahi/it/life/it/linux/linux_setting/xorg_conf.html">Xサーバ設定ファイルxorg.confを設定する - itLifeTips</a></li>
+<li><a href="http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-ja-4/s1-x-server-configuration.html">X サーバー設定ファイル - Red Hat Enterprise Linux 4: リファレンスガイド</a></li>
+<li><a href="http://www14.plala.or.jp/campus-note/vine_linux/x/x_configure.html">X の設定 - Penguin's campus note</a></li>
+</ul>
+
+<h2>DRI</h2>
+<p>DRIについては<a href="../videogame/opengl.html">OpenGL</a>を参照のこと。</p>
+<p>DRIはXサーバを経由せず、Xクライアントが直接GPUにアクセスできるようにするための仕様。高速な描画が可能となる。OpenGLライブラリであるMesaなどが利用している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E3%83%BB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%BB%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%83%81%E3%83%A3">ダイレクト・レンダリング・インフラストラクチャ - Wikipedia</a></li>
+</ul>
+
+<h1>ログインとセッション</h1>
+<p><a href="linux_unix_admin.html">UNIXシステム管理（システム情報と設定）</a>や<a href="linux_bash_script.html">Bash（シェルスクリプト）</a>も参照のこと。</p>
+
+<h2>startx/xinit</h2>
+<p>startxやxinitはXサーバーを起動するコマンド。.xinitrcや起動スクリプトを実行する。</p>
+<p>.xinitrcはカスタマイズすることで、Xサーバーが起動する時に実行するアプリケーションやウィンドウマネージャを設定できる。</p>
+
+<h2>.xsessionと.xinitrc</h2>
+<table class="some_tables">
+<tr><th class="min60">スクリプト</th><th>説明</th><tr>
+<tr><td>.xsession</td><td>端末のX画面（ディスプレイマネージャ）にログインした時に実行される初期化スクリプト。</td></tr>
+<tr><td>.xinitrc</td><td>startxコマンドやxinitコマンドでXを起動した時に実行される初期化スクリプト。</td></tr>
+</table>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Xinitrc">xinitrc - ArchWiki</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>.xinitrcのカスタマイズ</h2>
+<p>.xinitrcあるいは.xsessionをカスタマイズすることで、Xサーバーを起動させたい時に行わせたい処理を記述できる。</p>
+<p>たとえば、Window Makerを起動したければ.xinitrcに以下のように記述する。</p>
+<pre>
+exec wmaker
+</pre>
+<p>これで、コンソール画面（CUIでログインしたシェルのプロンプト）から</p>
+<pre>
+$ startx
+</pre>
+<p>を実行すれば、Xサーバーと一緒にWindow Makerが起動する。</p>
+<p>必要に応じて日本語入力メソッドなどの設定を.xinitrcに記述する。<a href="linux_japanese_input.html">Linux日本語入力</a>を参照のこと。</p>
+<p>（詳しくは<a href="https://wiki.archlinux.jp/index.php/Xinitrc">xinitrc - ArchWiki</a>にサンプルコードなどがあるため、そちらを参照のこと。）</p>
+
+<h2>セッションの選択</h2>
+<p>複数のデスクトップ環境をインストールしている場合、GDMなどのディスプレイマネージャでログインする時に、セッションを選択することができる。</p>
+
+<h1>リソースとキーマップの設定</h1>
+<h2>.Xdefaultsと.Xresources</h2>
+<p>.Xdefaultsあるいは.Xresourcesは、リソースファイルと呼ばれる設定ファイル。</p>
+<p>X11を使って作られたアプリケーションの設定パラメータ（リソース）を編集することができる。</p>
+<p>たとえば、端末エミュレータのktermなどについて、文字色や背景色といった表示スタイルを変更できる。</p>
+<ul>
+<li><a href="https://cns-guide.sfc.keio.ac.jp/2000/10/2/2.html">2.2 .Xdefaultsファイル - SFC-CNS GUIDE</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?%7E%2F%2EXdefaults">UNIX/Linuxの部屋 設定ファイル:~/.Xdefaults</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/X_resources">X resources - ArchWiki</a></li>
+<li><a href="http://malkalech.com/xresources_magic">X resources を設定することのメモ | Jenemal Notes</a></li>
+</ul>
+
+<h2>.Xmodmap</h2>
+<p>.Xmodmapは、X11におけるキーマップを変更できる設定ファイル。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Xmodmap">xmodmap - ArchWiki</a></li>
+</ul>
+
+<h1>X11付属アプリケーション</h1>
+<h2>twm</h2>
+<p>非常にシンプルな、X11標準のウィンドウマネージャ。</p>
+<p><a href="fvwm.html">FVWM (twm亜種)</a>も参照のこと。</p>
+
+<h2>xterm</h2>
+<p>同じくシンプルな、X11標準のターミナルエミュレータ。</p>
+<p><a href="linux_terminal.html">Linux端末</a>も参照のこと。</p>
+
+<h2>kterm</h2>
+<p>ktermは日本語の表示ができるX11のターミナルエミュレータ。X11/twm環境などで利用される。</p>
+<p>また、日本語入力についてはkinput2-cannaなどを利用することが多い。<a href="linux_japanese_input.html">Linux日本語入力</a>を参照のこと。</p>
+
+<h2>色んなX11の付属アプリケーション</h2>
+<p>xclockは時計。xlogoはXロゴ。xeyesはマウスカーソルを見つめる目玉。xcalcは電卓。xsnowは雪を降らせる。xpenguinsはペンギンがやってくる。</p>
+<p>X11にはこうしたさまざまなオマケアプリケーションがある。twmで使うと面白いのでぜひ体験してほしい。Xはtwmでxtermやxclockなどを使うと、軽くてカッコいい。</p>
+<ul>
+<li><a href="https://qiita.com/kkk627/items/42e6280a02338fa62700">いろんなX11アプリケーション - Qiita</a></li>
+</ul>
+
+<h1>リモート操作</h1>
+<h2>リモートのXプログラムを実行する</h2>
+<p>リモートのXプログラムを実行する方法。</p>
+<p>X11はネットワーク透過なクライアント・サーバーシステムであるため、SSHと同じようにリモートにあるGUIプログラムをローカルから通信して起動することができる。ローカルで動いているXアプリケーションと全く同じように操作することができる。</p>
+<ul>
+<li><a href="http://linux.kororo.jp/cont/intro/xhost.php">自マシン上でリモートにあるXサーバーのプログラムを実行する - コロのLinuxサーバー構築</a></li>
+</ul>
+<p>基本的に、Xサーバー側でアクセス許可を行い（xhostコマンド）、Xクライアント側で接続するXサーバーのホスト名を設定する（DISPLAY環境変数）だけでよい。</p>
+<p>また、「WindowsからLinux上のリモートのXアプリケーションを実行したい」といった場合は、Cygwin/Xが使える（ただし僕は使ったことがないので良く分からない）。Cygwin/XはUNIXアプリケーションをWindowsで動かすことのできるCygwinに含まれているX Window Systemで、Windows上にUNIXのAPIを構築し、その上でXを動かす。<a href="../virt/cygwin.html">Cygwin</a>も参照のこと。</p>
+
+<h2>VNC</h2>
+<p><a href="vnc.html">VNC</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>GUI開発</h2>
+<p>GUIの開発全般については<a href="../prog_lang/gui_develop.html">GUI開発</a>を参照のこと。</p>
+
+<h1>man-pages</h1>
+<h2>X11 man-pages</h2>
+<p>X11のman-pagesは以下から閲覧できます。</p>
+<ul>
+<li><a href="http://xjman.dsl.gr.jp/index.html">X Japanese Documentation Project</a></li>
+</ul>
+<p>たとえば、以下のようなマニュアルが存在します。</p>
+<ul>
+<li><a href="http://xjman.dsl.gr.jp/man/man3/X.3x.html">man X</a></li>
+<li><a href="http://xjman.dsl.gr.jp/man/man5/XF86Config.5x.html">man XF86Config</a></li>
+<li><a href="http://xjman.dsl.gr.jp/man/man1/Xserver.1x.html">man Xserver</a></li>
+</ul>
+
+<h1>設定</h1>
+<h2>X11</h2>
+<p>X11の設定。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/tipsindex_x.html">Linux Tips［X Window System］ - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0807/31/news132.html">X Window System の仕組みと設定 (1/4) - @IT</a></li>
+<li><a href="http://xjman.dsl.gr.jp/index.html">X Japanese Documentation Project</a></li>
+<li><a href="https://wiki.archlinuxjp.org/index.php/Xorg">Xorg - ArchWiki</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-x-server-config-xorg.conf.html">C.3.3. xorg.conf ファイル - RHEL</a></li>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch07.ja.html">第7章 X Window システム - Debian</a></li>
+<li><a href="http://www14.plala.or.jp/campus-note/vine_linux/x/x_configure.html">X の設定 - Penguin's campus note</a></li>
+<li><a href="http://www.ne.jp/asahi/it/life/it/linux/linux_setting/xorg_conf.html">Xサーバ設定ファイルxorg.confを設定する - itLifeTips</a></li>
+</ul>
+<p>昔は、xorg.confはXF86Configという名前でした。</p>
+<ul>
+<li><a href="http://xjman.dsl.gr.jp/man/man5/XF86Config.5x.html">Manpage of XF86Config</a></li>
+<li><a href="ftp://www.x.org/pub/X11R6.8.2/doc/xorg.conf.5.html">xorg.conf(5x) manual page</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

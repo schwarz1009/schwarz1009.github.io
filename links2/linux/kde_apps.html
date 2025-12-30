@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>KDEアプリケーション関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>KDEアプリケーションの世界観</h1>
+<p>KDEアプリケーションに関する世界観です。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="qt.html">Qt</a></li>
+<li><a href="kde.html">KDE（アーキテクチャ）</a></li>
+<ul>
+<li><a href="kde_desktop.html">KDE（デスクトップ）</a></li>
+<li><b>KDE（アプリケーション）</b></li>
+</ul>
+</ul>
+<p><a href="linux_desktop_apps.html">Linuxデスクトップアプリケーション</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>全般</h1>
+<h2>意外とすごいKDEアプリ</h2>
+<p>最近のKDEアプリケーションは、意外とすごい。少しずつ使えるものになっている。</p>
+<p>たとえば、C/C++などの言語の開発に使えるKDevelopは、多機能で定評のあるKateをエディタに使い、GCCやGDBなどのフロントエンドを持ち、フォームデザイナーもある。</p>
+<p>KonquerorのレンダリングエンジンであるKHTMLは、WebKitのベースになったことで有名。</p>
+<p>また、画像編集ソフトのKritaや、動画編集ソフトのKdenliveも有名である。</p>
+<p>Amarokなどは音楽プレイヤーとして使いやすいし、Quanta PlusなどはWeb開発ツールとして有名。また、僕はWindowsでも自分で作曲した楽譜の描画にMuseScoreを使うが、これはC++とQtで書かれたアプリケーションだ。</p>
+<p>意外とめちゃくちゃすごいKDEアプリだが、完全にGNOMEの草葉の陰に追いやられてしまっている。特にMozilla FirefoxがQtに対応しないため、Firefoxだけのルック・フィールがQtとGTKの間で違ってしまうことなどが、ユーザー獲得を遠ざけている。</p>
+<p>しかしながら、KDEはGNOMEなどの影響もあって、優れたデスクトップ環境とライブラリフレームワークの設計をしており、KateやKMailなどのエンジンをKDevelopやKontactで使うなど、「アーキテクチャ面での革新」の度合いは大きい。</p>
+
+<h2>KDE Gear</h2>
+<p>KDEに含まれる一連のアプリケーションのことをKDE Gearと呼びます。KDEは多機能で使いやすく視覚的にも美しい、クロスプラットフォームなアプリケーション群を開発・提供しています。GNOMEのようなオマケのようなアプリケーションではなく、Linuxひいてはほかのプラットフォームでも動作するような「使えるアプリケーション」を開発します。これがほかのデスクトップ環境と大きく異なります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDE_Gear">KDE Gear - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.18</p>
+</div>
+
+<h1>基本ユーティリティ</h1>
+<h2>Konsole</h2>
+<p>KDEのターミナルエミュレータ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Konsole">Konsole - Wikipedia</a></li>
+</ul>
+<h2>KEdit/KWrite/Kate</h2>
+<p>KDEのテキストエディタ。機能レベルに合わせて3種類あります。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KEdit">KEdit - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/KWrite">KWrite - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Kate">Kate - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/KDE/kate">git - Kate</a></li>
+</ul>
+
+
+<h2>Ark</h2>
+<p>アーカイブの圧縮・解凍ソフト。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ark_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">Ark (コンピュータ) - Wikipedia</a></li>
+</ul>
+
+<h2>Gwenview</h2>
+<p>画像ビューア。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gwenview">Gwenview - Wikipedia</a></li>
+</ul>
+
+<h2>ArchWikiより</h2>
+<p>ArchWikiの以下の一覧が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3">アプリケーション一覧/ユーティリティ - ArchWiki</a></li>
+</ul>
+
+<h1>インターネット</h1>
+<h2>Konqueror/KHTML</h2>
+<p>KDEのウェブブラウザ兼ファイルマネージャ。Windowsで言う、Explorerを拡張したIEに近い。</p>
+<p>KHTMLはKDEのHTMLレンダリングエンジン。アップルやグーグルなどがWebKitと言う名前で派生し、今ではWebKitがMozillaによるGeckoエンジンとIEによるTridentとともに主要なレンダリングエンジンの三本柱となっている。</p>
+<p><a href="linux_browsers.html">Linux Webブラウザ</a>や<a href="webkit.html">WebKit</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Konqueror">Konqueror - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/KHTML">KHTML - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/WebKit">WebKit - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://cgit.kde.org/kde-baseapps.git">git</a></li>
+<li><a href="https://github.com/KDE/khtml">git - KHTML</a></li>
+</ul>
+
+<h2>KMail</h2>
+<p>KDEのメールソフト。</p>
+<p><a href="linux_mail.html">Linux メール</a>も参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KMail">KMail - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/KDE/kmail">git</a></li>
+</ul>
+
+<h2>Kontact</h2>
+<p>KDEのグループウェアやスケジュール管理などのスイート。KMail、KOrganizer、KAddressBookなどのKDEアプリケーションを統合したもの。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Kontact">Kontact - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/KOrganizer">KOrganizer - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/KAddressBook">KAddressBook - Wikipedia</a></li>
+</ul>
+<p></p>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/kontaktio/">git</a></li>
+</ul>
+
+<h2>Kopete</h2>
+<p>インスタントメッセンジャー。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Kopete">Kopete - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/KDE/kopete">git</a></li>
+</ul>
+
+
+<h2>Konversation/KSirc</h2>
+<p>IRCクライアント。</p>
+<p><a href="../services/irc.html">IRC</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Konversation">Konversation - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/KSirc">KSirc - Wikipedia</a></li>
+</ul>
+
+<h2>ArchWikiより</h2>
+<p>ArchWikiの以下の一覧が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88">アプリケーション一覧/インターネット - ArchWiki</a></li>
+</ul>
+
+<h1>Calligra Suite (KWord/KSpreadなど)</h1>
+
+<h2>概要</h2>
+<p>KDEのオフィススイート。KWordはフレームをベースとした文字レイアウトのスタイルをとる。</p>
+<p><a href="../windows_pc/office_softwares.html">Officeソフトウェア</a>も参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Calligra_Suite">Calligra_Suite - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/KWord">KWord - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/KSpread">KSpread - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/KDE/calligra">git</a></li>
+</ul>
+
+<h2>Words (KWord)</h2>
+<p>ワープロ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KWord">KWord - Wikipedia</a></li>
+</ul>
+
+<h2>Tables (KSpread)</h2>
+<p>表計算。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Calligra_Tables">Calligra Tables - Wikipedia</a></li>
+</ul>
+<h2>Stage (KPresenter)</h2>
+<p>プレゼンテーション。</p>
+
+<h2>Flow (Kivio)</h2>
+<p>フローチャート作成。</p>
+
+<h2>Karbon14</h2>
+<p>ベクター系（ドロー系）グラフィックソフト。</p>
+
+<h2>Krita</h2>
+<p>ラスター系（ビットマップ系）グラフィックソフト。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Krita">Krita - Wikipedia</a></li>
+</ul>
+<h2>Kugar & KChart</h2>
+<p>グラフ作成ソフト。</p>
+
+<h2>KFormula</h2>
+<p>数式の編集ソフト。</p>
+
+<h2>Kexi</h2>
+<p>データベース。</p>
+
+<h2>Plan (KPlato)</h2>
+<p>プロジェクト管理ソフト。</p>
+
+<h2>ArchWikiより</h2>
+<p>ArchWikiの以下の一覧が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88">アプリケーション一覧/ドキュメント - ArchWiki</a></li>
+</ul>
+
+<h1>マルチメディア</h1>
+
+<h2>Amarok/Kaffeine/Dragon Player</h2>
+<p>KDEの音楽プレイヤー。僕が昔KDE 4時代に使っていたAmarokは、Magnatuneというフリーの音楽配信サイトから音楽を無料でダウンロード視聴することが出来ました。クラシック風の音楽（昔のイタリアのクラシック曲）が聴けて良かったです。</p>
+<p>Amarok以外にKaffeineやDragon Playerといった音楽プレイヤーがある。使用感が違う。</p>
+<p><a href="linux_multimedia_player.html">Linux マルチメディア（プレイヤー）</a>も参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Amarok">Amarok - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Kaffeine">Kaffeine - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Dragon_Player">Dragon Player - Wikipedia</a></li>
+<li><a href="http://d.hatena.ne.jp/toumeioj3/20080605/p1">Magnatune（マグナチューン）と言う名の音楽配信サイト - 武蔵野日和下駄</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/dschmidt/amarok">git - Amarok</a></li>
+</ul>
+
+<h2>Clementine</h2>
+<p>Amarok 1.4からforkした音楽プレーヤー。Qt 4とGStreamerをベースにしている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Clementine_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">Clementine (ソフトウェア) - Wikipedia</a></li>
+</ul>
+
+<h2>Noatun</h2>
+<p>メディアプレイヤー。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Noatun">Noatun - Wikipedia</a></li>
+</ul>
+
+<h2>K3b</h2>
+<p>CD/DVD焼き込みソフト。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/K3b">K3b - Wikipedia</a></li>
+</ul>
+
+<h2>Kdenlive</h2>
+<p>動画編集ソフト。</p>
+<p><a href="linux_multimedia_edit.html">Linux マルチメディア（動画・音楽編集）</a>も参照のこと。</p>
+<ul>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0180">第180回　KdenliveでH.264/AACなMADムービーを作る：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<h2>digiKam</h2>
+<p>写真管理ソフト。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/DigiKam">digiKam - Wikipedia</a></li>
+</ul>
+
+<h2>Krita/Karbon14</h2>
+<p>KDEのグラフィック編集ソフト。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Krita">Krita - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Karbon14">Karbon14 - Wikipedia</a></li>
+</ul>
+
+<h2>KolourPaint</h2>
+<p>ペイントソフト。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KolourPaint">KolourPaint - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/KDE/kolourpaint">git</a></li>
+</ul>
+
+<h2>ArchWikiより</h2>
+<p>ArchWikiの以下の一覧が参考になる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7/%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2">アプリケーション一覧/マルチメディア - ArchWiki</a></li>
+</ul>
+
+<h1>開発</h1>
+<h2>KDevelop</h2>
+<p>KDEの統合開発環境（IDE）。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDevelop">KDevelop - Wikipeida</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/KDE/kdevelop">git</a></li>
+</ul>
+
+<!--
+<h1>コンテンツ</h1>
+<h2>基本ユーティリティ</h2>
+<p><a href="kde_apps_utils.html">KDE基本ユーティリティ</a>を参照のこと。</p>
+
+<h2>インターネット</h2>
+<p><a href="kde_apps_net.html">KDEインターネット</a>を参照のこと。</p>
+
+<h2>オフィス</h2>
+<p><a href="kde_apps_office.html">KDEオフィス</a>を参照のこと。</p>
+
+<h2>マルチメディア</h2>
+<p><a href="kde_apps_multimedia.html">KDEマルチメディア</a>を参照のこと。</p>
+
+<h2>開発</h2>
+<p><a href="kde_apps_develop.html">KDE開発</a>を参照のこと。</p>
+-->
+
+
+
+
+
+<h1>その他のKDEアプリケーション</h1>
+<h2>KDEアプリケーション一覧</h2>
+<p>他にもKDEアプリケーションはたくさんある。Wikipediaを参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDE%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7">KDEアプリケーション一覧 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/KDE">KDE - Wikipeida</a></li>
+</ul>
+<p>ArchWikiのアプリケーション一覧からさまざまなサード・パーティのアプリケーションを参照できます。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%80%E8%A6%A7">アプリケーション一覧 - ArchWiki</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

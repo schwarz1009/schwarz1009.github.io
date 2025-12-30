@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C関連の世界観５（入出力） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C言語の世界観（５．入出力）</h1>
+<p>C言語によるプログラミングに関する世界観５（入出力）です。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="c.html">C言語（１．基本）</a></li>
+<ul>
+<li><a href="c_flow.html">２．制御フロー</a></li>
+<li><a href="c_data.html">３．データ構造</a></li>
+<li><a href="c_pointer.html">４．配列とポインタ</a></li>
+<li><b>５．入出力</b></li>
+<li><a href="c_preprocessor.html">６．プリプロセッサとインラインアセンブラ</a></li>
+</ul>
+<li><a href="c_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="c.html">C</a>や<a href="cpp.html">C++</a>も参照のこと。</p>
+<p>ツール関係は<a href="c_cpp_tools.html">C/C++ツール</a>に移動しました。</p>
+<p>システムに依存する部分は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>や<a href="windows_programming.html">Windowsプログラミング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>文字列処理</h1>
+<h2>文字の配列</h2>
+<p>文字列（単語など）を変数にしたい時は、文字型の配列か、それへのポインタを使う。</p>
+<p>文字列は文字型の配列へのポインタとして扱われるため、そのままでは別の変数にコピーできない（参照的アドレスだけがコピーされる）。</p>
+<p>文字列をコピーしたい時はstrcpy()関数を使う。</p>
+<p>ただしstrcpy()にはバッファーオーバーフローの問題があるため、セキュリティ機能を追加したstrcpy_s()を使うべきである。</p>
+<p>Visual C++ではstrcpy()関数を使うとコンパイルエラーが発生し、strcpy_s()関数を使うように促されることがある。</p>
+
+<h2>シングルクォーテーションとダブルクォーテーション</h2>
+<p>文字はシングルクォーテーションの'～'で、文字列はダブルクォーテーションの"～"で表す。</p>
+<pre class="prettyprint">
+char h, o, g, e;
+h = 'H';
+o = 'O';
+g = 'G';
+e = 'E';
+</pre>
+<p>文字列リテラルは、文字のポインタを使う場合以下のように表せる。</p>
+<pre class="prettyprint">
+char *str = "Hoge";
+</pre>
+<p>ある変数に文字列を格納したい場合はバッファとして文字の配列を使う。</p>
+<pre class="prettyprint">
+char str[50];
+str = "Hoge";
+</pre>
+<p>printf()やscanf()などで文字列を指定する時は文字列の中に%sを埋め込んで表す。</p>
+<pre class="prettyprint">
+char *str = "Hoge";
+printf("strの内容は%s。\n", str);
+</pre>
+<div class="edit_date">
+<p>2023.06.30編集</p>
+</div>
+
+<h2>文字列の終端</h2>
+<p>文字列は普通ヌル文字（\0）で終わる。</p>
+<p>よって、文字列を最後まで繰り返し処理するためには、char型の変数に一文字ずつ読みながら、今の文字を\0と比較して\0であればループを終了する。</p>
+<pre class="prettyprint">
+char *p;
+char *hoge = "Hoge";
+p = hoge;
+
+while (*p != '\0'){
+    printf("%c\n", *p);
+    p++;
+}
+</pre>
+
+<h2>コード例</h2>
+<p>たとえば、</p>
+<pre class="prettyprint">
+char *p;
+char *hoge = "hogehogehoge";
+p = hoge;
+
+while (*p != '\0'){
+    switch (*p) {
+    case 'h':
+        printf("HHHHHHHHH\n");
+        break;
+    case 'o':
+        printf("OOOOOOOOO\n");
+        break;
+    case 'g':
+        printf("GGGGGGGGG\n");
+        break;
+    case 'e':
+        printf("EEEEEEEEE\n");
+        break;
+    }
+    p++;
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+HHHHHHHHH
+OOOOOOOOO
+GGGGGGGGG
+EEEEEEEEE
+HHHHHHHHH
+OOOOOOOOO
+GGGGGGGGG
+EEEEEEEEE
+HHHHHHHHH
+OOOOOOOOO
+GGGGGGGGG
+EEEEEEEEE
+</pre>
+<p>後日注記：このコードを改良して、空白や=や:のような記号が登場するごとに、過去に出てきたキーワードを別々の変数に分割したり、右辺の値を左辺の名前をつけて保管するようにすると、原始的なトークン解析のパーサーが作れるかもしれません。単語の始点を表すポインタと、単語の終点を表すポインタの、二つあるいはそれ以上の複数のポインタを使うと、実装が楽になるかもしれません。単なる文字列の分割なら、JavaやPerlなら標準のAPIでできますが、C言語で行う方法を知っておくとためになるでしょう。もちろん正規表現を使うこともできますが、正規表現を使わずに独自のパーサーを作るほうが高速になる場合もあるでしょう。</p>
+<p>後日注記：本当に作るなら、プロパティの設定名と値の始点と終点を表す4つのポインタと、カーソルとして使うための1つのポインタを合わせた5つのポインタを作ります。そして、行の先頭、行の末尾、条件式で比較して一致した=の文字の左と右の場所にそれぞれのポインタを置きます。そして、カーソルとして使うポインタでそれらのポインタ位置を移動しながら、str[]のようなバッファにカーソルをインクリメントしながら文字列をコピーします。解析したデータを保存するためにハッシュテーブルを表す構造体を使い、「設定名」と「値」をこの構造体が持つようにします。これがもっとも単純だと思います。ぜひ、挑戦して作ってみてください。</p>
+<p>後日注記：本当は、ポインタをそんなに4つも5つも作る必要はありません。文字数をカウントすればいいからです。行の先頭から=が現れる場所まで、カウント変数をインクリメントして文字数を数え、=が現れてから行の末尾までの文字数も数えます。そうすれば、どこからどこまでが設定の名前で、どこからどこまでが値か、ということが分かります。</p>
+<p>後日注記：あるいは、文字が出現するたびにひとつひとつの文字をバッファにコピーするというのも、単純で悪くない方法だと思います。下手に工夫して作るよりも、そのほうが分かりやすくていいかもしれません。</p>
+<div class="edit_date">
+<p>2023.06.30</p>
+<p>2023.07.01編集</p>
+</div>
+
+<h2>トークン解析の方法</h2>
+<p>トークン（字句）を解析する方法として、バッファに入れて空白やその他の記号で区切って配列にする、という方法があります。最初から空白で区切られることが分かっているデータは、データをバッファに入れた上で、空白文字で区切って配列にします。そうすることで、いちいち空白文字が登場する度に一文字一文字解析しなくてよくなります。</p>
+<p>空白文字以外でも、{～}や[～]や"～"や:や,などで区切るようにすれば、JSONのパーサなどは作れます。ただし、JSONの場合はネスト構造のツリー構造になるので、簡単に配列にすることはできません。C言語では標準でツリー構造のデータ構造は用意されていないので、自分でツリー構造のJSONのデータエレメントを表す構造体を作らなければなりません。</p>
+<p>また、区切り文字によって分割するからといって、一文字一文字解析する必要が絶対にないわけではありません。[の次に]が来るまでは特殊なモードで文字列解析を行うといったように、区切り文字で区切る場合においても、一文字一文字解析する必要は依然としてあります。</p>
+<p>また、構文解析の時に使える手法が再帰です。再帰的にループさせることで、「0回以上の繰り返し」や「1回以上の繰り返し」について、それ以上繰り返される部分がなくなるまで繰り返して処理することができます。また、最初に閉じた括弧は最後に開いた括弧に対応します。そのような時にはスタックのデータ構造を活用することができます。</p>
+<p>後日注記：ここで書いたのと同じことはパーサーだけではなくコンパイラの開発にも役に立ちます。<a href="compiler_develop.html">コンパイラ開発</a>や<a href="json.html">JSON</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.04.15</p>
+<p>2024.04.17編集</p>
+</div>
+
+<h2>char型の別の活用法</h2>
+<p>また、char型は単に一番大きさの小さい整数型として使うこともできる（たとえばカレンダーの日付などはchar型で格納すればいい）。</p>
+<p>逆に、任意の文字と少しの追加的な数が入る型であれば、charではなくint型を使うこともある（char型では任意の文字に加えて追加的な数が表せない）。</p>
+
+<h2>文字列処理用の関数</h2>
+<p>C言語には、文字列処理用の関数として、</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>strlen()</td><td>文字列の長さを得る</td></tr>
+<tr><td>strcpy()</td><td>文字列をコピーする</td></tr>
+<tr><td>strcat()</td><td>文字列を連結する</td></tr>
+<tr><td>strcmp()</td><td>文字列を比較する</td></tr>
+<tr><td>strchr()</td><td>文字列から文字を検索する</td></tr>
+<tr><td>strstr()</td><td>文字列から文字列を検索する</td></tr>
+<tr><td>atoi()</td><td>文字列を数値に変換する</td></tr>
+</table>
+<p>などがある。</p>
+<p>gets()と同様、strcpy()にもセキュリティ上の問題がある。なのでstrcpy_s()を使うこと。</p>
+<p>（「<a href="https://www.amazon.co.jp/%E6%83%85%E5%A0%B1%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96-%E5%96%9C%E4%B9%85%E5%B7%9D-%E6%94%BF%E5%90%89/dp/4873613515">情報基礎概論 第4版 喜久川政吉・殿塚勲 共著（学術図書出版社）</a>」を参考に執筆しました。）</p>
+
+<h2>文字列操作</h2>
+<p>文字列操作を行うためには、一文字ずつ操作する場合、char型の変数を用意し、標準入力からgetchar()で取得した文字を比較する。</p>
+<p>文字列は\0で終わりになる。標準入力・ファイルの終わりはEOFとなる。</p>
+<p>このような時、ポインタを使うことも多い。たとえば、ひとつひとつchar型へのポインタでポイントし、ポインタをインクリメントすることで最後までスキャンする。</p>
+<p>たとえば、コマンドラインオプションを解析する場合、自前で作るなら、'-'の後に続く'a'とか'b'とかの文字を比較して、条件分岐を行えばよい。</p>
+
+<h2>一般的文字列解析器を作る</h2>
+<p>C言語では、基本的に、ポインタなどを使って、一文字一文字解析を行います。</p>
+<p>ですが、複数の文字（文字列）を解析したい場合、どのようにすればいいでしょうか。</p>
+<p>これはたとえば、文字列が「the」と一致するかどうかを知りたければ、一文字目がtで、二文字目がhで、三文字目がeであることを比較すればいいでしょう。</p>
+<p>なので、これを一般化した関数にして、一文字目が与えられた一文字目と一致し、二文字目が与えられた二文字目と一致し、三文字目が与えられた三文字目と一致し、…ということを、最後の文字まで繰り返して行い、最後まですべて一致すれば真を返すような関数にします。</p>
+<p>そう、文字列を一致するのであっても、抽象的かつ一般化された関数にしてしまえば、簡単にトークン（字句）の解析器は作れるのです。</p>
+<p>実際は、このように、自分でトークンを解析する場面は多くありません。既に同じようなAPIがあります。C言語に用意されたAPIは少ないですが、文字列から文字列を検索するAPIなどもあります。</p>
+<p>実際にこの関数を使う際には、if文の条件式などにこの関数を入れて、さまざまな文字列と文字列を比較するようにします。それで、コンパイラやインタプリタやWebブラウザも作れるでしょう。</p>
+<div class="edit_date">
+<p>2024.08.04</p>
+<p>2024.08.08編集</p>
+</div>
+
+<h1>標準入出力</h1>
+<h2>printf（出力）</h2>
+<p>printf()は文字列を出力（表示）する関数で、gets()は文字列を入力する関数。コマンドラインのプログラムでは、入力と出力が主な操作になる。</p>
+<p>printf()では、フォーマットされた書式で変数の内容を表示できる。数値型の変数には%dを使用する。改行は\nで表す。</p>
+<pre class="prettyprint">
+int x;
+x = 22;
+printf("変数xの中身は%d。\n", x);
+</pre>
+<p>フォーマットの書式は、</p>
+<table class="some_tables">
+<tr><th class="min60">書式</th><th>意味</th></tr>
+<tr><td>%d</td><td>数値</td></tr>
+<tr><td>%c</td><td>一文字の文字</td></tr>
+<tr><td>%s</td><td>文字列</td></tr>
+<tr><td>%o</td><td>8進表記</td></tr>
+<tr><td>%x</td><td>16進表記</td></tr>
+<tr><td>%f</td><td>小数点以下のある数</td></tr>
+<tr><td>%e</td><td>指数表記</td></tr>
+</table>
+<p>%6dとすると、半角6文字の桁数の領域を表示のために確保することができる。</p>
+<p>%04dとすると、幅を4桁にした上で0詰めにできる。</p>
+<p>小数点以下の数を表示する際に、13.195のように全部の桁数を6桁、小数点以下を3桁にするには%6.3fとする。</p>
+<ul>
+<li><a href="https://www.k-cube.co.jp/wakaba/server/format.html">フォーマット指定子一覧 - 若葉プログラミング塾</a></li>
+<li><a href="https://teratail.com/questions/117073">C - プログラミング初心者です。書式指定の前にある空白について教えてください｜teratail</a></li>
+<li><a href="https://webkaru.net/clang/align-printf-output/">C言語入門 - 数値の桁揃え - Webkaru</a></li>
+</ul>
+
+<h2>gets（入力）</h2>
+<p>gets()は入力用の関数で、1行分の文字列を入力するが、本当は使ってはならない。バッファオーバーラン（バッファオーバーフロー）を防ぐことができないからである。</p>
+<p>gets()は文字列の代入にポインタを指定するが、データのサイズを指定する引数がないため、ポインタが指す配列のサイズ以上の文字を代入されてしまうとセキュリティホールが発生する。</p>
+<p>よって、サンプルとしてのみ用いるだけで、実際には使うべきではない。</p>
+<p>scanf()についても同様にバッファオーバーランの問題があるが、scanf()の場合は文字幅指定で回避できる。</p>
+<p>こうした場合、fgets()をgets()やscanf()の代替として用いることができる。</p>
+<p>後日注記：文字列をコピーするstrcpy()にも同様の問題がある。バッファのサイズを指定できるstrcpy_s()を使うようにしよう。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gets">gets - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Fgets">fgets - Wikipedia</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p><a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<h2>fgets()とfputs()</h2>
+<p>標準入力から文字列を得るにはfgets()を、標準出力に文字列を表示するにはfputs()を使う。</p>
+<p>fgets()とfputs()は以下のように使う。</p>
+<pre class="prettyprint">
+char str[50];
+
+printf("文字列を入力しなさい。\n");
+fgets(str, sizeof str, stdin);
+fputs(str, stdout);
+</pre>
+<p>文字列を入力する際の注意点として、fgets()で得た文字列をそのままprintf()した場合、%が含まれているとそれが変数名であると解釈されることがある。なので要注意。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.06.30編集</p>
+</div>
+
+<h2>その他の入出力関数</h2>
+<p>printf()とよく似た関数として、出力は行わずフォーマットだけを行うsprintf()という関数もある。</p>
+<p>また、基本的にstdinから一文字入力するにはgetchar()、stdoutに一文字出力するにはputchar()を使い、ファイル全体を表示するならEOFまでgetchar()とputchar()を繰り返せばいい。</p>
+<p>また、入力解析の必然的な性質として、「一文字余計に読まなければ最後まで読んだか分からない」ということがあるが、そのために1バイト戻す関数としてungetc()がある。</p>
+<p>入出力関数について詳細は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>を参照のこと。</p>
+
+<h2>バッファオーバーフローを起こす主な関数</h2>
+<p>C言語の入出力関数は、入力系の関数でバッファオーバーフローを起こす可能性があるので気を付けよう。</p>
+<p>後日注記：FreeBSD Developers' Handbookに、バッファオーバーフローを起こす危険性のある主な関数の一覧があります。これによると、strcpy(), strcat(), getwd(), gets(), scanf(), realpath(), sprintf()は使うべきでありません。</p>
+<ul>
+<li><a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/developers-handbook/secure-bufferov.html">3.3. Buffer Overflows - Chapter 3. Secure Programming - FreeBSD Developers' Handbook</a></li>
+</ul>
+<p>そのほか、FreeBSDの各種ハンドブックはUNIXのプログラマにとっていい文書だと思うので、参考になさってください。</p>
+<ul>
+<li><a href="https://www.freebsd.org/doc/ja_JP.eucJP/books/handbook/">FreeBSD ハンドブック</a></li>
+<li><a href="https://www.freebsd.org/doc/ja_JP.eucJP/books/porters-handbook/">FreeBSD port 作成者のためのハンドブック</a></li>
+<li><a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/developers-handbook/index.html">FreeBSD Developers' Handbook</a></li>
+</ul>
+
+<h1>ファイル入出力</h1>
+<h2>FILE型のポインタ</h2>
+<p>ポインタで特に良く使うのは、FILE型のポインタである。ファイルを操作する入出力の処理ができる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+FILE *fp;
+int c;
+
+if ((fp = fopen("hoge.txt", "r")) == NULL) {
+    fprintf(stderr, "ファイルのオープンができません\n");
+    exit(1);
+}
+
+while ((c = getc(fp)) != EOF) {
+    putchar(c);
+}
+
+fclose(fp);
+</pre>
+<p>cがcharではなくintである理由は、char型の値に加えてファイル終端のEOFという値を含まなければならないため、char型よりも大きな型でなければならないから。</p>
+<p>また、このように文字を格納するためにint型を使うことはたまにある。文字として表現できる値に加えて、エラーが返ってきた時の値などを含む必要があるからである。</p>
+<p>以下のページを参考にしました。</p>
+<ul>
+<li><a href="http://www1.cts.ne.jp/~clab/hsample/File/File02/File02.html">Ｃ言語講座：読み込みモードで開く</a></li>
+</ul>
+
+<h2>システムコールとファイルディスクリプタ</h2>
+<p>UNIXでシステムコールを用いてファイルを操作する場合、ストリームを識別するためにファイルディスクリプタと呼ばれる整数値（どのファイルを読み書きするかというOSの識別子）を用いて、それをopen()やclose()などのシステムコールに渡すことで、そのファイルをopen()あるいはclose()し、それに対してread()あるいはwrite()することでデータを読み書きする。</p>
+<p>ファイルディスクリプタは、プロセスが生成されると、標準のファイルディスクリプタとして標準入力（コマンドプロンプトからの入力）、標準出力（端末への出力）、標準エラー出力（エラーメッセージの出力）が与えられる。このほか、open()を呼び出してファイルを開いた時にも、ファイルディスクリプタが与えられ、このファイルディスクリプタに読み書きすることで、ファイルを読み書きすることができる。</p>
+<p>パイプでやり取りするのも、この標準入力・標準出力である。標準入力を読んだり標準出力に書いたりする場合、リダイレクトなどを使うことで、ユーザーがそのプログラムをさまざまな場合や状況に応じて使い分けられるというメリットがある。標準入力を読んで標準出力に書くプログラムは、端末の入出力にもファイルの入出力にも同時に対応できる。</p>
+<p><a href="../linux/linux_api_syscalls.html">Linux API（システムコール）</a>を参照のこと。</p>
+
+<h2>stdio</h2>
+<p>しかしながら、システムコールを用いた処理では、固定長の読み書きしかできない。このため、一文字入力・一文字出力したり、一行読み書きしたりする場合、stdio（標準入出力ライブラリ）と呼ばれるC言語の関数を使うことができる。</p>
+<p>stdioでは、バッファリング機構を用いて、メモリ上に「バッファ」を保持することができる。すなわち、何度も頻繁に読み書きされるデータに関しては、その都度ストレージから読み書きするのではなく、メモリ上に確保しておいて、実際の読み書きが必要にならない限りバッファから読み書きをする。このため、システムコールに比べてstdioの読み書きはとても効率的で高速である。</p>
+<p>また、stdioには、フォーマット入出力と呼ばれる機能がある。これは、たとえば数値を出力する際、変数をどこに展開するか、どれくらいの桁で出力するか、小数点や進数表記をどのように表示するか、のようなもの。ここでよく使われるのはprintf()関数。ファイルに出力する際はfprintf()、出力せず文字フォーマットだけを行う場合はsprintf()が使える。</p>
+<p>stdioを使う場合、ファイルを識別するにはFILE型のポインタを使う。これは先に記述したファイルディスクリプタのラッパーであり、内部にファイルディスクリプタやバッファ情報などが格納されている。stdioにおいては、open()やclose()を使わず、fopen()あるいはfclose()を使う。</p>
+<p>また、ファイルの今の位置がどこにあるのか（ファイルオフセット）は保存される。lseek(), fseek(), fseeko()などで現在位置を動かして読むことができる。</p>
+<p>注意点として、gets()を標準入力を得るためのサンプルコードに使う書籍が多くあるが、これは使ってはならない。gets()ではポインタのみを読み込みバッファに指定するため、バッファを超えたデータが与えられた時にデータが溢れてしまい、悪意を持った人間によってバッファオーバーランが起きるかもしれない脆弱性を持っているからである。これはscanf()などでも同様だが、scanf()では文字幅を指定することで回避できる。これらへの対処策としてfgets()などが利用できる。また文字列をコピーするstrcpy()も使うべきではなく、代わりにstrcpy_s()を使うべきである。VC++ではstrcpy()が使われていると代わりにstrcpy_s()を使うようにエラーメッセージが表示される。C11ではgets()は廃止された。</p>
+<p><a href="../linux/linux_api_stdio.html">Linux API（stdio）</a>を参照のこと。</p>
+
+<h2>モード</h2>
+<p>fopen()などを実行する時、モードは</p>
+<table class="some_tables">
+<tr><th class="min60">モード</th><th>説明</th></tr>
+<tr><td>"r"</td><td>読み込み</td></tr>
+<tr><td>"w"</td><td>新規書き込み</td></tr>
+<tr><td>"a"</td><td>追加書き込み</td></tr>
+<tr><td>"r+"</td><td>読み書き</td></tr>
+<tr><td>"w+"</td><td>新規読み書き</td></tr>
+<tr><td>"a+"</td><td>追加読み書き</td></tr>
+</table>
+<p>ができる。また、これにbが付いている場合（"rb"など）はバイナリファイルを表す。</p>
+<p>後日注記："r+"と"w+"と"a+"の違いは、"r+"は既存のファイルに対して読み書きを行うが、"w+"はファイルの内容を消去して新しく読み書きを行う。"a+"は追記読み書きを行う。</p>
+<p>（「<a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8%E2%80%95ANSI%E5%AF%BE%E5%BF%9C-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797307579">C言語プログラミングレッスン 入門編―ANSI対応 (SOFTBANK BOOKS)</a>」と「<a href="https://www.amazon.co.jp/%E6%83%85%E5%A0%B1%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96-%E5%96%9C%E4%B9%85%E5%B7%9D-%E6%94%BF%E5%90%89/dp/4873613515">情報基礎概論 第4版 喜久川政吉・殿塚勲 共著（学術図書出版社）</a>」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.01.18編集</p>
+</div>
+
+<h2>エラーチェック</h2>
+<p>また、ファイルオープンの際のエラーチェックも忘れないようにしよう。</p>
+
+<h2>バッファ確保のテクニック</h2>
+<p>C言語でファイルを読み書きするテクニックとして、とてもたくさんのサイズの文字列があった時、順番にそれを処理していくのであれば、一気に巨大サイズのバッファを確保するのではなく、4096などにサイズを決め打ちしたバッファを確保しておいて、その中に4096の固定サイズずつファイルを読み込んでいき、処理を行って、繰り返し読み込みを続け、ファイルの最後まで少しずつ処理していくという方法がある。この方法なら、確保されるメモリ領域の削減に繋がる。</p>
+
+<h2>参考文献</h2>
+<p>システムコールとstdioについて、詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>ファイルディスクリプタ</h2>
+<p>ストリームを識別する指定子。</p>
+<p>プロセスには標準入力、標準出力、標準エラー出力の3つのファイルディスクリプタが自動的に設定される。</p>
+<p>これら以外に、ファイルをopen()した場合やsocketを作った場合にもファイルディスクリプタが設定され、これらを用いてread()やwrite()を行う。</p>
+
+<h2>システムコールとstdio</h2>
+<p>システムコールのread()やwrite()は、固定長入出力であり、「行単位」とか「文字・バイト単位」という入出力ができない。stdioではこうした便利な入出力関数が用意されている。</p>
+<p>テキスト処理でよく使うやり方として、4096など固定長のバッファを作っておいて、一時的にバッファにコピーしながら処理をしていくというやり方がある。少しずつ処理をするので可変長の文字バッファを得る必要がなく、一度に確保するよりもメモリ使用量が抑えられる。Pythonなどでは同様の目的にジェネレータを使うこともできる。</p>
+<p>gets()は使ってはならない。確保したメモリ領域よりも大きな入力が行われた際に、バッファオーバーランを防ぐ手段がないからである。scanf()も同様の理由で使うのはおすすめしない（scanf()の場合は文字幅指定で回避できる）。同様に文字列をコピーするstrcpy()も使用すべきでなく、strcpy_s()を使うことが推奨される。</p>
+
+<h2>stdioバッファ</h2>
+<p>stdioではバッファ処理を行うためシステムコール呼び出しよりも速度が速い。</p>
+
+<h2>ファイル型のポインタ</h2>
+<p>ファイル型（FILE）のポインタはstdioでファイルを識別するのに使う。</p>
+<p>FILEの中にはファイルディスクリプタやバッファの情報が格納されている。要するにラッパー。</p>
+
+<h2>fork, exec, exit, wait</h2>
+<p>fork()すると、fork()した親プロセスと子プロセスが2つに分かれ、どちらも同じ場所からその後の処理に進む。</p>
+<p>exec()すると、その時点でそのプロセスが上書きされ、新しいプロセスが実行される。</p>
+<p>基本的にfork()してexec()することで新しいプロセスを実行する。</p>
+
+<h1>書籍</h1>
+<h2>書籍・ページ</h2>
+<p>以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8%E2%80%95ANSI%E5%AF%BE%E5%BF%9C-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797307579">C言語プログラミングレッスン 入門編―ANSI対応 (SOFTBANK BOOKS)</a></li>
+<li><a href="https://www.grapecity.com/tools/support/powernews/column/clang/037/page02.htm">もう一度基礎からC言語 第37回 ファイルの扱い(2)～ファイル操作の実例 FILE構造体の中身 - グレープシティ株式会社</a></li>
+<li><a href="https://www.grapecity.com/developer/support/powernews/column/clang/037/page01.htm">もう一度基礎からC言語 第37回 ファイルの扱い(2)～ファイル操作の実例 オープン処理のいろいろな書き方</a></li>
+</ul>
+
+<h2>FreeBSD man intro(3) / stdio(3)</h2>
+<p>FreeBSD man intro(3) / stdio(3)は参考になります。</p>
+<ul>
+<li><a href="https://www.freebsd.org/cgi/man.cgi?query=intro&sektion=3&manpath=freebsd-release-ports">intro(3) - FreeBSD Manual Pages</a></li>
+<li><a href="https://www.freebsd.org/cgi/man.cgi?query=stdio&sektion=3&apropos=0&manpath=FreeBSD+13.0-RELEASE+and+Ports">stdio(3) - FreeBSD Manual Pages</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

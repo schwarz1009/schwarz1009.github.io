@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>GNOME関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>GNOMEの世界観</h1>
+<p>GNOMEの世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="gtk.html">GTK</a></li>
+<ul>
+<li><a href="gtk_bindings.html">GTK言語バインディング</a></li>
+<li><a href="vala.html">ValaとGenie</a></li>
+<li><a href="glade.html">Glade</a></li>
+<li><a href="cairo.html">Cairo</a></li>
+</ul>
+<li><b>GNOME（アーキテクチャ）</b></li>
+<ul>
+<li><a href="gnome_desktop.html">GNOME（デスクトップ）</a></li>
+<li><a href="gnome_apps.html">GNOME（アプリケーション）</a></li>
+</ul>
+</ul>
+<p><a href="../network/corba.html">CORBA</a>や<a href="linux_x11.html">Linux（X11周辺）</a>や<a href="kde.html">KDE</a>や<a href="ximian.html">Ximian</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>GNOME</h1>
+<h2>GNOMEとは</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>GNOMEなどでは、CORBAと呼ばれる分散システムを設計の基本にすることで、プラットフォームと言語とネットワークの垣根を超えたモジュールのリンクが可能であり、これを長らくKDEに比べた優位性としてきた。</p>
+<p>しかしながら、GNOME 3ではCORBAはD-Busによってリプレースされている。</p>
+<p>また、GNOMEのGTKはGLib/GObjectと呼ばれるオブジェクト指向の仕組みを提供しており、GLibにのっとってC言語でオブジェクト指向の環境でプログラムを開発できる。</p>
+<p>また、C言語は比較的各種言語のバインディングが作りやすく、C++/Python/JavaScript/Vala/Rustなどにも対応している。</p>
+<p>これに対して、QtはC++の仕組みを採用しているが、比較的、美しくて機能的なのはKDE/Qtの方である。</p>
+<p>しかしながら、Qtはそもそも昔はフリーソフトウェアではないツールキットであり、GNUなどではこれに対してGNOMEプロジェクトを開始するに至った。</p>
+<p>今ではQtはフリーソフトウェアライセンスで提供されている。</p>
+<p>また、GNOMEは比較的独立性が高く、また初心者向けで、最初のログイン時に動画で使い方を教えるなど、Windowsも使えない初心者ユーザーのためによく考えられている。</p>
+<p>しかしながら、Linux開発者のリーナス・トーバルズなどは、「ユーザーを馬鹿だとみなすGNOMEの姿勢は根本的に誤りである」としている。</p>
+<p>標準となっているのはGNOMEだが、デスクトップのデザインが美しく、また、搭載アプリケーションの高機能性が光るのはKDEである。</p>
+<p>特に、KDEアプリケーションには、Windowsに遜色のない機能的GUIアプリが多く備わっている。</p>
+
+<h2>GNOMEの概要</h2>
+<p>巨大なデスクトップ環境。GTK+と言うウィジェット・ツールキットをベースに作られている。昔は、シンプルで初心者向けだった。昔のGMONE2を使いたい場合は、MATEをインストールすると良い。</p>
+<p>僕の個人的使用感としては、アプリケーションの機能にアクセスするための方法がGNOME 3になってから削られてしまったのが難点。デスクトップのシェル自体は拡張機能を入れることで何とかなるが、アプリケーションのメニューバーをざくっと削除しているため、僕はGNONE 3のアプリケーションは基本的に使わない。僕はいつもMATEをFedoraで使っている。</p>
+<p>GNOMEはWindowsとの類似性が強いが、そもそもGNOMEのコンポーネント技術として採用されたCORBAがWindowsのCOMと同様の技術であるように、最初からWindowsを意識したデスクトップ環境となっている。</p>
+<p>だが、インターフェースの特徴などはMac OS X（現macOS）に近く、最近はAndroidのようなタブレットでタッチパネルでタップによって操作されることを念頭に開発されている。</p>
+<p>また、シンプルで初心者向けなのを謳っていて、昔から統一的なアイコンやメニューバーなどの機能を分かりやすく、単純にするように作られている。</p>
+<p>KDEは統合的要素が強く、それぞれのアプリケーションやコンポーネントが美しく統合されていて、配布もアプリケーションやフレームワーク・ライブラリに応じて配布されているが、GNOMEはそれぞれの要素がバラバラで、それぞれが独立して開発されている印象を受ける。</p>
+<p>GNOMEにも、全く良い点が無いわけではない。GNOME 3でインターフェースが独自になって、革新的になった。これからのパソコンのインターフェースを革新していくのは、GNOMEだ。嫌われているのは、GNOME 2がとてもシンプルで使いやすいLinuxの標準GUIだったからだ。</p>
+<p>GNOMEの原産地はメキシコである。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME">GNOME - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/MATE">MATE - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/GTK+">GTK+ - Wikipedia</a></li>
+</ul>
+<p>公式</p>
+<ul>
+<li><a href="https://www.gnome.org/">GNOME.org</a></li>
+<li><a href="http://www.gnome.gr.jp/">GNOME JP</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://git.gnome.org//browse/">git</a></li>
+</ul>
+
+<h1>GNOMEアーキテクチャ</h1>
+
+<h2>GNOMEアーキテクチャの基本</h2>
+<p>GNOMEのネットワーク・オブジェクト・モデルのアーキテクチャとして、以下の要素がある。</p>
+<table class="some_tables">
+<tr><th class="min60">技術</th><th>説明</th></tr>
+<tr><td>CORBA</td><td>プラットフォーム・言語非依存で、さまざまなシステムで横断的に利用できる、ネットワークでのコンポーネント通信技術。<br>分散ネットワーク環境で繋がったUNIXやWindowsなどのCORBAアプリケーションとの間での通信ややり取りができる。</td></tr>
+<tr><td>D-Bus</td><td>GNOME 3では分散ネットワークシステムとして、CORBAに代わってD-Busが使われている。</td></tr>
+<tr><td>GTK+/GLib</td><td>オブジェクト指向のウィジェットツールキット。<br>C言語によってオブジェクト指向のボタンやメニューなどのGUIアイテムを、X11において実装している。</td></tr>
+<tr><td>GTK+のラッパー</td><td>C++/Perl/Python/Ruby/Java/C#などのために用意されたGTK+のバインディング。<br>さまざまな言語でGTK+アプリケーションをオブジェクト指向で実装出来る。<br>Vala（C#/Javaライク）やGenie（Pythonライク）といったGLib/GNOME専用の言語もある。</td></tr>
+</table>
+<p>このようにすることで、GNOMEアプリケーションはさまざまなシステムとのコンポーネントとネットワークを通して通信することができ、またC言語以外のさまざまなプログラミング言語を混ぜてプログラミングを行うことができる。</p>
+<div class="edit_date">
+<p>2025.12.19編集</p>
+</div>
+
+<h2>GNOMEとCORBA</h2>
+<p>GNOMEのCORBA/Bonoboには、いくつかUNIXの問題点を解消するメリットがある。</p>
+<p>まず、GUIのアプリケーションは、MS-WordやMS-Excelを見れば分かるように、巨大モノリシックアプリケーション（単一の巨大アプリケーション）になりがちである。</p>
+<p>それから、従来的にUNIX環境では、libcやxlibのような最低限のライブラリを除いて、コマンドであってもコードの再利用がほとんどなされなかった。プログラムを再利用する方法は、パイプやシェルスクリプトのようなものしかなかった。</p>
+<p>CORBAとBonobo（GNOMEのCORBAを用いた再利用可能なコンポーネントの仕組み）を利用することで、GUIの巨大アプリケーションの機能をモジュール（オブジェクト）として分割し、再利用可能なコンポーネントとして連携させて、プログラムを実装することができる。アプリケーションが巨大になりがちなGUI環境だからこそ、libcやxlibを超えるコンポーネントの再利用の仕組みが必要なのである。</p>
+<p>このような仕組みには元々WindowsのCOMがあり、Microsoft社のWebブラウザであるIE (Internet Explorer)もCOMコンポーネントの集合体として実装されている。</p>
+<p>また、CORBAにおいては、ネットワークの垣根を越えた分散環境でも、各オブジェクトを連携できる。これを「分散オブジェクト」と呼ぶ。これにより、たとえばPlan 9のような分散環境を実現するミドルウェアとして、GNOMEとCORBAを利用することもできる。ネットワークで接続できるため、レガシーなシステムとモダンなシステムを連携させることも簡単である。</p>
+<p>確かに、プログラミング言語においては、ライブラリやモジュールの仕組みを使うことで、コードの再利用をすることができる。だが、それらはその言語の世界だけで閉じている。PerlからはPerlのライブラリやモジュールしか使えないし、PythonからはPythonのモジュールしか使えない。CORBAはプログラミング言語やプラットフォームに関係なく、グルー（糊）のようにコンポーネントを再利用できる。</p>
+<p>CORBAを簡単に言えば、「システム統合（インテグレーション）を容易にする技術」である。CORBAは異なるプラットフォームでもオブジェクトの連携ができるため、UNIXやWindows、あるいはメインフレームのCOBOLなどとも連携させることができる。そのため、複雑な要素や種類がたくさんあるシステムであっても、過去の資産を再利用しやすい。たとえば、COBOLのようなレガシーなシステムに、Javaサーバーのようなモダンなシステムを結合・連携させることができる。</p>
+<p>また、GNOMEというシステムは、GTKやGLib/GObjectを用いることで、アーキテクチャ構造そのものがオブジェクト指向で設計・実装されている。GTKはC言語でありながらオブジェクト指向を実現し、またさまざまなプログラミング言語のバインディングが存在するため、PythonやC#などさまざまなプログラミング言語を使ってGUIアプリケーションを開発することができるようになっている。</p>
+<ul>
+<li><a href="http://web.archive.org/web/20050206212853/http://www.os-omicron.org/~takano/private/trans/bongo-bong_j.html">Unix をもう少しマシなものにしよう</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.19</p>
+</div>
+
+<h2>GTK+/GLib</h2>
+<p><a href="gtk.html">GTK+</a>を参照のこと。</p>
+
+<h2>CORBA</h2>
+<p><a href="../network/corba.html">CORBA</a>を参照のこと。</p>
+
+<h2>D-Bus</h2>
+<p><a href="../network/dbus.html">D-Bus</a>を参照のこと。</p>
+
+
+<h1>設定データベース</h1>
+<h2>GConf</h2>
+<p>GNOMEの設定登録システム。Windowsのレジストリと同様のシステム。</p>
+<p>Windowsでも3.1まではINIファイルに記述する形でOSの設定を処理していたが、これではたくさんの設定項目を処理するためには効率が悪いため、専用の設定データベースとしてのレジストリが導入された。</p>
+<p>GNOMEでは、長らくXMLベースの設定システムであるGconfを使っていた。設定項目はホームディレクトリの中の~/.gconf/以下にXML形式で保存される。この設定項目を、アプリケーションはGConfライブラリの中のGConfClientから参照・編集できる。また、Windowsのレジストリエディタと同様のGUIの設定ツールであるgconf-editorから、設定項目をユーザーがGUIで参照・編集することもできる。また、Gconfでは設定の変更を監視することができ、なんらかの原因で変更された設定を登録したアプリケーションのコールバック関数に通知することができる。これにより、リアルタイムに設定をデスクトップ環境全体に反映することができる。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/レジストリ">レジストリ - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/GConf">GConf - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.19編集</p>
+</div>
+
+<h2>dconf</h2>
+<p>長らくGconfが使われていたが、XMLベースの設定データベースでは処理が遅いということもあり、最近はXMLからバイナリブロブへと移行した新しいdconfを採用している。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Dconf">Dconf - Wikipedia(英語版)</a></li>
+</ul>
+
+<h1>仮想ファイルシステム</h1>
+<h2>GnomeVFS/GVfs</h2>
+<p>GNOMEの仮想ファイルシステム。FTPやSamba（Windowsネットワークのフリーな実装）などにアクセス出来る。</p>
+<p>GnomeVFSを使うことで、ネットワーク上のファイルやディレクトリなどに、ローカルのファイルと全く違いがないようにアクセスすることができる。</p>
+<p>ファイルパスはネットワーク用の専用の特殊なURIを用いてアクセスできる。</p>
+<p>Linuxカーネルには、FUSEと呼ばれる機能があり、ユーザー空間で独自のファイルシステムを作成できる。GVfsはFUSEを使ったGnomeVFSの後継バージョンである。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GVfs">GVfs - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/GnomeVFS">GnomeVFS - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Filesystem_in_Userspace">Filesystem in Userspace - Wikipedia</a></li>
+</ul>
+<p><a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>や<a href="../network/file_server_ftp.html">FTP</a>や<a href="../network/file_server_samba.html">Samba</a>も参照のこと。</p>
+
+<h2>GIO</h2>
+<p>最近はさらにGIOという仕組みが出来ている。これも仮想ファイルシステムへのアクセスAPIである。</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/GIO_(software)">GIO (software) - Wikipedia(英語)</a></li>
+</ul>
+
+<h1>国際化とアクセシビリティ</h1>
+
+
+<h2>gettext</h2>
+<p>gettextはGNUで使われている翻訳システム。gettextでの翻訳は以下のようになる。</p>
+<p>_()を使って以下のように文字列をラップする。
+<pre class="prettyprint">
+printf(_("hoge is %s."), hoge_name);
+</pre>
+</p>potファイルで文字列のテンプレートを準備する。それをpoファイルで以下のように翻訳する。
+<pre>
+#: src/hoge_prog.c:20
+msgid "hoge is %s."
+msgstr "ほげとは%sである。"
+</pre>
+<p><a href="linux_unix_timezone_locale.html">UNIXシステム管理（タイムゾーンとロケール）</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gettext">gettext - Wikipedia</a></li>
+</ul>
+
+<h1>Mono</h1>
+<h2>Mono/GTK#</h2>
+<p>UNIXやLinuxにおいて、マイクロソフトが開発した.NET Frameworkと同等の環境を動かすことが出来る、仮想マシンとC#/VB.NETコンパイラ。GTK#によってGUIアプリケーションも作れる。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Mono_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">Mono (ソフトウェア) - Wikipedia</a></li>
+</ul>
+
+<h2>GNOMEで.NET(Mono)</h2>
+<p>GNOME創設者のミゲル・デ・イカザ氏らのメンバーが始めたMonoプロジェクトは、Linux/UNIX環境でMicrosoft .NET Frameworkと同等の環境（仮想マシン・コンパイラ・クラスライブラリ）が動く。</p>
+<p>これは、言語非依存・プラットフォーム非依存のメッセージングという点において、CORBAよりさらに新しいアプローチだ。</p>
+<p>GNOMEでC#/.NETを行うためには、GTK#とMonoを使う。ある意味、GNOMEをCで書いて、GNOMEアプリケーションをC#で書くことはまさに理想なのである。</p>
+<p><a href="../prog_lang/mono.html">Mono</a>も参照のこと。</p>
+
+<h2>GNOMEと.NETの流行</h2>
+<p>2000年代のWindows界隈では、C#/.NETという新しい技術が導入され始めていた。Microsoftが開発した新しいC#という言語については、コードの見た目から「Windows版のJavaである」という批判もあったが、さまざまなプログラミング言語から共通のクラスライブラリを使うことのできるCLIという技術は、従来のCOMをさらに推し進めたものとしての革新性もあった。</p>
+<p>GNOME界隈でも、.NETをGNOMEでも導入したいということで、C#/.NETをUNIXに移植したmono（.NET技術は仕様が公開されていたので移植版を作ることができた）とか、GTKのC#/.NETバインディングであるGtk#などを開発して、メモアプリのTomboyやデスクトップ検索のBeagle、写真管理アプリのF-SpotやメディアプレイヤーのBansheeなど、いくつかのGNOMEアプリケーションがC#で書かれた。</p>
+<p>だが、2010年代には、そのような.NETの流行は下火になり、代わりにCSSやJavaScriptのようなWeb技術でGNOMEのデスクトップシェルが書かれるようになった。GNOMEのデスクトップインターフェースであるGNOME-Shellの拡張機能はJavaScriptで開発することができる。Windows界隈でもVS-CodeがJavaScriptで書かれるなど、最近のデスクトップ環境の流行はWeb技術とJavaScriptとなっている。</p>
+<div class="edit_date">
+<p>2025.12.19</p>
+</div>
+
+<h1>開発者向け</h1>
+<h2>JHBuild</h2>
+<p>GNOMEをビルドするためのツール。GNOMEを自分の力で開発したい方向け。以下を参照のこと。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0244">第244回　JHBuildでGNOMEをビルドしよう - gihyo.jp</a></li>
+<li><a href="https://developer.gnome.org/jhbuild/index.html.ja">JHBuild マニュアル</a></li>
+</ul>
+
+<h2>GNOMEのコードを読もう</h2>
+<p>Linuxの仕組みを知りたいものとして、誰もが参照したいのがGNOMEのソースコード。昔はtar.gzで配布されていたものを個別に入れる必要があったが、今ではGitLabからコードをオンラインで簡単に参照でき、gitを使えばローカルにcloneするのも簡単である。</p>
+<p>GNOMEはさまざまな技術をベースにして作られているので、全てを把握するのには時間がかかるかもしれない。だが、「Windowsに代わるOSを使いたい」のであれば、誰でも「Windowsに代わるOSを自分で開発したい」のではないだろうか。カーネルやコンパイラの情報も必要だが、実際のところ自分の好きなデスクトップ環境のコードを見ることは、デスクトップ環境を「使うだけではなく開発したい」といった人に向けて開かれている、オープンな情報の在り方のひとつである。</p>
+<p>GNOMEのコードは、以下の情報から参照できる。</p>
+<ul>
+<li><a href="https://gitlab.gnome.org/GNOME">GNOME · GitLab</a></li>
+<li><a href="https://www.gnome.org/gnome-3/source/">Source – GNOME</a></li>
+<li><a href="https://wiki.gnome.org/Git/Developers">Git/Developers - GNOME Wiki!</a></li>
+</ul>
+
+<h2>HIG</h2>
+<p>GNOMEでは、アプリケーションのUIを分かりやすく統一するために規範となるHIG（GNOME Human Interface Guidelines）が用意されている。</p>
+<ul>
+<li><a href="https://developer.gnome.org/hig/stable/">GNOME Human Interface Guidelines</a></li>
+<li><a href="https://wiki.gnome.org/Design/HIG/">GNOME Human Interface Guidelines - GNOME Wiki</a></li>
+<li><a href="https://developer.gnome.org/hig-book/">GNOME Human Interface Guidelines (GNOME 2)</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>GNOMEデスクトップ</h2>
+<p><a href="gnome_desktop.html">GNOMEデスクトップ</a>を参照のこと。</p>
+
+<h2>GNOMEアプリケーション</h2>
+<p><a href="gnome_apps.html">GNOMEアプリケーション</a>を参照のこと。</p>
+
+
+
+<h1>GNOMEについて余談</h1>
+<h2>GNOME 3の方向性</h2>
+<p>僕は、GNOME 3の方向性も、ある意味では間違っていないと思う。</p>
+<p>賢くて独自性のあるシェルにして、アプリケーションの操作を単純化し、シンプルで初心者向けの簡単なものにする、と言う考え方は、パソコンの開発者なら誰でも分かる。</p>
+<p>昔の自分も、「パソコンの分からない母親にも使えるインターフェースを作りたい」と思っていた。</p>
+<p>だが、そのために機能性や使いやすさを犠牲にする、GNOME 3の考え方を、僕は信じない。</p>
+<p>僕は普段、Fedora 26でMATEを使っている。MATEは動作も速いし、機能性もきちんとある。僕は、MATEでなければLinuxは使えないと思う。</p>
+<p>たまにKDEを起動することはあっても、メインで使う環境にはならない。KDE/Qtアプリケーションの中に良いアプリケーションがない。</p>
+<p>だから、きっとGNOME 4が出ることがあったとしても、GNOME 3をMATEと同等に維持するような、そんなプロジェクトがあっても良いのかなと思う。</p>
+
+<h2>GNOMEとKDEの二大戦争</h2>
+<p>GNOMEとKDEの二大戦争を悪いという人が居る。開発リソースの分散になって、どっちも転ぶだけだと言う。</p>
+<p>僕は、むしろ、その通りだと思う。</p>
+<p>GNOMEは、Mac風にメニューを二大パネルにしたぐらいから、KDEと違う独自のデスクトップ環境へのデザイン・設計の道を歩み出したと思う。</p>
+<p>あの当時、僕は、「素晴らしいデスクトップ環境が2種類もあって、多様性がある」と思っていた。</p>
+<p>あの当時のLinuxは、Mozilla Suite（SeaMonkey）やFirefoxなど、ブラウザにも個性があって、独自性があった。</p>
+<p>だが、GNOME 3が出て、KDE 4が出て、一気にLinuxは悪くなった。それまでの独自なデスクトップの個性を失い、無個性なものになった。</p>
+<p>KDE 4は、僕は最初は「本当に美しい」と思って好きになったが、Plasma 5が出て、フラットな表示になってから、「美しいようでいて、ただ無個性なだけ」だと僕は思った。</p>
+<p>むしろ、KDE 3の方が個性があって良かったのかもしれないと今思う。</p>
+<p>本当に、GNOMEとKDEは、僕はどちらも悪いと思う。GNOMEがアーキテクチャ指向で、KDEがモダンデザイン指向なのは分かるが、どちらの考え方でもない、新しいデスクトップ環境を作ってほしい。</p>
+<p>だが、そうした「X11の多様性」を生み出したのは、他でもないKDEとGNOMEの開発者だ。そこは、賞賛してしかるべきだろう。</p>
+<p>僕は、昔からGNOMEとKDEはどちらも好きだ。どちらかが良いものになって、もう一方もさらに良いものになる。それで、頑張ってほしい。</p>
+<p>ただ、それで終わりとしたいところだが、僕は不幸にも、これ以上KDEとGNOMEは良いものになりようがなく感じてしまう。</p>
+<p>ある意味、LinuxのGUIはもう、最後まで行きついてしまったところがある。これ以上、新しいものを考えることが出来ない。</p>
+<p>ジョブズが居たら、なんて思うだろうか。むしろ、簡単に新しいものを作って「ハイ、これが次世代の革新です」と言うかもしれない。</p>
+<p>だが、今のWindows/Linuxの開発は、もう行き着いてしまったと思う。これ以上、新しいものが出るような気がしない。家庭用ゲーム機と同じ、衰退への道を歩むのではないかと思う。</p>
+<p>僕が思うに、アラン・ケイの発想をもう一度再考するしかないと思う。Ubuntuにそれをやってほしい。Ubuntuなら良いものが作れるかもしれない。オープンソースの良いところは、誰でも開発に参加出来るところだから、Ubuntuでなくても、他の開発者が作っても良い。だが、マイクロソフトの資金力で作れば、またありえないものが生まれる。だが、それできっと良いものは生まれないと思う。</p>
+
+
+
+<h2>GNOMEは賢い代わり遅い</h2>
+<p>GNOMEには、CORBA（最近ではD-Bus）によるコンポーネントの埋め込みとネットワーク通信、テーマエンジンやエクステンション、各種言語へのラッパーなど、とても賢い点が多いのだが、その分、処理速度が遅いという難点がある。</p>
+<p>そもそも、GNOMEではintやポインタ型すら、オブジェクトの1つとして扱うためにgintやgpointerのような型を使うようになっている。そうした「オブジェクト指向の賢いデスクトップ環境」や、X Window Systemの「ネットワーク透過」まで、たくさんの賢い点があるのだが、いかんせん、GNOMEデスクトップ全体を遅くしている。</p>
+<p>だが、最近のコンピュータリソースの処理速度の向上には目を見張るものがあり、GNOME 2のforkであるMATEを今のパソコンで使うと、とても軽く高速に動作する。</p>
+<p>さらに問題を大きくしているのは、KDEとの連携である。KDEはさらにグラフィックスの綺麗さや豪華さに力を入れており、GNOMEより起動が遅く、メモリを食い、不安定で動かない環境もある。だが、使っていると、KDEの方が快適である。これは、GNOMEの、「機敏さはなくてもきちんと安定して動く」という「きちんと動く」特徴とは対照的である。</p>
+<p>COMという技術のオリジナルではあるものの、GUIウィジェットツールキットとウィンドウシステムとカーネルが統合されている、「統合されたWindows」はとても使いやすい。Microsoftがいつも言っていたように、Windowsの大きな特徴は「統合」である。これは、GTK+とQtが共存して醜い不統一のツールキット環境を生み出した、今のオープンソース陣営が見習わなければならない特徴である。Windowsは醜いAPIをしているが、その分高速で機敏に動作する。昔より安定しているのは、その上で.NETというJavaと同様のVM環境にしているからである。Windowsが勝利するのは、GNOME 3を使えば良く分かる。Linuxがシェアを奪えないのは、GNOMEを知っていれば、当たり前である。</p>
+<p>ちなみに、Javaは処理速度を優先して、値型を導入した。GNOMEは昔からWindowsで動くJavaよりも遅いが、それはgintを導入し、全面的に賢くしすぎたためではないかと僕は思う。逆に言えば、みんな、GNOMEの賢さを理解できていない。GNOMEは最高の設計をしているのに、誰にも見向きもされない。昔から、そういうものである。</p>
+<p>GNOMEも遅すぎるという性能の遅さを昔から分かっていて、最近ではXMLベースだったGConfをバイナリブロブのdconfに変更するなど、きちんと頑張って高速化している。.NETのVMが必要だったMonoを、最近ではCにコンパイルするValaに変えている。そもそも、GNOMEはきちんと動くことなんか目指していない。ただ、賢いアーキテクチャを目指しているのは、そもそもが昔のWindowsのCOMのような言語・プラットフォーム非依存のネットワーク通信をやりたいからであり、そもそもWindowsとの連携を模索している。だから、頑張って高速化するための努力をすれば、きっと速くなるだろう。Mozilla Firefoxがやったように、機能を全て拡張機能に頼って、シンプルで軽快なデフォルトの状態を維持する、という仕組みは、GNOME 3で大々的に導入された。だが、これは不評である。それは、デフォルトの状態が「全くと言って良いほど使えない」からである。最低品質のデスクトップ環境になったとよく言われる。だが、GNOME 3は最近、「慣れると使いやすい」と言われるようになってきた。それは、拡張機能を入れればWindowsのように使えるし、入れなくてもスマホのような分かりやすいGNOME-Shellのインターフェースが、スマホ時代の今の人間たちに好評だからである。だが、僕としては、もう少しUIを整理してほしいと思う。アプリケーションによってメニューバーがあったりなかったりするのは、良いことではないと思う。GNOMEは遅いだけではなく、デザインが未熟である。昔から、「最も醜い感じを受けるデスクトップ」は、いつでもLinuxのGNOMEである。</p>
+<p>また、WindowsとLinuxには、「気質の違い」というものが存在する。Windowsは、効率のために何でも統合させたがる。カーネルにWindowsのGUIを統合し、グラフィックス処理も統合し、IEをExplorerと統合する。このため、目に見える部分では軽快で高速だが、目に見えないセキュリティホールやバグが多く、Officeのような巨大アプリケーションは良く不安定になる。GNOMEでは、そういうものを全部独立したコンポーネントにした上で、それぞれが開発するようにプロジェクトそのものを独立させ、カーネルにグラフィックス処理を統合せず、X11やGTK+/GDKに分離させる。このため、目に見えて遅くなる。特に、独自のXULという技術を使っているMozillaなどは、起動に時間がかかりすぎて、反応すらしていないように思われることもある。だが、Windowsが必ずしも不安定かというと、そうでもない。Microsoftは.NETを開発し、またWindows NT時代にカーネルを書き直したこともあって、最近は安定している。Linuxが最近不安定なのは、Ubuntuなどが使い勝手を優先するコードをたくさん書いていて、自動認識を多くするようになったことで、複雑性が増えてかつ想定できない事態が発生しても簡単に直せなくなったり、あるいはオープンソースソフトウェアが増えすぎたことや巨大になったことで、Linuxの一般的な開発者の数だけでは全てを見通すことができず、Red Hatなどの会社に頼るようになって、Windowsのやり方と変わらなくなってきたからではないかと思う。そもそもGNOMEが遅いというのもあるが、LinuxカーネルやGCC/Glibcなども複雑化してきており、X11も昔よりモジュラー化が進み、どんどん複雑かつ高度になったことで、昔のMulticsと全く同じ「高機能化に伴う馬鹿」が増えていることで、「全てのコンポーネントがどんどん悪くなっている」というのがあると思う。それこそ、最近はAndroidが普及したこともあって、必ずしもLinuxがウィルスやセキュリティホールとは無縁ではなくなった。逆に、昔のRed Hat Linuxなどをそのまま使っているサーバーが、アップデートを怠っていることで、Linuxはセキュリティホールの拡大にとても大きく加担しているのである。Linuxはセキュアではないし、安定もしていないし、軽くもない。GNOMEは劣悪で、KDEは使っている人間が居ない。結局、そのように負け続けているのが、今のLinuxデスクトップの、誰でも分かる現状である。</p>
+<p>ただ、言っておくと、最近はGNOME 3は本当はそんなに遅くない。本当に、Gconfをdconfにして、CORBAをD-Busに変えたせいで、速くなっている。X11はwaylandに変わって軽くなるだろう。Linuxデスクトップは、最近、Ubuntuの影響で、どんどん「初心者でも使いやすい」ものになっている。特に、日本人ユーザーが知らないこととして、海外ではLinuxはとても好意的に受け入れられている。それは、僕の英会話学校の講師が喜々としてLinuxの話題を出すようにである。そもそも、海外にはLinuxのような工業製品が多い。日本ほど、レベルの高くないものが普通なのである。日本のSONYや東芝の製品が出来すぎているだけで、海外ではとても低額で使えるLinuxのような製品がたくさんあるのである。２ちゃんねるだけを見ていると、そういう発想が分からなくなる。日本人は賢いから、Linuxを使わないのである。</p>
+
+<h2>GNOMEはサルが好き</h2>
+<p>GNOMEプロジェクト創設者のミゲル・デ・イカザ氏が猿が好きなことから、GNOMEプロジェクトのアプリケーションには良く猿の名前がつけられている。BonoboやXamarinなどがこれに当たる。</p>
+<p>イカザ氏はXimianというGNOMEアプリケーションの開発とサポートを行う企業を立ち上げ、.NET FrameworkをUNIX環境に実装したMonoなどを開発した。その後XimianはNovellやそれ以後の企業に買収され、Monoチームは存在の意義を疑われてレイオフされた。そのため、Xamarinという新しい会社を作り、.NET FrameworkでiOSやAndroidのアプリケーションを開発できるXamarinと呼ばれるソフトウェアを開発した。これが功を奏し、MicrosoftによってXamarinは買収された。現在はMonoチームの仲間と一緒にMicrosoftに居るはずである。彼はGNOMEの創設でCORBAを導入したほか、Midnight Commanderと呼ばれるCUIベースだがメニュー選択でファイルを操作できるファイルマネージャや、GNOMEのGnumeric表計算ソフトなどを開発し、多くのオープンソースプログラマーから「スーパーハッカー」として著名である。</p>
+<p>後日注記：開発者のミゲルやその仲間たちがメキシコ人であることから、GNOMEは「メキシコ発のデスクトップ環境」として知られる。KDEはドイツ発祥であることから「ドイツ発のデスクトップ環境」として知られる。それぞれの個性が全く違うことからよく対比される。</p>
+<p><a href="ximian.html">Ximian</a>や<a href="../mobile/xamarin.html">Xamarin</a>も参照のこと。</p>
+
+
+<h2>GNOMEはOpenVMSとよく似ている</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.22.html">2021/01/22</a>より。</p>
+<p>GNOMEについて言えるのは、UNIXよりもOpenVMSに似ているということ。</p>
+<p>OpenVMSでは、ネイティブで分散クラスタ環境が構築でき、さまざまなプログラミング言語を織り交ぜてシステムを開発できる。</p>
+<p>ここに、「UNIXをもう少しマシなものにしよう」という考え方が見て取れる。</p>
+<p><a href="../os/openvms.html">OpenVMS</a>も参照のこと。</p>
+
+<h2>GNOMEはオブジェクト指向のナウいデスクトップ環境だがWindowsのパクリ</h2>
+<p>GNOMEは、「オブジェクト指向のデスクトップ環境」とよく言われます。</p>
+<p>これは、GTKがGLib/GObjectという「オブジェクト指向のシステム」に従って設計されており、完全にオブジェクト指向の論理的・コンポーネント的なデスクトップ環境だからです。</p>
+<p>同時に、GNOMEは「Windowsのパクリだ」と言って批判されることがありますが、それは言葉通り正しいです。そもそもCORBAはWindowsのCOMが原形であり、分散コンポーネント通信システムをオープン標準で定めたものです。</p>
+<p>ですので、「UNIXやWindowsをベースに、よりそれらシングルホストOSをPlan 9やOpenVMSのような分散環境に近づけた、オープン標準なデスクトップ環境」であると言えます。</p>
+<p>GNOMEプロジェクト創設者のミゲル・デ・イカザ氏はUNIXにおけるオープンソースな.NET FrameworkであるMonoや、Excelライクな表計算ソフトであるGnumeric、メニュー式ファイルマネージャのMidnight Commanderなどの開発で知られており、GNOMEデスクトップをサポートするXimian社の設立でも知られていることなどから、明らかにWindowsの影響が見られます。Ximian社はほかにも高機能メール・グループウェアクライアントであるEvolutionや、GNOME/Bonoboの開発で知られます。UNIXをWindows並みに「マシなものにしよう」という情熱が、彼らの作るソフトウェアプロジェクトから見ることができます。</p>
+
+<h2>GNOMEは内部の構造が賢い</h2>
+<p>GNOMEについて言えること、それは「内部の構造が賢い」ということです。</p>
+<p>まず、GNOMEはオブジェクト指向のデスクトップ環境です。オブジェクト指向という、新しくて論理的で抽象度の高い考え方に基づいて作られています。</p>
+<p>それから、GNOMEは再利用性を重視します。CORBA/D-Busを使うことで、再利用可能なコンポーネントを使ってデスクトップ環境が作られています。</p>
+<p>そのように、GNOMEは賢い考え方によって作られているため、内部の構造がほかのどのデスクトップ環境よりも賢くなっています。</p>
+<p>ユーザーの視点から見ると、GNOMEは初心者に優しいです。初心者でも扱いやすいように、さまざまな点ができるだけ簡単に操作できるように作られています。</p>
+<p>なので、GNOMEは誰もが最初に使う「標準」に相応しいと言えます。</p>
+<div class="edit_date">
+<p>2025.01.07</p>
+</div>
+
+<h2>関連する日記</h2>
+<p><a href="../../diary/guren/2025.07.18.html">2025-07-18</a>に関連する内容があります。</p>
+
+<h1>リンク集</h1>
+<h2>GNOME入門</h2>
+<p>巨大なデスクトップ環境。</p>
+<ul>
+<li><a href="https://help.gnome.org/">GNOME Library</a></li>
+<li><a href="https://help.gnome.org/users/gnome-help/stable/">GNOME ヘルプ</a></li>
+</ul>
+
+<h2>GNOME/GTK+/GLib</h2>
+<p>GNOMEを使ったアプリケーションの開発。</p>
+<ul>
+<li><a href="https://developer.gnome.org/">GNOME 開発センター</a></li>
+</ul>
+<p>GNOME本体の開発。</p>
+<ul>
+<li><a href="https://wiki.gnome.org/Home">GNOME Wiki</a></li>
+<li><a href="https://www.gnome.org/get-involved/">Get Involved - GNO<E</a></li>
+<li><a href="https://wiki.gnome.org/Newcomers/">Newcomers guide - GNOME</a></li>
+<li><a href="https://developer.gnome.org/jhbuild/stable/">JHBuild マニュアル</a></li>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0244">第244回　JHBuildでGNOMEをビルドしよう - gihyo.jp</a></li>
+</ul>
+
+<h2>GNOMEリファレンス</h2>
+<p>GNOME</p>
+<ul>
+<li><a href="https://developer.gnome.org/references">API Reference - 開発者 - GNOME 開発センター</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Official-GNOME-developers-guide/dp/1593270305">The Official GNOME 2 developer's guide</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

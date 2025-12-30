@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（IO・入出力） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（IO・入出力）</h1>
+<p>Linuxのカーネルの開発に関する世界観（IO・入出力）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><b>IO・入出力</b></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>入出力とシステムコール</h1>
+
+
+<h2>入出力とシステムコール</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>また、Linuxでは端末を用いた入出力が可能である。</p>
+<p>端末のデバイスファイルは、多くの場合/dev/tty0が第一の仮想コンソールである。</p>
+<p>Linuxにおいては、標準入力、標準出力、標準エラー出力が多くの場合プロセスに与えられるが、このほかにも、open()で開いたファイルやソケットなどにも文字列を入出力できる。</p>
+<p>システムコールについては、open(), close(), write(), read()が、ファイルに対しての読み書きとして使える。</p>
+<p>ファイルディスクリプタと呼ばれる整数が、それぞれのストリームの識別に使われる。</p>
+<p>しかしながら、多くの場合、システムコールを使うよりも、C言語のstdioというライブラリを使った方が高速であり、また便利である。</p>
+<p>システムコールに比べて、stdioはバッファリングを行うため、何度も同じデータにアクセスする時の速度が高速になる。</p>
+<p>また、システムコールのread()やwrite()は固定長の読み書きを行うが、stdioは文字単位や行単位の読み書きが可能であり、printf()のようなフォーマット出力と呼ばれる便利な仕組みが存在する。</p>
+<p>stdioではファイルディスクリプタを生に触るのではなく、FILE型のポインタと呼ばれるラッパーを使う。</p>
+
+<h2>カーネルはシステムコールを待ち受けるだけ</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>このようなカーネルをどのように開発するか、という問題だが、Linuxカーネルは、基本的にシステムコールを待ち受けるだけのイベント駆動なOSである。</p>
+<p>よって、Linuxカーネルは自分からは何もしない。</p>
+<p>何かの要求があった時にだけ、働くように作られている。</p>
+
+<h2>ファイルディスクリプタとFILEポインタ</h2>
+<p>基本的に、システムコールでファイルにじかにアクセスする時は、OSの識別番号であるファイルディスクリプタを使う。stdioで使うFILE型のポインタはファイルディスクリプタのラッパーで、stdioのバッファリング情報などが含まれている。</p>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>カーネルと入出力ソフトウェア</h1>
+<h2>カーネルにおける入出力ソフトウェアの目的</h2>
+<p>（以下は「<a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a>」を参考に執筆しました。）</p>
+<p>カーネルにおける入出力ソフトウェアの目的は、「デバイスに依存しない」こと。</p>
+<p>たとえば、フロッピーディスクとハードディスクでは、データを取り出したり書き換えたりする際に、まったく別の処理と操作が必要となる。</p>
+<p>入出力ソフトウェアがあることで、これを共通化できる。同じ操作によって異なるデバイスを操作することができ、そのデバイスが操作できるかどうかはカーネル（入出力ソフトウェア）が対応しているかどうかだけにかかっている。</p>
+<p><a href="../os/os.html">OS</a>も参照のこと。</p>
+
+<h2>I/O関連の用語</h2>
+<p>I/O関連の用語には以下のようなものがある。</p>
+<table class="some_tables">
+<tr><th class="min60">用語</th><th>説明</th></tr>
+<tr><td>I/Oバス</td><td>I/OデバイスとCPUは、I/Oバスによって接続される。<br>データバス、アドレスバス、コントロールバスがある。</td></tr>
+<tr><td>I/Oポート</td><td>I/OデバイスはI/Oポートを用いてアクセスする。<br>アセンブリ言語のin, ins, out, outsという命令でアクセス・読み書きができる。<br>また、I/Oポートには固有のI/Oアドレスがある。</td></tr>
+<tr><td>I/Oポートのレジスタ</td><td>制御レジスタ、ステータスレジスタ、入力レジスタ、出力レジスタがある。</td></tr>
+<tr><td>I/Oインターフェース</td><td>I/Oポートとデバイスコントローラを繋ぐインターフェースとして働く。<br>専用I/Oインターフェースと汎用I/Oインターフェースがある。</td></tr>
+<tr><td>専用I/Oインターフェース</td><td>キーボード、グラフィック、ディスク、バスマウス、ネットワークのインターフェース。</td></tr>
+<tr><td>汎用I/Oインターフェース</td><td>パラレルポート、シリアルポート、USB、PCMCIA、SCSIのインターフェース。</td></tr>
+<tr><td>デバイスコントローラ</td><td>デバイスコントローラは、プロセッサから高レベルなデバイス操作命令を受け取り、<br>より低レベルなデバイス操作処理（たとえば物理的なディスクの操作）を実現する。</td></tr>
+<tr><td>デバイスファイル</td><td>I/OデバイスはUNIXではファイルとして扱われ、デバイスファイルと呼ばれる。</td></tr>
+<tr><td>I/O共有メモリ</td><td>I/Oデバイスとの間で共有されるメモリのこと。<br>たとえばモニターに画像を表示するためのフレームバッファなど。</td></tr>
+</table>
+<p>これらの仕組みを踏まえた上で、I/Oデバイスを操作するソフトウェアレイヤーであるデバイスドライバを書く。デバイスドライバにはブロック型とキャラクタ型がある。</p>
+<p>ブロック型デバイスドライバは複雑で、さまざまなI/O機構（バッファリングやディスクキャッシュを含む）が必要となるが、キャラクタ型デバイスドライバはそれに比べれば簡単である。</p>
+<p>（以上は<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>を参考に執筆しました。）</p>
+<p><a href="linux_kernel_device.html">Linuxカーネル（デバイス）</a>や<a href="linux_devicefile.html">デバイスファイル</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2024.09.19-20</p>
+</div>
+
+<h1>入出力関連ページ</h1>
+<h2>入出力</h2>
+<p>入出力については<a href="linux_api.html">システムコール・API（１．ファイル・入出力）</a>や<a href="../prog_lang/c_io.html">C言語（５．入出力）</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

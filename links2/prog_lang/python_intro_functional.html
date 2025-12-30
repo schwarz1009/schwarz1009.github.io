@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Python入門（７．関数型言語の機能） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Python入門（７．関数型言語の機能）</h1>
+<p>Python入門（７．関数型言語の機能）です。</p>
+<p><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a>を参考に執筆しました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="python_intro.html">Python入門</a></li>
+<ul>
+<li><a href="python_intro_basic.html">１．基本</a></li>
+<li><a href="python_intro_flow.html">２．制御フロー</a></li>
+<li><a href="python_intro_oop.html">３．オブジェクト指向</a></li>
+<li><a href="python_intro_data.html">４．データ構造</a></li>
+<li><a href="python_intro_str.html">５．文字列</a></li>
+<li><a href="python_intro_file.html">６．ファイル</a></li>
+<li><b>７．関数型言語の機能</b></li>
+<li><a href="python_intro_others.html">８．その他</a></li>
+<li><a href="python_intro_advanced.html">９．応用・モジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>無名関数と高階関数</h1>
+
+<h2>無名関数（ラムダ式）</h2>
+<p>Pythonでは、無名関数（ラムダ式）を使うことで、簡単なコードブロックであれば名前をつけなくてもブロックを変数に代入して実行すべきところで実行することができる。</p>
+<p>無名関数は以下のように記述する。</p>
+<pre class="prettyprint">
+lambda x, y: (x + y) / 2
+</pre>
+<p>ラムダ式は他の言語にもあるし、無名関数はC#では昔デリゲートと呼ばれていた。Rubyのブロックに近い。C言語でも関数ポインタを関数の引数に与えることはできる。</p>
+<ul>
+<li><a href="https://www.lifewithpython.com/2013/01/python-anonymous-function-lambda.html">Python の無名関数（ lambda ）の使い方 - Life with Python</a></li>
+</ul>
+
+<h2>map/filter関数</h2>
+<p>map()関数は、リストのそれぞれの要素に、同じ処理を実行したリストを返す。</p>
+<p>filter()関数は、リストから条件を満たすものだけをフィルターして抽出する。</p>
+<p>以下はリストのそれぞれの要素に同じ処理を実行して、同じサイズのリストに結果となる要素をすべて格納してくれる、map()関数と無名関数を組み合わせた例。</p>
+<pre class="prettyprint">
+orig = [1, 2, 3, 4, 5]
+
+bi = map(lambda x: x * 2, orig)
+
+print(bi)  # [2, 4, 6, 8, 10]
+</pre>
+<ul>
+<li><a href="https://python.ms/type/for/map-filter/#_1-map">Python の map と filter ってなに？ | Mastering Python</a></li>
+<li><a href="http://hiroto1979.hatenablog.jp/entry/2016/02/24/020534">Python3におけるmap/filterの使い方 - どこかに向かうらしい話</a></li>
+</ul>
+
+<h2>zip関数</h2>
+<p>zip()関数は、for文とともに使うことで、複数のリストからひとつひとつ要素を取り出すような反復処理を行うことができる。</p>
+<pre class="prettyprint">
+names = ['クロ', 'シロ', 'タマ']
+ages = [6, 8, 4]
+for n, a in zip(names, ages):
+    print(n, 'は', a, '歳です。')
+</pre>
+
+<h1>イテレータとジェネレータ</h1>
+<h2>iter, next, enumerate関数</h2>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>iter()</td><td>イテレータを返す関数。</td></tr>
+<tr><td>next()</td><td>イテレータから次の要素を取り出す関数。</td></tr>
+<tr><td>enumerate()</td><td>要素を取り出した時に、その要素が何番目の要素なのかを知るための関数。</td></tr>
+</table>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+
+<h2>for文とイテレータ</h2>
+<p>Pythonのfor文は、リスト・タプル・辞書などのイテラブル（イテレータを実装したオブジェクト）に対して繰り返し処理をする構文であり、イテレータのための構文であるとも言える。</p>
+<p>for文にリストなどのイテラブルを与えた場合、内部処理としてイテレータが実行されている。</p>
+<ul>
+<li><a href="https://uxmilk.jp/41512">Pythonのイテレータの基本的な使い方 | UX MILK</a></li>
+</ul>
+<p>イテレータさえ実装されていれば、どのようなオブジェクトであってもfor文で繰り返すことができる。</p>
+<p>イテレータを実装するには、__iter__()メソッドと__next__()メソッドを実装し、__iter__()から__next__()を持つオブジェクトを返すようにする。</p>
+<ul>
+<li><a href="https://qiita.com/tchnkmr/items/e740173d7400f8672d75">[Python] イテレータを実装する - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.22</p>
+</div>
+
+<h2>yield（ジェネレータ）</h2>
+<p>yieldは、for文のような繰り返し処理と組み合わせて使うことが多い機能で、関数からfor文などに対して繰り返して1つずつ値を返し続けることができる。</p>
+<p>for文で使う場合は、一度の繰り返しを行う時に、次のyieldの実行までを処理し、yieldで返された値をfor文のカウントごとに代入される変数に代入する。そして、次の繰り返しに進んだ時に、次のyieldまでを処理する。</p>
+<p>言葉で説明すると難しいが、繰り返しの中でさまざまな処理を行いたい場合に、知っておくと便利である。for文を使わずに、自分でnext()メソッドを実行することもできる。</p>
+<p>yieldはジェネレータと呼ばれる機能で、yieldがある関数はジェネレータ関数と呼ばれる。これをイテレータ（反復子）とともに用いることで、一回の繰り返しの呼び出しに対して、yieldまでを一回行うことができる。</p>
+<p>後日注記：ジェネレータは、通常のイテレータと同様に反復処理でひとつひとつの要素にアクセスすることができるが、実際にリスト要素をデータとして持っているのではなく、呼び出されるたびに要素を自動作成して、yield returnでfor文に返すことができる。</p>
+<p>詳しくは以下のリンクが参考になる。また、PythonだけではなくC#でも使える。</p>
+<ul>
+<li><a href="http://ailaby.com/yield/">python の yield。サクッと理解するには return と比較 | コード７区</a></li>
+</ul>
+
+<h2>ジェネレータの書き方</h2>
+<p>以下はジェネレータ式の例。内包表記に似ているが、[]ではなく()でくくる。ひとつひとつの値を作りながら表示するため、最初の項目を表示するために時間がかからない。</p>
+<pre class="prettyprint">
+for v in (x * 2 for x in range(10)):
+    print(v)
+</pre>
+<p>関数と同様にジェネレータを作るためにはyield文を使う。</p>
+<pre class="prettyprint">
+def gen():
+    for x in range(10):
+        yield x * 2
+
+for v in gen():
+    print(v)
+</pre>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.06</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>イテレータとジェネレータ</h2>
+<p><a href="iterator.html">イテレータとジェネレータ</a>を参照のこと。</p>
+
+<h2>クロージャ・関数オブジェクト</h2>
+<p><a href="closure.html">クロージャ・無名関数・関数オブジェクト</a>も参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

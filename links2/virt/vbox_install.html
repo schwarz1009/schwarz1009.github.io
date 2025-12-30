@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>VirtualBox/Vagrantの導入方法 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">仮想化・互換レイヤーの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/virt_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>VirtualBox/Vagrantの導入方法</h1>
+<p>VirtualBox/Vagrantの導入方法です。<a href="vbox.html">VirtualBox/Vagrant</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>仮想環境にLinuxを導入する手順</h1>
+<h2>VagrantでUbuntu 20.04</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="../../diary/blog_frey/2020.09.30.html">2020/09/30</a>より。</p>
+<p>VirtualBoxとVagrantを使って、作業所のMacと自宅のWindows 10にUbuntu 20.04を導入した。</p>
+<p>やったことは、まず、Macでは、VirtualBoxの公式サイトからVirtualBoxをインストールし、Vagrantの公式サイトからVagrantをインストールする。</p>
+<p>次に、デスクトップにvagrant_projectsディレクトリとその中のubuntu2004ディレクトリを作成。</p>
+<p>そして、</p>
+<pre>
+cd vagrant_projects/ubuntu2004
+</pre>
+<p>のようにしてvagrant_projects/ubuntu2004ディレクトリに移動し、</p>
+<pre>
+vagrant init bento/ubuntu-20.04
+</pre>
+<p>を実行。</p>
+<p>bento/ubuntu-20.04以外のイメージを使いたい場合は<a href="https://app.vagrantup.com/boxes/search">Discover Vagrant Boxes</a>を参照のこと。</p>
+<p>vagrant_projects/ubuntu2004にVagrantfileができるので、</p>
+<pre>
+  config.vm.network "private_network", ip: "192.168.33.10"
+</pre>
+<p>を設定（#を消す）。</p>
+<p>これで、自分のネットワークを使ってUbuntu上でもネットワークに接続できるようになる。</p>
+<p>そして</p>
+<pre>
+vagrant up
+</pre>
+<p>を実行。Ubuntuイメージのダウンロードが始まる。</p>
+<p>しばらく待っていると完了する。</p>
+<p>この状態でターミナルが入力待ちに戻ると、仮想環境でUbuntuが起動しているので、Macならば</p>
+<pre>
+ssh -p 2222 vagrant@localhost
+</pre>
+<p>を実行してUbuntuのターミナルに接続する。</p>
+<p>最初のログインメッセージでは「Yes」を入力し、パスワードは「vagrant」を入力する。</p>
+<p>このコマンドは</p>
+<pre>
+vagrant ssh
+</pre>
+<p>でもよい（僕はWindowsで実行する時にこちらのコマンドを使った）。</p>
+<p>ログインできて感動したら、lsやpingなどを試してLinuxシステムが動くことを確認した後に、</p>
+<pre>
+sudo apt update
+sudo apt upgrade
+</pre>
+<p>でパッケージを最新版にする。</p>
+<p>SSHからログアウトするには</p>
+<pre>
+exit
+</pre>
+<p>を実行する。</p>
+<p>また、仮想環境のUbuntuを終了させるには</p>
+<pre>
+vagrant halt
+</pre>
+<p>とする。</p>
+<p>次回の起動時は</p>
+<pre>
+vagrant up
+</pre>
+<p>とする。</p>
+<p>仮想環境が何らかの理由で削除したくなった時は</p>
+<pre>
+vagrant destroy
+vagrant box remove bento/ubuntu-20.04
+</pre>
+<p>とする。</p>
+<p>Windowsも同様の手順で行うが、PowerShellで行うことがポイント。</p>
+<p>また、Windowsでは最初の起動の時に</p>
+<pre>
+vagrant up --provider=virtualbox
+</pre>
+<p>というようにプロバイダを設定しないとエラーがでる。</p>
+
+<h2>ApacheやPHPさえ設定すればサーバの練習になる</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="../../diary/blog_frey/2020.09.30.html">2020/09/30</a>より。</p>
+<p>Ubuntuを仮想環境に導入したので、後はApacheやPHPやMySQL（あるいはMariaDB）を導入すれば、サーバ構築の練習になる。</p>
+<p>僕はWordPressやRuby on Railsを導入してみたいと思っている。</p>
+<p>仮想サーバは必要無くなればいつでも簡単に削除できるので、実マシン上に導入するのとは違って、手軽にシステムが壊れるようなことを試すことができる。</p>
+<p>パッケージをaptで導入して、遊びと練習に使いたい。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

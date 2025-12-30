@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>PHP関連の世界観（１．言語） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PHPの世界観（１．言語）</h1>
+<p>PHPによるプログラミングに関する世界観（１．言語）です。</p>
+<p><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考にしています。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="php.html">PHP</a></li>
+<ul>
+<li><b>１．言語</b></li>
+<li><a href="php_db.html">２．データベース</a></li>
+<li><a href="php_security.html">３．セキュリティ</a></li>
+<li><a href="php_framework.html">４．フレームワーク</a></li>
+</ul>
+<li><a href="php_comments.html">A．戯言</a></li>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>基本</h1>
+<h2>PHPは頻繁に更新されるコンテンツに使う</h2>
+<p>PHPを使うことで、HTMLファイルの中にPHPのコードを埋め込み、PHPの文法と機能を使ってHTMLデータを自動作成できます。</p>
+<p>ですが、どのような時に、PHPによる自動作成を行うべきなのでしょうか。静的なHTMLと動的なPHPをどのように使い分ければ良いのでしょうか。</p>
+<p>ひとつの目安として言えるのは、「頻繁に更新されるコンテンツ」の自動作成や加工のために、PHPを使う、という方法です。</p>
+<p>たとえば、Web掲示板、チャット、Wiki、あるいはECサイトなどは、不特定多数によって更新される、頻繁に最新の情報を自動作成する必要のあるサイトの例です。また、天気予報やニュースのようなページも、いちいちHTMLファイルを書き換えるのではなく、PHPで自動更新されるようにした方が楽に管理できます。</p>
+<p>不特定多数によって投稿が更新される以外にも、WebページとしてのPHPファイルの構成は変えないでおいて、「データだけを更新したい」といった場合にもPHPは使われます。これはブログサイトなどが言えるでしょう。</p>
+<p>また、入力フォームを受け取ったり、ログイン認証を行ったり、ユーザーに専用の管理画面を表示したり、などといった使い方もあります。また、Web画像加工ツールのように、PHPの関数を使いたいから使う、といった利用も可能です。</p>
+<p>ファイルの構成を変えずにデータだけを蓄積する上で、素のPHPを使うよりも、HTMLテンプレートを「ビュー」、データベースを「モデル」、処理や操作を「コントローラ」として、ルーティングの結果望みのページが自動作成されるようにする、「Webフレームワーク」という機能を使うこともできます。PHPなら<a href="php_framework_laravel.html">Laravel</a>、Pythonなら<a href="python_django.html">Django</a>、Rubyなら<a href="ruby_on_rails.html">Ruby on Rails</a>などがこれに当たります。</p>
+<p>PHPの利用が必要ない場合として、一度書いたらそのままで残るような普通のWebページが挙げられます。ですが、最近のWebページは高度に進化しており、<a href="../network/wordpress.html">WordPress</a>のようなCMSエンジンを使うことで、ブログライクなさまざまな機能（コメント投稿機能など）をWebページに持たせることができます。</p>
+
+<h2>PHPの基本</h2>
+<p>PHPのプログラムコードは、HTMLのソースファイルの中に「&lt;?php ～ ?&gt;」のコードを埋め込むことで行われます。出力するための関数で表示するPerl/CGIなどと違い、簡素な記述が可能となります。（echo()関数を用いて表示することも可能。）</p>
+<p>PHPはPerlを参考に作られているため、変数名に$を付けるなど、良く似た点があります。</p>
+<p>HTMLに埋め込む形ではなく、PHPのコードだけを記載する場合は、文の最初から「&lt;?php ～」と始めれば良い。この時、空白の内容が出力されないように、「?&gt;」を付けないことが推奨されている。注意しておこう。</p>
+<p>後日注記：PHPの基本は&lt;?php ～ ?&gt;の中でecho()を使ってテキストやHTML要素を表示すること。早い話それさえできればPHPで基本的なことはできます。</p>
+<div class="edit_date">
+<p>2024.10.29編集</p>
+</div>
+
+<h1>スーパーグローバル変数</h1>
+<h2>$_POST</h2>
+<p>$_POSTはあらかじめ定義された変数（スーパーグローバル変数）で、PHPがPOSTメソッドで受け渡されたデータが格納されている。</p>
+<p>ページの中で</p>
+<pre class="prettyprint">
+&lt;form method="post" action="comment_receive.php"&gt;
+</pre>
+<p>と指定したフォームの変数が格納されている。「method="post"」という記述がそれを意味している。「action="comment_receive.php"」はPOSTを使ってフォームの値を受け渡すページ名を指定する。</p>
+<p>$_POSTの中に配列として全てのデータが入っているが、その中の一部を取り出す時は、キーによって配列内部のデータを参照する。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+&lt;textarea name="comment_text" cols="50" rows="5" maxlength="150"&gt;&lt;/textarea&gt;
+</pre>
+<p>なら、</p>
+<pre class="prettyprint">
+$_POST['comment_text']
+</pre>
+<p>という風にすると、このテキストエリアに入力された値を取り出せる。</p>
+<p>実際にはnl2br()関数を用いて改行を&lt;br&gt;タグに変える必要や、htmlspecialchars()関数を用いてHTMLの特殊文字を普通の文字に変換して&lt;script&gt;タグなどを無効化する必要がある。</p>
+<p><a href="html.html">HTML</a>も参照のこと。</p>
+
+<h2>$_GET</h2>
+<p>URLに含まれる文字を得たい場合は$_GETを使うこともできる。</p>
+<p>たとえば、</p>
+<pre>
+http://hogeblog.com/blog.php?username=hoge
+</pre>
+<p>とアクセスした場合、</p>
+<pre class="prettyprint">
+$_GET['username']
+</pre>
+<p>にはhogeが格納される。</p>
+<p>getとpostはどちらもサーバーに変数を送ることができるが、一般的にgetはサーバーからデータを「取得する」場合、postはサーバーにデータを「投稿する場合」に使うことが推奨される。</p>
+
+<h2>$_FILES</h2>
+<p>ファイルのアップロードがPOSTから行われた時、この変数にファイルの情報が格納される。</p>
+<p>後日注記：PHPでファイルをアップロードするためには、HTMLの投稿フォームで</p>
+<pre class="prettyprint">
+&lt;input name="hoge_file" type="file" /&gt;
+</pre>
+<p>を使用します。これを受け取ったPHPスクリプトから</p>
+<pre class="prettyprint">
+$_FILES['hoge_file']['name']
+$_FILES['hoge_file']['tmp_name']
+</pre>
+<p>のように操作します。nameは元のファイル名、tmp_nameはサーバー上に保管された一時ファイル名です。</p>
+<p>注意点として、データのエンコードのために以下のように&lt;form&gt;タグに記述します。</p>
+<pre class="prettyprint">
+&lt;form enctype="multipart/form-data" action="post.php" method="post"&gt;
+</pre>
+<p>実際には、アップロードされた時点で、本来あるべき場所に一時ファイルを移動させる処理を書く必要があります。そのためにis_uploaded_file()とmove_uploaded_file()を使います。</p>
+<p>以下が参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/asami___t/items/42fc7f40f5753389a913">【PHP】ファイルのアップロード方法 #PHP7 - Qiita</a></li>
+<li><a href="https://www.php.net/manual/ja/features.file-upload.post-method.php">PHP: POST メソッドによるアップロード - Manual</a></li>
+<li><a href="https://www.yoheim.net/blog.php?q=20171201">[フロントエンド] multipart/form-dataを理解してみよう - YoheiM .NET</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.12.31編集</p>
+</div>
+
+<h2>$_SESSION</h2>
+<p>セッションはサーバーに一時的に保持されるデータで、ページをまたいでユーザーの情報を保持しておくことができる。ユーザーのログイン情報などを保持するために使われることが多い。</p>
+<p>Cookie（クッキー）はブラウザ側に保持されるが、セッションはサーバー側に保持される。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+session_start();
+</pre>
+<p>としてセッションを開始し、</p>
+<pre class="prettyprint">
+$_SESSION['username']
+</pre>
+<p>のように変数として、セッションの間に保管されるデータにアクセスできる。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://techacademy.jp/magazine/4970">PHPでセッションを使う方法【初心者向け】 | TechAcademyマガジン</a></li>
+<li><a href="https://www.scollabo.com/banban/php/php_14.html">セッション管理/PHP入門 - 初心者のためのホームページ作り</a></li>
+<li><a href="https://qiita.com/Yuki-Kurita/items/78816353a62af2c2436d">3分で覚え直す$_SESSIONの使い方まとめ [PHP] - Qiita</a></li>
+</ul>
+
+<h2>$_COOKIE</h2>
+<p>HTTP Cookieの情報が格納される。セッションはWebサーバに保存されるが、クッキーはWebブラウザに保存される。</p>
+<p><a href="../network/cookie.html">Cookie</a>も参照のこと。</p>
+
+<h2>$_SERVER</h2>
+<p>Webサーバーの情報が格納されており、Webサーバのホスト名、IPアドレス、リクエストのプロトコル、リクエスト元のIPアドレス、リクエストのHTTPメソッド名などが含まれる。</p>
+<p>後日注記：$_SERVERはとてもよく使うグローバル変数であるため、中にある要素をよく確認しておこう。</p>
+
+<h1>PHP文法</h1>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
+
+<h2>変数名のつけ方とPerlからの影響</h2>
+<p>PHPは「PerlライクにHTMLにコードを埋め込むことのできる言語」として使われることが多かったため、変数名には必ず$をつけるなど、Perlからの影響が見られます。</p>
+<p>しかしながら、Perlのように使うのは$だけで、@や%は基本的に使いません。配列やハッシュであっても$をつけます。オブジェクトのインスタンスであっても同様に$をつけます。</p>
+<p>むしろ、Perlからの影響よりも、C++やJavaに合わせた点もあわせもっています。たとえばforeach文はデフォルトではPerlのように配列の中身を操作することができません。&をつけて参照を用いて操作する必要があります。</p>
+
+<h2>型とスコープ</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
+<p>PHPでは、グローバルスコープとローカルスコープが存在する。PHPブロックの中に直接記述した変数はグローバルスコープとなる。関数やクラスのメソッドを定義するとその中はローカルスコープとなる。ローカルスコープに宣言すると、別の場所からその変数にはアクセスできない。逆にグローバルスコープに宣言した変数は、ほかの場所（別のPHPブロックや別のファイルなど）からもアクセスできる。globalキーワードを使うことで、ローカルスコープの中からグローバルスコープの変数を操作できる。</p>
+<p>型は、(float)'102.034'のようにC言語風のキャストが行えるほか、変換関数としてintval(), floatval(), strval()などがある。</p>
+<p><a href="type.html">型</a>も参照のこと。</p>
+
+<h2>演算子</h2>
+<p>代入演算子=や、代数演算子+, -, *, /, %などが使える。++や--も可能。</p>
+<p>比較演算子は、==の場合型がキャストされて比較される。キャストしたくない場合は===を使用する。</p>
+<p>また、.は文字列の連結に使う。このため、オブジェクトに対するメソッドの呼び出しには.ではなく-&gt;を使う。</p>
+
+<h2>文字列を表現する二つの方法（ダブルクォーテーションとシングルクォーテーション）</h2>
+<p>PHPで文字列を表現するためには、ダブルクォーテーション（"～"と文字列を囲む方法）とシングルクォーテーション（'～'と文字列を囲む方法）がある。</p>
+<p>二つの違いは、変数名を記述した場合に値を展開するかどうか、制御文字（エスケープシーケンス）を理解するかどうかなど。</p>
+<p>"～"で文字列を囲んだ場合、その中に変数名（たとえば$age）が含まれていると、echo()などで文字列を出力した時に、その変数が展開されて変数の値を表示できる。</p>
+<p>また、\nのような制御文字（エスケープシーケンス）を理解し、たとえば\nの場合は改行を表示する。</p>
+<p>そのため、以下のようなコードが記述できる。</p>
+<pre class="prettyprint">
+&lt;?php
+$age = 18;
+echo "I'm $age years old.\n";
+</pre>
+<p>上のコードを実行すると、</p>
+<pre>
+I'm 18 years old.
+</pre>
+<p>と表示され、最後に改行される。</p>
+<p>これに対して、'～'で文字列を囲んだ場合、変数の展開はされず、制御文字も理解されない。書いたそのままの文字列が表示される。</p>
+<p>また、'～'で文字列を囲む場合、中に"の文字をそのまま入れることができる。逆に"～"で囲んだ場合は、中に'の文字をそのまま入れられる。'～'の中に'を入れたい場合は、\'のようにエスケープしなければならない。</p>
+<p>それから、'～'は"～"よりも、変数展開などのチェックが必要ないため処理速度が速い。そのため、変数展開などが必要ない場合は、原則'～'を使うようにしよう。</p>
+
+<h2>配列</h2>
+<p>配列の例：</p>
+<pre class="prettyprint">
+&lt;?php
+$names = array('assy', 'schwarz', 'zaidou',);
+echo $names[0], PHP_EOL;  // assy
+</pre>
+<p>以下のように[]で書くこともできます。（短縮構文）</p>
+<pre class="prettyprint">
+$numbers = [1, 2, 3, 4, 5];
+</pre>
+<p>後日注記：PHPでは配列の要素に種類の異なる型の要素を混ぜることができる。そのため、数値や文字列など異なる型の要素を同じ配列の中に詰め込むことができる。</p>
+
+<h2>連想配列</h2>
+<p>連想配列の例：</p>
+<pre class="prettyprint">
+&lt;?php
+$people_types = array(
+    'assy'    =&gt; 'human',
+    'schwarz' =&gt; 'robot',
+    'zaidou'  =&gt; 'saint',
+);
+
+echo $people_types['schwarz'], PHP_EOL;  // robot
+</pre>
+<p>短縮構文で描くとこうなります。</p>
+<pre class="prettyprint">
+$people_types = [
+    'assy'    =&gt; 'human',
+    'schwarz' =&gt; 'robot',
+    'zaidou'  =&gt; 'saint',
+];
+</pre>
+<p>後日注記：PHPでは、添字配列と連想配列（ハッシュ）は同じものとして扱われる。よって、キーのない配列要素を混ぜることもできる。また、添字配列でなくても順番は保持される。</p>
+
+<h2>多次元配列</h2>
+<p>PHPでは、多次元配列は配列の中に配列を入れ込めば実現できる。$a[0][0]のようにアクセスできる。</p>
+<p>また、連想配列を要素に持つ連想配列$namesがあった場合、</p>
+<pre class="prettyprint">
+&lt;?php
+$names = array(
+    'assy'    =&gt; array('age' =&gt; 31, 'count' =&gt; 9,),
+    'schwarz' =&gt; array('age' =&gt; 27, 'count' =&gt; 1,),
+    'zaidou'  =&gt; array('age' =&gt; 50, 'count' =&gt; 2,),
+);
+
+foreach ($names as $n =&gt; $v) {
+    echo "$n は {$v['age']} 歳で {$v['count']} 人です", PHP_EOL;
+}
+</pre>
+<p>のようにアクセスすることもできる。</p>
+<p>PHPのecho()では、変数名と文字列を区別するために{}を使います。詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/glaytomohiko/items/40000ea1932fd2120f6e">【PHP】echo での{} の使われ道 ＋ 文字列結合 - Qiita</a></li>
+</ul>
+
+<h2>条件分岐</h2>
+<p>if～elsif～else。条件式が真である場合と偽である場合に別々の処理を実行する。</p>
+<pre>
+if (1つ目の条件式) {
+    1つ目の条件式が真の場合に実行される処理
+} elsif (2つ目の条件式) {
+    2つ目の条件式が真の場合に実行される処理
+} else {
+    すべての条件式が偽の場合に実行される処理
+}
+</pre>
+<p>後日注記：PHPの特徴として、PHPモードとHTMLモードを行き来しても、論理的な制御フローは維持される。そのため、以下のようなコードを書くことができる。</p>
+<pre class="prettyprint">
+&lt;?php
+if (条件式) {
+?&gt;
+&lt;p&gt;条件式が真の場合に表示される&lt;/p&gt;
+&lt;?php
+} else {
+?&gt;
+&lt;p&gt;条件式が偽の場合に表示される&lt;/p&gt;
+&lt;?php
+}
+?&gt;
+</pre>
+<p>（詳しくは<a href="https://www.php.net/manual/ja/tutorial.useful.php">実用的な例 - PHPマニュアル</a>が参考になる。）</p>
+<p>後日注記：また、{}を使った場合に「どのカッコがどのカッコに対応しているのか」が、このようなHTMLに対する埋め込みだと分かりづらくなる。このような時は{}の代わりに:（コロン）とendif;やendfor;やendwhile;などを使うことができる。</p>
+<pre class="prettyprint">
+&lt;?php if (条件式): ?&gt;
+
+&lt;p&gt;条件式が真の場合に表示される&lt;/p&gt;
+
+&lt;?php else: ?&gt;
+
+&lt;p&gt;条件式が偽の場合に表示される&lt;/p&gt;
+
+&lt;?php endif; ?&gt;
+</pre>
+<p>（詳しくは<a href="https://www.php.net/manual/ja/control-structures.alternative-syntax.php">制御構造に関する別の構文 - PHPマニュアル</a>が参考になる。）</p>
+<p><a href="structured_programming.html">構造化プログラミング</a>も参照のこと。</p>
+
+<h2>ループ</h2>
+<p>while。条件式が真である間繰り返す。</p>
+<pre>
+while (条件式) {
+    条件式が真である間繰り返す処理
+}
+</pre>
+<p>do-while。whileと同様だが、最初の一回目は必ず実行される。</p>
+<pre>
+do {
+    条件式が真である間繰り返す処理
+} while (条件式);
+</pre>
+<p>for。C言語のfor文と同様、カウントと条件の比較に関連する部分をひとつの場所に書ける。</p>
+<pre>
+for (インデックス変数の初期化を行う式; 条件式; 繰り返しが毎回終わる度に実行される処理) {
+    条件式が真である間繰り返す処理
+}
+</pre>
+<p>foreach。Javaなどの拡張for文と同様、シーケンス（連続したデータ構造）の要素をひとつひとつ取り出しながら反復処理を行う。</p>
+<pre>
+foreach (反復参照可能なシーケンス as 要素) {
+    要素ごとに実行される処理
+}
+</pre>
+<p>foreachでは現在のキーを取得することもできる。</p>
+<pre>
+foreach (反復参照可能なシーケンス as キー =&gt; 要素) {
+    キーと要素ごとに実行される処理
+}
+</pre>
+<p>foreachでは、参照を用いることで、要素を一時的な変数にコピーするのではなく、元の要素を書き換えることができる。</p>
+<pre>
+foreach (反復参照可能なシーケンス as &要素) {
+    要素ごとに実行される処理
+}
+</pre>
+<p>参照を使った例：</p>
+<pre class="prettyprint">
+&lt;?php
+$people_types = array(
+    'assy'    =&gt; 'human',
+    'schwarz' =&gt; 'robot',
+    'zaidou'  =&gt; 'saint',
+);
+
+foreach ($people_types as &$t) {
+    $t = 'character';
+}
+
+var_dump($people_types);    // すべての要素がcharacterになっている
+</pre>
+<p>後日注記：また、ほかの言語にあるように、break文（繰り返しから抜ける）やcontinue文（今回の繰り返しをスキップして次の繰り返しを行う）を使うことができる。</p>
+<ul>
+<li><a href="https://uxmilk.jp/13355">PHPのbreak文とcontinue文の使い方 | UX MILK</a></li>
+</ul>
+
+<h2>関数</h2>
+<p>関数の例：
+<pre class="prettyprint">
+&lt;?php
+function ave2($x, $y) {
+    return ($x + $y) / 2;
+}
+
+$z = ave2(4, 12);
+</pre>
+<p>後日注記：引数によって関数に値を渡し、関数からreturnによって値を返すことができる。ただし、引数に与える値や返す値の型を静的に明記する必要はない。</p>
+<p>後日注記：もし、PHPに型宣言が必要だと考えるなら、PHPの最近のバージョンでは型宣言を関数やクラスに記述できる。</p>
+<pre class="prettyprint">
+&lt;?php
+declare(strict_types=1);
+
+function ave2(float $x, float $y): float {
+    return ($x + $y) / 2;
+}
+
+$z = ave2(4.5, 12.0);
+</pre>
+<p>強い型付けを有効にするためにstrict_types=1をdeclare()命令で設定する必要がある。</p>
+<p>詳しくは以下が参考になります。</p>
+<ul>
+<li><a href="https://www.php.net/manual/ja/language.types.declarations.php">型宣言 - PHPマニュアル</a></li>
+<li><a href="https://qiita.com/minato-naka/items/cc9da5fc1bc8cc4240a8">PHPで型を意識し安全なプログラムを書く - Qiita</a></li>
+</ul>
+<p><a href="function.html">関数</a>も参照のこと。</p>
+
+<h2>コールバック関数と可変関数</h2>
+<p>コールバック関数と可変関数は、関数に対して関数名を引数に指定して呼び出すことで、関数の中から関数を呼び出す仕組み。</p>
+<p>関数の中で、さまざまな場所から場合によって異なる関数を呼び出すことができる。</p>
+<p>コールバック関数は、たとえば$arが配列だったとして、</p>
+<pre class="prettyprint">
+array_map('intval', $ar);
+</pre>
+<p>のようにする。この場合、変数を数値型に変換するintval()関数を、array_map()を使って配列$arの全要素に適用している。</p>
+<p>たとえば、文字列をexplode()で分割して配列に格納し、それを数値に変換するには以下のようにします。</p>
+<pre class="prettyprint">
+$str = "1:2:3:4:5";
+$ar = explode(':', $str);
+array_map('intval', $ar);
+</pre>
+<p>explode()の使い方については以下が参考になります。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/23396">【PHP入門】文字列に関する操作まとめ(分割/文字数) | 侍エンジニアブログ</a></li>
+</ul>
+<p>array_map()に与えるのはPHPに用意されている関数だけではなく、自分で作った関数であってもよい。</p>
+<pre class="prettyprint">
+function multiple3($n) {
+    return $n * 3;
+}
+
+$ar = [1, 2, 3, 4, 5];
+array_map('multiple3', $ar);
+</pre>
+<p>また、関数func_call_func()の引数が$arg_funcだったとして、func_call_func()の中で$arg_func();とし、関数hoge_func()を定義し、</p>
+<pre class="prettyprint">
+function func_call_func($arg_func) {
+    for ($i = 0; $i &lt; 10; $i++) {
+        $arg_func($i);
+    }
+}
+
+function hoge_func($x) {
+    echo '&lt;p&gt;' . $x . '&lt;/p&gt;', PHP_EOL;
+}
+
+func_call_func('hoge_func');
+</pre>
+<p>とこの関数を呼び出すことで、関数hoge_func()を関数func_call_func()の内部の$arg_func();から呼び出すことができる。これを可変関数と言う。</p>
+<p><a href="functional_programming.html">関数型プログラミング</a>も参照のこと。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
+
+<h2>無名関数</h2>
+<p>また、これら以外にも無名関数と呼ばれる機能もある。無名関数はクロージャのように使うこともできる。</p>
+<p>後日注記：たとえば、無名関数をコールバック関数に使った関数は、以下のようになる。</p>
+<pre class="prettyprint">
+function func_call_loop($callback, $end) {
+    for ($i = 0; $i &lt; $end; $i++) {
+        $callback($i);
+    }
+}
+
+func_call_loop(function($n) { echo '&lt;p&gt;' . $n . '&lt;/p&gt;', PHP_EOL; }, 20);
+</pre>
+<p>array_map()に無名関数を指定することもできる。</p>
+<pre class="prettyprint">
+$ar = [1, 2, 3, 4, 5];
+array_map(function($n) { return $n * 3; }, $ar);
+</pre>
+<ul>
+<li><a href="http://taustation.com/php-function-anonymus-function-closure-callback/">PHP &#8211; 関数 &#8211; 無名関数／クロージャ―／コールバック &#8211; TauStation</a></li>
+</ul>
+<p><a href="closure.html">クロージャ・無名関数・関数オブジェクト</a>を参照のこと。</p>
+
+<h2>requireとrequire_once</h2>
+<p>require()は、別のファイルに書かれたPHPスクリプトを読み込むために使う。一度しか読む必要がない場合はrequire_once()が使える。</p>
+<p>また、同様の関数にinclude()とinclude_once()がある。違いは、include()を使った場合、ファイルが存在しなくても、警告は発せられるが実行は継続される。</p>
+<p>後日注記：実際のPHPプログラミングでは、共通の関数やクラスの定義を読み込むためにrequire()を使うほか、データベース用のユーザー名とパスワードなど、どのファイルからも共通して使われる「共通のデータ」を宣言して読み込むために、require()やrequire_once()を使ってそのデータが保持されているPHPファイルを読み込みます。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>と<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>を参考に執筆しました。）</p>
+
+<h2>コメント</h2>
+<p>PHPでは、Perl風の一行コメントである#と、C/C++風の一行コメントである//と、複数行のブロックコメントである/* ～ */が利用できる。</p>
+<p>JavaのJavadocと同様、PHPでもDocCommentのための/** ～ */という形式のコメントが利用できる。</p>
+<p>HTMLのコメントである&lt;!-- ～ --&gt;とごっちゃにならないように注意しよう。</p>
+<ul>
+<li><a href="https://wepicks.net/phpref-comment/">PHPの＜コメント3種類＞1行と複数行のコメントアウト | WEPICKS!</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.03</p>
+</div>
+
+<h1>オブジェクト指向</h1>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
+<h2>PHPでオブジェクト指向</h2>
+<p>PHPでオブジェクト指向プログラミングを行うことは可能だ。クラスやオブジェクトも完備され、標準でさまざまな機能が提供されており、C++/Javaに負けない高度なオブジェクト指向機能を使うことができる。</p>
+<p>オブジェクトの作成には「new」演算子を使い、メソッドの呼び出しには-&gt;を使う。たとえばデータベースへのアクセスにはPDOクラスのオブジェクトを作って行う。</p>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>PHPのオブジェクト指向の詳細</h2>
+<p>PHPのオブジェクト指向の記述は、JavaやC++とよく似ている。</p>
+<p>まず、クラスはclass文で記述する。extendsをつけることで、既にあるクラスを継承し、機能を追加したり、メソッドをオーバーライドして機能を上書きすることができる。</p>
+<pre class="prettyprint">
+&lt;?php
+class Cat
+{
+    public function mew()
+    {
+        echo 'にゃーん', PHP_EOL;
+    }
+}
+</pre>
+<p>インターフェースはinterface文で記述する。implementsをつけることで、既にあるインターフェースを実装し、共通のインターフェースからそのクラスを使うことができる。インターフェースは「implements Reader, Writer」のように複数のインターフェースを実装できる。</p>
+<p>クラスのインスタンスはnewで生成し、-&gt;でメソッドを実行できる。</p>
+<pre class="prettyprint">
+$kuro = new Cat();
+$kuro-&gt;mew();
+</pre>
+<p>アクセス修飾子は、public（公開）, private（非公開）, protected（自らあるいは継承したクラスオンリー）がある。</p>
+<p>オブジェクトのインスタンスは参照型変数として扱われるため、そのままコピーすると同じオブジェクトを参照する別名の変数となる。これはJavaと同じ。明示的に複製したければcloneを使う。</p>
+<pre class="prettyprint">
+$shiro = clone $kuro;
+</pre>
+<p>親クラスのメソッドやプロパティを子クラスに同じ名前で定義すると、オーバーライドできる。</p>
+<p>抽象クラスはabstractで宣言する。親クラスで抽象的な「とっかかり」となる共通部分を作っておいて、詳細は派生クラスで実装することができる。</p>
+<p>また、PHPにはマジックメソッドというものがあり、これはオブジェクトを特定の状況で使う時に自動的に呼び出されるメソッドで、フックとして使うことができる。</p>
+<p>たとえば、__toString()メソッドは、文字列型へキャストしようとした時に呼び出される。この動作を上書き（オーバーロード）することで、デフォルトの動作を書き換えることができる。</p>
+<p>コンストラクタの__constructやデストラクタの__destructは、マジックメソッドの一種として実現されている。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参照のこと。）</p>
+
+<h2>__invoke()</h2>
+<p>マジックメソッドの面白い例として、__invoke()メソッドがある。これはオブジェクトのインスタンスを関数のように実行することのできるメソッド。たとえば、</p>
+<pre class="prettyprint">
+&lt;?php
+class Cat
+{
+    public function __invoke($x)
+    {
+        echo $x, PHP_EOL;
+    }
+}
+
+$kuro = new Cat();
+$kuro('mew');
+</pre>
+<p>のように実行できる。また、array_map()のような関数の引数にこのオブジェクトを渡すこともできる。</p>
+
+<h2>例外</h2>
+<p>例外は、</p>
+<pre>
+throw new 例外のクラス名();
+</pre>
+<p>で送出し、</p>
+<pre>
+try { 例外が発生するかもしれない処理 } catch (例外のクラス名 変数名) { 例外が発生した場合の処理 }
+</pre>
+<p>で処理する。</p>
+
+<h2>参照</h2>
+<p>参照は以下のようになる：</p>
+<pre class="prettyprint">
+&lt;?php
+
+$x = 100;
+$y =& $x;
+</pre>
+<p>$xと$yは同じ領域を参照する。</p>
+<pre class="prettyprint">
+$y = 200;
+</pre>
+<p>とした場合、$xも200に変更される。</p>
+<p>後日注記：PHPではオブジェクトのインスタンス変数は特に何もしなくても参照型として扱われるため、関数の外で宣言されたオブジェクトを引数に与えた場合、関数の中から操作できる。=で代入しても、同じ場所を指す参照となるだけで複製はされない。明示的に複製するにはcloneが必要。</p>
+
+<h2>var_dump()</h2>
+<p>var_dump()は変数の詳細をダンプして表示する関数。たとえばbool型の変数などでecho()文を用いると空白しか表示されないなどといった時に、変数の値の詳細な確認のために使うことができる。</p>
+
+<h2>エラーレポーティング</h2>
+<p>PHPのエラーレポーティングは、E_PARSE（文法の間違い）、E_ERROR（実行時の致命的エラー）、E_WARNING（警告）、E_NOTICE（重要度の低い警告）、E_DEPRECATED（廃止予定の古い機能）があり、これらすべてを指定するのがE_ALL。</p>
+<p>このうち、実行されずに終了するのがE_PARSE、実行中にその場で終了するのがE_ERROR。E_WARNINGとE_NOTICEは警告は出されるものの実行が継続される。</p>
+<p>また、これらに加えて、非推奨な記述が使われている時にE_STRICTを設定できる。</p>
+<p>エラーレベルは、php.iniでランタイムレベルで制御することもできるし、error_reporting()関数でプログラムレベルで制御することもできる。エラーレベルはビット演算子を用いたフラグによって表現する。</p>
+<p>ちなみにエラーを表示するかどうかはdisplay_errorsで制御できる。エラーを表示しない場合でも、log_errorsを設定することで、エラーをログに取ることもできる。ログのファイル名はerror_logで設定する。本番環境ではエラーを表示せずログに記録することが推奨される。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a></li>
+</ul>
+
+<h1>文字列・ファイル処理・配列</h1>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参考に執筆しました。）</p>
+
+<h2>文字列の処理</h2>
+<p>文字列の処理は、printf(), sprintf(), htmlspecialchars(), nl2br(), implode(), explode()などを使うことが多い。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>printf()</td><td>変数をフォーマットして出力する。</td></tr>
+<tr><td>sprintf()</td><td>出力せずにフォーマットする。</td></tr>
+<tr><td>htmlspecialchars()</td><td>HTMLのタグを文字に変換する。</td></tr>
+<tr><td>nl2br()</td><td>改行をbrタグにする。</td></tr>
+<tr><td>implode()</td><td>配列を連結して文字列にする。</td></tr>
+<tr><td>explode()</td><td>文字列を分割して配列にする。</td></tr>
+</table>
+<p>ほかにも、さまざまな文字列処理の関数がある。文字列系の関数にはstr*あるいはstr_*という接頭辞が付いており、さまざまな文字列処理に活用できる。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="http://php.net/manual/ja/book.strings.php">PHP: 文字列 - Manual</a></li>
+</ul>
+
+<h2>正規表現の関数</h2>
+<p>PHPではPerl互換の正規表現によるパターンマッチングを行うことができる。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</td><th>説明</th></tr>
+<tr><td>preg_match()</td><td>正規表現でマッチング。最初の一回だけマッチングを行う。</td></tr>
+<tr><td>preg_match_all()</td><td>正規表現でマッチング。すべての箇所にマッチングを行う。</td></tr>
+<tr><td>preg_replace()</td><td>置換。</td></tr>
+<tr><td>preg_split()</td><td>分割。</td></tr>
+</table>
+<p>文字列の検索は正規表現を使わなくても、strpos()関数を使った方が効率的なので、正規表現を使わなくてもいい時は文字列系の関数を使おう。</p>
+<p><a href="../linux/regex.html">正規表現</a>も参照のこと。</p>
+
+<h2>ファイル入出力の基本</h2>
+<p>C言語のラッパー関数として、fopen(), fread(), fwrite(), fclose()などを使うことができる。</p>
+<p>file_get_contents()関数を使うと、ファイルの内容を一度にすべて読み込める。また、file_put_contents()関数を使うと書き込みができる。</p>
+<p>SplFileObjectクラスはオブジェクト指向のファイル操作用のクラスで、fopen()系の関数をメンバに持つ。foreach文で1行ごとにファイル読み込みを行うためのイテレータとしても利用できる。</p>
+<ul>
+<li><a href="https://www.php.net/manual/ja/class.splfileobject.php">PHP: SplFileObject - Manual</a></li>
+</ul>
+<p>このほか、ファイル処理の関数としてmkdir(), rmdir(), rename(), copy(), unlink()などがある。</p>
+<p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+<h2>glob()関数</h2>
+<p>ファイル一覧を取得するには、C言語と同様のglob()関数を用いると便利。たとえば以下のようになる：</p>
+<pre class="prettyprint">
+glob('hoge_dir/*.txt')
+</pre>
+
+<h2>配列のAPI</h2>
+<p>PHPには、多数の配列関連のAPIが標準で用意されている。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>array_shift()<br>array_unshift()<br>array_push()<br>array_pop()</td><td>配列をスタックやキューのように扱う。<br>array_shift()とarray_unshift()は先頭に要素を取り出し・追加。<br>array_push()とarray_pop()は末尾に要素を追加・取り出し。</td></tr>
+<tr><td>sort()/rsort()<br>ksort()/krsort()<br>asort()/arsort()<br>usort()/uasort()/uksort()</td><td>昇順あるいは降順のソート。<br>k*はキーのソート。<br>a*はキーとの結合関係を維持。<br>u*はユーザー定義関数を使用。</td><tr>
+<tr><td>array_reverse()</td><td>逆順に並べ替え。</td><tr>
+<tr><td>shuffle()</td><td>ランダムに並べ替え。</td><tr>
+<tr><td>count()</td><td>配列の要素数をカウント。</td><tr>
+<tr><td>in_array()</td><td>配列の中に値を含む要素が存在するかを確認。</td><tr>
+<tr><td>array_search()</td><td>値を検索して見つかった要素のキーを取得。</td><tr>
+<tr><td>array_fill()</td><td>配列のすべての要素を同じ値で埋める。</td><tr>
+<tr><td>array_map()<br>array_filter()</td><td>コールバック関数を指定して配列をマップあるいはフィルタリング。</td><tr>
+<tr><td>array_keys()</td><td>配列のキーだけを取り出す。</td><tr>
+<tr><td>array_merge()</td><td>配列を結合。</td><tr>
+<tr><td>array_slice()</td><td>配列のスライスを切り出す。</td><tr>
+<tr><td>array_splice()</td><td>要素を置き換え（削除して追加）。</td><tr>
+</table>
+<p>詳しくは以下のページ・書籍が参考になる。</p>
+<ul>
+<li><a href="https://wepicks.net/phpref-array/">PHPの配列をマスターしよう！【基本から初心者向け】 | WEPICKS!</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a></li>
+</ul>
+<p><a href="data_structure_list.html">配列とリストとハッシュ</a>や<a href="data_structure_stack.html">スタックとキュー</a>も参照のこと。</p>
+
+<h1>画像処理</h1>
+<h2>GDライブラリ</h2>
+<p>PHP標準のGD拡張モジュールを使うことで、PHPで画像を動的に作成したり、画像を操作したりできる。</p>
+<p>簡単な画像処理の他、投稿された画像のリサイズなどにも使うことができる。</p>
+<ul>
+<li><a href="https://www.php.net/manual/ja/book.image.php">PHP: GD - Manual</a></li>
+<li><a href="http://bashalog.c-brains.jp/17/09/15-150000.php">PHPで画像を動的に生成する【GD編】 | バシャログ。</a></li>
+<li><a href="http://kyasper.com/php-tips/">PHP GDライブラリで画像加工をしてみる | 福島県郡山市のホームページ制作、Web制作　Kyasper Web Design キャスパーウェブデザイン</a></li>
+<li><a href="https://qiita.com/laughool/items/8ccdb6d51dceea5fb593">phpのGDライブラリを試してみました！ - Qiita</a></li>
+<li><a href="https://www.sejuku.net/blog/74338">PHPで画像をリサイズしよう！表示・保存方法もわかる | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+
+<h2>Imagick</h2>
+<p>ImagickはImageMagickをPHPで使用するための画像処理ライブラリ。</p>
+<ul>
+<li><a href="https://www.php.net/manual/ja/book.imagick.php">PHP: ImageMagick - Manual</a></li>
+</ul>
+
+<h1>関数一覧</h1>
+<h2>PHPの主な関数の一覧</h2>
+<p>主な関数の一覧は以下が参考になる。</p>
+<ul>
+<li><a href="https://php-archive.net/php/essential-php-functions/">[PHP]最低限覚えておきたい必須関数一覧 | PHP Archive</a></li>
+</ul>
+
+<h2>リファレンス</h2>
+<p>PHPのリファレンスは以下から参照できます。</p>
+<ul>
+<li><a href="http://php.net/manual/ja/langref.php">PHP: 言語リファレンス - Manual</a></li>
+<li><a href="http://php.net/manual/ja/funcref.php">PHP: 関数リファレンス - Manual</a></li>
+<li><a href="http://php.net/manual/ja/index.php">PHP: PHP マニュアル - Manual</a></li>
+</ul>
+<p>以下は個人サイト。</p>
+<ul>
+<li><a href="https://webkaru.net/php/function-reference/">PHP入門 - PHP関数リファレンス - Webkaru</a></li>
+<li><a href="http://alphasis.info/php/">PHP リファレンス - アルファシス</a></li>
+<li><a href="http://www.php-ref.com/">忘れっぽいエンジニアのＰＨＰリファレンス</a></li>
+<li><a href="http://php-beginner.com/reference/">PHPスクリプト講座：PHP言語リファレンス | そふぃのphp入門</a></li>
+<li><a href="http://php-beginner.com/function/">PHP関数講座：PHP関数リファレンス | そふぃのphp入門</a></li>
+</ul>
+
+<h1>ライブラリ集</h1>
+<h2>PEAR</h2>
+<p>PEARはPHPのライブラリ。</p>
+<ul>
+<li><a href="http://www.phpbook.jp/pear/">PEAR入門 - PHPBook</a></li>
+</ul>
+
+<h2>PEAR::Auth</h2>
+<p>PEARの例として、たとえば認証機能を使えるようになるPEAR::Authなどが存在する。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/pear/pear_auth/">ユーザー認証(PEAR::Auth) - PEAR入門</a></li>
+</ul>
+
+<h1>PHPの設定</h1>
+<h2>php.ini</h2>
+<p>php.iniはPHPの設定ファイル。Debianでは/etc/php5/cli/php.ini、CentOSでは/etc/php.iniにある。</p>
+<p>特に文字コードをUTF-8に設定し、mbstring.*の各種設定で日本語マルチバイト環境とUTF-8の設定をしよう。</p>
+<!--<p>具体例は<a href="../network/apache.html">Apacheの世界観</a>にあります。</p>-->
+<ul>
+<li><a href="https://webkaru.net/php/php-ini/">php.ini の設定 - PHP入門 - Webkaru</a></li>
+</ul>
+
+<h2>PHPの設定ファイルを編集</h2>
+<p>（書籍「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考にさせていただきました。）</p>
+<p>PHPの設定ファイルで、文字コードをUTF-8に設定しましょう。このためには、php.iniを変更します。</p>
+<p>以下はphp.iniの例。</p>
+<pre>
+default_charset = "UTF-8"
+mbstring.language = Japanese
+mbstring.internal_encoding = UTF-8
+mbstring.http_input = pass
+mbstring.http_output = UTF8
+mbstring.encoding_translation = Off
+mbstring.substiture_character = none;
+mbstring.func_overload = 0
+</pre>
+
+<h2>php-fpmとmod_php</h2>
+<p>mod_phpは従来からのApacheのPHPモジュール。</p>
+<p>FPMはFastCGI Process Managerのことで、PHPをFastCGIで動かすことのできる実装のひとつ。</p>
+<ul>
+<li><a href="https://www.php.net/manual/ja/install.fpm.php">PHP: FastCGI Process Manager (FPM) - Manual</a></li>
+</ul>
+<p>ApacheでPHPを動かす場合に、php-fpmとmod_phpでどのように違うかは以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/nikirom/items/7668eb1aa2db291df53f">apache2.4のphp-fpmとmod_phpの検証 - Qiita</a></li>
+</ul>
+<p>FastCGIについて詳しくは<a href="../network/fastcgi.html">FastCGIの世界観</a>を参照のこと。</p>
+
+
+<h1>PHPによる主なソフトウェア</h1>
+<h2>MediaWiki</h2>
+<p>Wikipediaで使われているWikiエンジン。</p>
+<p><a href="../services/wiki.html">Wiki</a>も参照のこと。</p>
+
+<h2>WordPress</h2>
+<p>Webサイト作成フレームワーク。</p>
+<p><a href="../network/wordpress.html">WordPress</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

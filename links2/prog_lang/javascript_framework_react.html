@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>React関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>Reactの世界観</h1>
+<p>Reactによるプログラミングに関する世界観です。</p>
+<p><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a>を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>React</h1>
+<h2>React</h2>
+<p>Facebookが中心となって開発されているJavaScriptフレームワーク。Angularと同様、コンポーネント指向だが、よりシンプルで、ビュー単体として設計されている。</p>
+<p>JavaScriptの中に直接HTMLライクなタグを記述できる「JSX」という技術を採用している。このためコードはBabelと呼ばれるトランスコンパイラ言語で記述する。Reactを用いたコンポーネントの作成とJSXを組み合わせることにより、JavaScriptにおいて新しいHTMLタグを自由に作成できる。</p>
+<p>Reactを使って作れるのは、単なるタグだけではなくアプリケーション全般。たとえば、ブラウザ上で動作する電卓、カレンダー、TODOアプリ、プロジェクト管理ツール、ゲームのようなものを作ることができる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+<li><a href="https://cloudear.jp/blog/?p=1545">Facebookが作ったJavaScriptライブラリ、Reactの威力を体感する - 技術ブログ | 株式会社クラウディア</a></li>
+<li><a href="https://qiita.com/rgbkids/items/8ec309d1bf5e203d2b19">出来る限り短く説明するReact.js入門 - Qiita</a></li>
+</ul>
+<p><a href="../services/facebook.html">Facebook</a>も参照のこと。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=React">React - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>Reactの基本</h1>
+<h2>Reactのインストール</h2>
+<p>以下のようにnpmから導入できる。</p>
+<pre>
+npm install react
+</pre>
+<p>あるいは、CDNを利用することもできる。</p>
+<pre class="prettyprint">
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.5/babel.min.js"&gt;&lt;/script&gt;
+</pre>
+<p>あるいは、React公式のZIPファイルからbuildディレクトリの中にあるスクリプトのファイルをコピーして自分のWebサイト内のディレクトリに配置し、react.min.jsとreact-dom.min.jsを読み込むスクリプトタグを記述してもよい。</p>
+<p>後日注記：*.min.jsは圧縮済みのスクリプトファイルで、実際のリリースされるサービスに使う。これに対して*.jsは圧縮されていないスクリプトファイルで、ソースコードの内容を自分で読みたい場合に使う。babel.min.jsはReactには含まれていないがJSXのために必要なBabelというソフトウェア。</p>
+<p>詳しくは以下の書籍・ページを参照のこと。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+<li><a href="https://dev-k.hatenablog.com/entry/how-to-use-react-in-cdn-dev-k">React.js初心者におすすめ！CDNを使って簡単にReactプロジェクトを始めよう - deve.K&#39;s Programming Primer - プログラミング初心者のための入門ブログ</a></li>
+<li><a href="https://code-database.com/knowledges/106">【React.js】CDNを使ってReactを手軽に試す(React 入門) | Code Database</a></li>
+<li><a href="https://cdnjs.com/">cdnjs</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.25編集</p>
+</div>
+
+<h2>Reactの基本</h2>
+<p>Reactは画面表示だけのシンプルなフレームワークで、ビューしか存在しない。</p>
+<p>主要技術は、JSXとBabelによってHTMLタグをそのまま書けること、それからVirtual DOMという仮想的なDOMによりDOMを直接操作せず、更新部分だけをDOMで差分表示するため表示が高速になる。</p>
+<p>・スクリプトの言語にはtype="text/babel"を設定する。</p>
+<p>・基本のオブジェクトはReactオブジェクト。このオブジェクトから</p>
+<pre class="prettyprint">
+var HogeComponent = React.createClass({
+  displayName: 'hoge component',
+  render: function() {
+    return (
+      &lt;p&gt;My name is {this.props.name}.&lt;/p&gt;
+    );
+  }
+});
+
+ReactDOM.render(
+  &lt;HogeComponent name="Assy"/&gt;,
+  document.getElementById('hoge')
+);
+</pre>
+<p>とすることで、コンポーネントを作成する。</p>
+<p>・コンポーネント（たとえばHogeComponent）は基本的に、クラスをReact.createClass()で生成し、それをReactDOM.render()で表示する。React.createClass()の中にはfunctionも多数記述され、たとえば画面出力を行うrender()関数などを記述する。（後述する具体例にあるように、React.Componentを継承して派生クラスにすることでもコンポーネントを作成できる。）</p>
+<p>・ReactDOM.render()メソッドでレンダリングを行う。JSXにより、HTMLタグをそのまま記述できる。第一引数にはレンダリングの内容（たとえば&lt;HogeComponent/&gt;）、第二引数には表示するDOM（id="hoge"などに相当するDOM要素）を指定する。こうすると、&lt;div id="hoge"&gt;に&lt;HogeComponent/&gt;の内容が表示される。</p>
+<p>・{}で囲まれた中にはJavaScriptでの値を記述する。</p>
+<p>・propsを使うことで、コンポーネントに対して外部から値を渡すことができる。</p>
+<p>・このほか、React内で情報を状態として保持することのできるState（JavaScriptから画面への一方向のデータの受け渡しではなく、後ろにあるJavaScriptにデータを受け渡せる）や、ユーザーの操作に対応するイベント（onClickのようにonの後の一文字目を大文字にする）などの機能がある。</p>
+<p>詳しくは以下の書籍を参照のこと。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+</ul>
+
+<h2>Reactの具体例</h2>
+<p>以下はReactの具体例。</p>
+<pre class="prettyprint">
+&lt;h1&gt;あなたのお気に入り情報&lt;/h1&gt;
+&lt;div id="personal_information"&gt;&lt;/div&gt;
+
+&lt;script type="text/babel"&gt;
+class Favorites extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;p&gt;あなたの名前は{ this.props.name }さんです。&lt;/p&gt;
+        &lt;p&gt;あなたの好きなOSは{ this.props.favorite_os }です。&lt;/p&gt;
+        &lt;p&gt;あなたの好きなプログラミング言語は{ this.props.favorite_proglang }です。&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;Favorites name="Assy" favorite_os="Gentoo Linux" favorite_proglang="Delphi" /&gt;,
+  document.getElementById('personal_information')
+);
+&lt;/script&gt;
+</pre>
+<p>コンポーネントの中にコンポーネントを入れ込むこともできる。なので、</p>
+<pre class="prettyprint">
+class YourName extends React.Component {
+  render() {
+    return (
+      &lt;p&gt;あなたの名前は{ this.props.name }さんです。&lt;/p&gt;
+    );
+  }
+}
+
+class FavoriteOS extends React.Component {
+  render() {
+    return (
+      &lt;p&gt;あなたの好きなOSは{ this.props.favorite_os }です。&lt;/p&gt;
+    );
+  }
+}
+
+class FavoriteProglang extends React.Component {
+  render() {
+    return (
+      &lt;p&gt;あなたの好きなプログラミング言語は{ this.props.favorite_proglang }です。&lt;/p&gt;
+    );
+  }
+}
+
+class Favorites extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;YourName name={ this.props.name } /&gt;
+        &lt;FavoriteOS favorite_os={ this.props.favorite_os } /&gt;
+        &lt;FavoriteProglang favorite_proglang={ this.props.favorite_proglang } /&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+const root = ReactDOM.createRoot(document.getElementById('personal_information'));
+root.render(&lt;Favorites name="Assy" favorite_os="Gentoo Linux" favorite_proglang="Delphi" /&gt;);
+</pre>
+<p>のように書き、YourName, FavoriteOS, FavoriteProglangを別々のクラスとして定義することもできる。</p>
+<p>以上のコードは以下の書籍・ページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://ja.reactjs.org/">ja.ReactJS.org</a></li>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+<li><a href="https://techis.jp/guide/react/react_class">React クラスコンポーネント | テックアイエスガイド</a></li>
+</ul>
+<p>後日注記：createRoot()はReact18からの新しいレンダリングのための関数です。並列処理関連の機能のために使用します。今までの関数も動作します。</p>
+<ul>
+<li><a href="https://zenn.dev/nawomat/articles/f8be31b66bfc19">React18からはレンダリングにcreateRootを使おう - Zenn</a></li>
+<li><a href="https://chaika.hatenablog.com/entry/2022/05/24/083000">今更の React 18 ReactDOM の render の使い方が変わった - かもメモ</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.25編集</p>
+<p>2024.07.14編集</p>
+</div>
+
+<h2>Stateを使うと状態を保持できる</h2>
+<p>このほか、Stateを使うとその時の状態を保持することができる。</p>
+<p>PropsとStateを使うことで、さまざまなReactだけのアプリケーションが開発できる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+this.setState({
+  age: 18
+});
+</pre>
+<p>としたものを、</p>
+<pre class="prettyprint">
+&lt;p&gt;{ this.state.age }&lt;/p&gt;
+</pre>
+<p>のように使う。</p>
+<p>現在のStateの値を使って新しい値を設定する場合は、以下のようにする。</p>
+<pre class="prettyprint">
+this.setState((state) =&gt; ({
+  msg: 'Hello, ' + state.msg
+}));
+</pre>
+<p>後日注記：Stateを使うことで、「現在のReactアプリケーションが持つ状態」を保持・変更できる。そのため、電卓やTODOアプリのように、入力・操作した内容をStateに保管することで、さまざまなアプリケーションを制作できる。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://ja.reactjs.org/">ja.ReactJS.org</a></li>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+<li><a href="https://zenn.dev/web_tips/articles/c3851133f52d16">Reactの基礎【コンポーネント】 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.14編集</p>
+</div>
+
+<h2>イベントを使うとユーザーの操作に対応できる</h2>
+<p>また、これだけでは、ユーザーインターフェースの表示はできても、ユーザーからのクリックなどのイベントに対応することができない。</p>
+<p>そのため、イベントを用いてユーザーの操作に対応した処理を書くことができる。</p>
+<p>まず、イベントハンドラ関数を作る。これはReactのクラス定義の中にhandleOnClick()関数などを記述する。名前はイベント名のOnClickの前にhandleを付けるのが一般的。</p>
+<pre class="prettyprint">
+class FugaComponent extends React.Component {
+  handleOnClick(e) {
+    // ここでクリック時に行われる処理を書く
+  }
+}
+</pre>
+<p>次に、画面からこの関数を実行できるように、onClickイベントにこの関数を指定する。</p>
+<pre class="prettyprint">
+&lt;input type="button" value="クリックしてね" onClick={ this.handleOnClick } /&gt;
+</pre>
+<p>onClick以外にも、フォームが変更された時を意味するonChangeなどのイベントがある。</p>
+<p>こうすることで、ユーザーのイベントに対応したReactアプリケーションを記述できる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+class FugaComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { msg: 'Hello, Hoge!' };
+  }
+
+  handleOnClick(e) {
+    this.setState({ msg: 'Hello, Fuga!' });
+  };
+
+  render() {
+    return (
+      &lt;p&gt;{ this.state.msg }&lt;/p&gt;
+      &lt;button onClick={ this.handleOnClick }&gt;クリックしてね&lt;/button&gt;
+    );
+  }
+}
+</pre>
+<p>のようになる。</p>
+<p>詳しくは以下の書籍・ページを参照のこと。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+<li><a href="https://ja.reactjs.org/">ja.ReactJS.org</a></li>
+<li><a href="https://qiita.com/itinerant_programmer/items/0d5303394da8e6c5310b">React関数命名:「on」と「handle」の理解と適切な使い方 #JavaScript - Qiita</a></li>
+<li><a href="https://qiita.com/RitaChan/items/bd38ec2666d312872d10">ReactのsetStateについて整理してみた #React - Qiita</a></li>
+<li><a href="https://zenn.dev/web_tips/articles/c3851133f52d16">Reactの基礎【コンポーネント】 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.25編集</p>
+<p>2024.07.14編集</p>
+</div>
+
+<h2>スタイルの適用</h2>
+<p>Reactでは、タグに</p>
+<pre class="prettyprint">
+&lt;div className="hoge"&gt;
+</pre>
+<p>のようにclassNameでCSSのクラスを指定します。</p>
+<p>あるいは、直接スタイルを指定するには</p>
+<pre class="prettyprint">
+&lt;div style={{ textAlign: "center" }}&gt;
+</pre>
+<p>のように二重波カッコ{{}}で指定します。text-alignではなくtextAlignと書くことに注意。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/kuniken/items/b06de893c22f33499a22">今からはじめるReact.js〜スタイルの適用〜 - Qiita</a></li>
+</ul>
+
+<h2>拡張子の.tsと.tsxの違い</h2>
+<p>ファイルの拡張子として、.tsファイルはJSXを含まない純粋なTypeScriptファイル。これに対して.tsxはJSXを含むTypeScriptファイルである。</p>
+<ul>
+<li><a href="https://qiita.com/y-hira18/items/f67cfc45a70c7c25708a">【TypeScript】.ts拡張子と.tsx拡張子 #React - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.06.18</p>
+</div>
+
+<h2>JSONデータの読み込み</h2>
+<p>ReactでJSONデータを読み込むには、以下のようなページが参考になる。僕自身はやったことがないため分からないが、Web APIからJSONを読み込むこともたぶん可能だと思う。</p>
+<p>以下はローカル（サイト内）にJSONデータファイルがある場合の読み込み方法。</p>
+<ul>
+<li><a href="https://qiita.com/ozlee/items/cfd2d92d554497322b71">reactでjsonデータを取得した。 #React - Qiita</a></li>
+<li><a href="https://qiita.com/yokomoji12345/items/4256a902940c2e673392">React入門 - Part5 - jsonファイルの読み込み、表示 #TypeScript - Qiita</a></li>
+<li><a href="https://zenn.dev/ako/articles/be93960af741cb">ReactでJSONファイルのエクスポート、インポート機能の作成 - Zenn</a></li>
+</ul>
+<p>以下はAPIとしてJSONデータを読み込む方法。</p>
+<ul>
+<li><a href="https://qiita.com/bstyle6130/items/5e009182ab18266dcb08">【React】apiから jsonデータを取得してブラウザに表示する方法 #API - Qiita</a></li>
+<li><a href="https://devsakaso.com/react-get-json-external-api/">【React】外部API(JSON)を取得して表示する方法 | devsakaso &#8211; プログラミングの独学サイト</a></li>
+</ul>
+<p>以下はCData Connect Serverというサービスを使う方法。</p>
+<ul>
+<li><a href="https://www.cdata.com/jp/kb/tech/json-connect-react.rst">JSON データを使った動的なReact アプリケーションを作成する方法 - CData Software Japan</a></li>
+</ul>
+<p><a href="node_js_express.html">Express</a>や<a href="../db/firebase.html">Firebase</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.07.30</p>
+</div>
+
+<h1>Reactでできること</h1>
+<h2>柔軟性が高く簡単</h2>
+<p>Reactは、柔軟性が高く簡単である。たとえば、クラスを作成したり継承したりして作ったタグ（JSXタグ）は、HTMLのタグと同様に簡単に使える。Reactを用いたスクリプトの内部で、呼び出しや出力文字列などに自分で作ったタグを埋め込める。</p>
+<p>なので、タグをクラスで作り、そのタグをさまざまなところで柔軟に活用できる。</p>
+<p>また、JSXタグを作成するためのコンポーネントの作成方法と、stateやイベントを用いたイベント駆動による状態保持の方法、あるいは仮想DOMぐらいを覚えれば、簡単なアプリケーションは開発できる。またビューしか存在しないため、理解することがとても簡単である。</p>
+
+<h2>HTML直書きではできないことができる</h2>
+<p>ReactやVue.jsのようなJavaScriptフレームワークがなぜ便利なのか、それは「HTML直書きではできないことができる」からです。</p>
+<p>たとえば、変数を使ってさまざまな場所に同じ内容を記述したい場合や、一部分だけを変えて同じHTMLコードを複数の部分で使いまわしたい場合などに、ReactのようなJavaScriptフレームワークは、HTML直書きではできないことをスマートに実現できます。</p>
+<p>また、Reactのマスターになると、まるでデスクトップのGUIアプリケーションと遜色のない、メニューが飛び出したりボタンが動いたりといった記述も可能となります。</p>
+<p>テンプレートについても、内部でStateで状態を保持しながら、たくさんのHTMLの記述を関数やクラスを用いてプログラマブルに操作することもできます。</p>
+<p>また、フロントエンドで完結するのではなく、Web APIを用いてバックエンドと連携すれば、掲示板やSNSをデータベースサーバと通信して作ることもできます。これはRuby on RailsのようなMVCフレームワークのビューの部分だけをフロントエンドのJavaScriptで行う感覚です。</p>
+
+<h2>ダイナミックに作成できるテンプレート</h2>
+<p>Reactについて言えば、タグを作成するというよりも、ダイナミックに作成できるテンプレートであると思います。</p>
+<p>テンプレートをさまざまなHTMLの集合体であるとした上で、ダイナミックにそのHTMLの要素や属性やスタイルを変えたり、さまざまなイベント処理で操作したり、内部で状態を保持したり、状態を場合によって書き換えたりする、ということが、JavaScriptでプログラマブルにできるシステムではないかと思います。テンプレートの各コンポーネントは単独で使うだけではなく、まるで部品と部品を組み合わせて機械を作るように、複数組み合わせて使うこともできます。</p>
+<p>Reactの優れた点は、JavaScriptとHTML/CSSという技術の長所を活かしていることだと思います。テンプレートは単にHTMLの集合体を返すだけではなく、JavaScriptを用いてダイナミックかつプログラマブルに作成できます。このため、たとえばGoogleの作るWebサービス（オンライン地図など）のような、複雑なWebサイトを簡単に作成することができます。</p>
+<p>Ajaxも使われているため、GUIアプリと遜色のないアプリをWebブラウザ上で作ることができます。Firebaseなどを使えば、Railsのようなバックエンドフレームワークも必要なく、仮想サーバのOSの管理やメンテナンスにもコストがかかりません。とても「楽」です。楽にWebアプリを作り、迅速に提供できると言えます。</p>
+<p>ただし、僕自身、Reactというものがなんであるか、まだきちんと分かっていません。なので、僕の言っていることを盲信せず、以下のような書籍を読むことをおすすめします。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.09</p>
+</div>
+
+<h2>UIを作成するためのフレームワーク</h2>
+<p>Reactは、UIを作成するためのフレームワークです。</p>
+<p>Reactを使うことで、特定の目的を持った、表示や操作や設定のための高度で複雑なUIを、JavaScriptを用いて作成できます。</p>
+<p>具体的な例は、以下のようなリンク先が参考になります。</p>
+<ul>
+<li><a href="https://wk-partners.co.jp/homepage/blog/hpseisaku/javascript/react-start/">初めてのReact「入門編」導入から基本まで〜TODOアプリを作ってを学ぼう！ | 株式会社ウェブ企画パートナーズ</a></li>
+</ul>
+<p>このように、HTMLやCSSやJavaScriptだけでは作成が困難あるいは面倒になる高度で複雑なUIを、Reactを用いることで比較的簡単に作成できます。</p>
+<div class="edit_date">
+<p>2023.06.21</p>
+</div>
+
+<h1>Reactの周辺技術</h1>
+<h2>React Router</h2>
+<p>React RouterはReactでルーティングを行う技術のこと。</p>
+<ul>
+<li><a href="https://zenn.dev/coji/articles/react-router-v7-internal-flow">React Router v7 の内部構造を探る：リクエストからレンダリングまでの道のり - Zenn</a></li>
+<li><a href="https://zenn.dev/takaya39/articles/4669c3fd1c7f04">React Routerのルーティング実装 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.13</p>
+</div>
+
+<h2>Next.js</h2>
+<p>Next.jsはReactをベースにしたフレームワーク。単独でReactを使うよりも、Next.jsを使うことのほうが多い。</p>
+<p><a href="javascript_framework_next_js.html">Next.js</a>も参照のこと。</p>
+
+<h2>Flux</h2>
+<p>Facebook社が提唱する、クライアントサイドの設計の考え方。単方向のデータフローで状態管理を行う。</p>
+<ul>
+<li><a href="https://codezine.jp/article/detail/10751">アプリの状態管理を安全に行うためのFluxとRedux (1/3)：CodeZine（コードジン）</a></li>
+</ul>
+
+<h2>Redux</h2>
+<p>状態管理のためのフレームワーク。Fluxの考え方をベースとしている。</p>
+<p><a href="state.html">状態</a>も参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/kitagawamac/items/49a1f03445b19cf407b7">Redux入門【ダイジェスト版】10分で理解するReduxの基礎 - Qiita</a></li>
+</ul>
+
+<h2>React Native</h2>
+<p>React Nativeはスマホ向けのアプリ開発技術で、JavaScriptを用いてスマホアプリを開発することができる。Reactと同様Facebookが開発した。</p>
+<ul>
+<li><a href="https://udemy.benesse.co.jp/development/app/react-native.html">【入門編】React Nativeとは？メリット・デメリット…｜Udemy メディア</a></li>
+</ul>
+<p>以下はReact NativeからREST APIを使ってJSONデータを読み込む方法について。</p>
+<ul>
+<li><a href="https://zenn.dev/joo_hashi/articles/5046551dfff2df">ReactNativeでREST APIからデータを取得する - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.30編集</p>
+</div>
+
+<h2>RailsやDjangoと組み合わせて使う</h2>
+<p>Reactは、RailsやDjangoと組み合わせて使うこともできる。この場合Next.jsのサーバ機能を使わず、ReactをRailsやDjangoのサーバ機能とともに使用する。</p>
+<p>RailsでReactを使う場合、react-railsというgemがあるので、それを導入すれば簡単に利用できる。</p>
+<ul>
+<li><a href="https://udemy.benesse.co.jp/development/app/what-is-next-js.html">Next.jsとは？Reactとの違いやインストール・基本操…｜Udemy メディア</a></li>
+<li><a href="https://qiita.com/k-penguin-sato/items/e3cc04f787cf3254cfae">ReactをRailsと共に使う方法 - Qiita</a></li>
+<li><a href="https://weseek.co.jp/tech/837/">Rails×React×TypeScriptで作るWEBアプリ入門 - WESEEK Tech Blog</a></li>
+</ul>
+<p><a href="ruby_on_rails.html">Ruby on Rails</a>や<a href="python_django.html">Django</a>も参照のこと。</p>
+
+<h1>Reactの代替技術</h1>
+<h2>Preact</h2>
+<p>PreactはReactの軽量版。</p>
+<ul>
+<li><a href="https://qiita.com/akashixi/items/e0e42e10ba8e088bf996">Preactの始め方&Reactとの違い - Qiita</a></li>
+<li><a href="https://www.codegrid.net/articles/2020-preact-1/">Preactで始める軽量コンポーネント指向開発 | 第1回 Preactの特徴 - CodeGrid</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.24</p>
+</div>
+
+<h2>SolidJS</h2>
+<p>SolidJSはReact/Next.jsと同じ目的に使用できるフレームワーク。Reactよりもパフォーマンスが高い。</p>
+<ul>
+<li><a href="https://zenn.dev/nameless_sn/articles/four-tsframework_suggestion">【必見】これから学ぶべきTypeScriptフレームワーク 4選 - Zenn</a></li>
+<li><a href="https://note.com/shift_tech/n/nfa8c00379e7d">SolidJSがどうやら魅力的です｜SHIFT Group 技術ブログ</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.29</p>
+</div>
+
+<h2>nue.js</h2>
+<p>nue.jsは新しいフロントエンドフレームワークで、Reactと比べて非常に軽量。</p>
+<ul>
+<li><a href="https://qiita.com/haruyan_hopemucci/items/93d4556afb76b0c964b9">巷で話題のnue.jsを試してみた - Qiita</a></li>
+<li><a href="https://qiita.com/haruyan_hopemucci/items/f5d1605baf24e01b8306">巷で話題のnue.jsを試してみた(2) v0.1.1でのコンポーネントレンダリング - Qiita</a></li>
+<li><a href="https://qiita.com/YmBIgo/items/e4600a44a446033afa1b">nuejs にコントリビュートした話（人生初OSSコントリビュート） - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>Remix</h2>
+<p>RemixはReactベースのフルスタックなフレームワーク。</p>
+<ul>
+<li><a href="https://zenn.dev/ak/articles/cef68c1b67a314">Remix入門【はじめからそうやって教えてくれればいいのに！】 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.13</p>
+</div>
+
+<h1>余談</h1>
+<h2>JavaScriptフレームワークとして圧倒的な人気</h2>
+<p>最近のJavaScriptフレームワークでは、Reactが圧倒的な人気を誇っている。以前はAngularに負けていたが、今では完全にReactが優勢。</p>
+<p>この背景には、「Reactアプリを作るのが簡単で楽しいから」というのがあるようだ。</p>
+<ul>
+<li><a href="https://qiita.com/baby-degu/items/a311ca07d155037253c8">2020年以降のプログラミング技術のトレンド予想 - Qiita</a></li>
+</ul>
+
+<h2>世界を見るとReactがもっとも流行っている</h2>
+<p>現在（2021年1月）を見ると、世界ではReactがもっとも流行っています。</p>
+<p>日本などのアジア圏ではVue.jsも流行っていますが、世界ではReactが猛烈な勢いでぶっちぎりで首位を走っています。</p>
+<p>今後もReactとTypeScriptは覚えておくべき言語・フレームワークになるでしょう。</p>
+<p>以上は以下の動画を参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=1Jk-Lw366gI">2021年、Web/IT業界のトレンド7選！(DX, NoCode, TypeScript, Flutter...) - YouTube</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>状態管理</h2>
+<p>ストアに状態（データ）を保持する（状態管理）。</p>
+<p>Redux（React）やVuex（Vue.js）はFacebookにより提唱されたFluxの実装。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

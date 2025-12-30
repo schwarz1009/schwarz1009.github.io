@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ディストリビューション - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ディストリビューション</h1>
+<p>Linuxのディストリビューションに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>概要</h1>
+<h2>ディストリビューションって何？</h2>
+<p>Linuxは、カーネルとしてはkernel.orgでオープンソースで配布・開発されているが、ここにあるのはOSの中核であるカーネルのみ。</p>
+<p>GNU/LinuxとしてのLinuxシステムを構築するためには、他のプロジェクトで配布されているソフトウェア一式と組み合わせる必要がある。</p>
+<p>そのため、この組み合わせ作業をしている会社やコミュニティなどを「ディストリビューター」と呼び、その配布物を「ディストリビューション」と呼ぶ。</p>
+<p>Linuxをきちんと使うためには、このディストリビューションをインストールする必要がある。</p>
+<p>ディストリビューションの構築にはたくさんの開発・メンテナンス作業が必要となる。</p>
+<p>GNUプロジェクトは、Linuxと言うソフトウェアはカーネルだけを指しており、LinuxをOSとして使う場合、GNUコンポーネント一式をそのまま使うことから、呼び名として「GNU/Linux」と呼ぶべきだ、と言う主張をしている。特に、Debian GNU/Linuxのように、コミュニティ寄りのディストリビューションは、GNU/Linuxと言う呼び名を採用しているものもある。</p>
+<p>昔はSlackwareのようにtarballパッケージでインストールしていたが、パッケージの管理作業が面倒なことから、現在はRPMやDebのような「パッケージ管理システム」でディストリビューションを作るのが一般的だ。</p>
+<p>GNU/Linuxがどのようなソフトウェアコンポーネントで成り立っているのかを見るには、<a href="http://www.linuxfromscratch.org/lfs/view/stable/">LFS</a>や<a href="http://www.linuxfromscratch.org/blfs/view/stable/">BLFS</a>（<a href="http://lfsbookja.osdn.jp/">日本語訳</a>）を見ると良いだろう。</p>
+
+<h2>パッケージの検索・詳細</h2>
+<p>ディストリビューションによって配布されているパッケージの詳細を見るためには、以下のようなリンク先がある。</p>
+<ul>
+<li><a href="https://www.debian.org/distrib/packages.ja.html">Debian -- パッケージ</a></li>
+<li><a href="https://packages.ubuntu.com/ja/">Ubuntu – Ubuntu パッケージ検索</a></li>
+<li><a href="https://apps.fedoraproject.org/packages/">Fedora Packages Search</a></li>
+<li><a href="https://www.archlinux.org/packages/">Arch Linux - Package Search</a></li>
+<li><a href="https://packages.gentoo.org/">Gentoo Packages</a></li>
+</ul>
+<p>基本的に、この検索で見つかるソフトウェアパッケージについては、パッケージ管理システムからインストールできる。<a href="linux_pkgmanagement.html">パッケージ管理</a>を参照のこと。</p>
+<p>自分の使っているディストリビューションが小規模な場合などで、パッケージを探している場合は、snapcraftやflathubなどにパッケージがあるかもしれない。<a href="flatpak.html">Flatpak/AppImage</a>や<a href="snappy.html">Snappy</a>を参照のこと。</p>
+
+
+<h2>何でこんなにたくさんディストリビューションがあるの？</h2>
+<p>Linuxは、WindowsやMacと違い、どこかの特定の一企業が配布やライセンスに対する主導権を持っているわけではない。</p>
+<p>そのため、「誰もが自分のLinuxを作って配布することが出来る」と言うポリシーのようなものがある。</p>
+<p>だが、簡単にディストリビューションが個人で作れるわけではない。たくさんのパッケージをメンテナンスする必要がある。</p>
+<p>そのバランスから、さまざまな開発母体を持ったディストリビューションが存在する。</p>
+<p>後日注記：昔のLinuxではディストリビューションが公式でパッケージを用意するのが普通だったため、メンテナンスなどの問題から小規模なディストリビューションは使えないものだったが、今はflatpakやflathubなどの新しい仕組み・サービスがあり、小規模なディストリビューションでもそうした最新の追加パッケージを導入できる。そのため、MX Linuxなどの小規模なディストリビューションも最近はとてもよく使われている。</p>
+
+<h1>Linuxディストリビューション一覧</h1>
+<h2>Debian GNU/Linux</h2>
+<p>コミュニティによるディストリビューションとしては最大規模。</p>
+<p>システムとしては安定志向で、そのためにリリースが遅れがちになり、ソフトウェアのバージョンが古いこともあるが、メンテナンスされているパッケージの数が多い。</p>
+<p>パッケージ開発システムとして、Debianにより開発されたDeb/Dpkg/Aptを採用している。</p>
+<p>特定のデスクトップ環境にも依存せず、さまざまなデスクトップ環境を試すことが出来る。</p>
+<p>保守的だが、リリースバージョンごとにパッケージのメンテナンスをきちんとしているため、サーバー用途にもおすすめだ。機能追加の更新は極力行わず、セキュリティと致命的なバグの修正だけを、リリースバージョンごとに更新している。コマンド一発でそれがアップデートされるのは、たくさんのコミュニティのパッケージメンテナーのおかげだ。</p>
+<p>組織的にはボランティアによる民主主義のモデルを採用している。また、独自のフリーソフトウェア・ガイドラインを設けていて、極力フリーではないパッケージは標準では採用していない。対応されているCPUアーキテクチャも多く、システムも柔軟に構築出来る。</p>
+<p>Debianが使い辛くて玄人向けだった時代ははるか昔に終わって、今では普通の人間が普通に使える普通のディストリビューションである。また、色々とパッケージに個性や独自性があるものの、それらはインストールした上で自分でカスタマイズすれば変えられる。よって、プログラマを目指す学習者ならば、Debianを導入すべきである。Linuxのディストリビューション全体を見ても、一番まともで正しいディストリビューションではないかと思う。ただし、パッケージに新しさが無く、いつまでも古いままであるため、普通に使っていて「何の面白さも無い」ディストリビューションである。</p>
+<p><a href="debian.html">Debian</a>を参照のこと。</p>
+<p>Debian</p>
+<ul>
+<li><a href="https://www.debian.org/index.ja.html">Debian -- ユニバーサルオペレーティングシステム</a></li>
+<li><a href="http://www.debian.or.jp/">Debian JP</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Debian GNU/Linux">Debian GNU/Linux - Wikipedia</a></li>
+</ul>
+
+<h2>Red Hat Linux/Fedora</h2>
+<p>Red Hatと言う会社が主に開発しているディストリビューション。</p>
+<p>旧Red Hat Linuxと言うものは無くなり、代わりにFedoraと言う最新式のコミュニティベースのディストリビューションをRed Hatが母体となって開発し、それを有料サポートのついたRed Hat Enterprise Linux(RHEL)に統合し、安定化させてサポートで儲ける、と言う体制を取っている。</p>
+<p>RHELのコード自体はオープンソースで公開されているため、CentOSと言うクローン版もある。企業サーバーにはRHELやCentOSがおすすめだ。</p>
+<p>Fedoraは、動くか動かないか分からない不安定版・実験版であると同時に、コミュニティ開発による最新式の技術を取り入れた、Linuxの「最新開発版」であると言える。</p>
+<p>Red Hatが昔独自に開発した、RPMと言うパッケージ管理システムを採用。このRPMによって、ディストリビューションはパッケージ管理システムを使って開発するのが主流になった。また、依存関係の解決も容易になり、Linuxを使うのが一部の「オタク」だけではなくなり、ディストリビューションのパッケージを誰でも簡単にインストール出来るようになった。</p>
+<p>IBMによりRed Hatが買収されたため、これからどうなるのか不安なのがFedoraやCentOSである。単なるWebSphereの実行基盤になるとか、AIXという名前に変わるのではないかとか、あるいは本当にLinux無くなるんじゃないか、などといった声もある。</p>
+<p><a href="redhat.html">Red Hat</a>や<a href="fedora.html">Fedora</a>を参照のこと。</p>
+<p>Fedora</p>
+<ul>
+<li><a href="https://getfedora.org/ja/">Fedora</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Fedora">Fedora - Wikipedia</a></li>
+</ul>
+
+<h2>Ubuntu</h2>
+<p>Debianをベースに、初心者向けで、出来るだけ最新のパッケージと使いやすいデスクトップ環境を取り入れたディストリビューションとして有名。</p>
+<p>Linuxディストリビューションとしても、一番使いやすくて初心者向けとして有名で、ユーザーが多い。</p>
+<p>Unityと言う独自のデスクトップを採用しているが、フレーバーと言うディストリビューションの公式派生を持っていて、KDEやGNOME、XfceやMATEを使うことも出来る。（後日注記：現在ではUnityではなくGMOME 3を採用している。）</p>
+<p>Debianの派生のため、比較的たくさんのパッケージをメンテナンスしている。また、Canonicalと言う母体の会社によって、十分にリーダーシップが発揮されていることから、Red Hatとともにオープンソース業界をリードしていく役割を担っている。</p>
+<p>Ubuntuも成熟したが、「普通にLinuxを使うならUbuntuしか選択肢がない」という状況が長い間続いてきた。だが、今のLinuxディストリビューションは、Linux Mintをはじめ、「Ubuntu以後の新しいセンスのあるディストリビューション」が増えている。よって、Ubuntuを使うよりも、もっと別のディストリビューションを使った方が面白いだろう。だが、仕事やビジネス、開発、システム管理、あるいはサーバーに使うのであれば、標準的なのはUbuntuである。最近はUbuntuの元になったDebianも改良され、「ほとんどDebianと同じ」になってきている。MriやSnappyのようにCanonicalは良く分からない発想をするため、「Linuxのトレンドと全く違う方向性」を持ったディストリビューションでもある。</p>
+<p><a href="ubuntu.html">Ubuntu</a>を参照のこと。</p>
+<p>Ubuntu</p>
+<ul>
+<li><a href="https://www.ubuntu.com/">Ubuntu.com</a></li>
+<li><a href="https://www.ubuntulinux.jp/">Ubuntu Japanese Team</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Ubuntu">Ubuntu - Wikipedia</a></li>
+</ul>
+
+<h2>openSUSE</h2>
+<p>昔は、ドイツのSuSEと言う会社が作っていた。Novellと言う会社に買収され、さらにそれもAttachmateに、それもマイクロフォーカスに買収されて、今ではEQTという良く分からないグループに売却されて、「一体誰が作っているの？」という状況。</p>
+<p>先進的なKDEの開発で有名だが、NovellがXimianと言うGNOMEの会社を買収したことから、GNOMEにも力を入れていた。</p>
+<p>最近では、ローリングリリース版（特定のバージョンでリリースするのではなく、常に最新のパッケージにアップデートされる）とバージョンリリース版の両方をリリースしている。</p>
+<p>Red Hatのライバル会社で、SUSE Linux Enterpriseと言う企業向け商用サポート版をリリースしている。</p>
+<p>openSUSEはFedoraのような実験版と言う側面は薄くて、企業が開発していることもあり、信頼性の高い製品になっている。</p>
+<p>Linuxカーネルのソースコードなどを見ていると、SuSEの会社の社員が開発したコードは意外と多い。企業向けに商用でLinuxを販売した初の会社であり、長らく「アメリカのRed Hat LinuxとドイツのSuSE Linux」の競争によって「商用Linuxの世界」は発展してきた。今ではどちらも体力が無く、一見Linuxは終わったかのように見えるが、裏では小さなディストリビューションがたくさん生まれており、「最盛期はもうはるか昔に過ぎ去ったのに、ようやく今頃使えるようになってきた」というのが2019年のLinuxディストリビューションである。</p>
+<p><a href="suse.html">SUSE</a>を参照のこと。</p>
+<p>openSUSE</p>
+<ul>
+<li><a href="https://www.opensuse.org/">www.openSUSE.org</a></li>
+<li><a href="https://ja.opensuse.org/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8">ja.openSUSE.org</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/openSUSE">openSUSE - Wikipedia</a></li>
+</ul>
+
+<h2>Gentoo Linux</h2>
+<p>独自のPortageと言うパッケージ管理システムを搭載したディストリビューション。</p>
+<p>「Gentooとは選択である」と言う標語を掲げている通り、ディストリビューションがお仕着せで「これは標準だが、これは標準ではない」と言うしきたりを決めるのを無くし、ユーザーが独自に自分のディストリビューションを構築する「メタ・ディストリビューション」と言う標語を掲げている。</p>
+<p>僕の一番好きなディストリビューション。</p>
+<p>インストールにはインストーラーは無く、全て手動でディストリビューションを構築するが、Gentoo Handbookと言う「Gentooの教科書」にインストールやシステムの構築方法のことがたくさん書いてあって、勉強になる。「Gentooインストールバトル」とも言われるこの「教科書と戦うインストール」だが、きちんと読めば敗北するわけがないのに敗北した人間が多い。こうした人たちには、GentooをベースにもっとみんなにフレンドリーにしたSabayonというディストリビューションがある。Archで言うManjaroと似ているが、インストーラ付きでバイナリパッケージからインストールできる。</p>
+<p>パッケージ管理はソースベースで、BSDのportsに近い。そのため、たくさんのCPUアーキテクチャに対応出来る。逆に、LibreOfficeのような巨大パッケージには「コンパイルをいちいちするのが時間がかかる」と言う難点もある。バイナリパッケージが提供されているものもあるが、GentooでPortageを使うなら、USEフラグ（コンパイルする時にどのような機能を有効・無効にするかと言うフラグ）をいろいろ設定して、独自コンパイルして使いたいものだ。</p>
+<p><a href="gentoo.html">Gentoo</a>を参照のこと。</p>
+<p>Gentoo Linux</p>
+<ul>
+<li><a href="https://www.gentoo.org/">Gentoo.org</a></li>
+<li><a href="http://www.gentoo.jp/">Gentoo.jp</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Gentoo Linux">Gentoo Linux - Wikipedia</a></li>
+</ul>
+
+<h2>Arch Linux</h2>
+<p>ローリングリリースとシンプル性を両立させたディストリビューション。</p>
+<p>今までのLinuxが「バージョンごとにリリースする」と言うバージョン制リリースを取っていたのとは逆に、「いつでも最新にアップデートされる」と言うローリングリリースと言うモデルを採用した。</p>
+<p>また、Pacmanと言う独自のパッケージ管理システムを採用。そして、「設定ファイルはそのままにし、余計な設定ツールの提供や独自の開発は行わず、それぞれが自分の力で手動設定をする」と言う、ある意味では初心者お断りのようなシンプルなパッケージ管理ポリシーを採用した。</p>
+<p>これはとても優れているモデルで、Gentoo Linuxのようなソースベースのパッケージ管理ではなくても、バイナリで、シンプルで、自分で設定することが出来る。ある意味、Linux本来の姿に戻ったような感じである。そして、余計なツールをごてごてに用意するRed HatやDebian/Ubuntuのやり方とは一線を画し、とても良い上級者向けのシステムとなっている。</p>
+<p>だが、インストーラーもなく、手動でインストールするには、経験と知識が必要だ。初心者は、Manjaroと言う、インストーラーと標準デスクトップ環境のインストールが提供されている派生版があるので、それを使うと良いだろう。</p>
+<p><a href="arch_linux.html">Arch Linux</a>を参照のこと。</p>
+<p>Arch Linux</p>
+<ul>
+<li><a href="https://www.archlinux.org/">Arch Linux</a></li>
+</ul>
+
+<h2>CentOS</h2>
+<p>RHELクローン。RHELのSRPMを独自にリビルドして、フリーなライセンスに基づいて無料のクローン版を配布している。</p>
+<p>そもそもRed Hat LinuxがRHELに移行した時から、既にフリーソフトウェアのRHELクローンはたくさん存在した。White Box Enterprise LinuxやScientific Linuxなどがそれに当たる。今では、企業向けのエンタープライズクラスの性能が求められ、Red Hatからのサポートを必要とせず、自分たちの技術で維持する機関向けのLinuxディストリビューションとして、CentOSを使うことが標準的である。「そもそも、CentOSがあるのにRed Hatどう儲けるんや？」という批判や心配の声もあるが、Red Hatは「絶対にストップしてはならない」ような政府や軍、巨大企業向けの責任のある仕事をしていて、「本当にRed Hatにできんのか？」という批判や心配の声もある。REHLの主な利用者として挙げられるのは、宇宙開発のNASAなどである。</p>
+<p>ちなみに、Oracle Linuxという派生版があり、これはRed HatではなくOracleが代わりに低価格でサポートする有料のディストリビューション。比較的安価であると同時にOracle DatabaseやWeblogic Serverなどを運用する基盤システムとして利用できる。</p>
+<p>後日注記：実際のところ、Red Hatは中小のサーバーや古くなったUNIXのリプレースなどに良く使われている。ミッションクリティカルな領域としては、通信インフラやメインフレームでもRed Hatを使う。こうした分野で、自分で技術力がある会社は、開発部署として本当にCentOSを使う。そのため、ただのコピー品に見えて、社会に本当に必要なエンタープライズOSがCentOSである。</p>
+<p><a href="centos.html">CentOS</a>を参照のこと。</p>
+<p>公式・Wikipedia</p>
+<ul>
+<li><a href="https://www.centos.org/">CentOS.org</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/CentOS">CentOS - Wikipedia</a></li>
+</ul>
+
+<h2>Linux Mint</h2>
+<p>Mintツールと呼ばれるツールを搭載し、マルチメディアのコーデックを充実させ、標準のソフトウェア環境などを変更した使いやすいディストリビューション。海外で人気がある。</p>
+<p><a href="linux_mint.html">Linux Mint</a>を参照のこと。</p>
+<p>公式・Wikipedia</p>
+<ul>
+<li><a href="https://www.linuxmint.com/">LinuxMint.com</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Linux Mint">Linux Mint - Wikipedia</a></li>
+</ul>
+
+<h2>Slackware</h2>
+<p>tgzでパッケージを配布する、老舗のディストリビューション。</p>
+<p>昔のLinuxディストリビューションは、RPMやDebのような形式でパッケージを配布していなかった。RPMやDebパッケージによって、システムの依存関係が解決できるようになり、インストールや管理が容易になって、初心者でもLinuxを使えるようになったが、逆にパワーユーザーから見ると、システムそのものをハックしていじり辛くなった。</p>
+<p>Slackwareは昔からあるディストリビューションで、RPMやDebのような高度なパッケージ管理システムを使っておらず、システムを自分の自由にいじりやすい。RPMやDebパッケージを使わなくてもシステムが自分で管理できるという自信のある人や、ハッカーを目指す人におすすめ。</p>
+<p>Slackware</p>
+<ul>
+<li><a href="http://www.slackware.com/">Slackware.com</a></li>
+<li><a href="https://slackware.jp/">逆襲のSlackware</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.30編集</p>
+</div>
+
+<h2>Mandriva Linux</h2>
+<p>かつてあった商用ディストリビューションで、ブラジルのConectivaとフランスのMandrakeSoft（Mandrake Linuxを作っていた）の合併。</p>
+<p>Mandrivaは倒産したため無くなったが、MageiaやPCLinuxOSやOpenMandrivaとしてforkされている。</p>
+<p>フランス系のディストリビューションであったことから、欧州での利用者が多い。</p>
+<p>Mandrakeは「まんだらけ」ではなく「マンドレーク」と読む。</p>
+
+<h1>面白いディストリビューション</h1>
+<h2>Feren OS</h2>
+<p><a href="feren_os.html">Feren OS</a>を参照のこと。</p>
+
+<h2>Void Linux</h2>
+<p><a href="void_linux.html">Void Linux</a>を参照のこと。</p>
+
+<h2>Nitrux</h2>
+<p><a href="nitrux.html">Nitrux</a>を参照のこと。</p>
+
+<h2>GoboLinux</h2>
+<p><a href="gobolinux.html">GoboLinux</a>を参照のこと。</p>
+
+<h2>Alpine Linux</h2>
+<p><a href="alpine_linux.html">Alpine Linux</a>を参照のこと。</p>
+
+<h1>マイナーなディストリビューション</h1>
+<h2>マイナーなディストリビューション</h2>
+<p><a href="linux_distro_minor.html">マイナーな Linux ディストリビューション</a>を参照のこと。</p>
+
+<h2>日本向け</h2>
+<p><a href="linux_distro_japan.html">日本向け Linux ディストリビューション</a>を参照のこと。</p>
+
+
+<h1>関連ページ</h1>
+<h2>パッケージ管理</h2>
+<p><a href="linux_pkgmanagement.html">パッケージ管理</a>を参照のこと。</p>
+
+<h2>ソースからのソフトウェアのインストール</h2>
+<p><a href="linux_src_install.html">ソースからのインストール</a>を参照のこと。</p>
+
+
+<h1>開発に参加したい</h1>
+<h2>ディストリビューションを作る</h2>
+<p>基本的にパッケージ管理システムがRPMであれば、specファイルを書き換えることで、パッケージのバージョンをアップしたり、パッチを当てた独自のRPMを作ることができます。</p>
+<p>新しいディストリビューションを作りたいのであれば、Red HatであればspecファイルをFedoraからコピーして書き換える、という方法があると思います。Debian派生ならば、Mintがやっているように、リポジトリを共有することもできるかもしれません。自分で調べて頑張ってください。</p>
+<p>RPMのspecファイルについては<a href="redhat_rpm.html">RPMの世界観</a>、Debパッケージの作成の方法については<a href="debian_deb.html">Deb/Dpkgの世界観</a>にまとめています。</p>
+
+<h2>カスタムLinuxディストリビューションを作る方法</h2>
+<p>カスタムLinuxディストリビューションを作るためには、まずベースとなるディストリビューションを決めます。</p>
+<p>そして、ベースとなるディストリビューションとリポジトリを共有した上で、パッケージやシステム構成・設定ファイルなどをカスタマイズし、ISOイメージを作成します。</p>
+<p>Alter Linuxを作られている山田ハヤオさんの<a href="https://hayao.fascode.net/">はやおのぺーじ</a>の中の<a href="https://hayao.fascode.net/buildmydist/index.html">【2019年版】Ubuntu系のLinuxディストリビューションを自作しよう</a>や<a href="http://hayao.fascode.net/buildmydist-2/">オリジナルLinuxディストリを自作しよう2</a>で経験談が述べられており、参考になります。</p>
+<p><a href="https://hayao.fascode.net/buildmydist/index.html">【2019年版】Ubuntu系のLinuxディストリビューションを自作しよう</a>では、専用のOSとISOイメージを作成するツールを使い、パッケージの導入と/etc/skelのカスタマイズによってカスタマイズされたディストリビューションを作成する方法を解説されています。</p>
+<p>ただし、僕個人的な意見からすると、ディストリビューションを作るとしたら、きちんとユーザーをサポートしなければなりません。もし、元のディストリビューションのパッケージをカスタマイズした場合、ベースとなったパッケージが更新されたら、自分でカスタマイズしたパッケージも追従する必要があります。とても根気と継続力が必要となる作業であり、責任もあるため、僕はあえて、カスタムLinuxディストリビューションを開発・配布することは一般的な普通の方にはおすすめしません。利用者の視点から見れば、いつなくなるか分からないですし、OSに何が含まれているのかも怪しいところがあります。</p>
+<div class="edit_date">
+<p>2023.01.22編集</p>
+</div>
+
+<h1>余談</h1>
+<h2>GPL</h2>
+<p>GPLは、二次的著作物における自由なライセンスの継承的な許諾を可能にする。</p>
+<p>これは、要は、最初にGPLで許諾されたソフトウェアが、派生版になってもGPLで許諾される（されなければならない）ことを意味している。</p>
+<p>どういうことかと言うと、最初に自由な利用を許諾し、自由に派生版を作れるだけではなく、派生版も自由な利用を許諾され（されなければならない）、そこからでも自由な派生版を作ることが出来る。</p>
+<p>ある意味やくざのようなライセンスだが、ストールマンのUNIXの独占化による反省として考えられている。</p>
+<p>Arch Linuxでは、「プログラマの自由を守るのではなく、コードの自由を守る」と言う表現をしている。</p>
+<p>僕としては、開発者一人の自分勝手な自由を守るのではなく、社会全体の万人の自由を守るライセンスだと言えると思う。</p>
+<p>ただ、「GPLはストールマンのジョークだ」と言うことを言う人間も居る。</p>
+<p><a href="gnu.html">GNU</a>を参照のこと。</p>
+
+<h2>Linuxの代替物</h2>
+<p>Linuxには、代替として利用出来るソフトウェアがいろいろある。</p>
+<p>LinuxカーネルがGPLなのが嫌ならば、FreeBSDやNetBSDのカーネルを使うのが良いだろう。現に、AppleのMac OS X/DarwinやSONYのPlayStationなどでは、FreeBSDのカーネルが使われている。特に、ZFSのような次世代のファイルシステムがLinuxカーネルではGPLと違反するため、ZFSのために*BSDを使う人間が多い。</p>
+<p>また、GNUのツールやライブラリが嫌ならば、これも*BSDのツールを使えば良い。GoogleのAndroidなどでは、GNU libcではなく、NetBSDのlibcを搭載している。</p>
+<p>それから、GCCの代替物としては、BSDライセンスのLLVM/Clangが開発中だ。すでに、FreeBSDなどで使われている。</p>
+<p>ライセンスとは関係ないが、X11の古びた巨大なウィンドウシステムは、waylandと言うシンプルなシステムを開発している。</p>
+<p>そういうわけで、けっこう、GNUやGPL系の技術やライセンスではないソフトウェア環境は、次第に整いつつある。</p>
+<p>OpenBSDの派生のBitrigなどでは、標準でGNUやGPLに依存するソフトウェアは、GNU infoだけとなっている。</p>
+<p>OpenBSDはセキュリティに強いことで有名で、BSDのコードを入念にチェックして書き直している。初期状態でのセキュリティホールは、プロジェクト発足から長い間2件しか見つかっていない。軍や医療などの分野で基幹システムを作るなら、OpenBSDを使うと良いだろう。</p>
+<p>結構Linuxを開発するのは、難しいように見えて難しくは無い。日本がディストリビューションを独自に作るのは、きっと簡単に可能だと思う。</p>
+
+<h2>善良なライセンス、善良なOS</h2>
+<p>最近あまり言わなくなったが、昔はLinuxのことを良く「善良なOS」だと言っていた。</p>
+<p>それは、GPLが「自分も自由に利用出来る代わり、相手も自由に利用させなければならない」と言う、「恩返しの法則」に基づいているからだ。</p>
+<p>自分がソースコードを自由に利用させてもらえる代わり、相手もソースコードを自由に利用させてあげなければならない。</p>
+<p>また、Linuxカーネルの開発者は、無償の自発的なボランティアの集団による、無償のコード寄贈で成り立っている。</p>
+<p>そういうところが、善良なOSだと言える。</p>
+<p>アフリカ発祥のUbuntuなどは、アフリカの民族語で「思いやり」を意味するubuntuと言う単語をディストリビューションの名前にした。</p>
+<p>ただし、それなら、*BSDのように「開発者の自発的な意志で共有するかどうかを可能にすれば良い」と思うかもしれない。僕はそれも良いと思う。だが、それでは、会社のユーザーがGPLでコードを寄贈しなくなる。今のLinuxカーネルは、会社によるコードの寄贈の方が、ボランティアによる寄贈よりもはるかに多い。</p>
+<p>逆に、BSDは改造した時に改変コードを共有・公開しなくて良いことになっているため、商業的な利用手段として優れている。商業的利用に関しては、BSDライセンスの方が良いだろう。</p>
+<p>また、教育的な目的と言う意味でも、ソースコードが公開されるのは優れている。カリスマハッカーを生み出すために、UNIXと同じようにソースコードを閲覧出来るのは、教育目的や、プログラマが関数の中身を把握し、決して関数の名前だけで分かっているだけではなく、仕組みを深く知る、と言う意味でも優れているだろう。</p>
+<p>Linuxには右翼的な側面もあって、「自分のコンピュータを自由に使える自由」とか、「相手がコードを公開するように強制させることで、自由なコードがどんどん増えていく」とか、ある意味ペテンのような自由な側面もある。自分が自由にするように、相手も自由にさせる。だが、最近は過度にそうした「強制的自由」だけが論点になってしまっていて、その背景にある「助け合いの精神」が見えなくなっていると思う。本来は、自分がコードを公開するように、他人にもコードを公開してほしい。それだけの、単純なライセンスを作りたいだけが、FSF（フリーソフトウェア財団）の目的だ。</p>
+
+<h2>Linuxは本当に軽いのか？</h2>
+<p>Linuxを、良く「軽量で安定して高速なOS」だと言うが、それはコマンドラインやサーバーで使った場合だ。</p>
+<p>標準のデスクトップ環境は、インストールしなければデスクトップ用途としてはまともに使えない。</p>
+<p>GNOME 3やKDEをインストールすると、とても豪華で巨大なGUI環境が手に入る。アプリケーションも、LibreOfficeやFirefoxなど、豪華極まりない。</p>
+<p>だが、その代り、GNOME 3やKDEは重たい。メモリを食うし、全く安定して動作しない。</p>
+<p>だが、これも、カスタマイズが可能である、と言う意味では、先ほどの「Linuxは軽い」とは矛盾しない。</p>
+<p>要は、MATE、Xfce、LXDE、あるいは軽量なウィンドウマネージャなど、軽いものにデスクトップ環境を変えてしまえば良い。</p>
+<p>そうすると、むしろ、MATEは今のパソコンなら非常に軽量かつ安定して動作する。XfceやLXDEはさらに軽いため、昔のXP時代のパソコンにインストールして使うことも出来る。</p>
+<p>Firefoxを重いとは言うが、最近はPale Moonと言う軽量なブラウザがある。Google Chromeを使うことも出来る。Xfce GoodiesによるWebKitを用いたMidoriという軽量なブラウザもある。Officeは、AbiWordやGnumericを使うとか、あるいはEmacsのようなテキストエディタを使うのが良いだろう。Officeでなくても、Linuxはテキスト処理用の操作手段がたくさんある（シェルスクリプトなど）。必ずしもLinuxでOfficeを使う必要はない。どうしても必要なら、GoogleのWeb版Office（Google ドキュメント）のようなものが使える。意外と、LibreOfficeはそんなに重くない。</p>
+<p>それから、サーバーやコマンドラインの用途で使えば、本当に高速に動作する。</p>
+<p>コマンドラインのBashは物凄く高速に処理を行う。画面に出力されたメッセージの速度についていけないほどだ。</p>
+<p>だが、ほとんどの場合、「Linuxは安定している」とは、RHELのようなサーバーのことを言っている。</p>
+<p>RHELは、99%以上の安定した稼働率を誇っているし、Solarisのような商用UNIXと比べても性能が良い。</p>
+<p>また、Linuxがセキュリティに優れている、と言うのは、むしろ、Windowsに比べればだ。Windowsも、「普及しているから狙われやすい」と言う側面は確かにあるが、コードを公開していないから分からないだけで、GUIのLinuxと同じようにバグがたくさんある。それに、コマンドラインで使うことが出来ない。MS-DOSのコマンド機能は貧弱だし、GUIなしのWindowsと言うのは存在しない。そして、Windowsにはセキュリティホールが多い。むしろ、設計的な問題だけではなく、現状の問題として、普及していないLinuxを使った方が「実質的にセキュア」だと言うことも言えるだろう。</p>
+<p>ある意味、Windowsをサーバーに使うのはありえない。むしろ、Linuxの最小構成をきちんと作ると、バグが入り込む余地は、巨大すぎるWindowsよりも少ないだろう。マルチユーザーやネットワークを考慮したOSではない、と言うことも言える。Windowsは、最初からDOSの利用を想定しているため、安定した設計になっていない。</p>
+<p>あとは、ソフトウェアの問題だ。IISのASP.NETよりもApacheやPHPの方が色んなソフトウェア（WordPressなど）が使える。GCCやPerlなどの言語処理系が無料で揃っていることも大きい。もちろん、VB.NETからSQL Serverを使うことも出来る。だが、Docker（コンテナと呼ばれるソフトウェアで、Linuxの上で仮想コンテナが動く。これは、Linuxの上で別のLinuxをたくさん走らせることが出来る）などの最新のソフトウェア事情から考えて、Linuxはサーバーなら安定して使える。特に、Dockerによる仮想環境（試験環境と本番環境を切り替えながらサービスを開発・デプロイする）を体験してしまうと、他の環境に移れなくなる。</p>
+<p>あとは、Linuxは移植性が高い。NetBSDほどではないが、Androidのような携帯の端末でも動く。そういうところが何でも出来る、と言う点が、真の魅力だと思う。</p>
+<p>ただ、この元の質問に立ち返って考えると、「標準のGNOMEとKDEは重いが、そうでない場合は軽量なこともある」と言えると思う。</p>
+<p>GNOME 3は、ありえないデスクトップ環境になっている。超シンプルなのに高度で、慣れないとまともに使うことが出来ない。KDEはWindowsに良く似ている。僕は、GNOMEとKDEが2つもあることが、さらに問題を分かり辛くしていると思う。完全にLinuxは重くて不安定でバグがいっぱいにしか見えない。だから、Linuxは日進月歩なのだ。きっといつか良いものになる。</p>
+
+<h1>簡単な説明</h1>
+<h2>ディストリビューションとパッケージ管理</h2>
+<ul class="defaultlist list7">
+<li>ディストリビューションとパッケージ管理
+<ul>
+<li>ディストリビューション
+<ul>
+<li>Red Hat
+<ul>
+<li>Red Hat社によるエンタープライズ向けディストリビューション</li>
+<li>商用向けのサブスクリプションモデルによるロングサポートが受けられる</li>
+<li>Linuxで商用システムを作る時の定番</li>
+<li>昔は無料版があったが、今ではFedoraがその後継バージョン</li>
+<li>技術的な貢献としてみると、パッケージ管理システムRPMを開発し、Linuxが一部のオタクでなくても誰でも使えるものになった</li>
+<li>Linuxカーネルへの貢献度も高い</li>
+</ul></li>
+<li>SUSE
+<ul>
+<li>ドイツの会社SUSEによるRed Hatのライバル</li>
+<li>ヨーロッパのスパコンなどのOSによく採用されている</li>
+</ul></li>
+<li>Fedora
+<ul>
+<li>Red Hatの後援によるコミュニティ版ディストリビューション</li>
+<li>最新技術を果敢に取り入れ、RHELのベースになっている</li>
+</ul></li>
+<li>CentOS
+<ul>
+<li>RHELクローン。サポートや保証は受けられない</li>
+</ul></li>
+<li>Vine Linux
+<ul>
+<li>日本のLinuxディストリビューションだが、最近はリソース不足からあまりいい活動をされていないようである</li>
+</ul></li>
+<li>Debian
+<ul>
+<li>コミュニティ向けディストリビューション</li>
+<li>たくさんのパッケージをコミュニティでメンテナンスしていて、技術力も高い</li>
+<li>しかしながら最小インストールでは本当に最小限のソフトウェアしか入らなかったり、標準のパッケージの構成や設定ファイルの構成が他と違うなど、少し玄人向け</li>
+</ul></li>
+<li>Ubuntu
+<ul>
+<li>南アフリカ発のディストリビューション</li>
+<li>「ubuntu」は南アフリカのズールー語で「他者への思いやり」を表す</li>
+<li>デスクトップ向け・初心者向けとして有名</li>
+<li>サーバでも標準的になりつつある</li>
+<li>LinuxをインストールしたいならまずはUbuntuから</li>
+<li>デスクトップ環境のインターフェースはWindows 7/10とよく似ている</li>
+</ul></li>
+<li>Linux Mint
+<ul>
+<li>Ubuntuをベースにデスクトップで使いやすくしたディストリビューション</li>
+<li>GNOME 3を採用せず、MATEやCinnamonなどを採用している</li>
+</ul></li>
+<li>Arch Linux
+<ul>
+<li>シンプルで、ごてごてした設定ツールなどを作らず、「自分で設定し、管理し、導入する」という上級者向けのディストリビューション</li>
+<li>開発者の間で人気がある</li>
+</ul></li>
+<li>Gentoo Linux
+<ul>
+<li>メタディストリビューションという言葉を掲げており、ディストリビューションが不要な標準を決めず、「ユーザが自分でディストリビューションを作る」</li>
+<li>ソースベースのパッケージ管理システムPortageを採用しており、どんなパッケージをインストールするのであってもコンパイルに時間がかかる</li>
+<li>OpenRCやnetifrcなどBSD風の独自仕様が強く、最近ではsystemdに対応しないなど「少しレガシーなディストリビューション」になってきた</li>
+</ul></li>
+<li>技術的に面白いディストリビューション
+<ul>
+<li>GoboLinux
+<ul>
+<li>ファイルシステム構成を抜本的に変更</li>
+</ul></li>
+<li>Nitrux
+<ul>
+<li>AppImageなどを使って、システムパッケージの導入の方法などを抜本的に変更</li>
+</ul></li>
+<li>Alpine Linux
+<ul>
+<li>小サイズで組み込み向けでありながらセキュリティを重視</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>パッケージ管理システム
+<ul>
+<li>ソフトウェアのインストール・アンインストール・更新</li>
+<li>パッケージの複雑な依存関係の自動解決</li>
+<li>常にパッケージを最新にアップデートする</li>
+<li>RPM
+<ul>
+<li>specファイルにパッケージの情報と依存関係、ビルドに必要なコマンドを書いて、パッケージ化する</li>
+</ul></li>
+<li>deb
+<ul>
+<li>Debian系で使うパッケージフォーマット</li>
+</ul></li>
+<li>DNF
+<ul>
+<li>DNFやaptでは、1コマンドで簡単にRPM/debパッケージを依存パッケージを含めてダウンロード・インストールできる</li>
+</ul></li>
+<li>apt
+<ul>
+<li>Debian系で使うパッケージインストールツール。aptさえ使えればあとは何も分からなくてもLinuxは使える</li>
+</ul></li>
+<li>Portage</li>
+<li>flatpak, snappy, AppImage
+<ul>
+<li>システムのパッケージとは別に仮想サンドボックス環境でアプリケーションをインストールできる</li>
+<li>ディストリビューションごとに専用パッケージをメンテナンスする必要がなく、システムとは別に最新のアプリケーションを手軽に導入できる</li>
+<li>flatpak向けのパッケージ配布サイトとしてflathubがある</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

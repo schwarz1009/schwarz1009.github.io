@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>掲示板開発の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>掲示板開発の世界観</h1>
+<p>掲示板開発の世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>掲示板の開発</h1>
+<h2>掲示板の作り方</h2>
+<p>基本的に、</p>
+<p>１．POSTで投稿されたデータを受け取る</p>
+<p>２．ヘッダのHTMLを表示</p>
+<p>３．受け取ったデータを記事一覧のデータファイルに記録</p>
+<p>４．記事一覧のデータファイルを読み込んで記事のHTMLを表示</p>
+<p>５．POSTで投稿するフォームのHTMLを表示</p>
+<p>６．フッタのHTMLを表示</p>
+<p>という風にスクリプトを書けば良い。</p>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="http://www.web-liberty.net/improve/perl/bbs.html">掲示板の作成 - Web Liberty</a></li>
+</ul>
+<p>以下はインターネット上に公開されている掲示板スクリプトのサンプルです。</p>
+<ul>
+<li><a href="https://uguisu.skr.jp/html/cgi_no1.html">CGI／PHP で掲示板を使ってみよう - メモ帳で作る タグ打ちWebサイト入門</a></li>
+<li><a href="http://www.web-liberty.net/improve/perl/bbs.html">掲示板の作成 - Web Liberty</a></li>
+<li><a href="http://nonsoft.la.coocan.jp/SoftSample/SampleBBS.html">NonSoft - 掲示板ＣＧＩのサンプル(perl)</a></li>
+</ul>
+
+<h2>PHPによる掲示板サンプル</h2>
+<p>以下に簡単な掲示板のサンプルがあります。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/phpappli/keijiban/index4.html">完成版 - 掲示板 - PHPサンプルプログラム - Let'sプログラミング</a></li>
+</ul>
+<p>上のページの掲示板では、投稿フォームの下に書き込みの処理（POSTが設定された時に実行される）と読み込みの処理があり、書き込み部分でファイルに出力したHTMLを読み込み部分でそのまま表示するようになっています。</p>
+<p>以下に、PHPによる掲示板のサンプルがあります。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/phpappli/keijiban/index4.html">完成版 - 掲示板 - PHPサンプルプログラム - Let'sプログラミング</a></li>
+<li><a href="http://www.dt30.net/gachinko/?p=507">PHPで掲示板を作ろう！ 掲示板の作成方法 その1 | ガチンコPHP塾</a></li>
+<li><a href="http://www.dt30.net/gachinko/?p=721">PHPで掲示板を作ろう!(データベース編) その1 データベースとは | ガチンコPHP塾</a></li>
+</ul>
+
+<h2>CGIスクリプトの書き方</h2>
+<p>掲示板やチャットなど、CGIスクリプトによって動的なWebページを作る方法については、結城浩さんの以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%9F%BA%E7%A4%8E%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/479730507X">Perlで作るCGI入門 基礎編―生きたホームページを作るために (SOFTBANK BOOKS)</a></li>
+<li><a href="https://www.amazon.co.jp/Perl%E3%81%A7%E4%BD%9C%E3%82%8BCGI%E5%85%A5%E9%96%80-%E5%BF%9C%E7%94%A8%E7%B7%A8%E2%80%95%E7%94%9F%E3%81%8D%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797305819">Perlで作るCGI入門 応用編―生きたホームページを作るために (SOFTBANK BOOKS)</a></li>
+</ul>
+<p>使われている言語であるPerl/CGI自体は旧来の技術だが、基本は今でも変わっていないため、教養として勉強になる。</p>
+<div class="edit_date">
+<p>2023.05.07</p>
+</div>
+
+<h2>datファイルでデータを保存する</h2>
+<p>Perl/CGIで作られた掲示板などでは、SQLのデータベースサーバーを使わず、datファイルを使ってサーバー上にデータを保存することも多くあります。</p>
+<p>datファイルの中に、掲示板で投稿されたメッセージなどのデータが格納されます。</p>
+<p>datファイルはテキスト形式であるため、SQLサーバーよりも信頼性などは劣りますが、テキストを直接さまざまなツールで編集できるため、SQLサーバーのデータよりも扱いやすいというメリットがあります。</p>
+<p>また、datファイルはサーバー上で公開されているため、このdatファイルを使って、昔の２ちゃんねるでは「２ちゃんねる専用ブラウザ」という、２ちゃんねるのためだけの専用の閲覧ソフトを作ることができました。</p>
+<p>しかしながら、SQLサーバーのように、高度なクエリやテーブル、論理演算（選択・射影・結合）などの機能が使えるわけではないため、Facebookのような高度なSNSを運用するのであれば、SQLサーバーの利用は必須となるでしょう。</p>
+<p>掲示板に限らず、ネットゲームなどでも、Perl/CGIで作られたブラウザゲームなどでは、データベースサーバーを使わず、シンプルなテキストファイルにデータを保存する場合もあります。この場合、Perlの機能（たとえば文字列の分割や結合）を使ってデータを読み書きします。</p>
+<p>このように、意外とSQLサーバーを使わずにWebプログラミングを行う機会は多いです。なので、データベースだけを分かってWebプログラミングを分かったつもりにならないようにしましょう。</p>
+<p><a href="../services/2ch.html">２ちゃんねる</a>や<a href="../services/2ch_browsers.html">２ちゃんねる専用ブラウザ</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.08.19</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Perl/CGI</h2>
+<p>Perl/CGIについては、<a href="perl.html">Perl</a>や<a href="perl_cgi.html">Perl/CGI</a>や<a href="../network/cgi.html">CGI</a>を参照のこと。</p>
+
+<h2>PHP</h2>
+<p>PHPについては<a href="php.html">PHP</a>を参照のこと。</p>
+
+<h2>Apache</h2>
+<p>Apacheについては<a href="../network/apache.html">Apache</a>を参照のこと。</p>
+
+<h2>掲示板サービス</h2>
+<p><a href="../services/sns_blog_bbs.html">SNS・ブログ・掲示板</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

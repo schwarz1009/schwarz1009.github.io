@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Spring Framework関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Spring Frameworkの世界観</h1>
+<p>Spring Frameworkに関する世界観です。<a href="java_framework.html">Javaの世界観D（Webフレームワーク）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>依存性注入</h1>
+<h2>依存性注入（DI: Dependency Injection）とは</h2>
+<p>また、LaravelやSpringなどで最近言われるようになった概念として、「依存性注入」というのがある。</p>
+<p>これは、たとえばクラスの中にインスタンスが含まれていた場合、そのクラスはそのインスタンスである別のクラスに「依存」している。</p>
+<p>それに対して、依存性注入では、クラスにインスタンスを「外部から、あとからぶち込む（注入する）」ことで、依存性の解決を図る。</p>
+<p>外部の設定ファイルで「このクラスのオブジェクトを注入しなさい」と指示するやり方を「DIコンテナ」と呼ぶ。</p>
+<ul>
+<li><a href="https://qiita.com/1000k/items/aef6aed46b0fc34cc15e">依存性注入(DI)の解説とやり方 - Qiita</a></li>
+<li><a href="https://qiita.com/hshimo/items/1136087e1c6e5c5b0d9f">猿でも分かる! Dependency Injection: 依存性の注入 - Qiita</a></li>
+<li><a href="https://www.slideshare.net/yuiito94/di-56742600">DI(依存性注入)について - SlideShare</a></li>
+</ul>
+
+<h2>テストケースを書くために</h2>
+<p>後から注入すると何が便利なのか。</p>
+<p>まず、テストケースを書く際に、クラスの中に別のクラスのオブジェクトが入っていると、それだけでテストケースが書けなくなってしまいます。</p>
+<p>なので、テストケースを書くために、あとからインスタンスを注入しよう、というのが、まず大きな点です。</p>
+<ul>
+<li><a href="https://qiita.com/1000k/items/aef6aed46b0fc34cc15e">依存性注入(DI)の解説とやり方 - Qiita</a></li>
+<li><a href="https://qiita.com/hshimo/items/1136087e1c6e5c5b0d9f">猿でも分かる! Dependency Injection: 依存性の注入 - Qiita</a></li>
+</ul>
+
+<h2>柔軟性の面から</h2>
+<p>もうひとつ、柔軟性の面から言っても、後から注入したほうが柔軟性があります。</p>
+<p>たとえば、依存しているインスタンス変数を後から注入して変えられるようにすると、自分でnewして作ったインスタンスを、別のオブジェクトの中に注入し、「外部からそのインスタンスを受け取る」ことができます。</p>
+<p>こうすると、設計が単純になるし、柔軟性も生まれます。それぞれのクラスのオブジェクトが、無限にツリー構造で依存していくのではなく、自分でそれぞれのインスタンスを作って、その「関連性としてのやり取り」によってプログラミングを行えます。</p>
+<p>つまり、どんどん無限の依存地獄に入っていくのではなく、それぞれの単体オブジェクトのメッセージのような方法で開発できるのです。</p>
+<p>また、このようにすることで、たとえば用途に応じて別のクラスのインスタンスを渡したりできるようになり、カスタマイズがしやすくなります。Javaの継承やインターフェースの考え方を、より体現した形であると言えるのです。</p>
+
+<h1>Spring Framework</h1>
+<h2>Spring Framework</h2>
+<p>JavaによるWebフレームワークの一つ。DI（依存性注入）とアスペクト指向プログラミングを二つの柱とする。</p>
+<p>複数のフレームワークを組み合わせて使うほかのJavaフレークワークに比べて、フルスタックであることで知られる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Spring_Framework">Spring Framework - Wikipedia</a></li>
+<li><a href="https://dev.classmethod.jp/server-side/java/spring-firstcontact/">第1回 はじめてのSpring Framework ｜ DevelopersIO</a></li>
+<li><a href="https://qiita.com/park-jh/items/4df5c67d895b2ea219d6">springの再入門 - DI（依存性注入） - Qiita</a></li>
+</ul>
+
+<h2>Springとフルスタックフレームワーク</h2>
+<p>Javaのフレームワークは、コントローラのStrutsやWicket、永続化のHibernateなど、さまざまな専門に分かれたフレームワークを組み合わせて使うことが多かった。</p>
+<p>これは柔軟ではあるものの、それぞれの役割と用途と方法を覚えながら、組み合わせて使用しなければならないため、いろいろと難しいところがある。</p>
+<p>これに対して、Springは各種のコンポーネントの集合であり、これをひとつのフルスタックフレームワークとして使うことができる。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://dev.classmethod.jp/articles/spring-firstcontact/">第1回 はじめてのSpring Framework | DevelopersIO</a></li>
+</ul>
+
+<h2>Spring MVC</h2>
+<p>MVC型のフレームワーク。Springから提供されている。Apache Strutsに失望したため、自前のWebフレームワークとして作られた。</p>
+<p>Spring MVCでは、@Component（DIコンテナに登録する）、@Service（サービス）、@Repository（DB）、@Controller（コントローラ）などのJavaのアノテーションを使うことで、簡単にMVC開発ができます。</p>
+<p>たとえばクラスをコントローラとして指定したいなら@Controllerをつける。</p>
+<pre class="prettyprint">
+@Controller
+public class HogeController {
+    ...
+}
+</pre>
+<p>URLリクエストとメソッドは以下のようにマッピングできる。</p>
+<pre class="prettyprint">
+    @RequestMapping('/')
+    @ResponseBody
+    public String index(String pageId) {
+        ...
+    }
+</pre>
+<p>このほかにもさまざまなアノテーションがある。</p>
+<p>（<a href="https://qiita.com/yana_temu/items/293a388e202470b7d7e0">1.Springframeworkを1からはじめる - Qiita</a>を参考に執筆・引用しました。）</p>
+<ul>
+<li><a href="https://qiita.com/t-shin0hara/items/c7d08aaef24fcdd64a28">Spring5 MVC ～サンプルアプリ実装～ - Qiita</a></li>
+<li><a href="https://qiita.com/yana_temu/items/293a388e202470b7d7e0">1.Springframeworkを1からはじめる - Qiita</a></li>
+<li><a href="http://penguinlabo.wp.xdomain.jp/understandspringmvc/">Spring MVCの概要を理解する | ぺんぎんらぼ</a></li>
+</ul>
+
+
+<h2>Spring Roo</h2>
+<p>SpringのサブプロジェクトのRADツール。コマンドラインからさまざまな種類のファイルを生成してくれる。</p>
+<ul>
+<li><a href="https://qiita.com/disc99/items/524b36b8c60495ed22b7">Spring Roo入門 - Qiita</a></li>
+</ul>
+
+<h2>Spring Boot</h2>
+<p>Springによる、Web開発を簡単にしてくれるBootstrapフレームワーク。</p>
+<ul>
+<li><a href="http://inaz2.hatenablog.com/entry/2017/04/05/200206">Spring Bootで簡単なWebアプリケーションを書いてみる - ももいろテクノロジー</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Webフレームワーク</h2>
+<p><a href="../network/web_framework.html">Webフレームワーク</a>を参照のこと。</p>
+
+<h2>Java</h2>
+<p><a href="java.html">Java</a>も参照のこと。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

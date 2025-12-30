@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>DOS関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Windows/PCの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/windows_pc_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>DOSの世界観</h1>
+<p>DOSに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>DOS</h1>
+<h2>MS-DOS</h2>
+<p>MS-DOSは、IBM PC/AT互換機として、IBMがパソコンの設計をオープン化し、そこでMicrosoftが作ったMS-DOSという16bitのコマンドOSとして販売された。</p>
+<p>当時はコマンドでの操作が主体だった。</p>
+<p>後日注記：Microsoftは最初BASICのインタープリタを作っていた会社で、とても小さな8キロバイトのBASICをマイコン（マイクロコンピュータ）に付属して稼いでいた。当時は、コンピュータを家庭の個人が持つことができるという「革命」だった。IBMがIBM PCをオープン化すると、当時あまり知られていなかったMicrosoftを、IBM PCの16bit OSのベンダーに採用し、MicrosoftはMS-DOSと呼ばれるコマンド操作・シングルタスクのOSを作った。MicrosoftはMS-DOSの上でDOS BASICが動くようにして、「簡単にプログラミングができる個人向けのコンピュータ」として「パソコン」と呼ばれた。</p>
+
+<h2>シングルタスクでコマンド操作が中心</h2>
+<p>DOSは、シングルタスクで、コマンドによるディスク操作が中心のOSです。</p>
+<p>当時は、まだパソコンにUNIXのような高度なネットワーク機能などはなく、またグラフィック機能もありませんでした（ただしビットマップやスクリーンバッファなどの操作で8bitのゲームなどは何とか作れた）。操作はコマンド主体で、シングルタスクで、「ディスクオペレーティングシステム」という名前の通り、大容量のディスク操作が中心のOSでした。</p>
+<p>当時のホビーPCは、BASICインタプリタでプログラミングを行うのが中心でした。DOS向けのアプリケーションはたくさんあり、Lotus 1-2-3などはDOSで動くアプリケーションでした。また、DEBUGコマンドなどを使うことで、機械語のプログラミングもできました。</p>
+<p>Windows 95が発売される以前の当時、Windows 3.1はMS-DOSで動くウィンドウ環境としてMicrosoftから提供されていました。当時はMacintoshがGUIシステムとして先を行っており、Windowsはその模倣品にすぎませんでした。それがこれだけシェアを集めることになったのは、Windows 95の使いやすさが人々に支持されたからだと思います。</p>
+<p><a href="../prog_lang/basic.html">BASIC</a>や<a href="../prog_lang/assembly.html">アセンブリ言語</a>や<a href="windows.html">Windows</a>も参照のこと。</p>
+
+<h2>DOSコマンド一覧</h2>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>CD</td><td>現在のディレクトリの移動。</td></tr>
+<tr><td>DIR</td><td>ディレクトリの中のファイル一覧の表示。</td></tr>
+<tr><td>MD</td><td>ディレクトリの作成。</td></tr>
+<tr><td>COPY</td><td>ファイルのコピー。</td></tr>
+<tr><td>TYPE</td><td>ファイルの内容（テキストの中身）の表示。</td></tr>
+<tr><td>DEL</td><td>ファイルの削除。</td></tr>
+<tr><td>REN</td><td>ファイルの名前変更。</td></tr>
+<tr><td>SET</td><td>環境変数の設定。</td></tr>
+<tr><td>EXIT</td><td>対話・入力環境の終了。</td></tr>
+</table>
+<p>以下はDOSのコマンド一覧。</p>
+<ul>
+<li><a href="https://www.k-cube.co.jp/wakaba/server/dos_command.html">よく使うDOSのコマンド -  若葉プログラミング塾</a></li>
+<li><a href="https://www.pg-fl.jp/program/dos/doscmd/">DOS コマンド一覧 - Programming Field</a></li>
+<li><a href="https://qiita.com/yutakakn/items/965a0148d8a1b9c2d14c">今でも使えるDOSコマンド - Qiita</a></li>
+<li><a href="http://axase.com/dos.html">DOSコマンド一覧 - ≫アザス・コム - axase.com -</a></li>
+</ul>
+<div class="edit_date">
+<p>2022.12.09編集</p>
+</div>
+
+<h2>DOSは今でも使える</h2>
+<p>DOSのことを「もう終わったOS」だと思っている人が多いですが、DOSコマンドはWindowsのコマンドプロンプト（アクセサリ→コマンドプロンプト）からWindowsで今でも使えます。</p>
+<p>特に、複数のファイルに同じコマンドを実行するバッチ処理に使われることが多い。UNIXと同等まではいかないですが今でも使えます。</p>
+<p>また、C言語でWindowsアプリを開発する時も、基本的な言語の練習はコマンドプログラムの開発を通じて行います。この時もコマンドプロンプトを使います。自分でプログラムを作れる人は、DOSが分かっているととても便利です。</p>
+
+<h2>MS-DOSはコマンドから直接ハードウェアにアクセスできる</h2>
+<p>UNIXとの違いとして言えるのは、MS-DOSではコマンドからハードウェアに直接アクセスできるということ。</p>
+<p>UNIXでは、多くの場合ユーザーコマンドからハードウェアには直接アクセスできず、カーネルを介してアクセスできるかどうかを許可する。これを隠蔽と呼ぶ。</p>
+<p>MS-DOSではコマンドからハードウェアに直接アクセスできる。このため、ゲームなどが作りやすい。</p>
+
+<h1>オープンソースなDOSの実装</h1>
+
+<h2>FreeDOS</h2>
+<p>オープンソースで開発されているFreeDOSと言うプロジェクトもある。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FreeDOS">FreeDOS - Wikipedia</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

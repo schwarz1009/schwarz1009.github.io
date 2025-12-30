@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Elm関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>Elmの世界観</h1>
+<p>Elmによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Elm</h1>
+<h2>Elm</h2>
+<p>Elmは関数型で全ての値を不変（イミュータブル）にするWebブラウザのUI作成を行う言語。JavaScriptにコンパイルできる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Elm_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)">Elm (プログラミング言語) - Wikipedia</a></li>
+<li><a href="https://qiita.com/Yametaro/items/50a2ce2014327f6c8869">JavaScriptとElmを比べてみた〜前編〜 - Qiita</a></li>
+<li><a href="https://qiita.com/Yametaro/items/005a854a2e86e22bb036">JavaScriptとElmを比べてみた〜後編・Vue.jsとも比べてみた〜 - Qiita</a></li>
+</ul>
+
+<h2>なんとこんなコードが成り立つ</h2>
+<p>Elmではなんとこんなコードが成り立つ。</p>
+<pre>
+z = x + y
+x = 10
+y = 2
+</pre>
+<p>これは、Elmでは全ての値が不変なので、xとyはどこで使っても同じ10と2を指す。変数を定義の上で使っても下で使っても良い。</p>
+<p>また、オブジェクトのプロパティすら不変なので、オブジェクトの値を更新したい時はその都度別の新しいオブジェクトが生まれる。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

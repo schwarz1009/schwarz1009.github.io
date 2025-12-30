@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux SSH - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux SSH</h1>
+<p>LinuxのSSHに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>SSH</h1>
+<h2>SSHとは</h2>
+<p>SSHはリモートのマシンにログインする「リモートログイン」ソフトウェア。</p>
+<p>リモートのLinuxマシンにログインし、UNIXコマンドを実行したり、パッケージをインストール・更新したり、サービスを起動・停止したり、設定ファイルを編集したりする、「リモート管理」を行うことができる。</p>
+<p>Linuxを使う上で、コマンドラインのOSを使うメリットとして言えるのは、「GUIよりも高度なことが簡単にできる」とか「スクリプトで自動化したり、パイプで複数のコマンドを組み合わせることができる」などとよく言われ、コンソール（端末の白黒画面のターミナル）やGUIの端末エミュレータ（GUIの中でコマンドラインが使えるターミナル）から使うこともできますが、コマンドラインの醍醐味はSSHでリモートのサーバーにログインするなどして、リモートからコマンド操作を行うことだと思います。</p>
+<p>たとえばWindows上のTeraTermなどの端末エミュレータから、リモートのLinuxサーバーマシンにログインし、操作を行う。この時、mkdirやcpなどのUNIXコマンドを覚えていると、多くのUNIXコマンドが使える。UNIXコマンドの大きなメリットは、「SSHでリモート操作ができる」ということが多い。</p>
+<p>ただし、リモートからログインできるため、セキュリティ管理には注意が必要。昔からのUNIXエンジニアにはrlogin/telnetを使ったログインがお馴染みだが、SSHはそれらよりもセキュリティが高いとされている。</p>
+<p>あまり使う頻度は多くないかもしれないが、WindowsからLinuxのGUIアプリケーションを起動したい場合は、Cygwin/Xなどが使用できる。僕は使ったことがないので実際は分からないが、Cygwin上のXでもおそらくリモートのXアプリケーションに接続できる（Xはネットワーク透過なクライアント・サーバーシステムである）。</p>
+<p>また、リモートデスクトップとしてはVNCと呼ばれるソフトウェアがある。これはリモートのコンピュータを遠隔操作することができ、Windowsなどでも使用できる。</p>
+
+<h2>SSH</h2>
+<p>リモートのマシンにログインして、コマンド操作を行うことが出来る。</p>
+<p>セキュリティ上の注意点として、出来るだけパスワード方式ではなく、公開鍵・秘密鍵方式を使って、デフォルトのポートを変更すること。</p>
+<ul>
+<li><a href="http://qiita.com/tag1216/items/5d06bad7468f731f590e">インフラエンジニアじゃなくても押さえておきたいSSHの基礎知識 - Qiita</a></li>
+<li><a href="https://mag.osdn.jp/07/04/03/0148224">SSHのセキュリティを高めるためのハウツー - OSDN</a></li>
+<li><a href="http://qiita.com/cocuh/items/e7c305ccffb6841d109c">そこそこセキュアなlinuxサーバーを作る - Qiita</a></li>
+<li><a href="http://gomocool.net/gomokulog/?p=557">ssh-keygenで鍵作成し、sshでログインできるようにする。 – gomokulog</a></li>
+<li><a href="https://qiita.com/passol78/items/2ad123e39efeb1a5286b">~/.ssh/configについて - Qiita</a></li>
+</ul>
+
+<h2>OpenSSH</h2>
+<p>オープンソースなSSHの実装。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OpenSSH">OpenSSH - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/openssh">git</a></li>
+</ul>
+
+<h1>ネットワークから操作する</h1>
+<h2>SSHの基本</h2>
+<p>主要なコマンド：</p>
+<table class="some_tables">
+<tr>
+<th class="min60">コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>ssh</td><td>リモートログイン（リモートでのコマンド実行）を行う。</td>
+</tr>
+<tr>
+<td>scp</td><td>リモートでのファイル転送を行う。</td>
+</tr>
+<tr>
+<td>ssh-keygen</td><td>公開鍵と秘密鍵の鍵ペアを生成する。</td>
+</tr>
+<tr>
+<td>ssh-copy-id</td><td>公開鍵をリモートマシンに登録する。</td>
+</tr>
+</table>
+<p>sshコマンドの例：</p>
+<pre>
+ssh [user@]hostname [command]
+</pre>
+<p>ユーザー名を省略すると、クライアントで今ログインしているユーザーとなる。</p>
+<p>コマンドを指定した場合、そのコマンドがリモートで実行され、省略した場合、リモートで実行するコマンドを入力可能なプロンプトが表示される。</p>
+<p>詳しくは以下のページを参照のこと。</p>
+<ul>
+<li><a href="http://qiita.com/tag1216/items/5d06bad7468f731f590e">インフラエンジニアじゃなくても押さえておきたいSSHの基礎知識 - Qiita</a></li>
+</ul>
+<p><a href="../network/encrypt.html">暗号</a>も参照のこと。</p>
+
+<h2>SSHの設定</h2>
+<p>SSHの設定方法については、<a href="linux_ssh_config.html">SSHの設定</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>sshfs</h2>
+<p>sshfsは、リモートのマシンのディレクトリをローカルのディレクトリにSSHを使ってマウントすることのできるソフトウェア。</p>
+<p>マウントしたディレクトリはローカルのディレクトリと同じように通常のUNIXコマンドで操作できる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/SSHFS">SSHFS - ArchWiki</a></li>
+<li><a href="https://www.server-memo.net/tips/sshfs.html">sshfsで別サーバのディレクトリをマウントする | server-memo.net</a></li>
+</ul>
+
+<h1>同様のコマンド</h1>
+<h2>rlogin/telnet</h2>
+<p>rlogin/telnetはSSHより古いコマンドで、パスワードなどを含めて全通信を暗号化せずに平文で行ってしまう問題があるため、現代のUNIXユーザはsshを使おう。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Rlogin">rlogin - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Telnet">Telnet - Wikipedia</a></li>
+</ul>
+
+<h1>Windowsの端末エミュレータ</h1>
+<h2>TeraTerm</h2>
+<p>TeraTermはWindowsにおける端末エミュレータで、telnetなどでWindowsからLinuxにリモートログインするためなどに使う。</p>
+<p>TeraTerm Projectでは原作者によるTera Termオリジナル版の後継版を開発している。</p>
+<p>TTSSHモジュールによりSSHにも対応している。</p>
+<ul>
+<li><a href="https://ttssh2.osdn.jp/">Tera Term Open Source Project</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>SSHの開発とUNIXプログラミング</h2>
+<p>実際のところ、プログラミングを行う上で必要なこととは、「与えられた条件から機能を作ること」と、「OSの仕様をよく知っておくこと」です。</p>
+<p>たとえば、SSHを作りたいのであれば、まず、リモートでUNIXにログインできなければなりません。そして、リモートでネットワークを通じて暗号化した上で入出力をやり取りし、接続したホストでコマンドを実行しなければなりません。</p>
+<p>そのために必要なのは、まず「UNIXでどのようにすればプログラムからログインできるのか」ということを知っておくことと、「ネットワークという条件の下にどのようにリモートシェルを実現するのか」ということを考えることです。</p>
+<p>すなわち、APIレベルでログインする方法が分かってしまえば、後は単にネットワーク接続の仕様を上手く利用し、与えられた条件で機能を作るようにすれば、SSHはおそらく作れます。</p>
+<p>そのように、プログラミングにおいては、そのOSあるいはプログラミング言語やライブラリAPIやフレームワークの仕組みに習熟しておくことと、その上で与えられた最低限の方法から自分の作りたい機能をどのようにすれば作れるのかを考えることが重要となります。</p>
+<p>SSHの開発だけではなく、どんな機能やソフトウェアであってもプログラミングにおいてはすべてに同じことが言えるでしょう。</p>
+<p><a href="../prog_lang/programming_expert.html">プログラミング作法（エキスパート）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.06.18</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>SSH</h2>
+<p>ネットワークからサーバーに接続し、コマンド操作ができる。</p>
+<p>以前はtelnetなどが使われていたが、セキュリティの問題がありsshが使われることが標準になった。</p>
+<p>コマンドで何でもできるため、侵入されると恐ろしいことになる。推奨設定は、「パスワードではなく公開鍵暗号を使うこと」「rootログインを禁止すること」「デフォルトのポート番号を変更すること」など。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

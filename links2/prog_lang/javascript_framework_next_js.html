@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Next.js関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div><h1>Next.jsの世界観</h1>
+<p>Next.jsによるプログラミングに関する世界観です。<a href="javascript_framework_react.html">React</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Next.js</h1>
+<h2>Next.js</h2>
+<p>Next.jsはReactをベースにして作られたフレームワーク。</p>
+<p>Next.jsでは、サーバサイドレンダリング（SSR）を使うことができる。SSRではクライアントのWebブラウザではなくサーバ側でレンダリングを事前に行うため、ページを表示する速度が高速になる。</p>
+<p>また、Next.jsには、ファイルを使ったルーティングの機能がある。配置したファイルの構成に応じて、URLからルーティングを行うことができる。</p>
+<p>また、Next.jsにはサーバの機能がある。そのため、ほかのなんらかのサーバを導入しなくても、Next.jsのサーバを使うことで簡単に作ったサービスをネット上に公開できる。</p>
+<p>Reactを単体で使うことは多くなく、多くの場合Next.jsと一緒に使う。また、データの永続化や認証といったバックエンドのためにGoogleから提供されているオンライン上のデータベースであるFirebaseを使うことが多い。Next.jsとFirebaseを使うことで、Railsのようなバックエンドフレームワークを使用しなくても、ほとんどReactだけでサービスを開発できる。</p>
+<ul>
+<li><a href="https://bagelee.com/programming/next-js/setup-next-js/">Next.jsの環境構築【これからはじめるNext.js】 - bagelee（ベーグリー）</a></li>
+<li><a href="https://udemy.benesse.co.jp/development/app/what-is-next-js.html">Next.jsとは？Reactとの違いやインストール・基本操…｜Udemy メディア</a></li>
+</ul>
+<p><a href="../db/firebase.html">Firebase</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.01.08-09編集</p>
+</div>
+
+<h2>Next.jsのルーティング</h2>
+<p>ReactはSPA（シングルページアプリケーション）が基本だが、Next.jsのルーティングはファイルベースで行われる。</p>
+<p>たとえば、/に相当するファイルは、pages/index.tsxに置かれ、/diaryに相当するファイルは、pages/diary.tsxに置かれる。</p>
+<p>ページが存在しなかった時はpages/404.tsxが表示される。</p>
+<p>pages/_app.tsxとpages/_document.tsxは特殊なファイルで、アプリケーション自体のエントリーポイントやHTMLのヘッダとして使われる。</p>
+<p>動的ルーティングも可能で、pages/diary/[pageid].jsとして/diary/hogeにアクセスすると、</p>
+<pre class="prettyprint">
+{ "pageid": "hoge" }
+</pre>
+<p>のようにページにパラメータが渡される。</p>
+<p>（<a href="https://qiita.com/Yuki_Oshima/items/5c0dfd8f7af8fb76af8f">Next.jsを使うべき5つの理由 + 実装Tips #JavaScript - Qiita</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2024.06.18</p>
+</div>
+
+<h2>Vercel</h2>
+<p>VercelはNext.jsによるWebアプリケーションをデプロイするために使えるプラットフォーム。デプロイ作業が簡単になる。運営元はNext.jsの開発元であるVercel社。</p>
+<ul>
+<li><a href="https://note.com/libproc/n/n10dd8760d530">Vercelの機能一覧＋解説 『Vercelを100%使い倒そう』｜TodoONada株式会社</a></li>
+<li><a href="https://zenn.dev/smartcamp/articles/9d9b4224be862f">Vercelを調査していて感じたメリット・デメリット - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.06.18</p>
+</div>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Next.js">Next.js - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

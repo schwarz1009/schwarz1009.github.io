@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>PostgreSQL関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PostgreSQLの世界観</h1>
+<p>PostgreSQLによるデータベース操作に関する世界観です。<a href="db.html">データベースの世界観</a>と<a href="sql.html">SQLの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>PostgreSQL</h1>
+
+<h2>PostgreSQL</h2>
+<p>オープンソースのSQLサーバ。MySQLのライバルで、どちらかというと性能ではMySQLに劣るものの、MySQLよりも機能が多いとされている。日本では一時期、さまざまな理由からMySQLよりもPostgreSQLの方が使われていたこともあり、MySQLよりもなじみが深いという方も多い。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/PostgreSQL">PostgreSQL - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/postgres/postgres">git</a></li>
+</ul>
+
+<h2>MySQLより機能が多い</h2>
+<p>MySQLが広く使われているデータベース管理システムだが、意外なことに、機能はPostgreSQLの方が多い。</p>
+<p>SQLの機能の多さはPostgreSQL、検索性能はMySQLが優れていると言われる。</p>
+<ul>
+<li><a href="http://db-study.com/archives/87">PostgreSQLと他RDBMSの比較 ｜ PostgreSQLではじめるDB入門</a></li>
+</ul>
+
+<h2>まず公式のマニュアルとユーザー会を読もう</h2>
+<p>僕が見ていたところ、公式のマニュアルとユーザー会の情報集約サイト「Let's Postgres」に一通り書いてある。MySQLを知っていればすんなりと理解できそう。</p>
+<ul>
+<li><a href="https://www.postgresql.jp/docupage">ドキュメント | 日本PostgreSQLユーザ会</a></li>
+<li><a href="https://www.postgresql.jp/document/11/html/">PostgreSQL 11.5文書</a></li>
+<li><a href="https://lets.postgresql.jp/">Let's Postgres</a></li>
+</ul>
+
+<h2>PostgreSQLの機能一覧表</h2>
+<p>以下に、PostgreSQLの機能を他のデータベース管理システムと比べた上での一覧表がある。重要な利点は、「商用RDBMSと比較しても遜色のない機能を持ちながらも低コストで導入できる」点。PostgreSQLにはOracle Datebaseと同様の機能がありながら、フリーで利用できる。</p>
+<ul>
+<li><a href="https://lets.postgresql.jp/documents/tutorial/rdbms-hikaku/1">PostgreSQLの機能と他のRDBMSの比較 | Let's Postgres</a></li>
+</ul>
+<p>後日注記：PostgreSQLは「適度に機能のバランスが取れたオープンソースのデータベース」として有名である。</p>
+
+<h2>pgAdmin</h2>
+<p>pgAdminを使うことで、PostgreSQLをCUIではなくGUIで管理できる。</p>
+<ul>
+<li><a href="https://www.pgadmin.org/">pgAdmin - PostgreSQL Tools</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=PostgreSQL">PostgreSQL - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>情報</h1>
+
+<h2>おすすめサイト</h2>
+<p>特に以下のサイトがおすすめです。</p>
+<ul>
+<li><a href="http://db-study.com/">PostgreSQLではじめるDB入門</a></li>
+</ul>
+
+<h2>PostgreSQLリンク集</h2>
+<p>以下のようなサイトが参考になる。</p>
+<ul>
+<li><a href="https://www.dbonline.jp/postgresql/">PostgreSQLの使い方 - DBOnline</a></li>
+<li><a href="http://gihyo.jp/dev/feature/01/dex_postgresql">詳解 PostgreSQL［10/11対応］―現場で役立つ新機能と実践知識：特集｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/dev/feature/01/lets-postgresql">gihyo.jp & Let's Postgres 連動企画　今こそ！PostgreSQL：特集｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>LPIによる教科書</h2>
+<p>Linuxの資格組織であるLPIにより、PostgreSQLの教科書がリリースされている。</p>
+<ul>
+<li><a href="https://oss-db.jp/ossdbtext">オープンソースデータベース標準教科書</a></li>
+</ul>
+
+<h1>リンク集</h1>
+<h2>PostgreSQL</h2>
+<p>データベース。SQLの基本は、取り出し、追加、削除、更新です。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/PostgreSQL">PostgreSQL - Wikipedia</a></li>
+</ul>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>仮想化技術関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">仮想化・互換レイヤーの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/virt_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>仮想化技術の世界観</h1>
+<p>仮想化技術に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>仮想化技術</h1>
+<h2>仮想化とは</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p><!--また、-->ネットワークにおいては、仮想化と呼ばれる仕組みを使うこともある。</p>
+<p>これは、OSの上で仮想マシンや仮想CPUをエミュレートし、OSの上で別のOSを実行できる機能。</p>
+<p>VM型の仮想化では、OSそのものを仮想化するため、たとえばWindows上でLinuxを実行できる。</p>
+<p>VM型仮想化としては、Virtualboxなどが有名。</p>
+<p>これに対して、Linux上でLinuxの仮想化を行うDockerなどでは、カーネルを共有するコンテナ型の仮想化を行うため、軽量でパフォーマンスがいい。</p>
+<p>コンテナ型の仮想化では、プロセスを専用のコンテナプロセスとして「隔離」することができ、それを「コンテナイメージ」とすることができる。</p>
+<p>Docker Hubなどのホスティングサイトでは、このコンテナイメージをインターネットからダウンロードでき、たとえば何の設定や導入もしなくても、簡単にRuby on Railsの環境をDockerだけで実現することができる。</p>
+<p>また、必要がなくなったら、簡単に仮想サーバごと削除できる。</p>
+<p>こうしたコンテナ型の仮想化は、システムの開発（DevOps）においてはとても便利で、本番環境を開発環境で再現するために使えるほか、レンタルサーバなどでは、簡単にroot権限のある仮想サーバを利用者に与えることができる（VPS）。</p>
+
+<h2>仮想化って何？</h2>
+<p>仮想化とは、「OS環境の上で別のOS環境を再現できる」技術。</p>
+<p>主に、サービスを開発する際、試験環境で実際の本番環境と同等の環境を構築し動くかどうかを試す用途や、レンタルサーバなどでroot権限を得られる仮想サーバーを作って提供したりするために使う。</p>
+<p>仮想化にはVM型の仮想化とコンテナ型の仮想化がある。</p>
+<p>VM型の仮想化では、VM（仮想マシン）の上でホストのOSとは別のOSを動かせる。</p>
+<p>これに対して、コンテナ型の仮想化では、ホストはLinuxカーネルで、その上でLinuxカーネルを共有しながら、Dockerというコンテナの上で別のマシン（Linux仮想環境）を動かすことができる。</p>
+<p>Dockerはパフォーマンス上のメリットや手軽さが優れており、「インスタンスにいつでも作って不要になれば削除できる」代わり、Windowsなど別のOSは実行できない。</p>
+<p>後日注記：実際にはLinux仮想環境と言うよりも、隔離されたコンテナプロセスが動く。軽量かつハイパフォーマンスでプロセスを動かせるため、ホストに直接MySQLを入れるのではなく、仮想マシンのMySQLコンテナを入れ、開発や試験環境と本番環境を同じにすることも多くなってきている。</p>
+
+<h2>仮想環境とコンテナ</h2>
+<p>たとえば、ホストのLinuxカーネルの上で、Dockerの仮想マシン上のコンテナOSとしてRHELを動かすことも、SUSEを動かすことも、Ubuntuを動かすこともできる。一台だけではなく何台も動かせる。</p>
+<p>このため、レンタルサーバーの仮想サーバーなどにおいて、ホストのシステムをLinuxで構築し、その上でコンテナOSをさまざまに動かすことで、「一台のパソコンの上で何台ものOSシステムを無限に動かす」ことができる。</p>
+<p>また、Dockerは通常ひとつのホストに制限されているが、Kubernetesを使うことで、ネットワーク上に分散するさまざまなホストを一台のホストであるかのように仮想化することができる。</p>
+<p>DockerとKubernetesを使うことで、パソコンは複数のネットワークホストが一台になり、その仮想ホスト一台が仮想的な無限台のシステムになる。必要になった段階でシステムを増やし、要らなくなったらすぐに削除できる。</p>
+<p>Dockerは、実際の本番環境と同等の環境を仮想環境上に構築し、試験やテストを行いながら開発をする「DevOps」と相性がいい。</p>
+<p>VM型の仮想化よりも、コンテナ型の仮想化の方が、Linuxカーネルを共有する分パフォーマンスが良く、軽いという特徴がある。</p>
+<p>後日注記：Dockerでは、Dockerfileを使うことでコンテナのイメージを簡単に作り、別の環境に適応したり配布することが簡単である。Web上のDocker Hubではこうしたイメージが配布されており、NginxやMySQLを入れるのであれば、「docker run」コマンドで簡単に導入することができる。</p>
+
+<h2>仮想化の用途（仮想環境にWindowsを入れる）</h2>
+<p>既存のシステムやアプリケーションがWindows 10で動かず、過去のWindowsのバージョンを継続して使わざるを得ないが、それでもセキュリティの問題からWindows 10に更新したい場合、仮想環境にWindowsの過去のバージョンを入れる、という方法があります。</p>
+<p>たとえば、僕は過去に親が購入したVisual Studio 6.0 Enterprise Editionを持っています。コンパイラやデバッガ、フォームデザイナーやリソースエディタなどが含まれたとても高価なソフトウェアですが、残念ながらWindows 10では動作しません。このような時、仮想環境に昔のWindowsを入れて、そこからVS 6.0を使うことができます。</p>
+<p>同じことは、マルチブートでも実現できますが、マルチブートと違い、同時に複数のOSを実行できます。このため、Linuxの開発用のサーバを仮想環境に入れて、Windowsから仮想サーバにアクセスしたりできます。</p>
+<p>広く使われている仮想ソフトウェアのVirtualBoxはオープンソースで、無料で使えます。Linuxデスクトップを使うなら、Windowsを仮想環境に導入し、Windowsアプリケーションを使う必要がある時に仮想環境のWindowsを使うこともできます。</p>
+<p>ネット上には、過去の全てのバージョンのWindowsを入れて、博物館のようにしている人も居ます。</p>
+<p>ただし、仮想環境はエミュレータと同じで、普通に使うよりも速度が遅くなります。特にLinuxをWindowsの上で動かすなら、LXDEのような軽量デスクトップ環境がおすすめです。</p>
+<p>（在導万創のブログより。2020.03.08）</p>
+
+
+<h1>VM型仮想化</h1>
+<h2>仮想化とは</h2>
+<p>仮想化とは、OSの上で別のOSを実行したり、複数のOSを並列実行したりすることができる技術。</p>
+<p>「コンピュータの中で仮想的なコンピュータを実現する」と考えると分かりやすい。実際にはWindowsの上でLinuxを動かしたり、Linuxの上でLinuxを動かしたりすることができる。</p>
+<p>Windowsにおいては、VirtualBoxを導入することで、Windowsの上でLinuxを実行したりできる。Xen、KVM、QEMUなどを使うことで、Linuxの上で別のOSを実行したりすることもできる。</p>
+<p>クラウドでは、仮想化技術は便利である。以下に挙げる以外にも、<!--上記のように-->Dockerを使うことで、Linuxの上で仮想Linuxをコンテナとして実行することもできる。</p>
+<p>また、実際のデプロイ環境と同じ環境を、作業中の環境で再現する用途にも使える。</p>
+<p>さまざまなOSを同時に動作させることで、ひとつの「リレーション環境」を作ることができるし、その際にOSのシステム構成などを柔軟に構成できる。レンタルサーバーを提供したり、社内システムを構築したりする時に、仮想化技術は無くてはならない。僕が思うに、さまざまなOSと言語でコンポーネントがネットワーク通信を行う、CORBAと似ていると思う。</p>
+
+<h2>Xen</h2>
+<p>仮想化ソフトウェア。複数のOSを並列実行出来る。</p>
+<p>Xenでは、XenスーパーバイザはLinuxやWindowsのようなOSよりも低い階層で動作し、LinuxやWindowsをXenの上で並列に動作させる。これは、VMwareのようなホストOSとゲストOSが分かれて実行されるタイプの仮想化ソフトウェアとは異なる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Xen_(%E4%BB%AE%E6%83%B3%E5%8C%96%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">Xen (仮想化ソフトウェア) - Wikipedia</a></li>
+</ul>
+
+<h2>KVM</h2>
+<p>Linuxカーネルに組み込まれた仮想化技術。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Kernel-based_Virtual_Machine">Kernel-based Virtual Machine - Wikipedia</a></li>
+</ul>
+
+<h2>QEMU</h2>
+<p>CPUエミュレータ。Intel CPUなどで別のCPUをエミュレートできる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/QEMU">QEMU - Wikipedia</a></li>
+</ul>
+
+<h2>VirtualBox</h2>
+<p>仮想化ソフトウェア。ホストOSの下でゲストOSを実行出来る。Windowsの上で任意のLinuxディストリビューションを実行したりすることが可能。</p>
+<p>後日注記：VirtualBoxにはホストOSとゲストOSの間でファイルを簡単に共有するような機能もあり、WindowsとLinuxの間でのやり取りをする上で使いやすい。Windows上で仮想環境を構築するなら、オープンソースなVirtualBoxが事実上の標準である。</p>
+<p><a href="vbox.html">VirtualBox/Vagrant</a>を参照のこと。</p>
+
+<h2>Vagrant</h2>
+<p>VirtualBoxと一緒にVagrantというソフトウェアを使うことで、VirtualBoxに導入したOSの環境を整備したり、サーバーをインストールしたりすることを自動化することができる。この時、環境のテンプレート（ひな形）であるVagrant boxを簡単に導入できる。Vagrant boxは簡単に削除・再作成することもできる。<a href="../prog_lang/php_framework_laravel.html">Laravel</a>の開発環境の導入に使うこともできる。</p>
+
+
+<h2>VMware</h2>
+<p>商用の仮想化ソフトウェア。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/VMware">VMware - Wikipedia</a></li>
+</ul>
+
+<h2>Hyper-V</h2>
+<p>Microsoftによる仮想化機構。どうしてもWindowsの上で他のOSを動かしたい場合は、Hyper-Vが使える。</p>
+<p>たとえば、Windowsの上でHyper-Vを使ってUbuntuを動かすことができる。最近はWindowsの上でネイティブにUbuntuが動くようにもなったが、Hyper-Vを使うことで、VMwareのように簡単にOSの上で別のOSを試したり削除したりすることもできる。UbuntuをWindowsの上でちょっと試してみたい人にはおすすめ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Hyper-V">Hyper-V - Wikipedia</a></li>
+<li><a href="https://qiita.com/mfunaki/items/9e2901936b04f00f9cd7">Windows 10 Pro Hyper-V に Ubuntu 18.04 LTS をインストール - Qiita</a></li>
+</ul>
+
+<h2>libvirt</h2>
+<p>さまざまな仮想化技術に対する、統一されたAPI。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Libvirt">libvirt - Wikipedia</a></li>
+</ul>
+
+<h2>GNOME Boxes</h2>
+<p>GNOME Boxesは、libvirtとQEMUとKVMを用いた、仮想化システムのGNOME用のフロントエンド。</p>
+<p>特徴は手軽であること。VirtualBoxのように高度な設定はできないが、簡単に仮想化環境とイメージを作成・削除できる。ISOイメージファイルやリモートマシンのURLなどから簡単に仮想マシンを作れる。</p>
+<p>たとえば、DistroWatch.comに書かれているようなさまざまなLinuxディストリビューションを導入して試すなどの用途に向いている。</p>
+<p>仮想環境の管理機能やリモートシステムのファイルブラウジングができるほか、VNCを経由してリモートデスクトップのクライアントになる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME_Boxes">GNOME Boxes - Wikipedia</a></li>
+<li><a href="https://holybea.com/2015/07/20/gnome-boxes/">GNOME環境で手軽に仮想マシンを構築するなら、GNOME Boxesがおすすめ - ほりべあぶろぐ</a></li>
+</ul>
+
+<h2>Box86</h2>
+<p>Box86はx86のエミュレータ。LinuxのARM環境（たとえばRaspberry Pi）でx86のバイナリを実行できる。</p>
+<ul>
+<li><a href="https://github.com/ptitSeb/box86">ptitSeb/box86: Box86 - Linux Userspace x86 Emulator with a twist, targeted at ARM Linux devices</a></li>
+<li><a href="https://raspida.com/wine32-rpi4">ラズパイでもBOX86を使ってWineでWindowsソフトを動かす | ラズパイダ</a></li>
+<li><a href="https://umemak.github.io/blog/posts/2020/04/23_box86/">ラズパイでbox86を試す - umemak</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.23</p>
+</div>
+
+<h1>コンテナ型仮想化</h1>
+<h2>jailsとZone</h2>
+<p>コンテナの歴史としては、FreeBSDで開発されたjailsという技術がある。また、SolarisにはZoneというコンテナの技術がある。</p>
+<p><a href="../unix/freebsd.html">FreeBSD</a>も参照のこと。</p>
+
+<h2>Docker</h2>
+<p>コンテナ型仮想化技術。Linuxで主に利用される。</p>
+<p><a href="docker.html">Docker</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>Kubernetes</h2>
+<p>コンテナのオーケストレーション技術。</p>
+<p><a href="kubernetes.html">Kubernetes</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>OpenVZ</h2>
+<p>Parallels Virtuozzo Containers for Linuxのオープンソース版のサーバ仮想化ソフト。ホストのLinuxカーネルを共有するため、オーバーヘッドが少ないとされる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OpenVZ">OpenVZ - Wikipedia</a></li>
+</ul>
+
+<h2>Linux-VServer</h2>
+<p>Linuxカーネル向けの仮想化技術によるバーチャルプライベートサーバ。Webホスティングサービスに利用される。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Linux-VServer">Linux-VServer - Wikipedia</a></li>
+</ul>
+
+<h1>仮想化プラットフォーム</h1>
+<h2>ProxmoxVE</h2>
+<p>ProxmoxVEはDebianをベースとした仮想化プラットフォーム。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Proxmox_VE_(%E4%BB%AE%E6%83%B3%E5%8C%96%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0)">Proxmox VE (仮想化プラットフォーム) - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.14</p>
+</div>
+
+<h1>Windows上のLinux</h1>
+<h2>coLinux</h2>
+<p>coLinuxはWindows上で動くLinuxカーネル。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Cooperative_Linux">Cooperative Linux - Wikipedia</a></li>
+</ul>
+
+<h2>Windows Subsystem for Linux (WSL)</h2>
+<p>Windows Subsystem for Linux (WSL)はLinuxのバイナリ実行ファイルをWindowsで動かすための互換レイヤー。</p>
+<p>新バージョンのWSL2では、互換レイヤーではなく、LinuxカーネルをOSにまるごと内蔵させた。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Windows_Subsystem_for_Linux">Windows Subsystem for Linux - Wikipedia</a></li>
+</ul>
+<p><a href="wsl.html">WSL</a>も参照のこと。</p>
+
+<h2>Cygwin</h2>
+<p>Windows向けのGNUツールの移植版。Windows上でUNIX環境が動作する。</p>
+<p><a href="cygwin.html">Cygwin</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>Linux上のWindows</h1>
+<h2>Wine</h2>
+<p>LinuxでWindowsアプリケーションを動かすためには<a href="wine.html">Wine</a>を用いる。</p>
+
+<h1>簡単な説明</h1>
+<h2>仮想化</h2>
+<ul class="defaultlist list7">
+<li>仮想化
+<ul>
+<li>仮想化
+<ul>
+<li>Docker
+<ul>
+<li>Kubernetes</li>
+<li>OpenShift</li>
+<li>OpenStack</li>
+<li>Ansible</li>
+</ul></li>
+<li>VirtualBox, Vagrant</li>
+<li>KVM</li>
+<li>Xen</li>
+<li>QEMU</li>
+</ul></li>
+</ul></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Delphi関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div><h1>Delphiの世界観</h1>
+<p>Delphiによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>主な用途</h1>
+<h2>フリーソフトの開発</h2>
+<p>フリーソフトの開発に使われることが多い。昔のDelphi 6は無料版があったため一部のフリーソフトユーザーに大人気だった。</p>
+<p>後日注記：僕も、最初はDelphi 6の無料版でプログラミングを始めました。その後にDelphi 7を購入しました。</p>
+
+<h1>概要</h1>
+<h2>Delphiによるプログラミング</h2>
+<p>Delphiでは、まず、RAD（ポトペタとも呼ばれる。VBなどのようにウィンドウをグラフィック操作で実際に表示されるような画面で編集できるエディタのこと）なフォームデザイナーを使ってフォームにコンポーネントを配置します。プロパティの値を変えれば、フォームデザイナー上のコンポーネントに即座に反映されます。</p>
+<p>また、コンポーネントのイベントにコードエディタで作成したコールバック関数を登録します。この関数の中で、コンポーネントのプロパティを変更したり、コンポーネントを動的に作成することもできます。もちろん、計算や条件分岐・繰り返しなどの構文も可能ですが、そのためにはObject Pascalという言語を使います。コードエディタでは自動補完のような機能を使うことができ、またイベントエディタ（オブジェクト インスペクタ）の項目をダブルクリックすることでコードエディタを開いて自動的に関数を作ることもできます。</p>
+<p>コンポーネントを自分の手で開発することもできます。たとえば2ch専用ブラウザのOpenJane Doeがやっているように、IEコンポーネントを使わずに、ネットワークからダウンロードしたデータを整形して、ビューに表示する軽量なビューコンポーネントを作成したりすることが考えられます。</p>
+<p>DelphiではObject Pascal言語を使います。この言語はとても洗練されており、Pascalという教育用言語をオブジェクト指向に拡張したもので、冗長に見えるところもありますが可読性に優れており、BASICなどに比べて生産性が高いことで有名です。</p>
+<p>また、Windows APIに比べてはるかに機能的で使いやすいVCLというライブラリを提供しており、これを使ってプログラミングを行うことができます。C++を使いたい場合は、C++でVCLの使えるC++ Builderなどの製品もあり、人気です。近年ではクロスプラットフォーム性も重要視されていて、（少し古い情報になりますが）昔リリースされていたKylixというLinux版のDelphiを使うことで、Delphi/VCLで書かれたアプリケーションをLinux/CLX向けに展開することができました。</p>
+
+<h2>パネルとプロパティとイベントだけで何でもできる</h2>
+<p>Delphiの一番の特徴は、「フォームにパネルを追加して、プロパティとイベントをいじながら、コード補完でコードを書いていくだけで、簡単にプログラムが書ける」ということです。</p>
+<p>実際のところ、テキストエリアやツリービューのようなパネルをどんどん追加していって、プロパティをいじるだけでUIをいじることができます。</p>
+<p>その上で、コードエディタでDelphiの分かりやすいコードを書いて、VCLのとても整然としたライブラリのクラスやメソッドを、それも覚えやすく規則的なメソッドや型を追加していくだけで、プログラムが完成します。</p>
+<p>決して簡単ではありません。独自にコンポーネントを作るためには、それなりの知識と技術が必要です。</p>
+<p>ですが、僕はこうしたDelphiの特徴が大好きで、本当に素晴らしいと思います。僕はMicrosoft製品の中ではC#が好きですが、Delphiの開発陣を引き抜いて開発しただけはあると思います。Delphiは最高です。</p>
+
+<h2>最高のGUI開発ツール</h2>
+<p>僕は、WindowsのGUI開発ツールとしては、Delphiは最高だと思っています。</p>
+
+<h2>ボーランドの製品</h2>
+<p>既に買収された旧ボーランドの製品です。ボーランドの製品には、C++でVCLライブラリの使えるC++ Builderなどもあります（こちらも人気でした）。</p>
+
+<h2>アンダース・ヘルスバーグ</h2>
+<p>MicrosoftでC#やTypeScriptなどを設計したアンダース・ヘルスバーグは、元々はボーランドでDelphiを開発していたメンバーで、MSによって引き抜かれました。なので、C#/VB.NETのようなWindowsの標準言語は、Delphiを祖先としていると言っていいでしょう（ただし、VBはかつてのBASIC言語のビジュアル版でもあるため、一概にDelphiが祖先とは言えない）。</p>
+<p>C#/VB.NETに対するDelphiのメリットは、CライクでもJavaライクでもJavaScriptライクでもない、Object Pascal言語を使うこと、そしてネイティブコンパイルができることです。C#/VB.NETは.NET Frameworkという、JavaVMと同様の仮想マシンの上で動きますが、Delphiはそうではなく、Windows用のネイティブなバイナリの実行ファイルをビルドできます。</p>
+<p>また、ヘルスバーグはDelphiの前身であるアセンブラによる高速Pascalコンパイラ、Turbo Pascalの原作者です。かつてはTurbo PascalはIntel PCでALGOL由来の言語のデファクトスタンダードでした。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%B9%E3%83%BB%E3%83%98%E3%83%AB%E3%82%B9%E3%83%90%E3%83%BC%E3%82%B0">アンダース・ヘルスバーグ - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Turbo_Pascal">Turbo Pascal - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Pascal">Pascal - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.11.24</p>
+</div>
+
+<h1>言語</h2>
+<h2>Object Pascal言語</h2>
+<p>Delphiでは、Pascalをオブジェクト指向に対応させたObject Pascalと言う言語でコードを書きます。</p>
+<p>Pascalについては<a href="pascal.html">Pascal</a>を参照のこと。</p>
+
+<h2>ネイティブコンパイル</h2>
+<p>Delphiでは、ソフトウェアをネイティブ・コンパイルし、ネイティブな実行ファイルを作ります。そのため、フリーソフトのような開発と配布に向いています。</p>
+
+<h2>高速</h2>
+<p>Delphiで作ったアプリケーションは、高速・軽快に動作します。その上、コンパイル速度も速いことで有名です。</p>
+
+<h2>教育用言語としてはBASICのライバル</h2>
+<p>DelphiはPascalという言語をベースにしていますが、Pascalは教育用として優れた言語で、教育用言語としてはBASICのライバルです。</p>
+<p>Visual BasicとDelphiのインターフェースや開発・管理・設定のスタイルは良く似ています。ですが、「簡単な言語」というイメージのBASICと比べ、「読みやすく、理解しやすく、コンピュータ技術とはどういうものなのか、プログラミング言語での開発とはどういうものなのかを学ぶ」という意味で、僕はDelphiの方に分があると思います。</p>
+<p>Visual Basicと似ているのは、コードデザイナーでの開発の方法や、プロパティやイベントなどの登録の方法も同じです。僕はVBを触る以前にDelphiを触ったため、「こんなにも分かりやすく便利でコンピュータのことが良く分かる環境はない」と思いました。今、VB.NET/C#を触っても、その想いは変わっていません。Delphiが一番優れたツールだと思います。</p>
+<p>僕は昔、Delphiの応用として（と言って良いかは分かりませんが）、C#とWindows.Formsの開発が好きでした。これは、C#の開発陣にDelphiの開発メンバー幹部をマイクロソフトが引き抜いたことに理由があると思います。DelphiとC#は、理想が同じです。Delphiの魂が分かる人には、C#の良さも分かると思います。</p>
+<p><a href="basic.html">BASIC</a>や<a href="vb.html">Visual Basic</a>や<a href="csharp.html">C#</a>や<a href="javascript_framework_typescript.html">TypeScript</a>も参照のこと。</p>
+
+<h1>ライブラリ・コンポーネント</h1>
+<h2>VCL/CLX</h2>
+<p>DelphiのVCL/CLXライブラリは、高度なオブジェクト指向の使いやすいライブラリとして人気があります。</p>
+<p>素のWindows APIやMFCを使うよりも、はるかに分かりやすくて、使いやすいです。</p>
+
+<h2>コンポーネント</h2>
+<p>Delphiはたくさんのコンポーネントが（有料ですが）付属しています。</p>
+
+<h1>GUIツール</h1>
+<h2>フォームデザイナー</h2>
+<p>Delphiには、フォームデザイナーが付属しています。VBなどと同じように簡単に開発出来ます。</p>
+<p>コンポーネントの追加は直感的で、イベントやプロパティの操作も使いやすいです。</p>
+
+<h2>コードエディター</h2>
+<p>Delphiのコードエディターでは、Delphi言語（Object Pascal言語）でコードを書いていきます。</p>
+<p>後日注記：Delphiで便利なのが、自動補完機能。クラス名やメソッド名などを数文字書くだけで、その数文字から始まるクラス名やメソッド名を一覧表示し、選ぶことで自動的に補完してくれる。僕はDelphiで初めて自動補完機能を使ったので、めちゃめちゃ便利だった。</p>
+<div class="edit_date">
+<p>2025.03.21編集</p>
+</div>
+
+<h2>イベント・メソッド・プロパティ</h2>
+<p>Dephiでは、イベントやプロパティの操作が直観的であり、登録や値の変更をGUIで行うことが出来ます。</p>
+<p>Delphiはイベントに応じたメソッドなどの登録と実行を、「イベントドリブン」で行うことができます。VBに負けない特徴ですが、VBよりも洗練されたコンポーネントを使って、イベント駆動を高度に行えます。これはとてもパソコンの仕組みとプログラミングの方法を分かりやすく、エレガントに教えてくれます。</p>
+<p>メニューやツールバーなどのコンポーネントとアクションリスト（メソッドの登録一覧のようなもの）のようなコンポーネントを使うことで、とても直感的にウィンドウプログラミングが行えます。また、ネイティブな実行ファイルを吐くこと、そして軽くて高速であることはとても大きな強みです。</p>
+
+<h1>Delphiいろいろ</h1>
+
+<h2>コンポーネントを作る</h2>
+<p>Delphiを使ってプログラムを開発していると、配置することのできる最初から登録されているコンポーネントを、自分で作ってみたくなる。</p>
+<p>たとえば、OpenJaneであっても、IEコンポーネントを使わずに、独自のビューコンポーネントを作っていて、それを使っていた。</p>
+<p>Delphiの基本は多少なりとも分かっていた当時の中学生の僕も、このコンポーネントの作り方が良く分からなかった。</p>
+<p>今、Delphiを使って開発している方は少ないかもしれないが、今では以下のような情報がある。</p>
+<ul>
+<li><a href="https://qiita.com/himajin_sekky/items/b87ee162048f9f4af86f">Delphi カスタムコンポーネントを作成・利用したい - Qiita</a></li>
+<li><a href="http://docwiki.embarcadero.com/RADStudio/Rio/ja/%EF%BC%BB%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%AE%E6%96%B0%E8%A6%8F%E4%BD%9C%E6%88%90%EF%BC%BD">［コンポーネントの新規作成］ - RAD Studio</a></li>
+</ul>
+<p>また、今のエンバカデロ社のDelphiはどうなっているのか分からないが、昔のボーランドだった頃のDelphiでは、製品版のDelphi 7を買うと分厚い何冊かのマニュアルが一緒に付属していた。これらのマニュアルと格闘するのも手である。</p>
+
+<h2>参考リンク</h2>
+<p>以下はObject Pascal言語で書かれた、Delphiのコードの実例です。</p>
+<ul>
+<li><a href="http://mrxray.on.coocan.jp/Delphi/plSamples/index.htm">[ Delphi サンプルプログラム集 概要 ] - Mr.XRAY</a></li>
+</ul>
+
+<h2>開発環境を買うとマニュアル本がついてくる</h2>
+<p>今のDelphiがどうなっているかは知りませんが、僕がDelphi 7を購入した時は、ソフトウェアの開発環境と一緒に、公式のマニュアル本と、「オフィシャルコースウェア」というDelphiやPascalの入門本がセットで含まれていました。</p>
+<p>このオフィシャルコースウェアを読むと、DelphiやPascalのプログラミングが一通りできるようになっています。</p>
+<p>なので、「自分にはプログラミングの知識や経験が何もない」という方であっても、Delphiを買えばプログラミングができます。</p>
+<p>ですが、僕がDelphiのプログラミングを始めた時、この本は読みませんでした。OpenJaneのビルドに成功した僕は、OpenJaneのソースコードを読んで編集し、Delphiのフォームデザイナとコードエディタを操作するだけで、Delphiのプログラミングがどのようなものであるか分かりました。</p>
+<p>Delphiは直感的で、とても簡単にプログラミングができ、高度なGUIアプリケーションの開発できる素晴らしい製品です。みなさんも、一度Delphiを触ってみることを強くおすすめします。</p>
+<div class="edit_date">
+<p>2023.05.09</p>
+</div>
+
+<h1>Delphiで作られた主なツール</h1>
+<h2>２ちゃんねる専用ブラウザ</h2>
+<p>Delphiは、２ちゃんねる専用ブラウザの開発に良く使われます。</p>
+<p>代表例としては、Open Jane、ギコナビ、ホットゾヌなど。</p>
+<p><a href="../services/2ch_browsers.html">2ch専用ブラウザ</a>も参照のこと。</p>
+
+<h1>Linux版</h1>
+<h2>Kylix</h2>
+<p>Kylixはボーランドが昔出していたLinux向けのIDEとコンパイラ。LinuxでDelphiの開発を行うことが出来る。</p>
+
+<h2>Lazarus</h2>
+<p>LazarusはFree Pascal向けのオープンソースなIDEで、Linuxで使用できる。</p>
+<p>「一度プログラムを書けば、どこでもコンパイルできる」を合言葉にし、DelphiコードをLinuxでコンパイルできるようにすることを目指している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Lazarus">Lazarus - Wikipedia</a></li>
+</ul>
+
+<h1>会社・製品</h1>
+<h2>エンバカデロの下、とても進歩している</h2>
+<p>Delphiは、現在、エンバカデロという会社で開発・販売されていますが、エンバカデロは馬鹿な会社に見えて、Delphiはどんどん進歩しています。</p>
+<p>たとえば、クロスプラットフォーム性が上がっています。macOSやモバイル端末でも、同じコードベースからコンパイルしてビルドできます。Linux向けのサーバー製品や、InterBaseというデータベース製品もあります。</p>
+<p>RADツールや、Pascal言語、VCLライブラリなどによる、驚異的な生産性はそのままで、とても賢い製品になっています。</p>
+<p>僕の知っていたDelphiの時代は、ボーランドによるDelphi 6のパーソナル版が無料で配布されていて、僕はDelphi 7を買いました。そして、Delphiの言語リファレンスが書かれた書籍がついてきました。そのごろはKylix（Linux版のDelphi）や.NETの対応（ほぼDelphiそのままのコードで.NET Framework向けのビルドができる）が進められていましたが、今のDelphiはそれとは比にならないほど進歩しています。</p>
+<p>ですが、エンバカデロという社名が悪いのでしょう。今はまた新しい会社に買収されています。これほど賢い技術なのに、発見もされず、使いたい人も居ません。とてももったいないことだと僕は思います。もう一度無料版のDelphiを提供すべきではないかと僕は思っています。</p>
+
+<h2>買ったほうが色々と付いてくる</h2>
+<p>Delphi 6は個人向けの利用が無料であるということもあって、一時期とても流行っていました。僕も、最初に使ったのはこの無料版であり、OpenJaneのビルドもこの無料版で行っていました。</p>
+<p>ですが、その後に、僕はDelphi 7の製品版を購入しました。</p>
+<p>無料版と製品版の違いは、無料版にはコンポーネントが最低限しかありません。すなわち、たくさんの便利なコンポーネントを使うことができず、いわば「最低限の機能だけに制限されている」と言えます。</p>
+<p>製品版を購入すると、さまざまなコンポーネントのフル機能を使うことができます。Delphiのプログラミングはコンポーネントを使うこととほぼイコールなので、この点は見逃せません。</p>
+<p>また、製品版を買うと、公式のPascalやDelphiの解説本である、「オフィシャルコースウェア」という入門本がセットで付いてきます。</p>
+<p>このオフィシャルコースウェアは分かりやすくてためになるので、今でも付いてくるのかは分かりませんが、この本が読みたいから製品版を購入する、というのもアリだと思います。</p>
+<p>そのように、Delphiは買ったほうが色々と付いてくるので、お金に余裕のある方は買うことをお勧めします。</p>
+<div class="edit_date">
+<p>2024.08.25</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>Delphi</h2>
+<ul class="defaultlist list7">
+<li>Windows
+<ul>
+<li>Delphi
+<ul>
+<li>Delphi/C++ Builder（VCL）</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>Delphiについて</h2>
+<p>DelphiはObject Pascalによる高い生産性や可読性と、イベント駆動（プロパティやイベントにメソッドを登録する）が売りのGUI開発ツール。</p>
+<p>RAD（ポトペタとも呼ばれる）による高い生産性のため、一部でとても人気があった。</p>
+<p>クラスライブラリであるVCLはWindows APIを生で使うよりもはるかに使いやすい。</p>
+<p>C#の開発チームはMicrosoftがDelphiから引き抜いたチームが設計・開発しており、C#が使いやすいのはそのためだと言われている。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-pascal.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Oracle関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Oracleの世界観</h1>
+<p>Oracleに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Oracle</h1>
+<h2>Oracle DB</h2>
+<p>OracleによるSQLサーバ。</p>
+<p>大きな範囲をカバーする商用のデータベースだが、値段が高い。</p>
+
+<h2>高額なライセンス料</h2>
+<p>Oracleはそもそもがデータベースの会社で、「とても高いライセンス料」を取って、データベース管理システムを販売し、ひとつのCPU当たり200万円ととても高額な値段を取っているが、トップシェアである。自社の独自技術べったりだが、信頼性は高いのだろう。</p>
+<p>Oracleの良い点として、Sunを買収した、というのが挙げられる。JavaやSolarisなど、UNIXやオープン系の技術を吸収したことで、一転「オープンソースに強い」会社になった。</p>
+<p>だが、OracleはMicrosoftと同じようにオープンソースにとても懐疑的であることで知られている。「オープンソースはもう流行っていない」という情報を訴えたこともある。それだけ、高品質なデータベースを作ることに自信がある、ということでもあるだろう。オープンソースは必ずしも善良ではなく、コストカットという名目で世界の技術レベルをどんどん下げている。</p>
+<p>後日注記：実際のところ、Oracle12cではProcessorライセンスはCPU数に応じたライセンス、Named User Plusライセンスはユーザー数に応じたライセンスで、Standard Edition 2なら一人当たり42,000円（サポートは+25,080円）、一CPU当たり2,100,000円（サポートは+1,254,000円）である。大規模なシステムを作るために不可欠であるEnterprise Editionでは一CPU当たり570万円。詳しくは以下のような資料を参考にしてほしい。</p>
+<p>後日注記2：Oracleは高額だが、「本当に信頼性が必要なデータセンター」としては安いのだろう。Oracleはどんな状況になってもきちんと動く。</p>
+<ul>
+<li><a href="https://www.oracle.com/jp/corporate/pricing/price/">価格表 | Oracle 日本</a></li>
+<li><a href="https://faq.oracle.co.jp/app/answers/detail/a_id/2631/~/oracle-database%E3%81%AE%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9%E8%A6%8B%E7%A9%8D%E6%96%B9%E6%B3%95%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E4%B8%8B%E3%81%95%E3%81%84%E3%80%82">Oracle Databaseのライセンス見積方法を教えて下さい。 - Oracle</a></li>
+<li><a href="https://sql-oracle.com/?p=1029">Oracle12cのライセンスと料金をまとめました | Oracle初心者でもスッキリわかる</a></li>
+</ul>
+
+
+<h2>Oracleという会社とオープンソース</h2>
+<p>Oracleという会社はオープンソースの敵か味方か良く分からないダークホースで、たとえばRHEL互換のOracle Linuxを作って自社のデータベースOracle DBやJavaアプリケーションサーバーWebLogicの基盤に使ったり、あるいはLinuxカーネルでもBtrFSというとても期待度の高い高信頼性のある先進的なB-Treeファイルシステムを作っている一方で、Sun Microsystemsを買収した結果Javaの有料化をしたり、MySQLやOpenOffice.orgなどの「とてもユーザーの多いオープンソースプロジェクト」がMariaDBやLibreOfficeにforkするきっかけを作るなど、「オープンソースなんですか、商用なんですか、どっちですか」という感じの会社である。</p>
+<p>だが、IBMを抜いてMicrosoftに次ぐ2番目のソフトウェア大企業になった会社であり、Microsoftと同じようにオープンソースに懐疑的ながら、それでもオープンソースと上手くやっていきたい、という会社である。</p>
+<p>オープンソースの先駆者だったNetscapeなどとは全く正反対だが、それでもオープンソースをやっているということは、オープンソースがとても優れたものになってきた証だろう。Netscapeの頃と比べて、とてもオープンソースは使える製品になってきている。使えないのはLibreOfficeぐらいだが、本当はWindowsでLibreOfficeを使う、という選択肢もある。えてして、NetscapeのMozillaと、Sun/OracleだったLibreOfficeは、Linuxの二大巨大アプリケーションである。IBMがRed Hatを買収するように、オープンソースは本当に強くなったので、Oracleが焦る理由も分かるのである。</p>
+<p>Oracleと良く似た立場に居るのは、なぜかAdobeである。AdobeはIllustratorやPhotoshopという強力な製品がある一方で、一部のフォントをオープンソースで提供するなどのオープンソース向けの事業もやっている。特にOracleは、Sunを買収した結果、VirtualBoxやSolarisやZFSなど、Oracleはオープン系技術をとても豊富に持っている。これが吉と出るか凶と出るかは、Oracleの技量しだいだろう。</p>
+<p>後日注記：OracleはRHEL互換のOracle Linuxを作って、Red Hatよりも安値で独自にサポートすることで、高額なライセンス料を払いたくないがサポートは必要な企業ユーザー向けに儲けている。RHEL + JBossからの完全移行をOracleは提案していて、Oracle Linuxと自社のWebLogicの技術を組み合わせることでRHELよりもコストを削減できるとしている。「完全オラクル環境」ではOracle Linux + Oracle VM + Oracle WebLogic Serverが、Red HatのRed Hat Enterprise Linux + JBoss EAPに対してコスト面で大きなメリットを持つとしている。</p>
+<p>後日注記2：実際のところ、Oracleは「限りなく敵に近いオープンソースの味方」ではないかと思う。オープンソースは大嫌いだが、やるしかない。</p>
+<ul>
+<li><a href="https://blogs.oracle.com/dbjp/oracle-linuxoracle-weblogic-serverit-red-hat-enterprise-linuxred-hat-jboss-eap">Oracle LinuxとOracle WebLogic ServerでITインフラのコストはまだ下がる！ コスト面でRed Hat Enterprise Linux、Red Hat JBoss EAPよりもメリットが大きい。その理由は？ | Oracle オラクルデータベースインサイダー Blog</a></li>
+</ul>
+
+<h2>高価で難しい</h2>
+<p>Oracleは高価なだけではなく、高機能であるためシステムの使い方を覚えるのに苦労する。CUIによる操作が主であり、開発や保守・運用がかなり難しい。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Oracle_Database">Oracle Database - Wikipedia</a></li>
+</ul>
+
+<h2>Oracle社員はすごい</h2>
+<p>最近、僕は<a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a>という本を買って、感動してしまいました。</p>
+<p>この本は、ITインフラの仕組みについて書かれた本です。</p>
+<p>この本を手に取った時、「ITのことがたくさん書かれた良い本だな」と思って僕は購入を決め、Amazonで購入しましたが、家に届いて見てみると、システムやハードウェアのことや、ITインフラにまつわる基礎・応用の理論、ネットワークの詳細な仕組み、そしてインフラを止めないための可用性とインフラのパフォーマンスを上げるための性能向上の方法が書いてありました。</p>
+<p>僕はこの本を見て、本当にすごいと思います。「ITインフラエンジニアになるための必要なことが全部書いてある」からです。</p>
+<p>特に、理論が凄いです。並列性や排他処理から、データ構造やジャーナリング、冗長化やスループットまで、データベースやネットワークに必要な知識が全部書いてあります。ネットワークについての内容も、とても詳細です。また、サーバーの冗長性に関しては、目を見張るものがあり、高信頼性システムをいかに構築するか、ということのために必要なことが全て書かれています。ボトルネックの解消についても書かれています。</p>
+<p>そして、著者の紹介を見たところ、みなさん日本オラクルの社員の方でした。</p>
+<p>Oracleを今まで「Linuxやオープンソースの敵だ」と思っていた僕としては、驚きました。OracleはSunを買収して、さまざまなオープンソースプロジェクトを破壊してきた会社であり、起訴好きであることも知られているため、オープンソース界ではあまり好まれていません。ですが、この本にはLinuxのこともたくさん出てくるため、「意外とOracleもLinuxを使うのだな」ということが分かりました。何より、Oracleの社員の凄さがわかりました。</p>
+<p>そういうわけで、オープンソース陣営の僕としてもOracleを見直しました。逆に、僕はOracleと相性が良いのではないかと思ったところです。Oracleの考え方と手法は、僕と近いところがあるのではないかと思います。特にこの本は素晴らしい本です。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+</ul>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Laravel関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Laravelの世界観</h1>
+<p>Laravelに関する世界観です。<a href="php.html">PHP</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Laravel入門</h1>
+<h2>Laravel</h2>
+<p>PHPのWebフレームワークとして一番人気があるのはLaravel。</p>
+<ul>
+<li><a href="https://qiita.com/nunulk/items/78d70ac809948b470bbc">Laravelのここがすごい - Qiita</a></li>
+<li><a href="https://miyabi-lab.space/blog/22">【入門編】Laravelのディレクトリ構造とMVCの処理の流れを理解する | 技術ブログ | MIYABI Lab</a> - とてもLaravelの基本が分かりやすくておすすめ。</li>
+</ul>
+<p>Laravel, <a href="python_django.html">Django</a>, <a href="ruby_on_rails.html">Ruby on Rails</a>を指して「三大バックエンドフレームワーク」と呼ばれる。</p>
+<p><a href="php_framework.html">PHP（フレームワーク）</a>も参照のこと。</p>
+
+<h2>Laravelの良いところ</h2>
+<p>Laravelの良いところは、</p>
+<p>１．機能が多い。特にコマンドラインの機能などが多く、さまざまなスケルトンの作成ができる。</p>
+<p>２．信頼できる。ログイン機能は素のPHPで作ると「本当にきちんとセキュリティができているのか」などが不安。Laravelで作ってしまえばきちんと動く。</p>
+<p>３．他のソフトウェアとの連携がしやすい。<a href="javascript_framework_vue_js.html">Vue.js</a>なども使える。</p>
+<p>４．分かりやすい。Railsと同じMVCを採用しながら、分かりやすく、また守らなければならない不自由な規約や制限も少ない。</p>
+<p>LaravelはMicrosoftの.NETを開発していたTaylor Otwellという方が作っていて、Windowsなどで使う場合なども仮想サーバを構築する方法があるなどよく考えられている。もちろんLinux + PHPでも動く。</p>
+
+<h2>Webプログラマを目指すならLaravelを英語の情報源で読もう</h2>
+<p>Laravelの文書は、英語の公式が良いと思います。日本語でも情報はありますが、僕は英語の勉強を兼ねて英語で読んでいます。</p>
+<ul>
+<li><a href="https://laravel.com/docs/6.x">Installation - Laravel - The PHP Framework For Web Artisans</a> - 左のメニューからドキュメントを参照できる。</li>
+</ul>
+<p>Webプログラマを目指すなら、もし中級者程度の知識（僕がこのホームページに書いているような知識）がある方は、最初からLaravelを習得するのが一番近道だと思います。</p>
+
+<h2>Laravelちょっとだけ入門</h2>
+<p>まず、新しいプロジェクトは、laravel newコマンドで作成する。</p>
+<p>ルーティングはweb.phpで行う。リクエスト（getなど）に対して、パス（/など）とコントローラ名@アクション名（HogeController@indexなど）を関連付ける。</p>
+<p>そして、コントローラ（たとえばHogeController）はControllerを継承し、アクション（たとえばindex()関数）を定義する。</p>
+<p>モデルはModelを継承する。</p>
+<p>ビューであるフロントは、Bladeというテンプレートエンジンを使用する。{{ ～ }}のように波かっこで変数の値を表示できる。</p>
+<p>また、Laravelには、Railsなどにあるようなマイグレーションファイル機能がある。直接SQLを書かなくても自動でデータベース上のテーブルを作成できる。</p>
+<p>詳しくは、以下のリンクが詳しい。</p>
+<ul>
+<li><a href="https://miyabi-lab.space/blog/22">【入門編】Laravelのディレクトリ構造とMVCの処理の流れを理解する | 技術ブログ | MIYABI Lab</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Laravel">Laravel - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>Laravel Homestead</h1>
+<h2>Web開発のための環境を整える、という敷居の高さ</h2>
+<p>みなさんは、WebサービスやWebアプリケーションを開発するために、GUIやコマンドラインアプリよりも敷居が高いと感じたことはないでしょうか。</p>
+<p>Webプログラミングを行うためには、サーバーや言語処理系やデータベース管理システムなどの「必要な開発環境」を導入する必要があります。</p>
+<p>確かに、WindowsならばXAMPPを入れる、という選択肢もありますが、「WindowsにApache/MySQL/PHP/Perlを入れるのか、何だか嫌だな」とか、「設定などのやり方が分からなくて、きちんと管理できそうにないから導入したくない」などといった意見があると思います。</p>
+<p>だからといって、LinuxのUbuntu Serverを入れて自分でサーバーソフトウェア一式を導入して自宅サーバーを構築するのも、セキュリティが不安だし、ためらいがある方も多いと思います。</p>
+<p>ここで、LaravelにはLaravel Homesteadというソフトウェアを導入して、Windowsあるいは他のOS上に仮想環境上に自宅サーバーを構築する方法があります。必要なくなったらすぐに削除できて、仮想マシン上のUbuntuにPHPからNginxまで必要なソフトウェアをすぐに導入でき、仮想環境上のサーバーとWindowsのWebブラウザが通信してビューを表示し、楽に開発ができるようになります。</p>
+<p>今まで、「ローカルサーバーを立てたくないからWebプログラミング入門を諦めていた方」には、これがとてもおすすめです。</p>
+<ul>
+<li><a href="https://laravel.com/docs/6.x/homestead">Laravel Homestead - Laravel - The PHP Framework For Web Artisans</a></li>
+</ul>
+
+<h2>VirtualBox + Vagrant + Homestead + ComposerでLaravelの開発環境を導入する</h2>
+<p>まず、VirtualBoxは仮想化ソフトウェアです。Windowsや多くのOS上でUbuntuなどのLinuxなど、別のOSシステムを仮想的に動かすことができます。</p>
+<p>VirtualBoxを使うことで、Windows上でUbuntu Serverを動かし、WindowsでWebブラウザで確認しながらUbuntu ServerがLaravelのWebサービスを提供してくれます。</p>
+<p>しかしながら、VirtualBoxにLinuxを導入してサーバーソフトウェア一式を整備するのは、たくさんの手間と苦労が必要になります。</p>
+<p>そこで、仮想マシン上にOS、サーバー、PHP、データベースを簡単に構築することができる、Vagrant（ベイグラント）というソフトウェアを使います。</p>
+<p>VirtualBoxとVagrantを組み合わせることで、「お手軽仮想サーバー」をWindowsなどのOS上に作ることができます。</p>
+<p>Vagrantで使われるVagrant boxは仮想マシンのテンプレート（ひな形）となるファイルなどのことで、一から自分で環境を作るのではなく、テンプレートを使って同じ環境を自動構築するために利用できます。</p>
+<p>また、Laravelが提供しているHomestead（ホームステード）というソフトウェアを使うことで、Laravelが動作する開発環境を簡単に導入できます。たとえば、Laravel公式の設定済みのVagrantfileを利用できます。</p>
+<p>また、ComposerはLaravelの使っているPHPの依存関係解決ツールです。Laravel自身のインストールにも使われます。Laravelをインストールする際、XAMPPを使うのであれば、XAMPP + Composer + Laravelを順に導入することになります。</p>
+<ul>
+<li><a href="https://qiita.com/7968/items/97dd634608f37892b18a">【Laravel超入門】開発環境の構築（VirtualBox + Vagrant + Homestead + Composer） - Qiita</a></li>
+<li><a href="https://webbibouroku.com/Blog/Article/vagrant">Vagrantで仮想環境構築入門 │ Web備忘録</a></li>
+</ul>
+<p><a href="../virt/vbox.html">VirtualBox/Vagrant</a>も参照のこと。</p>
+
+<h2>Laravel Homesteadのシステム</h2>
+<p>Laravel Homesteadには、UbuntuからMySQLまで多くのソフトウェアが含まれています。以下を参照のこと。</p>
+<ul>
+<li><a href="https://laravel.com/docs/6.x/homestead">Laravel Homestead - Laravel - The PHP Framework For Web Artisans</a></li>
+</ul>
+<p>また、Vagrant boxはいつでも削除でき、数分で再作成できます。</p>
+<p><a href="../linux/ubuntu.html">Ubuntu</a>や<a href="../db/mysql.html">MySQL</a>も参照のこと。</p>
+
+<h1>Laravel関連のTips</h1>
+<h2>Laravelを本番環境のAmazon EC2にデプロイする</h2>
+<p>Laravelでサービスを作って、Amazon EC2などの本番環境にデプロイする手順は以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d">LaravelをAWSのEC2へデプロイする手順 - Qiita</a></li>
+<li><a href="https://qiita.com/nakm/items/0bcc6564538a0604b2ce">laravelをAWS EC2にデプロイする - Qiita</a></li>
+</ul>
+<p><a href="../services/aws.html">AWS</a>も参照のこと。</p>
+
+<h2>Composer</h2>
+<p>Composerとは、Laravelにおいて使用可能なライブラリやツールなどの依存関係を管理・解決するツールのこと。</p>
+<p>Laravelにおいて、依存関係のあるツールをインストールしたい時に、依存関係にあるライブラリなどを適切に導入してくれる。また、Laravel自体のインストールにも使う。</p>
+<ul>
+<li><a href="https://qiita.com/shinozakiy/items/c98a66f368b4c09a38a1">laravelでのcomposerとは何か？ #PHP - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.28</p>
+</div>
+
+<h2>Dockerを使った導入</h2>
+<p>以下のYouTuberのセイト先生の動画で、Dockerを使ったLaravelの開発環境構築の手順が説明されており、Docker初心者には参考になります。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=YfaB3PJv1f0">世界一わかりやすいDocker入門！爆速で開発環境を作る方法 #プログラミング初心者 - YouTube</a></li>
+</ul>
+<p><a href="../virt/docker.html">Docker</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.08.28-29</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Webフレームワーク</h2>
+<p><a href="../network/web_framework.html">Webフレームワーク</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

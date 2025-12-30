@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>route - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>route</h1>
+<p>routeに関する世界観です。<a href="linux_net.html">Linuxネットワーク</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>route</h1>
+<p>ルーティングテーブル（経路表）の確認や、経路の追加・削除などの設定を行う。</p>
+<p>net-tools由来のコマンドであるため、現在は非推奨。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0111/01/news002.html">route　～ルーティングテーブルの表示／設定を行う：ネットワークコマンド使い方 - ＠IT</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/net-tools/man8/route.8.html">man route</a></li>
+</ul>
+
+<h2>routeコマンド例</h2>
+<p>routeコマンドを単に実行すると、ルーティングテーブル（経路表）を確認できる。</p>
+<pre>
+# route
+</pre>
+<div class="edit_date">
+<p>2024.02.08編集</p>
+</div>
+
+<h2>経路の追加</h2>
+<p>ルーティングテーブルに新しく経路を追加するには「route add」を使う。また、削除は「route del」を使う。</p>
+<p>たとえば、IPアドレス192.168.0.0/24を宛先とする通信で、転送するゲートウェイを192.168.1.1にするには以下のようにする。</p>
+<pre>
+# route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.1.1
+</pre>
+<p>あるいは、デフォルトゲートウェイを192.168.1.1にするには以下のようにする。</p>
+<pre>
+# route add default gw 192.168.1.1
+</pre>
+<p>詳しくは以下を参照のこと。
+<ul>
+<li><a href="https://engineer-ninaritai.com/linux-route/">【linux】routeコマンドの使い方とは？route add やroute delでルーティングの設定をしてみよう｜インフラエンジニアになりたくて。</a></li>
+<li><a href="https://www.server-memo.net/centos-settings/network/linux-routeing.html">Linuxルーティング追加 | server-memo.net</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0111/01/news002.html">route　～ルーティングテーブルの表示／設定を行う：ネットワークコマンド使い方 - ＠IT</a></li>
+</ul>
+<p>永続的な設定はRed Hat系の場合、/etc/sysconfig/static-routesで設定する。</p>
+<p><a href="linux_net_sysconfig.html">ネットワーク設定（sysconfig）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.02.08編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>ifconfig</h2>
+<p><a href="linux_net_ifconfig.html">ifconfig</a>を参照のこと。</p>
+
+<h2>netstat</h2>
+<p><a href="linux_net_netstat.html">netstat</a>を参照のこと。</p>
+
+<h2>iproute2</h2>
+<p><a href="linux_net_iproute2.html">iproute2</a>を参照のこと。</p>
+
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="../network/network.html">ネットワーク</a>や<a href="../network/network_intro.html">ネットワーク入門</a>や<a href="../network/network_device.html">ネットワーク機器</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

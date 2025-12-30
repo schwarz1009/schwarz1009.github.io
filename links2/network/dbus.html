@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>D-Bus関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div><h1>D-Busの世界観</h1>
+<p>D-Busの世界観です。<a href="corba.html">CORBA</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>D-Bus</h1>
+<h2>D-Bus（勘違い含む）</h2>
+<p>Bonoboは、最近はD-Busという新しい仕組みに変わった。D-BusはKDE由来のDCOPからの影響で生まれた。LinuxやX.OrgでもD-Busを使う。</p>
+<p>ある意味、GNOMEがBonoboを捨ててD-Busに移行したことで、CORBA実装としてのGNOMEは終わってしまった。今や、「UNIXをもっとマシなものにしよう」とか「GNOMEの優位性」という精神は、KDEへと逆戻りしてしまっている。だが、それも悪いことではない。GNOMEがきちんと考えて、KDEと仲直りしたと言うべきである。</p>
+<p>（後日注記：実際には、D-Busはプロセス間通信の仕組みではあるが、メッセージ、バス、オブジェクト、インターフェースを使ってさまざまなものと通信することができ、CORBAと良く似ている。「CORBA実装としてのGNOMEは終わった」という批判はあたらない。）</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Bonobo">Bonobo - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/D-Bus">D-Bus - Wikipedia</a></li>
+</ul>
+
+<h2>D-Busとは</h2>
+<p>D-Busはプロセス間通信の仕組みで、メッセージ、バス、オブジェクト、インターフェースを使ってシステム上のさまざまなプログラムと通信することができる。</p>
+<p>D-Busでは、dbus-sendというコマンドで、インターフェースを通じたD-Busによる通信ができる。dbus-sendについて詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="http://www.usupi.org/sysad/175.html">D-Bus の存在を感じてみる - いますぐ実践! Linuxシステム管理 / Vol.175</a></li>
+<li><a href="http://www.usupi.org/sysad/176.html">D-Bus の存在をもう少し感じてみる - いますぐ実践! Linuxシステム管理 / Vol.176</a></li>
+</ul>
+
+<h2>参考ページ</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/byuu/items/c600366b9c138f639863">DBus ことはじめ - Qiita</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

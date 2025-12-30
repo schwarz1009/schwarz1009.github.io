@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Webフレームワーク関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Webフレームワーク関連の世界観</h1>
+<p>Webフレームワークに関する世界観です。</p>
+<p><a href="../prog_lang/php_framework.html">PHPフレームワーク</a>や<a href="../prog_lang/javascript_framework.html">JavaScriptフレームワーク</a>や<a href="../prog_lang/java_framework.html">Java（Webフレームワーク）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Webフレームワーク</h1>
+<h2>Webフレームワークの意味</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p><!--これに対し、そもそも-->サーバで<a href="../prog_lang/html.html">HTML</a>データを返す際に、動的にサーバ側で処理を行うことをサーバサイドと呼ぶ。</p>
+<p>クライアントサイドでは<a href="../prog_lang/javascript.html">JavaScript</a>を用いるが、サーバサイドでは<a href="../prog_lang/php.html">PHP</a>や<a href="../prog_lang/ruby.html">Ruby</a>といった言語を用いることが一般的。</p>
+<p>実際は単にPHPやRubyを直接書くこともできるが、よりWebサービスの開発のために便利な機能を詰め込んだ、フレームワークというものを用いてサーバサイドの処理を記述する。</p>
+<p>PHPでは<a href="../prog_lang/php_framework_laravel.html">Laravel</a>, Rubyでは<a href="../prog_lang/ruby_on_rails.html">Ruby on Rails</a>といったフレームワークが知られている。</p>
+<p>しかしながら、クライアントサイドでJavaScriptを使いながら、サーバサイドでRailsを使うのは、言語が二種類あって非効率である。</p>
+<p>このため、サーバサイドでもJavaScriptを使う<a href="../prog_lang/node_js.html">Node.js</a>といった「サーバサイドJavaScript」と呼ばれる仕組みもある。</p>
+<p>RailsやLaravelでは、MVCフレームワークと呼ばれるモデルで開発を行う。</p>
+<p>MVCフレームワークでは、まず外部からのリクエストを処理するルーティングと呼ばれる処理があり、そのルーティングによって、MVCのCに相当するコントローラのアクションに処理が移る。</p>
+<p>アクションでは、Mに相当するモデルによって、データベースとのやり取りを行い、Vに相当するビューによって、HTMLを動的に作成してブラウザに返す。</p>
+<p>従来はこのMVCの処理を全てサーバ側で行っていたが、ビューの処理はクライアントサイドだけでも行えることが最近分かってきたため、<a href="../prog_lang/javascript_framework_vue_js.html">Vue.js</a>や<a href="../prog_lang/javascript_framework_react.html">React</a>といったビューに特化した<a href="../prog_lang/javascript_framework.html">JavaScriptフレームワーク</a>で、クライアントでビューの処理を行うことも一般的になってきている。</p>
+
+<h2>Webフレームワークとは</h2>
+<p>Ruby on Railsの登場を受けて、最近のWebアプリケーションやWebサービスの開発には、「フレームワーク」と呼ばれるものを用いて行う機会が増えてきた。</p>
+<p>Webフレームワークは各Web言語（Java, Perl, PHP, Python, Rubyなど）に存在し、「MVCモデル」と呼ばれる枠組みを使って、効率的・生産的にサービスを開発することができる。</p>
+
+<h2>MVCモデル</h2>
+<p>多くのWebフレームワークでは、MVCモデルを採用している。</p>
+<table class="some_tables">
+<tr><th class="min60">概念</th><th>説明</th></tr>
+<tr><td>Model</td>
+<td>
+モデル（Model）は、データベースへのデータの記録と参照。<br>
+ビューとコントローラの中のデータ操作は、モデルにおけるデータベース設計と対応付けられる。
+</td></tr>
+
+<tr><td>View</td>
+<td>
+ビュー（View）は、HTMLのテンプレートからユーザーが操作するページ画面を動的に作成する。<br>
+PHPやERB（埋め込みRuby）などを使って、HTMLの中にコードを埋め込んでテンプレートを記述する。
+</td></tr>
+
+<tr><td>Controller</td>
+<td>
+コントローラ（Controller）は、リクエストとイベントに応じたコントロール（処理の制御）を行う。<br>
+モデルとビューの間を仲介し、それぞれのアクションからモデルとビューに処理を配分する。
+</td></tr>
+</table>
+<p>このようにすることで、単なるHTMLページに処理を埋め込むだけのPerl/CGIやPHPよりも、データベースとHTMLを使ったスマートで保守性の高いWebサービスを開発できる。</p>
+<div class="edit_date">
+<p>2023.05.12編集</p>
+</div>
+
+<h2>MVCフレームワークを自前で作る</h2>
+<p>MVCを用いたWebフレームワークは、基本的なもので良ければ、自前で設計・実装して作ることもできる。<a href="../prog_lang/php_framework.html">PHPフレームワーク</a>を参照のこと。</p>
+
+
+<h2>Webフレームワークの前夜</h2>
+<p>まず、<a href="../prog_lang/perl_cgi.html">Perl/CGI</a>がある。Perl/CGIでは、Apacheを用いてサーバー側で処理を行う。Perlスクリプトを簡単に作ることで、掲示板やカウンターなどのWebサービスを作ることが出来た。</p>
+<p>次に、<a href="../prog_lang/php.html">PHP</a>がある。PHPでは、HTMLタグの中にスクリプトを埋め込むことで、さらに簡単にプログラミングが出来た。</p>
+<p>次にあるのは、<a href="../prog_lang/java_servlet.html">Javaサーブレット</a>とJSPである。プロセスをいちいち立ち上げるのではなく、ひとつのプログラムのスレッドとして管理することで、効率的にサーバーサイドプログラムが出来た。</p>
+<p>そして、いよいよWebフレームワークの夜明けが来る。<a href="../prog_lang/ruby.html">Ruby</a>はとても少ないコードで簡単なプログラミングが出来た。</p>
+<p>さあ、<a href="../prog_lang/ruby_on_rails.html">Rails</a>が登場した。Railsの登場は革命である。全てのコードをRubyで書き、MVCと呼ばれる生産的な「フレームワーク構造」を使うことで、革命的なほど簡単にWebサービスを作ることが出来た。</p>
+<p>Railsを模したWebフレームワークとして、<a href="../prog_lang/php_framework_cakephp.html">CakePHP</a>や<a href="../prog_lang/python_django.html">Django</a>などが登場した。「PHPやPythonでもRuby on Railsのようなことがやりたい」という声が多く、誰もが同じようなMVCフレームワークを作った。</p>
+<p>同時に、クライアントサイドでも革命が起こった。<a href="../prog_lang/javascript_framework.html">JavaScriptフレームワーク</a>である。JavaScriptフレームワークでは、クライアントサイドでもMVCと良く似た構造のプログラミングを可能とした。</p>
+<p>しだいに、「RailsはRailsで難しくて複雑だ」という意見が増えた。このことから、もっと簡単で、もっと短いコードで作るフレームワークは作れないか、という声が増えた。これが、マイクロフレームワークである。</p>
+
+<h1>フレームワーク</h1>
+
+<h2>Webフレームワーク</h2>
+<p>MVCなどの生産的で効率的な構造に従って開発するフレームワーク。各言語に存在する。<!--<a href="web_framework.html">Webフレームワーク</a>を参照のこと。--></p>
+
+<h2>各言語のページ</h2>
+<table class="some_tables">
+<tr><th class="min60">言語</th><th>リンク</th></tr>
+<tr><td>Java</td>
+<td>
+<a href="../prog_lang/java_servlet.html">Java（サーブレット）</a><br>
+<a href="../prog_lang/java_framework.html">Java（Webフレームワーク）</a><br>
+<a href="../prog_lang/java_framework_struts.html">Struts</a><br>
+<a href="../prog_lang/java_framework_spring.html">Spring Framework</a><br>
+<a href="../prog_lang/java_langs.html">Java（各種言語）</a>
+</td>
+<tr><td>Perl</td>
+<td>
+<a href="../prog_lang/perl_cgi.html">Perl/CGI</a><br>
+<a href="../prog_lang/perl_catalyst.html">Catalyst</a><br>
+<a href="../prog_lang/perl_mojolicious.html">Mojolicious</a>
+</td>
+<tr><td>PHP</td>
+<td>
+<a href="../prog_lang/php_framework.html">PHPフレームワーク</a><br>
+<a href="../prog_lang/php_framework_cakephp.html">CakePHP</a><br>
+<a href="../prog_lang/php_framework_laravel.html">Laravel</a>
+</td>
+<tr><td>Python</td>
+<td>
+<a href="../prog_lang/python_tools.html">Pythonのツール</a><br>
+<a href="../prog_lang/python_django.html">Django</a>
+</td>
+<tr><td>Ruby</td>
+<td>
+<a href="../prog_lang/ruby_tools.html">Rubyのツール</a><br>
+<a href="../prog_lang/ruby_on_rails.html">Ruby on Rails</a>
+</td>
+<tr><td>JavaScript</td>
+<td>
+<a href="../prog_lang/node_js.html">Node.js</a><br>
+<a href="../prog_lang/node_js_express.html">Express</a><br>
+<a href="../prog_lang/javascript_framework.html">JavaScriptフレームワーク</a>
+</td>
+</table>
+<div class="edit_date">
+<p>2023.05.12編集</p>
+</div>
+
+<h2>Ruby on Rails</h2>
+<p>Rubyを使って、Webプログラミングを正しく効率的に行うフレームワーク。だが、「簡単すぎて技術力がつかない」と一部では批判的な意見も。</p>
+<p><a href="../prog_lang/ruby_on_rails.html">Ruby on Rails</a>を参照のこと。</p>
+
+<h3>セキュリティガイド</h3>
+<p>以下はRailsのセキュリティガイド。</p>
+<ul>
+<li><a href="https://railsguides.jp/security.html">Rails セキュリティガイド</a></li>
+</ul>
+<h3>チュートリアルとガイド</h3>
+<p>以下は日本語に訳されたRailsのチュートリアルとガイド。</p>
+<ul>
+<li><a href="https://railstutorial.jp/">Ruby on Rails チュートリアル</a></li>
+<li><a href="https://railsguides.jp/">Ruby on Rails ガイド (5.0 対応)</a></li>
+</ul>
+
+<h2>Node.js</h2>
+<p>サーバーサイドのJavaScript環境。</p>
+<p>MongoDB, Express, AngularJS, Node.jsの4つのアプリケーションを合わせて、MEANと呼ぶように提唱された。JavaScriptによるWeb環境である。</p>
+<p><a href="../prog_lang/node_js.html">Node.js</a>、<a href="../prog_lang/node_js_express.html">Express</a>、<a href="../prog_lang/javascript_framework_angular.html">Angular</a>、<a href="../db/mongodb.html">MongoDB</a>も参照のこと。</p>
+
+<h2>WordPress</h2>
+<p>素のHTMLを書くのではなく、簡単なインターフェースから高度な統合サイトを作ることが出来る技術。</p>
+<ul>
+<li><a href="https://ja.wordpress.org/">WordPress 日本語ローカルサイト</a></li>
+</ul>
+<p><a href="wordpress.html">WordPress</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>雨後の筍のようにフレームワークが新しく現れては消える</h2>
+<p>Webフレームワークについて言えることは、雨後の筍のようにフレームワークが新しく現れては消えていく、ということです。</p>
+<p>せっかく既存のフレームワークの開発手法を覚えても、それがいつまでも使えるという保証はなく、新しいフレームワークが登場しては、その使い方を覚え直さなければなりません。</p>
+<p>特に、今まではRubyだったのに、それがPythonやJavaScriptを利用したさらに新しいものに変わるということは日常茶飯事です。</p>
+<p>また、フロントエンド（クライアントサイド）およびバックエンド（サーバーサイド）の開発は、日々複雑化しています。</p>
+<p>複雑になった結果、全貌をきちんと理解することは困難を極めます。複雑なフロントエンドとバックエンドの開発がどういうものなのか、よく分かっていない人があまりに増えました（自分もその一人です）</p>
+<p>Perl/CGIの頃から基本は変わっていないのですが、応用は様変わりしています。もはや、CGIスクリプトが書けるというだけではプログラマとしては通用しません。</p>
+<p>このように、Webの開発は壮絶を極めます。それでもWebをやる覚悟があるなら、サーバ運営がクラウドだろうがVPSだろうが自宅サーバだろうが、そんなものは関係ありません。そんなものは些細な問題です。フレームワークを覚えながらフロントエンドとバックエンドの開発をやるなら、ぜひ素晴らしいサービスの開発を頑張ってください。</p>
+<p><a href="cgi.html">CGI</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.12</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>Webフレームワーク</h2>
+<ul class="defaultlist list7">
+<li>Webフレームワーク
+<ul>
+<li>MVCフレームワーク
+<ul>
+<li>Rails, Django, LaravelなどサーバーサイドのWebフレームワーク</li>
+<li>モデル、ビュー、コントローラ
+<ul>
+<li>モデルはデータベースの構造</li>
+<li>ビューはHTMLのテンプレートビュー</li>
+<li>コントローラはさまざまなプログラミング処理でモデルとビューを取り持つ</li>
+</ul></li>
+<li>スケルトン作成
+<ul>
+<li>Railsではコマンドラインの操作で、ソースコードのひな形となるスケルトンを自動作成してくれる</li>
+</ul></li>
+<li>ルーティング</li>
+<li>アクション</li>
+<li>ビューテンプレート</li>
+<li>マイグレーション</li>
+<li>バリデーション</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>MVCフレームワーク</h2>
+<h3>ルーティング</h3>
+<p>Webサイトにアクセスした時に、URLに基づいてどのページを表示するかを案内する。</p>
+
+<h3>アクション</h3>
+<p>アクションは、コントローラで定義されるメソッドのこと。</p>
+<p>ルーティングによって適切なコントローラとアクションが指名され、Railsはコントローラのインスタンスを作ってアクションを実行する。</p>
+<p>Webサイトのさまざまな機能（たとえばリスト表示やフォローなど）はアクションに実装する。</p>
+
+<h3>ビューテンプレート</h3>
+<p>RailsではHTMLにRubyコードを埋め込めるERBを使ってビューテンプレートを記述する。</p>
+
+<h3>パーシャル</h3>
+<p>パーシャルは、複数のビューテンプレートの共通する部分を分割し、自動で読み込んでくれる機能。</p>
+
+<h3>マイグレーション</h3>
+<p>SQLで直接データベースを操作しなくても、Rubyからデータベースにテーブルを作成できる。</p>
+<p>SQLコマンドを打つことなく、データベーステーブルを自動作成する。</p>
+
+<h3>バリデーション</h3>
+<p>ユーザーがWebサイトのフォームに入力した時、その入力内容のデータにあらかじめ制限をかける。</p>
+<p>たとえば数値だけ有効、空文字列は無効など。</p>
+
+<h3>フレームワークの独自作成</h3>
+<p>Webフレームワークは、簡単なものであれば自分で独自に作成することもできる。書籍「パーフェクトPHP」などを読んでほしい。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

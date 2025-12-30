@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C/C++開発ツール関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C/C++開発ツールの世界観</h1>
+<p>C/C++開発ツールによるプログラミングに関する世界観です。</p>
+<p><a href="c.html">Cの世界観</a>、<a href="cpp.html">C++の世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>コンパイラ</h1>
+<h2>Visual C++</h2>
+<p>Microsoftによるコンパイラ。</p>
+<p><a href="windows_mfc.html">Visual C++/MFC</a>も参照のこと。</p>
+
+<h2>GCC/MinGW + MSYS or Cygwin</h2>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>や<a href="../virt/cygwin.html">Cygwin</a>を参照のこと。</p>
+
+<h2>LLVM/Clang</h2>
+<p><a href="../linux/llvm.html">LLVM/Clang</a>を参照のこと。</p>
+
+<h2>Intel C++ Compiler</h2>
+<p>Intelによるコンパイラ。</p>
+
+<h2>C++Builder/VCL/CLX</h2>
+<p>旧ボーランドによるコンパイラ・統合開発環境。</p>
+<p>VCLとCLXは、DelphiやC++Builderで使われるライブラリ。</p>
+<p><a href="delphi.html">Delphi</a>を参照のこと。</p>
+
+<h1>開発ツール</h1>
+<h2>Visual C++(Visual Studio)</h2>
+<p>MicrosoftによるC/C++の開発環境。</p>
+<p>後日注記：Visual C++ではWindows APIを使ったWindowsプログラミングのほか、AppWizardやClassWizardを使ったMFCの開発ができます。</p>
+
+<h2>Eclipse CDT</h2>
+<p>オープンソースのC/C++開発環境。</p>
+<p>「Visual C++は高すぎる。だからといってWindows開発者への道を諦めたくない。どうしたものか…」といった人には、このEclipse CDTを使うのが良いかもしれません。</p>
+<p>僕も、WindowsでC言語のロボットを開発した時は、EclipseにCDT/MinGWを入れて使いました。</p>
+<p>ただ、僕は良く分かっていないので、もしかしたらWindows関係のライブラリやAPIが足りないかもしれません。思い切ってLinuxでのC/C++開発者になってみてはいかかでしょうか。本当のGCCを使うことができます。GCCが嫌ならばLLVMの開発者になれば、きっと自分で独自の言語をRustのように作ることもきっとできます。</p>
+<p>最近分かったこととして、Eclipse CDT + MinGWでもWindows APIを使ったWindowsアプリケーションを開発することはできるようです。以下のリンクを参照してください。</p>
+<p><a href="eclipse.html">Eclipse</a>も参照のこと。</p>
+<ul>
+<li><a href="https://amimilab.com/2016/07/21/post-109/">無料でC/C++によるWinAPI+GUI開発環境を構築する方法 - あみみラボ</a></li>
+</ul>
+
+<h2>Emacs & Vim</h2>
+<p>C/C++の開発に利用出来るオープンソースのテキストエディタ。Linuxで開発するのであれば、Emacs/Vimを使いましょう。</p>
+<p><a href="../linux/emacs.html">Emacs</a>や<a href="../linux/vi.html">vi</a>を参照のこと。</p>
+
+<h1>Windows API</h1>
+<h2>Windows API</h2>
+<p>WindowsのAPI。</p>
+<p><a href="windows_programming.html">Windowsプログラミング</a>を参照のこと。</p>
+
+<h2>MFC</h2>
+<p>MicrosoftによるC++向けライブラリ。</p>
+
+<h2>Managed C++（C++/CLI）</h2>
+<p>.NET向けのC++拡張。</p>
+
+<h1>UNIX & X11 API</h1>
+<h2>システムコール・ライブラリ関数（libc）</h2>
+<p>カーネルとC標準ライブラリ（libc）のAPI。</p>
+<p><a href="../linux/linux_api.html">Linux API</a>や<a href="../linux/libc.html">libc</a>を参照のこと。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/">JM Project</a></li>
+</ul>
+
+<h2>標準コマンドのソースコード（coreutils）</h2>
+<p>coreutilsのgitで基本的なコマンドのコードを読むことが出来ます。</p>
+<ul>
+<li><a href="http://git.savannah.gnu.org/cgit/coreutils.git/tree/src">coreutils.git</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/js-foundation/0013">第13回　Linuxコマンドの基礎の基礎</a></li>
+</ul>
+
+<h2>Xlib</h2>
+<p>X11の低レベルなグラフィックスAPI。</p>
+<p><a href="../linux/linux_x11_admin.html">X11（設定とプログラミング）</a>を参照のこと。</p>
+<ul>
+<li><a href="http://rio.la.coocan.jp/lab/xlib/index.htm">Xlib Programming Lectures - Rio's Laboratory</a></li>
+</ul>
+<h2>GTK+</h2>
+<p>GTK+はC言語によるX11ウィジェットツールキット。</p>
+<p><a href="../linux/gtk.html">GTK</a>を参照のこと。</p>
+
+<h2>GNOME</h2>
+<p>GNOMEのAPI。</p>
+<p><a href="../linux/gnome.html">GNOME</a>を参照のこと。</p>
+<ul>
+<li><a href="https://developer.gnome.org/">GNOME 開発センター</a></li>
+</ul>
+
+<h2>Qt</h2>
+<p>C++によるX11ウィジェットツールキット。</p>
+<p><a href="../linux/qt.html">Qt</a>を参照のこと。</p>
+
+<h2>KDE</h2>
+<p>KDEのAPI。</p>
+<p><a href="../linux/kde.html">KDE</a>を参照のこと。</p>
+<ul>
+<li><a href="https://techbase.kde.org/Getting_Started/ja">KDE TechBase</a></li>
+</ul>
+
+<h1>Webツール</h1>
+<h2>Web上でCをコンパイル</h2>
+<p>以下にオンラインでCのソースコードをコンパイル・実行できるサイトがあります。</p>
+<ul>
+<li><a href="http://www.tutorialspoint.com/compile_c_online.php">Online C Compiler</a></li>
+<li><a href="https://qiita.com/tttamaki/items/2b009aa957cfa4895d50">オンラインでプログラミングして実行できるサイト - Qiita</a></li>
+</ul>
+<p>人気があるのはAWS Cloud9です。</p>
+<ul>
+<li><a href="https://aws.amazon.com/jp/cloud9/?origin=c9io">AWS Cloud9（ブラウザのみでコードを記述、実行できるクラウドIDE）｜AWS</a></li>
+</ul>
+
+<h1>簡単な説明</h1>
+<h2>開発支援ツール</h2>
+<ul class="defaultlist list7">
+<li>開発技法
+<ul>
+<li>開発ツール
+<ul>
+<li>デバッガ
+<ul>
+<li>GDB
+<ul>
+<li>ブレークポイントを設定して、途中まで実行し、変数の中身を見たり、変数に値をセットしたりできる</li>
+</ul></li>
+</ul></li>
+<li>ユニットテスト</li>
+<li>ソースコード閲覧支援
+<ul>
+<li>ctags, GNU Global, lxr, OpenGrok</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

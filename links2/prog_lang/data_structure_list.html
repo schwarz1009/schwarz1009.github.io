@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>データ構造（配列とリストとハッシュ）の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div><h1>データ構造（配列とリストとハッシュ）の世界観</h1>
+<p>データ構造（配列とリストとハッシュ）に関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="data_structure.html">データ構造</a></li>
+<ul>
+<li><b>配列とリストとハッシュ</b></li>
+<li><a href="data_structure_stack.html">スタックとキュー</a></li>
+<li><a href="data_structure_tree.html">ツリー</a></li>
+<li><a href="data_structure_graph.html">グラフ</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>配列とリストとハッシュ</h1>
+<h2>連続したデータ構造</h2>
+<p>まず、配列とリストとハッシュがある。</p>
+<table class="some_tables">
+<tr><th class="min60">データ構造</th><th>意味</th></tr>
+<tr><td>配列</td><td>メモリ上の連続した場所に作られる要素の集合。<br>添え字（インデックス）からアクセスする。<br>ベクター、ベクトルとも呼ばれる。</td></tr>
+<tr><td>連結リスト</td><td>ポインタによって紐づけされた連結された要素の集合。<br>データ部とポインタ部に分けて管理する。<br>配列に比べて挿入や削除が容易だが探索に時間がかかる。</td></tr>
+<tr><td>ハッシュ</td><td>キーに対して値を設定する。<br>PHPでは連想配列、Pythonでは辞書、JavaScriptではオブジェクトと呼ばれる。<br>マップ、ハッシュテーブル、検索テーブルなどとも呼ばれる。</td></tr>
+</table>
+<p>「シーケンス」という言葉が使われた時は、配列やそれ以外の順番に並んだデータ構造のことを指す。</p>
+<p>また、リストには次のデータへのポインタをひとつだけ持っている「単方向リスト」の他に、前のデータへのポインタがある「双方向リスト」、環状に連結された「環状リスト」がある。</p>
+<p>このほか、要素の順番が重要でない場合、集合（セット）などを用いることができる。集合は慣習的にビットフラグで表されるほか、順序の無関係な要素の集合を表すセット専用のデータ構造が提供されることもある。</p>
+<p>2次元のデータ構造には、行列とテーブルがある。行列は要素がすべて同じ型になるが、テーブルは要素がそれぞれ違った型となる。テーブルは構造体による配列によって表現できる。</p>
+<p>（<a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a>を参考に執筆しました。）</p>
+
+<h2>リストをスタックやキューとして使う</h2>
+<p>Perl, PHP, Python, Rubyのような言語では、リストをスタックやキューとして使うことができる。<a href="data_structure_stack.html">スタックとキュー</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.09.05</p>
+</div>
+
+<h2>参考文献</h2>
+<p>以下の書籍を参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版 (Professional Ruby Series)</a></li>
+<li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

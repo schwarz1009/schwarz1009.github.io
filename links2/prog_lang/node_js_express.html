@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Express関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Expressの世界観</h1>
+<p>Expressに関する世界観です。<a href="node_js.html">Node.js</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Express</h1>
+<h2>Expressのインストール</h2>
+<p>Expressのインストールは以下のようにする。</p>
+<pre>
+npm install express
+</pre>
+
+<h2>Expressでできること</h2>
+<p>Expressを使うことで、Node.jsを用いてMVCフレームワークによるバックエンド開発が可能となる。</p>
+<p>「JavaScriptはフロントエンドでのみ使う」という従来の常識は誤り。Node.jsとExpressを用いることで、Ruby on Railsなどで行っていたバックエンドも、完全にJavaScriptで開発できる。</p>
+<p>Ruby on Railsに見られるような、Scaffoldによるコードの自動作成機能もある。</p>
+<p>また、デフォルトのテンプレートエンジンにはJadeを使う。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>が参考になります。）</p>
+
+<h2>基本コード</h2>
+<p>基本はこんな感じ。</p>
+<pre class="prettyprint">
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) =&gt; {
+  res.render('index', { title: 'タイトル' })
+})
+
+app.listen(port)
+</pre>
+<p>（以上は<a href="https://expressjs.com/ja/starter/hello-world.html">Express の「Hello World」の例</a>、<a href="https://qiita.com/zenno04/items/d16f881170170b567b16">Windows10 + Express & Pug（旧Jade） - Qiita</a>、<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を編集して引用しました。）</p>
+<p>ちなみに、JavaScriptでは行末のセミコロン（;のこと）は省略できます。なので上の記述例では;がついていません。詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://blog.tai2.net/automatic_semilocon_insertion.html">JavaScriptの行末セミコロンは省略すべきか | blog.tai2.net</a></li>
+</ul>
+
+<h2>Jadeの基本</h2>
+<p>Expressでは、テンプレートエンジンJadeをHTMLの記述に使う。</p>
+<p>まず、タグ名にスペースを空けて文字列を続けると、それがタグの中の要素になる。|で繋げると複数行にわたって一行の文字列を書ける。</p>
+<table class="some_tables">
+<tr><th>元</th><th>結果</th></tr>
+<tr><td>
+<pre>
+p ほげ
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;p&gt;ほげ&lt;/p&gt;
+</pre>
+</td></tr>
+<tr><td>
+<pre>
+p ほ
+ | げ
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;p&gt;ほげ&lt;/p&gt;
+</pre>
+</td></tr>
+</table>
+<p>インデントやコロンを続けると、ネストされた入れ子のタグになる。</p>
+<table class="some_tables">
+<tr><th>元</th><th>結果</th></tr>
+<tr><td>
+<pre>
+p: span ほげ
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;p&gt;&lt;span&gt;ほげ&lt;/span&gt;&lt;/p&gt;
+</pre>
+</td></tr>
+<tr><td>
+<pre>
+html
+  head
+    title= title
+  body
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;title変数の値&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</td></tr>
+</table>
+<p>#の場合はidを、.の場合はclassを指定できる。divは省略できる。</p>
+<table class="some_tables">
+<tr><th>元</th><th>結果</th></tr>
+<tr><td>
+<pre>
+p.hoge ほげ
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;p class="hoge"&gt;ほげ&lt;/p&gt;
+</pre>
+</td></tr>
+<tr><td>
+<pre>
+#hoge
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;div id="hoge"&gt;&lt;/div&gt;
+</pre>
+</td></tr>
+<tr><td>
+<pre>
+.hoge
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;div class="hoge"&gt;&lt;/div&gt;
+</pre>
+</td></tr>
+</table>
+<p>丸括弧を続ければ属性を指定できる。</p>
+<table class="some_tables">
+<tr><th>元</th><th>結果</th></tr>
+<tr><td>
+<pre>
+a(href='hoge') ほげ
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;a href='hoge'&gt;ほげ&lt;/a&gt;
+</pre>
+</td></tr>
+</table>
+<p>また、Jadeの中で定義した変数か、あるいはres.render()の第二引数で指定した変数の場合、#{変数名}で変数の値を使うことができる。あるいはタグ名=変数名または属性名=変数名とも書ける。</p>
+<table class="some_tables">
+<tr><th>元</th><th>結果</th></tr>
+<tr><td>
+<pre>
+p #{title}
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;p&gt;title変数の値&lt;/p&gt;
+</pre>
+</td></tr>
+<tr><td>
+<pre>
+title= title
+</pre>
+</td><td>
+<pre class="prettyprint">
+&lt;title&gt;title変数の値&lt;/title&gt;
+</pre>
+</td></tr>
+</table>
+<p>最後に、先頭が-で始まる場合はJavaScriptコードとなる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a>を参考に執筆しました。）</p>
+
+<h2>JadeはPugに名称変更</h2>
+<p>JadeはPugに名称変更したようです。</p>
+<ul>
+<li><a href="https://qiita.com/zenno04/items/d16f881170170b567b16">Windows10 + Express & Pug（旧Jade） - Qiita</a></li>
+</ul>
+<p>上の記事には、blockを使った継承の方法が記述されており、参考になります。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Express+JavaScript">Express JavaScript - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>バックエンドAPI</h1>
+<h2>REST APIを用いてExpressをバックエンドに使う</h2>
+<p>実際のところ、ExpressはREST APIを用いてバックエンドに使います。</p>
+<p>フロントエンドではReact/Next.jsのようなクライアントで動くフレームワークを使い、バックエンドにはNode.js/ExpressとMySQLやPostgreSQLのようなデータベース管理システムを使って、両者をREST APIで連携させます。</p>
+<p>そのようにすることで、フロントエンドとバックエンドをどちらもJavaScriptで開発できます。</p>
+<p>データ形式にはJSONを使います。</p>
+<ul>
+<li><a href="https://www.dailyupblog.com/backend_development/1037/">【Node.js + Express】ExpressでREST APIを開発してみる〜概要・取得 | Daily Up</a></li>
+<li><a href="https://teech-lab.com/nodejs-express-restapi-memo/1258/">Node.jsとExpressでREST APIを開発してみよう！ | Teech Lab.</a></li>
+</ul>
+<p><a href="../network/cgi.html">CGI</a>や<a href="../network/rest.html">REST</a>や<a href="json.html">JSON</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.06.30</p>
+</div>
+
+<h2>API開発の基本</h2>
+<p>ExpressでAPIを開発するには、</p>
+<pre class="prettyprint">
+router.get("/bbs", function(req, res, next) {
+  pool.query("SELECT * FROM bbs", function(error, result) {
+    if (error) {
+      throw error;
+    }
+    res.status(200).json({
+      data: result.rows
+    });
+  });
+});
+</pre>
+<p>のように、ルーティング（上記では/bbs）に応じてSQLのクエリ（上記ではbbsテーブルの項目を全件取得）を実行するように記述する。</p>
+<p>（<a href="https://www.dailyupblog.com/backend_development/1037/">【Node.js + Express】ExpressでREST APIを開発してみる〜概要・取得 | Daily Up</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2024.07.14</p>
+</div>
+
+<h1>NestJS</h1>
+<h2>NestJS</h2>
+<p>NestJSはTypeScriptとNode.jsによるバックエンドのための新しいフレームワークで、Expressをベースとしている。</p>
+<p>Railsなどと同様の目的で、TypeScriptでサーバーサイドを書くために使用できる。</p>
+<ul>
+<li><a href="https://zenn.dev/higuchimakoto/articles/21c8420c4a612a">NestJSにざっくり入門してみる - Zenn</a></li>
+</ul>
+<p><a href="javascript_framework_typescript.html">TypeScript</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.06.14</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Webフレームワーク</h2>
+<p><a href="../network/web_framework.html">Webフレームワーク</a>を参照のこと。</p>
+
+<h2>Node.js</h2>
+<p><a href="node_js.html">Node.js</a>も参照のこと。</p>
+
+<h2>JavaScript</h2>
+<p><a href="javascript.html">JavaScript</a>も参照のこと。</p>
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

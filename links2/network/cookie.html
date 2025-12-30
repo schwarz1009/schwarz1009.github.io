@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Cookie関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_webserver_menu.html" class="sideiframe"></iframe>
+</div><h1>Cookie関連の世界観</h1>
+<p>Cookieに関する世界観です。<a href="web.html">Webサーバー</a>や<a href="apache.html">Apache</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Cookie</h1>
+<h2>Cookie（クッキー）とは</h2>
+<p>Cookie（クッキー）とは、Webサイトがブラウザに保存する利用者個人にまつわる情報のこと。</p>
+<p>たとえば、Amazonのような通販サイトで、一度ログアウトしてもう一度ログインしても購入したい商品のカートが残っていたりする。</p>
+<p>このように、「サイトを離れても（あるいはページを遷移しても）設定を残しておく」ということを成り立たせるのがCookie。</p>
+<p>正体はブラウザに保存されるとても小さなテキストファイル。</p>
+<p>ブラウザ側に保存されるデータをCookie（クッキー）と呼ぶが、逆にサーバ側に保存されるデータはセッションと呼ぶ。</p>
+<p>CGIは、設定情報を残すことができないため「ステートレス」であるとして知られるが、Cookieを使うことでCGIにおいてもステートフルなサービスを実現できる。</p>
+<p>逆に、個人用の設定をブラウザに残しておいてしまうため、後で別の人間が同じブラウザで同じサービスを使った時に、間違って情報を不正に利用されかねない（たとえばクレジットカード番号など）というセキュリティ上のリスクもある。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://time-space.kddi.com/ict-keywords/20180726/2392">初心者でもわかる『cookie（クッキー）』講座 危険性やスマホでの設定方法もズバリ解説｜TIME＆SPACE by KDDI</a></li>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+</ul>
+
+<h2>JavaScriptからCookieを操作する</h2>
+<p>JavaScriptからCookieを操作するには、document.cookieを操作すればよい。</p>
+<p>詳しくは以下の書籍が参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X">パーフェクトJavaScript (PERFECT SERIES 4)</a></li>
+</ul>
+
+<h2>PHPからCookieを操作する</h2>
+<p>PHPからCookieを操作するには、スーパーグローバル変数$_COOKIEを操作すればよい。</p>
+<p><a href="../prog_lang/php_lang.html">PHP（言語）</a>も参照のこと。</p>
+
+<h1>js-cookieとjQueryの例</h1>
+<h2>js-cookie</h2>
+<p>自分のWebサイトでCookieを扱いたい場合、js-cookieを使うとCookieを手軽に操作出来る。</p>
+<ul>
+<li><a href="https://github.com/js-cookie/js-cookie">js-cookie</a></li>
+</ul>
+
+<h2>jQueryでjs-cookieを使う</h2>
+<p>たとえば、jQueryとともにjs-cookieを使う場合、まず
+<pre class="prettyprint">
+&lt;script src="/js.cookie.js"&gt;&lt;/script&gt;
+</pre>
+<p>でjs.cookie.jsを読み込む。</p>
+<p>Cookieの取得は</p>
+<pre class="prettyprint">
+    var sizevar = Cookies.get('cookieFontSize');
+    if (sizevar== 'xbig') {
+        $("body").css("fontSize","200%"); 
+    }
+    else if (sizevar== 'big') {
+        $("body").css("fontSize","150%"); 
+    }
+    else if (sizevar== 'normal') {
+        $("body").css("fontSize","100%"); 
+    }
+    else if (sizevar== 'small') {
+        $("body").css("fontSize","14px"); 
+    }
+    else if (sizevar== 'xsmall') {
+        $("body").css("fontSize","13px"); 
+    }
+    
+    var familyvar = Cookies.get('cookieFontFamily');
+    if (familyvar == 'mincho') {
+        $("body").addClass('font_mincho');
+        $("body").removeClass('font_gothic');
+    }
+    else if (familyvar== 'gothic') {
+        $("body").addClass('font_gothic');
+        $("body").removeClass('font_mincho');
+    }
+</pre>
+<p>Cookieの設定や削除は</p>
+<pre class="prettyprint">
+    $("button.xbig").click(function(){
+        $("body").css("fontSize","200%"); 
+        Cookies.set('cookieFontSize', 'xbig', { expires: 7 });
+    });
+    $("button.big").click(function(){
+        $("body").css("fontSize","150%"); 
+        Cookies.set('cookieFontSize', 'big', { expires: 7 });
+    });
+    $("button.normal").click(function(){
+        $("body").css("fontSize","100%"); 
+        Cookies.set('cookieFontSize', 'normal', { expires: 7 });
+    });
+    $("button.small").click(function(){
+        $("body").css("fontSize","14px"); 
+        Cookies.set('cookieFontSize', 'small', { expires: 7 });
+    });
+    $("button.xsmall").click(function(){
+        $("body").css("fontSize","13px"); 
+        Cookies.set('cookieFontSize', 'xsmall', { expires: 7 });
+    });
+    
+    $("button.bt_mincho").click(function(){
+        $("body").addClass('font_mincho');
+        $("body").removeClass('font_gothic');
+        Cookies.set('cookieFontFamily', 'mincho', { expires: 7 });
+    });
+    $("button.bt_gothic").click(function(){
+        $("body").addClass('font_gothic');
+        $("body").removeClass('font_mincho');
+        Cookies.set('cookieFontFamily', 'gothic', { expires: 7 });
+    });
+    $("button.bt_clean").click(function(){
+        $("body").css("fontSize","14px"); 
+        $("body").removeClass('font_mincho');
+        $("body").removeClass('font_gothic');
+        Cookies.remove('cookieFontSize');
+        Cookies.remove('cookieFontFamily');
+    });
+</pre>
+<p>のようにする。</p>
+<p>後日注記：僕のサイトでCookieを使っていたのは過去のことであり、今ではCookieは一切使っていません。</p>
+<p><a href="../prog_lang/jquery_samplecode.html">jQueryサンプルコード</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.06.16編集</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

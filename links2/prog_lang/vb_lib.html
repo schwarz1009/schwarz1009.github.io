@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Visual Basic関連の世界観２（クラスライブラリ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Visual Basicの世界観２（クラスライブラリ）</h1>
+<p>Visual Basicに関する世界観２（クラスライブラリ）です。</p>
+<p><a href="https://www.amazon.co.jp/VisualBasic2010%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC-Perfect-Master-%E9%87%91%E5%9F%8E-%E4%BF%8A%E5%93%89/dp/4798031100">VisualBasic2010パーフェクトマスター (Perfect Master SERIES)</a>や<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考にしています。</p>
+
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="vb.html">Visual Basic（１．基本）</a></li>
+<ul>
+<li><b>２．クラスライブラリ</b></li>
+<li><a href="vb_form.html">３．フォームデザイナー</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>クラスライブラリ・API</h1>
+<p>（<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考に執筆・引用しました。）</p>
+<h2>配列とコレクション</h2>
+<p>配列は、Arrayクラスで操作できる。たとえばArray.Sort(ar1)で配列をソートできる。ar1は配列の変数名。</p>
+<p>Dimで要素数を設定した配列は、ReDimで要素数を変更できる。</p>
+<p>Lengthプロパティで要素数を得られる。多次元配列ならばGetLength()メソッドを使う。</p>
+<p>Sort()メソッドでソートができる。Reverse()メソッドで逆順にできる。</p>
+<p>Clear()メソッドでクリアできる。CopyTo()メソッドとClone()メソッドでコピーができる。</p>
+<p>要素数が動的に変化する配列は、ArrayListクラスから利用できる。ジェネリックの場合はListクラスを使う。</p>
+<p>キーと値による連想配列は、HashTableクラスから利用できる。ジェネリックの場合はDictionaryクラスを使うと、データ型を指定できる。キーでソートする場合はSortedListクラスを使う。</p>
+<p>コレクションの要素の値を検索するには、IndexOf()メソッドを使う。</p>
+<p>（<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考に執筆しました。）</p>
+
+<h2>文字列</h2>
+<p>文字列の処理はStringクラスから行える。</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>IndexOf()</td><td>検索</td></tr>
+<tr><td>Contains()</td><td>存在のチェック</td></tr>
+<tr><td>Replace()</td><td>置換</td></tr>
+<tr><td>Split()</td><td>分割</td></tr>
+<tr><td>Remove()</td><td>削除</td></tr>
+<tr><td>Insert()</td><td>挿入</td></tr>
+<tr><td>Join()</td><td>連結</td></tr>
+</table>
+<p>などのメソッドから操作出来る。</p>
+<p>（<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考に執筆しました。）</p>
+
+<h2>ファイル</h2>
+<p>ファイル処理はIO.Fileクラスの各メソッドから行える。ディレクトリの処理はIO.Directoryクラス。</p>
+<p>File/Directoryクラスは、</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>Exists()</td><td>存在確認</td></tr>
+<tr><td>Delete()</td><td>削除</td></tr>
+<tr><td>Move()</td><td>移動</td></tr>
+<tr><td>Copy()</td><td>コピー</td></tr>
+<tr><td>RenameFile()</td><td>名前変更</td></tr>
+</table>
+<p>などの操作が出来る。</p>
+<p>また、Directoryは</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>CreateDirectory()</td><td>フォルダの作成</td></tr>
+<tr><td>GetDirectories()</td><td>フォルダ内のフォルダ一覧を取得</td></tr>
+<tr><td>GetFiles()</td><td>フォルダ内のファイル一覧を取得</td></tr>
+</table>
+<p>などの操作が出来る。</p>
+<p>（<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考に執筆しました。）</p>
+
+<h2>テキストファイルの読み書き</h2>
+<p>テキストファイルは、IO.File.OpenRead(), IO.File.OpenText(), IO.StreamReaderなどから読み込みが行なえる。</p>
+<p>StreamReaderでは、一行ずつ読み込むためにはReadLine()メソッド、一文字ずつ読み込むためにはRead()メソッド、一気に全部読み込むためにはReadToEnd()メソッドを使う。</p>
+<p>また、IO.File.OpenWrite(), IO.StreamWriterなどから書き込みが行える。</p>
+<p>StreamWriterでは、一行書き込むためにはWriteLine()メソッド、単に書き込むにはWrite()メソッドを使う。</p>
+<p>また末尾に追記するにはIO.File.AppendText()メソッドを使う。</p>
+<p>（<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考に執筆しました。）</p>
+
+<h2>コモンダイアログ</h2>
+<p>また、コモンダイアログは、ファイルを開くダイアログがOpenFileDialog、名前をつけて保存のダイアログがSaveFileDialogコンポーネントから開くことができる。</p>
+<p>フォントの指定はFontDialog、色の指定はColorDialogから行える。</p>
+<p>（<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考に執筆しました。）</p>
+
+<h2>ネットワークソケット</h2>
+<p>まず、ソースコードの先頭に</p>
+<pre class="prettyprint lang-vb">
+Imports System.Net.Sockets
+</pre>
+<p>を追加する。</p>
+<p>ネットワーク上のコンピュータにTCP/IPで接続するには、</p>
+<pre class="prettyprint lang-vb">
+Dim client As New TcpClient
+</pre>
+<p>でクライアントを作って、</p>
+<pre class="prettyprint lang-vb">
+client.Connect("localhost", 80)
+</pre>
+<p>などとする。</p>
+<p>その後に、</p>
+<pre class="prettyprint lang-vb">
+Dim stream As NetworkStream = client.GetStream()
+</pre>
+<p>でストリームを取得できる。</p>
+<p>この状態で、</p>
+<pre class="prettyprint lang-vb">
+stream.Write(hoge_buff, 0, hoge_buff.Length)
+</pre>
+<p>した内容が、</p>
+<pre class="prettyprint lang-vb">
+stream.Read(hoge_data, 0, hoge_data.Length)
+</pre>
+<p>で返ってくる。hoge_buffに送りたいデータを指定し、hoge_dataに送られた内容が入る。</p>
+<p>そして、</p>
+<pre class="prettyprint lang-vb">
+System.Text.Encoding.ASCII.GetString(hoge_data)
+</pre>
+<p>でテキストを得られる。</p>
+<p>サーバーを作りたい場合は、</p>
+<pre class="prettyprint lang-vb">
+server = New TcpListener(IPAddress.Loopback, 9000)
+</pre>
+<p>として、</p>
+<pre class="prettyprint lang-vb">
+server.Start()
+</pre>
+<p>とする。Stopで停止する。</p>
+<p>この時Threding.Thredクラスを利用してスレッドを作成すること。</p>
+<p>サーバーを作る場合、AcceptTcpClient()を使うことで、クライアントからの接続待ちができる。この状態でクライアントから接続を受けると、AcceptTcpClient()から返り値であるTcpClientオブジェクトが得られる。その上でストリームを取得してRead()などを行なえば良い。</p>
+<pre class="prettyprint lang-vb">
+Dim client As TcpClient = server.AcceptTcpClient()
+Dim stream As NetworkStream = client.GetStream()
+</pre>
+<p>ちなみに、Webサーバーに接続したい時は、ソースコードの先頭に</p>
+<pre class="prettyprint lang-vb">
+Imports System.Net
+</pre>
+<p>を追加し、WebClientクラスを使用する。OpenRead(), DownloadFile(), UploadFile()などのメソッドの他、クエリ文字列（URLの?の後に続く文字列）を操作するメソッドなどがある。</p>
+<p>（<a href="https://www.amazon.co.jp/VisualBasic2010%E9%80%86%E5%BC%95%E3%81%8D%E5%A4%A7%E5%85%A8555%E3%81%AE%E6%A5%B5%E6%84%8F-%E6%B1%A0%E8%B0%B7-%E4%BA%AC%E5%AD%90/dp/4798027685">VisualBasic2010逆引き大全555の極意</a>を参考に執筆しました。）</p>
+
+<h1>関連ページ</h1>
+<h2>ソケット</h2>
+<p><a href="../linux/linux_kernel_socket.html">Linuxカーネル（ソケット）</a>も参照のこと。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-vb.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

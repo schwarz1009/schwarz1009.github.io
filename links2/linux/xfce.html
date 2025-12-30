@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Xfce関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Xfceの世界観</h1>
+<p>Xfceの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Xfce</h1>
+<h2>Xfceとは</h2>
+<p>見た目のかっこよさやカスタマイズ性は十分にあるままで、軽量かつ高速なUNIXのデスクトップ環境を作ろう、という試み。</p>
+<p>GNOMEやKDEの巨大指向にうんざりした人にお勧めで、一部では「絶対にこの方が（UNIXとして）正しい」というファンが居るデスクトップ環境。リーナス・トーバルズも一時期GNOMEからXfceに乗り換えていた。</p>
+<p>ある意味、Linuxのデスクトップ環境は、肥大化・巨大化してWindowsよりも不安定になっている。本当に路線として正しいのは、「UNIXの哲学を体現する」Xfceなのかもしれない。一部では商用UNIXで用いられるCDEに似ているとか。</p>
+<p>Thunarという簡素で賢いファイルマネージャも人気。Xfce-Goodiesという軽量アプリケーションのプロジェクトもあり、軽量なWebブラウザのMidoriなどが開発されている。</p>
+<p>標準の機能は少ないが、プラグインを導入することで機能を拡張できるため、コアなユーザにも推奨できる。見た目のスタイルを変えられるテーマ機能もある。</p>
+<p>公式・Wikipedia</p>
+<ul>
+<li><a href="https://www.xfce.org/?lang=ja">Xfce.org</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Xfce">Xfce - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://git.xfce.org/">git</a></li>
+</ul>
+
+<h2>Thunar</h2>
+<p>ThunarはXfceのファイルマネージャ。軽量かつ高速。ファイルの名前を一括で変更できる「バルクリネーム」機能がある。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Thunar">Thunar - ArchWiki</a></li>
+</ul>
+
+<h2>Midori</h2>
+<p>Xfce-Goodiesの軽量なWebブラウザ。レンダリングエンジンにWebKit/GTK+を採用している。</p>
+<p><a href="linux_browsers.html">Linux ブラウザ</a>を参照のこと。</p>
+
+<h2>XfceならMX Linux</h2>
+<p>Xfceを使うなら、中量級のディストリビューションである<a href="mx_linux.html">MX Linux</a>がおすすめ。</p>
+<p>大手ディストリビューションに見放された32bit版も開発・提供しており、Windows XPマシンに導入してもよし。</p>
+
+<h2>最近、Xfceユーザーになった</h2>
+<p>最近、僕はGNOME 3を使うのをやめ、Xfceユーザーになりました。</p>
+<p>Debianなら、aptコマンドですぐに導入できます。</p>
+<pre>
+# apt install xfce4 xfce4-goodies
+</pre>
+<p>ただし、GNOMEとの混在環境ではアプリケーションメニューなどが分かりづらくなるため、最初のDebianのインストール時にXfceを選択することをおすすめします。</p>
+<p>今はDebianでXfceを使っています。軽くて、安定していて、そしてGNOMEよりもどこに機能があるのか分かりやすく、とても快適です。</p>
+<p>WindowsやMacのユーザーに、「Linuxデスクトップはこんなに使いやすいのだ」と訴えかけるには、ディストリビューションのデフォルトの環境は、GNOME 3よりもXfceにするべきだと思います。</p>
+<p>Xfceを使うことで、GNOME 3が全く「本当のLinux環境ではない」ということを思い知らされました。</p>
+<p>ただし、今のところGNOME 3のアプリケーションとXfceのアプリケーションがメニューに混在していて使いづらいため、一度XfceをベースとしたDebianあるいはほかのディストリビューションを導入しなおそうと思います。</p>
+<p>XfceでMozilla Firefoxを使うと、WindowsとFirefoxアカウントの情報を共有できるため、とても便利です。また、GIMPやInkscapeなどはWindows版のものよりも高速に起動します。</p>
+<p>ただし、教訓として、最初にGNOMEを導入したのがまずかったように、Linuxは何度も入れなおす必要があるということが分かります。そのため、大事なデータはWindowsに残し、USBハードディスクにバックアップを取るようにしています。</p>
+<p><a href="gnome_desktop.html">GNOMEデスクトップ</a>も参照のこと。</p>
+
+<h2>Xfceを入れる前によく考えよう</h2>
+<p>軽い気持ちでXfceをaptなどからインストールする前に、本当にXfceがシステムに必要なのかをよく考えましょう。</p>
+<p>Xfceをaptなどからインストールすると、依存関係などからさまざまなパッケージが大量にインストールされてしまい、後でアンインストールすることが困難になります。</p>
+<p>また、標準的なGNOMEなどに比べて、標準的でないXfceなどのデスクトップ環境は、バグや不具合が多く、きちんと動かない（つまり使い物にならない）ことが多々あります。</p>
+<p>このような時、できることは、ディストリビューションを再インストールしてシステムの再設定を行うか、不要であってもXfceとGNOMEなどが混在した環境でGNOMEを使うことです。</p>
+<p>ですが、GNOMEとXfceが共存したところで、ほとんど良いことは何もありません。GNOMEだけを使うので十分です。FirefoxなどはGNOMEだけの環境ではGNOMEのファイルマネージャなどを標準で連携などの際に使いますが、Xfceが混在していると、使わないにもかかわらずGNOMEではなくXfceのファイルマネージャが使われたりして、システムが非常に使いづらくなってしまいます。</p>
+<p>また、そもそも、Xfceを追加でインストールすること自体、僕はおすすめしません。もし、Xfceを本当に使うならば、ディストリビューションを最初にインストールする際にXfceを選択するか、Xfceを標準のデスクトップ環境に採用したディストリビューションをインストールしたほうがいいでしょう。</p>
+<p>なので、Xfceをインストールする前に、使うのか使わないのかをよく考えましょう。単に「使ってみたいから使う」という考え方は推奨しません。</p>
+<div class="edit_date">
+<p>2023.03.05</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

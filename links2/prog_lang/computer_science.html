@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>コンピュータ科学の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>コンピュータ科学の世界観</h1>
+<p>コンピュータ科学の世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>コンピュータとは</h1>
+<h2>コンピュータの計算とは単なる数の計算ではない</h2>
+<p>コンピュータの計算とは、単なる数の計算ではないと知っておきましょう。</p>
+<p>コンピュータの計算は、単なる加減乗除の計算ではありません。</p>
+<p>コンピュータの計算は、ある特定の操作があって、特定の状態に対してその場その場で行われるべき操作が決まっていて、操作の結果現れる新しい状態に基づいてまた別の操作が行われるようになっていて、状態が続くという条件の間それが繰り返され、それが終点になった時点で計算が終了する処理のように、「ひとつひとつの状態に対して決められた操作処理を行う一連の手続き」のことです。</p>
+<p>コンピュータの計算は、単なる加減乗除の計算だけではありません。たとえば小学校で習う掛け算や割り算の筆算のように、あるいは筆算の延長線上にあるような一連の操作処理のように、よりさまざまな場合に共通の「状態に対する連続した操作」のことを意味しています。</p>
+<p>古い本ですが、<a href="https://www.amazon.co.jp/%E6%95%B0%E5%AD%A6%E3%81%AE%E6%80%9D%E6%83%B3-NHK%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-42-%E6%9D%91%E7%94%B0-%E5%85%A8/dp/4140010428">数学の思想 (NHKブックス 42)</a>という本には、そのような「電子計算機の計算とは単なる数の計算ではない」ということが記述されており、参考になります。</p>
+<p>コンピュータの計算は、まさにそのような「アルゴリズムの計算」であると言えます。</p>
+<p>このような結果、コンピュータではさまざまなことができます。単にできるだけではなく、高速であり、また正確です。大量にある仕事であっても、とても複雑な計算であっても、文句を言わず、間違えることもなく、コンピュータが動く限りこなすことができます。</p>
+
+<h2>状態に対して手続きを記述する</h2>
+<p>僕は、プログラミングのコツは、「状態に対して手続きを記述する」ということだと思います。</p>
+<p>まず、データ構造である「状態」を思い浮かべます。この状態は、「ある一定の法則」によって常に秩序が保たれているか、あるいは自分の手でそのように保ちます。</p>
+<p>そして、この「状態」を、「別のなんらかの状態にする」ために、「手続き」となるアルゴリズムを考えます。</p>
+<p>これは、たとえばソートや探索のようなものです。</p>
+<p>ある秩序に基づく状態があり、その状態を別の状態にするため、あるいは秩序を保ち続けるために、どのような手続きを実行したらいいかを考え、それを記述するのです。</p>
+<p>実際には、プログラミングはなんらかの状態を別の状態にするだけではありません。特定のデータを見つけるための探索もありますし、圧縮や解凍、あるいは通信やストレージやメモリの管理など、さまざまな分野があります。</p>
+<p>ですが、基本的な「状態と手続きが現れ、状態に対して手続きを記述する」ということは変わらないため、状態を別の状態にするための手続きを書くことができるなら、ほかのことも同じようにできるようになるでしょう。</p>
+
+<h1>情報理論</h1>
+<h2>クロード・シャノンとコンピュータ</h2>
+<p>クロード・シャノンは、コンピュータを単なる「計算機」から、どんな情報でも万能に処理できる「コンピュータ」に変えた。物理学では情報を分析することはできないと唱え、情報を「ツー」と「トン」で計算できるモールス信号のように、情報を単純化する「コード化」を行い、0と1のビット化によって、数字だけではなくさまざまな情報（マルチメディア情報など）を処理することができると考えた。</p>
+<p>後日注記：シャノンの賢い点は、情報の基本単位を0と1のビットにし、数だけではなく、文字や画像や音声など、すべての情報がこのビットによって表現できるとしたこと。これにより、コンピュータというたった一種類の「情報を処理する機械」で、すべてのビット情報を同じように処理することが可能になった。文字や画像や音声などに種類を分けることなく、たったひとつのコンピュータですべてが処理できるということが、この「ビット」という情報の共通単位によって可能になったのだ。これにより、ビットの処理を行うコンピュータは「万能情報処理装置」になったのである。</p>
+<p>以下の書籍に、クロード・シャノンの情報理論についての記述が載っている。TRON開発者の坂村健さんによる書籍である。（上の記述は以下の書籍を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%97%9B%E5%BF%AB-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E5%AD%A6-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E5%9D%82%E6%9D%91-%E5%81%A5/dp/4087474283">痛快! コンピュータ学 (集英社文庫)</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.09編集</p>
+</div>
+
+<h2>情報理論の解説</h2>
+<p>以下のようなページが参考になる。熱力学と共通の概念であるエントロピー（情報の乱雑さの度合い）や、確率分布・符号化などの理論がよく教えられる。</p>
+<ul>
+<li><a href="http://web.tuat.ac.jp/~s-hotta/info/">情報理論 - 東京農工大学 情報工学科 堀田研究室</a></li>
+<li><a href="https://postd.cc/visual-information-theory-1/">情報理論を視覚的に理解する (1/4) </a>, <a href="https://postd.cc/visual-information-theory-2/">(2/4)</a>, <a href="https://postd.cc/visual-information-theory-3/">(3/4)</a>, <a href="https://postd.cc/visual-information-theory-4/">(4/4)</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%83%85%E5%A0%B1%E7%90%86%E8%AB%96">情報理論 - Wikipedia</a></li>
+</ul>
+
+<h2>クロード・シャノン</h2>
+<p>通信、暗号化、圧縮などに関連する、情報理論の提唱者。彼によってコンピュータは単なる計算機から「符号化」によってさまざまな情報処理を行う「万能機械」になった。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%89%E3%83%BB%E3%82%B7%E3%83%A3%E3%83%8E%E3%83%B3">クロード・シャノン - Wikipedia</a></li>
+</ul>
+<p><a href="../linux/linux_filetools_archive.html">Linuxアーカイブ・同期・デバイス処理</a>も参照のこと。</p>
+
+<h2>エントロピーと熱力学</h2>
+<p>エントロピーについては<a href="../natural/physics_thermodynamics.html">熱力学</a>も参照のこと。</p>
+
+<h1>チューリングマシン</h1>
+<h2>チューリングマシン</h2>
+<p>チューリングマシンは仮想的な理想かつ単純な機械のことで、計算機を数学的に議論するために用いられる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%9E%E3%82%B7%E3%83%B3">チューリングマシン - Wikipedia</a></li>
+</ul>
+
+<h2>チューリングマシンについての数学的な議論</h2>
+<p>チューリングマシンは、自分の「状態」があり、文字列をテープから受け付けた上で、入力文字列から出力文字列になるように上書きし、受理あるいは拒否の状態に入って停止するような仮想的な機械のこと。</p>
+<p>チューリングは、すべての言語が決定可能なのかどうか、すなわちすべての問題が有限時間でイエスかノーかで判断できるのかどうかを考えるために、「万能チューリングマシン」を用意することで、この問題に「ノー」（有限では解決できない問題も存在する）であると証明した。</p>
+<p>チューリングマシンについての数学的な議論については、以下の記事が詳しい。（以上の内容はこの記事を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://manabitimes.jp/math/2128">チューリングマシンの定義とそれに関連する話 | 高校数学の美しい物語</a></li>
+</ul>
+
+<h2>アラン・チューリング</h2>
+<p>チューリングマシンで知られるコンピュータ科学者。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A9%E3%83%B3%E3%83%BB%E3%83%81%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">アラン・チューリング - Wikipedia</a></li>
+</ul>
+
+<h2>関連ページ</h2>
+<p><a href="state.html">状態</a>や<a href="event.html">イベント駆動</a>も参照のこと。</p>
+
+<h1>ノイマン型コンピュータ</h1>
+<h2>ノイマン型コンピュータ</h2>
+<p>ノイマン型コンピュータとは、プログラム内蔵方式のコンピュータのこと。</p>
+<p>命令をひとつひとつ逐次的に実行する「プログラム」を、コンピュータの内部にデータとして持つ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%8E%E3%82%A4%E3%83%9E%E3%83%B3%E5%9E%8B">ノイマン型 - Wikipedia</a></li>
+</ul>
+
+<h2>ジョン・フォン・ノイマン</h2>
+<p>コンピュータ科学者。</p>
+<p>後日注記：フォン・ノイマンは、コンピュータ科学以外でもたくさんの分野で巨大な貢献を遺した、20世紀を代表する偉大な天才である。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A7%E3%83%B3%E3%83%BB%E3%83%95%E3%82%A9%E3%83%B3%E3%83%BB%E3%83%8E%E3%82%A4%E3%83%9E%E3%83%B3">ジョン・フォン・ノイマン - Wikipedia</a></li>
+<li><a href="https://www.amazon.co.jp/%E7%97%9B%E5%BF%AB-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E5%AD%A6-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E5%9D%82%E6%9D%91-%E5%81%A5/dp/4087474283">痛快! コンピュータ学 (集英社文庫)</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.01編集</p>
+</div>
+
+<h2>必ずしも命令の逐次実行ではないコンピュータも考えられる</h2>
+<p>僕がノイマン型コンピュータについて思うことは、「必ずしも命令の逐次実行ではないコンピュータも考えられる」ということです。</p>
+<p>たとえば、人工知能を持った自律思考型のロボットがあったとして、これを今のコンピュータのように、プログラムを逐次実行していく方法で作ることは難しいと思います。</p>
+<p>そうではなく、別の方法で、プログラムを自分自身が考えだすようなCPUを作ることは、僕はできると思います。</p>
+<p><a href="../programs/ai.html">AI</a>や<a href="../programs/robot.html">ロボット</a>も参照のこと。</p>
+
+<h1>科学技術計算ソフトウェア</h1>
+<h2>gnuplot</h2>
+<p>グラフ描画ソフト。</p>
+<p><a href="../linux/gnuplot.html">gnuplot</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gnuplot">gnuplot - Wikipedia</a></li>
+</ul>
+
+<h2>R言語</h2>
+<p>統計専用のプログラミング言語。</p>
+<p><a href="r_lang.html">R言語</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E">R言語 - Wikipedia</a></li>
+</ul>
+
+<h2>GNU Octave</h2>
+<p>数学的解析のための高レベルな言語・ソフトウェア。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU_Octave">GNU Octave - Wikipedia</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>コンピュータの歴史</h2>
+<p><a href="../hardware/old_computer.html">古いコンピュータ（１．メインフレーム・ミニコン）</a>も参照のこと。</p>
+
+<h2>数学</h2>
+<p><a href="../math/vector.html">ベクトル</a>や<a href="../math/statistic.html">統計</a>なども参照のこと。</p>
+
+<h2>データサイエンス</h2>
+<p><a href="../programs/ai.html">人工知能・AI・機械学習・データマイニング</a>を参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

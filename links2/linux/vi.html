@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>vi - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>vi</h1>
+<p>viに関する世界観です。<a href="ncurses.html">ncurses</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>vi</h1>
+<!--<p>viの基本。自分なんかiと:qくらいしか知りません（恥ずかしいです）。--></p>
+<h2>viとは</h2>
+<p>viは、UNIXの標準的テキストエディタ。特に、サーバーなどの最小限のシステムで使われることが多い。（Emacsは、サーバーでは入っていない場合がある。）</p>
+<p>モードを切り替えることによって効率的な入力が可能。キーボードによるコマンド操作が豊富。</p>
+<p>そのありえないキーバインドから、UNIX界では「もっとも操作方法を覚えるのが難しいエディタ」として知られている。また、ラインエディタexをベースにしており、exのコマンドを使うことができる。これによって、さまざまなモードを切り替えながら、色んなことを簡単にできて入力や操作もしやすい最強のエディタとして知られている。</p>
+<p>Emacsとviはテキストエディタ界の二大勢力として宗教戦争をしている。僕は昔はvi派だったが、今はEmacs派。昔はviに拘っていたが、今はWindowsでxyzzy（EmacsライクなWindowsエディタ）を使うようになった。</p>
+<p>viの操作方法がどうしても覚えられないと言う人は、コマンドラインで使える小さなnanoと言うエディタがある。初心者が設定ファイルの編集をするには、nanoがおすすめ。</p>
+<ul>
+<li><a href="http://oxynotes.com/?p=3844">Linuxの鬼門、viエディタの基本的な操作方法と実用的なコマンド - OXY NOTES</a></li>
+<li><a href="http://www.ritsumei.ac.jp/~tomori/vi.html">viコマンド集 - Takayuki Omori Home Page</a></li>
+</ul>
+
+<h2>Vim公式のヘルプ</h2>
+<p>Vimを使うのであれば、公式のメインヘルプファイルを読みましょう。以下に日本語に訳されたページがあります。</p>
+<ul>
+<li><a href="https://vim-jp.org/vimdoc-ja/index.html">help - Vim日本語ドキュメント</a></li>
+</ul>
+<p>後日注記：Vimでは:helpからマニュアルを読むことができます。とてもよくできていて便利であると好評です。ただしデフォルトは英語です。日本語にするためにはvimdoc-jaをインストールします。あるいはHTML版もあります。</p>
+<ul>
+<li><a href="https://qiita.com/shinshin86/items/eb41e4fb513bb4d3e3cd">Vim :helpがユニークな3つのポイント、vim :helpを読むための敷居を下げる3つの事柄 - Qiita</a></li>
+<li><a href="https://original-game.com/mini_howto/how-to-translate-vim-help-into-japanese/">Vimのヘルプを日本語化する方法 - オリジナルゲーム.com | ゲーム開発に役立つ情報が盛り沢山</a></li>
+<li><a href="https://vim-jp.org/vimdoc-ja/">help - Vim日本語ドキュメント</a> - HTML版。vimdoc-jaをインストールしなくてもブラウザから読める。GitHubは<a href="https://github.com/vim-jp/vimdoc-ja">vim-jp/vimdoc-ja</a>にリポジトリがある。</li>
+</ul>
+<div class="edit_date">
+<p>2023.06.07編集</p>
+</div>
+
+<h2>ラインエディタex</h2>
+<p>viのようなビジュアルモードのテキストエディタが生まれる前、UNIXなどではラインエディタと呼ばれる、行番号を指定してその行だけを編集・プリントするエディタが使われていた。</p>
+<p>viのもとになったのは、ラインエディタex。viはexのビジュアルモードとして開発された。</p>
+<p>このラインエディタexは、今でも便利に使うことのできる高度な機能がたくさんある。viから、今でもexの機能を使うことができる。</p>
+<p>exの操作の基本は、アドレス指定とコマンド。exでは</p>
+<pre>
+:[アドレス]コマンド[オプション]
+</pre>
+<p>という形式でアドレスに続いてコマンドを付加する形式で操作を実行する。</p>
+<p>アドレス指定に使うアドレスシンボルは、</p>
+<table class="some_tables">
+<tr><th class="min60">シンボル</th><th>説明</th></tr>
+<tr><td>x,y</td><td>x行からy行までを処理することを表す。</td></tr>
+<tr><td>0</td><td>ファイル先頭</td></tr>
+<tr><td>$</td><td>最後の行</td></tr>
+<tr><td>%</td><td>全ての行</td></tr>
+<tr><td>/pat/または?pat?</td><td>これより後またはこれより前にpatにマッチする行</td></tr>
+</table>
+<p>となる。</p>
+</table>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。）</p>
+
+<h2>viの基本操作</h2>
+<p>UNIX使いにとって、viを習得するのは絶対に必要である。</p>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>挿入モードに入る</td><td>i, a, o, O, A, Iのどれか。<br>コマンドによって現在位置の左、右、上、下などの挿入場所が違う。<br>aは右、Aは行末、iは左、Iは行頭、oは下の行、Oは上の行に挿入する。<br>「viの入力は青い（a, o, i）」と覚えよう。</td></tr>
+<tr><td>基本的移動</td><td>h（左）, j（下）, k（上）, l（右）。</td></tr>
+<tr><td>その他の移動</td><td>wで次の単語、bで前の単語。<br>0で行の先頭へ、$で行の終端へ。<br>Hで画面最上行先頭、Mで画面中央行先頭、Lで画面最下行先頭に移動。</td></tr>
+<tr><td>ロールアップ</td><td>Ctrl+fで一画面下へ、Ctrl+bで一画面上へ。<br>Ctrl+dで半画面下へ、Ctrl+uで半画面上へ。</td></tr>
+<tr><td>ヤンク</td><td>ヤンクとはバッファへのコピーのこと。<br>ylで一文字ヤンク, ywで一単語ヤンク、yyでカーソル行のヤンク。<br>複数行ヤンクしたい場合は3yyなどとする（3行ヤンク）。</td></tr>
+<tr><td>プット</td><td>pあるいはPでプット（バッファから貼り付け）。<br>pの場合、文字や単語はカーソル右に、行は行の下にプットされる。<br>Pの場合は逆。</td></tr>
+<tr><td>カット</td><td>xで一文字削除、dwで一単語削除、ddで一行削除。<br>ddなどで削除した内容はヤンクと同様バッファに入れられるため、pなどで貼り付けすることができる。</td></tr>
+<tr><td>検索</td><td>/文字列で下方に検索、?文字列で上方に検索、nで同方向に次の検索、Nで逆方向に次の検索。</td></tr>
+<tr><td>アンドゥ・リドゥ</td><td>.で直前の動作を繰り返し、uで直前のコマンドの取り消し、Uでカーソル行に行った編集の取り消し。</td></tr>
+<tr><td>連結</td><td>Jで上の行と下の行を連結する。.を使うことで繰り返しJを実行できる。</td></tr>
+</table>
+
+<p>また、:に続いてコマンドを入力することで、exコマンドが実行できる。</p>
+<table class="some_tables">
+<tr><th class="min60">exコマンド</th><th>説明</th></tr>
+<tr><td>:wq</td><td>保存して終了</td></tr>
+<tr><td>:q!</td><td>破棄して終了（!は問答無用でやれという意味）</td></tr>
+<tr><td>:w ファイル名</td><td>ファイルに保存</td></tr>
+<tr><td>:w! ファイル名</td><td>強制的に上書き</td></tr>
+<tr><td>:r ファイル名</td><td>カーソル位置にファイルを読み込む。</td></tr>
+<tr><td>:s/foo/bar</td><td>カーソル行の中の最初のfooをbarに置き換え。<br>このコマンドの最後に/gをつけると、カーソル内の全てに対して置換を行う。</td></tr>
+<tr><td>:%s/foo/bar/g</td><td>ファイル内の全てに対して置換を行う。<br>ある行からある行までの置換を行いたい時は、:5,80s/foo/bar/gのように行番号でアドレス指定を行う。</td></tr>
+</table>
+<p>（以上は「<a href="https://www.amazon.co.jp/%E6%83%85%E5%A0%B1%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96-%E5%96%9C%E4%B9%85%E5%B7%9D-%E6%94%BF%E5%90%89/dp/4873613515">情報基礎概論 第4版 喜久川政吉・殿塚勲 共著（学術図書出版社）</a>」を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>検索と置換を使いこなそう</h2>
+<p>検索と置換のコマンドを上手く使うことで、どこからどこまでのどんなパターンに対して、正規表現による置換をかけることが出来る。</p>
+<p>ちなみに、記法として/以外の記号を使うことも出来る。</p>
+<pre>
+:%s;/usr/bin;/usr/local/bin;g
+</pre>
+<p>正規表現については<a href="regex.html">正規表現</a>を参照のこと。</p>
+
+<h2>UNIXコマンドの実行</h2>
+<pre>
+:!コマンド
+</pre>
+<p>でUNIXコマンドを実行できる。</p>
+<p>たとえば</p>
+<pre>
+:96,99!sort
+</pre>
+<p>などとすれば96～99行目をソート（並び替え）する。このように、テキストブロックをUNIXのフィルタ処理にかけることもできる。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。）</p>
+
+<h2>文脈依存置換</h2>
+<p>文脈依存置換とは、あるパターンを含む行を探し、見つかったら別の文字列を置換することのできる構文。</p>
+<p>たとえば、mapから始まる行に出現するAltだけをESCに変えるには、</p>
+<pre>
+:g/^map/s/Alt/ESC/g
+</pre>
+<p>とする。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。）</p>
+
+<h2>編集を破棄する</h2>
+<p>作業中の編集を破棄して、最後に保存された状態に戻したければ、:e!コマンドが使える。</p>
+<pre>
+:e!
+</pre>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。）</p>
+<div class="edit_date">
+<p>2023.05.10</p>
+</div>
+
+<h2>シェルの実行</h2>
+<p>viでシェルを実行するには、
+<pre>
+:sh
+</pre>
+<p>とする。たくさんのUNIXコマンドを実行する際に、何度も:!を実行する代わりにシェルを利用できる。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。）</p>
+<div class="edit_date">
+<p>2023.05.10</p>
+</div>
+
+<h2>exコマンドを複数実行する</h2>
+<p>単にexコマンドを複数同時に実行したい場合は、|を使えばよい。</p>
+<pre>
+: %s/hoge/fuga/g | %s/foo/bar/g
+</pre>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。）</p>
+<div class="edit_date">
+<p>2023.05.10</p>
+</div>
+
+<h2>自動インデントは最強すぎる</h2>
+<p>Vimでは、プログラミング言語のソースコード（たとえばCSS）などで、全体のインデントがそろっていない時などに、gg=Gとすると自動でインデント整形してくれます。便利です。</p>
+<ul>
+<li><a href="https://howpon.com/20554">Vim &#8211; 全体のずれたインデントを自動で揃える(一括整形)方法 | Howpon[ハウポン]</a></li>
+</ul>
+
+<h2>Debianでは標準がvim-tiny</h2>
+<p>僕がDebianでvimを最初に使おうとして驚いたのが、シンタックスハイライトの設定を読み込まないこと。</p>
+<p>syntax enableと書いていても、エラーがでてシンタックスハイライトの設定が無効になるため、なぜだろうとネットを見ていたら、どうやら標準で導入されているのはvim-tinyと呼ばれる最小ビルド版だったようです。</p>
+<p>サーバなどの制限された環境で使うなら、このvim-tinyでも我慢できるかもしれませんが、趣味用のマシンで使うならvimを導入しましょう。aptで簡単に導入できます。</p>
+<pre>
+# apt install vim
+</pre>
+
+<h2>書籍・参考ページ</h2>
+<p>以下の書籍・ページが参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a></li>
+<li><a href="http://qiita.com/okuramasafumi/items/5e4624cfc8379aec739c">Vimを体系的に学ぶつもりのない人のためのVim講座―Exコマンド編 - Qiita</a></li>
+<li><a href="http://h50146.www5.hpe.com/products/software/oe/hpux/developer/column/unixtext_app03/02.html">2時間目：exコマンドに挑戦 - UNIXの教科書 応用編</a></li>
+<li><a href="http://d.hatena.ne.jp/syocky/20110223/1298474644">exコマンド - プログラマーズハイ</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Vim">Vim - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>vi実装</h1>
+<h2>nvi</h2>
+<p>軽量なviクローン。*BSDで標準（デフォルト）のviとして使われている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/nvi">nvi - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.07編集</p>
+</div>
+
+<h2>Vim</h2>
+<p>viの改良版。Linuxでは多くの場合このvimを使う。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Vim">Vim - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/vim/vim">git</a></li>
+</ul>
+
+<h2>Neovim</h2>
+<p>NeovimはVimの改良版。Vimにはないさまざまな機能が追加され、愛好者が多い。</p>
+<p>後日注記：Neovimでは設定やプラグインをVim scriptだけではなくLuaでも書ける。<a href="../prog_lang/lua.html">Lua</a>も参照のこと。</p>
+<ul>
+<li><a href="https://zenn.dev/hituzi_no_sippo/articles/871c06cdbc45b53181e3">NeovimとLua - Zenn</a></li>
+<li><a href="https://zenn.dev/hisasann/articles/neovim-settings-to-lua">やっとNeovimの設定ファイルをinit.luaに移行した - Zenn</a></li>
+</ul>
+<p>後日注記：Neovimはツイッターでも度々言及されるなど、最近急速に利用者を増やしている。一昔前はテキストエディタはAtomの時代だったが、今やNeovimの時代と言っても過言ではなく、覇者であるVS-Codeにエディタのクオリティから言って完全に負けていない。</p>
+<div class="edit_date">
+<p>2023.06.07編集</p>
+</div>
+
+<h1>Vimの設定</h1>
+<h2>設定やプラグインの基本</h2>
+<p>以下のVIM USER MANUALの設定についての章は読んでおこう。設定やプラグインに関する基本的なことが記述されている。</p>
+<ul>
+<li><a href="https://vim-jp.org/vimdoc-ja/usr_05.html">設定の変更 - VIM USER MANUAL - Vim日本語ドキュメント</a></li>
+</ul>
+
+<h2>.vimrc</h2>
+<p>vimの設定は~/.vimrcにおいて行う。基本的な設定は以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/morikooooo/items/9fd41bcd8d1ce9170301">何も考えず~/.vimrcにこれを書くんだ！ 〜vim初心者によるvim初心者のためのvim入門〜 - Qiita</a></li>
+<li><a href="https://qiita.com/reireias/items/230c77b3ff5575832654">よく使われているvimrcの設定ランキング - Qiita</a></li>
+</ul>
+<p>特に、行番号を多用するvimerとして、行番号の表示設定は必須。</p>
+<pre>
+set number
+</pre>
+
+<h2>プラグイン</h2>
+<p>UNIXの場合~/.vim/plugin/がプラグインディレクトリになる。プラグインについては以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/reireias/items/5364dcaada1a5b88a206">よく使われているvimのプラグイン top20 - Qiita</a></li>
+<li><a href="https://qiita.com/reireias/items/beaa3bb0e299ae934217">オレ的vimプラグイン10選 - Qiita</a></li>
+</ul>
+<p>後日注記：おすすめのプラグインはさらに以下のようなページが参考になります。特にfzf（Golang界隈で有名）やヘルプの日本語化は不可欠です。</p>
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/23248/">おすすめプラグイン 〜 Vimはいいぞ！ゴリラと学ぶVim講座(7)  |  さくらのナレッジ</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.07編集</p>
+</div>
+
+<h2>Vim script</h2>
+<p>Vim scriptはVim上で動くプログラミング言語。</p>
+<p>実際はexコマンドの集合で、:と一緒に入力されるexコマンドならなんでも書ける。なので、複数のファイルに同じ一括置換などを行いたいなら手軽に活用できる。exスクリプトとも呼ばれる。</p>
+<p>たとえば、</p>
+<pre>
+%s/^/&lt;p&gt;/g
+%s/$/&lt;/p&gt;/g
+wq
+</pre>
+<p>これをhoge.vimに保存して、任意のファイルを開いて以下のコマンドで実行。</p>
+<pre>
+:source hoge.vim
+</pre>
+<p>.vimrcもVim scriptのひとつ。標準のVimの設定（.vimrcがない場合のデフォルト設定）は$VIMRUNTIME/defaults.vimにある。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a></li>
+<li><a href="https://vim-jp.org/vimdoc-ja/usr_05.html">設定の変更 - VIM USER MANUAL - Vim日本語ドキュメント</a></li>
+<li><a href="https://vim-jp.org/vimdoc-ja/usr_41.html">Vim script 書法 - VIM USER MANUAL - Vim日本語ドキュメント</a></li>
+<li><a href="https://qiita.com/sh05_sh05/items/ffff7428ba1a9075f78d">怖くなかったVim script #入門 - Qiita</a></li>
+<li><a href="https://zenn.dev/skanehira/books/make-vim-plugin/viewer/vim_script">Vim script入門｜Vimプラグイン開発入門 - Zenn</a></li>
+<li><a href="https://knowledge.sakura.ad.jp/23436/">Vim scriptでプラグインを作ろう 〜 Vimはいいぞ！ゴリラと学ぶVim講座(8) | さくらのナレッジ</a></li>
+<li><a href="https://zenn.dev/aikige/articles/load-vim-script-from-current-buffer">Vim小技: 今書いているVimスクリプトを試す - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13</p>
+</div>
+
+<h2>シンタックスハイライト</h2>
+<p>基本的に、.vimrcに</p>
+<pre>
+syntax enable
+</pre>
+<p>と書いておけばよし。</p>
+<p>シンタックスハイライトについてはVIMリファレンスマニュアルに専用の文書があります。</p>
+<ul>
+<li><a href="https://vim-jp.org/vimdoc-ja/syntax.html">syntax - Vim日本語ドキュメント</a></li>
+</ul>
+
+<h2>autoindent, smartindent, cindent</h2>
+<p>viでコードを記述している際に自動的にインデントを行うには、viではautoindentを設定する。</p>
+<p>またvimではこれに加えてsmartindentとcindentがある。特にcindentではC言語のコード記述においてとても賢い自動インデントを行ってくれる。</p>
+<pre>
+set autoindent
+set smartindent
+set cindent
+</pre>
+<ul>
+<li><a href="https://maku77.github.io/vim/settings/auto-indent.html">自動インデントモードを有効にする - まくまくVimノート</a></li>
+<li><a href="https://vimblog.hatenablog.com/entry/vimrc_set_tab_indent_options">Vim のカスタマイズ 〜 タブ/インデントの設定 〜 - Vim のブログ</a></li>
+</ul>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。）</p>
+<div class="edit_date">
+<p>2023.05.10</p>
+</div>
+
+<h2>:set</h2>
+<p>viから設定を変更するには、:setコマンドを使う。</p>
+<pre>
+:set オプション
+</pre>
+<p>すべての設定可能なオプションは以下のコマンドで一覧表示できる。</p>
+<pre>
+:set all
+</pre>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80vi-%E7%AC%AC6%E7%89%88-%E3%83%AA%E3%83%B3%E3%83%80-%E3%83%A9%E3%83%A0/dp/4873110831">入門vi 第6版</a>を参照のこと。）</p>
+<div class="edit_date">
+<p>2023.05.10</p>
+</div>
+
+<h2>GNU Grobal</h2>
+<p>Vimのプラグインとして僕がおすすめなのはGNU Grobal。関数が使われているところから関数の定義にジャンプしたりできる。これがないと、自分でヘッダファイルの中を探し回ることになってしまう。</p>
+<p>詳しくは<a href="../prog_lang/ctags.html">ctagsの世界観</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Vim</h2>
+<p>移動はhjklで行う。</p>
+<p>挿入モードに移動するにはiあるいはaなど。押した瞬間から文字入力が始まる。ESCでコマンドモードに戻る。</p>
+<p>検索は/hogeなど。</p>
+<p>正規表現による置換は</p>
+<pre>
+:%s/foo/bar/g
+</pre>
+<p>など。</p>
+<p>「:」で始まるコマンドはexコマンドという（viはラインエディタexのヴィジュアルモードとして開発された）。</p>
+<p>文脈依存置換という面白い機能もある。その文脈における検索・置換ができる（たとえばhogeが含まれている行の中のfooをbarに置換する）。オライリーの「入門vi」に書いてあるので参考にしてほしい。</p>
+<p>UNIXコマンドはviで使うと真価を発揮する。たとえば特定ブロックにsortをかけるなど。</p>
+<p>外部sortコマンドは</p>
+<pre>
+:2,30!sort
+</pre>
+<p>などで実行できる（2～30行目のブロックにsortコマンドをかける）が、内部sortコマンド:sortを使うこともできる。</p>
+<p>vimを使う際は行番号だけは表示するように設定しよう。行番号が表示されないviは使えないから（ほとんどのアドレス指定が行番号）である。また、シンタックスハイライトもあると便利。</p>
+<p>使い方はVim公式のヘルプを見よう。</p>
+
+
+<h1>リンク集</h1>
+<h2>Vim</h2>
+<p>Linuxの標準的で入力や操作の効率の良いテキストエディタ。</p>
+<p>Vim</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/series/2643/">いまさら聞けないVim - @IT</a></li>
+<li><a href="http://qiita.com/okamos/items/c97970ab34ff55ff3167">Vim初心者に捧ぐ実践的入門 - Qiita</a></li>
+</ul>
+
+<h2>動画・ツイッター</h2>
+<p>以下は技術系VTuberの方のツイッターアカウントとYouTubeチャンネルで、Vimの応用的な使い方（やその他の技術的なこと）を動画で教えてくれる。「なぜviが最強のエディタと言われるのか」という問題の答えの一端が見える。僕のようなニワカVimmerにはちょうどいい。</p>
+<ul>
+<li><a href="https://twitter.com/fwarashi">kurenaif @fwarashiさんのツイッターアカウント</a></li>
+<li><a href="https://www.youtube.com/c/kurenaif">kurenaifさんのYouTubeチャンネル</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.19</p>
+</div>
+
+<h1>余談</h1>
+<h2>vi作者のビル・ジョイはカリスマハッカー</h2>
+<p>viは、BSDやcshの開発者の一人でSunでNFSやJavaの開発にも関わったとされる、ビル・ジョイが開発した。彼はUNIX界ではカリスマのように崇拝されている一人である。</p>
+<p>特にcshについては、今でも*BSD系のOSで標準的に使われている（cshを改良したtcshが使われていることが多い）。LinuxではBashを用いることが多いが、viも標準的に搭載されている。</p>
+<p>UNIXのエンジニアなどでは、cshなどのCシェルの使い方に慣れている方が多く、LinuxやMacなどでbashが使われていると嫌な顔をされることがある。cshはCライクな構文で知られ、Cライクな文法でシェルスクリプトを書くことができる。</p>
+<p><a href="csh.html">Cシェル（csh）</a>や<a href="../unix/bsd.html">BSD</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

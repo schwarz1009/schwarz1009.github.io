@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>netstat - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>netstat</h1>
+<p>netstatに関する世界観です。<a href="linux_net.html">Linuxネットワーク</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>netstat</h1>
+<p>TCP/IPネットワークの通信状況を調べる。</p>
+<p>net-tools由来のコマンドであるため、現在は非推奨。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Netstat">netstat - Wikipedia</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/net-tools/man8/netstat.8.html">man netstat</a></li>
+</ul>
+
+
+<h2>netstatコマンドとは</h2>
+<p>ネットワークインターフェース（NIC）のステータスや、TCP/UDPソケットのネットワーク統計状態を表示する。「-t」（TCPソケット）、「-u」（UDPソケット）のオプションと、ほかのオプションを組み合わせて使用する。</p>
+<p>主なオプション：</p>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>説明</th></tr>
+<tr><td>-s</td><td>各プロトコルごとの統計情報を表示</td></tr>
+<tr><td>-I</td><td>NIC名の絞り込み（例：-Ieth0）</td></tr>
+<tr><td>-i</td><td>システムの全NICの状態テーブル（送受信しているパケット数など）を表示</td></tr>
+<tr><td>-a</td><td>すべてのアクティブなソケットのステータスの一覧</td></tr>
+<tr><td>-l</td><td>接続待ち（listen状態）ソケットのステータスの一覧</td></tr>
+<tr><td>-p</td><td>それぞれのソケットが属しているプロセスIDとプロセス名を表示</td></tr>
+<tr><td>-r</td><td>経路表（ルーティングテーブル）を表示</td></tr>
+<tr><td>-n</td><td>ホスト名・ユーザー名・ポート名の解決をせず、数字のIPアドレスで表示</td></tr>
+<tr><td>-A</td><td>アドレスファミリー（たとえば低レベルなプロトコル）を指定</td></tr>
+<tr><td>-c</td><td>1秒ごとに更新</td></tr>
+<tr><td>-v</td><td>詳細表示</td></tr>
+<tr><td>-e</td><td>さらに詳細表示</td></tr>
+</table>
+<p>後日注記：よく使うオプションは、たとえば複数のNICがあった場合、eth0についてのみ表示するには-Ieth0などとする。ほかには-lや-pをよく使う。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1412/10/news003.html">netstatコマンドとは？：ネットワーク管理の基本Tips - ＠IT</a></li>
+<li><a href="https://kazmax.zpp.jp/cmd/n/netstat.8.html">netstat - システム管理コマンドの説明 - Linux コマンド集 一覧表 - kazmax - Linuxで自宅サーバー</a></li>
+<li><a href="https://docs.oracle.com/cd/E38900_01/html/E38855/ipconfig-142.html">netstat コマンドによるネットワークのステータスの監視 - Oracle Solaris の管理: IP サービス</a></li>
+</ul>
+
+<h2>ssコマンド</h2>
+<p>iproute2では、ssコマンドでネットワーク関連の統計情報を表示できる。</p>
+<ul>
+<li><a href="https://qiita.com/dharry/items/6599efe759b30c577152">今更なnetstatとss - Qiita</a></li>
+<li><a href="http://enakai00.hatenablog.com/entry/20140712/1405139841">RHEL7/CentOS7でipコマンドをマスター - めもめも</a></li>
+</ul>
+<p><a href="linux_net_iproute2.html">iproute2</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>ifconfig</h2>
+<p><a href="linux_net_ifconfig.html">ifconfig</a>を参照のこと。</p>
+
+<h2>route</h2>
+<p><a href="linux_net_route.html">route</a>を参照のこと。</p>
+
+<h2>ソケット</h2>
+<p><a href="linux_kernel_socket.html">Linuxカーネル（ソケット）</a>を参照のこと。</p>
+
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="../network/network.html">ネットワーク</a>や<a href="../network/network_intro.html">ネットワーク入門</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

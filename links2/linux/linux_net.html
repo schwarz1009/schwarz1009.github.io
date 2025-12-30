@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ネットワーク１（コマンド） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ネットワーク１（コマンド）</h1>
+<p>Linuxのサーバーとネットワークに関する世界観１（コマンド）です。<a href="linux_net2.html">Linuxネットワーク２（設定）</a>や<a href="linux_net_sysconfig.html">Linuxネットワーク設定A（sysconfig）</a>や<a href="linux_net_ifupdown.html">Linuxネットワーク設定B（ifupdown）</a>や<a href="../network/network.html">ネットワークの世界観</a>も参照してください。</p>
+<p>Web関連の項目は<a href="../network/web_intro.html">Webの世界</a>や<a href="../network/web.html">Webサーバー</a>に分割しました。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Linuxネットワーク</h1>
+<h2>UNIXとネットワーク</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.14.html">2021/01/14</a>より。</p>
+<p>UNIXでは、伝統的にネットワーク色が強い。</p>
+<p>たとえば大学のワークステーションでは、telnetによるネットワークに繋がった別ホストへの接続や、NFSを使ったネットワーク上のファイルシステムのマウント、NISによるネットワーク上のログイン情報の共通化などが、DOSに比べて簡単にできる。</p>
+<p>この時、MIPSやAlphaなど、CPUアーキテクチャが異なるホストでも、基本的に構わない。</p>
+<p>ただし、異なるアーキテクチャのバイナリは別マシンでは当然ながら動かないことに注意。</p>
+<p>LinuxのようなUNIX系のOSはこのように、ネットワークでさまざまなマシンが繋がった時に、真価を発揮する。</p>
+<p><a href="../prog_lang/portability.html">移植性</a>も参照のこと。</p>
+
+<h2>ネットワークの基本コマンド</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>Linuxでは、traceroute, route, netstat, ifconfig, arp, nslookupなどのコマンドで、ネットワーク関連の操作を行うが、これらのコマンドの多くは型遅れとなっており、現在はiproute2パッケージを代わりに使う。</p>
+<p>また、ifconfigなどのコマンドは低レベルで強力だが使いづらいため、より上の高レベルな設定システム、たとえばDebianであればifupdownを用いて設定を行うことがデフォルトとなっている。</p>
+
+<h2>ネットワーク系のプログラム</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>Linux上におけるほかのネットワークプログラムとしては、リモートによる接続やリモートログインを行う、telnetやrlogin, sshのようなプログラムや、ネットワーク上でログイン情報を共通化するNIS/YP、ネットワーク上のファイルシステムをローカルにあるのと同じようにマウントできるNFSなどがある。</p>
+<p>NFS以外のネットワークファイルシステムに準ずるシステムとしては、サーバとの間でファイル転送を行うFTPや、Windowsネットワークを実装したSambaなどがある。</p>
+<p><a href="linux_ssh.html">SSH</a>や<a href="../network/file_server.html">ファイルサーバー</a>も参照のこと。</p>
+
+<h2>ネットワークのコマンド</h2>
+<p>IPアドレスには、送信元のIPアドレス、受信先のIPアドレスがあり、パケットのIPアドレスに対応する。</p>
+<p>パケットはIPアドレスを付与して送信され、ルーター間を転送しながら相手にたどり着く。</p>
+<p>ひとつひとつのルーターの接続経路はtraceroute/tracertコマンドで一覧表示できる。</p>
+<p>routeコマンドはルーターのルーティングテーブルを表示・設定するコマンド。</p>
+<p>パケットは暗号化されていないと簡単に他人から傍受することができる。HTTPにおいて接続を暗号化するためには、https接続（SSL/TLS暗号化）を利用する。</p>
+<p>現在の自分が実行しているネットワーク接続の一覧はnetstatコマンドで表示できる。IPやTCP/UDPの各パケットの統計情報などもnetstatで調べることができる。</p>
+<p>IPアドレスは従来の32bitのIP v4の他に、よりビット数を増やし多くの機器にアドレスを付与することのできる128bitのIP v6がある。</p>
+<p>最近では、通信経路の匿名化技術であるTorプロジェクトなどが開発されている。</p>
+<p>nslookupはDNSサーバに名前解決を問い合わせるコマンド。</p>
+<p>arpはイーサネットにおけるIPアドレスとMACアドレスの対照表であるARPテーブルを表示・設定するコマンド。</p>
+
+<h2>ソケットとサーバー・クライアント</h2>
+<p>UNIXやWinSockでは、ソケットAPIを用いて、プログラムとプログラムの間でネットワーク接続と通信を簡単に行える。</p>
+<p>ソケットはBSD UNIXで採用されたTCP/UDPの接続API。ファイルシステムと同じように使うことができ、互いに関連性を持った状態で片方にデータを書き込むともう片方からデータを読み込むことができる。ソケットにはファイルと同じようにファイルディスクリプタ（読み書きしているストリームを識別する番号）が割り当てられ、ファイルと同様に扱われる。</p>
+<p>ソケットは通常サーバー・クライアントで、ひとつの公開サーバーに対して複数のクライアントが接続する形で接続が行われる。P2Pと呼ばれる、中央サーバーが無くピアとピアが直接接続されるネットワーク方式もある。</p>
+<p>サーバーは通常マルチスレッドでデーモンとして実装される。デーモンはUNIXにおけるシステムに常に常駐するプログラムのことで、コマンドとは異なり、システムで常にサービスを提供する。</p>
+<p>インターネットにサーバーを公開し、外部のネットワークからアクセスするためには、「ポート」と呼ばれるアプリケーション番号を外部に「開ける」必要がある。HTTPの場合はポート80番をルーターやファイアーウォールの設定で開ける必要がある。</p>
+<p>HTTPデーモンを起動し、ポート80番を開ければ、クライアントのWebブラウザから、Webサーバーのコンテンツを閲覧することができる。</p>
+<p>また、「www.hogehoge.com」といった独自のURLでコンテンツを表示したければ、独自ドメインを取ることが必要となる。</p>
+<p>DHCPを用いてルーターが自動的にIPアドレスを各コンピュータに割り振っている場合、各コンピュータのIPアドレスが動的に変わってしまうことがある。これはサーバーを公開する上では問題となる。ダイナミックDNSを使うことで、IPアドレスが変わっても自動でDNSサーバーに通知し、固有のホスト名を持つことができる。</p>
+<p>自宅サーバーを管理・運営する場合、システムのセキュリティなどがきちんとしていなければウイルスにかかったり踏み台（乗っ取られてウイルスを他のサーバーに感染させたり、ウイルス入りのメールを不特定多数に送りつけたりする中継地点のサーバー）にされたりする危険性がある。また、掲示板を運用するのであればきちんと運営しなければ犯罪予告や誹謗中傷などの書き込みがされることもある。そのため、安易にサーバーを立てることは好ましくない。自身もウイルスにかからないように気をつけながら、悪意ある利用者が侵入することができないように、セキュリティの専門家と一緒にサーバーを管理することが必要である。</p>
+
+<h1>ソケットのAPI</h1>
+<h2>ソケットとは</h2>
+<p>ソケットはUNIXにおけるファイルAPI（open(), write(), read(), close()）と同様のネットワーク通信の実装である。</p>
+<p>TCP/IPの下位プロトコル（トランスポート層、UDP/TCP）の通信が行える。</p>
+<p>基本は、複数のソケットが互いに関係を持つと有効になる。一方に書き込むともう一方から出てくる。そのため、ハードウェアやシステム的なことを考えなくても、ファイルのAPIと同様に簡単にネットワーク通信が出来る。</p>
+<p>BSD系UNIXを起源とするAPIであり、そのためこのソケットのAPIは「BSD socket」などと呼ばれる。</p>
+<p>ソケットはファイルとして扱われる。そのため、通常のファイルと同じように、ファイルディスクリプタからストリームとして読み書きできる。</p>
+<p><a href="linux_kernel_socket.html">Linux カーネル（ソケット）</a>も参照のこと。</p>
+
+<h2>ソケット実例</h2>
+<p>ソケットプログラミングの実例は以下のようなページが参考になる。</p>
+<ul>
+<li><a href="http://www.turbolinux.com/solution_service/library/features/c_magazine/vol_11.html">Turbolinux関連書籍 - C MAGAZINE Linux programming Tips - 第11回　ソケットプログラミング道 - Turbolinux</a></li>
+</ul>
+
+<h1>コンテンツ</h1>
+<h2>ifconfig</h2>
+<p><a href="linux_net_ifconfig.html">ifconfig</a>を参照のこと。</p>
+
+<h2>netstat</h2>
+<p><a href="linux_net_netstat.html">netstat</a>を参照のこと。</p>
+<h2>route</h2>
+<p><a href="linux_net_route.html">route</a>を参照のこと。</p>
+<h2>iproute2由来のコマンド</h2>
+<p><a href="linux_net_iproute2.html">iproute2</a>を参照のこと。</p>
+<h2>サーバーのモニタリング</h2>
+<p><a href="linux_net_monitoring.html">モニタリング</a>を参照のこと。</p>
+
+<h2>さまざまなネットワーク系コマンド</h2>
+<p><a href="linux_net_etc.html">さまざまなネットワーク系コマンド</a>を参照のこと。</p>
+
+<h2>curl</h2>
+<p><a href="linux_net_curl.html">curl</a>を参照のこと。</p>
+
+<h2>ネットワーク関係の設定</h2>
+<p><a href="linux_net2.html">Linuxネットワーク（２．設定）</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="../network/network.html">ネットワーク</a>や<a href="../network/network_intro.html">ネットワーク入門</a>を参照のこと。</p>
+
+<h2>BIND・DNSサーバ</h2>
+<p><a href="../network/dns.html">DNSサーバ</a>も参照のこと。</p>
+
+<h2>NIS</h2>
+<p><a href="../network/nis.html">NIS</a>も参照のこと。</p>
+
+<h2>WinSock</h2>
+<p><a href="../prog_lang/windows_winsock.html">WinSock</a>も参照のこと。</p>
+
+<h1>余談</h1>
+
+<h2>英語が読めるなら！</h2>
+<p>英語がスラスラ読めるありえないあなたには以下がお勧め。</p>
+<ul>
+<li><a href="http://www.tldp.org/LDP/nag2/">Linux Network Administrators Guide</a></li>
+</ul>
+<p>そう、英語が読めないから僕らは苦労するんだよ…（トボトボ）。</p>
+
+<h2>ネットワークのコマンドを使えることはネットワークプログラミングに有効</h2>
+<p>僕が思うに、ネットワーク系のコマンドを使いこなせることは、ネットワークプログラミングを始めるにあたってとても有効です。</p>
+<p>コマンドでできることは、コードを記述してできることと変わりません。ネットワーク系のコマンドが使えることで、ソケットAPIやHTTPリクエストなどを用いたネットワークプログラミングができるようになります。</p>
+
+<h1>リンク集</h1>
+<h2>ネットワーク</h2>
+<p>Linux/UNIXでのネットワークプログラミング。</p>
+<ul>
+<li><a href="http://www.geekpage.jp/programming/linux-network/">Linuxネットワークプログラミング - Geekなぺーじ</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/net/">ネットワークプログラミングの基礎知識 - 68user's page</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

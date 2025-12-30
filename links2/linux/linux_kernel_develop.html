@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（開発） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（開発）</h1>
+<p>Linuxのカーネルの開発に関する世界観（開発）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><b>開発</b></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Linuxカーネルの中核機能</h1>
+<h2>プログラムの並列実行</h2>
+<p>言ってしまえば、Linuxカーネルの中核的な機能は3つに分けられます。すなわち、プログラムの「並列実行」、リソースすなわちディスクやメモリなどのキャッシュや再配分による「効率化」、そしてハードウェアIOデバイスやディスク・ネットワークなどの「機器の適切な操作」です。</p>
+<p>Linuxカーネルは、レジスタの内容をメモリに退避しながら、スケジューリングアルゴリズムに基づいて次々と停止と再実行を繰り返すことで、ひとつのCPUしかないハードウェアにおいて、それぞれのプログラムの数だけCPUがあるかのように「仮想化」します。</p>
+<p>メモリにおいては、それぞれのプログラムのメモリの数だけアドレス空間を用意するために、論理アドレスをリニアアドレスや物理アドレスに変換します。</p>
+<p>このようにすることで、CPUやメモリを仮想的に複数作り出し、並列的に処理ができるようにします。割り込みやプロセス間通信やスレッドなども、この並列処理に関係する重要な機能です。</p>
+<p><a href="linux_kernel_proc.html">Linuxカーネル（プロセス）</a>や<a href="linux_kernel_mm.html">Linuxカーネル（メモリ管理）</a>を参照のこと。</p>
+
+<h2>リソースのキャッシュや再配分による効率化</h2>
+<p>また、Linuxカーネルは、プログラムのデータの読み込みや書き込みを効率化するために、キャッシュを行います。メモリ、ディスクストレージ、ネットワークなどにおいて、適切なキャッシュを行います。</p>
+<p>i-nodeを書き込む際には、i-nodeを未使用、使用中、あるいはダーティ（書き込み中）の3つに分類することで、キャッシュに書き込まれた内容を後でディスクに書き込むようにします。</p>
+<p>また、メモリにおいては、ページング機構とセグメンテーション機構を上手く使い、三段階のページアドレッシングを行い、ページ置換アルゴリズムなどを用いることで、効率的かつもっとも連続性の高いメモリ領域を確保します。</p>
+<p>このようにすることで、リソースを効率的かつ高速に配分します。</p>
+<p><a href="linux_kernel_fs.html">Linuxカーネル（ファイルシステム）</a>を参照のこと。</p>
+
+<h2>機器の適切な操作</h2>
+<p>最後に、Linuxカーネルは、機器の適切な操作を行います。</p>
+<p>ハードウェアの操作は、デバイスドライバレベルで見ると、とても複雑かつ異なる仕様を持っています。Linuxカーネルは、ハードウェアデバイスに対して、低レベルのデバイスドライバだけがそのデバイスコントローラの仕様を知っているようにし、プログラマには抽象的なレイヤーを用意して、隠蔽した上で簡単かつ共通の操作ができるようにします。</p>
+<p>また、ネットワークなどの機能については、適切かつ効率的にネットワーク通信が行えるように、標準に準拠した、あるいは場合によっては標準仕様よりも効率的で優れたソケット通信のサブシステムを提供します。</p>
+<p>また、IntelのCPUにおいては、さまざまな特権レベルを考慮し、カーネルモードとユーザモードを切り替えて実行します。Intel互換のCPUだけではなく、ほかのCPUアーキテクチャにもLinuxは対応し、ユーザーランドのプログラムがC言語で書かれる場合、カーネルがCPUアーキテクチャのレイヤーを共通化し、コンパイルし直すだけで別のアーキテクチャに対応できるようにします。</p>
+<p><a href="linux_kernel_device.html">Linuxカーネル（デバイス）</a>を参照のこと。</p>
+
+<h1>Linuxカーネルの機能</h1>
+
+<h2>カーネルモードとユーザーモード</h2>
+<p>UNIXのカーネルは、CPUの「カーネルモード」と「ユーザーモード」によって、カーネルとユーザーの世界を分ける。</p>
+<p>UNIXのユーザーランドのプログラムはユーザーモードで実行される。プログラムからシステムコールが呼び出されると、システムコールが実行されている間、そのプログラムはカーネルモードに切り替わる。システムコールの実行が終わると、その後にプログラムはユーザーモードに再度切り替わる。</p>
+<p>カーネルモードとユーザーモードは、CPUの特殊な命令で切り替えられる。Intel のx86系CPUにはこのようなCPUの状態が4種類あるが、UNIXではカーネルモードとユーザーモードのみを使う。</p>
+<p>ユーザーモードで実行されている時は、カーネル内のコードやデータにはアクセスできない。カーネルモードで実行中の時のみ、これらのリソースへのアクセスが許される。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+</ul>
+<p><a href="../prog_lang/assembly.html">アセンブリ言語</a>や<a href="../hardware/intel.html">Intel</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.12編集</p>
+</div>
+
+<h2>OSとしての特徴</h2>
+<p>Linuxは基本的にコマンドラインのOSだが、その特徴として、MS-DOSなどのパソコン向けOSでは使えない、高機能で高度なコマンドラインシェルを使うことが出来る。</p>
+<p>また、コマンドシェル・インターフェースは、ネットワークを通して使うことも出来る。</p>
+<p>UNIX環境のため、端末として使うコンピュータ、ログインするコンピュータ、ファイル管理をするコンピュータなどを分けて構築することも、比較的容易である。</p>
+<p>自動化も比較的容易で、シェルスクリプトやスクリプト言語のように、コマンドやシステムコール・Cや他言語の関数などをスクリプト形式で実行することも出来る。</p>
+<p>簡単なコマンドなら、EmacsやVimのようなテキストエディタからも、コマンドを実行することが出来る。</p>
+<p>また、最近はGUIのデスクトップ環境を使って、Windowsなどのパソコン向けOSと同等かそれ以上のデスクトップ機能を使うことも出来る。この場合、X11サーバーを最初に起動し、クライアントのGUIアプリケーションをXサーバーと通信させ、Xlibに対応したツールキットライブラリ（GTK+やQt）とともに使うことになる。</p>
+<p>この場合、Windowsとは違って、さまざまなインターフェースを独自に開発することが出来る。代表例は、GNOMEとKDEである。</p>
+<p>そして、オープンソースで開発されているアプリケーションは、Microsoft製品やAdobe製品などに勝るとも劣らない機能を持っている。（だが、操作性の違いにより戸惑う部分や、未完成で上手く動かないことも多い。）</p>
+
+<h2>Linuxカーネルとイベント駆動</h2>
+<p>Linuxカーネルは受動型のプログラムで、能動的に何かを実行することは無い。システムコールあるいは割り込みに応じて、応答を返して実行される、イベント駆動型のソフトウェアである。</p>
+<p>カーネルのプログラムの役割としては、アプリケーションの実行（プロセス管理）と、システムとプログラムに対するメモリ管理、それからデバイスドライバーによるハードウェアの操作と監視、ストレージデバイスにおけるファイルシステムの実現、そしてネットワークへの接続などがある。</p>
+<p>Linuxカーネルは、単一の巨大なプログラムとして実現されており、モノリシックカーネルと呼ばれる。これは、カーネルの機能をたくさんのサーバーやサービスに分ける、MinixやGNU Hurdのマイクロカーネルとは逆の方向である。Minixのタネンバウム教授もそれを批判している。だが、マイクロカーネルは性能的に遅いことがある。Hurdなどは、遅すぎて使い物にならない、と言う話もある。</p>
+<p>詳しくは以下をご覧あれ：</p>
+<ul>
+<li><a href="https://ja.osdn.net/projects/linux-kernel-docs/wiki/0.1%E3%80%80Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%81%A8%E3%81%AF">0. 1　Linuxカーネルとは - Linux Kernel Documents</a></li>
+</ul>
+<p><a href="../prog_lang/event.html">イベント駆動</a>や<a href="../unix/mach.html">Mach</a>や<a href="../unix/hurd.html">Hurd</a>や<a href="../unix/minix.html">MINIX</a>を参照のこと。</p>
+
+<h2>カーネルを読もう</h2>
+<p>カーネルでは、構造体とポインタ、そして膨大な関数によって、それぞれ局所的にとても複雑な計算をしています。</p>
+<p>ですが、基本的に存在するのはif文とfor文であり、そこにさまざまな関数の呼び出しと構造体の数値の代入が行われています。</p>
+<p>読み解くのにはとても技術力の基本力が必要だと思いますが、そんなに高いハードルではないと僕は思います。</p>
+<p>C言語のプログラムをどのように書いていくか、ということの参考にもなるので、頑張って読もうとチャレンジしても僕は良いと思います。</p>
+<ul>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/">kernel/git/torvalds/linux.git - Linux kernel source tree</a></li>
+<li><a href="http://elixir.free-electrons.com/linux/latest/source">Linux Kernel @ Free Electrons</a></li>
+</ul>
+<p><a href="linux_kernel_src.html">Linuxカーネル（ソースコード・カーネルモジュール）</a>を参照のこと。</p>
+
+<h2>Linux上のミドルウェア</h2>
+<p>LAMPスタックのようにLinux上で、スクリプト言語のインタープリタを実行することがありますが、この時、それらのインタープリタは単なるプロセスです。</p>
+<p>こうした設計を、コンピュータ業界では「低レベルレイヤー」と「高レベルレイヤー」に分けて考えます。</p>
+<p>ですが、単純に、Linuxカーネル上でPerlやPHPが動き、そのPerlやPHPを利用してそれぞれの掲示板やWebサービスのプログラムが動いていると考えると良いでしょう。</p>
+<p>Linuxカーネルは、Cコンパイラであるgccなどでコンパイルされたバイナリであれば、Linuxカーネル上でそのまま動かせますが、JavaやPerlやPHPのような「間に抽象レイヤーが必要な言語」では、そのソフトウェア（ミドルウェア）を実行した上で、そのミドルウェアの上でプログラムが実行されます。最近ではC/C++でプログラムを作ることが次第に少なくなってきており、JavaやPythonなどのミドルウェアがLinuxでも良く使われています。</p>
+<p>こうした「低レベル」「高レベル」は、言語以外に、X11のGUIシステムにも見られます。X11の上にGTKやQtの階層があり、その上でGNOMEやKDEが動き、その上でGUIアプリケーションが動きます。LinuxでGUIアプリケーションを使う時は、こうした抽象レイヤーの階層図を理解しておく必要があります。</p>
+<p><a href="../prog_lang/system_layer.html">システムレイヤー</a>も参照のこと。</p>
+
+<h2>Linuxカーネルは高パフォーマンス</h2>
+<p>Linuxカーネルの特徴は、なんといってもその高パフォーマンス。商用のUNIXにも勝るほどの効率と性能で、プロセスやメモリを効率的かつ高速で処理する。また、安定性にも優れている。</p>
+<p>FreeBSDなども高パフォーマンスであることで知られるが、Linuxカーネルの高パフォーマンスは、リーナスの高い技量と多くのコミュニティの人員が豊富であることが挙げられる。</p>
+<p>だが、人員のスキルだけではなく、技術的に高度である。僕も分からないが、詳細を知りたい方は「詳解Linuxカーネル」に詳しいことが書いてある。Windowsなんか、サーバーには使えない。Linuxとは比較にならないほど、Windowsのレベルは低い。</p>
+
+<h1>余談</h1>
+<h2>Linuxはカーネルがしっかりしているからきちんと動く</h2>
+<p>Linuxは、リーナス・トーバルズが作っているカーネルがしっかりしているから、きちんと動く、ということが言えます。</p>
+<p>どんなアプリケーションであれ、OSの上で動くプログラムは、全て、カーネルの上で動いています。</p>
+<p>Linux上のシステムは、Apacheであれ、Perlであれ、GCCであれ、カーネルの上で動いています。</p>
+<p>システムコールについては、カーネルでは基本的なものしか実装しておらず、多くがlibcなども介して動いています。Perlなどであれば、インタープリタの上で動いています。</p>
+<p>ですが、Linuxカーネルがきちんとしているせいで、それらはとてもきちんと安定して動くのです。</p>
+<p>Linuxは、マルチタスク・マルチユーザのOSをUNIXを模倣して作りましたが、ここで「UNIXを模倣した」というのがポイントです。リーナスは、単なるUNIXの再実装を開発しただけにすぎません。ですが、UNIXという巨大な遺産を継承したことで、簡単に「一流に動くもの」を作ることができたのです。</p>
+<p>ですが、最近はWindowsも頑張っています。Windows NTのNTカーネルを再実装してから、Windowsはあまりフリーズせず、不安定でなくなりました。</p>
+<p>なぜ、Windows 9xはそんなに不安定だったのでしょうか。</p>
+<p>その理由は、Windowsという製品そのものが、MS-DOSをベースとしており、そのMS-DOSが、他社のCP/Mの互換OSを入手して改良した、「後付けの改良・改造を施したOS」だったからです。</p>
+<p>他人が開発したソフトウェアを、別の人間が改造して、ウィンドウシステムのような巨大な機能を付け加えることは、とても難しいことです。Windows Meが不安定だったのは、それにマルチメディア機能などたくさんの機能を付け加えすぎたせいだと思います。</p>
+<p>また、Windows 9xは一定の基準や標準が無く、Microsoftが独自に仕様を定めた結果、適当かついいかげんに仕様が膨らんでしまい、DOSのおかしなAPIと相まって、巨大で複雑なカーネルとなってしまったのです。</p>
+<p>反面、Linuxカーネルは、リーナス・トーバルズが一から作ったカーネルを、ネット上のみんなで開発したOSです。リーナスが天才だっただけではなく、UNIXの優れたエンジニアが「自ら貢献しようという積極的な動機を持って改良」したのです。彼らは、素晴らしい仕事を「ネット上の協力」を通して行いました。リーナスが、「それが僕には楽しかったから」といったことを言ったのも、彼らとの協力そのものが楽しかったからであり、リーナスだけではなく、参加者が全員楽しかったのだと思います。</p>
+<p>また、Linuxカーネルの上で動くコンパイラやコマンドツールはGNU Projectが開発していますが、彼らのソフトウェアは既にUNIXでの稼働実績があり、成熟していました。そこに、リーナスの作った高品質なカーネルが「上手く組み合わさった」ことで、GNUとLinuxは融和し、「一から作ろうとしては作れないところを、ネットの仲間やGNUやXFree86などの既製品と組み合わせて作り上げた」というOSがLinuxなのです。</p>
+
+<h2>Minix本を読もう</h2>
+<p>リーナスは確かに偉大な天才ですが、誰にもできないことをしたわけではありません。</p>
+<p>彼は、タネンバウム教授のMinix本を読んで、その通り、Minixを改良して、Minixと同じものを作りながら、Minixを改良したコードだけで動くようになり、最終的にインターネットに発表し、全てのMinixのコンポーネントをGNUのコンポーネントに置き換えて、独自の商用利用を禁じたライセンスはGPLに変更し、さまざまな人の改良パッチを取り入れただけだからです。</p>
+<p>そういうわけで、タネンバウム教授のMinix本を読めば、きっとリーナスと同じことは誰でもできるでしょう。</p>
+<p>そのMinix本が以下です。</p>
+<p>MINIX本</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0-%E7%AC%AC3%E7%89%88-Andrew-S-Tanenbaum/dp/4894717697/">オペレーティングシステム 第3版</a></li>
+</ul>
+<p>僕も、そろそろMinix本を読むぐらいのレベルに来ているような気がします。家に第二版があるので、そのうち読もうと思っています。</p>
+<p>ネットでは、Minix本はOSの仕組みを理解したい人というよりは、OSを作りたい人向けだと言います。</p>
+
+<h2>Linuxの課題とコミュニティの価値</h2>
+<p>また、Minix本を書いたタネンバウム教授は、Linuxを「マイクロカーネルではなくモノリシックカーネルで、時代遅れだ」と言っています。現代的なカーネルはマイクロカーネルと呼ばれ、本当のカーネルは小さく、プロセス間通信と仮想CPU/仮想メモリの「最低限必要なものだけを実装したカーネル」とし、ファイルシステムやネットワークなどは、マイクロカーネル上の「サーバー」として実装し、いつでもそのサーバーをONにしたりOFFにしたりすることができるものであるべきですが、Linuxカーネルはそうしたカーネルに必要な機能をひとつのプログラムの中にいっしょくたにしています。これは初学者にとっては作りやすいカーネルですが、現代的なカーネルではありません。Linuxは今でもモノリシックカーネルを続けており、設計において技術的な新しい点もあまりなく、「普通のUNIX互換カーネル」でしかありません。</p>
+<p>また、GNUから見ると、LinuxカーネルのおかげでGNU/Linuxシステムは完成しましたが、「GNUの全ての成果が、Linuxの成果であるかのように誤解されている」というところがあります。GNUのソフトウェアはフリーソフトウェアであるため、コピーや再配布が可能ですが、LinuxユーザーはGNUの成果をふんだんに取り入れながら、あたかもその全てをリーナス・トーバルズとコミュニティが開発したかのように人々に勘違いさせています。実際はリーナスやコミュニティはLinuxを開発しただけで、GNUまでは開発していません。GNUのストールマンは「GNU/Linuxと呼ぶべきだ」としていますが、Debianぐらいしかこの名称を本気で採用するプロジェクトはありません。そしてそのDebianすら、フリーソフトウェアでない「独占ソフトウェア」を含めて再配布しています。これはGNUから見てあってはならないことです。</p>
+<p>そういうわけで、Linuxにはさまざまな課題や問題があり、またそのコミュニティも一様ではありませんが、そこが良いのです。みんなで開発し、みんなが別の理想を持って別の理由から開発したものを、共通の利益として共有していく、このプロジェクトの透明性と健全性こそが、オープンソースコミュニティの大原則です。最近は、Linuxカーネルでも、ボランティアの参加者は8%程度に過ぎず、多くが企業によって金銭的な利益を目的に開発されていますが、同時に、Mozilla.orgのように本当に金儲けではなく開発されているプロジェクトもあります。色んな人がいて、みんなで協力する姿勢は、とても良いものだと僕は思っています。Linuxは既に、昔のLinuxとは全く違うものですが、そうした考え方や理想そのものは変わっていないように感じます。</p>
+<p>本当のところを言うと、GNUの言うように、リーナスやその仲間が開発した部分は本当に小さいものです。それは、UNIX由来のツールは、昔から作っていた人々が居て、たとえばviをビル・ジョイが開発したように、あるいはPerlをラリー・ウォールが、Rubyをまつもとゆきひろが開発したように、さまざまな人間が開発したものの寄せ集めに過ぎないからです。Red Hatなどが「保守と責任のサポートをやる」と言っていますが、彼らのやっていることは昔からUNIXの業者がやっていたこととあまり変わりません。そう、Linuxはまさに「コンピュータ技術を全部一緒にしたかのようなOS」です。そのため、Linuxをやっていると、本当にコンピュータの「歴史」が良く分かります。歴史的なさまざまなイディオムやプラクティスが多く、「ああ、これがまさにコンピュータだな」と感じられます。逆に、Windowsは新しいアーキテクチャ上の進歩が多く、Windowsを使っていると「新しい世界になったのだな」ということが良く分かります。新旧のWindowsとLinuxがともに進歩していけば、きっとIT技術の未来は明るいのではないかと思います。</p>
+<p>2019.11.16追記：「詳解 Linuxカーネル」を読んでいて、この文章に少し誤りがあることに気付いた。すなわち、歴史上の伝統的なほとんどのUNIXカーネルはモノリシックだということ。Linuxはそれらと同様にモノリシックなカーネルでありながら、モジュール機構などを活用し、カーネルをフロッピーディスクに収めるぐらい小さくできる（少なくともこの本の第二版が出版された時点では）。よって、必ずしもマイクロカーネルの設計は必要ない。リーナスも開発者たちもそれを重々承知であると思う。</p>
+
+<h2>コンピュータはCPUとメモリが機械語で記述されたOSの膨大な情報をひらすらに計算する</h2>
+<p>コンピュータは、CPUとメモリが、機械語で記述されたOSの膨大な情報を、ひらすらに計算する機械です。</p>
+<p>ただひたすらに、機械語で書かれたOSの膨大な情報を計算します。これが「計算機」です。</p>
+<p>Linuxカーネルがオープンソースであることは、「コンピュータを自由に使える」ということを意味しています。</p>
+<p>プログラムのソースコードが公開されたLinuxカーネルでは、OSの内容を自分で研究したり書き換えたりすることができます。</p>
+<p>カーネルだけではなく、GCCのようなツールチェイン（コンパイラや開発ツールの集合）がGPLでライセンスされているため、コンピュータの動作を自在に、どこまでも詳細に変更できます。</p>
+<p>まさに、Linuxは「ハッキングのためのOS」であると言えます。</p>
+<p>また、最近のIntel CPUの進歩は目覚ましく、数十年前のSunやHPなどのワークステーション以上の能力を、64bitのIntelプロセッサが持っています。これにLinuxを組み合わせることで、「現代版ワークステーション」を操作することができます。</p>
+
+
+<h1>簡単な説明</h1>
+<h2>Linuxカーネル</h2>
+<ul class="defaultlist list7">
+<li>カーネルの仕組み
+<ul>
+<li>プロセス管理
+<ul>
+<li>コンテキストスイッチ
+<ul>
+<li>CPUレジスタやプログラムカウンタなどの内容をtask_struct構造体に退避</li>
+<li>安全にプロセスを停止・再開</li>
+</ul></li>
+<li>スケジューリング
+<ul>
+<li>OSによってスケジューリングアルゴリズムが異なる</li>
+</ul></li>
+</ul></li>
+<li>メモリ管理
+<ul>
+<li>仮想アドレス空間
+<ul>
+<li>プログラムごとの論理アドレスをハードウェアの物理アドレスにカーネルが仲介して翻訳</li>
+<li>メモリ管理ユニット（MMU）と呼ばれるハードウェアを使用</li>
+</ul></li>
+<li>ページングとセグメンテーション
+<ul>
+<li>メモリはページと呼ばれる小さな単位でカーネルによって管理される</li>
+</ul></li>
+<li>プロセスにはテキスト領域（プログラムコード自身が入る領域）、スタック領域、ヒープ領域などが確保される</li>
+</ul></li>
+<li>デバイスドライバ
+<ul>
+<li>OSの中で唯一デバイスコントローラの仕様を知っている</li>
+<li>Linuxではカーネルの肥大化を防ぐためマイナーなドライバは削除している</li>
+</ul></li>
+<li>割り込み
+<ul>
+<li>I/O・ディスクデバイスなどハードウェアの処理を待つ間カーネルは別のことをする</li>
+<li>カーネルが何かしている間にイベントを通知して割り込む</li>
+<li>ソフトウェア割込み</li>
+<li>ハードウェア割込み</li>
+<li>タイマ割込み</li>
+</ul></li>
+<li>プロセス間通信
+<ul>
+<li>共有メモリ</li>
+<li>セマフォ</li>
+<li>メモリマップトファイル</li>
+<li>パイプ</li>
+<li>ソケット通信</li>
+</ul></li>
+<li>シグナル
+<ul>
+<li>プロセスの強制終了に使うほか、シグナルをトラップ（捕捉）することでシグナルに応じた処理をプロセスで実行できる</li>
+</ul></li>
+<li>入出力
+<ul>
+<li>tty（端末のデバイスファイル）</li>
+<li>もともとはテレタイプ（プリンタと紙テープ）だったが、歴史とともに徐々にモニター（ダム端末やキャラクタ端末など）とキーボードになり、最近はX端末を使うようになった</li>
+<li>仮想コンソール</li>
+<li>ターミナルエミュレータ</li>
+</ul></li>
+<li>ファイルシステム
+<ul>
+<li>VFS
+<ul>
+<li>どのファイルシステムでも同じように扱える仮想インターフェースを提供</li>
+</ul></li>
+<li>i-node
+<ul>
+<li>ファイルのインデックス</li>
+<li>ext2ではi-nodeにはファイルのメタデータやデータブロックのアドレスなどが記録される</li>
+</ul></li>
+<li>ブロック型ファイルシステム（ext2）
+<ul>
+<li>データをブロックで管理する</li>
+<li>ブロックグループの中にデータブロックと、ブロックごとの特殊情報（スーパーブロックやグループディスクリプタなど）が格納される。</li>
+</ul></li>
+<li>ジャーナリング（ext3/ext4）
+<ul>
+<li>途中で電源を切っても壊れない</li>
+</ul></li>
+<li>B-Treeファイルシステム
+<ul>
+<li>ReiserFS, XFS, Btrfs</li>
+<li>ファイルシステムにデータベースの技術を使用する</li>
+</ul></li>
+</ul></li>
+<li>ソケット
+<ul>
+<li>2つの接続でデータをやり取りする</li>
+<li>2つのソケットが相互に接続されると有効になる</li>
+<li>片方に書くと、片方から読める</li>
+</ul></li>
+<li>カーネルモジュール</li>
+<li>マイクロカーネル
+<ul>
+<li>Mach</li>
+<li>Hurd</li>
+<li>L4</li>
+</ul></li>
+<li>リアルタイム処理
+<ul>
+<li>リアルタイムOSでは、優先度の高いタスクは優先度の低い他の全てのタスクを後回しにして、必ず決められた時間内に実行する。</li>
+<li>LinuxではRT-PreemptパッチをあてることでLinuxカーネルをプリエンティブルにできる。</li>
+<li>商用のリアルタイムOSにはQNXやVxWorksなどがあり、宇宙開発などにも使われている。</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h1>Kernel.org</h1>
+<h2>公式ドキュメント</h2>
+<p>Linuxカーネルの公式ドキュメントは以下にある。</p>
+<ul>
+<li><a href="https://www.kernel.org/doc/html/latest/">The Linux Kernel documentation</a></li>
+</ul>
+<p>以下は日本語に訳されているページ。</p>
+<ul>
+<li><a href="https://www.kernel.org/doc/html/latest/translations/ja_JP/howto.html">Linux カーネル開発のやり方 — The Linux Kernel documentation</a></li>
+</ul>
+<p>古いLinuxのドキュメントは<a href="http://en.tldp.org/">the Linux Documentation Project</a>にある。<a href="https://linuxjf.osdn.jp/">Linux JF (Japanese FAQ) Project.</a>で翻訳がされているが、最近はあまり更新されていない。</p>
+
+<h2>gitリポジトリ</h2>
+<p>以下はgitリポジトリの一覧。</p>
+<ul>
+<li><a href="https://git.kernel.org/">Kernel.org git repositories</a></li>
+</ul>
+<p>以下はリーナス・トーバルズのリポジトリ。ソースコードツリーのブラウズもできる。</p>
+<ul>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/">kernel/git/torvalds/linux.git - Linux kernel source tree</a></li>
+</ul>
+
+<h1>カーネル関連の文書</h1>
+<h2>The linux-kernel mailing list FAQ</h2>
+<p>カーネル関連の文書は、LKMLのFAQにまとめられています。</p>
+<p>特に、カーネルにパッチを投稿する場合は</p>
+<pre>
+[PATCH] cleanup of foo driver [1/5]
+</pre>
+<p>のようなサブジェクトをつける、といった決まりが書かれています。英語ですがカーネルハッカー候補生は必ず目を通しましょう。</p>
+<ul>
+<li><a href="http://vger.kernel.org/lkml/">The linux-kernel mailing list FAQ</a></li>
+</ul>
+
+<h2>初心者向け、Linuxカーネル開発者になるためのアドバイス</h2>
+<p>以下に、初心者向けのLinuxカーネル開発者になるためのアドバイスがあり、参考になります。</p>
+<ul>
+<li><a href="https://yakst.com/ja/posts/156">Linuxカーネルハッカーになる4つの方法 | Yakst</a></li>
+</ul>
+
+<h2>The Linux Kernel Hackers' Guide</h2>
+<p>Linuxカーネルハッカーのガイド。</p>
+<ul>
+<li><a href="http://en.tldp.org/LDP/khg/HyperNews/get/khg.html">Linux Kernel Hackers' Guide</a></li>
+</ul>
+
+<h2>The Linux Kernel</h2>
+<p>Linuxカーネルの仕組み。日本語訳もあります。</p>
+<ul>
+<li><a href="http://en.tldp.org/LDP/tlk/tlk.html">The Linux Kernel</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-images/frame.html">The Linux Kernel日本語訳</a></li>
+</ul>
+
+<h2>The Linux Kernel Module Programming Guide</h2>
+<p>Linuxカーネルモジュールのプログラミングガイド。モジュールを作るための定番のガイド。</p>
+<ul>
+<li><a href="http://www.tldp.org/LDP/lkmpg/2.6/html/">The Linux Kernel Module Programming Guide</a></li>
+</ul>
+
+<h2>Linux Kernel 2.4 Internals</h2>
+<p>Linuxカーネル2.4の仕組み。</p>
+<ul>
+<li><a href="http://www.tldp.org/LDP/lki/index.html">Linux Kernel 2.4 Internals</a></li>
+</ul>
+
+<h2>Linux Kernel in a Nutshell</h2>
+<p>フリーの電子書籍。カスタムLinuxカーネルを構築する方法が書かれている。プログラミングの内容ではない。</p>
+<ul>
+<li><a href="http://www.kroah.com/lkn/">Linux Kernel in a Nutshell</a></li>
+</ul>
+
+<h2>A Beginner's Guide to Linux Kernel Development</h2>
+<p>Linux Foundation Educationより、「Linuxカーネル開発 初心者向けガイド（LFD103-JP）」が提供されました。英語版の「A Beginner's Guide to Linux Kernel Development（LFD103）」を翻訳したものです。</p>
+<ul>
+<li><a href="https://training.linuxfoundation.org/ja/training/a-beginners-guide-to-linux-kernel-development-lfd103-jp/">Linuxカーネル開発初心者向けガイド(LFD103-JP) - Linux Foundation - 教育</a></li>
+<li><a href="https://www.linuxfoundation.jp/press-release/2025/11/a-beginners-guide-to-linux-kernel-development-now-available-in-japanese/">Linux Foundation Education、無料オンラインコース「Linuxカーネル開発 初心者向けガイド」の提供を開始 - The Linux Foundation</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/2512/15/news044.html">無料で「Linuxカーネル開発」が学べるオンライン講座、日本語版で提供開始：初心者から熟練エンジニアまでが対象 - ＠IT</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.20</p>
+</div>
+
+<h2>RHELカーネル管理ガイド</h2>
+<p>カーネルを管理するために、RHELの以下のガイドが参考になる。</p>
+<ul>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/index">カーネルの管理、監視、および更新 Red Hat Enterprise Linux 8 | Red Hat Customer Portal</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/kernel_administration_guide/index">カーネル管理ガイド Red Hat Enterprise Linux 7 | Red Hat Customer Portal</a></li>
+</ul>
+<p>RHELのドキュメントは基本的に参考になるのでいろいろと参照しても良いだろう。</p>
+<ul>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/">Product Documentation for Red Hat Enterprise Linux 8 - Red Hat Customer Portal</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/">Product Documentation for Red Hat Enterprise Linux 7 - Red Hat Customer Portal</a></li>
+</ul>
+
+<h2>GentooとArchのカーネル関係ガイド</h2>
+<p>以下はGentooとArchのカーネル関係のガイド。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Kernel/Gentoo_Kernel_Configuration_Guide/ja">カーネル / Gentoo カーネルコンフィグレーションガイド - Gentoo Wiki</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Kernel">Kernel - Gentoo Wiki</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB">カーネルモジュール - ArchWiki</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB">カーネルモジュールのコンパイル - ArchWiki</a></li>
+</ul>
+
+<h1>ドキュメント集約サイト</h1>
+<h2>Linux Kernel Documentation</h2>
+<p>Linuxカーネルの公式ドキュメント。</p>
+<ul>
+<li><a href="https://www.kernel.org/doc/">Linux Kernel Documentation</a></li>
+</ul>
+
+<h2>The Linux Documentation Project</h2>
+<p>Linux関連の文書をまとめてある公式ドキュメント的なサイト。</p>
+<ul>
+<li><a href="http://en.tldp.org/">the Linux Documentation Project</a></li>
+</ul>
+
+<h2>Linux JF (Japanese FAQ) Project</h2>
+<p>カーネル関連の文書などを日本語訳している、準公式和訳的なサイト。</p>
+<ul>
+<li><a href="https://linuxjf.osdn.jp/">Linux JF (Japanese FAQ) Project.</a></li>
+</ul>
+
+<h2>Linux Kernel Newbies</h2>
+<p>Linuxカーネルに追加された新機能や重要な修正などの概略を載せてくれている。</p>
+<p>新しくカーネル開発者になりたい人はここから始めるべき。初心者レベルの質問に対して回答が返ってくることも多い。ただし英語。</p>
+<ul>
+<li><a href="https://kernelnewbies.org/">Linux Kernel Newbies</a></li>
+</ul>
+
+<h2>Linux Cross Reference</h2>
+<p>タグ付けされたLinuxカーネルのコードをブラウズできる。</p>
+<ul>
+<li><a href="https://elixir.bootlin.com/linux/latest/source">lxr</a></li>
+</ul>
+
+<h2>Linux Kernelのwiki</h2>
+<p>公式のWikiのリスト。</p>
+<ul>
+<li><a href="https://www.wiki.kernel.org/">Main Page - Demeter of the Kernel.org</a></li>
+</ul>
+
+<h2>Kernel Planet</h2>
+<p>Linux Kernel開発者の集積ブログ。</p>
+<ul>
+<li><a href="http://planet.kernel.org/">Kernel Planet</a></li>
+</ul>
+
+<h2>OSDev Wiki</h2>
+<p>OSDev WikiはOSの開発をする人に参考になるWikiです。</p>
+<ul>
+<li><a href="https://wiki.osdev.org/Main_Page">Expanded Main Page - OSDev Wiki</a></li>
+</ul>
+
+<h2>その他の情報源</h2>
+<p>その他の情報源：</p>
+<ul>
+<li><a href="https://qiita.com/hikanda/items/39f9031266ed5fdced78">Linux Kernel 関連の便利ページ - Qiita</a></li>
+</ul>
+
+<h1>書籍</h1>
+<h2>Linuxデバイスドライバ</h2>
+<p>Linuxカーネル開発のための書籍の1つ。Amazonの評価は低いが、必ず読みなさい的な本であるようだ。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Linux%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90-%E7%AC%AC3%E7%89%88-Jonathan-Corbet/dp/4873112532">Linuxデバイスドライバ 第3版</a></li>
+</ul>
+
+<h2>詳解 Linuxカーネル</h2>
+<p>書籍の1つ。僕も買いましたが、読んでいません。</p>
+<p>2019.11.16追記：今になってこの本を読んでいます。とても面白いです。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3-Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC3%E7%89%88-Daniel-Bovet/dp/487311313X/">詳解 Linuxカーネル 第3版</a></li>
+</ul>
+
+<h2>MINIX本</h2>
+<p>リーナス・トーバルズが読んだとされるタネンバウム先生のMINIXによる簡単なオペレーティングシステム理論の概要。</p>
+<p>実践的で、自分でOSを作りたい人向き、ということらしい。もちろん難しい。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0-%E7%AC%AC3%E7%89%88-Andrew-S-Tanenbaum/dp/4894717697/">オペレーティングシステム 第3版</a></li>
+</ul>
+
+<h1>コミュニティ</h1>
+<h2>LKML</h2>
+<p>Linux Kernelのメーリングリストのアーカイブは以下を参照のこと。</p>
+<ul>
+<li><a href="https://lkml.org/">lkml.org</a></li>
+</ul>
+
+<h1>日本語の情報</h1>
+<h2>Linuxカーネルドキュメントプロジェクト</h2>
+<p>書籍「Linuxカーネル2.6解読室」の一部が公開されています。</p>
+<ul>
+<li><a href="https://ja.osdn.net/projects/linux-kernel-docs/wiki/FrontPage">Linuxカーネルドキュメントプロジェクト</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/4797338261?tag=osdn-22&linkCode=as2&camp=247&creative=1211&creativeASIN=4797338261">Linuxカーネル2.6解読室</a></li>
+</ul>
+
+<h2>その他の情報</h2>
+<p>ネットにはさまざまな情報が溢れています。以下が参考になるかもしれません。</p>
+<ul>
+<li><a href="https://qiita.com/advent-calendar/2017/linux">Linux Advent Calendar 2017 - Qiita</a></li>
+<li><a href="http://nullpo-head.hateblo.jp/entry/2015/12/25/194126">Linuxカーネルを新しいCPUに移植する - 豆腐の豆腐和え</a></li>
+<li><a href="http://wiki.bit-hive.com/linuxkernelmemo/">Linuxカーネルメモ</a></li>
+<li><a href="http://kernhack.hatenablog.com/">φ(・・*)ゞ ｳｰﾝ　カーネルとか弄ったりのメモ</a></li>
+</ul>
+
+
+
+
+
+<h1>リンク集</h1>
+<h2>Linuxカーネルの仕組みなど</h2>
+<p>カーネルについて。</p>
+<ul>
+<li><a href="https://www.kernel.org/">Kernel.org</a></li>
+<li><a href="https://git.kernel.org/cgit/">git.kernel.org</a></li>
+<li><a href="http://www.ibm.com/developerworks/jp/linux/library/l-linux-kernel/">Linux カーネルの徹底調査 - IBM developerWorks</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">オペレーティングシステム - Wikipedia</a></li>
+</ul>
+
+<h2>OS/Linux書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0-%E7%AC%AC3%E7%89%88-Andrew-S-Tanenbaum/dp/4894717697/">オペレーティングシステム 第3版</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%9D%E3%82%8C%E3%81%8C%E3%81%BC%E3%81%8F%E3%81%AB%E3%81%AF%E6%A5%BD%E3%81%97%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%8B%E3%82%89-%E5%85%A8%E4%B8%96%E7%95%8C%E3%82%92%E5%B7%BB%E3%81%8D%E8%BE%BC%E3%82%93%E3%81%A0%E3%83%AA%E3%83%8A%E3%83%83%E3%82%AF%E3%82%B9%E9%9D%A9%E5%91%BD%E3%81%AE%E7%9C%9F%E5%AE%9F-%E5%B0%8F%E3%83%97%E3%83%AD%E3%83%BB%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%AA%E3%83%BC%E3%83%8A%E3%82%B9-%E3%83%88%E3%83%BC%E3%83%90%E3%83%AB%E3%82%BA/dp/4796880011">それがぼくには楽しかったから 全世界を巻き込んだリナックス革命の真実</a></li>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3-Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC3%E7%89%88-Daniel-Bovet/dp/487311313X">詳解 Linuxカーネル 第3版</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+
+<h2>Linuxカーネル</h2>
+<p>Linuxカーネルについて。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3-Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC3%E7%89%88-Daniel-Bovet/dp/487311313X">詳解 Linuxカーネル 第3版</a> - 昔第2版を買いましたが、全く読んでいません。</li>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/watchindex.html">連載記事 「Linux Kernel Watch」 - @IT</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">オペレーティングシステム - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB">カーネル - Wikipedia</a></li>
+</ul>
+
+<h2>Linuxカーネルソースコード</h2>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/torvalds/linux">git</a></li>
+</ul>
+<p>Linuxカーネルについては、<a href="https://git.kernel.org/">git.kernel.org</a>からリポジトリの一覧を見ることができる。トーバルズの公式リポジトリは<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/">git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/</a>にある。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>永続化とO/Rマッピングの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>永続化とO/Rマッピングの世界観</h1>
+<p>永続化とO/Rマッピングに関する世界観です。<a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>永続化とO/Rマッピング</h1>
+<h2>データの永続化</h2>
+<p>データの永続化とは、データ（オブジェクト）をメモリ上から、電源を消してもデータが消えることのない不揮発性の記憶装置に保存することを指す。</p>
+<p>特に、ユーザーから送られたデータなどが、プログラムと一緒にメモリ上にある場合、永続化を行うことでプログラムが終了してもそのデータが永続的に存続する。</p>
+<p>後日注記：単純に永続化するだけならば、オブジェクトをそのままシリアライズして、データファイルに書き出せばいい。実際、この方式はクライアントでもサーバーでもよく使われる。だが、大量の顧客データを扱う場合などに、パフォーマンスや信頼性を考えて、永続化ストレージにはリレーショナルデータベースを用いることが多い。この時、JavaのクラスとリレーショナルデータベースシステムのSQL文を相互に変換し、マッピングするHibernateのようなO/Rマッピングツールが存在する。（しかしながら、Javaのオブジェクト指向とSQLを変換するO/Rマッピングは、「それぞれ全く異なるもの」であるためよく嫌われている。また、永続化のコードは「SQLからPHPでHTMLを変換してリスト表示する」のようなプログラムになるため、よくプログラマから嫌われている。）</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="http://www.shoeisha.com/mag/dbm/pdf/810211-dbm.pdf">オブジェクトの 永続化とは何か</a> - PDFです。</li>
+<li><a href="http://zerobase.hateblo.jp/entry/2013/02/03/012904">データベースを使った永続化への復讐 - 石橋秀仁(zerobase)書き散らす</a></li>
+<li><a href="https://www.atmarkit.co.jp/fdb/rensai/javapersis01/javapersis01_1.html">Javaのオブジェクト永続化に何を選ぶ？（1/3） － ＠IT</a></li>
+<li><a href="https://qrunch.net/@raccy/entries/rL1NlHKO4t0pfzIS">O/Rマッパーが悪いのはオブジェクト永続化にRDBを使おうとしたことが悪い | Qrunch（クランチ）</a></li>
+</ul>
+
+<h2>HibernateとO/Rマッピング</h2>
+<p>Javaでの永続化の関連技術に、JPAやその実装であるHibernateがある。HibernateはO/Rマッピングを行うためのシステムで、O/Rマッピングとはオブジェクト指向とリレーショナルデータベースシステムの間でデータの変換と永続化を行うための技術。</p>
+<ul>
+<li><a href="https://www.techscore.com/tech/Java/Others/Hibernate/index/">Hibernate | TECHSCORE(テックスコア)</a></li>
+</ul>
+<p>JavaとSQLの間で変換を行うにはマッピングデータが必要だが、HibernateではXML、アノテーション、XDocletなどのメタデータ形式が用意されている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Hibernate">Hibernate - Wikipedia</a></li>
+</ul>
+
+<h1>永続化手法</h1>
+<h2>Hibernate</h2>
+<p><a href="java_framework.html">Java（Webフレームワーク）</a>も参照のこと。</p>
+
+<h2>Ruby on Rails</h2>
+<p><a href="ruby_on_rails.html">Ruby on Rails</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>永続化、O/Rマッピング</h2>
+<p>データをプログラムが終了しても再び読み込めるようにメモリの外の領域に書き出す。</p>
+<p>単純な永続化はシリアライズでも可能だが、パフォーマンスなどを考えてリレーショナルデータベースを使う。</p>
+<p>O/Rマッピングは、オブジェクト指向のオブジェクトとリレーショナルデータベースのデータを変換するためにマッピングする。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

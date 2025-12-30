@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>find - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>find</h1>
+<p>findに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="grep_find_sed_awk.html">grep, find, sed, awk</a></li>
+<ul>
+<li><a href="grep.html">grep</a></li>
+<li><b>find</b></li>
+<li><a href="sed.html">sed</a></li>
+<li><a href="awk.html">awk</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>find</h1>
+<h2>find</h2>
+<p>findはファイル名を検索したり、ツリー構造のファイル一覧を出力したりするコマンド。</p>
+<p>特にオプションを使ってたとえば更新日時の新しいファイルを探したり、xargsを用いてgrepやsedをかける前のファイル一覧の出力（パイプでxargsに送る）などに使える。</p>
+<pre>
+$ find /usr/src/linux | less
+</pre>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_findutils/man1/find.1.html">man find</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.02.08編集</p>
+</div>
+
+<h2>findとlocate</h2>
+<p>findはファイルを検索する際、色んなオプションが使える。locateはオプションは貧弱だが、事前に作られたデータベースから検索するために、検索速度が速い。</p>
+<p>データベースはcronで自動で作られるが、手動で作る場合はrootユーザーになってupdatedbを実行する。</p>
+<p>後日注記：locateは、findのようにさまざまな条件を指定して検索することはできないが、データベースを用いるため、超高速にファイルを検索できる。</p>
+<ul>
+<li><a href="https://qiita.com/ottyajp/items/1ac218164f1daf643262">ファイルを探す[findとlocate] - Qiita</a></li>
+<li><a href="https://eng-entrance.com/linux-command-locate">locateコマンドについて詳しくまとめました 【Linuxコマンド集】 - エンジニアの入り口</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_findutils/man1/locate.1.html">man locate</a></li>
+</ul>
+
+<h2>findのオプション</h2>
+<table class="some_tables">
+<tr><th class="min60">オプション</th><th>意味</th></tr>
+<tr><td>-name</td><td>ファイル名を指定（大文字小文字を区別する）</td></tr>
+<tr><td>-iname</td><td>ファイル名を指定（大文字小文字を区別しない）</td></tr>
+<tr><td>-atime</td><td>アクセス日時を指定</td></tr>
+<tr><td>-mtime</td><td>更新日時を指定</td></tr>
+<tr><td>-size</td><td>サイズを指定</td></tr>
+<tr><td>-type</td><td>ファイルの種別を指定<br>fはファイルのみ<br>dはディレクトリのみ</td></tr>
+<tr><td>-perm</td><td>パーミッションを指定</td></tr>
+<tr><td>-and</td><td>複数の条件を指定（AND）</td></tr>
+<tr><td>-or</td><td>複数の条件を指定（OR）</td></tr>
+<tr><td>-not</td><td>条件に当てはまらないものを検索（NOT）</td></tr>
+</table>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/taddy_korokoro/items/7aab525561c59cd39d02">Linux ディレクトリ・ファイル操作 コマンド一覧 - Qiita</a></li>
+<li><a href="https://eng-entrance.com/linux-command-find">ファイルなどを検索する！findコマンドの詳細まとめ【Linuxコマンド集】 - エンジニアの入り口</a></li>
+</ul>
+
+<h2>更新日が最近の7日以内のファイルを探す</h2>
+<p>findの便利な使い方。カレントディレクトリ（.）から「最近7日以内」に更新されたファイルを見つける。</p>
+<pre>
+$ find . -mtime -7
+</pre>
+<p>ls -lのように詳細に表示したい場合は-lsをつける。</p>
+<p>以下は引用元。</p>
+<ul>
+<li><a href="https://www.softel.co.jp/blogs/tech/archives/1332">【linux】更新日が最近のファイルを見つける（findコマンド） - SOFTELメモ</a></li>
+</ul>
+
+<h1>xargs</h1>
+<h2>xargs</h2>
+<p>xargsは、すべての行をそれぞれ引数とするような順次的なコマンド操作を行うコマンド。</p>
+<p>xargsを上手く使うことで、一覧されたテキストから全てに対するコマンドを実行できる。findとともに使うことで、手作業でうんざりする作業をしなくても済む。</p>
+<ul>
+<li><a href="https://www.xmisao.com/2013/09/01/how-to-use-find-and-xargs.html">findとxargsの基本的な使い方 -- ぺけみさお</a></li>
+</ul>
+<p>xargsコマンドを上手く使うことで、findやgrepなどの結果から、「全ての行に対するコマンド」を実行出来る。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_findutils/man1/xargs.1.html">man xargs</a></li>
+</ul>
+
+<h2>全てのファイルの内容を正規表現で置換</h2>
+<p>xargsは、たとえば、findで一覧した全てのファイルに対して、sedのようなコマンドで正規表現をかけ、保存したい場合などに使える。</p>
+<p>xargsで全てのHTMLファイルを正規表現で置換する。</p>
+<pre>
+find . -name '*.html' | xargs sed -i 's/Linux/FreeBSD/g'
+</pre>
+<p>以下は引用元。</p>
+<ul>
+<li><a href="http://blog.takuros.net/entry/20080221/1203552993">sedとxargsで特定文字列を一括置換 - プログラマでありたい</a></li>
+</ul>
+<p>同様のことをWindowsで行うためには、フリーソフトのサクラエディタのGrepやGrep検索機能を使う。あるいはxyzzyなどでも同じ機能がある。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1801/19/news014.html">【 xargs 】コマンド――コマンドラインを作成して実行する - @IT</a></li>
+</ul>
+
+<h2>xargs & parallel</h2>
+<p>GNU parallelはコマンドを並列実行するツール。簡単な並列実行ならxargsに-Pオプションでもいける。</p>
+<ul>
+<li><a href="http://bicycle1885.hatenablog.com/entry/2014/08/10/143612">コマンドを並列に実行するGNU parallelがとても便利 - りんごがでている</a></li>
+<li><a href="https://orebibou.com/2017/07/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E4%B8%A6%E5%88%97%E5%8C%96%E3%82%92%E8%A1%8C%E3%81%88%E3%82%8B%E3%80%8Egnu-parallel%E3%80%8F%E3%81%AE%E5%80%8B%E4%BA%BA%E7%9A%84%E4%BD%BF%E3%81%84/">コマンドの並列化を行える『GNU parallel』の個人的使い方まとめ | 俺的備忘録 〜なんかいろいろ〜</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>awkやPerlやbashと組み合わせることも可能</h2>
+<p>findやxargsと組み合わせることができるのはsedだけではありません。awkやPerl、あるいはbashなどと組み合わせることも可能です。</p>
+<p>たとえば、すべての*.txtファイルに同じスクリプトを適用するような方法が考えられます。要するにバッチ処理です。findとxargsでバッチ処理の練習ができます。</p>
+<p>ほかにも、もっと普通のUNIXコマンド（たとえばmvやcpやkillなど）をxargsと組み合わせることもできます。以下はその例です。</p>
+<ul>
+<li><a href="https://qiita.com/dongxinanbei/items/13528b9a0a9d78b5aa81">ls + awk + xargs + mvの複合コマンド #Linux - Qiita</a></li>
+<li><a href="https://qiita.com/Kuroi_Cc/items/69c3a99973b9ff2dc1ed">awkにハマってしまったかもしれない件 #CLI - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.05.22</p>
+</div>
+
+<h2>壊れるかもしれないことは仮想マシンで</h2>
+<p>また、「大切な環境が壊れるかもしれないからバッチ処理なんかしたくない」という人は、最近は仮想マシンという優れ物があります。</p>
+<p>すなわち、壊れるかもしれないことは仮想マシンで試し、システムが壊れた時は仮想マシンごと瞬時に消して、また新しい仮想マシンを作れます。</p>
+<p>なので、そのような仮想マシンを使って、壊れるかもしれない時は壊れてもいい環境で行いましょう。</p>
+<p>後日注記：実際にはテスト用の仮想マシンをわざわざ作らなくても、一時的なディレクトリに処理するデータをコピーするなどすれば、比較的安全にテストを行うことができます。もしいきなり本番のデータを使うなら、それなりのバックアップや復旧のための体制（たとえばgitのようなバージョン管理システムを使うとか、tarで元のデータのアーカイブを取っておくなど）は取っておきましょう。</p>
+<p><a href="../virt/docker.html">Docker</a>や<a href="linux_bash_script.html">Bash（シェルスクリプト）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.05.22</p>
+<p>2024.05.25編集</p>
+</div>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

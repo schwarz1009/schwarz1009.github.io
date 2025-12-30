@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Ruby on Rails関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Ruby on Railsの世界観</h1>
+<p>Ruby on Railsによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Ruby on Rails</h2>
+<h2>Railsで何ができるのか</h2>
+<p>最近、Webフレームワークというものが、IT業界でWebサービスを開発するために大いに流行している。</p>
+<p>Webフレームワークとはなんなのか。それは、「Webサービスを簡単に作ることのできるフレームワーク」のことだ。</p>
+<p>そして、このWebフレームワークの火付け役となったような存在が、MVCフレームワークのRuby on Railsである。</p>
+<p>Railsを使うことで、HTMLのビューを画面インターフェースとし（V: ビュー）、SQLのデータベースをデータの永続化手段とし（M: モデル）、プログラミング言語Rubyでロジックを記述することで（C: コントローラ）、とても洗練された設計と管理のやり方で、簡単にWebサービスを作ることができる。</p>
+<p>Railsによって具体的にどんなことができるか。たとえば、TwitterやFacebookのような、ミニブログやSNSをはじめとする、Web上の交流スペースが作れる。ほかにも、ブログサービスとか、CMSとかのように、Web上でSQLデータベースとHTMLを使って作ることができるものが簡単に作れる。</p>
+<p>Railsにおける大きな特徴は、従来難しいとされていたことを簡単かつスマートにできるということ。データベースのCRUD操作などは簡単に自動作成できるし、RESTfulやJSONやAjaxなどにも簡単に対応できる。</p>
+
+<h2>RailsとMVCフレームワーク</h2>
+<p>Railsは、MVCフレームワークという考え方と規約に基づき、「少ない記述量でWebアプリケーションを可能にする」ことを目指したWebアプリケーション・フレームワークだ。</p>
+<p>MはModelで、データベース管理システムのテーブルを表している。</p>
+<p>VはViewで、データをどのように表示するかを表している。HTMLに若干のコードを加えることで実現される。</p>
+<p>CはControllerで、プログラミングとしての、Webブラウザによって呼び出される、個々のリクエストに応じたアプリケーションのメソッドや処理を表し、ModelとViewを統括している。</p>
+<p>Railsの基本理念は「同じことを繰り返さない」ことと「設定より規約」であり、一度書いたコードなどを再度、重複して書く必要はなく、また複雑な設定を編集するのではなく、ある一定の慎重に設計された決まりごと（規約）に則したシステムの構築を行うことによって、設定を無くすことができる。</p>
+<p>Railsのコード量の少なさは画期的で、またその管理のしやすさとシステムの作りやすさは革命的だった。まるで、機関車が線路（レール）の上を走っているかのように、規約通りにすればとても簡単にWebアプリケーションを構築出来る。</p>
+<p>また、Railsをやると、プログラミングの基本とは何なのか、ということが良く分かる。どこでもRailsはプログラミングの入門や基礎のために良いと言われる。だが、逆に「簡単すぎて技術力の習得にならない」と、Railsを敬遠する意見も一部にはある。</p>
+<ul>
+<li><a href="https://railsguides.jp/getting_started.html">Rails をはじめよう</a></li>
+</ul>
+
+<h2>Railsの基本</h2>
+<p>まず、Railsにはモデル、ビュー、コントローラという3つの層がある。</p>
+<p>モデルはデータベースのことで、SQLiteなどで作ったデータベーステーブルに対して、決められた命名規則で自動的にデータベースを操作するためのクラスが定義される。</p>
+<p>このモデルを用いて、データベースを操作する。SQL文を用いずにRubyでデータを操作する「マイグレーション」を行う。</p>
+<p>ビューは、HTMLの表示部分。ERBを使ってHTMLの中にRuby構文を埋め込む。&lt;% ～ %&gt;とした部分にRuby文を入れられる。また、&lt;%= ～ %&gt;とすればRuby文の中で最後に評価された値を表示できる。CSSはよりプログラマブルな計算などができるCSSであるScssを用いる。JavaScriptはRubyライクな記述でJavaScriptを記述できるCoffeeScriptを使う。ビューはアクションから呼ばれるが、命名規則に決められた通りすれば、何も記述しなくても自動的に特定のビューを表示できる。また、パーシャルを使ってビューの中の特定の部分を共有できる。たとえばブログの表示画面と編集画面で同じHTMLを表示することができる。</p>
+<p>コントローラは、ビューとモデルを取り持つ部分。Rubyのインスタンス変数（@articleなど）を用いることで、コントローラ・ビュー・モデルの間で同じデータを共有・操作することができる。コントローラにはアクションを定義し、このアクションからビューが表示される。コントローラは既にあるクラスを継承し、アクションを定義することで開発を行う。また、URLからコントローラのアクションを呼ぶために最初にルーティングを行う。コントローラをプログラマが、ビューをデザイナーが担当することで、プログラマとデザイナーの間で仕事を分業しやすくなる。</p>
+<p>Railsのジェネレータ機能であるScaffoldを使うことで、Webアプリケーションのひな形を自動作成できる。たとえばブログなどはほとんど自動作成してくれる。あとはデザイナーがCSSの修正や英語を日本語に直すだけで、簡単な日記システムなどはほとんど自動作成できる。</p>
+<p>RailsではPumaと呼ばれるWebサーバーが付属している。またデータベース管理システムとしては、軽量なSQLiteが入門者にはおすすめな一方、MySQLやPostgreSQLも使うことができる。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%A3%E3%81%9F1%E6%97%A5%E3%81%A7%E5%9F%BA%E6%9C%AC%E3%81%8C%E8%BA%AB%E3%81%AB%E4%BB%98%E3%81%8F-Ruby-Rails-%E8%B6%85%E5%85%A5%E9%96%80-WINGS%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/dp/4774196185">たった1日で基本が身に付く! Ruby on Rails 超入門</a>が参考になります。）</p>
+
+<h2>Railsによるプログラミング</h2>
+<p>Railsは「設定より規約」という主義に基づいてWebアプリケーションの開発を行う。これはMVCフレームワークに従うということだけではなく、たとえばディレクトリやファイル名の命名規則（英単語の単数形と複数形を使い分けるなど）にも見られる傾向で、多くのことを規約に従って用意する。コントローラの機能はクラスを継承して実装し、ビューはスケルトンとして自動作成された（HTMLファイルに当たる）ERBファイルにRubyコードを埋め込んで実装する。また、データベースは専用の簡略化されたコマンドで、必要最低限のコマンドからSQLテーブルを作成し、それに対応するモデルを実装する。</p>
+<p>規約通り進めていけば、驚くほど簡単にWebプログラミングが出来るが、規約以外のことをやるための自由度は少ない。</p>
+<p>（昔少しだけ触ったRailsのチュートリアルの曖昧な知識で書いているため、間違ったことを言っているかもしれません。実際のところを知るためには、実際にRailsを触ってもらいたいと思います。）</p>
+
+<h2>Railsの開発はワークフローを分かれば単純</h2>
+<p>Railsの開発は、ソースコードやプログラム例を提示して「このように書け」というものではなく、さまざまな手順を最小限行っていく「ワークフロー」です。</p>
+<p>なので、簡単に開発の手順を提示することは出来ません。ですが、決して難しくはなく、以下のようなサイトをきちんと読んで「自分で実行」すれば、簡単に分かります。</p>
+<p>おすすめなのは<a href="https://railsguides.jp/getting_started.html">Rails をはじめよう</a>です。rails generateコマンドを使って自動的にファイルやフォルダを作成したり、*.html.erbファイルにRubyコードを埋め込んだり、ApplicationControllerやApplicationRecordなどの基本クラスを継承したり、@articles.each doで繰り返し表示したりしながら、モデル、ビュー、コントローラ、そしてルーティングやアクションなどを作成していくことで、Webアプリケーションとは何であるか、ということが掴めます。</p>
+<ul>
+<li><a href="https://railsguides.jp/getting_started.html">Rails をはじめよう</a></li>
+<li><a href="https://railstutorial.jp/">Ruby on Rails チュートリアル</a></li>
+<li><a href="https://railsguides.jp/">Ruby on Rails ガイド (5.0 対応)</a></li>
+</ul>
+
+<h2>Rails環境の構築はDockerを使うのが楽ちん</h2>
+<p>Rails環境の構築は、Docker Hubを使ってdocker runで入れるのが楽。</p>
+<pre>
+$ docker pull hoge
+$ docker run -it hoge /bin/bash
+</pre>
+<p>Railsのイメージを使うなら、以上のhogeの部分を「rails」に置き換えて実行すればよい。</p>
+<p>NginxもMySQLも全部Dockerでコンテナとして起動してしまおう。注意点は、MySQLコンテナを削除するとデータも消えること。MySQLコンテナとデータコンテナを分けてデータの永続化を行う必要がある。詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/shimo_yama/items/d0c42394689132fcb4b6">docker run(コンテナ作成)する時のオプションあれこれ - Qiita</a></li>
+<li><a href="https://qiita.com/halhide/items/36e03c650bb08dfcc820">rails開発環境をdockerで作ったメモ - Qiita</a></li>
+<li><a href="https://qiita.com/pocari/items/456052a291381895f8b3">dockerでrails5環境構築 - Qiita</a></li>
+</ul>
+<p>後日注記：複数のDockerイメージを連携させて動かす場合（たとえばRailsとMySQL）は、docker-composeというコマンドを使うと複数のイメージを楽に連携・管理できる。</p>
+<ul>
+<li><a href="https://datumstudio.jp/blog/docker%E3%81%A7rails%E3%81%A8mysql%E3%81%AE%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">DockerでRailsとMySQLの環境構築 | ブログ一覧 | DATUM STUDIO株式会社</a></li>
+<li><a href="https://tech-lab.sios.jp/archives/20051">【連載】世界一わかりみが深いコンテナ &amp; Docker入門 〜 その4:docker-composeってなに？ 〜 | SIOS Tech. Lab</a></li>
+</ul>
+<p><a href="../virt/docker.html">Docker</a>も参照のこと。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Rails">Rails - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>さまざまな機能</h1>
+<p>（以下の内容は、<a href="https://www.youtube.com/watch?v=IyEcu9e1YgM">Ruby On Rails入門｜90分でマスター！RubyOnRailsチュートリアル入門（せお丸のプログラマー養成講座） - YouTube</a>という動画を見た上で、自分なりに簡単な入門を書いてみました。詳しくは動画をご覧ください。）</p>
+
+<h2>モデル</h2>
+<p>モデルはApplicationRecordを継承する。ApplicationRecordはActiveRecord::Baseを親クラスとして継承している。</p>
+<p>RailsのActive Recordでは、SQL文を使わず、Ruby風のcreate, find, whereなどのメソッドを、rails cで実行されるRubyの入力プロンプトで実行する。saveでデータベースへの変更を適用できる。rails cでこれらの入力を行うと、発行されたSQL文を即座に確認できる。</p>
+<p>Railsのマイグレーションファイルでは、日付を記録し、一度実行されたマイグレーションファイルは二度は実行されない。マイグレーションファイルでは、オートインクリメントされるidカラムやタイムスタンプ情報などを自動で付加できるほか、インデックスの有無やバリデーションルール（値を入れる時のルール、文字列で256文字以下など）も自動で付加するように記述できる。また、has_many（たくさんの子供を持つ）やbelongs_to（ひとつに属する）を使うことで、1対多のリレーションを表現できる。たくさんのコメントがつく掲示板やブログなどに必要となる。</p>
+<p>データベースをデフォルトのSQLiteからMySQLなどに変更する時はYAMLファイル（database.yml）から設定を変更する。</p>
+<p><a href="../db/db.html">データベース</a>を参照のこと。</p>
+
+<h2>ルーティング</h2>
+<p>ルーティングは、基本的にgetやpostなどのHTTPリクエストと一緒にパス名を記述し、to: の後にコントローラのアクション名を記述する。</p>
+<p>設定されているルーティング情報は、rails routesコマンドから確認できる。</p>
+<p>また、簡単なCRUD操作は、Scaffold一発で自動作成できる。この時、HTTPには存在しないRESTfulなメソッドも自動で作成される。また、ルーティングにresourcesを記述すると、CRUDに対するルーティングを自動設定できる。</p>
+<p><a href="../network/rest.html">REST</a>を参照のこと。</p>
+
+<h2>コントローラ</h2>
+<p>コントローラはApplicationControllerを継承する。コントローラでは、HTTPリクエストとレスポンスを振り分ける。</p>
+<p>コントローラの中のアクションからモデルとビューを使うことにより、ページごとの機能を実装する。</p>
+<p>コントローラとビューをやり取りする時は、共有する変数名に@をつけてインスタンス変数にする。@のついたインスタンス変数は、コントローラとビューの間で共有できる。</p>
+<p>また、ルーティングでリクエストパラメータを受け取る時は、/hoge/:uidなどのように:をつけ、その変数をparams[:uid]のように受け取る。</p>
+
+<h2>ビュー</h2>
+<p>ビューはERBファイル（RubyコードをPHPのように埋め込んだHTMLファイル）を使って記述する。</p>
+<p>基本的に、ルーティング情報から振り分けられるコントローラのアクションに対して、ビューを対応付ける。基本的には規約通りにすれば継承したりメソッドの名前を書いたりするだけで簡単に対応付けできる。もちろん開発とともにコントローラの中でアクションを書く必要は出てくる。</p>
+<p>ビューは基本的にHTMLと同様だが、RubyコードとRailsのフォームヘルパーを中に埋め込める。@で始まるインスタンス変数により、コントローラの変数をビューで使用できる。</p>
+<p>ビューを記述する上で必要なのは、Railsのフォームヘルパー（ビューヘルパー）という機能。フォームの部品やリンクなどは、フォームヘルパーを使って、HTMLで直接書くよりも柔軟で簡単な書き方で記述できる。フォームヘルパーで書いたフォームやリンクはそのままHTMLに変換される。また、部分テンプレートであるパーシャルを使うことで、よく使うHTML部品は複数のファイルで共有できる。パーシャルにはファイル名の先頭に_をつけることになっている。</p>
+<p><a href="html.html">HTML</a>を参照のこと。</p>
+
+<h2>Gemの導入</h2>
+<p>Railsで開発をするために、全ての機能を自分で作る必要はない。多くの機能が、「Gem」というパッケージとして公開されており、Gemを使うだけでさまざまな機能を使うことができる。</p>
+<p>Gemを使うにはRailsプロジェクトの中にあるGemfileを編集し、bundlerでインストールすればよい。</p>
+<p><a href="ruby_gems.html">Gems</a>を参照のこと。</p>
+
+<h1>Railsの参考になる文書</h1>
+<h2>チュートリアル</h2>
+<p>Railsのチュートリアル。</p>
+<ul>
+<li><a href="https://railstutorial.jp/">Ruby on Rails チュートリアル</a></li>
+<li><a href="http://railsgirls.jp/app">Rails Girls アプリ・チュートリアル - Rails Girls - Japanese</a></li>
+</ul>
+<p>おすすめなのは<a href="http://railsgirls.jp/app">Rails Girlsのチュートリアル</a>です。余計な情報がなく簡素で、簡単にRailsをはじめられます。</p>
+
+<h2>ガイド</h2>
+<p>Railsのガイド。</p>
+<ul>
+<li><a href="https://railsguides.jp/">Ruby on Rails ガイド (5.0 対応)</a></li>
+</ul>
+
+<h2>Railsの参考文書</h2>
+<p>Railsの参考文書。</p>
+<p>まず、Web技術についてはほぼ公式とされるMDNを参照する。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/">MDN Web Docs</a></li>
+</ul>
+<p>次にRails Girlsや以下のRails Textbookが一部で有名かつおすすめ。僕も学びたい。</p>
+<ul>
+<li><a href="http://railsgirls.jp/">Rails Girls - Japanese</a></li>
+<li><a href="http://igarashikuniaki.net/rails_textbook/">Rails Textbook</a></li>
+</ul>
+<p>書籍としては以下のような書籍（現場Rails）があり、おすすめ。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%8F%BE%E5%A0%B4%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B-Ruby-Rails-5%E9%80%9F%E7%BF%92%E5%AE%9F%E8%B7%B5%E3%82%AC%E3%82%A4%E3%83%89-%E5%A4%A7%E5%A0%B4%E5%AF%A7%E5%AD%90/dp/4839962227/ref=as_li_ss_tl?ie=UTF8&qid=1544338536&sr=8-1&keywords=%E7%8F%BE%E5%A0%B4rails&linkCode=sl1&tag=saboyutaka02-22&linkId=078a44f524c3714c07f8ca15e6b64e92&language=ja_JP">現場で使える Ruby on Rails 5速習実践ガイド</a></li>
+</ul>
+<p>もっときちんとした「参考文書ガイド」を読みたいならるびまにあります。</p>
+<ul>
+<li><a href="https://magazine.rubyist.net/articles/0059/0059-Ruby-Rails-Beginners-Guide.html">RubyとRailsの学習ガイド2019年版 - るびま</a></li>
+<li><a href="https://qiita.com/saboyutaka/items/1a8c40e105e93ac6856a">未経験からRuby on Railsを学んで仕事につなげるまでの1000時間メニュー - Qiita</a></li>
+</ul>
+
+<h2>Rails Girlsを読もう</h2>
+<p><a href="http://railsgirls.jp/">Rails Girls</a>はRailsのチュートリアルやTipsがたくさんあって参考になります。</p>
+<p>特に、「この機能をつけるためにはどうすれば良いのだろう」と思った時に、さっとそのページを見ることができて、とても良いサイト構成をしていると思います。</p>
+
+<h2>Railsアプリを公開する（Heroku, OpenShift）</h2>
+<p>Rails Girlsに、HerokuやOpenShiftにRailsアプリを公開する手順が書いてあります。</p>
+<ul>
+<li><a href="http://railsgirls.jp/heroku">Heroku に Rails アプリをアップ - Rails Girls - Japanese</a></li>
+<li><a href="http://railsgirls.jp/openshift">OpenShiftでアプリを公開する - Rails Girls - Japanese</a></li>
+</ul>
+<p><a href="../services/heroku.html">Heroku</a>も参照のこと。</p>
+
+<h1>Railsのガイド</h1>
+<h2>renderとredirect_to</h2>
+<p>renderは、コントローラやビューの中から、RHTMLで書かれたビューや部分テンプレートを呼び出すメソッド。コントローラの中のアクションの中で、@hogeのように@をつけて作ったインスタンス変数は、ビューから使用できる。</p>
+<p>redirect_toは、サーバにHTTPリクエストを送った上で、返ってくるHTMLが表示される。</p>
+<p>以下の記事を参考に執筆しました。</p>
+<ul>
+<li><a href="https://qiita.com/1ulce/items/282cccba1e44158489c8">railsのrenderとredirect_toの違い - Qiita</a></li>
+</ul>
+
+<h2>Railsのルーティング</h2>
+<p>RailsのルータはURLを受け取ってコントローラの中のアクションに処理を割り振る。</p>
+<ul>
+<li><a href="https://railsguides.jp/routing.html">Rails のルーティング - Rails ガイド</a></li>
+</ul>
+
+<h2>Active Record</h2>
+<p>Active Recordは、MVCでいうところのM、モデルに相当する。O/Rマッピングの「Active Recordパターン」を実装したもの。</p>
+<p>以下の記事を参考に執筆しました。</p>
+<ul>
+<li><a href="https://railsguides.jp/active_record_basics.html">Active Record の基礎 - Rails ガイド</a></li>
+</ul>
+<p><a href="orm.html">永続化とO/Rマッピング</a>も参照のこと。</p>
+
+<h2>Action Controller</h2>
+<p>Action Controllerは、MVCでいうところのC、コントローラに相当する。</p>
+<ul>
+<li><a href="https://railsguides.jp/action_controller_overview.html">Action Controller の概要 - Rails ガイド</a></li>
+</ul>
+
+<h2>Action View</h2>
+<p>Action Viewは、MVCでいうところのV、ビューに相当する。ビューはERB（Embedded Ruby）というRuby埋め込み型のHTML形式で記述される。</p>
+<ul>
+<li><a href="https://railsguides.jp/action_view_overview.html">Action View の概要 - Rails ガイド</a></li>
+</ul>
+
+<h1>Ajax</h1>
+<h2>RailsでAjax</h2>
+<p>Railsでは、:remote =&gt; trueでturbolinkを有効にすることで、Ajaxを自動的に有効にできる。あるいは、jQueryを使ってもAjaxを実装することができる。</p>
+<p>Railsはデータがポストされた時、turbolinkが有効になっていると、HTMLファイルではなくJavaScript/JSON/XMLなどの形式のファイルをデータとして返し、自動でそのファイルを見つけて実行するようになっている。</p>
+<p>詳しくは以下の記事が詳しい。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/28967">【Rails入門】ajaxの使い方まとめ | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+</ul>
+<p><a href="ajax.html">Ajax</a>も参照のこと。</p>
+
+<h1>開発ツール</h1>
+<h2>RubyMineを使おう</h2>
+<p>Ruby on Railsの開発ツールとして、ジェットブレインズ社のRubyMineがあります。</p>
+<p>たとえば、Railsではrailsコマンドを多用しますが、RubyMineを使うことで、コンソールから簡単にrailsコマンドを実行することができて、便利です。</p>
+<p>また、RubyMineにはctagsと同様関数名から関数定義にジャンプする機能があり、クラスやメソッドの由来となる記述にジャンプすることができて、とても便利です。</p>
+<p><a href="intellij.html">IntellJ IDEA</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>一部の人間に嫌われている理由</h2>
+<p>僕は、Railsが一部の人間に嫌われている理由は、コマンドでファイルを自動作成し、ほとんどコードを書かず、設定もせずに出来上がるそのRailsの手法が、コマンドと設定を主にするLinuxやRubyの文化の逆を行っているからだと思う。</p>
+<p>Railsはコマンドを多用し、ファイルを自動作成する。そのファイルが何であるのか、説明をせず、何もせずに必要な全てのファイルが出来上がり、設定はせずにルールを守り、コードは最低限しか書かない。</p>
+<p>まるで、Microsoft Visual C++のスケルトン作成を見ているようである。</p>
+<p>Railsがここまで流行っている理由は、「Railsをやっていると、プログラミングの基本が全部分かってしまう」ということがある。Railsをやるだけで、簡単にコードをどのような場面で、どのように書けば良いのかが分かる。本当は、エンジニアの中にある「これがコードを書く秘訣だ」ということが、全部ばれて公になってしまうのだ。</p>
+<p>だから、Railsは嫌われるが、僕は自信を持ってRailsを薦める。プログラミングをやりたいなら、RailsでWebサービス・Webアプリケーションを作るのが一番早道だ。おそらく、一週間でプログラマになれるだろう。</p>
+<p>後日注記：プログラミングをするコツは、自分で作ること。そして、Railsを使ってWebサービスを作ると、「あれ、プログラミングできちゃった」という具合で、一番早道でプログラミングができる。なので、プログラマになりたい人はRailsをやるのが一番良い。おすすめである。</p>
+
+<h2>逆に、Railsが賢すぎて、一般的プログラマにはついていけないところも</h2>
+<p>むしろ、Railsは嫌われているというよりも、むしろ、賢すぎて、一般的プログラマにはついていくことができないところがあります。</p>
+<p>コマンド一発でなんでも可能であり、自動的なスケルトンコードの作成をふんだんに使い、設定はごく最低限で、すべてがよく考えられて設計されており、「そこまでやるか」というところまでやってくれるのが、Railsの特徴です。</p>
+<p>正直言って、今までのPHPでSQLデータを繰り返し表示していたプログラマにとっては、ありえないです。賢すぎます。Railsの開発者は、まったく一般人とは別の頭をしているのだと思います。</p>
+
+<h2>最近はNext.jsに取って代わられつつある</h2>
+<p>Railsは、最近はもう古くなってきています。</p>
+<p>最近のWebフレームワークは、RailsからNext.jsなどに取って代わられようとしています。</p>
+<p>Railsは確かに優れたフレームワークでしたが、フロントエンド部分に課題があり、その結果最近ではRailsの代わりにNext.jsを使うことが多くなってきています。</p>
+<p>特に、Rubyが動的型付け言語であるため、楽ではあるものの大規模な開発では逆に困難さを抱えてしまい、その点、TypeScriptなどは静的型付け言語であるため、大規模な開発に向いています。</p>
+<p>最近、RailsをWebサービスの開発に使うことは少なくなりつつあります。新しい案件なら、Next.jsを使うことをおすすめします。</p>
+<p><a href="javascript_framework_react.html">React</a>や<a href="javascript_framework_next_js.html">Next.js</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>Webフレームワーク</h2>
+<p><a href="../network/web_framework.html">Webフレームワーク</a>を参照のこと。</p>
+
+<h2>Ruby</h2>
+<p><a href="ruby.html">Ruby</a>や<a href="ruby_tools.html">Rubyのツール</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>Ruby on Rails</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%9F%E3%81%A3%E3%81%9F1%E6%97%A5%E3%81%A7%E5%9F%BA%E6%9C%AC%E3%81%8C%E8%BA%AB%E3%81%AB%E4%BB%98%E3%81%8F-Ruby-Rails-%E8%B6%85%E5%85%A5%E9%96%80-WINGS%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/dp/4774196185">たった1日で基本が身に付く! Ruby on Rails 超入門</a></li>
+</ul>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C関連の世界観１（基本） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C言語の世界観（１．基本）</h1>
+<p>C言語によるプログラミングに関する世界観１（基本）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>C言語（１．基本）</b></li>
+<ul>
+<li><a href="c_flow.html">２．制御フロー</a></li>
+<li><a href="c_data.html">３．データ構造</a></li>
+<li><a href="c_pointer.html">４．配列とポインタ</a></li>
+<li><a href="c_io.html">５．入出力</a></li>
+<li><a href="c_preprocessor.html">６．プリプロセッサとインラインアセンブラ</a></li>
+</ul>
+<li><a href="c_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="cpp.html">C++</a>も参照のこと。</p>
+<p>ツール関係は<a href="c_cpp_tools.html">C/C++ツール</a>に移動しました。</p>
+<p>システムに依存する部分は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>や<a href="windows_programming.html">Windowsプログラミング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>C言語の基本</h1>
+<h2>C言語とは</h2>
+<p>C言語は、プログラミング言語の中でもっとも有名な言語のひとつで、カーネルやコンパイラ、システムソフトウェアやライブラリモジュールなど、比較的低レベルで、パフォーマンス（速度・効率）が必要なレイヤーで使われる。</p>
+<p>C言語は、ALGOL系の構造化プログラミング言語であり、if文、switch文、for文、while文など、ネスト可能（for文の中にfor文を入れるなど、文を入れ子にできる）なブロックや、サブルーチンとして使うことのできる関数を使うことで、構造化されたプログラミングができる。goto文も用意されているが、サブルーチンとしての関数に引数を与えて関数呼び出しを行い、return文によって関数から値を返すことで、原理上ラベルを用いたgotoを行う必要はない。そのため、BASICなどのような行番号は存在しない。</p>
+<p>C言語は、静的型付け言語であり、変数を使う際には、データ型（英語ではタイプと呼ばれる）を宣言して使用するデータ領域を定義する必要がある。データ型には、小さなものから主にchar（文字）、int（整数）、float（単精度浮動小数点数）、double（倍精度浮動小数点数）などがあり、データ型の異なる変数を組み合わせて使った時など（たとえばintとcharを足す際）には小さなものから大きなものへとキャスト（型の変換操作）が行われる。文字列はchar型の配列として表現される。</p>
+<p>このほか、C言語には、ポインタや配列、構造体、列挙型などがある。ポインタはメモリアドレスを指し示す変数であり、データのメモリ上の位置から変数を参照できる。基本的に、ポインタ（あるいは配列）は、静的あるいは動的に作成した、メモリ上の単一あるいは連続した要素に対する、基本的に最初の要素を指し示す。ポインタの場合、ポインタをインクリメントすることで、要素に次々にアクセスする「カーソル」として使うことができる。C言語の配列の場合、データは連続して確保され、そのサイズは固定長であり、配列のサイズを後で大きくしたり小さくしたり、あるいは任意の位置に挿入したり削除したりすることは困難である。このような場合、malloc()でヒープ上に動的なサイズの要素を確保し、これをポインタによって操作することで、プログラムの中でサイズの変わる要素を操作できる。C言語にはガーベッジコレクションのように、不要になった動的に確保された変数を自動で削除する仕組みがないため、動的にmalloc()で作ったメモリ上のデータは破棄すべき時にfree()できちんと削除しなければメモリリークが起きる。あるいは、C++の使える環境であれば、STLのvectorなどのコンテナを使うことで、任意の位置に挿入・削除したりサイズを変更したりできるベクター配列を使うこともできる。この場合、反復子（イテレータ）を用いてコンテナの要素に順次アクセスしたり、STLのアルゴリズムを使ってシーケンスに対する処理（並べ替えなど）を行うこともできる。また、C++ではスマートポインタを使うことで、不要になった要素をガーベッジコレクションと同様に自動削除してくれる。</p>
+<p>また、構造体はデータ要素を複数まとめてひとつのデータ要素にすることのできるデータ型であり、とてもよく使われる。たとえば、X軸とY軸のある点（ポイント）を表現したり（四角形は二つのポイントによって表現できる）、次の要素へのポインタを持つ連結リストやツリーを表現したり、ストレージやネットワークにおけるデータ属性をマッピングしたりできる。C言語にはオブジェクト指向の機能はないが、関数に構造体のポインタを渡して実行すれば、構造体のポインタを操作する一連の関数（メソッド的なもの）を実現でき、疑似オブジェクト指向のようなことはできる。また、マジックナンバー（int型の整数値を不用意に真偽値のようなさまざまな用途に転用すること）を避けるためにenum型（列挙型）を使うことも多い。</p>
+<p>C言語はコンパイラ言語であり、コンパイラがコンパイルする時点でアセンブルやリンクが行われ、OSによって直接実行可能な機械語のバイナリファイルが作成される。そのため、逐次的に一行一行読み込んで実行するインタープリタ言語に比べて、速度や効率などのパフォーマンスが高い。また、ハードウェアで直接実行できるため、ランタイムは基本的に必要なく、ライブラリやOSのシステムモジュールを除けば、別途ほかのランタイムを必要とせず、ネイティブでそのまま実行できる。また、インラインアセンブラやunsafeコード（システムのメモリを破壊する可能性のある危険なコード）を記述できるため、カーネルや言語処理系の開発にはほとんどと言っていいほどC言語が使われる。しかしながら、インタープリタ言語に比べて、低水準であり、機能も少なく、標準のクラスライブラリの豊富なJavaや.NET、あるいはモジュールが豊富なPythonなどに比べて、自らの手でコードを書かなければならない（自分で同じものを書かなければ使うことのできない）場面は多く、記述も冗長になる傾向にある。JavaのようにVMで実行されるわけではなく、ガーベッジコレクションもないため、バグやきちんと動かない場面は他よりも多いかもしれない。また、コンパイラ言語では実行する前に必ずコンパイラによるコンパイルが必要であり、C言語のコンパイラには、標準で「変更されたファイルだけをコンパイルする機能」がないため、makeを用いてMakefileを書く必要がある。</p>
+<p>また、C言語は、プラットフォーム依存性が強い。VMを使うJavaなどでは、当初からプラットフォーム移植性が極力少ないことを目指しているため、Javaでは同じプログラムが別のプラットフォームでも、再コンパイルする必要が無くそのまま実行できる。これに比べてC/C++では、別のプラットフォームで動かすためには再コンパイルが必要であり、libcなどの一部の標準化されたライブラリだけを使っている場合でなければ、#ifdefなどによるプリプロセッサなどを用いて、たとえばPOSIX向けとWindows向けに別々のコードを書く必要がある。特にC/C++でGUI開発を行う場合、X11やGTK/Qtの環境とWindowsの環境では「まったく異なるコードを書く必要」があり、当然ながらX11向けのプログラムはWindowsでは動作しない（最近のWSLのような新技術は例外）。C言語にはテンプレートはないが、簡単なマクロ演算（二つの値を足すようなマクロなど）であればプリプロセッサによるマクロを使って実現できる。</p>
+<p>C言語のコンパイラには、GNUによるGPLのGCCのほか、最近では非GNU系のオープンソースのLLVMなどがあるが、WindowsでC/C++で開発を行いたい場合は、MFCなどの付属するVisual C++を買うことが必要だが、このVisual C++には高額なコストが必要である。特にWindowsにこだわらない場合（それがレアケースであることは分かっているとしても）であれば、コストのかからないLinuxを使うこともできるが、LinuxでもしGUI開発を行うのであれば、GTKやQtを使う必要があり、これはマイナーな環境であるため日本語の情報量も少ない。本当にプログラミング初心者であれば、いきなりC/C++から入るのではなく、PythonやRubyのような「初心者にも優しい言語」を使うことをおすすめする。</p>
+<p>C言語にはC++という兄弟言語があり、C言語には用意されていないクラスを用いたオブジェクト指向のプログラミングや、テンプレートを用いたジェネリックプログラミング、あるいはSTLといった便利なライブラリを利用出来る。多くの場合、C言語の使える環境ではC++も使うことができる。GCC、LLVM、Visual C++などほとんどのC言語のコンパイラはC++もサポートされている。また、MFCのようなプラットフォーム依存のAPIライブラリは、C言語と同時にC++も用いられることを前提として提供されている。C++の全ての機能を使う必要はない。C++は「必要としない機能によってパフォーマンスなどの面でコストがかからないように」設計されているため、一部のC++の機能だけを使う「ベターC」としてC++を使うこともできる。</p>
+<p>また、これはC言語に限らない話だが、プログラミングをする際の注意点として、「完璧なひとつのプログラム」を作ろうとしないこと。さまざまなモジュールやプログラムを小分けにして、小さなプログラムの集合体として全体のプログラムを構成するようにしよう。たとえば、コンパイラを作るなら、フロントエンドとバックエンドをきちんと分けること。JavaやPHPを使うなら、なんでもできる処理をmain()にすべて書くようなプログラムではなく、最低限の処理を行うもっとも小さなクラスを作り、そのクラスの集合体としてプログラムを設計すること。UNIXの哲学として、KISSの法則と呼ばれる「シンプルにしろ、愚か者」という格言があるが、プログラムを作る時は、ひとつの完璧なプログラムではなく、もっともシンプルなプログラムの集合体としてシステムを設計するようにしよう。また、プログラムを開発する時は、最初から全部を作ろうとするのではなく、最小限の「プロトタイプ」を作った上で、そのプロトタイプに少しずつ機能を追加していき、必要に応じてリファクタリング（コードの整理整頓）をしていくことにしよう。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=C%E8%A8%80%E8%AA%9E">C言語 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>コンテンツ</h1>
+<h2>目次</h2>
+<p>１．基本</p>
+<p><a href="c_flow.html">２．制御フロー</a></p>
+<p><a href="c_data.html">３．データ構造</a></p>
+<p><a href="c_pointer.html">４．配列とポインタ</a></p>
+<p><a href="c_io.html">５．入出力</a></p>
+<p><a href="c_preprocessor.html">６．プリプロセッサとインラインアセンブラ</a></p>
+<p><a href="c_comments.html">A．戯言</a></p>
+
+<h2>サンプルコード</h2>
+<p><a href="c_samplecode.html">C言語サンプルコード</a>も参照のこと。</p>
+
+<h2>参考文献</h2>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EC-%E7%AC%AC2%E7%89%88-ANSI%E8%A6%8F%E6%A0%BC%E6%BA%96%E6%8B%A0-B-W-%E3%82%AB%E3%83%BC%E3%83%8B%E3%83%8F%E3%83%B3/dp/4320026926">プログラミング言語C（K&R）</a></li>
+<li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8%E2%80%95ANSI%E5%AF%BE%E5%BF%9C-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797307579">C言語プログラミングレッスン 入門編―ANSI対応 (SOFTBANK BOOKS)</a></li>
+</ul>
+
+<h1>変数と演算子</h1>
+<h2>変数</h2>
+<p>変数。変数は基本的にint x;のように「変数の型」と「変数の名前」を指定する。代入は=で行う。</p>
+<pre class="prettyprint">
+int x, y;
+char c;
+x = 10;
+y = 3 + x * 6;
+c = 'C';
+printf("%c and %d\n", c, y);
+</pre>
+<p>出力結果は以下のようになる。</p>
+<pre>
+C and 63
+</pre>
+<p>数学と同じように、掛け算（*）は足し算（+）よりも演算の優先順位が上であることに注意しよう。C言語の演算子では、*は+よりも先に計算される。</p>
+<div class="edit_date">
+<p>2023.01.19編集</p>
+</div>
+
+<h2>代入演算子とインクリメント演算子</h2>
+<p>代入演算子には、単に値を変数に代入する「=」以外にも、加算・減算を行う+=や-=などがある。</p>
+<pre class="prettyprint">
+x = x + 1;
+</pre>
+<p>は</p>
+<pre class="prettyprint">
+x += 1;
+</pre>
+<p>あるいは</p>
+<pre class="prettyprint">
+x++;
+</pre>
+<p>と書くことが出来る。</p>
+<pre class="prettyprint">
+x = x - 1;
+</pre>
+<p>も同様に</p>
+<pre class="prettyprint">
+x -= 1;
+</pre>
+<p>あるいは</p>
+<pre class="prettyprint">
+x--;
+</pre>
+<p>と書ける。C言語ではこのような代入演算子やインクリメント演算子を多用する。</p>
+<ul>
+<li><a href="https://e-words.jp/w/%E4%BB%A3%E5%85%A5%E6%BC%94%E7%AE%97%E5%AD%90.html">代入演算子とは - 意味をわかりやすく - IT用語辞典 e-Words</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.19編集</p>
+</div>
+
+<h2>リテラルと型</h2>
+<p>数の値（リテラル）は、10進数については13のようにそのまま記述する。8進数は先頭に0をつけて015（10進数の13）などとする。16進数は先頭に0xをつけて0x0d（10進数の13）などとする。浮動小数点数（小数点以下のある数）は100.25や1.0025e+2（指数表記、1.0025×10<sup>2</sup>）などのように記述する。文字は'c'、文字列は"Hoge"と囲んで表記する。</p>
+<p>変数には型と呼ばれるものが存在する。型は変数の性質を表す。char（文字型、バイト数1）、int（整数型、バイト数2）、long（倍長整数型、バイト数4）、float（単精度浮動小数点型、バイト数4）、double（倍精度浮動小数点型、バイト数8）などとなる。</p>
+<p>後日注記：演算子などで異なる型同士の演算をした際には、小さいほう（たとえばint）から大きい方（たとえばdouble）への自動的な型キャストが行われる。代入や関数の引数渡しなどにおいても自動的に変数の型が変換される。()を使うことで強制的な型変換ができる。たとえば、n = (int) v;など。</p>
+<p>後日注記：プログラム（関数）は、単に成功した場合に値を返すだけではなく、失敗した場合のエラーチェックも返さなければならない。このため、たとえ文字を返す関数であっても、返り値の型をcharではなくintにする場合がある。これはchar型の値に加えてエラーチェックのための値を返す必要があるからである。</p>
+<ul>
+<li><a href="https://ameblo.jp/mingw/entry-10328228946.html">２進数・８進数・１０進数・１６進数 | そろそろホンキ出す</a></li>
+<li><a href="https://talavax.com/exponential-notation.html">指数表記とは - 【ゆるゆるプログラミング】</a></li>
+<li><a href="http://www9.plala.or.jp/sgwr-t/c/sec02.html">第２章　データの扱い - 初心者のためのポイント学習Ｃ言語</a></li>
+</ul>
+<p><a href="type.html">型</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.01.19編集</p>
+</div>
+
+<h2>算術演算子</h2>
+<p>基本的な演算子：</p>
+<table class="some_tables">
+<tr><th class="min60">演算子</th><th>演算</th></tr>
+<tr><td>=</td><td>代入</td></tr>
+<tr><td>+</td><td>足し算</td></tr>
+<tr><td>-</td><td>引き算</td></tr>
+<tr><td>*</td><td>掛け算</td></tr>
+<tr><td>/</td><td>割り算</td></tr>
+<tr><td>%</td><td>余りの計算</td></tr>
+</table>
+<p>また、++でインクリメント（その数値に+1を計算して代入）、--でデクリメント（その数値に-1を計算して代入）ができる。</p>
+<p>インクリメント・デクリメント演算子には、後置演算（a++）と前置演算（++a）が存在する。単独で用いた時は結果は変わらないが、=とともに用いると、++aは先に処理をしてから代入され、a++は代入してから後に処理が行われる。</p>
+<p>後日注記：数学と同じように、+や-よりも*や/が優先されることに注意。もし+や-を優先させたければ()を使う。Cの演算子の優先順位は仕様として決まっている。</p>
+
+<h2>さまざまな計算</h2>
+<p>このほか、math.h（libm）の中のpow()関数で累乗が、sqrt()関数で平方根が、fabs()関数で絶対値が計算できる。三角関数のためのsin()やcos()やtan()もある。</p>
+<p>これらの関数を使う場合、</p>
+<pre class="prettyprint">
+#include &lt;math.h&gt;
+</pre>
+<p>を必ず記述し、コンパイル時にlibmとリンクさせる。GCCの場合以下のようにコンパイルする。</p>
+<pre>
+gcc -o calc calc.c -lm
+</pre>
+<p>-lmがlibmとのリンクを表す。</p>
+<ul>
+<li><a href="https://kaworu.jpn.org/c/C%E8%A8%80%E8%AA%9E%E3%81%A7%E4%BA%8C%E4%B9%97%E3%82%92%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">C言語で二乗を計算する方法 - C言語入門</a></li>
+<li><a href="https://code-database.com/knowledges/120">【C&#43;&#43;】math.hを使ったべき乗・絶対値・平方根・剰余などの基本計算の関数について解説 | Code Database</a></li>
+<li><a href="https://daeudaeu.com/c-sin-cos-tan/">【C言語】三角関数（sin・cos・tan）の使い方 | だえうホームページ</a></li>
+<li><a href="https://hacknote.jp/archives/53903/">C言語 math.hをコンパイルする時に-lmが必要ないとき - ハックノート</a></li>
+</ul>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.01.19</p>
+</div>
+
+<h2>論理演算子・ビット演算子</h2>
+<p>C言語の論理演算子には&& (AND), || (OR), ! (NOT)がある。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/cstart/if/index3.html">C言語 | 論理演算子 - JavaDrive</a></li>
+</ul>
+<p>ビット演算子には& (AND), | (OR), ^ (XOR), ~ (NOT), &lt;&lt;= (左方向シフト), &gt;&gt;= (右方向シフト)がある。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/cstart/ope/index6.html">C言語 | ビット演算子 - JavaDrive</a></li>
+</ul>
+<p><a href="structured_programming.html">構造化プログラミング</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.01.19</p>
+</div>
+
+<h2>ポインタと配列</h2>
+<p>このような変数は、ポインタや配列として連続したデータにアクセスしたり、別名で同じ場所にある変数の記憶内容を書き換えたりできる。</p>
+<p>C言語では、メモリ上のデータにメモリアドレスを使ってアクセスするためにポインタを使う。こうすることで、スコープが消えても削除されないようなヒープ領域の動的なメモリ領域（malloc()というAPIを使ってこうしたデータ領域を確保できる）などにメモリアドレスを用いてアクセスできる。</p>
+<p>ポインタを使う場合は、int *pのように*をつけて宣言し、p = &nのように変数のアドレス（メモリ上の場所）を代入し、*p = 10のようにそのポインタの指す場所を書き換える。こうするとnという変数名を使った代入式でなくても、nの内容が10に書き換えられる。</p>
+<p>配列の場合は、int x[10]のように連続したデータ領域を宣言し、x[2]=10とすればxの三番目の要素を書き換えられる。インデックス変数は0から始まるため、x[2]は二番目ではないことに注意しよう。</p>
+<p>ポインタと配列は結びつきが強く、よく同じものであると解釈される。ポインタに配列のアドレスを代入し、p++とすることで、ポインタの指し示すアドレスをインクリメントし、次の要素を指すことができる。インクリメントした後で*p=++nとすれば、pの今指し示している要素にインクリメントしたnの値を代入できる。</p>
+<p>詳しくは<a href="c_pointer.html">C言語（ポインタ）</a>を参照のこと。</p>
+
+<h2>const</h2>
+<p>constは、「一度代入されたら変更されない変数」すなわち（名前のついた）定数を定義するのに使う。</p>
+<p>たとえば一度代入したら再度変更されない文字列には、const char*型を使うことが多い。できるだけ定数として使われる変数にはすべてconstを付けることが推奨される。</p>
+<p>また、関数の引数が文字列のポインタである場合、constをつけることで明示的に「変更されない」ということを示すことができる。</p>
+
+<h2>コメント</h2>
+<p>プログラムの記述した内容の意味が、あとあとになって本人以外の誰から見ても分かりやすくするために、コメントを書く習慣を心がけよう。</p>
+<p>C言語では、/* ～ */で囲まれたブロックはコメントとして扱われ、プログラムに影響を与えずに説明文（あるいはほかのどんなテキストでも）を書くことができる。</p>
+<p>コメントの中身はプログラムとしては無視される。そのため、一部のプログラムコードを一時的に無効にしたい場合などにもコメントは使われる。これを「コメントアウト」と呼ぶ。</p>
+<p>コメントは、日本人ならば日本語で書きたいところだが、国際的なオープンソースプロジェクトなどでは、日本人以外の人種も参加しているため、事実上の国際標準である英語で書くことが推奨される場合もある。機械翻訳であっても日本語で書かれるよりはマシなので、そのような場合は英語で書くことを心がけよう。</p>
+<p>また、コメントはネストすることができない。/* ～ */の中にさらに/* ～ */を書くことはできない。</p>
+<div class="edit_date">
+<p>2023.02.03</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>アセンブラ・C</h2>
+<ul class="defaultlist list7">
+<li>アセンブラ・C
+<ul>
+<li>アセンブラ
+<ul>
+<li>セグメント
+<ul>
+<li>命令やメモリのアドレスをセグメントとオフセットで相対的に指定する</li>
+</ul></li>
+<li>ニーモニック
+<ul>
+<li>電卓で演算したりするのと同じ感覚</li>
+</ul></li>
+<li>レジスタ
+<ul>
+<li>電卓に一時的な記憶領域を付けたのと同じ感覚</li>
+</ul></li>
+<li>マクロ</li>
+<li>DOS、DEBUGコマンド</li>
+<li>C</li>
+<li>UNIXシステムコール
+<ul>
+<li>ファイルディスクリプタ</li>
+<li>固定長入出力</li>
+<li>open(), close(), read(), write()</li>
+<li>fork(), exec(), exit(), wait()</li>
+<li>socket</li>
+</ul></li>
+<li>標準Cライブラリ（libc）
+<ul>
+<li>stdio
+<ul>
+<li>ファイル型のポインタ</li>
+<li>stdioバッファ</li>
+<li>ストリーム</li>
+<li>行単位入出力</li>
+<li>バイト単位入出力</li>
+<li>フォーマット入出力</li>
+</ul></li>
+<li>glibc</li>
+<li>musl</li>
+<li>NetBSD libc</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+
+
+<h1>関連ページ</h1>
+<h2>C/C++</h2>
+<p><a href="cpp.html">C++（１．オブジェクト指向）</a>, <a href="cpp_generics.html">C++（２．ジェネリック）</a>, <a href="cpp_stl_libs.html">C++（３．STL・ライブラリ）</a>から、「C++にオブジェクト指向の考え方をとり入れたスマートな言語」であるC++の情報が見れます。</p>
+<p><a href="c_cpp_tools.html">C/C++ツール</a>から、各プラットフォームのコンパイラ、開発ツール、ライブラリの情報が見れます。</p>
+<p><a href="assembly.html">アセンブリ言語</a>では、C言語の深層と深く関わっているアセンブリ言語とマシン語（機械語）の情報が見れます。</p>
+
+<h2>Windows</h2>
+<p><a href="windows_programming.html">Windows API</a>から、WindowsにおけるC/C++プログラミングのAPI（Windows APIと呼ばれる）の情報が見れます。</p>
+<p><a href="windows_programming2.html">MFC/ATL/COM/応用技術</a>から、WindowsにおけるC++をベースとした独自のラッパーライブラリやフレームワーク、応用技術の内容を見れます。</p>
+
+<h2>GNU/Linux</h2>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>から、GNUによって提供されているフリーソフトウェアの開発ツールが見れます。</p>
+<p><a href="debug.html">デバッグ（gdb）</a>から、GNUによるコマンドラインデバッガのgdbの情報が見れます。</p>
+<p><a href="../linux/linux_api.html">Linux システムコール・API</a>, <a href="../linux/linux_api2.html">Linux システムコール・API（２．プロセス・メモリ）</a><!--, <a href="../linux/linux_api3.html">Linux システムコール・API（３．ネットワーク）</a>-->から、LinuxにおけるUNIXのシステムコール・ライブラリ変数のAPIが見れます。</p>
+<p><a href="../linux/linux_x11.html">Linux X11周辺</a>, <a href="../linux/gtk.html">GTK+</a>, <a href="../linux/qt.html">Qt</a>から、X11におけるGUIプログラミングの情報が見れます。</p>
+
+<h1>リンク集</h1>
+
+<h2>C言語</h2>
+<p>Cの入門。</p>
+<ul>
+<li><a href="http://www9.plala.or.jp/sgwr-t/">初心者のためのポイント学習Ｃ言語</a></li>
+<li><a href="http://merry.whitesnow.jp/SEMI_C/c_langtop.html">メリーおばさんのLinux講座 - Ｃ言語プログラミング入門</a></li>
+<li><a href="http://linuxc.info/">LinuxC</a></li>
+<li><a href="http://www5c.biglobe.ne.jp/~ecb/c/c00.html">C言語入門 - 目指せプログラマー！</a></li>
+<li><a href="http://www.atmarkit.co.jp/fcoding/index/c.html">目指せ！ Cプログラマ - @IT</a></li>
+</ul>
+
+<h2>Cリファレンス</h2>
+<p>C</p>
+<ul>
+<li><a href="http://www.orchid.co.jp/computer/cschool/cref.html">C言語関数リファレンス - C言語学習塾</a></li>
+<li><a href="https://mayonez.jp/topic/1751">C言語リファレンスサイト｜入門・開発で躓いたらココを見よう-Mayonez</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8%E2%80%95ANSI%E5%AF%BE%E5%BF%9C-SOFTBANK-BOOKS-%E7%B5%90%E5%9F%8E/dp/4797307579">C言語プログラミングレッスン 入門編―ANSI対応 (SOFTBANK BOOKS)</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

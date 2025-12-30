@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>SQL関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>SQLの世界観</h1>
+<p>SQLによるデータベース操作に関する世界観です。<a href="db.html">データベースの世界観</a>と<a href="mysql.html">MySQLの世界観</a>も参照のこと。</p>
+<p><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>などを参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>SQLデーターベースサーバー</h1>
+<h2>SQLの基本は保管、更新、削除、検索</h2>
+<p>RDBMSでは、データを複数の行と列で構成された「テーブル」（表）の形で取り扱います。</p>
+<p>この仕組みにより、データベースはより安全かつ高速に大量のデータを取り扱うことができます。</p>
+<p>SQLの基本はデータの保管、更新、削除、検索です。</p>
+
+<h2>SQLの基本</h2>
+<p>基本は、追加（INSERT）、更新（UPDATE）、削除（DELETE）、取り出し（SELECT）の４つです。 DELETEの時WHEREを指定しないと「全削除」になってしまうので注意してください。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/SQL">SQL - Wikipedia</a></li>
+</ul>
+<!--<p><a href="../db/sql.html">SQL</a>を参照のこと。</p>-->
+
+<h2>CRUD</h2>
+<p>データベース用語として、Create（生成）、Read（読み取り）、Update（更新）、Delete（削除）の4つをCRUDと言います。</p>
+<p>Webやデータベースの世界でよく使う言葉なので覚えておきましょう。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=SQL">SQL - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>データベースサーバー</h1>
+<h2>MySQL/MariaDB</h2>
+<p>データーベースサーバー。MySQLがサン・マイクロシステムズ（現オラクル）に買収されたことで、MariaDBと言う派生版が生まれている。</p>
+<p><a href="mysql.html">MySQL</a>を参照のこと。</p>
+
+<h2>PostgreSQL</h2>
+<p>データーベースサーバー。MySQLのライバル。</p>
+<p><a href="postgresql.html">PostgreSQL</a>を参照のこと。</p>
+
+<h2>SQLite</h2>
+<p>軽量なデーターベースサーバー。</p>
+<p><a href="sqlite.html">SQLite</a>を参照のこと。</p>
+
+<h2>phpMyAdmin</h2>
+<p>PHPで実装されたMySQL設定ソフトウェア。</p>
+
+<h1>データベースの作成（データベース定義言語）</h1>
+<p>（SQLの記述は<a href="https://qiita.com/devopsCoordinator/items/0f742158caf0fdb533e3">【新人教育 資料】第4章 SQLへの道 〜SQL基本操作編〜 - Qiita</a>と<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>などを参考にしています。）</p>
+
+<h2>CREATE</h2>
+<p>CREATE データベースのテーブルやビューを作成する。</p>
+<p>テーブルの作成：</p>
+<pre class="prettyprint lang-sql">
+CREATE TABLE customer (
+    id INTEGER PRIMARY KEY,
+    name CHAR(35) NOT NULL,
+    address CHAR(125),
+    email CHAR(45) UNIQUE
+);
+</pre>
+<p>ビューの作成：</p>
+<pre class="prettyprint lang-sql">
+CREATE VIEW viewname AS SELECT ...;
+</pre>
+<p>後日注記：ビューとはユーザに見せるための仮想的な表で、実体はSQL文であり、物理テーブルの実体を持たない。ユーザにテーブルの一部を見せたり、結合したテーブルを見せるためなどに利用できる。</p>
+<p>（<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>を参考に執筆しました。）</p>
+
+<h2>phpMyAdmin</h2>
+<p>MySQLでは、テーブルの作成は、phpMyAdminというブラウザ上のツールを使って行うこともできます。</p>
+
+<h1>四大命令（データベース操作言語）</h1>
+<p>（SQLの記述は<a href="https://qiita.com/devopsCoordinator/items/0f742158caf0fdb533e3">【新人教育 資料】第4章 SQLへの道 〜SQL基本操作編〜 - Qiita</a>と<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>などを参考にしています。）</p>
+
+<h2>INSERT</h2>
+<p>INSERT データを追加する。</p>
+<pre class="prettyprint lang-sql">
+INSERT INTO tablename (column1, column2, ...) VALUES (value1, value2, ...);
+</pre>
+
+<h2>SELECT</h2>
+<p>SELECT データを参照する。</p>
+<pre class="prettyprint lang-sql">
+SELECT column1, column2, ... FROM tablename [WHERE search];
+</pre>
+<p>searchは検索条件です。</p>
+<table class="some_tables">
+<tr><th class="min60">句</th><th>説明</th></tr>
+<tr><td>DISTINCT</td><td>重複したデータを削除して一行にまとめる。</td></tr>
+<tr><td>JOIN</td><td>テーブルの結合。<br>すべての表をFROMで列挙して、WHERE句で列を結合する方法と、<br>JOIN句で結合する方法の2つの方法がある。</td></tr>
+<tr><td>WHERE</td><td>選択するための条件式を指定する。</td></tr>
+<tr><td>GROUP BY</td><td>グループ化を行う。グループ化すると、集計関数で集計できるようになる。</td></tr>
+<tr><td>ORDER BY</td><td>並べ替え（ソート）を行う。</td></tr>
+</table>
+<p>（詳しくは<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>が参考になります。）</p>
+
+<h2>UPDATE</h2>
+<p>UPDATE データを更新する。</p>
+<pre class="prettyprint lang-sql">
+UPDATE tablename SET column1=value1 [, column2=value2 ...] [WHERE search];
+</pre>
+<h2>DELETE</h2>
+<p>DELETE データを削除する。</p>
+<pre class="prettyprint lang-sql">
+DELETE FROM tablename [WHERE search];
+</pre>
+
+<h1>その他のSQL文</h1>
+<p>（<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>を参考にしています。）</p>
+
+<h2>あいまい検索</h2>
+<p>あいまいな検索にはLIKEを使う。</p>
+<p>たとえば、</p>
+<pre class="prettyprint lang-sql">
+氏名 LIKE '加藤%'
+</pre>
+<p>の場合は、「加藤」で始まる氏名を検索する。</p>
+
+<h2>カーソル</h2>
+<p>カーソルは、一連の連続したデータにひとつひとつアクセスするための機能。</p>
+<p>後日注記：カーソルはDECLAREで宣言し、OPEN～CLOSEの間で、データをFETCHで取得し、ループ処理の中でWHERE CURRENT OFを使って現在位置にあるデータを編集・削除する。カーソルを使うことで、ファイルシステムとよく似た感じで「現在位置」を保持しながらデータを操作することができる。</p>
+
+<h2>集計関数</h2>
+<p>SUM（合計値を求める）, AVG（平均値を求める）, MAX（最大値を得る）, MIN（最小値を得る）, COUNT（行数のカウントを行う）などの集計関数がある。</p>
+
+<h1>セキュリティ</h1>
+<h2>SQLインジェクションとプレースホルダ</h2>
+<p>SQLインジェクションは、悪意のあるユーザーによってSQL文の行末などに別のSQL文をあたかも値であるかのように入力され、不正なSQLを実行されてしまう脆弱性。</p>
+<p>こうした場合、プレースホルダによって値を入れるべき部分に$1、$2、あるいは?などの特別な文字列（プレースホルダ）を入れておき、その中に可変の文字列が代入されるようにすることで、「必ず値が値として評価されるようにする」ことで脆弱性を回避できる。</p>
+<p>また、プレースホルダを使う他にも、入力された値を適切にエスケープするという対策もある。</p>
+<ul>
+<li><a href="https://lets.postgresql.jp/documents/tutorial/with_php/against_sql_injection/placeholder/1">PHPでのSQLインジェクション対策 - プレースホルダ編 | Let's Postgres</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">SQLインジェクション - Wikipedia</a></li>
+</ul>
+<p>プレースホルダの例については<a href="../prog_lang/php_db.html">PHP（データベース）</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>SQL</h2>
+<p>データベース専用言語。</p>
+<ul>
+<li><a href="http://www.techscore.com/tech/sql/index.html/">SQL - TECHSCORE(テックスコア)</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

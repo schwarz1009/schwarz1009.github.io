@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Kubernetes関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">仮想化・互換レイヤーの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/virt_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Kubernetesの世界観</h1>
+<p>Kubernetesに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Kubernetes</h1>
+<h2>Kubernetesとは</h2>
+<p>Dockerは、通常ひとつのマシン（ホスト）の中でDockerコンテナを動かす。これにより、マシンの上であたかも別のマシンが動いているかのように仮想化できる。</p>
+<p>だが、Dockerはひとつのマシンの中での仮想環境であり、ネットワーク上に接続されたほかのマシンは関係ない。</p>
+<p>だが、クラスタや仮想サーバなどの環境では、ネットワークで繋がった多くのマシンをひとつのマシン（クラスタ上のホスト）として仮想化し、そのクラスタの上で複数のコンテナを仮想マシンとして動かす（クラスタ上に存在するたくさんの仮想マシン）ことが必要な時がある。</p>
+<p>Kubernetesを使うことで、ネットワーク上の複数のマシンをあたかもひとつのマシンであるかのように仮想化し、クラスタ内でリソースを共有・配分して、その上でコンテナを動かすことができる。</p>
+<p>また、Kubernetesを使うことで、クラスタ内のコンテナを適切に管理できる。たとえば、複数のコンテナイメージを連携させたり、ひとつのコンテナがダウンした時に別のコンテナを立ち上げる・負荷分散をするなど、コンテナのリソースの適切な管理と調整が行える。これを「オーケストレーション」と呼ぶ。Kubernetesではほかにも、多種多様なニーズからさまざまな機能が提供されている。</p>
+<p>クラスタ内のリソースの配分など、面倒なことは全部Kubernetesが適切に管理してくれる。サーバー管理者は仮想マシンのイメージとマシン台数をKubernetesに指示するだけでよい。</p>
+<p>サーバーの規模を大規模化することも簡単で、クラウド上で適切にサービスをデプロイできる。</p>
+<ul>
+<li><a href="https://ubiteku.oinker.me/2017/02/21/docker-and-kubernetes-intro/">Docker（コンテナ型仮想化）と Kubernetes についての簡単な紹介 – ゆびてく</a></li>
+<li><a href="https://qiita.com/mihirat/items/ebb0833d50c882398b0f">kubernetes初心者のための入門ハンズオン - Qiita</a></li>
+<li><a href="https://qiita.com/MahoTakara/items/85096f8b2632c802ab22">今さら人に聞けない Kubernetes とは？ - Qiita</a></li>
+<li><a href="https://www.redhat.com/ja/topics/containers/what-is-kubernetes">Kubernetes とは | k8s | Red Hat</a></li>
+<li><a href="https://jp-redhat.com/openeye_online/column/omizo/4093/">OpenShiftとKubernetesのちがうところ | RED HAT OPENEYE -レッドハットの情報ポータル</a></li>
+<li><a href="https://kubernetes.io/ja/docs/concepts/overview/what-is-kubernetes/">Kubernetesとは何か？ | Kubernetes</a></li>
+<li><a href="https://udemy.benesse.co.jp/development/system/kubernetes.html">Kubernetesとは何かを図でわかりやすく解説！Pod、Na…｜Udemy メディア</a></li>
+</ul>
+
+<h2>マイクロサービス</h2>
+<p>最近では、Kubernetesを用いたマイクロサービスというサービス設計が流行している。ひとつのJava EEアプリケーションですべての機能を提供するのではなく、Dockerコンテナごとに機能としてのサービスを提供し、Kubernetesでオーケストレーションすることで全体のサービスを提供する。肥大化を防ぎテストが容易になるほか、障害発生時に機能としてのサービス単位に被害を最小化できる。</p>
+<ul>
+<li><a href="https://openstandia.jp/solution/kubernetes/">Kubernetes保守サポート＆ソリューション｜OSSサポートのOpenStandia&trade;【NRI】</a></li>
+</ul>
+
+<h2>ほかにも同様の技術はたくさんある</h2>
+<p>Dockerコンテナをクラスタリングしたりオーケストレーションしたりするための技術は、Kubernetes以外にもたくさんあります。たとえばOpenShift 3, Flynn, Apache Mesos, Marathon, OpenStack Magnum, Docker Swarm, Docker Composeなど。以下の記事が参考になります。</p>
+<ul>
+<li><a href="https://thinkit.co.jp/article/2127">Dockerの誤解と神話。識者が語るDockerの使いどころとは？ Docker座談会（前編） | Think IT（シンクイット）</a></li>
+<li><a href="https://thinkit.co.jp/article/2169">Dockerを使いこなすには。Dockerはこの先どこへ向かうのか？ Docker座談会（後編） | Think IT（シンクイット）</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.04.06</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Docker</h2>
+<p><a href="docker.html">Docker</a>を参照のこと。</p>
+
+<h2>クラスタ技術</h2>
+<p><a href="../network/cluster.html">クラスタ・分散・高信頼システム</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Kubernetes</h2>
+<p>Dockerでコンテナを仮想化できるのは、ひとつのマシンの中だけでの話。</p>
+<p>Kubernetesにより、複数のマシンがネットワーク通信を行う場合に、全体を一台のマシンであるかのように仮想化できる。</p>
+<p>クラスタ内のシステムリソースの配分などを自動で行ってくれる。</p>
+<p>クラスタ環境やクラウド環境などの仮想サーバとしても利用できる。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

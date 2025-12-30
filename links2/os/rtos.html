@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>リアルタイムOS - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">OSの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/os_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>リアルタイムOS</h1>
+<p>リアルタイムOSに関する世界観です。<a href="../linux/linux_kernel.html">Linuxカーネル</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>組み込み・リアルタイム系OS</h1>
+<h2>リアルタイムOSとは</h2>
+<p>組み込みなど、小さなハードウェアに組み込まれたRTOSでは、リアルタイムに反応することが求められる。</p>
+<p>RTOSでは、イベントが発火してからCPUで処理が行われるまでの時間を必ず守る（決められた時間内に処理される）。</p>
+<p>そのために「優先順位」（レイテンシ）を使い、優先度が高いタスクの処理は、それよりも低いタスクの処理をすべて無視できる。</p>
+<p>Linuxではrt（Real Time）関係の開発が行われている。RT-Preemptパッチを当てることで、完全にプリエンティブルなLinuxカーネルを使用できる。</p>
+<p>RT-Linuxは<a href="../linux/raspberry_pi.html">RaspberryPi</a>などでも試すことができる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB">リアルタイムカーネル - ArchWiki</a></li>
+<li><a href="http://nw-electric.way-nifty.com/blog/2018/02/raspberrypirt-l.html">RaspberryPiに最新のRT-Linuxを入れる方法: new_western_elec</a></li>
+</ul>
+
+<h2>RTLinux</h2>
+<p>Linuxのカーネルにリアルタイム機能を追加した、リアルタイムでマイクロカーネルなLinux。</p>
+<ul>
+<li><a href="http://www.azusa-st.com/kjm/kjm/outline.htm">RT-Linuxの概要 - RT-Linuxデバッグの一方法の紹介</a></li>
+<li><a href="http://archive.linux.or.jp/JF/JFdocs/RTLinux-HOWTO.html">RTLinux HOWTO</a></li>
+</ul>
+
+<h2>RTwiki</h2>
+<p>現在誠意開発中のReal-Time LinuxのWiki。</p>
+<ul>
+<li><a href="https://rt.wiki.kernel.org/index.php/Main_Page">Real-Time Linux Wiki</a></li>
+</ul>
+
+<h2>Embedded Linux</h2>
+<p>組み込み用Linux。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E7%B5%84%E3%81%BF%E8%BE%BC%E3%81%BFLinux">組み込みLinux - Wikipedia</a></li>
+</ul>
+
+<h2>μClinux</h2>
+<p>μClinuxは組み込み向けのLinuxで、MMUがない環境でも動作する。現在はメインラインカーネルに統合されており（統合後もパッチなどは開発されてきた）、NOMMUオプションで利用できる。</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/%CE%9CClinux">μClinux - Wikipedia(英語)</a></li>
+</ul>
+<p><a href="../linux/libc.html">libc</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.21</p>
+</div>
+
+<h2>組み込みOSの特徴</h2>
+<p>組み込みOSは、汎用OSと異なり、メモリ常駐型で動作することが多い。</p>
+<p>汎用OSのように、起動時にハードディスクからOSとプログラムを読み込むのではなく、主に書き換え不可能なROMを用いて、メモリに常に常駐した形で動作する。</p>
+<p>ただし、一部の場合にのみ、書き換え可能なRAMを使うことがある。</p>
+<p>後日注記：基本的に、汎用OSは起動時にハードディスクから読み出されますが、組み込みOSはROMを使ってオンメモリで動作します。このため高速に立ち上がりますが、変更はできません。</p>
+<p>（放送大学「コンピュータの動作と管理 ('17)」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.05.27</p>
+<p>2025.08.18編集</p>
+</div>
+
+<h1>リアルタイムOS</h1>
+<h2>QNX</h2>
+<p>商用のリアルタイムUnix。マイクロカーネルで、カーネルの機能を動的にサーバーを停止するだけで変えられる。</p>
+<p>ソフトウェアの誤動作が致命的な結果となるような機器に多く使われており、スペースシャトルのロボットアームにも採用されている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB">カーネル - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/QNX">QNX - Wikipedia</a></li>
+</ul>
+
+<h2>VxWorks</h2>
+<p>Wind River社による組み込み用のリアルタイムOS。</p>
+<p>信頼性が非常に重要視される分野で多く使われている実績を持ち、NASAの火星探査機にも使われている。</p>
+<p>地球と火星の間でのソフトウェアアップデートにも成功。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-%E6%B2%B3%E6%9D%91-%E9%80%B2/dp/4798130648">おうちで学べるプログラミングのきほん</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/VxWorks">VxWorks - Wikipedia</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>マイクロカーネルOS</h2>
+<p>マイクロカーネルOSについて詳しくは<a href="../unix/mach.html">Mach</a>などを参照のこと。</p>
+
+<h2>組み込みJava</h2>
+<p><a href="../prog_lang/java_embedded.html">Java組み込み</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

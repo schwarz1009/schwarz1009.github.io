@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Go言語の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Go言語の世界観</h1>
+<p>Go言語（Golang）に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Golang</h1>
+<h2>Go言語の特徴</h2>
+<p>importはパッケージのインポートであり、()で指定することで複数のパッケージをインポートできる。自分のパッケージはpackage hogepkgでパッケージ化できる。</p>
+<p>変数はvar、定数はconstで宣言する。他の多くの言語と異なり、型名よりも変数名を先に書く。変数の初期値から型名が明らかに分かっている場合は、型名を省略できる。また、:=を用いればvarも省略できる。複数の変数は「,」で区切って横に並べれば一度に代入できる。またvarの後に()を書くことで複数の変数宣言と代入を同時にできる。</p>
+<p>配列は要素数が固定となり、変更できない。これに対して、配列の一部あるいは全部への参照であるスライスは、要素数を変更したり、要素を追加したりすることができる。</p>
+<p>if文、switch文、for文には条件式に()は必要ない。switch文では、caseの中に条件式を書くことができる。switch文では、breakが必要ない。意図的にフォールスルーしたい時はfallthroughを明示的に記述する。また、while文は存在せず、for文で従来のfor文に相当するループも、while相当のループも行うことができる。for文では、連続した要素をイテレータのように順番に処理したければ、rangeを用いる。</p>
+<p>マップは連想配列やハッシュ、辞書と呼ばれるような、キーと値を対応付けたデータ構造。Pythonの辞書やJavaScriptのオブジェクトのように一覧で宣言できるほか、要素の追加や削除もできる。また、for文でrangeを用いてキーと値のどちらもを取り出したループを行うことができる。</p>
+<p>関数はfuncで宣言する。他の多くの言語では関数はひとつの値しか返すことができないが、Go言語では複数の値を返すことができる。</p>
+<p>Go言語には、クラスが存在しない。代わりに構造体を用いる。メソッドは、構造体とは別の場所に羅列する。この時、関数名の前に構造体の変数名と型名を、</p>
+<pre>
+func (構造体の変数名 構造体の型名) 関数名(x int, y int) (int int) {
+    ...
+}
+</pre>
+<p>のように書くことで、構造体とメソッドを紐づけすることができる。また、デフォルトでは構造体の変数は値渡しとなる。これを参照渡しとしたい場合は構造体の型名に*をつける。こうすれば、構造体の中身をメソッドから変更できる。</p>
+<p>Go言語では、意図的に継承は実装していない。しかしながら、匿名フィールドという機能を用いれば、ほかの構造体にあるフィールドやメソッドと同じものを持つ構造体を簡単に作成できる。</p>
+<p>Go言語では、interfaceをポリモーフィズムのために使ったり、空インターフェースをany型のように使うことができる。interfaceはメソッド名の羅列であり、interfaceの中のメソッドと同名のメソッドを定義すると、interfaceを実装したことに相当する（自動的にinterfaceを適用できるようになる）。その上で、interfaceを引数とするメソッド（interfaceを引数とする汎用関数）を定義することもでき、その場合はinterfaceが実装された構造体を引数としてメソッドとして受け取ることができる。</p>
+<p>また、空インターフェースと呼ばれるinterface{}は、すべての型と互換性があり、any型のように使用することができる。変数に対してどんな型の値も代入でき、引数として使えばどんな型の引数も受け付けることができる。</p>
+<p>Go言語では、例外は存在しない。例外のようなことを行いたい場合はgoto文を使えばよい。</p>
+<p>また、Go言語にはガーベッジコレクションの仕組みがあるため、newした領域は参照がなくなれば自動的に廃棄される。Go言語にはポインタも存在する。構造体名と要素を繋ぐ「.」はポインタの場合もそうでない場合も使うことができる。</p>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://www.tohoho-web.com/ex/golang.html">とほほのGo言語入門 - とほほのWWW入門</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Go_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)">Go (プログラミング言語) - Wikipedia</a></li>
+<li><a href="https://www.kwbtblog.com/entry/2020/04/21/164351">Go言語でハマったことメモ（インターフェース） - 新しいことにはウェルカム</a></li>
+</ul>
+
+<h2>goroutine</h2>
+<p>goroutineで並行処理を簡単に書ける。</p>
+<pre class="prettyprint lang-go">
+package main
+
+func func1() {
+    ...
+}
+
+func func2() {
+    ...
+}
+
+func main() {
+    go func1()
+    go func2()
+    
+    ...
+}
+</pre>
+<p>func1()とfunc2()は並列で実行される。</p>
+<p>また、チャネルを用いることで、goroutineの終了を待ち合せたり、別のgoroutineから値をパイプのように取り出すことができる。</p>
+<ul>
+<li><a href="https://qiita.com/taigamikami/items/fc798cdd6a4eaf9a7d5e">Goのgoroutine, channelをちょっと攻略！ - Qiita</a></li>
+</ul>
+
+<h2>英語でも公式のドキュメントを読もう</h2>
+<p>僕は、ツイッターで<a href="https://twitter.com/Hayao0819">山田ハヤオ (@Hayao0819)</a>さんのツイートを見た結果、golangに興味が出てきたので、golangの勉強を少しずつしています。</p>
+<p>golangは、公式のドキュメントがよく書かれていて、おすすめです。</p>
+<p>特に、以下のドキュメントのリンクから、簡単なチュートリアルが読めます。</p>
+<ul>
+<li><a href="https://go.dev/doc/">Documentation - The Go Programming Language</a></li>
+</ul>
+<p>ですが、ある程度golangのことが分かったら、このチュートリアルは飛ばして、Effective Goを読むことをおすすめします。Effective Goは、英語が理解できなくても、眺めているだけでなんとなくgolangの基本的な雰囲気が分かるので、僕のような「触りだけを知りたい入門者」にはうってつけだと思います。</p>
+<ul>
+<li><a href="https://go.dev/doc/effective_go">Effective Go - The Go Programming Language</a></li>
+</ul>
+<p>実際のgolangがどのような言語であるかは、僕の意見を知るよりも、山田ハヤオさんや<a href="https://twitter.com/mattn_jp">@mattn_jp</a>さんのようなさまざまなgolang界隈の方のツイートを読めば分かると思います。山田ハヤオさんはAlter LinuxというLinuxディストリビューションの開発者であり、Linuxに関する技術力には疑いようのないものがあります。</p>
+<ul>
+<li><a href="https://alter.fascode.net/">Alter Linux - FascodeNetwork</a></li>
+<li><a href="https://hayao.fascode.net/">はやおのぺーじ</a></li>
+</ul>
+<p><a href="../linux/linux_distro_japan.html">日本向けLinuxディストリビューション</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.04</p>
+<p>2023.05.28編集</p>
+</div>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Go+%E8%A8%80%E8%AA%9E">Go 言語 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>関連リンク</h1>
+<h2>Go言語</h2>
+<p>グーグルによる並列処理言語。</p>
+<ul>
+<li><a href="http://qiita.com/tenntenn/items/0e33a4959250d1a55045">Go言語の初心者が見ると幸せになれる場所　#golang - Qiita</a></li>
+</ul>
+
+<h2>サンプルコード</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="https://qiita.com/gcfuji/items/e2a3d7ce7ab8868e37f7">他言語プログラマがgolangの基本を押さえる為のまとめ - Qiita</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>並列処理</h2>
+<p><a href="parallel.html">並列処理</a>も参照のこと。</p>
+
+<h2>Go言語でRedis</h2>
+<p>Go言語でRedisを使う方法については、<a href="../db/redis.html">Redis</a>を参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-go.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

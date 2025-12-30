@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linuxの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="../../index.html">ホームページに戻る</a></p>
+<h1>Linuxの世界観</h1>
+<!--
+<div id="toc"></div>
+<h1>Linux・コンピュータ</h1>-->
+<h2>目次</h2>
+<div id="toc" class="toc2"></div>
+
+<h2>LinuxとIT技術</h2>
+<p>この<!--一行-->解説では、<!--リンク集を中心に、-->パソコンや大学の科目のことを目次としてまとめています。</p>
+<p>特に、Linuxについては初心者がこれを見てすぐにLinuxのシステムと構造が分かるような、「使い方の一歩先のシステム管理と開発」が分かるようにするのが狙いです。</p>
+<p>後日注記：ITエンジニアにつけた名前は蘭子です。</p>
+
+<!--
+<h3>サブカテゴリ</h3>
+<p><a href="index_desktop.html">Linuxデスクトップ</a></p>
+<p><a href="index_apps.html">Linuxアプリケーション</a></p>
+-->
+
+<h2>Linuxシステム（ユーザーランド）</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>Linux入門</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_intro_basic.html">Linuxとは</a></li>
+<li><a href="linux_intro_ui.html">Linuxの3つのインターフェース</a></li>
+<li><a href="linux_intro_userland.html">Linuxのユーザランド入門</a></li>
+<li><a href="linux_intro_kernel.html">Linuxのカーネル入門</a></li>
+<li><a href="linux_os_design.html">Linux設計</a></li>
+<li><a href="linux_sites.html">Linux Webサイト</a></li>
+
+</ul>
+<h3>UNIXシステム管理</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<!--<li><a href="linux_unix_logger_cron.html">８．システムロガーとcron</a></li>-->
+<li><a href="linux_unix_logger.html">８A．システムロガー</a></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<!--
+<li><a href="linux_unix_kernel_lib.html">UNIX管理（７．カーネルと共有ライブラリ）</a></li>
+-->
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+<li><a href="ncurses.html">ncurses</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>コマンド</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_commands_beginner.html">UNIXコマンド（基本）</a></li>
+<ul>
+<li><a href="linux_commands.html">応用１．ユーザープログラム</a></li>
+<li><a href="linux_commands_proc.html">応用２．プロセス</a></li>
+<li><a href="linux_commands_doc.html">応用３．ドキュメント</a></li>
+</ul>
+</ul>
+<h3>grep, find, sed, awk</h3>
+<ul class="defaultlist list6">
+<li><a href="grep_find_sed_awk.html">grep, find, sed, awk</a></li>
+<ul>
+<li><a href="grep.html">grep</a></li>
+<li><a href="find.html">find</a></li>
+<li><a href="sed.html">sed</a></li>
+<li><a href="awk.html">awk</a></li>
+</ul>
+</ul>
+<h3>ファイル操作</h3>
+<ul class="defaultlist list6">
+<!--
+<li><a href="linux_filetools.html">Linux ファイル操作</a></li>
+-->
+<li><a href="linux_filetools_diff.html">diffとpatch・テキスト処理</a></li>
+<li><a href="linux_filetools_archive.html">アーカイブ・同期・デバイス処理</a></li>
+</ul>
+<h3>BusyBox</h3>
+<ul class="defaultlist list6">
+<li><a href="busybox.html">BusyBox</a></li>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>シェルと端末</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_sh.html">シェル</a></li>
+<li><a href="linux_terminal.html">端末（ターミナル）</a></li>
+</ul>
+<h3>Bash</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_bash.html">Bash（１．シェル）</a></li>
+<ul>
+<li><a href="linux_bash_script.html">２．シェルスクリプト</a></li>
+<li><a href="linux_bash_advanced.html">Bashのさまざまな機能</a></li>
+</ul>
+</ul>
+<h3>その他のシェル</h3>
+<ul class="defaultlist list6">
+<li><a href="csh.html">Cシェル（csh）</a></li>
+<li><a href="ksh.html">ksh</a></li>
+<li><a href="zsh.html">zsh</a></li>
+<li><a href="fish.html">fish</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../unix/bsd.html">BSD</a></li>
+<li><a href="../unix/freebsd.html">FreeBSD</a></li>
+<li><a href="../unix/sun_solaris.html">Solaris</a></li>
+<li><a href="../os/mac.html">Mac</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<h2>Linuxシステム（テキストエディタ）</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>テキストエディタ</h3>
+<ul class="defaultlist list6">
+<li><a href="emacs.html">Emacs</a></li>
+<li><a href="vi.html">vi</a></li>
+<li><a href="regex.html">正規表現</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../prog_lang/lisp.html">Lisp</a></li>
+<li><a href="../windows_pc/vscode.html">VS-Code</a></li>
+</ul>
+</div>
+</div>
+<div class="index_box">
+
+<h3>組版処理・数式</h3>
+<ul class="defaultlist list6">
+<li><a href="tex.html">TeX</a></li>
+<li><a href="mathjax.html">MathJax</a></li>
+</ul>
+<h3>グラフ</h3>
+<ul class="defaultlist list6">
+<li><a href="gnuplot.html">gnuplot</a></li>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>コンパイラ・ビルドツール</h3>
+<ul class="defaultlist list6">
+<li><a href="gnu_toolchain.html">GNUツールチェイン</a></li>
+<li><a href="llvm.html">LLVM/Clang</a></li>
+<!--
+<li><a href="make_autotools.html">Make/Autotools</a></li>
+-->
+<li><a href="make.html">Make</a></li>
+<li><a href="autotools.html">Autotools</a></li>
+<li><a href="cmake.html">CMake</a></li>
+<li><a href="meson_ninja.html">Meson+Ninja</a></li>
+</ul>
+
+</div>
+</div>
+
+<h2>Linuxシステム（カーネル）</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>カーネル開発（１）</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+</ul>
+</ul>
+
+</div>
+<div class="index_box">
+<h3>カーネル開発（２）</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+
+<h3>システムコール・API</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_api.html">システムコール・API（１．ファイル・入出力）</a></li>
+<ul>
+<li><a href="linux_api_syscalls.html">１A．システムコール</a></li>
+<li><a href="linux_api_stdio.html">１B．stdio</a></li>
+</ul>
+<li><a href="linux_api2.html">２．プロセス・メモリ</a></li>
+<!--
+<li><a href="linux_api3.html">３．ネットワーク・ソケット</a></li>
+-->
+<li><a href="libc.html">libc</a></li>
+</ul>
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../prog_lang/c_pointer.html">C言語（４．配列とポインタ）</a></li>
+<li><a href="../prog_lang/c_io.html">C言語（５．入出力）</a></li>
+</ul>
+</div>
+
+</div>
+<div class="index_box">
+
+<h3>Linux社会</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_people.html">著名人</a></li>
+<li><a href="gnu.html">GNU・FSF</a></li>
+<li><a href="oss.html">オープンソース</a></li>
+<ul>
+<li><a href="oss_permissive.html">パーミッシブ・ライセンス</a></li>
+</ul>
+<li><a href="linux_history.html">歴史</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../unix/unix.html">UNIX</a></li>
+<li><a href="../hardware/hardware.html">ハードウェア（１．半導体）</a></li>
+<li><a href="../hardware/hardware2.html">ハードウェア（２．周辺機器）</a></li>
+<li><a href="../hardware/intel.html">Intel</a></li>
+<li><a href="../prog_lang/assembly.html">アセンブリ言語</a></li>
+<li><a href="../prog_lang/git.html">Git</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<h2>Linuxシステム（システム構成）</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>システム</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_basesystem.html">ベースシステム</a></li>
+<li><a href="linux_boot.html">ブート</a></li>
+<li><a href="linux_daemon.html">initとデーモン</a></li>
+<ul>
+<li><a href="systemd.html">systemd</a></li>
+</ul>
+</ul>
+
+<h3>ファイルシステム階層</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_fhs.html">ファイルシステム階層</a></li>
+<li><a href="linux_lib.html">共有ライブラリ</a></li>
+<li><a href="linux_header.html">ヘッダファイル</a></li>
+<li><a href="linux_devicefile.html">デバイスファイル</a></li>
+</ul>
+
+<h3>新技術</h3>
+<ul class="defaultlist list6">
+<li><a href="ostree.html">OSTree</a></li>
+<li><a href="linux_newtech.html">新技術</a></li>
+</ul>
+
+<h3>セキュアOSモジュール</h3>
+<ul class="defaultlist list6">
+<li><a href="selinux.html">SELinux</a></li>
+<li><a href="apparmor.html">AppArmor</a></li>
+</ul>
+
+<h3>トレーシング</h3>
+<ul class="defaultlist list6">
+<li><a href="tracing.html">トレーシング</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>ネットワーク</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_net.html">Linux ネットワーク（１．コマンド）</a></li>
+<ul>
+<li><a href="linux_net_ifconfig.html">ifconfig</a></li>
+<li><a href="linux_net_netstat.html">netstat</a></li>
+<li><a href="linux_net_route.html">route</a></li>
+<li><a href="linux_net_iproute2.html">iproute2</a></li>
+<li><a href="linux_net_monitoring.html">モニタリング</a></li>
+<li><a href="linux_net_etc.html">さまざまなネットワーク系コマンド</a></li>
+<li><a href="linux_net_curl.html">curl</a></li>
+</ul>
+<li><a href="linux_net2.html">２．設定</a></li>
+<ul>
+<li><a href="linux_net_sysconfig.html">A．sysconfig</a></li>
+<li><a href="linux_net_ifupdown.html">B．ifupdown</a></li>
+<li><a href="linux_net_netifrc.html">C．Netifrc</a></li>
+<li><a href="linux_net_networkmanager.html">D．NetworkManager</a></li>
+</ul>
+</ul>
+
+<h3>ファイアウォール</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_net_firewall.html">ファイアウォール</a></li>
+<ul>
+<li><a href="linux_net_firewall_iptables.html">iptables</a></li>
+<li><a href="linux_net_firewall_nftables.html">nftables</a></li>
+</ul>
+</ul>
+<h3>SSH</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_ssh.html">SSH</a></li>
+<ul>
+<li><a href="linux_ssh_config.html">SSHの設定</a></li>
+</ul>
+</ul>
+
+</div>
+<div class="index_box">
+<h3>時刻同期</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_net_ntp.html">NTP・時刻同期</a></li>
+</ul>
+
+<h3>Webベースの管理ツール</h3>
+<ul class="defaultlist list6">
+<li><a href="webmin_cockpit.html">Webmin/Cockpit</a></li>
+</ul>
+
+<h3>議論</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_problems.html">問題</a></li>
+<li><a href="linux_newidea.html">新常識</a></li>
+<li><a href="linux_do.html">何をするか</a></li>
+</ul>
+
+<h3>資格</h3>
+<ul class="defaultlist list6">
+<li><a href="lpic_linuc.html">LPIC/LinuC</a></li>
+<!--
+<li><a href="linux_english.html">Linuxと英語</a></li>
+-->
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../network/dns.html">DNSサーバ</a></li>
+<li><a href="../network/web.html">Webサーバー</a></li>
+<li><a href="../network/apache.html">Apache</a></li>
+<li><a href="../network/file_server.html">ファイルサーバー</a></li>
+<li><a href="../network/file_server_nfs.html">NFS</a></li>
+<li><a href="../network/file_server_samba.html">Samba</a></li>
+<li><a href="../network/mail_server.html">メールサーバー</a></li>
+<li><a href="../network/nis.html">NIS</a></li>
+<li><a href="../virt/docker.html">Docker</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<h2>Linuxディストリビューション</h2>
+<div class="container">
+<div class="index_box">
+
+
+<h3>ディストリビューション</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_distro.html">ディストリビューション</a></li>
+<ul>
+<li><a href="linux_distro_minor.html">マイナーなLinuxディストリビューション</a></li>
+<li><a href="linux_distro_japan.html">日本向けLinuxディストリビューション</a></li>
+<ul>
+<li><a href="plamo_linux.html">Plamo Linux</a></li>
+</ul>
+</ul>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../mobile/android.html">Android</a></li>
+<li><a href="../unix/bsd.html">BSD</a></li>
+<li><a href="../hardware/mainframe.html">メインフレーム</a></li>
+</ul>
+</div>
+
+<h3>パッケージ管理</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_src_install.html">ソースからのインストール</a></li>
+<li><a href="linux_pkgmanagement.html">パッケージ管理</a></li>
+</ul>
+
+<h3>ユニバーサルパッケージ</h3>
+<ul class="defaultlist list6">
+<li><a href="flatpak.html">Flatpak/AppImage</a></li>
+<li><a href="snappy.html">Snappy</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>RPM系</h3>
+<ul class="defaultlist list6">
+<li><a href="redhat.html">Red Hat（１．Red Hat）</a></li>
+<ul>
+<li><a href="fedora.html">Fedora</a></li>
+<li><a href="redhat_dnf_yum.html">２．DNF/Yum</a></li>
+<li><a href="redhat_rpm.html">３．RPM</a></li>
+<li><a href="centos.html">CentOS</a></li>
+</ul>
+</ul>
+
+<h3>SUSE/Ximian</h3>
+<ul class="defaultlist list6">
+<li><a href="suse.html">SUSE</a></li>
+<li><a href="ximian.html">Ximian</a></li>
+</ul>
+
+<h3>Deb系</h3>
+<ul class="defaultlist list6">
+<li><a href="debian.html">Debian（１．Debian GNU/Linux）</a></li>
+<ul>
+<li><a href="debian_apt.html">２．Apt</a></li>
+<li><a href="debian_deb.html">３．Deb/Dpkg</a></li>
+</ul>
+<li><a href="ubuntu.html">Ubuntu</a></li>
+<li><a href="linux_mint.html">Linux Mint</a></li>
+<li><a href="mx_linux.html">MX Linux</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+
+<h3>独自系</h3>
+<ul class="defaultlist list6">
+<li><a href="gentoo.html">Gentoo</a></li>
+<li><a href="arch_linux.html">Arch Linux</a></li>
+<li><a href="lfs.html">LFS (Linux From Scratch)</a></li>
+</ul>
+
+<h3>その他</h3>
+<ul class="defaultlist list6">
+<li><a href="feren_os.html">Feren OS</a></li>
+<li><a href="void_linux.html">Void Linux</a></li>
+<li><a href="nitrux.html">Nitrux</a></li>
+<li><a href="gobolinux.html">GoboLinux</a></li>
+<li><a href="alpine_linux.html">Alpine Linux</a></li>
+<li><a href="qubes_os.html">Qubes OS</a></li>
+<li><a href="nixos.html">NixOS</a></li>
+<li><a href="pop_os.html">Pop!_OS</a></li>
+<li><a href="elementary_os.html">elementary OS</a></li>
+</ul>
+
+<h3>シングルボードコンピュータ</h3>
+<ul class="defaultlist list6">
+<li><a href="raspberry_pi.html">Raspberry Pi</a></li>
+</ul>
+
+
+</div>
+</div>
+
+<h2>X11</h2>
+<div class="container">
+<div class="index_box">
+
+
+
+<h3>X11</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_x11.html">X11 (X Window System)</a></li>
+<ul>
+<li><a href="linux_x11_basic.html">１．アーキテクチャ</a></li>
+<li><a href="linux_x11_advanced.html">２．ツールキットとデスクトップ環境</a></li>
+<li><a href="linux_x11_admin.html">X11設定とプログラミング</a></li>
+</ul>
+<li><a href="vnc.html">VNC</a></li>
+</ul>
+<h3>Wayland</h3>
+<ul class="defaultlist list6">
+<li><a href="wayland.html">Wayland</a></li>
+</ul>
+
+<h3>ウィンドウマネージャ</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_desktop.html">デスクトップ環境/ウィンドウマネージャ</a></li>
+<ul>
+<li><a href="fvwm.html">FVWM (twm亜種)</a></li>
+<li><a href="jwm.html">JWM, IceWM</a></li>
+<li><a href="openbox.html">Openbox (Blackbox, Fluxbox)</a></li>
+<li><a href="windowmaker.html">Window Maker</a></li>
+<li><a href="enlightenment.html">Enlightenment</a></li>
+</ul>
+<li><a href="tilingwm.html">タイル型WM</a></li>
+<ul>
+<li><a href="i3.html">i3</a></li>
+</ul>
+<li><a href="linux_desktop_jisaku.html">ウィンドウマネージャ自作</a></li>
+</ul>
+
+</div>
+<div class="index_box">
+<h3>Motif</h3>
+<ul class="defaultlist list6">
+<li><a href="motif.html">Motif</a></li>
+</ul>
+
+<h3>GTK</h3>
+<ul class="defaultlist list6">
+<li><a href="gtk.html">GTK</a></li>
+<ul>
+<li><a href="gtk_bindings.html">GTK言語バインディング</a></li>
+<li><a href="vala.html">ValaとGenie</a></li>
+<li><a href="glade.html">Glade</a></li>
+</ul>
+<li><a href="cairo.html">Cairo</a></li>
+</ul>
+
+<h3>GNOME</h3>
+<ul class="defaultlist list6">
+<li><a href="gnome.html">GNOME（アーキテクチャ）</a></li>
+<ul>
+<li><a href="gnome_desktop.html">GNOME（デスクトップ）</a></li>
+<li><a href="gnome_apps.html">GNOME（アプリケーション）</a></li>
+<!--
+<ul>
+<li><a href="gnome_apps_utils.html">GNOME基本ユーティリティ</a></li>
+<li><a href="gnome_apps_net.html">GNOMEインターネット</a></li>
+<li><a href="gnome_apps_office.html">GNOMEオフィス</a></li>
+<li><a href="gnome_apps_multimedia.html">GNOMEマルチメディア</a></li>
+<li><a href="gnome_apps_develop.html">GNOME開発</a></li>
+</ul>
+-->
+</ul>
+<li><a href="mate.html">MATE</a></li>
+<li><a href="cinnamon.html">Cinnamon</a></li>
+<li><a href="budgie.html">Budgie</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../network/corba.html">CORBA</a></li>
+<li><a href="../prog_lang/mono.html">Mono</a></li>
+</ul>
+</div>
+
+</div>
+<div class="index_box">
+
+<h3>KDE</h3>
+<ul class="defaultlist list6">
+<li><a href="qt.html">Qt</a></li>
+<li><a href="kde.html">KDE（アーキテクチャ）</a></li>
+<ul>
+<li><a href="kde_desktop.html">KDE（デスクトップ）</a></li>
+<li><a href="kde_apps.html">KDE（アプリケーション）</a></li>
+<!--
+<ul>
+<li><a href="kde_apps_utils.html">KDE基本ユーティリティ</a></li>
+<li><a href="kde_apps_net.html">KDEインターネット</a></li>
+<li><a href="kde_apps_office.html">KDEオフィス</a></li>
+<li><a href="kde_apps_multimedia.html">KDEマルチメディア</a></li>
+<li><a href="kde_apps_develop.html">KDE開発</a></li>
+</ul>
+-->
+</ul>
+<li><a href="trinity.html">Trinity</a></li>
+</ul>
+
+
+<h3>Xfce/LXDE</h3>
+<ul class="defaultlist list6">
+<li><a href="xfce.html">Xfce</a></li>
+<li><a href="lxde.html">LXDE/LXQt</a></li>
+</ul>
+
+
+<h3>日本語・書体</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_japanese_input.html">日本語入力</a></li>
+<ul>
+<li><a href="linux_japanese_console.html">日本語入力・表示（コンソール・コマンドライン）</a></li>
+<li><a href="linux_japanese_input_skk.html">SKK</a></li>
+</ul>
+<li><a href="linux_font.html">フォント</a></li>
+</ul>
+
+<h3>印刷</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_printer.html">プリンター</a></li>
+</ul>
+
+
+</div>
+</div>
+
+<h2>Linuxアプリケーション</h2>
+<div class="container">
+<div class="index_box">
+
+<h3>ソフトウェア</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_desktop_apps.html">デスクトップアプリケーション</a></li>
+<ul>
+<li><a href="linux_desktop_apps_lists.html">デスクトップアプリケーション一覧</a></li>
+</ul>
+<li><a href="linux_tech.html">テクニック</a></li>
+</ul>
+
+<h3>Office</h3>
+<ul class="defaultlist list6">
+<li><a href="libreoffice.html">LibreOffice</a></li>
+<li><a href="onlyoffice.html">ONLYOFFICE</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../windows_pc/office_softwares.html">Officeソフトウェア</a></li>
+</ul>
+</div>
+</div>
+<div class="index_box">
+
+<h3>インターネット</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_browsers.html">Webブラウザ</a></li>
+<ul>
+<li><a href="webkit.html">WebKit</a></li>
+<ul>
+<li><a href="webkit_embedded.html">WebKit埋め込み</a></li>
+</ul>
+</ul>
+<li><a href="linux_mail.html">メール</a></li>
+</ul>
+
+<h3>Mozilla.org</h3>
+<ul class="defaultlist list6">
+<li><a href="mozilla.html">Mozilla</a></li>
+<ul>
+<li><a href="mozilla_firefox.html">Mozilla Firefox</a></li>
+<li><a href="mozilla_thunderbird.html">Mozilla Thunderbird</a></li>
+<li><a href="mozilla_xul.html">XUL</a></li>
+</ul>
+</ul>
+</div>
+<div class="index_box">
+
+<h3>マルチメディア</h3>
+<ul class="defaultlist list6">
+<li><a href="linux_multimedia.html">マルチメディア（動画・音声）</a></li>
+<ul>
+<li><a href="linux_multimedia_codec.html">コーデック</a></li>
+<li><a href="linux_multimedia_ripping.html">リッピング・CD書き込み</a></li>
+<li><a href="linux_multimedia_player.html">プレイヤー</a></li>
+<li><a href="linux_multimedia_edit.html">動画・音楽編集</a></li>
+<li><a href="linux_multimedia_streaming.html">ストリーミング・動画配信</a></li>
+</ul>
+<li><a href="linux_design.html">デザイン</a></li>
+</ul>
+
+<div class="related_items">
+<ul class="defaultlist list6">
+<li><a href="../art/gimp.html">GIMP</a></li>
+<li><a href="../art/inkscape.html">Inkscape</a></li>
+<li><a href="../videogame/opengl.html">OpenGL</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<h2>イメージ画像</h2>
+<img src="../../imgs/imageA.jpg" alt="アテナイの学堂">
+<p>大学のイメージ。ラファエロ画。<a href="../../image.html">詳細</a></p>
+
+
+
+</div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

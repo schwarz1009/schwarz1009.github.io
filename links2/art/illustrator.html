@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Adobe Illustratorの世界観１（基本） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">芸術・デザインの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/art_designsofts_menu.html" class="sideiframe"></iframe>
+</div><h1>Adobe Illustratorの世界観１（基本）</h1>
+<p>Adobe Illustratorの世界観１（基本）。</p>
+<p>以下の内容は、僕自身がデザインの作業所で見習いとして学び経験したことに基づきます。書いている当時がとても未熟であったため、誤解や勘違いが多くあります。</p>
+<p>作業所の同僚やスタッフにも多くのことを教えていただきました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>Illustrator（１．基本）</b></li>
+<ul>
+<li><a href="illustrator_intro.html">Illustratorをはじめよう</a></li>
+<li><a href="illustrator_bezier.html">ベジェ曲線の描き方</a></li>
+<li><a href="illustrator2.html">２．高度な使い方</a></li>
+<li><a href="illustrator_illust_layout.html">A．イラスト・レイアウト</a></li>
+<li><a href="illustrator_text.html">B．文字・テキスト</a></li>
+<li><a href="illustrator_color.html">C．色・配色</a></li>
+<li><a href="illustrator_effect.html">D．効果・アピアランス</a></li>
+<li><a href="illustrator_gradation_transparent.html">E．グラデーション・透明</a></li>
+<li><a href="illustrator_photo.html">F．写真</a></li>
+</ul>
+</ul>
+<p>実際に僕が制作したデザイン作品は<a href="../../gallery/index.html">イラスト・作品ギャラリー</a>にあります。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>概要</h1>
+<h2>ベクトル系ドローソフト</h2>
+<p>Illustratorはベクトル系ドローソフト。ベクトル系（ベクター系）のソフトは、画像をピクセルやドットで一面的に保持するPhotoshopとは異なり、画像をパスと呼ばれる直線やベジェ曲線の数値データの重ね合わせとして保持する。座標を計算して画像の大きさや位置を求めるため、拡大・縮小しても劣化することがない。イラストを作成する時に、たくさんの拡大・縮小やさまざまな変形効果を使い、また滑らかな曲線を維持したい場合には、ベクトル系のソフトは便利であり、美しいイラストを作ることができる。パスデータはあとからでも編集や加工が可能（しやすい）で、イラストを作る作業をとても簡単にしてくれる。</p>
+<p>グラフィックデザイン以外でも、ワードやパワーポイントのような文書の作成（特にチラシや広報文書など）に使うこともできる。また、パスオブジェクトの重ね合わせを利用することで、効率的にイラストを作成・加工することができる。</p>
+<p>Photoshopと連携させて使うことで、とても柔軟でクオリティの高いグラフィックデザインをすることができる。Photoshopとともに、定番中の定番、事実上の標準ソフトである。代替としてはオープンソースのInkscapeなどがあるが、まだまだInkscapeは未熟で、日本での利用者は少ない。特にInkscapeはイラスト制作には十分使えるクオリティだが、日本語での組版には若干向いていないと思う。</p>
+
+<h2>Illustratorの基本</h2>
+<p>Illustratorの基本は、パスです。</p>
+<p>パスを引く時は、<!--曲面でハンドルが水平になるようにしましょう。-->ハンドルが水平に近くなるとなだらかな曲線になり、垂直に近くなると大きな曲線になります。</p>
+<p>ALTキーを押しながらハンドルを動かすことで、切り返すことが出来ます。</p>
+<p>それから、基本的に、線と塗りをつけていきます。</p>
+<p>色がない時は色なしを選択しましょう。</p>
+<p>そして、レイヤーやオブジェクトの前面・背面移動を使って、「見えないところ」はオブジェクトの重なり合いで表現しましょう。</p>
+<p>イラストをトレースする時は、下絵レイヤーにスキャンした画像イメージのファイルを配置して、一つ一つパスを引いて行って、最後に色をつけましょう。</p>
+<p>機能として、スマートガイド、スポイトツール、テキストボックス、クリッピングマスクなども応用してください。</p>
+
+<h2>細かい技法を覚えよう</h2>
+<p>Illustratorをやるコツは、絵を描くのと同じです。細かい技法から覚えていきましょう。</p>
+<p>パスを引くのも、アピアランスや効果をかけるのも、全て技法にすぎません。細かい技法を覚えていけば、次第にIllustratorの機能の様子が見えてきます。</p>
+<p>才能は継続です。継続し続ければ、必ずデザイナーになれます。</p>
+<p>特に、技法を覚えることは、デザインだけに限らず、芸術や音楽、そしてプログラミングや工学に至るまで、全てにおいて必要です。</p>
+<p>芸術は美しいインスピレーションから作るという方もいますが、それは一部の天才だけで、多くの人は技法を学ぶことでデザインができるようになります。</p>
+<p>そして、その技法はインターネット上にも本にもたくさん掲載されていますが、そこで、「自分なりに考えて理解する」ことのできる人を、本当の天才、あるいは才能があると言います。</p>
+<p>さまざまなテクニックや技法を、自分で考えて習得できるようになれば、それで一人前です。</p>
+
+<h2>僕はパスをとても綺麗に引ける</h2>
+<p>ちなみに、僕は最近、ペンツールでパスをとても綺麗に引けるようになりました。</p>
+<p>著作権の問題から掲載することができず残念ですが、シュルツの書いた原画のスヌーピーの漫画を、本物そっくりにトレースできます。「どちらが本物なのか分からない」とみんなに言われています。「Illustratorでここまでできるのはすごい」と言われました。</p>
+<p>パスを引くコツは、完全に「慣れ」ですが、基本的なやり方を知り、コツとロジックを分かれば、パスは誰でも綺麗に引けます。これが、Illustratorの最初の壁である「ベジェ曲線」であるとよく言われます。ですが、全然簡単です。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Illustrator">Illustrator - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<!--
+<h1>イラレ入門</h1>
+<h2>ベジェ曲線の引き方</h2>
+<p>ベジェ曲線の引き方については、<a href="illustrator_bg_bezier.html">Illustratorβ（ベジェ曲線）</a>を参照のこと。</p>
+
+<h2>基本操作</h2>
+<p>イラレの基本操作については、<a href="illustrator_bg_basic.html">Illustratorγ（基本操作）</a>を参照のこと。</p>
+
+<h2>デザイン心得</h2>
+<p>デザインの心得については、<a href="illustrator_bg_design.html">Illustratorδ（デザイン心得）</a>を参照のこと。</p>
+-->
+
+<h1>コンテンツ</h1>
+<h2>Illustratorをはじめよう</h2>
+<p>Illustratorの初心者向けの入門は、<a href="illustrator_intro.html">Illustratorをはじめよう</a>と<a href="illustrator_bezier.html">ベジェ曲線の描き方</a>にまとめています。</p>
+
+<h2>Illustratorの高度な使い方</h2>
+<p>Illustratorのさらにワンランク上の使い方については、<a href="illustrator2.html">Illustrator２（高度な使い方）</a>にまとめています。</p>
+
+<h2>Photoshop</h2>
+<p>Adobeのラスター系画像処理ソフトであるPhotoshopについては、<a href="photoshop.html">Photoshop</a>にまとめています。</p>
+
+<h2>デザインで参考になる知識</h2>
+<p>デザインで参考になる色彩などの知識については、<a href="design.html">デザイン（１．知識）</a>にまとめています。</p>
+
+<h2>デザイナーの仕事</h2>
+<p>自分がやっているデザインの仕事などについてのワークフローは、<a href="design2.html">デザイン（２．ワークフロー）</a>にまとめています。</p>
+
+<h2>美術とイラスト制作</h2>
+<p>イラストを描く上で知っておきたいパースなどの知識や手法については、<a href="art.html">美術・イラスト（１．描画手法）</a>や<a href="perspective.html">パース・遠近法・透視図法</a>にまとめています。</p>
+
+<h2>美術史</h2>
+<p>美術と建築の様式や歴史については、<a href="art2.html">美術・イラスト（２．美術史）</a>にまとめています。</p>
+
+<h2>GIMP（オープンソースなPhotoshop代替）</h2>
+<p>オープンソースのラスター系画像処理ソフトGIMPについては、<a href="gimp.html">GIMP</a>にまとめています。</p>
+
+<h2>Inkscape（オープンソースなIllustrator代替）</h2>
+<p>Illustratorと同じベクター系ドローソフトで、オープンソースで開発されているInkscapeについては、<a href="inkscape.html">Inkscape</a>にまとめています。</p>
+
+<h1>Adobeのサービス</h1>
+<h2>TypekitとAdobe Creative Cloud</h2>
+<p>AdobeのCC製品を購入したものの特典として、以下のサービスが利用できる。</p>
+<p>Typekit：オンラインのフォント閲覧・導入サービス。さまざまなフォントを一覧し、ワンクリックでインストールできる。</p>
+<p>Adobe Creative Cloud：インターネットでのストレージ共有サービス。Google Driveなどと同様に、インターネットでファイルを自動で共有・同期できる。僕の作業所でも、共同での作業のためにファイル共有はAdobe Creative Cloudを使っている。（以前はGoogle Driveも使っていました。）</p>
+
+<h1>インターネット・教本</h1>
+<h2>おすすめの教本</h2>
+<p>以下はおすすめの教本。僕はこの3冊をお勧めします。</p>
+<table class="some_tables">
+<tr><th class="min60">書籍</th><th>説明</th></tr>
+<tr><td><a href="https://www.amazon.co.jp/%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99%E3%81%84Illustrator-%E6%93%8D%E4%BD%9C%E3%81%A8%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99%E3%81%84%E6%95%99%E7%A7%91%E6%9B%B8-%E3%83%94%E3%82%AF%E3%82%BB%E3%83%AB%E3%83%8F%E3%82%A6%E3%82%B9/dp/4774162582/">世界一わかりやすいIllustrator 操作とデザインの教科書</a></td><td>僕が最初に読んだ本。<br>Illustratorの基本的な機能が網羅されている。</td></tr>
+<tr><td><a href="https://www.amazon.co.jp/%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99%E3%81%84Illustrator-%E3%83%97%E3%83%AD%E6%8A%80%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AE%E5%8F%82%E8%80%83%E6%9B%B8-CC-CS6%E5%AF%BE%E5%BF%9C-%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99%E3%81%84%E5%8F%82%E8%80%83%E6%9B%B8/dp/4774180114">世界一わかりやすいIllustrator プロ技デザインの参考書 CC/CS6対応</a></td><td>僕が上の本と一緒に買った本。<br>Illustratorの高度な使い方がたくさん掲載されている。</td></tr>
+<tr><td><a href="https://www.amazon.co.jp/%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E3%81%AF%E3%81%98%E3%82%81%E3%82%8BIllustrator%E3%81%AE%E5%AD%A6%E6%A0%A1-CS6-CC%E5%AF%BE%E5%BF%9C-%E5%A4%A7%E8%B3%80-%E8%91%89%E5%AD%90/dp/4839945721">やさしくはじめるIllustratorの学校 CS6/CC対応</a></td><td>僕が最近読んでいる本。<br>Illustratorで具体的にどのようにイラストを制作するかが分かりやすく示されている。<br>初心者を卒業したい方におすすめ。</td></tr>
+</table>
+
+<h2>素材集</h2>
+<p>Googleのイメージ検索も良いのですが、以下のような専門の素材集サイトがあります。特に、イラストACはIllustratorのファイル形式でもダウンロード出来ておすすめです。</p>
+<p>イラストACは商用利用が可能で引用明記もいらない素材集サイトです。たくさんのデザイナーやイラストレーターが素材を公開されています。Google検索は著作権の問題があるため、公開する仕事や作品に使うのは避けましょう。ただし、デザインの具体例などを調べる時（たとえば、カレンダーのデザインが具体的にどんなスタイルになるのかを知りたいときなど）には、Googleイメージ検索は重宝します。Googleイメージ検索と同様の使い方として、画像のブックマーク・コレクションができる<a href="../services/pinterest.html">Pinterest</a>というサービスもあります。</p>
+<ul>
+<li><a href="https://www.ac-illust.com/">イラストAC</a></li>
+<li><a href="https://www.photo-ac.com/">写真AC</a>、<a href="https://www.silhouette-ac.com/">シルエットAC</a> - 上のイラストACの姉妹サイトです。</li>
+<li><a href="https://www.pinterest.jp/">Pinterest</a></li>
+</ul>
+<p>イラストACは、Illustratorの形式で素材がダウンロード出来るため、パスのグラフィックデータを利用出来て便利です。ただし、無料会員にはダウンロード数が制限されたり、待ち時間が設定されたりしてしまいます。僕の作業所では、有料会員として登録して利用させていただいています。</p>
+
+<h2>素材と著作権に対する僕の意見</h2>
+<p>僕もコンテンツ業界の人間ですが、Linuxやオープンソースも好きであるため、最近の著作権の問題には関心を抱いています。</p>
+<p>僕は、デザイナーの仕事をしていますが、実際のところ、フリー素材を使うことも多々あります。</p>
+<p>特に上に挙げたイラストACのフリー素材は、なければ仕事ができませんし、デザイナーにはこうした素材サイトに自分のイラストをアップロードして稼いでいる方もいます。</p>
+<p>一方、GPLやCreative Commonsのようなライセンスは使いづらいものです。</p>
+<p>僕がオープンソースでOSやソフトウェアを作るのであれば、コピーレフトなライセンスにはしたくありません。</p>
+<p>特に、Wikipediaにはいつか無くなってほしいと思っています。</p>
+
+<h2>チュートリアル</h2>
+<p>PhotoshopやIllustratorの高度なデザインテクニックは、ネット上にたくさんあります。ただし、英語の情報も多いです。</p>
+<p>以下は一例です。検索すればもっと出てきます。</p>
+<ul>
+<li><a href="https://www.webtoolnavi.com/illustrator-texteffect-100/">Illustratorを使ったすごいテキストエフェクトのチュートリアル100個まとめ - Web制作ナビ</a></li>
+<li><a href="http://photoshopvip.net/59837">デザインテクニックを磨こう！すごいIllustratorチュートリアル作り方まとめ - PhotoshopVIP</a></li>
+</ul>
+<p>もっと見たい方は、「<a href="https://www.google.com/search?q=illustrator+%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB&ie=utf-8&oe=utf-8">Illustrator チュートリアル</a>」で検索してください。</p>
+
+<h2>ビデオチュートリアル</h2>
+<p>特におすすめなのは、英語のビデオチュートリアルを公開している「Spoon Graphics」というChris Spooner氏のサイト。</p>
+<ul>
+<li><a href="https://blog.spoongraphics.co.uk/">Spoon Graphics</a></li>
+</ul>
+<p>ビデオ形式のチュートリアルであるため、ただ眺めるだけで「Illustratorではこんなこともできるのか」ということが分かる。上メニューの「VIDEOS」からYouTubeのビデオを見ることができる。</p>
+<p>英語だが、操作画面があるため、分からなくても分かりやすい。英語の字幕もあり、聞き取れなくても何を言っているのかが分かる。何より英語の勉強になる。</p>
+
+<h2>Adobe公式マニュアル</h2>
+<p>Adobeによる公式のマニュアル。</p>
+<ul>
+<li><a href="https://helpx.adobe.com/jp/photoshop/user-guide.html">Photoshop ユーザーガイド</a></li>
+<li><a href="https://helpx.adobe.com/jp/illustrator/user-guide.html">Illustrator ユーザーガイド</a></li>
+</ul>
+
+<h2>その他個人サイトなど</h2>
+<p>その他にもさまざまな個人サイトがあります。参考にしてください。</p>
+
+<h1>PostScriptとPDF</h1>
+<p><a href="postscript.html">PostScript</a>と<a href="pdf.html">PDF</a>を参照のこと。</p>
+
+
+<h1>その他のDTP製品</h1>
+<h2>InDesign</h2>
+<p>InDesignはAdobeによるDTP向け文書編集ソフトウェア。Illustratorと並んでDTP業界で広く使われている。</p>
+<ul>
+<li><a href="https://blogs.adobe.com/japan/dtp-make-good-use-of-indesign-layout-tatechuyoko-ruby/">こんなときはイラレよりInDesignが断然便利　─画像配置＆縦中横＆ルビ編─ - Adobe Blog</a></li>
+</ul>
+
+<h2>Adobe XD</h2>
+<p>Adobe XDはAdobeによるデザインツール。特にプロトタイプやワイヤーフレームの作成などに使える。</p>
+<ul>
+<li><a href="https://blog.nijibox.jp/article/adobexd_howtouse/">【基本機能】Adobe XDのまず知っておきたい使い方や基本知識を解説 | 株式会社ニジボックス</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.05</p>
+</div>
+
+<h1>資格</h1>
+<h2>アドビ認定アソシエイト</h2>
+<p>Adobeによる公式のエントリー資格。専門学校に通っている学生向け。</p>
+<ul>
+<li><a href="https://adobe.odyssey-com.co.jp/index.html">アドビ認定アソシエイト | Adobe Certified Associate</a></li>
+</ul>
+
+<h2>Illustratorクリエイター能力試験</h2>
+<p>Illustratorの資格。自分でスタンダードの模擬試験をやったことがあるが、意外と簡単かも。分かっている人なら楽勝で取れるはず。</p>
+<ul>
+<li><a href="https://www.sikaku.gr.jp/ns/il/">Illustrator®（イラストレーター）クリエイター能力認定試験│資格検定のサーティファイ│あなたのスキルアップを応援します|</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>関連する日記</h2>
+<p><a href="../../diary/guren/2024.07.26.html">2024-07-26</a>、<a href="../../diary/guren/2024.10.03.html">2024-10-03</a>に関連する内容があります。</p>
+
+<h1>簡単な説明</h1>
+<h2>デザインソフトウェア</h2>
+<ul class="defaultlist list7">
+<li>デザイン
+<ul>
+<li>デザイン
+<ul>
+<li>Adobe Illustrator
+<ul>
+<li>パスに対して塗りと線を設定する</li>
+<li>イラストの作成、トレース</li>
+<li>ベジェ曲線、ペンツール</li>
+<li>DTP</li>
+<li>パターン、透明、ブラシ、効果、グラデーション、メッシュ</li>
+<li>アピアランス</li>
+<li>文字組み</li>
+<li>切り抜き</li>
+</ul></li>
+<li>Adobe Dreamweaver</li>
+<li>Adobe Premiere</li>
+<li>Inkscape
+<ul>
+<li>Illustratorがなくても似顔絵ぐらいならInkscapeでも描ける</li>
+</ul></li>
+<li>PostScript
+<ul>
+<li>PostScriptプリンター
+<ul>
+<li>プリンタにある程度のプログラム解釈能力をつける</li>
+</ul></li>
+<li>GhostScript
+<ul>
+<li>オープンソースでPostScriptファイルが操作できる</li>
+<li>gsコマンドでいろいろできる</li>
+</ul></li>
+</ul></li>
+<li>PDF</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h1>リンク集</h1>
+
+<h2>Illustrator</h2>
+<p>最近は、この本を作業所でやっています。（2017.01.30）</p>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99%E3%81%84Illustrator-%E6%93%8D%E4%BD%9C%E3%81%A8%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99%E3%81%84%E6%95%99%E7%A7%91%E6%9B%B8-%E3%83%94%E3%82%AF%E3%82%BB%E3%83%AB%E3%83%8F%E3%82%A6%E3%82%B9/dp/4774162582/">世界一わかりやすいIllustrator 操作とデザインの教科書 (世界一わかりやすい教科書)</a></li>
+<li><a href="https://www.amazon.co.jp/%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99%E3%81%84Illustrator-%E3%83%97%E3%83%AD%E6%8A%80%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AE%E5%8F%82%E8%80%83%E6%9B%B8-CC-CS6%E5%AF%BE%E5%BF%9C-%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99%E3%81%84%E5%8F%82%E8%80%83%E6%9B%B8/dp/4774180114">世界一わかりやすいIllustrator プロ技デザインの参考書 CC/CS6対応 (世界一わかりやすい参考書)</a></li>
+<li><a href="https://www.amazon.co.jp/10%E5%80%8D%E3%83%A9%E3%82%AF%E3%81%99%E3%82%8BIllustrator%E4%BB%95%E4%BA%8B%E8%A1%93-%E3%80%90%E5%A2%97%E5%BC%B7%E6%94%B9%E8%A8%82%E7%89%88%E3%80%91-CS5-CC2014%E5%AF%BE%E5%BF%9C-%E3%83%99%E3%83%86%E3%83%A9%E3%83%B3%E3%81%BB%E3%81%A9%E7%9F%A5%E3%82%89%E3%81%9A%E3%81%AB%E6%90%8D%E3%81%97%E3%81%A6%E3%82%8B%E5%8A%B9%E7%8E%87%E5%8C%96%E3%81%AE%E6%96%B0%E5%B8%B8%E8%AD%98/dp/4774167967">10倍ラクするIllustrator仕事術 【増強改訂版】 CS5/CS6/CC/CC2014対応 ~ベテランほど知らずに損してる効率化の新常識</a></li>
+<li><a href="https://www.amazon.co.jp/%E6%96%B0%E3%81%BB%E3%82%81%E3%82%89%E3%82%8C%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E4%BA%8B%E5%85%B8-%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3-Photoshop-Illustrator-%E3%83%9E%E3%83%AB%E3%82%B3/dp/4798155888">新ほめられデザイン事典 レイアウトデザイン[Photoshop&Illustrator]</a></li>
+<li><a href="https://www.amazon.co.jp/ACA-%E3%82%A2%E3%83%89%E3%83%93%E8%AA%8D%E5%AE%9A%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E5%AF%BE%E5%BF%9C-Illustrator-CC-%E8%A9%A6%E9%A8%93%E5%AF%BE%E7%AD%96/dp/4908327068">ACA アドビ認定アソシエイト対応 Illustrator CC 試験対策</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観３A（入出力） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観３A（入出力）</h1>
+<p>Javaによるプログラミングに関する世界観３A（入出力）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="java.html">Java（１．文法）</a></li>
+<li><a href="java_oop.html">２．オブジェクト指向</a></li>
+<ul>
+<li><a href="java_oop_extends.html">２A．継承</a></li>
+<li><a href="java_oop_interface.html">２B．インターフェース</a></li>
+<li><a href="java_gc.html">２C．ガーベッジコレクションと例外</a></li>
+</ul>
+<li><a href="java_lib.html">３．クラスライブラリ</a></li>
+<ul>
+<li><b>３A．入出力</b></li>
+<li><a href="java_lib_list.html">３B．コレクションと配列</a></li>
+<li><a href="java_lib_string.html">３C．文字列</a></li>
+<li><a href="java_lib_thread.html">３D．マルチスレッド</a></li>
+<li><a href="java_lib_xml.html">３E．XML</a></li>
+<li><a href="java_lib_image.html">３F．画像処理</a></li>
+<li><a href="java_lib_net.html">３G．ネットワーク・データベース</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>入出力</h1>
+<h2>コマンドラインでの入出力</h2>
+<p>Javaで入出力をする時は、ストリーム系のクラスを使う。入出力はコマンドラインの基本です。頑張って理解しましょう。</p>
+<p>キーボードによるコマンドライン入力は、InputStreamReaderにSystem.inを指定して、BufferedReaderを上から被せる。</p>
+<p>たとえば、以下のようにする。</p>
+<pre class="prettyprint">
+BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+String line = reader.readLine();
+</pre>
+<p>コマンドラインからlineに一行入力する。</p>
+<p>入力したデータは文字列型で保持されているため、数値に変換するのであればInteger.parseInt()を使う。</p>
+<p>コンソール画面への出力はSystem.out.println()で行えばよい。</p>
+<p>System.out.println()は改行を最後に付加する。改行を付加したくないのであればSystem.out.print()を使う。</p>
+<ul>
+<li><a href="https://qiita.com/tansunogon/items/6fc62dbb2663f50beb2f">[java.io] Java文字列入力のまとめ (InputStream, Reader, Scanner) - Qiita</a></li>
+</ul>
+
+<h2>ファイル操作</h2>
+<p>Javaでファイル操作をする時は、バッファ系のクラスを利用する。入出力とファイル処理はコマンドラインの基本であるため、要勉強。</p>
+
+<h3>ファイルの読み込み</h3>
+<p>ファイルの読み込みはFileReaderを用いる。FileReaderでファイルから一文字だけ読み込みたい場合はread()を使う。残念ながらFileReaderを使う場合、基本的に一文字ずつしか読み込めない。</p>
+<p>ただし、読み込みの際にBurfferedReaderという「バッファリングを処理するクラス」を一枚被せて利用することが多い。これだけで、ファイルの読み込みが高速になる。</p>
+<p>後日注記：バッファリングとは、必要とされると思われるデータをまとめて読み込んでバッファに格納しておく機能。必要とされるデータだけをその時読み込むのではなく、ほかのデータもある程度のサイズをまとめてバッファに読み込んでおく。それによってストレージに何度もアクセスする必要がなくなり、効率的にファイルの中身を読み込むことができる。</p>
+<p>BurfferedReaderのメソッドとしては、基本的にファイルから一行読み込むためのreadLine()と、ファイルを閉じるためのclose()を使う。</p>
+<p>たとえば、以下のようにする。</p>
+<pre class="prettyprint">
+String filename = "hoge.txt";
+BufferedReader reader = new BufferedReader(new FileReader(filename));
+String line;
+while ((line = reader.readLine()) != null) {
+    System.out.println(line);
+}
+reader.close();
+</pre>
+<p>hoge.txtからreader.readLine()で一行ずつ読み込み、lineに代入して、nullが返るまでSystem.out.println()でコンソールに出力し続ける。</p>
+<p>FileReader以外の方法として、InputStreamReaderとFileInputStreamを用いたより柔軟な方法がある。FileReaderではデフォルトの文字コードが使われるが、InputStreamReaderとFileInputStreamを用いれば自分の指定したい文字コードの種類を指定して読み込める。</p>
+<ul>
+<li><a href="https://www.javaroad.jp/java_io2.htm">Javaの道：入出力（２．ファイル入出力）</a></li>
+<li><a href="http://java-code.jp/244">BufferedReader／BufferedWriterクラス | Javaコード入門</a></li>
+<li><a href="https://www.javadrive.jp/start/stream/index1.html">テキストファイルを読む - テキストファイルの入出力 - Java入門 - Let'sプログラミング</a></li>
+</ul>
+<p>後日注記：その他のファイル読み込みの方法については以下のページが参考になる。たとえばjava.nio.file.FilesのreadString()を使えば、ファイルすべてを読み込んで文字列変数に代入できる。readAllLines()ならば読み込んだ内容を文字列のリストにできる。また読み込み速度が速い方法としてFileChannelを使う方法がある。</p>
+<ul>
+<li><a href="https://www.bold.ne.jp/engineer-club/java-reading-files">Javaでファイル読み込みする3つの方法 簡単なものから性能重視まで! - ENGINEER.CLUB（エンジニアクラブ）</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.03-04編集</p>
+</div>
+
+<h3>ファイルの書き込み</h3>
+<p>ファイルの書き込みはFileWriterを用いる。FileWriterで文字列をファイルに書き込むためにはwrite()を使う。</p>
+<p>書き込みの際にバッファリングを行うBufferedWriterクラスを被せて利用する。ファイルの書き込みが高速になる。</p>
+<p>また、BufferedWriterにさらにPrintWriterを被せることが多い。このPrintWriterは、ファイルに一行書き込むための便利なprintln()というメソッドを持つクラス。</p>
+<p>たとえば、以下のようにすればよい。読み込みのためにreader、書き込みのためにwriterという二つのオブジェクトを使用している。</p>
+<pre class="prettyprint">
+String filename_in = "hoge_in.txt";
+String filename_out = "hoge_out.txt";
+BufferedReader reader = new BufferedReader(new FileReader(filename_in));
+PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename_out)));
+String line;
+while ((line = reader.readLine()) != null) {
+    writer.println(line);
+}
+reader.close();
+writer.close();
+</pre>
+<p>reader.readLine()でhoge_in.txtから一行読み込むたびに、それをwriter.println()でhoge_out.txtに書き込み続ける。</p>
+<p>FileWriter以外の方法として、OutputStreamWriterとFileOutputStreamを用いたより柔軟な方法がある。FileWriterではデフォルトの文字コードが使われるが、OutputStreamWriterとFileOutputStreamを用いれば自分の指定したい文字コードの種類を指定して書き込める。</p>
+<ul>
+<li><a href="https://www.javaroad.jp/java_io2.htm">Javaの道：入出力（２．ファイル入出力）</a></li>
+<li><a href="https://www.javadrive.jp/start/stream/index7.html">便利な書き込み用クラス - テキストファイルの入出力 - Java入門 - Let'sプログラミング</a></li>
+<li><a href="https://www.javadrive.jp/start/stream/index4.html">テキストをファイルに書き込む - テキストファイルの入出力 - Java入門 - Let'sプログラミング</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.03編集</p>
+</div>
+
+<h3>その他のファイル処理</h3>
+<p>その他のファイル処理として、java.io.Fileには、</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>delete()</td><td>ファイルを削除する</td></tr>
+<tr><td>renameTo()</td><td>ファイルの名前を変更する</td></tr>
+<tr><td>exists()</td><td>ファイルの存在を確認する</td></tr>
+<tr><td>list()</td><td>ディレクトリの中のファイル一覧を取得する</td></tr>
+<tr><td>mkdir()</td><td>ディレクトリを作成する</td></tr>
+<tr><td>mkdirs()</td><td>深いディレクトリを一気に作成する</td></tr>
+</table>
+などのメソッドがある。Fileクラスはさまざまなファイル処理に使われる重要なクラスである。</p>
+<p>（<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a>を参考に執筆しました。）</p>
+
+<h2>例外を使おう</h2>
+<p>上記では簡素化のために使っていませんが、実際はIO処理の際にエラーがでることがあるため、例外機構をきちんと使いましょう。</p>
+<p>たとえばこんな感じ。</p>
+<pre class="prettyprint">
+import java.io.*;
+
+public class HogeReadPrinter {
+    public static void main(String[] args) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String line = reader.readLine();
+            System.out.println(line);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+}
+</pre>
+<p>BufferedReader.readLine()を用いる際には、例外IOExceptionをキャッチしなければなりません。</p>
+<p>ほかにも、FileReaderを使う時は例外FileNotFoundException、Integer.parseInt()を使う時は例外NumberFormatExceptionをキャッチする必要があります。</p>
+<p>キャッチしなければならない例外は公式のJavaのマニュアルのthrowsの欄に書かれているので参照してください。</p>
+
+<h2>応用</h2>
+<p>以下は自分で書いたコード。コマンドライン入力の応用です。</p>
+<pre class="prettyprint">
+import java.io.*;
+
+public class HogeInputCalc {
+    public static void main(String[] args) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.print("x = ");
+            String line_x = reader.readLine();
+            int x = Integer.parseInt(line_x);
+            System.out.print("y = ");
+            String line_y = reader.readLine();
+            int y = Integer.parseInt(line_y);
+            System.out.println(x + " + " + y + " = " + (x + y));
+            System.out.println(x + " - " + y + " = " + (x - y));
+            System.out.println(x + " * " + y + " = " + (x * y));
+            System.out.println(x + " / " + y + " = " + (x / y));
+        } catch (IOException e) {
+            System.out.println(e);
+        } catch (NumberFormatException e) {
+            System.out.println("入力された数値の形式が正しくありません。");
+        }
+    }
+}
+</pre>
+
+<h2>参考文献</h2>
+<p>以上の解説とプログラムコードは以下の参考文献を部分的に参考にしました。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a></li>
+<li><a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a></li>
+</ul>
+<p>また、以下のページが参考になります。</p>
+<ul>
+<li><a href="http://www.javaroad.jp/index_basic.htm">Javaの道＞Java基本</a></li>
+</ul>
+
+<h1>シリアライズ</h1>
+<h2>シリアライズAPI</h2>
+<p>Javaは文字列やバイトデータの入出力以外に、オブジェクトを入出力するシリアライズ（直列化）のクラスが用意されている。</p>
+<p>まず、シリアライズを行う際には、シリアライズしたいオブジェクトのクラスでSerializableインターフェースを実装する。</p>
+<p>そして、InputStreamとObjectInputStreamとreadObject()メソッドでオブジェクトを読み込む。</p>
+<p>また、OutputStreamとObjectOutputStreamとwriteObject()メソッドでオブジェクトを書き込む。</p>
+<ul>
+<li><a href="http://tech-blog.tsukaby.com/archives/192">Java初級者のための必須Java標準APIまとめと簡易解説 | つかびーの技術日記</a></li>
+<li><a href="https://qiita.com/Sekky0905/items/b3c6776d10f183d8fc89">Javaのシリアライズ(直列化)メモ - Qiita</a></li>
+<li><a href="http://www.javaroad.jp/java_io7.htm">Javaの道：入出力（７．オブジェクトのシリアライズ）</a></li>
+</ul>
+<p><a href="java_lib_xml.html">Javaクラスライブラリ（XML）</a>や<a href="serialize.html">シリアライズ</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>Linux API</h2>
+<p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

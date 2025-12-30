@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>PHP関連の世界観（２．データベース） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>PHPの世界観（２．データベース）</h1>
+<p>PHPによるプログラミング（２．データベース）に関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="php.html">PHP</a></li>
+<ul>
+<li><a href="php_lang.html">１．言語</a></li>
+<li><b>２．データベース</b></li>
+<li><a href="php_security.html">３．セキュリティ</a></li>
+<li><a href="php_framework.html">４．フレームワーク</a></li>
+</ul>
+<li><a href="php_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="../db/db.html">データベース</a>や<a href="../db/mysql.html">MySQL</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>データベース</h1>
+<h2>PDOのコンストラクタ</h2>
+<p>PDOをnewする時のコンストラクタ引数には、「データソース名」「ユーザー名（任意）」「パスワード（任意）」「接続オプション（任意）」を指定する。
+<pre class="prettyprint">
+$dbh = new PDO('mysql:dbname=bbs_db;host=localhost', $db_user, $db_password);
+</pre>
+
+<h2>PDOの主な関数</h2>
+<p>PDOの主な関数は以下。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
+<tr><td>PDO::query()</td><td>SQL文を即時に実行して結果を返す。</td></tr>
+<tr><td>PDO::prepare()</td><td>execute()で実行されるSQL文の準備。</td></tr>
+<tr><td>PDO::setAttribute()</td><td>データベースハンドルの属性を設定する。<br>PDO::ATTR_ERRMODEはエラーレポートの設定で、<br>PDO::ERRMODE_EXCEPTIONは例外を投げる。<br>PDO::ATTR_EMULATE_PREPARESは、<br>プリペアドステートメントのエミュレーションの有効・無効。<br>詳しくは<a href="https://www.php.net/manual/ja/pdo.setattribute.php">PHP: PDO::setAttribute - Manual</a>を参照。</td></tr>
+<tr><td>PDOStatement::bindValue()</td><td>SQL文のプレースホルダに値を入れる。</td></tr>
+<tr><td>PDOStatement::execute()</td><td>プリペアドステートメント（SQL文）の実行。</td></tr>
+<tr><td>PDOStatement::fetchAll()</td><td>全ての要素を含む配列を返す。</td></tr>
+</table>
+<p>（<a href="https://blog.codecamp.jp/programming-php-pdo-mysql-1">【モダンなPHP】PHPでPDOを使ってMySQLに接続する方法！ | CodeCampus</a>、<a href="https://qiita.com/mitsuru793/items/45b2452284e321c7a5a9">PDOを使ったPHPでのデータベース基本操作 - Qiita</a>を参考に執筆しました。）</p>
+
+<h2>SQLの利用</h2>
+<p>データベースサーバーとやり取りするプログラムが、「いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)」にあります。</p>
+<p>基本的に以下のように接続すれば良い。</p>
+<pre class="prettyprint">
+$dbh = new PDO('mysql:dbname=bbs_db;host=localhost;charset=utf8', $db_user, $db_password);
+
+$dbh-&gt;setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+$dbh-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$sql = "SELECT * FROM bbs";
+$stmt = $dbh-&gt;query($sql);
+$data = $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($data as $row) {
+    /*HTML表示などの処理*/
+}
+</pre>
+<p>（以上は「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」より編集して部分的に引用。）</p>
+
+<h2>HTMLの整形処理</h2>
+<p>foreach文「foreach ($data as $row) {}」の中で、ひとつひとつのデータ（行の中の列の項目）には</p>
+<pre class="prettyprint">
+$row['username']
+</pre>
+<p>や</p>
+<pre class="prettyprint">
+$row['comment']
+</pre>
+<p>のようにアクセスする。</p>
+<p>セキュリティ対策のために</p>
+<pre class="prettyprint">
+htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8')
+</pre>
+<p>とするのが望ましい。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+echo "&lt;table id=\"bbs\"&gt;\n";
+foreach ($data as $row) {
+    echo "&lt;tr&gt;";
+    echo "&lt;td&gt;";
+    echo htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8');
+    echo "&lt;/td&gt;";
+    echo "&lt;td&gt;";
+    echo htmlspecialchars($row['comment'], ENT_QUOTES, 'UTF-8');
+    echo "&lt;/td&gt;";
+    echo "&lt;/tr&gt;\n";
+}
+echo "&lt;/table&gt;\n";
+</pre>
+<p>などとする。</p>
+<p>（以上は「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」より編集して部分的に引用。）</p>
+<div class="edit_date">
+<p>2024.11.10編集</p>
+</div>
+
+<h2>プレースホルダの例（bindValue）</h2>
+<p>以下はプレースホルダの例。</p>
+<p>以下の?のところに変数の値が入る。</p>
+<pre class="prettyprint">
+$sql = "SELECT * FROM bbs WHERE uid = ?"
+</pre>
+<p>これに対して、PHPでは</p>
+<pre>
+bindValue(?の出てくる番号, ?に入れる変数, 型)
+</pre>
+<p>として、?に値を設定する。たとえば、</p>
+<pre class="prettyprint">
+$stmt = $dbh-&gt;prepare($sql);
+$stmt-&gt;bindValue(1, $user_id, PDO::PARAM_INT);
+$stmt-&gt;execute();
+</pre>
+のようにする（1が1番目の?に対応し、$user_idを当てはめる）。</p>
+<p>（以上は「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」を参考に執筆しました。）</p>
+
+<h2>プレースホルダの例（bindParam）</h2>
+<p>プレースホルダはprepare()の時にbindValue()ではなくbindParam()を使うことで名前を付けて変換することもできる。プレースホルダ名には:idのように「:」をつけて表現する。</p>
+<pre class="prettyprint">
+$stmt = $dbh-&gt;prepare('INSERT INTO bbs(uid, comment) VALUES(:uid, :comment)';
+$stmt-&gt;bindParam(':uid', $user_id);
+$stmt-&gt;bindParam(':comment', $_POST['comment']);
+$stmt-&gt;execute();
+</pre>
+<p>などとする。</p>
+<p>（以上は<a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a>より編集して部分的に引用。）</p>
+
+<h2>CRUD操作</h2>
+<p>SELECT文だけではなく、INSERT、UPDATE、DELETEなどの命令文（CRUD操作）も同様にプリペアドステートメントにSQL文を代入して実行できる。</p>
+<p>SELECTの場合：</p>
+<pre class="prettyprint">
+$sql = "SELECT * FROM bbs";
+$stmt = $dbh-&gt;query($sql);
+$data = $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+</pre>
+<p>INSERTの場合：</p>
+<pre class="prettyprint">
+$sql = "INSERT INTO bbs (name,email,text) VALUES (?, ?, ?)";
+$stmt = $dbh-&gt;prepare($sql);
+$stmt-&gt;bindValue(1, $name, PDO::PARAM_STR);
+$stmt-&gt;bindValue(2, $email, PDO::PARAM_STR);
+$stmt-&gt;bindValue(3, $text, PDO::PARAM_STR);
+$stmt-&gt;execute();
+</pre>
+<p>UPDATEの場合：</p>
+<pre class="prettyprint">
+$sql = "UPDATE bbs SET text = ?, name = ? WHERE id = ?";
+$stmt = $dbh-&gt;prepare($sql);
+$stmt-&gt;bindValue(1, $text, PDO::PARAM_STR);
+$stmt-&gt;bindValue(2, $name, PDO::PARAM_STR);
+$stmt-&gt;bindValue(3, $id, PDO::PARAM_INT);
+$stmt-&gt;execute();
+</pre>
+<p>DELETEの場合：</p>
+<pre class="prettyprint">
+$sql = "DELETE FROM bbs WHERE id = ?";
+$stmt = $dbh-&gt;prepare($sql);
+$stmt-&gt;bindValue(1, $id, PDO::PARAM_INT);
+$stmt-&gt;execute();
+</pre>
+<p><a href="../db/sql.html">SQL</a>や<a href="../db/mysql.html">MySQL</a>も参照のこと。</p>
+
+<h2>PDOの使い方</h2>
+<p>PDOオブジェクトの詳しい使い方については以下が参考になる。</p>
+<ul>
+<li><a href="https://blog.codecamp.jp/programming-php-pdo-mysql-1">【モダンなPHP】PHPでPDOを使ってMySQLに接続する方法！ | CodeCampus</a></li>
+<li><a href="https://qiita.com/mitsuru793/items/45b2452284e321c7a5a9">PDOを使ったPHPでのデータベース基本操作 - Qiita</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a></li>
+<li><a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a></li>
+</ul>
+
+<h2>MySQLとPHPの連携</h2>
+<p>また、MySQLしかデータベースサーバーを使わないのであれば、mysql_connect()やmysql_query()などのようなmysql_*系の関数を使うこともできます。
+<p>以下はPHPとMySQLの連携について。</p>
+<ul>
+<li><a href="http://www.phpbook.jp/tutorial/mysql/">MySQLへの接続 - PHPBook</a></li>
+</ul>
+<p><a href="../db/mysql.html">MySQL</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>DbManagerという専門のクラスを作ることが多い</h2>
+<p>PHPからデータベースを操作できるPDOクラスですが、実際には上から下へと流れるように書くのではなく、DbManagerのような専門のクラスを仲介することが多いです。</p>
+<p>DbManagerという名前のクラスにおいて、new PDO()したオブジェクトをメンバとして保持するようにし、このオブジェクトに対して外部からさまざまなメソッドを実行し、その中でSQL文をクエリ実行するようにします。</p>
+<p>もし、ページごとにPDOを操作していると、ひとつのページで一回しかデータベース処理することができず、複雑なことができません。</p>
+<p>DbManagerのような専門のクラスを用意することで、さまざまな場所からさまざまなタイミングで、データベースを処理することができます。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88PHP-PERFECT-3-%E5%B0%8F%E5%B7%9D-%E9%9B%84%E5%A4%A7/dp/4774144371">パーフェクトPHP (PERFECT SERIES 3)</a>を参照してください。）</p>
+<div class="edit_date">
+<p>2023.05.15</p>
+</div>
+
+<h2>掲示板やブログを作るのは簡単</h2>
+<p>実際のところ、掲示板やブログエンジンを作るのは簡単です。</p>
+<p>単に、PHPやNode.jsなどを使って、HTMLの中でSQLのデータを表示・編集あるいは投稿・更新すればいいだけだからです。</p>
+<p>必要なのは、HTMLのテンプレート（各ページに共通のHTMLの雛形）を書いて、SQLデータベースからデータを取得して表示するといったように、HTMLとSQLを変換する技術を使いこなすことだけです。</p>
+<p>なので、ブログサービスやSNSなどのネットサービスは、比較的簡単に作れます。</p>
+<p>ただし、開発の難しさと、運営のコストや利益を上げるのはまた別の問題です。X（旧ツイッター）のようなSNSや掲示板を作っても、利益を上げることが難しく、また運営にもコストがかかります。</p>
+<p>なので、企業が簡単にSNSや掲示板を開発・運用することはなかなかできません。無料で公開して世界中でユーザーを集めることがまず至難の業であり、ユーザーがたくさんいても利益が生まれません。膨大なユーザー数を誇るXのイーロン・マスクですら利益を上げるために苦労しています。</p>
+<p>XなどのSNSではユーザーのヘイトスピーチや差別発言によるアカウントの凍結も必要で、そのために膨大な運用と管理のコストがかかり、どんなにユーザーがいても赤字になってしまいます。２ちゃんねるはそのような運用・管理をきちんとしていないため、元管理者のひろゆき氏は裁判で膨大な賠償金を支払うように判決が下っています。ただし、安易にアカウントを凍結するとその人間がネット上で言論の活動をする権利を奪ってしまうことになり、「言論の自由」という権利上の問題になります。</p>
+<p><a href="bbs_develop.html">掲示板開発</a>や<a href="html.html">HTML</a>なども参照のこと。</p>
+<div class="edit_date">
+<p>2024.11.10</p>
+</div>
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

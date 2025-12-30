@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>CSS関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>CSSの世界観</h1>
+<p>CSSに関する世界観です。<a href="html.html">HTML</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>CSS</h1>
+<h2>基本</h2>
+<p>基本の要素として、</p>
+<pre class="prettyprint lang-css">
+h2 {
+    margin: 40px 0 30px 0; /* 上マージン40px、右マージン0、下マージン30px、左マージン0 */
+    color: #6c5776; /* 文字色を#6c5776に */
+    padding: 8px 10px; /* 上下パディング8ピクセル、左右パディング10px */
+    border-left: 10px solid #6c5776; /* 左ボーダーを、10pxの直線、線色#6c5776に */
+    border-bottom: 1px dashed #6c5776; /* 下ボーダーを、1px幅の破線、線色#6c5776に */
+    font-size: 180%; /* 文字の大きさ */
+    background: #e8e6f3; /* 背景 */
+}
+</pre>
+<p>などがある。CSSのコメントは/*～*/で記述する。</p>
+<p>基本的にマージンとパディング（後述）を取り、文字色と線（ボーダー）と背景を設定する。</p>
+<p>場合によっては幅や高さ、あるいはデコレーション要素などを記述することが多い。</p>
+
+<h2>セレクタ</h2>
+<p>CSSでセレクタを使うには、まず、HTMLの方で、</p>
+<pre class="prettyprint">
+&lt;div class="classname"&gt;テキスト&lt;/div&gt;
+</pre>
+<p>とし、CSSの方で、</p>
+<pre class="prettyprint lang-css">
+.classname {
+    padding: 10px;
+    margin: 30px 0 30px 0;
+    border: 1px dashed #9aadbe;
+    font-size: 13px;
+}
+</pre>
+<p>などとしてやります。</p>
+<p>領域内の特定の要素にスタイルをかける場合は、スペースを使って</p>
+<pre class="prettyprint lang-css">
+.classname li {
+    ...
+}
+</pre>
+<p>などとします。</p>
+<p>複数のクラスを一度に設定する場合は、</p>
+<pre class="prettyprint lang-css">
+.classname1,.classname2 {
+    ...
+}
+</pre>
+<p>とします。</p>
+<p>たとえば、以下のようにすることで、特定の領域のリンクの色を変えられます。</p>
+<pre class="prettyprint lang-css">
+.tabs a:link {
+    color: #23466e;
+}
+
+.tabs a:visited {
+    color: #848a96;
+}
+</pre>
+<p>クラスではなくidの場合は、「.」の代わりに「#」を使います。</p>
+<p>pタグやdivタグへの適用の場合は、.classnameのような記述で構いませんが、tableタグのような場合ではタグ指定が必要です。この場合、</p>
+<pre class="prettyprint lang-css">
+table.some_tables {
+    padding: 10px;
+    margin: 10px 8px 10px 8px;
+    border-collapse: collapse;
+}
+</pre>
+<p>などとします。blockquoteなどについても同様です。</p>
+
+<h2>display</h2>
+<p>CSSのdisplayにはblock, inline, inline-block, noneを指定できる。</p>
+<p>pタグやdivタグなど、左右ぴったりに伸びる領域を作るブロックのタグのデフォルトは</p>
+<pre class="prettyprint lang-css">
+display: block;
+</pre>
+<p>aタグやspanタグなど、文字の中に挿入されるインラインのタグのデフォルトは</p>
+<pre class="prettyprint lang-css">
+display: inline;
+</pre>
+<p>divタグで領域を作った時、領域の幅は画面の左右いっぱいに作られる。これを、widthで指定したサイズ、あるいは</p>
+<pre class="prettyprint lang-css">
+width: auto;
+</pre>
+<p>で幅として必要なだけの幅に自動的に調整して表示したい時は、</p>
+<pre class="prettyprint lang-css">
+display: inline-block;
+</pre>
+<p>を指定する。こうすると、左右の幅が自動的に調整されるだけでなく、たくさんの要素があった時にブロックを横に並べることができる。この並び方を上に整列するには</p>
+<pre class="prettyprint lang-css">
+vertical-align: top;
+</pre>
+<p>を指定する。</p>
+<p>また、右や左に回り込みをする時は
+<pre class="prettyprint lang-css">
+float: right;
+</pre>
+<p>やleftを指定する。この時、</p>
+<pre class="prettyprint lang-css">
+clear: right;
+</pre>
+<p>やleftやbothを指定することで、複数のブロックが横に並ばないようにすることができる。</p>
+<p>また、</p>
+<pre class="prettyprint lang-css">
+display: none;
+</pre>
+<p>にすることで、要素を非表示にできる。レスポンシブデザインなどでスマホ向けのページにする時に、余計な要素を非表示にするなどの用途が考えられる。</p>
+
+<h2>marginとpadding</h2>
+<p>marginはその要素の「外側」に出来る空き領域のことで、paddingはその要素の「内側」に出来る空き領域のこと。</p>
+<p>borderを指定した場合、borderの外側にmarginができ、borderの内側にpaddingが出来る。</p>
+<p>以下のサイトを参考に執筆しました。</p>
+<ul>
+<li><a href="http://taneppa.net/margin_padding/">今さら聞けない、marginとpaddingの違い</a></li>
+</ul>
+<p>後日注記：marginとpaddingはborderやbackgroundを設定する上で重要。線に囲まれた四角の領域があって、その内側の余白をpadding、外側の余白をmarginと呼ぶ。margin-leftやpadding-leftのように設定することもできる。</p>
+
+<h2>max-widthとmin-width</h2>
+<p>max-widthとmin-widthは、幅の最大値・最小値。これ以上大きく・小さくなることを制限できる。レスポンシブデザインなどで有効。</p>
+<p>div要素だけではなくimg要素などにも適用することができて便利である。たとえば、</p>
+<pre class="prettyprint lang-css">
+.block_box {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 15px;
+    width: 750px;
+    max-width: 90%;
+}
+
+.titleimage img {
+    max-width: 90%;
+}
+</pre>
+<p>などとできる。</p>
+<ul>
+<li><a href="https://saruwakakun.com/html-css/basic/max-min-width">【CSS】max-widthとmin-widthの使い方まとめ - サルワカ</a></li>
+</ul>
+<p>後日注記：max-widthとmin-widthは、上手く使うとJavaScriptを使わずに高度な画像などの拡大縮小ができる。たとえば、</p>
+<pre class="prettyprint lang-css">
+width: 100%;
+min-width: 1000px;
+object-fit: cover;
+</pre>
+<p>とすることで、「画面いっぱいに拡大してほしいけど、1000pxのサイズより小さくなってほしくない」といったことができる。1000pxの部分にオリジナルの画像サイズを入れれば、「画像を小さくせず、100%の横幅の分だけ拡大してほしい」ということができる。object-fit: cover;は縦横の比率を変えないために設定する。</p>
+
+<h2>Flexbox</h2>
+<p>Flexboxは今までmarginやpadding, floatやdisplayで行ってきた「横並びの配置」を綺麗かつシンプルにできるCSS3の機能。</p>
+<p>基本的に</p>
+<pre class="prettyprint">
+&lt;div class="index_container"&gt;
+&lt;div class="index_box"&gt;
+    ...
+&lt;/div&gt;
+&lt;div class="index_box"&gt;
+    ...
+&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>として、CSSで</p>
+<pre class="prettyprint lang-css">
+.index_container{
+    display:flex;
+    flex-flow: row wrap;
+}
+
+.index_box {
+    flex: 1 0 50%;
+}
+</pre>
+<p>とする。</p>
+<ul>
+<li><a href="https://webdesign-trends.net/entry/8148">もう迷わない！CSS Flexboxの使い方を徹底解説 | Web Design Trends</a></li>
+<li><a href="https://www.webcreatorbox.com/tech/css-flexbox-cheat-sheet">日本語対応！CSS Flexboxのチートシートを作ったので配布します |  Webクリエイターボックス</a></li>
+<li><a href="https://creive.me/archives/15427/">【CSS】Flexboxの使い方を徹底解説！基本から実践まで(サンプルあり) | creive【クリーブ】</a></li>
+</ul>
+<p>後日注記：いろんな設定があるが、とにかくdisplay: flex;を設定しておけば内部のdiv要素を横列に揃えて段組みすることができる。レスポンシブなどでモバイル端末だけ解除したい場合は、@media screen and (max-device-width: 480px) { }の中でセレクタを使ってdiplay: block;と上書きすればいい。</p>
+
+<h2>:beforeと:after</h2>
+<p>疑似要素:beforeと:afterを使うことで、以下のようにタイトルの前に画像を置いたりなど、疑似的な要素を作ることが出来る。</p>
+<pre class="prettyprint lang-css">
+h1:before {
+    content: url("cat2.png");
+    margin-right: 15px;
+}
+</pre>
+<p>以下のサイトを参考に執筆しました。</p>
+<ul>
+<li><a href="https://coliss.com/articles/build-websites/operation/css/css-tutorial-pseudo-element-before-after-by-hongkiat.html">[CSS]なにかと便利な「:before, :after擬似要素」の使い方を基本からマスターするためのチュートリアル | コリス</a></li>
+</ul>
+
+<h2>CSSでアイコンを作る</h2>
+<p>:beforeと:afterやcontent、position:relative;やposition:absolute;、top/left/right/bottomなどを使い、border-*や丸要素のradiusや傾きのtransformを使いこなすことで、CSSだけでアイコンを作ることができる。</p>
+<p>普段Adobe Illustratorを使っている僕からすると、backgroundやborderで塗りや線を表現する感じは、イラレに近いところがあるのかもしれないと思う。</p>
+<ul>
+<li><a href="http://webnonotes.com/css/cssicon/">CSSで作るアイコン | Web’Notes</a></li>
+</ul>
+<p>後日注記：CSSでアイコンを作るには、before疑似要素あるいはafter疑似要素を設定する。</p>
+<p>まず、display:block;を指定する。これを指定しないと、回転などの効果がかけられない。</p>
+<p>position:absolute;を指定して、位置を絶対位置にする。</p>
+<p>そして、線を作る時はborder、塗りを作る時はbackgroundを使い、位置はtop/left/right/bottom、大きさはwidth/heightで設定する。</p>
+<p>曲線にしたい時はborder-radius, 三角形を作りたい時はborder: 10px transparent solid;などで線と線の境界線が斜めになる挙動を利用し（なぜこれで三角形が作れるのかは<a href="https://liginc.co.jp/web/html-css/html/164641">なぜCSSのborderで三角形ができるのか、実際にコードを書いて調べてみた  | 株式会社LIG</a>などを参考のこと）、四角形を作りたい時はbackground、回転をかけたい時はtransform: rotate(45deg);などで設定する。</p>
+<p>上手くいかない時は、!important宣言や、もっと下の箇所で思わぬ記述があって上書きされていたりする（たとえばセレクタでliを設定していても、下の方の.hoge liが適用されていたりする）ので、ブラウザの検証ツールを使って間違っている箇所を発見しよう。</p>
+
+<h2>position: absoluteとrelative</h2>
+<p>absoluteは絶対位置、relativeは相対位置で、要素を特定の位置に表示できる。現在の要素の位置に関係なく一番上に要素を載せたい時などに利用する。</p>
+<pre class="prettyprint lang-css">
+position:static;
+</pre>
+<p>は、特に位置を設定しない。top, bottom, left, rightの値は適用されない。デフォルトの場合での初期値はこれになる。</p>
+<pre class="prettyprint lang-css">
+position:relative;
+</pre>
+<p>は相対位置。top, bottom, left, rightの値だけ、標準の位置（position:static;の位置）よりもずらした場所への配置になる。</p>
+<pre class="prettyprint lang-css">
+position:absolute;
+</pre>
+<p>は絶対位置。通常、親要素にposition:static;が設定されている場合は、ウィンドウ左上の絶対位置からtop, bottom, left, rightの値だけ、ずらした場所への配置となる。要素がどこにあるかに関係なく、絶対位置に要素を表示することができる。</p>
+<p>ただし、子要素にposition:absolute;が指定されている場合でも、親要素にposition:static;以外の値が設定されている場合は、親要素の左上が基準位置となる。たとえば、親要素にposition:relative;が指定され、子要素にposition:absolute;が指定されている場合は、親要素の値を基準位置とした場所に要素が配置される。</p>
+<p>要するに、position:absolute;が指定されていると普通は絶対位置になるが、その親要素にposition:relative;やposition:absolute;などが指定されている場合ではそこからの位置になる。</p>
+<pre class="prettyprint lang-css">
+position:fixed;
+</pre>
+<p>は、absoluteと同じように絶対位置となるが、スクロールしてもその位置が固定される。</p>
+<p>（以上は<a href="http://www.htmq.com/style/position.shtml">position－スタイルシートリファレンス - HTMLクイックリファレンス</a>を参考に執筆しました。）</p>
+<p>後日注記：良く分からない方は、absoluteを指定する時は親要素にrelativeを指定しておくと表示できる位置を相対的に変えられる（そこからの位置にできる）、と覚えておくといいでしょう。</p>
+<ul>
+<li><a href="https://uxmilk.jp/63409">CSSのposition: absoluteとrelativeとは | UX MILK</a></li>
+<li><a href="http://www.htmq.com/style/position.shtml">position－スタイルシートリファレンス - HTMLクイックリファレンス</a></li>
+</ul>
+
+<h2>!important</h2>
+<p>!importantは、CSSの優先順位を変えられる宣言。通常CSSは後に書いたものの方が優先されるが、!importantを書くことで優先順位を最優先にできる。</p>
+<pre class="prettyprint lang-css">
+pre.prettyprint {
+    color: #ffffff;
+    border: 1px solid #1d695f !important;
+    border-top: 5px solid #1d695f !important;
+}
+</pre>
+
+<h2>16進数での色の表現</h2>
+<p>HTMLやCSSでは、#から始まる6桁の16進数で色を表現する。</p>
+<p>たとえば、#FF8822では、FFが赤、88が緑、22が青になる。FFが最も色が明るく、00が最も色が暗い。#FFFFFFが白で、#000000が黒。真っ赤にする時は#FF0000とする。</p>
+<p>以下のサイトを参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.peko-step.com/tool/tfcolor.html">RGBと16進数カラーコードの相互変換ツール - PEKO STEP</a></li>
+</ul>
+
+<h2>レスポンシブ対応</h2>
+<p>レスポンシブとは、スマホなどの小ディスプレイのデバイスに共通するHTMLで対応すること。</p>
+<p>スマホなどの小ディスプレイサイズのデバイスに対応するには、以下のように記述する。</p>
+<p>基本的に、レスポンシブでは、ViewPortでブラウザの幅を設定する。</p>
+<pre class="prettyprint">
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+</pre>
+<p>もし、ここでwidth=300にした場合、ブラウザの横幅が300になる。デフォルトは980。300にした場合、980よりも約三倍ほど拡大される。width=device-widthにした場合は、スマホに応じて適切な幅となる。</p>
+<p>CSSのほうで、レスポンシブに対応したCSSのメディアクエリの設定をする。これにより、スマホの場合だけ特別に適用するCSSを指定できる。</p>
+<pre class="prettyprint lang-css">
+@media screen and (max-device-width: 480px) {
+    .sidebar_profile,.image {
+        margin: 10px 0 10px 0;
+        padding: 0px;
+        float: none;
+    }
+
+    .sidebar {
+        display:none;
+    }
+    
+    #main-menu {
+        display:none;
+    }
+
+    .titleimage {
+        display:none;
+    }
+  
+    body {
+        padding: 0;
+    }
+  
+    .banner,.banner2{
+        padding: 0;
+        margin: 0 0 0 0;
+        background: #ffffff;
+        border: 0;
+    }
+  
+    #toc {
+        padding: 0px;
+        margin: 10px 0 10px 0;
+    }
+    #toc ol li {
+        margin: 0px;
+    }
+
+    .sideiframe {
+        width: 100%;
+    }
+    .sideiframe_profile {
+        width: 100%;
+    }
+}
+</pre>
+<p>詳しくは以下のページが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/alt_yamamoto/items/2fbd63ee77d87dd727f7">VueもReactもやったことないのでVanilla JSでやってみたSPA - Qiita</a></li>
+</ul>
+<p><a href="../windows_pc/browsers.html">Webブラウザ（Windows）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.08.25編集</p>
+</div>
+
+<h2>JavaScriptでCSSを操作する</h2>
+<p>JavaScriptでCSSを操作するには、styleプロパティを使う。</p>
+<p>たとえば、特定のdiv要素を任意のタイミングで非表示にするには、</p>
+<pre class="prettyprint">
+document.getElementById('div_hoge').style.display = 'none';
+</pre>
+<p>とする。たとえばタブUIを実装したいなら、全てのdiv要素を非表示にして任意のdiv要素を表示するJavaScriptの関数を書いて、タブのクリック時に引数付きでこの関数を実行すればよい。</p>
+<p><a href="javascript_dom_canvas.html">JavaScript（DOM/Canvas）</a>も参照のこと。</p>
+
+<h2>CSSアニメーション</h2>
+<p>CSSでは、アニメーションを簡単に実現できる。</p>
+<p>まず、animationプロパティで、全体の時間の秒数や、アニメーションの仕方（連続的、ステップ、永遠に繰り返しなど）を指定し、@keyframesと結び付ける。</p>
+<p>@keyframesでは、最初（from）と最後（to）の要素の状態を、transformプロパティで指定する。</p>
+<p>たとえば、要素の移動する位置（translate）や拡大縮小するサイズ（scale）をtransformで指定する。</p>
+<p>最初と最後だけでなく、時間をパーセントで指定すれば、全体の時間の中でたとえば25%, 50%, 75%の時間に、どこに動かすかも指定できる。</p>
+<p>これにより、横スクロールによる、画像の自動切り替えを実現できる。</p>
+<p>これとは別にJavaScriptでの方法として、一定時間ごとに関数を実行するには、setIntervalを使う。</p>
+<p>setIntervalのコールバック関数で、transformプロパティをJavaScriptから操作すれば、同じことはできる。</p>
+<p>以下は参考になるかもしれないサイト。</p>
+<ul>
+<li><a href="https://coco-factory.jp/ugokuweb/css02/">CSSアニメーションで動きを指定しよう | 動くWebデザインアイディア帳</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes">@keyframes - CSS: カスケーディングスタイルシート | MDN</a></li>
+<li><a href="https://webdesignday.jp/inspiration/technique/css/5167/">【CSS】animation・keyframesを徹底解説 | WEBDESIGNDAY</a></li>
+<li><a href="https://qiita.com/7968/items/1d999354e00db53bcbd8">【CSS3】@keyframes と animation 関連のまとめ - Qiita</a></li>
+<li><a href="https://qiita.com/soarflat/items/4a302e0cafa21477707f">CSSアニメーション 入門 - Qiita</a></li>
+</ul>
+
+<h2>グリッド</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.21.html">2021/01/21</a>より。</p>
+<p>CSSでは、Flexboxのほか、均等に揃えて要素を配置するグリッドが利用できる。1:2や3:4のような複雑な比率も可能。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=CSS">CSS - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>CSS3とSass</h1>
+<h2>CSS3</h2>
+<p>CSS3では、色が徐々に変わっていくグラデーション、変形や角を丸くする、影の効果、ボックス形状のレイアウト、動くアニメーションなど、さまざまな視覚効果が追加された。</p>
+<p>たとえば、影の効果を使いたいなら、</p>
+<pre class="prettyprint lang-css">
+box-shadow: 0px 1px 3px rgba(0,0,0,.2);
+</pre>
+<p>などとする。また、角を丸くしたいなら、</p>
+<pre class="prettyprint lang-css">
+border-radius: 10px;
+</pre>
+<p>などとする。また、背景をグラデーションにしたいなら、</p>
+<pre class="prettyprint lang-css">
+background: linear-gradient(to right bottom, #ffffff, #eff3f6);
+</pre>
+<p>などとする。</p>
+<p>詳細は以下のページを参照のこと。</p>
+<ul>
+<li><a href="https://kumaweb-d.com/html/html5-css3/">【ちゃんと使えてる？】HTML5・CSS3の使い方 - くまWeb</a></li>
+<li><a href="https://qiita.com/Y_ASAMOTO/items/90afe7d24467020c17f0">【爆速】HTML5 + CSS3で簡単にWebデザインしよう！ - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.12.31編集</p>
+</div>
+
+<h2>CSSの関数</h2>
+<p>CSS3では、関数を使うことができる。たとえばcalc()関数は数値の計算ができる。たとえば、</p>
+<pre class="prettyprint lang-css">
+width: 100%;
+</pre>
+<p>とした場合に、マージンとして取っていた幅を100%から引きたい時がある。このような時は、
+<pre class="prettyprint lang-css">
+width: calc(100% - 60px);
+</pre>
+<p>などとできる。</p>
+<p>ちなみに、このような時は、widthにstretchを指定してもよい。</p>
+<pre class="prettyprint lang-css">
+width: stretch;
+</pre>
+<p>また、その他の便利な関数として、比較関数のmin()、max()、clamp()がある。たとえば以下のように、幅の最小値を複数の値から選べる。</p>
+<pre class="prettyprint lang-css">
+min-width: min(80%, 274px);
+</pre>
+<ul>
+<li><a href="https://coliss.com/articles/build-websites/operation/css/how-calc-works-by-ire.html">CSSのcalc()関数を使うとスゴイ便利！ページのレイアウト、要素やフォントのサイズ指定など実装テクニックのまとめ | コリス</a></li>
+<li><a href="https://coliss.com/articles/build-websites/operation/css/css-stretch-keyword.html">CSSのwidth: 100%;のより良い代替手段として、stretchキーワードが実はかなり便利です | コリス</a></li>
+<li><a href="https://coliss.com/articles/build-websites/operation/css/css-about-min-max-clamp.html">CSSの比較関数が便利すぎる！ min(), max(), clamp()の使い方を詳しく解説 | コリス</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.12.31</p>
+</div>
+
+<h2>Sass</h2>
+<p>SassはプログラムのようにCSSを書くことのできる技術。</p>
+<p>変数やmixin（関数のように引数を指定できる）が使え、セレクタの指定をネストできる。記法にはSASS形式とSCSS形式（よりCSSに近い）がある。</p>
+<p>また、別ファイルの*.scssファイルをimportすることも可能。</p>
+<ul>
+<li><a href="https://qiita.com/m0nch1/items/b01c966dd2273e3f6abe">これからはcssはSassで書こう。 - Qiita</a></li>
+<li><a href="https://www.willstyle.co.jp/blog/1276/">まだCSSで書いてるの？Sassを使って効率的にスタイリング | Will Style Inc.｜神戸にあるウェブ制作会社</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.05編集</p>
+</div>
+
+<h1>開発ツール</h1>
+<h2>ブラウザの検証機能を上手く使おう</h2>
+<p>CSSを記述する上で、ブラウザの検証機能を上手く使いましょう。</p>
+<p>Google ChromeやMozilla Firefoxには検証機能が備わっており、HTMLのタグを選択して、その要素にどんなスタイルが指定されているか、一目で分かります。</p>
+<p>また、スタイルをその場で設定し直し、見た目がどのように変化するかも見ることができます。</p>
+<p>CSSで見た目がどうしてもうまくいかない時や、見た目に不具合があってなぜなのか分からない時は、検証機能を使うようにしましょう。</p>
+<p><a href="../linux/mozilla_firefox.html">Mozilla Firefox</a>や<a href="javascript_tools.html">JavaScriptのツール</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>中学生の頃CSSでネットゲームのスキンを作っていた</h2>
+<p>僕は中学生の頃、CSSを使って（CSS3とかじゃない昔のCSS）、FF BATTLEというネットゲームのスキン機能を作っていました。<a href="../videogame/online_game.html">ネットゲーム</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2024.08.26</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>CSS/Sass</h2>
+<p>スライド。</p>
+<ul>
+<li><a href="http://www.slideshare.net/michouse/sass-21381702">Sass 超入門 - SlideShares</a></li>
+</ul>
+
+<h2>CSS関連のTips</h2>
+<p>CSS/JavaScriptでのホームページスタイル制作：</p>
+<ul>
+<li><a href="http://webnonotes.com/css/css-list/">CSSで作るリストデザイン - Web’Notes</a></li>
+<li><a href="http://www.02320.net/tech/blockquote-css-design/">blockquoteタグにCSSだけで引用符つけたりオシャレにしたい - おち研 技術部</a></li>
+<li><a href="http://www.1uphp.com/con2/menu/tab11.html">ホームページ作成　タブメニューの作り方（１） - WEBサイト作成　フリー素材コード　の1uphp.com スタイルシート,htmlやFirefox,Operaなどのブラウザの表示結果まで。</a></li>
+<li><a href="http://www.zyonass.com/blog/781">ページ内でのタブ表示切替 | ホームページ制作 佐賀 福岡 長崎　ワールド ザイオナス</a></li>
+</ul>
+
+<h2>配色パターン</h2>
+<p>配色パターン：</p>
+<ul>
+<li><a href="https://www.materialpalette.com/">Material Design Color Palette Generator</a></li>
+<li><a href="http://www.colourlovers.com/">COLOURlovers</a></li>
+<li><a href="http://www.hp-stylelink.com/news/2013/07/20130708.php">カラー配色で迷わない！シーン別配色見本32パターン - ホームページ制作なら渋谷のウェブ制作会社【スタイル】</a></li>
+<li><a href="https://saruwakakun.com/design/gallery/palette">配色パターン見本40選：ベストな色の組み合わせ確認ツール - サルワカ | サルでも分かる図解説明マガジン</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

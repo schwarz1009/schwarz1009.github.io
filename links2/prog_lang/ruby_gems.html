@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>gems関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>gemsの世界観</h1>
+<p>gemsに関する世界観です。<a href="ruby.html">Ruby</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>gems</h1>
+<h2>gems</h2>
+<p>Rubyのライブラリはgemと呼ばれます。</p>
+<ul>
+<li><a href="https://www.ruby-lang.org/ja/libraries/">ライブラリ - Ruby</a></li>
+</ul>
+
+<h2>bundlerとGemfile</h2>
+<p>bundlerは、gemの依存関係を解決し、インストールとバージョン管理をしてくれるツール。</p>
+<p>bundle installを実行すると、Gemfileに記載されたgemを依存関係も含めてすべてインストールできる。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://qiita.com/nishina555/items/1b343d368c5ecec6aecf">【初心者向け】bundler、Gemfile、Gemfile.lockの関係性について図でまとめてみた - Qiita</a></li>
+</ul>
+
+<h2>gemとBundlerの使い方</h2>
+<p>まず、インストールされているgemを確認するには以下のコマンドを実行する。</p>
+<pre>
+gem list
+</pre>
+<p>gemをインストールするには以下のようにする。</p>
+<pre>
+gem install パッケージ名
+</pre>
+<p>gemをアップデートするには以下のようにする。</p>
+<pre>
+gem update
+</pre>
+<p>Bundlerをインストールするには以下のようにする。</p>
+<pre>
+gem install bundler
+</pre>
+<p>新しくGemfileを作成するには以下のようにする。</p>
+<pre>
+bundle init
+</pre>
+<p>Gemfileを以下のように修正する。</p>
+<pre>
+source "https://rubygems.org"
+
+gem 'rails'
+</pre>
+<p>最後に、以下を実行すればGemfileに記述されたgemがインストールされる。</p>
+<pre>
+bundle install
+</pre>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Ruby">Ruby - ArchWiki</a></li>
+<li><a href="https://qiita.com/oshou/items/6283c2315dc7dd244aef">Bundlerの使い方 - Qiita</a></li>
+<li><a href="https://qiita.com/hisonl/items/162f70e612e8e96dba50">Bundler概要 - Qiita</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

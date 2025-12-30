@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（メモリ管理） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（メモリ管理）</h1>
+<p>Linuxのカーネルの開発に関する世界観（メモリ管理）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><b>メモリ管理</b></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>仮想アドレス空間</h1>
+<h2>プログラムの実行</h2>
+<p>C/C++でプログラムを書いた場合、言語の文法通りにそのプログラムが動くように、コンパイラがそのソースコードから機械語の実行バイナリファイルを翻訳して吐き出す。</p>
+<p>OSはこの機械語のプログラムがきちんと動くように、プログラムにメモリ領域を割り当て、ページングとセグメンテーションによって分割されたメモリ領域を管理する。</p>
+<p>また、プログラムがアクセスするメモリアドレスについて、論理アドレスを物理アドレスに翻訳し、同時にプログラムのコードを短期間で別々に切り替えて「タイムスライス」を与えることで、CPUとメモリがたとえひとつしかなくても、複数のプロセスを同時に並列的に実行できるようにする。</p>
+
+<!--
+<h2>プロセスとメモリ</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>プロセスには、付属するメモリ領域としてテキスト領域（プログラムそのもの）、スタック領域、ヒープ領域などが与えられる。</p>
+-->
+
+<h2>レジスタとメモリ</h2>
+<p>実際のところ、レジスタとはCPU内部の高速なメモリに過ぎません。ですが、レジスタは機械語で命令の処理に使われるため、小さく、少なく、そしてプログラムの実行にとって重要です。そのため、レジスタは少ない領域のものを、プロセスを切り替えるたびに「読み込んだり退避したり」します。</p>
+<p>これに対して、メモリは低速で、大容量です。このため、それぞれの領域に分割して、プロセスがそれぞれのアドレス空間を持ち、機械語の命令としてメモリにプロセスがアクセスしようとした時は、カーネルが仲介して論理アドレスを物理アドレスに翻訳するのです。</p>
+<p>そのため、コンテキストの切り替えは比較的容易です。ソフトウェアだけで実現できます。</p>
+<p>メモリ管理を行うためには、ハードウェアの機能を用いてカーネルが仲介し、論理アドレスをリニアアドレス・物理アドレスに変換します。この時、ハードウェアのセグメンテーション回路とページング回路を利用します。また、それぞれのメモリ領域はページと呼ばれる単位でカーネルによって管理されます。</p>
+
+<h2>仮想アドレス空間</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>また、メモリ領域については、カーネルがハードウェアのMMUという機構を上手く使うことで、プログラムが実際のメモリ領域（論理アドレスやリニアアドレスと呼ぶ）にアクセスした段階で、カーネルがそれを物理アドレスに翻訳する。</p>
+<p>このようにすることで、カーネルはメモリ領域を全てのプログラムに「個別に与える」ことができる。</p>
+<p>このような仕組みを「仮想アドレス空間」と呼ぶ。</p>
+<p>後日注記：Intel x86には仮想メモリを実現するために、セグメント機構とページング機構の2つがあり、冗長であるため、Linuxでは基本的にページング機構だけを使い、必要な場合にだけセグメント機構を使っている。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>、<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>が参考になります。）</p>
+
+<h2>アドレス空間の構造</h2>
+<p>自分の書いたブログ「わたしの名はフレイ」<a href="/diary/blog_frey/2020.06.26-3.html">2020/06/26</a>より。</p>
+<p>アドレス空間には、</p>
+<p>・テキスト領域（機械語のプログラムコードが入る）</p>
+<p>・ヒープ領域（malloc()が管理する）</p>
+<p>・スタック領域（ローカル変数や関数の引数）</p>
+<p>などがあり（ほかにデータ領域やBSS領域がある）、プロセスが作られると割り当てられる。</p>
+<p>基本的に、プロセスを実行すると、そのプロセスに対してテキスト領域、ヒープ領域、スタック領域が割り当てられることを知っておけば良い。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>が参考になります。）</p>
+
+<h2>ページング・メモリ断片化</h2>
+<p>メモリは断片化する。断片化を解決するために、Linuxカーネルでは、ページと呼ばれる固定長の単位でメモリ領域を管理している。これをページングと言う。</p>
+<p><a href="linux_kernel_mm_paging.html">Linuxカーネル（ページング・メモリ断片化）</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.10.10</p>
+</div>
+
+<h2>セグメント</h2>
+<p>（以下は<a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a>を参考に執筆しました。）</p>
+<p>多くの場合、OSにひとつしか仮想アドレス空間が存在しないよりも、それぞれ独立したアドレス空間が複数あったほうがいいことが多い。</p>
+<p>論理的に区分されたエンティティに従い、アドレス空間を分割する方法を「セグメント」と呼ぶ。</p>
+<p>ページングは固定サイズのメモリ区分だが、セグメントは論理的なエンティティによる可変長の区分であるという違いがある。</p>
+
+<h1>参考文献</h1>
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+</ul>
+<p>また、以下のページに参考になる内容があります。日本語版もあります。</p>
+<ul>
+<li><a href="http://en.tldp.org/LDP/tlk/tlk.html">The Linux Kernel</a></li>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/The-Linux-Kernel-images/frame.html">The Linux Kernel日本語訳</a></li>
+</ul>
+
+<h2>MINIX本</h2>
+<p>MINIX本では、メモリ管理について詳細が記述されています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+</ul>
+
+<h1>ハードウェアとアルゴリズム</h1>
+<h2>メモリ管理ユニット (MMU)</h2>
+<p>メモリ管理ユニット (MMU)は、仮想メモリを実現するためのハードウェア部品。CPUと連携することで、仮想アドレスと物理アドレスを変換したり、メモリを保護したりできる。</p>
+<p>現代的なOSでは、MMUとカーネルが連携して仮想アドレス空間を実現している。</p>
+<p>後日注記：MMUが必ずマシンにあるとは限らない（組み込みなどの場合）ため、一部のOSカーネルや軽量libcなどではMMUのないシステムにも対応している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%A2%E3%83%AA%E7%AE%A1%E7%90%86%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88">メモリ管理ユニット - Wikipedia</a></li>
+</ul>
+
+<h2>メモリ管理アルゴリズム</h2>
+<p>メモリ管理アルゴリズムについては以下が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/mopp/items/23f55bf8bf97e455000f">自作OSのから見たメモリ管理概論 - Qiita</a></li>
+</ul>
+
+<h2>Linuxカーネルのメモリ管理についての色んなこと</h2>
+<p>以下のスライドがとても参考になる。必見。</p>
+<ul>
+<li><a href="https://www.slideshare.net/NishiokaYusuke/linux-65414163">Linuxにおけるメモリ管理の基本 - SlideShare</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>プロセス管理</h2>
+<p><a href="linux_kernel_proc.html">Linuxカーネル（プロセス）</a>も参照のこと。</p>
+
+<h2>仮想メモリ</h2>
+<p><a href="../hardware/memory.html">メモリ</a>も参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>DNSサーバ関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>DNSサーバの世界観</h1>
+<p>DNSサーバに関する世界観です。</p>
+<p><a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a>を参考に執筆しました。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>名前解決</h1>
+<h2>名前解決とDNS</h2>
+<p>ネットワークにおいて、IPアドレスのような0と1での番号は、機械にとっては認識しやすいが、人間にとっては認識しづらい。</p>
+<p>IPアドレスをそのまま人間が使うこともできるが、人間に分かりやすい「名前」を付けた上で、名前とIPアドレスの対応表を作り、名前からIPアドレスを知ることができるようにする仕組みを「名前解決」とか「ネームサービス」と呼ぶ。</p>
+<p>そして、そのような名前解決は、DNSサーバと呼ばれるサーバ機構に問い合わせることで可能となる。</p>
+<p>DNS以外にも、かつてUNIXで行われていた/etc/hostsを使ったり、NISやLDAPを用いて名前解決を行う場合もある。このような名前解決を行う機構を総合して「リゾルバ」と呼ぶ。</p>
+<p>名前解決において、コンピュータの名前のことをホスト名と呼ぶ。ホスト名にはhogehoge.comのようなドメインが付属される。ドメインはネットワークの所属する組織のことを示す名前のこと。最後の.comのことをトップレベルドメイン（TLD）と呼ぶ。</p>
+<ul>
+<li><a href="https://jprs.jp/glossary/index.php?ID=0058">JPRS用語辞典｜TLD（トップレベルドメイン）</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.28</p>
+</div>
+
+<h2>リゾルバ</h2>
+<p>リゾルバとは、名前解決を行う機構。</p>
+<p>UNIXでは、インターネットの初期の時代から伝統的に/etc/hostsでIPアドレスとホスト名を羅列して使っていた。今でもローカルネットワークの中でホスト名をつける際にこの/etc/hostsを使う。</p>
+<p>現代のインターネット世界では、DNSサーバに問い合わせることで名前解決を行うことができる。</p>
+<p>また、NISにも同様のホスト名とIPアドレスを関連付け、名前解決を行う機構がある。</p>
+<p>これらすべてを統合した名前解決の仕組みをリゾルバと呼ぶ。Linuxのリゾルバはlibcにある。設定は/etc/nsswitch.confに記述する。</p>
+<p>（以上は<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+
+<h1>DNS関係のコマンド・設定ファイル</h1>
+<h2>DNS関係のコマンド</h2>
+<table class="some_tables">
+<tr>
+<th class="min60">コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>dig</td>
+<td>DNSサーバーからドメイン名とIPアドレスの情報を得る。</td>
+</tr>
+<tr>
+<td>host</td>
+<td>ホスト情報を得る。</td>
+</tr>
+<tr>
+<td>nslookup</td>
+<td>対話的にDNSサーバーから情報を得る。</td>
+</tr>
+<tr>
+<td>whois</td>
+<td>ネットワークの企業名などの情報を得る。</td>
+</tr>
+</table>
+<p>（<a href="http://www.21linux.com/archives/180network/">ネットワーク関係 - Linuxコマンド百科辞典</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://qiita.com/ryuichi1208/items/eeb98d5a94d71c55aa34">最低限知っておくべきネットワーク系コマンド - Qiita</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/bind/man1/dig.1.html">man dig</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/bind/man1/host.1.html">man host</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/bind/man8/nslookup.8.html">man nslookup</a></li>
+</ul>
+
+<h2>/etc/hosts</h2>
+<p>（<a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a>を参考に執筆しました。）</p>
+<p>ホスト名とIPアドレスの一覧や対応表を記述するのは/etc/hostsファイル。たとえば、</p>
+<pre>
+127.0.0.1    hogepc
+127.0.0.1    localhost    localhost.localdomain
+</pre>
+<p>などとする。</p>
+<p>IPv6の場合は、</p>
+<pre>
+::1    hogepc  localhost.localdomain  localhost
+</pre>
+<p>とする。::1は、IPv6におけるIPアドレスで、IPv4での127.0.0.1に相当し、自分自身と通信するために使われる（ループバックアドレス）。</p>
+<p>ping（IPv4）あるいはping6（IPv6）で接続可能かを試してみよう。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/506/">「/etc/hosts」ファイル | Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/hosts.5.html">man hosts</a></li>
+</ul>
+
+<h2>/etc/resolv.conf</h2>
+<p>DNSなどの名前解決をするソフトウェアのことを「リゾルバ」と呼ぶ。</p>
+<p>リゾルバが使用するDNSネームサーバの設定は、/etc/resolv.confに設定する。</p>
+<p>たとえば、</p>
+<pre>
+nameserver     192.168.1.1
+nameserver     192.168.1.2
+domain         localdomain
+</pre>
+<p>のように設定する。</p>
+<p>nameserverは複数書くことができるが、優先度は上に書かれたものが上で、1番目のDNSサーバで解決できなかった時は2番目のDNSサーバに問い合わせが行われる。</p>
+<p>また、domainを指定すると、ホスト名だけを指定して名前解決をした時に、ドメイン名を自動的に付加してくれる。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/507/">「/etc/resolv.conf」ファイル | Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/resolv.conf.5.html">man resolv.conf</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.06.12編集</p>
+</div>
+
+<h2>/etc/host.conf</h2>
+<p>/etc/host.confには、リゾルバの詳細な設定を記述する。ホスト名を検索する順序を記述することが多い。</p>
+<pre>
+order hosts,bind
+</pre>
+<p>とすると、名前解決をする際に/etc/hostsの後にDNSサーバ（bind）に問い合わせを行う。bindとhostsのほかにnisを設定できる。</p>
+<pre>
+multi on
+</pre>
+<p>とすると、/etc/hostsに複数のIPアドレスが同じ名前で登録されていた時に、名前から複数のIPアドレスを返してくれる。</p>
+<pre>
+reorder on
+</pre>
+<p>とすると、IPアドレスが複数あった時に、同じサブネットマスクの中にあるアドレスを優先的に返してくれる。
+<pre>
+trim .hoge.com
+</pre>
+<p>とすると、IPアドレスに対応するホスト名から「.hoge.com」の部分を自動的に削除する。</p>
+<p>（<a href="https://www.usupi.org/sysad/113.html">いますぐ実践! Linuxシステム管理 / Vol.113</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/host.conf.5.html">man host.conf</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.06.12編集</p>
+</div>
+
+<h2>/etc/nsswitch.conf</h2>
+<p>/etc/nsswitch.confには、名前解決を行うための優先順位を設定する。</p>
+<p>たとえば、</p>
+<pre>
+hosts: files dns
+</pre>
+<p>とすると、まずローカルのファイルを名前解決し、次にDNSサーバに名前解決を行う。</p>
+<p>設定できるのはfiles (ローカルのファイル), dns (DNSサーバ), ldap (LDAP), nis (NIS), sss (System Security Services Daemon), winbind (Samba/Windowsネットワーク/Active Directory)など。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/508/">「/etc/nsswitch.conf」ファイル | Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="https://qiita.com/TK_Yudai/items/12e3a1f0ae5f50e8d7c5">システム管理者のためのnsswitch.confガイド #Linux - Qiita</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/LDP_man-pages/man5/nsswitch.conf.5.html">man nsswitch.conf</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.06.12編集</p>
+</div>
+
+<h1>DNSサーバー</h1>
+<h2>BIND</h2>
+<p>DNSサーバー。ドメイン名とIPアドレスのリストから相互変換を行う。</p>
+<p>多機能で、コンテンツサーバとしてもキャッシュサーバとしても動作する。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/488/">BIND | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h2>BINDを使う</h2>
+<p>BINDは、世界でもっとも利用されているDNSサーバ。</p>
+<p>BINDの使用目的として、「キャッシュサーバに使う」「自分のドメインを立ち上げる」という主な二つの利用法がある。</p>
+<p>しかしながら、この設定をするのはいろいろと複雑。以下の書籍を参考にしてほしい。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a></li>
+</ul>
+
+<h2>Unbound</h2>
+<p>UnboundはBINDと同様のDNSサーバだが、機能を少なくして中身の設計をシンプルにしている。コンテンツサーバとしては動作しない。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/489/">Unbound | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h2>djbdns</h2>
+<p>djbdnsはDaniel Bernstein（qmailで有名なdjb）によるDNSサーバ。セキュリティ重視でシンプル。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/490/">DNSサーバ「djbdns」 | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h1>DNSフィルタリング</h1>
+<h2>Pi-hole</h2>
+<p>Pi-holeはフィルタリング機能を持ったDNSサーバで、広告カットのようなことができる。</p>
+<ul>
+<li><a href="https://remoteroom.jp/diary/2020-07-17/">Pi-holeの紹介 ～自宅LAN全部まとめてAd Blocking～ - RemoteRoom</a></li>
+</ul>
+<p><a href="../linux/raspberry_pi.html">Raspberry Pi</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.27</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Linuxカーネル</h2>
+<p><a href="../linux/linux_kernel_socket.html">Linuxカーネル（ソケット）</a>や<a href="../linux/linux_net.html">Linuxネットワーク</a>も参照のこと。</p>
+
+<h2>NIS</h2>
+<p><a href="nis.html">NIS</a>も参照のこと。</p>
+
+<h2>ネットワーク</h2>
+<p><a href="network_intro.html">ネットワーク入門</a>も参照のこと。</p>
+
+<h1>参考文献</h1>
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+<li><a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

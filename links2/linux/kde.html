@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>KDE関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>KDEの世界観</h1>
+<p>KDEに関する世界観です。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="qt.html">Qt</a></li>
+<li><b>KDE（アーキテクチャ）</b></li>
+<ul>
+<li><a href="kde_desktop.html">KDE（デスクトップ）</a></li>
+<li><a href="kde_apps.html">KDE（アプリケーション）</a></li>
+</ul>
+</ul>
+<p><a href="linux_x11.html">Linux（X11周辺）</a>や<a href="gnome.html">GNOME</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>KDE</h1>
+<h2>概要</h2>
+<p>Linuxのデスクトップ環境のもう一つの選択肢。綺麗で豪華な代わり、メモリを食う。Qtと言うC++の美しいウィジェット・ツールキットを利用している。コードはほとんどがC++で書かれている。GNOMEに次いでファンが多い。GNOMEの「G陣営」とは別に「K陣営」と呼ばれている。</p>
+<p>KDE 4からガラッと美しくなったが、Trinityと言う昔のKDE 3をforkした集団も存在する。昔から、KDEは使うのにクセがあるが、Windowsに近い。</p>
+<p>僕の個人的使用感としては、起動が遅いのと、Fedoraで日本語入力のツールボタンがきちんと動かないのが難点だし、僕はFirefox派なので、あまりKDEを使うことは無い。重くはない（使っていると機敏に反応する）のだが、メモリを食うし、起動が遅い。時々良くアプリケーションが不正終了するなど、不安定な印象も受ける。</p>
+<p>KDEは当初からCDEというUNIXの統合デスクトップ環境を模倣して作られている。Konquerorがブラウザとファイルマネージャを兼ねるなどWindowsと良く似ているが、Linuxのそもそもの統合デスクトップ環境としての元祖であり、Linuxを本当に使いたい人間たちが好き勝手に開発している印象を受ける。Sunなどの支持もあって会社のために開発されているところも強いGNOMEとは対照的に、マニアックなアマチュア・プログラマが開発している印象を受ける。</p>
+<p>GNOMEはアーキテクチャ指向であると言われるが、KDEはC++とQtとKDEライブラリ・フレームワークを使用したシンプルで強力で、何よりも美しいデスクトップ・GUI環境プラットフォームを開発している。何より、GNOMEよりも使っていて気持ちが良い。GNUとの仲は悪いというが、最近はきちんとQtもオープンソースになっている。</p>
+<p>KDEの原産地はドイツである。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDE">KDE - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Qt">Qt - Wikipedia</a></li>
+</ul>
+<p>公式</p>
+<ul>
+<li><a href="https://www.kde.org/">KDE.org</a></li>
+<li><a href="https://jp.kde.org/">KDE Japan</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/KDE">git</a></li>
+</ul>
+
+<h2>KDEには何の問題もない</h2>
+<p>KDEには、何の問題もありません。</p>
+<p>QtがGPL互換のフリーソフトウェアのライセンスでなかったのは過去の話であり、現在ではQtもGPL/LGPLのフリーソフトウェアのライセンスで配布・提供されています。</p>
+<p>また、KDEがC++だけでしか開発することができないプラットフォームであるというのは誤解であり、今ではPythonなどを用いて開発することもできます。</p>
+<p>また、GNOMEがCORBAによる再利用性の高いコンポーネント機構を備えているというのも間違った長所の理解であり、KDEではKPartという優れた再利用の機構を備えています。KDEアプリケーションの中で、別のKDEアプリケーションの一部分だけを再利用することができます。</p>
+<p>KDEは素晴らしい環境です。標準的にCMakeを使うことができますし、ほとんどのアプリケーションがGNOMEの同様のアプリケーションよりも多機能であり、プロフェッショナル向けの高品質なアプリケーションが多いです。重さはGNOMEと同じぐらいであり、何よりもデザインがはるかに美しく、そしてGNOMEの「明らかにおかしすぎる設計や実装」が存在せず、まったくすべてが調和しています。</p>
+<p>もし、ディストリビューションが標準でGNOMEを採用しているとか、Firefoxなどの一部のアプリケーションがGTKにしか対応していないという問題を除けば、99%、KDEの方が優れています。</p>
+<p>しかしながら、KDEを追加的に導入すると、GNOMEとKDEの混合したシステムになってしまいます。アプリケーションメニューに、GNOMEとKDEのアプリケーションが混在してしまい、わけが分からないことになります。KDE環境でもGNOMEやGTKのアプリケーションが使えること自体はいいのですが、まったく見た目の異なるアプリケーションを協調させて動かさなければなりません。</p>
+<p>そのため、KDEを使うのであれば、GNOMEがすでにある環境にインストールするのではなく、GNOMEのない環境にKDEだけを導入することをおすすめします。おすすめのディストリビューションは、KubuntuあるいはKDE neon（最新バージョンのKDEを使うことができる専用のディストリビューション）です。</p>
+<p>ですが、KDEは、環境によってはきちんと動かないことがあります。特に、日本人ユーザーが少ないため、日本語環境の問題で使い物にならないことがあります。そのため、GNOMEを我慢して使わなければならない状況は多いです。ですが、KDEがもしきちんと使えるのであれば、「気持ちよくLinuxデスクトップを使うことができる特権」を得られたのだと思うようにしましょう。</p>
+<p>もちろん、GNOMEにおいてもKDEにおいても、Linuxカーネルが動いていることには変わりがありませんし、UNIXの古くからあるツールはGNOME端末でもKonsoleでも動きます。そのため、コマンドラインだけを主に使うのであれば、自分の興味関心だけで自分の好きなデスクトップ環境あるいはウィンドウマネージャを使えばよいでしょう。</p>
+<p>また、LibreOfficeは最近、GNOME環境であってもKDE環境であっても、実行しているデスクトップ環境に適合した見た目でUIが表示されます。Firefoxも、見た目が調和しないことを除けばきちんと動きます。そもそもMozillaの技術はXULをベースにしているため、GNOME環境のFirefoxであっても調和しないで動いていることがよくあります。もちろん、KDEにはKonquerorという独自のWebブラウザがあります。本当のKDEユーザはFirefoxを使いません。Konquerorを使います。</p>
+
+<h1>QtとKDEライブラリ</h1>
+<h2>Qt</h2>
+<p>QtはKDEで採用されているツールキットライブラリ。LinuxだけではなくWindowsなどでも動作する。使用するプログラミング言語は主にC++だが、PyQt (Python)やQtRuby (Ruby)などの言語バインディングも存在する。</p>
+<p><a href="qt.html">Qt</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.18編集</p>
+</div>
+
+<h2>KPart</h2>
+<p>KPartはKDEのためのコンポーネントシステムで、GNOMEのBonoboやMSのOLEに相当する。</p>
+<p>たとえば個人情報アプリケーションKontactは、メールソフトのKMailなど複数のPIMアプリケーションを組み合わせて作られている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KPart">KPart - Wikipedia</a></li>
+</ul>
+
+<h2>CMake</h2>
+<p>CMakeはKDEで使われているビルドシステム。</p>
+<ul>
+<li><a href="https://community.kde.org/Guidelines_and_HOWTOs/CMake">Guidelines and HOWTOs/CMake - KDE Community Wiki</a></li>
+</ul>
+<p><a href="cmake.html">CMake</a>も参照のこと。</p>
+
+<h2>KDE Frameworks</h2>
+<p>KDE Frameworks 5は、KDE Plasma 5とKDEアプリケーションの基盤となるライブラリとフレームワークのコレクション。</p>
+<p>後日注記：<a href="https://develop.kde.org/products/frameworks//">公式</a>では、「Qtでプログラミングを行う上での83のアドオンライブラリ」であると紹介されている。たとえば、圧縮・解凍ライブラリであるKArchiveや、ジョブ・キューベースのスレッド管理APIであるThreadWeaverなどが主な例として紹介されている。このようなルーチンをQtアプリケーションで作りたい時は、KDE Frameworksを使えば、車輪の最発明をする必要がない。KDE FrameworksはQtと同様にクロスプラットフォームであり、LinuxだけではなくMac, Windows, Androidにも対応している。</p>
+<p>後日注記：KDE Frameworkに基づいたアプリケーションを作りたいのであれば、<a href="https://techbase.kde.org/KDE_Frameworks">KDE TechBase</a>などに情報がある。また、一覧は<a href="https://ja.wikipedia.org/wiki/KDE_Frameworks">Wikipedia</a>に存在する。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDE_Frameworks_5">KDE Frameworks 5 - Wikipedia</a></li>
+</ul>
+
+<h2>Kirigami</h2>
+<p>KirigamiはKDEのUIフレームワークで、デスクトップやモバイル、その他のデバイスにそれぞれ適応した見た目でアプリケーション画面を表示させることができる。</p>
+<ul>
+<li><a href="https://develop.kde.org/frameworks/kirigami//">Kirigami UI Framework</a></li>
+</ul>
+
+<h2>KDELibs</h2>
+<p>KDEのライブラリは以前KDELibsと呼ばれていた。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDELibs">KDELibs - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/KDE/kdelibs">git</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>KDEデスクトップ</h2>
+<p><a href="kde_desktop.html">KDEデスクトップ</a>を参照のこと。</p>
+
+<h2>KDEアプリケーション</h2>
+<p><a href="kde_apps.html">KDEアプリケーション</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>デスクトップ・アプリケーション・フレームワークまで、一貫して開発する</h2>
+<p>KDEプロジェクトは、デスクトップ、アプリケーション、ライブラリまで、一貫して全てをKDEプロジェクトで開発しています。</p>
+<p>GTK+には対応してもQtには対応しないことの多いLinuxアプリケーション界ですが、KDEでは全てをQtとKDELibで開発しています。</p>
+<p>その目標は、「第一のLinuxデスクトップ」になることです。</p>
+<p>GTK+/GNOMEアプリケーションが、個性的というか、独特というか、悪く言えば醜くてのっぺりしているツールキットを開発・提供しているのとは対照的に、美しく、かっこよく、センスの良いアプリケーションを作っています。</p>
+<p>KDEアプリケーションは、見た目も多くが統一されており、高機能性が高く、とてもカッコいいのですが、いかんせん標準になれていません。いつまでも、準標準的なデスクトップです。ですが、その前に開けているビジョンと考え方は素晴らしいと思います。Linuxでは標準でないこともあって、そもそも起動すらしなかったり、起動しても日本語がまともに使えなかったり、あるいはまともに使える環境でもGNOMEよりもはるかに起動が遅いなど、たくさんの課題がありますが、「Linuxの未来をなんとか良いものとして見られるようにしてくれる」という意味で、KDEコミュニティはLinuxを陰から支えてくれています。</p>
+
+<h2>KDE Plasma 6</h2>
+<p>すみません、KDEを最近追いかけていなかったので全然知らなかったのですが、2024年2月28日にKDE Plasma 6がリリースされています。暇があれば使ってみたいですが、最近の僕は時間がなくて忙しいので、いつか試してみたいです。</p>
+<p>見た感じ、インターフェースはPlasma 5とそんなに変わっていない印象ですが、デフォルトでのWaylandサポートなどが向上している模様です。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDE_Plasma_6">KDE Plasma 6 - Wikipedia</a></li>
+<li><a href="https://kde.org/ja/announcements/megarelease/6/">KDE MegaRelease 6 - KDE Community</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.18</p>
+</div>
+
+<h1>開発</h1>
+<h2>KDEアプリケーションを開発したい</h2>
+<p>KDEアプリケーションを開発したいのなら、以下が参考になる。</p>
+<ul>
+<li><a href="https://develop.kde.org/docs/getting-started/hello_world/">Hello World! | KDE Developer</a></li>
+</ul>
+<p>チュートリアルの一覧が以下のページにある。</p>
+<ul>
+<li><a href="https://techbase.kde.org/Development/Tutorials">Development/Tutorials - KDE TechBase</a></li>
+</ul>
+<p>ただしちょっと一覧の内容が多すぎるため、最初は「Basics of how to develop with KDE Frameworks」の部分から読んでいこう。以下が参考になる。</p>
+<ul>
+<li><a href="https://techbase.kde.org/Development/Tutorials/Setting_Up">Development/Tutorials/Setting Up - KDE TechBase</a></li>
+<li><a href="https://techbase.kde.org/Development/Tutorials/First_program">Development/Tutorials/First program - KDE TechBase</a></li>
+<li><a href="https://techbase.kde.org/Development/Tutorials/Using_KXmlGuiWindow">Development/Tutorials/Using KXmlGuiWindow - KDE TechBase</a></li>
+<li><a href="https://techbase.kde.org/Development/Tutorials/Using_Actions">Development/Tutorials/Using Actions - KDE TechBase</a></li>
+<li><a href="https://techbase.kde.org/Development/Tutorials/Saving_and_loading">Development/Tutorials/Saving and loading - KDE TechBase</a></li>
+</ul>
+
+<h2>KDEに貢献したい</h2>
+<p>英語だが、以下のページが参考になるかもしれない。</p>
+<ul>
+<li><a href="https://community.kde.org/Get_Involved">Get Involved - KDE Community Wiki</a></li>
+</ul>
+<p>あるいは、自分で検索してください。</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=qt+application+development">qt application development - Google検索</a></li>
+<li><a href="https://www.google.co.jp/search?q=kde+application+development">kde application development - Google検索</a></li>
+</ul>
+
+<h2>KDEアプリケーション開発のサンプルコード</h2>
+<p>GitHubにコードのサンプル集がある。</p>
+<ul>
+<li><a href="https://github.com/KDE/kdeexamples">GitHub - KDE/kdeexamples: A collection of coding examples that provide practical demonstrations of the usage of KDE libraries and app development infrastructure.</a></li>
+</ul>
+
+<h1>ニュースサイト</h1>
+<h2>dot.kde.org</h2>
+<p>KDEには、dot.kde.orgという専用のニュースサイトがある。</p>
+<ul>
+<li><a href="https://dot.kde.org/">dot.kde.org</a></li>
+</ul>
+
+<h1>リンク集</h1>
+<h2>KDE入門</h2>
+<p>もう一つの巨大なデスクトップ環境。</p>
+<ul>
+<li><a href="https://docs.kde.org/">KDE Documentation</a></li>
+<li><a href="https://userbase.kde.org/Welcome_to_KDE_UserBase/ja">KDE UserBase へようこそ</a></li>
+</ul>
+
+<h2>KDE/Qt</h2>
+
+<p>KDEを使ったアプリケーションの開発。</p>
+<ul>
+<li><a href="https://techbase.kde.org/Welcome_to_KDE_TechBase">KDE TechBase</a></li>
+<li><a href="https://techbase.kde.org/Development">Development - KDE</a></li>
+</ul>
+<p>KDE本体の開発。</p>
+<ul>
+<li><a href="https://techbase.kde.org/Welcome_to_KDE_TechBase">KDE TechBase</a></li>
+<li><a href="https://techbase.kde.org/Welcome_to_KDE_TechBase/ja">Welcome to KDE TechBase/ja - KDE</a></li>
+<li><a href="https://techbase.kde.org/Getting_Started/ja">始めましょう - KDE</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

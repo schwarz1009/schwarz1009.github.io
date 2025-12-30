@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>HTML関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>HTMLの世界観</h1>
+<p>HTMLに関する世界観です。<a href="css.html">CSS</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>HTMLとWebの概念</h1>
+<h2>ハイパーテキストとは</h2>
+<p>ハイパーテキストは、文書と文書を結びつける、「文書を超えた文書」と言う概念のこと。</p>
+<p>この時、テキストを結びつけるリンクのことを「ハイパーリンク」と呼ぶ。</p>
+<p>World Wide Webの産みの親であるティム・バーナーズ＝リーは、ハイパーテキストとインターネットを結び付け、Webサーバー、Webブラウザ、Webページによる「世界中の文書情報を簡単に探索することのできるネットワークシステム」を作り上げた。</p>
+<p>HTMLは、このWorld Wide Web（wwwと省略されるか、あるいは単にWeb）において文書を記述するためのマークアップ言語である。TeXなどと同様にマークアップ言語であるため、MS-Wordのように結果を見ながら編集することは基本的に出来ないが、HTMLエディタを使うことで可能である場合もある。</p>
+
+<h2>HTMLとCSS</h2>
+<p>HTMLは、文書の意味情報やリンクの体裁を表現するだけで、スタイルやデザインはCSSあるいはスタイルシートと呼ばれる別のテキストの記述によって行う。</p>
+<p>HTMLで文書を書いたら、その情報に基づいてCSSを書く。あるいは、逆にCSSに基づいてHTMLを書く。このことによって、マークアップした記述全体に一気にデザインを設定し、スタイルを変えることが可能になる。CSSはとても優れた仕組みである。</p>
+
+<h2>WebサーバとWebブラウザ</h2>
+<p>HTMLを見るためには、Webブラウザと呼ばれるソフトウェアが必要。WebブラウザはHTMLを整形して、きちんとしたプリントされた出力として画面に表示し、そこで踏まれたリンクなどから別のページをリクエストする。別のページは同じWebサーバ上にある場合もあれば、別のWebサーバ上にある場合もある。</p>
+<p>Webサーバは、コンテンツであるWebページをWebブラウザに送受信するための、大きなコンピュータ。このコンピュータはネットワークに繋がった状態で常に起動・実行され続けており、さまざまなクライアントの要求に応じてWebページを送ったり、PHPなどのサーバーサイドの処理を行う。この時、PHPなどからSQLのようなデータベース管理システムが呼ばれることも多く、多くの場合、コミュニケーションサイトの情報はPHPなどを通じてSQLデータベースに保管され、PHPなどを通じてHTMLに整形されて、WebサーバからWebブラウザへ送られる。</p>
+
+<h2>サーバーサイドとクライアントサイド</h2>
+<p>HTML+CSSでは、変数や制御構造を用いたプログラミングはできない。あくまで、HTMLとCSSは文書の体裁とスタイルを記述するだけである。</p>
+<p>プログラミングを行いたい場合は、PHPなどのサーバーサイドの言語か、JavaScriptのようなクライアントサイドの言語を用いて行う。</p>
+<p>サーバーサイドの言語で書かれた記述は、「Webサーバ側」で行われる。そして、Webサーバは処理を行ってHTMLをネットワークでブラウザに送信する。そして、JavaScriptで書かれた記述は、「クライアントのWebブラウザ側」で行われる。</p>
+<p>たとえば、掲示板のようにデータをHTMLに整形し、POSTなどで送られたデータをデータベースやサーバ側のデータファイルに投稿するのは、サーバーサイドで行われる。また、ブラウザ側で豪華なエフェクトをかけてブロックを綺麗に表示したり、インタラクティブな操作の処理（リンクを踏んだ時にAjaxのような処理を行ったり、スクロールした時にコンテンツを動的に読み込んだりする）をブラウザ側で行うのは、クライアントサイドで行われる。</p>
+<p>最近は、Webの開発にはWebフレームワークを使うことが多く、PHPの開発でもCakePHPやLaravelなどを使うことが多い。またWikiやWordPressの普及などもあって、HTMLを手動で書くことは減ってきている。だが、HTMLの基本を知っておくことはとても役に立つ。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=HTML">HTML - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>HTML</h1>
+<h2>ヘッダ</h2>
+<table class="some_tables">
+<tr><th class="min60">タグ</th><th>解説</th></tr>
+<tr>
+<td>&lt;!DOCTYPE html&gt;</td>
+<td>HTML宣言。</td>
+</tr>
+<tr>
+<td>&lt;html&gt;HTML文書全体&lt;/html&gt;</td>
+<td>HTMLの開始。</td>
+</tr>
+<tr>
+<td>&lt;head&gt;ヘッダ要素&lt;/head&gt;</td>
+<td>ヘッダ。</td>
+</tr>
+<tr>
+<td>&lt;title&gt;タイトル&lt;/title&gt;</td>
+<td>タイトル。ヘッダに含まれる。</td>
+</tr>
+<tr>
+<td>&lt;meta&gt;</td>
+<td>文章のメタ情報。ヘッダに含まれる。文書自体についての情報を記載する。</td>
+</tr>
+<tr>
+<td>&lt;link&gt;</td>
+<td><p>スタイルシートなどのリンク。ヘッダに含まれる。</p>
+<pre class="prettyprint">
+&lt;link rel="stylesheet" type="text/css" href="../style.css"&gt;
+</pre>
+<p>のようになる。</p></td>
+</tr>
+<tr>
+<td>&lt;style&gt;CSSのスタイル&lt;/style&gt;</td>
+<td>CSSのスタイルをHTMLページに直接書く場合は、styleタグを使う。</td>
+</tr>
+</table>
+
+<h2>テキスト</h2>
+<table class="some_tables">
+<tr><th class="min60">タグ</th><th>解説</th></tr>
+<tr>
+<td>&lt;body&gt;メインの文章&lt;/body&gt;</td>
+<td>メインテキストの開始。</td>
+</tr>
+<tr>
+<td>&lt;h1&gt;見出し1&lt;/h1&gt;<br>&lt;h2&gt;見出し2&lt;/h2&gt;<br>&lt;h3&gt;見出し3&lt;/h3&gt;<br>&lt;h4&gt;見出し4&lt;/h4&gt;<br>&lt;h5&gt;見出し5&lt;/h5&gt;<br>&lt;h6&gt;見出し6&lt;/h6&gt;</td>
+<td><p>見出し。h1が一番大きく、数字を上げるほどサイズが小さくなる。<br>CSSでスタイルを設定できるが、その際にセレクタを使うと便利。</p>
+<pre class="prettyprint">
+&lt;div class="hot_titles"&gt;
+&lt;h1&gt;表題1&lt;/h1&gt;
+&lt;p&gt;テキスト1&lt;/p&gt;
+&lt;h1&gt;表題2&lt;/h1&gt;
+&lt;p&gt;テキスト2&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<p>とした上で、</p>
+<pre class="prettyprint lang-css">
+.hot_titles h1 {
+    margin: 60px 0 30px 0;
+    background: #f9ebd1;
+    padding: 15px 15px 15px 15px;
+    border-bottom: 2px solid #c3003a;
+    font-size: 270%;
+    color: #a03c44;
+}
+.hot_titles h1:before {
+    content: url("dog4.png");
+    margin-right: 15px;
+}
+</pre>
+<p>などとすれば、hot_titlesのdiv要素の中にあるすべてのh1要素にスタイルを適用できる。</p>
+</td>
+</tr>
+<tr>
+<td>&lt;p&gt;文章の一区切り&lt;/p&gt;</td>
+<td>段落。CSSでmarginとline-heightを上手く使うことで綺麗な段落付けができる。</td>
+</tr>
+</table>
+
+<h2>テキスト要素</h2>
+<table class="some_tables">
+<tr><th class="min60">タグ</th><th>解説</th></tr>
+<tr>
+<td>&lt;a href="hoge.html"&gt;リンク&lt;/a&gt;</td>
+<td><p>リンク。CSSでスタイルを設定する時は</p>
+<pre class="prettyprint lang-css">
+a:link {通常のリンクのスタイル}
+a:visited {訪れたことのあるリンクのスタイル}
+a:hover {マウスオーバーした時のスタイル}
+a:active {クリックしてアクティブにした時のスタイル}
+</pre>
+<p>を別々に設定する。</p></td>
+</tr>
+<tr>
+<td>&lt;br&gt;</td>
+<td>改行。</td>
+</tr>
+<tr>
+<td>&lt;div&gt;div領域&lt;/div&gt;</td>
+<td>領域（ブロック）。クラスを指定することでスタイルを設定できる。</td>
+</tr>
+<tr>
+<td>&lt;span&gt;span領域&lt;/span&gt;</td>
+<td>領域（インライン）。divと違い、ひとつの大きなブロックではなく、<br>ブロックの中のテキストの一部のような小さな要素になる。</td>
+</tr>
+</table>
+<p>後日注記：span要素であっても、CSSで</p>
+<pre class="prettyprint lang-css">
+display: block;
+</pre>
+<p>を設定すれば大きなブロックにできる。blockとinlineを上手く使い分けることがCSSによるスタイライズの肝となる。</p>
+<p>後日注記：aタグにtarget="_blank"をつけると、リンクをクリックした際にそのページを新しいウィンドウ（あるいはタブ）を開いて表示します。</p>
+<p>後日注記：divやspanにスタイルを指定したい場合は、style属性で直接CSSを指定するか、class属性でセレクタを指定し、そのセレクタに応じたスタイルをCSSファイル内で指定してやればよい。</p>
+<p>後日注記：XHTMLの記法として、開始タグだけで終了タグがないもの、たとえば&lt;br&gt;などについては、タグの最後に/をつけて&lt;br /&gt;とする。ただし従来の&lt;br&gt;も引き続き利用できる。</p>
+<ul>
+<li><a href="https://qiita.com/mzmz__02/items/2d583aaeb19d40c905d2">【HTML/XHTML】&lt;br&gt;と&lt;br /&gt;の違い #初心者 - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.12.31編集</p>
+</div>
+
+<h2>リストとテーブル</h2>
+<table class="some_tables">
+<tr><th class="min60">タグ</th><th>解説</th></tr>
+<tr>
+<td>&lt;ul&gt;箇条書きリスト&lt;/ul&gt;<br>&lt;ol&gt;番号付きリスト&lt;/ol&gt;<br>&lt;li&gt;それぞれのリスト項目&lt;/li&gt;</td>
+<td>リスト。通常はul+liかol+liの組み合わせで使う。<br>&lt;ul&gt;～&lt;/ul&gt;あるいは&lt;ol&gt;～&lt;/ol&gt;の中にそれぞれの&lt;li&gt;～&lt;/li&gt;を入れて使う。</td>
+</tr>
+<tr>
+<td>&lt;table&gt;テーブル全体&lt;/table&gt;<br>&lt;tr&gt;一行の項目&lt;/tr&gt;<br>&lt;th&gt;表題の列&lt;/th&gt;<br>&lt;td&gt;ひとつの列&lt;/td&gt;</td>
+<td>テーブル（表）。<br>&lt;table&gt;～&lt;/table&gt;の中にそれぞれの&lt;tr&gt;～&lt;/tr&gt;（行）を入れ、<br>trの中にそれぞれの&lt;th&gt;～&lt;/th&gt;（表題の列）あるいは&lt;td&gt;～&lt;/td&gt;（列）を入れて使う。<br>colspanとrowspanを設定することでセルを結合できる。</td>
+</tr>
+</table>
+
+<h2>高度な要素</h2>
+<table class="some_tables">
+<tr><th class="min60">タグ</th><th>解説</th></tr>
+<tr>
+<td>&lt;img src="foo.png"&gt;</td>
+<td>画像。</td>
+</tr>
+<tr>
+<td>&lt;iframe src="bar.html"&gt;&lt;/iframe&gt;</td>
+<td>インラインフレーム。</td>
+</tr>
+<tr>
+<td>&lt;script&gt;実行されるスクリプト文&lt;/script&gt;</td>
+<td><p>JavaScript。挿入されたスクリプトを実行する。</p>
+<p>ファイルを指定する場合は</p>
+<pre class="prettyprint lang-css">
+&lt;script type="text/javascript" src="script.js"&gt;&lt;/script&gt;
+</pre>
+<p>とする。</p></td>
+</tr>
+<tr>
+<td>&lt;!--コメント文--&gt;</td>
+<td>コメント文。この中に書かれた内容は書かれていないものとして扱われる。<br>HTMLのコメントは入れ子にした時に悲惨なことになるので注意が必要。</td>
+</tr>
+</table>
+<p>後日注記：フレームの中でリンクする際に、aタグにtarget="_parent"をつけると親フレームのページを更新し、target="_self"をつけると子フレームの内部のページを更新します。</p>
+
+<h2>特殊文字</h2>
+<p>HTMLの中で&lt;や&gt;などのHTMLで使われる記号を使いたい時は、&amp;lt;や&amp;gt;のように記述する。</p>
+<table class="some_tables">
+<tr><th class="min60">特殊文字</th><th>記述</th></tr>
+<tr>
+<td>&quot;</td>
+<td>&amp;quot;</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>&amp;amp;</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>&amp;lt;</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>&amp;gt;</td>
+</tr>
+<tr>
+<td>&nbsp;(空白)</td>
+<td>&amp;nbsp;</td>
+</tr>
+<tr>
+<td>&copy;</td>
+<td>&amp;copy;</td>
+</tr>
+</table>
+<p>以下のサイトを参考に執筆しました。</p>
+<ul>
+<li><a href="http://pst.co.jp/powersoft/html/index.php?f=3401">HTML-特殊文字 - HTML タグ リファレンス</a></li>
+</ul>
+
+<h2>入力フォーム</h2>
+<p>入力フォームは、PHPなどでテキストや選択内容をサーバに送信するために必要。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+&lt;form method="post" action="comment_receive.php"&gt;
+名前: &lt;input type="text" name="username" required /&gt;&lt;br /&gt;
+投稿内容: &lt;br /&gt;
+&lt;textarea name="comment" cols="50" rows="5" maxlength="150"&gt;なんでも書いてね&lt;/textarea&gt;&lt;br /&gt;
+&lt;input type="submit" value="投稿" /&gt;
+&lt;/form&gt;
+</pre>
+<p>などとなる。タグは、</p>
+<table class="some_tables">
+<tr><th class="min60">タグ</th><th>解説</th></tr>
+<tr>
+<td>&lt;form&gt;</td>
+<td>フォームの始まり。<br>method="post"でPOSTであることを指定する。<br>action="hoge.php"でデータを送るPHPファイルを指定する。</td>
+</tr>
+<tr>
+<td>&lt;input&gt;</td>
+<td>入力フォームの要素。<br>type="text"なら文字列の入力、type="radio"ならラジオボタンとなる。<br>type="button"ならボタン、type="submit"なら送信ボタンとなる。</td>
+</tr>
+<tr>
+<td>&lt;select&gt;</td>
+<td>選択メニュー。</td>
+</tr>
+<tr>
+<td>&lt;option&gt;</td>
+<td>選択メニュー項目。</td>
+</tr>
+<tr>
+<td>&lt;textarea&gt;</td>
+<td>複数行の文字列入力領域。</td>
+</tr>
+</table>
+<p>などを使う。</p>
+<p>（詳しくは「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」が参考になります。）</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/form">&lt;form&gt;: フォーム要素 - HTML: ハイパーテキストマークアップ言語 | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/text">&lt;input type=&quot;text&quot;&gt; - HTML: ハイパーテキストマークアップ言語 | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/submit">&lt;input type=&quot;submit&quot;&gt; - HTML: ハイパーテキストマークアップ言語 | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/textarea">&lt;textarea&gt;: テキストエリア要素 - HTML: ハイパーテキストマークアップ言語 | MDN</a></li>
+<li><a href="https://zenn.dev/fujiyama/articles/496e5e81ba7df9">ボタンには常にtype=&quot;button&quot;をつけよう - Zenn</a></li>
+</ul>
+<p><a href="php_lang.html">PHP（言語）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.12.31編集</p>
+</div>
+
+<h1>HTML5</h1>
+<h2>HTML5</h2>
+<p>HTML5とCSS3では、さまざまなタグや視覚効果が追加された。</p>
+<p>HTML5では、&lt;header&gt;、&lt;section&gt;、&lt;article&gt;、&lt;nav&gt;、&lt;footer&gt;などの新しいタグが追加された。</p>
+<p>これらを使うことで、検索エンジンにページの各部分の意味を伝えやすくなる。</p>
+<p>詳細は以下のページを参照のこと。</p>
+<ul>
+<li><a href="https://kumaweb-d.com/html/html5-css3/">【ちゃんと使えてる？】HTML5・CSS3の使い方 - くまWeb</a></li>
+<li><a href="https://qiita.com/Y_ASAMOTO/items/90afe7d24467020c17f0">【爆速】HTML5 + CSS3で簡単にWebデザインしよう！ - Qiita</a></li>
+</ul>
+<p><a href="../windows_pc/browsers.html">Webブラウザ（Windows）</a>も参照のこと。</p>
+
+<h2>ビデオタグ</h2>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.21.html">2021/01/21</a>より。</p>
+<p>また、HTML5では動画を再生するネイティブなタグなどがサポートされた。このため、外部プラグインが必要なFlashなどは衰退した。</p>
+
+<h2>HTML5の意味</h2>
+<p>インターネットの世界には、とてもたくさんのWebページが存在します。それぞれのWebページに管理人がいて、それぞれが独自のHTMLを書いて公開しています。</p>
+<p>ですが、その無数にあるWebページで、それぞれのHTMLはそれぞれ異なるやり方で記述されているため、HTMLの記述はそれぞれのページでバラバラになってしまい、Webの世界は混沌とし、わけがわからなくなってしまいます。</p>
+<p>このようなWebの混沌を、HTML5の新しいタグを使うことで、ある程度の「共通のルール」を持たせることができます。</p>
+<p>HTML5の新しいタグを使うことで、ヘッダ、フッタ、メニュー、記事、といった各部分の役割と意味を分かりやすくすることができます。「ここがメニューです」とか「ここがメインの記事です」ということを明確に記述できます。</p>
+<p>この恩恵を受けるのは、人間ではなく機械から読み取る時です。人間ならば、HTMLが表示された画面を見て、「ここがメニューだな」とか「ここがメインの内容だな」ということが目で見て分かりますが、機械には明示的に書かなければ分かりません。なので、人間ではなく機械に正しくHTMLの部分の意味を伝えるために、そのような共通のタグを指定します。</p>
+<p>これらは、特にクロール型の検索エンジンで役に立ちます。クロール型の検索エンジンは、機械的にWebページの内容を解析して、そのWebページがどのような内容のページなのかを解析し、それを検索エンジンに反映させます。HTML5の新しいタグを使うことで、検索エンジンがクロールする際に、Webページの内容を明示的に伝えることができます。</p>
+<div class="edit_date">
+<p>2023.08.21</p>
+</div>
+
+<h1>余談</h1>
+<h2>HTMLとSQLの間で様々なことをするのをWebサービスと言う</h2>
+<p>実際のところ、HTMLによるマークアップのドキュメントと、SQLなどのデータベースによるデータの集積が、Webにおける主役であると言えます。</p>
+<p>まず、HTMLで画面を作ります。このHTMLでどのようなことをするかを、PHPやJavaScriptで記述します。そして、そこからSQLなどのデータベースとやり取りし、データベースとHTMLの間で、さまざまなことをします。</p>
+<p>HTMLでできることは、「静的なマークアップ文書」です。そして、SQLでできることは、「頻繁に書き換えられるデータベース」です。この二つを繋げ、サーバーを用意することで、掲示板やSNS、動画サイトなどのWebサービスが作れます。</p>
+<p>WebデザイナーとかWebプログラマがやっていることは、要するにそういうことです。HTMLとSQLの間で様々なことをするのを、Webサービスだと言っているだけなのです。</p>
+<p><a href="../db/db.html">データベース</a>や<a href="php_db.html">PHP（データベース）</a>も参照のこと。</p>
+
+<h1>別ページ</h1>
+<h2>CSS</h2>
+<p>CSSに関しては<a href="css.html">CSS</a>を参照のこと。</p>
+
+<h2>JavaScript</h2>
+<p>XMLやJavaScriptに関しては、</p>
+<p>・<a href="xml.html">XML</a></p>
+<p>・<a href="javascript.html">JavaScript</a></p>
+<!--
+<p>・<a href="javascript_dom_canvas.html">JavaScript（２．DOM/Canvas）</a></p>
+<p>・<a href="javascript_prototype.html">JavaScript（３．プロトタイプチェーン）</a></p>
+-->
+<p>・<a href="javascript_framework.html">JavaScriptフレームワーク</a></p>
+<p>・<a href="jquery.html">jQuery</a></p>
+<p>を参照のこと。</p>
+
+<h2>Webサーバー・ツール</h2>
+<p>Web系のサーバーやツールに関しては、</p>
+<p>・<a href="../network/web_intro.html">Webの世界</a></p>
+<p>・<a href="../network/web.html">Webサーバー</a></p>
+<p>・<a href="../network/web_tools.html">Webツール</a></p>
+<p>・<a href="../network/web_framework.html">Webフレームワーク</a></p>
+<p>・<a href="../network/cgi.html">CGI</a></p>
+<p>・<a href="php.html">PHP</a></p>
+<p>・<a href="../network/wordpress.html">WordPress</a></p>
+<p>・<a href="ruby_on_rails.html">Ruby on Rails</a></p>
+</p>を参照のこと。</p>
+
+<h2>Webブラウザ</h2>
+<p>Web系のブラウザについては、。</p>
+<p>・<a href="../linux/mozilla.html">Mozilla</a></p>
+<p>・<a href="../linux/webkit.html">WebKit</a></p>
+<p>・<a href="../windows_pc/browsers.html">Webブラウザ</a></p>
+<p>を参照のこと</p>
+
+<h1>簡単な説明</h1>
+<h2>HTML/CSS</h2>
+<ul class="defaultlist list7">
+<li>HTML/CSS
+<ul>
+<li>HTML, CSS
+<ul>
+<li>セレクタ（IDとクラス）</li>
+<li>display
+<ul>
+<li>inline, block, inline-block, noneなどを使い分ける</li>
+</ul></li>
+<li>絶対位置と相対位置</li>
+<li>フレックスボックス
+<ul>
+<li>画面を分割して綺麗に並べられる</li>
+</ul></li>
+<li>グリッド</li>
+</ul></li>
+<li>XML, JSON</li>
+</ul></li>
+</ul>
+
+<h2>セレクタ</h2>
+<p>IDには「#」を、クラスには「.」をつけて、「そのクラスの適用されている部分のタグ」だけを指定できる。</p>
+<p>IDはJavaScriptやDOMなどから「この場所にHTMLを入れ込み表示せよ」などといった命令をするためにも使う。</p>
+
+<h2>セレクタの包括関係（.section h3など）</h2>
+<p>「sectionクラスのdivタグの中のh3タグ」といった指定が可能。</p>
+<p>ページによってh3タイトルの見た目をdivで囲うだけで簡単に変えられたりする。</p>
+
+<h2>絶対位置と相対位置</h2>
+<p>絶対位置に表示することで、画面の特定の場所に要素を表示できる。</p>
+<p>親要素に相対位置が設定されていれば、絶対位置でもそこからの相対的な位置になる。</p>
+
+<h1>リンク集</h1>
+<h2>HTML</h2>
+<p>HTML/CSSなど</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/subtop/ux/">HTML5 + UX : HTML5とUXの総合情報フォーラム - @IT</a></li>
+</ul>
+
+<h2>HTMLリファレンス</h2>
+<p>HTML/CSS</p>
+<ul>
+<li><a href="http://www.htmq.com/">HTMLクイックリファレンス</a></li>
+</ul>
+
+<h2>Webデザイン（HTML5・CSS/Sass）</h2>
+<p>以下は楽に見ることの出来るスライド（プレゼンテーション）へのリンク。</p>
+<ul>
+<li><a href="http://commte.net/blog/archives/3403">ひとりでWeb制作できた！「知識０から学ぶ」すごいスライドやサイト２７ - コムテブログ</a></li>
+</ul>
+
+<h2>HTML5</h2>
+<p>スライド。</p>
+<ul>
+<li><a href="http://www.slideshare.net/myakura/html5-2480964?from=ss_embed">HTML5, きちんと。 - SlideShares</a></li>
+<li><a href="http://www.slideshare.net/swapskills/futomi">今からハジメるHTML5マークアップ - SlideShares</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

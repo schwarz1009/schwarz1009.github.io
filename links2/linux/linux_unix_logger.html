@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXシステム管理８A（システムロガー） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXシステム管理８A（システムロガー）</h1>
+<p>UNIXやLinuxのシステム管理（システム・コマンド・設定）に関する世界観８A（システムロガー）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_unix.html">UNIXシステム管理</a></li>
+<ul>
+<li><a href="linux_unix_os.html">１．OS</a></li>
+<li><a href="linux_unix_compiler.html">２．コンパイラ</a></li>
+<li><a href="linux_unix_shell.html">３．シェル</a></li>
+<li><a href="linux_unix_filesystem.html">４．ファイルシステム</a></li>
+<li><a href="linux_unix_user.html">５．ユーザーとパーミッション</a></li>
+<li><a href="linux_unix_admin.html">６．システム情報と設定</a></li>
+<li><a href="linux_unix_timezone_locale.html">７．タイムゾーンとロケール</a></li>
+<li><b>８A．システムロガー</b></li>
+<li><a href="linux_unix_cron.html">８B．cron</a></li>
+<li><a href="linux_unix_others.html">９．提案</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>システムロガー</h1>
+<h2>ログファイルとは</h2>
+<p>ログファイルとは、システムの動作を逐一記録したファイルのこと。</p>
+<p>システムがダウンした時や、なんらかの理由で動かなくなった時などに、ログファイルに記録されている内容から、原因究明や復旧への最初の糸口が見出せる。</p>
+<p>Linuxのログファイルは/var/logディレクトリにある。このディレクトリの下にシステムにとって重要なさまざまなログファイルがある。</p>
+<div class="edit_date">
+<p>2023.09.20</p>
+</div>
+
+<h2>システムロガー</h2>
+<p>システムのログを取ってくれる。システムにどんな不良があったのか、いつ何をしていたのか（いつ何が起きたのか）を知るために役に立つ。</p>
+<p>デフォルトでは、/var/logディレクトリにさまざまなログファイルがある。システム全般のログは/var/log/syslogにある。</p>
+<p>後日注記：Linuxで何かあった時、たとえばアプリケーションが起動しなかったり不正終了した時は、原因を探るために/var/log/syslogを見てみましょう。エラーメッセージをGoogleにかけることでも解決することがあります。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0209/07/news002.html">システム管理の基礎 syslogdの設定をマスターしよう (1/3) - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0808/21/news120.html">syslog-ngの導入と設定 (1/3) - @IT</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/sysklogd/man8/syslogd.8.html">man sysklogd</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/util-linux/man1/dmesg.1.html">man dmesg</a></li>
+</ul>
+
+<h2>さまざまなログファイル</h2>
+<p>/var/logにはさまざまなログがあります。</p>
+<p>よく必要になるログファイルとして、/var/log/boot.logはOS起動時のログが記録される。一般的なシステム関連は/var/log/messages、cronは/var/log/cronに記録される。</p>
+<p>ログ名の最後の.0や.1は古いアーカイブされた過去のログを表します。たとえば、messages.0のようになります。</p>
+<ul>
+<li><a href="https://www.infraeye.com/study/linuxz46.html">Linux - システムのログ その2 - LPIC イージス</a></li>
+</ul>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%9C%80%E6%96%B0Debian-GNU-Linux%E5%AE%8C%E5%85%A8%E6%94%BB%E7%95%A5%E3%82%AC%E3%82%A4%E3%83%89-%E5%A4%A9%E9%87%8E-%E6%AD%A3%E6%A8%B9/dp/4798014125">最新 Debian GNU/Linux 完全攻略ガイド（天野正樹）</a></li>
+</ul>
+<p><a href="linux_fhs.html">Linuxファイルシステム階層</a>も参照のこと。</p>
+
+<h2>auth.log</h2>
+<p>/var/log/auth.logには認証に関するログが記録されている。</p>
+<p>一人で一台のLinuxを使っている時は関係ないが、ネットワークに繋がっている場合などにチェックすることで、GDMやsu/sudoコマンドにログインしたユーザのことをチェックできる。</p>
+<p>認証だけではなく、システム全般のログを参照するためには、/var/log/syslogを参照すること。</p>
+<p>そのほか、認証関係のログについては以下の記事が参考になる。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/520/">認証に関する情報を記録するログファイル | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+
+<h2>sysklogd, syslog-ng, metalog</h2>
+<p>sysklogdは従来的なシステムロガー用のデーモンを含めたパッケージ。syslog-ng, metalogはさらに高度で上級者向けのパッケージ。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Tools/ja">ツールのインストール - Gentoo Wiki</a></li>
+</ul>
+
+<h1>ブートログ</h1>
+<h2>/var/log/dmesgとdmesgコマンド</h2>
+<p>/var/log/dmesgは、ブートしてからファイルシステムがマウントするまでの「ブートログ」が保管されるログファイルで、dmesgコマンドによって作成される。</p>
+<p>ブート時に何が起こったのか、システムが立ち上がってからもう一度見たい時に使うことができる。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/519/">「/var/log/dmesg」ファイル、「dmesg」コマンド | Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/util-linux/man1/dmesg.1.html">man dmesg</a></li>
+</ul>
+
+<h2>/var/log/message</h2>
+<p>/var/log/messageは、syslogdが出力するログ。syslogdが起動してからはこちらにログが保管される。</p>
+<ul>
+<li><a href="http://tooljp.com/linux/faq/1285E01679D0B05549257A1A0053BEC4.html">dmesg と/var/log/messages の違いは | Redhat Enterprise Linux 6 - FAQ CENTER</a></li>
+</ul>
+
+<h2>起動で何かあったらログを見てsystemctl statusを確認する</h2>
+<p>もし、デーモンの起動で何かあったら、まずログを見ましょう。たとえば/var/log/boot.logに、OSを起動する時に表示されるログがあります。</p>
+<p>ログを見て、何のデーモンなのか確認出来たら、</p>
+<pre>
+systemctl status [サービス名]
+</pre>
+<p>を確認します。ここで表示される情報から、たとえば正常に起動できなかったサービスについて、何が問題なのかを突き止められます。</p>
+<p><a href="linux_daemon.html">initとデーモン</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h1>systemd</h1>
+<h2>journalctl (journald)</h2>
+<p>journalctlは、systemdによる新しいシステムロガーの表示コマンド。</p>
+<p>長らくシステムロガーの吐くログファイルは</p>
+<pre>
+less /var/log/syslog
+</pre>
+<p>で読むことができたが、systemd導入の結果、今ではjounalctlを使うようになった。</p>
+<p><a href="systemd.html">systemd</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

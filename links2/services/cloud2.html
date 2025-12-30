@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>クラウドサービス・レンタルサーバ関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Webサービスの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/services_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>クラウドサービス・レンタルサーバの世界観</h1>
+<p>クラウドサービス・レンタルサーバに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>クラウドサーバ</h1>
+<h2>クラウドサーバって何ぞや</h2>
+<p>簡単に言えば、レンタルサーバーの進化版みたいなもの。似たようなものだと考えてよい。</p>
+<p>商用の大規模なサーバーから個人でアプリ開発と提供に使うような小規模なサーバーまで、多様なスケールに対応し、簡単にスケールを向上させることができる。</p>
+<p>クラウド環境にはSaaS、PaaS、IaaSがあり、SaaSはクラウドで提供されるアプリケーション、PaaSはアプリケーションの開発を行うプラットフォーム、IaaSはインフラとして提供されるハードウェア資源のことを指す。</p>
+<p>レンタルサーバではひとつのサーバを多数のユーザーで共有するが、VPSやクラウドでは専用の仮想サーバをたてる。そのため、自由にOS（主にRHELやSUSE、UbuntuのようなLinuxディストリビューションなど）をインストールして自分の好きなソフトを導入して管理することができる。</p>
+
+<h2>パブリッククラウドとプライベートクラウド</h2>
+<p>パブリッククラウドは、自社の専用のハードウェアを必要とせず、ネットワーク上で必要な時だけリソースを利用する体系。Amazon AWSなどはパブリッククラウドにあたる。</p>
+<p>プライベートクラウドは、プライベートに構築された自社内の専用のクラウド。</p>
+<p>このほか、パブリッククラウドとプライベートクラウドのいいとこどりをするハイブリッドクラウドがある。</p>
+<ul>
+<li><a href="https://www.idcf.jp/cloud/column/public_private.html">パブリッククラウドとプライベートクラウド、どうやって使い分ける？｜IDCフロンティア</a></li>
+<li><a href="https://www.yume-tec.co.jp/column/awsengineer/1429">AWSの基礎知識：パブリッククラウドとプライベートクラウド【エンジニア採用担当者向け】 | ITエンジニアの派遣なら夢テクノロジー</a></li>
+</ul>
+
+<h2>クラウドについて</h2>
+<p><a href="../network/cloud.html">クラウド</a>を参照のこと。</p>
+
+<h1>レンタルサーバの種類</h1>
+<h2>レンタルサーバとは</h2>
+<p>レンタルサーバは、さまざまな会社のサーバー資源をレンタルして使用できるサービスのこと。</p>
+<p>その種別により、共有サーバ、VPS、クラウドサーバ、専用サーバがある。</p>
+<ul>
+<li><a href="https://hnavi.co.jp/knowledge/blog/server_construction/">サーバ構築のポイントとは？今さら聞けないサーバに関する基礎知識｜発注成功のための知識が身に付く【発注ラウンジ】</a></li>
+<li><a href="https://knowledge.sakura.ad.jp/7938/">ネコでもわかる！さくらのVPS講座 〜第一回：VPSてなんだろう？〜 | さくらのナレッジ</a></li>
+</ul>
+<p>以下は上のリンクを参考に執筆しました。</p>
+
+<h2>共有サーバ（レンタルサーバ）</h2>
+<p>ひとつのサーバを複数人で共有する。価格は安いが、カスタマイズが不可能で、別のユーザーと資源を共有するため、別のユーザーの影響でサーバが落ちたりすることがある。</p>
+
+<h2>VPS（Virtual Private Server）</h2>
+<p>サーバの中で仮想サーバを作り、その仮想サーバを専用サーバにする。カスタマイズが可能でroot権限が得られるため自分で自由にPHPやSQLサーバなどを設定できる。</p>
+<p>有名なのはさくらのVPS。</p>
+<p>自分でアプリケーションをインストールしたり独自の設定をすることができて、「自宅サーバ並みの自由度が得られる」が、一方でセキュリティアップデートを自分で行わなければならないなど、「自宅サーバ並みの管理スキル」が求められる。個人のWebサーバに使うのであれば、自宅サーバを立てるのとあまり変わらない。</p>
+<p>ちなみに自分でOSをインストールすることができるため、CentOS6の環境の上でCentOS7などをインストールすることも可能。UbuntuやDebianやFedoraやSuSEなどを使うこともできる。</p>
+
+<h2>クラウドサーバ</h2>
+<p>サーバの中でも高度かつ高性能で、VPSよりももっとたくさんのシステムパフォーマンスが得られる。たとえばAmazonのAWSやGoogleのGAEなど、データセンターと同等のサーバー資源をクラウドインフラとして利用することができ、データセンター並みの高い性能とディスク容量を誇る。</p>
+<p>サーバの資源は後から拡張できるため、大規模なサイトになってからサーバをいくらでも拡張できる。</p>
+<p>価格が高く、月額課金制と従量課金制の2つの料金体制がある。AWSなどは使用した時間ベースで払えるため、大規模なWebサービスを構築するために使うと良い。</p>
+<p>クラウドサーバでは、サーバを「仮想サーバ」として利用する。仮想サーバはいつでも迅速に拡張し、あるいは縮小できる。よって、キャンペーン中だけ仮想サーバを拡張して、必要がなくなったらすぐに縮小できる。</p>
+
+<h2>専用サーバ</h2>
+<p>サーバを完全に一人で占有する専用のサーバ。価格は最も高い。</p>
+
+<h2>自宅サーバ</h2>
+<p>最初から自宅サーバを自ら立てるのもアリ。自分でサーバ資源を管理できるスキルの高さが必要。<a href="../network/web.html">Webサーバ</a>や<a href="../network/apache.html">Apache</a>も参照のこと。</p>
+
+<h1>クラウドサービス</h1>
+<h2>AWS</h2>
+<p>Amazonによるクラウドサーバー。</p>
+<p><a href="aws.html">AWS</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>GAE (Google App Engine)</h2>
+<p>Google Cloud Platformは、Googleによるクラウドプラットフォーム。</p>
+<p>Google App Engine (GAE) は、その中のWebアプリケーションを実行するエンジン。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Google_Cloud_Platform">Google Cloud Platform - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Google_App_Engine">Google App Engine - Wikipedia</a></li>
+</ul>
+
+<h2>Heroku</h2>
+<p>無料で使えるクラウドサーバー。</p>
+<p><a href="heroku.html">Heroku</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>OpenShift</h2>
+<p>オープンソースな技術によるPaaS（クラウドプラットフォーム）。サーバ上にWebアプリケーションをデプロイすることができる。</p>
+<ul>
+<li><a href="https://www.openshift.com/">OpenShift: Container Application Platform by Red Hat, Built on Docker and Kubernetes</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1304/25/news014.html">“使用”より“構築”で学ぶオープンPaaS「OpenShift」 (1/5)：DevOps時代のJavaプログラマのためのオープンクラウド入門（1） - ＠IT</a></li>
+</ul>
+
+<h2>Now</h2>
+<p>極度にシンプルで、手軽にデプロイできるPaaS（クラウドプラットフォーム）。</p>
+<ul>
+<li><a href="https://qiita.com/aggre/items/f0cb9f8b8e8c54768e50">Now でクラウドの複雑さから解放されよう、今すぐに - Qiita</a></li>
+</ul>
+
+<h2>Windows Azure</h2>
+<p>Microsoftによるクラウドサービス。</p>
+<ul>
+<li><a href="https://azure.microsoft.com/ja-jp/">Microsoft Azure Cloud Computing Platform & Services</a></li>
+</ul>
+
+<h1>レンタルサーバー・VPS</h1>
+<h2>さくらのレンタルサーバー（VPS）</h2>
+<p>安くて魅力的なのはさくらかもしれない。サーバをコスパで選ぶとVPSになるが、Linuxを自分で管理しなければならないなど運営・管理コストは高い。</p>
+<ul>
+<li><a href="https://www.sakura.ne.jp/">さくらのレンタルサーバ | 高速・安定WordPressなら！無料2週間お試し</a></li>
+</ul>
+
+<h2>さくらVPSを導入しよう</h2>
+<p>さくらのVPSを導入する手順がqiitaに載っています。</p>
+<ul>
+<li><a href="https://qiita.com/Qsugi/items/9239f93f35967e567b5b">さくらVPSでCentOS7 １．申し込み - Qiita</a></li>
+<li><a href="https://qiita.com/Qsugi/items/4cc4ba9983191a306b19">さくらVPSでCentOS7 ２．CentOS7インストール - Qiita</a></li>
+<li><a href="https://qiita.com/Qsugi/items/45772c8a71a31bd0d3c8">さくらVPSでCentOS7 ３．SSH接続 - Qiita</a></li>
+<li><a href="https://qiita.com/Qsugi/items/bf9740f31b4c42eaad91">さくらVPSでCentOS7 ４．Apache・PHPインストール - Qiita</a></li>
+<li><a href="https://qiita.com/Qsugi/items/7798669338b555f4ea8d">さくらVPSでCentOS7 ５．MariaDBインストール - Qiita</a></li>
+<li><a href="https://qiita.com/Qsugi/items/6f383694f60913abb948">さくらVPSでCentOS7 ６．FTP接続 - Qiita</a></li>
+<li><a href="https://qiita.com/Qsugi/items/a8328a116218b058a8bf">さくらVPSでCentOS7 ７．sftp接続 - Qiita</a></li>
+<li><a href="https://qiita.com/Qsugi/items/8b6f5b457285140b2ca2">さくらVPSでCentOS7 ８．phpMyAdminインストール - Qiita</a></li>
+</ul>
+
+<h2>ロリポップ</h2>
+<p>ロリポップも有名である。</p>
+<ul>
+<li><a href="https://lolipop.jp/">ロリポップ！レンタルサーバー | 利用実績170万人突破！無料SSLあり</a></li>
+</ul>
+
+<h2>ConoHa</h2>
+<p>ConoHaは初期費用が無料でかつ月900円で使える。</p>
+<ul>
+<li><a href="https://qiita.com/HitoshiHaga/items/5e21f9b4f52158e28510">ConoHaでサクっとWebサーバーを作ろう - Qiita</a></li>
+</ul>
+
+<h2>WordPressを使いたい場合</h2>
+<p>WordPressが動作するレンタルサーバーの情報が知りたい場合は、以下を参照のこと。</ul>
+<ul>
+<li><a href="http://wpdocs.osdn.jp/%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%83%85%E5%A0%B1">レンタルサーバー情報 - WordPress Codex 日本語版</a></li>
+</ul>
+
+
+<h1>レンタルホームページ</h1>
+<p><a href="../network/web_hosting_parts.html">Webホスティング・パーツ</a>も参照のこと。</p>
+
+<h2>FC2ホームページ</h2>
+<p>FC2によるホームページサービス。</p>
+<ul>
+<li><a href="http://web.fc2.com/">FC2ホームページ - 無料ホームページスペース</a></li>
+</ul>
+<h2>忍者ホームページ</h2>
+<p>忍者ツールズによるホームページサービス。</p>
+<ul>
+<li><a href="https://www.ninja.co.jp/hp/">無料でホームページを作成するなら｜忍者ホームページ</a></li>
+</ul>
+
+<h1>ホームページ作成</h1>
+<h2>Jimdo</h2>
+<p>Jimdoはホームページ作成サービス。簡単にホームページを作成できる。</p>
+<ul>
+<li><a href="https://www.jimdo.com/jp/">ホームページ作成サービス｜誰でも簡単・無料HP - Jimdo</a></li>
+</ul>
+
+<h2>Wix</h2>
+<p>ホームページ作成サービス。</p>
+<ul>
+<li><a href="https://ja.wix.com/">ホームページ作成｜無料ホームページ制作ツール｜Wix.com</a></li>
+</ul>
+
+<h1>GitHub</h1>
+<h2>GitHub Pages</h2>
+<p>最近はGitHubを用いることで、GitHub Pagesから静的なHTMLを公開できる。アドレスは「https://アカウント名.github.io」あるいは「https://アカウント名.github.io/リポジトリ名」となる。Webサイトを作るのであれば一番手軽。ただしGitの知識が必要。</p>
+<p><a href="../prog_lang/git.html">Git</a>も参照のこと。</p>
+<ul>
+<li><a href="https://prog-8.com/docs/github-pages">自分で作ったWebページをインターネット上に公開しよう！ | プログラミングの入門なら基礎から学べるProgate[プロゲート]</a></li>
+</ul>
+
+<h1>CDNサービス</h1>
+<h2>Cloudflare</h2>
+<p>CloudflareはWebサイト管理者向けのCDNサービス。サイトをセキュリティ保護し、読み込みを高速化してくれる。</p>
+<ul>
+<li><a href="https://www.accelia.net/column/beginners/6462/">Cloudflare（クラウドフレア）とは？仕組みや導入するメリット - アクセリア株式会社</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.18</p>
+</div>
+
+<h2>Amazon CloudFront</h2>
+<p>Amazon CloudFrontはAmazonによるCDNサービスで、Webサイトの読み込みを高速化する。<a href="aws.html">AWS</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.06.12</p>
+</div>
+
+<h1>余談</h1>
+<h2>クラウドに使われるLinux</h2>
+<p>現在のLinuxビジネスにおいて、大きな市場となっているのがクラウド市場である。</p>
+<p>どういうことかというと、AWSなどでホストOSの上で動作するゲストOSあるいはコンテナ仮想化であればコンテナ向けのOSとして、RHELやUbuntuなどが選択される場合が多くなってきている。</p>
+<p>仮想OSとは、クラウドサーバの中の仮想サーバに使われるOSのこと。仮想サーバはroot権限が得られるため、どこまでも自分仕様に管理できるほか、OSも自由にインストールできる。そのため、サポートが必要ならRHEL、必要ないならUbuntuを導入する場合が多い。</p>
+<p>そうした、「クラウドサービス向けのコンテナOS」という新しい市場が生まれつつある。</p>
+<p>MicrosoftのやっているWindows Azureでも、ゲストOSとしてRed HatなどのLinuxが使われる機会が増えてきており、一時期は「Linuxやオープンソースは癌である」と言っていたMicrosoftすら、Linuxに対して本腰を入れて対応する時代がやってきつつある。そのため、MSは.NET Coreをオープンソースにしたり、GitHubを買収したり、あるいはWSL 2にLinuxカーネルを仮想OSとして搭載するなど、半ば「手段を選ばず何でもあり」のようになっている。</p>
+<p>ただし、クラウドの仮想コンテナ向けのOSというのは巨大市場である。それは、パブリッククラウドとプライベートクラウドの2つにまたがるハイブリッドクラウド市場が、「エンタープライズ向けの新しい標準」となろうとしていることなどから言える。昔のように、IBMの大型コンピュータを使わず、クラウドで何でも実現する時代に到達しつつある。この分野で強いのが、LinuxというOSである。</p>
+
+<h1>簡単な説明</h1>
+<h2>クラウドサービス</h2>
+<ul class="defaultlist list7">
+<li>Webサービス
+<ul>
+<li>クラウドサービス
+<ul>
+<li>AWS</li>
+<li>VPS</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2>AWS</h2>
+<p>AWSはクラウドサービス。基本的に、どんなに巨大になってもスケールを拡張できるレンタルサーバのようなものだと考えればいい。</p>
+<p>コストパフォーマンスだけを見るなら、さくらなどのサービスでVPSを購入した方が安い。</p>
+
+<h2>VPS</h2>
+<p>VPSは仮想プライベートサーバと呼ばれ、自分だけのroot権限を持った仮想サーバが得られる。共有サーバ（レンタルサーバ）と比べると、システムのカスタマイズが自由だが、システムを自分で管理しなければならない。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
