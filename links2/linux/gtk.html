@@ -99,29 +99,45 @@
 <p>g_signal_connect()の引数は、g_signal_connect(対象オブジェクト, シグナル名, 新しいシグナルハンドラとなる関数, オプションのデータ)となる。</p>
 <p>たとえば、</p>
 <pre class="prettyprint">
-GtkWindow *window;
-GtkButton *button;
+#include &lt;gtk/gtk.h&gt;
 
-gtk_init(&argc, &argv);
+void button_clicked_func(GtkWidget *widget, gpointer data) {
+    g_print("Hoge!\n");
+}
 
-window = g_object_new(GTK_TYPE_WINDOW, "title", "Application 1", NULL);
+gint delete_func(GtkWidget *widget, GdkEvent event, gpointer data) {
+    return FALSE;
+}
 
-g_signal_connect(window, "delete-event", G_CALLBACK(delete_func), NULL);
-g_signal_connect(window, "destory", G_CALLBACK(end_func), NULL);
+void end_func(GtkWidget *widget, gpointer data) {
+    gtk_main_quit();
+}
 
-button = g_object_new(GTK_TYPE_BUTTON, "label", "_Button 1", NULL);
+int main(int argc, char **argv) {
+    GtkWindow *window;
+    GtkButton *button;
 
-g_signal_connect(button, "clicked", G_CALLBACK(button_clicked_func), NULL);
+    gtk_init(&argc, &argv);
 
-gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(button));
+    window = g_object_new(GTK_TYPE_WINDOW, "title", "Application 1", NULL);
 
-gtk_widget_show_all(GTK_WIDGET(window));
+    g_signal_connect(window, "delete-event", G_CALLBACK(delete_func), NULL);
+    g_signal_connect(window, "destory", G_CALLBACK(end_func), NULL);
 
-gtk_main();
+    button = g_object_new(GTK_TYPE_BUTTON, "label", "_Button 1", NULL);
 
-return 0;
+    g_signal_connect(button, "clicked", G_CALLBACK(button_clicked_func), NULL);
+
+    gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(button));
+
+    gtk_widget_show_all(GTK_WIDGET(window));
+
+    gtk_main();
+
+    return 0;
+}
 </pre>
-<p>のようになる。実際はmain()関数に上記のコードを記述し、delete_func(), end_func(), button_clicked_func()の関数をそれぞれ作成する。</p>
+<p>のようになる。実際はmain()関数のコードを記述し、delete_func(), end_func(), button_clicked_func()の関数をそれぞれ作成する。</p>
 <p>まず、gtk_init()関数で初期化を行い、ウィンドウwindowをg_object_new()関数で作る。</p>
 <p>そして、g_signal_connect()関数を使って、windowのdelete-eventイベントに自分で作ったdelete_func()関数を、destroyイベントに自分で作ったend_func()関数をコールバック関数として（関数名にG_CALLBACK()をつける）登録している。</p>
 <p>同様に、ボタンbuttonを作った上でbuttonのclickedイベントに自分で作ったbutton_clicked_func()関数をコールバック関数として登録している。</p>
@@ -130,6 +146,7 @@ return 0;
 <p>（<a href="https://www.amazon.co.jp/Official-GNOME-developers-guide/dp/1593270305">The Official GNOME 2 developer's guide</a>を参考に執筆しました。115～116ページに類似のコードが出てきます。）</p>
 <div class="edit_date">
 <p>2023.02.19編集</p>
+<p>2026.01.08編集</p>
 </div>
 
 <h2>ウィジェットの対応関数</h2>
