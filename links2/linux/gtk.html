@@ -79,7 +79,7 @@
 <h1>GTKプログラミング</h1>
 <h2>GObjectの基本</h2>
 <p>GTK/GLibでは、型名や関数名などなんにでもgをつけます。</p>
-<p>たとえば、型名ならgint, gchar*, gboolean, gpointer, 関数名ならg_signal_connect()のようにです。</p>
+<p>たとえば、型名ならgint, gchar*, gboolean, gpointer, 関数名ならg_print(), g_signal_connect()のようにです。</p>
 <p>これは、C言語でオブジェクト指向を行うGLib/GObjectのおかげで、標準には存在しないオブジェクト指向の型や関数を使うからです。慣れるまでは醜いかもしれませんが、論理的な「オブジェクト指向のデスクトップ環境」を作る上で、C言語のままで優れたやり方をしています。</p>
 <p>g_object_new()は、オブジェクトを作成するためのGObjectの関数です。ウィジェットは、g_object_new()あるいはウィジェットごとの関数で作成します。ウィジェットは、GtkWidget*, GtkWindow*, GtkTextView*などのポインタ変数で保持・参照します。</p>
 <p>GObjectにおいては、g_object_new()に、型名であるGTypeを指定し、プロパティ名と値の組（必ずNULLで終わる）を指定することで、オブジェクトを作成できます。GTypeにはGTK_TYPE_WINDOW（ウィンドウ）やGTK_TYPE_LABEL（ラベル）やGTK_TYPE_BUTTON（ボタン）などがあります。</p>
@@ -93,6 +93,7 @@
 </ul>
 <div class="edit_date">
 <p>2023.02.19編集</p>
+<p>2026.01.08編集</p>
 </div>
 
 <h2>コード例と解説</h2>
