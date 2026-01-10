@@ -119,3 +119,10 @@ A:visited {
     border-top: 1px solid #845d9e;
     border-right: 1px solid #845d9e;
 }
+
+@media screen and (max-device-width: 480px) {
+    .box li {
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+}
