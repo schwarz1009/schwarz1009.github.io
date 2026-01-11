@@ -322,6 +322,61 @@ class FugaComponent extends React.Component {
 <p>2024.07.30</p>
 </div>
 
+<h2>コード例（AIが作成）</h2>
+<p>以下はGoogleのAIが記述した、ReactでREST APIからJSONを取得して表示する例。</p>
+<pre class="prettyprint">
+import React, { useState, useEffect } from 'react';
+
+function UserList() {
+  const [users, setUsers] = useState([]); // ユーザーデータを保持するState
+  const [loading, setLoading] = useState(true); // ローディング状態
+
+  useEffect(() =&gt; {
+    // コンポーネントがマウントされた時、または依存配列が変更された時に実行
+    fetch('jsonplaceholder.typicode.com') // ダミーAPIを叩く例
+      .then(response =&gt; {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // JSON形式でデータをパース
+      })
+      .then(data =&gt; {
+        setUsers(data); // 取得したデータをStateにセット
+        setLoading(false); // ローディング終了
+      })
+      .catch(error =&gt; {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
+  }, []); // 空の依存配列で、初回レンダリング時に一度だけ実行
+
+  if (loading) {
+    return &lt;div&gt;Loading...&lt;/div&gt;;
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Users&lt;/h1&gt;
+      &lt;ul&gt;
+        {users.map(user =&gt; ( // データをリスト表示
+          &lt;li key={user.id}&gt;{user.name} ({user.email})&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default UserList;
+</pre>
+<p>以上のコードはfetchを使っているが、より高機能なaxiosを使うこともできる。</p>
+<ul>
+<li><a href="https://explore-zine.com/react-restapi/">【React】Axios を使って REST API でサーバーからデータを取得する方法！ - Explorer Zine</a></li>
+<li><a href="https://qiita.com/Taira0222/items/92b4a667fd9844e28c52">【React】axios #初心者 - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.01.11</p>
+</div>
+
 <h1>Reactでできること</h1>
 <h2>柔軟性が高く簡単</h2>
 <p>Reactは、柔軟性が高く簡単である。たとえば、クラスを作成したり継承したりして作ったタグ（JSXタグ）は、HTMLのタグと同様に簡単に使える。Reactを用いたスクリプトの内部で、呼び出しや出力文字列などに自分で作ったタグを埋め込める。</p>
