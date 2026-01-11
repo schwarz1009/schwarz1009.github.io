@@ -326,6 +326,53 @@ class FugaComponent extends React.Component {
 <p>以下はGoogleのAIが記述した、ReactでREST APIからJSONを取得して表示する例。</p>
 <pre class="prettyprint">
 import React, { useState, useEffect } from 'react';
+// axiosを使う場合は import axios from 'axios'; も追加
+
+function App() {
+  const [users, setUsers] = useState([]); // ユーザーデータを格納する状態
+  const [loading, setLoading] = useState(true); // データ読み込み中かどうかの状態
+
+  // APIからデータを取得する関数
+  const fetchUsers = async () =&gt; {
+    try {
+      const response = await fetch('jsonplaceholder.typicode.com');
+      const data = await response.json(); // JSON形式でデータを受け取る
+      setUsers(data); // 状態を更新
+      setLoading(false); // 読み込み完了
+    } catch (error) {
+      console.error("データの取得に失敗しました:", error);
+      setLoading(false);
+    }
+  };
+
+  // コンポーネントがマウントされた時（初回レンダリング時）に一度だけAPI呼び出し
+  useEffect(() =&gt; {
+    fetchUsers();
+  }, []); // 空の依存配列で初回のみ実行
+
+  if (loading) {
+    return &lt;div&gt;Loading...&lt;/div&gt;; // データ読み込み中の表示
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;React REST API JSON Example&lt;/h1&gt;
+      &lt;ul&gt;
+        {users.map(user =&gt; (
+          &lt;li key={user.id}&gt;
+            {user.name} ({user.email})
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</pre>
+<p>あるいは、</p>
+<pre class="prettyprint">
+import React, { useState, useEffect } from 'react';
 
 function UserList() {
   const [users, setUsers] = useState([]); // ユーザーデータを保持するState
@@ -369,6 +416,21 @@ function UserList() {
 export default UserList;
 </pre>
 <p>以上のコードはfetchを使っているが、より高機能なaxiosを使うこともできる。</p>
+<pre class="prettyprint">
+// import axios from 'axios'; // 追記
+
+// fetchUsers関数の内部をaxiosで書き換え
+const fetchUsers = async () =&gt; {
+  try {
+    const response = await axios.get('jsonplaceholder.typicode.com');
+    setUsers(response.data); // axiosは .data にデータが入る
+    setLoading(false);
+  } catch (error) {
+    console.error("データの取得に失敗しました:", error);
+    setLoading(false);
+  }
+};
+</pre>
 <ul>
 <li><a href="https://explore-zine.com/react-restapi/">【React】Axios を使って REST API でサーバーからデータを取得する方法！ - Explorer Zine</a></li>
 <li><a href="https://qiita.com/Taira0222/items/92b4a667fd9844e28c52">【React】axios #初心者 - Qiita</a></li>
