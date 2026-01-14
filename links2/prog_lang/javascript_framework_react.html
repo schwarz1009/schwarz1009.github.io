@@ -441,6 +441,21 @@ const fetchUsers = async () =&gt; {
 <p>2026.01.11</p>
 </div>
 
+<h2>useEffectの問題</h2>
+<p>ReactのuseEffectはレンダリング後に副作用を実行するためのフックとして使いますが、利用には注意が必要。間違った使い方をすると保守性の悪いプログラムになります。</p>
+<ul>
+<li><a href="https://envader.plus/article/444">Reactの基本、useEffectを理解しよう | エンベーダー</a></li>
+<li><a href="https://belonginc.dev/members/ryo/posts/react-useEffect/">useEffectをむやみに使うとメンテナンスがかなり苦しくなるので、やめましょうと思った話 - Belong Engineering Hub</a></li>
+<li><a href="https://zenn.dev/uhyo/articles/useeffect-taught-by-extremist">過激派が教える！　useEffectの正しい使い方 - Zenn</a></li>
+</ul>
+<p>以下はリアクティブという問題を解決したCrank.jsというフレームワークに関する記事。</p>
+<ul>
+<li><a href="https://qiita.com/rana_kualu/items/d16ad3a0b271924013ec">【Crank.js】リアクティブという欠陥を完全解決したJavaScriptフレームワーク、Crank.jsの思想と信条 #React - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.01.14</p>
+</div>
+
 <h1>Reactでできること</h1>
 <h2>柔軟性が高く簡単</h2>
 <p>Reactは、柔軟性が高く簡単である。たとえば、クラスを作成したり継承したりして作ったタグ（JSXタグ）は、HTMLのタグと同様に簡単に使える。Reactを用いたスクリプトの内部で、呼び出しや出力文字列などに自分で作ったタグを埋め込める。</p>
