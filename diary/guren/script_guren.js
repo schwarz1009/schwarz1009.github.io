@@ -947,6 +947,7 @@ div_guren_script.insertAdjacentHTML('beforebegin', '\
 <li><a href="2026.01.13.html">2026-01-13</a></li>\
 <li><a href="2026.01.14.html">2026-01-14</a></li>\
 <li><a href="2026.01.15.html">2026-01-15</a></li>\
+<li><a href="2026.01.16.html">2026-01-16</a></li>\
 </ul>\
 </div>\
 </div>\
