@@ -107,6 +107,29 @@ try {
 </pre>
 <p>後日注記：例外を吐くにはthrowを使う。独自の例外クラスを作るにはExceptionクラスを継承する。その場でtry-catchせずにもっと上流の呼び出し側で捕捉する場合はメソッド名にthrowsをつける。</p>
 <p>後日注記：たとえば、例外をthrowで吐いた時、throwsをメソッド名につけることで、そのメソッドを使うユーザがメソッドを呼び出した時に例外をtry-catchすることができる。逆に言えばthrowsがつけられているメソッドを使う時には必ずその例外をtry-catchする必要がある（あるいはさらに上流にthrowsするか）。</p>
+<p>後日注記：たとえば、FileNotFoundExceptionはファイルが見つからない時に、IOExceptionはIOエラーの時に実行されるため、</p>
+<pre class="prettyprint">
+try {
+    ...
+} catch (FileNotFoundException e) {
+    ...
+} catch (IOException e) {
+    ...
+}
+</pre>
+<p>とします。これらの例外はExceptionクラスを継承しており、</p>
+<pre class="prettyprint">
+try {
+    ...
+} catch (Exception e) {
+    ...
+}
+</pre>
+<p>とすれば、あらゆるすべての例外を捕らえられます。</p>
+<p>（以上は<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2026.01.18編集</p>
+</div>
 
 <h2>例外をきちんとやるのは面倒くさい</h2>
 <p>Javaの例外は、C++やほかのオブジェクト指向言語にもある機能であり、使いやすく見えますが、意外ときちんと実装するのは面倒くさいです。</p>
