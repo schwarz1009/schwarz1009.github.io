@@ -229,6 +229,7 @@ public class Main {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
             hoge = new Hoge("Assy", 37);
             objectOutputStream.writeObject(hoge);
+            objectOutputStream.flush();
             objectOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
