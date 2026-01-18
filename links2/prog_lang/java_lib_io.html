@@ -213,12 +213,69 @@ public class HogeInputCalc {
 <p>まず、シリアライズを行う際には、シリアライズしたいオブジェクトのクラスでSerializableインターフェースを実装する。</p>
 <p>そして、InputStreamとObjectInputStreamとreadObject()メソッドでオブジェクトを読み込む。</p>
 <p>また、OutputStreamとObjectOutputStreamとwriteObject()メソッドでオブジェクトを書き込む。</p>
+<pre class="prettyprint">
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class Hoge {
+    public static void main(String args[]) {
+        String fileName = "hoge.txt";
+        Hoge hoge;
+
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+            hoge = new Hoge("Assy", 37);
+            objectOutputStream.writeObject(hoge);
+            objectOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
+            hoge = (Hoge) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("名前は" + hoge.getName() + "で、年齢は" + language.getAge());
+    }
+}
+</pre>
+<p>以下はHoge.java</p>
+<pre class="prettyprint">
+import java.io.Serializable;
+
+public class Hoge implements Serializable {
+    private String name;
+    private int age;
+
+    Hoge(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+}
+</pre>
+<p>（<a href="https://qiita.com/Sekky0905/items/b3c6776d10f183d8fc89">Javaのシリアライズ(直列化)メモ - Qiita</a>と<a href="https://java.keicode.com/lang/io-object-serialize.php">Java オブジェクトのシリアライズとデシリアライズ - Java の入出力 - Java の基本 - Java 入門</a>を参考に執筆しました。）</p>
 <ul>
 <li><a href="http://tech-blog.tsukaby.com/archives/192">Java初級者のための必須Java標準APIまとめと簡易解説 | つかびーの技術日記</a></li>
 <li><a href="https://qiita.com/Sekky0905/items/b3c6776d10f183d8fc89">Javaのシリアライズ(直列化)メモ - Qiita</a></li>
 <li><a href="http://www.javaroad.jp/java_io7.htm">Javaの道：入出力（７．オブジェクトのシリアライズ）</a></li>
 </ul>
 <p><a href="java_lib_xml.html">Javaクラスライブラリ（XML）</a>や<a href="serialize.html">シリアライズ</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.01.18編集</p>
+</div>
 
 <h1>関連ページ</h1>
 <h2>Linux API</h2>
