@@ -220,7 +220,7 @@ this.setState((state) =&gt; ({
 <li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
 <li><a href="https://zenn.dev/web_tips/articles/c3851133f52d16">Reactの基礎【コンポーネント】 - Zenn</a></li>
 </ul>
-<p>後日注記：状態を変更できたとしても、更新した変数の値が画面に反映されないと意味がありません。stateの変数の値が変わるたびに、Reactの再レンダリングの発火をトリガする、更新用の関数を自動的に実行するためには、useStateと呼ばれるフックを使います。実際には、useState()を実行した際に、現在のstateと再レンダリング用のset関数が返り値として返るので、そのset関数を呼び出すことができます。</p>
+<p>後日注記：状態を変更できたとしても、更新した変数の値が画面に反映されないと意味がありません。stateの変数の値が変わるたびに、Reactの再レンダリングの発火をトリガする、更新用の関数を自動的に実行するためには、useStateと呼ばれるフックを使います。useState()を実行した際に、現在のstateと再レンダリング用のset関数が返り値として返るので、そのset関数を呼び出すことで再レンダリングができます。</p>
 <ul>
 <li><a href="https://ja.react.dev/reference/react/useState">useState – React</a></li>
 <li><a href="https://qiita.com/seira/items/f063e262b1d57d7e78b4">React hooksを基礎から理解する (useState編) #JavaScript - Qiita</a></li>
