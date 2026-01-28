@@ -106,14 +106,18 @@
 </ul>
 
 <h1>Xディスプレイサーバの設定</h1>
-<h2>xorg.conf</h2>
+<h2>xorg.conf / XF86Config</h2>
 <p>X11の設定ファイルです。</p>
 <p>最近はハードウェアを自動認識するため、あまりいじることはありませんが、昔から超複雑で、一番厄介な設定ファイルです。<!--初心者にはさっぱりです。--></p>
+<p>後日注記：昔のIntel PC-UNIX向けのX11サーバーはXFree86という名称でした。設定ファイルの名前はXF86Configでした。後継版のXorgに移行するとともに、設定ファイルの名前だけが変わりました。</p>
 <ul>
 <li><a href="https://wiki.gentoo.org/wiki/Xorg/Guide/ja">Xorg / ガイド - Gentoo Wiki</a></li>
 <li><a href="https://wiki.archlinux.jp/index.php/Xorg">Xorg - ArchWiki</a></li>
 <li><a href="https://www.freebsd.org/doc/ja_JP.eucJP/books/handbook/x-config.html">5.4. Xorg の設定 - FreeBSD</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.01.28編集</p>
+</div>
 
 <h2>xorg.confの設定項目</h2>
 <p>Section "section-name"～EndSectionは各セクションを表し、各セクションはエントリ行から成り立つ。エントリはオプション名と1つ以上のオプションから成り立つ。</p>
@@ -141,6 +145,18 @@
 <ul>
 <li><a href="https://ja.wikipedia.org/wiki/%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88%E3%83%BB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%BB%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%83%81%E3%83%A3">ダイレクト・レンダリング・インフラストラクチャ - Wikipedia</a></li>
 </ul>
+
+<h2>さまざまな設定ツール（Xconfiguratorなど）</h2>
+<p>このほか、XFree86（昔のXサーバーの名称）にはXF86Config（昔の設定ファイル名）の設定を行うためのさまざまな設定ツールがある。Xconfiguratorなどがその例。</p>
+<p>このようなツールを使うと自動的に最適な設定になるが、用途や意味が初心者には分かりづらいため、「結局どうすれば動くのか」ということになりがちである。</p>
+<ul>
+<li><a href="https://www.mlab.im.dendai.ac.jp/linux/2003/postinstall/xf86.html">マウスの設定: コンピュータ基礎および演習I・ワークショップI --- Linux -  東京電機大学 工学部 情報メディア学科</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/flinux/rensai/linuxtips/006xsetting.html">X Window Systemの設定を行うには - @IT</a></li>
+<li><a href="https://www.ne.jp/asahi/music/marinkyo/unikso/vino.html.ja">Vine Linux - まりんきょ学問所</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.01.28</p>
+</div>
 
 <h1>ログインとセッション</h1>
 <p><a href="linux_unix_admin.html">UNIXシステム管理（システム情報と設定）</a>や<a href="linux_bash_script.html">Bash（シェルスクリプト）</a>も参照のこと。</p>
