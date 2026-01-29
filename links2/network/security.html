@@ -135,7 +135,7 @@
 <p>また、Debian 10では新たにRustによるバイナリを追加し、Waylandが標準で有効になった。こうした足場から、少しずつセキュリティを高めてもらいたい。</p>
 <p><a href="../linux/selinux.html">SELinux</a>や<a href="../linux/apparmor.html">AppArmor</a>も参照のこと。</p>
 
-<h1>セキュリティ技術</h1>
+<h1>VPNとトンネリング</h1>
 <h2>パケットフィルタリングとVPN</h2>
 <p>パケットフィルタリングとは、ファイアーウォールを用いて、パケット通信に介入し、アクセスの制御を行う仕組みのこと。つまり、不正な通信をブロックすること。</p>
 <p>これに対してVPNとは、インターネット上に仮想のプライベートネットワーク（専用回線）を作ること。つまり、社内だけの専用のネットワークを作ること。VPNの中での通信をVPNの外から傍受することはできない。</p>
@@ -187,6 +187,7 @@
 </ul>
 <p><a href="../linux/linux_net_etc.html">Linuxネットワーク（さまざまなコマンド）</a>を参照のこと。</p>
 
+<h1>セキュリティアタック</h1>
 <h2>侵入検知・防御</h2>
 <p>侵入検知とは、その通り侵入を検知する技術。</p>
 <p>異常な通信などを発見し、「どうすれば防げるのか」だけではなく、「今侵入されているかどうか」を監視し、検知し、通告する技術である。</p>
@@ -204,22 +205,6 @@
 </ul>
 <p>サイバー攻撃については<a href="../prog_lang/php_security.html">PHPセキュリティ</a>を参照のこと。</p>
 
-<h2>IPA セキュア・プログラミング講座</h2>
-<p>IPAのセキュア・プログラミング講座で、さまざまなセキュリティ対策が紹介されています。</p>
-<ul>
-<li><a href="https://www.ipa.go.jp/security/awareness/vendor/programming/">IPA セキュア・プログラミング講座</a></li>
-<li><a href="https://www.ipa.go.jp/security/index.html">IPA 独立行政法人 情報処理推進機構：情報セキュリティ</a></li>
-</ul>
-
-<h2>セキュリティ関連の資格</h2>
-<p>Linuxにおけるセキュリティ技術について、本格的に学びたい方は、LinuCレベル3 303試験でセキュリティの領域に関する資格試験を実施されているため、情報セキュリティスペシャリスト試験（略称SC）などと合わせて勉強されると良いと思います。</p>
-<ul>
-<li><a href="https://linuc.org/linuc3/303.html">LinuCレベル3 303</a></li>
-<li><a href="https://www.jitec.ipa.go.jp/1_11seido/sc.html">情報処理安全確保支援士試験(SC)</a></li>
-</ul>
-<p><a href="../prog_lang/kihonjouhou.html">基本情報</a>や<a href="../linux/lpic_linuc.html">LPIC/LinuC</a>を参照のこと。</p>
-
-<h1>サイバー攻撃</h1>
 <h2>主なサイバー攻撃</h2>
 <p>（「<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>」を参考に執筆しました。）</p>
 <p>PHPなどの言語によって対策可能なセキュリティ攻撃については、<a href="../prog_lang/php_security.html">PHPセキュリティ</a>に記述しているが、それ以外の主なサイバー攻撃についてを説明する。</p>
@@ -265,7 +250,29 @@
 <p>2026.01.29</p>
 </div>
 
-<h1>セキュリティ関連ページ</h1>
+<h1>国際規格</h1>
+<h2>STIG</h2>
+<p>STIG (Security Technical Implementation Guide)とは、アメリカの国防総省のDISAによって裁定される、セキュリティ関連の国際的な基準や規格や実装ガイドのこと。</p>
+<ul>
+<li><a href="https://www.sompocybersecurity.com/column/glossary/stig">STIGとは【用語集詳細】 - SOMPO CYBER SECURITY｜ＳＯＭＰＯリスクマネジメントのサイバーセキュリティ事業</a></li>
+<li><a href="https://trust.arcgis.com/ja/compliance/stig.htm">STIG—ArcGIS Trust Center | ドキュメント</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.01.29</p>
+</div>
+
+<h1>通信経路の匿名化</h1>
+<h2>Tor</h2>
+<p>Torはインターネット通信において接続経路情報を匿名化する技術。</p>
+<p>The Guardian Projectはオープンソースのセキュリティ関連の団体で、Torプロジェクトと協力関係にある。</p>
+<p>後日注記：Torは、インターネットでハッキングを試みる悪意あるハッカー集団によって使われることが多い技術。多くの組織的なハッカーが、自らの国や組織を隠すためにTorを使用している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Tor">Tor - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/The_Guardian_Project_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">The Guardian Project (ソフトウェア) - Wikipedia</a></li>
+</ul>
+<p><a href="../windows_pc/browsers_privacy.html">プライバシー保護ブラウザ</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
 <h2>暗号</h2>
 <p><a href="encrypt.html">暗号</a>を参照のこと。</p>
 
@@ -288,6 +295,21 @@
 <p>監視・モニタリングについては<a href="../linux/linux_net_monitoring.html">Linuxモニタリング</a>も参照のこと。</p>
 
 <h1>リンク集</h1>
+<h2>IPA セキュア・プログラミング講座</h2>
+<p>IPAのセキュア・プログラミング講座で、さまざまなセキュリティ対策が紹介されています。</p>
+<ul>
+<li><a href="https://www.ipa.go.jp/security/awareness/vendor/programming/">IPA セキュア・プログラミング講座</a></li>
+<li><a href="https://www.ipa.go.jp/security/index.html">IPA 独立行政法人 情報処理推進機構：情報セキュリティ</a></li>
+</ul>
+
+<h2>セキュリティ関連の資格</h2>
+<p>Linuxにおけるセキュリティ技術について、本格的に学びたい方は、LinuCレベル3 303試験でセキュリティの領域に関する資格試験を実施されているため、情報セキュリティスペシャリスト試験（略称SC）などと合わせて勉強されると良いと思います。</p>
+<ul>
+<li><a href="https://linuc.org/linuc3/303.html">LinuCレベル3 303</a></li>
+<li><a href="https://www.jitec.ipa.go.jp/1_11seido/sc.html">情報処理安全確保支援士試験(SC)</a></li>
+</ul>
+<p><a href="../prog_lang/kihonjouhou.html">基本情報</a>や<a href="../linux/lpic_linuc.html">LPIC/LinuC</a>を参照のこと。</p>
+
 <h2>書籍</h2>
 <p>以下の書籍・ページが参考になります。</p>
 <ul>
@@ -304,28 +326,6 @@
 <div class="edit_date">
 <p>2026.01.14</p>
 </div>
-
-<h1>国際規格</h1>
-<h2>STIG</h2>
-<p>STIG (Security Technical Implementation Guide)とは、アメリカの国防総省のDISAによって裁定される、セキュリティ関連の国際的な基準や規格や実装ガイドのこと。</p>
-<ul>
-<li><a href="https://www.sompocybersecurity.com/column/glossary/stig">STIGとは【用語集詳細】 - SOMPO CYBER SECURITY｜ＳＯＭＰＯリスクマネジメントのサイバーセキュリティ事業</a></li>
-<li><a href="https://trust.arcgis.com/ja/compliance/stig.htm">STIG—ArcGIS Trust Center | ドキュメント</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.01.29</p>
-</div>
-
-<h1>通信経路の匿名化</h1>
-<h2>Tor</h2>
-<p>Torはインターネット通信において接続経路情報を匿名化する技術。</p>
-<p>The Guardian Projectはオープンソースのセキュリティ関連の団体で、Torプロジェクトと協力関係にある。</p>
-<p>後日注記：Torは、インターネットでハッキングを試みる悪意あるハッカー集団によって使われることが多い技術。多くの組織的なハッカーが、自らの国や組織を隠すためにTorを使用している。</p>
-<ul>
-<li><a href="https://ja.wikipedia.org/wiki/Tor">Tor - Wikipedia</a></li>
-<li><a href="https://ja.wikipedia.org/wiki/The_Guardian_Project_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">The Guardian Project (ソフトウェア) - Wikipedia</a></li>
-</ul>
-<p><a href="../windows_pc/browsers_privacy.html">プライバシー保護ブラウザ</a>も参照のこと。</p>
 
 <h1>余談</h1>
 <h2>Log4jの脆弱性（Log4Shell）によって、インターネットは闇の世界になるかも</h2>
