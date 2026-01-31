@@ -140,7 +140,7 @@ x = 1 + \frac{1}{x}
 <h2>平方根とπの連分数展開</h2>
 <p>\(\sqrt{2}\)のような無理数は、有理数の極限として表現できる。以下は連分数による\(\sqrt{2}\)の展開。</p>
 <p>\[
-\sqrt{2} = [1; \overline{2}] = 1+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\ddots}}}}}
+\sqrt{2} = [1; \overline{2}] = 1+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{\ddots}}}}}}
 \]</p>
 <p>このように、平方根は必ず、循環連分数となる。このことを上手く使うことで、たとえば第6近似の</p>
 <p>\[
@@ -149,15 +149,15 @@ x = 1 + \frac{1}{x}
 <p>を求めるなどして、\(\sqrt{2}\)の近似値を求められる。</p>
 <p>同様に、</p>
 <p>\[
-\sqrt{3} = [1; \overline{1, 2}] = 1+\cfrac{1}{1+\cfrac{1}{2+\cfrac{1}{1+\cfrac{1}{2+\cfrac{1}{1+\ddots}}}}} \\
-\sqrt{5} = [2; \overline{4}] = 2+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\ddots}}}}} \\
-\sqrt{7} = [2; \overline{1, 1, 1, 4}] = 2+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{4+\cfrac{1}{1+\ddots}}}}}
+\sqrt{3} = [1; \overline{1, 2}] = 1+\cfrac{1}{1+\cfrac{1}{2+\cfrac{1}{1+\cfrac{1}{2+\cfrac{1}{1+\cfrac{1}{\ddots}}}}}} \\
+\sqrt{5} = [2; \overline{4}] = 2+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{\ddots}}}}}} \\
+\sqrt{7} = [2; \overline{1, 1, 1, 4}] = 2+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{4+\cfrac{1}{1+\cfrac{1}{\ddots}}}}}}
 \]</p>
 <p>となる。</p>
 <p>同様に、\(\pi\)も連分数展開できる。</p>
 <p>\[
-\pi = 3+\cfrac{1^2}{6+\cfrac{3^2}{6+\cfrac{5^2}{6+\cfrac{7^2}{6+\cfrac{9^2}{6+\ddots}}}}} \\
-\frac{4}{\pi} = 1+\cfrac{1^2}{3+\cfrac{2^2}{5+\cfrac{3^2}{7+\cfrac{4^2}{9+\cfrac{5^2}{11+\ddots}}}}}
+\pi = 3+\cfrac{1^2}{6+\cfrac{3^2}{6+\cfrac{5^2}{6+\cfrac{7^2}{6+\cfrac{9^2}{6+\cfrac{11^2}{\ddots}}}}}} \\
+\frac{4}{\pi} = 1+\cfrac{1^2}{3+\cfrac{2^2}{5+\cfrac{3^2}{7+\cfrac{4^2}{9+\cfrac{5^2}{11+\cfrac{6^2}{\ddots}}}}}}
 \]</p>
 <p>\(\pi\)は超越数であるため、正則連分数展開（分子がすべて1）には規則性はないが、正則でない連分数展開（上記）には規則性があるものがある。</p>
 <ul>
