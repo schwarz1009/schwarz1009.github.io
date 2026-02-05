@@ -220,6 +220,69 @@ delegate (double x, double y) { return (x + y) / 2; }
 <p>2023.10.11</p>
 </div>
 
+<h2>AIが書いたサンプル</h2>
+<p>以下はGoogleのAIが書いたWindows.Formsのサンプルコード。</p>
+<pre class="prettyprint">
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace SimpleFormApp
+{
+    // メインとなるフォームクラス
+    public class MainForm : Form
+    {
+        // コントロールの定義 (camelCase)
+        private Label displayLabel;
+        private Button actionButton;
+
+        public MainForm()
+        {
+            // フォームの基本設定
+            this.Text = "サンプル画面";
+            this.Size = new Size(300, 200);
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            // ラベルの初期化
+            displayLabel = new Label();
+            displayLabel.Text = "ボタンを押してください";
+            displayLabel.Location = new Point(50, 40);
+            displayLabel.AutoSize = true;
+
+            // ボタンの初期化
+            actionButton = new Button();
+            actionButton.Text = "クリック";
+            actionButton.Location = new Point(100, 80);
+            // クリックイベントの登録
+            actionButton.Click += ActionButton_Click;
+
+            // フォームにコントロールを追加
+            this.Controls.Add(displayLabel);
+            this.Controls.Add(actionButton);
+        }
+
+        // ボタンがクリックされた時の処理
+        private void ActionButton_Click(object sender, EventArgs e)
+        {
+            displayLabel.Text = "こんにちは、Windows Forms！";
+            displayLabel.ForeColor = Color.Blue;
+        }
+
+        // アプリケーションの開始点
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
+        }
+    }
+}
+</pre>
+<div class="edit_date">
+<p>2026.02.05</p>
+</div>
+
 <h2>具体的なGUIコンポーネント</h2>
 <p>.NETの具体的なGUIコンポーネントについては、<a href="dotnet.html">.NET</a>や<a href="vb_form.html">Visual Basic（３．フォームデザイナー）</a>を参照のこと。</p>
 
