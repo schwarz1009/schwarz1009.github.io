@@ -90,6 +90,49 @@
 <p>2023.08.19</p>
 </div>
 
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いた、掲示板のサンプル。</p>
+<pre class="prettyprint">
+#!/usr/bin/perl
+use CGI;
+use strict;
+
+my $q = CGI-&gt;new;
+my $file = 'bbs.txt';
+
+# 投稿処理
+if ($q-&gt;param('submit')) {
+    my $name = $q-&gt;param('name');
+    my $message = $q-&gt;param('message');
+    open(FH, "&gt;&gt;$file");
+    print FH "$name&lt;&gt;$message\n";
+    close(FH);
+}
+
+# HTML表示
+print $q-&gt;header(-charset=&gt;'UTF-8');
+print "&lt;html&gt;&lt;body&gt;";
+print "&lt;h1&gt;掲示板&lt;/h1&gt;";
+print "&lt;form method='post' action='bbs.cgi'&gt;";
+print "名前: &lt;input type='text' name='name'&gt;&lt;br&gt;";
+print "メッセージ: &lt;input type='text' name='message'&gt;&lt;br&gt;";
+print "&lt;input type='submit' name='submit' value='投稿'&gt;";
+print "&lt;/form&gt;";
+
+# 過去の投稿を表示
+if (open(FH, "&lt;$file")) {
+    while (&lt;FH&gt;) {
+        my ($name, $message) = split(/&lt;&gt;/);
+        print "&lt;p&gt;$name: $message&lt;/p&gt;";
+    }
+    close(FH);
+}
+print "&lt;/body&gt;&lt;/html&gt;";
+</pre>
+<div class="edit_date">
+<p>2026.02.05</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>Perl/CGI</h2>
 <p>Perl/CGIについては、<a href="perl.html">Perl</a>や<a href="perl_cgi.html">Perl/CGI</a>や<a href="../network/cgi.html">CGI</a>を参照のこと。</p>
