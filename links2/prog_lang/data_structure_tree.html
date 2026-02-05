@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -99,6 +100,96 @@
 <p>2024.08.15</p>
 </div>
 
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いた二分探索木のサンプルコード。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+// ノードの構造体定義
+typedef struct Node {
+    int data;
+    struct Node *left;
+    struct Node *right;
+} Node;
+
+// 新しいノードを作成する関数
+Node* createNode(int value) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (newNode == NULL) {
+        fprintf(stderr, "メモリ確保に失敗しました\n");
+        exit(1);
+    }
+    newNode-&gt;data = value;
+    newNode-&gt;left = NULL;
+    newNode-&gt;right = NULL;
+    return newNode;
+}
+
+// 二分探索木に値を挿入する関数
+Node* insert(Node* node, int value) {
+    // 空の場所を見つけたら新しいノードを配置
+    if (node == NULL) return createNode(value);
+
+    // 値を比較して左右に振り分ける
+    if (value &lt; node-&gt;data) {
+        node-&gt;left = insert(node-&gt;left, value);
+    } else if (value &gt; node-&gt;data) {
+        node-&gt;right = insert(node-&gt;right, value);
+    }
+    return node;
+}
+
+// 値を探索する関数
+Node* search(Node* root, int key) {
+    // 見つからない、または値が一致した場合
+    if (root == NULL || root-&gt;data == key) return root;
+
+    // キーが現在のノードより小さければ左、大きければ右を探索
+    if (key &lt; root-&gt;data) return search(root-&gt;left, key);
+    return search(root-&gt;right, key);
+}
+
+// 通りがけ順（Inorder）で表示（昇順に出力される）
+void inorder(Node* root) {
+    if (root != NULL) {
+        inorder(root-&gt;left);
+        printf("%d ", root-&gt;data);
+        inorder(root-&gt;right);
+    }
+}
+
+int main() {
+    Node* root = NULL;
+
+    // データの挿入
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
+
+    printf("木の中身（昇順）: ");
+    inorder(root);
+    printf("\n");
+
+    // 探索のテスト
+    int target = 60;
+    if (search(root, target) != NULL) {
+        printf("値 %d は木の中に存在します。\n", target);
+    } else {
+        printf("値 %d は見つかりませんでした。\n", target);
+    }
+
+    return 0;
+}
+</pre>
+<div class="edit_date">
+<p>2026.02.05</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>アルゴリズム</h2>
 <p><a href="algorithm_example.html">具体的なアルゴリズム</a>も参照のこと。</p>
@@ -121,5 +212,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
