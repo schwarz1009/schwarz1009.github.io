@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -65,6 +66,49 @@
 <li><a href="https://qiita.com/tricogimmick/items/f6bcd8733bb2825eb76c">WPFのサンプルアプリケーションを作ってみました。 - Qiita</a></li>
 </ul>
 
+<h2>AIが書いたサンプル</h2>
+<p>以下はAIによるWPFのサンプル。GoogleのAIに書いてもらいました。</p>
+<p>MainWindow.xaml</p>
+<pre class="prettyprint">
+&lt;Window x:Class="WpfSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPFサンプル" Height="200" Width="300"&gt;
+    &lt;StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"&gt;
+        &lt;!-- TextBlock: 文字を表示。Nameで名前を付ける --&gt;
+        &lt;TextBlock Name="MessageTextBlock" Text="こんにちは！" FontSize="20" Margin="10" TextAlignment="Center"/&gt;
+        
+        &lt;!-- Button: クリックイベントを追加 --&gt;
+        &lt;Button Content="メッセージ変更" Click="ChangeMessageButton_Click" Width="120" Height="30"/&gt;
+    &lt;/StackPanel&gt;
+&lt;/Window&gt;
+</pre>
+<p>MainWindow.xaml.cs</p>
+<pre class="prettyprint">
+using System.Windows;
+
+namespace WpfSample
+{
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        // ボタンが押された時の処理
+        private void ChangeMessageButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TextBlockのTextプロパティを書き換える
+            MessageTextBlock.Text = "ボタンが押されました！";
+        }
+    }
+}
+</pre>
+<div class="edit_date">
+<p>2026.02.05</p>
+</div>
+
 <h2>Microsoft Silverlight</h2>
 <p>Microsoftによる、Webブラウザプラグイン。Adobe Flash/Flexと同様のシステム。</p>
 <p><a href="../network/web_ria.html">RIA（リッチインターネットアプリケーション）</a>も参照のこと。</p>
@@ -103,5 +147,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
