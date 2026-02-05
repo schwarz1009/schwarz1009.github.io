@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -101,7 +102,89 @@
 <p>2023.06.29</p>
 </div>
 
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いたバブルソートと二分探索のサンプルコード。バブルソートで昇順に並べ替えた後で、二分探索で特定の値を探索する。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
 
+// バブルソート関数
+void bubbleSort(int arr[], int n) {
+    int i, j, temp;
+    for (i = 0; i &lt; n - 1; i++) {
+        for (j = 0; j &lt; n - i - 1; j++) {
+            // 隣り合う要素を比較し、前が大きければ入れ替える
+            if (arr[j] &gt; arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// 二分探索関数 (見つかった場合はインデックス、見つからない場合は-1を返す)
+int binarySearch(int arr[], int n, int target) {
+    int left = 0;
+    int right = n - 1;
+    
+    while (left &lt;= right) {
+        int mid = left + (right - left) / 2; // 中央の要素
+
+        if (arr[mid] == target) {
+            return mid; // 見つかった
+        }
+        if (arr[mid] &lt; target) {
+            left = mid + 1; // 右半分を探す
+        } else {
+            right = mid - 1; // 左半分を探す
+        }
+    }
+    return -1; // 見つからなかった
+}
+
+int main() {
+    int data[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(data) / sizeof(data[0]);
+    int target = 22;
+
+    printf("--- バブルソート前 ---\n");
+    for (int i = 0; i &lt; n; i++) printf("%d ", data[i]);
+    printf("\n");
+
+    // 1. バブルソートを実行
+    bubbleSort(data, n);
+
+    printf("\n--- バブルソート後 ---\n");
+    for (int i = 0; i &lt; n; i++) printf("%d ", data[i]);
+    printf("\n");
+
+    // 2. 二分探索を実行
+    int result = binarySearch(data, n, target);
+
+    printf("\n--- 二分探索 ---\n");
+    if (result != -1) {
+        printf("値 %d はインデックス %d に見つかりました。\n", target, result);
+    } else {
+        printf("値 %d は見つかりませんでした。\n", target);
+    }
+
+    return 0;
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+--- バブルソート前 ---
+64 34 25 12 22 11 90 
+
+--- バブルソート後 ---
+11 12 22 25 34 64 90 
+
+--- 二分探索 ---
+値 22 はインデックス 2 に見つかりました。
+</pre>
+<div class="edit_date">
+<p>2026.02.05</p>
+</div>
 
 
 
@@ -120,5 +203,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
