@@ -142,6 +142,82 @@ $ docker run -it hoge /bin/bash
 <p>Gemを使うにはRailsプロジェクトの中にあるGemfileを編集し、bundlerでインストールすればよい。</p>
 <p><a href="ruby_gems.html">Gems</a>を参照のこと。</p>
 
+<h1>AIによるサンプル</h1>
+<h2>簡単なミニブログアプリケーション</h2>
+<p>以下はGoogleのAIによる、Ruby on Railsでの簡単なミニブログ簡単アプリケーションの作成方法。</p>
+<p>まずターミナルで以下のようにコマンドを実行する。</p>
+<pre class="prettyprint">
+# 1. 新しいRailsアプリを作成 (tailwindcssをCSSフレームワークとして指定)
+rails new miniblog --css tailwind
+cd miniblog
+
+# 2. スキャフォールドを使ってPostモデル（タイトル、本文）を生成
+# タイトルはstring、本文はtext
+rails generate scaffold Post title:string content:text
+
+# 3. データベースにテーブルを作成
+rails db:migrate
+</pre>
+<p>次に、アプリケーションを開いた時にブログ一覧が表示されるようにルーティングを設定する。config/routes.rbを編集：</p>
+<pre class="prettyprint">
+Rails.application.routes.draw do
+  resources :posts
+  # ルートURL (/) にアクセスした時に posts#index を表示
+  root "posts#index"
+end
+</pre>
+<p>次にアプリケーションを起動する。</p>
+<pre class="prettyprint">
+bin/dev
+# または rails server
+</pre>
+<p>この状態でhttp://localhost:3000にアクセスすると、投稿一覧画面が表示される。</p>
+<p>解説すると、rails generate scaffoldコマンドは以下のファイルを自動作成する。</p>
+<table class="some_tables">
+<tr><th class="min60">MVC</th><th>ファイル</th></tr>
+<tr><td>モデル</td><td>app/models/post.rb (データ定義)</td></tr>
+<tr><td>コントローラ</td><td>app/controllers/posts_controller.rb (動作ロジック)</td></tr>
+<tr><td>ビュー</td><td>app/views/posts/ (HTMLテンプレート)</td></tr>
+</table>
+<p>ビューのサンプルは、app/views/posts/index.html.erbが投稿一覧を表示する画面。</p>
+<pre class="prettyprint">
+&lt;div class="w-full"&gt;
+  &lt;% if notice.present? %&gt;
+    &lt;p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg" id="notice"&gt;&lt;%= notice %&gt;&lt;/p&gt;
+  &lt;% end %&gt;
+
+  &lt;div class="flex justify-between items-center"&gt;
+    &lt;h1 class="font-bold text-4xl"&gt;ミニブログ&lt;/h1&gt;
+    &lt;%= link_to '新規投稿', new_post_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white" %&gt;
+  &lt;/div&gt;
+
+  &lt;div id="posts" class="min-w-full"&gt;
+    &lt;%= render @posts %&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>そして、app/views/posts/_post.html.erbが投稿の個別表示（各投稿の見た目の定義）。</p>
+<pre class="prettyprint">
+&lt;div id="&lt;%= dom_id post %&gt;" class="my-5 p-5 bg-white border border-gray-200 rounded-lg"&gt;
+  &lt;h2 class="text-2xl font-bold"&gt;
+    &lt;%= link_to post.title, post, class: "text-blue-700" %&gt;
+  &lt;/h2&gt;
+  
+  &lt;p class="my-3 text-gray-700"&gt;
+    &lt;%= post.content %&gt;
+  &lt;/p&gt;
+
+  &lt;div class="flex gap-2"&gt;
+    &lt;%= link_to '詳細', post, class: "text-sm text-gray-500" %&gt;
+    &lt;%= link_to '編集', edit_post_path(post), class: "text-sm text-gray-500" %&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>これで完了。http://localhost:3000にアクセスし、「新規投稿」ボタンから投稿を作成し、一覧画面で表示と編集を行うことができる。</p>
+<div class="edit_date">
+<p>2026.02.05</p>
+</div>
+
 <h1>Railsの参考になる文書</h1>
 <h2>チュートリアル</h2>
 <p>Railsのチュートリアル。</p>
