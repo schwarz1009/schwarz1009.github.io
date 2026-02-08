@@ -66,6 +66,61 @@
 <li><a href="https://docs.djangoproject.com/ja/3.0/">Django ドキュメント</a></li>
 </ul>
 
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いたサンプル。</p>
+<p>以下をターミナルで実行する。</p>
+<pre class="prettyprint">
+# プロジェクトの作成
+django-admin startproject myproject
+cd myproject
+
+# アプリケーションの作成
+python manage.py startapp helloapp
+</pre>
+<p>ビュー (helloapp/views.py)</p>
+<pre class="prettyprint">
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("&lt;h1&gt;こんにちは！Djangoの小さな画面です。&lt;/h1&gt;")
+</pre>
+<p>ルーティング (helloapp/urls.pyを新規作成)</p>
+<pre class="prettyprint">
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+]
+</pre>
+<p>ルーティング (myproject/urls.pyを編集)</p>
+<pre class="prettyprint">
+from django.contrib import admin
+from django.urls import path, include  # includeを追加
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('helloapp.urls')), # アプリのURLをトップに設定
+]
+</pre>
+<p>設定 (myproject/settings.py)</p>
+<pre class="prettyprint">
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    # ...
+    'helloapp', # アプリを追加
+]
+</pre>
+<p>以下をターミナルで実行する。</p>
+<pre class="prettyprint">
+python manage.py runserver
+</pre>
+<p>ブラウザでhttp://127.0.0.1にアクセスすると、「こんにちは！Djangoの小さな画面です。」と表示される。</p>
+<div class="edit_date">
+<p>2026.02.08</p>
+</div>
+
 <h2>YouTubeの入門動画</h2>
 <p>以下はYouTubeの入門動画。</p>
 <ul>
