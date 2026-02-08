@@ -121,7 +121,7 @@
 <h1>AIによるサンプル</h1>
 <h2>Razor Pagesのサンプル</h2>
 <p>以下はGoogleのAIが書いたRazor Pagesのサンプル。</p>
-<p>ページモデル (Pages/Index.cshtml.cs)</p>
+<p>ページモデル (Index.cshtml.cs)</p>
 <pre class="prettyprint">
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -129,18 +129,18 @@ namespace MyApp.Pages
 {
     public class IndexModel : PageModel
     {
-        public string WelcomeMessage { get; set; }
+        // 表示したい名前を保持するプロパティ
+        public string UserName { get; set; }
 
         public void OnGet()
         {
-            // データ取得のサンプル（本来はデータベースなどから）
-            // ページが読み込まれた時に実行される
-            WelcomeMessage = "ASP.NET Coreへようこそ！";
+            // サーバー側でデータをセットする (DBから取得する代わり)
+            UserName = "山田太郎";
         }
     }
 }
 </pre>
-<p>ビュー (Pages/Index.cshtml)</p>
+<p>ビュー (Index.cshtml)</p>
 <pre class="prettyprint">
 @page
 @model IndexModel
@@ -148,8 +148,12 @@ namespace MyApp.Pages
     ViewData["Title"] = "ホーム";
 }
 
-&lt;h1&gt;@Model.WelcomeMessage&lt;/h1&gt;
-&lt;p&gt;現在の時間: @DateTime.Now.ToString("HH:mm:ss")&lt;/p&gt;
+&lt;div class="text-center"&gt;
+    &lt;h1 class="display-4"&gt;こんにちは&lt;/h1&gt;
+    
+    &lt;!-- 名前をここに表示 --&gt;
+    &lt;p&gt;ユーザー名: &lt;strong&gt;@Model.UserName&lt;/strong&gt; さん&lt;/p&gt;
+&lt;/div&gt;
 </pre>
 <div class="edit_date">
 <p>2026.02.08</p>

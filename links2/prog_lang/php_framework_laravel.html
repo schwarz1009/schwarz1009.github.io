@@ -144,6 +144,50 @@
 <p>2024.08.28-29</p>
 </div>
 
+<h1>AIによるサンプル</h1>
+<h2>ユーザーの名前を画面に表示するサンプル</h2>
+<p>以下はGoogleのAIが書いた、Laravelでユーザーの名前を画面に表示するサンプル。</p>
+<p>ビューファイル (resources/views/hello.blade.php)</p>
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Laravel サンプル&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f3f4f6; }
+        .box { padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #333; font-size: 24px; }
+        p { color: #666; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="box"&gt;
+        &lt;h1&gt;こんにちは、{{ $name }}！&lt;/h1&gt; &lt;!-- 変数を表示 --&gt;
+        &lt;p&gt;これは小さな画面表示のサンプルです。&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>ルーティング (routes/web.php)</p>
+<pre class="prettyprint">
+use Illuminate\Support\Facades\Route;
+
+// '/hello' にアクセスしたら、resources/views/hello.blade.php を表示する
+Route::get('/hello', function () {
+    $name = 'ユーザーさん';
+    return view('hello', ['name' => $name]); // 'name' 変数を渡す
+});
+</pre>
+<p>以下をターミナルで実行。</p>
+<pre class="prettyprint">
+php artisan serve
+</pre>
+<p>ブラウザで、http://localhost:8000/helloにアクセスすると画面に「こんにちは、ユーザーさん！」と表示される。</p>
+<div class="edit_date">
+<p>2026.02.08</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>Webフレームワーク</h2>
 <p><a href="../network/web_framework.html">Webフレームワーク</a>を参照のこと。</p>
