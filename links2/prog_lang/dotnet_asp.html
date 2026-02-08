@@ -118,6 +118,42 @@
 <p>2026.02.08</p>
 </div>
 
+<h1>AIによるサンプル</h1>
+<h2>Razor Pagesのサンプル</h2>
+<p>以下はGoogleのAIが書いたRazor Pagesのサンプル。</p>
+<p>ページモデル (Pages/Index.cshtml.cs)</p>
+<pre class="prettyprint">
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace MyApp.Pages
+{
+    public class IndexModel : PageModel
+    {
+        public string WelcomeMessage { get; set; }
+
+        public void OnGet()
+        {
+            // ページが読み込まれた時に実行される
+            WelcomeMessage = "ASP.NET Coreへようこそ！";
+        }
+    }
+}
+</pre>
+<p>ビュー (Pages/Index.cshtml)</p>
+<pre class="prettyprint">
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "ホーム";
+}
+
+&lt;h1&gt;@Model.WelcomeMessage&lt;/h1&gt;
+&lt;p&gt;現在の時間: @DateTime.Now.ToString("HH:mm:ss")&lt;/p&gt;
+</pre>
+<div class="edit_date">
+<p>2026.02.08</p>
+</div>
+
 <h1>ネットワーク</h1>
 <h2>ネットワーク・プログラミング</h2>
 <p>.NETでのネットワークプログラミング。</p>
