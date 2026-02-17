@@ -144,11 +144,46 @@
 <tr><th class="min60">命令</th><th>説明</th></tr>
 <tr><td>MOV AH, XXH<br>INT 21H</td><td>MS-DOSのファンクションXXの機能を<br>ソフトウェア割り込みにより呼び出す</td></tr>
 </table>
-<p>たとえば、文字の入力や出力は、すべてこのファンクションコールによって実現できる。ファンクション番号01、06、0Aはコンソールからの入力に使う。02、09はコンソールへの出力に使う。</p>
+<p>たとえば、文字の入力や出力は、すべてこのファンクションコールによって実現できる。<p>
+<p>ファンクション番号01はキーボードからの入力（1文字、エコー付き）、06はコンソールからの直接入力（バッファリングなし、Ctrl-Cチェックなし）、0Aはキーボードからバッファ領域への文字列入力。02は標準出力（スクリーン画面）への出力（1文字）、09は画面への文字列の出力に使う。</p>
 <p>このほか、論理演算命令（AND, OR）、ストリング操作命令、ローテート・シフト命令などがある。</p>
 <p>（以上は<a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E8%AA%AD%E3%82%808086%E2%80%9516%E3%83%93%E3%83%83%E3%83%88%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%8F%E8%AA%9E%E3%82%8B-%E3%82%A2%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9-%E8%92%B2%E5%9C%B0-%E8%BC%9D%E5%B0%9A/dp/4871482456">はじめて読む8086―16ビット・コンピュータをやさしく語る (アスキーブックス)</a>を参考に執筆しました。）</p>
 <div class="edit_date">
 <p>2022.12.05編集</p>
+<p>2026.02.17編集</p>
+</div>
+
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いたコード。16bitのアセンブラでHello Worldを表示する。</p>
+<pre>
+org 100h                ; .COMファイルは0100hからロードされる
+
+section .text
+start:
+    ; --- INT 21h, AH=09h: 文字列を出力 ---
+    mov ah, 09h         ; ファンクション番号 09h (画面に文字列を表示)
+    mov dx, msg         ; 表示したい文字列のメモリアドレスをDXにセット
+    int 21h             ; DOSサービス呼び出し
+
+    ; --- プログラムの正常終了 ---
+    mov ah, 4Ch         ; ファンクション番号 4Ch (プログラム終了)
+    int 21h             ; DOSサービス呼び出し
+
+section .data
+msg db 'Hello, World!$' ; '$'で終わる文字列 (09hファンクションのルール)
+</pre>
+<p>以上をhello.asmとして保存し、NASMで</p>
+<pre>
+nasm -f bin hello.asm -o hello.com
+</pre>
+<p>とコンパイルして、hello.comを実行する。</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/76772513/nasm-hello-world-in-dosbox">assembly - NASM "hello world" in DOSBox - Stack Overflow</a></li>
+<li><a href="https://www.daniweb.com/programming/software-development/threads/236650/int-21h-ah-09h-string-output">assembly - int 21h/ah=09h string output [SOLVED] | DaniWeb</a></li>
+<li><a href="https://medium.com/ax1al/dos-assembly-101-4c3660957d25">DOS Assembly 101. Hello World, Today Will Gonna Explain a… | by astro | RIXED_LABS | Medium</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.17</p>
 </div>
 
 <h2>数値の後にHをつけるか否か</h2>
