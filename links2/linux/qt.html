@@ -86,6 +86,34 @@
 <li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0284">第284回　クロスプラットフォームなアプリケーション開発フレームワークQtでプログラミングをはじめる：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
 </ul>
 
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いた、Qt WebEngine (Chromiumベース)を用いた簡単なWebブラウザ。</p>
+<pre class="prettyprint">
+#include &lt;QApplication&gt;
+#include &lt;QWebEngineView&gt;
+#include &lt;QUrl&gt;
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+
+    // WebViewの作成
+    QWebEngineView *view = new QWebEngineView();
+    // 初期URLを設定
+    view-&gt;setUrl(QUrl("https://www.google.com"));
+    view-&gt;resize(1024, 768);
+    view-&gt;show();
+
+    return app.exec();
+}
+</pre>
+<ul>
+<li><a href="https://qiita.com/syukan3/items/43226dc0d697ce86d0ca">Qtチュートリアル：C++でクロスプラットフォームなGUIアプリを作ろう #C++ - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
+
 <h2>KDEアプリケーションを開発したい</h2>
 <p><a href="kde.html">KDE</a>を参照のこと。</p>
 
