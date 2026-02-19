@@ -250,15 +250,15 @@ int main(int argc, char **argv) {
 }
 </pre>
 <p>以下はこのコンパイラ自体のビルド。</p>
-<pre>
+<pre class="prettyprint">
 gcc -o compiler compiler.c
 </pre>
 <p>以下はこのコンパイラを使ってアセンブリコードを生成するコマンド。</p>
-<pre>
+<pre class="prettyprint">
 ./compiler "5+3-2" &gt; tmp.s
 </pre>
 <p>以下はアセンブリコードを機械語に変換して実行するコマンド。</p>
-<pre>
+<pre class="prettyprint">
 gcc -o tmp tmp.s
 ./tmp
 echo $?  # 結果を表示（6）
