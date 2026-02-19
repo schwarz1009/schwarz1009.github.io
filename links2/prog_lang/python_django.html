@@ -121,6 +121,58 @@ python manage.py runserver
 <p>2026.02.08</p>
 </div>
 
+<h2>AIによるサンプル２</h2>
+<p>以下はGoogleのAIが書いたサンプルその２。ビューとテンプレートを利用する。</p>
+<p>ビュー (views.py)</p>
+<pre class="prettyprint">
+# app/views.py
+from django.shortcuts import render
+
+def index(request):
+    # テンプレートに渡すデータ
+    context = {
+        'title': 'ホームページ',
+        'message': 'Djangoへようこそ！',
+        'items': ['りんご', 'バナナ', 'オレンジ']
+    }
+    # テンプレートファイル(index.html)にデータを渡して描画
+    return render(request, 'index.html', context)
+</pre>
+<p>テンプレート (index.html)</p>
+<pre class="prettyprint">
+&lt;!-- app/templates/index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;{{ title }}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;{{ message }}&lt;/h1&gt;
+    
+    &lt;h2&gt;フルーツリスト&lt;/h2&gt;
+    &lt;ul&gt;
+        {% for item in items %}
+            &lt;li&gt;{{ item }}&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>URL設定 (urls.py)</p>
+<pre class="prettyprint">
+# app/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+</pre>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
+
 <h2>YouTubeの入門動画</h2>
 <p>以下はYouTubeの入門動画。</p>
 <ul>
