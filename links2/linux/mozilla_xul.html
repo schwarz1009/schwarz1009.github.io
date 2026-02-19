@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -69,6 +70,82 @@
 </ul>
 <p>後日注記：上のページのXULとJavaScriptによるFirefoxの拡張機能の作成入門は、昔僕が多くの部分を翻訳しました（ほかの人が翻訳した部分もある）。英語のことを何も分かっていない少年時代の僕が訳した文章であるため、稚拙なところがあるかもしれません。ですが、「XULで作るとこんなに拡張性が高いのだ」ということが分かって、とても勉強になりました。またこのページの方法は昔のやり方であり、今のFirefoxではやり方が変わっていることに注意してください。</p>
 
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いた、XULによる拡張機能のサンプル。現在のFirefoxではWebExtensions APIが使われているため、Firefoxのバージョン56まででしか動作しない。</p>
+<p>install.rdf (拡張機能のメタデータ)</p>
+<pre class="prettyprint">
+&lt;?xml version="1.0"?&gt;
+&lt;RDF xmlns="http://www.w3.org"
+     xmlns:em="http://www.mozilla.org"&gt;
+  &lt;Description about="urn:mozilla:install-manifest"&gt;
+    &lt;em:id&gt;hello-xul@example.net&lt;/em:id&gt;
+    &lt;em:version&gt;1.0&lt;/em:version&gt;
+    &lt;em:type&gt;2&lt;/em:type&gt; &lt;!-- 2 = Extension --&gt;
+    &lt;em:name&gt;Hello XUL Button&lt;/em:name&gt;
+    &lt;em:description&gt;ツールバーにボタンを追加します&lt;/em:description&gt;
+    &lt;em:creator&gt;Example Author&lt;/em:creator&gt;
+    &lt;em:targetApplication&gt;
+      &lt;Description&gt;
+        &lt;em:id&gt;{ec8030f7-c20a-464f-9b0e-138a3cf7304f}&lt;/em:id&gt; &lt;!-- Firefox --&gt;
+        &lt;em:minVersion&gt;3.0&lt;/em:minVersion&gt;
+        &lt;em:maxVersion&gt;56.*&lt;/em:maxVersion&gt; &lt;!-- 古いバージョンのみ --&gt;
+      &lt;/Description&gt;
+    &lt;/em:targetApplication&gt;
+  &lt;/Description&gt;
+&lt;/RDF&gt;
+</pre>
+<p>chrome.manifest (ファイルの登録)</p>
+<pre>
+content hello-xul chrome/content/
+overlay chrome://browser/content/browser.xul chrome://hello-xul/content/browser.xul
+skin hello-xul classic/1.0 chrome/skin/
+</pre>
+<p>chrome/content/browser.xul (画面レイアウト・UI)</p>
+<pre class="prettyprint">
+&lt;?xml version="1.0"?&gt;
+&lt;overlay id="hello-xul-overlay"
+         xmlns="http://www.mozilla.org"&gt;
+
+  &lt;script src="overlay.js" type="application/x-javascript" /&gt;
+
+  &lt;!-- ツールバーにボタンを挿入 --&gt;
+  &lt;toolbarpalette id="BrowserToolbarPalette"&gt;
+    &lt;toolbarbutton id="hello-xul-button"
+                   label="Hello"
+                   class="toolbarbutton-1"
+                   oncommand="HelloXUL.sayHello();" /&gt;
+  &lt;/toolbarpalette&gt;
+
+&lt;/overlay&gt;
+</pre>
+<p>chrome/content/overlay.js (機能・ロジック)</p>
+<pre class="prettyprint">
+var HelloXUL = {
+  sayHello: function() {
+    // コンポーネントマネージャを使ってアラートを表示
+    var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+                            .getService(Components.interfaces.nsIPromptService);
+    prompts.alert(null, "Hello XUL", "Hello, World!");
+  }
+};
+</pre>
+<p>以下はフォルダ構成。</p>
+<pre>
+hello-xul-addon/
+├── install.rdf
+├── chrome.manifest
+└── chrome/
+    ├── content/
+    │   ├── browser.xul
+    │   └── overlay.js
+    └── skin/
+        └── button.png
+</pre>
+<p>以下のフォルダ構成でZIP圧縮し、拡張子を.xpiにし、Firefox 56以前あるいはPale Moonのウィンドウにドラッグ＆ドロップし、ツールバーの右クリックから「カスタマイズ」を選んで「Hello」を配置する。</p>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>XMLでGUI</h2>
 <p><a href="../prog_lang/xml_gui.html">XML＆GUI</a>を参照のこと。</p>
@@ -95,5 +172,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
