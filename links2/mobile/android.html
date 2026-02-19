@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -109,6 +110,66 @@
 <h2>Android StudioとKotlinによる開発</h2>
 <p>開発はIntelliJ IDEAをベースにしたAndroid Studioを用いて行う。特にJava VM代替言語のKotlinを用いてアプリが開発されることが多い。</p>
 <p><a href="../prog_lang/java.html">Java（１．文法）</a>や<a href="../prog_lang/java_langs_kotlin.html">Kotlin</a>や<a href="../prog_lang/intellij.html">IntelliJ IDEA</a>や<a href="../prog_lang/java_embedded.html">Java組み込み</a>も参照のこと。</p>
+
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いた、KotlinとJetpack Composeによるボタンを押すとカウンターが増えるAndroidアプリ。</p>
+<pre class="prettyprint">
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MaterialTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    CounterApp()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CounterApp() {
+    // 状態の保持: countが変化すると画面が再描画(リコンポジション)される
+    var count by remember { mutableStateOf(0) }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "カウント: $count",
+            fontSize = 32.sp
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { count++ }) {
+            Text(text = "増やす")
+        }
+    }
+}
+</pre>
+<p>Jetpack ComposeはGoogleによって開発された、Androidアプリ開発のための宣言的UIツールキット。従来のXMLのレイアウトファイルを使わず、@Composableというアノテーションを付加します。</p>
+<ul>
+<li><a href="https://tech.niftylifestyle.co.jp/entry/729">Jetpack ComposeとViewModelを使って画面を作ってみた | ニフティライフスタイル Tech Blog</a></li>
+<li><a href="https://zenn.dev/ubiblog2/articles/5374237b218711">Androidアプリ開発初心者がJetpack Composeを使ってみる - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
 
 <h2>APK</h2>
 <p>APKはAndroidのパッケージ形式。独自の形式に見えるが、実際はZip形式であり、JavaのJAR形式をベースにしている。</p>
@@ -305,5 +366,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
