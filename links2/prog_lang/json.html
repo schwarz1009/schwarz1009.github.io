@@ -206,6 +206,186 @@ IsStudent: false
 <p>2026.02.19</p>
 </div>
 
+<h2>C++による簡易的JSONパーサー２</h2>
+<p>以下はGoogleのAIが書いた、C++による簡易的なJSONパーサーその２。ネストされたオブジェクトや配列にも対応したバージョン。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;variant&gt;
+#include &lt;optional&gt;
+#include &lt;memory&gt;
+
+// JSONのデータ型を定義
+struct JsonValue;
+using JsonObject = std::map&lt;std::string, JsonValue&gt;;
+using JsonArray = std::vector&lt;JsonValue&gt;;
+
+struct JsonValue {
+    std::variant&lt;std::nullptr_t, bool, double, std::string, std::shared_ptr&lt;JsonObject&gt;, std::shared_ptr&lt;JsonArray&gt;&gt; data;
+
+    // ヘルパー: 型チェック
+    bool is_null() const { return std::holds_alternative&lt;std::nullptr_t&gt;(data); }
+    bool is_string() const { return std::holds_alternative&lt;std::string&gt;(data); }
+    bool is_number() const { return std::holds_alternative&lt;double&gt;(data); }
+    bool is_bool() const { return std::holds_alternative&lt;bool&gt;(data); }
+    bool is_object() const { return std::holds_alternative&lt;std::shared_ptr&lt;JsonObject&gt;&gt;(data); }
+    bool is_array() const { return std::holds_alternative&lt;std::shared_ptr&lt;JsonArray&gt;&gt;(data); }
+
+    // ヘルパー: 値の取得
+    std::string get_string() const { return std::get&lt;std::string&gt;(data); }
+    double get_number() const { return std::get&lt;double&gt;(data); }
+    bool get_bool() const { return std::get&lt;bool&gt;(data); }
+    JsonObject& get_object() { return *std::get&lt;std::shared_ptr&lt;JsonObject&gt;&gt;(data); }
+    JsonArray& get_array() { return *std::get&lt;std::shared_ptr&lt;JsonArray&gt;&gt;(data); }
+};
+
+// パーサー本体
+class Parser {
+    std::string json;
+    size_t pos = 0;
+
+    void skip_whitespace() {
+        while (pos &lt; json.size() && isspace(json[pos])) pos++;
+    }
+
+    char next_char() {
+        skip_whitespace();
+        return json[pos];
+    }
+
+    std::string parse_string() {
+        pos++; // " をスキップ
+        std::string s;
+        while (pos &lt; json.size() && json[pos] != '"') {
+            s += json[pos++];
+        }
+        pos++; // " をスキップ
+        return s;
+    }
+
+    JsonValue parse_value();
+
+    JsonValue parse_object() {
+        auto obj = std::make_shared&lt;JsonObject&gt;();
+        pos++; // { をスキップ
+        skip_whitespace();
+        if (next_char() == '}') {
+            pos++;
+            return JsonValue{obj};
+        }
+        while (true) {
+            skip_whitespace();
+            std::string key = parse_string();
+            skip_whitespace();
+            if (json[pos] == ':') pos++;
+            (*obj)[key] = parse_value();
+            skip_whitespace();
+            if (json[pos] == ',') {
+                pos++;
+            } else if (json[pos] == '}') {
+                pos++;
+                break;
+            }
+        }
+        return JsonValue{obj};
+    }
+
+    JsonValue parse_array() {
+        auto arr = std::make_shared&lt;JsonArray&gt;();
+        pos++; // [ をスキップ
+        skip_whitespace();
+        if (next_char() == ']') {
+            pos++;
+            return JsonValue{arr};
+        }
+        while (true) {
+            arr-&gt;push_back(parse_value());
+            skip_whitespace();
+            if (json[pos] == ',') {
+                pos++;
+            } else if (json[pos] == ']') {
+                pos++;
+                break;
+            }
+        }
+        return JsonValue{arr};
+    }
+
+    JsonValue parse_number() {
+        size_t start = pos;
+        while (pos &lt; json.size() && (isdigit(json[pos]) || json[pos] == '.' || json[pos] == '-' || json[pos] == '+')) {
+            pos++;
+        }
+        return JsonValue{std::stod(json.substr(start, pos - start))};
+    }
+
+public:
+    Parser(std::string j) : json(std::move(j)) {}
+
+    JsonValue parse() {
+        return parse_value();
+    }
+};
+
+JsonValue Parser::parse_value() {
+    skip_whitespace();
+    char c = json[pos];
+    if (c == '"') return JsonValue{parse_string()};
+    if (c == '{') return parse_object();
+    if (c == '[') return parse_array();
+    if (isdigit(c) || c == '-') return parse_number();
+    if (json.substr(pos, 4) == "true") { pos += 4; return JsonValue{true}; }
+    if (json.substr(pos, 5) == "false") { pos += 5; return JsonValue{false}; }
+    if (json.substr(pos, 4) == "null") { pos += 4; return JsonValue{nullptr}; }
+    return JsonValue{nullptr};
+}
+
+// 動作確認用
+int main() {
+    std::string json_str = R"(
+    {
+        "name": "John",
+        "age": 30,
+        "isStudent": false,
+        "address": {
+            "city": "Tokyo",
+            "zip": "100-0001"
+        },
+        "hobbies": ["reading", "coding", {"type": "sports", "name": "soccer"}]
+    }
+    )";
+
+    Parser parser(json_str);
+    JsonValue root = parser.parse();
+
+    if (root.is_object()) {
+        auto& obj = root.get_object();
+        std::cout &lt;&lt; "Name: " &lt;&lt; obj["name"].get_string() &lt;&lt; std::endl;
+        std::cout &lt;&lt; "City: " &lt;&lt; obj["address"].get_shared_ptr&lt;JsonObject&gt;()-&gt;at("city").get_string() &lt;&lt; std::endl; // この行は修正が必要
+        
+        // オブジェクトの修正版アクセス
+        auto& addr = obj["address"].get_object();
+        std::cout &lt;&lt; "City (Corrected): " &lt;&lt; addr["city"].get_string() &lt;&lt; std::endl;
+        
+        // 配列のアクセス
+        auto& hobbies = obj["hobbies"].get_array();
+        std::cout &lt;&lt; "First Hobby: " &lt;&lt; hobbies[0].get_string() &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Third Hobby Type: " &lt;&lt; hobbies[2].get_object()["type"].get_string() &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</pre>
+<ul>
+<li><a href="https://github.com/toughengineer/minjsoncpp">toughengineer/minjsoncpp: Minimalistic JSON C++ library</a></li>
+<li><a href="https://www.youtube.com/watch?v=sUxFE32tXF0">LS36.4 - 再帰降下パーサーの実装 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.20</p>
+</div>
+
 <h1>関連書式</h1>
 <h2>HOCON</h2>
 <p>HOCONはJSONを改良した新しい設定ファイル書式。名前にHuman-Optimizedとあるように、機械ではなく人間にとって記述・編集しやすいように考えられている。</p>

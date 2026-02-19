@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
@@ -78,6 +79,153 @@
 <p>その他のドキュメント記述フォーマットとして、古いものではTeX, PostScript, PDF, MS-Office, OpenDocumentなどがある。</p>
 <p><a href="../linux/tex.html">TeX</a>や<a href="../art/postscript.html">PostScript</a>や<a href="../art/_pdf.html">PDF</a>や<a href="../windows_pc/msoffice.html">MS-Office</a>や<a href="../linux/libreoffice.html">LibreOffice</a>も参照のこと。</p>
 
+<h1>AIによるサンプル</h1>
+<h2>C++による簡易的XMLパーサー</h2>
+<p>以下はGoogleのAIが書いた、C++による簡易的なXMLパーサー。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;sstream&gt;
+
+// 属性の型定義
+using Attributes = std::map&lt;std::string, std::string&gt;;
+
+// ノード構造体
+struct Node {
+    std::string name;
+    Attributes attrs;
+    std::string text;
+    std::vector&lt;Node&gt; children;
+};
+
+// パーサークラス
+class SimpleXMLParser {
+public:
+    Node parse(const std::string& xml) {
+        size_t pos = 0;
+        return parseNode(xml, pos);
+    }
+
+private:
+    Node parseNode(const std::string& xml, size_t& pos) {
+        Node node;
+        
+        // &lt;タグ名 属性&gt; を見つける
+        size_t start = xml.find('&lt;', pos);
+        size_t end = xml.find('&gt;', start);
+        std::string tagContent = xml.substr(start + 1, end - start - 1);
+        pos = end + 1;
+
+        // 属性の解析
+        parseAttributes(tagContent, node);
+
+        // 空タグ &lt;tag /&gt; のチェック
+        if (!tagContent.empty() && tagContent.back() == '/') {
+            node.name = tagContent.substr(0, tagContent.length() - 1);
+            return node;
+        }
+
+        node.name = tagContent;
+
+        // 子ノードとテキストの解析
+        while (true) {
+            size_t nextStart = xml.find('&lt;', pos);
+            if (nextStart == std::string::npos) break;
+
+            // 終了タグのチェック
+            if (xml.substr(nextStart + 1, node.name.length() + 1) == "/" + node.name) {
+                pos = xml.find('&gt;', nextStart) + 1;
+                break;
+            }
+
+            // 子ノードなら再帰
+            if (xml[nextStart + 1] != '/') {
+                node.children.push_back(parseNode(xml, pos));
+            } else {
+                // 終了タグ（自分ではない）はスキップ
+                pos = xml.find('&gt;', nextStart) + 1;
+            }
+        }
+        return node;
+    }
+
+    void parseAttributes(std::string& tagContent, Node& node) {
+        size_t firstSpace = tagContent.find(' ');
+        if (firstSpace == std::string::npos) return;
+
+        node.name = tagContent.substr(0, firstSpace);
+        std::string attrStr = tagContent.substr(firstSpace + 1);
+
+        size_t pos = 0;
+        while (pos &lt; attrStr.length()) {
+            size_t eq = attrStr.find('=', pos);
+            if (eq == std::string::npos) break;
+            
+            std::string key = attrStr.substr(pos, eq - pos);
+            // keyの空白を除去
+            key.erase(0, key.find_first_not_of(" "));
+            key.erase(key.find_last_not_of(" ") + 1);
+
+            size_t startQuote = attrStr.find('"', eq);
+            size_t endQuote = attrStr.find('"', startQuote + 1);
+            
+            std::string value = attrStr.substr(startQuote + 1, endQuote - startQuote - 1);
+            node.attrs[key] = value;
+            pos = endQuote + 1;
+        }
+    }
+};
+
+// 解析結果を表示する関数
+void printNode(const Node& node, int indent = 0) {
+    std::string spaces(indent, ' ');
+    std::cout &lt;&lt; spaces &lt;&lt; "Node: " &lt;&lt; node.name &lt;&lt; "\n";
+    for (auto const& [key, val] : node.attrs) {
+        std::cout &lt;&lt; spaces &lt;&lt; "  Attr: " &lt;&lt; key &lt;&lt; " = " &lt;&lt; val &lt;&lt; "\n";
+    }
+    for (const auto& child : node.children) {
+        printNode(child, indent + 4);
+    }
+}
+
+int main() {
+    std::string xml = 
+        "&lt;library&gt;"
+        "  &lt;book id=\"1\" genre=\"fantasy\"&gt;"
+        "    &lt;title&gt;Harry Potter&lt;/title&gt;"
+        "    &lt;author&gt;Rowling&lt;/author&gt;"
+        "  &lt;/book&gt;"
+        "  &lt;book id=\"2\" genre=\"sci-fi\"&gt;"
+        "    &lt;title&gt;Dune&lt;/title&gt;"
+        "  &lt;/book&gt;"
+        "&lt;/library&gt;";
+
+    SimpleXMLParser parser;
+    Node root = parser.parse(xml);
+    printNode(root);
+
+    return 0;
+}
+</pre>
+<p>実行結果：</p>
+<pre>
+Node: library
+    Node: book
+      Attr: genre = fantasy
+      Attr: id = 1
+        Node: title
+        Node: author
+    Node: book
+      Attr: genre = sci-fi
+      Attr: id = 2
+        Node: title
+</pre>
+<div class="edit_date">
+<p>2026.02.20</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>XMLでGUI</h2>
 <p><a href="xml_gui.html">XML＆GUI</a>を参照のこと。</p>
@@ -111,5 +259,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
