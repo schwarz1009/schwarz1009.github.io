@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -124,6 +125,110 @@
 <li><a href="https://github.com/KDE/kdelibs">git</a></li>
 </ul>
 
+<h1>AIによるサンプル</h1>
+<h2>KTextEditorを使った簡単なKDEのテキストエディタ</h2>
+<p>以下はGoogleのAIが書いた、KTextEditorを使った簡単なKDEのテキストエディタ。開発にはKDE Frameworks 5または6が必要。</p>
+<p>まず開発に必要なパッケージをインストールする。Ubuntu/Kubuntuの場合：</p>
+<pre>
+sudo apt install build-essential cmake extra-cmake-modules libkf5texteditor-dev libkf5parts-dev libkf5xmlgui-dev qtbase5-dev
+</pre>
+<p>main.cpp</p>
+<pre class="prettyprint">
+#include &lt;QApplication&gt;
+#include &lt;KAboutData&gt;
+#include &lt;KLocalizedString&gt;
+#include &lt;KTextEditor/Editor&gt;
+#include &lt;KTextEditor/Document&gt;
+#include &lt;KTextEditor/View&gt;
+#include &lt;KXmlGuiWindow&gt;
+#include &lt;KActionCollection&gt;
+#include &lt;QMenu&gt;
+#include &lt;QMenuBar&gt;
+
+// KTextEditorのビューを含んだメインウィンドウを作成
+class SimpleEditorWindow : public KXmlGuiWindow
+{
+public:
+    SimpleEditorWindow() : KXmlGuiWindow(nullptr)
+    {
+        // 1. KTextEditorのDocumentを取得
+        KTextEditor::Document *doc = KTextEditor::Editor::instance()-&gt;createDocument(this);
+
+        // 2. Viewを生成してウィンドウの中心に設置
+        KTextEditor::View *view = doc-&gt;createView(this);
+        setCentralWidget(view);
+
+        // 3. 基本的なメニュー（ファイルなど）を追加
+        auto fileMenu = menuBar()-&gt;addMenu(i18n("&File"));
+        
+        // 保存アクションの例（実際には保存/読み込みの処理をここに実装）
+        // KTextEditorが標準で提供するアクションを利用可能
+        fileMenu-&gt;addAction(actionCollection()-&gt;action(KStandardAction::Save));
+        
+        // 4. GUI定義（GUI Factory）をロードしてツールバー等をKate/KWrite風に
+        createGUI(doc);
+    }
+};
+
+int main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("simpleeditor");
+
+    KAboutData aboutData(
+        QStringLiteral("simpleeditor"),
+        i18n("Simple Editor"),
+        QStringLiteral("1.0"),
+        i18n("A simple KTextEditor application"),
+        KAboutLicense::GPL,
+        i18n("(c) 2026 Author")
+    );
+    KAboutData::setApplicationData(aboutData);
+
+    SimpleEditorWindow *window = new SimpleEditorWindow();
+    window-&gt;resize(800, 600);
+    window-&gt;show();
+
+    return app.exec();
+}
+</pre>
+<p>CMakeLists.txt</p>
+<pre class="prettyprint">
+cmake_minimum_required(VERSION 3.16)
+project(SimpleEditor)
+
+find_package(ECM REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(KF5 REQUIRED COMPONENTS TextEditor Parts XmlGui CoreAddons)
+
+add_executable(simpleeditor main.cpp)
+
+target_link_libraries(simpleeditor
+    Qt5::Widgets
+    KF5::TextEditor
+    KF5::Parts
+    KF5::XmlGui
+)
+
+install(TARGETS simpleeditor ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+</pre>
+<p>上の二つのファイルを同じ場所に保存し、以下を実行する。</p>
+<pre>
+mkdir build
+cd build
+cmake ..
+make
+./simpleeditor
+</pre>
+<ul>
+<li><a href="https://github.com/KDE/ktexteditor">KDE/ktexteditor: KTextEditor Framework</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>KDEデスクトップ</h2>
 <p><a href="kde_desktop.html">KDEデスクトップ</a>を参照のこと。</p>
@@ -233,5 +338,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
