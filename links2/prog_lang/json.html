@@ -6,6 +6,7 @@
         <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -90,6 +91,107 @@
 <p>2025.12.16</p>
 </div>
 
+<h1>AIによるサンプル</h1>
+<h2>C++による簡易的JSONパーサー</h2>
+<p>以下はGoogleのAIが書いた、C++による簡易的なJSONパーサー。ただし、ネストされたオブジェクトや配列、nullには未対応で、エラーチェックもほぼなし。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;unordered_map&gt;
+#include &lt;vector&gt;
+#include &lt;sstream&gt;
+
+// JSONの値の種類を定義
+enum class JsonType { STRING, NUMBER, BOOL, OBJECT };
+
+// JSONの値を格納する構造体（簡易版）
+struct JsonValue {
+    JsonType type;
+    std::string string_val;
+    int int_val = 0;
+    bool bool_val = false;
+    std::unordered_map&lt;std::string, JsonValue&gt; object_val;
+};
+
+// スペースを飛ばす関数
+void skipWhitespace(const std::string& json, size_t& pos) {
+    while (pos &lt; json.length() && isspace(json[pos])) {
+        pos++;
+    }
+}
+
+// 文字列を解析する関数 ("..."部分)
+std::string parseString(const std::string& json, size_t& pos) {
+    pos++; // '"' を飛ばす
+    size_t start = pos;
+    pos = json.find('"', start);
+    std::string result = json.substr(start, pos - start);
+    pos++; // '"' を飛ばす
+    return result;
+}
+
+// JSONObjectを解析する関数
+std::unordered_map&lt;std::string, JsonValue&gt; parseObject(const std::string& json, size_t& pos) {
+    std::unordered_map&lt;std::string, JsonValue&gt; object;
+    pos++; // '{' を飛ばす
+    skipWhitespace(json, pos);
+
+    while (pos &lt; json.length() && json[pos] != '}') {
+        skipWhitespace(json, pos);
+        if (json[pos] == '"') {
+            std::string key = parseString(json, pos);
+            skipWhitespace(json, pos);
+            if (json[pos] == ':') {
+                pos++; // ':' を飛ばす
+                skipWhitespace(json, pos);
+                
+                // 値の解析 (簡易的にString, Int, Boolのみ対応)
+                if (json[pos] == '"') {
+                    object[key] = {JsonType::STRING, parseString(json, pos)};
+                } else if (isdigit(json[pos]) || json[pos] == '-') {
+                    size_t start = pos;
+                    while (isdigit(json[pos]) || json[pos] == '-') pos++;
+                    object[key] = {JsonType::NUMBER, "", std::stoi(json.substr(start, pos - start))};
+                } else if (json.substr(pos, 4) == "true" || json.substr(pos, 5) == "false") {
+                    bool b = (json.substr(pos, 4) == "true");
+                    object[key] = {JsonType::BOOL, "", 0, b};
+                    pos += b ? 4 : 5;
+                }
+            }
+        }
+        skipWhitespace(json, pos);
+        if (json[pos] == ',') pos++; // ',' を飛ばす
+    }
+    pos++; // '}' を飛ばす
+    return object;
+}
+
+int main() {
+    std::string json = R"({
+        "name": "John Doe",
+        "age": 30,
+        "isStudent": false
+    })";
+
+    size_t pos = 0;
+    skipWhitespace(json, pos);
+    
+    if (json[pos] == '{') {
+        auto data = parseObject(json, pos);
+
+        // 結果の出力
+        std::cout &lt;&lt; "Name: " &lt;&lt; data["name"].string_val &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Age: " &lt;&lt; data["age"].int_val &lt;&lt; std::endl;
+        std::cout &lt;&lt; "IsStudent: " &lt;&lt; (data["isStudent"].bool_val ? "true" : "false") &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</pre>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
+
 <h1>関連書式</h1>
 <h2>HOCON</h2>
 <p>HOCONはJSONを改良した新しい設定ファイル書式。名前にHuman-Optimizedとあるように、機械ではなく人間にとって記述・編集しやすいように考えられている。</p>
@@ -128,5 +230,7 @@
 <script type="text/javascript" src="../../js/jquery.toc.js"></script>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
 </body>
 </html>
