@@ -263,9 +263,11 @@ gcc -o tmp tmp.s
 ./tmp
 echo $?  # 結果を表示（6）
 </pre>
-<p>strtol()関数は文字列をlong型整数に変換するCの関数です。</p>
+<p>strtol()関数は文字列をlong型整数に変換するCの関数です。また、echo $?は直前に実行されたコマンドの終了ステータスを表示します。</p>
 <ul>
 <li><a href="https://cgengo.sakura.ne.jp/strtol.html">strtol() - C言語例文集</a></li>
+<li><a href="https://qiita.com/zackey2/items/1221d44ab4ced84dad1c">パイプしたときの終了ステータスの取得方法 #Linux - Qiita</a></li>
+<li><a href="https://subro.mokuren.ne.jp/1930.html">お金をかけずにサーバーの勉強をしよう - 黒い画面のコマンドには戻り値というものがある -</a></li>
 </ul>
 <div class="edit_date">
 <p>2026.02.19-20</p>
