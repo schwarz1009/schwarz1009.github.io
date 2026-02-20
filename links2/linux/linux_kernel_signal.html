@@ -99,6 +99,30 @@
 
 <h2>kill(2)</h2>
 <p>シグナルを送信する。名前は「kill」（殺す）だが実際には強制終了だけではなくさまざまなシグナルを送信できる。</p>
+<p>後日注記：Linuxの主なシグナルには、</p>
+<table class="some_tables">
+<tr><th class="min60">シグナル</th><th>説明</th></tr>
+<tr><td>SIGTERM (15)</td><td>プロセスの正常終了（デフォルト）</td></tr>
+<tr><td>SIGKILL (9)</td><td>強制終了（捕捉や無視はできない）</td></tr>
+<tr><td>SIGINT (2)</td><td>キーボードからの割り込み、Ctrl+C</td></tr>
+<tr><td>SIGHUP (1)</td><td>設定の再読み込みとデーモンのリロード</td></tr>
+<tr><td>SIGQUIT (3)</td><td>Ctrl+\で終了し、コアダンプを生成</td></tr>
+<tr><td>SIGSTOP (17/19)</td><td>プロセスの一時停止</td></tr>
+<tr><td>SIGCONT (18)</td><td>停止したプロセスの再開</td></tr>
+</table>
+<p>などがある。これらはkillコマンドを使ってシグナル名や番号からプロセスIDを指定して送り付けることができる。</p>
+<pre>
+kill -シグナル番号/名前 PID
+</pre>
+<p>以上はGoogleのAIを参考にしました。</p>
+<ul>
+<li><a href="https://chaingng.github.io/post/linux_process/">[linux]シグナルとkill - Hack Engineering</a></li>
+<li><a href="https://zenn.dev/kompeito/articles/1ad712d6afc9ec">killコマンドと主要なシグナル一覧 - Zenn</a></li>
+<li><a href="https://popinsight.jp/blog/?p=50638">【kill】Linuxでプロセスを終了させるコマンド - ポップインサイト</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.20編集</p>
+</div>
 
 <h2>シグナルと割り込み</h2>
 <p>UNIXのシグナルは、ソフトウェア割り込みを実装した機構のひとつ。そもそもはハードウェアの非同期割り込みのための機構だったが、それをソフトウェアで実装した。</p>
