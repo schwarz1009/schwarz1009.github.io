@@ -239,6 +239,10 @@ add al, 2
 mov [0100], al
 </pre>
 <p>などと操作するのです。</p>
+<p>また、mul命令やdiv命令で引数がひとつしかない理由は、桁あふれを防ぐために、結果の代入先がバイト長によって変わるからです。</p>
+<ul>
+<li><a href="https://qiita.com/MoriokaReimen/items/4853587dcb9eb96fab62">Linuxでx86アセンブラ（四則演算編） #nasm - Qiita</a></li>
+</ul>
 <div class="edit_date">
 <p>2026.02.22</p>
 </div>
