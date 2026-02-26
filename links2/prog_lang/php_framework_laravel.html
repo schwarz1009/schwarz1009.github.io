@@ -146,7 +146,7 @@
 
 <h1>AIによるサンプル</h1>
 <h2>ユーザーの名前を画面に表示するサンプル</h2>
-<p>以下はGoogleのAIが書いた、Laravelでユーザーの名前を画面に表示するサンプル。</p>
+<p>以下はGoogleのAIが書いた、Laravelでユーザーの名前を画面に表示するサンプル。編集済み。</p>
 <p>ビューファイル (resources/views/hello.blade.php)</p>
 <pre class="prettyprint">
 &lt;!DOCTYPE html&gt;
@@ -154,12 +154,7 @@
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;Laravel サンプル&lt;/title&gt;
-    &lt;style&gt;
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f3f4f6; }
-        .box { padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center; }
-        h1 { color: #333; font-size: 24px; }
-        p { color: #666; }
-    &lt;/style&gt;
+    &lt;link rel="stylesheet" href="{{ asset('css/style.css') }}"&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div class="box"&gt;
@@ -168,6 +163,13 @@
     &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
+</pre>
+<p>スタイルファイル (public/css/style.css)</p>
+<pre class="prettyprint lang-css">
+body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f3f4f6; }
+.box { padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center; }
+h1 { color: #333; font-size: 24px; }
+p { color: #666; }
 </pre>
 <p>ルーティング (routes/web.php)</p>
 <pre class="prettyprint">
@@ -184,8 +186,13 @@ Route::get('/hello', function () {
 php artisan serve
 </pre>
 <p>ブラウザで、http://localhost:8000/helloにアクセスすると画面に「こんにちは、ユーザーさん！」と表示される。</p>
+<ul>
+<li><a href="https://qiita.com/miki_grapes/items/89fad9241b99f35f5fa9">【Laravel】独自のCSSファイルを読み込む方法 #PHP - Qiita</a></li>
+<li><a href="https://run-fish.com/laravel-css/">LaravelにCSSを反映させたい | 走る魚</a></li>
+</ul>
 <div class="edit_date">
 <p>2026.02.08</p>
+<p>2026.02.26編集</p>
 </div>
 
 <h1>関連ページ</h1>
@@ -209,6 +216,7 @@ php artisan serve
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/scriptfortoc.js"></script>
 <script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
 <script>prettyPrint();</script>
 </body>
 </html>
