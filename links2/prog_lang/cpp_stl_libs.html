@@ -81,16 +81,49 @@
 <p>STLのコンテナでは、テンプレートを使うことで、任意の型の複数の値を持ったコレクションを扱い、要素を格納・取り出しすることができる。</p>
 <p>種類と目的に応じて、vector、deque、list、stack、queue、priority_queue、set、multiset、map、multimapなどがある。</p>
 <p>これらは、</p>
-<p>・要素の順番が意味を持つか（vector, deque, list）、持たないか（set, multiset, map, multimap）</p>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>分類</th></tr>
+<tr><td>vector, deque, list</td><td>要素の順番が意味を持つ</td></tr>
+<tr><td>set, multiset, map, multimap</td><td>要素の順番が意味を持たない</td></tr>
+</table>
 <p>ベクターやリストの場合：</p>
-<p>・ランダムアクセスな操作ができるか（vector, deque）、できないか（list）</p>
-<p>・末尾への追加・削除の操作だけが高速か（vector）、末尾だけではなく先頭への操作も高速か（deque）、任意の位置への操作も高速か（list）</p>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>分類</th></tr>
+<tr><td>vector, deque</td><td>ランダムアクセスな操作ができる</td></tr>
+<tr><td>list</td><td>ランダムアクセスな操作ができない</td></tr>
+</table>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>分類</th></tr>
+<tr><td>vector</td><td>末尾への追加・削除の操作だけが高速</td></tr>
+<tr><td>deque</td><td>末尾だけではなく先頭への操作も高速</td></tr>
+<tr><td>list</td><td>任意の位置への操作も高速</td></tr>
+</table>
 <p>セットとマップの場合：</p>
-<p>・値だけを持つか（set, multiset）、キーと値の両方を持つか（map, multimap）</p>
-<p>・セットの場合、重複した値が許されるか（multiset）、許されないか（set）</p>
-<p>・マップの場合、重複したキーが許されるか（multimap）、許されないか（map）</p>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>分類</th></tr>
+<tr><td>set, multiset</td><td>値だけを持つ</td></tr>
+<tr><td>map, multimap</td><td>キーと値の両方を持つ</td></tr>
+</table>
+<p>セットの場合：</p>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>分類</th></tr>
+<tr><td>set</td><td>重複した値が許されない</td></tr>
+<tr><td>multiset</td><td>重複した値が許される</td></tr>
+</table>
+<p>マップの場合：</p>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>分類</th></tr>
+<tr><td>map</td><td>重複したキーが許されない</td></tr>
+<tr><td>multimap</td><td>重複したキーが許される</td></tr>
+</table>
+<p>スタックとキューの場合：</p>
+<table class="some_tables">
+<tr><th class="min60">クラス</th><th>分類</th></tr>
+<tr><td>stack</td><td>後入れ先出し（FILO）のスタック</td></tr>
+<tr><td>queue</td><td>先入れ先出し（FIFO）のキュー</td></tr>
+<tr><td>priority_queue</td><td>優先度の順に取り出す</td></tr>
+</table>
 <p>などの特徴がある。</p>
-<p>また、stackは後入れ先出し（FILO）のスタック、queueは先入れ先出し（FIFO）のキューとなる。priority_queueは優先度の順に取り出す。</p>
 <p>詳しくは以下が参考になる。</p>
 <ul>
 <li><a href="https://ufcpp.net/study/stl/characteristics.html">STL コンテナの特徴一覧 - C++ STL | ++C++; // 未確認飛行 C</a></li>
@@ -99,6 +132,7 @@
 <p><a href="data_structure_list.html">配列とリストとハッシュ</a>や<a href="data_structure_stack.html">スタックとキュー</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2022.11.30</p>
+<p>2026.02.27編集</p>
 </div>
 
 <h2>反復子</h2>
