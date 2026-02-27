@@ -110,14 +110,16 @@ public class MyThread extends Thread {
 </pre>
 -->
 
-<p>継承の例：</p>
+<p>スーパークラスの例 (Cat.java)</p>
 <pre class="prettyprint">
 public class Cat {
     public void mew() {
         System.out.println("にゃーご");
     }
 }
-
+</pre>
+<p>サブクラスの例 (ExCat.java)</p>
+<pre class="prettyprint">
 public class ExCat extends Cat {
     @Override
     public void mew() {
@@ -132,6 +134,9 @@ public class ExCat extends Cat {
 }
 </pre>
 <p>継承は、既にある財産であるクラスを引き継ぐために行う。</p>
+<div class="edit_date">
+<p>2026.02.27編集</p>
+</div>
 
 <h2>綺麗な設計をしたコードは、極力既存のコードを変更する必要性がない</h2>
 <p>継承について言えることとして、「綺麗な設計をしたコードは、極力元のコードを変更する必要がない」ということが言えます。</p>
