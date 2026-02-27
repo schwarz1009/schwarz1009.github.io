@@ -238,7 +238,7 @@ int main(void){
 <h2>C++で文字列</h2>
 <p>C++で文字列を扱うためには、std::stringを使う。</p>
 <p>後日注記：std::stringを使うことで、長さがどれくらいになるか事前に分からない可変長の文字列であっても、バッファの大きさを気にすることなく文字列を操作したり結合したりすることができる。</p>
-<p>後日注記：std::stringを使う際の注意点として、引数としての文字列を参照渡しにするために、std::string&のように変数名の前に&を付けます。また、変更しない文字列にはconstを付けます。なので、</p>
+<p>後日注記：std::stringを使う際の注意点として、関数の引数としての文字列を参照渡しにするために、std::string&のように変数名の前に&を付けます。また、変更しない文字列にはconstを付けます。なので、</p>
 <pre class="prettyprint">
 void printStr(const std::string& str) {
     std::cout &lt;&lt; str &lt;&lt; std::endl;
