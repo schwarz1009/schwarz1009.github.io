@@ -254,12 +254,16 @@ void printStr(const std::string& str) {
 
 <h2>C++で正規表現</h2>
 <p>C++で正規表現を行うためには、std::regexを使う。</p>
+<p>後日注記：C++で日本語の文字列を表現する場合は、ワイド文字リテラル（wchar_t型）といって、L"～"のように文字列の前にLを付けます。正規表現の操作をする場合には、単バイト文字の場合regexを、ワイド文字の場合wregexを使い、コンストラクタに正規表現のパターンを与えます。結果はmatch_results&lt;Iter&gt;、部分マッチはsub_match&lt;Iter&gt;で返り、regex_match()でパターンを照合できます。</p>
 <ul>
 <li><a href="https://codezine.jp/article/detail/7716">標準C++の正規表現: ＜regex＞ (1/2)：CodeZine（コードジン）</a></li>
 <li><a href="https://cpplover.blogspot.com/2015/01/c-stdregex.html">本の虫: C++の正規表現ライブラリ: std::regex</a></li>
 <li><a href="https://qiita.com/kmikmy/items/6ac1f54b64a307b5b941">C++11で正規表現（std::regex）を使う - Qiita</a></li>
 </ul>
 <p><a href="../linux/regex.html">正規表現</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2026.03.01編集</p>
+</div>
 
 <h2>C++でファイル読み書き</h2>
 <p>C++でファイルの読み書きを行うには、ifstream（ファイルの読み込み）とofstream（ファイルの書き込み）を使用する。また先頭に#include &lt;fstream&gt;を書く必要がある。</p>
