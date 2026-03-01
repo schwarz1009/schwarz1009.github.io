@@ -374,7 +374,7 @@ END
 <p>主なものに数値型のBYTE (unsigned char)、WORD (unsigned short), DWORD (unsigned long)、INT (int)、UINT (unsigned int)、LONG (long)、BOOL (真偽値、TRUEとFALSE)、VOID (void)などがある。</p>
 <p>覚えておくべきは文字列のTCHARで、環境によってCHAR (char)とWCHAR (wchar_t、マルチバイト文字・ワイド文字)に切り替わる。文字列（*STR）では、constの文字列には「C」、ワイド文字には「W」、TCHARには「T」、ポインタには「P」あるいは「LP」（二種類あるのは16ビット時代の名残りで現在においては同じ）、NULL終端には「N」が含まれる。</p>
 <p>また、グラフィックスなどで使うための構造体に、POINT (X座標とY座標)や、RECT (left, top, right, bottom)がある。</p>
-<p>それから、メッセージループにはMSG構造体、ウィンドウハンドルにはHWND型、デバイスコンテキストハンドルにはHDC型、ファイルやスレッドなどリソース一般の操作にはHANDLE型などが使われる。ほかにもHINSTANCE、HMENU、HGDIOBJなどがある。メッセージのパラメータにはWPARAM、LPARAM、LRESULTが使われる。</p>
+<p>それから、メッセージループにはMSG構造体、ウィンドウハンドルにはHWND型、デバイスコンテキストハンドルにはHDC型、ファイルやスレッドなどリソース一般の操作にはHANDLE型などが使われる。ほかにもHINSTANCE、HMENU、HICON、HGDIOBJなどがある。メッセージのパラメータにはWPARAM、LPARAM、LRESULTが使われる。</p>
 <ul>
 <li><a href="https://programming.pc-note.net/winapi/features.html">Windows APIプログラミングの概要(C言語) - 超初心者向けプログラミング入門</a></li>
 <li><a href="https://program.note-toself.info/windowsapidata/">WindowsAPIでよく使われるUINTやLPSTRといったデータ型 | プログラミングTips</a></li>
