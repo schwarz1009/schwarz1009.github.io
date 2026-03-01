@@ -154,8 +154,13 @@ if (pid &lt; 0) {
 <li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man7/pthreads.7.html">man pthreads</a></li>
 <li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/pthread_create.3.html">man pthread_create</a></li>
 </ul>
+<p>後日注記：基本的に、pthread_create()でスレッドを作り、pthread_join()で終了まで待機し、pthread_exit()で終了し、pthread_mutex_lock()/unlock()で排他制御を行う。pthread_create()の引数では非同期で実行する関数を指定する。スレッドを待機する時はpthread_join()、待機しない時はpthread_detach()で、そのいずれかを必ず実行しなければならない。</p>
+<ul>
+<li><a href="https://qiita.com/miyamoto_works/items/8ede26b07099606e50db">pthreadの使い方 #C - Qiita</a></li>
+</ul>
 <div class="edit_date">
 <p>2023.08.19編集</p>
+<p>2026.03.01編集</p>
 </div>
 
 <h2>プロセスとスレッドの違い</h2>
