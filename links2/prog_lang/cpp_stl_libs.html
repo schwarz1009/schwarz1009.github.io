@@ -303,6 +303,7 @@ ifs &gt;&gt; text_data;
 <h2>C++でマルチスレッド</h2>
 <p>長らく、C/C++にはスレッドの概念がなかった。そのため、プラットフォーム依存のAPIを使う必要があった。UNIXではpthreadを使うのが一般的だった。</p>
 <p>だが、C++11ではstd::threadが提供され、C++でもマルチスレッドアプリケーションを開発できるようになった。</p>
+<p>後日注記：基本的に、std::threadに並列で実行する関数やメソッドを指定します。join()でスレッドの処理が終わるまで待機します。コンパイルする際に必ず-pthreadオプションを付けます。</p>
 <ul>
 <!--<li><a href="https://qiita.com/kurun_pan/items/f626e763e74e82a44493">C++ std::threadの使い方 - Qiita</a></li>-->
 <li><a href="https://zenn.dev/hidenori3/articles/4e03d62c5e7679">C++ std::threadの使い方 - Zenn</a></li>
