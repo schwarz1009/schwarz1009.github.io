@@ -288,7 +288,7 @@ if (!ifs)
 std::string text_data;
 ifs &gt;&gt; text_data;
 </pre>
-<p>デストラクタで自動的にファイルのクローズ処理が行われるため、明示的なclose()は不要ですが、明示的にopen()とclose()を行うこともできます。</p>
+<p>RAIIにより、デストラクタで自動的にファイルのクローズ処理が行われるため、明示的なclose()は不要ですが、明示的にopen()とclose()を行うこともできます。</p>
 <p>後日注記：<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>では、宣言用のヘッダファイルと定義用のヘッダファイルを分けることで、コンパイラの依存性をできるだけ少なくするという話が出てきますが、その中で「iosfwd」というヘッダファイルが紹介されています。これはsstream, streambuf, fstream, iostreamなどのヘッダの宣言内容を集めたもので、コンパイル依存性を少なくするために使うことができます。</p>
 <ul>
 <li><a href="https://programming.pc-note.net/cpp/filestream.html">ファイルストリーム(C++) - 超初心者向けプログラミング入門</a></li>

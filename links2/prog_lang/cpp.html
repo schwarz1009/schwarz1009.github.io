@@ -671,9 +671,14 @@ GetObject()-&gt;Show();
 <li><a href="https://qiita.com/hmito/items/9b35a2438a8b8ee4b5af">C++20スマートポインタ入門 #C++ - Qiita</a></li>
 </ul>
 <p>後日注記：以前のC++にはスマートポインタがなかった。これが、JavaやC#などのほかのオブジェクト指向言語に比べて、「オブジェクト指向言語として決定的に欠けた部分」と言われていた。現在のC++にはスマートポインタがあるため、どんどん使いましょう。詳しくはやねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」が参考になります。</p>
+<p>後日注記：C++11におけるスマートポインタには、単一所有権のstd::unique_ptr、複数所有権のstd::shared_ptr、弱参照（所有権なし）のstd::weak_ptrがあり、RAIIによって管理を行います。</p>
+<ul>
+<li><a href="https://ja.wikibooks.org/wiki/C%2B%2B/RAII">C++/RAII - Wikibooks</a></li>
+</ul>
 <p><a href="programming_pointer.html">プログラミング作法（３C．ポインタとメモリ管理）</a>や<a href="java_gc.html">Java（２C．ガーベッジコレクションと例外）</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2026.02.27編集</p>
+<p>2026.03.01編集</p>
 </div>
 
 <h2>デストラクタとスマートポインタを上手く使おう</h2>
@@ -689,6 +694,18 @@ delete obj;
 <p>というコードがあったとして、これは上手くnewしたオブジェクトを解放するように見えますが、実際は処理の部分でreturn, break, goto, あるいは例外などが投げられた場合、deleteされずに処理が終わってしまいます。</p>
 <p>このような時には、デストラクタ（あるいはスマートポインタ）を上手く使って、リソースを管理する専門のオブジェクトを使いましょう。このオブジェクトのリソースを管理するための専門のクラスのデストラクタで必ずnewされたオブジェクトが解放されるようにすると、得たリソースが必ず解放できます。</p>
 
+<h2>RAII</h2>
+<p>C++にはRAIIという機能があり、リソース（メモリ、ファイル、ロックなど）の取得と解放をコンストラクタとデストラクタに結び付けることができます。RAIIの主な利用例はスマートポインタです。</p>
+<p>たとえば、ofstreamを使ってファイルの書き込みを行う場合、スコープを抜ければ自動的にデストラクタによってclose()されるため、ファイルのクローズ処理は必要ありません。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/RAII">RAII - Wikipedia</a></li>
+<li><a href="https://qiita.com/wx257osn2/items/e2e3bcbfdd8bd02872aa">RAII解説 #C++ - Qiita</a></li>
+<li><a href="https://ja.wikibooks.org/wiki/C%2B%2B/RAII">C++/RAII - Wikibooks</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.01</p>
+</div>
+
 <h1>その他の重要な機能</h1>
 <h2>例外</h2>
 <p>例外はthrowで吐き、try ～ catchブロックのcatchで捕捉する。</p>
@@ -700,7 +717,14 @@ try {
 }
 </pre>
 <p>後日注記：Linuxカーネル開発者のリーナス・トーバルズは、「C++の例外は壊れている」と言っています。JavaやPythonなど後続の言語に比べて、C++の例外処理は、C言語のエラーチェックに後付けで付け足したような仕様をしていて、実際カーネルやOSの開発には向いていません。</p>
+<ul>
+<li><a href="https://jp.quora.com/%E3%83%AA%E3%83%BC%E3%83%8A%E3%82%B9-%E3%83%88%E3%83%BC%E3%83%90%E3%83%AB%E3%82%BA%E6%B0%8F%E3%81%8C%E8%A8%80%E3%81%86-C-%E3%81%AE%E4%BE%8B%E5%A4%96%E5%87%A6%E7%90%86%E3%81%AF%E5%A3%8A%E3%82%8C%E3%81%A6%E3%81%84">リーナス・トーバルズ氏が言う「C++の例外処理は壊れている」とはどういう意味ですか？ - Quora</a></li>
+<li><a href="https://www.reddit.com/r/cprogramming/comments/1iphrwm/linus_torvalds_critique_of_c_a_comprehensive/?tl=ja">Linus Torvalds の C++ 批判：包括的なレビュー : r/cprogramming</a></li>
+</ul>
 <p>（詳しくは<a href="https://www.amazon.co.jp/%E6%A8%99%E6%BA%96C-%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-Ascii-books-%E6%9F%8F%E5%8E%9F/dp/4756131212">標準C++の基礎知識 (Ascii books)</a>が参考になります。）</p>
+<div class="edit_date">
+<p>2026.03.01編集</p>
+</div>
 
 <h2>インライン関数</h2>
 <p>インライン関数は、関数の呼び出しオーバーヘッドを避けるために、関数を呼び出すのではなく、マクロのように行の中にインラインで関数コードを埋め込むことができる機能。</p>
