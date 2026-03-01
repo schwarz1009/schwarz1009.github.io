@@ -68,6 +68,32 @@
 </ul>
 <p>後日注記：PostgreSQLは「適度に機能のバランスが取れたオープンソースのデータベース」として有名である。</p>
 
+<h2>PostgreSQLの独自の機能</h2>
+<p>GoogleのAIによれば、PostgreSQLでは、</p>
+<table class="some_tables">
+<tr><th class="min60">機能</th><th>説明</th></tr>
+<tr><td>バイナリJSON (JSONB)</td><td>バイナリ形式で高速な検索・インデックス（GIN）によるJSONのサポート</td></tr>
+<tr><td>配列型 (Array)</td><td>列に配列を直接入れられる</td></tr>
+<tr><td>範囲型 (Range)</td><td>値の範囲を専用の型として定義できる</td></tr>
+<tr><td>独自の型定義</td><td>ユーザーの独自の型（複合型やドメイン型）を定義できる</td></tr>
+<tr><td>PostGIS extension</td><td>地理空間データを扱える</td></tr>
+<tr><td>高度なインデックス</td><td>B-treeやハッシュだけでなくGIN, GiST, SP-GiST, BRINなどのインデックスを利用可能</td></tr>
+<tr><td>部分インデックス</td><td>テーブルの一部のみにインデックスを利用できる</td></tr>
+<tr><td>式インデックス</td><td>関数や式の結果にインデックスを利用できる</td></tr>
+<tr><td>テーブル継承</td><td>テーブル構造を継承可能</td></tr>
+<tr><td>パーティショニング</td><td>大きなテーブルを論理的な親テーブルの下に分割できる</td></tr>
+<tr><td>行レベルセキュリティ</td><td>ユーザーごとにアクセスできるテーブルを行単位で指定できる</td></tr>
+<tr><td>同時実行制御 (MVCC)</td><td>トランザクションの下にデッドロックを回避する</td></tr>
+<tr><td>ユーザーによる拡張</td><td>標準のSQLにない機能をユーザーが追加できる</td></tr>
+</table>
+<p>などの機能が存在します。</p>
+<ul>
+<li><a href="https://flxy.jp/media/article/34422">PostgreSQLとは？主な機能やコマンド一覧をわかりやすく解説 - FLEXY（フレキシー）</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.01</p>
+</div>
+
 <h2>pgAdmin</h2>
 <p>pgAdminを使うことで、PostgreSQLをCUIではなくGUIで管理できる。</p>
 <ul>
