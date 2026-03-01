@@ -254,7 +254,7 @@ void printStr(const std::string& str) {
 
 <h2>C++で正規表現</h2>
 <p>C++で正規表現を行うためには、std::regexを使う。</p>
-<p>後日注記：C++で日本語の文字列を表現する場合は、ワイド文字リテラル（wchar_t型）といって、L"～"のように文字列の前にLを付けます。正規表現の操作をする場合には、単バイト文字の場合regexを、ワイド文字の場合wregexを使い、コンストラクタに正規表現のパターンを与えます。結果はmatch_results&lt;Iter&gt;、部分マッチはsub_match&lt;Iter&gt;で返り、regex_match()でパターンを照合できます。</p>
+<p>後日注記：C++で日本語の文字列を表現する場合は、ワイド文字リテラル（wchar_t型）といって、L"～"のように文字列の前にLを付けます。C++の正規表現では、単バイト文字の場合regexを、ワイド文字の場合wregexを使い、コンストラクタに正規表現のパターンを与えます。結果はstringの場合smatch、部分マッチはsub_matchなどで返り、regex_match()でパターンを照合し、regex_replace()で置換できます。</p>
 <ul>
 <li><a href="https://codezine.jp/article/detail/7716">標準C++の正規表現: ＜regex＞ (1/2)：CodeZine（コードジン）</a></li>
 <li><a href="https://cpplover.blogspot.com/2015/01/c-stdregex.html">本の虫: C++の正規表現ライブラリ: std::regex</a></li>
