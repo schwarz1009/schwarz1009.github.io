@@ -267,6 +267,27 @@ void printStr(const std::string& str) {
 
 <h2>C++でファイル読み書き</h2>
 <p>C++でファイルの読み書きを行うには、ifstream（ファイルの読み込み）とofstream（ファイルの書き込み）を使用する。また先頭に#include &lt;fstream&gt;を書く必要がある。</p>
+<pre class="prettyprint">
+std::ofstream ofs("hoge.txt");
+if (!ofs)
+{
+    std::cout &lt;&lt; "ファイルのオープンに失敗しました。" &lt;&lt; std::endl;
+    return 0;
+}
+ofs &lt;&lt; "Hoge hoge Fuga fuga" &lt;&lt; std::endl;
+</pre>
+<p>あるいは、</p>
+<pre class="prettyprint">
+std::ifstream ifs("hoge.txt");
+if (!ifs)
+{
+    std::cout &lt;&lt; "ファイルのオープンに失敗しました。" &lt;&lt; std::endl;
+    return 0;
+}
+std::string text_data;
+ifs &gt;&gt; text_data;
+</pre>
+<p>デストラクタで自動的にファイルのクローズ処理が行われるため、明示的なclose()は不要です。</p>
 <p>後日注記：<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>では、宣言用のヘッダファイルと定義用のヘッダファイルを分けることで、コンパイラの依存性をできるだけ少なくするという話が出てきますが、その中で「iosfwd」というヘッダファイルが紹介されています。これはsstream, streambuf, fstream, iostreamなどのヘッダの宣言内容を集めたもので、コンパイル依存性を少なくするために使うことができます。</p>
 <ul>
 <li><a href="https://programming.pc-note.net/cpp/filestream.html">ファイルストリーム(C++) - 超初心者向けプログラミング入門</a></li>
@@ -274,6 +295,9 @@ void printStr(const std::string& str) {
 <li><a href="https://qiita.com/knknkn1162/items/47736785a3e472db5525">いっつも忘れるC++ ファイル入出力関数を図にしてみた - Qiita</a></li>
 </ul>
 <p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.03.01編集</p>
+</div>
 
 <h2>C++でマルチスレッド</h2>
 <p>長らく、C/C++にはスレッドの概念がなかった。そのため、プラットフォーム依存のAPIを使う必要があった。UNIXではpthreadを使うのが一般的だった。</p>
