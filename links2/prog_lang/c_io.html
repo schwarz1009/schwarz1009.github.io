@@ -193,11 +193,90 @@ EEEEEEEEE
 <p>そう、文字列を一致するのであっても、抽象的かつ一般化された関数にしてしまえば、簡単にトークン（字句）の解析器は作れるのです。</p>
 <p>実際は、このように、自分でトークンを解析する場面は多くありません。既に同じようなAPIがあります。C言語に用意されたAPIは少ないですが、文字列から文字列を検索するAPIなどもあります。</p>
 <p>実際にこの関数を使う際には、if文の条件式などにこの関数を入れて、さまざまな文字列と文字列を比較するようにします。それで、コンパイラやインタプリタやWebブラウザも作れるでしょう。</p>
-<p>後日注記：要するに、最初の一文字が一致した時点でフラグを立てて、その後に続く文字列がいつまでも一致するようならcontinueで処理の継続を行い、もし一文字でも異なっていたら-1を返し、最後まで一致していたら文字列のある地点あるいは文字列そのものを意味するIDなどを返すことで、普通に文字列の解析はできます。</p>
 <div class="edit_date">
 <p>2024.08.04</p>
 <p>2024.08.08編集</p>
-<p>2026.03.02編集</p>
+</div>
+
+<h2>AIによる文字列解析器</h2>
+<p>要するに、最初の一文字が一致した時点でフラグを立てて、その後に続く文字列がいつまでも一致するようならcontinueで処理の継続を行い、もし一文字でも異なっていたら-1を返し、最後まで一致していたら文字列のある地点あるいは文字列そのものを意味するIDなどを返すことで、普通に文字列の解析はできます。</p>
+<p>せっかくなので、GoogleのAIにこの文字列解析器を作ってもらいました。以下がそのコードです。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+/**
+ * 文字列が途中まで一致するかチェックする関数
+ * @param text 検索対象の文字列
+ * @param pattern 検索する文字列
+ * @return 一致した位置(0始まり)、不一致なら-1
+ */
+int checkString(const char *text, const char *pattern) {
+    int textLen = strlen(text);
+    int patLen = strlen(pattern);
+    int flag = 0; // 一致フラグ
+    int startPos = -1;
+
+    if (patLen == 0) return 0; // 空パターンは先頭一致とみなす
+
+    for (int i = 0; i &lt; textLen; i++) {
+        // 1. 最初の一文字が一致した時点でフラグを立てる
+        if (!flag && text[i] == pattern[0]) {
+            flag = 1;
+            startPos = i;
+        }
+
+        // 2. フラグが立っている（検索中）なら、以降の文字を比較
+        if (flag) {
+            int currentPatternIdx = i - startPos;
+
+            // パターンの最後までチェック完了
+            if (currentPatternIdx == patLen) {
+                break; 
+            }
+
+            // 3. 一文字でも異なっていたら-1を返す
+            if (text[i] != pattern[currentPatternIdx]) {
+                return -1;
+            }
+            
+            // 4. 一致しているならcontinueで処理を継続
+            continue;
+        }
+    }
+
+    // パターンが終了まで一致したか確認
+    if (flag && (strlen(text + startPos) &gt;= patLen)) {
+        // パターンが途中で終わらず、最後まで一致しているか再確認
+        for(int k=0; k&lt;patLen; k++) {
+            if(text[startPos+k] != pattern[k]) return -1;
+        }
+        return startPos; // 5. 最後まで一致していたら位置を返す
+    }
+
+    return -1;
+}
+
+int main() {
+    const char *text = "abcdefg";
+    
+    // テストケース1: 一致
+    printf("Result 1: %d\n", checkString(text"cde")); // 出力: 2
+
+    // テストケース2: 途中まで一致、その後不一致
+    printf("Result 2: %d\n", checkString(text"cdf")); // 出力: -1
+
+    // テストケース3: 1文字目から不一致
+    printf("Result 3: %d\n", checkString(text"xyz")); // 出力: -1
+
+    // テストケース4: パターンが長い
+    printf("Result 4: %d\n", checkString(text"defgh")); // 出力: -1
+
+    return 0;
+}
+</pre>
+<div class="edit_date">
+<p>2026.03.02</p>
 </div>
 
 <h1>標準入出力</h1>
