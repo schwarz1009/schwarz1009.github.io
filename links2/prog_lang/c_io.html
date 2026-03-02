@@ -276,6 +276,72 @@ int main() {
 }
 </pre>
 <p>ただし、このプログラムは文字列が不一致だった時点で終わる仕組みになっている。標準ライブラリのstrstrのように、最初からやり直して別の場所を探してはくれない。</p>
+<p>以下は文字列が不一致だった時に別の場所を探し直すようにしたバージョン。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+
+// 文字列検索関数
+// text: 検索される文字列
+// target: 探す文字列
+// 戻り値: 一致した位置のポインタ（見つからない場合は NULL）
+const char* custom_strstr(const char* text, const char* target) {
+    // 探す文字列が空の場合は、textの先頭を返す
+    if (*target == '\0') return text;
+
+    // textを走査
+    for (int i = 0; text[i] != '\0'; i++) {
+        
+        // 1. 最初の一文字が一致した時点でフラグを立てる (if文の判定)
+        if (text[i] == target[0]) {
+            int j = 0;
+            // 2. その後に続く文字列がいつまでも一致するようなら処理の継続
+            while (target[j] != '\0' && text[i + j] == target[j]) {
+                j++;
+            }
+
+            // 3. 最後まで一致していたら文字列のある地点を返す
+            if (target[j] == '\0') {
+                return &text[i];
+            }
+            
+            // 4. (途中まで一致したが) 一文字でも異なっていたら...
+            // 今回の検索箇所では一致しなかったため、外側のforループで
+            // 次の文字から再試行する (continue処理の代わり)
+        }
+        
+        // 5. 一致していなかった時は別の場所にあるか探す (forループのインクリメント)
+    }
+
+    // 最後まで見つからなかった時
+    return NULL;
+}
+
+int main() {
+    const char* text = "Hello, this is a sample text for search.";
+    const char* target = "sample";
+
+    printf("Text: %s\n", text);
+    printf("Target: %s\n\n", target);
+
+    const char* result = custom_strstr(text, target);
+
+    if (result != NULL) {
+        printf("一致しました！位置: %ld\n", result - text);
+        printf("残りの文字列: %s\n", result);
+    } else {
+        printf("-1 (見つかりませんでした)\n");
+    }
+
+    // 別の検索例
+    const char* target2 = "notfound";
+    printf("\nTarget: %s\n", target2);
+    if (custom_strstr(text, target2) == NULL) {
+        printf("-1 (見つかりませんでした)\n");
+    }
+
+    return 0;
+}
+</pre>
 <div class="edit_date">
 <p>2026.03.02</p>
 </div>
