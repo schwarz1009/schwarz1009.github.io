@@ -261,16 +261,16 @@ int main() {
     const char *text = "abcdefg";
     
     // テストケース1: 一致
-    printf("Result 1: %d\n", checkString(text"cde")); // 出力: 2
+    printf("Result 1: %d\n", checkString(text, "cde")); // 出力: 2
 
     // テストケース2: 途中まで一致、その後不一致
-    printf("Result 2: %d\n", checkString(text"cdf")); // 出力: -1
+    printf("Result 2: %d\n", checkString(text, "cdf")); // 出力: -1
 
     // テストケース3: 1文字目から不一致
-    printf("Result 3: %d\n", checkString(text"xyz")); // 出力: -1
+    printf("Result 3: %d\n", checkString(text, "xyz")); // 出力: -1
 
     // テストケース4: パターンが長い
-    printf("Result 4: %d\n", checkString(text"defgh")); // 出力: -1
+    printf("Result 4: %d\n", checkString(text, "defgh")); // 出力: -1
 
     return 0;
 }
