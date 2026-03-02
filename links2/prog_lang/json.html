@@ -363,7 +363,7 @@ int main() {
     if (root.is_object()) {
         auto& obj = root.get_object();
         std::cout &lt;&lt; "Name: " &lt;&lt; obj["name"].get_string() &lt;&lt; std::endl;
-        std::cout &lt;&lt; "City: " &lt;&lt; obj["address"].get_shared_ptr&lt;JsonObject&gt;()-&gt;at("city").get_string() &lt;&lt; std::endl; // この行は修正が必要
+        std::cout &lt;&lt; "City: " &lt;&lt; obj["address"].get_object().at("city").get_string() &lt;&lt; std::endl;
         
         // オブジェクトの修正版アクセス
         auto& addr = obj["address"].get_object();
