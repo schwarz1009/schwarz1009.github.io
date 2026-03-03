@@ -298,6 +298,13 @@ SELECT name,SUM(like_count) FROM bbs GROUP BY name;
 
 <h2>LIMIT句、DISTINCT句</h2>
 <p>このほか、MySQLには件数に上限をかけて取得するLIMIT句や、重複した行を削除して一行にまとめるDISTINCT句などがある。</p>
+<p>後日注記：また、MySQLには指定された行数をスキップするOFFSET句などがあります。</p>
+<ul>
+<li><a href="https://leapcell.io/blog/ja/sql-ni-okeru-offset-kubun-no-rikai">SQLにおけるOFFSET句の理解 | Leapcell</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.03編集</p>
+</div>
 
 <h2>AS句</h2>
 <p>AS句を用いることで、結合などで用いるテーブル名などが長い場合、繰り返す際に別名をつけることができる（FROM threads AS tとしてt.idとしたり、JOIN comments AS cとしてc.tidとしたりする）。</p>
