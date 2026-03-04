@@ -51,7 +51,7 @@
 <div class="page_links">
 
 
-<h1>その他</h1>
+<h1>デコレータとassert文</h1>
 
 <h2>Pythonのデコレータ</h2>
 <p><a href="aspect.html">アスペクト指向</a>のように、Pythonでは単にbeforeのように「処理の前後に処理を行いたい」という場合、デコレータと呼ばれる機能を使うことができる。</p>
@@ -104,6 +104,22 @@ class Hoge:
 <h2>assert文</h2>
 <p>assert文については<a href="debug.html">デバッグ</a>を参照のこと。</p>
 
+<h1>並列処理</h1>
+<h2>マルチスレッドとGIL</h2>
+<p>かつてより、Pythonは並列処理が苦手である。</p>
+<p>かつてのPythonでは、GILという排他制御の方法を行っていた。<p>
+<p>GILありの状態においては、ひとつのプロセスで実行されるバイトコードでは、ひとつのスレッドしか使えないようにロックされる。</p>
+<p>しかしながら、マルチスレッドにおいては、GILありの状態ではほかの言語のようにマルチスレッドで並列処理ができない。そのため、最近のPythonではGILがなしになった。</p>
+<ul>
+<li><a href="https://qiita.com/yusuke_hrsm/items/6addffa5d8056ffe67f9">pythonにおける並列処理と並行処理 #Python - Qiita</a></li>
+<li><a href="https://qiita.com/yusuke_hrsm/items/ded8c7c67bd704e91cf5">GILがなくなったPythonを使ってみる #並列処理 - Qiita</a></li>
+<li><a href="https://buildersbox.corp-sansan.com/entry/2025/12/23/120000">PythonのGILとはなんだったのか - Sansan Tech Blog</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.04</p>
+</div>
+
+<h1>その他</h1>
 <h2>eval, exec, compile, breakpoint関数</h2>
 <table class="some_tables">
 <tr><th class="min60">関数</th><th>説明</th></tr>
