@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Rustのツールの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Rustのツールの世界観</h1>
+<p>Rustのツールに関する世界観です。<a href="rust.html">Rust</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Rust公式</h1>
+<h2>Servo</h2>
+<p>Mozilla FirefoxのHTMLレンダリングエンジン。</p>
+<p><a href="../linux/mozilla_firefox.html">Mozilla Firefox</a>も参照のこと。</p>
+
+<h2>Cargo</h2>
+<p>Rustのビルドツール＆パッケージマネージャ。</p>
+
+<h2>crates.io</h2>
+<p>crates.ioでは、Rustのライブラリである「クレート」が公開されている。</p>
+<ul>
+<li><a href="https://crates.io/">crates.io</a></li>
+</ul>
+
+<h1>入力支援</h1>
+<h2>rust-analyzer</h2>
+<p>rust-analyzerはRustの入力補完、型の検査や文法のチェックをしてくれる言語サーバープロトコル（LSP）。</p>
+<ul>
+<li><a href="https://qiita.com/simonritchie/items/a8bdcbc65a0ae1861e6b">rust-analyzerを使ってみたら思いのほか素敵だったので紹介してみる #VSCode - Qiita</a></li>
+</ul>
+<p><a href="../windows_pc/vscode.html">VS-Code</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.03.04</p>
+</div>
+
+<h1>システム</h1>
+<h2>Redox</h2>
+<p>RedoxはRustで書かれたOS。UNIX系でマイクロカーネル。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Redox_(%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0)">Redox (オペレーティングシステム) - Wikipedia</a></li>
+<li><a href="https://doc.redox-os.org/book/">Overview - The Redox Operating System</a></li>
+<li><a href="https://doc.redox-os.org/book/introduction/side_projects.html">Side projects - The Redox Operating System</a></li>
+</ul>
+
+<h1>デスクトップ</h1>
+<h2>Tauri</h2>
+<p>TauriはRustで書かれたElectronと同種のGUIフレームワーク。</p>
+<p><a href="electron.html">Electron</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h1>Web/バックエンド</h1>
+<h2>Axum</h2>
+<p>AxumはRustによる新しいWebフレームワーク。</p>
+<ul>
+<li><a href="https://zenn.dev/techno_tanoc/articles/99e54c82cb049f">Rustの新しいWEBフレームワークaxumを触ってみた - Zenn</a></li>
+<li><a href="https://zenn.dev/hkdord/articles/axum-request-id">Rust の Web フレームワーク Axum のミドルウェアと戯れる - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>Actix-Web</h2>
+<p>Actix-WebはRustによるWebフレームワーク。</p>
+<ul>
+<li><a href="https://zenn.dev/collabostyle/articles/77f4f8528ded1c">Actix Web に入門して REST API サーバーを作る - Zenn</a></li>
+<li><a href="https://www.issoh.co.jp/column/details/3257/">Actix-webとは何か？その概要と基本情報 | 株式会社一創</a></li>
+<li><a href="https://tech.dentsusoken.com/entry/rust-web-framework-hello">Rust製WebフレームワークのaxumとActix webの「Hello, world!」を比較してみた - 電通総研 テックブログ</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.05</p>
+</div>
+
+<h2>Rocket</h2>
+<p>RocketはRustによるWebフレームワーク。</p>
+<ul>
+<li><a href="https://zenn.dev/collabostyle/articles/f606940fb6fe7c">Rust の web フレームワーク Rocket を使って 3分 Hello, world! - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.05</p>
+</div>
+
+<h1>Web/フロントエンド</h1>
+<h2>Yew</h2>
+<p>YewはRustによるフロントエンド向けのフレームワーク。VueやReactと同様のフレームワーク。</p>
+<ul>
+<li><a href="https://zenn.dev/azukiazusa/articles/rust-base-web-front-fremework-yew">Web フロントエンドエンジニアのための Rust 製 Web フロントフレームワーク Yew 入門 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>Leptos</h2>
+<p>LeptosはRustによるモダンなフロントエンド開発フレームワーク。</p>
+<ul>
+<li><a href="https://qiita.com/ishikawahijiri/items/46f0b9a936218cee0af2">Rustモダンフロントエンド Leptos入門 #Webアプリケーション - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.04</p>
+</div>
+
+<h2>Dioxus</h2>
+<p>DioxusはRustによるフロントエンド開発フレームワーク。</p>
+<ul>
+<li><a href="https://qiita.com/automation2025/items/5a992eaf96a0f382c56b">Rust Dioxus徹底入門 #Rust - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.04</p>
+</div>
+
+<h1>その他のアプリケーション</h1>
+<h2>nu</h2>
+<p>nuは今までとは異なる新しいシェル。Rustで作られている。</p>
+<p><a href="../linux/linux_sh.html">Linuxシェル</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>Eyra</h2>
+<p>Eyraはプログラムのすべて（libcを含む）をRust化することを目指したプロジェクト。</p>
+<ul>
+<li><a href="https://notgull.net/eyra/">Eyra is an interesting Rust project – notgull – The world's \#1 source of notgull</a></li>
+<li><a href="https://twitter.com/blackenedgold/status/1708037592284004475">@blackenedgoldさんのポスト - X</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.10.02</p>
+</div>
+
+<h2>Alacritty</h2>
+<p>AlacrittyはRust製の端末エミュレータ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Alacritty">Alacritty - Wikipedia</a></li>
+<li><a href="https://zenn.dev/ring_belle/books/mac-environment/viewer/terminal-alacritty">【Terminal】Rust製最速ターミナルAlacrittyを導入する - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.04</p>
+</div>
+
+<h2>その他</h2>
+<p><a href="https://ja.wikipedia.org/wiki/Rust_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)">Rust (プログラミング言語) - Wikipedia</a>を参照のこと。</p>
+
+<h1>ほかの言語との相互運用</h1>
+<h2>NAPI-rs</h2>
+<p>NAPI-rsはNode.jsのAPI（Node-API、JavaScript/TypeScript）とRustを相互運用できるようにする技術。</p>
+<ul>
+<li><a href="https://future-architect.github.io/articles/20221228a/">Rust製SQLフォーマッタをnapi-rsを利用してVSCode拡張機能化 | フューチャー技術ブログ</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.03</p>
+</div>
+
+<h2>PyO3/rust-cpython/UniFFI</h2>
+<p>PyO3やrust-cpythonやUniFFIはPythonなどとRustの間での相互運用を可能にする技術。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2023/07/monthly-python-2307">PythonとRustの融合：PyO3/maturinを使ったPythonバインディングの作成入門 | gihyo.jp</a></li>
+<li><a href="https://leapcell.io/blog/ja/python-to-rust-wo-renkeisase-pafo-mansu-wo-xiang-shang-saseru">PythonとRustを連携させてパフォーマンスを向上させる | Leapcell</a></li>
+<li><a href="https://zenn.dev/takanori_is/scraps/2fcf5d859dfc22">Rust の他言語バインディング生成ライブラリ UniFFI を試す - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.03</p>
+</div>
+
+<h2>maturin</h2>
+<p>maturinはRustで記述したプログラムをPythonパッケージとして配布する技術。</P>
+<ul>
+<li><a href="https://zenn.dev/kitchy/articles/5b4578ca9a87d9">maturinを使ってRustのコードをpythonから呼び出す - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.03</p>
+</div>
+
+<h1>非同期処理</h1>
+<h2>Tokio</h2>
+<p>TokioはRustの非同期IOライブラリ。</p>
+<ul>
+<li><a href="https://zenn.dev/tfutada/articles/5e87d6e7131e8e">RustのTokioで非同期とグリーンスレッドを理解する - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.04</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-rust.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

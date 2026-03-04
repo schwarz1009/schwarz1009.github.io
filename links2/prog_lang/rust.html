@@ -350,6 +350,7 @@ $ cargo run
 <p>実際のところ、Rustのコンパイラはとても優れている。人間でも分からないようなバグをたくさん言い当ててくれるからだ。</p>
 <p>あの蟹は、めちゃくちゃ賢い。</p>
 
+<h1>サンプルコード</h1>
 <h2>自分で作った簡単な計算プログラム</h2>
 <p>自分で作った簡単なプログラムです。攻撃力が10のキャラと、攻撃力が1だが「1ターンごとに攻撃力が1上がっていく」キャラが戦って、いつ上がっていく方のキャラが上回るか、を計算する。</p>
 <p>正確にいうと、「いつ上回るかを計算する」というより、その「上回っていく過程」を表示する。</p>
@@ -434,134 +435,6 @@ fn main() {
 <p>2025.02.21編集</p>
 </div>
 
-<h1>Rustで書かれたアプリケーション</h1>
-<h2>Servo</h2>
-<p>Mozilla FirefoxのHTMLレンダリングエンジン。</p>
-<p><a href="../linux/mozilla_firefox.html">Mozilla Firefox</a>も参照のこと。</p>
-
-<h2>Cargo</h2>
-<p>Rustのビルドツール＆パッケージマネージャ。</p>
-
-<h2>crates.io</h2>
-<p>crates.ioでは、Rustのライブラリである「クレート」が公開されている。</p>
-<ul>
-<li><a href="https://crates.io/">crates.io</a></li>
-</ul>
-
-<h2>Redox</h2>
-<p>RedoxはRustで書かれたOS。UNIX系でマイクロカーネル。</p>
-<ul>
-<li><a href="https://ja.wikipedia.org/wiki/Redox_(%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0)">Redox (オペレーティングシステム) - Wikipedia</a></li>
-<li><a href="https://doc.redox-os.org/book/">Overview - The Redox Operating System</a></li>
-<li><a href="https://doc.redox-os.org/book/introduction/side_projects.html">Side projects - The Redox Operating System</a></li>
-</ul>
-
-<h2>Tauri</h2>
-<p>TauriはRustで書かれたElectronと同種のGUIフレームワーク。</p>
-<p><a href="electron.html">Electron</a>を参照のこと。</p>
-<div class="edit_date">
-<p>2023.10.02</p>
-</div>
-
-<h2>Axum</h2>
-<p>AxumはRustによる新しいWebフレームワーク。</p>
-<ul>
-<li><a href="https://zenn.dev/techno_tanoc/articles/99e54c82cb049f">Rustの新しいWEBフレームワークaxumを触ってみた - Zenn</a></li>
-<li><a href="https://zenn.dev/hkdord/articles/axum-request-id">Rust の Web フレームワーク Axum のミドルウェアと戯れる - Zenn</a></li>
-</ul>
-<div class="edit_date">
-<p>2023.10.02</p>
-</div>
-
-<h2>Actix-Web</h2>
-<p>Actix-WebはRustによるWebフレームワーク。</p>
-<ul>
-<li><a href="https://zenn.dev/collabostyle/articles/77f4f8528ded1c">Actix Web に入門して REST API サーバーを作る - Zenn</a></li>
-<li><a href="https://www.issoh.co.jp/column/details/3257/">Actix-webとは何か？その概要と基本情報 | 株式会社一創</a></li>
-<li><a href="https://tech.dentsusoken.com/entry/rust-web-framework-hello">Rust製WebフレームワークのaxumとActix webの「Hello, world!」を比較してみた - 電通総研 テックブログ</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.02.05</p>
-</div>
-
-<h2>Rocket</h2>
-<p>RocketはRustによるWebフレームワーク。</p>
-<ul>
-<li><a href="https://zenn.dev/collabostyle/articles/f606940fb6fe7c">Rust の web フレームワーク Rocket を使って 3分 Hello, world! - Zenn</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.02.05</p>
-</div>
-
-<h2>Yew</h2>
-<p>YewはRustによるフロントエンド向けのフレームワーク。VueやReactと同様のフレームワーク。</p>
-<ul>
-<li><a href="https://zenn.dev/azukiazusa/articles/rust-base-web-front-fremework-yew">Web フロントエンドエンジニアのための Rust 製 Web フロントフレームワーク Yew 入門 - Zenn</a></li>
-</ul>
-<div class="edit_date">
-<p>2023.10.02</p>
-</div>
-
-<h2>nu</h2>
-<p>nuは今までとは異なる新しいシェル。Rustで作られている。</p>
-<p><a href="../linux/linux_sh.html">Linuxシェル</a>を参照のこと。</p>
-<div class="edit_date">
-<p>2023.10.02</p>
-</div>
-
-<h2>Eyra</h2>
-<p>Eyraはプログラムのすべて（libcを含む）をRust化することを目指したプロジェクト。</p>
-<ul>
-<li><a href="https://notgull.net/eyra/">Eyra is an interesting Rust project – notgull – The world's \#1 source of notgull</a></li>
-<li><a href="https://twitter.com/blackenedgold/status/1708037592284004475">@blackenedgoldさんのポスト - X</a></li>
-</ul>
-<div class="edit_date">
-<p>2023.10.02</p>
-</div>
-
-<h2>Alacritty</h2>
-<p>AlacrittyはRust製の端末エミュレータ。</p>
-<ul>
-<li><a href="https://ja.wikipedia.org/wiki/Alacritty">Alacritty - Wikipedia</a></li>
-<li><a href="https://zenn.dev/ring_belle/books/mac-environment/viewer/terminal-alacritty">【Terminal】Rust製最速ターミナルAlacrittyを導入する - Zenn</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.02.04</p>
-</div>
-
-<h2>その他</h2>
-<p><a href="https://ja.wikipedia.org/wiki/Rust_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)">Rust (プログラミング言語) - Wikipedia</a>を参照のこと。</p>
-
-<h1>ほかの言語との相互運用</h1>
-<h2>NAPI-rs</h2>
-<p>NAPI-rsはNode.jsのAPI（Node-API、JavaScript/TypeScript）とRustを相互運用できるようにする技術。</p>
-<ul>
-<li><a href="https://future-architect.github.io/articles/20221228a/">Rust製SQLフォーマッタをnapi-rsを利用してVSCode拡張機能化 | フューチャー技術ブログ</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.03.03</p>
-</div>
-
-<h2>PyO3/rust-cpython/UniFFI</h2>
-<p>PyO3やrust-cpythonやUniFFIはPythonなどとRustの間での相互運用を可能にする技術。</p>
-<ul>
-<li><a href="https://gihyo.jp/article/2023/07/monthly-python-2307">PythonとRustの融合：PyO3/maturinを使ったPythonバインディングの作成入門 | gihyo.jp</a></li>
-<li><a href="https://leapcell.io/blog/ja/python-to-rust-wo-renkeisase-pafo-mansu-wo-xiang-shang-saseru">PythonとRustを連携させてパフォーマンスを向上させる | Leapcell</a></li>
-<li><a href="https://zenn.dev/takanori_is/scraps/2fcf5d859dfc22">Rust の他言語バインディング生成ライブラリ UniFFI を試す - Zenn</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.03.03</p>
-</div>
-
-<h2>maturin</h2>
-<p>maturinはRustで記述したプログラムをPythonパッケージとして配布する技術。</P>
-<ul>
-<li><a href="https://zenn.dev/kitchy/articles/5b4578ca9a87d9">maturinを使ってRustのコードをpythonから呼び出す - Zenn</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.03.03</p>
-</div>
-
 <h1>余談</h1>
 <h2>MicrosoftもRustベースのプログラミング言語を</h2>
 <p>今僕が知ったニュースとして、マイクロソフトはRustの特徴を取り入れたプログラミング言語である「Project Verona」をGitHubにオープンソース化して提示したとのこと。</p>
@@ -635,11 +508,18 @@ fn main() {
 <li><a href="https://zenn.dev/tkithrta/articles/0ce4f16c0cbdd3">Rust 仕事 ない - Zenn</a></li>
 </ul>
 <p>ですが、この記事の最後にあるように、絶対にRustで仕事をしなければならないわけではないと思います。オープンソースの世界だけで、無償の趣味で行うプログラミングをRustで行うような方向性で進歩すればいいのではないでしょうか？</p>
+<p>後日注記：ネットにはRustが大好きな人がたくさんいます。たとえば以下の人はPython、C言語、Java、Lispを渡り歩いてきてRustに行き着いたそうです。Rust歴2年とのことですが、僕よりもはるかに先を行っていると思います。</p>
+<ul>
+<li><a href="https://zenn.dev/aq2r/articles/746b6ab98bf7d1">自身の経験とRustへの思い - Zenn</a></li>
+</ul>
 <div class="edit_date">
-<p>2026.03.03</p>
+<p>2026.03.03-04</p>
 </div>
 
 <h1>関連ページ</h1>
+<h2>Rustのツール</h2>
+<p>Rustで書かれたアプリケーションについては、<a href="rust_tools.html">Rustのツール</a>を参照のこと。</p>
+
 <h2>WebAssembly</h2>
 <p>WebAssemblyを使うことで、Rustで書いたプログラムをWebブラウザ上あるいはNode.js上で動かすことができます。</p>
 <p><a href="wasm.html">WebAssembly</a>を参照のこと。</p>
