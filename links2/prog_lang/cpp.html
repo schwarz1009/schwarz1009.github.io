@@ -743,6 +743,13 @@ inline int hoge(int x, int y) {
 
 <h2>auto（型推論）</h2>
 <p>C++11では、具体的な型を書かず、初期化子からコンパイラに型を推論してもらう、型推論のキーワードとしてautoが追加された。</p>
+<p>たとえば以下のように使う。HogeObjectクラスのメソッドgetObject()はHogeObjectを返す。</p>
+<pre class="prettyprint">
+HogeObject hoge("hoge");
+auto& fuga = hoge.getObject("fuga");
+auto& piyo = fuga.getObject("piyo");
+</pre>
+<p>上のコードでは、左式のgetObject()というメソッドがHogeObjectを返すことから、コンパイラが自動的に右式の型を判断して型推論している。</p>
 <ul>
 <li><a href="https://qiita.com/s_Pure/items/73481180871bb380f645">C＋＋の「auto」について #C++ - Qiita</a></li>
 </ul>
