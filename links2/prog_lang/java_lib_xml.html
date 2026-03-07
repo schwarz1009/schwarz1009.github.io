@@ -65,27 +65,70 @@
 </ul>
 
 <h2>SAXを使う場合</h2>
-<p>SAXを使う場合、javax.xml.parsersパッケージのSAXParserFactoryクラスのnewSAXParser()とSAXParserクラスを使う。</p>
-<p>org.xml.sax.helpers.DefaultHandlerを継承してstartDocument()、endDocument()、startElement()、endElement()、characters()などにイベント通知時の処理を記述する。</p>
+<p>SAXを使う場合、SAXParserFactoryクラスおよびSAXParserクラスを使う（javax.xml.parsersパッケージ）。</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>newInstance()</td><td>新しいSAXParserFactoryのインスタンスを作る</td></tr>
+<tr><td>newSAXParser()</td><td>SAXParserFactoryを元に、SAXParserのインスタンスを取得する</td></tr>
+<tr><td>parse()</td><td>XMLのパースとイベントの通知を開始する</td></tr>
+</table>
+<p>そして、DefaultHandler（org.xml.sax.helpersパッケージ）を継承して、<p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>startDocument()</td><td>ドキュメントの開始</td></tr>
+<tr><td>endDocument()</td><td>ドキュメントの終了</td></tr>
+<tr><td>startElement()</td><td>要素の開始</td></tr>
+<tr><td>endElement()</td><td>要素の終了</td></tr>
+<tr><td>characters()</td><td>文字の通知</td></tr>
+</table>
+<p>などにイベント通知時の処理を記述する。</p>
 <p>以下のページを参考に執筆しました。</p>
 <ul>
 <li><a href="https://eng-entrance.com/java-xml">【詳しくわかる】JavaでXMLを扱う方法まとめてご紹介 - エンジニアの入り口</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.03.07編集</p>
+</div>
 
 <h2>DOMを使う場合</h2>
-<p>DOMを使う場合、javax.xml.parsersパッケージのDocumentBuilderFactoryクラスのnewInstance()とnewDocumentBuilder()とDocumentBuilderクラスを使う。</p>
-<p>getDocumentElement()を用いてノードを取得する。</p>
-<p>org.w3c.domパッケージの中に、DocumentクラスやNodeクラスやElementクラスがある。</p>
-<p>ノードの値はgetFirstChild()、getNodeType()、getNodeValue()、getNextSibling()で取得できる。</p>
-<p>ノードの名前はgetNodeName()、属性値はgetAttribute()で取得できる。</p>
-<p>ノードのリストはorg.w3c.dom.NodeListクラスで取得できる。</p>
-<p>ノードツリーの作成はcreateElement()、setAttribute()、appendChild()、createTextNode()で行う。</p>
-<p>作成したノードツリーはTransformerFactoryクラス、Transformerクラスで変換する。</p>
+<p>DOMを使う場合、DocumentBuilderFactoryクラスおよびDocumentBuilderクラス（javax.xml.parsersパッケージ）を使う。</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>newInstance()</td><td>新しいDocumentBuilderFactoryのインスタンスを作る</td></tr>
+<tr><td>newDocumentBuilder()</td><td>DocumentBuilderFactoryを元に、DocumentBuilderのインスタンスを取得する</td></tr>
+<tr><td>parse()</td><td>DocumentBuilderを元に、ドキュメントを取得する</td></tr>
+<tr><td>getDocumentElement()</td><td>ドキュメントを元に、エレメントノードを取得する</td></tr>
+</table>
+<p>また、DocumentクラスやNodeクラスやElementクラスがある（org.w3c.domパッケージ）。</p>
+<p>以下はNodeインターフェースのメソッド。</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>getFirstChild()</td><td>最初の子ノードを取得する</td></tr>
+<tr><td>getNodeType()</td><td>ノードの型を取得する</td></tr>
+<tr><td>getNodeValue()</td><td>ノードの値を取得する</td></tr>
+<tr><td>getNextSibling()</td><td>次に続くノードを取得する</td></tr>
+<tr><td>getNodeName()</td><td>ノードの名前を取得する</td></tr>
+<tr><td>getAttribute()</td><td>ノードの属性値を取得する</td></tr>
+</table>
+<p>ノードのリストはNodeListクラス（org.w3c.domパッケージ）で取得できる。</p>
+<p>ノードツリーの作成は、</p>
+<table class="some_tables">
+<tr><th class="min60">メソッド</th><th>説明</th></tr>
+<tr><td>createElement()</td><td>要素を作る</td></tr>
+<tr><td>appendChild()</td><td>子要素の追加</td></tr>
+<tr><td>setAttribute()</td><td>属性と値を指定</td></tr>
+<tr><td>createText()</td><td>要素の内容を作る</td></tr>
+</table>
+<p>で行う。そして、作り終えたノードツリーは、TransformerFactoryクラスおよびTransformerクラスを用いて、ソースコードとツリーを変換する（javax.xml.transformパッケージ）。</p>
 <p>以下のページを参考に執筆しました。</p>
 <ul>
 <li><a href="https://eng-entrance.com/java-xml">【詳しくわかる】JavaでXMLを扱う方法まとめてご紹介 - エンジニアの入り口</a></li>
 <li><a href="https://www.sejuku.net/blog/64635">【Java入門】XMLの扱い方(DOM、SAX、プロパティファイルも解説) | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト</a></li>
+<li><a href="https://style.potepan.com/articles/29550.html">【Java】XMLファイルを出力するサンプルコードを紹介！ | ポテパンスタイル</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.03.07編集</p>
+</div>
 
 <h2>XMLでシリアライズ</h2>
 <p>JavaBeansのパッケージにはオブジェクトのデータをシリアライズ、デシリアライズするためにXMLEncoderクラス（JavaBeansのデータをXMLに変換）とXMLDecoderクラス（XMLからデータを復元）が用意されている。</p>
