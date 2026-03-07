@@ -249,8 +249,8 @@ public class TwoNumbers {
 </pre>
 <p>後日注記：JavaにはC#のような代入式を使ってゲッター・セッターを記述するためのプロパティが存在しないため、明示的にゲッターとセッターを記述する必要があります。</p>
 
-<h1>Cとの相互運用</h1>
-<h2>native修飾子</h2>
+<h1>その他の機能</h1>
+<h2>native修飾子（Cとの相互運用）</h2>
 <p>Javaのメソッドにはnative修飾子がある。これはメソッドがJava以外の言語、特にC/C++で実装されていることを意味する修飾子で、この修飾子がついたメソッドではシグネチャ（宣言）だけを記述し、実際の内容は外部のライブラリに記述する。</p>
 <ul>
 <li><a href="https://java-code.jp/120">native修飾子 | Javaコード入門</a></li>
@@ -258,6 +258,16 @@ public class TwoNumbers {
 </ul>
 <div class="edit_date">
 <p>2026.03.04</p>
+</div>
+
+<h2>var（型推論）</h2>
+<p>Java 10より、Javaではvarを用いた型推論が可能となりました。右の式から型が明らかである場合に、左の式の型宣言を不要とし、varで省略できます。ただし動的型付けではないため、異なる型の値を同じ変数に入れることはできません。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/start/var/index9.html">Java | 変数宣言で型推論を利用する - JavaDrive</a></li>
+<li><a href="https://qiita.com/dhirabayashi/items/a4a13d19b41779325bb0">【Java】varを使うべき場合、使うべきではない場合 #型推論 - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.07</p>
 </div>
 
 <h1>発展</h1>
