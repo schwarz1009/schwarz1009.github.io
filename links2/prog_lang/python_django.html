@@ -60,11 +60,15 @@
 <p>Djangoではmanage.pyというスクリプトがプロジェクトごとに用意され、これを実行することでプロジェクトの管理を行う。</p>
 <p>ルーティングはhoge/urls.pyで行う（URLconf）。モデルはhoge/models.pyに、ビューはhoge/views.pyに、テンプレートはhoge/templates/hoge/index.htmlなどに記述する。</p>
 <p>Pythonを埋め込んだHTMLファイルでは、{% ～ %}で埋め込みコードを記述し、{{ }}で変数を展開し、ifに対してendif、forに対してendforでかっこを閉じる。</p>
+<p>後日注記：Djangoのモデルでは、models.Modelクラスを継承して作成します。</p>
 <ul>
 <li><a href="https://docs.djangoproject.com/ja/3.0/intro/tutorial01/">はじめての Django アプリ作成、その 1 | Django ドキュメント</a></li>
 <li><a href="https://docs.djangoproject.com/ja/3.0/intro/tutorial03/">はじめての Django アプリ作成、その 3 | Django ドキュメント</a></li>
 <li><a href="https://docs.djangoproject.com/ja/3.0/">Django ドキュメント</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.03.08編集</p>
+</div>
 
 <h2>AIによるサンプル</h2>
 <p>以下はGoogleのAIが書いたサンプル。</p>
@@ -171,6 +175,47 @@ urlpatterns = [
 </pre>
 <div class="edit_date">
 <p>2026.02.19</p>
+</div>
+
+<h2>AIによるサンプル３</h2>
+<p>以下はGoogleのAIが書いたサンプルその３。モデルを利用する。</p>
+<pre class="prettyprint">
+from django.db import models
+from django.utils import timezone
+
+class Category(models.Model):
+    """カテゴリー情報を管理するモデル"""
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Post(models.Model):
+    """ブログ記事を管理するモデル"""
+    title = models.CharField('タイトル', max_length=200)
+    content = models.TextField('本文')
+    # 他のモデルとの紐付け（1対多の関係）
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='カテゴリー')
+    created_at = models.DateTimeField('作成日', default=timezone.now)
+    updated_at = models.DateTimeField('更新日', auto_now=True)
+    is_published = models.BooleanField('公開フラグ', default=False)
+
+    def __str__(self):
+        """管理画面などで表示される文字列を定義"""
+        return self.title
+</pre>
+<p>モデルを書き換えた後は、以下のコマンドを実行してデータベースに反映する。</p>
+<pre>
+python manage.py makemigrations
+python manage.py migrate
+</pre>
+<p>このようにすることで、データベースのテーブル構造を定義する。</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/ja/6.0/topics/db/models/">モデル | Django ドキュメント | Django</a></li>
+<li><a href="https://www.youtube.com/watch?v=LJCs3MVXTcw">Djangoでモデルクラスの基本と作り方を徹底解説 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.08</p>
 </div>
 
 <h2>YouTubeの入門動画</h2>
