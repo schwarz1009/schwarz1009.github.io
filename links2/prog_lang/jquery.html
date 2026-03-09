@@ -44,6 +44,31 @@
 <li><a href="http://semooh.jp/jquery/">jQuery日本語リファレンス</a></li>
 </ul>
 
+<h2>jQueryの基本</h2>
+<p>jQueryの基本は以下の構造となる。</p>
+<pre class="prettyprint">
+$(document).ready(function(){
+    $("セレクタその1").イベント(function () {
+        $("セレクタその2").メソッド('引数');
+    });
+});
+</pre>
+<p>たとえば、</p>
+<pre class="prettyprint">
+$(document).ready(function(){
+    $("button.sidebar_profile_button").click(function () {
+        $(".sidebar_profile").slideToggle('fast');
+    });
+});
+</pre>
+<p>のような感じ。詳しくは以下の記事が参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/oxxxkura/items/59d5d9ad15f3e8be8d76">【初心者向け】jQueryはじめの一歩 #JavaScript - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.09</p>
+</div>
+
 <h2>eachメソッド</h2>
 <p>jQuaryで便利なメソッドが、each()メソッド。セレクタで選択した全要素や、配列の全要素に対して、インデックスや要素を取得して繰り返し処理を行うことができる。</p>
 <p>上手く活用することで、たとえば目次の自動作成などに応用できる。</p>
