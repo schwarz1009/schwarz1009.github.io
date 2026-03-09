@@ -37,16 +37,20 @@
 
 <h2>jQuery</h2>
 <p>セレクタと言うものを使って、簡単に「いつどうされたらどうなるか」と言う処理を行うことが出来る技術。</p>
+<p>jQueryでは、セレクタやメソッドチェーン、イベントの概念を使うことで、「まるでJavaScriptとはまったく異なる言語のよう」に、簡素な記述で処理を記述できる。DOM操作などは一切でてこない。</p>
+<p>僕が思うに、素のJavaScriptを使うよりも簡単で、デザイナーにとって使いやすいライブラリだと思う。</p>
 <ul>
 <li><a href="https://webkikaku.co.jp/blog/webdesign/jquery_start/">jQueryってなに？超初心者向け入門講座 - ウェブ企画ラボ</a></li>
 <li><a href="http://semooh.jp/jquery/">jQuery日本語リファレンス</a></li>
 </ul>
 
-<h2>JavaScriptとはまったく異なる言語のよう</h2>
-<p>jQueryでは、セレクタやメソッドチェーン、イベントの概念を使うことで、「まるでJavaScriptとはまったく異なる言語のよう」に、簡素な記述で処理を記述できる。DOM操作などは一切でてこない。</p><p>僕が思うに、素のJavaScriptを使うよりも簡単で、デザイナーにとって使いやすいライブラリだと思う。</p>
-
-<h2>サンプルコード</h2>
-<p><a href="jquery_samplecode.html">jQueryサンプルコード</a>を参照のこと。
+<h2>eachメソッド</h2>
+<p>jQuaryで便利なメソッドが、each()メソッド。セレクタで選択した全要素や、配列の全要素に対して、インデックスや要素を取得して繰り返し処理を行うことができる。</p>
+<p>上手く活用することで、たとえば目次の自動作成などに応用できる。</p>
+<p>たとえば、以下のjQuaryプラグインは、ヘッダータグに対してeach()メソッドと階層レベルのカウントを行うことで目次の自動作成を行っている。</p>
+<ul>
+<li><a href="http://www.koikikukan.com/archives/2014/08/29-005555.php">jQueryで目次を自動生成する「tocプラグイン」 - 小粋空間</a></li>
+</ul>
 
 <h2>YouTubeの入門動画</h2>
 <p>以下はYouTubeの入門動画。</p>
@@ -56,15 +60,6 @@
 <div class="edit_date">
 <p>2025.12.16</p>
 </div>
-
-<h1>便利なメソッド</h1>
-<h2>eachメソッド</h2>
-<p>jQuaryで便利なメソッドが、each()メソッド。セレクタで選択した全要素や、配列の全要素に対して、インデックスや要素を取得して繰り返し処理を行うことができる。</p>
-<p>上手く活用することで、たとえば目次の自動作成などに応用できる。</p>
-<p>たとえば、以下のjQuaryプラグインは、ヘッダータグに対してeach()メソッドと階層レベルのカウントを行うことで目次の自動作成を行っている。</p>
-<ul>
-<li><a href="http://www.koikikukan.com/archives/2014/08/29-005555.php">jQueryで目次を自動生成する「tocプラグイン」 - 小粋空間</a></li>
-</ul>
 
 <h1>jQuaryプラグイン</h1>
 <h2>jQuary</h2>
@@ -94,6 +89,10 @@
 <ul>
 <li><a href="http://illbenet.jp/view/50">pixiv小説のように明朝体・ゴシック体を切り替えるjQuery - I'll be NET</a></li>
 </ul>
+
+<h1>サンプル</h1>
+<h2>サンプルコード</h2>
+<p><a href="jquery_samplecode.html">jQueryサンプルコード</a>を参照のこと。
 
 <h1>簡単な説明</h1>
 <h2>jQuery</h2>
