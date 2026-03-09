@@ -156,8 +156,9 @@ Arrays.sort(ar1, Comparator.reverseOrder());
 </pre>
 <p>のようにする。ar1は配列の変数名。</p>
 <p>また、Comparatorインターフェースを実装したクラスの中でcompare()メソッドをオーバーライドすれば、自分で比較用のメソッドを実装することもできる。たとえばクラスの中の何かのメンバやパラメータに基づいて比較するといったことが可能。</p>
+<p>以下はHoge.java</p>
 <pre class="prettyprint">
-class Hoge {
+public class Hoge {
     String str_hoge;
     
     Hoge (String a_hoge) {
@@ -168,8 +169,10 @@ class Hoge {
         return str_hoge;
     }
 }
-
-class HogeComparator implements Comparator&lt;Hoge&gt;{
+</pre>
+<p>以下はHogeComparator.java</p>
+<pre class="prettyprint">
+public class HogeComparator implements Comparator&lt;Hoge&gt;{
     @Override
     public int compare(Hoge hoge1, Hoge hoge2) {
         return hoge1.getHoge().compareTo(hoge2.getHoge());
@@ -190,6 +193,9 @@ Arrays.sort(hoges, new HogeComparator());
 <li><a href="http://teqspaces.com/Java/7">Comparatorを使ってListをソートする（Java）：技術空間</a></li>
 <li><a href="https://confrage.jp/java8%E3%81%AEcomparator%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9collections%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AEsort%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89/">Java8のComparatorの使い方(Collectionsクラスのsortメソッド) | 株式会社CONFRAGE ITソリューション事業部</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.03.09編集</p>
+</div>
 
 <h2>イテレータ</h2>
 <p>Iteratorインタフェースは、コレクションの中を繰り返し順番に取得・参照する仕組み。</p>
