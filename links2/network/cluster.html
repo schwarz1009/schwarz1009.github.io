@@ -261,26 +261,6 @@
 <li><a href="https://linuc.org/textbooks/system/">高信頼システム構築標準教科書 －仮想化と高可用性－ ダウンロード LinuC-3 304試験対応 | Linux技術者認定試験 リナック | LPI-Japan</a></li>
 </ul>
 
-<h1>スパコン</h1>
-<h2>スーパーコンピュータとLinux</h2>
-<p>Linuxはスーパーコンピュータ用のOSとして良く使われている。以下のページを見れば分かる通り、TOP500のほとんどはLinux。IBMのスパコンではRHELが目立つが、ドイツのスパコンにはSUSEが良く使われているようだ。</p>
-<ul>
-<li><a href="https://ja.wikipedia.org/wiki/TOP500">TOP500 - Wikipedia</a></li>
-</ul>
-
-<h2>日本のスパコン</h2>
-<p>日本のスパコンとしては京や地球シミュレータなどが過去に頑張っていた。地球シミュレータはNECによるスパコンで、かつてはベクトルプロセッサを用いた数少ないスパコンだった。</p>
-<p>後日注記：2020年の富士通の京の後継「富岳」がTOP500で一位を取ったことで話題になりましたが、2022年にアメリカの「Frontier」に抜かれ、2024年ではアメリカの「El Capitan」が一位です。</p>
-<ul>
-<li><a href="https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%B2%B3_(%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">富岳 (スーパーコンピュータ) - Wikipedia</a></li>
-<li><a href="https://ja.wikipedia.org/wiki/%E4%BA%AC_(%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">京 (スーパーコンピュータ) - Wikipedia</a></li>
-<li><a href="https://ja.wikipedia.org/wiki/%E5%9C%B0%E7%90%83%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF">地球シミュレータ - Wikipedia</a></li>
-<li><a href="https://ja.wikipedia.org/wiki/TOP500">TOP500 - Wikipedia</a></li>
-</ul>
-<div class="edit_date">
-<p>2025.02.04編集</p>
-</div>
-
 <h1>クラスタ用ソフトウェア</h1>
 <h2>Slurm</h2>
 <p>Slurmはオープンソースなジョブスケジューラ（ワークロード管理ソフトウェア）。多くのスパコンやクラスタで使われている。</p>
@@ -306,12 +286,61 @@
 <li><a href="https://ja.wikipedia.org/wiki/Linux-HA">Linux-HA - Wikipedia</a></li>
 </ul>
 
+<h1>計算ライブラリ</h1>
+<h2>BLAS/LINPACK</h2>
+<p>BLAS/LINPACKは線形代数用の計算ライブラリ。</p>
+<ul>
+<li><a href="http://azalea.s35.xrea.com/blas/whatIsBlas.html">BLASの簡単な使い方 - UIKYO.NET</a></li>
+<li><a href="https://qiita.com/warai_otoco/items/33b134c329cc4575d20f">手持ちのPCでLINPACKを走らせてみる #intel - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.10</p>
+</div>
+
+<h2>Intel MKL</h2>
+<p>Intel MKLはIntelのCPU/GPU向けに最適化された計算ライブラリ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Intel_Math_Kernel_Library">Intel Math Kernel Library - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.10</p>
+</div>
+
+<h2>FFT</h2>
+<p>FFTは高速フーリエ変換のための効率的なアルゴリズム。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E9%AB%98%E9%80%9F%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">高速フーリエ変換 - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.10</p>
+</div>
+
 <h1>歴史上のOS</h1>
 <h2>OpenVMS</h2>
 <p>クラスタシステムは、歴史上のOSであるOpenVMSで最初に始められました。OpenVMSでは、可用性のひとつであるフェイルオーバの仕組みを特別な設定なしに実現します。</p>
 <p><a href="../os/openvms.html">OpenVMS</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2025.08.23</p>
+</div>
+
+<h1>スパコン</h1>
+<h2>スーパーコンピュータとLinux</h2>
+<p>Linuxはスーパーコンピュータ用のOSとして良く使われている。以下のページを見れば分かる通り、TOP500のほとんどはLinux。IBMのスパコンではRHELが目立つが、ドイツのスパコンにはSUSEが良く使われているようだ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TOP500">TOP500 - Wikipedia</a></li>
+</ul>
+
+<h2>日本のスパコン</h2>
+<p>日本のスパコンとしては京や地球シミュレータなどが過去に頑張っていた。地球シミュレータはNECによるスパコンで、かつてはベクトルプロセッサを用いた数少ないスパコンだった。</p>
+<p>後日注記：2020年の富士通の京の後継「富岳」がTOP500で一位を取ったことで話題になりましたが、2022年にアメリカの「Frontier」に抜かれ、2024年ではアメリカの「El Capitan」が一位です。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%B2%B3_(%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">富岳 (スーパーコンピュータ) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E4%BA%AC_(%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">京 (スーパーコンピュータ) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E5%9C%B0%E7%90%83%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF">地球シミュレータ - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/TOP500">TOP500 - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.02.04編集</p>
 </div>
 
 <h1>関連ページ</h1>
