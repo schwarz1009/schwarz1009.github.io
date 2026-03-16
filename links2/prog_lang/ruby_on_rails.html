@@ -217,6 +217,76 @@ rails server
 <p>2026.02.05</p>
 </div>
 
+<h2>モデルの例</h2>
+<p>以下はGoogleのAIによる、Ruby on Railsを使ったモデルの例。ブログ記事（Post）を作成・保存・検索する。</p>
+<p>以下のコマンドで生成されたモデルを使用する。</p>
+<pre class="prettyprint">
+rails generate model Post title:string content:text
+</pre>
+<p>モデルの定義 (app/models/post.rb)</p>
+<pre class="prettyprint">
+class Post &lt; ApplicationRecord
+  # タイトルが存在し、かつ100文字以内であること
+  validates :title, presence: true, length: { maximum: 100 }
+  # 内容が存在すること
+  validates :content, presence: true
+end
+</pre>
+<p>コントローラーでの利用例 (app/controllers/posts_controller.rb)</p>
+<pre class="prettyprint">
+class PostsController &lt; ApplicationController
+  def create
+    # データを新規作成（保存はしない）
+    @post = Post.new(post_params)
+    
+    if @post.save
+      # 保存成功：一覧ページへ
+      redirect_to @post, notice: '記事を作成しました'
+    else
+      # 保存失敗：新規作成画面を再表示
+      render :new
+    end
+  end
+
+  def show
+    # IDで1件検索
+    @post = Post.find(params[:id])
+  end
+
+  def index
+    # 全件取得（作成日時順）
+    @posts = Post.order(created_at: :desc)
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :content)
+  end
+end
+</pre>
+<p>Railsコンソールでの動作確認 (rails c)</p>
+<pre class="prettyprint">
+# 1. 新規作成と保存
+post = Post.create(title: "最初の記事", content: "Railsのモデルは便利！")
+
+# 2. 検索
+found_post = Post.find_by(title: "最初の記事")
+
+# 3. 更新
+found_post.update(content: "内容を更新しました")
+
+# 4. 削除
+found_post.destroy
+</pre>
+<p>以下は解説記事。</p>
+<ul>
+<li><a href="https://qiita.com/renesisu727/items/a21c7f5d1604700b7111">[初心者向け]Ruby on Railsについて徹底解説してみた #Database - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.16</p>
+</div>
+
 <h1>Railsの参考になる文書</h1>
 <h2>チュートリアル</h2>
 <p>Railsのチュートリアル。</p>
