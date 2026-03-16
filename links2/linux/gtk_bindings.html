@@ -229,7 +229,7 @@ sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0
 <p>2026.03.16</p>
 </div>
 
-<h1>各バインディングについて</h1>
+<h1>gtkmm</h1>
 <h2>gtkmm (C++)</h2>
 <p>以下はgtkmmの例。</p>
 <ul>
@@ -237,6 +237,137 @@ sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0
 </ul>
 <p><a href="../prog_lang/cpp.html">C++</a>も参照のこと。</p>
 
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIによるgtkmmとGStreamerを使った音楽プレイヤーソフトのサンプル。</p>
+<pre class="prettyprint">
+#include &lt;gtkmm.h&gt;
+#include &lt;gst/gst.h&gt;
+#include &lt;iostream&gt;
+
+class MusicPlayerWindow : public Gtk::Window {
+public:
+    MusicPlayerWindow();
+    virtual ~MusicPlayerWindow();
+
+private:
+    // シグナルハンドラ
+    void on_button_play();
+    void on_button_stop();
+    void on_file_set();
+
+    // GStreamerのセットアップ
+    void setup_gstreamer(const std::string& uri);
+
+    // UI要素
+    Gtk::Box m_vbox{Gtk::Orientation::VERTICAL, 5};
+    Gtk::FileChooserButton m_file_button{"音楽ファイルを選択", Gtk::FileChooserAction::OPEN};
+    Gtk::Button m_button_play{"再生"};
+    Gtk::Button m_button_stop{"停止"};
+    Gtk::Label m_label{"ファイル未選択"};
+
+    // GStreamer要素
+    GstElement *pipeline;
+    bool is_playing = false;
+};
+
+MusicPlayerWindow::MusicPlayerWindow() {
+    set_title("GTKmm 音楽プレイヤー");
+    set_default_size(400, 150);
+
+    // GStreamerの初期化
+    gst_init(nullptr, nullptr);
+
+    // レイアウト設定
+    set_child(m_vbox);
+    m_vbox.append(m_file_button);
+    m_vbox.append(m_label);
+    
+    Gtk::Box *button_box = Gtk::make_managed&lt;Gtk::Box&gt;(Gtk::Orientation::HORIZONTAL, 5);
+    button_box-&gt;append(m_button_play);
+    button_box-&gt;append(m_button_stop);
+    m_vbox.append(*button_box);
+
+    // シグナル接続
+    m_button_play.signal_clicked().connect(sigc::mem_fun(*this, &MusicPlayerWindow::on_button_play));
+    m_button_stop.signal_clicked().connect(sigc::mem_fun(*this, &MusicPlayerWindow::on_button_stop));
+    m_file_button.signal_file_set().connect(sigc::mem_fun(*this, &MusicPlayerWindow::on_file_set));
+}
+
+MusicPlayerWindow::~MusicPlayerWindow() {
+    if (pipeline) {
+        gst_element_set_state(pipeline, GST_STATE_NULL);
+        gst_object_unref(pipeline);
+    }
+}
+
+void MusicPlayerWindow::setup_gstreamer(const std::string& uri) {
+    if (pipeline) {
+        gst_element_set_state(pipeline, GST_STATE_NULL);
+        gst_object_unref(pipeline);
+    }
+
+    // playbinはメディア再生を自動化するGStreamer要素
+    pipeline = gst_element_factory_make("playbin", "player");
+    g_object_set(pipeline, "uri", uri.c_str(), nullptr);
+}
+
+void MusicPlayerWindow::on_file_set() {
+    auto file = m_file_button.get_file();
+    if (file) {
+        std::string uri = file-&gt;get_uri();
+        m_label.set_text("再生中: " + file-&gt;get_basename());
+        setup_gstreamer(uri);
+    }
+}
+
+void MusicPlayerWindow::on_button_play() {
+    if (!pipeline) return;
+
+    if (!is_playing) {
+        gst_element_set_state(pipeline, GST_STATE_PLAYING);
+        m_button_play.set_label("一時停止");
+        is_playing = true;
+    } else {
+        gst_element_set_state(pipeline, GST_STATE_PAUSED);
+        m_button_play.set_label("再生");
+        is_playing = false;
+    }
+}
+
+void MusicPlayerWindow::on_button_stop() {
+    if (pipeline) {
+        gst_element_set_state(pipeline, GST_STATE_NULL);
+        m_button_play.set_label("再生");
+        is_playing = false;
+    }
+}
+
+int main(int argc, char* argv[]) {
+    auto app = Gtk::Application::create("org.example.musicplayer");
+    return app-&gt;make_window_and_run&lt;MusicPlayerWindow&gt;(argc, argv);
+}
+</pre>
+<p>Gtk::FileChooserButtonは、ファイル選択用のダイアログを開くボタン。</p>
+<p>GstElement *pipelineは、GStreamerのplaybin要素。これ一つでファイル読み込みからデコード、出力（オーディオ）まで自動で行う。</p>
+<p>setup_gstreamerは、選択されたファイルのURIをplaybinにセットする。</p>
+<p>以下は必要なライブラリのインストール (Ubuntu/Debian系)。</p>
+<pre>
+sudo apt install libgtkmm-4.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+</pre>
+<p>以下はビルド。</p>
+<pre class="prettyprint">
+g++ -std=c++17 music_player.cpp -o music_player \
+    `pkg-config gtkmm-4.0 gstreamer-1.0 --cflags --libs`
+</pre>
+<p>以下は実行。</p>
+<pre>
+./music_player
+</pre>
+<div class="edit_date">
+<p>2026.03.16</p>
+</div>
+
+<h1>各バインディングについて</h1>
 <h2>gjs (JavaScript)</h2>
 <p>以下はgjsの例。</p>
 <ul>
