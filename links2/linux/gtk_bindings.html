@@ -347,9 +347,14 @@ int main(int argc, char* argv[]) {
     return app-&gt;make_window_and_run&lt;MusicPlayerWindow&gt;(argc, argv);
 }
 </pre>
-<p>Gtk::FileChooserButtonは、ファイル選択用のダイアログを開くボタン。</p>
-<p>GstElement *pipelineは、GStreamerのplaybin要素。これ一つでファイル読み込みからデコード、出力（オーディオ）まで自動で行う。</p>
-<p>setup_gstreamer()は、選択されたファイルのURIをplaybinにセットする。</p>
+<p>以下はコードの解説。</p>
+<table class="some_tables">
+<tr><th class="min60">コード</th><th>説明</th></tr>
+<tr><td>Gtk::FileChooserButton</td><td>ファイル選択用のダイアログを開くボタン。</td></tr>
+<tr><td>GstElement *pipeline</td><td>GStreamerのplaybin要素。これ一つでファイル読み込みからデコード、出力（オーディオ）まで自動で行う。</td></tr>
+<tr><td>setup_gstreamer()</td><td>選択されたファイルのURIをplaybinにセットする。</td></tr>
+<tr><td>gst_element_set_state()</td><td>GST_STATE_PLAYINGが再生、GST_STATE_PAUSEDが一時停止、GST_STATE_NULLが停止・リソース解放。</td></tr>
+</table>
 <p>以下は必要なライブラリのインストール (Ubuntu/Debian系)。</p>
 <pre>
 sudo apt install libgtkmm-4.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
