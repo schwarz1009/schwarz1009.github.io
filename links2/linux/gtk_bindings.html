@@ -116,6 +116,118 @@
 <li><a href="https://ja.wikipedia.org/wiki/PyGTK">PyGTK - Wikipedia</a></li>
 </ul>
 
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIによるPyGObjectとCairoを使ったペイントソフトのサンプル。</p>
+<pre class="prettyprint">
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, Gdk, Cairo
+import cairo
+
+class PaintWindow(Gtk.Window):
+    def __init__(self):
+        super().__init__(title="Simple Paint with GTK3")
+        self.set_default_size(800, 600)
+        self.connect("destroy", Gtk.main_quit)
+
+        # 描画サーフェス（バックバッファ）
+        self.surface = None
+
+        # 描画エリア
+        self.drawing_area = Gtk.DrawingArea()
+        self.drawing_area.connect("draw", self.on_draw)
+        self.drawing_area.connect("configure-event", self.on_configure)
+        
+        # マウスイベントの設定
+        self.drawing_area.set_events(Gdk.EventMask.BUTTON_PRESS_MASK |
+                                     Gdk.EventMask.BUTTON_RELEASE_MASK |
+                                     Gdk.EventMask.POINTER_MOTION_MASK)
+        
+        self.drawing_area.connect("button-press-event", self.on_button_press)
+        self.drawing_area.connect("button-release-event", self.on_button_release)
+        self.drawing_area.connect("motion-notify-event", self.on_motion_notify)
+        
+        self.add(self.drawing_area)
+        
+        # 描画の初期状態
+        self.last_x = 0
+        self.last_y = 0
+        self.is_drawing = False
+
+    def on_configure(self, widget, event):
+        """ウィンドウサイズ変更時にサーフェスを再作成"""
+        allocation = widget.get_allocation()
+        
+        # 新しいサーフェスを作成
+        new_surface = cairo.ImageSurface(
+            cairo.FORMAT_ARGB32, allocation.width, allocation.height
+        )
+        cr = cairo.Context(new_surface)
+        
+        # 背景を白で塗りつぶし
+        cr.set_source_rgb(1, 1, 1)
+        cr.paint()
+        
+        # 前のサーフェスがあれば、新しいサーフェスにコピー
+        if self.surface:
+            cr.set_source_surface(self.surface, 0, 0)
+            cr.paint()
+            
+        self.surface = new_surface
+        return True
+
+    def on_draw(self, widget, cr):
+        """描画エリアを更新する"""
+        if self.surface:
+            cr.set_source_surface(self.surface, 0, 0)
+            cr.paint()
+        return False
+
+    def on_button_press(self, widget, event):
+        if event.button == Gdk.BUTTON_PRIMARY:
+            self.is_drawing = True
+            self.last_x = event.x
+            self.last_y = event.y
+
+    def on_button_release(self, widget, event):
+        if event.button == Gdk.BUTTON_PRIMARY:
+            self.is_drawing = False
+
+    def on_motion_notify(self, widget, event):
+        if self.is_drawing:
+            cr = cairo.Context(self.surface)
+            cr.set_source_rgb(0, 0, 0) # 描画色（黒）
+            cr.set_line_width(2)
+            cr.set_line_cap(cairo.LINE_CAP_ROUND)
+            
+            # 線を描画
+            cr.move_to(self.last_x, self.last_y)
+            cr.line_to(event.x, event.y)
+            cr.stroke()
+            
+            # 位置を更新
+            self.last_x = event.x
+            self.last_y = event.y
+            
+            # 描画エリアに更新を通知
+            widget.queue_draw()
+
+if __name__ == "__main__":
+    win = PaintWindow()
+    win.show_all()
+    Gtk.main()
+</pre>
+<p>以下は必要なライブラリのインストール (Ubuntu/Debian系)。</p>
+<pre>
+sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0
+</pre>
+<p>以下は関連記事。</p>
+<ul>
+<li><a href="https://qiita.com/hiroxpepe/items/d65fb9fc7987e742723e">Python で Ubuntu で GTK で GNOME ウインドウで Hello World する #gnome - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.16</p>
+</div>
 
 <h1>各バインディングについて</h1>
 <h2>gtkmm (C++)</h2>
