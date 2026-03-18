@@ -135,7 +135,7 @@ ReactDOM.render(
 );
 &lt;/script&gt;
 </pre>
-<p>コンポーネントの中にコンポーネントを入れ込むこともできる。なので、</p>
+<p>コンポーネントの中にコンポーネントを入れ込むこともできる。また、export defaultでコンポーネントを分離できる。なので、</p>
 <pre class="prettyprint">
 class YourName extends React.Component {
   render() {
@@ -145,6 +145,10 @@ class YourName extends React.Component {
   }
 }
 
+export default YourName;
+</pre>
+<p>同様に、</p>
+<pre class="prettyprint">
 class FavoriteOS extends React.Component {
   render() {
     return (
@@ -153,6 +157,10 @@ class FavoriteOS extends React.Component {
   }
 }
 
+export default FavoriteOS;
+</pre>
+<p>同様に、</p>
+<pre class="prettyprint">
 class FavoriteProglang extends React.Component {
   render() {
     return (
@@ -161,6 +169,10 @@ class FavoriteProglang extends React.Component {
   }
 }
 
+export default FavoriteProglang;
+</pre>
+<p>そして、</p>
+<pre class="prettyprint">
 class Favorites extends React.Component {
   render() {
     return (
@@ -182,15 +194,22 @@ root.render(&lt;Favorites name="Assy" favorite_os="Gentoo Linux" favorite_progla
 <li><a href="https://ja.reactjs.org/">ja.ReactJS.org</a></li>
 <li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
 <li><a href="https://techis.jp/guide/react/react_class">React クラスコンポーネント | テックアイエスガイド</a></li>
+<li><a href="https://monotein.com/blog/import-export-react">【Reactビギナー向け】default exportとexportの種類をすべて解説 ｜ monotein</a></li>
 </ul>
 <p>後日注記：createRoot()はReact18からの新しいレンダリングのための関数です。並列処理関連の機能のために使用します。今までの関数も動作します。</p>
 <ul>
 <li><a href="https://zenn.dev/nawomat/articles/f8be31b66bfc19">React18からはレンダリングにcreateRootを使おう - Zenn</a></li>
 <li><a href="https://chaika.hatenablog.com/entry/2022/05/24/083000">今更の React 18 ReactDOM の render の使い方が変わった - かもメモ</a></li>
 </ul>
+<p>後日注記：最近のReact界隈では、クラスコンポーネントよりも関数コンポーネントを使うことが推奨されています。</p>
+<ul>
+<li><a href="https://www.wantedly.com/companies/company_1071330/post_articles/869030">React.js では関数がクラスよりも優れている理由 | Programming</a></li>
+<li><a href="https://qiita.com/omo_taku/items/18da0c020672a368f166">【React】クラスコンポーネント vs 関数コンポーネント【初心者に分かりやすく】 #JavaScript - Qiita</a></li>
+</ul>
 <div class="edit_date">
 <p>2023.06.25編集</p>
 <p>2024.07.14編集</p>
+<p>2026.03.18編集</p>
 </div>
 
 <h2>Stateを使うと状態を保持できる</h2>
