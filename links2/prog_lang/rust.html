@@ -253,14 +253,52 @@ fn hoge&lt;'a&gt;(x: &'a i32, y: &'a i32) -&gt; &'a i32 {
 <h1>Rustのその他の言語仕様</h1>
 <h2>パターン</h2>
 <p>Rustでは、さまざまな場面で「パターン」が登場する。パターンを使うことで、変数の値の構造を記述できる。パターンの応用例は、match式を使ったパターンマッチング。</p>
+<p>以下はGoogleのAIによるパターンマッチングのサンプル。</p>
+<pre class="prettyprint lang-rust">
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+}
+
+fn main() {
+    let msg = Message::Move { x: 10, y: 20 };
+
+    // 1. match式によるパターンマッチ
+    match msg {
+        Message::Quit =&gt; println!("Quit"),
+        Message::Move { x, y: 0 } =&gt; println!("Move on X-axis: {}", x),
+        Message::Move { x, y } =&gt; println!("Move to ({}, {})", x, y),
+        Message::Write(text) =&gt; println!("Text: {}", text),
+        // _ =&gt; println!("Other"), // 必要なら残りを全てキャッチ
+    }
+
+    // 2. 範囲マッチングと値の束縛
+    let number = 13;
+    match number {
+        1 | 3 | 5 | 7 | 9 =&gt; println!("Odd digit"),
+        10..=20 =&gt; println!("10 to 20"),
+        _ =&gt; println!("Other"),
+    }
+
+    // 3. if letによる特定のパターンのみマッチ
+    let optional = Some(5);
+    if let Some(i) = optional {
+        println!("Matched: {}", i);
+    }
+}
+</pre>
 <p>以下のページが参考になる。</p>
 <ul>
 <li><a href="https://frozenlib.net/blog/2018-03-11_rust-pattern-match/">Rustのパターンマッチを完全に理解した | FrozenLib</a></li>
 <li><a href="https://doc.rust-jp.rs/book-ja/ch18-01-all-the-places-for-patterns.html">パターンが使用されることのある箇所全部 - The Rust Programming Language 日本語版</a></li>
+<li><a href="https://doc.rust-jp.rs/book-ja/ch18-03-pattern-syntax.html">パターン記法 - The Rust Programming Language 日本語版</a></li>
+<li><a href="https://omomuki-tech.com/archives/1023">[Rustのはじめ方] Part18: パターンマッチと分岐処理 - omomuki-tech.com</a></li>
 </ul>
 <div class="edit_date">
 <p>2023.07.05</p>
 <p>2023.08.14編集</p>
+<p>2026.03.26編集</p>
 </div>
 
 <h2>Result型</h2>
