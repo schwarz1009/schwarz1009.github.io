@@ -56,14 +56,10 @@
 
 <h1>Schemeの特徴</h1>
 <h2>Common LispとSchemeの違い</h2>
-<p>Schemeでは、define命令をグローバル変数と関数の両方の宣言に使う。</p>
-<p>Schemeには、変数と関数が同じものとして、区別されずに扱われるため、グローバル変数であっても関数であってもdefine命令で宣言する。</p>
-<p>これは、Common Lispでいえばdefvalとdefunの両方の機能をdefineが持っているのと同じことである。</p>
-<p>また、Schemeには名前空間がひとつしかないので、代入する命令は複数個別に必要なく、define（Common Lispのdefval）とset!（Common Lispのsetq）を使う。</p>
-<p>ローカル変数を宣言するにはletを使えばいい。</p>
-<p>また、Common Lispではシンボルとして値と関数が区別されるが、Schemeでは区別されない。Schemeでは、変数に紐づけされる値はオブジェクトであっても関数であってもいい。なのでCommon Lispでlambda式などに付けられる#'は、Schemeでは必要なく、単にlambdaと書くだけで構わない。</p>
-<p>また、Common Lispのtやnilの代わりのものとして、Schemeでは#tと#fがある。</p>
-<p>ほかにもCommon LispとSchemeにはさまざまな違いがある。「<a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp</a>」などが参考になる。</p>
+<p>Common LispとSchemeの違いは、Common Lispでは関数と変数の宣言の方法が異なるが、Schemeでは関数と変数の宣言の方法が区別されない。</p>
+<p>Common Lispでは、変数はdefval、関数はdefunで宣言する。これに対してSchemeでは、どちらもdefineで宣言する。</p>
+<p>値と関数シンボルも区別されないため、Common Lispで関数やlambda式の前に付けられる関数シンボルの#'は、Schemeでは必要ない。lambda式を書くためには、単にlambdaとすればいい。</p>
+<p>ほかにも、Schemeには「名前空間がひとつしかない」「tやnilの代わりに#tと#fを使う」といった違いがある。詳しくは「<a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp</a>」などが参考になる。</p>
 <p>以下の書籍を参考に執筆しました。</p>
 <ul>
 <li><a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp</a></li>
@@ -73,6 +69,7 @@
 <div class="edit_date">
 <p>2023.10.31</p>
 <p>2024.07.12編集</p>
+<p>2026.03.28編集</p>
 </div>
 
 <h2>Schemeは最高のプログラミング言語</h2>
