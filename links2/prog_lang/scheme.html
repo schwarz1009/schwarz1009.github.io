@@ -57,7 +57,7 @@
 <h1>Schemeの特徴</h1>
 <h2>Common LispとSchemeの違い</h2>
 <p>Common LispとSchemeの違いは、Common Lispでは関数と変数の宣言の方法が異なるが、Schemeでは関数と変数の宣言の方法が区別されない。</p>
-<p>Common Lispでは、変数はdefval、関数はdefunで宣言する。これに対してSchemeでは、どちらもdefineで宣言する。</p>
+<p>Common Lispでは、変数はdefval、関数はdefunで宣言する。これに対してSchemeでは、どちらもdefineで宣言する。ローカル変数を宣言するにはletを使えばいい。</p>
 <p>値と関数シンボルも区別されないため、Common Lispで関数やlambda式の前に付けられる関数シンボルの#'は、Schemeでは必要ない。lambda式を書くためには、単にlambdaとすればいい。</p>
 <p>ほかにも、Schemeには「名前空間がひとつしかない」「tやnilの代わりに#tと#fを使う」といった違いがある。詳しくは「<a href="http://www.asahi-net.or.jp/~kc7k-nd/">On Lisp</a>」などが参考になる。</p>
 <p>以下の書籍を参考に執筆しました。</p>
