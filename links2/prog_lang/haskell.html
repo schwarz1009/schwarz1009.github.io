@@ -190,6 +190,23 @@ main = print (add)
 <p>標準的によく使われるListや、Maybeなどもモナドで実装されている。</p>
 <p>モナドの解説はネット上にあふれているのでそれを参照してほしい（僕はまだ理解できていない）。</p>
 
+<h2>カリー化の意味</h2>
+<p>以下の関数型プログラミングの入門記事に、カリー化の説明があります。</p>
+<ul>
+<li><a href="https://zenn.dev/sonneko/articles/004b051a805687">関数型って結局なんやねん！どないして活用せえっちゅうねん！ - Zenn</a></li>
+<li><a href="https://zenn.dev/masahiro_toba/articles/1e56d008423cf8">高階関数,カリー化,部分適用とは？(Haskell) - Zenn</a></li>
+</ul>
+<p>カリー化とは一般的な関数からその時々の用途で特殊な関数を返すことであり、さらに言えば「関数を一引数化すること」です。Haskellでは自動的にカリー化が起こります。</p>
+<pre class="prettyprint lang-hs">
+hoge :: Int -&gt; Int -&gt; Int
+hoge a b = a + b
+</pre>
+<p>のような関数の引数と戻り値の記述をするのは、自動的なカリー化によってその関数が関数を返すため、引数が二つ以上ある場合は関数を連続して呼び出し、引数をひとつひとつ与えることになるからです。</p>
+<p>つまり、hoge a bという関数の呼び出しは、(hoge a) bと等価です。hoge(a, b)とhoge(a)(b)も同じです。</p>
+<div class="edit_date">
+<p>2026.04.16</p>
+</div>
+
 <h1>Haskell製のソフトウェア</h1>
 <h2>Pugs</h2>
 <p>PugsはPerl 6の言語処理系。<a href="perl_comments.html">Perl戯言</a>を参照のこと。</p>
