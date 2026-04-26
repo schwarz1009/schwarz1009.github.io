@@ -244,22 +244,34 @@ public abstract class TwoHundred {
 <p>たとえば、CatクラスとDogクラスを共通のスーパークラスであるAnimalクラスの派生クラスにすることができます。</p>
 <p>このような抽象化をis-a関係と呼びます。</p>
 <p>CatクラスとDogクラスに共通する機能はAnimalクラスで実装し、Catクラスしか持たない機能、Dogクラスしか持たない機能を、それぞれの派生クラスで実装します。</p>
+<p>ただし、このis-a関係は、必ずしも成り立つとは限りません。「<a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a>」の例によれば、正方形は四角形を継承して作ることができそうですが、実際は、高さを変更せずに幅を変えるという四角形の機能が、正方形では成り立ちません。なので、is-a関係は万能ではないと注意する必要があります。</p>
 <div class="edit_date">
 <p>2026.04.26</p>
 </div>
 
 <h2>継承と包有のどちらを使うべきか</h2>
 <p>ネットでは、クラスの継承よりも包有あるいはインターフェースを用いた方が良いという意見もあるようです。理由は、「柔軟性が低く変更が難しいから」であるとのこと。</p>
+<p>ただし、あえて僕の意見を言えば、同じことができるならどちらでも良いと思います。継承には、仮想関数やポリモーフィズムの仕組みが使えるというメリットもあります。</p>
 <ul>
 <li><a href="https://qiita.com/alt_yamamoto/items/25eda376e6b947208996">良いコードの書き方 - Qiita</a></li>
 </ul>
-<p>ただし、あえて僕の意見を言えば、同じことができるならどちらでも良いと思います。継承には、仮想関数やポリモーフィズムの仕組みが使えるというメリットもあります。</p>
 <p>後日注記：包有は「合成」と呼ばれることもあります。合成とはクラスから別のクラスへの参照を持つことです。一般的に、合成が使える際には、合成を使ったほうが再利用性から言って望ましいです。</p>
+<p>後日注記：合成はコンポジションとも呼ばれ、ひとつのオブジェクトに複数のオブジェクトを包有できます。たとえば、</p>
+<pre class="prettyprint">
+public class Zoo {
+    private Cat cat;
+    private Dog dog;
+    private Bird bird;
+}
+</pre>
+<p>などとした場合、Zooクラスにはたくさんの動物のオブジェクトが合成されます。このような関係をhas-a関係と呼びます。</p>
 <ul>
 <li><a href="https://www.amazon.co.jp/Scala%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%A9%E3%83%96%E3%83%AB%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%AC%AC3%E7%89%88-Martin-Odersky/dp/4844381490/">Scalaスケーラブルプログラミング第3版</a></li>
+<li><a href="https://www.amazon.co.jp/Effective-%E7%AC%AC3%E7%89%88-ADDISON-WESLEY-PROFESSIONAL-COMPUTI/dp/4621066099">Effective C++ 第3版</a></li>
 </ul>
 <div class="edit_date">
 <p>2025.06.10編集</p>
+<p>2026.04.26編集</p>
 </div>
 
 <h2>Object型</h2>
