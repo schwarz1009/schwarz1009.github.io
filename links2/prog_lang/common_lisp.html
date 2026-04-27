@@ -139,6 +139,7 @@ TRUE
 
 <h2>Common Lispの主な関数</h2>
 <p>注意：全部ではありません。<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>の中に出てくる関数やオペレータから、僕が気になるものをピックアップしました。</p>
+<p>以下は変数と関数について。</p>
 <table class="some_tables">
 <tr><th class="min60">関数</th><th>説明</th></tr>
 <tr><td>let</td><td>ローカル変数を宣言する</td></tr>
@@ -152,6 +153,10 @@ TRUE
 <tr><td>tagbody</td><td>gotoを使用できるブロックを作る</td></tr>
 <tr><td>go</td><td>goto（ジャンプ）を行う</td></tr>
 <tr><td>values</td><td>多値を返す</td></tr>
+</table>
+<p>以下はリストとデータ型について。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
 <tr><td>quote</td><td>リストを評価せずそのまま返す（関数として実行しない）</td></tr>
 <tr><td>list</td><td>リストを作る<br>二つの要素からなるリストは、二分木であると考えられる（右と左の要素が子ノードの親となる）</td></tr>
 <tr><td>cons</td><td>リストを連結する</td></tr>
@@ -166,6 +171,10 @@ TRUE
 <tr><td>make-hash-table</td><td>ハッシュテーブルを作る</td></tr>
 <tr><td>gethash</td><td>ハッシュテーブルの中のキーに応じた値を取り出す</td></tr>
 <tr><td>defstruct</td><td>構造体（ストラクチャ）を作る</td></tr>
+</table>
+<p>以下は判定と比較について。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
 <tr><td>typep</td><td>型を判定する</td></tr>
 <tr><td>=</td><td>値を等値であるか比較する</td></tr>
 <tr><td>&lt;</td><td>より小さい</td></tr>
@@ -180,9 +189,17 @@ TRUE
 <tr><td>cond</td><td>複数の条件に対して、評価する内容を記述する</td></tr>
 <tr><td>do</td><td>反復処理を行う</td></tr>
 <tr><td>dotimes</td><td>指定した回数だけ反復処理を行う</td></tr>
+</table>
+<p>以下は例外について。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
 <tr><td>catch</td><td>例外をキャッチする</td></tr>
 <tr><td>throw</td><td>例外を投げる</td></tr>
 <tr><td>unwind-protect</td><td>例外に割り込まれたとしても評価される式を記述する</td></tr>
+</table>
+<p>以下は入出力について。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
 <tr><td>open</td><td>ファイルをオープンする</td></tr>
 <tr><td>close</td><td>ファイルをクローズする</td></tr>
 <tr><td>read-line</td><td>ファイルあるいは標準入力を一行読み込む</td></tr>
@@ -190,6 +207,10 @@ TRUE
 <tr><td>prin1</td><td>プログラム用に出力する</td></tr>
 <tr><td>princ</td><td>ユーザ用に出力する</td></tr>
 <tr><td>format</td><td>フォーマット指定子を指定して出力する（変数の値を埋め込むことが可能）</td></tr>
+</table>
+<p>以下は計算処理について。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
 <tr><td>+</td><td>足し算</td></tr>
 <tr><td>-</td><td>引き算</td></tr>
 <tr><td>*</td><td>掛け算</td></tr>
@@ -203,6 +224,10 @@ TRUE
 <tr><td>sin</td><td>サイン</td></tr>
 <tr><td>cos</td><td>コサイン</td></tr>
 <tr><td>tan</td><td>タンジェント</td></tr>
+</table>
+<p>以下はevalとマクロとCLOSについて。</p>
+<table class="some_tables">
+<tr><th class="min60">関数</th><th>説明</th></tr>
 <tr><td>eval</td><td>リストをLispコードとして実行する</td></tr>
 <tr><td>defmacro</td><td>マクロ（式を別の式に置き換える）を定義する</td></tr>
 <tr><td>defclass</td><td>CLOS（Common Lispオブジェクトシステム）のクラスを定義する</td></tr>
@@ -212,6 +237,7 @@ TRUE
 <p>（<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>を参考に執筆しました。）</p>
 <div class="edit_date">
 <p>2023.09.10編集</p>
+<p>2026.04.27編集</p>
 </div>
 
 <h1>Common Lispいろいろ</h1>
