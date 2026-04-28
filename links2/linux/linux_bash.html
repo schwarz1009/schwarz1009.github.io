@@ -60,12 +60,16 @@
 $ echo $PATH
 /usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin
 </pre>
+<p>この状態で、たとえばlsコマンドを実行すると、/usr/local/binディレクトリ、/binディレクトリ、/usr/binディレクトリ、/usr/X11R6/binディレクトリの中から、lsと名前の付いた実行ファイルが実行される。</p>
+
 <h3>PATHの設定</h3>
 <p>PATHの設定方法。</p>
 <pre>
 $ PATH=$PATH:/home/assy/bin
 $ export PATH
 </pre>
+<p>こうすることで、検索されるディレクトリの中に/home/assy/binを追加できる。ただし永続的な設定のためには以下の設定ファイルの編集が必要。</p>
+
 <h3>設定ファイル</h3>
 <p>PATHの設定ファイル。</p>
 <p>.bash_profileに以下の設定を記述することで、ログインした時に自動でPATHを設定してくれます。</p>
@@ -74,7 +78,9 @@ PATH=$PATH:/home/assy/bin
 export PATH
 </pre>
 <p>システム全体（すべてのユーザーのシェル）で設定する場合は、/etc/profileに記述します。</p>
-
+<div class="edit_date">
+<p>2026.04.28編集</p>
+</div>
 
 <h2>一般ユーザーとrootユーザーのシェル</h2>
 <p>シェルには、一般ユーザーのシェルとrootユーザーのシェルという二種類のシェルがある。慣習的に、コマンドの入力例などを記述する際に、一般ユーザーのシェルは$、rootユーザーのシェルは#を行頭につけて表現する。この$や#を入力する必要はない。</p>
@@ -109,10 +115,23 @@ $ (ユーザーに戻る)
 <p>また、プログラムを実行して、何も出力せずにプログラムが終了し、元のシェルの入力に戻った時は、コマンドは正常に処理を完了している。何かエラーを出した時（途中で不正終了した時）はエラーが表示される。</p>
 
 <h2>作業の終了</h2>
-<p>別のユーザーとしてログインしたい場合など、シェルそのものを終了させたい時はexitコマンドを実行する。また、システムを終了させたい時はshutdownコマンドを実行する。システムの終了は-h、再起動は-r。</p>
+<p>別のユーザーとしてログインしたい場合など、シェルそのものを終了させたい時はexitコマンドを実行する。</p>
+<pre>
+$ exit
+</pre>
+<p>また、システムを終了させたい時はshutdownコマンドを実行する。システムの終了は-h、再起動は-r。</p>
 <pre>
 # shutdown -h now
 </pre>
+<p>shutdownコマンド以外にも、haltコマンド、rebootコマンド、poweroffコマンドも使用できる。また、systemdの入っている環境では、systemctlコマンドにこれらのコマンド名を指定することもできる。</p>
+<ul>
+<li><a href="https://docs.redhat.com/ja/documentation/red_hat_enterprise_linux/7/html/system_administrators_guide/sect-managing_services_with_systemd-power">10.4. システムのシャットダウン、サスペンド、および休止状態 | システム管理者のガイド | Red Hat Enterprise Linux | 7 | Red Hat Documentation</a></li>
+<li><a href="https://www.miraclejob.com/recommend/detail?cd=2296">shutdown, halt, reboot, poweroffの見分け方 - MiracleJOB</a></li>
+</ul>
+<p>また、大量にファイルを書き換えた場合などは、手動で電源を切る前にsyncコマンドを実行すると、キャッシュの中にあるデータをディスクに全部書き出してくれて、安心できる。</p>
+<div class="edit_date">
+<p>2026.04.28編集</p>
+</div>
 
 <h2>Bashのソースコードを読もう</h2>
 <p>BashとReadlineのコードは以下から読める。</p>

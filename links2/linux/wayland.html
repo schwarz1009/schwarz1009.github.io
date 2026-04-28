@@ -56,6 +56,19 @@
 <h2>Mri</h2>
 <p>MriはUbuntuで独自に作られていたWaylandと似たような次世代のディスプレイサーバだったが、今ではUbuntuもWaylandを採用するなど衰退した。</p>
 
+<h2>XWayland</h2>
+<p>Waylandを使う際に重要なのは、レガシーなX11アプリケーションの移行の問題である。</p>
+<p>GNOMEやKDEのようなモダンなデスクトップ環境は、Waylandにネイティブ対応する傾向にあるが、古いレガシーなX11アプリケーションは、Waylandに対応していない場合がある。</p>
+<p>そのようなレガシーなX11アプリケーションを使う場合には、WaylandとXorgなどのX11サーバーを併用する必要がある。</p>
+<p>だが、ここで使えるのが、XWaylandという技術。XWaylandはWaylandの上でX11サーバーを動かす技術で、Wayland上でレガシーなX11アプリケーションを動作させることができる。</p>
+<p>なので、今の時代は「Waylandネイティブ」「旧来のX11サーバー」「XWayland」という三種類のディスプレイサーバーを、場合によって使い分けることになる。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Wayland">Wayland - ArchWiki</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.04.28</p>
+</div>
+
 <h1>リンク集</h1>
 
 <h2>Wayland</h2>
