@@ -238,6 +238,24 @@ $ uname -a
 <li><a href="https://linuxja.miraheze.org/wiki/Arch_Linux/Alter_Linux">Alter Linux - LinuxJapanWiki</a></li>
 </ul>
 
+<h1>余談</h1>
+<h2>古くなってメンテナンスされなくなったコードは削除される</h2>
+<p>Linuxカーネルでは、古くなってメンテナンスされなくなったコードは削除されます。</p>
+<p>たとえば、昔ジャーナリングファイルシステムの先駆として有名だった、ReiserFSは削除されました。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/202203/01">2022年3月1日　古いコードはコストがかかる ―LKML，ReiserFSの削除について議論：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>Linuxカーネルでは、古いコードをメンテナンスすることにはコストがかかります。メンテナーになりたい人がいる間はメンテナンスされますが、メンテナーがいなくなるとその機能は削除されてしまいます。</p>
+<p>AI時代においては、その傾向はさらに顕著です。誰も使っていない古くなったコードに対して、AIが多数のバグレポートを送ってくるようになったため、メンテナンスすることが大変になり、「削除したほうが楽」だからです。</p>
+<ul>
+<li><a href="https://xenospectrum.com/linux-7-1-legacy-driver-removal-ai-bug-reports/">誰も使ってないのに毎日バグ報告が届く：AIが生み出したLinuxボランティアの消耗戦 | XenoSpectrum</a></li>
+</ul>
+<p>最近のLinuxカーネルでは、誰も使っていない20年以上前のドライバの規格や、CPUアーキテクチャなどの対応コードが削除されました。</p>
+<p>ですが、超ポータブルなLinuxディストリビューションT2/Linuxなどでは、Linuxカーネルのメインラインから削除されたコードをforkして維持し、ディストリビューションとして独自に提供しています。</p>
+<div class="edit_date">
+<p>2026.04.28</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>libc</h2>
 <p>libcについては<a href="libc.html">libc</a>を参照のこと。</p>
