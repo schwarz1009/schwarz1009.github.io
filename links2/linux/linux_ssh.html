@@ -113,7 +113,7 @@ ssh [user@]hostname [command]
 
 <h2>SSH X転送</h2>
 <p>SSHには「X転送」と呼ばれる機能がある。ssh -Xまたはssh -Yを使うことで、X11のGUIアプリケーションの画面をリモートで表示できる。</p>
-<p>ただし、この機能はX11のネットワーク透過機能に依存しており、セキュリティの向上した最近のWaylandでは利用できない。</p>
+<p>ただし、この機能はX11のネットワーク透過機能に依存しており、セキュリティの向上した最近のWaylandではWaypipeを導入する必要がある。</p>
 <ul>
 <li><a href="https://www.issoh.co.jp/tech/details/11677/">X11が限界を迎えた背景とWaylandが再設計した表示プロトコルの全体像 | 株式会社一創</a></li>
 <li><a href="https://qiita.com/Ren_s_off/items/2e0b7e312ce7e654f235">他のコンピュータをリモートで操作したい(ssh, waypipe ssh) #Linux - Qiita</a></li>
