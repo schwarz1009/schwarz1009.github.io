@@ -122,12 +122,15 @@ ls -al
 $ echo $PATH
 /usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin
 </pre>
+<p>この状態で、たとえばlsコマンドを実行すると、/usr/local/binディレクトリ、/binディレクトリ、/usr/binディレクトリ、/usr/X11R6/binディレクトリの中から、lsと名前の付いた実行ファイルが実行される。</p>
+
 <h3>PATHの設定</h3>
 <p>PATHの設定方法。</p>
 <pre>
 $ PATH=$PATH:/home/assy/bin
 $ export PATH
 </pre>
+<p>こうすることで、検索されるディレクトリの中に/home/assy/binを追加できる。ただし永続的な設定のためには以下の設定ファイルの編集が必要。</p>
 
 <h3>設定ファイル</h3>
 <p>PATHの設定ファイル。</p>
@@ -141,6 +144,9 @@ export PATH
 <ul>
 <li><a href="http://pocketstudio.jp/linux/?%A5%D1%A5%B9(PATH)%A4%CE%B3%CE%C7%A7%A4%C8%C0%DF%C4%EA%CA%FD%CB%A1%A4%CF%A1%A9">パス(PATH)の確認と設定方法は？ - Pocketstudio.jp Linux Wiki</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.04.28編集</p>
+</div>
 
 <h2>エイリアス</h2>
 <p>エイリアスとは、コマンドの別名。</p>
