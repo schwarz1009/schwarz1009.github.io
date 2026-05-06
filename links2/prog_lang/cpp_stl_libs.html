@@ -272,7 +272,7 @@ void printStr(const std::string& str) {
 std::ofstream ofs("hoge.txt");
 if (!ofs)
 {
-    std::cout &lt;&lt; "ファイルのオープンに失敗しました。" &lt;&lt; std::endl;
+    std::cerr &lt;&lt; "ファイルのオープンに失敗しました。" &lt;&lt; std::endl;
     return 0;
 }
 ofs &lt;&lt; "Hoge hoge Fuga fuga" &lt;&lt; std::endl;
@@ -282,7 +282,7 @@ ofs &lt;&lt; "Hoge hoge Fuga fuga" &lt;&lt; std::endl;
 std::ifstream ifs("hoge.txt");
 if (!ifs)
 {
-    std::cout &lt;&lt; "ファイルのオープンに失敗しました。" &lt;&lt; std::endl;
+    std::cerr &lt;&lt; "ファイルのオープンに失敗しました。" &lt;&lt; std::endl;
     return 0;
 }
 std::string text_data;
@@ -294,10 +294,12 @@ ifs &gt;&gt; text_data;
 <li><a href="https://programming.pc-note.net/cpp/filestream.html">ファイルストリーム(C++) - 超初心者向けプログラミング入門</a></li>
 <li><a href="https://qiita.com/NickTominaga/items/7e01b7eb0b67ac791ec6">[C++] ファイル入出力の覚書 - Qiita</a></li>
 <li><a href="https://qiita.com/knknkn1162/items/47736785a3e472db5525">いっつも忘れるC++ ファイル入出力関数を図にしてみた - Qiita</a></li>
+<li><a href="https://qiita.com/daikiminobe/items/fb9e593b39433ff05f46">はじめてのC++【37日目】 #C++ - Qiita</a></li>
 </ul>
 <p><a href="../linux/linux_api.html">Linuxシステムコール・API</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2026.03.01編集</p>
+<p>2026.05.06編集</p>
 </div>
 
 <h2>C++でマルチスレッド</h2>
