@@ -259,9 +259,15 @@ public abstract class TwoHundred {
 <p>後日注記：合成はコンポジションとも呼ばれ、ひとつのオブジェクトに複数のオブジェクトを包有できます。たとえば、</p>
 <pre class="prettyprint">
 public class Zoo {
-    private Cat cat;
-    private Dog dog;
-    private Bird bird;
+    private Cat m_cat;
+    private Dog m_dog;
+    private Bird m_bird;
+    
+    Zoo(Cat a_cat, Dog a_dog, Bird a_bird) {
+        this.m_cat = a_cat;
+        this.m_dog = a_dog;
+        this.m_bird = a_bird;
+    }
 }
 </pre>
 <p>などとした場合、Zooクラスにはたくさんの動物のオブジェクトが合成されます。このような関係をhas-a関係と呼びます。</p>
@@ -272,6 +278,7 @@ public class Zoo {
 <div class="edit_date">
 <p>2025.06.10編集</p>
 <p>2026.04.26編集</p>
+<p>2026.05.06編集</p>
 </div>
 
 <h2>Object型</h2>
