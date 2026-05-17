@@ -52,7 +52,7 @@ function ChangeTab(tabname) {
     document.getElementById(tabname + '_li').style.background = 'white';
     
     tabs.forEach((tab) => {
-        if (tabname != 'tab_' + tab) {
+        if (tabname != ('tab_' + tab)) {
             document.getElementById('tab_' + tab + '_li').style.background = '#f2dae8';
         }
     });
