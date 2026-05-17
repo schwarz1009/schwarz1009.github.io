@@ -58,28 +58,33 @@ function ChangeTab(tabname) {
     });
 }
 
-var data = [];
-data.push('<div class="tab_menu"><ul class="tab_list">');
-
-tabs.forEach((tab) => {
-    data.push('<li id="tab_' + tab + '_li"><a href="#tab_' + tab + '" class="tab_' + tab + '" onclick="ChangeTab(\'tab_' + tab + '\'); return false;">' + tab.split('_').join('-') + '</a></li>');
-});
-
-data.push('</ul></div><div class="box">');
-
-tabs.forEach((tab) => {
-    data.push('<div id="tab_' + tab + '" style="display: none;"><ul>');
-    
-    tabs_map.get(tab).forEach((date) => {
-        data.push('<li><a href="' + date + '.html">' + date.split('.').join('-') + '</a></li>');
+function tab_list() {
+    var data = [];
+    tabs.forEach((tab) => {
+        data.push('<li id="tab_' + tab + '_li"><a href="#tab_' + tab + '" class="tab_' + tab + '" onclick="ChangeTab(\'tab_' + tab + '\'); return false;">' + tab.split('_').join('-') + '</a></li>');
     });
-            
-    data.push('</ul></div>');
-});
+    var result = data.join('');
+    return result;
+}
 
-data.push('</div>');
-
-var result = data.join('');
+function box(){
+    var data = [];
+    
+    tabs.forEach((tab) => {
+        data.push('<div id="tab_' + tab + '" style="display: none;"><ul>');
+        
+        tabs_map.get(tab).forEach((date) => {
+            data.push('<li><a href="' + date + '.html">' + date.split('.').join('-') + '</a></li>');
+        });
+                
+        data.push('</ul></div>');
+    });
+    
+    var result = data.join('');
+    return result;
+}
 
 let div_guren_script = document.getElementById('guren_tab');
-div_guren_script.insertAdjacentHTML('beforebegin', result);
+var s_tab_list = tab_list();
+var s_box = box();
+div_guren_script.insertAdjacentHTML('beforebegin', '<div class="tab_menu"><ul class="tab_list">' + s_tab_list + '</ul></div><div class="box">' + s_box + '</div>');
