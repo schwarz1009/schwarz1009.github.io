@@ -86,11 +86,29 @@
 <pre class="prettyprint">
 &lt;%= ～ %&gt;
 </pre>
-<p>とすれば式をそのまま出力できる。さらに詳細は以下を参照のこと。</p>
+<p>とすれば式をそのまま出力できる。</p>
+<p>また、</p>
+<pre class="prettyprint">
+&lt;%! ～ %&gt;
+</pre>
+<p>とすれば、メソッドや変数を定義できる。</p>
+<p>また、</p>
+<pre class="prettyprint">
+&lt;%@ ～ %&gt;
+</pre>
+<p>とすれば、JSP全体の設定を変更したり（pageディレクティブ）、ファイルを読み込んだり（includeディレクティブ）できる。</p>
+<p>このほか、&lt;jsp:forward&gt;や&lt;jsp:include&gt;のようなアクションタグを使うことで、Javaの処理をアクション形式で呼び出せる。</p>
+<p>また、スクリプトレットを使いすぎるとコードが複雑になって読みにくくなるため、JSTL（JSP Standard Tag Library）を使うことが推奨される。</p>
+<p>さらに詳細は以下を参照のこと。</p>
 <ul>
 <li><a href="https://www.fujitsu.com/jp/group/fap/services/java-education-kc/course/technology/web-apl/06-jsp/">プログラマー育成コース for Java　いまさら聞けないServlet/JSP入門：6章 : 富士通アプリケーションズ</a></li>
+<li><a href="https://qiita.com/icelandnono/items/54825f0e53d1faac7bf1">JSPでHTMLを出力する #スクリプト - Qiita</a></li>
+<li><a href="https://qiita.com/thirai67/items/7fcabde29b193ce25617">Java JSP #Java - Qiita</a></li>
 </ul>
 <p><a href="php.html">PHP</a>や<a href="dotnet_asp.html">ASP.NET</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.05.17編集</p>
+</div>
 
 <h2>doGet()とdoPost()</h2>
 <p>HttpServletでは、GETリクエストでページにアクセスが来た時はdoGet()、POSTリクエストでデータを受け取った時はdoPost()で処理を行う。</p>
