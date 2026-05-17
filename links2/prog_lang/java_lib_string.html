@@ -73,12 +73,27 @@ String s_hoge = new String("ほげほげ");
 <p>StringBufferクラスは、文字列を連結・編集することができるクラス。</p>
 <p>Javaの標準のStringは、固定長かつ変更不可能（イミュータブル）だが、これに対してStringBufferは可変長かつ変更可能（ミュータブル）である。</p>
 <p>JavaのStringを使っている際に、たくさん「+」で文字列を連結していると、メモリ上に文字列がたくさん作られて速度が遅くなってしまう。このような場合にStringBufferを使う。</p>
+<pre class="prettyprint">
+StringBuffer sb_hoge = new StringBuffer();
+
+sb_hoge.append("&lt;html&gt;&lt;body&gt;");
+sb_hoge.append("&lt;p&gt;Hoge&lt;/p&gt;");
+sb_hoge.append("&lt;p&gt;Fuga&lt;/p&gt;");
+sb_hoge.append("&lt;p&gt;Piyo&lt;/p&gt;");
+sb_hoge.append("&lt;/body&gt;&lt;/html&gt;");
+
+return (new String(sb_hoge));
+</pre>
 <p>また、Java 1.5で追加されたStringBuilderクラスは、StringBufferと同様、文字列を連結・編集することができるクラス。</p>
 <p>StringBufferよりもStringBuilder（新しいほう）が処理速度が高速だが、StringBuffer（古いほう）はスレッドセーフであるという違いがある。</p>
 <ul>
 <li><a href="https://techacademy.jp/magazine/31984">JavaのStringBufferクラスの使い方を現役エンジニアが解説【初心者向け】 | TechAcademyマガジン</a></li>
 <li><a href="https://www.javadrive.jp/start/stringbuilder/index3.html">Java | StringBuilderオブジェクトの作成と基本的な使い方 - Let'sプログラミング</a></li>
+<li><a href="https://www.javadrive.jp/servlet/ini/index4.html">doGetメソッドとdoPostメソッド - サーブレットの基本 - サーブレット入門 - Let'sプログラミング</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.05.17編集</p>
+</div>
 
 <h1>正規表現</h1>
 <h2>パターンマッチング</h2>
