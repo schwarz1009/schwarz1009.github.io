@@ -2,6 +2,8 @@
 // jQueryで目次を自動生成する「tocプラグイン」 - 小粋空間
 // http://www.koikikukan.com/archives/2014/08/29-005555.php
 
+// 2026.05.17 Stringを配列に変更 Assy
+
 ;(function($){
 
     jQuery.fn.toc = function(options) {
@@ -13,7 +15,7 @@
         var setting = jQuery.extend(defaults, options);
 
         var startLevel = setting.startLevel.substr(1, 1);
-        var data = '';
+        var data = [];
         var currentLevel = 0;
         var counter = 1;
 
@@ -29,24 +31,25 @@
             var level = this.nodeName.substr(1, 1) - ( startLevel - 1 );
 
             while(currentLevel < level) {
-                data += '<' + setting.listType + '>';
+                data.push('<' + setting.listType + '>');
                 currentLevel++;
             }
             while(currentLevel > level) {
-                data += '</' + setting.listType + '></li>';
+                data.push('</' + setting.listType + '></li>');
                 currentLevel--;
             }
             if ( currentLevel == level ) {
-                data += '<li>';
+                data.push('<li>');
             }
-            data += '<a href="#' + this.id + '">' + $(this).html() + "</a>";
+            data.push('<a href="#' + this.id + '">' + $(this).html() + "</a>");
             counter++;
         });
         while (currentLevel > 0) {
-            data += '</' + setting.listType + '>';
+            data.push('</' + setting.listType + '>');
             currentLevel--;
         }
-        $("#" + setting.target).html(data);
+        var result = data.join("");
+        $("#" + setting.target).html(result);
         return this;
     };
 })($)
