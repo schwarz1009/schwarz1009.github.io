@@ -99,11 +99,16 @@
 <p>とすれば、JSP全体の設定を変更したり（pageディレクティブ）、ファイルを読み込んだり（includeディレクティブ）できる。</p>
 <p>このほか、&lt;jsp:forward&gt;や&lt;jsp:include&gt;のようなアクションタグを使うことで、Javaの処理をアクション形式で呼び出せる。</p>
 <p>また、スクリプトレットを使いすぎるとコードが複雑になって読みにくくなるため、JSTL（JSP Standard Tag Library）を使うことが推奨される。</p>
+<p>そして、JSTLと組み合わせることのできる構文として、変数の値をタグに入れ込む場合はEL式を使う。</p>
+<pre class="prettyprint">
+&lt;p&gt;Hello, ${hoge_user.name}!&lt;/p&gt;
+</pre>
 <p>さらに詳細は以下を参照のこと。</p>
 <ul>
 <li><a href="https://www.fujitsu.com/jp/group/fap/services/java-education-kc/course/technology/web-apl/06-jsp/">プログラマー育成コース for Java　いまさら聞けないServlet/JSP入門：6章 : 富士通アプリケーションズ</a></li>
 <li><a href="https://qiita.com/icelandnono/items/54825f0e53d1faac7bf1">JSPでHTMLを出力する #スクリプト - Qiita</a></li>
 <li><a href="https://qiita.com/thirai67/items/7fcabde29b193ce25617">Java JSP #Java - Qiita</a></li>
+<li><a href="https://workteria.forward-soft.co.jp/blog/detail/10069">【Java】JSPでタグライブラリを使う（JSTL） - ワークテリア（Workteria）</a></li>
 </ul>
 <p><a href="php.html">PHP</a>や<a href="dotnet_asp.html">ASP.NET</a>も参照のこと。</p>
 <div class="edit_date">
