@@ -116,10 +116,38 @@
 </div>
 
 <h2>doGet()とdoPost()</h2>
-<p>HttpServletでは、GETリクエストでページにアクセスが来た時はdoGet()、POSTリクエストでデータを受け取った時はdoPost()で処理を行う。</p>
+<p>HttpServletクラスの継承では、GETリクエストでページにアクセスが来た時はdoGet()、POSTリクエストでデータを受け取った時はdoPost()で処理を行う。</p>
+<pre class="prettyprint">
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class HogeServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        
+        // GETリクエストでページにアクセスが来た時の処理
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+        // POSTリクエストでページにアクセスが来た時の処理
+    }
+}
+</pre>
+<p>以下は参考文献。</p>
 <ul>
 <li><a href="https://www.javadrive.jp/servlet/ini/index4.html">doGetメソッドとdoPostメソッド - サーブレットの基本 - サーブレット入門 - Let'sプログラミング</a></li>
+<li><a href="https://qiita.com/toshi_solution/items/75560ac5353a16703ddc">[Java]HttpServletクラスの継承と構造 #servlet - Qiita</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.05.17編集</p>
+</div>
 
 <h2>WARファイル</h2>
 <p>WARファイルは、Webアプリケーション向けのJavaアプリケーションの圧縮形式。</p>
