@@ -248,6 +248,7 @@ process.stdout.write('終了.\n');
 <p>最近は、日記の月別のタブをJavaScriptで作りました。</p>
 <p>JavaScriptコードは以下（script_sylph.js）。</p>
 <pre class="prettyprint">
+// データ部分
 var tabs = ['2022_01', '2022_02', '2022_03', '2022_04', '2022_05', '2022_06', '2022_07', '2022_08', '2022_09', '2022_10', '2022_11', '2022_12'];
 
 var tabs_map = new Map();
@@ -265,6 +266,7 @@ tabs_map.set('2022_10', ['2022.10.01', '2022.10.02', '2022.10.03', '2022.10.04',
 tabs_map.set('2022_11', ['2022.11.01', '2022.11.02', '2022.11.03', '2022.11.04', '2022.11.05', '2022.11.06', '2022.11.07', '2022.11.09', '2022.11.10', '2022.11.11', '2022.11.12', '2022.11.13', '2022.11.14', '2022.11.15', '2022.11.17', '2022.11.18', '2022.11.19', '2022.11.20', '2022.11.21', '2022.11.22', '2022.11.25', '2022.11.28', '2022.11.29', '2022.11.30']);
 tabs_map.set('2022_12', ['2022.12.01', '2022.12.03', '2022.12.04', '2022.12.05', '2022.12.06', '2022.12.07', '2022.12.09', '2022.12.10', '2022.12.11', '2022.12.12', '2022.12.13', '2022.12.14', '2022.12.15', '2022.12.17', '2022.12.18', '2022.12.19', '2022.12.20']);
 
+// タブの表示と非表示を切り替える
 function ChangeTab(tabname) {
     tabs.forEach((tab) =&gt; {
         document.getElementById('tab_' + tab).style.display = 'none';
@@ -279,8 +281,65 @@ function ChangeTab(tabname) {
             document.getElementById('tab_' + tab + '_li').style.background = '#c6e2f8';
         }
     });
+    
+    /* 以下のコードと等価。
+    document.getElementById('tab_2022_01').style.display = 'none';
+    document.getElementById('tab_2022_02').style.display = 'none';
+    document.getElementById('tab_2022_03').style.display = 'none';
+    document.getElementById('tab_2022_04').style.display = 'none';
+    document.getElementById('tab_2022_05').style.display = 'none';
+    document.getElementById('tab_2022_06').style.display = 'none';
+    document.getElementById('tab_2022_07').style.display = 'none';
+    document.getElementById('tab_2022_08').style.display = 'none';
+    document.getElementById('tab_2022_09').style.display = 'none';
+    document.getElementById('tab_2022_10').style.display = 'none';
+    document.getElementById('tab_2022_11').style.display = 'none';
+    document.getElementById('tab_2022_12').style.display = 'none';
+
+    document.getElementById(tabname).style.display = 'block';
+   
+    document.getElementById(tabname + '_li').style.background = 'white';
+
+    if (tabname != 'tab_2022_01') {
+        document.getElementById('tab_2022_01_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_02') {
+        document.getElementById('tab_2022_02_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_03') {
+        document.getElementById('tab_2022_03_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_04') {
+        document.getElementById('tab_2022_04_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_05') {
+        document.getElementById('tab_2022_05_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_06') {
+        document.getElementById('tab_2022_06_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_07') {
+        document.getElementById('tab_2022_07_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_08') {
+        document.getElementById('tab_2022_08_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_09') {
+        document.getElementById('tab_2022_09_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_10') {
+        document.getElementById('tab_2022_10_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_11') {
+        document.getElementById('tab_2022_11_li').style.background = '#c6e2f8';
+    }
+    if (tabname != 'tab_2022_12') {
+        document.getElementById('tab_2022_12_li').style.background = '#c6e2f8';
+    }
+    */
 }
 
+// 配列に表示する文字列を追加する
 var data = [];
 data.push('&lt;div class="tab_menu"&gt;&lt;ul class="tab_list"&gt;');
 
@@ -289,6 +348,26 @@ tabs.forEach((tab) =&gt; {
 });
 
 data.push('&lt;/ul&gt;&lt;/div&gt;&lt;div class="box"&gt;');
+
+/* 以下の文字列を表示させるのと等価。
+&lt;div class="tab_menu"&gt;
+&lt;ul class="tab_list"&gt;
+&lt;li id="tab_2022_01_li"&gt;&lt;a href="#tab_2022_01" class="tab_2022_01" onclick="ChangeTab(\'tab_2022_01\'); return false;"&gt;2022-01&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_02_li"&gt;&lt;a href="#tab_2022_02" class="tab_2022_02" onclick="ChangeTab(\'tab_2022_02\'); return false;"&gt;2022-02&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_03_li"&gt;&lt;a href="#tab_2022_03" class="tab_2022_03" onclick="ChangeTab(\'tab_2022_03\'); return false;"&gt;2022-03&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_04_li"&gt;&lt;a href="#tab_2022_04" class="tab_2022_04" onclick="ChangeTab(\'tab_2022_04\'); return false;"&gt;2022-04&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_05_li"&gt;&lt;a href="#tab_2022_05" class="tab_2022_05" onclick="ChangeTab(\'tab_2022_05\'); return false;"&gt;2022-05&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_06_li"&gt;&lt;a href="#tab_2022_06" class="tab_2022_06" onclick="ChangeTab(\'tab_2022_06\'); return false;"&gt;2022-06&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_07_li"&gt;&lt;a href="#tab_2022_07" class="tab_2022_07" onclick="ChangeTab(\'tab_2022_07\'); return false;"&gt;2022-07&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_08_li"&gt;&lt;a href="#tab_2022_08" class="tab_2022_08" onclick="ChangeTab(\'tab_2022_08\'); return false;"&gt;2022-08&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_09_li"&gt;&lt;a href="#tab_2022_09" class="tab_2022_09" onclick="ChangeTab(\'tab_2022_09\'); return false;"&gt;2022-09&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_10_li"&gt;&lt;a href="#tab_2022_10" class="tab_2022_10" onclick="ChangeTab(\'tab_2022_10\'); return false;"&gt;2022-10&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_11_li"&gt;&lt;a href="#tab_2022_11" class="tab_2022_11" onclick="ChangeTab(\'tab_2022_11\'); return false;"&gt;2022-11&lt;/a&gt;&lt;/li&gt;
+&lt;li id="tab_2022_12_li"&gt;&lt;a href="#tab_2022_12" class="tab_2022_12" onclick="ChangeTab(\'tab_2022_12\'); return false;"&gt;2022-12&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="box"&gt;
+*/
 
 tabs.forEach((tab) =&gt; {
     data.push('&lt;div id="tab_' + tab + '" style="display: none;"&gt;&lt;ul&gt;');
@@ -302,8 +381,52 @@ tabs.forEach((tab) =&gt; {
 
 data.push('&lt;/div&gt;');
 
+/* 以下の文字列を表示させるのと等価。
+&lt;div id="tab_2022_01" style="display: none;"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="2022.01.01.html"&gt;2022-01-01&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.02.html"&gt;2022-01-02&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.03.html"&gt;2022-01-03&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.04.html"&gt;2022-01-04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.05.html"&gt;2022-01-05&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.06.html"&gt;2022-01-06&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.07.html"&gt;2022-01-07&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.08.html"&gt;2022-01-08&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.09.html"&gt;2022-01-09&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.10.html"&gt;2022-01-10&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.11.html"&gt;2022-01-11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.12.html"&gt;2022-01-12&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.13.html"&gt;2022-01-13&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.14.html"&gt;2022-01-14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.15.html"&gt;2022-01-15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.16.html"&gt;2022-01-16&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.17.html"&gt;2022-01-17&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.18.html"&gt;2022-01-18&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.19.html"&gt;2022-01-19&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.20.html"&gt;2022-01-20&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.21.html"&gt;2022-01-21&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.22.html"&gt;2022-01-22&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.23.html"&gt;2022-01-23&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.24.html"&gt;2022-01-24&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.25.html"&gt;2022-01-25&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.26.html"&gt;2022-01-26&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.27.html"&gt;2022-01-27&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.28.html"&gt;2022-01-28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.29.html"&gt;2022-01-29&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.30.html"&gt;2022-01-30&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="2022.01.31.html"&gt;2022-01-31&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="tab_2022_02" style="display: none;"&gt;
+（以下月ごとに繰り返し）
+&lt;/div&gt;
+&lt;/div&gt;
+*/
+
+// 配列の内容をひとつの文字列に連結する
 var result = data.join('');
 
+// タブを表示する
 let div_sylph_script = document.getElementById('sylph_tab');
 div_sylph_script.insertAdjacentHTML('beforebegin', result);
 </pre>
