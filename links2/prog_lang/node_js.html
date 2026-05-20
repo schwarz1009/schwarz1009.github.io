@@ -208,6 +208,22 @@ httpd.on('イベント名', イベントハンドラの関数);
 <p>2023.09.10</p>
 </div>
 
+<h2>Node.jsでTypeScriptコードをネイティブ実行できるようになった</h2>
+<p>以前から、Node.jsでTypeScriptコードを実行するためには、tscコマンドでJavaScriptコードにコンパイルする必要がありました。</p>
+<p>ですが、新しいNode.js v25.2.0では、「Type Stripping」という、TypeScriptコードの中に含まれる型の情報をスペースに置き換えて実行することで、ネイティブのNode.jsでTypeScriptコードを実行することができるようになりました。</p>
+<ul>
+<li><a href="https://www.ragate.co.jp/media/developer_blog/vhhosnz9i2an">Node.js v25.2.0でTypeScriptがネイティブ実行可能に | エンジニアブログ | ラーゲイト株式会社</a></li>
+<li><a href="https://www.publickey1.jp/blog/25/nodejstypescripttype_strippingnodejs_v2520.html">Node.jsでネイティブにTypeScriptを実行できる「Type Stripping」機能が安定版に到達。Node.js v25.2.0 － Publickey</a></li>
+</ul>
+<p>それ以前のNode.jsでは、tscコマンドを使うほかに、ts-nodeというモジュールを使うことで、Node.jsでTypeScriptコードを動かすことができます。</p>
+<ul>
+<li><a href="https://ics.media/entry/4682/">TypeScriptで始めるNode.js入門 - ICS MEDIA</a></li>
+<li><a href="https://qiita.com/mangano-ito/items/75e65071c9c482ddc335">ts-node で TypeScript + node をサクッと実行する #Node.js - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.20</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>npm</h2>
 <p><a href="javascript_framework_npm.html">npm</a>を参照のこと。</p>
