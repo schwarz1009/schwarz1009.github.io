@@ -56,6 +56,25 @@
 <p>2026.05.17編集</p>
 </div>
 
+<h2>Erlangの特徴</h2>
+<p>Erlangは、エリクソンによって電話交換機のシステムのために開発され、「1秒であっても絶対にシステムが停止しない」という設計の下に作られており、VMであるBEAMは以下の特徴がある。</p>
+<table class="some_tables">
+<tr><th class="min60">特徴</th><th>説明</th></tr>
+<tr><td>軽量プロセス</td><td>スレッドではなく独自の軽量なプロセスを使う。<br>数百万のプロセスをひとつのサーバーで動かせる。</td></tr>
+<tr><td>アクターモデル</td><td>プロセスの間でメモリを共有せず、メッセージ通信を使う。<br>メモリ干渉のバグを防げる。</td></tr>
+<tr><td>Let it crash</td><td>プロセスがエラーを起こした時、レスキューせずにそれを廃棄する。<br>ひとつのプロセスを犠牲にしてでも、システム全体を稼働させ続ける。</td></tr>
+<tr><td>ホットスワップ</td><td>システムを停止することなく更新することが可能。</td></tr>
+</table>
+<p>このような特徴の結果、Erlang（やその他のBEAM言語）は極めてスケーラビリティが高く、ダウンしづらい特徴を持っている。</p>
+<p>（<a href="https://www.youtube.com/watch?v=OrDpi2_ep8A">なぜGleamは「最も親切な関数型言語」と呼ばれるのか - YouTube</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://qiita.com/egisatoshi/items/f728108344f87840dfef">試して面白いプログラミング言語6選 - Qiita</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Erlang">Erlang - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.20</p>
+</div>
+
 <h2>Elixir</h2>
 <p>ElixirはErlangの代替言語。Erlangの高い並列性能をそのままに、Rubyのような記述で並列処理を書ける。</p>
 <ul>
@@ -65,8 +84,15 @@
 <ul>
 <li><a href="https://en-ambi.com/itcontents/entry/2017/06/19/110000/">挑戦！ Elixirによる並行・分散アプリケーションの作り方【第二言語としてのElixir】｜ハイクラス転職・求人情報サイト アンビ（AMBI）</a></li>
 </ul>
+<p>後日注記：Elixir用のツールとして、かつてはlinterのDogmaやフォーマッタのexfmtがあり、Gleamの作者ルイス・ピルフォールドによって開発された。今ではmix formatやcredoが標準的に使われている。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=OrDpi2_ep8A">なぜGleamは「最も親切な関数型言語」と呼ばれるのか - YouTube</a></li>
+<li><a href="https://qiita.com/torifukukaiou/items/015873cc4272eef15f7f">一匹狼のelixirプログラム（.exs）に対してmix formatを利用して整形することを楽しむ #Elixir - Qiita</a></li>
+<li><a href="https://qiita.com/letusfly85/items/cf225814608251b2f65c">credoを使ってElixirでRuboCopみたいにlintチェックをしよう！ #Ruby - Qiita</a></li>
+</ul>
 <div class="edit_date">
 <p>2026.05.17編集</p>
+<p>2026.05.20編集</p>
 </div>
 
 <h2>Phoenix</h2>
@@ -107,8 +133,13 @@
 <li><a href="https://zenn.dev/mzryuka/articles/start-gleam_playground">Gleamことはじめ - Zenn</a></li>
 <li><a href="https://logmi.jp/tech/articles/322584">Pythonを使って関数型プログラミング Part.1 - ログミーTech</a> - パイプライン演算子についての解説がある。</li>
 </ul>
+<p>ErlangやElixirはBEAM上で動く優れた並列処理が行える関数型言語だったが、動的型付け言語だった。Gleamは関数型言語のMLを参考に、「MLの素晴らしい型システムを乗せたい」という作者のルイス・ピルフォールドによって独自に開発された静的型付け言語である。また、関数型言語にありがちな「高度かつ数学的でわけが分からない」言語ではなく、親切かつ習得の優しい関数型言語を目指して開発されている。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=OrDpi2_ep8A">なぜGleamは「最も親切な関数型言語」と呼ばれるのか - YouTube</a></li>
+</ul>
 <div class="edit_date">
 <p>2023.05.17</p>
+<p>2026.05.20編集</p>
 </div>
 
 
