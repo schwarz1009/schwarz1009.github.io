@@ -55,21 +55,22 @@
 <p>XOR（排他的論理和）は基本的な論理演算のひとつで、0 XOR 0 = 0、0 XOR 1 = 1、1 XOR 0 = 1、1 XOR 1 = 0となる。</p>
 <p>Aがもし平文を表すビット列であったとして、あらかじめ決められたビット列BをAに対してかけることで、以下のように暗号化された値を作れる。</p>
 <table class="some_tables">
-<tr><td>A</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-<tr><td>B</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-<tr><td>A XOR B</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th>A</th><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th>B</th><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><th>A XOR B</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
 </table>
 <p>同じ数でのXORは必ず0になるから（0 XOR 0 = 0, 1 XOR 1 = 0）、A XOR Bに対してもう一度BとのXORを取ると、必ずAに戻る。</p>
 <table class="some_tables">
-<tr><td>A XOR B</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
-<tr><td>B</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-<tr><td>A</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th>A XOR B</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th>B</th><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><th>A</th><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
 </table>
 <p>これは暗号化・復号化の手順に良く似ている。Bとなるビット列を上手く選んだ場合、XORを使ってとても強い暗号を作れる。</p>
 <p>使い捨てパッドは、「平文に対してランダムに作られたビット列でXORをかける」というだけのシンプルな暗号。シンプルだが、絶対に解読できない暗号である。なぜなら、復号化されたとしても、それが正しい平文なのかどうかが分からないからである。</p>
 <p><a href="../hardware/computer_architecture.html">コンピュータの計算原理</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2022.12.05編集</p>
+<p>2026.05.24編集</p>
 </div>
 
 <h3>DES</h3>
