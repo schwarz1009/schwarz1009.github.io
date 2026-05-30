@@ -41,11 +41,15 @@
 <p>４．最適化（コンパイラが工夫することで実行効率のよいコードの記述に変換する）</p>
 <p>５．コードの生成</p>
 <p>後日注記：解析を行う上で、スタックを用いた再帰的な処理を行うことが多い。たとえば、算術式における括弧は、最後に開いた括弧が最初に閉じるべき括弧となる。これらは再帰的に処理され、構文ツリーとなる。</p>
+<p>後日注記：トークンとはコードの記述の中にある意味を持つ最小単位の字句のこと。構文解析を行うと、たとえば=の下にxと+、+の下に10と20といったツリー構造のパースツリーができる。</p>
 <p>詳しくは以下のページ・書籍が参考になる。</p>
 <ul>
 <li><a href="https://www.gadgety.net/shin/tips/unix/compiler.html">コンパイラの構造を解説 | Shinta's Site</a></li>
 <li><a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.05.31編集</p>
+</div>
 
 <h2>yaccとlex</h2>
 <p>yeccとlexを使うことで、面倒な字句解析や構文解析を行わなくても、lexが字句解析プログラムを、yaccが構文解析プログラムを自動で作ってくれる。これにより、簡単にプログラミング言語を作ることができる。</p>
@@ -53,14 +57,17 @@
 <ul>
 <li><a href="http://kmaebashi.com/programmer/devlang/index.html">プログラミング言語を作る - K.Maebashi's home page</a></li>
 </ul>
+<p>flexはGNUによるlexの実装で、bisonはGNUによるyaccの実装。</p>
 <p>汎用言語のコンパイラを作るためには、コードの中間表現である「中間コード」を作らなければならない。よく使われるのは「3番地コード」と呼ばれる中間言語表現で、3つのアドレスで算術式を表現する。その上で、さまざまな最適化技術を使って、最適化処理（コードを書かれている以上に速くする処理）を行う。</p>
+<p>後日注記：このほか、文法ルールからパーサーを自動的に作ってくれるANTLRなどのツールがあります。</p>
+<ul>
+<li><a href="https://qiita.com/i-tanaka730/items/4eeaae247f70895c3456">ANTLRを使って構文解析を行う #antlr4 - Qiita</a></li>
+</ul>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2023.08.17編集</p>
+<p>2026.05.31編集</p>
 </div>
-
-<h2>bisonとflex</h2>
-<p>flexはGNUによるlexの実装で、bisonはGNUによるyaccの実装。</p>
-<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
 
 <h2>lexとyaccの基本</h2>
 <p>lexやyaccでは、C言語のコードと一緒に言語表現の記述を行う。</p>
@@ -121,6 +128,13 @@ int x = 1 + (2 + 3)
 <ul>
 <li><a href="https://qiita.com/temmaru/items/6da42ede23aeabe8c263">RustでCコンパイラ作ってみた - Qiita</a></li>
 </ul>
+<p>後日注記：言語の構文をツリー構造で抽象的に表現したものをAST（抽象構文木）と呼びます。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E6%A7%8B%E6%96%87%E6%9C%A8">抽象構文木 - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.31編集</p>
+</div>
 
 <h2>3番地コード</h2>
 <p>3番地コードとは、2つの入力と1つの出力のアドレスによって成り立つコード。</p>
@@ -165,6 +179,16 @@ x = 3 + t1
 <p>2023.05.12編集</p>
 </div>
 
+<h2>BNF記法</h2>
+<p>BNF記法（バッカス・ナウア記法）とは、プログラミング言語の文法定義を数式のように厳密に書くことのできる記法のこと。</p>
+<ul>
+<li><a href="https://qiita.com/h_sakurai/items/3cc328a6db8941ac6336">怖くないバッカスナウア記法(BNF)入門 #言語作成 - Qiita</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/fxml/ddd/ddd004/ddd004-bnf.html">BNF記法入門（1） ─XML関連仕様を読むために─ - @IT</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.31</p>
+</div>
+
 <h1>コンパイラを作る</h1>
 <h2>3番地コードと最適化手法</h2>
 <p>コンパイラの中間コード作成などについては、以下が詳しい。基本的には3番地コードを作らないといけない。さまざまな最適化手法がある。</p>
@@ -204,7 +228,20 @@ x = 3 + t1
 <h2>コンパイラの作り方を学ぶには、LLVMを学ぶのがいい</h2>
 <p>現代的なコンパイラの作り方を学ぶには、LLVMを学ぶのがいいと思います。</p>
 <p>LLVMは最適化においても中間言語表現においても、僕がこの記事に書いたのとは比べ物にならないような、はるかに最先端かつ詳細なコンパイラ開発を行っています。</p>
+<p>後日注記：プログラミング言語の開発において、すべてを自分で全部作らなくていい。バックエンドはLLVMを使い、自分の言語を解析するためのパーサーだけをフロントエンドとして作ればいい。</p>
 <p><a href="../linux/llvm.html">LLVM</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2026.05.31編集</p>
+</div>
+
+<h2>YouTubeの解説動画</h2>
+<p>プログラミング言語の分類とコンパイラ・インタープリタの仕組み（字句解析・構文解析・ASTなど）や、さまざまなプログラミング言語の誕生秘話、プログラミング言語の開発のためのツール（LLVM、ANTLR、BNFなど）については、以下のYouTubeの解説動画が参考になります。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=0nkLSE4WUi4">新しいプログラミング言語を作るってどうやるの？ - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.31</p>
+</div>
 
 <h1>AIによるサンプル</h1>
 <h2>加算・減算を行ってアセンブリコードを出力する簡易コンパイラ</h2>
@@ -281,6 +318,17 @@ echo $?  # 結果を表示（6）
 <p>たとえば、「ウィンドウを表示してユーザーを案内しろ」とか、「ネットワークを正常に直せ」とか、そういう「人間的な言語」のコードを書いて、それをアレクサのようなAI・人工知能が解釈して、その通りに動くのです。</p>
 <p>これができれば、コンピュータは「本当に人間と同じぐらいの知性を持った」ことになるでしょう。</p>
 <p><a href="../programs/ai.html">AI</a>も参照のこと。</p>
+
+<h1>参考になる書籍</h1>
+<h2>Crafting Interpreters</h2>
+<p>Crafting Interpretersは、無料で公開されているスクリプト言語の言語処理系を作るための書籍。</p>
+<ul>
+<li><a href="https://craftinginterpreters.com/">Crafting Interpreters</a></li>
+<li><a href="https://tyfkda.github.io/blog/2019/12/22/crafting-interpreters.html">Crafting Interpretersを読んだ - Kludge Factory</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.31</p>
+</div>
 
 <h1>余談</h1>
 <h2>行を一行読み込んで、たくさんの機械語命令に変換すればいい</h2>
