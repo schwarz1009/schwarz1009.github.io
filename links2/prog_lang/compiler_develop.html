@@ -59,10 +59,6 @@
 </ul>
 <p>flexはGNUによるlexの実装で、bisonはGNUによるyaccの実装。</p>
 <p>汎用言語のコンパイラを作るためには、コードの中間表現である「中間コード」を作らなければならない。よく使われるのは「3番地コード」と呼ばれる中間言語表現で、3つのアドレスで算術式を表現する。その上で、さまざまな最適化技術を使って、最適化処理（コードを書かれている以上に速くする処理）を行う。</p>
-<p>後日注記：このほか、文法ルールからパーサーを自動的に作ってくれるANTLRなどのツールがあります。</p>
-<ul>
-<li><a href="https://qiita.com/i-tanaka730/items/4eeaae247f70895c3456">ANTLRを使って構文解析を行う #antlr4 - Qiita</a></li>
-</ul>
 <p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2023.08.17編集</p>
@@ -165,16 +161,6 @@ x = 3 + t1
 <p>2023.05.12編集</p>
 </div>
 
-<h2>BNF記法</h2>
-<p>BNF記法（バッカス・ナウア記法）とは、プログラミング言語の文法定義を数式のように厳密に書くことのできる記法のこと。</p>
-<ul>
-<li><a href="https://qiita.com/h_sakurai/items/3cc328a6db8941ac6336">怖くないバッカスナウア記法(BNF)入門 #言語作成 - Qiita</a></li>
-<li><a href="https://atmarkit.itmedia.co.jp/fxml/ddd/ddd004/ddd004-bnf.html">BNF記法入門（1） ─XML関連仕様を読むために─ - @IT</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.05.31</p>
-</div>
-
 <h1>コンパイラを作る</h1>
 <h2>3番地コードと最適化手法</h2>
 <p>コンパイラの中間コード作成などについては、以下が詳しい。基本的には3番地コードを作らないといけない。さまざまな最適化手法がある。</p>
@@ -243,6 +229,26 @@ x = 3 + t1
 <li><a href="https://qiita.com/takl/items/fe5ad17eccc3a9d3f98a">OCamlで動的スコープなLispを作る - Qiita</a></li>
 </ul>
 <p><a href="lisp.html">Lisp</a>も参照のこと。</p>
+
+<h1>ツール・記法</h1>
+<h2>ANTLR</h2>
+<p>このほか、文法ルールからパーサーを自動的に作ってくれるANTLRなどのツールがあります。</p>
+<ul>
+<li><a href="https://qiita.com/i-tanaka730/items/4eeaae247f70895c3456">ANTLRを使って構文解析を行う #antlr4 - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.31</p>
+</div>
+
+<h2>BNF記法</h2>
+<p>BNF記法（バッカス・ナウア記法）とは、プログラミング言語の文法定義を数式のように厳密に書くことのできる記法のこと。</p>
+<ul>
+<li><a href="https://qiita.com/h_sakurai/items/3cc328a6db8941ac6336">怖くないバッカスナウア記法(BNF)入門 #言語作成 - Qiita</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/fxml/ddd/ddd004/ddd004-bnf.html">BNF記法入門（1） ─XML関連仕様を読むために─ - @IT</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.31</p>
+</div>
 
 <h1>AIによるサンプル</h1>
 <h2>加算・減算を行ってアセンブリコードを出力する簡易コンパイラ</h2>
