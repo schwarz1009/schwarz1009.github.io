@@ -45,10 +45,6 @@
 <li><a href="https://en.wikibooks.org/wiki/OpenGL_Programming">OpenGL Programming - Wikibooks</a></li>
 </ul>
 
-<h2>OpenGL ES</h2>
-<p>OpenGL for Embedded Systems。AndroidやiOSなどのモバイルプラットフォーム向けのOpenGL。</p>
-<p><a href="../mobile/android.html">Android</a>や<a href="../mobile/ios.html">iOS</a>も参照のこと。</p>
-
 <h1>OpenGLの基本</h1>
 <h2>シェーダ</h2>
 <p>OpenGLの基本は、シェーダと座標変換。</p>
@@ -66,27 +62,30 @@
 <ul>
 <li><a href="https://www.youtube.com/watch?v=mS6-FAjJZKo">意外と知らないゲームエンジン！ゲームエンジンが何なのか理解する - YouTube</a></li>
 </ul>
-<p>後日注記：シェーダはGPUのためのプログラムで、C言語とよく似た専用のプログラミング言語で書く。ただし、シェーダは三角形のメッシュをどこにどう描くかしか命令できない。それぞれのシェーダに対して、全体をマネージャー的に行うCPUの処理はレンダリングパイプラインといって、C++やC#で命令する。シェーダのためにデータをやり取りする際にセマンティクスを使用する。</p>
+<p>後日注記：シェーダはGPUのためのプログラムで、HLSL (DirectX, Unity, Unreal Engine)やGLSL (OpenGL, WebGL)など、C言語ベースのシェーディング言語で書く。ただし、シェーダは三角形のメッシュをどこにどう描くかしか命令できない。それぞれのシェーダに対して、全体をマネージャー的に行うCPUの処理はレンダリングパイプラインといって、C++やC#で命令する。シェーダのためにデータをやり取りする際にセマンティクスを使用する。</p>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=FI5o2G2ctrM">グラフィックスエンジニアを目指し始めたら最初に見る動画 - YouTube</a></li>
 <li><a href="https://www.youtube.com/watch?v=W_HyKZsysmM">【グラフィックス入門】ゲームオブジェクトの形を決める、頂点シェーダーの仕組み - YouTube</a></li>
 </ul>
 <div class="edit_date">
 <p>2026.05.31編集</p>
-<p>2026.06.01編集</p>
+<p>2026.06.01-02編集</p>
 </div>
 
 <h2>座標変換</h2>
 <p>座標変換を行うことで、それぞれのモデルを奥行きのついた正しい大きさと位置と形で画面全体に表示できる。</p>
-<p>まずローカル座標（ローカルなモデルの中の座標）をワールド座標（世界全体の絶対座標）に変換し、次にカメラから見たビュー座標に変換する。</p>
-<p>その後に、プロジェクション座標変換で3Dのグラフィックスを2Dに変換する。</p>
+<p>まずローカル座標（ローカルなモデルの中の座標）をワールド座標（世界全体の絶対座標）に変換し、次にビュー座標（カメラ視点の座標）に変換する。</p>
+<p>その後に、プロジェクション座標変換（3Dのグラフィックスを2Dに変換）する。</p>
 <p>この時、パースをつけて近くにあるものを大きく、遠くにあるものを小さく描画するのを透視投影と言い、パースをつけずに同じ大きさで描画するのを並行投影と言う。</p>
-<p>最後に、スクリーン座標変換でディスプレイの座標へと変換した上で表示する。</p>
+<p>最後に、スクリーン座標変換（ディスプレイの座標へと変換）した上で表示する。</p>
 <p>以下のページを参考にしました。</p>
 <ul>
 <li><a href="http://monolizm.com/sab/pdf/%E7%AC%AC%E4%B8%89%E5%9B%9E_%E3%83%97%E3%83%AC%E3%82%BC%E3%83%B3%E8%B3%87%E6%96%99(%E3%81%AA%E3%82%8B%E3%81%BB%E3%81%A93D%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E6%8F%8F%E7%94%BB%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF).pdf">第三回_プレゼン資料(なるほど3Dグラフィック描画の仕組み).pdf</a></li>
 </ul>
 <p><a href="../art/perspective.html">パース・遠近法・透視図法</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.06.02編集</p>
+</div>
 
 <h2>画像合成の基本</h2>
 <p>（詳しいことはやねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B02%E3%80%90CD-ROM%E4%BB%98%E3%80%91-Game-developer-books-%E3%81%86%E3%82%89%E3%81%8A/dp/4798006033">Windowsプロフェッショナルゲームプログラミング2</a>」に書いてあります。）</p>
@@ -94,7 +93,7 @@
 <p>基本的に、後ろにあるものから描画していく。この時「抜き色」といって、ある色を透明にすることがある。これを「スプライト」と呼ぶ。</p>
 <p>グラフィックスは表画面（primary surface）にいきなり描くのではなく、裏画面（secondary surface）で描画が終わってから表画面に送る。スクロールされた時は、スクロールした部分だけを再描画する。この時のsecondary surfaceをリングサーフェースと呼ぶ。</p>
 
-<h1>参考リンク</h1>
+<h1>OpenGL関連技術</h1>
 <h2>グラフィックスプログラミング入門</h2>
 <p>東京大学の以下のページは、OpenGLとGLUTを使ったグラフィックスプログラミングの入門として参考になります。</p>
 <ul>
@@ -156,6 +155,22 @@
 <li><a href="https://qiita.com/maueki/items/8392decdd36c3fa19117">Linuxグラフィックスタック覚書 - Qiita</a></li>
 </ul>
 <p><a href="../linux/linux_x11_admin.html">X11設定とプログラミング</a>も参照のこと。</p>
+
+<h1>さまざまなプラットフォーム</h1>
+<h2>OpenGL ES</h2>
+<p>OpenGL for Embedded Systems。AndroidやiOSなどのモバイルプラットフォーム向けのOpenGL。</p>
+<p><a href="../mobile/android.html">Android</a>や<a href="../mobile/ios.html">iOS</a>も参照のこと。</p>
+
+<h2>WebGL</h2>
+<p>WebGL (Web Graphics Library)はWebブラウザ上で動作する2D/3DCGのためのJavaScript API。プラグイン不要。HTMLのcanvasを利用する。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/WebGL">WebGL - Wikipedia</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/WebGL_API">WebGL: ウェブの 2D および 3D グラフィック - Web API | MDN</a></li>
+<li><a href="https://qiita.com/alicial/items/71a800305e11fc9ed46d">WebGLについて #生 - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.06.02</p>
+</div>
 
 <h1>その他のAPI</h1>
 <h2>DirectX</h2>
