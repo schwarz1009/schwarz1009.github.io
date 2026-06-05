@@ -141,6 +141,13 @@ x = 3 + t1
 <ul>
 <li><a href="https://ja.wikipedia.org/wiki/3%E7%95%AA%E5%9C%B0%E3%82%B3%E3%83%BC%E3%83%89">3番地コード - Wikipedia</a></li>
 </ul>
+<p>後日注記：コンパイラの最適化において、SSA (Static Single Assignment, 静的単一代入)といって、変数に代入するのを一度だけにする技術があります。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=_K8htW_mZZQ">コンパイラはなぜ生まれたのか【プログラミング言語の歴史】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.06.05編集</p>
+</div>
 
 <h2>最適化の手法</h2>
 <p>（以下は<a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a>を参考に執筆しました。）</p>
@@ -150,17 +157,22 @@ x = 3 + t1
 <tr><td>ループ最適化</td><td>変化しないループ（ループ不変式）を外に出す</td></tr>
 <tr><td>局所最適化</td><td>メモリを近い場所で参照する（局所参照性の向上）</td></tr>
 <tr><td>プロシージャ間最適化</td><td>関数をインラインに埋め込むなど、コード全体を最適化する</td></tr>
+<tr><td>定数畳み込み</td><td>定数の計算をコンパイル時に置き換える</td></tr>
+<tr><td>デッドコード除去</td><td>一回も使われないコードを削除する</td></tr>
+<tr><td>共通部分式除去</td><td>異なる箇所で同じ計算をしていた場合、一度だけ計算して再利用する</td></tr>
 </table>
 <p>などがある。</p>
 <p>より詳しくは以下のようなページが参考になる。</p>
 <ul>
 <li><a href="https://marycore.jp/coding/compiler-optimizations/">知っておいて損はない「コンパイラ最適化」の数々 | MaryCore</a></li>
 <li><a href="http://www.hpcs.cs.tsukuba.ac.jp/~msato/lecture-note/comp2001/comp9/lecture9.html">コード最適化 - Msato's lecture notes</a></li>
+<li><a href="https://www.youtube.com/watch?v=_K8htW_mZZQ">コンパイラはなぜ生まれたのか【プログラミング言語の歴史】 - YouTube</a></li>
 </ul>
 <p>後日注記：自分のプログラミング言語を作る上で、ここに書かれている最適化の手法をすべて作る必要はありません。GCCやLLVMのバックエンドを使えばいいからです。自分の作ったプログラミング言語を解析する部分はGCCやLLVMのフロントエンドとして記述し、最適化やネイティブコードを作成する部分はGCCやLLVMのバックエンドを使えばいいのです。</p>
 <div class="edit_date">
 <p>2023.05.07</p>
 <p>2023.05.12編集</p>
+<p>2026.06.05編集</p>
 </div>
 
 <h1>コンパイラを作る</h1>
@@ -218,11 +230,16 @@ x = 3 + t1
 <ul>
 <li><a href="https://www.youtube.com/watch?v=0nkLSE4WUi4">新しいプログラミング言語を作るってどうやるの？ - YouTube</a></li>
 </ul>
+<p>また、以下の動画も参考になります。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=_K8htW_mZZQ">コンパイラはなぜ生まれたのか【プログラミング言語の歴史】 - YouTube</a></li>
+</ul>
 <div class="edit_date">
 <p>2026.05.31</p>
+<p>2026.06.05編集</p>
 </div>
 
-<h1>コンパイラとLisp</h1>
+<h1>さまざまなコンパイラ技術</h1>
 <h2>eval</h2>
 <p>eval()は、コンパイラ言語よりもインタープリタ言語に多くみられる言語の仕組みで、「文字列の内容を式（プログラムコード）として評価（実行）することができる」というもの。</p>
 <p>Rubyなどでeval()を使うと、文字列の内部を言語として評価できるため、たとえば"1 + 2"という文字列から3を返したり、変数名を宣言して展開したりできるなどとても強力である。</p>
@@ -236,9 +253,25 @@ x = 3 + t1
 <li><a href="https://qiita.com/takl/items/fe5ad17eccc3a9d3f98a">OCamlで動的スコープなLispを作る - Qiita</a></li>
 </ul>
 <p>後日注記：Lispの言語処理系は作りやすい。(hoge fuga)のようなS式の文法がシンプル（ほぼすべて関数）なだけでなく、LispコードはAST（抽象構文木）と類似しており、中間表現が作りやすい。</p>
+<p>後日注記：ちなみに、Javaのガーベッジコレクションの仕組みはそもそもLispが持っていたことで有名です。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=_K8htW_mZZQ">コンパイラはなぜ生まれたのか【プログラミング言語の歴史】 - YouTube</a></li>
+</ul>
 <p><a href="lisp.html">Lisp</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2026.05.31編集</p>
+<p>2026.06.05編集</p>
+</div>
+
+<h2>JIT</h2>
+<p>JITとは実行時にプログラムの中でよく使われる部分を機械語にコンパイルして高速化する技術。</p>
+<p>ホットスポットといって、プログラムの中でよく使われる部分を実行中にプロファイリングで見つけ出し、その部分を実行時に機械語に変換する。</p>
+<p>Java以外には、JavaScriptのV8エンジンなどでも使われている。V8のJITのおかげでWebブラウザのJavaScript処理はそれまでのインタープリタに比べて劇的にパフォーマンスが改善した。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=_K8htW_mZZQ">コンパイラはなぜ生まれたのか【プログラミング言語の歴史】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.06.05</p>
 </div>
 
 <h1>ツール・記法</h1>
