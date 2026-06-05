@@ -168,6 +168,7 @@
 <p>また、このようなPromiseによる非同期処理を、もっと同期処理と同じような記述で書くことのできる仕組みとして、async/awaitがあります。asyncを関数定義につけると、その関数は非同期関数となります。awaitはasyncをつけた関数の中にしか記述できませんが、awaitが記述された時点で、awaitをつけた関数のPromiseの結果が返されるまで、非同期関数を一時的に停止して、Promiseの解決を待機します。そして、解決した時点で非同期関数の実行を再開します。</p>
 <p>非同期処理をasync/awaitを用いて書く仕組みは、C#やPythonなどにも存在します。C#では、ジェネリックなTaskクラスをasync/awaitとともに記述することで、同期関数と同じように非同期関数を実行できます。ある意味、golangのgoルーチンに近いと思います。また、Pythonではイベントループとともにasync/awaitを実行できます。Pythonでは従来からジェネレータを使うことでコルーチンの作成が可能でしたが、それと区別するために、async/awaitのコルーチンのことをネイティブコルーチンと呼びます。</p>
 <p>後日注記：JavaScriptやPythonやC#などの言語では、非同期関数を記述するためにasyncとawaitを使います。非同期関数にはasyncを付け、処理の完了を必ず待つためにawaitを書く必要があります。ですが、「赤い関数と青い関数問題」があり、sync関数とasync関数が別々の色の関数群になってしまいます。これに対してZigでは、asyncを書く必要がそもそもなく、どの関数であっても同期・非同期両方の実行ができます。</p>
+<p>後日注記：コルーチンとは、プログラムを一時停止して、後で中断場所から再開できる仕組みのこと。古くはオブジェクト指向を創始したSimulaに存在する機能だった。今のasync/awaitの元型となる概念である。</p>
 <p>以下は参考文献。</p>
 <ul>
 <li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise - JavaScript | MDN</a></li>
@@ -187,9 +188,11 @@
 <li><a href="https://www.rhoboro.com/2019/02/09/coroutine-abstract.html">コルーチンは怖くない - Minimum Viable Programmer</a></li>
 <li><a href="https://codemy-lesson.office-ing.net/archives/1298">いまさら聞けない async と await って何？ – CODEMYマンツーマンレッスン</a></li>
 <li><a href="https://www.youtube.com/watch?v=O1btYkdh0eE">AI時代に、Zigの最大の優位が消えた理由 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=FQeYLH0sJSg">オブジェクト指向はなぜ生まれたのか？【プログラミング言語の歴史】 - YouTube</a></li>
 </ul>
 <div class="edit_date">
 <p>2026.05.24編集</p>
+<p>2026.06.05編集</p>
 </div>
 
 <h2>マルチスレッドとnull参照</h2>
