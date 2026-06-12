@@ -45,10 +45,12 @@
 <pre class="prettyprint">
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
+
 int getlp(int *p){
     *p = rand()%2;
     return 1;
 }
+
 void action(int *p){
     if(*p==0){
         printf("はらが減った。\n");
@@ -57,6 +59,7 @@ void action(int *p){
         printf("はらは減っていない。\n");
     }
 }
+
 int main(void){
     int p;
     while(getlp(&p)){
@@ -72,14 +75,17 @@ int main(void){
 <pre class="prettyprint">
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
+
 struct _obj {
     int p;
     int hara;
 };
+
 int getlp(struct _obj *obj){
     obj-&gt;p = rand()%4;
     return 1;
 }
+
 void action(struct _obj *obj){
     if(obj-&gt;p==0){
         printf("はらは");
@@ -102,6 +108,7 @@ void action(struct _obj *obj){
         obj-&gt;hara=1;
     }
 }
+
 int main(void){
     struct _obj obj;
     obj.hara=1;
@@ -118,15 +125,18 @@ int main(void){
 <pre class="prettyprint">
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
+
 struct _obj {
     int p;
     int w;
     int t;
 };
+
 int getlp(struct _obj *obj){
     obj-&gt;p = rand()%5;
     return 1;
 }
+
 void action(struct _obj *obj){
     if(obj-&gt;p==0){
         printf("ここは");
@@ -164,6 +174,7 @@ void action(struct _obj *obj){
         }
     }
 }
+
 int main(void){
     struct _obj obj;
     obj.w=1;
@@ -286,18 +297,22 @@ int check1 (struct _obj *obj) {
     }
     return 0;
 }
+
 int check2 (struct _obj *obj) {
     if (obj-&gt;p == 1) {
         return 1;
     }
     return 0;
 }
+
 void action1 (struct _obj *obj) {
     printf("ここではアクション１をやります。\n");
 }
+
 void action2 (struct _obj *obj) {
     printf("ここではアクション２をやります。\n");
 }
+
 int main (void) {
     struct _obj obj;
     obj.p = 0;
@@ -328,15 +343,18 @@ int check1 (struct _obj *obj) {
     }
     return 0;
 }
+
 int check2 (struct _obj *obj) {
     if (obj-&gt;p == 1) {
         return 1;
     }
     return 0;
 }
+
 void action1 (struct _obj *obj) {
     printf("ここではアクション１をやります。\n");
 }
+
 void action2 (struct _obj *obj) {
     printf("ここではアクション２をやります。\n");
 }
@@ -382,15 +400,18 @@ int check1 (struct _obj *obj) {
     }
     return 0;
 }
+
 int check2 (struct _obj *obj) {
     if (obj-&gt;p == 1) {
         return 1;
     }
     return 0;
 }
+
 void action1 (struct _obj *obj) {
     printf("ここではアクション１をやります。\n");
 }
+
 void action2 (struct _obj *obj) {
     printf("ここではアクション２をやります。\n");
 }
@@ -437,15 +458,18 @@ int check1 (struct _obj *obj) {
     }
     return 0;
 }
+
 int check2 (struct _obj *obj) {
     if (obj-&gt;p == 1) {
         return 1;
     }
     return 0;
 }
+
 void action1 (struct _obj *obj) {
     printf("ここではアクション１をやります。\n");
 }
+
 void action2 (struct _obj *obj) {
     printf("ここではアクション２をやります。\n");
 }
@@ -510,15 +534,18 @@ int check1 (struct _obj *obj) {
     }
     return 0;
 }
+
 int check2 (struct _obj *obj) {
     if (obj-&gt;p == 1) {
         return 1;
     }
     return 0;
 }
+
 void action1 (struct _obj *obj) {
     printf("ここではアクション１をやります。\n");
 }
+
 void action2 (struct _obj *obj) {
     printf("ここではアクション２をやります。\n");
 }
@@ -1317,6 +1344,7 @@ main {
 int getlp(void){
     return rand()%2;
 }
+
 void action(int p){
     if(p==0) {
         printf("はらが減った。");
@@ -1325,6 +1353,7 @@ void action(int p){
         printf("はらは減っていない。");
     }
 }
+
 int main(void){
     while(1){
         action(getlp());

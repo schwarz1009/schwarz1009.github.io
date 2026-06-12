@@ -140,15 +140,18 @@ int check1 (struct _obj *obj) {
     }
     return 0;
 }
+
 int check2 (struct _obj *obj) {
     if (obj-&gt;p == 1) {
         return 1;
     }
     return 0;
 }
+
 void action1 (struct _obj *obj) {
     printf("ここではアクション１をやります。\n");
 }
+
 void action2 (struct _obj *obj) {
     printf("ここではアクション２をやります。\n");
 }
