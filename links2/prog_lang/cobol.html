@@ -43,10 +43,10 @@
 <p>（<a href="https://ja.wikipedia.org/wiki/COBOL">COBOL - Wikipedia</a>にサンプルコードがある。以下に「実例3 (Fizz Buzz)」を解説する。）</p>
 <table class="some_tables">
 <tr><th class="min60">部</th><th>説明</th></tr>
-<tr><td>見出し部<br>IDENTIFICATION DIVISION</td><td>PROGRAM-IDが宣言されている。</td></tr>
-<tr><td>環境部<br>ENVIRONMENT DIVISION</td><td>今回は存在しない。</td></tr>
-<tr><td>データ部<br>DATA DIVISION</td><td>WORKING-STORAGE SECTION（作業場所）では<br>プログラムの中で使われる変数の定義を行う。</td></tr>
-<tr><td>手続き部<br>PROCEDURE DIVISION</td><td>PERFORM VARYING UNTIL文による繰り返しと<br>EVALUATE文による条件分岐が行なわれている。<br>また、DISPLAY文でメッセージを表示している。</td></tr>
+<tr><td>見出し部<br>IDENTIFICATION DIVISION</td><td>プログラムの識別名を書く。<br>PROGRAM-IDが宣言されている。</td></tr>
+<tr><td>環境部<br>ENVIRONMENT DIVISION</td><td>プログラムの実行対象となる環境を書く。<br>今回は存在しない。</td></tr>
+<tr><td>データ部<br>DATA DIVISION</td><td>プログラムで使用するデータと型を書く。<br>WORKING-STORAGE SECTION（作業場所）では<br>プログラムの中で使われる変数の定義を行う。</td></tr>
+<tr><td>手続き部<br>PROCEDURE DIVISION</td><td>プログラムの処理内容を書く。<br>PERFORM VARYING UNTIL文による繰り返しと<br>EVALUATE文による条件分岐が行なわれている。<br>また、DISPLAY文でメッセージを表示している。</td></tr>
 </table>
 <p>ほかにも、IF～THEN文（条件分岐）やPERFORM UNTIL文（繰り返し）やPERFORM TIMES文（回数が明確に分かっている場合に繰り返しに使う）が利用できる。</p>
 <p>詳しくは以下を参照のこと。</p>
@@ -55,6 +55,7 @@
 </ul>
 <div class="edit_date">
 <p>2024.07.30編集</p>
+<p>2026.07.08編集</p>
 </div>
 
 <h2>COBOL関連情報</h2>
