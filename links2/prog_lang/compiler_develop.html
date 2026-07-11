@@ -378,6 +378,100 @@ echo $?  # 結果を表示（6）
 <p>2026.02.19-20</p>
 </div>
 
+<h2>再帰下降パーサー</h2>
+<p>以下はGoogleのAIによる再帰下降法を用いた数式パーサーの例。</p>
+<pre class="prettyprint">
+#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdlib.h&gt;
+
+// トークンの種類
+typedef enum {
+    TOKEN_NUM, TOKEN_PLUS, TOKEN_MUL, TOKEN_EOF
+} TokenType;
+
+typedef struct {
+    TokenType type;
+    int value;
+} Token;
+
+Token current_token;
+const char *expression;
+
+// トークンを1つ進める
+void next_token() {
+    while (isspace(*expression)) expression++;
+
+    if (*expression == '\0') {
+        current_token.type = TOKEN_EOF;
+        return;
+    }
+    if (isdigit(*expression)) {
+        current_token.type = TOKEN_NUM;
+        current_token.value = strtol(expression, (char**)&expression, 10);
+        return;
+    }
+    if (*expression == '+') {
+        current_token.type = TOKEN_PLUS;
+        expression++;
+        return;
+    }
+    if (*expression == '*') {
+        current_token.type = TOKEN_MUL;
+        expression++;
+        return;
+    }
+}
+
+// 前方宣言
+int parse_expression();
+
+// 因子（数値）のパース
+int parse_factor() {
+    int val = current_token.value;
+    next_token();
+    return val;
+}
+
+// 項（乗算）のパース
+int parse_term() {
+    int val = parse_factor();
+    while (current_token.type == TOKEN_MUL) {
+        next_token();
+        val *= parse_factor();
+    }
+    return val;
+}
+
+// 式（加算）のパース
+int parse_expression() {
+    int val = parse_term();
+    while (current_token.type == TOKEN_PLUS) {
+        next_token();
+        val += parse_term();
+    }
+    return val;
+}
+
+int main() {
+    expression = "1 + 2 * 3";
+    next_token();
+    printf("Result: %d\n", parse_expression()); // Result: 7
+    return 0;
+}
+</pre>
+<p>ctype.hは文字の判定を行うためのC言語の標準ライブラリ。パーサーを作る際によく使われる。</p>
+<ul>
+<li><a href="https://interuniversitylearning.com/archives/6014">【C言語】ctype.hを使って文字列の判別と操作をする【標準ライブラリ】 – プログラミング入門 - 勉強お助け猫の庭</a></li>
+</ul>
+<p>以下はその他のサンプル。</p>
+<ul>
+<li><a href="https://qiita.com/nomunomu0504/items/26c02aa4a5311ddcf856">再帰下降法でC言語数式パーサーもどきを作ってみる #C++ - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.07.11</p>
+</div>
+
 <h1>提案</h1>
 <h2>AIコンパイラ</h2>
 <p>僕は、AIや人工知能の技術を応用して、「AIコンパイラ」を作ってはどうかと思います。</p>
