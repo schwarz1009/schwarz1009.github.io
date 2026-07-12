@@ -162,17 +162,20 @@ x = 3 + t1
 <tr><td>共通部分式除去</td><td>異なる箇所で同じ計算をしていた場合、一度だけ計算して再利用する</td></tr>
 </table>
 <p>などがある。</p>
+<p>このほか、べき乗を乗算に、乗算をビットシフトや加算になど、より軽い演算子に変換するとか、変数を効率的にレジスタに割り当てる、配列の範囲や境界値のチェックを省略する、などの最適化手法があります。</p>
 <p>より詳しくは以下のようなページが参考になる。</p>
 <ul>
 <li><a href="https://marycore.jp/coding/compiler-optimizations/">知っておいて損はない「コンパイラ最適化」の数々 | MaryCore</a></li>
 <li><a href="http://www.hpcs.cs.tsukuba.ac.jp/~msato/lecture-note/comp2001/comp9/lecture9.html">コード最適化 - Msato's lecture notes</a></li>
 <li><a href="https://www.youtube.com/watch?v=_K8htW_mZZQ">コンパイラはなぜ生まれたのか【プログラミング言語の歴史】 - YouTube</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a></li>
 </ul>
 <p>後日注記：自分のプログラミング言語を作る上で、ここに書かれている最適化の手法をすべて作る必要はありません。GCCやLLVMのバックエンドを使えばいいからです。自分の作ったプログラミング言語を解析する部分はGCCやLLVMのフロントエンドとして記述し、最適化やネイティブコードを作成する部分はGCCやLLVMのバックエンドを使えばいいのです。</p>
 <div class="edit_date">
 <p>2023.05.07</p>
 <p>2023.05.12編集</p>
 <p>2026.06.05編集</p>
+<p>2026.07.12編集</p>
 </div>
 
 <h1>コンパイラを作る</h1>
