@@ -168,6 +168,14 @@ while (*p != '\0') {
 out:
     exit();
 </pre>
+<p>後日注記：goto文と同様に、ある位置にジャンプできるCの関数にsetjmp()とlongjmp()がある。setjmp()で現在のスタックの位置を覚えて、longjmp()でその位置のスタックにジャンプ（復帰）できる。goto文と異なり、関数の外までジャンプできるので「ロングジャンプ」と呼ばれる。詳しくは以下の書籍やページが参考になる。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a></li>
+<li><a href="https://www.chihayafuru.jp/tech/index.php/archives/6132">[C言語] setjmp() と longjmp() の使いかた | Tech控え帳</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.07.15編集</p>
+</div>
 
 <h2>if文やwhile文の中に関数を入れる</h2>
 <p>また、「その関数が正常終了した時に、さらに処理を続ける」といった場合に、if文の中に関数を入れ子構造にして入れることもある。</p>
