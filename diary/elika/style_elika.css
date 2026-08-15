@@ -128,6 +128,7 @@ A:hover { }
 .top_footer {
     margin-top: 0px;
 }
+*/
 
 .banner2 {
     padding: 0;
@@ -143,7 +144,6 @@ A:hover { }
 .banner_image:before {
     color: #665990;
 }
-*/
 
 .tl-tweet {
     border: 1px dashed #FC9D9D;

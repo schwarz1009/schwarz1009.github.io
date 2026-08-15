@@ -120,6 +120,21 @@ A:visited {
     border-right: 1px solid #c50030;
 }
 
+.banner2 {
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.banner_image {
+    border: 1px solid #c50030;
+    border-top: 5px solid #c50030;
+}
+
+.banner_image:before {
+    color: #c50030;
+}
+
 @media screen and (max-device-width: 480px) {
     .box li {
         margin-left: 1px;

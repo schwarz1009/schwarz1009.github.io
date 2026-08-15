@@ -121,6 +121,26 @@ pre.code {
 
 .date { font-size: 14px; color: #82c0cd; }
 
+.banner2 {
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.banner_image {
+    display: inline-block;
+    border: 1px solid #487ca3;
+    border-top: 5px solid #487ca3;
+    padding: 5px;
+}
+
+.banner_image:before {
+    display: block;
+    content:'広告';
+    color: #bac1c7;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 @media screen and (max-device-width: 480px) {
 
     body {
