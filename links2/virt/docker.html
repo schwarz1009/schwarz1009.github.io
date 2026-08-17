@@ -95,6 +95,13 @@
 <ul>
 <li><a href="http://docs.docker.jp/v1.12/engine/userguide/eng-image/dockerfile_best-practice.html">Dockerfile を書くベスト・プラクティス — Docker-docs-ja 1.12.RC2 ドキュメント</a></li>
 </ul>
+<p>後日注記：DockerfileはDockerイメージを作るためのレシピのようなもので、OSを入れるところからPythonを入れるところ、ライブラリを導入するところ、最後にアプリをコピーするところなどをひとつひとつ記述する。小さなイメージを作るためのコツがあるので、以下の動画を参照のこと。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=U9vzjYJqxXs">【Docker入門】世界を変えたコンテナ革命！なぜ動き、どう使うのか？【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.17編集</p>
+</div>
 
 <h2>Dockerの利点</h2>
 <p>Dockerの利点とは、</p>
@@ -118,6 +125,13 @@
 <li><a href="https://knowledge.sakura.ad.jp/2210/">Dockerコンテナをクラウドサービス上で共有できる「Docker Hub」を使ってみる | さくらのナレッジ</a></li>
 <li><a href="http://docs.docker.jp/engine/userguide/dockerrepos.html">Docker Hub にイメージを保管する — Docker-docs-ja 1.9.0b ドキュメント</a></li>
 </ul>
+<p>後日注記：Docker HubはDockerイメージを誰もが公開することのできる公式のリポジトリ。自分でイメージを作らなくても、先人が作ってくれたイメージをDocker Hubから導入できる。Dockerfileでイメージを作る時にも、自分で全部作るのではなく、たとえばPythonのDockerイメージを前提としてDockerfileを記述することで、既にあるイメージを土台に独自のイメージを作れる。ただし、Docker Hubに公開されているイメージには、悪意のあるコードが含まれているかもしれない。だから、公式イメージや「Verified Publisher」の認証マークのついているイメージを使い、Trivyなどのスキャンツールで脆弱性を診断する必要がある。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=U9vzjYJqxXs">【Docker入門】世界を変えたコンテナ革命！なぜ動き、どう使うのか？【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.17編集</p>
+</div>
 
 <h2>docker run</h2>
 <p>まず、docker pullでイメージをダウンロードする。（イメージは<a href="https://hub.docker.com/">Docker Hub</a>で探す。）</p>
@@ -144,6 +158,14 @@ $ docker run -it hoge /bin/bash
 <li><a href="https://datumstudio.jp/blog/docker%E3%81%A7rails%E3%81%A8mysql%E3%81%AE%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">DockerでRailsとMySQLの環境構築 | ブログ一覧 | DATUM STUDIO株式会社</a></li>
 <li><a href="https://tech-lab.sios.jp/archives/20051">【連載】世界一わかりみが深いコンテナ &amp; Docker入門 〜 その4:docker-composeってなに？ 〜 | SIOS Tech. Lab</a></li>
 </ul>
+<p>後日注記：Dockerを使う際にdocker-composeは便利。Webサーバーとデータベースサーバーなど、複数のコンテナを連携させ、同時に起動することができる。ただし、本番環境では少し役不足。本番環境では、さらに高度なオーケストレーションができるKubernetesを使うことが推奨される。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=U9vzjYJqxXs">【Docker入門】世界を変えたコンテナ革命！なぜ動き、どう使うのか？【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<p><a href="kubernetes.html">Kubernetes</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.08.17編集</p>
+</div>
 
 <h2>Docker関連の便利なツール</h2>
 <p>僕の好きなYouTuberのセイト先生が、Dockerを使う上で便利なツールを5つ紹介されている。</p>
@@ -156,6 +178,16 @@ $ docker run -it hoge /bin/bash
 <p>2024.08.27-28</p>
 </div>
 
+<h2>Docker環境におけるネットワークとストレージ</h2>
+<p>Docker環境では、4種類のネットワーク通信（仮想的なハブによるコンテナ同士の通信、隔離のないホストと同じネットワーク通信、複数のホストマシンにまたがる通信、ネットワーク無しモード）があり、コンテナが消えてもデータがなくならないように、ホストのディレクトリをマウントしたり、Docker専用のボリュームに保存しておくことができる。詳しくは以下の動画が参考になる。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Pwtfq6MNaxM">【初心者向け】コンテナって何だ？Dockerの仕組みを徹底解説【ゆっくり解説】 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=U9vzjYJqxXs">【Docker入門】世界を変えたコンテナ革命！なぜ動き、どう使うのか？【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.17</p>
+</div>
+
 <h2>Dockerの分かりやすい解説動画</h2>
 <p>このほかにも、セイト先生のDocker入門動画が公開されているので、初心者の方はこの動画を見ましょう。僕のこの文章では分からない、スッキリ分かるDockerの分かりやすい解説が説明されています。</p>
 <p>後日注記：この動画の説明にもある通り、Dockerはさまざまな環境（本番用や開発用）で同じテスト用の環境を簡単に構築するために使います。さまざまなミドルウェアなどを導入する時に、個別の環境にひとつひとつ入れるのは手間がかかりますし、バージョンの管理も難しいです。Dockerならひとつのコンテナにすべて詰め込んで、簡単にまるっとそのまま別の環境に導入することができます。</p>
@@ -165,6 +197,10 @@ $ docker run -it hoge /bin/bash
 <p>後日注記：コンテナとはアプリケーションと必要な設定とライブラリを詰め込んだ、持ち運び可能な軽い箱。コンテナの中にアプリケーションを動かすために必要なものをすべて詰め込み、同じ環境を再現できるようにすることで、どこでも同じアプリケーションが同じように動くようにする。またVM型の仮想化と比べてコンテナ型の仮想化はカーネルを共有するため、軽量。そして、ネームスペースによって、環境を隔離でき、それぞれのコンテナが干渉しないようにできる。また、cgroupsによってコンテナごとに使えるリソースを制限できる。またコンテナイメージはレイヤーがあり、下のレイヤーであるOSをほかのコンテナイメージでも使いまわすことができる。</p>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=Pwtfq6MNaxM">【初心者向け】コンテナって何だ？Dockerの仕組みを徹底解説【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<p>後日注記：Docker以前の開発環境の構築は地獄だった。自分のパソコンでは動いたのに、ほかのパソコンでは開発したアプリが動かない。OSのバージョンや競合ライブラリの問題から、同じアプリが別の環境では動かないことがあった。新人のための開発環境の構築には何日もかかることもある。Dockerはこの問題を解決し、コンテナと呼ばれる箱を導入することで、一瞬で動く環境を導入・再現できるようになった。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=U9vzjYJqxXs">【Docker入門】世界を変えたコンテナ革命！なぜ動き、どう使うのか？【ゆっくり解説】 - YouTube</a></li>
 </ul>
 <p><a href="../prog_lang/php_framework_laravel.html">Laravel</a>も参照のこと。</p>
 <div class="edit_date">
@@ -182,6 +218,7 @@ $ docker run -it hoge /bin/bash
 <p>以下はその他の解説動画。</p>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=Pwtfq6MNaxM">【初心者向け】コンテナって何だ？Dockerの仕組みを徹底解説【ゆっくり解説】 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=U9vzjYJqxXs">【Docker入門】世界を変えたコンテナ革命！なぜ動き、どう使うのか？【ゆっくり解説】 - YouTube</a></li>
 </ul>
 <div class="edit_date">
 <p>2025.12.16</p>
@@ -216,6 +253,15 @@ $ docker run -it hoge /bin/bash
 <li><a href="https://christina04.hatenablog.com/entry/2020/02/24/170724">cgroupsでリソース制限 - Carpe Diem</a></li>
 <li><a href="https://knowledge.sakura.ad.jp/2108/">15分で分かるLXC（Linux Containers）の仕組みと基本的な使い方 | さくらのナレッジ</a></li>
 </ul>
+
+<h2>containerd</h2>
+<p>containerdはDocker同様の軽量なコンテナランタイムで、昔はDockerのコンポーネントの一部だった。今では軽量のコンテナエンジンとして、Kubernetesなどで使われている。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=U9vzjYJqxXs">【Docker入門】世界を変えたコンテナ革命！なぜ動き、どう使うのか？【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.17</p>
+</div>
 
 <h1>コンテナ型仮想化について</h1>
 <h2>コンテナはDevOpsと相性が良い</h2>
