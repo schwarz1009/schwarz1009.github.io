@@ -236,6 +236,32 @@ f'(x)=\lim_{h \to 0}\frac{f(x + h)-f(x)}{h}
 <p>2024.03.04</p>
 </div>
 
+<h2>表組みと図</h2>
+<p>LaTeXで表組みを行うには、tabular環境を使う。</p>
+<p>たとえば、</p>
+<pre>
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lrr}
+    国       & 人口         & 面積 \\
+    アメリカ & 3億4,235万人 & 983万平方キロメートル     \\
+    日本     & 1億2,281万人 & 37万7,976平方キロメートル
+  \end{tabular}
+  \caption{世界の国}
+  \label{tb:hoge}
+\end{table}
+</pre>
+<p>とする。また、図を表示するにはfigure環境を使う。</p>
+<ul>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/rat/latex/">LaTeXの書き方 | RAT Portal</a></li>
+<li><a href="https://qiita.com/alphalia/items/5ab6c9403b3c7453ef55">LaTeXの図や表についてのまとめ #LaTeX - Qiita</a></li>
+<li><a href="https://takataninote.com/tex/table.html">【LaTeX】表の作成 - Takatani Note</a></li>
+<li><a href="https://icochan1.net/latex/table/">【全パターン紹介】LaTeXの表の作成方法｜図解でわかる | ぷそらぼ</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.28</p>
+</div>
+
 <h2>科学論文や出版社向け</h2>
 <p>MS-Wordと比べると、Wordがビジネス向けの書類などを作れるワープロであるのに対して、TeXは科学者や学生による科学論文、あるいは出版社による書籍の出版向けであると言われる。</p>
 <p>僕のようにAdobe Illustratorを使う人間から見ると、TeXとイラレは出版やデスクトップパブリッシング（DTP）で使われる主要なソフトであり、完全に文書として読まれる小説や専門書のような出版ならTeXだが、写真をふんだんに使った雑誌やデザインポスターなどであればイラレを使う。</p>
