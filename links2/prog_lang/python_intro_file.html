@@ -127,13 +127,29 @@ with open('hoge.csv', encoding="utf-8") as hoge_file:
 </ul>
 <p><a href="xml.html">XMLと文書形式</a>も参照のこと。</p>
 
+<h2>PyhtonからJSONを扱う</h2>
+<p>PythonからJSON形式のデータを扱うには、jsonというAPIを使う。</p>
+<p>PythonオブジェクトをJSONデータにエンコーディングするにはjson.dumps()を使う（直列化）。</p>
+<p>JSONデータをPythonオブジェクトにデコーディングするにはjson.loads()を使う（脱直列化）。</p>
+<p>後日注記：このほか、jsonファイルからデータを読み込むためにはjson.load()、jsonファイルへとデータを書き込むためにはjson.dump()を使います。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/json.html">json --- JSON エンコーダおよびデコーダ &#8212; Python 3.9.4 ドキュメント</a></li>
+<li><a href="https://web-tech.binarymacaron.xyz/2022/03/16/214/">Python JSONモジュールのload/loads, dump/dumpsの違い | ハードウェアエンジニア、WEBを学ぶ。</a></li>
+<li><a href="https://www.amazon.co.jp/Python-%E5%AE%8C%E5%85%A8-%E5%85%A5%E9%96%80-%E6%9D%BE%E6%B5%A6%E5%81%A5%E4%B8%80%E9%83%8E/dp/4815607648">Python[完全]入門</a></li>
+</ul>
+<p><a href="serialize.html">シリアライズ</a>や<a href="json.html">JSON</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.08.30編集</p>
+</div>
+
 <h1>関連ページ</h1>
 <h2>pickle</h2>
 <p>pickleを用いてPythonのオブジェクトを直列化する方法については<a href="serialize.html">シリアライズ</a>を参照のこと。</p>
 
+<!--
 <h2>JSON</h2>
 <p>JSONを用いてPythonのオブジェクトを直列化する方法については<a href="json.html">JSON</a>を参照のこと。</p>
-
+-->
 
 
 
