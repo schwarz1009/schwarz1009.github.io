@@ -153,39 +153,6 @@
 <p>2026.02.17編集</p>
 </div>
 
-<h2>AIによるサンプル</h2>
-<p>以下はGoogleのAIが書いたコード。16bitのアセンブラでHello Worldを表示する。</p>
-<pre>
-org 100h                ; .COMファイルは0100hからロードされる
-
-section .text
-start:
-    ; --- INT 21h, AH=09h: 文字列を出力 ---
-    mov ah, 09h         ; ファンクション番号 09h (画面に文字列を表示)
-    mov dx, msg         ; 表示したい文字列のメモリアドレスをDXにセット
-    int 21h             ; DOSサービス呼び出し
-
-    ; --- プログラムの正常終了 ---
-    mov ah, 4Ch         ; ファンクション番号 4Ch (プログラム終了)
-    int 21h             ; DOSサービス呼び出し
-
-section .data
-msg db 'Hello, World!$' ; '$'で終わる文字列 (09hファンクションのルール)
-</pre>
-<p>以上をhello.asmとして保存し、NASM (Netwide Assembler)で</p>
-<pre>
-nasm -f bin hello.asm -o hello.com
-</pre>
-<p>とコンパイルして、DOSBoxでhello.comを実行する。</p>
-<ul>
-<li><a href="https://stackoverflow.com/questions/76772513/nasm-hello-world-in-dosbox">assembly - NASM "hello world" in DOSBox - Stack Overflow</a></li>
-<li><a href="https://www.daniweb.com/programming/software-development/threads/236650/int-21h-ah-09h-string-output">assembly - int 21h/ah=09h string output [SOLVED] | DaniWeb</a></li>
-<li><a href="https://medium.com/ax1al/dos-assembly-101-4c3660957d25">DOS Assembly 101. Hello World, Today Will Gonna Explain a… | by astro | RIXED_LABS | Medium</a></li>
-</ul>
-<div class="edit_date">
-<p>2026.02.17</p>
-</div>
-
 <h2>数値の後にHをつけるか否か</h2>
 <p>DEBUGコマンドを使ったアセンブラでは、数値を指定すると16進数として解釈されますが、その他のアセンブラで16進数を示すには数値のあとにHを付けます。</p>
 <p>つまり、</p>
