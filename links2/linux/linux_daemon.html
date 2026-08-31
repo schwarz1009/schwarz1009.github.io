@@ -128,7 +128,7 @@ reboot
 <li><a href="http://www.atmarkit.co.jp/ait/articles/0206/04/news001.html">Linux起動の仕組みを理解しよう［rcスクリプト編］ - @IT</a></li>
 </ul>
 
-<h2>デーモンを作る</h2>
+<h2>デーモンを作るためのAPI</h2>
 <p>通常のプログラムをデーモンとして実行させるには、whileでループするプログラムを作って、SysV initならシェルスクリプトの中で&をつけてバックグラウンドで実行すればよい。</p>
 <p>デーモンのプロセスやスレッドは、カーネルによってマルチタスクで実行される。</p>
 <ul>
@@ -138,13 +138,20 @@ reboot
 <ul>
 <li><a href="https://gigazine.net/news/20200907-unix-linux-daemon/">UNIX/Linuxの「デーモン」はこうやって作る - GIGAZINE</a></li>
 </ul>
-<p>後日注記：基本的に、デーモンになるためには、fork()した後でsetsid()で制御端末を切り離す。あるいは、Linuxにはデーモンになるためのdaemon(3)というAPIもある。詳しくは以下の書籍に記述されています。</p>
+<p>後日注記：基本的に、デーモンになるためには、fork()した後でsetsid()で制御端末を切り離す。あるいは、Linuxにはこれと同様に、プロセスを制御端末から切り離してバックグラウンドで動作させる、デーモンになるためのdaemon(3)という専用のAPIもある。詳しくは以下の書籍に記述されています。</p>
 <ul>
 <li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p>後日注記：また、systemdと連携する新しいスタイルのデーモンの実装のためのC言語のAPIとしてsd-daemonがある。また、systemdにデーモンの起動を通知するにはsd_notifyという関数を用いる。</p>
+<ul>
+<li><a href="https://www.freedesktop.org/software/systemd/man/latest/sd-daemon.html">sd-daemon - systemd</a></li>
+<li><a href="https://qiita.com/ozaki-r/items/ced43d5e32af67c7ae04">sd_notifyの通信方法 #Linux - Qiita</a></li>
+<li><a href="https://qiita.com/kosuke-n/items/105f266364f1275a9a63">systemdで初期処理の同期をとる方法。 #Python - Qiita</a></li>
 </ul>
 <p>詳しくは<a href="linux_api2.html">Linux API（プロセス・メモリ）</a>も参照のこと。</p>
 <div class="edit_date">
 <p>2026.08.07編集</p>
+<p>2026.08.31編集</p>
 </div>
 
 <h2>/etc/services</h2>
