@@ -51,6 +51,7 @@ div_page_diary[0].insertAdjacentHTML('beforebegin', '\
  <a href="../subaru/index.html">宇宙開拓団スバルの記録</a> -\
  <a href="../aozora/index.html">永遠の青空とともに</a> -\
  <a href="../guren/index.html">紅蓮と黄金の出会う場所</a></p>\
+<p><a href="https://schwarz1009.hatenadiary.com/">詩人アッシー四世のブログ</a></p>\
 </div>\
 ');
 
