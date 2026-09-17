@@ -17,6 +17,7 @@ div_page_diary[0].insertAdjacentHTML('beforebegin', '\
 <li><a href="../hardware/index.html"><div class="emoji_icon">🖨️</div><div class="menu_text">ハードウェア</div></a></li>\
 <li><a href="../videogame/index.html"><div class="emoji_icon">🎲</div><div class="menu_text">ゲーム</div></a></li>\
 <li><a href="../prog_lang/index.html"><div class="emoji_icon">📝</div><div class="menu_text">プログラミング言語</div></a></li>\
+<li><a href="../prog_lang/index_web.html"><div class="emoji_icon">🌏</div><div class="menu_text">Webプログラミング</div></a></li>\
 <li><a href="../programs/index.html"><div class="emoji_icon">📑</div><div class="menu_text">AI・自作プログラム</div></a></li>\
 <li><a href="../network/index.html"><div class="emoji_icon">📥</div><div class="menu_text">ネットワーク</div></a></li>\
 <li><a href="../db/index.html"><div class="emoji_icon">🗄️</div><div class="menu_text">データベース</div></a></li>\
