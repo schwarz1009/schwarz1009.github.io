@@ -211,7 +211,7 @@ public class Window {
 </pre>
 <p>WindowFrameクラス (WindowFrame.java) - Windowクラスを継承し、機能を追加したい時はここに追加する。実際に使われるクラスの基本。コンストラクタの引数はそのまま親クラスに渡す。openWindow()などの機能を追加でき、その中でopen()などのAPIを自由に利用できる。</p>
 <pre class="prettyprint">
-public class WindowFrame extands Window {
+public class WindowFrame extends Window {
     public WindowFrame(WindowImpl impl) {
         super(impl);
     }
@@ -224,26 +224,12 @@ public class WindowFrame extands Window {
 </pre>
 <p>SwingFrameクラス (SwingFrame.java)  - WindowImplクラスを継承し、Swingに対応する。WindowImplクラスのrawOpen()を実装する。コンストラクタにHogeAppクラスのインスタンスを取る。</p>
 <pre class="prettyprint">
-public class SwingFrame extands WindowImpl {
-    private HogeApp hoge;
-    
-    public SwingFrame(HogeApp hoge) {
-        this.hoge = hoge;
-    }
-    
-    public void rawOpen(String msg) {
-        hoge.swingOpen(msg);
-    }
-}
-</pre>
-<p>HogeAppクラス (HogeApp.java) - 実際のアプリケーションを記述する。</p>
-<pre class="prettyprint">
-public class HogeApp implements ActionListener {    
+public class SwingFrame extends WindowImpl implements ActionListener {
     private JFrame hogeFrame;
     private Container hogeContentPane;
     private JButton hogeButton;
     
-    public void swingOpen(String msg) {
+    public void rawOpen(String msg) {
         hogeFrame = new JFrame(msg);
         hogeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         hogeFrame.setSize(150, 100);
@@ -252,7 +238,7 @@ public class HogeApp implements ActionListener {
         hogeButton.addActionListener(this);
         hogeContentPane.add(hogeButton, BorderLayout.CENTER);
         hogeFrame.setVisible(true);
-   }
+    }
 
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == hogeButton) {
@@ -266,7 +252,7 @@ public class HogeApp implements ActionListener {
 <pre class="prettyprint">
 public class Main {
     public static void main(String[] args) {
-        WindowFrame w = new WindowFrame(new SwingFrame(new HogeApp()));
+        WindowFrame w = new WindowFrame(new SwingFrame());
         w.openWindow("Hoge");
     }
 }
