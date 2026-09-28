@@ -189,13 +189,13 @@
 
 <h2>Bridgeでクロスプラットフォーム対応</h2>
 <p>以下は、Bridgeパターンでクロスプラットフォーム対応する例です。</p>
-<p>WindowImplクラス (WindowImpl.java)</p>
+<p>WindowImplクラス (WindowImpl.java) - Swingのほか、さまざまなツールキットに対応するための枠組み。</p>
 <pre class="prettyprint">
 public abstract class WindowImpl {
     public abstract void rawOpen(String msg);
 }
 </pre>
-<p>Windowクラス (Window.java)</p>
+<p>Windowクラス (Window.java) - ウィンドウの基本機能を定義する。</p>
 <pre class="prettyprint">
 public class Window {
     private WindowImpl impl;
@@ -209,7 +209,7 @@ public class Window {
     }
 }
 </pre>
-<p>WindowFrameクラス (WindowFrame.java)</p>
+<p>WindowFrameクラス (WindowFrame.java) - Windowクラスを継承し、機能を追加したい時はここに追加する。</p>
 <pre class="prettyprint">
 public class WindowFrame extands Window {
     public WindowFrame(WindowImpl impl) {
@@ -218,10 +218,11 @@ public class WindowFrame extands Window {
     
     public void openWindow(String msg) {
         open(msg);
+        // ここに機能を追加できる
     }
 }
 </pre>
-<p>SwingFrameクラス (SwingFrame.java)</p>
+<p>SwingFrameクラス (SwingFrame.java)  - WindowImplクラスを継承し、Swingに対応する。</p>
 <pre class="prettyprint">
 public class SwingFrame extands WindowImpl {
     private HogeApp hoge;
@@ -235,7 +236,7 @@ public class SwingFrame extands WindowImpl {
     }
 }
 </pre>
-<p>HogeAppクラス (HogeApp.java)</p>
+<p>HogeAppクラス (HogeApp.java) - 実際のアプリケーションを記述する。</p>
 <pre class="prettyprint">
 public class HogeApp implements ActionListener {    
     private JFrame hogeFrame;
@@ -261,7 +262,7 @@ public class HogeApp implements ActionListener {
     }
 }
 </pre>
-<p>Mainクラス (Main.java)</p>
+<p>Mainクラス (Main.java) - アプリケーションを実行する。</p>
 <pre class="prettyprint">
 public class Main {
     public static void main(String[] args) {
@@ -270,7 +271,7 @@ public class Main {
     }
 }
 </pre>
-<p>Swing以外が必要になれば追加できます。</p>
+<p>このようにすることで、Swing以外が必要になれば追加できます。</p>
 <div class="edit_date">
 <p>2026.09.28</p>
 </div>
