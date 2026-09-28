@@ -195,7 +195,7 @@ public abstract class WindowImpl {
     public abstract void rawOpen(String msg);
 }
 </pre>
-<p>Windowクラス (Window.java) - ウィンドウの基本機能を定義する。</p>
+<p>Windowクラス (Window.java) - ウィンドウの基本機能を定義する。コンストラクタにWindowImplのサブクラスのオブジェクトを取り、open()からrawOpen()を呼ぶ。</p>
 <pre class="prettyprint">
 public class Window {
     private WindowImpl impl;
@@ -209,7 +209,7 @@ public class Window {
     }
 }
 </pre>
-<p>WindowFrameクラス (WindowFrame.java) - Windowクラスを継承し、機能を追加したい時はここに追加する。</p>
+<p>WindowFrameクラス (WindowFrame.java) - Windowクラスを継承し、機能を追加したい時はここに追加する。コンストラクタの引数はそのまま親クラスに渡す。open()などのAPIを自由に利用できる。</p>
 <pre class="prettyprint">
 public class WindowFrame extands Window {
     public WindowFrame(WindowImpl impl) {
@@ -222,7 +222,7 @@ public class WindowFrame extands Window {
     }
 }
 </pre>
-<p>SwingFrameクラス (SwingFrame.java)  - WindowImplクラスを継承し、Swingに対応する。</p>
+<p>SwingFrameクラス (SwingFrame.java)  - WindowImplクラスを継承し、Swingに対応する。WindowImplクラスのrawOpen()を実装する。コンストラクタにHogeAppクラスのインスタンスを取る。</p>
 <pre class="prettyprint">
 public class SwingFrame extands WindowImpl {
     private HogeApp hoge;
