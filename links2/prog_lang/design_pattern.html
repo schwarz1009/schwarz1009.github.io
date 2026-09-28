@@ -187,6 +187,89 @@
 <p>2026.09.26-27編集</p>
 </div>
 
+<h2>Bridgeでクロスプラットフォーム対応</h2>
+<p>以下は、Bridgeパターンでクロスプラットフォーム対応する例です。</p>
+<p>WindowImplクラス (WindowImpl.java)</p>
+<pre class="prettyprint">
+public abstract class WindowImpl {
+    public abstract void open();
+}
+</pre>
+<p>Windowクラス (Window.java)</p>
+<pre class="prettyprint">
+public class Window {
+    private WindowImpl impl;
+    public Window(WindowImpl impl) {
+        this.impl = impl;
+    }
+    
+    public void open() {
+        impl.rawOpen()
+    }
+}
+</pre>
+<p>WindowFrameクラス (WindowFrame.java)</p>
+<pre class="prettyprint">
+public class WindowFrame extands Window {
+    public WindowFrame(WindowImpl impl) {
+        super(impl);
+    }
+    
+    public void openWindow (String msg) {
+        open();
+    }
+}
+</pre>
+<p>SwingFrameクラス (SwingFrame.java)</p>
+<pre class="prettyprint">
+public class SwingFrame extands WindowImpl {
+    private HogeApp hoge;
+    
+    public void rawOpen() {
+        hoge.swingOpen();
+    }
+}
+</pre>
+<p>HogeAppクラス (HogeApp.java)</p>
+<pre class="prettyprint">
+public class HogeApp implements ActionListener {    
+    private JFrame hogeFrame;
+    private Container hogeContentPane;
+    private JButton hogeButton;
+    
+    public void swingOpen() {
+        hogeFrame = new JFrame("Hoge");
+        hogeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        hogeFrame.setSize(150, 100);
+        hogeContentPane = hogeFrame.getContentPane();
+        hogeButton = new JButton("Hoge");
+        hogeButton.addActionListener(this);
+        hogeContentPane.add(hogeButton, BorderLayout.CENTER);
+        hogeFrame.setVisible(true);
+   }
+
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == hogeButton) {
+            // ここにボタンクリック時の処理を記述する
+            hogeButton.setText("Fuga");
+        }
+    }
+}
+</pre>
+<p>Mainクラス (Main.java)</p>
+<pre class="prettyprint">
+public class Main {
+    public static void main(String[] args) {
+        Window w = new WindowFrame(new SwingFrame(new HogeApp()));
+        w.openWindow();
+    }
+}
+</pre>
+<p>Swing以外が必要になれば追加できます。</p>
+<div class="edit_date">
+<p>2026.09.28</p>
+</div>
+
 <h1>簡単な説明</h1>
 <h2>デザインパターン</h2>
 <ul class="defaultlist list7">
