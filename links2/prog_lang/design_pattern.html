@@ -195,7 +195,7 @@ public abstract class WindowImpl {
     public abstract void rawOpen(String msg);
 }
 </pre>
-<p>Windowクラス (Window.java) - ウィンドウの基本機能とAPIを定義する。コンストラクタにWindowImplのサブクラスのオブジェクトを取り、open()からrawOpen()を呼ぶ。</p>
+<p>Windowクラス (Window.java) - ウィンドウの基本機能とAPIを定義する。コンストラクタにWindowImplのサブクラスのオブジェクトを取り、自身のサブクラスと繋ぐ。open()からrawOpen()を呼ぶ。</p>
 <pre class="prettyprint">
 public class Window {
     private WindowImpl impl;
