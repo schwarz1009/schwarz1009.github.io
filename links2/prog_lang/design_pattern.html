@@ -192,19 +192,20 @@
 <p>WindowImplクラス (WindowImpl.java)</p>
 <pre class="prettyprint">
 public abstract class WindowImpl {
-    public abstract void open();
+    public abstract void open(String msg);
 }
 </pre>
 <p>Windowクラス (Window.java)</p>
 <pre class="prettyprint">
 public class Window {
     private WindowImpl impl;
+    
     public Window(WindowImpl impl) {
         this.impl = impl;
     }
     
-    public void open() {
-        impl.rawOpen()
+    public void open(String msg) {
+        impl.rawOpen(msg)
     }
 }
 </pre>
@@ -215,8 +216,8 @@ public class WindowFrame extands Window {
         super(impl);
     }
     
-    public void openWindow (String msg) {
-        open();
+    public void openWindow(String msg) {
+        open(msg);
     }
 }
 </pre>
@@ -225,8 +226,8 @@ public class WindowFrame extands Window {
 public class SwingFrame extands WindowImpl {
     private HogeApp hoge;
     
-    public void rawOpen() {
-        hoge.swingOpen();
+    public void rawOpen(String msg) {
+        hoge.swingOpen(msg);
     }
 }
 </pre>
@@ -237,12 +238,12 @@ public class HogeApp implements ActionListener {
     private Container hogeContentPane;
     private JButton hogeButton;
     
-    public void swingOpen() {
-        hogeFrame = new JFrame("Hoge");
+    public void swingOpen(String msg) {
+        hogeFrame = new JFrame(msg);
         hogeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         hogeFrame.setSize(150, 100);
         hogeContentPane = hogeFrame.getContentPane();
-        hogeButton = new JButton("Hoge");
+        hogeButton = new JButton(msg);
         hogeButton.addActionListener(this);
         hogeContentPane.add(hogeButton, BorderLayout.CENTER);
         hogeFrame.setVisible(true);
@@ -261,7 +262,7 @@ public class HogeApp implements ActionListener {
 public class Main {
     public static void main(String[] args) {
         Window w = new WindowFrame(new SwingFrame(new HogeApp()));
-        w.openWindow();
+        w.openWindow("Hoge");
     }
 }
 </pre>
