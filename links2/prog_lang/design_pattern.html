@@ -192,7 +192,7 @@
 <p>WindowImplクラス (WindowImpl.java)</p>
 <pre class="prettyprint">
 public abstract class WindowImpl {
-    public abstract void open(String msg);
+    public abstract void rawOpen(String msg);
 }
 </pre>
 <p>Windowクラス (Window.java)</p>
@@ -225,6 +225,10 @@ public class WindowFrame extands Window {
 <pre class="prettyprint">
 public class SwingFrame extands WindowImpl {
     private HogeApp hoge;
+    
+    public SwingFrame(HogeApp hoge) {
+        this.hoge = hoge;
+    }
     
     public void rawOpen(String msg) {
         hoge.swingOpen(msg);
@@ -261,7 +265,7 @@ public class HogeApp implements ActionListener {
 <pre class="prettyprint">
 public class Main {
     public static void main(String[] args) {
-        Window w = new WindowFrame(new SwingFrame(new HogeApp()));
+        WindowFrame w = new WindowFrame(new SwingFrame(new HogeApp()));
         w.openWindow("Hoge");
     }
 }
