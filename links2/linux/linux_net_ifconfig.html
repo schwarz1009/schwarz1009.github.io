@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ifconfig - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ifconfig</h1>
+<p>ifconfigに関する世界観です。<a href="linux_net.html">Linuxネットワーク</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ifconfig</h1>
+<p>ネットワーク設定の確認と変更に行う。特に良く使うコマンドだから、覚えていた方が良いが、とても複雑だ。設定を確認する以下のコマンドが分かっていればそれで何とかなる。</p>
+<p>net-tools由来のコマンドであるため、現在は非推奨。</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/net-tools/man8/ifconfig.8.html">man ifconfig</a></li>
+</ul>
+
+<h2>コマンド実行・設定例</h2>
+<p>ifconfigに「-a」オプションをつけて実行すると、NIC（ネットワークインターフェース）ごとのネットワークの設定内容を表示する。</p>
+<pre>
+# ifconfig -a
+（ネットワークインターフェースの設定が表示される）
+</pre>
+<p>loは「ループバックインターフェース」で、自分自身との通信のために使われる。</p>
+<p>ifconfigによるネットワークインターフェースの設定は以下のように行う。</p>
+<pre>
+ifconfig eth0 192.168.0.2 netmask 255.255.255.0 broadcast 192.168.0.255
+</pre>
+<p>この例では、ネットワークインターフェース名eth0に対し、IPアドレスを192.168.0.2、サブネットマスクを255.255.255.0、ブロードキャストアドレスを192.168.0.255に設定する。</p>
+<p>詳しい説明は以下の記事が参考になる。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0109/29/news004.html">ifconfig　～（IP）ネットワーク環境の確認／設定を行う - @IT</a></li>
+</ul>
+
+<h2>説明</h2>
+<p>まず、ifconfigに続いてインタフェース名を指定する。ここでは「eth0」。</p>
+<p>IPアドレスをビットにすると以下のようになる。</p>
+<pre>
+   192      168      0         2
+11000000 10101000 00000000 00000010
+</pre>
+<p>サブネットマスクは、ネットワーク部を1、ホスト部を0としたもの。ネットワークの外部と内部を区別するために必要。</p>
+<pre>
+   255      255     255        0
+11111111 11111111 11111111 00000000
+</pre>
+<p>ブロードキャストアドレスは、ブロードキャスト通信（1対多の通信で、同一ネットワークの全ホストと通信を行う）のために必要。IPアドレスと同じネットワーク部を持ち、ホスト部を1とする。たとえばARPやDHCPなどでネットワーク内部にあるすべての機器と通信するために使用する。</p>
+<pre>
+   192      168      0        255
+11000000 10101000 00000000 11111111
+</pre>
+<p>これらに加えてrouteコマンドで、どのホストがゲートウェイとなるかを登録する。ゲートウェイは外部のネットワークとの接続を内部のネットワークの中で共有するホストのアドレスのことで、具体的にはルータのアドレス。</p>
+<pre>
+route add default gw 192.168.1.1
+</pre>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation/ja">Gentoo Linux amd64 ハンドブック: Gentoo をインストールする - Gentoo Wiki</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking/ja">ネットワーク設定 - Gentoo AMD64 Handbook</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0109/29/news004.html">ifconfig　～（IP）ネットワーク環境の確認／設定を行う - @IT</a></li>
+<li><a href="https://xtech.nikkei.com/atcl/nxt/column/18/00780/062000008/">すべての相手に一斉送信、必殺技の「ブロードキャスト」を完全図解 | 日経クロステック（xTECH）</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.02.08編集</p>
+</div>
+
+<h2>up（起動）とdown（停止）</h2>
+<p>起動と停止は：</p>
+<pre>
+ifconfig eth0 up
+ifconfig eth0 down
+</pre>
+
+<h2>Red Hat, Debianなどの高レベルな設定プログラム</h2>
+<p>従来使われてきた、ifconfigやnetstatなどのネットワークコマンドは、net-toolsというソフトウェアパッケージに含まれてきた。</p>
+<p>だが、net-toolsは長い間新しいバージョンがリリースされておらず、型遅れのような状況にある。</p>
+<p>なので、現在はnet-tools関連のコマンドを使うことは推奨されない。代わりに、iproute2のipコマンドなどを使うことが推奨される。</p>
+<p>また、ifconfigは低レベルなコマンドインターフェースとしては柔軟だが、低レベルすぎて、簡単にネットワークの設定を行うことができない。</p>
+<p>そのため、多くの場合、より高レベルのネットワーク設定機構を使う。たとえばDebianではifupdownを用いることが一般的である。</p>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch05.ja.html">第5章 ネットワークの設定 - Debian</a></li>
+</ul>
+<p>詳細は<a href="linux_net_iproute2.html">iproute2</a>と<a href="linux_net2.html">Linuxネットワーク（２．設定）</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>netstat</h2>
+<p><a href="linux_net_netstat.html">netstat</a>を参照のこと。</p>
+
+<h2>route</h2>
+<p><a href="linux_net_route.html">route</a>を参照のこと。</p>
+
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="../network/network.html">ネットワーク</a>や<a href="../network/network_intro.html">ネットワーク入門</a>や<a href="../network/network_etc.html">ネットワークの雑多なこと</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Plan 9関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">UNIXの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/unix_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Plan 9の世界観</h1>
+<p>Plan 9に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Plan 9</h1>
+<h2>Plan 9とは</h2>
+<p>ベル研究所のUNIXの開発メンバーが開発する、研究用の分散OS。</p>
+<p>UNIXの反省に基づいて、さらなるファイル指向や賢いネットワーク・アーキテクチャの下に設計されている。</p>
+<p>UNIXの反省を踏まえた上で、ベル研究所の作っている研究用の分散OSがPlan 9である。</p>
+<p>ネットワーク化・GUI化した最近のコンピューティング環境を踏まえて、ネットワーク分散型でさらなるファイル指向を目指したOSを研究向けながら開発している。</p>
+<p>GUIには、タイル型のような先進的な環境を採用。また、バージョン管理システムなどを搭載したファイルシステムなどに改善点が見られる。</p>
+<p>僕は昔調べていたことがあるが、覚えていないので、間違いがあるかもしれない。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Plan_9">Plan 9 - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/0intro/plan9">git</a></li>
+</ul>
+
+<h2>Plan 9</h2>
+<p>UNIXを生んだベル研究所（AT&Tと、AT&Tからベル研究所を受け継いだルーセント・テクノロジーズ）による、UNIXのファイル指向をさらに進めた研究用の分散OS。</p>
+<p>9Pという分散ファイルシステムのプロトコルの下、全てのリソースをファイルとして扱える。</p>
+<p>ネットワークは単一した名前空間であり、階層型のファイルシステムとして扱える。リモートでもローカルでも、どんなリソースも9Pプロトコルとと階層型ファイルシステムの名前空間からアクセスできる。</p>
+
+<h2>Plan 9は分散OS</h2>
+<p>UNIXでは、ひとつのコンピュータに対して複数の端末が備え付けられ、デバイスもそのローカルな環境でのデバイスを主としてシステムが構築されることを前提としていた。</p>
+<p>Plan 9では、たくさんのネットワークに繋がった分散システムにおいて、多くのコンピュータを1つのシステムとして扱えるようにした取り組みがなされている。</p>
+
+<h2>Plan 9の基本</h2>
+<p>UNIXでは、ファイルやハードウェアデバイスなどがファイルとして表されたが、UNIXやコンピュータそのものの発展とともに、ファイルとして扱えないコンピュータ上のリソースが増えてきた。</p>
+<p>Plan 9では、こうしたものを、もう一度ファイルとして捉えなおし、特に分散環境においての共通のシステム環境をもう一度階層型のパス情報を持ったファイルによって表現する。</p>
+<p>Plan 9のUnionディレクトリは、異なるホストのディレクトリを透過的に結合するディレクトリの機能。たとえばローカルにある/binディレクトリを、ネットワーク上にあるほかのホストにある/binディレクトリと結合し、ひとつのディレクトリとして扱うことができる。</p>
+<p>Plan 9では、ローカルにあるファイルやデバイスだけではなく、ネットワーク上にあるリソースや、ウィンドウシステムの画面なども、すべてパス情報を持ったファイルで表される。/netディレクトリにはネットワーク上にあるリソースが存在し、/netディレクトリそのものがTCP/IPにおけるAPIの役割を持っている。たとえば/net/tcpや/net/udpなどがファイルとして表現される。</p>
+<p>また、Plan 9では分散ファイルシステムを9Pというプロトコルで扱うことができる。ネットワーク上にある名前付きのオブジェクトは、9Pプロトコルによってファイルとしてインターフェースを持つ。</p>
+<p>また、ファイルシステムにはバージョン管理システムが統合されており、バックアップする必要がない。</p>
+<p>Plan 9のAcmeは、コマンドラインシェル、テキストエディタ、ウィンドウシステム、タイル型ウィンドウマネージャなどを兼任する、Plan 9の開発者向けシステムシェル。</p>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Plan_9_from_Bell_Labs">Plan 9 from Bell Labs - Wikipedia</a></li>
+</ul>
+
+<h2>なぜPlan 9は普及しなかったのか</h2>
+<p>Plan 9は多くのプログラマに輝かしい光を与えたが、普及しなかった。</p>
+<p>その一因として、「UNIXほどの大きな進歩がなかったから」と言われている。「旧来のUNIXを置き換えるほどには先進的ではなかったからだ」とエリック・レイモンドは述べている。</p>
+<p>UNIXはさびつきながらもきちんと動いており、役割をこなしていたが、それをリプレースするほどの先進性はPlan 9にはなかった。</p>
+<p>ただし、<a href="https://www.atmarkit.co.jp/news/analysis/200902/09/future.html">Linuxに勝てなかったPlan 9 － ＠IT</a>で言われているように、「OSをUNIXからPlan 9に置き換えるほどの大変化をしなくても、もっと上位のレベル層で同じことをやれば良い」ということは言えるかもしれない。低レベルなOS階層で分散システムを構築しなくても、Linuxならもっと上位の層で同じことはできる。</p>
+<p>また、/procファイルシステムやUnicode（UTF-8）など、いくつかの機能はLinuxや別のOSにも採用されている。</p>
+
+
+<h2>Inferno</h2>
+<p>Plan 9から派生した分散OS。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Inferno_(%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0)">Inferno (オペレーティングシステム) - Wikipedia</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>分散OS</h2>
+<p><a href="../os/distributed_os.html">分散OS</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

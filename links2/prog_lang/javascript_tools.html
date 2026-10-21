@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JavaScriptのツールの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index_web.html">Webプログラミングの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_javascript_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>JavaScriptのツール</h1>
+<p>JavaScriptのツールです。<a href="javascript.html">JavaScript</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>JavaScriptエンジン</h1>
+<h2>SpiderMonkey/Rhino</h2>
+<p>MozillaのJavaScriptエンジン。SpiderMonkeyはC/C++、RhinoはJavaで実装されている。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/About_JavaScript">JavaScript について | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/SpiderMonkey">SpiderMonkey | MDN</a></li>
+</ul>
+
+<h2>V8</h2>
+<p>Google Chromeで使われているJavaScriptエンジン。JavaScriptフレームワークでよくバックエンドとして使われている（Electronなど）。</p>
+
+<h2>JavaScriptCore</h2>
+<p>Safari（Apple）などのWebKitブラウザで使われているJavaScriptエンジン。</p>
+
+<h2>Chakra(JScript)</h2>
+<p>IEで使われているJavaScriptエンジン。</p>
+
+<h1>Microsoftの独自技術</h1>
+<h2>JScript/VBScript</h2>
+<p>MicrosoftによるJavaScriptの実装と、そのVB版。</p>
+<p>後日注記：JavaScriptには標準でファイル処理のAPIも存在しないことは有名だが、JScriptやVBScriptは逆にWindowsのファイル処理と統合されており、WSHを用いて簡単なバッチ処理を行うことができて便利である。</p>
+
+<h2>WSH</h2>
+<p>WindowsでJScript/VBScriptを使ってスクリプトによる簡単なアプリケーションを作ることが出来る。</p>
+
+<h1>コンパイラ技術</h1>
+<h2>AST/ESTree</h2>
+<p>ASTとは抽象構文木のことで、コードの中の意味のある部分をツリー構造で表現したもの。</p>
+<ul>
+<li><a href="https://qiita.com/blue32a/items/6bdc1ca12daf2ed0e34d">【JavaScript】AST（抽象構文木）に触れてみる #JavaScript - Qiita</a></li>
+</ul>
+<p>また、ESTreeはJavaScriptにおけるASTの仕様。</p>
+<ul>
+<li><a href="https://sosukesuzuki.dev/advent/2022/06/">ESTree とは - sosukesuzuki.dev</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.04.09</p>
+</div>
+
+<h2>JSIR</h2>
+<p>JSIRはJavaScriptのための新しい中間コード表現。</p>
+<ul>
+<li><a href="https://xenospectrum.com/jsir-google-mlir-javascript-analysis/">GoogleがついにJavaScriptを「再定義」する。次世代解析基盤「JSIR」がASTの限界を突破する理由 | XenoSpectrum</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.04.09</p>
+</div>
+
+<h2>Acorn</h2>
+<p>AcornはJavaScriptをパースする構文解析ライブラリのひとつ。</p>
+<ul>
+<li><a href="https://qiita.com/wicket/items/816c8703d23945462dfd">javascriptの構文解析をしてみる #JavaScript - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.04.09</p>
+</div>
+
+<h1>lintツール</h1>
+<h2>ESLint</h2>
+<p>lintツールはいわば「駄目だしツール」。コードの中で修正したほうがよい部分を検査して見つけてくれる。
+<p>JavaScript界ではESLintが有名。</p>
+<p><a href="linter.html">lintツール</a>を参照のこと。</p>
+
+<h2>Rome</h2>
+<p>RomeはJavaScriptのビルドまわりの何でも屋ツールチェイン。</p>
+<p><a href="linter.html">lintツール</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2026.03.07</p>
+</div>
+
+<h1>テスト</h1>
+<h2>Jest</h2>
+<p>JestはJavaScriptのためのテスト用フレームワーク。TypeScriptも使用できる。</p>
+<ul>
+<li><a href="https://typescriptbook.jp/tutorials/jest">Jestでテストを書こう | TypeScript入門『サバイバルTypeScript』</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.20</p>
+</div>
+
+<h1>検証機能</h1>
+<h2>ブラウザの検証機能を使おう</h2>
+<p>JavaScriptを開発する上で、ブラウザの検証機能を上手く使いましょう。</p>
+<p>console.log()で出力した文字列や変数は、ブラウザの検証機能の中にあるコンソールに出力されます。</p>
+<p>このコンソールから、対話的にJavaScriptのコードを実行することもできます。</p>
+<p>console.logでは、文字列や変数を出力するだけではなく、配列やオブジェクトの要素を詳細フォーマットで出力することもでき、デバッグに役に立ちます。</p>
+<p><a href="../linux/mozilla_firefox.html">Mozilla Firefox</a>や<a href="css.html">CSS</a>も参照のこと。</p>
+
+<h2>JavaScriptでデバッグ</h2>
+<p>JavaScriptでデバッグを行うには、ブラウザの開発者ツールで行う方法があります。</p>
+<ul>
+<li><a href="https://qiita.com/Hamoto/items/703b5e4a5c9aff891a26">ブラウザの開発者ツールでJavaScriptをデバッグする #debug - Qiita</a></li>
+<li><a href="https://developer.chrome.com/docs/devtools/javascript?hl=ja">JavaScript をデバッグする  |  Chrome DevTools  |  Chrome for Developers</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.09</p>
+</div>
+
+<h1>Web/JavaScript関連のスクリプト</h1>
+<h2>google-code-prettify</h2>
+<p>JavaScriptでソースコードを色づけしてくれる。</p>
+<ul>
+<li><a href="https://qiita.com/rico/items/1c64075a53cbe507c836">コード表示を綺麗に：シンタックスハイライトしたい - Qiita</a></li>
+<li><a href="https://github.com/google/code-prettify">google-code-prettify</a></li>
+</ul>
+<p>google-code-prettifyはテーマでシンタックスハイライトの色を変えられる。僕はSons of Obsidianテーマを使っている。</p>
+<ul>
+<li><a href="https://studiostyl.es/schemes/son-of-obsidian">Son of Obsidian | Studio Styles</a></li>
+</ul>
+
+<h2>js-cookie</h2>
+<p>Cookieを手軽に操作出来る。</p>
+<ul>
+<li><a href="https://github.com/js-cookie/js-cookie">js-cookie</a></li>
+</ul>
+<p><a href="../network/cookie.html">Cookie</a>も参照のこと。</p>
+
+<h2>MathJax</h2>
+<p>JavaScriptで数式を表示できる。</p>
+<ul>
+<li><a href="https://oku.edu.mie-u.ac.jp/~okumura/javascript/mathjax.html">MathJaxによる数式表示 - 奥村晴彦</a></li>
+<li><a href="http://easy-copy-mathjax.xxxx7.com/">Easy Copy MathJax</a></li>
+</ul>
+<p><a href="../linux/mathjax.html">MathJax</a>も参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-css.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

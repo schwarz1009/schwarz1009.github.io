@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>コードとファイルの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>コードとファイルの世界観</h1>
+<p>コードとファイルの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>コードとファイル</h1>
+<h2>プログラミングの基本はコードとファイル</h2>
+<p>僕は、プログラミングの基本は、コードとファイルだと思います。</p>
+<p>プログラム自身を表す「コード」があり、その上で、プログラムから読み書きされる「ファイル」があります。</p>
+<p>どのようなプログラムであっても、まずコードとファイルがあります。</p>
+<p>このことをつかむことが、プログラミングを行う上で、重要だと僕は思います。</p>
+
+<h2>コードはプログラミング言語で書く</h2>
+<p>まず、コードはプログラミング言語で書きます。</p>
+<p>このことは、C/C++であっても、Javaであっても、Perlであっても、Pythonであっても、Lispであっても変わりません。</p>
+<p>プログラムというテキスト形式のデータが、コンパイラやインタプリタによって機械語に翻訳され、その機械語のプログラムをCPUが実行するのです。</p>
+
+<h2>ファイルは永続化されたデータ</h2>
+<p>また、ファイルは永続化されたデータです。</p>
+<p>コードが、プログラムにおいて、どのような振る舞いをするかという、「変わらない不変のもの」であるとするならば、ファイルは、その場その場で変わるデータであり、「変わりやすいプログラムの処理対象」であるでしょう。</p>
+<p>Webなどの場合は、データの保管のためにファイルではなくデータベースサーバを使うこともあります。</p>
+<p>単にファイルと言っても、プレーンテキスト、ini、HTML、XML、JSON、CSV、エクセルなど、さまざまな形式のファイルがあります。<a href="xml.html">XMLと文書形式</a>や<a href="digital.html">デジタル情報</a>を参照のこと。</p>
+
+<h2>どんな機能を持ったプログラムであっても、コードとファイルで成り立つ</h2>
+<p>どんな機能を持ったプログラムであっても、プログラムはコードとファイルで成り立ちます。</p>
+<p>コマンドプログラムも、ネットワーク通信も、テキスト処理も、GUIも、マルチメディアも、言ってしまえばなんであってもコードとファイルでプログラムは成り立ちます。</p>
+<p>ですが、カーネルは少し話が変わります。なぜなら、カーネルはプログラムとファイルシステムをそもそも「成り立たせるための仕組みを提供」するからです。</p>
+<p>なので、カーネルのやっていることは、コードとファイルを成り立たせることであり、それによってプログラムの「実行環境を作る」ということであると言えます。</p>
+
+<h2>２ちゃんねる専用ブラウザとPortageを例にすると分かりやすい</h2>
+<p>このような、コードとファイルによってプログラムが成り立つという実例は、昔の２ちゃんねる専用ブラウザが分かりやすいです。</p>
+<p>サーバーから掲示板のデータファイル（datファイル）をダウンロードし、ローカルに保存し、datファイルをテキスト解析して、タブとリストあるいはブラウザコントロールでGUI表示し、巡回や投稿、HTMLのスキン機能などをつけた２ちゃんねる専用ブラウザは、まさに「プログラミングの基本がよく分かる」ようなアプリケーションの題材でした。</p>
+<p>ですが、今は、そもそも2chが5chに変わって、いろいろと２ちゃんねる専用ブラウザは肩身が狭くなりました。</p>
+<p>ほかの適当な実例としては、Gentoo Linuxのパッケージ管理システムであるPortageなどが分かりやすいと思います。Portageは、ネットワーク上のリポジトリとローカルのツリーを同期し、コマンド操作で自動的にebuildスクリプトを実行して、ソースtarballをビルドしてシステムにインストールします。ここでもコードとファイルが大活躍します。</p>
+<p>なので、昔の時代を知っている人であれば、「専ブラとPortageがプログラムの基本だな」ということが分かると思います。</p>
+
+<h1>関連ページ</h1>
+<h2>XMLと文書形式</h2>
+<p><a href="xml.html">XMLと文書形式</a>を参照のこと。</p>
+
+<h2>シリアライズと永続化</h2>
+<p><a href="serialize.html">シリアライズ</a>と<a href="orm.html">永続化とO/Rマッピング</a>を参照のこと。</p>
+
+<h2>RDBMS</h2>
+<p>高度なアプリケーションの場合、永続化のためにファイルではなくデータベースを使うこともあります。</p>
+<p><a href="../db/rdbms.html">RDBMS</a>を参照のこと。</p>
+
+<h2>Linux設計</h2>
+<p><a href="../linux/linux_os_design.html">Linux設計</a>も参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

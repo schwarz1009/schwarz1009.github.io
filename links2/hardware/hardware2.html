@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ハードウェアの世界観２（周辺機器） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ハードウェアの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/hardware_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ハードウェアの世界観２（周辺機器）</h1>
+<p>パソコンのハードウェアとカーネルの世界観２（周辺機器）です。<a href="hardware.html">ハードウェア１（半導体）</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>パソコンの自作</h1>
+<h2>パソコンは簡単に自作できる</h2>
+<p>パソコンは、思ったより簡単に自作できます。たとえば、メモリの容量を増やしたり、ネットワークカードやグラフィックカードなどを追加することで、性能の向上が期待できます。</p>
+<p>もちろん、LSI（CPUやメモリのような半導体素子）を自作するわけではありません。そんなことは高度な会社や研究所でなければできません。ここでいう自作とは、ハードウェアをいったん分解して、その上で自分の好きなカードやボードを追加し、パソコンの性能を向上させることです。</p>
+<p>デスクトップ型のマシンは、最初から自作PCを作ることを想定して作られているため、簡単にネジが外せたりします。ノートパソコンであっても、メモリを増設したり、あるいはハードディスクを取り換えて別のものにしたりすることができます。たとえば、Windowsの入ったハードディスクをそのままで取っておいて、その上で別のハードディスクにLinuxをインストールしたりすることができます。僕はいつもこのやり方で、Windowsにいつでも戻せる状態を維持したままで、Linuxを新しいハードディスクに入れています。Windowsがなければインターネットの情報にもアクセスできず、Linux関連の情報も調べることができなくなったりします。Linux入門者のみんなにもこの方法をおすすめします。</p>
+<p>別のやり方として、コンピュータを数台用意して、スイッチ方式でキーボード、マウス、ディスプレイなどを切り替える方法もあります。昔は、僕もこの方法でやっていました。この方法の利点は、同時に複数のパソコンの電源を入れて、簡単にスイッチできることです。欠点は、パソコンのハードウェアがたくさん増えて、置き場所に困ることです。また、スイッチを行うための専用の機器が必要になります。ですが、一端それを導入してしまうと、いつでもWindowsとLinuxを切り替えることができて、とても便利です。</p>
+<p>もっと別のやり方としては、Windowsの仮想環境にLinuxをインストールする、という方法もあるでしょう。オープンソースのVirtualBox環境にインストールしたり、Windows 10のHyper-Vを使う方法などがあります。</p>
+<p>僕がパソコンの自作をしていたのは昔からで、中学生の頃には学校に自由研究のレポートにパソコンの分解と自作のことを書きました。ですから、子供ならLinuxの仕組みは分かるでしょう。ですが、きちんと開発するのであれば、大人になってからで良いと思った方が良いでしょう。きちんと前提となる基礎知識があれば、ソフトウェアの開発は難しくはないのです。ですが、ハードウェア環境を用意することがネックになる場合はたくさんあります。本当に開発するハードウェアと、いつも使うハードウェアはOSも含めて分けて管理しましょう。開発環境はいつ動かなくなるか、分からないからです。</p>
+
+<h2>書籍</h2>
+<p>ハードウェアについては以下のような書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/4295002666/">徹底攻略 応用情報技術者教科書 平成30年度</a></li>
+</ul>
+
+
+<h1>入出力経路</h1>
+<h2>チャネル・コントローラ</h2>
+<p>CPUとデバイスの処理を行う間、CPUが待っていては遅いので、I/O処理を入出力専用のプロセッサであるチャネル・コントローラに任せる。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%81%E3%83%A3%E3%83%8D%E3%83%AB%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9">チャネル・コントローラ - Wikipedia</a></li>
+</ul>
+
+<h2>インターフェース</h2>
+<p>パソコンや周辺機器を接続するハードウェアインターフェース。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9_(%E6%83%85%E5%A0%B1%E6%8A%80%E8%A1%93)">インタフェース (情報技術) - Wikipedia</a></li>
+</ul>
+
+<h2>シリアルインターフェースとパラレルインターフェース</h2>
+<p>シリアルインターフェースでは1ビットずつ直列で、パラレルインターフェースでは複数のビットずつ並列でデータを送り出す。シリアルインターフェースにはRS-232C（シリアル回線）やUSBやIEEE1394、パラレルインターフェースにはIDEやSCSIなどがある。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E4%BB%A4%E5%92%8C05%E5%B9%B4-%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%EF%BC%86%E3%82%AF%E3%83%AC%E3%83%90%E3%83%BC%E6%96%B9%E5%BC%8F%E3%81%A7%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B-%E6%A0%A2%E6%9C%A8%E5%85%88%E7%94%9F%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%83%85%E5%A0%B1%E6%8A%80%E8%A1%93%E8%80%85%E6%95%99%E5%AE%A4-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E6%A0%A2%E6%9C%A8/dp/4297131307">平成18年度 イメージ&クレバー方式でよくわかる栢木先生の基本情報技術者教室 (情報処理技術者試験)</a></li>
+</ul>
+
+<h2>InfiniBand</h2>
+<p>InfiniBandは高いRAS（信頼性・可用性・保守性）を持つ新しいI/Oバスの通信規格。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/InfiniBand">InfiniBand - Wikipedia</a></li>
+</ul>
+
+<h1>バス</h1>
+<h2>バス</h2>
+<p>コンピュータ内部で各回路がデータをやり取りするための伝送路。</p>
+<p>バスはコンピュータのインターフェース同士を繋いでデータを送受信する「通信回路」であり、CPUやメモリとハードディスクやプリンターなどの周辺機器を繋ぐ。</p>
+<p>その通信回路のやり取りの方法と移動の経路が、バス停を順次移動していくバスに似ていることから、「バス」と名付けられた。</p>
+<p>バスには8bit時代からさまざまな規格があり、それぞれのインターフェースをたくさんの（それだけの）線で結ぶ方式をパラレルバス、すべてを一本の線で結ぶ方式をシリアルバスと呼ぶ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%90%E3%82%B9_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">バス (コンピュータ) - Wikipedia</a></li>
+</ul>
+
+
+<h2>USB</h2>
+<p>USBは「ユニバーサル・シリアル・バス」の略で、比較的新しいバスのインターフェース。</p>
+<p>今では、マウスやプリンターなど、多くの機器がUSBで繋がれている。</p>
+<p>USBは通信用の2つの線と電源用の2つの線の4本の線だけで成り立ち、これだけで高速な通信ができる。最初の頃のUSB 1.0は遅かったが、USB 2.0で速度が改善され、USB 3.0ではもっと高速になった。</p>
+<p>USBは簡単に抜いたり挿したりすることで動的にデバイスを感知し、ユーザーモードで接続するため、ホットプラグの仕組みが必要である。伝統的に、UNIXではデバイスファイルを事前に作っておくのが慣例であり、Linuxでもホットプラグを実現することは長い間課題だった。今では、ユーザーモードで/devディレクトリのデバイスを動的に作成するudevがLinuxでは使われている。</p>
+<p><a href="../linux/linux_devicefile.html">Linuxデバイスファイル</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%83%BB%E3%82%B7%E3%83%AA%E3%82%A2%E3%83%AB%E3%83%BB%E3%83%90%E3%82%B9">ユニバーサル・シリアル・バス - Wikipedia</a></li>
+</ul>
+
+<h2>帯域</h2>
+<p>帯域とはデータの転送速度のことで、スループットともいう。</p>
+<p>基本的に、CPUやメモリに近いところには高速なI/Oコントローラを配置し、ハードディスクなどの大容量なストレージに近い（CPUやメモリから遠い）ところでは低速なコントローラや機器を配置する。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a></li>
+</ul>
+
+<h2>I/Oポートとバス</h2>
+<p>CPUから入出力を行うには、CPUに直接接続されたI/Oポートを使う方法と、バスを使う方法がある。</p>
+<p>I/Oポートはより基本的かつ単純であり、小さなマイコンの周辺機器などに適している。</p>
+<p>これに対して、バスは入出力専門の転送回路であるデータチャネルを持つなど、データを転送するためにより適している。</p>
+<p>（放送大学「コンピュータの動作と管理 ('17)」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.04.22</p>
+</div>
+
+<h1>入力装置</h1>
+<p><a href="input_device.html">入力デバイス</a>も参照のこと。</p>
+<h2>キーボード</h2>
+<p>文字の入力装置。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">キーボード (コンピュータ) - Wikipedia</a></li>
+</ul>
+<h2>マウス</h2>
+<p>GUIイベントの入力装置・ポインティングデバイス。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A6%E3%82%B9_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">マウス (コンピュータ) - Wikipedia</a></li>
+</ul>
+<h1>出力装置</h1>
+<h2>プリンター</h2>
+<p>紙にデータを印刷する装置。</p>
+<p><a href="printer.html">プリンター</a>も参照のこと。</p>
+<p>PostScriptについては<a href="../art/postscript.html">PostScript</a>のページに情報がある。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%83%B3%E3%82%BF%E3%83%BC">プリンター - Wikipedia</a></li>
+</ul>
+
+<h2>ディスプレイ</h2>
+<p>出力をモニター画面に映し出す装置。</p>
+<p><a href="monitor.html">モニター</a>と<a href="../tech/tv.html">テレビ</a>も参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">ディスプレイ (コンピュータ) - Wikipedia</a></li>
+</ul>
+
+
+<h2>スピーカー</h2>
+<p>音を再生する装置。</p>
+<p><a href="../tech/phone.html">電話</a>も参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%94%E3%83%BC%E3%82%AB%E3%83%BC">スピーカー - Wikipedia</a></li>
+</ul>
+
+
+<h1>ディスク（補助記憶装置）</h1>
+<h2>ハードディスク</h2>
+<p>データの記憶装置。パソコンに内蔵されて用いられることが多い。</p>
+<p><a href="harddisk.html">ハードディスク</a>と<a href="../tech/magnetic_tape.html">磁気テープ</a>も参照のこと。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%8F%E3%83%BC%E3%83%89%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96">ハードディスクドライブ - Wikipedia</a></li>
+</ul>
+
+<h2>CD/DVD</h2>
+<p>外部から大容量のデータを読み込む時に使われる。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%91%E3%82%AF%E3%83%88%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF">コンパクトディスク - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/DVD">DVD - Wikipedia</a></li>
+</ul>
+
+<h1>ネットワーク</h1>
+<p><a href="../network/network.html">ネットワーク</a>も参照のこと。</p>
+<h2>ネットワーク</h2>
+<p>ネットワークを使うことで、別々の場所にあるコンピュータ同士を繋ぐことができる。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF">コンピュータネットワーク - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88">インターネット - Wikipedia</a></li>
+</ul>
+
+<h2>TCP/IP群</h2>
+<p>TCP/IPはネットワークにおけるプロトコルの1つ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%83%BB%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%83%BB%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%88">インターネット・プロトコル・スイート - Wikipedia</a></li>
+</ul>
+
+<h1>その他</h1>
+<h2>マザーボード</h2>
+<p>電子回路基板。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%B6%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89">マザーボード - Wikipedia</a></li>
+</ul>
+<h2>拡張カード</h2>
+<p>パソコンの機能を拡張できるカード。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%8B%A1%E5%BC%B5%E3%82%AB%E3%83%BC%E3%83%89">拡張カード - Wikipedia</a></li>
+</ul>
+<h2>電源・バッテリー</h2>
+<p>パソコンに電気を送る装置。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E9%9B%BB%E6%BA%90%E5%9B%9E%E8%B7%AF">電源回路 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%83%E3%83%86%E3%83%AA%E3%83%BC">バッテリー - Wikipedia</a></li>
+</ul>
+
+<h1>ソフトウェア</h1>
+<h2>ファームウェア</h2>
+<p>ハードウェアに対してソフトウェア向けのインターフェースを提供する小さな内蔵ソフトウェア。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%83%BC%E3%83%A0%E3%82%A6%E3%82%A7%E3%82%A2">ファームウェア - Wikipedia</a></li>
+</ul>
+<h2>カーネル</h2>
+<p>ハードウェアを制御し、アプリケーションを実行出来るようにする。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB">カーネル - Wikipedia</a></li>
+</ul>
+<h2>OS・システムソフトウェア</h2>
+<p>ユーザが使いやすいユーザーランドを実現する基本ソフトウェア。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">オペレーティングシステム - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2">システムソフトウェア - Wikipedia</a></li>
+</ul>
+<h2>ミドルウェア</h2>
+<p>カーネルと応用ソフトウェアの中間として、さまざまなサービスを提供する。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%89%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2">ミドルウェア - Wikipedia</a></li>
+</ul>
+<h1>開発フレームワーク・言語処理系</h1>
+<h2>プログラミング言語</h2>
+<p>プログラムを記述するための言語。アセンブリに翻訳するコンパイラ方式と実行時に読み込みながら逐次的に実行するインタプリタ方式がある。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E">プログラミング言語 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E%E4%B8%80%E8%A6%A7">プログラミング言語一覧 - Wikipedia</a></li>
+</ul>
+<h2>Webアプリケーションフレームワーク</h2>
+<p>Webアプリケーションは、プログラミング言語以上のフレームワークを用いて開発されることがある。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Web%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF">Webアプリケーションフレームワーク - Wikipedia</a></li>
+</ul>
+<h2>GUIツールキット</h2>
+<p>GUIプログラムは、プログラミング言語以上のGUIツールキットを用いて開発される。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A3%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88%E3%83%BB%E3%83%84%E3%83%BC%E3%83%AB%E3%82%AD%E3%83%83%E3%83%88">ウィジェット・ツールキット - Wikipedia</a></li>
+</ul>
+
+<h1>歴史</h1>
+<h2>コンピュータなどの歴史</h2>
+<p>コンピュータの歴史。思ったより面白いです。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E6%A9%9F%E3%81%AE%E6%AD%B4%E5%8F%B2">計算機の歴史 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E6%A9%9F%E3%81%AE%E6%AD%B4%E5%8F%B2_(1960%E5%B9%B4%E4%BB%A3%E4%BB%A5%E9%99%8D)">計算機の歴史 (1960年代以降) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E5%8F%B2">パーソナルコンピュータ史 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E%E5%B9%B4%E8%A1%A8">プログラミング言語年表 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E6%AD%B4%E5%8F%B2">オペレーティングシステムの歴史 - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%81%AE%E6%AD%B4%E5%8F%B2">インターネットの歴史 - Wikipedia</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>歴史上のパソコン</h2>
+<p><a href="old_computer.html">古いコンピュータ</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>ハードウェア</h2>
+<p>コンピュータの仕組み。</p>
+<ul>
+<li><a href="http://www.way-on.com.tw/PCbasal/">パソコンの仕組み</a></li>
+<li><a href="http://www.infonet.co.jp/ueyama/ip/index.html">Webで学ぶ 情報処理概論</a></li>
+</ul>
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

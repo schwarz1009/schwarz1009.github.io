@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>OpenJDK関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>OpenJDKの世界観</h1>
+<p>OpenJDKに関する世界観です。<a href="java.html">Javaの世界観１（言語）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>オープンソースJava</h1>
+<h2>OpenJDK</h2>
+<p>オープンソースのJava VM/クラスライブラリ。Linuxではこれを主に使います。昔あったGNU Classpath、Apache Harmony、GCJ（JavaをGCCの仕組みを使ってネイティブの実行ファイルにコンパイルできる）などはOpenJDKの登場によって衰退した模様。昔はJavaをLinuxでどう使うかは重要な問題であり、二大オープン系プロジェクトの割には問題が多く、仲が悪かった。FedoraはOpenJDKを完全にフリーにして取り込むためにIcedTeaプロジェクトを作った。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/OpenJDK">OpenJDK - Wikipedia</a></li>
+</ul>
+
+<h2>OpenJDKのソースコード</h2>
+<!--
+<h3>OpenJDKはコードを見ると面白い</h3>
+-->
+<p>OpenJDKのことを「オープンソース版のあやしいJava」だと思っている人が多いけれど、実際コードを見ていると、Oracleが著作権者でGPLでライセンスされており、コードはきちんと公開されている。</p>
+<p>OpenJDKはC++やJavaのほかアセンブリ言語などで書かれており、コードを見ていると色々と面白い。以下を参照に、一度ご覧になってみると良いと思う。</p>
+<ul>
+<li><a href="https://hg.openjdk.java.net/jdk/jdk">jdk/jdk: log</a> - 左メニューの「browse」からコードを参照できる。</li>
+<li><a href="https://openjdk.java.net/">OpenJDK</a> - さまざまなプロジェクトが計画されている。</li>
+</ul>
+<p>OpenJDKは、おそらく、Oracle JDKの有料化とともに、Java界のスタンダードになるだろう。よって、Javaはもう完全にオープンソース陣営の舵に乗っている。.NET Coreもオープンソースになり、またMicrosoftはたくさんの開発・基盤ツールをオープンソースとして公開し始めている。ほとんどの有力なプログラミング言語や開発ツールで、もう、オープンソースは勝利した。今から、オープンが完全にパソコンのデファクトスタンダードとなっていくだろう。</p>
+
+
+<h1>Javaの有料化</h1>
+<h2>Javaの有料化でどうなるJava言語</h2>
+<p>Oracleは先日、将来のJDK（Javaの基本的な開発ツール）を有料化することを発表した。これにより、今まで無料で使えていたJava（あくまでもOracleの名前を冠したJDK）が有料になる。</p>
+<p>これは、ある意味、空気に値段を付けるようなものである。だが、簡単にOracleを批判することはできない。</p>
+<p>なぜなら、Javaを開発するのはとてもコストと労働力のかかる仕事であり、ある意味Sunを買収したOracleにとって、Javaは「負債」になっていたからである。</p>
+<p>Javaの有料化によって、今までJava言語を使っていた「ただのりユーザー（フリーライダー）」はこれまでのようにJavaを無料では使えなくなる。</p>
+<p>ただ、これで困るのは、一般ユーザーだけではない。今までJava言語を使ってさまざまなプログラムを開発してきた、「業務で仕方なくJavaを使っていたユーザー」にとっては、ここから先は別の言語を使うか、あるいは有料になったJavaを買わなければならない。</p>
+<p>だが、ここで朗報がある。Javaには、最近、オープンソース版のOpenJDKがある。OpenJDKをみんなで開発すれば、今までのようにJavaを無料のまま、オープンソースで使うことができる。</p>
+<p>だが、OpenJDKとOracleのJavaにどれくらい違いや互換性があるのか、僕は知らない。そもそも、Javaをどこからどこまで有料にするのか、僕はまだ分かっていない。</p>
+<p>ただ言えることは、Javaの開発者は決してボランティアではないということである。有料化を批判するのは簡単だが、むしろ、今からOracleがぼろ儲けするのは明らかである。空気に値段を付けたのと同じである。</p>
+<p>C#/.NETに移行するという声もあるようだが、「Oracleから逃げてMicrosoftに捕まっただけ」であるとの批判もある。そもそも、C#はmonoや.NET Coreなどを別にすれば、そもそも有料である。オープンソース系の言語が見直される日も来るのかもしれない。誰かがJavaを模した「仮想マシンとバイトコードで動く静的型付けのオブジェクト指向言語」を作る可能性はある。だが、Javaと全く同じものにすることは難しいだろう。それは、Javaのクラスライブラリがとても巨大で、簡単に少人数では作れるわけがないからである。OracleのJavaを買う、という選択肢も十分考えられる。</p>
+<p>そもそも、IBMなどがやっているように、有料のもので良いのであれば、Oracle以外にもJavaを提供している会社は存在する。一番良いのは、その中のどれかが無料提供されることだろう。一気にOracleに勝てるはずだ。</p>
+<p>後日追記：あまり記事も見ずにいい加減なことを言ったが、今までのフリーなJavaは機能や性能ともに同等なOpenJDKとして提供される。だが、サポートされる期間がOracleのJavaと違う。言ってしまえば、個人ユーザーにとってはOpenJDKで十分である。だから、安心してほしい。</p>
+<ul>
+<li><a href="https://qiita.com/wingsys/items/aeb332da1aedc9d1d6bf">「Javaの方針転換」リスクに関する考察 - Qiita</a> - Javaがどういう言語であったか、別の言語としては何が考えられるか、などの考察。</li>
+</ul>
+
+<h2>Javaの有償化は誤解</h2>
+<p>上に「Javaが有料化する」と書きましたが、Oracleによればそれは誤解です。Javaはリリースサイクルが変更になり、オープンソースで無料のOpen JDKが今までと同様に無償で提供されます。ですが、Open JDKは半年ごとに新しいバージョンがでるようになり、サポート期間も短いです。大規模なエンタープライズシステムを作るためには、長期のサポートが必要ですが、このために有償のOracle JDKが3年ごとにリリースされ、8年間サポートされます。</p>
+<p>よって、OpenJDKを使う一般ユーザーにとっては、Javaは無償のままです。こうした理由に、「時代の変化に対応していくために、もっと短いスパンで新バージョンをリリースする」という必要があったことが言えます。</p>
+<ul>
+<li><a href="https://www.itmedia.co.jp/news/articles/1905/20/news123.html">オラクル、「Java有償化という誤解」を解き、未来を語る (1/3) - ITmedia NEWS</a></li>
+</ul>
+
+<h2>MSがjClarityを買収 (AdoptOpenJDK)</h2>
+<p>最近、MSがjClarityを買収した。jClarityはJavaのワークロードのパフォーマンスを上げる会社だが、AdoptOpenJDKと呼ばれる「Oracleではない独自のOpenJDKバイナリ」を提供するプロジェクトの創設者のひとつでもある。</p>
+<p>今後、MSはAzure上のJavaにAdoptOpenJDKを使うかもしれないということだが、AdoptOpenJDKはOracleJDKを完全に置き換えるものであるため、OracleとMSでJavaをめぐる争いが勃発するかもしれない。</p>
+<ul>
+<li><a href="https://jp.techcrunch.com/2019/08/20/2019-08-19-microsoft-acquires-jclarity-an-open-source-java-performance-tuning-tool/">マイクロソフトがJavaアプリのパフォーマンスを上げるjClarityを買収 | TechCrunch Japan</a></li>
+</ul>
+
+<h2>AdoptOpenJDKを使おう</h2>
+<p>Javaを開発者として使うなら、AdoptOpenJDKがベストです。</p>
+<p>Oracle JDKは個人利用だけが無償であり、商用利用ではお金を取ります。</p>
+<p>また、OpenJDKそのものはサポート期限が短いです。</p>
+<p>AdoptOpenJDKなら、LTS版があるため、商用利用でも長い間サポートしてくれます。</p>
+<p>僕もMac + VS-Codeを使ったJavaの練習で、AdoptOpenJDKを使っています。</p>
+<ul>
+<li><a href="https://adoptopenjdk.net/">AdoptOpenJDK</a></li>
+</ul>
+<p>後日注記：AdoptOpenJDKはEclipse傘下となってAdoptiumとなりました。OpenJDKの独自ビルド版は、このほかにもAzul ZuluやMicrosoftによるビルド版などが提供されています。また、Oracle JDKはJava 17より新しいライセンス「Oracle No-Fee Terms and Conditions License」を裁定しており、商用用途でも無償利用が再び可能となりました。</p>
+
+<h1>関連ページ</h1>
+<h2>Sun</h2>
+<p><a href="../unix/sun.html">Sun</a>を参照のこと。</p>
+
+<h2>Oracle</h2>
+<p><a href="../db/oracle.html">Oracle</a>を参照のこと。</p>
+
+<h2>オープンソース</h2>
+<p><a href="../linux/oss.html">オープンソース</a>を参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Ubuntu - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Ubuntu</h1>
+<p>Ubuntuに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Ubuntuとは</h1>
+<h2>Ubuntuの概要</h2>
+<p>デスクトップ向けで定評があるLinuxディストリビューション。</p>
+<p>Red HatやDebianのような「ハッカー向け」のディストリビューションではなく、初心者から学習者に人気のある、特にデスクトップ向けのディストリビューション。</p>
+<p>だからといって使えないわけではなく、サーバー管理者からプロのエンジニアまで、幅広い人気がある。</p>
+<p>つい最近まで、Unityという独自のデスクトップインターフェースを搭載していて、使いやすさからとても好評だったが、wayland対応や次世代Unity開発が頓挫したことにより、GNOMEを再度搭載するに至った。</p>
+<p>僕もUbuntuは嫌いではないが、Debianの方が軽いとか、Fedoraの方が面白そうとか、そういう発想はある。だが、Ubuntuはzipファイルの中の日本語Shift-JISファイル名問題など、日本語についても良い感じに調整されており（日本語Remixイメージの場合）、最初から設定すべき項目も少なく（ほとんどは自動かつデフォルトのままで使える）、まさに「普通のパソコンユーザ向け」なディストリビューションであり、Windowsからの乗り換えに最適（ベストマッチング）である。</p>
+<p>また、開発者やオタクから特に人気がないかと言われればそんなことはなく、KDEの開発でもKubuntuが標準の解説ページも多い。</p>
+<p>また、Linuxで遊んでみたい、という「純粋な遊び用途」であれば、半年ごとにリリースし、Debianよりも新しいバージョンを採用するUbuntuのリリースモデルとメンテナンスされているパッケージのリポジトリは魅力的である。</p>
+<p>Ubuntuから派生したMintのように、Ubuntuのリポジトリを共有することで簡単に新しいディストリビューションを作っているプロジェクトもある。debパッケージそのものは、Debianで開発され、Ubuntuで更新され、Mintへと共有されていたりする。</p>
+<p>Unityの特徴として（もうGNOME3には変わったが）、Mac風の画面上部に常時表示されるアプリケーションメニューがある。Macを完全に模倣していて、DockなどもMac由来だが、その上で独自の「アフリカ的」な魅力を醸し出している。Ubuntuはアフリカ発の「思いやり」を重視しているディストリビューションだ。（ubuntuという言葉は南アフリカのズールー語で「他者への思いやり」を意味する。Ubuntuの母体会社Canonicalの創業者であるマーク・シャトルワースは南アフリカ人であり、実業家で自腹で宇宙旅行をした世界二人目の人物である。）</p>
+<p>デスクトップだけではなく、サーバー版やクラウド版も作っている。サーバー版は最小限の構成で、インストール後はどのポートも開いていない。だがLAMPは簡単にインストール出来る。</p>
+<p>Ubuntuはコミュニティも活発で、ネットでさまざまなブログを見ることが出来るほか、技術評論社などのようなサイトで情報を取得できる。最近は「LinuxデスクトップといえばUbuntu」となっており、ネットでのLinuxデスクトップの情報はUbuntuのための情報が多い。情報にありつける頻度や機会も高い。</p>
+<ul>
+<li><a href="http://gihyo.jp/admin/clip/01/ubuntu-topics">Ubuntu Weekly Topics｜gihyo.jp … 技術評論社</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe">Ubuntu Weekly Recipe：連載｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>どのディストリビューションにするか迷ったら、とりあえずUbuntuにしておくと良いだろう。その後にFedoraやDebianに乗り換えるのは簡単だ。</p>
+
+<h2>初心者向けだと思っていたらトラブルではまる</h2>
+<p>僕は、Ubuntuは必ずしも初心者向けではないと思います。</p>
+<p>それは、バグや不具合が多いからです。トラブルにはまった時に、「自分が何をしたのか分からなくなって、解決できなくなる」ということが多いのです。</p>
+<p>初心者は自動による設定をありがたく受け入れてしまいますが、これはOSが必ず想定した動きをした場合に限られます。</p>
+<p>実際のところ、Debian sid（Debianの開発版）のパッケージを多く取り入れていることもあって、Ubuntuは非常に不安定かつバグが多いです。また、初心者は設定のことなど考えていないため、自分の操作がシステムにどのように影響するのか、なぜその問題が発生したのかが分かりません。問題の発生を「この設定のせいだ」と把握するのが非常に難しいのです。</p>
+<p>Ubuntuは、むしろ、初心者ではなく、きちんとLinuxのことが分かるエンジニアに向いています。エンジニアがやりたい高機能な環境を簡単に設置できるからです。実際のところ、UbuntuはデスクトップLinuxですが、Serverの方が使えます。Ubuntu ServerはWikipediaのサーバーインフラにも使われています。</p>
+
+<h2>アフリカを素晴らしい地域にするための、人類全員による思いやりOS</h2>
+<p>今でこそ、デスクトップLinuxの標準的存在になったUbuntu。</p>
+<p>Ubuntuには、Linuxやオープンソースの理想よりも一歩上の、もっと高い理想があります。</p>
+<p>それは、「アフリカ発のOS」であると言うこと。</p>
+<p>開発者のマーク・シャトルワースは南アフリカ人で、ubuntuという言葉は南アフリカのズールー語で「他者への思いやり」を意味しています。</p>
+<p>Ubuntuは、アフリカ人による、アフリカ人のための、無料に入手し、どれだけパソコンがあってもコピーして導入でき、ソースコードがオープンで、ベンダーロックインもされないOSです。</p>
+<p>Ubuntuは確かに、初心者向けの、「デスクトップやGUIで使うLinux」として流行っています。確かに、技術的にももっとも優れたOSを目指していますが、本当は社会的な意義の大きい、慈善事業のようなOSです。</p>
+<p>そもそも、シャトルワースは実業家で、とても莫大な資本を持っていました。シャトルワースは自腹で宇宙旅行をした世界二人目の人物として知られますが、自分の資金や資産をなげうってさまざまなことをすることで知られており、UbuntuやCanonicalも、シャトルワースが自らの資本を投入して作った、いわば「金持ちの道楽」です。</p>
+<p>ですが、UbuntuはデスクトップLinuxとして、標準的な地位を確立しました。それは、アフリカの雰囲気が醸し出されていると同時に、Linuxやオープンソースそのものは国際的かつグローバルにたくさんの人々が参加しており、「人類全員で作る思いやりOS」を目指していたことが、そうした多くの人々、中には先進国だけではなく発展途上国の人々も含めて、そうした参加者に強烈な「思いやりの理想」を突きつけたからだと思います。</p>
+<p>Ubuntuは、Linuxでありながら、UNIXのコマンドラインでの操作インターフェースの感じが薄いOSです。確かに、GNUツールやbashなどが無料で付属しており、パワフルなコマンドラインを使うこともできますし、Windowsとは違い、gccのようなC/C++のコンパイラも、PerlやPythonなどのインタープリタもあり、サーバーやデータベースに必要なソフトウェアもパッケージングされており、パソコンが一台あれば、それだけでシステム管理者になることができます。Ubuntuのソースコードはオープンソースに公開されており、開発に参加したり、エンジニアとして技術を磨くためにも最適です。</p>
+<p>ですが、UbuntuはGUIで、デスクトップで使うことが半ば前提になっています。GNOME 3が人々から批判されていた時は、独自のUnityというインターフェースを開発しました。また、KDEやXfceのような他のデスクトップユーザーのために、最初からそうしたデスクトップ環境が導入されているフレーバーも開発し、提供していました。</p>
+<p>こうしたUbuntuの姿勢が、Linuxコミュニティから批判されることもあり、たとえば「UbuntuはWindowsのようなOSだ」とか、「全然Linuxじゃない」などといった批判もあります。それでも、Ubuntuはデスクトップの開発を先んじて行います。そのため、Linuxのトレンドから遠く離れたソフトウェアを開発し、mriやsnappyのような「ありえないUbuntu独自の技術」を作ります。</p>
+<p>また、上に書いたような意味でUbuntuを捉えると、「アフリカだけに閉じたOSではないか」とみなされるかもしれませんが、そうではなく、たとえば中国の国産OSであるUbuntu Kylinを開発・提供しています。中国では、Windowsの違法コピー問題が多く言われており、誰もWindowsの正規版を購入しておらず、違法コピーが半ば常態化しています。こうした中国を変えるために、Ubuntuは努力しています。UKUIというMATEを改良した独自のインターフェースを採用しています。</p>
+<p>また、Ubuntuの使用感で言うと、「デザインがアフリカ的」であると言えます。Ubuntuは、濃い茶色や紫など、「濃い色」を多用します。これが、アフリカ人的な「新しい色彩感覚」を作り出しています。これはヨーロッパなどの白人国家で、Ubuntuがかっこよく見える理由でもあります。ヨーロッパでは、カラフルで眩しいブライトな色を多用しますが、Ubuntuはそうしたヨーロッパの色彩感覚と全く違うのです。</p>
+<p>UbuntuがWindowsよりも優れている点は、僕は「ロケール」「ベンダーロックインからの解放」「無料かつ独学のために有用」であると思います。</p>
+<p>まず、ロケールの問題。Microsoftは日本などの「儲かる市場」に対しては、日本語などの専用ロケールを提供します。ですが、アフリカの諸語のような「儲からないのにコストだけがかかる」言語には、なかなかロケールが提供されず、メッセージなどが現地の言葉に翻訳されません。オープンソースなUbuntuなら、ボランティアのアフリカ人が自ら、英語から自分たちの使う言語に翻訳することができます。gettextの使い方と、英語を解する能力があれば、誰でも翻訳に参加できるのです。</p>
+<p>次に、ベンダーロックインからの解放です。Microsoftが支配的かつ、Windowsの寡占市場となっている日本や韓国などの国では、Windowsアプリケーションを開発しても、Microsoftにただ使われるだけになってしまいます。オープンソースなUbuntuなら、別のUNIXやLinuxディストリビューションにも容易に乗り換えられます。また、派生版を自分で作って使うことも、ひとつのOSをコピーして使うことも自由です。（Ubuntuはdebパッケージを採用しているため、パッケージが簡単に改変できる。）</p>
+<p>最後に、無料かつ独学のために有用である、ということです。たとえば、Ubuntuにはgccやg++のようなコンパイラが最初から用意されており、bashやperlを使って自分でスクリプトを書くことで、プログラミングを学ぶことができます。インターネット回線につなぐことのできる環境で、英語を読む能力があれば、インターネットの膨大な情報に、アフリカからでも無料でアクセスできます。また、ソースコードが公開されており、一度Cのマスターになってしまえば、自分でどこまでも独学で学ぶことができます。サーバーを立てることも、データベースを構築することもできるため、いきなりキャリアを積むこともできます。</p>
+<p>今のIT業界は、完全に「能力主義」です。本当に能力のある人間であれば、黒人でも、低学歴者でも、大学をでていなくても、15歳であろうと世界で活躍します。そうした「世界を知るための場所」となることができる、それが今のコンピュータとインターネットを持つ国の優位性です。</p>
+<p>また、コンピュータは昔は一部の特権階級のものでしたが、今では一般市民が自分のコンピュータ、それも昔のSunやHPのワークステーションを超える64bitのコンピュータを持つことができるようになりました。それでも、アフリカや中国などでは遅れています。こうしたアフリカの人々に、生まれた時から格差を与えてはいけません。栄養失調や病気のための薬と同様、世界を知り生きるための手段としてコンピュータが必要です。</p>
+<p>ただし、ここまでUbuntuをほめたたえて言うことではないかもしれませんが、日本人がUbuntuを使う必要は僕はないと思います。日本では、高品質なWindows 10をプリインストールしたパソコンを、ポケットマネーで買うことができます。そうした豊かな国民は、あえて安定したWindowsを捨ててまでUbuntuを使うことは、特にメリットもなく、得策ではないと思います。確かにVisual Studioは高いかもしれませんが、WindowsパソコンにRubyやPythonをインストールすることは簡単にできます。もちろん、使いたい人間が自分だけの判断で使うことは構いません。gccやコマンドラインの練習になって良いでしょう。ですが、会社のデザインやオフィスワークをするパソコンにUbuntuを導入することは得策ではありません。MozillaやLibreOfficeを使う人間は、Windowsにインストールした方が最適ですし、無料のソフトウェアがたくさんあるからといって、MS-OfficeやAdobeのデザイン製品が動かないのであれば、まともには使えません。</p>
+<p>ですが、IT業界は勝者が総取りの世界です。Ubuntuがもしアフリカや中国などの後進国で普及すれば、アフリカ全体あるいは中国全体がUbuntu一色に染まることでしょう。その時、その地域は、アメリカとはまた違う、素晴らしい文化圏になるでしょう。Ubuntuはアフリカを素晴らしい地域に変える可能性を秘めた、思いやりいっぱいのOSです。ぜひ、日本人も一度使ってみてください。ターミナルを操作する必要はありません。Windowsと同様に、Mozilla FirefoxとLibreOfficeの用途に使うべきでしょう。</p>
+<p>Ubuntuも、デスクトップLinuxの歴史を塗り替えた素晴らしいディストリビューションです。おそらく、デスクトップ用途で使うのであれば、Ubuntuが一番簡単で使いやすいでしょう。ですが、その代わり、UNIXの技術的なことは何も身につきません。何もしなくてもディストリビューションが全て自動でやってくれるからです。Ubuntuはそうした「初心者ユーザー」を大量に生み出しました。その結果、Ubuntuはいわば「Linux業界でもっとも嫌われているディストリビューション」にもなったのです。</p>
+<p>注記：これではUbuntuがアフリカ向けの慈善事業に見えてしまいますが、そうではありません。Ubuntuは、慈善事業ではありませんし、実際、開発者のマーク・シャトルワースは白人で、開発メンバーの多くも白人です（<a href="https://ja.wikipedia.org/wiki/Ubuntu#/media/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:20111102-145438-UDSPrecise-XL.jpg">Ubuntu開発者サミットグループ 11/11/02撮影</a>には、多数の白人の中にいくらか東洋系の人種が見られる。日本人かその他のアジア人だろう）。なぜ白人の間でUbuntuが流行るのかというと、それは使いやすいからです。実際のところ、UbuntuはLinuxコミュニティに良い「きっかけ」を与えています。たとえば、upstartからsystemdが生まれ、bazaarからgitが生まれ、mriからwaylandが生まれ、snappyからflatpakが生まれたように、UbuntuはLinuxをどんどん新しくしていきます。次世代Unity 8も、完成すればきっと良いインターフェースになったはずです。シャトルワースは、使いやすいOSをどのようにすれば作れるかというビジョンに長けています。おそらく、本気でWindowsを超えるOSを自分独自に作りたいのだと思います。</p>
+<p><a href="../country/africa.html">アフリカ</a>も参照のこと。</p>
+
+<h2>サーバーでも標準になってきた</h2>
+<p>最近、Ubuntuはデスクトップだけではなく、サーバーでも標準的になってきました。</p>
+<p>たとえば、WikipediaのサーバーにはUbuntuが使われています。</p>
+<p>他にも、Laravel Homesteadで仮想環境にサーバーを立てる時も、Ubuntuが標準的なOSとして含まれています。</p>
+<p>今までは「仕事で使うLinuxの事実上の標準はRHEL」と言われてきましたが、個人で使うサーバーなどには、Ubuntu Serverを入れておけば問題ないでしょう。</p>
+<p>Debianなどもサーバー用途には使えますが、僕は一度Debianをサーバー用途に使おうと思ってはまったことがあります。最小インストールではdhcpcdが含まれておらず、ネットワークにつなげることもdhcpcdのパッケージのダウンロードを行うこともできなくなってしまったのです。</p>
+<p>よほどのことがない限り、LinuxサーバーにはUbuntu Serverを導入するのが良いと僕は思います。</p>
+<p>実を言うと、僕は今までUbuntu Desktopは良く導入してきましたが、Ubuntu Serverは使ったことがありません。そのため無責任な話にはなりますが、ポートが最初から何も空いていないなど、Ubuntu Serverはサーバー管理にとても適しています。ネットの情報を参考にしながら、「Linuxでサーバーを立てる時はUbuntu」と知っていただけたら幸いです。</p>
+<p>後日注記：最小インストールでdhcpcdが入らないDebianは間違いではありません。最小インストールで、本当に最低限のパッケージしか入らないのが良いのです。これがRed Hat系のディストリビューションだと、最小インストールといっておきながらごてごてとパッケージが入って、ポートやサービスもONになっているという気味の悪いシステムになることがあります。よって、サーバーでDebianを使うなら、自分でdhcpcdをシステムにローカルで入れられるぐらいの「技術力」が必要となるでしょう。日本語入力もデフォルトがuimですが、嫌なら変えましょう。自分でどんどん変えまくって、壊れたら何度でも再インストールです。そういうことを繰り返しているうちに、Gentooのような素晴らしいディストリビューションにたどり着くでしょう。</p>
+
+<h1>Ubuntuフレーバー</h1>
+
+<h2>フレーバーとは</h2>
+<p>Ubuntuの標準版と同時にリリースされる、各デスクトップを変更・置き換えしたバージョン。</p>
+<p>長らく標準版はUnityを搭載していた（その前はGNOME2だった）が、最近標準版はGNOME3に戻った。（戻るまではUbuntu GNOMEというフレーバーがあった。）</p>
+
+<h2>Ubuntu</h2>
+<p>標準のUbuntuはGNOME 3構成。以前はUnityだった。</p>
+<p>標準のUbuntuには、デスクトップ（Ubuntu Desktop）、サーバー（Ubuntu Server）、そしてクラウド版がある。これはFedoraと同様である。</p>
+<p><a href="gnome.html">GNOME</a>も参照のこと。</p>
+
+<h2>Kubuntu</h2>
+<p>KDEを搭載したUbuntu。</p>
+<p>KDEの初心者ユーザーから開発者まで、KDEファンの中で人気があるフレーバー。</p>
+<p>最新のKDEを試してみたいなら使うと良いだろう。</p>
+<p>（Ubuntuではないが、KDEプロジェクトの開発する「KDE neon」というディストリビューションも最近生まれた。本当に最新のKDEを使いたい人におすすめ。）</p>
+<p><a href="kde.html">KDE</a>も参照のこと。</p>
+
+<h2>Xubuntu</h2>
+<p>Xfceを搭載したUbuntu。GNOMEやKDEよりとても軽量で軽い。</p>
+<p>デスクトップにそんなに多くの機能を期待しない、ライトユーザーにおすすめ。</p>
+<p>特に、「Windowsよりも軽いOSを使いたいが、少しはカスタマイズしたい」という人にピッタリ。</p>
+<p><a href="xfce.html">Xfce</a>も参照のこと。</p>
+
+<h2>Lubuntu</h2>
+<p>軽量デスクトップ環境LXDE/LXQtを搭載したフレーバー。</p>
+<p>本当に最も軽いOSを使いたい場合はこれがお勧め。</p>
+<p>たとえば、Windows XPを入れていたマシンにインストールする用途が考えられる。</p>
+<p>その場合、ターミナルだけを使うのも良いが、ブラウザはFirefoxを軽量化した「Pale Moon」というブラウザがある。あるいは、WebKit系のブラウザも良いだろう。</p>
+<p>Officeを使いたいなら、Gnumericはとても軽くてお勧め。あるいはEmacs/VimでLaTeXを使う、という旧人類のような発想も良いだろう。</p>
+<p><a href="lxde.html">LXDE/LXQt</a>も参照のこと。</p>
+
+<h2>Ubuntu Budgie</h2>
+<p>Budgieを搭載した流行りのフレーバー。</p>
+<p>Budgieは最近開発された独自のデスクトップ環境。どんなインターフェースなのか僕は詳しくは無いが、新しいインターフェースだ。</p>
+<p><a href="budgie.html">Budgie</a>も参照のこと。</p>
+
+<h2>Ubuntu MATE</h2>
+<p>MATEを搭載したフレーバー。</p>
+<p>Ubuntuは、GNOME 3に反発してUnityを搭載するまでは、GNOME 2を搭載していたが、その再来であり、旧来からのファンにとっては「まってました」というディストリビューションだ。</p>
+<p>昔のGNOME2は重くてもっさりしたデスクトップ環境だったが、今の64bitマルチコアなCPUで使うと、めちゃくちゃ軽くて速い。</p>
+<p>GNOME3は嫌いな人間も居るため、「古くて新しい」、大注目のフレーバーだ。</p>
+<p><a href="mate.html">MATE</a>も参照のこと。</p>
+
+<h2>Ubuntu Kylin</h2>
+<p>中国向けのディストリビューション。</p>
+<p>中国では、Windowsの違法コピーが深刻な問題になっているが、それの解決策になるだろうか。</p>
+<p>MATEを改良した独自のUI（UKUI）を搭載。</p>
+<p>中国とアフリカが手を組んで、新しいデジタルな解放世界を作る、といっても良いだろう。中国の国産OSである。</p>
+
+<h2>Ubuntu Studio</h2>
+<p>ビデオやグラフィックなどのマルチメディア向けのディストリビューション。</p>
+<p>ちなみに、FedoraにもDESIGN SUITE（デザイナー向けのバージョン）がある。</p>
+<p>最近のLinuxは、デザインの分野に進出している。</p>
+<p>これは、GIMP、Inkscape、Krita、Scribus、Blender、PiTiViなどのマルチメディアアプリケーションが高機能になって使えるようになってきたからだ。</p>
+
+<h2>Mythbuntu</h2>
+<p>MythTVを導入したUbuntu派生のホームシアターPC向けディストリビューション。</p>
+
+<h2>Edubuntu</h2>
+<p>教育機関向けフレーバー。</p>
+
+<h1>派生ディストリビューション</h1>
+<h2>Linux Mint</h2>
+<p><a href="linux_mint.html">Linux Mint</a>を参照のこと。</p>
+
+<h2>elementary OS</h2>
+<p>独自のPantheonと呼ばれるデスクトップ環境を搭載したデザイン的に美しいディストリビューション。</p>
+<p><a href="elementary_os.html">elementary OS</a>も参照のこと。</p>
+
+<h2>Puppy Linux</h2>
+<p>軽量なディストリビューション。</p>
+
+<h2>Zorin OS</h2>
+<p>Windows向けのディストリビューション。</p>
+
+<h2>Trisquel GNU/Linux</h2>
+<p>GNUによる「完全にフリーな」Ubuntuの派生ディストリビューション。</p>
+
+<h1>Ubuntuの独自技術</h1>
+<h2>Unity</h2>
+<p>UnityはUbuntuの旧来のデスクトップシェル。使いやすくて評判もある一方、GNOME2とも3とも違うため批判も多かった。現在はGNOME3を採用した。</p>
+
+<h2>Mir</h2>
+<p>Waylandと同じXに代わるディスプレイサーバとして開発されていた。</p>
+<p><a href="wayland.html">Wayland</a>を参照のこと。</p>
+
+<h2>Upstart</h2>
+<p>initの代替。当時は採用するディストリビューションもあったが、今ではsystemdにとって代わられた。</p>
+<p><a href="linux_daemon.html">initとデーモン</a>や<a href="systemd.html">systemd</a>を参照のこと。</p>
+
+<h2>Bazaar</h2>
+<p>クロスプラットフォームの分散型バージョン管理システム。もう完全にgitに負けてしまった。</p>
+<p><a href="../prog_lang/scm.html">バージョン管理システム</a>を参照のこと。</p>
+
+<h2>Launchpad</h2>
+<p>Bazaarを用いたオンラインでのオープンソースプロジェクトとソースコードのホスティングサイト。</p>
+<p><a href="../services/project_hosting.html">プロジェクト・ホスティング</a>を参照のこと。</p>
+
+<h2>Ubiquity</h2>
+<p>UbuntuのためのGUIインストーラー。</p>
+
+<h2>Wubi</h2>
+<p>UbuntuをWindows環境にインストールすることができる、フリーソフトウェアのインストーラー。</p>
+
+<h2>Ubuntu for Android</h2>
+<p>UbuntuをAndroidに導入出来る、Android向けUbuntu。</p>
+<p><a href="../mobile/android.html">Android</a>も参照のこと。</p>
+
+<h2>Ubuntuソフトウェアセンター</h2>
+<p>Ubuntuによるソフトウェアのパッケージインストールツール。</p>
+
+<h2>Snappy</h2>
+<p>新しい形でのパッケージ管理・ソフトウェアデプロイシステム。Windowsのフリーソフトのように、中央集権型のリポジトリに依存せず、どこからでもパッケージをインストール可能。</p>
+<p><a href="snappy.html">Snappy</a>も参照のこと。</p>
+
+<h2>UFW</h2>
+<p>Ubuntuのファイアーウォール管理プログラム。</p>
+<p><a href="linux_net_firewall.html">ファイアウォール</a>も参照のこと。</p>
+
+<h1>WindowsにUbuntuをインストール</h1>
+<h2>Hyper-Vを使う方法</h2>
+<p>Hyper-Vを使ってWindowsの仮想環境にUbuntuをインストールすることができます。以下が参考になります。</p>
+<ul>
+<li><a href="https://www.pc-koubou.jp/magazine/6866">WindowsにUbuntuをインストール［Hyper-Vの使い方］ | パソコン工房 NEXMAG</a></li>
+</ul>
+<p><a href="../virt/virt.html">仮想化</a>も参照のこと。</p>
+
+<h1>Tips</h1>
+<h2>UbuntuのレポジトリとPPA</h2>
+<p>Ubuntuでは、公式のリポジトリでたくさんのソフトウェアが配布されており、容易に導入できるだけでなくメンテナンスされており新バージョンの公開や配布が行われるとaptから簡単にシステム全体のアプリケーションを更新できる。</p>
+<p>だが、時にはCanonicalが配布していないマイナーなパッケージを使いたい、といった場合もある。</p>
+<p>こういう時、PPA（パーソナル・パッケージ・アーカイブ）と呼ばれる、非公式のリポジトリを使うことができる。非公式ながら、リポジトリを追加すると公式のリポジトリと同様に新バージョンが公開された時に自動でアップデートがかかる。とても便利である。</p>
+<p>詳しいPPAの使い方は以下を参照のこと。</p>
+<ul>
+<li><a href="https://allabout.co.jp/gm/gc/438675/">UbuntuのPPAて何？ [Linuxの使い方] All About</a></li>
+<li><a href="https://kazuhira-r.hatenablog.com/entry/2019/03/10/225459">Ubuntu LinuxのPPAって？ - CLOVER</a></li>
+</ul>
+<p><a href="debian_apt.html">Apt</a>も参照のこと。</p>
+
+<h2>UbuntuのイミュータブルOS</h2>
+<p>Ubuntu Coreをベースとしたイミュータブル（不変）なコンテナベースのデスクトップOSが近日登場予定。中核技術となるのはコンテナ上でのアプリケーション実行を可能とするsnap。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/ubuntu-topics/202306/02">Ubuntu Coreベースの『新しいデスクトップ』へのチャレンジ | gihyo.jp</a></li>
+<li><a href="https://news.itsfoss.com/ubuntu-all-snap-desktop/">Snap-based Immutable Ubuntu Desktop to Come With 24.04 LTS! - It's FOSS News</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.06.05</p>
+</div>
+
+<h1>情報</h1>
+<h2>OMG! Ubuntu!</h2>
+<p>Ubuntuの最新情報などを知りたいなら、OMG! Ubuntu!というサイトがおすすめです。</p>
+<ul>
+<li><a href="https://www.omgubuntu.co.uk/">OMG! Ubuntu!</a></li>
+</ul>
+
+<h2>gihyo.jpの連載</h2>
+<p>おそらく、以下のgihyo.jpの連載はUbuntuに関する日本語の情報としては一番情報量が多いです。Linux全般の内容としても参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/list/group/Ubuntu-Weekly-Topics">Ubuntu Weekly Topics | gihyo.jp</a></li>
+<li><a href="https://gihyo.jp/list/group/Ubuntu-Weekly-Recipe">Ubuntu Weekly Recipe | gihyo.jp</a></li>
+<li><a href="https://gihyo.jp/list/group/Linux-Daily-Topics">Linux Daily Topics | gihyo.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.09</p>
+</div>
+
+<h1>余談</h1>
+<h2>UbuntuはLinuxを破壊する存在である</h2>
+<p>Ubuntuの特徴として、UbuntuはデスクトップLinuxで成功しすぎて、Microsoftのように調子に乗っている、ということが挙げられる。</p>
+<p>それが、Snappyなどをはじめとする、「Ubuntuだけの技術」である。Ubuntuは、ありえないほどデスクトップ関連の独自技術を作る。Linuxデスクトップを普及させた良い面がある一方で、「これってLinuxというよりもむしろUbuntuだよね」的な、「LinuxなんだけどLinuxでない」ような考え方をしている。</p>
+<p>それは、そもそも、UbuntuはLinuxではないもっと高い理想を持っているからではないかと思う。</p>
+<p>Ubuntuは、アフリカ人のLinuxである。開発者が完全なアフリカの黒人ではなく肌も白いのはあるが、それでも、「黒人にもOSが作れる」ということを主張し、「他者への思いやり」であるubuntuという黒人の言葉をディストリビューションにした、異色のLinuxである。</p>
+<p>そう、UbuntuはLinuxだが、Linuxではない。Linuxはいつまでも、Red HatとDebianなのである。</p>
+<p>Ubuntuの技術は確かにデスクトップLinuxに良い風を起こしているが、いかんせん、独自色が強すぎる。ディスプレイサーバも、initシステムも、あるいはデスクトップ環境のシェルすら、全て独自に変えようとしている。これは、むしろ、ある意味危険である。UbuntuはLinuxだが、同時にLinuxを破壊する存在なのである（そして、一部では、Linuxは既にUbuntuに破壊された存在なのである）。</p>
+
+<h2>クラウドで儲かっている</h2>
+<p>上にUbuntuが慈善事業であるかのようなことを書いたが、それに反して、Ubuntuはクラウドサーバ向けのOSとして人気で、クラウド向けのサポートサービスで儲かっている。</p>
+<p>今のクラウドでは、仮想コンテナサーバに使うOS（ホストOSの上で動くゲストOSやコンテナOSで、サーバ上の仮想サーバではOSのroot権限を得られる）は、サポートが必要ならRed Hat、必要ないならUbuntu、といった具合。</p>
+<p>Ubuntuがアフリカ向けの慈善団体OSであるとは言うが、実際は黒人のユーザーなどほとんど居なくて、アフリカでUbuntuなんか、流行っているわけがない。嘘ではないが、黒人のためのOSではなくなっている。</p>
+<p>同時に、Canonicalのサイトを見ても、仮想化やクラウドで金儲けの内容ばかり。今一度、Linuxをビジネスではなく、たとえばGPLでみんなのコードをボランティアが書いていた頃のように、「古き良きデジタル共産主義」に戻さなければならないのではないかと僕は思う。</p>
+
+<h2>導入すると、Windowsと全く同じで、使えるが面白くは無い</h2>
+<p>Ubuntuの特徴として言えるのは、「Windowsとまったくおんなじ」ということ。</p>
+<p>導入して、設定やカスタマイズをすると、全くWindowsと同じ。GNOME 3の拡張などを入れると、まさに完全なWindowsのコピー。</p>
+<p>アプリケーションについても、Mozilla FirefoxやGoogle Chromeなどを導入すると、「Windowsと何ひとつ変わらない環境」が実現できる。</p>
+<p>だが、実際のところ、使えるとはいっても、Windowsとまったく同じでは面白くない。</p>
+<p>Ubuntuが嫌われる理由がここにある。</p>
+<p>Linuxディストリビューションは、「WindowsのようなOSを作る」という誤った目標を持っている。</p>
+<p>もっと独自性のあるデスクトップインターフェースにしなければ、使えるとは言うものの、「パチモン」と言って嫌われることに拍車はかからないだろう。</p>
+
+<h1>関連ページ</h1>
+<h2>Debian</h2>
+<p>UbuntuのベースとなっているDebian GNU/Linuxについては<a href="debian.html">Debian</a>を参照のこと。</p>
+
+<h2>Laravelの開発環境の導入</h2>
+<p>Laravelの開発用環境の構築のために仮想環境にUbuntuをインストールする方法については、<a href="../prog_lang/php_framework_laravel.html">Laravel</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

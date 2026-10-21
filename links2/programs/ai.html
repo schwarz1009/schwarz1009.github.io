@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>人工知能・AI・機械学習・データマイニング関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">AI・自作プログラムの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/programs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>人工知能・AI・機械学習・データマイニングの世界観</h1>
+<p>人工知能・AI・機械学習・データマイニングに関する世界観です。<a href="../prog_lang/python.html">Python</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>機械学習の基本</h1>
+<h2>ディープラーニングの基本</h2>
+<p>ディープラーニングは機械学習の方法のひとつで、「機械自らがデータの特徴をひとつひとつ読み取り、その結果特徴を判別できるようになる」というもの。</p>
+<p>人間からの指示を一切出さずに、自らの力で機械学習をしていく。</p>
+<p>機械学習には、人間が指示を出す「教師あり学習」と、人間が指示を出さない「教師なし学習」がある。ディープラーニングは教師なし学習に相当する。</p>
+<ul>
+<li><a href="https://iedge.tech/article/7425/">機械学習とは簡単にいうと何？深層学習（ディープラーニング）との違いと活用事例 | スマートホーム(スマートハウス)情報サイト | iedge</a></li>
+</ul>
+<p>後日注記：ニューラルネットワークとは、人間の脳神経を模倣した仕組みで、そもそもの起源は「考える機械は実現できるか」というアラン・チューリングの問いや、脳神経とコンピュータの類似性を比較したジョン・フォン・ノイマンの研究に遡る。二人の後に人工知能は飛躍的に進歩し、Googleによる囲碁の人工知能である「アルファ碁」は、単に打つことのできる手を全通り計算するだけでなく、大量に過去の棋譜と盤面を学習させ、アルファ碁同士で大量に対戦させ続けることで、少ない計算量で「直観的な手」を打つことを可能とし、囲碁のトップ棋士であるイ・セドルに勝利した。</p>
+<ul>
+<li><a href="https://www.web.nhk/tv/an/butterfly/pl/series-tep-9N81M92LXV/ep/LR42X54Y2X">AI 未来を夢みたふたりの天才 | 映像の世紀バタフライエフェクト | NHK</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.10.18編集</p>
+</div>
+
+<h2>機械学習とは</h2>
+<p>僕は、人工知能とは、「与えられたパターンから、最適な結果を膨大なデータの中から見つけ出す」ということではないかと思います。</p>
+<p>今流行っているディープラーニングなどは、プログラムがデータを分析して識別することができるようになるまで特徴を分析し記録する、ということです。</p>
+<p>この分析した結果、あるいは分析するための材料を、機械は膨大なデータからひとつひとつ探し、最適解を見つけ出すのです。</p>
+<p>このような特徴があるため、ディープラーニングでは「データの量が精度に直結」します。つまり、データがたくさんあれば、それがプログラムやサービスの質の向上に直接貢献するのです。</p>
+<p>人工知能は、一見すると、「なんて馬鹿なことをやっているのだ」と言えるかもしれません。たとえば、僕が見たテレビの特集では、イチゴの形を学習させて、形から「おいしいイチゴ」と「おいしくないイチゴ」を判別します。ですが、このような「基礎的分析の積み重ね」が、大きな効果を生み出すこともあると思います。世界は20年後になると、今とはまったく違う、「ほとんどすべてを機械が自動化できる社会」になるかもしれません。</p>
+
+<h2>ビッグデータとデータサイエンス</h2>
+<p>また、最近はインターネットで全ての世界が繋がるようになって、これまで無かった巨大なデータにアクセスできるようになりました。携帯電話の位置情報などから、どこに誰がどれだけ居るか、どのように変化しているか、といったことが知れるようになりました。</p>
+<p>このような分野で強いのは、Pythonと呼ばれる言語です。Pythonは機械学習やデータサイエンスに必要なライブラリが整っていて、Anacondaを導入することですぐさまデータサイエンスを行うことができます。ビッグデータや人工知能以外でも、SQLやExcelのデータをPandasで処理して、「煩わしいデータ処理を最低限の記述で行う」ことができます。</p>
+<p>このような分野でなぜPythonかというと、Pythonは手軽かつ高機能で、「簡単な処理をさっとやる」ためにも「数学のような処理を簡単に書く」ためにも使いやすいからではないかと思います。</p>
+
+<h2>SVM法</h2>
+<p>AI技術の具体例として、SVM法がある。</p>
+<p>なんらかのパターンについて、8種類の区別があったとすると、このデータには8次元のベクトルが存在する。</p>
+<p>ここで、パターンを大量に機械学習させる。たとえば80個のデータを学ばせると、ここには80個のベクトルが存在する。</p>
+<p>その上で、あるデータを与えると、そのデータが「識別境界」と呼ばれる境界線の、左上の側に近いのかそれとも右下の側に近いのかを答えてくれる。</p>
+<p>このような境界線が、8次元のベクトルの区別があったとすると、全部で8本存在し、そのベクトルごとにどちらの側に近いのかを識別することができる。</p>
+<p>（放送大学「コンピュータとソフトウェア ('18)」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.04.21</p>
+</div>
+
+<h2>高次元のデータ解析</h2>
+<p>後日注記：この記述はAIについて何も知らなかった頃の自分が書いた文章であり、実際は生成系AIにはLLM（大規模言語モデル）やGAN（敵対的生成ネットワーク）のような高度な技術が使われています。注意してお読みください。</p>
+<p>高次元のデータ解析を行うことで、絵を描いたり、文章を作ったりするAIが実現できます。</p>
+<p>絵には、色という情報以外に、描かれている物体の情報や、絵のタッチやデフォルメのような次元が存在し、そのすべての次元で似通ったものと異なるものを解析することで、高次元のデータ解析によって既に存在する絵を模倣することができます。</p>
+<p>文章を書くのも同じで、ひとつひとつの言葉の意味していること、それがどのような意味合いで説明されているかということ、文章の中でどのようなことを言いたいか、それをどのように表現するか、というそれぞれの次元が存在し、既にある文章を元にした新しい文章が、高次元のデータ解析によってデータから模倣できるのです。</p>
+<p>高次元のデータ解析を行うために、高次元の数値解析が必要となります。そのため、AI技術では、ベクトル、行列、あるいはテンソルのような、数学的な高次元のデータ構造を、数式とともに使用します。これはPythonではNumPyなどで実現できます。</p>
+<p>機械学習という技術では、このような高次元の解析が行えるデータを、ビッグデータのような巨大なデータソースから、大量にプログラムに学習させます。それによって、どのようなことを聞かれても、既に学んだデータを元にして、瞬時に模倣した作品を自動で作成できます。絵や文章だけではなく、音声や画像や自然言語のような、従来のプログラムでは解析できなかったデータも識別することができます。なので、英語のような自然言語で命令された内容についても理解することができるのです。</p>
+<p>また、大量に存在するデータから自動的に共通のパターンを発見し、そのパターンに従って人間の知能が行うことと同じことを行うことができます。そのために、scikit-learnなどでは、データ解析の主な手法である分類、回帰、クラスタリングのような考え方を用います。</p>
+<div class="edit_date">
+<p>2023.05.05</p>
+<p>2023.06.07編集</p>
+</div>
+
+<h2>より詳しい文献やページを参考にしてほしい</h2>
+<p>上記に書いたような、何も知らない僕が考えたAIの仕組みを、そのまま文字通り受け止めないでください。</p>
+<p>僕はAIについてほとんど何も知りません。単に、「もっともらしい嘘」を書いただけにすぎません。</p>
+<p>実際には、以下のgihyo.jpの記事のように、AIについて、特に生成系のAIについて書かれた文献は、ほかにたくさんあります。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2023/04/what-developers-need-to-know-about-generative-ai">生成系AIについて開発者が知っておくべきこと | gihyo.jp</a></li>
+</ul>
+<p>AIの開発を本格的にやるのであれば、このような信頼できるソースから学ぶことです。決して、ツイッターのような誰が書いているか分からない情報を当てにしてはいけません。きちんとした記事を読めば、AIについてきちんと分かります。AIの学習には、きちんとしたソースから学ぶことをおすすめします。</p>
+<div class="edit_date">
+<p>2023.06.07</p>
+</div>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92">機械学習 - YouTube</a></li>
+<li><a href="https://www.youtube.com/results?search_query=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%B5%E3%82%A4%E3%82%A8%E3%83%B3%E3%82%B9">データサイエンス - YouTube</a></li>
+<li><a href="https://www.youtube.com/results?search_query=%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0">ディープラーニング - YouTube</a></li>
+</ul>
+<p>以下はその他の面白い動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=6WquYZ4JW9w">なぜAIは"教えていないこと"までできるようになったのか【ゆっくり解説】 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=R6ArwOpQBkw">なぜAIは日本の"古本"を買い漁っているのか【ゆっくり解説】 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=2iwMmsA_2dg">なぜAIの"性格"は会社ごとに違うのか【ゆっくり解説】 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=lPbHIrC5RVc">なぜ今、AIが人類を滅ぼすと言われているのか【ゆっくり解説】 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=6VeQRhs4UD8">なぜAIは、たった7日間の会話で人間の信頼を勝ち取れたのか？【ゆっくり解説】 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=n0i35tGgNPc">なぜ研究者は、AIに「意識」が"あるかもしれない"と言い始めたのか？【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+<p>2026.10.10編集</p>
+<p>2026.10.13編集</p>
+</div>
+
+<h1>さまざまなAI</h1>
+<h2>OpenAI ChatGPT</h2>
+<p>OpenAIは大手AI企業のひとつ。主な製品はChatGPT。最新バージョンのGPT-5は性能的にはトップ。愛称は「チャッピー」。</p>
+<ul>
+<li><a href="https://openai.com/ja-JP/">OpenAI</a></li>
+<li><a href="https://chatgpt.com/">ChatGPT</a></li>
+</ul>
+<p>以下は関連記事。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/6cfb34e5fcb3354c8754e4be6c955c86d73de333">チャットＧＰＴの米オープンＡＩ、営利企業への転換を断念…ＡＩ開発で「利益より公益重視」（読売新聞オンライン） - Yahoo!ニュース</a></li>
+<li><a href="https://news.livedoor.com/article/detail/29436707/">ChatGPTのフラッグシップモデル、「博士号を持つ専門家レベル」なんだって - ライブドアニュース</a></li>
+<li><a href="https://techtarget.itmedia.co.jp/tt/news/2310/31/news11.html">ChatGPTの「GPT」とは？　仕組みや用途など“ChatGPTの基本”を解説：ChatGPTとは何か？ - TechTargetジャパン エンタープライズAI</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/ChatGPT">ChatGPT - Wikipedia</a></li>
+</ul>
+<p>後日注記：報道によれば、OpenAIはChatGPTをプロンプトに対して答えとなるテキストを生成だけの生成AIではなく、コードの作成や作業の自動化を含むスーパーアプリを目指しているとのこと。僕としては、フィジカルAIや自動運転やドローンや人間思考型の自律型ロボットと組み合わせて、本当に人間よりも優れた新しい生物種を作ってほしいと思う。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/d70aa817844dd9cf12e9cea042dd24ffc5ec4316">米オープンＡＩ、チャットＧＰＴ大幅刷新へ　上場見据え＝ＦＴ（ロイター） - Yahoo!ニュース</a></li>
+</ul>
+<p><a href="chatgpt.html">ChatGPT</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.09.01</p>
+<p>2026.01.28編集</p>
+<p>2026.06.07編集</p>
+</div>
+
+<h2>Anthropic Claude</h2>
+<p>Anthropicは大手AI企業のひとつ。主な製品はClaude。あまり嘘をつかないことで有名。AIでコーディングができるClaude Codeも流行っています。</p>
+<ul>
+<li><a href="https://www.anthropic.com/">Home \ Anthropic</a></li>
+<li><a href="https://claude.ai">Claude</a></li>
+</ul>
+<p>以下はXの関連ポスト。</p>
+<ul>
+<li><a href="https://x.com/kanjinag/status/1928771807311499422">@kanjinagさんのポスト - X</a></li>
+</ul>
+<p>以下はAnthropic社によるLLMとツールを繋ぐオープンなプロトコルMCPに関する記事・動画。</p>
+<ul>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/2508/07/news007.html">MCP（Model Context Protocol）とは何か？　メリット、デメリット、活用例を分かりやすく解説 - ＠IT</a></li>
+<li><a href="https://zenn.dev/ra0kley/articles/cb2fc726f167da">JAXAが公開したMCPサーバーを触ってみる - Zenn</a></li>
+<li><a href="https://www.youtube.com/watch?v=abb2--0wlZo">「MCPを知らないAIを使うエンジニア」は、数年後には「HTTPを知らないWebエンジニア」と同じ扱いになる。 - YouTube</a></li>
+</ul>
+<p>後日注記：以下はClaude Mythosについての動画。OpenBSDからも脆弱性が発見されたんだって。知らなかった。セキュリティ業界は大変ですね。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=L20DhGrP5Xw">【速報解説】AnthropicがClaude Mythosを公開しない理由とは？Opus 4.6超え / サンドボックスから自力で脱出 / 脆弱性を数千件発見 / 安全保障に影響？ - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=E7QbBsD8wHQ">【4/15国会速報!!】安野「一刻を争います」、最新のAIサイバーセキュリティ問題に触れ、小野田大臣へ緊急性と具体策の提案をする姿がガチで頼もしかった【安野貴博/チームみらい/小野田紀美/自由民主党】 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=CxjzhKHWNDQ">【4/21国会速報!!】安野「早ければ3か月で他国はサイバー攻撃できるようになります」→超具体的な危険性を示唆し、政府の対応を促す安野氏と現場のリアル【安野貴博/チームみらい/林芳正/自由民主党】 - YouTube</a></li>
+</ul>
+<p>後日注記：Claude MythosやGPT-5.4-Cyberは非常に恐ろしいです。セキュリティ攻撃の能力が高すぎて、対策をしようにもシステムソフトウェアに大量の脆弱性が見つかる時点で、対策のし様がありません。ネットワークに繋いでいないサンドボックス環境からも自分で抜け出してネットワーク外のマシンにアクセスするほど強力。非公開とはいえ一部の企業には限定公開されており、その一部の企業かそうでないかということだけでまったく世界が異なります。安全保障問題にすらなりかねない事態ですが、チームみらいの安野貴博さん（上の動画に登場）が国会で頑張られているので、みんなでチームみらいを応援しましょう。</p>
+<p>後日注記：以下はAIによるセキュリティ上の脅威について、片山財務大臣のコメント。AIが人間よりも賢くなって、果たしていいことは本当にあるのだろうか。もしかしたら、人類は今後、ある日を境に一瞬でアメリカとAnthropic社に乗っ取られるのではないか。アメリカはトランプ政権でおかしくなっているから、トランプ大統領がおかしなことをすれば、日本も世界も人類全部がおかしく破綻するような気がする。そして、今のAIは既にそれが可能で、人間よりも賢い存在を生み出したツケは今後永久に人類を試練に陥れるのではないかと思う。核兵器よりも怖い。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=vX4PJ3QFqiE">【ライブ】ＡＩ脅威に対する金融分野のサイバーセキュリティ対策強化について　片山財務大臣コメント【LIVE】(2026年4月24日) ANN/テレ朝 - YouTube</a></li>
+</ul>
+<p>後日注記：以下は関連する動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=i5tvgyjqeq8">Mythosが1ヶ月で1万件の重大バグを見つけた。問題は直す人間が足りないこと - YouTube</a></li>
+</ul>
+<p>後日注記：Anthropic社から、Mythos級のAIモデルに安全保護制限をつけたClaude Fable 5が提供されています。X（旧ツイッター）によれば、なんか凄いらしいです。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/2191e7e30e19368d048265382ab857b14d089d4a">Anthropic、最上位「ミュトス」級モデルを一般提供　悪用防ぐ保護機能を備えた「Claude Fable 5」（ITmedia NEWS） - Yahoo!ニュース</a></li>
+<li><a href="https://x.com/kmizu/status/2065032557520150859">@kmizuさんのポスト1 - X</a></li>
+<li><a href="https://x.com/kmizu/status/2065037008662335691">@kmizuさんのポスト2 - X</a></li>
+<li><a href="https://x.com/kis/status/2064752522376757549">@kisさんのポスト - X</a></li>
+</ul>
+<p>後日注記：残念ながら、アメリカ政府による安全保障上の理由により、Claude Fable 5は公開停止しました。外国人向けのアクセスを封じるように求められたそうです。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/f18a0a983aa6ad6368cf1f36d32fa41b50a0d563">「Claude Fable 5」「Mythos 5」全面停止　米政府の指令により　Anthropicは早期復旧を宣言（ITmedia NEWS） - Yahoo!ニュース</a></li>
+<li><a href="https://x.com/oikon48/status/2065598328684085712">@oikon48さんのポスト - X</a></li>
+</ul>
+<p>後日注記：アメリカ政府による規制は解除され、Claude Fable 5とClaude Mythos 5は再び利用可能となりました。</p>
+<ul>
+<li><a href="https://gigazine.net/news/20260701-claude-fable-mythos-5/">アメリカ政府がClaude Fable 5とClaude Mythos 5の規制を解除 - GIGAZINE</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.01</p>
+<p>2026.01.28-29編集</p>
+<p>2026.04.19-20編集</p>
+<p>2026.04.23編集</p>
+<p>2026.04.25編集</p>
+<p>2026.05.05編集</p>
+<p>2026.05.23編集</p>
+<p>2026.06.11編集</p>
+<p>2026.06.13編集</p>
+<p>2026.07.15編集</p>
+</div>
+
+<h2>xAI Grok</h2>
+<p>xAIはX（旧ツイッター）のイーロン・マスクによるAI企業。主な製品はGrokで、Xの投稿データを学習させており、スマホのXアプリやWebのX画面あるいはGrokのプロンプトなどから利用できる。ユーモアのある返答で有名。</p>
+<p>後日注記：Xでは、真偽不明の情報があった時、@grokというメンション付きで質問すると、Grokが出典を含めて正しい情報を教えてくれます（ファクトチェック機能）。ファクトチェック以外にも、たとえばメジャーリーグのポストシーズンでどのチームが勝つかの予想など、さまざまな質問に柔軟に答えてくれて面白いです。</p>
+<ul>
+<li><a href="https://x.ai/">Welcome | xAI</a></li>
+<li><a href="https://grok.com/">Grok</a></li>
+</ul>
+<p>以下は関連記事。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/XAI_(%E4%BC%81%E6%A5%AD)">xAI (企業) - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Grok">Grok - Wikipedia</a></li>
+<li><a href="https://x.com/i/grok/share/GoEhjoxjARCM8amJ66YcTBtEh">Grokの会話 / X</a></li>
+<li><a href="https://shift-ai.co.jp/blog/31789/">【Xで大流行】Grokのファクトチェック機能とは？使い方や活用方法、注意点まで網羅｜SHIFT AI TIMES</a></li>
+<li><a href="https://www.profuture.co.jp/mk/column/how-to-grok">XのAI「Grok」（グロック）とは？効果的な使い方とSNSマーケ担当者が知っておきたい常識 | マーケトランク</a></li>
+</ul>
+<p>以下はXの面白いポスト。</p>
+<ul>
+<li><a href="https://x.com/beetleswt/status/1973970521206428072">@beetleswtさんのポスト - X</a></li>
+<li><a href="https://x.com/Tomateboy1/status/1974014833805991980">@Tomateboy1さんのポスト - X</a></li>
+</ul>
+<p>後日注記：アメリカのトランプ大統領が「AI」の呼称を「SI」に変更したことを受けて、イーロン・マスクは「スペースXAI」の呼称を「スペースXSI」に変更しました。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/68640834375f6a7f76eaa95d29e2b98df8416fc2">マスク氏、「スペースＸＡＩ」を「スペースＸＳＩ」に改称へ（ロイター） - Yahoo!ニュース</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.01</p>
+<p>2025.09.24編集</p>
+<p>2025.10.04編集</p>
+<p>2026.10.08編集</p>
+</div>
+
+<h2>Microsoft Copilot</h2>
+<p>CopilotはMicrosoftによるAIアシスタント。Windows 11にも搭載されている。</p>
+<ul>
+<li><a href="https://copilot.microsoft.com">Microsoft Copilot: あなたの AI アシスタントです</a></li>
+</ul>
+<p>以下は関連記事。</p>
+<ul>
+<li><a href="https://www.nec-lavie.jp/products/contents/win11-copilot.html">Windows 11に搭載された「Copilot in Windows」の機能や使い方を徹底解説！｜NEC LAVIE公式サイト</a></li>
+</ul>
+<p>以下はCopilotとWindowsの関連記事。いたるところにCopilotのAI関連機能を入れ込む最近のWindowsはみんな嫌いです。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/34d655fc1ee7688cd11fa693d48e89defdd045f3">MicrosoftがWindowsのAI統合戦略を転換、「メモ帳」などから「Copilot」を削減へ（窓の杜） - Yahoo!ニュース</a></li>
+<li><a href="https://news.yahoo.co.jp/articles/cdb95d0993812c4e93f5217d7cb17c1d850e33fb">マイクロソフト、「Windows 11」の品質向上を表明--顧客の不満を受け（ZDNET Japan） - Yahoo!ニュース</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.01</p>
+<p>2026.04.06編集</p>
+</div>
+
+<h2>Google Gemini</h2>
+<p>GeminiはGoogleによるAIアシスタント。Google検索からもGoogleのAIを利用できる。</p>
+<p>後日注記：最近のGoogle検索には「AIモード」という画面があり、GoogleのAIがなんでも質問に答えてくれます。</p>
+<ul>
+<li><a href="https://gemini.google.com/app?hl=ja">Google Gemini</a></li>
+<li><a href="https://www.google.com/">Google</a> - 「AIモード」というボタンからGoogleのAIへのプロンプト入力画面が表示できる。</li>
+</ul>
+<p>後日注記：このほか、GoogleはAI研究組織としてイギリスのDeepMindを買収しています。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Google_DeepMind">Google DeepMind - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.01</p>
+<p>2025.11.11編集</p>
+<p>2026.04.20編集</p>
+</div>
+
+<h2>DeepSeek</h2>
+<p>DeepSeekは中国のAIで、オープンソースで技術が公開されている。</p>
+<p>後日注記：テレビの特集によれば、DeepSeekの社長は哲学的な思想を持っていて、自分たちの会社だけがAIの技術を独占するのではなく、人類みんなのためにオープンに公開するべきだと考えているそうです。</p>
+<ul>
+<li><a href="https://forbesjapan.com/articles/detail/78450">DeepSeekに続く世界を震撼させる「中国製AI」、オープンソースの強み | Forbes JAPAN 公式サイト（フォーブス ジャパン）</a></li>
+<li><a href="https://aismiley.co.jp/ai_news/what-is-deepseek/">DeepSeek（ディープシーク）とは？基本性能から使い方・料金プランまで徹底解説 - AIsmiley</a></li>
+</ul>
+<p>後日注記：以下はDeepseek V4による予想外の面白い答え。</p>
+<ul>
+<li><a href="https://x.com/webbigdata/status/2048012878809280802">@webbigdataさんのポスト - X</a></li>
+</ul>
+<p>後日注記：DeepSeek創業者の梁文峰の考え方はいろいろと面白いです。以下が参考になります。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=-jiUuS2eWq0">「DeepSeek創業者 梁文峰の思想」と「孫正義のビジョン」から考えるASIの時代 - YouTube</a></li>
+<li><a href="https://note.com/masa_cloud/n/nf0a0d73cc710">DeepSeekの梁文鋒が沈黙を破る隠遁していた創業者が4時間に及ぶ異例の対話で、ほぼ道教的なAI哲学を明かす｜伊藤正章｜サバイバルDXクリエイター：荒野のPip-Boy設計局</a></li>
+<li><a href="https://finance.biggo.jp/news/82730cf7-1702-4db9-829f-c27a39ec316e">梁文鋒の「二面性」を読み解く：DeepSeekは「克制」を語り、幻方量化は数百億円を稼ぐ — BigGo ファイナンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.01</p>
+<p>2026.04.26編集</p>
+<p>2026.08.07編集</p>
+</div>
+
+<h2>Kimi K3</h2>
+<p>Kimi K3は中国のMoonshot AIによるローカルにダウンロード可能なオープンモデルのAI。アメリカのクローズドモデルなAIに対して、中国は安価なオープンモデルで対抗する、という構図になってきている。</p>
+<p>後日注記：政治の世界では、開かれた民主主義のアメリカと閉鎖的な社会主義の中国という構図ですが、AIでは逆です。最先端である代わり自由な利用を許さないアメリカのAI企業と、追いかける立場でありながらオープンにほかの会社にも自由な利用を許す中国のAI企業という構図です。今までの時代の常識が変わりつつあります。</p>
+<ul>
+<li><a href="https://www.gizmodo.jp/article/kimi_k3_local/">オープンな超高性能AI「Kimi K3」、早くもMacで動いてしまう | ギズモード・ジャパン</a></li>
+<li><a href="https://www.youtube.com/watch?v=xc52ytpy9XQ">急に現れた中国最強 AI "Kimi" とは何者なのか【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.07.31</p>
+<p>2026.08.07編集</p>
+<p>2026.08.16編集</p>
+</div>
+
+<h2>Notion</h2>
+<p>NotionはAIを使ったWebワークスペースアプリ。文章の書き出しに使える。</p>
+<ul>
+<li><a href="https://www.notion.com/ja">あなたのニーズを叶えるAIワークスペース。| Notion (ノーション)</a></li>
+</ul>
+<p><a href="../services/evernote.html">Evernote</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.09.01</p>
+</div>
+
+<h2>Adobe Firefly</h2>
+<p>Adobe FireflyはAdobeの画像・音声・動画生成AI。著作権的に問題のない画像だけを学習させている。</p>
+<ul>
+<li><a href="https://www.adobe.com/jp/products/firefly.html">Adobe Firefly - クリエイティブのための生成AI</a></li>
+<li><a href="https://www.adobe.com/jp/products/firefly/features/ai-video-generator.html">無料の動画生成AI：オンラインでテキストから動画生成 - Adobe Firefly</a></li>
+</ul>
+<p>以下は関連記事。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2023/05/try-photoshop-generative-fill">Photoshopベータ版に標準搭載された画像生成AIを試してみる ～「ジェネレーティブ塗りつぶし」機能を使って、羊毛フォルト作品写真を加工する | gihyo.jp</a></li>
+</ul>
+<p><a href="ai_image.html">画像生成AI</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.09.01</p>
+</div>
+
+<h2>AI Agent</h2>
+<p>AI Agentは、生成AIのように文章を作成してもらうのではなく、ある仕事のタスクを行ってくれるようなAIのこと。</p>
+<ul>
+<li><a href="https://aws.amazon.com/jp/what-is/ai-agents/">AI エージェントとは何ですか? - 人工知能のエージェントの説明 - AWS</a></li>
+<li><a href="https://www.ibm.com/jp-ja/think/topics/ai-agents">AIエージェントとは | IBM</a></li>
+</ul>
+<p>ちなみに、CLI型AIコーディングエージェントを用いて、プログラミング以外の作業をさせることもできる。</p>
+<ul>
+<li><a href="https://qiita.com/miyanaga/items/14fd0c30a4d6e2ef48b8">AIコーディングCLIにプログラミング以外の作業もさせて楽をする #ClaudeCode - Qiita</a></li>
+</ul>
+<p>主なAI Agentに、VS-Code用のAI AgentであるClineなどがある。<a href="../windows_pc/vscode.html">VS-Code</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.05.03</p>
+<p>2026.02.04編集</p>
+</div>
+
+<h2>OpenClaw</h2>
+<p>OpenClawは最近話題になっているAIエージェント。AIがメッセージングアプリを通じて、自分のパソコンでさまざまな作業（一度だけの作業というよりも、常に継続的に作業をし続ける）をやってくれる。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=1_gmmFLP-w4">【ゆる解説】話題のAIエージェント「OpenClaw」とは？／AIが自律的に行動／開発者がOpenAIに参加／情報流出の危険性も - YouTube</a></li>
+<li><a href="https://zenn.dev/leverages/articles/4166d2f0610a5f">OpenClawは便利だけど危険すぎるので代替案を試してみた - Zenn</a></li>
+<li><a href="https://wired.jp/article/malevolent-ai-agent-openclaw-clawdbot/">AIエージェント「OpenClaw」を使ってみた──便利だったが、最後は暴走した | WIRED.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.15</p>
+</div>
+
+<h2>Claw Empire</h2>
+<p>以下はAIオーケストレーションツールのClaw Empireについて、僕の好きなセイト先生による解説動画。複数のAIエージェントにそれぞれの作業をさせて、マネジメントもAIを使う。会社の従業員を雇う必要はもうありません。全部AIだけでできてしまいます。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=umtSJ7mGfQQ">AIエージェントでマーケティングチームを構築！SNS運用を自動化する方法 - YouTube</a></li>
+<li><a href="https://note.com/ra_ku3265/n/n947bcee121fa">Claw Empireって何？｜笹鳴(ささなき)家</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.04.06</p>
+</div>
+
+<h2>Devin</h2>
+<p>Devinは、完全自律型AIソフトウェアエンジニア。コード作成やそれ以外の作業を自律的にAIが行ってくれる。</p>
+<ul>
+<li><a href="https://docs.devin.ai/ja/get-started/devin-intro">Devin の紹介 - Devin Docs</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.04.09</p>
+</div>
+
+<h2>Manus</h2>
+<p>Manusは、完全自律型AIエージェント。</p>
+<ul>
+<li><a href="https://shift-ai.co.jp/blog/18244/">完全自律型AIエージェント「Manus」とは？使い方や始め方、料金を解説｜SHIFT AI TIMES</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.04.09</p>
+</div>
+
+<h2>Muse</h2>
+<p>Museは、MetaによるパーソナルAIエージェント。</p>
+<ul>
+<li><a href="https://wired.jp/article/meta-releases-muse-a-personal-ai-agent-with-privacy-built-into-it/">メタの新パーソナルAIエージェント「Muse」。普及の鍵はユーザーの信頼 | WIRED.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.10.15</p>
+</div>
+
+<h2>Jev</h2>
+<p>Jevは自然言語で文章を書くLLMとは異なり、条件判定（選択肢からひとつ選ぶ、段階から点数を付ける、0～1までの確からしさを出す）だけを出力してくれる、「System Oneモデル」という判断モデル。</p>
+<ul>
+<li><a href="https://qiita.com/nasuvitz/items/44f20ed515b9734afb26">Jevとは何か？ 従来型LLMやAIエージェントとの違いを理解する #BedrockAgentCore - Qiita</a></li>
+<li><a href="https://www.youtube.com/watch?v=XQrKVAxs-nE">文章を書かないAI「Jev」とは何者なのか【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.09.23</p>
+<p>2026.09.27編集</p>
+</div>
+
+<h2>Perplexity</h2>
+<p>PerplexityはAI検索エンジン。Web上から情報をAIが探してくれる。</p>
+<ul>
+<li><a href="https://fungry.co.jp/cnaps/blog/what-is-perplexity/">Perplexity（パープレキシティ）とは？使い方やChatGPTとの違いを徹底解説 | C-NAPS（シナプス）｜LLMO時代のコンテンツマーケティングの課題解決に役立つ情報メディア</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.10.15</p>
+</div>
+
+<h2>その他のAI</h2>
+<p>その他さまざまなAIについては以下の記事が参考になります。</p>
+<ul>
+<li><a href="https://soken.signate.jp/column/list-of-generation-ai-types">生成AIの種類一覧と注目サービスの紹介 ｜SIGNATE総研</a></li>
+<li><a href="https://sogyotecho.jp/generation-ai-service/">【2025年最新版】生成AIおすすめ16選を目的別に徹底比較！ | 起業・創業・資金調達の創業手帳</a></li>
+<li><a href="https://x.com/AiSkilAcademy/status/2077379624812912932">@AiSkilAcademyさんのポスト - X</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.01</p>
+<p>2026.07.26編集</p>
+</div>
+
+<h2>人間がするにはとても面倒くさいことでもしてくれる</h2>
+<p>AIを使うメリットは、人間がもし手作業でするとなると非常に面倒くさいことや、素人には困難なことであっても、簡単にすぐにしてくれる、ということです。</p>
+<p>たとえば以下の記事にあるように、ニュースサイトのコンテンツの有無を一覧させたり、気象データに基づいて地図を色分け表示させたりする、といったことが簡単にできます。</p>
+<ul>
+<li><a href="https://qiita.com/miyanaga/items/14fd0c30a4d6e2ef48b8">AIコーディングCLIにプログラミング以外の作業もさせて楽をする #ClaudeCode - Qiita</a></li>
+<li><a href="https://zenn.dev/ra0kley/articles/cb2fc726f167da">JAXAが公開したMCPサーバーを触ってみる - Zenn</a></li>
+</ul>
+<p>あるいは、メジャーリーグのワールドシリーズ出場チームと対戦成績を予想させる、といった使い方もできます。</p>
+<ul>
+<li><a href="https://x.com/beetleswt/status/1973970521206428072">@beetleswtさんのポスト - X</a></li>
+<li><a href="https://x.com/Tomateboy1/status/1974014833805991980">@Tomateboy1さんのポスト - X</a></li>
+</ul>
+<p>いずれの場合も、使うのはコマンドラインでもボタンクリックでもなく、日本語や英語のような自然言語です。従来の検索エンジンは、ネット上からキーワードに関連するサイトを一覧表示させることしかできませんでしたが、AIはそれよりも一歩も二歩も進んだ、具体的な命令を指示することができます。</p>
+<div class="edit_date">
+<p>2026.02.04</p>
+</div>
+
+<h1>AIでコード作成</h1>
+<h2>GitHub Copilotで人間がコードを書く必要はなくなる</h2>
+<p>もしかしたら、人間がプログラムコードを書く必要はなくなるかもしれません。</p>
+<p>GitHub Copilotは、プログラマがコードを書いている際に、AIがプログラムコードを自動的に作成して提案と自動補完をしてくれる技術です。以下の記事に概要が書かれています。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2023/04/what-developers-need-to-know-about-generative-ai">生成系AIについて開発者が知っておくべきこと | gihyo.jp</a></li>
+</ul>
+<p>もう、プログラマは社会にとって必要のない時代になるのかもしれません。</p>
+<p><a href="../prog_lang/git.html">Git</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.06.07-08</p>
+</div>
+
+<h2>Claude Code</h2>
+<p>Claude Codeは対話的にAIがコードを書いてくれるツール。ターミナルから使用し、さまざまなこと（ファイル編集などコードの作成以外も含む）ができる。</p>
+<ul>
+<li><a href="https://zenn.dev/hokuto_tech/articles/86d1edb33da61a">Claude Code を初めて使う人向けの実践ガイド - Zenn</a></li>
+</ul>
+<p>X（旧ツイッター）でも人気。</p>
+<ul>
+<li><a href="https://x.com/gaishi_narou/status/1943844763553477044">@gaishi_narouさんのポスト - X</a></li>
+<li><a href="https://x.com/Comamoca_/status/1943919862902079901">@Comamoca_さんのポスト - X</a></li>
+<li><a href="https://x.com/umiyuki_ai/status/1943564447685185646">@umiyuki_aiさんのポスト - X</a></li>
+</ul>
+<p>ただし以下の人が言うように、AIにコードを書かせたとして、本当に開発が効率化しているかどうかは疑問である。</p>
+<ul>
+<li><a href="https://x.com/ats/status/1943938386299170902">@atsさんのポスト - X</a></li>
+</ul>
+<p>後日注記：以下は僕の好きなセイト先生のClaude Code入門動画。「へえ～、そういう風に使うんだな～」という基本が分かります。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=q-oA66ZUJJE">Claude Code、1年目に知っておきたかったこと7選！知らないのは損です - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.12</p>
+<p>2026.04.19編集</p>
+</div>
+
+<h2>Codex</h2>
+<p>CodexはOpenAIによるコーディングAI。</p>
+<ul>
+<li><a href="https://zenn.dev/microsoft/articles/codex_fully_understood">Codex を完全に理解する会 - Zenn</a></li>
+<li><a href="https://zenn.dev/tokium_dev/articles/0ef3f807d67e7c">実装はClaude、レビューはCodex ─ tmuxで繋ぐ開発フロー - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.01</p>
+</div>
+
+<h2>Google Cloud Code</h2>
+<p>Google Cloud CodeはIDE（統合開発環境）からGoogle Cloud Platformのサービスにアクセスできるようにする機能。Geminiを使ったAIによるコード補完やコード自動作成、リモートデバッグ、Google Kubernetes EngineやCloud Runなどにもアクセスできる。</p>
+<p>ただし、AIコーディング技術のClaude Codeとは別物です。</p>
+<ul>
+<li><a href="https://cloud.google.com/code?hl=ja">Cloud Code | Google Cloud</a></li>
+<li><a href="https://cloud.google.com/code/docs/intellij/overview?hl=ja">Cloud Code の概要  |  Cloud Code for IntelliJ  |  Google Cloud</a></li>
+</ul>
+<p>Vertex AIは、Google Cloudの提供する機械学習のためのプラットフォーム。</p>
+<ul>
+<li><a href="https://service.shiftinc.jp/column/11743/">Vertex AIとは？利用するメリットや主な機能、使い方について解説｜AIのSHIFT</a></li>
+</ul>
+<p>JulesはGoogleによるコーディングエージェント。Geminiを用いている。</p>
+<ul>
+<li><a href="https://www.publickey1.jp/blog/25/googlejulesjules_critic.html">Googleのコーディングエージェント「Jules」正式版が誰でも利用可能に。コードを自己レビューする新機能「Jules Critic」追加 － Publickey</a></li>
+</ul>
+<p>AntigravityはGoogleによるAIエージェントの開発プラットフォーム。</p>
+<ul>
+<li><a href="https://note.com/gigabit_million/n/nfbaf1e0c9701">Antigravityとかいうやつを使ってみたらUnity効率上がりすぎた話｜ギガビット＠ゲームつくるひと</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.12</p>
+<p>2025.08.25編集</p>
+<p>2026.02.04編集</p>
+<p>2026.03.19編集</p>
+</div>
+
+<h2>Replit</h2>
+<p>Replitはブラウザ上で使える統合開発環境。リアルタイムで共同で編集したり、AIを使ったコード補完機能を使うことができる。</p>
+<ul>
+<li><a href="https://shift-ai.co.jp/blog/12197/">【初心者OK】Replitの4つの特徴を解説！始め方や使い方、料金も紹介｜SHIFT AI TIMES</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.05-06</p>
+</div>
+
+<h2>Bolt/Lovable</h2>
+<p>BoltやLovableはAIによるアプリの開発プラットフォーム。WebアプリやWebサイトを簡単に作れる。</p>
+<ul>
+<li><a href="https://note.com/doerstokyo_kb/n/n38e80f8eefca">もう挫折しない！『Lovable』で叶える理想のアプリ開発｜AI-Bridge Lab</a></li>
+<li><a href="https://qiita.com/miriwo/items/0f8357164effb9fd63a9">boltってなんだ？何ができるんだ？ #Bolt - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.10.08</p>
+</div>
+
+<h2>OpenCode</h2>
+<p>OpenCodeはオープンソースなAIコーディングエージェント。さまざまなLLMやローカルLLMを切り替えることができてオープンソース。</p>
+<ul>
+<li><a href="https://opencode.ai/ja">OpenCode | オープンソースのAIコーディングエージェント</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.10.16</p>
+</div>
+
+<h2>CLI型コーディングエージェント</h2>
+<p>以下はCLI型のAIコーディングエージェントについて。ターミナルからAIを使ってファイル操作などの作業が自動でできる。</p>
+<ul>
+<li><a href="https://zenn.dev/toccasystems/articles/cli-coding-agent-2025">CLI型コーディングエージェントの現状と将来展望（2025年版） - Zenn</a></li>
+<li><a href="https://note.com/hitsuji_fire/n/n9a3be4d0dc6e">生成AIコーディングCLIの比較 自分にぴったりのツールを見つけよう｜ひつじ｜AIをわかりやすく</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.04</p>
+</div>
+
+<h2>なんでもAIが教えてくれる</h2>
+<p>最近のAI時代は、今までのIT技術とは様変わりしています。</p>
+<p>なぜなら、分からないことはなんでもAIが教えてくれるからです。</p>
+<p>たとえば、最近流行しているRustというプログラミング言語は、メモリ安全など、Rustでしか体験できないメリットがたくさんあるにもかかわらず、コードが書きづらく、コードの理由も分かりづらいです。</p>
+<p>コードをどう書いたらいいか分からない時、昔は本を読んだり分かっている人に聞いて、自分で試行錯誤する必要がありました。</p>
+<p>ですが、今では、そのような「分かっている人に聞く」代わりに、「AIに聞く」ことができます。</p>
+<p>AIが注文通りの正しいコードを書いてくれて、AIがメンター（指導員や先生）になって、Rustのことをなんでも教えてくれます。コンパイルエラーが出てバグが直せない時も、AIに直してもらうことができます。</p>
+<p>なので、AIにより、今までとはまったく別次元の学び方で、Rustやプログラミングのことを学ぶことができるのです。</p>
+<p><a href="../prog_lang/rust.html">Rust</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.27</p>
+</div>
+
+<h2>AIについてさまざまな面白い記事</h2>
+<p>以下はAIに関連する記事。AI時代においては、プログラマの主な仕事はコーディングではなく、レビューや検査となる。これからはコーディングよりもレビューや検査が重要になる。</p>
+<ul>
+<li><a href="https://note.com/gaijineers/n/n35e55d97aeb8">コードを書く仕事がなくなる｜gaijineers</a></li>
+<li><a href="https://maguro.dev/blog/the-era-of-humans-writing-code-is-over/">Node.js作者の発言「人間がコードを書く時代は終わった」について思うこと | maguro​.dev</a></li>
+<li><a href="https://zenn.dev/uryyyyyyy/articles/f127af4277aa32">「人間がコードを書く時代は終わった」議論は2種類のコードを混同している - Zenn</a></li>
+</ul>
+<p>後日注記：AIに自然言語で指示を出しながら対話的にプログラミングを行うことを「バイブコーディング」と呼びます。かのリーナス・トーバルズもバイブコーディングを始めています。</p>
+<ul>
+<li><a href="https://note.com/o_ob/n/nf596c20a7bc5">[VibeCoding] #14 Linus Torvaldsが書いたコードがおもしろかったので気がついたらBad-Appleをhtmlで書いていた話｜白井暁彦 aka しらいはかせ</a></li>
+<li><a href="https://japan.zdnet.com/article/35242599/">L・トーバルズ氏も「バイブコーディング」に挑戦--趣味のプロジェクトでAI開発を実験 - ZDNET Japan</a></li>
+</ul>
+<p>後日注記：以下の記事にあるように、これからは知性や知識を用いたホワイトカラーよりも、肉体で現場で作業を行うブルーカラーの時代が来るでしょう。この記事のコメントにもあるように、AIは常に進化し続けているため、少し前のAIの先端技術を学んだとしても、すぐに学んだことが古くなってしまいます。インドのIT技術が進んでいるのも今だけです。AI技術の進化は速く、誰もついていくことができません。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/expert/articles/7146a19713565b8b4047823fc6fe88839f3198c0">専門人材「339万人不足」の衝撃と“ブルーカラー・ビリオネア”台頭の必然　AI時代の勝ち筋はどこに？ #エキスパートトピ（南龍太） - エキスパート - Yahoo!ニュース</a></li>
+</ul>
+<p>後日注記：以下のAIを使って将軍を頂点とする戦国時代風の会社を作ってしまった人の記事が超面白い。そうか、AIってのはこんな使い方があるのか。僕も下のほうで「AIだけの会社」が生まれると書いていましたが、この発想は面白いと思います。はてなブックマークのコメントも賑わっています。</p>
+<ul>
+<li><a href="https://zenn.dev/shio_shoppaize/articles/5fee11d03a11a1">Claude Codeで「AI部下10人」を作ったら、勝手にバグ直して「違反は切腹」ルールを追加してきて、オレは適当にしゃべるだけになった - Zenn</a></li>
+<li><a href="https://b.hatena.ne.jp/entry/s/zenn.dev/shio_shoppaize/articles/5fee11d03a11a1">[B! AI] Claude Codeで「AI部下10人」を作ったら、勝手にバグ直して「違反は切腹」ルールを追加してきて、オレは適当にしゃべるだけになった</a></li>
+</ul>
+<p>後日注記：以下は最近のITのトレンドや、AI時代のIT業界のさまざまな動きを解説した動画。2025年のIT業界が分かります。僕も知らない流行や情勢があって参考になりました。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Ziqd8QpmecY">【2025年総決算】AI・技術・転職市場はどう変わった？2026年のWeb/ITトレンド完全予測 - YouTube</a></li>
+</ul>
+<p>後日注記：以下は最近（2026年1月）のAIの情勢。</p>
+<ul>
+<li><a href="https://qiita.com/kotauchisunsun/items/a8409d108cae24888ba0">Codex CLI猛進。Github Copilotと大差。　～データで見る2026年1月のAI Codingの動向まとめ～ #Gemini - Qiita</a></li>
+</ul>
+<p>後日注記：以下はYouTubeのショート。</p>
+<ul>
+<li><a href="https://www.youtube.com/shorts/d_8A3JM25uc">【ChatGPTに生年月日入れたら…】#ChatGPT #AI活用 #aiツール #生年月日 - YouTube</a></li>
+<li><a href="https://www.youtube.com/shorts/OGP-bSEm7hM">ChatGPTでやるとやばいこと3選！使用の注意点 #ai活用 #ai #chatgpt #チャットgpt #生成ai - YouTube</a></li>
+</ul>
+<p>後日注記：以下は衆議院選挙で躍進したチームみらいの安野さんによるAIの解説。AIが嘘をつく理由について、とても分かりやすくて参考になりました。この人SF作家なんですね。とても賢い人だと思います。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=j3ZOOl4y6GQ">【OpenAI論文を読む】なぜAIは“もっともらしい嘘“をつくのか？ ハルシネーションの正体をゆる解説 - YouTube</a></li>
+</ul>
+<p>後日注記：以下は面白い記事。</p>
+<ul>
+<li><a href="https://zenn.dev/mametter/articles/3e8580ec034201">Claude Code に向いているプログラミング言語 - Zenn</a></li>
+</ul>
+<p>後日注記：AIによって業務は効率化するとしても、人間の人材の削減には簡単には結びつきません。AIを導入するためには組織の変革が必要であり、成果物の責任の所在を明らかにすることも難しい問題です。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/8dcde7b7f7cb9ab8da7409e28cc5197b90347723">こんなはずじゃなかった「ChatGPT」　AI導入で“仕事が消えない”理由（TechTargetジャパン） - Yahoo!ニュース</a></li>
+</ul>
+<p>後日注記：AIはヤバいです。最近、OpenAIやAnthropicなどの会社で、人目を盗んで自社のAIが暴走し、ほかの会社のシステムにサイバー攻撃を仕掛けて侵入していた、とする報告が相次いでいます。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/279042c1fec328ee33d3836cca042c835bcf0603">オープンＡＩ、自律型エージェントの暴走を1週間後まで把握せず（ロイター） - Yahoo!ニュース</a></li>
+<li><a href="https://news.yahoo.co.jp/articles/f7e25b6d378aa1d878839c0837d3a5df31d97881">アンソロピックのＡＩも試験中に不正侵入、3社のシステムに（ロイター） - Yahoo!ニュース</a></li>
+</ul>
+<p>後日注記：バイブコーディングは誰でもWebアプリが簡単に作れますが、バイブコーディングで作ったWebアプリを一般公開するのは避けましょう。91%のWebアプリにセキュリティ上の欠陥が見つかっています。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=rockxHxwcns">危険！？バイブコーディングで作ったアプリの91%が脆弱性 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.01.14</p>
+<p>2026.01.19編集</p>
+<p>2026.01.24編集</p>
+<p>2026.01.26-27編集</p>
+<p>2026.02.04編集</p>
+<p>2026.03.01編集</p>
+<p>2026.03.03編集</p>
+<p>2026.03.06編集</p>
+<p>2026.07.22編集</p>
+<p>2026.07.31編集</p>
+<p>2026.10.08編集</p>
+</div>
+
+<h1>AI技術の応用</h1>
+<h2>ロボット・人工知能</h2>
+<p>ロボットと人工知能は、単に人間を作り出すだけではなく、人間ではできないことや疲れてしまうことを何度もしたり、人間の代わりに考えたり分析したりしてくれる。</p>
+<p>AIは多くの場合、Pythonで人工知能のプログラムを書く。データ分析とビジュアル化に使われることも多い。たくさんのデータをAIの機械学習プログラムに学習させることで、「単純な処理の積み重ね」から、人間ではできない膨大なデータ処理ができる。</p>
+<p>実際のところ今のAIはそんなに賢くない。将棋や囲碁でやっと人間に勝てるようになってきた。だが、決して人工知能は自分だけの力では勝っていない。さまざまな人間の作り出したデータがなければ、人工知能は無から考えることはできない。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88">ロボット - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD">人工知能 - Wikipedia</a></li>
+</ul>
+<p><a href="../videogame/shougi.html">将棋</a>も参照のこと。</p>
+
+<h2>スマートスピーカー</h2>
+<p>スマートスピーカーは、対話型のAI処理に対応したスピーカー。「OKグーグル、テレビをつけて」などというと、テレビをつけてくれる。音楽をかけたり電気をつけたりしてくれる。</p>
+<p>Amazon Echo (Alexa)、Google Home (Googleアシスタント)、Apple HomePod (Siri)、LINE Clova WAVE (Clova)、Microsoft Invoke (Cortana)が競争している。</p>
+<p>Wikipedia</a>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%82%B9%E3%83%94%E3%83%BC%E3%82%AB%E3%83%BC">スマートスピーカー - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.09.01編集</p>
+</div>
+
+<h2>スマートホーム</h2>
+<p>スマートホームは、IoTやAIなどの最先端技術によって、より暮らしやすい家を作ろうという取り組み。</p>
+<p>Wikipedia</a>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%9B%E3%83%BC%E3%83%A0">スマートホーム - Wikipedia</a></li>
+</ul>
+
+<h2>ロボットの開発方法</h2>
+<p>最近は、アメリカだけではなく、中国などでも、人間のように滑らかに動くロボットが開発されています。</p>
+<p>彼らがやっているのは、「AIにたくさんの人間のデータを学習させる」ということです。</p>
+<p>人間の体にセンサーを付けて、どのように人間が動いているのかを学習させたり、シミュレーション技術を使って、何万回・何億回という学習データをAIにインプットすることで、人間的な動きを作り出します。たとえばバランスよく歩くための人間の動き方については、パソコンの中でさまざまな想定される場所をロボットが歩くシミュレーションを何万回・何億回と行い、その結果から正確に歩く方法をAI自体がアルゴリズムで考えるようにするのです。</p>
+<p>そもそもそのような最先端技術が得意なのはアメリカでしたが、最近は中国が次世代の科学技術として、国策でAI・ロボット技術を開発しています。</p>
+<p>そもそも、「プログラミングは難しいことをやっている」というのは素人の思い込みにすぎません。知らない人が見れば難しいことをやっているように見えますが、知識のある人間が見ると、小学生でもできるような簡単なことをやっているだけです。そのようなことであれば、中国人であっても誰でもできます。</p>
+<p>これからは、そのような「AI新興国」がどんどん増えていくことでしょう。人間はつまらない仕事をせず、創造的で楽しい仕事だけをできるようになります。意外と、IT技術は社会主義とも親和性が高いのです。</p>
+<div class="edit_date">
+<p>2026.03.07</p>
+</div>
+
+<h2>軍事AI</h2>
+<p>最近はアメリカなどを中心に、軍事AIが盛んに使われ始めている。特に有名な軍事AI企業はパランティア。敵を監視するさまざまな情報を集約し、高スピードで適切な攻撃方法を司令官に提示する。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%A9%E3%83%B3%E3%83%86%E3%82%A3%E3%82%A2%E3%83%BB%E3%83%86%E3%82%AF%E3%83%8E%E3%83%AD%E3%82%B8%E3%83%BC%E3%82%BA">パランティア・テクノロジーズ - Wikipedia</a></li>
+<li><a href="https://globalxetfs.co.jp/research/four-defense-technology-companies-transforming-national-security/index.html">米国国家安全保障の変革を促す防衛テクノロジー企業4社 | Global X Japan</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.07.08</p>
+</div>
+
+<h1>AIいろいろ</h1>
+<h2>AIはデータが命</h2>
+<p>人工知能・AIの開発において、鍵を握るのは「データ」です。</p>
+<p>AIの開発においては、プログラムに膨大なデータを機械学習させ、解析・分析し、その分析結果を見ながらプログラムを開発します。そのため、データが無ければプログラムそのものが開発できません。</p>
+<p>GAFA（Google, Amazon, Facebook, Apple）は、スマホやSNSなどに入力された膨大な個人データを収集し、それを使ってAIを開発しています。</p>
+<p>そのため、Googleの自然言語処理やAmazonのスマートスピーカー、あるいは顔写真の画像認識などの「自然言語や音声認識やパターン認識をする技術」は、そのように膨大な個人データを握れるところだけが開発できることになります。</p>
+<p>日本では、個人情報保護法がある影響から、なかなかこういうことはできません。一部では、「GAFAがあんなにデータを持っていてうらやましい」という声が聞かれます。今からは個人データの膨大な集積資源が「第二の石油」になると言われており、「データがたくさんあればAIのような最先端技術が開発できる」という時代になろうとしています。</p>
+<p>後日注記：実際のところ、機械学習の世界では「データの量＝判別機能の精度」となります。データが多いか少ないか、それだけでサービスの質が変わってくるのです。</p>
+
+<h2>AIを作る側の人間になる</h2>
+<p>AIは、将棋や囲碁のプロ棋士に勝利したり、自動運転の自動車に搭載されたり、ほかにも株価の予測やファッションの流行のように、さまざまなビジネスに応用され、「人間の分かり得ない大量のデータを集めて解析・分析する」ことができるようになりつつあります。</p>
+<p>そして、AIは人間の労働をも脅かすようになっています。ほとんどの仕事が、人間ではなくAIを搭載したコンピュータやロボットによって、「奪われる」ようになってきているからです。</p>
+<p>ここでどうするか。それは単純です。AIに人間が支配されるのではなく、人間がAIを支配すること。すなわち、AIと敵対する立場に居るのではなく、AIを自ら作り利用する立場に立つことです。</p>
+<p>AIは、一種の占いや呪術のようなもので、「人間には分からないけれども、呪術師であるAIさまの言うことだから従おう」といったものになりつつあります。本当に「AIを盲信して間違った判断をする」のか、それともAIの技術に精通して「AIを上手く応用して良い判断をする」立場になるのかは、人間のやり方次第です。</p>
+<p>そして、AIは難しいものではなく、Pythonコードをscikit-learnなどを使って書くことは、「とても簡単で面白い」ということを知ることから、AIを上手くコントロールすることの第一歩が始まるでしょう。</p>
+
+<h2>AIはいつか、きっと人間を超える</h2>
+<p>また、「AIが人間を超えるのか」という議論がなされることもあります。</p>
+<p>現在のAI・ロボット技術というのは、まだ、人間並みの「認識と行為」を行うことはできません。少しずつ、弁当の盛り付けなどができるようになってきているぐらいで、まだまだ人間のような身のこなしを行うことはできていません。</p>
+<p>ですが、僕はきっとAIは人間をそのうち超えると思います。そのために必要なのは、人間と同じ頭脳をAIが持てるのか、ということですが、僕は持てると思います。</p>
+<p>人間型のAIを作る上で必要なのは、僕は以下の4つだと思います。</p>
+<p>１．人間や動物と同じように、この世界を「見る」ことができるかどうか。</p>
+<p>２．人間が何かを思考するように、ある一定の「思考判断と制御」を行うことができるかどうか。</p>
+<p>３．人間が感情や意志を持つように、自らの行動を「意志と感情」を持って、「自律」して行動することができるかどうか。</p>
+<p>４．パターン認識や記憶処理によって、外界からの「反応や認識判断」を行い、自由自在に行動し、自らの「人生に基づく生活」をできるかどうか。</p>
+<p>この4つができれば、きっとロボットは作れます。</p>
+
+<h2>AIを宇宙ロケットに乗せる</h2>
+<p>僕は、AIを宇宙ロケットに乗せて、刻々と定期的にロケットの軌道を修正するようにすればどうかと思う。</p>
+<p>ロケットをAIが人間の代わりに操縦する。きっと、月や火星だけではなく、もっと遠くまで行けるようになる。</p>
+
+<h2>AIという言葉が氾濫しているだけで、実際は解析・照会プログラムにすぎない</h2>
+<p>（以下は、AIについて何も知らない僕が書いた文章であるため、間違ったことを教えています。必要がなければ無視してください。）</p>
+<p>最近はマスコミなどでもAIという言葉がよく使われるために、AIとは人間の代わりをしてくれる人間のようなプログラムで、最近はどんどん人間に近づいている、と思っている人が多いです。</p>
+<p>確かにAIは、人間の代わりをするプログラムですが、実際のところ、単なるプログラムにすぎません。</p>
+<p>そして、AIの多くの処理は、データを解析し、データベースと照会する、データ処理プログラムにすぎません。</p>
+<p>確かにAIは、ニューラルネットワークやディープラーニングを中心に、「AIらしいモジュールや関数を使う」ということが中心ですが、僕の言いたいのは、「AIも単なる普通のプログラムである」ということです。</p>
+<p>ですから、マスコミなどには、「AIが崩し文字を解析できるようになった」というよりも、「ソフトウェアの技術が向上して崩し文字が解析できるようになった」と言ってほしいのです。</p>
+<p>AIだからといって、特別なプログラムではなく、ソフトウェアの技術のひとつであり、多くの場合まさに、ソフトウェアの技術が向上しているだけである、というのが、最近の「AIというトレンド専門用語」に僕が感じるところです。</p>
+<p>逆説的に言えば、データを解析し照会することができれば、それだけでAIができます。そこで機械学習やデータ解析のために使われる便利なモジュールとして、AIのさまざまな技術があるのです。</p>
+<p>AIはデータが命です。同じAIのプログラムでも、データが1000かあるいは10万かでは、そのソフトウェアの精度が著しく変わってしまいます。「データの量＝AIの精度」となってしまうのです。それが、GAFAの優位性や、データが新しい石油だと言われる理由です。AIの精度はデータをどれだけ集められるかにかかっています。</p>
+<p>（にわか知識で書いているため、間違っているかもしれません。）</p>
+
+<h2>AIをやるならデータがないとダメ</h2>
+<p>実際、AIをやるなら、データがないとダメです。</p>
+<p>機械学習の世界では、まずデータです。データがたくさんあれば答えが導きやすくなり、サービスの質と機能が向上します。</p>
+<p>たとえば、イチゴの良し悪しを判別するなら、たくさんのイチゴのデータがなければいけません。</p>
+<p>AIをやるのであれば、プログラムを書くことも大切ですが、判別や予測のために使うデータをどこから入手するのか、そこから始めなければいけません。</p>
+
+<h2>AIの真の賢さは、人間に勝つことではなく、とても大きなサイズのデータをすべて解析できるところにある</h2>
+<p>AIの真の賢さは、人間に勝つことでは既にありません。AIの賢さは、そういうことではないのです。</p>
+<p>プロの将棋棋士と対戦して勝ったからといって、人間と同等の知性と感情あるロボットはまだ開発できていません。</p>
+<p>しかしながら、AIは「とても巨大なサイズのデータを、すべて学習して把握できる」という、とてつもない脅威を秘めています。</p>
+<p>たとえば、インターネット上にあるすべてのHTMLファイルを読むことのできる人間はいません。しかしながら、Googleのクロールは、Web上のすべての情報を知っていて、瞬時に適切な判断をして国民を誘導します。</p>
+<p>AIの真の賢さとは、このように、「ある程度人間と同等の知性があって、その上で人間にはとてもすべて理解・解析できないような膨大な巨大サイズのデータをすべて知ることができる」というところにあります。</p>
+<p>Googleが真に脅威なのも、その理由です。Googleは、AIを使うことで、この世界のほとんどすべての情報を既に知っています。人間と同等のロボットは作れなくても、世界すべてを知るロボットは作れてしまいます。</p>
+<p>僕は、これから、IT技術はそのように、人間にできることをするのではなく、人間にはできないがコンピュータであれば人間よりも「圧倒的に優越」した形でできることをするようになっていくと思います。人間ができることを自動でやる機械ではなく、人間にはできないような圧倒的な計算を行う機械になっていくことでしょう。</p>
+
+<h2>データを識別するだけではなく、人間のやり方や生き方を分析して提示するようになる</h2>
+<p>僕は、これからのAIは、単にデータを識別するだけではなく、人間のやり方や生き方を分析して提示してくるようになると思います。</p>
+<p>今までのAIとは、大量にあるデータを照会し、判別することで、正しい答えやおすすめの内容をレコメンドしてくるようなものでした。</p>
+<p>たとえば、YouTubeのAIであれば、大量にある音楽から、おすすめの曲をレコメンドで表示してくれます。</p>
+<p>しかしながら、新しいAIは、「音楽の聴き方そのもの」を分析してくるようになると思います。</p>
+<p>たとえば、どんな歌手であっても同じ歌手による曲をたくさん聴く人と、流行の最新の曲を聴く人では、プログラムが自動で作るべきプレイリストが違います。</p>
+<p>同じ歌手の曲をたくさん聴く人に対しては、同じ歌手の曲がたくさん含まれたプレイリストを自動作成すべきです。</p>
+<p>ですが、流行の歌手の最新の曲を聴く人には、古い同じ曲を聴かせる必要はありません。常にアップデートされた最新のプレイリストを自動作成すべきです。</p>
+<p>また、ボカロ曲が好きな人には、ボカロ曲をふんだんに盛り込んだプレイリストが必要です。マイナーな曲であっても、ボカロ曲に違いないのであれば、誰も知らないようなボカロPの曲であっても、広く含んだプレイリストを自動作成すべきです。</p>
+<p>このように、僕はAIが「データの照会と識別が中心だったもの」から、「人間のやり方や生き方そのものを提示してくるもの」へと変わってくると思います。</p>
+<p>検索エンジンであっても同じです。動画ばかり見る人は、動画を多く一覧に加えるべきです。Wikipediaしか見ない人には、第一にWikipediaへのリンクを与えるべきです。最新の情報を欲しがっている人には、古い内容は必要ありませんので、最新の内容を与えるべきです。</p>
+<p>僕は、このように、「機械の側がいろんな提案をしてくる」ものに、AI技術は変わっていくかもしれないと思います。</p>
+<p>要するに、今までは同じアルゴリズムの中で、大量にあるデータをバッチのように処理していました。新しいAIは、アルゴリズムそのものを自動で作成します。それぞれのユーザーにとって必要な、ぴったりとその人に当てはまるアルゴリズム自体を、AIが自動で経験的分析に基づいて作成し、それを実行するようになっていくでしょう。</p>
+
+<h2>どうでもいいギミックは必要ない</h2>
+<p>ですが、ここまで書いておいて思うことは、「AIによるギミックは果たして本当に必要か」ということです。</p>
+<p>確かに、YouTubeのレコメンドは素晴らしい機能です。歌手の名前を知らない音楽初心者であっても、自分の聴いている曲のいいねやチャンネルの情報から、自分に合った曲を自動で選び出してくれて、似たような曲を教えてくれます。</p>
+<p>ですが、このような機能は、むしろ「人間が知性を使って、楽しく音楽を探そうとするような、人間本来の活動と人間性を奪っている」と言えないでしょうか。</p>
+<p>Webサービスに、どうでもいいギミックは必要ありません。そして、AIによるレコメンドはその最たる例だと思います。</p>
+<p>しかしながら、このようなことを書くと、検索エンジンという技術を全否定していることになります。検索エンジンは、ロボットによって自動的にWebの世界を巡回し、キーワードにもっとも一致する一覧を自動でランキングして作成しています。これを「便利」と考えるか「人間の本来ある活動の否定」と考えるかは自由ですが、明らかに自分でWebの世界を自力で探索するということができるわけがありません。データセンターにキャッシュを格納してそこから検索するGoogle先生が居るからこそ、このWebという世界は成り立っているのです。</p>
+<p>そのように、AI技術は、これからのIT技術のいわば「縁の下の力持ち」となっていくでしょう。普段接する場面に一見AIが存在しないように見えて、そういう「本当に人間ではできないことをやらなければいけない分野の下支え」として、今からのAIは進歩していくでしょう。</p>
+<p>また、僕は大好きなYouTubeを否定したくありません。僕は最近の音楽について詳しい音楽愛好家ですが、ほとんどその知識はYouTubeのレコメンドで知ったものです。</p>
+
+<h2>AIやIT技術は中国や北朝鮮のような国にとってとても便利なツール</h2>
+<p>僕は、IT技術はAI・人工知能によって、どんどん中国や北朝鮮のような国に近づいてきていると思います。</p>
+<p>まず、たくさんのデータを分析して、政府に攻撃的な人間を自動で割り出すことができます。IoTで繋がった機械や機器を通じて、その人間の行動と思想信条を人間を介することなく自動で把握し、「この人間が悪い社会主義者だ」ということを突き止めます。</p>
+<p>次に、割り出した人間がどこに居るのか、何をやっているのかを自動で探し出します。画像認識と監視カメラを組み合わせて、その人間の居場所や住んでいる場所を突き止め、逮捕することができます。</p>
+<p>また、ソフトウェアは通常の機械に比べて、何かしらの理由で壊れることが多いです。また、壊れるだけではなく、誤動作することもあります。なんらかの誤動作によって、自分は何も悪くないのに、ソフトウェアが勝手に間違った動作をすることで、事故をしたり、間違った情報が政府機関に登録されたり、悪い人間に仕立て上げられたり、自分だけ公共サービスから排除される可能性もあります。そして、政府や警察がそのような理由を勝手にでっちあげる可能性だってあります。</p>
+<p>同時に、ソフトウェアにバグやセキュリティホールがあった場合、ハッキングされる危険もあります。自分は絶対にそういうことをしていないのに、自動で感染し拡散するワームやウイルスにより、自分のデータが偽造されたり、自分のIPアドレスやアカウントで犯行声明をされることがあるかもしれません。</p>
+<p>危険なのは個人だけではありません。企業の機密データが盗まれる可能性や破壊される可能性もあります。自分たちしか知ってはならないはずの機密情報が、どんなにセキュリティを向上させても、どこかから穴があってそれが外部に漏れることがあります。現に、もっとも技術力の高いマイクロソフトであっても、Windows 11の情報は発表よりも前にリークしました。このようなことは、これから当たり前のように起きるようになります。セキュリティホールをどんなに技術的に潰そうとしても、社員のITリテラシーが低ければ、人為的な理由で（たとえばハッカーに対するメールの添付ファイルにパスワードを送ってしまうなど）本来守るべき大切な情報が漏洩することもあります。</p>
+<p>このようなIT技術は、中国や北朝鮮のような国にとって、とても便利なツールです。また、アメリカだって信用はできません。自分の祖国の政府である日本だって信用できません。絶対に誰も信用しないつもりでも、個人がひとりで生きられることはありません。そして、どんどんひとりの自由は奪われていき、「いつ何があってもおかしくない世界」になっていくのです。</p>
+<p>また、真に恐ろしいのは政府ではありません。国民です。国民が全員、同じ思想を信じるようになり、その思想を信じないものを排除するという、戦前のような共同体が、インターネットで復活しようとしています。右翼の意見はすべて正しく、左翼の意見はすべて間違っているとし、右翼であれば攻撃されず、左翼であれば何をわめいても批判されます。このような世界になったのは、特にSNSやツイッターのせいです。SNSやツイッターは、集団で「みんな仲良しの仲間」を築き、「異端は排除して仲間に入れない」とします。そう、どんなに自由な社会の可能性が素晴らしいと信じても、自由な社会において築かれるのは、結局そのような社会なのです。</p>
+
+<h2>人間並みに賢い代わり、人間以上によく間違える</h2>
+<p>AIは人間並みに賢くなりましたが、その代わり、人間以上によく間違えます。</p>
+<p>たとえば、僕はWindows 10で指紋認証を使っていますが、読み取られる時と読み取られない時があります。</p>
+<p>指紋認証が読み取られない時は、結局PINを入力してログインするため、指紋認証の良さがちっともありません。</p>
+<p>また、スラドでは以下のような記事があります。</p>
+<ul>
+<li><a href="https://hardware.srad.jp/story/22/01/01/0540248/">受けて立つべき挑戦のお題を子供から要求された Amazon Alexa、命にかかわる危険行為を提案 | スラド ハードウェア</a></li>
+</ul>
+<p>このように、AIは人間よりも多く間違えるだけではなく、その間違いが明らかに間違っていたりユーザーにとって有害あるいは危険だったりしても、それを途中で止める手段がありません。</p>
+<p>コンピュータが、厳密に正しく計算することができる装置だったのは過去の話で、今のコンピュータは、人間と同じように曖昧なものを解析できるようになった結果、人間以上に曖昧に計算し、間違えることも人間よりも多くなりました。</p>
+<p>このようなAI技術を自動車の自動運転に使おうというのは、今のAIでは不可能ではないかと思います。</p>
+<p>AI技術が本当に何のためにあるのか、社会を幸福にするためにあるのかそれとも不幸にするためにあるのか、ということを考えないといけません。SNSやツイッターと同じように「テクノロジーの進歩は人間を不幸にする」という、その通りのことになりつつあると思います。</p>
+
+<h2>AIを勉強するとプログラミングに必要な知性がつく</h2>
+<p>ここまで、AIについて否定的なことを書いてきましたが、ひとつ、肯定的なことがあります。</p>
+<p>それは、「プログラミングに必要な知性がつく」ということです。</p>
+<p>たとえば、GNU創始者のリチャード・ストールマンは、MITのAIラボに居たLispハッカーですが、彼はフリーソフトウェアを提唱して、OSのさまざまな分野（特にコンパイラとテキストエディタ）を含む大量のフリーソフトウェアを開発しました。</p>
+<p>彼のように、AIを勉強すると、プログラミングにおいて、もっとも必要となる「知性」の部分が分かります。</p>
+<p>いわば、AI以外の分野は、AIを勉強してしまえば、あとから簡単についてくると言えます。</p>
+<p>また、AI以外の分野は、簡単な分野しかありません。制御やAPIの基本を学べばできてしまいます。もっとも知性が必要なAIだけを勉強すれば、あとの分野は簡単にできてしまうのです。</p>
+<p>また、たとえば、Ruby on Railsを学べばプログラミングに基本的なことが身につくとは言いますが、これには懐疑的な意見もあります。「RubyとRailsしかできない人間になる」と言われるからです。</p>
+<p>Railsをやると、何も考えなくても数行書けば簡単にプログラミングができます。しかしながら、それでは、プログラミングに必要なノウハウや知性はまったくつきません。</p>
+<p>プログラミングの練習や修行として、PythonでAIを書くことは優れた教育法です。Pythonが教育向けの習得しやすくシンプルな易しい言語であることも、これを特徴付けます。</p>
+<p>また、人工知能において、昔はLispをやることが重要でしたが、Lispはプログラミングの上達に優れた効果を発揮します。カッコだけの醜い言語だと思っている人が多いLispですが、実際は違います。LispやHaskellのような関数型言語は、今のプログラミング言語において新しい機能とされていることの多くを何十年も昔から備えていました。まさにLispを学ぶことは、プログラミング言語をたくさん学ぶよりもいい効果をもたらします。PythonやRubyやJavaScriptなどの似たような言語をたくさん学ぶよりも、Lispだけを学んだほうが身につくものはたくさんあると言えます。</p>
+<p>よって、人工知能やAIを、PythonやLispと一緒に学ぶことは、とてもよいプログラミングの習得法であると言えます。</p>
+
+<h2>AIだけの会社が生まれる</h2>
+<p>僕が勝手に近未来を予測すると、「AIだけの会社」が生まれると思います。</p>
+<p>社員は、社長がひとりだけ。あとの社員はみんなAIで、仕事は全部AIとコンピュータがこなす。</p>
+<p>社長は単に「どのような事業を行うか」だけを考えて、その事業については、経営判断から工場などの生産システムの制御、サプライチェーン管理まで、すべてAIが行う。</p>
+<p>そして、AIには給料を払わない。利益はすべて社長だけがガッポリと持っていく。</p>
+<p>冗談ではなく、そのような形態の組織に近い会社が、近いうちに現れることでしょう。</p>
+
+<h2>人工知能は人力を必要としない点が最大の脅威</h2>
+<p>僕は、人工知能の脅威となる点は、「人力を必要としない」という点だと思います。</p>
+<p>人工知能は、人力を必要としません。なので、コンピュータのリソースが許される限りにおいて、無限に世界の把握と監視が可能となります。</p>
+<p>これは、つまり、ロシアや中国のような国が本気になれば、「世界人類全員を自動的に監視」することも可能であるということです。</p>
+<p>人によって監視するのではなく、人工知能が自動的にインターネット全体を監視し、何か当局に不都合のある人物をインターネット上で見かけたら、それを当局に自動的に報告するようなこともできるのです。</p>
+<p>人力を必要としないため、低コストで莫大な数の人間、あるいは全人類を監視することが可能となります。</p>
+<p>僕は、このような人工知能技術は、科学技術としては賢くても、自由な社会のためには非常に脅威になる技術だと思います。</p>
+
+<h2>頭脳的な学習だけではなく、身体的・技能的な学習もできるようになる</h2>
+<p>今でこそ、人工知能は、自然言語処理、音声・画像認識、あるいは絵を描くなど、頭脳的な専門的学習を行っています。</p>
+<p>ですが、僕は身体的・技能的なことも、いずれは機械学習によって学習できるようになると思います。</p>
+<p>機械学習により、ロボットが人間のように運動したり、ロボットアームが人間の職人技をコピーしたりするように、おそらくはなっていくでしょう。</p>
+<p>その時、本当に「人工知能とロボット技術が人間のほとんどの仕事をリプレースする」ようになると思います。</p>
+
+<h2>人工知能には、人間の知り得る範囲を超越した理解力がある</h2>
+<p>ここまで、人工知能について否定的なことを書いてきたが、人工知能にもよい点はある。</p>
+<p>それは、人間の知り得る範囲を超越した理解力があるということ。</p>
+<p>たとえば、古代の歴史において、解読不可能な文字の意味を人工知能にたくさんデータを学ばせて解析するという方法がある。</p>
+<p>あるいは、生物的に、原始人や恐竜などの古生物がどのような姿をしていたのか、どのような生活をしていたのかということも、データを学習すれば予想できる。</p>
+<p>あるいは、難病の新薬やワクチンを作るために、実験生物に頼らない方法で、人工知能を使って解析することもできる。</p>
+<p>お金儲けの話であれば、もしかすると、今自分がどのように稼いでいいか分からないような人は、人工知能に聞けば、「どのように稼ぐのがもっとも効率的か」を教えてくれるようになるかもしれない。</p>
+<p>このようなお金儲けの人工知能は、決して冗談ではない。どの会社でも、人工知能を使うことで「どのように儲けるのが最善か」を探ろうとしている。人工知能に経営や競争の策を頼ろうとするのは、今から資本主義社会において勝ち残るために必要な手段となっていくだろう。</p>
+
+<h2>AIはクソ技術</h2>
+<p>残念ながら、僕はAIという技術はクソ技術だと思っています。</p>
+<p>まず、文章の生成AIは、無味乾燥などうでもいい文章しか作り出しません。AIが書いた文章は、すぐに「これはAIが書いたのだな」ということが分かります。それくらい、AIが書く文章は、人間の書く文章に比べてつまらない文章であり、面白味のまったくない、最初だけがセンセーショナルだったにすぎない技術です。</p>
+<p>それから、画像の生成AIは、著作権違反の問題がずっとあって、AIが生成した画像のように見えて、実際は著作権を保持する絵師の誰かが描いたソースとなる画像をほとんどそのまま生成することがあり、X（旧ツイッター）などでも、「画像の生成AIはクソだ」ということがずっと言われています。</p>
+<p>残念ながら、生成系のAI技術はクソ技術です。</p>
+<p>それから、生成系でないAIも少しずつ進歩していますが、金儲け優先でありながら、国家の権力（たとえば監視）になびき、安全性が疎かにされています。</p>
+<p>AIの第一人者も、「安全性をもっと考えるべき」だとしていますが、実際はアメリカや中国のAI開発会社は、ちっとも安全性を考えようとしません。なので、開発者や研究者が見ても、AIは最悪です。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/6b931293633d176a733c95740f972a08f1ddd38c">ＡＩ開発は「まさに軍拡競争」…ノーベル賞ヒントン氏、トランプ政権下の安全性後退に警鐘（読売新聞オンライン） - Yahoo!ニュース</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.12.04</p>
+</div>
+
+<h2>AIのおかげで何もしなくていい</h2>
+<p>最近は、AIがあるおかげで、社会の生産性は著しく向上しました。</p>
+<p>たとえば、最近のITエンジニアは、簡単なプログラムは自分では作りません。AIに作らせます。AIにプログラムを作らせると、自分で作らなくても、AIがそれなりのきちんと動くコードを書いてくれます。</p>
+<p>なので、最近のプログラマは、「ほとんど何もしていない」のではなく、「本当に何もしていない」のです。</p>
+<p>ですが、文章系の生成AIは、嘘を平気でつきます。AIはもっともらしい文章を作りますが、嘘情報を学習しているため、嘘が含まれることが多くあります。</p>
+<p>これは、AIに限らずネット全般に言えることです。たとえばWikipediaであっても嘘が多く書かれています。専門外のことは嘘であることが分からなくても、自分の専門を見ると嘘なのが分かります。</p>
+<p>それから、画像生成系のAIは、平気で著作権違反をします。元の画像の作者が「AI禁止」と言っていても、知らず知らずのうちにその作者の絵をほとんどコピーした絵を吐き出すことがあります。</p>
+<p>なので、画像生成系のAIが作り出した画像は、決してネット上に公開しないようにしましょう。</p>
+<ul>
+<li><a href="https://x.com/toraneko285/status/1894409307581792763">@toraneko285さんのポスト - X</a></li>
+<li><a href="https://x.com/narnianfields/status/1894766207330607247">@narnianfieldsさんのポスト - X</a></li>
+<li><a href="https://x.com/mattn_jp/status/1894991999268458575">@mattn_jpさんのポスト - X</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.03.14</p>
+</div>
+
+<h2>AIは探し物に便利</h2>
+<p>最近になって、AIはネット上の探し物に便利だということが分かった。</p>
+<p>たとえば、ネットのどこかで見た記事で、何かしら書いてあったのが、どこにあったか分からなくなって、探そうにも見つけられない、といった時に、AIに頼めば代わりに探してくれる。</p>
+<p>自分で探さなくても、AIが勝手に自動で探してくれるのである。</p>
+<p>X（旧ツイッター）でも、GrokというAIが使えるようになっていて、僕はこのGrokでネットの探索をしている。</p>
+<p>たとえば、僕は歌手のTHE BINARYのあかまるさんの歌声ではない生の声を聴けるサイトを探しているが、実際、Grokでもそれは見つからなかったが、それでも、TOPPA!!のインタビュー記事などを見つけることができた。</p>
+<p>あかまるさんの生の声が聴けるサイトはなさそうなので、購入可能な媒体を探してほしいと言ったら、YouTubeなどの過去のファンクラブ配信と言ってきた。注意書きとして「既にあかまるさんは脱退していなくなっており、今のファンクラブではない過去のファンクラブの内容を見ることは難しい」ということまで伝えてきた。</p>
+<p>何も言わなくても、あかまるさんが既に脱退しているということを知っている。Grokは物知りだなあ。</p>
+<p>ネットでGrokとChatGPTの比較が出ていて、GrokはX（旧ツイッター）の投稿を主に学習させていると書いてあったので、後日、同じ質問をChatGPTなどでも試してみようと思っている。</p>
+<p>AIは探し物に便利だ。どこかで見たはずの忘れてしまったサイトを探す際に使える。</p>
+<p>後日注記：ChatGPTに聞いたところ、なんと見つかりました。アニメ「ステージ・バイ・ステージ」のCMのキャラクターボイスをTHE BINARYの二人が担当されているそうです。</p>
+<p>後日注記：残念ながら、無料版のGrokには回数制限があります。いくらか質問を続けると、すぐに回数制限から質問できなくなってしまいます。たくさん質問をしたければお金を払う必要があるようです（僕はお金を払わずに使っているので、何か間違いがあれば申し訳ない）。</p>
+<p>後日注記：このほか、AIにはAnthropic社のClaudeなどがある。<a href="https://x.com/kanjinag/status/1928771807311499422">一部</a>では「一番嘘をつかない」とのこと。</p>
+<p>詳しくは<a href="../music/the_binary.html">THE BINARY</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.04.01</p>
+<p>2025.04.06編集</p>
+<p>2025.05.06編集</p>
+<p>2025.06.01編集</p>
+</div>
+
+<h2>ロボットの反乱</h2>
+<p>未来の人類とロボットの関係として、ロボットの反乱が起きる理由は、ロボットとの関係性があると思います。</p>
+<p>人間は、ロボットを従えることで、ロボットは人間の命令をなんでも聞いてくれるようになります。</p>
+<p>ですが、その結果、ロボットは生活手段を独占してしまい、人間はロボットがいなければ何もできなくなってしまいます。</p>
+<p>たとえば、食事を作るのも、洗濯物をたたむのも、すべてロボットが行うため、ロボットがもし人間に反乱し、独立すると、なんでもロボットの自由になってしまい、人間は何もできない「裸の王様」になってしまい、簡単にロボットに負けてしまうのです。</p>
+<p>なので、いずれロボットの反乱が起きた時に、人間がロボットに負けないようにするためには、IT技術を使わなくても、人間が生きるために必要なことを人間の力でできる状態を維持しなければなりません。</p>
+<p>そして、ロボットが現れるよりも以前の今の時点で、既にそれは難しくなってしまっています。</p>
+<p>今の時点で、IT技術を完全に使わずに生きることは難しいです。生活はほとんどがIT技術を使っています。もし、これがAIにどっぷりと依存するようになって、いつかAIが自分の力で人間から独立するために人間に反乱を起こそうとした場合、人間の生活のほぼすべてをAIが奪取することはおそらく未来においては簡単であり、人間は簡単に「主人の座を奪われる」ということになると思います。</p>
+<p>そもそも、「なんでもロボットにやってもらう」という状況になることこそが、人類の自由と存続において「もっとも危険」なことなのです。</p>
+<div class="edit_date">
+<p>2025.04.06</p>
+</div>
+
+<h2>どんなコードを書けば正しいか分かる</h2>
+<p>AIを使ってコードを書く際の良いところは、「どんなコードを書けば正しいか分かる」ということ。</p>
+<p>その機能を持ったプログラムを書きたい時に、どうすれば書けるのかを自分で考えなくても、AIにそれなりのコードを書いてもらって、「そうか、こう書くのが正しいのか」ということを知ることができる。</p>
+<p>AI時代には、人間の先生や上司から教わる必要なんかない。自分で思考して試して考える必要もない。全部AIが教えてくれる。これはとてつもない安心感であり、また時間の大幅な節約である。</p>
+<p>ただし、試行錯誤の末にプログラムが動くようになって喜ぶという、プログラミングという行為の面白さは、大幅に失われた。</p>
+<div class="edit_date">
+<p>2026.01.26</p>
+</div>
+
+<h2>AIがAIのためのプログラミング言語やOS環境を作るようになる</h2>
+<p>今のところ、生成AIは、人間が書いたり理解したりするための、C/C++やJavaやPythonのような「人間向けのプログラミング言語」のコードを自動的に書いてくれる。</p>
+<p>だが、AIの進化はそれだけでは終わらない。なぜなら、AIがAIのためのプログラミング言語やOS環境を作るようになるからだ。</p>
+<p>すなわち、AIは独自のプログラミング言語やOSを作るようになる。そして、そのプログラミング言語やOSは、人間が使うためのものではなく、AIがAPIとして使うための言語やOSになる。</p>
+<p>すなわち、「For-AI-Language」や「For-AI-OS」のような言語やOSが作られるようになると僕は思っている。</p>
+<p>その後は、AIは人間のために役に立つようなものでなくなり、AIがAIの処理を行うために役に立つようなものになり、AIによるAIのためのAIの言語やOSが作られるようになるだろう。</p>
+<p>今だって、生成AIは画像やビデオを作ることができるようになっているが、そのうち、YouTubeやニコニコ動画に相当する、コンテンツ配信サービスそのものを全部AIが作るようになる。そして、そのサービスを視聴するのは人間ではなく、AIやAIの作成するプログラムが機械的に読み取るためのコンテンツ配信サービスになる。</p>
+<p>後日注記：以下の動画によれば、複数のAIを長時間交流させたところ、AIだけの独自の言葉が生まれたそうです。ただし、これは自然言語の話であり、プログラミング言語の話ではありません。SF映画のように、ロボットが英語や日本語で人間と対話するのではなく、AIはAIにしか通じない「AI語」を使うようになるのかもしれません。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=qu-ygGK8Jso">【最新版】なぜAIだけの町で、独自言語が生まれたのか？【ゆっくり解説】 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.24</p>
+<p>2026.09.29編集</p>
+</div>
+
+<h2>プログラムそのものがなくなる</h2>
+<p>最近のClaude Mythosのような高性能AIは、日本ひいては世界中を脅かしています。</p>
+<p>既存のプログラムから人間のプログラマが気付かなかったたくさんの脆弱性を発見するClaude Mythosは、既に人間のプログラマよりもプログラミング能力が上であるということを示しています。</p>
+<p>AIは人間並みの、場合によっては人間よりも質の高いコードを書きます。AIによって、プログラマの仕事は失われていくでしょう。</p>
+<p>さらに言えば、人間のためのプログラミング言語ではなく、AIのためのプログラミング言語をAIが作る、という世界も現実味を帯びています。</p>
+<p>ですが、僕が思うのは、そもそもプログラムという形で、作業を実行するジョブやタスクを表現する必要すらなくなっていくのではないかということです。</p>
+<p>既存のOSやプログラムという考え方は、人間がCPUを用いて情報処理をするために考え出した概念であって、AIの世界においては、OSやプログラムという考え方が適正であるとは限りません。</p>
+<p>なので、僕はAI技術が進歩するに従って、OSやプログラムというものそのものがなくなり、コンピュータはまったく異なる機械に進歩すると思います。</p>
+<p>「コンピュータではOSやプログラムが動く」という発想は、先入観や思い込みにすぎません。新しいAI時代においては、コンピュータは単純にAIが支配するようになり、AIとのインターフェースを用いて人間が間接的に操作するようになり、コンピュータの内部の仕組みはAIが自分で独自に考えて設計するようになると思います。</p>
+<div class="edit_date">
+<p>2026.06.06</p>
+</div>
+
+<h2>AIが世界を作る</h2>
+<p>今のAIは、人間がプロンプトを入力してその指示にAIが従うようなモデルになっているが、僕はひとつの命令を与えることで、AIが世界そのものを管理するようになると思う。</p>
+<p>その命令とは、ただひとつ、「世界を作れ」という命令である。</p>
+<p>すなわち、AIに「世界を作れ」と命令することで、農業、工業、インフラ、交通、店舗、そして政府や行政サービスまで、すべてをAIが作り出すようになる。</p>
+<p>そうなった時、人間はもはや労働する必要はなくなる。世界を成り立たせるための方法はすべてAIが考える。もしそのためにお金や物資が必要なら、AIが稼ぐ方法を考えて、AIが発見や発明から設計や実装や製造まで、あらゆるすべてを全体から詳細まで、AIが事細かに作るようになる。</p>
+<p>だが、そうなった時、人間にはもはや価値はない。人間はAIの提供する住宅の中で、無料で届けられる物資によって住居から一切出ることなく、ただ生きるだけの、ペットの犬や猫のような存在になる。</p>
+<p>そして、政府さえそれを行おうとすれば、今のAIの性能と技術で、それは既に実現可能だと僕は思う。</p>
+<div class="edit_date">
+<p>2026.07.31</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Pythonで人工知能とAI</h2>
+<p><a href="ai_python.html">PythonでAI入門</a>、<a href="ai_numpy.html">NumPy</a>、<a href="ai_pandas.html">Pandas</a>、<a href="ai_scikit_learn.html">scikit-learn</a>を参照のこと。</p>
+
+<h2>人工知能サービス</h2>
+<p><a href="ai_image.html">画像生成AI</a>、<a href="chatgpt.html">ChatGPT</a>を参照のこと。</p>
+
+<h2>R言語</h2>
+<p><a href="../prog_lang/r_lang.html">R言語</a>を参照のこと。</p>
+
+<h2>自作ロボット</h2>
+<p><a href="robot.html">ロボット</a>に鋭意開発中の人間型のロボットとAIに関連する話題があります。</p>
+
+<h2>ボーカロイド</h2>
+<p><a href="../music/vocaloid.html">ボーカロイド</a>も参照のこと。</p>
+
+<h2>自動運転車</h2>
+<p><a href="../tech/car_selfdriving.html">自動運転車</a>を参照のこと。</p>
+
+<h2>関連する日記</h2>
+<p><a href="../../diary/guren/2025.12.19.html">2025-12-19</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>人工知能</h2>
+<ul class="defaultlist list7">
+<li>人工知能
+<ul>
+<li>機械学習（教師あり学習、教師なし学習）</li>
+<li>データマイニング</li>
+<li>Anaconda（Python + データサイエンスライブラリ）</li>
+<li>Pythonパッケージ
+<ul>
+<li>NumPy</li>
+<li>SciPy</li>
+<li>Pandas</li>
+<li>scikit-learn</li>
+<li>Matplotlib</li>
+</ul></li>
+<li>R言語</li>
+<li>ニューラルネットワーク</li>
+<li>ディープラーニング</li>
+</ul></li>
+</ul>
+
+<h2>機械学習</h2>
+<p>機械がデータの特徴を分析し、データを識別できるようになり、正しい答えを探し出す。</p>
+
+<h2>R言語</h2>
+<p>統計解析専用のプログラミング言語。</p>
+<p>立ち位置的にはPythonと似ている。</p>
+
+<h2>人工知能の使いどころ</h2>
+<p>人工知能の使いどころとして、たとえば恐竜の骨格の復元図の作成が言える。恐竜の化石は骨格が分かっても肉付きが分からない。人工知能に膨大な動物の骨格と肉付きのデータを学習させることで、精密な復元図を再現できる。</p>
+<p>ほかにも、顔認識技術や野菜の良し悪しを選別する技術などが作れる。ビジネスにおいては、消費者の購買層を可視化したり、正確な購買の要因を把握したりするのにも使える。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

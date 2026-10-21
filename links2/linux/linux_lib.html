@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux 共有ライブラリ - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux 共有ライブラリ</h1>
+<p>Linuxの共有ライブラリに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>共有ライブラリのコマンド</h1>
+<h2>ライブラリとは</h2>
+<p>ライブラリとは、それ自体が起動して実行することのできるプログラムではなく、ほかのプログラムから呼び出されることで、さまざまな便利な機能を提供してくれるプログラムのこと。</p>
+<p>UNIXでは、基本的なライブラリとしてlibcやxlibがあるが、ほかにも、たとえばGTKのライブラリなどを使うことで、GTKプログラミングが自分でできるようになったりする。</p>
+<p>しかしながら、ライブラリを使ったプログラムは、それだけを導入しても、ライブラリの共有オブジェクトがシステムに存在しなければ動作しない。GTKのライブラリが一通り導入されていなければ、当たり前だがGTKアプリケーションは動作しない。このため、依存パッケージの管理のためにパッケージ管理システムを用いる。</p>
+<p>また、もし実行できたとしても、プログラムをなんらかの理由でソースコードからコンパイル・ビルドするためには、ライブラリのAPI（関数やグローバル変数のプロトタイプ宣言など）が記述されたヘッダファイルが必要となる。このためには、ヘッダファイルが含まれている-develパッケージを導入することが必要となる。また、gccなどの開発ツール（ツールチェイン）が一通り導入されている必要もある（Red Hatなどではデフォルトでgccすら含まれていないことがある）。</p>
+<p><a href="linux_unix_compiler.html">UNIXシステム管理（コンパイラ）</a>も参照のこと。</p>
+
+<h2>リンク</h2>
+<p>基本的に、拡張子*.aで終わるライブラリは、静的リンク（スタティックリンク）を行うライブラリ。これに対して、拡張子*.soで終わるライブラリは、動的リンク（ダイナミックリンク）を行うライブラリ。</p>
+<p>スタティックリンクでは、プログラムのコンパイル時に静的にプログラムにライブラリが結合される。これに対してダイナミックリンクでは、プログラムのコンパイル時には結合されず、プログラムとライブラリのオブジェクト（共有ライブラリ、shared object）が別々に作成され、実行時にLinuxのリンクローダ（ld-linux.so.2）が動的にリンクを行ってプログラムを実行する。</p>
+<p>昔のUNIXシステムには、スタティックリンクしか存在しなかった。ダイナミックリンクが導入されてからは、さまざまなメリットから、ダイナミックリンクを使うことが一般的で、Linuxでもダイナミックリンクを使うことが標準的となっている。</p>
+<p>スタティックリンクに比べた時のダイナミックリンクのメリットとして、ファイルサイズの削減とメモリイメージの共有が言える。ライブラリを物理的に結合しないため、プログラムのファイルサイズの削減となる。また、メモリ領域において単一のライブラリイメージをすべてのプログラムで共有するため、メモリ領域の大幅な削減となる。ダイナミックリンクのオーバーヘッドがたとえあったとしても、ダイナミックリンクを用いることができる環境では、ダイナミックリンクの方がシステムのパフォーマンスがよくなることが多い。</p>
+<p>また、ここでABIという話をする。ABIとはアプリケーションのバイナリのインターフェースであり、ソースコードレベルのインターフェースであるAPIと違って、ABIはバイナリレベルでのインターフェースである。もし、ABIがきちんと保たれている環境であったとしたら、共有ライブラリの方がシステムのバージョンが変わった時の変更がしやすい。共有ライブラリだけを更新すればよく、アプリケーションレベルでの再リンクが必要ないからである。このため、OSのバージョン更新などでも、仕様が大幅に変わっていない場合、ダイナミックリンクの方が対応しやすい。</p>
+<p>共有ライブラリのデメリットとしては、依存関係を把握しづらいことが言える。プログラムが依存している共有ライブラリがシステムに存在しなければ、そのプログラムは動作しない。また、libcなどの重要な共有ライブラリのバージョンを上げる時に、もし仕様が変わっていてABIが保たれていなければ、システムの多くの部分に障害が発生する危険性もある（スタティックリンクだからといって、再リンクと同時に動かなくなる可能性はある）。</p>
+<p>より詳しく書かれている書籍としては以下が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a></li>
+</ul>
+
+<h2>ldd/ldconfigコマンド</h2>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>ldd</td><td>プログラムの実行ファイル（バイナリ）の依存する共有ライブラリを表示する。</td></tr>
+<tr><td>ldconfig</td><td>共有ライブラリのためのリンクを作成し、キャッシュを更新する。</td></tr>
+</table>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/ld.so/man1/ldd.1.html">man ldd</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/ld.so/man8/ldconfig.8.html">man ldconfig</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>lddコマンド</h2>
+<p>lddコマンドは、引数に指定した実行ファイルが利用している共有ライブラリを表示する。</p>
+<pre>
+$ ldd /bin/ls
+（lsの依存関係にある共有ライブラリが表示される）
+</pre>
+
+<h2>/libディレクトリとldconfig</h2>
+<p>基本的に、通常は/libや/lib64に共有ライブラリが置かれる。これは/usr/libや/usr/lib64などのシンボリックリンクになっていることもある。</p>
+<p>だが、これよりも優先度が上となるのが、システムの環境変数LD_LIBRARY_PATHやLD_LIBRARY_PATH_64、あるいは設定ファイル/etc/ld.so.confに記述された共有ライブラリの置かれるディレクトリパス。</p>
+<p>/etc/ld.so.confの設定は、ldconfigコマンドを実行することによってシステムに反映させることができる。</p>
+<p>具体的には、/etc/ld.so.conf.d/以下にhoge.confを作ってこの中に共有ライブラリの置かれるディレクトリパスを記述し、ldconfigコマンドを実行してキャッシュ（/etc/ld.so.cache）を更新する。</p>
+<ul>
+<li><a href="https://www.dogrow.net/linux/blog6/">(6) ldconfigでライブラリパスを更新 - Linuxやってみる！</a></li>
+</ul>
+<p><a href="linux_fhs.html">Linuxファイルシステム階層</a>も参照のこと。</p>
+
+<h2>共有ライブラリを作る</h2>
+<p>基本的に、</p>
+<pre>
+$ gcc -shared -fPIC -o libhoge.so hoge.c
+</pre>
+<p>とする。ここで「-shared」が共有ライブラリの指定の意味となる。</p>
+<p>Linuxの共有ライブラリを作るためには、gccに「-fpic」または「-fPIC」を指定し（x86ではどちらも同じ）、PIC (Position Independent Code)としてコンパイルをかける必要がある。（PICでなくてもコンパイルはできるが、PICのほうがいろいろとよい。）</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="http://0xcc.net/blog/archives/000107.html">Linux の共有ライブラリを作るとき PIC でコンパイルするのはなぜか - bkブログ</a></li>
+<li><a href="http://www.koikikukan.com/archives/2016/10/27-000300.php">Linuxで共有ライブラリの作成とダイナミックリンクをする方法: 小粋空間</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.21編集</p>
+</div>
+
+<h2>参考ページ・書籍</h2>
+<p>以下のページ・書籍が参考になります。</p>
+<ul>
+<li><a href="https://linux.dogrow.net/blog6/">(6) ldconfigでライブラリパスを更新 - Linuxやってみる！</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88C%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E7%9F%A5%E3%82%89%E3%82%8C%E3%81%96%E3%82%8BC%E3%81%AE%E6%B7%B1%E5%B1%A4-Ascii-books-%E3%83%94%E3%83%BC%E3%82%BF%E3%83%BC-%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%87%E3%83%BB%E3%83%AA%E3%83%B3%E3%83%87%E3%83%B3/dp/4756116396">エキスパートCプログラミング―知られざるCの深層 (Ascii books)</a></li>
+</ul>
+
+
+<h1>関連ページ</h1>
+<h2>ヘッダファイル</h2>
+<p><a href="linux_header.html">Linuxヘッダファイル</a>を参照のこと。</p>
+
+<h2>GNUツールチェイン</h2>
+<p><a href="gnu_toolchain.html">GNUツールチェイン</a>を参照のこと。</p>
+
+<h2>libc・API</h2>
+<p><a href="libc.html">libc</a>や<a href="linux_api_stdio.html">Linux API（stdio）</a>を参照のこと。</p>
+
+<h2>カーネルソースコード</h2>
+<p><a href="linux_kernel_src.html">Linuxカーネル（ソースコード・カーネルモジュール）</a>を参照のこと。</p>
+
+<h2>C言語</h2>
+<p><a href="../prog_lang/c_flow.html">C言語（制御フロー）</a>や<a href="../prog_lang/c_preprocessor.html">C言語（プリプロセッサとインラインアセンブラ）</a>も参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

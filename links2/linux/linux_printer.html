@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linuxプリンター - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div><h1>Linuxプリンター</h1>
+<p>Linuxの印刷・プリンターに関する世界観です。<a href="../hardware/printer.html">プリンター</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>印刷</h1>
+<p>印刷とプリンターの設定。</p>
+
+<h2>lprコマンドとLinuxにおける印刷</h2>
+<p>UNIXにおいて、コマンドで印刷するためには、lprコマンドを使う。</p>
+<pre>
+cat hoge.txt &gt; /dev/lp
+</pre>
+<p>と投げることもできるが、基本的にrootユーザ（あるいは印刷デーモンと同じグループに属するユーザ）だけ。一般ユーザはlprを使う。</p>
+<p>たとえば、</p>
+<pre>
+cat hoge.txt | lpr
+</pre>
+<p>などとすればよい。</p>
+<p>prコマンドは印刷用に整形するコマンド。これを使うことで以下のようにできる。</p>
+<pre>
+pr hoge.txt | lpr
+</pre>
+<p>また、lpqで投げられたキューを見ることができる。lprmで印刷ジョブをキャンセルできる。</p>
+<ul>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/Printing-Usage-HOWTO.html">The Linux Printing Usage HOWTO</a></li>
+</ul>
+
+<h2>CUPS</h2>
+<p>CUPSはUNIXにおける印刷システム。CUPSを設定した上で、上記lprコマンド（BSD系）やlpコマンド（SystemV系）を使って印刷が可能。</p>
+<ul>
+<li><a href="https://vinelinux.org/docs/vine6/cui-guide/vine-cups.html">CUPSによる印刷環境の設定方法と使用方法 - Vine Linux</a></li>
+<li><a href="https://eng-entrance.com/linux-print">意外と知らない？ Linuxでの印刷の仕組み - エンジニアの入り口</a></li>
+<li><a href="https://eng-entrance.com/linux-printer-cups">【Linux入門】しっかりわかる！プリンタ管理と印刷コマンド - エンジニアの入り口</a></li>
+</ul>
+
+<h2>CUPSの設定</h2>
+<p>CUPSの設定は、http://localhost:631にアクセスすることで、WebのGUI設定画面が用意されている。</p>
+<p>プリンターを追加する場合、「管理」タブの中の「プリンターの追加」を選択する。ユーザ名には「root」、パスワードにはrootのパスワードを打ち込む。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-printer-cups">【Linux入門】しっかりわかる！プリンタ管理と印刷コマンド - エンジニアの入り口</a></li>
+</ul>
+
+<h2>PostScript</h2>
+<p>PostScriptはAdobeによるページ記述言語。PostScriptプリンターでは、プリンターに内蔵されている。<a href="../art/postscript.html">PostScript</a>を参照のこと。</p>
+
+<h2>Samba</h2>
+<p>SambaでWindowsとLinuxのプリンターを共有するには、<a href="../network/file_server_samba.html">Samba</a>を参照のこと。</p>
+
+<h1>Linuxとプリンタードライバ</h1>
+<h2>Linuxでは印刷が鬼門</h2>
+<p>Linuxの印刷は鬼門です。ファームウェアやドライバが用意されていないことが多く、Linuxではプリンターが直接使えないことが多いのです。</p>
+<p>ドライバがどうしても無い場合、「WindowsをPostScriptプリンターにする」ことで解決できます。</p>
+<ul>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0271">第271回 WindowsをPostScriptプリンターにしてUbuntuから快適印刷：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0218">第218回　Ubuntuから職場や研究室のプリンターに印刷しよう：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>ドライバーを検索することでLinuxから直接プリンターで印刷することが出来る場合もある。以下を参照のこと。</p>
+<ul>
+<li><a href="https://ameblo.jp/pcroom123/entry-11519028804.html">Ubuntu Linuxのプリンターの設定はwindowの環境より簡単でした | 滋賀県大津市の小さなパソコン教室「ぱそこんる～む１２３」</a></li>
+</ul>
+<p>Linuxに対応したプリンターはそれほど多くは無いが、最近では「ドライバレス」という動きが起こっている。</p>
+<p>タブレット端末などで使用されるドライバの必要のないAirPrintやIPP Everywhereなどの印刷規格に対応したプリンターを利用することで、ドライバがなくてもLinuxでプリンターを使えるようにする。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/ubuntu-topics/201701/06">2017年1月6日号　『ドライバレス』でのプリンタ対応・UWN#492・493：Ubuntu Weekly Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.07編集</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

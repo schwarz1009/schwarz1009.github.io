@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>システムレイヤーの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>システムレイヤーの世界観</h1>
+<p>システムレイヤーに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>システムレイヤー</h1>
+<h2>GTKのレイヤー</h2>
+<p>プログラミングにおいては、よく「高水準」とか「低水準」といった言葉で、「レイヤー分け」という考え方が行われる。</p>
+<p>たとえば、以下はGNOMEで使われているGTKのレイヤー。</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/GTK#/media/File:GTK+_software_architecture.svg">Simplified software architecture of GTK. Pango, GDK, ATK, GIO, Cairo and GLib (Shmuel Csaba Otto Traian)</a></li>
+</ul>
+<p>ここでは、以下のようなレイヤーがあることが分かる。</p>
+<table class="some_tables">
+<tr><th class="min60">レイヤー</th><th>コンポーネント</th></tr>
+<tr><td>高水準</td><td>GNOME（デスクトップ環境・アプリケーション）<br>GTK（ウィジェットツールキット）</td></tr>
+<tr><td>中水準</td><td>Pango（多言語テキスト表示）<br>GDK（ピクセルグラフィックス描画）<br>ATK（アクセシビリティ）<br>GIO（IO・仮想ファイルシステム）</td></tr>
+<tr><td>低水準</td><td>Cairo（ベクターグラフィックス描画）<br>GLib（型・オブジェクト指向）</td></tr>
+<tr><td>ディスプレイサーバ</td><td>Xlib（X11）<br>Wayland（ディスプレイサーバ）<br>Linux（カーネル）</td></tr>
+</table>
+<p>詳しくは<a href="../linux/gtk.html">GTK</a>を参照のこと。</p>
+
+<h2>UNIXにおける水準</h2>
+<p>まず、高水準・低水準とは、多くの場合、「よりマシンに近いか」「よりユーザーのやりたいことや機能に近いか」といったことから使われる言葉である。</p>
+<p>たとえば、Linuxカーネルは比較的低水準のレイヤーである。マシンのデバイスコントローラの情報はデバイスドライバが唯一知っていて、それをカーネルが使って操作する。</p>
+<p>カーネルの移植性の低い低水準のコードは、機種依存のi-nodeを直接操作するストレージ操作や、TCP/UDPを用いたプロトコル（送受信の手順や決まり）やコネクション操作とルーティングやパケット送受信操作などがあり、これの少し上に、移植性の少し高いVFSを用いたファイルシステムや、socketを用いたネットワークの高水準な機能があり、それらを行うことで、「カーネルレベル」の操作を行う。</p>
+<p>カーネル内部の処理よりも高水準なのは、システムコールである。カーネルはシステムコールを受け付け、プログラマはシステムコールを使ってカーネルに新しいサービスをお願いする。</p>
+<p>少し上の水準では、Cライブラリの水準がある。コマンドやデーモンなどは、Cライブラリとシステムコールをバランスよく使いながら、移植性の少し高いコードを書く。</p>
+<p>さらに上には、シェルによってコマンド操作をするユーザーフレンドリな環境があり、シェルスクリプトなどは単純なスクリプト処理を行う。</p>
+
+<h2>GUIにおける水準</h2>
+<p>GUI環境であれば、こうしたUNIX環境の上に、X11 - Xlib - GTK - GNOMEなどの高水準なシステムプログラムがある。</p>
+<p>X11では、低レベルなウィンドウの表示操作や、マウスやキーボードやディスプレイの間でのビットマップ表示操作を行う。XはXプロトコルでXサーバーとXクライアントの間で通信を行う。Xlibを用いることで、Xプロトコルの詳細を知らなくても、簡単なライブラリAPIでXのプログラマブルな操作ができる。さらにメニューやボタンを実現し、コンテナやボックスの概念を導入し、強力なオブジェクト指向と使いやすいシグナルインターフェースを使うことのできるGTKがあり、GTKはGLibやGDKの上のレイヤーで成り立つ。GTKを使って作られたデスクトップ環境がGNOMEであり、この上にGNOMEアプリケーションが動く。</p>
+<p>KDEであればX11 - Qt - KDE Frameworks - Plasmaとなる。</p>
+<p>この上でユーザーはユーザーフレンドリなGUIアプリケーションを実行する。たとえばMozilla FirefoxやLibreOfficeなどである。</p>
+
+<h2>サーバーにおける水準</h2>
+<p>サーバープログラムであれば、ApacheなどのWebサーバーや、JavaやRubyなどのミドルウェアの上に、CGIやRailsなどのAPサーバーがあり、MySQLやPostgreSQLなどのDBサーバーがある。</p>
+<p>このように、コンピュータでは「低水準から高水準へ」という考え方の下で、システムが成立している。自分がどのような水準のプログラムを書きたいかという目線から、どれくらいの水準でソフトウェアを開発するかを考える必要がある。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

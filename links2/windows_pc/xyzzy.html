@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>xyzzyの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Windows/PCの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/windows_pc_softs_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>xyzzyの世界観</h1>
+<p>xyzzyの世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>xyzzy</h1>
+<h2>xyzzy</h2>
+<p>Windowsで使えるEmacsと良く似たテキストエディタ。</p>
+<p>後日注記：Emacsと同じようにLispで拡張することができる日本人によるWindows向けの軽量なテキストエディタ。エディタの下部にコマンドバーがあるのも同様。</p>
+<ul>
+<li><a href="https://xyzzy-022.github.io/">xyzzy</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.25編集</p>
+</div>
+
+<h2>文字コードをUTF-8にする</h2>
+<p>xyzzyでデフォルトの文字コードをUTF-8にするには、.xyzzyに以下を記述する。</p>
+<pre class="prettyprint lang-lisp">
+(setq *default-fileio-encoding* *encoding-utf8n*)
+</pre>
+<p>utf8ではなくutf8nを使う理由は、テキストデータの先頭に文字コード判別用のBOMをつけないため。</p>
+<ul>
+<li><a href="https://book.studio947.net/article/944/">文字コードはUTF-8? UTF-8N? ｜ 狩野祐東の本 Studio947</a></li>
+</ul>
+<p>.xyzzyの場所は環境変数XYZZYHOMEで設定する。</p>
+<ul>
+<li><a href="http://hie.s64.xrea.com/xyzzy/note/first_step.html">xyzzy の音 - はじめに</a></li>
+<li><a href="https://sk.kuee.kyoto-u.ac.jp/person/yonezawa/contents/program/xyzzy/kyotex/install.html">kyotex-mode - xyzzy lisp - 米澤進吾 ホームページ</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.06編集</p>
+</div>
+
+<h2>検索・置換</h2>
+<p>xyzzyで僕が一番良く使う機能は、検索と置換。特に、GrepとGresregは必須。正規表現で簡単に編集が出来ます。</p>
+<p>だが、xyzzyはテキストのコピーの際にドイツ語のウムラウトが消えてしまう。フランス語の特殊文字も消える。検索しても直し方が分からない。なんとかならないものかと思う。</p>
+<p>正規表現については<a href="../linux/regex.html">正規表現</a>を参照のこと。</p>
+
+<h2>Emacs</h2>
+<p>EmacsやLispについては<a href="../linux/emacs.html">Emacs</a>や<a href="../prog_lang/lisp.html">Lisp</a>を参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-lisp.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

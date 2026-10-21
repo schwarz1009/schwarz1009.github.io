@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ネットワーク設定A（sysconfig） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ネットワーク設定A（sysconfig）</h1>
+<p>Linuxのネットワーク設定に関する世界観A（sysconfig）です。<a href="linux_net2.html">Linuxネットワーク２（設定）</a>や<a href="../network/network.html">ネットワークの世界観</a>も参照してください。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Red Hatのネットワーク設定</h1>
+<h2>NetworkManager</h2>
+<p>NetworkManagerとsysconfigの関係や何が変わったのかは以下が参考になります。</p>
+<ul>
+<li><a href="https://qiita.com/gomi_ningen/items/baee5fada818a8ba944a">RHEL7 系のネットワーク設定 - Qiita</a></li>
+</ul>
+<p>以前は/etc/init.d/networkから/etc/sysconfig/*を読んでいました。今ではNetworkManagerを使って設定するべきであると推奨されています。</p>
+<p>設定ファイルが/etc/syscnofig/network-scripts/ifcfg-*などになることは相変わらずですが、/etc/sysconfig/network-scriptsなどを手動で編集することは推奨されません。</p>
+<p><a href="linux_net_networkmanager.html">Linux ネットワーク設定D（NetworkManager）</a>を参照のこと。</p>
+
+<h2>sysconfig (Red Hat)</h2>
+
+<table class="some_tables">
+<tr>
+<th class="min60">設定ファイル</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>/etc/sysconfig/</td>
+<td>Red Hat系でシステムの設定をする時のディレクトリ。<br>/etc/sysconfig/の中には、さまざまなシステムの設定ファイルがあります。</td>
+<tr>
+<td>/etc/sysconfig/network</td>
+<td>ホスト名の設定。</td>
+</tr>
+<tr>
+<td>/etc/sysconfig/network-scripts/</td>
+<td>ネットワークインターフェースの設定ディレクトリ。</td>
+</tr>
+<tr>
+<td>/etc/sysconfig/network-scripts/ifcfg-*</td>
+<td>IPアドレス・ゲートウェイなどの設定。<br>/etc/sysconfig/network-scripts/ifcfg-eth0などのファイルを設定する。</td>
+</tr>
+<tr>
+<td>/etc/sysconfig/iptables</td>
+<td>ファイアーウォールの設定。<a href="linux_net_firewall_iptables.html">iptables</a>も参照のこと。</td>
+</tr>
+</table>
+
+<h2>設定例</h2>
+<p>たとえば、/etc/sysconfig/network-scripts/ifcfg-eth1は以下のように設定する。</p>
+<table class="some_tables">
+<tr><th class="min60">設定</th><th>説明</th></tr>
+<tr><td>DEVICE=eth1</td><td>デバイス名の設定。</td></tr>
+<tr><td>TYPE=Ethernet</td><td>デバイスのタイプの設定。</td></tr>
+<tr><td>ONBOOT=yes</td><td>起動した時に有効にする。</td></tr>
+<tr><td>GATEWAY=192.168.1.1</td><td>ゲートウェイの設定。</td></tr>
+<tr><td>NETMASK=255.255.255.0</td><td>サブネットマスクの設定。</td></tr>
+<tr><td>IPADDR=192.168.0.3</td><td>IPアドレスの設定。</td></tr>
+<tr><td>BOOTPROTO=dhcp</td><td>プロトコルにDHCPを利用する。</td></tr>
+</table>
+<p>（<a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.05.06</p>
+<p>2024.02.08編集</p>
+</div>
+
+<h2>Red Hatにおけるsysconfig</h2>
+<p>Red Hat系のLinuxでは、ネットワークインターフェース以外にも、/etc/sysconfig/ディレクトリでさまざまなシステムの設定を行う。</p>
+<p>中には/etc/*.confの設定に対して、/etc/sysconfig/で一枚上にかぶせて設定する場合もある。たとえばnamed（BINDの本体）の設定ファイルは/etc/named.confだが、/etc/sysconfig/namedではnamedデーモンの起動時の引数を記述する。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/535/">「/etc/sysconfig」ディレクトリ | Linux技術者認定試験 リナック | LPI-Japan</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/ch-The_sysconfig_Directory.html">付録D sysconfig ディレクトリ - Red Hat</a></li>
+</ul>
+<p><a href="../network/dns.html">DNSサーバ</a>も参照のこと。</p>
+
+<h2>sysconfig参考リンク</h2>
+<p>参考リンク：</p>
+<ul>
+<li><a href="https://qiita.com/gomi_ningen/items/baee5fada818a8ba944a">RHEL7 系のネットワーク設定 - Qiita</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/ch-Network_Interfaces.html">第9章 ネットワークインターフェース - Red Hat</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-JP/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html">9.2. インターフェース設定ファイル - Red Hat</a></li>
+</ul>
+
+<h2>sysconfigでのネットワークの設定手順実例</h2>
+<p>以前のsysconfig以下の設定ファイルを手動で設定する際の手順です。</p>
+<ul>
+<li><a href="https://www.express.nec.co.jp/linux/distributions/knowledge/network/network03.html">ネットワークの設定方法 - NEC</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Red Hat</h2>
+<p>Red Hatについては<a href="redhat.html">Red Hat</a>や<a href="fedora.html">Fedora</a>を参照のこと。</p>
+
+<h2>ネットワークの仕組みについて</h2>
+<p><a href="../network/network.html">ネットワーク</a>や<a href="../network/network_intro.html">ネットワーク入門</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

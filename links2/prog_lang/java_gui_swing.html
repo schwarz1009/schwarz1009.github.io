@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Swing関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Swingの世界観</h1>
+<p>Swingに関する世界観です。<a href="java_gui.html">Javaの世界観（A．GUI）</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Swing</h1>
+<h2>Swingとは</h2>
+<p>Swingは、Pure Javaで書かれたJavaのGUIツールキット。</p>
+<p>Javaは"Write once, run anywhere"というスローガンを売りにしている。これは、Javaで書かれたコードはどのOS・どのプラットフォームにおいても、一度書けばどこでも動く、というJavaの理念。</p>
+<p>Swingは、そのようなJava仮想マシンで同じように動く「Pure Java」なGUIツールキットとして知られる。</p>
+<p>OS依存のコードを使っていないため、OSのルック・フィールとは異なる見た目になる。これは、.NET FrameworkのWindows.Formsとは異なる特徴で、たとえWindowsでもLinuxでも、Windows/Linuxネイティブなアプリケーションとは異なる見た目を持つ。</p>
+<p>また、OS依存のコードを使っていないため、コードの見た目や開発の手法も異なる。リスナーと呼ばれる「メッセージループライクな継承システム」によって、イベントにメソッドを登録する形で開発する。GTK+やVBよりも、Windows APIやXlibに近い開発方法である。</p>
+<p>マルチテキストなどのコンポーネントも、一切OSの仕組みを使わず、Pure Javaで独自に実装されている。</p>
+<p>こうした点は、デスクトップアプリケーションをどのOSでも動かせる、という点で優れている。たとえば、Swingで書かれたアプリケーションは、Windowsで動けばLinuxでも同じように動く。</p>
+<p>また、もっと小型のモバイルなシステムでJava MEを使う場合でも、Swingが動くような環境がもしあるのであれば、WindowsでSwingで開発したアプリケーションをモバイル機器でも動かせる。</p>
+
+<h2>Swing</h2>
+<p>JavaのGUIであるSwingは、クロスプラットフォームであらゆるOSで同じように動くことで有名です。同様の技術に、EclipseによるOSネイティブなウィジェットを使用するSWTがあります。</p>
+<ul>
+<li><a href="https://www.javadrive.jp/tutorial/">JavaDrive - Swingを使ってみよう</a></li>
+<li><a href="https://www.javadrive.jp/tutorial/ini/index1.html">JavaDrive - Swingを使ったアプリケーションとは</a></li>
+<li><a href="http://www.atmarkit.co.jp/fjava/index/index_swing.html">SwingでJavaに強くなる - @IT</a></li>
+<li><a href="http://www.tohoho-web.com/java/swing.htm">Swing - とほほのJava入門</a></li>
+</ul>
+
+<h2>Swingのイベント処理</h2>
+<p>Swingでは、ActionListenerというインターフェースを実装することで、イベント処理を行う。</p>
+<p>addActionListener()でボタンなどのオブジェクトとアクションリスナーを関連づけし、ボタンに対してクリックなどのアクションを行った際に生み出されるActionEventのインスタンスに対して、アプリケーションがどのように振る舞うかをactionPerformed()というメソッドで設定する。</p>
+<p>後日注記：Swingのリスナは、Windows APIやX11でいうイベントループに相当し、実際よく似ている。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/0608/19/news014_2.html">Swingのイベント処理を知る (2/2)：SwingでJavaに強くなる（4） - ＠IT</a></li>
+</ul>
+
+<h2>Swingの主なコンポーネント</h2>
+<p>Swingの主なコンポーネントに、</p>
+<table class="some_tables">
+<tr><th class="min60">コンポーネント</th><th>説明</th></tr>
+<tr><td>JFrame</td><td>ウィンドウフレーム</td></tr>
+<tr><td>JDialog</td><td>ダイアログ</td></tr>
+<tr><td>JButton</td><td>ボタン</td></tr>
+<tr><td>JLabel</td><td>ラベル文字</td></tr>
+<tr><td>JTextField</td><td>テキスト入力フィールド（一行）</td></tr>
+<tr><td>JTextArea</td><td>テキスト入力エリア（複数行）</td></tr>
+<tr><td>JPanel</td><td>パネル</td></tr>
+<tr><td>JMenuBar</td><td>メニューバー</td></tr>
+<tr><td>JToolBar</td><td>ツールバー</td></tr>
+<tr><td>JPopupMenu</td><td>ポップアップメニュー</td></tr>
+</table>
+<p>などがある。</p>
+<p>（詳しくは<a href="http://www.tohoho-web.com/java/swing.htm">Swing - とほほのJava入門</a>などを参照のこと。）</p>
+
+<h2>Swingのルック・フィール</h2>
+<p>Swingでは、ルック・フィールをそれぞれのプラットフォームと調和するように切り替えることができる。</p>
+<p>たとえば、</p>
+<pre class="prettyprint">
+UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+</pre>
+<p>とすればMetal（Swingの独自ルック・フィール）となる。</p>
+<pre class="prettyprint">
+UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+</pre>
+<p>とすればMotif風の見た目になる。</p>
+<p>システムのルック・フィール名はUIManager.getSystemLookAndFeelClassName()で取得できる。よって、</p>
+<pre class="prettyprint">
+UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+</pre>
+<p>とすれば、MacならMac風、WindowsならWindows風のルック・フィールになる。</p>
+
+<h2>継承はGUIツールキットと相性がいい</h2>
+<p>Javaの継承は、GUIツールキットと相性がいいことで知られています。</p>
+<p>たとえば、Swingを使う際に、テキストボックス（JTextArea）とテキストフィールド（JTextField）には、同じ「テキストを編集する」という機能が必要です。</p>
+<p>そのため、これらの親クラスであるJTextComponentで、文字列の入力と編集に関する設定であるsetEditable()メソッドが定義されています。</p>
+<p>ほかにも、ボタン（JButton）やメニュー項目（JMenuItem）に必要なクリックを実行するdoClick()メソッドは、親クラスのAbstractButtonクラスで定義されています。</p>
+<p>このように、オブジェクト指向の継承は、GUIツールキットと相性がよく、コントロールに対して必要なメソッドを適切な親クラスで定義するようになっています。</p>
+<p>（放送大学「コンピュータとソフトウェア ('18)」を参考に執筆しました。）</p>
+
+<h2>Swingの開発は簡単</h2>
+<p>はっきり言って、Swingの開発は非常に簡単です。</p>
+<p>たとえば、以下のページにサンプルとなるコードがあります。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0608/19/news014_2.html">Swingのイベント処理を知る (2/2) - @IT</a></li>
+</ul>
+<p>このページのように、</p>
+<pre class="prettyprint">
+public class HogeApp implements ActionListener {
+    // 使うコンポーネントを定義する
+    private JFrame hogeFrame;
+    private Container hogeContentPane;
+    private JButton hogeButton;
+    
+    // コンストラクタでコンポーネントを作成する
+    public HogeApp() {
+        hogeFrame = new JFrame("Hoge");
+        hogeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        hogeFrame.setSize(150, 100);
+        hogeContentPane = hogeFrame.getContentPane();
+        hogeButton = new JButton("Hoge");
+        hogeButton.addActionListener(this);
+        hogeContentPane.add(hogeButton, BorderLayout.CENTER);
+        hogeFrame.setVisible(true);
+    }
+    
+    // アクションイベントごとに処理を行う
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == hogeButton) {
+            // ここにボタンクリック時の処理を記述する
+            hogeButton.setText("Fuga");
+        }
+    }
+    
+    // プログラムを起動する
+    public static void main(String[] args) {
+        new HogeApp();
+    }
+}
+</pre>
+<p>のように記述します。</p>
+<p>まず、ActionListenerを実装したHogeAppなどのアプリケーションのメンバ関数として、使うコンポーネントを定義します（extends JFrameでフレームを継承することもできる）。</p>
+<p>そして、コンストラクタでそれらのコンポーネントを作成します。フレームからgetContentPane()で取得したContentPaneに対してボタンを追加します。自分自身がActionListenerを実装しているため、ボタンのaddActionListener()にはthisを指定します。</p>
+<p>そして、actionPerformed()メソッドでアクションイベントごとの処理を記述します。</p>
+<p>最後に、main()関数でHogeApp()を起動するのです。</p>
+<ul>
+<li><a href="https://java.keicode.com/lib/swing-components-jbutton.php">ボタン JButton - Swing のコンポーネント - Java 入門</a></li>
+<li><a href="https://www.javadrive.jp/tutorial/jframe/index6.html">Java Swing | フレームに含まれるペインの取得とコンポーネントの追加 - Let'sプログラミング</a></li>
+<li><a href="https://www.javadrive.jp/tutorial/jbutton/index1.html">Java Swing | ボタンの作成とボタンに表示される文字列の設定 - Let'sプログラミング</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.15-16</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>移植性</h2>
+<p><a href="portability.html">移植性</a>に関連する内容があります。</p>
+
+<h2>GUI開発</h2>
+<p>GUIの開発全般については<a href="gui_develop.html">GUI開発</a>を参照のこと。</p>
+
+<h2>イベント駆動</h2>
+<p><a href="event.html">イベント駆動</a>を参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>Swing</h2>
+<p>SwingはPure Javaで書かれたJavaのツールキットであり、Javaの理想通り、どんな環境でも同じ見た目になる。</p>
+<p>その代わり、独自のフラットな魔術的な雰囲気のする見た目（ルック・フィール）になる。</p>
+<p>Windowsネイティブのルック・フィールがいいなら、IBMがEclipse向けに開発したSWT（JavaでネイティブGUIが開発できる）を使うか、VB.NETかC#（Microsoft版Javaという位置づけの.NET Framework向け言語）でWindows.Formsを使った方が良い。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

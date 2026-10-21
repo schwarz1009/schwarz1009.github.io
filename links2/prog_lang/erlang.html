@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Erlangの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Erlangの世界観</h1>
+<p>Erlangに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Erlang</h1>
+<h2>Erlang</h2>
+<p>Erlangはエリクソンによる並列処理言語。Erlangの仮想マシン上で動くElixirと言う言語もあります。</p>
+<ul>
+<li><a href="https://www.erlang.org/">Erlang</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Erlang">Erlang - Wikipedia</a></li>
+<li><a href="http://www.geocities.jp/m_hiroi/func/abcerl01.html">お気楽 Erlang プログラミング入門</a></li>
+<li><a href="https://en-ambi.com/itcontents/entry/2017/06/12/110000/">最速で知る！ ElixirプログラミングとErlang/OTPの始め方【第二言語としてのElixir】｜ハイクラス転職・求人情報サイト アンビ（AMBI）</a></li>
+<li><a href="https://qiita.com/egisatoshi/items/f728108344f87840dfef">試して面白いプログラミング言語6選 - Qiita</a></li>
+<li><a href="http://erlang.shibu.jp/">Erlangユーザーズガイド — Erlang User's Guide v5.8.1 documentation</a></li>
+</ul>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="http://dukelab.hatenablog.com/entry/2014/08/31/233708">Erlang 基礎ポイント7 - 分散処理 - DukeLab</a></li>
+</ul>
+<p>また、以下に公式のドキュメントの翻訳があります。</p>
+<ul>
+<li><a href="https://gist.github.com/Gab-km/ed96c640970f367b911a">公式チュートリアルである "Getting Started with Erlang User's Guide" の翻訳 - Sequential Programming</a></li>
+<li><a href="https://www.erlang.org/doc/system/seq_prog.html">Sequential Programming — Erlang System Documentation v29.0</a></li>
+</ul>
+<p>また、OTPとはErlangのシステムを動かすためのライブラリと設計原則を含むミドルウェアのこと。分散データベースや開発・管理ツール、他言語へのインターフェースなどが含まれる。</p>
+<ul>
+<li><a href="https://zenn.dev/shiguredo/articles/modern-erlang">モダン Erlang/OTP - Zenn</a></li>
+<li><a href="https://qiita.com/zenwerk/items/f3b53c54161a0c0e0237">すごいErlangゆかいに学んだメモ 19章 OTPアプリケーションの作法 #Erlang - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.17編集</p>
+<p>2026.05.20編集</p>
+</div>
+
+<h2>Erlangの特徴</h2>
+<p>Erlangは、エリクソンによって電話交換機のシステムのために開発され、「1秒であっても絶対にシステムが停止しない」という設計の下に作られており、VMであるBEAMは以下の特徴がある。</p>
+<table class="some_tables">
+<tr><th class="min60">特徴</th><th>説明</th></tr>
+<tr><td>軽量プロセス</td><td>スレッドではなく独自の軽量なプロセスを使う。<br>数百万のプロセスをひとつのサーバーで動かせる。</td></tr>
+<tr><td>アクターモデル</td><td>プロセスの間でメモリを共有せず、メッセージ通信を使う。<br>メモリ干渉のバグを防げる。</td></tr>
+<tr><td>Let it crash</td><td>プロセスがエラーを起こした時、レスキューせずにそれを廃棄する。<br>ひとつのプロセスを犠牲にしてでも、システム全体を稼働させ続ける。</td></tr>
+<tr><td>ホットスワップ</td><td>システムを停止することなく更新することが可能。</td></tr>
+</table>
+<p>このような特徴の結果、Erlang（やその他のBEAM言語）は極めてスケーラビリティが高く、ダウンしづらい特徴を持っている。エリクソンの電話交換機には、99.9999999%の稼働率という伝説がある。</p>
+<p>後日注記：Erlangの軽量プロセスは、OSのスレッドよりもはるかに軽量で、かつ、ほかのプロセスから完全に独立している。エラーが出ても、アプリケーション全体を巻き込むことはほとんどない。だから、エラーを起こさないためのプログラミングではなく、エラーが起きたとしてもそこから回復するためのプログラミングができる。</p>
+<p>（<a href="https://www.youtube.com/watch?v=OrDpi2_ep8A">なぜGleamは「最も親切な関数型言語」と呼ばれるのか - YouTube</a>を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://qiita.com/egisatoshi/items/f728108344f87840dfef">試して面白いプログラミング言語6選 - Qiita</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Erlang">Erlang - Wikipedia</a></li>
+<li><a href="https://funcallfunc.com/programming/2017/02/21/let-it-crash.html">Let it crashについて « kaku's blog</a></li>
+<li><a href="https://zenn.dev/j5ik2o/books/akka-book-e8771e80b20c32ed1840/viewer/03_about-akka">Akkaとは(90%)｜Akkaによるリアクティブシステム開発ガイド - Zenn</a></li>
+<li><a href="https://www.youtube.com/watch?v=F8TbDUihvmo">2026年にElixirを学ぶ意味はあるのか - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.20</p>
+<p>2026.05.23編集</p>
+</div>
+
+<h1>Elixir</h1>
+<h2>Elixir</h2>
+<p>ElixirはErlangの代替言語。Erlangの高い並列性能をそのままに、Rubyのような記述で並列処理を書ける。</p>
+<p>後日注記：ElixirはErlang VM (BEAM)上で動くRubyによく似た言語。</p>
+<ul>
+<li><a href="https://elixir-lang.jp/">Elixir</a></li>
+<li><a href="http://www2.nagano.ac.jp/hiraoka/ANY/er.0.html">Erlang/Elixir 事始め - 平岡信之</a></li>
+<li><a href="https://www.youtube.com/watch?v=F8TbDUihvmo">2026年にElixirを学ぶ意味はあるのか - YouTube</a></li>
+</ul>
+<p>以下にサンプルコードがあります。Rubyと良く似ています。</p>
+<ul>
+<li><a href="https://en-ambi.com/itcontents/entry/2017/06/19/110000/">挑戦！ Elixirによる並行・分散アプリケーションの作り方【第二言語としてのElixir】｜ハイクラス転職・求人情報サイト アンビ（AMBI）</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.17編集</p>
+<p>2026.05.17編集</p>
+<p>2026.05.23編集</p>
+</div>
+
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いたコード。</p>
+<pre class="prettyprint lang-ex">
+defmodule MathHelper do
+  @moduledoc """
+  数学的なヘルパー関数を提供するモジュールです。
+  """
+
+  @doc """
+  数値のリストを受け取り、偶数だけを2倍にした合計を計算します。
+  """
+  def sum_of_doubled_evens(numbers) do
+    numbers
+
+    |&gt; Enum.filter(&Integer.is_even/1)
+    |&gt; Enum.map(&(&1 * 2))
+    |&gt; Enum.sum()
+  end
+end
+</pre>
+<div class="edit_date">
+<p>2026.05.20</p>
+</div>
+
+<h2>Phoenix</h2>
+<p>PhoenixはElixirによる最近大人気のWebフレームワーク。</p>
+<ul>
+<li><a href="https://coregenik.com/ja/elixir_phoenix">Elixir/Phoenix - Coregenik Inc. | 株式会社コアジェニック</a></li>
+<li><a href="https://www.casleyconsulting.co.jp/blog/engineer/241/">Elixir + Phoenix FrameworkでWebアプリケーションを作成する | キャスレーコンサルティング株式会社</a></li>
+<li><a href="https://qiita.com/ak-ymst/items/12153c854965ad28fc20">Elixir+Phoenixに触ってみる（インストール編） - Qiita</a></li>
+</ul>
+<p>後日注記：Phoenix LiveViewを使うことで、JavaScriptをほとんど書かなくてもElixirだけでSPAなどフロントエンドとバックエンドの開発ができる。</p>
+<ul>
+<li><a href="https://zenn.dev/tkrd/books/live_view_primer_1">Phoenix LiveView 入門①: はじめの一歩 - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.08</p>
+<p>2026.05.23編集</p>
+</div>
+
+<h2>Ash Framework</h2>
+<p>Ash FrameworkはElixirによるWebフレームワークのひとつ。</p>
+<ul>
+<li><a href="https://ytnobody.github.io/wyton/2024/12/15/2024-12-15-001/">[Elixir]Ash Frameworkに入門しようとしたら準備がちょっと大変だったので、devcontainerを整備して簡単に始められるようにした | Wyton</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.23</p>
+</div>
+
+<h2>Nx</h2>
+<p>NxはElixirによる数値計算・機械学習のためのライブラリ。</p>
+<ul>
+<li><a href="https://qiita.com/sand/items/9a47cfe0c95386417224">Elixir Nx の基礎 (Livebook) #nx - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.23</p>
+</div>
+
+<h2>Elixirのツール</h2>
+<p>Elixir用のツールとして、かつてはlinterのDogmaやフォーマッタのexfmtがあり、Gleamの作者ルイス・ピルフォールドによって開発された。今ではmix formatやcredoが標準的に使われている。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=OrDpi2_ep8A">なぜGleamは「最も親切な関数型言語」と呼ばれるのか - YouTube</a></li>
+<li><a href="https://qiita.com/torifukukaiou/items/015873cc4272eef15f7f">一匹狼のelixirプログラム（.exs）に対してmix formatを利用して整形することを楽しむ #Elixir - Qiita</a></li>
+<li><a href="https://qiita.com/letusfly85/items/cf225814608251b2f65c">credoを使ってElixirでRuboCopみたいにlintチェックをしよう！ #Ruby - Qiita</a></li>
+</ul>
+<p>また、以下にElixir関連の新しいライブラリの一覧があります。Hugging Faceと連携し、ElixirでGPTやStable DiffusionなどのAIモデルを用いることのできるBumblebeeが面白そう。</p>
+<ul>
+<li><a href="https://qiita.com/piacerex/items/f6a73a8252a3f6093b1a">2023年末のElixirが出来ること⑤AI・LLM前編【Nx／Bumblebee】（最新Elixirのキャッチアップや、アドカレのネタ探しに読んでください） #Python - Qiita</a></li>
+</ul>
+<p><a href="../programs/ai_python.html">Python AI入門</a>や<a href="../programs/ai_image.html">画像生成AI</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.05.20</p>
+<p>2026.05.23編集</p>
+</div>
+
+<h2>Livebook</h2>
+<p>LivebookはWebブラウザ上でElixirのコードを書いて実行できるライブ開発環境。</p>
+<ul>
+<li><a href="https://livebook.dev/">Home - Livebook.dev</a></li>
+<li><a href="https://qiita.com/RyoWakabayashi/items/dc82ad3ed866d58a8acf">Livebook のはじめ方 -インストール、実行、注意点- #Docker - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.23</p>
+</div>
+
+<h1>Erlang向け言語</h1>
+<h2>LFE (Lisp Flavored Erlang)</h2>
+<p>LFE (Lisp Flavored Erlang)はErlang向けのLisp風言語。</p>
+<ul>
+<li><a href="https://qiita.com/masato/items/8fcd61bda7934d28230b">Lisp Flavored Erlang (LFE) のインストール - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.17</p>
+</div>
+
+<h2>Gleam</h2>
+<p>GleamはErlang向けのプログラミング言語で、コンパイラはRustで書かれており、コードの見た目はRustに近いがパイプライン演算子をよく使う。パイプライン演算子とは、関数型言語でよく使われる、hoge(fuga())をfuga |&gt; hogeと書ける記法のこと。またJavaScriptを吐くこともできる。</p>
+<ul>
+<li><a href="https://zenn.dev/helloyuki/scraps/4569649537e13c">Gleam を触ってみる - Zenn</a></li>
+<li><a href="https://zenn.dev/mzryuka/articles/start-gleam_playground">Gleamことはじめ - Zenn</a></li>
+<li><a href="https://logmi.jp/tech/articles/322584">Pythonを使って関数型プログラミング Part.1 - ログミーTech</a> - パイプライン演算子についての解説がある。</li>
+</ul>
+<p>ErlangやElixirはBEAM上で動く優れた並列処理が行える関数型言語だったが、動的型付け言語だった。Gleamは関数型言語のMLを参考に、「MLの素晴らしい型システムを乗せたい」という作者のルイス・ピルフォールドによって独自に開発された静的型付け言語である。また、関数型言語にありがちな「高度かつ数学的でわけが分からない」言語ではなく、親切かつ習得の易しい関数型言語を目指して開発されている。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=OrDpi2_ep8A">なぜGleamは「最も親切な関数型言語」と呼ばれるのか - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.17</p>
+<p>2026.05.20編集</p>
+</div>
+
+
+<h1>関連ページ</h1>
+<h2>並列処理</h2>
+<p><a href="parallel.html">並列処理</a>も参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-ex.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

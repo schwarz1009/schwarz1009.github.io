@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>MINIX関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">UNIXの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/unix_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>MINIXの世界観</h1>
+<p>MINIXに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>MINIX</h1>
+<h2>MINIXとは</h2>
+<p>AT&Tによってパブリックドメインで公開されたUNIXは、OSの全ソースコードを自由に閲覧することができた。</p>
+<p>だが、AT&Tに対する独占禁止法の措置が解除されるとUNIXはパブリックドメインでなくなり、自由にソースコードを見ることができなくなった。</p>
+<p>これはOSの技術や実装を学ぶ学生や、OSの仕組みを教える教授にとって望ましいことではない。</p>
+<p>そのため、タネンバウム教授によって学生にOSの仕組みを教えるために作られた、IBM PC/AT互換機で動くUNIXのクローンが、MINIXである。</p>
+<p>MINIXは当時正式にはオープンソースではなかったが、タネンバウム教授の書籍<a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a>からソースコードを見ることができ、学生は自らMINIXを自分のパソコンで動かしながら、ソースコードと解説を書籍で読むことで、OSを自分で作るための学習をすることができる。</p>
+<p>しかしながら、MINIXはあくまで教育用を目的としており、OSの機能として目新しい点はないが、マイクロカーネル構造を採用している。しかしながら、i386の仮想記憶に対応していないなど、実用として満足のいくものではなかった。</p>
+<p>当時、MINIXを使っていたLinuxカーネル開発者のリーナス・トーバルズは、著作権の問題から提供されていなかったIntel CPU用のBSDカーネルを入手することもできず、GNU Hurdカーネルも完成していなかったため、独自のLinuxというカーネルを作った。最初はターミナルエミュレータのようなものだったが、改良されるにしたがってMINIXに対して付け加えたコードだけで一人前のカーネルとして動作するようになった。このLinuxカーネルを、リーナスは「あくまでホビー的なもので、GNUのような大規模なプロジェクトではない」とした上で、MINIXのメーリングリストに公開した。</p>
+<p>Linuxカーネルは、同様にフリーなUNIXのクローンを求めていた人々に大人気となり、「自分も使いたい機能を作る」などといってインターネット上のみんなで改良された。独自の商用利用を禁じたライセンスはGPLに置き換えられ、MINIXのコンポーネントはGNUソフトウェアに置き換えられた。ここに、GNUが「GNU/Linux」と呼ぶような、「完全に無料かつ自由なOS」は完成した。</p>
+<p>さまざまな人間が片手間でパッチを作って、それをなんでも取り入れオープンに開発するモデルは「バザール開発」と呼ばれた。また、アラン・コックスのような善意のボランティアによって大幅なバグの修正などがなされ、当時のWindows 9x系OSと比べてもバグが少なく、一部では「Windows陣営に対する革命」であるかのように扱われた。</p>
+<p>しかしながら、Linuxカーネルは先進的なマイクロカーネル構造を採用しておらず、旧来のUNIXカーネルが採用していたようなモノリシックカーネルだったため、タネンバウム教授からは「Linuxは時代遅れだ」と言われた。現在でもLinuxカーネルはモノリシックカーネルのままだが、Linuxではモジュール機構を取り入れ、個別の機能をモジュールで実行中に動的に追加・削除できるため、マイクロカーネルの長所だけを取り入れていると言える。また、GNU Hurdがいつまでも完成されなかった理由として、GNU創始者のストールマンは「マイクロカーネルのデバッグが予想以上に難しかったため」としている。一般にコマンドで対話的に実行されるソフトウェアよりも、サービスやデーモンと呼ばれる非対話型のソフトウェアはデバッグが難しく、それらがポートやメッセージを通じて複雑に関係し合うGNU Hurdのモデルは開発が難しかった。そのため、MachのようなマイクロカーネルのOSカーネルはパフォーマンスの問題があり、Linuxカーネルが「とても高いパフォーマンス」を誇るのはタネンバウム教授の発言に反してモノリシックカーネル構造を採用したためであると言えるかもしれない。</p>
+
+<h2>MINIXはオープンソースになった</h2>
+<p>昔はオープンソースでなかったMINIXだが、現在は過去のバージョンにさかのぼってオープンソースのライセンスとなっている。</p>
+
+<h2>MINIXとLinuxの誕生</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a>を参考に執筆しました。）</p>
+<p>AT&TのUNIXは、ソースコードを自由に見ることができ、多くの大学でOSの理論と実装を教える上で、UNIXのコードは必要不可欠だった。</p>
+<p>しかしながら、AT&Tの方針転換によって、UNIXのコードは自由に見ることができなくなり、大学で教えるためにも使えなくなった。</p>
+<p>そのため、大学ではOSの実装を教えることをやめ、理論だけを中心に教えることになった。</p>
+<p>しかしながら、理論だけでは、OSの本当に大切なことをきちんと教えることはできない（入出力やファイルシステムなどのOSにとって大切な部分は、理論性が低いため十分に教えられないこともある）と、MINIXの作者タネンバウムは考えた。</p>
+<p>そこでタネンバウムが作ったOSがMINIX。MINIXはUNIXと互換性があるように構築されながら、設計にモジュール性を取り入れ、ファイルシステムなどはカーネルの一部ではなく、ユーザープログラムとして実装された。</p>
+<p>何より、OSの学習者に分かりやすいように、全体の実装を小さく保ち、ソースコードも読みやすいように書かれ、説明となるコメントも豊富に取り入れられた。</p>
+<p>MINIXがリリースされて、USENETニューズグループが結成されると、毎日たくさんの参加者が「MINIXに取り入れてほしい機能」の提案を送ってくるようになった。</p>
+<p>しかしながら、MINIXの制作者は、MINIXを学習者のために小さく保ちたいと考えており、このようなニューズグループの機能追加の提案に抵抗を続ける。</p>
+<p>そして、フィンランド人のリーナス・トーバルズは、このMINIXのニューズグループに、自作のカーネルを作ったことを投稿した。ここから、Linuxの歴史は始まった。</p>
+
+<h2>タネンバウム教授</h2>
+<p>Linuxの開発が行われる前にリーナス・トーバルズが使っていたとされる、アンドリュー・タネンバウム教授のMinixは、教育用のOSとして著名で、Minix本（オペレーティングシステム 設計と理論およびMINIXによる実装）と一緒に今でもOSカーネルを作りたい人に愛読・利用されている。</p>
+<p>アンドリュー・タネンバウム教授はLinuxのことを「時代遅れ」だとし、リーナス・トーバルズと議論を巻き起こしたことで有名。</p>
+<p>タネンバウム教授は残念なことにLinuxユーザーから批判されることが多く、Linuxの成功に対して「先見の明が無かった」とされることが多い。たとえばLinuxにおけるファイルシステムの並列処理を「芸当」と言ったなどのコメントばかりが取りだたされるが、Minix本の著者と知られるようにLinuxに対しても多くの（知的・教育的な）貢献をしている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MINIX">MINIX - Wikipedia</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+</ul>
+
+<h1>教育用OS</h1>
+<h2>Minix</h2>
+<p>教育用のUNIX互換OS。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Minix">Minix - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/minix3/minix">git</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>マイクロカーネルOS</h2>
+<p>マイクロカーネルOSについては、<a href="mach.html">Mach</a>も参照のこと。</p>
+
+<h2>Linuxの歴史</h2>
+<p><a href="../linux/linux_history.html">Linux 歴史</a>を参照のこと。</p>
+
+<h2>分散OS</h2>
+<p>タネンバウム教授による分散OSであるAmoebaについては、<a href="../os/distributed_os.html">分散OS</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>MINIX</h2>
+<p>書籍</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0-%E7%AC%AC3%E7%89%88-Andrew-S-Tanenbaum/dp/4894717697/">オペレーティングシステム 第3版</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

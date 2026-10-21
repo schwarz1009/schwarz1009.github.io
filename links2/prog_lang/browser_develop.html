@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Webブラウザ開発の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Webブラウザ開発の世界観</h1>
+<p>Webブラウザ開発の世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>アプリケーション開発</h1>
+<h2>必要な情報とはなんであるか、何を目的とするのかをはっきりさせること</h2>
+<p>プログラムを書く時のコツは、必要な情報とはなんであるか、何を目的とするのかを、はっきりとさせることです。</p>
+<p>すなわち、Webブラウザであれば、目的は「ホームページを表示すること」であり、重要な機能は、「HTMLやCSSを読み込んで解析すること」「解析したページを画面に正しいグラフィックスで表示すること」「与えられたアドレスの情報からネットワークを通じてページを推移・ダウンロードすること」などが基本となります。</p>
+<p>HTMLやCSSを解析するためにどうするか、ということを考えるためには、まず、「HTMLやCSSがなんなのか」をきちんと定義します。HTMLのタグを解析するのであれば、HTMLを「テキストからメモリ上の構造化されたオブジェクトに変換」しなければなりません。ここで、「解析器」と「構造化データの構築器」と「構造化データの参照・アクセス方法」が必要となります。</p>
+<p>また、構造化データを表示するのであれば、レイアウトや描画を行わなければいけません。すなわち、「画面上の位置やサイズを決める」こと、「与えられた位置やサイズの情報から、ひとつひとつの描画要素を描画していくこと」が必要となります。</p>
+<p>このように、「必要な情報はなんであるか」と「何を目的とするのか」から考えれば、おのずと「どのようにデータ構造を使うのか」「どのようにアルゴリズムを書けばいいのか」が見えてくると思います。</p>
+<p>後日注記：標準的なブラウザでは、この構造化データのことをDOMツリーと呼びます。DOMはクライアントのブラウザ組み込み言語であるJavaScriptからアクセスしてスクリプトで操作することもできます。DOMやJavaScriptはHTMLやCSS同様に標準化されているため、一般的なホームページを閲覧するのであれば、自分で独自に作るより、標準に従った方がいいでしょう。</p>
+
+<h2>Webブラウザの開発１</h2>
+<p><a href="programming_method.html">プログラミング作法の世界観２（入門）</a>より。</p>
+<blockquote class="inyou2">
+<p>言語とライブラリの基本が分かったら、クラス図を書きましょう。</p>
+<p>クラス図とは、クラスとクラスの関係を考える、モデリング（図）の一種です。</p>
+<p>それぞれのクラスの属性（メンバとなる変数と関数）とクラス間の関係をここに書きます。</p>
+<p>クラス図が書けるようになったら、あなたはもうれっきとしたプログラマの仲間入りです。</p>
+<p>実際にプログラムを開発してみましょう。コンパイラでもブラウザでもなんでも構いません。きっと良いプログラムができると思います。</p>
+<p>たとえば、ブラウザを作るのであれば、それぞれのキーワードに応じたクラスを作って、そのクラスのメソッドを使うようにインスタンスを作ることになるでしょう。この時、共通の親クラスやインターフェースを作ると、Javaらしいプログラムになるでしょう。</p>
+<p>また、JavaScriptからDOMで操作することになるのであれば、簡単なコンパイラも作る必要があります。これも、HTMLと同じように、キーワードごとにクラスを作れば、きっと作れるはずです。</p>
+<p>また、ブラウザの制御として、ブラウザのGUIクラスも作りましょう。このGUIクラスには、ウィンドウにHTMLファイルを読み込んだり、ナビゲートしたり、通信を行ったりする機能が必要となるでしょう。</p>
+<p>あとは、HTMLとCSSとJavaScriptを解析する「パーサー」が必要です。そこまで分かったら、もう、できたようなものです。あとは、それぞれのクラスで、グラフィックスをいかに描画するか、という処理を抽象的・汎用的に書くことになるでしょう。</p>
+<p>唯一面倒くさい点は、OSによって異なる整形されたグラフィックスの表示の仕方です。そのために、ひとつバッファを描画するクラスを作りましょう。そして、このクラスを用いてグラフィックスを表示します。リアルタイムな表示にするのは難しいかもしれません。CSSの表示もこの中でCSS専用のクラスを作って使いましょう。これは「レンダリングエンジン」に相当します。</p>
+<p>要するに、オブジェクトツリーを決められた通り表示するレンダリングエンジンを作る必要があります。このツリーをDOMと同じにすれば、JavaScriptからも操作しやすいでしょう。また、タグごとにクラスを作ると言いましたが、最低限のクラスだけを作って、あとはリソースファイルなどで対応することもできます。あるいは、線と文字と背景とレイアウトを表示するそれぞれのクラスを作った上で、点線や色のついた文字や線や背景などは派生クラスで対応しても良いでしょう。そのようにすれば、きっと簡単なブラウザを作ることができます。</p>
+<p>タグのクラスとして必要なのは、全ての親になるGeneralTagと、SpanTagとDivTagが必要になります。ここから、PTagのようなものを作ります。そして、TagTreeクラスを作って、HtmlParserクラスがTagTreeを生成し、DomクラスがTagTreeをDOMから制御できるようにします。あとは、CssPerserクラスでCSSを解読し、ここにLayoutクラスを入れて線や文字・背景の色やレイアウトを行います。ViewerクラスでTagTreeオブジェクトをLayoutクラスとともに表示できるようにしたらビューは完成です。BrowserWindowクラスを作って、ブラウザからビューを操作できるようにしましょう。</p>
+<p>ここで、それぞれのタグクラスが何をするのかが問題ですが、単純に、サイズや色や文字情報などを保管します。そして、CssParserで解析した「どんなオブジェクトは何色」という情報に基づいて、Layoutクラスが一気に表示するようにします。</p>
+<p>良く考えると、オブジェクトを識別するためのオブジェクトIDが必要です。また、一気にメモリに確保するとメモリを大量に食うため、今作業しているそのそれだけに集中できるようなメモリアロケーション機能が必要になるでしょう。</p>
+</blockquote>
+
+<h2>Webブラウザの開発２</h2>
+<p><a href="programming_expert.html">プログラミング作法の世界観３（エキスパート）</a>より。</p>
+<blockquote class="inyou2">
+<p>みんな、Webブラウザのようなものは難しすぎて誰にも作れないのだろうと考えているかもしれないが、意外と簡単である。</p>
+<p>まず、HTMLを装飾と文字データの属性を持ったレイアウト情報（レイアウト文字データ）に変換する。ここでCSSを考慮しても良いだろう。そして、与えられたオプションから四角形の領域を表示する部分を実装する。つまり、「divとspanだけを作れば作れる」からである。</p>
+<p>pタグやh1タグのようなものは、全部divとspanを使って作れば良い。</p>
+<p>レイアウト部分が作れたら、次は装飾部分を作る。まず、文字を表示しなければならない。次に、文字と背景と線に色をつけなければならない。</p>
+<p>最初からCSSを考慮した設計にすると、あとで楽が出来るだろう。</p>
+<p>また、その上で、画像を表示したり、さまざまな機能を作ったりする必要はある。JavaScriptの実装も難しいし、そのためにはDOMを実装しないといけない。</p>
+<p>だが、これくらいの、HTMLをパースして領域を表示する部分は、むしろ、僕のロボット（人工知能）のプログラムを参考にすると上手く作れるだろう。HTMLを読み込んで、CSSを解釈し、タグをパースし、領域とレイアウトを決め、装飾をつけて、最終的にモニターに表示するのを、ひとつの制御の流れとして実装すれば、あとはオプションを解釈して動作を変えるだけで、おそらく作れるだろう。</p>
+</blockquote>
+
+<h2>C#による簡単なタブブラウザ</h2>
+<p><a href="csharp_samplecode.html">C#サンプルコードの世界観</a>より。</p>
+<p>タブブラウザ。</p>
+<pre class="prettyprint">
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication1
+{
+    public partial class Form1 : Form
+    {
+        public List&lt;WebBrowser&gt; allWebsList;
+
+        public Form1()
+        {
+            InitializeComponent();
+            allWebsList = new List&lt;WebBrowser&gt;();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            // タブコントロールに新しいタブとブラウザを作成する
+            WebBrowser web;
+            TabPage newTabPage;
+            
+            web = new WebBrowser();
+            allWebsList.Add(web);
+            web.Dock = DockStyle.Fill;
+            
+            newTabPage = new TabPage();
+            newTabPage.Controls.Add(web);
+            tabControl1.Controls.Add(newTabPage);
+            
+            web.GoHome();
+        }
+    }
+}
+</pre>
+<p>デザイナの方では、toolStrip1、tabControl1、toolStripButton1、Form1を作ってください。</p>
+<p>デザイナで作成したコード。Form1.Designer.cs。</p>
+<pre class="prettyprint">
+namespace WindowsFormsApplication1
+{
+    partial class Form1
+    {
+        /// &lt;summary&gt;
+        /// 必要なデザイナー変数です。
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// 使用中のリソースをすべてクリーンアップします。
+        /// &lt;/summary&gt;
+        /// &lt;param name="disposing"&gt;マネージ リソースが破棄される場合 true、破棄されない場合は false です。&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows フォーム デザイナーで生成されたコード
+
+        /// &lt;summary&gt;
+        /// デザイナー サポートに必要なメソッドです。このメソッドの内容を
+        /// コード エディターで変更しないでください。
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1.SuspendLayout();
+            this.SuspendLayout();
+            //
+            // toolStrip1
+            //
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(284, 25);
+            this.toolStrip1.TabIndex = 0;
+            this.toolStrip1.Text = "toolStrip1";
+            //
+            // tabControl1
+            //
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(284, 237);
+            this.tabControl1.TabIndex = 1;
+            //
+            // toolStripButton1
+            //
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            //
+            // Form1
+            //
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.toolStrip1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.TabControl tabControl1;
+    }
+}
+</pre>
+<!--<p>これはArrayListを使って作りましたが、本当はジェネリックなコレクションを使うこともできます。現在はそちらが推奨されています。</p>-->
+
+<h2>実際のレンダリングエンジンの仕組み</h2>
+<p>実際のレンダリングエンジンでは、</p>
+<p>１．リソースをダウンロード</p>
+<p>２．HTML→DOM、CSS→CSSOMと呼ばれるオブジェクトモデルにそれぞれ独立してパース</p>
+<p>３．JavaScriptをコンパイル・実行</p>
+<p>４．DOMとCSSOMをマッチングさせてレンダリングツリーを構築</p>
+<p>５．レイアウト</p>
+<p>６．ペイント・コンポジット</p>
+<p>を行う。以下のページが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/goemp/items/91dcc8b50d7a61ce98bc">ブラウザレンダリングの仕組み - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.09編集</p>
+</div>
+
+<h2>WebKitを組み込む</h2>
+<p>自分独自のWebブラウザを開発したいなら、必ずしもレンダリングエンジンを自分で作る必要はありません。</p>
+<p>IEコンポーネントやWebKitのような、既に存在するレンダリングエンジンを埋め込んで使えばよいからです。</p>
+<p>かつてのタブブラウザなどは、WindowsのIEコンポーネントを使って、独自のブラウザ（フリーソフトあるいはオープンソースを含む）をみんなで開発し、どのブラウザが一番使いやすくて機能があるかを競っていました。</p>
+<p>最近では、同様のことがオープンソースのレンダリングエンジンであるWebKitを使って行うことができます。</p>
+<p>最近のブラウザは、オープンソースのChromium（Google Chromeのオープンソース版）をベースにしたブラウザが多く、Windows標準のMicrosoft EdgeなどもChromiumをベースに作られています。</p>
+<p>WebKitを使ったレンダリングエンジンの埋め込みについては、<a href="../linux/webkit_embedded.html">WebKit埋め込み</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.05.12編集</p>
+</div>
+
+<h2>オープンソースプロジェクトに参加する</h2>
+<p>Webブラウザは大規模なソフトウェアであり、自分ひとりでは開発することは困難ですが、オープンソースプロジェクトに参加することで、「Webブラウザを開発したい」という夢を諦めずに現実のものにすることができます。</p>
+<p><a href="oss_develop.html">オープンソース開発</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2023.09.07</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>WebKit</h2>
+<p><a href="../linux/webkit.html">WebKit</a>も参照のこと。</p>
+
+<h2>タブブラウザ・２ちゃんねる専用ブラウザ</h2>
+<p><a href="../windows_pc/tab_browsers.html">タブブラウザ</a>や<a href="../services/2ch_browsers.html">２ちゃんねる専用ブラウザ</a>を参照のこと。</p>
+
+<h2>DOM操作</h2>
+<p><a href="javascript_dom_canvas.html">JavaScript（DOM/Canvas）</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

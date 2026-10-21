@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"  href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<title>Haskellについて - schwarz1009</title>
+
+</head>
+<body>
+<p><a href="index.html">トップページに戻る</a></p>
+<iframe src="menu_menu.html" class="iframe_menu"></iframe>
+<p>AUTHOR: schwarz1009<br>
+TITLE: Haskellについて<br>
+BASENAME: 2020/09/16/162218<br>
+STATUS: Publish<br>
+ALLOW COMMENTS: 1<br>
+CONVERT BREAKS: 0<br>
+DATE: 09/16/2020 16:22:18<br>
+CATEGORY: Haskell<br>
+CATEGORY: Webブラウザ<br>
+CATEGORY: 英語
+
+</p>
+<ul class="table-of-contents">
+    <li><a href="#関数型ってこういうことじゃないかという仮説">関数型ってこういうことじゃないかという仮説</a></li>
+    <li><a href="#リストとパターンマッチング">リストとパターンマッチング</a></li>
+    <li><a href="#モナド">モナド</a></li>
+    <li><a href="#日本人は英語を読むスピードが遅い">日本人は英語を読むスピードが遅い</a></li>
+    <li><a href="#守るべきこと">守るべきこと</a></li>
+    <li><a href="#ウィンウィンの外交協力を">ウィンウィンの外交協力を</a></li>
+    <li><a href="#デジタルはセキュリティと安全を">デジタルはセキュリティと安全を</a></li>
+    <li><a href="#最高の国になるか必然的に破綻するかどちらか">最高の国になるか、必然的に破綻するか、どちらか</a></li>
+    <li><a href="#破壊ではない手段で世界を変えられるか">破壊ではない手段で世界を変えられるか</a></li>
+    <li><a href="#菅の会見">菅の会見</a></li>
+    <li><a href="#菅はやるべきことをやっていく">菅はやるべきことをやっていく</a></li>
+    <li><a href="#政治家に良い人材がいない">政治家に良い人材がいない</a></li>
+    <li><a href="#ブラウザは抽象的なデータ型を作れば作れるはず">ブラウザは抽象的なデータ型を作れば作れるはず</a></li>
+    <li><a href="#Javaの勉強がしたい">Javaの勉強がしたい</a></li>
+    <li><a href="#必要なコアルーチン">必要なコアルーチン</a></li>
+</ul>
+<div class="section">
+    <h3 id="関数型ってこういうことじゃないかという仮説">関数型ってこういうことじゃないかという仮説</h3>
+    <p>今日は、作業所で仕事がなかったので、<br />
+英語の読み上げソフトでHaskellのチュートリアルを聴いていた。<br />
+通常、変数は以下のように上から下へと順序的に書いていく。</p>
+<pre class="code lang-haskell" data-lang="haskell" data-unlink>x <span class="synStatement">=</span> <span class="synConstant">30</span>
+y <span class="synStatement">=</span> x <span class="synStatement">+</span> <span class="synConstant">10</span>
+</pre><p>しかしながら、Haskellでは変数がimmutable（不変）であり、<br />
+一度名前付けされた値がプログラムのどの位置であっても変わらないため、<br />
+記述を逆にできる。</p>
+<pre class="code lang-haskell" data-lang="haskell" data-unlink>y <span class="synStatement">=</span> x <span class="synStatement">+</span> <span class="synConstant">10</span>
+x <span class="synStatement">=</span> <span class="synConstant">30</span>
+</pre><p>このプログラムを、じっと見てほしい。<br />
+そう、気付くことがある。<br />
+これはまさに、関数の引数定義と呼び出しと同じである。<br />
+たとえば、C言語では関数は以下のように宣言・定義する。</p>
+<pre class="code lang-c" data-lang="c" data-unlink><span class="synPreProc">#include </span><span class="synConstant">&lt;stdio.h&gt;</span>
+
+<span class="synType">int</span> add(<span class="synType">int</span> x);
+
+<span class="synType">int</span> add(<span class="synType">int</span> x) {
+    <span class="synStatement">return</span> x + <span class="synConstant">10</span>;
+}
+
+<span class="synType">int</span> main() {
+    <span class="synType">int</span> y;
+    y = add(<span class="synConstant">30</span>);
+    printf(<span class="synConstant">&quot;</span><span class="synSpecial">%d\n</span><span class="synConstant">&quot;</span>, y);
+}
+</pre><p>Haskellではこうなる。letを使う場合（GHCiから実行）：</p>
+<pre class="code lang-haskell" data-lang="haskell" data-unlink><span class="synStatement">let</span> x <span class="synStatement">=</span> <span class="synConstant">30</span> <span class="synStatement">in</span> x <span class="synStatement">+</span> <span class="synConstant">10</span>
+</pre><p>あるいは、関数を定義する場合（以下は全てファイルから実行）：</p>
+<pre class="code lang-haskell" data-lang="haskell" data-unlink>add x <span class="synStatement">=</span> x <span class="synStatement">+</span> <span class="synConstant">10</span>
+
+main <span class="synStatement">=</span> print (add <span class="synConstant">30</span>)
+</pre><p>あるいは、単にCと逆向きに書く場合：</p>
+<pre class="code lang-haskell" data-lang="haskell" data-unlink>main <span class="synStatement">=</span> <span class="synStatement">do</span> { print y }  <span class="synComment">-- doブロックで複数のアクションの実行が可能</span>
+
+y <span class="synStatement">=</span> x <span class="synStatement">+</span> <span class="synConstant">10</span>
+x <span class="synStatement">=</span> <span class="synConstant">30</span>
+</pre><p>doブロックは;でそれぞれのアクションを区切るか、<br />
+レイアウトと言ってインデントを揃えることで<br />
+Pythonのようにきれいに書くこともできる。<br />
+そして、whereを使うことでこのようにも書ける：</p>
+<pre class="code lang-haskell" data-lang="haskell" data-unlink>add <span class="synStatement">=</span> x <span class="synStatement">+</span> <span class="synConstant">10</span>
+  <span class="synType">where</span>
+    x <span class="synStatement">=</span> <span class="synConstant">30</span>
+
+main <span class="synStatement">=</span> print (add)
+</pre><p>そう、ここには、変数と関数の区別もなく、<br />
+順序通りに宣言・定義されるという決まりもない。<br />
+まさに、プログラミングは関数である。<br />
+そして、関数は変数であり、言うとすれば「計算」である。<br />
+計算においては、関数もステートメントも変わらない。<br />
+これが、Haskellの本質ではないかと僕は思う。</p>
+
+</div>
+<div class="section">
+    <h3 id="リストとパターンマッチング">リストとパターンマッチング</h3>
+    <p>公式にあるオンラインのWebブラウザ上でHaskellを実行できる、<br />
+<a href="http://tryhaskell.org/">Try Haskell</a>で「help」を実行してチュートリアルを一通りやった。<br />
+リストとパターンマッチングはとても面白い機能だと感じた。</p>
+
+</div>
+<div class="section">
+    <h3 id="モナド">モナド</h3>
+    <p>Haskellは、「同じ関数を同じ引数の呼び出しで行うと必ず同じ結果が返る」という、<br />
+純粋関数型言語であり、<br />
+変数はimmutable（不変）である。<br />
+しかしながら、変数が不変だと不便なことがある。<br />
+特に、IOなどのデータ処理をどうするのか、という問題である。<br />
+Haskellでは、「モナド」という圏論のアイデアを使った考え方を用いて、<br />
+参照透過性を壊すことなくIOを実現している。<br />
+標準的によく使われるListや、<br />
+Maybeなどもモナドで実装されている。<br />
+モナドの解説はネット上にあふれているので<br />
+それを参照してほしい（僕はまだ理解できていない）。</p>
+
+</div>
+<div class="section">
+    <h3 id="日本人は英語を読むスピードが遅い">日本人は英語を読むスピードが遅い</h3>
+    <p>日本人がなぜ英語を話せないのかというと、<br />
+単純に「読むスピードが遅い」からである。<br />
+ネイティブの発音を聞けば分かるが、<br />
+ネイティブはとても速く英語を話して理解する。<br />
+彼らは、「高速に英語を理解するエンジン」が既にあって、<br />
+そのエンジンに乗せて「レールの上を走るように」英語を聴く。<br />
+しかしながら、日本人は馬鹿ではない。<br />
+英語が速く話せる理由は、英語には意味が少ないからである。<br />
+日本語は、意味が多いため、理解するのに時間がかかる。<br />
+英語は意味が少ないため、理解するのに時間がかからないのである。</p>
+
+</div>
+<div class="section">
+    <h3 id="守るべきこと">守るべきこと</h3>
+    <p>守るべきことは、ひとつ。<br />
+それは、「自由を奪わないこと」である。<br />
+これは神との約束である。<br />
+自由を奪わなければ、この世界は救われる。</p>
+
+</div>
+<div class="section">
+    <h3 id="ウィンウィンの外交協力を">ウィンウィンの外交協力を</h3>
+    <p>菅新総理、誕生おめでとう。<br />
+僕が菅に望むことは2つ。<br />
+それは「日本のために外国が貢献してくれる外交」と、<br />
+「デジタル化をもっとセキュリティや安全の目線から行う」こと。<br />
+菅さんは外交が苦手で、<br />
+地球儀を俯瞰する安倍前首相に比べて、<br />
+外交で知られていないというが、<br />
+方針が全くないのであれば、<br />
+僕は日本のために外国が貢献してくれる外交をしてほしい。<br />
+日本が外国に協力する、というだけではなく、<br />
+日本がその国に協力することで相手が日本に貢献し、<br />
+外国にとっても利益があるような、<br />
+「ウィンウィンの外交」をしてほしい。<br />
+単に「仲が良い」というだけでは、<br />
+安倍とトランプぐらいの「仲良しの友達」になる。<br />
+たとえば、GAFAの最巨頭で知られているGoogleは<br />
+アドセンスという広告サービスで大きくなったが、<br />
+Webサイトの管理者はGoogleの広告を掲載することで、<br />
+Googleからお小遣い程度のお金を得ることができ、<br />
+多くのWebサイトがGoogleの広告を掲載するに至った。<br />
+このように、たとえばロシアであれば、<br />
+ロシアの主張に妥協し、ロシアがやることに納得するだけの<br />
+「妥協ロシア外交」をさせられるのではなく、<br />
+ロシアと協力することで、日本に利益があり、<br />
+協力するロシアの側にも利益があるような、<br />
+そんな外交ができればいいと僕は思う。</p>
+
+</div>
+<div class="section">
+    <h3 id="デジタルはセキュリティと安全を">デジタルはセキュリティと安全を</h3>
+    <p>また、菅と新閣僚によるデジタル推進で強力な競争力を得ると<br />
+みんな言っていて、<br />
+特にテレワークやオンライン授業が上手くいくだろうと言うが、<br />
+僕はセキュリティや安全面で成果をあげてほしいと思う。<br />
+特に、オリンピック開催国となる日本では、<br />
+オリンピックのためのサーバがセキュリティのリスクにさらされるだろう。<br />
+セキュリティと安全は、IT技術においてもっとも大きな課題のひとつである。<br />
+安全なインフラを上手く築いてほしいと思う。</p>
+
+</div>
+<div class="section">
+    <h3 id="最高の国になるか必然的に破綻するかどちらか">最高の国になるか、必然的に破綻するか、どちらか</h3>
+    <p>また、僕は日本の新時代は少し難しいと思う。<br />
+なぜなら、最高の国になる要素も多いが、<br />
+必然的に破綻する要素も多いからである。<br />
+何もない普通の時代にはならないだろう。<br />
+最高に栄えるか、最悪に滅びるか、どちらかだ。<br />
+全ては劇的に良くなっており、<br />
+「今までの人類とは比にならないほどの高度な進歩」がある一方で、<br />
+同時に温暖化やトランプ・中国など多くのネガティブな要素がある。<br />
+本当に良くなるとしたら、<br />
+ネガティブな要素をポジティブな要素に転換し、変えていくことだ。<br />
+もし、菅が今までの総理大臣とまったく同じ<br />
+「何も変わらない政治」を継承するのであれば、<br />
+ポジティブな要素は花開くことなく、<br />
+ネガティブな要素にコロナなどさらなるネガティブ要素が増していき、<br />
+この国は滅亡するだろう。</p>
+
+</div>
+<div class="section">
+    <h3 id="破壊ではない手段で世界を変えられるか">破壊ではない手段で世界を変えられるか</h3>
+    <p>また、僕は菅について、少し思うことがある。<br />
+彼は、「破壊」には向いていないが、「停滞」もしない。<br />
+おそらく、破壊ではない方法で、着実に事をしっかりと進めていく。<br />
+そのようなことが得意な政治家ではないかと思う。<br />
+破壊ではない手段で世界を変えていくことができるか、<br />
+積み上げたものが消え去らない形で人々と共有できるか、<br />
+支配ではない方法で社会を「自助」の社会にできるか、<br />
+そうした点が成功と失敗を分けさせるポイントではないかと思う。</p>
+
+</div>
+<div class="section">
+    <h3 id="菅の会見">菅の会見</h3>
+    <p>菅の首相就任会見を見て思うことは<br />
+いくつかある。<br />
+まず、今までにやったことを継承する、<br />
+ということを言いたいせいで、<br />
+新しいことをやるというよりも<br />
+今まで過去にやったことの紹介になっており、<br />
+まるで「自分の手柄話」になっている。<br />
+「過去からの継承」に目を向けすぎて、「未来」がない。<br />
+また、内容について言えば、<br />
+「やるべきことを推し進めるためにどうするか」という内容である。<br />
+当たり前でないことを当たり前としないとか、<br />
+悪しき前例主義を撤廃するとかは、<br />
+「トップダウンに権力が推し進めるための方法論」であり、<br />
+まさに官房長官の立場の主張である。<br />
+しかしながら、菅にはいいところがたくさんある。<br />
+デジタル化をマイナンバーで推し進めるのは自分は賛成だし、<br />
+国民が頼りにしてくれるような国家を作るというのも良い。<br />
+「帝王」ではなく「縁の下の力持ち」である、<br />
+そしてそれでも「奴隷」ではなく「指導者」である、<br />
+そのために「臨戦態勢で推し進めていく」、<br />
+そのような、<br />
+「ビジョンと主張や意見には欠けているが<br />
+正しい姿勢と全力ですべきことはする意欲はある指導者」だと感じた。<br />
+まさに官房長官の会見であった。</p>
+
+</div>
+<div class="section">
+    <h3 id="菅はやるべきことをやっていく">菅はやるべきことをやっていく</h3>
+    <p>菅のいい点は、「やるべきことをやっていく」ということ。<br />
+本人は、それしか言っていない。<br />
+やるべきことを、安倍を継承してやっていく。<br />
+頼りにはなるかもしれないし、今まで通りで楽かもしれないが、<br />
+「何一つ新規性がない」。<br />
+将来に期待はできるが、スピーチとしてはつまらない会見だった。</p>
+
+</div>
+<div class="section">
+    <h3 id="政治家に良い人材がいない">政治家に良い人材がいない</h3>
+    <p>また、僕が思うに、今の政治家には「良い人材がいない」のである。<br />
+課題の種類が多すぎて、<br />
+とても総理ひとりだけでは把握して解決できないほど、<br />
+たくさんの問題があるというのに、<br />
+その問題を全てくまなく解決できるほど、<br />
+人材がそろっていない。<br />
+温暖化、コロナ、沖縄、拉致、復興、いくらでも問題はあるのだが、<br />
+そうした全てのことを、<br />
+菅がたったひとりでいつもの官房長官のように行うと、<br />
+いつか無理がでてきて、破綻する。<br />
+だからといって、そうした<br />
+「困難な問題を解決できるスーパー超人」はそんなにたくさん存在しない。<br />
+それこそ、政治家に有能な人材が居なさすぎる。<br />
+彼らがどんなにデジタル化を頑張っても、<br />
+マイクロソフトやアップルのような超スーパー企業は現れない。<br />
+目指しているからといって、<br />
+国の社会秩序の維持にも、<br />
+行政などの社会制度改革にも暗雲が立ち込める、<br />
+そんな政権になったと思う。</p>
+
+</div>
+<div class="section">
+    <h3 id="ブラウザは抽象的なデータ型を作れば作れるはず">ブラウザは抽象的なデータ型を作れば作れるはず</h3>
+    <p>僕が思うに、<br />
+WebブラウザのHTMLレイアウトエンジンは難しくない。<br />
+たとえば、あるタグを引数として、<br />
+そのタグがどのようにレンダリングできるかをデータ型で返す関数を作る。<br />
+このデータ型には、<br />
+CSSのまだかかっていない「BeforeCSS」クラスと、<br />
+CSSをそれにかけた状態である「AfterCSS」クラスを作る。<br />
+そして、CSSがかかっていない方のデータ型は、<br />
+とても抽象的な「どんなHTMLタグの指示がどういう木構造でされたか」を判断し、<br />
+内部にHTMLからパースしたツリー構造（すなわちDOM）を作る。<br />
+これに対して、CSSがかかっているデータ型は、<br />
+実際のレイアウトエンジンが表示する「どう表示するか」を判断し、<br />
+内部にベクトル画像と表示設定（幅を100%にするなど）を含めて、<br />
+グラフィックス全体を重ね合わせたグラフィックス構造データを作る。<br />
+最後にこのベクトルデータをウィンドウの状態、<br />
+すなわち今ウィンドウの幅が1200pxになっているなどの状態に<br />
+適合させて表示させればいい。<br />
+このウィンドウクラスはウィンドウのさまざまな操作に応じて反応し、<br />
+またJavaScriptでイベントやDOMの操作が行えるように、<br />
+特定の命令にも反応して、<br />
+必要であればDOMのリアルタイムパースや<br />
+ペイント処理・レンダリングとも連携するようにする。<br />
+難しいのは、HTMLやCSSやJavaScriptのパース処理。<br />
+パースを行うために、きちんとしたインタプリタの実装が必要。</p>
+
+</div>
+<div class="section">
+    <h3 id="Javaの勉強がしたい">Javaの勉強がしたい</h3>
+    <p>僕は、Javaの勉強がしたい。<br />
+思い切って言えば、<br />
+小さなブラウザのレンダリングエンジンのようなものを作ってみたい。<br />
+それも、オブジェクト指向やJavaの応用技術をふんだんに使って、<br />
+綺麗な設計と柔軟なシステムによるレンダリングエンジンを作ってみたい。<br />
+全体のプログラムの制御内容としては、<br />
+HTMLファイルを読み込んで、<br />
+それをタグごとに解析し、<br />
+パース結果をDOMツリーに変換する。<br />
+それをCSSを用いてレイアウトに変えるために<br />
+DOMツリーの要素をひとつひとつ、<br />
+CSSに基づくレイアウトへと変換していき<br />
+最終的に今のブラウザの情報に基づいてペイントする。<br />
+そして、コールされた命令に基づいて、<br />
+インターネットからHTMLや必要なファイルをダウンロードしたり、<br />
+リンクやナビゲートを行う「ネットワーク推移」の機能をつける。<br />
+これらをJavaで作ることは、かなり難しいと思う。<br />
+まずはこれらをモジュールごとに分割して、<br />
+ひとつひとつの機能が成立し、働くように開発してみたい。</p>
+
+</div>
+<div class="section">
+    <h3 id="必要なコアルーチン">必要なコアルーチン</h3>
+    <p>コアルーチンとしては少ない。<br />
+まず、どんなタグでもトークンと構文から解析し、<br />
+ツリーのデータ構造に「追加」していくルーチン。<br />
+このルーチンは、<br />
+・HTMLファイルの読み取り<br />
+・正規表現を用いたタグ（はじめから終わりまで）の取得<br />
+・ひとつひとつマッチしたタグからタグ名と要素と属性を取り出し<br />
+・タグ名に応じて要素と属性の意味を解析する分岐ルーチン<br />
+・全てのタグを適切にDOMツリーに構造的に追加<br />
+となる。<br />
+次に、CSSとレイアウトのルーチン。<br />
+・CSSの読み取り<br />
+・CSSの要素と属性のハッシュ化<br />
+・DOMツリーをループしながらひとつひとつCSS適用<br />
+・DOMに適用されたCSSに基づいて再帰的にレイアウト<br />
+レイアウトを行う上で、<br />
+・位置（絶対位置や相対位置の計算も含む）<br />
+・大きさ<br />
+・色<br />
+・フォント<br />
+・線<br />
+・背景<br />
+・余白<br />
+・GUIツールキットを用いたボタンやフォーム<br />
+・グラフィック効果<br />
+などの表示が必要であり、<br />
+このためには、<br />
+・レイアウト計算や属性適用をセレクタごとに管理<br />
+・表示をどのようなレイアウトで表示するか（block, inline）<br />
+・相対位置と絶対位置やサイズの計算<br />
+・重ね合わせの計算<br />
+・画像や色のついたボックスの表示場所の決定<br />
+・テキストの表示場所の決定<br />
+・ひとつひとつの値を計算<br />
+・最終的なレイアウトを計算<br />
+などが必要である。<br />
+そして、ウィンドウとペイントのルーチン。<br />
+・ウィンドウの情報を取得<br />
+・ウィンドウのさまざまなフラグに基づいてペイント結果を生成<br />
+・ペイント結果をOS固有のグラフィックスに変換<br />
+最後に、ナビゲーションのルーチン。<br />
+・ダウンロードルーチンにダウンロードすべきファイルを指示<br />
+・ファイルのダウンロード<br />
+・ボタンやリンクをクリックした時にナビゲート<br />
+・HTTPリクエストとレスポンスに基づくサーバとの対話<br />
+また、必要なのはこれだけではなく、<br />
+JavaScriptインタプリタが必要であり、<br />
+これには、<br />
+・JavaScriptソースコードの解析（字句解析と構文解析）<br />
+・中間言語（三番地コードを用いる）に変換して最適化<br />
+・状態ベースの仮想マシンで動く機械語のオブジェクトに変換<br />
+・JavaScriptの基本言語APIを提供してリンク<br />
+・DOMツリーへの操作のためのAPIの提供<br />
+・イベントに応じてJavaScriptの関数をコール<br />
+・実際のブラウザのレイアウトに反映<br />
+などがさらに必要になる。<br />
+Javaで書くのであれば、<br />
+これらを上手くクラス図にして、<br />
+データ構造とアルゴリズムをひとつひとつ決定し、<br />
+クラスとオブジェクトの関係にすれば、<br />
+ブラウザのレンダリングエンジンは開発できる。</p>
+
+</div>
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+

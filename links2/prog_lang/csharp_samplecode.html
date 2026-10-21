@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C#サンプルコードの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C#サンプルコード</h1>
+<p>C#のサンプルコードです。<a href="csharp.html">C#</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>自分で作ったコード</h1>
+<h2>タブブラウザ</h2>
+<p><!--[過去の日記]-->26-日付の無い日記と<!--[過去の日記]-->2012-09-17より。</p>
+<p>タブブラウザ。</p>
+<pre class="prettyprint">
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication1
+{
+    public partial class Form1 : Form
+    {
+        public List&lt;WebBrowser&gt; allWebsList;
+
+        public Form1()
+        {
+            InitializeComponent();
+            allWebsList = new List&lt;WebBrowser&gt;();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            // タブコントロールに新しいタブとブラウザを作成する
+            WebBrowser web;
+            TabPage newTabPage;
+            
+            web = new WebBrowser();
+            allWebsList.Add(web);
+            web.Dock = DockStyle.Fill;
+            
+            newTabPage = new TabPage();
+            newTabPage.Controls.Add(web);
+            tabControl1.Controls.Add(newTabPage);
+            
+            web.GoHome();
+        }
+    }
+}
+</pre>
+<p>デザイナの方では、toolStrip1、tabControl1、toolStripButton1、Form1を作ってください。</p>
+<p>デザイナで作成したコード。Form1.Designer.cs。</p>
+<pre class="prettyprint">
+namespace WindowsFormsApplication1
+{
+    partial class Form1
+    {
+        /// &lt;summary&gt;
+        /// 必要なデザイナー変数です。
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// 使用中のリソースをすべてクリーンアップします。
+        /// &lt;/summary&gt;
+        /// &lt;param name="disposing"&gt;マネージ リソースが破棄される場合 true、破棄されない場合は false です。&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows フォーム デザイナーで生成されたコード
+
+        /// &lt;summary&gt;
+        /// デザイナー サポートに必要なメソッドです。このメソッドの内容を
+        /// コード エディターで変更しないでください。
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1.SuspendLayout();
+            this.SuspendLayout();
+            //
+            // toolStrip1
+            //
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(284, 25);
+            this.toolStrip1.TabIndex = 0;
+            this.toolStrip1.Text = "toolStrip1";
+            //
+            // tabControl1
+            //
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(284, 237);
+            this.tabControl1.TabIndex = 1;
+            //
+            // toolStripButton1
+            //
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            //
+            // Form1
+            //
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.toolStrip1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.TabControl tabControl1;
+    }
+}
+</pre>
+<!--<p>これはArrayListを使って作りましたが、本当はジェネリックなコレクションを使うこともできます。現在はそちらが推奨されています。</p>-->
+
+<h2>HTMLに行番号をつけるプログラム</h2>
+<!--[過去の日記]
+<p><a href="../../diary/26-notitled.html">26-日付の無い日記</a>より。</p>
+-->
+<p>この前自分で作った、&lt;p&gt;にid="行番号"をつけるプログラム。</p>
+<pre class="prettyprint">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Text.RegularExpressions;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            RepA("st.html");
+            RepA("pm.html");
+            RepA("tx.html");
+            RepA("hs.html");
+            RepA("mm.html");
+            RepA("sk.html");
+            RepA("lt.html");
+            RepA("cp.html");
+            RepA("sc.html");
+            RepA("etc.html");
+            RepA("hs2.html");
+            RepB("lt2.html");
+            RepB("sk2.html");
+            RepB("hs3.html");
+            RepB("cp2.html");
+            RepB("lg.html");
+            RepB("sc2.html");
+            RepB("tg.html");
+            RepB("ms.html");
+            RepB("etc2.html");
+            RepB("tg2.html");
+            RepB("sk3.html");
+            RepB("cp3.html");
+            RepB("lt3.html");
+            RepB("tx2.html");
+        }
+        
+        static void __RepCore(string strin, string pat)
+        {
+            string str = "";
+            Encoding enc = Encoding.GetEncoding(932);
+            using (StreamReader r = new StreamReader(strin, enc))
+            {
+                string line;
+                int c = 0;
+                while ((line = r.ReadLine()) != null) // 1行ずつ読み出し。
+                {
+                    string mc;
+                    if (Regex.IsMatch(line, pat))
+                    {
+                        mc = Regex.Replace(line, @"", "&lt;p id=\"" + (c + 1) + "\"&gt;");
+                        str += mc + "\n";
+                        c++;
+                    }
+                    else
+                    {
+                        mc = line;
+                        str += mc + "\n";
+                        c++;
+                    }
+                }
+            }
+            // ファイルにテキストを書き出し。
+            using (StreamWriter w = new StreamWriter(strin + ".o.html", false, enc))
+            {
+                w.WriteLine(str);
+            }
+        }
+       
+        static void RepA(string strin)
+        {
+            __RepCore(strin, "----");
+        }
+
+        static void RepB(string strin)
+        {
+            __RepCore(strin, "◇◇");
+        }
+    }
+}
+</pre>
+<p>Regexの使い方が馬鹿だ。</p>
+<p>あとは、僕はxyzzyを使う。</p>
+<p>正規表現のメモ。</p>
+<blockquote class="inyou2">
+<p>検索：&lt;p id="\(.*\)"&gt;----\n&lt;p&gt;\(.*\)</p>
+<p>検索：&lt;p id="\(.*\)"&gt;◇◇\n&lt;p&gt;\(.*\)</p>
+<p>置換：&lt;a href="tx2.html#\1"&gt;\2&lt;/a&gt;,\n</p>
+<p>検索：&lt;p&gt;[\n|].*$</p>
+<p>検索：&lt;p&gt;.*$</p>
+<p>検索：^\n$</p>
+<p>検索： ..:..</p>
+<p>----か◇◇で始まる行を、その行のpタグのid属性と次の行の内容でリンクに変換します。</p>
+</blockquote>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-vb.js"></script>
+<script type="text/javascript" src="../../js/lang-ml.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

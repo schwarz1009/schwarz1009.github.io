@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>JSON関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index_web.html">Webプログラミングの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div><h1>JSONの世界観</h1>
+<p>JSONに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>データ記述フォーマットJSON</h1>
+<h2>JSON</h2>
+<p>JavaScriptやPythonなどと親和性の高いデータ記述フォーマット。Ajaxなどで使われたりするほか、MongoDBなどのNoSQLデータベースでも使われる。</p>
+<p>以下は具体例。</p>
+<pre>
+{
+    "Japan": [ "yen", 50 ],
+    "EU": {
+        "Germany": [ "euro", 100 ],
+        "UK": ["pound", 200 ]
+    }
+}
+</pre>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://dev.classmethod.jp/etc/concrete-example-of-json/">非エンジニアに贈る「具体例でさらっと学ぶJSON」 ｜ DevelopersIO</a></li>
+</ul>
+
+<h2>jqコマンド</h2>
+<p>jqコマンドは、JSONを操作するための便利なコマンド。curlなどとともに使用する。</p>
+<ul>
+<li><a href="https://qiita.com/takeshinoda@github/items/2dec7a72930ec1f658af">jq コマンドを使う日常のご紹介 #AWS - Qiita</a></li>
+<li><a href="https://zenn.dev/en2enzo2/articles/e45e6d0aec6c7e">【jqコマンド】JSONをLinuxで扱うコマンドの使い方 - Zenn</a></li>
+</ul>
+<p><a href="../linux/linux_net_curl.html">curl</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.04.24</p>
+</div>
+
+<h2>最近はJSON形式のデータが増えてきた</h2>
+<p><a href="ruby_on_rails.html">Ruby on Rails</a>のようなWebフレームワークでは、人間が読むHTMLを出力する代わりに、機械が読むためのJSONデータを吐き出すことができる。</p>
+<p>こうした単純なWeb上のJSONデータ以外にも、<a href="../network/web_api.html">Web API</a>であるSOAPや<a href="../network/rest.html">REST</a>を使うことで、Web上のさまざまなデータをネットワーク経由で取得し、操作し、処理することができる。特に、RESTではJSON形式が一般的に利用されている（一応XMLにも対応している）。</p>
+<p>JSONは以前XMLが使われていていた<a href="ajax.html">Ajax</a>の「インタラクティブWebアプリ」でも、XMLの代わりとなるシンプルなデータ記述フォーマットとなっている。</p>
+<p>また、ドキュメント指向データベースの<a href="../db/mongodb.html">MongoDB</a>ではJSONライクなデータ構造が格納できる。JavaScriptやPythonとも親和性が高い。</p>
+<p>このような特徴から、DOMでXMLを操作したり、SQLクエリでデータベースにデータを格納したり、MS-Excelファイルを編集したりする従来のフォーマットから、徐々にJSONへと移行していくものだと思われる。</p>
+<p>JSONのサンプルは以下が参考になる。</p>
+<ul>
+<li><a href="http://www.tohoho-web.com/ex/json.html">JSON入門 - とほほのWWW入門</a></li>
+</ul>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=JSON">JSON - YouTube</a></li>
+</ul>
+<p>以下はその他の解説動画。JSONの文法規格は非常に小さく、一枚の名刺に印刷できる大きさしかない。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=UO5_6fp7RqQ">なぜ世界はJSONに支配されたのか - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+<p>2026.08.13編集</p>
+</div>
+
+<h2>PyhtonからJSONを扱う</h2>
+<p><a href="python_intro_file.html">Python入門（ファイル）</a>を参照のこと。</p>
+
+<h1>AIによるサンプル</h1>
+<h2>C++による簡易的JSONパーサー</h2>
+<p>以下はGoogleのAIが書いた、C++による簡易的なJSONパーサー。ただし、ネストされたオブジェクトや配列、nullには未対応で、エラーチェックもほぼなし。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;unordered_map&gt;
+#include &lt;vector&gt;
+#include &lt;sstream&gt;
+
+// JSONの値の種類を定義
+enum class JsonType { STRING, NUMBER, BOOL, OBJECT };
+
+// JSONの値を格納する構造体（簡易版）
+struct JsonValue {
+    JsonType type;
+    std::string string_val;
+    int int_val = 0;
+    bool bool_val = false;
+    std::unordered_map&lt;std::string, JsonValue&gt; object_val;
+};
+
+// スペースを飛ばす関数
+void skipWhitespace(const std::string& json, size_t& pos) {
+    while (pos &lt; json.length() && isspace(json[pos])) {
+        pos++;
+    }
+}
+
+// 文字列を解析する関数 ("..."部分)
+std::string parseString(const std::string& json, size_t& pos) {
+    pos++; // '"' を飛ばす
+    size_t start = pos;
+    pos = json.find('"', start);
+    std::string result = json.substr(start, pos - start);
+    pos++; // '"' を飛ばす
+    return result;
+}
+
+// JSONObjectを解析する関数
+std::unordered_map&lt;std::string, JsonValue&gt; parseObject(const std::string& json, size_t& pos) {
+    std::unordered_map&lt;std::string, JsonValue&gt; object;
+    pos++; // '{' を飛ばす
+    skipWhitespace(json, pos);
+
+    while (pos &lt; json.length() && json[pos] != '}') {
+        skipWhitespace(json, pos);
+        if (json[pos] == '"') {
+            std::string key = parseString(json, pos);
+            skipWhitespace(json, pos);
+            if (json[pos] == ':') {
+                pos++; // ':' を飛ばす
+                skipWhitespace(json, pos);
+                
+                // 値の解析 (簡易的にString, Int, Boolのみ対応)
+                if (json[pos] == '"') {
+                    object[key] = {JsonType::STRING, parseString(json, pos)};
+                } else if (isdigit(json[pos]) || json[pos] == '-') {
+                    size_t start = pos;
+                    while (isdigit(json[pos]) || json[pos] == '-') pos++;
+                    object[key] = {JsonType::NUMBER, "", std::stoi(json.substr(start, pos - start))};
+                } else if (json.substr(pos, 4) == "true" || json.substr(pos, 5) == "false") {
+                    bool b = (json.substr(pos, 4) == "true");
+                    object[key] = {JsonType::BOOL, "", 0, b};
+                    pos += b ? 4 : 5;
+                }
+            }
+        }
+        skipWhitespace(json, pos);
+        if (json[pos] == ',') pos++; // ',' を飛ばす
+    }
+    pos++; // '}' を飛ばす
+    return object;
+}
+
+int main() {
+    std::string json = R"({
+        "name": "John Doe",
+        "age": 30,
+        "isStudent": false
+    })";
+
+    size_t pos = 0;
+    skipWhitespace(json, pos);
+    
+    if (json[pos] == '{') {
+        auto data = parseObject(json, pos);
+
+        // 結果の出力
+        std::cout &lt;&lt; "Name: " &lt;&lt; data["name"].string_val &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Age: " &lt;&lt; data["age"].int_val &lt;&lt; std::endl;
+        std::cout &lt;&lt; "IsStudent: " &lt;&lt; (data["isStudent"].bool_val ? "true" : "false") &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</pre>
+<p>実行方法：</p>
+<pre>
+g++ -std=c++11 simple_json_parser.cpp -o parser
+./parser
+</pre>
+<p>実行結果：</p>
+<pre>
+Name: John Doe
+Age: 30
+IsStudent: false
+</pre>
+<ul>
+<li><a href="https://www.tumblr.com/mattn/158098354482/c-%E3%81%A7-stl-%E3%83%95%E3%83%AC%E3%83%B3%E3%83%89%E3%83%AA%E3%81%AB%E6%89%B1%E3%81%88%E3%82%8Bjson%E3%83%91%E3%83%BC%E3%82%B5jsonhpp">C++ で STL フレンドリに扱えるJSONパーサ「json.hpp」 – @mattnのTumblr</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
+
+<h2>C++による簡易的JSONパーサー２</h2>
+<p>以下はGoogleのAIが書いた、C++による簡易的なJSONパーサーその２。ネストされたオブジェクトや配列にも対応したバージョン。</p>
+<pre class="prettyprint">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;variant&gt;
+#include &lt;optional&gt;
+#include &lt;memory&gt;
+
+// JSONのデータ型を定義
+struct JsonValue;
+using JsonObject = std::map&lt;std::string, JsonValue&gt;;
+using JsonArray = std::vector&lt;JsonValue&gt;;
+
+struct JsonValue {
+    std::variant&lt;std::nullptr_t, bool, double, std::string, std::shared_ptr&lt;JsonObject&gt;, std::shared_ptr&lt;JsonArray&gt;&gt; data;
+
+    // ヘルパー: 型チェック
+    bool is_null() const { return std::holds_alternative&lt;std::nullptr_t&gt;(data); }
+    bool is_string() const { return std::holds_alternative&lt;std::string&gt;(data); }
+    bool is_number() const { return std::holds_alternative&lt;double&gt;(data); }
+    bool is_bool() const { return std::holds_alternative&lt;bool&gt;(data); }
+    bool is_object() const { return std::holds_alternative&lt;std::shared_ptr&lt;JsonObject&gt;&gt;(data); }
+    bool is_array() const { return std::holds_alternative&lt;std::shared_ptr&lt;JsonArray&gt;&gt;(data); }
+
+    // ヘルパー: 値の取得
+    std::string get_string() const { return std::get&lt;std::string&gt;(data); }
+    double get_number() const { return std::get&lt;double&gt;(data); }
+    bool get_bool() const { return std::get&lt;bool&gt;(data); }
+    JsonObject& get_object() { return *std::get&lt;std::shared_ptr&lt;JsonObject&gt;&gt;(data); }
+    JsonArray& get_array() { return *std::get&lt;std::shared_ptr&lt;JsonArray&gt;&gt;(data); }
+};
+
+// パーサー本体
+class Parser {
+    std::string json;
+    size_t pos = 0;
+
+    void skip_whitespace() {
+        while (pos &lt; json.size() && isspace(json[pos])) pos++;
+    }
+
+    char next_char() {
+        skip_whitespace();
+        return json[pos];
+    }
+
+    std::string parse_string() {
+        pos++; // " をスキップ
+        std::string s;
+        while (pos &lt; json.size() && json[pos] != '"') {
+            s += json[pos++];
+        }
+        pos++; // " をスキップ
+        return s;
+    }
+
+    JsonValue parse_value();
+
+    JsonValue parse_object() {
+        auto obj = std::make_shared&lt;JsonObject&gt;();
+        pos++; // { をスキップ
+        skip_whitespace();
+        if (next_char() == '}') {
+            pos++;
+            return JsonValue{obj};
+        }
+        while (true) {
+            skip_whitespace();
+            std::string key = parse_string();
+            skip_whitespace();
+            if (json[pos] == ':') pos++;
+            (*obj)[key] = parse_value();
+            skip_whitespace();
+            if (json[pos] == ',') {
+                pos++;
+            } else if (json[pos] == '}') {
+                pos++;
+                break;
+            }
+        }
+        return JsonValue{obj};
+    }
+
+    JsonValue parse_array() {
+        auto arr = std::make_shared&lt;JsonArray&gt;();
+        pos++; // [ をスキップ
+        skip_whitespace();
+        if (next_char() == ']') {
+            pos++;
+            return JsonValue{arr};
+        }
+        while (true) {
+            arr-&gt;push_back(parse_value());
+            skip_whitespace();
+            if (json[pos] == ',') {
+                pos++;
+            } else if (json[pos] == ']') {
+                pos++;
+                break;
+            }
+        }
+        return JsonValue{arr};
+    }
+
+    JsonValue parse_number() {
+        size_t start = pos;
+        while (pos &lt; json.size() && (isdigit(json[pos]) || json[pos] == '.' || json[pos] == '-' || json[pos] == '+')) {
+            pos++;
+        }
+        return JsonValue{std::stod(json.substr(start, pos - start))};
+    }
+
+public:
+    Parser(std::string j) : json(std::move(j)) {}
+
+    JsonValue parse() {
+        return parse_value();
+    }
+};
+
+JsonValue Parser::parse_value() {
+    skip_whitespace();
+    char c = json[pos];
+    if (c == '"') return JsonValue{parse_string()};
+    if (c == '{') return parse_object();
+    if (c == '[') return parse_array();
+    if (isdigit(c) || c == '-') return parse_number();
+    if (json.substr(pos, 4) == "true") { pos += 4; return JsonValue{true}; }
+    if (json.substr(pos, 5) == "false") { pos += 5; return JsonValue{false}; }
+    if (json.substr(pos, 4) == "null") { pos += 4; return JsonValue{nullptr}; }
+    return JsonValue{nullptr};
+}
+
+// 動作確認用
+int main() {
+    std::string json_str = R"(
+    {
+        "name": "John",
+        "age": 30,
+        "isStudent": false,
+        "address": {
+            "city": "Tokyo",
+            "zip": "100-0001"
+        },
+        "hobbies": ["reading", "coding", {"type": "sports", "name": "soccer"}]
+    }
+    )";
+
+    Parser parser(json_str);
+    JsonValue root = parser.parse();
+
+    if (root.is_object()) {
+        auto& obj = root.get_object();
+        std::cout &lt;&lt; "Name: " &lt;&lt; obj["name"].get_string() &lt;&lt; std::endl;
+        
+        // オブジェクトのアクセス
+        auto& addr = obj["address"].get_object();
+        std::cout &lt;&lt; "City: " &lt;&lt; addr["city"].get_string() &lt;&lt; std::endl;
+        
+        // 配列のアクセス
+        auto& hobbies = obj["hobbies"].get_array();
+        std::cout &lt;&lt; "First Hobby: " &lt;&lt; hobbies[0].get_string() &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Third Hobby Type: " &lt;&lt; hobbies[2].get_object()["type"].get_string() &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</pre>
+<ul>
+<li><a href="https://github.com/toughengineer/minjsoncpp">toughengineer/minjsoncpp: Minimalistic JSON C++ library</a></li>
+<li><a href="https://www.youtube.com/watch?v=sUxFE32tXF0">LS36.4 - 再帰降下パーサーの実装 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.20</p>
+<p>2026.03.02編集</p>
+</div>
+
+<h1>プロトコル</h1>
+<h2>JSON-RPC</h2>
+<p>JSON-RPCは、JSONによるRPC（リモートプロシージャコール）のプロトコル。REST APIの代替技術として、あるいは言語サーバのプロトコルLSPやAIのプトロコルMCPなどで使われている。</p>
+<ul>
+<li><a href="https://qiita.com/oohira/items/35e6eaaf4b44613ad7d3">JSON-RPCって何？ #WebAPI - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.05.05</p>
+</div>
+
+<h1>関連書式</h1>
+<h2>HOCON</h2>
+<p>HOCONはJSONを改良した新しい設定ファイル書式。名前にHuman-Optimizedとあるように、機械ではなく人間にとって記述・編集しやすいように考えられている。</p>
+<ul>
+<li><a href="https://qiita.com/stk0724/items/0d5cfbb65195febd56bf">設定ファイル統一戦争勃発(もしくはHOCONのススメ #Go - Qiita</a></li>
+<li><a href="https://docs.spongepowered.org/5.1.0/ja/server/getting-started/configuration/hocon.html">HOCON の入門 &mdash; Sponge 5.1.0 ドキュメント</a></li>
+<li><a href="https://minerva.mamansoft.net/Notes/HOCON">HOCON - Minerva</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.04.24</p>
+</div>
+
+<h2>Pkl</h2>
+<p>PklはAppleによる設定ファイルのためのプログラミング言語。プログラミング言語としての柔軟性を持ち、JSONやYAMLなどに変換できる。</p>
+<ul>
+<li><a href="https://qiita.com/gracefulm/items/ed5b7f0054b4cd9f63d4">まだ設定ファイルをJSONやYAMLで書いてるの？ #Config - Qiita</a></li>
+<li><a href="https://gigazine.net/news/20240205-apple-pkl/">Appleがシステム構成のためのプログラミング言語「Pkl」をオープンソースでリリース - GIGAZINE</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.04.09</p>
+</div>
+
+<h2>Boost.PropertyTree</h2>
+<p>C++におけるBoost.PropertyTreeについては<a href="cpp_stl_libs.html">C++（STL・ライブラリ）</a>も参照のこと。</p>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

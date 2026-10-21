@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>nftables - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>nftables</h1>
+<p>nftablesに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>nftables</h1>
+<h2>nftables</h2>
+<p>ファイアーウォール。Debian 10ではiptablesからnftablesに置き換わる。</p>
+<p>後日注記：nftablesは、従来の*tables系のフィルタリングシステムを統合したもので、RHEL 8など多くのディストリビューションで採用されつつある。「iptablesとまったく異なる使用方法」なのがたまに傷。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/892/">nftables | Linux技術者認定 LinuC | LPI-Japan</a></li>
+<li><a href="https://yakst.com/ja/posts/187">あなたがnftablesを好きになるわけ | Yakst</a></li>
+</ul>
+
+<h2>プログラムのように設定を記述する</h2>
+<p>nftablesでは、nftコマンドを使って設定や管理を行うほか、iptablesと大きく異なる点として、「プログラムのようにフィルタリング設定を記述する」という点が挙げられる。</p>
+<p>iptablesではデータだったフィルタリング設定が、nftablesではプログラムのようになる。このため理解するのは難しいが、理解してしまえば簡素かつ柔軟な設定が可能である。</p>
+<p>詳しくは以下のページが参考になる。</p>
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/22636/">Linuxにおける新たなパケットフィルタリングツール「nftables」入門 | さくらのナレッジ</a></li>
+</ul>
+
+<h2>設定例</h2>
+<p>たとえば、80番ポート（HTTP）や443番ポート（HTTPS）を許可するには、</p>
+<pre>
+#!/usr/sbin/nft -f
+
+...
+
+table ip filter {
+    chain input {
+        ...
+        
+        tcp dport 80 counter accept
+        tcp dport 443 counter accept
+        
+        ...
+    }
+}
+</pre>
+<p>とする。</p>
+<p>（<a href="https://next49.hatenadiary.jp/entry/20191115/1573821560">Debian 10 (buster)のnftablesでアクセス制御 - 発声練習</a>と<a href="https://qiita.com/scheveningen/items/8906fdb9b81aa01c25d6">CentOS8でnftablesの設定をしてみる #centos8 - Qiita</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.10.23</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>ファイアーウォール</h2>
+<p><a href="linux_net_firewall.html">Linux ファイアウォール</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

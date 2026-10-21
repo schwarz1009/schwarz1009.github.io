@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>NIS関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>NIS関連の世界観</h1>
+<p>NISに関する世界観です。<a href="../unix/sun.html">Sun</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>NIS</h1>
+<h2>NISとは</h2>
+<p>NISは、ネットワーク・インフォメーション・サービスの略で、Sunによるユーザー認証情報をネットワーク上で共有するためのシステム。</p>
+<p>当初は「イエローページ」（電話帳）という名前だった。コマンド名にypとつけるのはその時の名残りである。</p>
+<p>後日注記：NIS/YPを使うことで、ネットワーク上のすべてのホストでログイン情報を共通化できる。どの端末からログインしても構わない。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%BB%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A9%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9">ネットワーク・インフォメーション・サービス - Wikipedia</a></li>
+</ul>
+
+<h2>NISの仕組み</h2>
+<p>NISを使うことで、ネットワーク上で繋がれたマシンの間で、/etc/passwdや/etc/groupのようなユーザー認証情報を分散させることなく共有できる。</p>
+<p>どこかでユーザー情報が更新されるとそれがほかのマシンでも更新され、全体のすべてのマシンで反映される。</p>
+<p>実際にはNISサーバで情報を一元管理し、NISクライアントは常にNISサーバに認証情報を問い合わせ、変更されると全体に反映する。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?NIS">コマンド:NIS: UNIX/Linuxの部屋</a></li>
+</ul>
+
+<h2>NISコマンド</h2>
+<table class="some_tables">
+<tr><th class="min60">コマンド</th><th>説明</th></tr>
+<tr><td>ypcat</td><td>NISデータベースを表示する。</td></tr>
+<tr><td>yppasswd</td><td>NISパスワードを変更する。</td></tr>
+</table>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/yp-tools/man1/ypcat.1.html">man ypcat</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/yp-tools/man1/yppasswd.1.html">man yppasswd</a></li>
+</ul>
+
+<h2>参考ページ</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?NIS">コマンド:NIS: UNIX/Linuxの部屋</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>NISの利点</h2>
+<p>NISを使うことで、ユーザー情報をすべてのネットワーク上のマシンで共有でき、ユーザーの個人設定も共有できる。どの機器でも同じIDとパスワードでログインできる。</p>
+<div class="edit_date">
+<p>2024.11.10</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>ユーザーログイン</h2>
+<p><a href="../linux/linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>を参照のこと。</p>
+
+<h2>DNS・名前解決</h2>
+<p><a href="dns.html">DNSサーバ</a>を参照のこと。</p>
+
+<h2>LDAP/Active Directory</h2>
+<p><a href="ldap.html">LDAP</a>や<a href="file_server_windowsnetwork.html">Windowsネットワーク</a>や<a href="file_server_samba.html">Samba</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>NIS</h2>
+<p>各端末のログイン認証情報をネットワークで共通化できる。</p>
+<p>どの端末でも同じユーザ名とパスワードでログインできる。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（ext2） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（ext2）</h1>
+<p>Linuxのカーネルの開発に関する世界観（ext2）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><b>ext2</b></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ブロック型ファイルシステム</h1>
+<h2>Linuxとext2ファイルシステム</h2>
+<p>Linuxにおいて、ファイルツリーをマウントするためには、ファイルシステムを作成してストレージをフォーマットしておく必要がある。</p>
+<p>この際に使われるファイルシステムには種類があり、Linuxではext2/3/4が一般的。WindowsではNTFS、LinuxとWindowsの両用ならexFATを使うのが一般的。</p>
+<p>Linuxにおいて、ext4でフォーマットしたストレージにはさまざまなファイルを保存することができる。</p>
+<p>ext4のベースになっているのはext2というブロック型ファイルシステムで、とても信頼できる。ext2は長い間使われてきた「試練を乗り越えてきたファイルシステム」と呼ばれ、旧来のブロック型の特徴を持つ。B-Tree型ファイルシステムに比べれば速度が落ちることもあるが、信頼性の上では抜群である。</p>
+<p>ext2をベースにしたext3は、ext2に対してジャーナリング機構を追加したファイルシステムであり、パソコンの使用中に途中で電源を切ってもジャーナリングから復旧するため、ファイルシステムが矛盾を起こすことがない。そしてext4はさらに新しくなった最新のext2系列のファイルシステムである。</p>
+<div class="edit_date">
+<p>2024.09.19</p>
+</div>
+
+<h2>ext2</h2>
+<p>（以下は<a href="http://www.atmarkit.co.jp/ait/articles/0306/24/news002_2.html">ブロックアルゴリズムとB-Treeアルゴリズム (2/3)：Linuxファイルシステム技術解説（2） - ＠IT</a>を参考に執筆しました。）</p>
+<p>ext2はLinuxで標準的に使われるブロック型ファイルシステム。データをデータブロック（実際のデータが入る）やスーパーブロック（ブロックに関する関連情報）などを持ったブロックグループに分けて管理する。</p>
+<p>ext2はBSD FFS（Fast File System）を元に開発された。古くからあるブロック型アルゴリズムを採用した伝統的なモデルによるファイルシステムで、ディスク上のデータをブロックに分けて記録する。</p>
+<p>まず、ファイルシステムを作成する際、平均的なファイルサイズから予測してブロックを作成する（デフォルトでは4096バイト。1024バイトや2048バイトにすることもできる）。</p>
+<p>ブロックグループは、複数のブロックがグループになったもの。</p>
+<p>ブロックグループの構造は、まず最初に「ブートブロック」が記録され、その後は連続して「ブロックグループ」がひとつひとつ並んで（ブロックグループ0, ブロックグループ1, ブロックグループ2, ...のように）記録される。</p>
+<p>ブロックグループには実際のデータが記録されるデータブロックのほか、「スーパーブロック」が含まれる。これは、ブロックやファイルシステムのサイズ・空き容量やi-node数などが含まれる、ブロックグループの関連情報のこと。</p>
+<p>ext2では、ブロックグループ0のスーパーブロックに、パーティションのすべてのブロックグループに関するメタ情報が記録される。</p>
+
+<h2>ext3/4</h2>
+<p>また、ジャーナリングに対応したext3/4のようなファイルシステムでは、システムを途中で強制停止した場合でもファイルの整合性を保ち、壊れることが無い。</p>
+<p>後日注記：ジャーナリングはとても便利。途中で強制終了した場合でも、ジャーナルから自動的に元のファイルシステムを復旧して問題なく起動してくれる。特にDebianでYouTubeを見ながらツイッターをやっていると、よく途中で画面が停止して何もできなくなることがある。こういう時は電源ボタンで強制終了。ジャーナリングのあるファイルシステムは、このような時でも問題がない。</p>
+
+<h2>アクセス制御リスト (ACL)</h2>
+<p>（以下は「<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>」を参考に執筆しました。）</p>
+<p>Linux 2.6では、ext2/ext3のためにアクセス制御リスト（ACL）が実装された。従来のパーミッションによるアクセス制御だけではなく、事細かく権限とセキュリティを決められるようになった。</p>
+<p>後日注記：ACLとよく似たものに、アクセス制御行列というものがある。これはアクセスを可能とするポリシーを行列（表）でまとめたもの。行を「ドメイン」（主体）と呼び、列を「オブジェクト」（対象）と呼び、ドメインのオブジェクトに対する「アクセス権」をそれぞれの項目の該当箇所とする。ただし、効率の問題から、アクセス制御行列がそのまま用いられることは少ない。ケーパビリティ・リストやACLが多くの場合用いられる。ACLはアクセス制御行列をそれぞれのオブジェクトに対するリストにしたものである。（詳しくは放送大学「コンピュータの動作と管理 ('17)」が参考になります。）</p>
+<p><a href="linux_unix_user.html">UNIXシステム管理（ユーザーとパーミッション）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.03.17</p>
+<p>2024.03.19-20編集</p>
+</div>
+
+<h1>ext2関連のコマンド</h1>
+<h2>fsck</h2>
+<p>fsckはファイルシステムの整合性をチェックして修復するツール。正常にシャットダウンしなかった場合、ジャーナリングに対応していないとこれが実行される。</p>
+<p><a href="../hardware/harddisk.html">ハードディスク</a>も参照のこと。</p>
+
+<h2>mkfsによるファイルシステムの作成とマウント</h2>
+<p>mkfsはファイルシステムを作成するコマンド。</p>
+<p>たとえば、</p>
+<pre>
+# mkfs.ext2 /dev/sda1
+# mkfs.ext4 /dev/sda3
+</pre>
+<p>とする。mkfs.ext2に-jをつけるとジャーナリングが有効になる（ext3）。</p>
+<p>ファイルシステムをマウントする時は、ファイルシステムのタイプを-tで指定する。</p>
+<pre>
+# mount -t ext4 /dev/sdb1 /media/usb
+</pre>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks/ja">ディスクの準備 - Gentoo Handbook</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Mount">Mount - Gentoo Wiki</a></li>
+</ul>
+<p><a href="linux_unix_filesystem.html">UNIXシステム管理（ファイルシステム）</a>も参照のこと。</p>
+
+<h2>lsattr/chattr</h2>
+<p>ext2/3/4のファイル属性を表示・変更する。追記専用、変更不可、安全な削除、復旧可能など、さまざまな機能が使える。</p>
+<p>（「<a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a>」を参考に執筆しました。）</p>
+<ul>
+<li><a href="http://linuxjm.osdn.jp/html/e2fsprogs/man1/lsattr.1.html">man lsattr</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/e2fsprogs/man1/chattr.1.html">man chattr</a></li>
+</ul>
+
+<h1>いろいろ</h1>
+<h2>もっとext2/ext3/ext4について詳しく知りたい</h2>
+<p>以下が参考になる。</p>
+<ul>
+<li><a href="http://archive.linux.or.jp/JF/JFdocs/The-Linux-Kernel-10.html">The Linux Kernel: ファイルシステム</a></li>
+<li><a href="http://nishidy.hatenablog.com/entry/2016/10/11/221042">ファイルシステム(ext2/ext3/ext4)の基礎まとめ - Tech random memoranda</a></li>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/ext4">linux.git - ext4</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

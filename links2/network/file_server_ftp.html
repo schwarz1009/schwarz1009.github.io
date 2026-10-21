@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>FTP関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>FTP関連の世界観</h1>
+<p>FTPに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>FTP</h1>
+<h2>FTPとは</h2>
+<p>FTPは、ファイル転送を行うプロトコル。</p>
+<p>特に、ホームページを運営する際に、ホームページを構成するHTMLデータをサーバーにアップロードするために使われることが多い。</p>
+<p>まず、サーバー側にFTPサーバーを立てて、ホームページのデータが含まれる場所をFTPサーバーで管理するための設定を行い、FTPクライアントからFTPサーバーに接続し、HTMLデータをアップロードする。</p>
+<p>FTPクライアントの設定で、サーバーに接続するためのFTPのアドレス・ユーザー名とパスワードを設定し、ミラーリング機能を使ってローカルのデータをサーバーにアップロードする。</p>
+<p>また、パーミッションの設定も行わなければならない。WindowsからLinuxなどのUNIX系のサーバーに接続するためには、パーミッションの適切な設定が最初の鬼門となる。きちんとパーミッションを設定しないと、CGIプログラムも動かないし、データファイルへのアクセスや読み書きもできない。</p>
+<p>FTP以外の技術として、サーバーにGitHubなどを使ったGitを使う方法も最近はある。いちいちコミットしてプッシュしなければならないというデメリットはあるが、履歴まで全部残り、必要ならばいつかの時点にロールバックできるという利点がある。</p>
+<p><a href="../prog_lang/git.html">Git</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.08.19</p>
+</div>
+
+<h1>FTPサーバー</h1>
+<h2>vsftpd</h2>
+<p>FTPサーバーのひとつ。</p>
+<p><a href="vsftpd.html">vsftpd</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>ProFTPD</h2>
+<p>FTPサーバーのひとつ。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>FTPクライアント</h1>
+<h2>lftp</h2>
+<p>コマンドで使えるFTPクライアント。</p>
+<p><a href="lftp.html">lftp</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>FileZilla</h2>
+<p>GUIのLinuxで動くFTPクライアント。</p>
+<ul>
+<li><a href="https://linuxappdata.com/software/69/">FileZilla - Linux App Data</a></li>
+</ul>
+
+<h2>gFTP</h2>
+<p>FTPクライアント。FTPのほかSSHやSFTPにも対応している。CUI版とGTKのGUI版がある。</p>
+<ul>
+<li><a href="https://linuxappdata.com/software/12/">gFTP - Linux App Data</a></li>
+</ul>
+
+<h2>WinSCP</h2>
+<p>Windowsで使えるFTPクライアント。</p>
+<p><a href="winscp.html">WinSCP</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h1>コマンド一覧</h1>
+
+<h2>FTP・転送</h2>
+<table class="some_tables">
+<tr>
+<th class="min60">コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>ftp</td>
+<td>FTPサーバーに接続してファイル転送を行う。</td>
+</tr>
+<tr>
+<td>ncftp</td>
+<td>高機能なファイル転送を行う。</td>
+</tr>
+</table>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

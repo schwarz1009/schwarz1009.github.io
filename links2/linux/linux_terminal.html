@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux 端末 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux 端末</h1>
+<p>Linuxの端末に関する世界観です。</p>
+<p>機械いじりが子供のごろから好きだった父親の話を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>端末とは</h1>
+<h2>端末</h2>
+<p>昔のコンピュータは、コンピュータそのものが高価かつ大型であったことから、今のように個人が専有する「パソコン」ではなく、ひとつの中央コンピュータに何台もの「端末」が繋がる形のコンピュータが一般的でした。</p>
+<p>それぞれの端末デバイスは、計算能力や記憶能力を持っておらず、端末が接続したひとつのコンピュータにだけ、計算処理装置や記憶処理装置があり、端末は主に入力と出力などの「操作と確認」を行うものでした。</p>
+<p>UNIXのようなマルチユーザー・マルチタスクのタイムシェアリングシステムで、コマンドライン操作を行うのは、この端末を中心とした入出力デバイスで行うのが基本となっています。たくさんのユーザーが同時にログインして、複数のタスクを同時に動かすのが前提となっています。</p>
+<p>端末には歴史があります。まず、UNIXの黎明期に使われていたのがテレタイプと呼ばれる端末で、出力はプリンター、入力は紙テープやタイプライターでした。</p>
+<p>UNIXでは端末のことを「tty」と呼びますが、これはテレタイプ（teletype）から来ています。</p>
+<p>その次に普及したのが、文字だけを表示できるモニタと、キーボードのキャラクタ端末・ダム端末です。モニタには文字しか表示できず、コンソール（黒画面の端末）のような画面で操作を行いました。</p>
+<p>その後に、ビットマップの点による画像を表示できる、ビットマップディスプレイ・X端末が普及しました。この頃から、GUIのアプリケーションを操作できるようになりました。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p><a href="../hardware/old_computer.html">古いコンピュータ（メインフレーム・ミニコン）</a>や<a href="linux_x11.html">X11</a>も参照のこと。</p>
+
+<h2>端末エミュレータ</h2>
+<p>現代のパソコンでは、それぞれのパソコンに計算装置と記憶装置が備わっており、ターミナルで使うのであっても、Xで使うのであっても、端末として特別なハードウェアは必要ありません。便宜上、コンソールやコマンドライン操作画面のことを端末と呼ぶことはあります。</p>
+<p>UNIXでは、端末を使ってコマンドラインのプログラムを操作しますが、この端末を現代のXでソフトウェアでエミュレートして再現したのが「端末エミュレータ」です。現代のLinuxでは、Xで端末エミュレータを使うか、あるいは黒画面の仮想コンソールで操作することで、コマンドライン操作を行います。</p>
+<p>Linuxでは、GNOMEやKDEのような「Windowsを模した統合デスクトップ環境」の上で、端末エミュレータを使ってコマンドライン操作を行うのが一般的です。</p>
+<p>このような経緯と設計があることから、UNIXは昔から、大量のタスクやリクエストを安定して壊れずにさばくのに向いています。FreeBSDなどのBSD系のUNIXは、昔からネットワークや大量のタスクをさばくのが得意で、Linuxでもこれは変わりません。UNIXではWindowsよりも早くからネットワークの機能も充実しており、そのため、LinuxやBSDなどのUNIXは今でもサーバーで標準的に使われます。逆に、WindowsのようにグラフィックスやGUI操作を前提として作られていないため、WindowsのようなGUIシステムは不得意で、現在でも、X11を使うのであっても端末エミュレータからコマンド操作をしなければ使えません。</p>
+
+<h2>端末のデバイスファイル</h2>
+<p>端末は一般的に、以下の3つに分けられる。</p>
+<p>・キーボードとモニタにじかに繋がった端末</p>
+<p>・シリアル回線（モデム・RS-232回線）の端末</p>
+<p>・ネットワーク上の端末</p>
+<p>/dev/tty0が一番目、tty1が二番目の仮想コンソール。また/dev/ttyS0は一番目のシリアル回線の端末を意味するデバイスファイル。</p>
+<p>端末のストリームを読むとキーボードからの入力が得られ、端末のストリームに書くとモニタに文字を表示できる。</p>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p>ttyとpts（sshやtelnetでリモートログインした時に使われるデバイスファイル）について詳しくは、以下を参照のこと。</p>
+<ul>
+<li><a href="https://qiita.com/toshihirock/items/22de12f99b5c40365369">ttyとかptsとかについて確認してみる - Qiita</a></li>
+<li><a href="https://blog.takanabe.tokyo/2013/06/09/1017/">ttyとptsとは – PAYFORWARD</a></li>
+<li><a href="http://takuya-1st.hatenablog.jp/entry/20101024/1287947368">ttyについて ttyやptsってなんぞ？ - それマグで！</a></li>
+</ul>
+<p><a href="linux_devicefile.html">Linuxデバイスファイル</a>も参照のこと。</p>
+
+<h1>Linuxをコマンドライン環境で使う時のTips</h1>
+<h2>仮想コンソール</h2>
+<p>仮想コンソール機能を使うことで、LinuxをDOSのような黒画面のコマンドライン環境で使っている時に、画面を複数使ってログインシェルを複数起動することが出来る。</p>
+<p>Alt+F1～F6で切り替えられる。Xからの切り替えはCtrl+Alt+F1～F6。</p>
+<p>また、X11のウィンドウシステムの画面はAlt+F7に設定されていることが多い。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/094virtualcon.html">複数のコンソールを切り替えて使うには - @IT</a></li>
+</ul>
+
+<h2>GNU Screen/tmux</h2>
+<p>GNU Screenはコンソールでもウィンドウシステムと同じように画面を作成・破棄できるソフトウェア。複数の端末でウィンドウシステムのように並列して作業することができる。</p>
+<p>後日注記：また、GNU Screenは起動元のプロセスが消えても処理を継続することができる機能があり、リモートからバッチ処理を行うような時にも使える。</p>
+<ul>
+<li><a href="https://note.crohaco.net/2015/gnu-screen-study/">GNU screen コマンド勉強録 - くろのて</a></li>
+</ul>
+<p>tmuxという新しいソフトウェアも開発されている模様。</p>
+<ul>
+<li><a href="https://qiita.com/nl0_blu/items/9d207a70ccc8467f7bab">tmuxを必要最低限で入門して使う - Qiita</a></li>
+</ul>
+<p>byobuというソフトウェアもある。</p>
+<ul>
+<li><a href="https://qiita.com/kayama0fa/items/82d3ebab8bb297bdfd23">byobu導入+操作メモ - Qiita</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>テレタイプと原始的通信の歴史</h2>
+<p>昔は、今のようなテレビやディスプレイはなく、遠くに離れたデータを転送するためには、テレタイプという方法を使っていました。</p>
+<p>欧米で、昔から使われた文字の入力・印刷機械に、タイプライターがあります。タイプライターは、キーボードに文字が並んでいて、タイプすることで文字の字体（フォント）を紙に転写します。</p>
+<p>テレタイプは、あるタイプライターでタイプした内容を、遠く離れた別のタイプライターに、機械的に転送することができます。</p>
+<p>情報通信技術では、文字をデジタル情報（コード・符号）に直して、文字を数値化した符号を送ることができますが、この符号は標準化されています。まだ日本語のような英語以外の文字を扱わなかった時代に、基本的な英語のアルファベットや、数字や基本的な記号を、数値に直す際に、どの文字は何番だ、という符号化を、ANSIというアメリカの標準化団体が、ASCIIという文字コードで標準化しました。</p>
+<p>転送には、昔は電話線を用いていました。ですが、電話線はアナログな音声を伝えるものであり、デジタルデータの転送には適していません。ここで生まれたのが、アナログな音声とデジタルなデータを変換する機械であるモデムです。モデムは昔のインターネットで電話線を通じて通信するためによく使われていました。</p>
+<p>通信技術において、有線の電信・電話線があることは昔は重要でした。その理由は、無線がなかったからです。なので、戦争で通信兵などは、ジャングルの奥地を切り開いて、電信・電話基地を開設するという、通信手段を確保する上で、とても重要な仕事をしていました。</p>
+<p>ですが、無線が使われるようになると、有線で電信・電話線を張り巡らせなくても、ひとつの中央の無線基地局から、無線で通信ができるようになりました。</p>
+<p>無線の歴史は古く、電話よりもモールス信号を使った無線通信が古くからあり一般的でした。モールス信号は、「ツー」と「トン」の二種類の信号で、アルファベットを信号に直して転送します。昔のアマチュア無線でも、昔はモールス信号を使っていました。</p>
+<p>そのようなテレタイプは、FAXの登場によって置き換えられました。FAXはやはり電話線を使いながら、画像を転送して再生することのできる装置です。FAXは今でも使われています。そのうち、映像を転送できるテレビ放送が生まれ、文字だけを表示できるキャラクタ端末や、テレビと同様のCRTディスプレイが作られるようになり、またインターネットの登場によってデジタル回線が引かれるようになりました。</p>
+<p><a href="../hardware/hobby_pc.html">ホビーパソコン</a>や<a href="../network/broadband.html">ブロードバンド</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.01.18-19</p>
+</div>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

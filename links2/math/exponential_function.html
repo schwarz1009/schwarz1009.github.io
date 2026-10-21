@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>指数対数の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">数学の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/math_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>指数対数の世界観</h1>
+<p>指数対数の世界観です。</p>
+<!--
+<p>「<a href="https://www.amazon.co.jp/%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E8%B4%88%E7%89%A9%E2%80%95%E4%BA%BA%E9%A1%9E%E3%81%AE%E8%87%B3%E5%AE%9Dei%CF%80-1%E3%82%92%E5%AD%A6%E3%81%B6-%E5%90%89%E7%94%B0-%E6%AD%A6/dp/448601863X">オイラーの贈物</a>」と「<a href="https://www.amazon.co.jp/%E5%9B%B3%E8%A7%A3%E5%85%A5%E9%96%80%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B%E9%AB%98%E6%A0%A1%E6%95%B0%E5%AD%A6%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%81%A8%E4%BB%95%E7%B5%84%E3%81%BF-%E5%B0%8F%E5%B3%B6-%E6%B7%B3%E5%AD%90/dp/4798008575">図解入門よくわかる高校数学の基本と仕組み</a>」などを参考にしています。</p>
+-->
+<!--<p>増えてきたので、学問のリンク集を文系、理系、その他に分けました。--></p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>指数関数</h1>
+<h2>指数関数と底</h2>
+<p>指数関数は\(y=a^x\)となる式のことで、\(a\)を「底（てい）」と言う。英語では底のことを「base」という。</p>
+<p>たとえば、</p>
+<p>\[y=2^x\]</p>
+<P>の時は、2倍ずつどんどん値が増えていく。逆に、</p>
+<p>\[y = \bigg(\frac{1}{4}\bigg)^x\]</p>
+<p>の時は、どんどん値が\(\frac{1}{4}\)になっていく。</p>
+<p>とても大きな増え方をするので指数関数は「驚異的な関数」として知られている。</p>
+<ul>
+<li><a href="http://www.phys.u-ryukyu.ac.jp/~maeno/sizensuugaku2016/lec4.html">指数関数 - 自然科学のための数学I/II（2016年度）- 琉球大学</a></li>
+<li><a href="http://kentiku-kouzou.jp/suugaku-sisuukansuu.html">指数関数とは？1分でわかる意味、公式、底、計算とグラフの関係 - 建築学生が学ぶ「構造力学」</a></li>
+<li><a href="https://www.amazon.co.jp/%E5%9B%B3%E8%A7%A3%E5%85%A5%E9%96%80%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B%E9%AB%98%E6%A0%A1%E6%95%B0%E5%AD%A6%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%81%A8%E4%BB%95%E7%B5%84%E3%81%BF-%E5%B0%8F%E5%B3%B6-%E6%B7%B3%E5%AD%90/dp/4798008575">図解入門よくわかる高校数学の基本と仕組み</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.11.16</p>
+<p>2026.01.31編集</p>
+</div>
+
+<h2>指数法則の拡張</h2>
+<p>指数関数は、\(y=a^x\)という式になります。</p>
+<p>しかしながら、指数であるxがマイナスの場合はどうなるでしょうか。</p>
+<p>yはxの関数であるため、このグラフを書くと、必ずどこかに答えとなる数が存在することになります。</p>
+<p>しかしながら、「aをマイナス回数かける」というのは、あまりに非現実的です。</p>
+<p>しかしながら、xがプラスの時は、xが増えるにしたがってyはa倍されていき、xが減るにしたがって\(\frac{1}{a}\)倍されていきます。</p>
+<p>それならば、マイナスになるに従い、\(\frac{1}{a}\)倍されていくと考えるのが必然的です。</p>
+<p>このように、「都合のいいように指数関数を定義する」ことを、指数関数の拡張といいます。</p>
+<p>また、指数xが分数の場合はどうでしょうか。これを二乗すると、</p>
+<p>\[(a^{\frac{1}{2}})^2=a^{(\frac{1}{2}) \times 2}=a\]</p>
+<p>となります。二乗すればaになるのだから、これを\(\sqrt{a}\)と定義するのです。そして同様に、三乗根、四乗根となっていきます。</p>
+<p>このように、「自然な見た目になるように拡張」していくのです。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%9B%B3%E8%A7%A3%E5%85%A5%E9%96%80%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B%E9%AB%98%E6%A0%A1%E6%95%B0%E5%AD%A6%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%81%A8%E4%BB%95%E7%B5%84%E3%81%BF-%E5%B0%8F%E5%B3%B6-%E6%B7%B3%E5%AD%90/dp/4798008575">図解入門よくわかる高校数学の基本と仕組み</a>が参考になります。）</p>
+
+<h2>指数関数のグラフ</h2>
+<p>以下はgnuplotで描いた\(y = 2^x\)のグラフ。</p>
+<p><img class="images_figure" src="gnuplot_exp.png" alt="2**x"></p>
+<div class="edit_date">
+<p>2026.02.26-27</p>
+</div>
+
+<h1>連分数</h1>
+<h2>連分数</h2>
+<p>連分数とは、分数の分母の中に分数が続いていくような分数のこと。</p>
+<p>\[
+x = a_0+\cfrac{1}{a_1+\cfrac{1}{a_2+\cfrac{1}{a_3+\cfrac{1}{a_4+\cfrac{1}{a_5}}}}}
+\]</p>
+<p>ただし、このように書くのは面倒なため、+記号を下に下げて記述する表記法もある。</p>
+<p>\[
+x=a_0 +\frac{1}{a_1} \lower 0.7em{+} \frac{1}{a_2} \lower 0.7em{+} \frac{1}{a_3} \lower 0.7em{+} \frac{1}{a_4} \lower 0.7em{+} \frac{1}{a_5}
+\]</p>
+<!--<p>ここでは+記号が分母の中に含まれているが、+記号を分母に含めずに下に下げるのも一般的。</p>-->
+<p>また、分子がすべて1である場合、簡略化した記法として、</p>
+<p>\[
+[a_0; a_1, a_2, a_3, a_4, a_5]
+\]</p>
+<p>と表記する。</p>
+<p>（以上は「<a href="https://www.amazon.co.jp/%E4%BB%A3%E6%95%B0%E5%85%A5%E9%96%80-%E7%8F%BE%E4%BB%A3%E6%95%B0%E5%AD%A6%E3%81%B8%E3%81%AE%E5%85%A5%E9%96%80-%E4%B8%8A%E9%87%8E-%E5%81%A5%E7%88%BE/dp/4000068776">現代数学への入門 代数入門 （上野健爾 岩波書店）</a>」を参考に執筆しました。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E9%80%A3%E5%88%86%E6%95%B0">連分数 - Wikipedia</a></li>
+<li><a href="https://memopad.bitter.jp/web/mathjax/TeXSyntax.html">MathJax で利用可能な TeX コマンド（非公式）</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.20-21</p>
+<p>2026.01.31編集</p>
+</div>
+
+<h2>黄金数</h2>
+<p>連分数についての例として、黄金数を挙げる。</p>
+<p>黄金比（黄金数）は、</p>
+<p>\[
+\varphi = \frac{1 + \sqrt{5}}{2}
+\]</p>
+<p>で示される比のことで、二次方程式の\(x^2 - x - 1 = 0\)の解として求められるが、これを</p>
+<p>\[
+x = 1 + \frac{1}{x}
+\]</p>
+<p>と変形する。xについての解は求められる形にはなっておらず、左辺を求めようとすると右辺に全体の式が紛れ込み、xは無限に繰り返される。</p>
+<p>\[
+\varphi = 1+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{\ddots}}}}}
+\]</p>
+<p>これを黄金数の連分数表示と呼ぶ。</p>
+<p>以下はラマヌジャンによる黄金数\(\varphi\)、円周率\(\pi\)、ネイピア数\(e\)の繋がったとても興味深い公式。</p>
+<p>\[
+\cfrac{1}{1 + \cfrac{e^{-2\pi}}{1 + \cfrac{e^{-4\pi}}{1 + \cfrac{e^{-6\pi}}{1 + \cfrac{e^{-8\pi}}{\ddots}}}}} = \big( \sqrt{2 + \varphi} - \varphi \big) e^{2\pi/5}
+\]</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E8%B4%88%E7%89%A9%E2%80%95%E4%BA%BA%E9%A1%9E%E3%81%AE%E8%87%B3%E5%AE%9Dei%CF%80-1%E3%82%92%E5%AD%A6%E3%81%B6-%E5%90%89%E7%94%B0-%E6%AD%A6/dp/448601863X">オイラーの贈物</a>を参考に執筆・引用しました。）</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E9%BB%84%E9%87%91%E6%AF%94">黄金比 - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.21</p>
+</div>
+
+<h1>平方根・無理数</h1>
+<h2>平方根と有理化</h2>
+<p>累乗と一緒にセットで教えられることの多い平方根。たとえば\(\sqrt 2\)は2乗すると2になる数のことを表す。</p>
+<p>たとえば\(\sqrt 2\)は、分数や循環小数にならないために無理数と呼ばれる。</p>
+<p>\[
+\sqrt 2 = 1.41421 \ 35623 \ 73095 \ 04880 \cdots
+\]</p>
+<p>昔はこの「無理数」の存在を認めない数学者（たとえばピタゴラスで、数はすべて比によって表すことのできる有理数であると主張した）が多く、多くの議論の的だった。</p>
+<p>有理化とは、数を無理数から有理数に変換すること。特に、分数の分母に無理数が存在する場合、分母から無理数を取り除くことを「分母の有理化」と呼ぶ。</p>
+<p>\[
+\frac{1}{\sqrt{2}} = \frac{1 \times \sqrt{2}}{\sqrt{2} \times \sqrt{2}} = \frac{\sqrt{2}}{2}
+\]</p>
+<p>後日注記：\(a = b^2\)の時、\(b = \pm \sqrt a\)。平方根は平方した数に対して、その数が根っこに持っている「根」であると考えられる。平方した数を考える上で、その根源となる数があり、それをルートで表現する。</p>
+<p>後日注記：無理数という言葉からは「比率のない数」であると考えてしまいがちだが、実際は「\(\sqrt 2\)などの特別な数との比率でしか表せない数」のことである。\(\sqrt 2\)自体を有理数同士による比率で表すことはできない。この数は\(x^2\)のように二乗して平方した数の根を求めると現れる。同じく無理数の\(\pi\)も、同様にそのような特別な数との比率でしか表せない数である。</p>
+<ul>
+<li><a href="https://juken-mikata.net/how-to/mathematics/rationalizing.html">有理化とは？やり方を分かりやすく解説！練習問題つき｜高校生向け受験応援メディア「受験のミカタ」</a></li>
+<li><a href="https://www.nhk.or.jp/kokokoza/suugaku1/assets/memo/memo_0000004133.pdf">第7回 ルートの有理化 | 数学I | NHK高校講座テレビ学習メモ</a></li>
+<li><a href="https://www.chiba-c.ed.jp/awakou/homepage/sc/club/culture/pc/pc_club/java/java11.htm">平方・平方根の表 - 安房高等学校パソコン部</a></li>
+<li><a href="https://benesse.jp/kyouiku/teikitest/chu/math/math/c00434.html">平方根|有理化とは？|中学数学|定期テスト対策サイト - Benesse</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.02.24</p>
+<p>2026.01.31編集</p>
+<p>2026.02.04編集</p>
+<p>2026.06.02編集</p>
+<p>2026.06.07編集</p>
+<p>2026.06.16編集</p>
+</div>
+
+<h2>平方根とπの連分数展開</h2>
+<p>\(\sqrt{2}\)のような無理数は、有理数の極限として表現できる。以下は連分数による\(\sqrt{2}\)の展開。</p>
+<p>\[
+\sqrt{2} = [1; \overline{2}] = 1+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{\ddots}}}}}}
+\]</p>
+<p>このように、平方根は必ず、循環連分数となる。このことを上手く使うことで、たとえば第6近似の</p>
+<p>\[
+\sqrt{2} \fallingdotseq 1+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2+\cfrac{1}{2}}}}} = \frac{99}{70} = 1.14142857 \cdots
+\]</p>
+<p>を求めるなどして、\(\sqrt{2}\)の近似値を求められる。</p>
+<p>同様に、</p>
+<p>\[
+\sqrt{3} = [1; \overline{1, 2}] = 1+\cfrac{1}{1+\cfrac{1}{2+\cfrac{1}{1+\cfrac{1}{2+\cfrac{1}{1+\cfrac{1}{\ddots}}}}}} \\
+\sqrt{5} = [2; \overline{4}] = 2+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{4+\cfrac{1}{\ddots}}}}}} \\
+\sqrt{7} = [2; \overline{1, 1, 1, 4}] = 2+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{4+\cfrac{1}{1+\cfrac{1}{\ddots}}}}}}
+\]</p>
+<p>となる。</p>
+<p>同様に、\(\pi\)も連分数展開できる。</p>
+<p>\[
+\pi = 3+\cfrac{1^2}{6+\cfrac{3^2}{6+\cfrac{5^2}{6+\cfrac{7^2}{6+\cfrac{9^2}{6+\cfrac{11^2}{\ddots}}}}}} \\
+\frac{4}{\pi} = 1+\cfrac{1^2}{3+\cfrac{2^2}{5+\cfrac{3^2}{7+\cfrac{4^2}{9+\cfrac{5^2}{11+\cfrac{6^2}{\ddots}}}}}}
+\]</p>
+<p>\(\pi\)は超越数であるため、正則連分数展開（分子がすべて1）には規則性はないが、正則でない連分数展開（上記）には規則性があるものがある。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80%E7%AE%97%E6%95%B0%E5%AD%A6-%E9%BB%92%E6%9C%A8-%E5%93%B2%E5%BE%B3/dp/4535785406">入門算数学</a></li>
+<li><a href="https://ikuro-kotaro.sakura.ne.jp/koramu/1591_cf.htm">整数の平方根の連分数 - ikuro's-homepage</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E9%80%A3%E5%88%86%E6%95%B0">連分数 - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.01.31</p>
+</div>
+
+<h2>ルートの近似値の求め方</h2>
+<p>実数\(a\)について、\(a\)を超えない最大の整数\(n\)を\(a\)の整数部分とし、\(a - n\)を\(a\)の小数部分とします。</p>
+<p>ルートの近似値を求めたい場合、実数\(x\)は\(10x\)の整数部分を考えることで、小数第1位までの値を求められます。</p>
+<p>たとえば\(\sqrt{14}\)の近似値は以下のように求められます。</p>
+<p>\[
+10 ^ 2 \times 14 = 1400 \\
+37 ^ 2 = 1369 \\
+38 ^ 2 = 1444 \\
+37 ^ 2 \lt 10 ^ 2 \times 14 \lt 38 ^2 \\
+37 \lt 10 \sqrt{14} \lt 38 \\
+3.7 \lt \sqrt{14} \lt 3.8
+\]</p>
+<p>よって、\(\sqrt{14}\)の小数第1位までの近似値は3.7です。</p>
+<p>同様に、小数第2位までの値は、\(10^2x\)の整数部分を考えることで求められます。</p>
+<p>\[ 3.74 \lt \sqrt{14} \lt 3.75 \]</p>
+<p>なので、\(\sqrt{14}\)の小数第2位までの近似値は3.74です。</p>
+<p>（放送大学「数学再入門 ('07)」を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2026.05.24</p>
+</div>
+
+<h1>対数関数</h1>
+<h2>対数関数</h2>
+<p>対数関数\(c = \log_{a}b\)は「aのc乗でbになる」という意味で、\(a\)を底、\(b\)を真数と呼ぶ。つまり、</p>
+<p>\[c=\log_{a}b \\ a^c=b\]</p>
+<p>を意味する。</p>
+<p>これをやっていると、たとえば「2を何乗すると7になるか」とか、対数でなければ表現できない「そんな数が本当にあるの？」と言うことがある。</p>
+<p>しかしながら、実数であるためグラフのどこかに必ず対応する場所が存在する。</p>
+<p>そのため、logを用いてこの数を表すことができる。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/%E5%9B%B3%E8%A7%A3%E5%85%A5%E9%96%80%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B%E9%AB%98%E6%A0%A1%E6%95%B0%E5%AD%A6%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%81%A8%E4%BB%95%E7%B5%84%E3%81%BF-%E5%B0%8F%E5%B3%B6-%E6%B7%B3%E5%AD%90/dp/4798008575">図解入門よくわかる高校数学の基本と仕組み</a>が参考になります。）</p>
+<ul>
+<li><a href="https://mmsankosho.com/math2-sisukansu-naze-taisuu-toiumonogaarunoka1/">【数Ⅱ指数対数】なぜ対数というものがあるのか？(1)　その仕組みと工学での使い方 | mm参考書</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.11.16編集</p>
+<p>2026.01.31編集</p>
+</div>
+
+<h2>自然対数と常用対数</h2>
+<p>自然対数は\(\log_{e}x\)と書き、自然対数の底であるeのことをネイピア数と言う。</p>
+<p>また、\(\log_{e}x\)は微分すると\(\frac{1}{x}\)になる。\(\log_{e}x\)のことを\(\ln{x}\)とも書く。</p>
+<p>微分方程式や複利計算など、数学の多くの場面でネイピア数eを使うことがある。</p>
+<p>eはπと同様の無限小数が続く無理数である。</p>
+<p>\[
+e = 2.71828 \ 18284 \ 59045 \ 23536 \ \cdots
+\]</p>
+<p>また、10を底とする対数\(\log_{10}x\)のことを常用対数と言う。</p>
+<p>また、指数関数\(e^x\)のことを\(\exp(x)\)と書く。</p>
+<p>以上は以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://atarimae.biz/archives/12731">自然対数・常用対数・二進対数の使い分け。log,ln,lg,expはどういう意味？｜アタリマエ！</a></li>
+<li><a href="https://atarimae.biz/archives/10256">自然対数の底(ネイピア数) e の定義と覚え方。金利とクジの当選確率から分かるその使い道｜アタリマエ！</a></li>
+<li><a href="https://club.informatix.co.jp/?p=2864">ネイピア数とは｜自然対数の底eについて解説 - 空間情報クラブ｜株式会社インフォマティクス</a></li>
+</ul>
+<p><a href="euler.html">オイラー</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.01.31編集</p>
+</div>
+
+<h2>ネイピア数eの定義</h2>
+<p>自然対数の底であるネイピア数eは以下のように定義される。</p>
+<p>\[e = \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + \frac{1}{5!} + \cdots\]</p>
+<p>右辺の数列の項は無限に続き（無限級数）、この総和をeとする。</p>
+<p>n!はnの階乗を表す。</p>
+<p>\[5! = 5 \times 4 \times 3 \times 2 \times 1 = 120\]</p>
+<p>あるいは、以下のようにも定義できる。</p>
+<p>\[e = \lim_{n \to \infty}\bigg(1 + \frac{1}{n}\bigg)^n\]</p>
+<p>円周率πや虚数単位iと同様、ネイピア数eは数学において非常に重要な数である。</p>
+<p>以上は以下の書籍・ページを参考に執筆しました。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%B6%E3%83%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AA%E3%83%BC-%E6%95%B0%E5%AD%A6%E5%A4%A7%E5%9B%B3%E9%91%91-%E3%82%A2%E3%83%B3-%E3%83%AB%E3%83%BC%E3%83%8B%E3%83%BC/dp/4315522546">ザ・ストーリー 数学大図鑑</a></li>
+<li><a href="https://atarimae.biz/archives/10256">自然対数の底(ネイピア数) e の定義と覚え方。金利とクジの当選確率から分かるその使い道｜アタリマエ！</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.22</p>
+</div>
+
+<h2>ボルツマンの原理と統計学</h2>
+<p>統計力学の重要な公式であるエントロピーについてのボルツマンの原理については、<a href="../natural/physics_thermodynamics.html">熱力学</a>を参照のこと。</p>
+<p>また、統計学については<a href="statistic.html">統計</a>も参照のこと。</p>
+
+<h2>logは指数を求める</h2>
+<p>（以下の文章は、logや対数について何も分かっていない、常識のない自分の書いた文章であるため、一般的な良識と比較して間違ったことを教えています。注意してご覧ください。）</p>
+<p>logは難しいと思う方が多いですが、基本的に「指数を求める」ものであると考えれば分かりやすいです。</p>
+<p>\(\log_{10}\)という「約束事」が決められた場合に、その数がどれほどの指数で表すことができるか、という関数が対数関数です。</p>
+
+<h2>対数で複雑な計算をする</h2>
+<p>対数を使うことで、巨大な数に対する複雑な計算が簡単にできます。</p>
+<p>古くから、そろばん（アバカス）やアルゴリズムなどを計算に使っていた歴史上の算術計算で、比較的新しい方法として考え出されたのが、対数を使った計算です。</p>
+<p>対数では、数の掛け算や割り算を、対数の足し算や引き算に変換することができます。</p>
+<p>二つの数の掛け算をしたければ、まず対数表で対数を探し、その対数を足した上で、その結果に対して対数表で真数を探します。割り算ならば対数を引きます。累乗ならば対数を掛けます。平方根のような根の計算であれば対数を割ります。</p>
+<p>この対数による計算は、巨大な数の複雑な計算をする上で計算するのを簡単にしてくれます。対数を使った計算尺などは、コンピュータが生まれた今でもまだ使われています。</p>
+<p>また、対数について、10を底とする常用対数は、コンピュータの登場によってあまり使われなくなりましたが、eを底とする自然対数は今でも多くの科学者の間で使われています。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%82%B6%E3%83%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AA%E3%83%BC-%E6%95%B0%E5%AD%A6%E5%A4%A7%E5%9B%B3%E9%91%91-%E3%82%A2%E3%83%B3-%E3%83%AB%E3%83%BC%E3%83%8B%E3%83%BC/dp/4315522546">ザ・ストーリー 数学大図鑑</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.02.22</p>
+</div>
+
+<h2>1増えると10倍になる</h2>
+<p>対数による数値計算の基本は、「1増えると10倍になる」ということ。5が6になるだけで、数が10倍になる。計算尺においては、1つ目盛りが増えると数が10倍になる。</p>
+<div class="edit_date">
+<p>2023.02.22</p>
+</div>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

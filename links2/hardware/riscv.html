@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>RISC-Vの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ハードウェアの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/hardware_menu.html" class="sideiframe"></iframe>
+</div><h1>RISC-Vの世界観</h1>
+<p>RISC-V CPUの世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>RISC-V</h1>
+<h2>RISC-Vとは</h2>
+<p>RISC-Vは、カリフォルニア大学バークレー校（UCB）によって開発された、オープンソースなISA（命令セットアーキテクチャ）。</p>
+<p>UCBのRISCアーキテクチャとしては五世代目に当たるためV（ファイブ）という名前が名付けられている。</p>
+<p>特徴は、ISAの仕様がオープンソースライセンスで公開され、非営利団体によって管理されていること。</p>
+<p>クローズドの最後の牙城で、Intelが事実上の標準だったISAにおいて、オープンソースの新しいISAとして注目を浴びており、MicrosoftやGoogleなども参加している。</p>
+<ul>
+<li><a href="https://pc.watch.impress.co.jp/docs/column/kaigai/1094808.html">【後藤弘茂のWeekly海外ニュース】海外で急激に盛り上がる新CPU命令アーキテクチャ「RISC-V」  - PC Watch</a></li>
+<li><a href="https://www.uquest.co.jp/embedded/outline/outline16.html">RISC-Vが拓く専用プロセッサの時代 | 組込みの輪郭 | [技術コラム集]組込みの門 | ユークエスト株式会社</a></li>
+<li><a href="https://fukuno.jig.jp/2720">比べてみよう、RISC-VとArm、RISC-V対応かんたんマシン語「asm15r」 #asm #riscv / 福野泰介の一日一創 / Create every day by Taisuke Fukuno</a></li>
+<li><a href="https://www.aps-web.jp/academy/risc-v/590/">RISC-Vの特徴｜ライセンス料不要のアーキテクチャとは - APS</a></li>
+<li><a href="https://www.jasa.or.jp/dl/bj/BJ69_RISC-V.pdf">RISC-V - 組込みシステム技術協会</a></li>
+</ul>
+
+<h2>クロック周波数やマルチコア化には限界がある</h2>
+<p>長い間、Intelの「ムーアの法則」、すなわち「半導体の集積率は18か月で2倍になる」という法則のもとで、爆発的に向上してきたIntel CPUの動作クロック周波数だったが、近年、それが頭打ち（スローダウン）してきた。</p>
+<p>それでもCPUの動作速度を上げるために、Intelなどはマルチコア化を行って速度を向上させようと取り組んできたが、マルチコアには並列処理のできない直列処理の部分が全体の動作速度のボトルネックになる（タスク全体の速度を決めてしまう）という問題がある。</p>
+
+<h2>専用プロセッサ</h2>
+<p>これに対して、業界の大企業からは、汎用的な命令を定めるのではなく、特定の処理に専門化した命令セットを定める、つまり「専用プロセッサ」とすることで、CPUの動作速度を向上させることができないか、という要請があった。</p>
+<p>RISC-Vの命令セットはは、オープンソースで公開されており、ロイヤリティフリーでRISC-Vの実装を製造することができ、また新しく将来性を見据えて設計されており、基本的な命令は最小限で、拡張することを念頭において設計されている。</p>
+<p>RISC-Vの拡張は許されているだけではなく「推奨」されており、それぞれのRISC-VのCPUの製造元が独自に「拡張」することで、専用プロセッサを自由に開発できる。</p>
+
+<h2>LinuxやFreeBSD・NetBSDなどで暫定的対応</h2>
+<p>LinuxやFreeBSD・NetBSDなどでは、RISC-Vに対する（暫定的な）対応を行っている。</p>
+<p>ロイヤリティフリーかつオープンソースであるため、誰でも使用料を払わずに、また契約完了まで待つことなくすぐにRISC-Vプロセッサを製造することができる。</p>
+<p>このため、たとえば大学の研究でLinuxの動くRISC-V CPUを製造した、などという人も居る。</p>
+<ul>
+<li><a href="https://diary.shift-js.info/building-a-riscv-cpu-for-linux/">Linux が動作する RISC-V CPU を自作した (2019 年度 CPU 実験 余興) – やっていく気持ち</a></li>
+</ul>
+<h2>命令セットとしてはMIPSに近い</h2>
+<p>命令セットとしては、MIPSに近いということである。</p>
+<ul>
+<li><a href="http://www.kumikomi.net/fpga/sample/0018/FPGA18_014.pdf">初めてのRISC-Vアーキテクチャ</a></li>
+</ul>
+
+<h2>NOMMU LinuxをRISC-Vエミュレータで動かす</h2>
+<p>以下はRustおよびEmacs Lisp上に作ったRISC-VエミュレータでNOMMU Linuxを動かすという面白い記事。</p>
+<ul>
+<li><a href="https://bokuweb.github.io/undefined/articles/20230523.html">RustでRISC-Vエミュレータを書いてNOMMU Linuxをブラウザで動かした | MaybeUnInit</a></li>
+<li><a href="https://gongo.hatenablog.com/entry/2025/12/19/000000">Emacs Lisp で RISC-V エミュレータを書いて NOMMU Linux を Emacs 上で動かしました - Thanks Driven Life</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.21</p>
+</div>
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

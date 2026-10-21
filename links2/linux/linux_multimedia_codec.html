@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux マルチメディア（コーデック） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux マルチメディア（コーデック）</h1>
+<p>Linuxのマルチメディア（コーデック）に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>動画・音声視聴環境</h1>
+<h2>FFmpeg/libavcodec</h2>
+<p>オープンソースの動画・音声再生ソフトウェア（コーデック）。Xine、VLC、MPlayerなどで使用されている。</p>
+<p>libavcodecは音声処理ライブラリ（コーデック）。</p>
+<p>さまざまなファイル形式、画像形式、コーデック、プロトコル、入出力デバイスなど、たくさんの形式に対応している。主にAVI, QuickTime, MP3, MPEG-4, Ogg, WAVなど、他にも膨大な形式をサポートしている。</p>
+<p>ffmpegはさまざまなことを行える汎用コマンドとしても優秀で、連番ファイルから動画を作成することもできる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FFmpeg">FFmpeg - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Libavcodec">libavcodec - Wikipedia</a></li>
+<li><a href="https://qiita.com/hotta_hideyuki/items/51326c2ca9fe88eef482">Linux設定 - Qiita</a> - ffmpegの説明もある。</li>
+</ul>
+
+<h2>Ogg (Vorbis + Theora) & FLAC</h2>
+<p>パテントフリーのマルチメディア・フォーマット。オープン陣営として普及を目指しているがなかなか上手く行っていない。</p>
+<p>Oggのコーデックには、音声コーデックのVorbisと動画コーデックのTheoraがあり、HTML5で再生することもできる。Xiph.Org Foundationによって開発されている。</p>
+<p>また、FLACという劣化のない可逆圧縮の音声ファイルフォーマットもある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ogg">Ogg - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Vorbis">Vorbis - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Theora">Theora - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/FLAC">FLAC - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Xiph.Org_Foundation">Xiph.Org Foundation - Wikipedia</a></li>
+</ul>
+
+<h2>Adobe Flash（Flash Player）/Gnash</h2>
+<p>Adobe FlashとFlash Playerは昔事実上の標準だった動画・アニメーション環境だが、最近は落ち目になっている。オープンソースの代替製品はあまり存在せず、GNUが一時期頑張ってフリーソフトウェア版のGnashを開発していた。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gnash">Gnash - Wikipedia</a></li>
+</ul>
+<p><a href="../art/flash.html">FLASH</a>も参照のこと。</p>
+
+<h2>HTML5でのビデオ再生</h2>
+<p>昔はLinuxでビデオや音楽を再生するのは面倒でしたが、今はHTML5の普及などがあり、YouTubeの動画や音楽なども、簡単にLinuxで楽しむことが出来ます。</p>
+<p>僕は、FirefoxやGoogle Chromeなどを使って、YouTubeの音楽を日常的に楽しんでいます。</p>
+<p>Linuxでも、Windowsに全く劣らないレベルで高品質な動画や音声を再生出来ます。Fedoraなら、初期インストール状態で、すぐに楽しめます。</p>
+<p>特に、今の時代はmp4ファイルを&lt;video&gt;に埋め込んで使うのが常套手段です。Ogg Theora（ogvでTheora + Vorbis）に対応する場合もあるようですが、今ではmp4（H.264 + AAC）やWebM（VP8 + Vorbis）が標準的であるように見えます。</p>
+<p>FLASHなどは一般的に使われなくなりました。Adobe Flashもサポートを2020年に打ち切る計画です。</p>
+<ul>
+<li><a href="https://www.plusdesign.co.jp/blog/?p=8213">HTML5のvideoタグを使った動画再生に関するまとめ｜プラカンブログ | WEB制作会社プラスデザインカンパニー</a></li>
+<li><a href="https://so-zou.jp/web-app/tech/html/element/multimedia/video/">video要素による動画の再生方法 | HTML解説</a></li>
+<li><a href="https://www.tagindex.com/html5/embed/video.html">HTML5/埋め込み/video要素 プラグインを使わずに動画を再生する - TAG index</a></li>
+</ul>
+
+
+<h2>DVDの再生はできない</h2>
+<p>DVDの再生はLinuxではできません。CSSを解除しなければならないからです。CSSを自分の責任で解除したい方は、検索して自己責任で導入すればと思います。</p>
+<p>なぜできる情報が出回っているのに違法なのかは以下のようなページを見れば分かる。そもそもLinuxではDVDは見ない。YouTubeだけを楽しめば良い。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Content_Scramble_System">Content Scramble System - Wikipedia</a></li>
+<li><a href="http://xtc.bz/article/click2003-10dvd.html">音楽配信メモ - なんでDVDコピーは「違法」なの!?（日経クリック 2003年10月号）</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

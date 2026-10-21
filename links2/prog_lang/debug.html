@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>デバッグ（gdb）関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>デバッグ（gdb）の世界観</h1>
+<p>デバッグ（gdb）に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>デバッガ</h1>
+<h2>デバッガは確認のために使う</h2>
+<p>デバッガは、確認のために使います。確認とは、内部データの確認のことです。</p>
+<p>Webブラウザを作る際、HTMLを解析して内部にDOMツリーを作ります。コンパイラを作る際も、構文解析器がトークンを葉とするようなパースツリーを内部に作ります。</p>
+<p>しかしながら、プログラムにバグがあって、こうした内部データがきちんと作られていなかった場合であっても、デバッガがなければ、それを確認する手段がありません。</p>
+<p>デバッガは、このような時に、内部データが「今どのような値になっているか」を見ることができます。</p>
+<p>また、デバッガは、プログラムの途中までを実行したり、ステップ実行でひとつひとつインタラクティブに実行することができます。「そこまで実行して、今のデータはどういう値になっているか」を知ることができます。</p>
+<p>デバッガは、簡単なプログラムでは使うことがないかもしれませんが、高度なアプリケーションになってくると重要なソフトウェアです。</p>
+<p>コマンドラインで使えるデバッガとしてGNUのgdbがあります。gccに-gオプションをつけて、デバッグ情報を追加したバイナリの動作を追跡・確認できます。</p>
+<p>コマンドラインでない場合は、IDE（統合開発環境）についているデバッガが使えます。オープンソースのEclipseや、ジェットブレインズの製品、あるいはVisual StudioやVS-Codeなどでもデバッグ機能があります。特にジェットブレインズの製品は使いやすくて、デバッガを使った開発におすすめです。またGoogle ChromeやMozilla FirefoxのようなWebブラウザには、JavaScriptのデバッグ機能があります。</p>
+
+<h2>gdb</h2>
+<p>GNUによるデバッガ。</p>
+<p>基本的に、gccに-gオプションをつけてバイナリをコンパイルする。警告オプションをすべて有効にする-Wall、最適化を行わない-O0オプションを付ける。</p>
+<pre>
+gcc -g -Wall -O0 -o hoge hoge.c
+</pre>
+<p>マクロを使えるようにするために-g3としてもよい。</p>
+<p>そして、プログラム名を指定してgdbを実行する。</p>
+<pre>
+gdb ./hoge
+</pre>
+<p>そして、各種コマンドを実行する。</p>
+<p>たとえば、bでブレークポイントを設定、runで実行、attachで実行中のプログラムのデバッグ、p 変数名で変数の値を表示、setで変数の値を書き換える、nでステップ実行、sで関数の中までステップ実行、cで次のブレークポイントまでを実行、などができる。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">コマンド</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>b 関数名</td><td>関数にブレークポイントを設定する。</td>
+</tr>
+<tr>
+<td>b ファイル名:行数</td><td>ファイルの中の特定の行にブレークポイントを設定する。</td>
+</tr>
+<tr>
+<td>i b</td><td>ブレークポイントを一覧表示する。</td>
+</tr>
+<tr>
+<td>d no</td><td>ブレークポイントを削除する。</td>
+</tr>
+<tr>
+<td>run</td><td>実行する。</td>
+</tr>
+<tr>
+<td>attach pid</td><td>実行中のプログラムをデバッグする。</td>
+</tr>
+<tr>
+<td>p 変数名</td><td>変数の値を表示する。おそらく最もよく使うコマンド。<br>構造体のメンバはs.mで要素を、ポインタは*pで値を見れる。</td>
+</tr>
+<!--
+<tr>
+<td>p 変数名=-1</td><td>変数の値を書き換える。</td>
+</tr>
+-->
+<tr>
+<td>set 書き込み先=式</td><td>変数の値を書き換える。</td>
+</tr>
+<tr>
+<td>n</td><td>ステップ実行する。関数には入らない。</td>
+</tr>
+<tr>
+<td>s</td><td>関数の中までステップ実行する。</td>
+</tr>
+<tr>
+<td>c</td><td>次のブレークポイントまでを実行する。</td>
+</tr>
+<tr>
+<td>f</td><td>関数を抜けるまでを実行する。</td>
+</tr>
+<tr>
+<td>u</td><td>ループを抜けるまでを実行する。</td>
+</tr>
+<tr>
+<td>where</td><td>現在どこを実行中かを表示する。</td>
+</tr>
+<tr>
+<td>bt</td><td>バックトレース（関数の呼び出し経路を表示）。</td>
+</tr>
+<tr>
+<td>l</td><td>その時点の関数ブロックのソースコードを表示する。</td>
+</tr>
+<tr>
+<td>何も打たずにリターン</td><td>直前のコマンドをもう一度実行する。</td>
+</tr>
+</table>
+<p>また、終了はcでプログラムを最後まで実行した上でqとする。</p>
+<div class="edit_date">
+<p>2023.02.05編集</p>
+</div>
+
+<h2>gdbリンク集</h2>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNU%E3%83%87%E3%83%90%E3%83%83%E3%82%AC">GNUデバッガ - Wikipedia</a></li>
+<li><a href="https://qiita.com/ShikiSumiya/items/a08363db88f21c81d351">はじめてのgdb - Qiita</a></li>
+<li><a href="http://www.ysr.net.it-chiba.ac.jp/data/gdb.html">gdbの使い方 - 千葉工業大学 情報科学部 情報ネットワーク学科 屋代 研究室 データライブラリ</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb1.html">gcc+gdbによるプログラムのデバッグ 第1回 ステップ実行、変数の操作、ブレークポイント - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb2.html">gcc+gdbによるプログラムのデバッグ 第2回 変数の監視、バックトレース、その他のコマンド - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb3.html">gcc+gdbによるプログラムのデバッグ 第3回 gdbの便利な機能、デバッグの例 - RAT Portal Site</a></li>
+<li><a href="http://d.hatena.ne.jp/Watson/20100318/1268887029">gdbコマンド メモ - Watsonのメモ</a></li>
+<li><a href="http://uguisu.skr.jp/Windows/gdb.html">gdb の使い方・デバッグ方法まとめ - ネットの基礎知識＆Windows/Linuxの快適術 - 何もないから何かみつかる</a></li>
+<li><a href="http://d.hatena.ne.jp/shibason/20090624/1245840061">GDBデバッギング覚え書き - しばそんノート</a></li>
+<li><a href="http://akito.wiki.fc2.com/wiki/gdb">gdb - 仕事のメモ</a></li>
+</ul>
+<p>また、以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p>物凄いマニュアルが以下にあります。</p>
+<ul>
+<li><a href="http://sourceware.org/gdb/current/onlinedocs/gdb.html">Debugging with GDB</a></li>
+<li><a href="http://www.asahi-net.or.jp/~wg5k-ickw/html/online/gdb-5.0/gdb-ja_toc.html">Debugging with GDB(日本語訳)</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/GNU_gdb/man1/gdb.1.html">man gdb</a></li>
+</ul>
+
+<h1>その他のソフトウェア</h1>
+<h2>Eclipseのデバッグ機能</h2>
+<p>オープンソースのIDEであるEclipseでもブレークポイントを設定したデバッグが可能です。<a href="eclipse.html">Eclipse</a>を参照のこと。</p>
+
+<h2>RubyMineとPyCharm</h2>
+<p>Ruby on Railsの開発にはジェットブレインズ社のRubyMine、Pythonの開発には同社のPyCharmがおすすめです。</p>
+<p>たとえば、関数やクラス名から、その宣言へとジャンプできますし、コンソールで対話的にコードを実行したり、ブレークポイントを設定して、ある特定の場所で変数の値がどうなっているかを知ることができます。</p>
+<p><a href="intellij.html">IntelliJ IDEA</a>を参照のこと。</p>
+
+<h2>HTML, CSS, JavaScript</h2>
+<p>HTML, CSS, JavaScriptの開発なら、Google ChromeやMozilla Firefoxの検証機能を使いましょう。</p>
+<p><a href="../linux/mozilla_firefox.html">Mozilla Firefox</a>や<a href="css.html">CSS</a>や<a href="javascript_tools.html">JavaScriptのツール</a>も参照のこと。</p>
+
+<h2>VS-Code</h2>
+<p>また、マイクロソフト社のオープンソーステキストエディタVS-Codeでも、デバッグ機能を使うことができます。</p>
+<p><a href="../windows_pc/vscode.html">VS-Code</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>「何がどこで実行中か」を見ながら作る</h2>
+<p>ある意味、プログラムの基本とは、「何がどこで実行中か」ということがポイントだと思います。</p>
+<p>いつ、そのプログラムがどこで何を実行しているのか、それが分かると、たとえばループの条件判断に関数を入れ込むなど、といった荒業でプログラムを書くことができます。</p>
+
+<h2>バグのないプログラム</h2>
+<p><a href="debug2.html">バグのないプログラム</a>を参照のこと。</p>
+
+<h1>printfデバッグとトレースログ</h1>
+<h2>マルチスレッドとデバッグ</h2>
+<p>コマンドラインの対話的プログラムの場合、デバッグ用のビルドとリリース用のビルドを分けることで、たとえばgccではデバッグ情報を付加してコンパイルすることで、gdbなどのデバッガから、ブレークポイント（中断地点）まで途中まで実行したり、コマンドでステップ実行を繰り返したり、実行時のそれぞれのポイントの変数などの情報を追跡したりすることができる。</p>
+<p>しかしながら、デーモンやサーブレット、あるいはマルチスレッドを用いた非対話型のプログラムでは、こうしたデバッガとの連携や、追跡やステップ実行が困難な時がある。</p>
+<p>こうした時は、要所要所に「printステートメント」を挿入し、printf()で変数の内容を表示する「printf()デバッグ」が効果を発揮する。</p>
+<p>Javaの場合、AspectJによるアスペクトを使うことで、複数のメソッドの実行の前後に、適切なステートメント（たとえばprintln()）を実行するようにすることもできる。</p>
+<p>また、C++のテンプレートには、違った意味でのデバッグの難しさが存在する。コードがコンパイル時点で冗長に生成されるため、デバッグが難しい（エラーメッセージも役に立たない）だけではなく、プログラムのサイズの肥大化にもつながる。JavaやC#にはもともとテンプレートは無かったが、最近はジェネリクスが導入されている。</p>
+<p>（<a href="https://www.amazon.co.jp/Reading-%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA%E6%8A%80%E6%B3%95-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9%E7%89%88-Diomidis-Spinellis/dp/4839956693">Code Reading ~オープンソースから学ぶソフトウェア開発技法~ (プレミアムブックス版)</a>を参考にしています。多くは自分で執筆しました。）</p>
+
+<h2>トレースログ</h2>
+<p>なんらかの理由でgdbや統合開発環境のデバッガによる対話的なデバッグが使えない場合（たとえばサーバーアプリケーション）、トレースログを吐き出すことでバグの原因を突き止めることができる場合があります。</p>
+<p>トレースログとは、プログラムの動きを追跡（トレース）した結果を記録するログのことです。</p>
+<p>注意点は、本番環境でトレースログを吐き出さないようにすること。本番環境でトレースログを取るのはご法度です。if (DEBUG) { }や#ifdef DEBUG ～ #endifのような形で、必ず本番環境ではトレースログの記録が無効化されるようにしておきましょう。#ifdef DEBUG ～ #endifとした場合は、gcc -DDEBUGとすればマクロが有効になります。</p>
+<p>また、トレースログには大量に情報が吐き出されることが一般的です。その中から具体的なバグの所在を見つけるのは難しいかもしれません。ですが、情報は多いに越したことはありません。原則として、ログに吐き出す内容には、できるだけ詳細な内容を吐き出すようにしましょう。</p>
+<ul>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/0801/08/news128_4.html">入門から実践までJavaで学べる「ログ」の常識：プログラマーの常識をJavaで身につける（10）（4/4 ページ） - ＠IT</a></li>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?gcc">gccコマンドの使い方: UNIX/Linuxの部屋</a></li>
+<li><a href="https://www.rapidtables.org/ja/code/linux/gcc/gcc-d.html">gcc-Dオプションフラグ - RapidTables</a></li>
+</ul>
+<p><a href="c_preprocessor.html">C言語（プリプロセッサとインラインアセンブラ）</a>も参照のこと。</p>
+
+<h2>常に全プロセスのメモリの内容を画面に出力するデバッグターミナル</h2>
+<p>僕が思うに、常にOSの全プロセスのメモリの内容を、画面に出力し続ける、デバッグターミナルを作ってはどうかと思う。</p>
+<p>プログラムをコンパイルする際に、デバッグ情報に加えて、今のメモリの内容を出力することができるような情報を付加し、OSがプログラムを実行した際に、全プログラムについて、メモリの中に格納されているデータの変数値などを常に表示し、更新する。</p>
+<p>これは、一部のIDE（統合開発環境）では、変数の値を一覧して表示する機能があるが、OSとコンパイラのレベルで、今稼働しているすべてのプログラムのデータ情報を表示し続けるのである。</p>
+<p>また、できることなら、そのデータの変更されていくログ情報もともに表示するオプションがあってもいいだろう。</p>
+<p>これはバグを見つけるためのデバッグに有効であるだけではなく、今稼働しているシステムが果たして正常に働いているのかということを確認する際にも有効だと思う。「システム管理者の誰もが欲しい機能」ではないかと思う次第だ。</p>
+<p>そして、この機能を作るのは原理的に簡単である。コンパイラとOSによって、変数値が変更された時に、ひとつ処理を介入して、その値をカーネルに通知するようなコードをマクロ的に追加し、その通知された内容をユーザープロセスが取得できるようなシステムコールがあればいい。そんなに実現の難しい仕組みではない。ただしパフォーマンスは遅くなるので、リリースする際には無効にするような、デバッグ用のオプション的機能としてつけるべきである。</p>
+
+<h1>言語別のデバッグに関する機能ピックアップ</h1>
+<h2>Pythonのassert文</h2>
+<p>Pythonには、assert文という、デバッグに使える専用の特殊な構文があります。</p>
+<p>assert文は、組み込み定数__debug__がTrueである時にだけ有効になります。assert文は、与えられた条件式を評価して、もしTrueでなかった場合に例外AssertionErrorを吐きます。</p>
+<p>これにより、必ずTrueになるはずの条件式が、そうなっていなかった場合を早く検知することができます。</p>
+<ul>
+<li><a href="https://www.tech-teacher.jp/blog/python-assert/">Pythonのassertをマスターしよう！基礎から具体例まで | TechTeacher Blog</a></li>
+<li><a href="https://codezine.jp/article/detail/12179">Pythonで本当に役立つ機能「アサーション」の使い方を解説！『Pythonトリック』から：CodeZine（コードジン）</a></li>
+</ul>
+<p><a href="python.html">Python</a>も参照のこと。</p>
+
+<h2>Rubyのpとppメソッド、logger</h2>
+<p>また、Rubyでデバッグ用に変数の内容を詳細に出力（ダンプ）したい場合は、pメソッドを使うことができます。</p>
+<p>これとは別に、Rubyにはppメソッドがあり、より見やすい形でダンプしてくれます。</p>
+<p>また、loggerを使うことで、変数の値をログに記録することができます。</p>
+<ul>
+<li><a href="https://www.sejuku.net/blog/21610">できるRubyプログラマになるためのデバッグ手法7選 | 侍エンジニアブログ</a></li>
+</ul>
+<p><a href="ruby.html">Ruby</a>も参照のこと。</p>
+
+<h2>PHPのvar_dump()関数</h2>
+<p>また、PHPにもvar_dump()関数があり、変数の値をダンプして詳細に出力できます。</p>
+<p><a href="php.html">PHP</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>GNUツールチェイン</h2>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>も参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>GDB</h2>
+<p>GDB</p>
+<ul>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb1.html">gcc+gdbによるプログラムのデバッグ 第1回 ステップ実行、変数の操作、ブレークポイント - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb2.html">gcc+gdbによるプログラムのデバッグ 第2回 変数の監視、バックトレース、その他のコマンド - RAT Portal Site</a></li>
+<li><a href="https://rat.cis.k.hosei.ac.jp/article/devel/debugongccgdb3.html">gcc+gdbによるプログラムのデバッグ 第3回 gdbの便利な機能、デバッグの例 - RAT Portal Site</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

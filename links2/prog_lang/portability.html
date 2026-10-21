@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>移植性の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div><h1>移植性の世界観</h1>
+<p>移植性の世界観です。<a href="../hardware/cpu_arch.html">CPUアーキテクチャ</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>UNIXと移植性</h1>
+
+<h2>UNIXと多種アーキテクチャとネットワーク</h2>
+<p>C言語を用いてさまざまなCPUアーキテクチャに移植されたUNIXでは、特にネットワークを用いた際に、共通のプロトコルやインターフェースを用いて、異なるCPUアーキテクチャをゆるやかに繋ぐことができる。</p>
+<p>たとえば、telnetでUNIXマシンにリモートログインしたり、NFSでネットワーク上のファイルシステムボリュームをマウントする際に、そのマシンがIntelで動いているのか、Alphaで動いているのか、MIPSで動いているのか、意識する必要はない。</p>
+<p>もちろん、Intelマシン上でローカルで実行できるのは、Intel x86の機械語で記述されたバイナリに限られる。だが、ネットワークでUNIXを使う際、このように「ゆるやかに各マシンをつなげる」ことができる。</p>
+<p><a href="../hardware/cpu_arch.html">CPUアーキテクチャ</a>や<a href="../unix/unix.html">UNIX</a>を参照のこと。</p>
+
+<h2>UNIXは移植性が高い</h2>
+<p>上に、「UNIXはさまざまなCPUアーキテクチャに移植されている」という話をしましたが、LinuxやNetBSDなどはカーネルとコンパイラがさまざまなCPUアーキテクチャに対応しており、移植性が高いことで知られます。</p>
+<p>そもそも、UNIXはC言語というアセンブリ言語よりも高水準のプログラミング言語で書かれたOSであり、機械語の命令に依存するアセンブリ言語ではなく機械語に翻訳されるC言語で書かれている点から、移植性が高いことで知られます。</p>
+<p>カーネルなどの中の一部のコードはアセンブリ言語やアーキテクチャに依存したC言語のコード（Linuxソースツリーのarch以下にある）など、CPUごとに異なるコードで書かれていますが、ユーザーランドなどのC言語で書かれた部分（の中でもアーキテクチャに依存しない部分）は、コンパイラが対応していれば再コンパイルすることで、別のCPUアーキテクチャ向けの機械語を吐くことができます。（バイナリをそのままでは動かない。コンパイルし直す必要がある。）</p>
+<p>Intelと密接に結びついたWindowsを使うのではなく、Linuxやその他のUNIX互換OSを使う場合、必ずしもIntelアーキテクチャのCPUを選ぶ必要はありません。</p>
+<p>しかしながら、このためには、多くの努力が必要です。ユーザーランドのUNIXツールなどは、C言語などで書かれている限り、再コンパイルだけで動作することが多いですが、問題はカーネルです。カーネルだけは、CPUごとにアーキテクチャ依存のコードを書かなければいけません。また、libcやGCCなどのコンパイラ・ライブラリも対応している必要があります。</p>
+<p>ただし、UNIXの標準APIを仕様としているため、UNIXのシステムコールなどのカーネルのAPIそのものはどのCPUアーキテクチャでも変わりません。「APIさえ同じなら、再コンパイルでどの対応CPUでもプログラムが動く」というのがUNIXの特徴です。</p>
+<p>たとえば、PowerPCやARM、MIPS、IBMのメインフレーム（IBM System z）など、特にエンタープライズシステム向けのアーキテクチャに、Linuxは広く対応しています。これも、そのアーキテクチャでLinuxを動かしたいという「ハッカーたちの情熱」が作り上げたものです。</p>
+<p>こうしたマイナーなCPUアーキテクチャは、メジャーなLinuxディストリビューションではサポートされない傾向にあります。それでも、Debianでは多くのCPUアーキテクチャに対応しています。また、Gentoo Linuxはソースベースであり、その環境でビルドするため、動くかどうかは別として多くのCPUアーキテクチャ向けのパッケージにあらかじめ対応しやすいパッケージ管理システムとなっています。</p>
+<p>また、Linux以外を見ると、NetBSDがとても多くのCPUアーキテクチャに対応しています。マイナーなCPUでは（もしその環境向けの専用OSを使わないのであれば）NetBSDを使うことで、UNIX系のシステムをそのアーキテクチャで実行できるでしょう。NetBSDが多くのアーキテクチャに対応しているのは、上に書いた「ネットワークで緩やかにつながる」というメリットという意味でも、UNIX界において良いことです。「Linuxでは動くアプリケーションをマイナーなCPUで動かしたい」となった時、NetBSDがその解決策になるでしょう。</p>
+<p>後日注記：このように、UNIXは早い段階から移植性を重視しており、異なるCPUアーキテクチャにおいても、APIに基づく再コンパイルやネットワークを通じて、移植や再利用、連携が可能である。またカーネルがLinuxである必要は必ずしもなく、POSIX準拠のAPIしか使わないアプリケーションであれば、NetBSDでも構わない。もちろん、Linuxカーネルが対応している限りにおいては、Linux固有のAPIを使うこともできる。</p>
+<p><a href="../linux/linux_kernel.html">Linuxカーネル</a>や<a href="../unix/netbsd.html">NetBSD</a>も参照のこと。</p>
+
+<h2>GCCのバックエンド</h2>
+<p>GCCでは、バックエンド部分だけを開発することで、新しいCPU向けにC/C++などのコードをコンパイルできます。</p>
+<p>Intel CPUからPowerPC向けのバイナリを吐く（クロスコンパイル）も可能です。</p>
+<p><a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>を参照のこと。</p>
+
+<h1>Javaと移植性</h1>
+<h2>Javaはさらに移植性が高い</h2>
+<p>Javaは仮想マシン（VM）でバイトコードが動く言語として有名ですが、UNIXよりもさらに移植性が高いとされています。</p>
+<p>UNIXとC言語では、別のCPUに移植する際に、再コンパイルする必要があります。また、プラットフォーム依存性が強く、もしWindows依存の機能を使っていたとしたら、それをUNIXやLinuxに移植することは困難を極めます（事実上不可能であることもあります）。</p>
+<p>ですが、Javaは違います。Java VM上でバイトコードが動くため、一度バイトコードにコンパイルしたら、どんなCPUであっても再コンパイルは必要ありません。あるCPUでコンパイルしたコードを、ほかのCPUでそのまま実行できます。プラットフォーム依存性は、すべてVMが吸収してくれます。</p>
+<p>また、Javaのクラスライブラリだけを使うのであれば、C/C++にあるような「プラットフォーム固有のAPI」がありません。特に、SwingはPure Javaで書かれたウィジェットツールキットであり、OSネイティブなルック・フィールと異なる場合もありますが（最近ではWindowsやMacの見た目をエミュレートするようにはなっている）、どれかのOSで動くSwingのGUIプログラムが、別のOSでも同じように動きます。</p>
+<p>これは、たとえばWindowsで動くJavaアプリケーションは、MacやLinuxでも同様に動くということを意味しています。</p>
+<p>このような特徴が活きるのは、クライアントサイドのデスクトップPCだけではありません。特にモバイルなどに関して言えば、パソコンで開発したJava MEアプリケーションがそのまま組み込みのモバイル端末で動きます。モバイルのOSでもJavaが動く必要はありますし、Java MEはJava SEの小さなサブセットであり、Java SEよりも少ない機能しか使えないにせよ、デスクトップPCで開発したアプリケーションがモバイルでもそのまま動くという特徴は強力です。</p>
+<p>GCCなどでもクロスコンパイルして「Intel CPUで動くC言語のコードのバイナリをPowerPC向けに吐き出す」といったことはできますが、Javaは再コンパイルが必要ないため、より移植性が高いと言えるでしょう。</p>
+<p>また、モバイルだけではなく、エンタープライズでも同様です。大規模なデータセンターのサーバーや、メインフレームには、Intelアーキテクチャではない、独自のCPUアーキテクチャを採用したものもあります。そのようなCPUには、Intelには備わっていない別の規格の高度な技術も存在するでしょう。たとえば、SunのSPARCアーキテクチャ上でJavaを動かす場合にも、このような「再コンパイルの必要がない移植性」は大きな効果をもたらします。</p>
+<p>LinuxでいうDockerのようなコンテナ型仮想化システムとJava EEにアーキテクチャ上の共通点が多くあるのも、このような「エンタープライズの開発を容易にする」という性質があるかもしれません。分散環境におけるEJBなども同様です。特にIntelとメインフレームはまったく異なるシステムですが、Javaを使うことで両者の世界を繋げることができます。</p>
+<p><a href="java.html">Java</a>や<a href="java_gui_swing.html">Swing</a>や<a href="java_embedded.html">Java組み込み</a>や<a href="java_servlet.html">Javaサーブレット</a>や<a href="java_servlet_appserver.html">Javaアプリケーションサーバ</a>や<a href="java_servlet_javabeans.html">JavaBeans</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>C言語のプリプロセッサ</h2>
+<p>C言語のプリプロセッサを使ってWindowsやLinux向けのコードを分ける方法については、<a href="c_preprocessor.html">C言語（プリプロセッサとインラインアセンブラ）</a>を参照のこと。</p>
+
+<h2>Autotools</h2>
+<p>Autotoolsについては、<a href="../linux/autotools.html">Autotools</a>を参照のこと。</p>
+
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Autotools関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Autotoolsの世界観</h1>
+<p>Autotoolsに関する世界観です。<a href="make.html">Make</a>や<a href="gnu_toolchain.html">GNUツールチェイン</a>や<a href="linux_unix.html">UNIXシステム管理</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Autotools</h1>
+<h2>Autoconf/Automakeとは</h2>
+<p>Autoconfは移植性を高めるためのツールで、プログラムをビルドするために使うconfigureというシェルスクリプトを自動作成する。</p>
+<p><!--[過去の日記]--><a href="../../diary/2017.10.30.html">2017-10-30</a>より。</p>
+<blockquote class="inyou2">
+<p>Autoconfは、設定用のシェルスクリプトのconfigureを自動作成する。</p>
+<p>Automakeは、Makefileを自動作成する。</p>
+<p>UNIX由来のツールしか使っていないので、追加インストールなしであらゆるパッケージのビルドを実行出来る。</p>
+</blockquote>
+<p>詳細は以下をご覧あれ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Autotools">Autotools - Wikipedia</a></li>
+</ul>
+
+<h2>configureの意味</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>configureを使うだけでは、移植性は何も上がっていない。configureを使って自動的に生成されるCのヘッダファイルなどの情報に基づいて、プログラマがコードを書く必要がある。</p>
+<p>configureはシステムのあらゆるプラットフォーム固有の情報をスキャンして調べ上げた上で、その情報をCのヘッダファイルなどに自動生成する。</p>
+<p>この情報を使って、プログラマがさまざまなプラットフォームに対応するコードを書くことで、移植性を高めることができる。</p>
+
+<h2>Automakeで楽にMakefileを作る</h2>
+<p>（以下の文章は、Autotoolsについて何も分かっていない、常識のない自分の書いた文章であるため、一般的な良識と比較して間違ったことを教えています。注意してご覧ください。）</p>
+<p>Autoconfには補助ツールとしてAutomakeとlibtoolがある。Automakeを使うと、簡単な記述でMakefileを自動作成してくれる。</p>
+<p>Automakeはさまざまな変数の使い方などを理解するのが難しいが、慣れるとMakefileを書く必要がなく、ソースファイルをディレクトリごとに把握できて、保守性が高い。XOrg Serverのソースツリーなどを見ていると、各ディレクトリにそのディレクトリの中にあるソースファイルの一覧のような内容を記したMakefile.amがある。それらについての詳細は、以下のページを参照のこと。たくさんの必要なファイルとたくさんの必要な入力・実行作業があって最初は戸惑うかもしれない。<!--昔は、これでも楽だった。--></p>
+<ul>
+<li><a href="http://www.02.246.ne.jp/~torutk/cxx/automake/automake.html">Automakeでmakeする - Object-Oriented & Java maneuver 別室</a></li>
+<li><a href="http://www.jaist.ac.jp/~kiyoshiy/memo/autoconf.html">即席GNU (autoconf & automake) - Kiyoshiy</a></li>
+</ul>
+
+<h2>Autotoolsの一連の作業</h2>
+<p>Automakeでは、ディレクトリ階層ごと（それぞれのサブディレクトリごと）にMakefile.amを配置し、プログラムバイナリ名やソースファイル名を記述する。</p>
+<p>autoscanコマンドを実行してスキャンし、雛型のconfigure.scanを自動的に吐き出して、そのファイル名をconfigure.acに変更し、編集する。</p>
+<p>autoheaderとaclocalを実行して、config.h.in（config.hの雛型）やaclocal.m4を吐き出す。</p>
+<p>automakeを実行して、Makefile.inを吐き出す。</p>
+<p>最後にautoconfを実行して、configureスクリプトを吐き出す。</p>
+<p>またlibtoolを使うことで共有ライブラリの移植性を高められる。なんとWindowsのDLLにすら対応可能である。</p>
+<p>詳しくは以下のページを参照のこと。</p>
+<ul>
+<li><a href="http://www.02.246.ne.jp/~torutk/cxx/automake/automake.html">Automakeでmakeする - Object-Oriented & Java maneuver 別室</a></li>
+<li><a href="http://www.jaist.ac.jp/~kiyoshiy/memo/autoconf.html">即席GNU (autoconf & automake) - Kiyoshiy</a></li>
+</ul>
+
+<h2>CMake</h2>
+<p>CMakeはAutotoolsに置き換わる新しいビルドシステム。</p>
+<p><a href="cmake.html">CMake</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>移植性</h2>
+<p><a href="../prog_lang/portability.html">移植性</a>も参照のこと。</p>
+
+<h2>Make</h2>
+<p><a href="make.html">Make</a>を参照のこと。</p>
+
+<h2>ソースからのインストール</h2>
+<p><a href="linux_src_install.html">ソースからのインストール</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+
+<h2>Autotools</h2>
+<p>Autotools</p>
+<ul>
+<li><a href="http://www.02.246.ne.jp/~torutk/cxx/automake/automake.html">Automakeでmakeする - Object-Oriented & Java maneuver 別室</a></li>
+<li><a href="http://loto.sourceforge.net/feram/Autotools-memo.ja.html">Autotoolsについてのメモ - Takeshi Nishimatsu Brand Free Software</a></li>
+<li><a href="http://tamaobject.hatenablog.com/entry/2013/08/01/165119">Autotools ( automake, autoconf, libtool ) 使い方まとめ - たまにゃんのメモ帳</a></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

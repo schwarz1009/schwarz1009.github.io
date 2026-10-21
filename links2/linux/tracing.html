@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>トレーシング - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>トレーシング</h1>
+<p>トレーシングに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>トレーシング</h1>
+<h2>トレーシングツールとは</h2>
+<p>システムが正常に稼働しなかったり、なんらかの問題が発生した時、原因を究明するために、稼働しているシステムの内部まで、システムの動きに沿ってその状態を解析したい場合は多い。</p>
+<p>このような時に使えるのが、トレーシングツール。</p>
+<p>Linuxでは、DTrace, SystemTap, bpftrace, bcc-toolsなどのツールを使って、システムをトレースすることができる。また、このためにカーネルのeBPFという機能を使うことができる。</p>
+
+<h2>DTraceとSystemTap</h2>
+<p>DTraceは、そもそもSolaris 10やOpenSolaris向けに開発されたシステムトレースツール。</p>
+<p>ZFSの開発にも絶大な効果を発揮したと言われる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/DTrace">DTrace - Wikipedia</a></li>
+</ul>
+<p>また、SystemTapはLinux向けの高度なトレーシングを行うために開発されたトレーシングツール。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0584">第584回　SystemTapでカーネルの挙動を確認する：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0585">第585回　SystemTapを活用してネットワークの動作を確認する：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h2>eBPFとbpftrace</h2>
+<p>UNIXには、パケットフィルタやシステムコールフィルタとして強力なBPF（Berkeley Packet Filter）が存在した。</p>
+<p>BPFの拡張仕様として、Linuxカーネル3.15で導入されたのがeBPF。</p>
+<p>eBPFを用いると、ユーザーが作成したプログラム（バイトコード）をカーネルランドで、さまざまなタイミングに応じたフックとして記述・実行することができる。</p>
+<p>しかしながら、カーネルランドでユーザーによるプログラムを実行させることは危険を伴う。そのため、安全に実行できるようにさまざまな制限がかけられている。</p>
+<p>このeBPFを用いて、新しくDTraceやSystemTapの後継として開発されているのが、bpftrace。</p>
+<p>bpftraceはIO Visorというプロジェクトによってオープンソースソフトウェアとして開発されている。</p>
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/24486/">バグ調査やパフォーマンス改善に役立つ！eBPFを用いたトレーシングについて | さくらのナレッジ</a></li>
+</ul>
+
+<h2>BCC</h2>
+<p>また、同じくIO Visorで開発されている、BCC（BPF Compiler Collection）というツール群がある。</p>
+<p>BCCはコンパイラという名前の通り、バイトコードを生成するコンパイラを提供している（BCCでeBPFのコードを書く場合は、Pythonコードの中にC言語のコードを書く多言語混在のコードになる）が、付属のツール群として、eBPFを用いたシステムトレーシングに使えるbcc-toolsというさまざまなソフトウェアが提供されている。</p>
+<p>このbcc-toolsを使うことで、コードを書かなくても手軽にeBPFの効力を発揮することができる。</p>
+<p>ツールには共通の語尾がついており、*snoop（特定のイベントの実行記録）、*top（定期的に画面を更新して情報を表示）、*dist（一定期間内の情報の統計）、*slower（時間のかかっている処理だけを探す）、u*（特定の言語向けに特化した機能）、tcp*（ネットワーク向けの機能）などがある。</p>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0688">第688回　eBPFのコンパイラーに対応したツールでさまざまな挙動を可視化する：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0690">第690回　BCCでeBPFのコードを書いてみる：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
