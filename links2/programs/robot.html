@@ -1166,6 +1166,68 @@ main {
 <p>2025.11.07</p>
 </div>
 
+<h2>AIによるAI</h2>
+<p>以下はGoogleのAIに作ってもらった僕のAIの改良版。</p>
+<pre class="prettyprint">
+import asyncio
+import random
+
+class Robot:
+    def __init__(self):
+        self.hara = 50
+        self.memories = []
+
+    async def perceive(self):
+        while True:
+            await asyncio.sleep(2)
+            event = random.choice(["晴れ", "雨", "リンゴ"])
+            self.memories.append(event)
+            print(f"[知覚] {event} を見つけた")
+
+    async def think(self):
+        while True:
+            await asyncio.sleep(3)
+            self.hara -= 10
+            if self.hara &lt; 30:
+                print("[思考] お腹が減ったな...")
+            elif self.memories:
+                past = random.choice(self.memories)
+                print(f"[思考] そういえばさっき {past} を見たな")
+
+async def main():
+    rb = Robot()
+    await asyncio.gather(rb.perceive(), rb.think())
+
+asyncio.run(main())
+</pre>
+<p>もうひとつ。</p>
+<pre class="prettyprint">
+import asyncio, random
+
+class Robot:
+    def __init__(self):
+        self.mood = "普通"
+        self.mem = []
+
+    async def run(self):
+        while True:
+            await asyncio.sleep(2)
+            ev = random.choice(["猫", "雨", "お菓子"])
+            self.mem.append(ev)
+            if ev == "猫": self.mood = "楽しい"
+            elif ev == "雨": self.mood = "憂鬱"
+            
+            thought = f"{ev}を見た。気分は{self.mood}。"
+            if random.random() &lt; 0.4:
+                thought += "…やっぱり気のせいかも。"
+            print(thought)
+
+asyncio.run(Robot().run())
+</pre>
+<div class="edit_date">
+<p>2026.11.17</p>
+</div>
+
 <h2>ロボットにChatGPTを乗せる</h2>
 <p>ロボットにChatGPTを乗せる構想については<a href="chatgpt.html">ChatGPT</a>を参照のこと。</p>
 
