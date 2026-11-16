@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>iptables - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>iptables</h1>
+<p>iptablesに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>iptables</h1>
+<h2>iptables</h2>
+<p>ファイアーウォール（パケットフィルタリング）やNAT（ルーティングやアドレス変換）として通信の許可とブロックを行うための、Linuxのネットワーク設定（Netfilter）を設定する技術。過去のLinux（CentOS 6など）で使われる。</p>
+<ul>
+<li><a href="https://qiita.com/kkojima0127/items/55cf768c046aa2731455">パケットフィルタリング Netfilterの動作と設定 - Qiita</a></li>
+<li><a href="https://eng-entrance.com/linux-firewall">【丁寧解説】Linuxファイアウォール iptablesの使い方 - エンジニアの入り口</a></li>
+<li><a href="https://qiita.com/Tocyuki/items/6d90a1ec4dd8e991a1ce">iptables まとめ - Qiita</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/iptables/man8/iptables.8.html">man iptables</a></li>
+</ul>
+
+<h2>設定ルールファイル</h2>
+<p>IPv4用は/etc/iptables/iptables.rulesに、IPv6用は/etc/iptables/ip6tables.rulesに設定ファイルがある。</p>
+<ul>
+<li><a href="http://qiita.com/cocuh/items/e7c305ccffb6841d109c">そこそこセキュアなlinuxサーバーを作る - Qiita</a></li>
+</ul>
+<p>後日注記：従来のsysconfigの場合、設定ファイルは/etc/sysconfig/iptablesにある。</p>
+<ul>
+<li><a href="https://qiita.com/dtanimoto00/items/1d0a9b02867add646ea5">iptablesの基本的な使い方 - Qiita</a></li>
+</ul>
+
+<h2>iptablesのテーブルの意味</h2>
+<p>基本的に、以下のテーブルを使い、サーバに入ってくるパケットや出ていくパケットに対して、遮断・許可を行うフィルターを記述します。</p>
+<table class="some_tables">
+<tr><th class="min60">テーブル</th><th>意味</th></tr>
+<tr><td>テーブル</td><td>filter（パケットの通過と遮断）<br>nat（NAT、パケットの送信元・送信先の書き換え）<br>mangle（Quality of Service、Type of Serviceなどの設定）</td></tr>
+<tr><td>コマンド（全体）</td><td>-F（全フィルタテーブルの消去）<br>-L（チェインのルールを一覧表示）<br>-X（デフォルト以外のチェインを全て消去）<br>-N（新しいユーザー定義のチェインを作成）<br>-P（組み込まれたチェインのポリシーを変更）</td></tr>
+<tr><td>コマンド（個別）</td><td>-A（ルールを追加）<br>-I（その位置にルールを挿入）<br>-D（ルールを消去）<br>-R（ルールを置換）</td></tr>
+<tr><td>チェイン</td><td>INPUT（外部から入るパケット）<br>OUTPUT（外部へと出るパケット）<br>FORWARD（経由するパケット）<br>PREROUTING（受信時にアドレスを変換）<br>POSTROUTING（送信時にアドレスを変換）</td></tr>
+<tr><td>パラメータ</td><td>-s（送信元IPアドレス）<br>-d（送信先IPアドレス）<br>-p（プロトコル）<br>-i（入るインターフェイス名、たとえばeth0）<br>-o（出るインターフェイス名）<br>-j（ターゲット）<br>--sport（送信元ポート番号）<br>--dport（宛先ポート番号）</td></tr>
+<tr><td>ターゲット<br>（-jで指定する）</td><td>DROP（遮断）<br>ACCEPT（許可）<br>REJECT（遮断してメッセージ送信）<br>LOG（ログに記録）<br>REDIRECT（別のポートにリダイレクト）</td></tr>
+</table>
+<p>（上記の表は<a href="https://eng-entrance.com/linux-firewall">【丁寧解説】Linuxファイアウォール iptablesの使い方 - エンジニアの入り口</a>と<a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a>からの引用です。）</p>
+<p>たとえば以下のようになる（80番ポートを開放）。</p>
+<pre>
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+</pre>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-firewall">【丁寧解説】Linuxファイアウォール iptablesの使い方 - エンジニアの入り口</a></li>
+<li><a href="https://dream.jp/vps/support/manual/mnl_security_04.html">iptablesの設定方法 | マニュアル｜ServersMan@VPS Entry/Standard/Proプラン｜仮想専用サーバー｜クラウドサービス：ユビキタスプロバイダ　DTI</a></li>
+<li><a href="https://qiita.com/Tocyuki/items/6d90a1ec4dd8e991a1ce">iptables まとめ - Qiita</a></li>
+<li><a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.13編集</p>
+</div>
+
+<h2>ルールの設定の基本</h2>
+<p>ファイアウォールの設定では、基本的に「全部遮断した上で必要なルールだけ許可する」というやり方を行う。</p>
+<p>ルールの削除には、-Dオプションの後にルール番号を指定する。</p>
+<pre>
+iptables -D INPUT 2
+</pre>
+<p>これで、ルール番号が2のINPUTルールを削除できる。</p>
+<p>あるいは、実際にルールを記述することでもルールを削除できる。</p>
+<pre>
+iptables -D INPUT -p tcp --dport 80 -j ACCEPT
+</pre>
+<p>-Lオプションで、現在設定されている設定の一覧が表示できる。</p>
+<pre>
+# iptables -L
+</pre>
+<p>設定の保存は、iptables-saveコマンドを使う。</p>
+<pre>
+# iptables-save &gt; /etc/sysconfig/iptables
+</pre>
+<p>設定の読み込みは、iptables-restoreコマンドを使う。</p>
+<pre>
+# iptables-restore &lt; /etc/sysconfig/iptables
+</pre>
+<p>（<a href="https://www.amazon.co.jp/10%E6%97%A5%E3%81%A7%E3%81%8A%E3%81%BC%E3%81%88%E3%82%8BFedora-Core-6%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E3%83%BB%E7%AE%A1%E7%90%86%E5%85%A5%E9%96%80%E6%95%99%E5%AE%A4-%E6%9D%BE%E6%9C%AC-%E5%85%89%E6%98%A5/dp/4798111600">10日でおぼえるFedora Core 6サーバ構築・管理入門教室</a>を参考に執筆しました。）</p>
+<div class="edit_date">
+<p>2023.05.06</p>
+</div>
+
+<h2>ルーティングとパケットフィルタリング</h2>
+<p>パケットフィルタリングで-sと-dを使うことで、「どのアドレスからやってきた（-s）どのアドレスへと向かっていく（-d）パケットをフィルタリングするか」を指定できる。</p>
+<p>その上で-j ACCEPTなどとして通信を許可する。--dportはポート番号を指定する。また-pにはプロトコルを指定する（多くの場合tcp）。</p>
+<p>ルーティングの設定はPREROUTING（DNAT）とPOSTROUTING（SNAT）で行う。パケットフィルタリングの設定はINPUT, OUTPUT, FORWARDで行う。</p>
+<p>基本的に、ルーティングが行われた後で、パケットフィルタリングが行われる。</p>
+<p>（<a href="https://qiita.com/dtanimoto00/items/1d0a9b02867add646ea5">iptablesの基本的な使い方 - Qiita</a>を参考に執筆しました。）</p>
+
+<h2>DNATとSNAT</h2>
+<p>かつてのインターネットでは、ホストの数がとても少なかったので、全員にグローバルアドレスを与えるようなことができたが、今の無数にホストの増えたネットワークではそうはいかない。</p>
+<p>グローバルアドレスを全員に与えていると限りがあるため、家庭内のネットワークではプライベートアドレスを用いる。</p>
+<p>NATは、このような時に、グローバルアドレスとプライベートアドレスを変換する。</p>
+<p>SNATは、プライベートアドレスから発生したグローバルアドレスへの通信で、送信元アドレスを変換する。これに対してDNATは、グローバルアドレスから発生したプライベートアドレスへの通信で、送信先アドレスを変換する。</p>
+<p>SNATを使うと、家庭内のネットワークから、外部のネットワークにあるサービスにアクセスできる。</p>
+<p>また、DNATを使うと、自分のアドレスを外部に公開し、グローバルアドレスからアクセスしてきたサーバーの利用者に対して、ルーティングを行うことができる。</p>
+<p>（<a href="https://yoru9zine.hatenablog.com/entry/2015/12/19/072304">NAT と SNAT と DNAT - 隙あらば寝る</a>を参考に執筆しました。）</p>
+
+<h2>IPマスカレード (NAPT)</h2>
+<p>IPマスカレードとは、動的に割り当てられるポート番号を使ってグローバルアドレスひとつに複数のプライベートアドレスを対応付ける機能。</p>
+<p>複数台のマシンがひとつのグローバルアドレスからインターネットに接続できるようになる。</p>
+<p>別名は「NAPT」。NAPTのことをLinuxではIPマスカレードと呼ぶ。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E4%BB%A4%E5%92%8C05%E5%B9%B4-%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%EF%BC%86%E3%82%AF%E3%83%AC%E3%83%90%E3%83%BC%E6%96%B9%E5%BC%8F%E3%81%A7%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B-%E6%A0%A2%E6%9C%A8%E5%85%88%E7%94%9F%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%83%85%E5%A0%B1%E6%8A%80%E8%A1%93%E8%80%85%E6%95%99%E5%AE%A4-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E6%A0%A2%E6%9C%A8/dp/4297131307">平成18年度 イメージ&クレバー方式でよくわかる栢木先生の基本情報技術者教室 (情報処理技術者試験)</a></li>
+<li><a href="https://wa3.i-3-i.info/word11980.html">IPマスカレードとは｜「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典</a></li>
+<li><a href="https://wa3.i-3-i.info/word11979.html">NAPTとは｜「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.02.07</p>
+</div>
+
+<h2>/etc/hosts.allowと/etc/hosts.deny</h2>
+<p>TCPWrapperから読み込まれる、自分自身へのアクセス制御を行うための設定ファイルとして、アクセス許可を行う/etc/hosts.allowとアクセス拒否を行う/etc/hosts.denyがある。</p>
+<p><a href="../network/vsftpd.html">vsftpd</a>や<a href="../network/file_server_nfs.html">NFS</a>も参照のこと。</p>
+<ul>
+<li><a href="https://linuc.org/study/knowledge/512/">「/etc/hosts.allow」ファイル、「/etc/hosts.deny」ファイル | Linux技術者認定 LinuC | LPI-Japan</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.02.07編集</p>
+</div>
+
+<h2>IPv6の場合</h2>
+<p>IPv6の場合、iptablesの代わりのコマンドとして、ip6tables、ip6tables-save、ip6tables-restoreを使います。</p>
+
+<h1>関連ページ</h1>
+<h2>ファイアーウォール</h2>
+<p><a href="linux_net_firewall.html">Linux ファイアウォール</a>を参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

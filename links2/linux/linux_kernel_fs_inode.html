@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux カーネル開発（i-node） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux カーネル開発（i-node）</h1>
+<p>Linuxのカーネルの開発に関する世界観（i-node）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><b>i-node</b></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><a href="linux_kernel_fs_btree.html">B-Treeファイルシステム</a></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>i-node</h1>
+<h2>カーネルの内部</h2>
+<p>（以下は<a href="https://atmarkit.itmedia.co.jp/ait/articles/0305/20/news002_2.html">VFSとファイルシステムの基礎技術：Linuxファイルシステム技術解説（1）（2/2 ページ） - ＠IT</a>を参考に執筆しました。）</p>
+<p>システムコールがファイル処理を要求すると、カーネルの内部でファイルオブジェクトが作成される。</p>
+<p>この時、ファイルオブジェクトは、以下の情報と関連付けられる。</p>
+<table class="some_tables">
+<tr><th class="min60">情報</th><th>説明</th></tr>
+<tr><td>ファイルディスクリプタ</td><td>プログラムからストリームを操作するための識別情報</td></tr>
+<tr><td>dentry（dエントリ）</td><td>ディレクトリのパス情報</td></tr>
+<tr><td>i-node</td><td>ストレージデバイス上のファイルの位置を示す</td></tr>
+</table>
+
+<h2>i-node</h2>
+<p>（以下は「<a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a>」を参考に執筆しました。）</p>
+<p>UNIXでは、ファイルはi-node（インデックスノード）と呼ばれるテーブルに関連付けられる。</p>
+<p>i-nodeは、UNIXのファイルシステムにおいて、ファイルのディスク上の位置を知るために必要となる。i-nodeには、ファイルの属性と、ファイルのディスク上の位置を示すブロックのアドレスが含まれている。</p>
+<p>小さなファイルの場合、i-nodeの中にファイルの位置を知るためのすべての情報があるが、大きなファイルの場合は、単一間接ブロックといって、i-nodeの中の1つのアドレスが別のブロックのアドレスとなっており、その中にさらにディスクのアドレスが入っている。</p>
+<p>これでもまだ不十分な場合、二重間接ブロックや三重間接ブロックも使用できる。</p>
+
+<h2>FAT（ファイルアロケーションテーブル）</h2>
+<p>FAT（ファイルアロケーションテーブル）については<a href="../tech/magnetic_tape.html">磁気テープ</a>や<a href="../hardware/harddisk.html">ハードディスク</a>を参照のこと。</p>
+
+<h1>書籍</h1>
+<h2>MINIX本</h2>
+<p>MINIX本では、ファイルシステムについて詳細が記述されています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

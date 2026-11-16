@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux システムコール・API１B（stdio） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux システムコール・API（１B．stdio）</h1>
+<p>Linuxのシステムコールとライブラリ関数・APIに関する世界観１B（stdio）です。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考にさせていただきました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_api.html">システムコール・API（１．ファイル・入出力）</a></li>
+<ul>
+<li><a href="linux_api_syscalls.html">１A．システムコール</a></li>
+<li><b>１B．stdio</b></li>
+<li><a href="linux_api2.html">２．プロセス・メモリ</a></li>
+</ul>
+<li><a href="libc.html">libc</a></li>
+</ul>
+<p>X11やGTK+/Qtなどについては<a href="linux_x11.html">Linux（X11周辺）</a>を参照のこと。また<a href="linux_kernel.html">Linuxカーネルの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>stdio</h1>
+<h2>stdioとバッファリング</h2>
+<p>システムコールであるopen(), close(), read(), write()を使うのに比べて、stdioの関数を使うことで、より高速にファイルの操作ができます。</p>
+<p>なぜ高速なのか、それはstdioがバッファリングを行うからです。</p>
+<p>バッファリングは一種のキャッシュのようなもので、システムコールが呼ばれた時点で常にストレージのデータにアクセスするのではなく、頻繁に使われるデータをバッファの中に保持し、バッファの中から読み書きすることで、データを読み書きするのが高速になります。</p>
+<p>ストレージのアクセスは遅いため、常にストレージにアクセスするシステムコールは遅くなります。これに対して、常にストレージにアクセスせず、常にバッファにアクセスするstdioのライブラリ関数は高速です。</p>
+<p>なので、本当に必要がない時以外、常にstdioを使うべきです。</p>
+<p>また、システムコールを使う場合、固定長のアクセスしかできません。stdioでは固定長だけではなく、バイト単位や行単位のアクセスができます。なので、一文字ずつ文字を操作したり、一行ごとに文字列を操作したりできます。また、stdioではフォーマット入出力という機能が実装されており、変数の値を表示する際にも効果を発揮します。</p>
+<div class="edit_date">
+<p>2023.08.19</p>
+</div>
+
+<h2>stdioの基本関数</h2>
+<p>stdioでは、バッファリングを行うため通常はシステムコールよりも動作速度が速い。また、固定長バイトだけではなく、文字単位（バイト単位）や行単位での入出力ができる。</p>
+<p>これらのCライブラリ関数では、FILE型のポインタを使ってファイルの情報を格納します。</p>
+<p>FILE型はファイルディスクリプタのラッパーで、stdioバッファの情報も含まれています。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>fopen(3)<br>fclose(3)<br>fread(3)<br>fwrite(3)</td><td>ライブラリ関数の版。<br>バッファリングを行うため、通常はシステムコールより動作が速い。</td>
+</tr>
+<tr>
+<td>printf(3)</td><td>printf()はフォーマットされた文字列を出力出来ます。<br>任意の文字列や変数の中身を展開して表示する場合など、良く使います。</td>
+</tr>
+<tr>
+<td>scanf(3)</td><td>scanf()はフォーマットを指定して入力できる。<br>バッファオーバーフローを起こす潜在的な危険がある（文字幅指定で回避できる）。</td>
+</tr>
+<tr>
+<td>getchar(3)</td><td>標準入力（端末、パイプもしくはリダイレクトされたファイル）から一文字の文字を入力できる。</td>
+</tr>
+<tr>
+<td>putchar(3)</td><td>標準出力（端末、パイプもしくはリダイレクトされたファイル）へと一文字の文字を出力できる。</td>
+</tr>
+</table>
+<p>以下はさらに詳しい解説。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr><td>fopen(3)</td><td>open(2)に対応するライブラリ関数。</td></tr>
+<tr><td>fclose(3)</td><td>close(2)に対応するライブラリ関数。</td></tr>
+<tr><td>fread(3)</td><td>固定長バイト列の入力。</td></tr>
+<tr><td>fwrite(3)</td><td>固定長バイト列の出力。</td></tr>
+</table>
+<p>以下はバイト単位（一文字）での入出力。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr><td>fgetc(3)</td><td>バイト単位（一文字）で入力するAPI。</td></tr>
+<tr><td>fputc(3)</td><td>バイト単位（一文字）で出力するAPI。</td></tr>
+<tr><td>getc(3)</td><td>マクロ。基本的にfgetc(3)と同じ。</td></tr>
+<tr><td>putc(3)</td><td>マクロ。基本的にfputc(3)と同じ。</td></tr>
+<tr><td>getchar(3)</td><td>入力元をstdinに固定してバイト単位（一文字）で入力する。</td></tr>
+<tr><td>putchar(3)</td><td>出力先をstdoutに固定してバイト単位（一文字）で出力する。</td></tr>
+</table>
+<p>以下は行単位での入出力。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr><td>fgets(3)</td><td>行単位での入力API。一行の文字列を入力できて便利。</td></tr>
+<tr><td>fputs(3)<br>puts(3)</td><td>行単位での出力API。一行の文字列を出力できて便利。<br>putsは出力先がstdoutに固定され、最後に改行を付け足す。</td></tr>
+</table>
+<p>バッファサイズ指定の存在しない、セキュリティの問題があるgets()は廃止されました。</p>
+<p>後日注記：これらの関数の引数は、関数によって異なります。ですが、大まかに言えば、出力系の関数であれば出力する文字、あるいは文字列リテラル、あるいはそれが格納されている変数（文字あるいは文字列へのポインタ）を指定します。入力系の関数であれば、入力した文字列を格納するバッファ変数へのポインタと、バッファサイズを指定します。また、入力先・出力先ストリームの指定ができる関数であれば、FILE型のポインタを用いてストリームを指定します。このストリームにオープンしたファイルあるいは標準入力・標準出力・標準エラー出力を指定できます。</p>
+<p>以下はフォーマット入出力。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr><td>printf(3)<br>fprintf(3)</td><td>フォーマット出力。</td></tr>
+<tr><td>scanf(3)</td><td>フォーマット入力。</td></tr>
+</table>
+<p>後日注記：printf()はコンソールへの出力、fprintf()はファイルへの出力によく使います。</p>
+<p>後日注記：printf()は、変数の値を文字列の中に埋め込むことや、端末に表示される変数の値の書式フォーマットを指定することができるため、変数の値の表示によく使われます。また、fprintf()は出力先ストリームを指定することができるため、ファイルや標準エラー出力への出力などに使用されます。特に、標準エラー出力を行う際には、ストリーム先にstderrを指定します。</p>
+<p>また、コマンドラインオプションの解析には専用のAPIが用意されている。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>getopt(3)</td><td>ショートオプション（-オプション）を解析する。</td>
+</tr>
+<tr>
+<td>getopt_long(3)</td><td>ロングオプション（--オプション）を解析する。</td>
+</tr>
+</table>
+<p>コマンドラインオプションには慣習があり、以上のAPIを使うことで、ショートオプションとロングオプションを解析できる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+
+<h2>使うべきでない関数</h2>
+<p>gets()などの使うべきでない関数については以下が参考になります。バッファサイズ指定がなく、バッファのポインタだけを指定するため、バッファのサイズを超過して文字列が入力されることがあります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Gets">gets - Wikipedia</a></li>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p><a href="../prog_lang/c_io.html">C言語（入出力）</a>や<a href="../network/security.html">セキュリティ</a>も参照のこと。</p>
+
+<h2>FILE型のポインタ</h2>
+<p>C言語のファイル処理は、ファイルをFILE型のポインタ（ファイルポインタ）とAPI関数を使って操作します。</p>
+<p>以下はFILE型のポインタを使った、ファイル操作のコード例：</p>
+<ul>
+<li><a href="https://www.grapecity.com/tools/support/powernews/column/clang/037/page02.htm">もう一度基礎からC言語 第37回 ファイルの扱い(2)～ファイル操作の実例 FILE構造体の中身 - グレープシティ株式会社</a></li>
+</ul>
+<p>ファイルをオープンするためのモードは、"r"は読み込み、"w"は書き込み、"a"は追記を表す。</p>
+<p>ちなみに、ファイルオフセットを移動させたいだけなら、lseek(2)やfseek(3), fseeko(3)で出来る。</p>
+
+<h2>具体例</h2>
+<p>たとえば、ファイルの内容をすべてコンソールに出力するプログラムは以下のようになります。</p>
+<pre class="prettyprint">
+FILE *fp;
+int c;
+
+if ((fp = fopen("hoge.txt", "r")) == NULL) {
+    fprintf(stderr, "ファイルのオープンができません\n");
+    exit(1);
+}
+
+while ((c = getc(fp)) != EOF) {
+    putchar(c);
+}
+
+fclose(fp);
+</pre>
+<p>以下のページを参考にしました。</p>
+<ul>
+<li><a href="http://www1.cts.ne.jp/~clab/hsample/File/File02/File02.html">Ｃ言語講座：読み込みモードで開く</a></li>
+</ul>
+
+<h2>書籍</h2>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>パターンマッチング</h1>
+<h2>libcでの正規表現</h2>
+<p>libcでは、</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr><td>regcomp(3)</td><td>正規表現のコンパイル</td></tr>
+<tr><td>regfree(3)</td><td>解放（open()とclose()と同じ）</td></tr>
+<tr><td>regexec(3)</td><td>パターンのマッチング。マッチすると0が返る。</td></tr>
+<tr><td>regerror(3)</td><td>regcomp()が失敗した時に返るエラーコードをエラーメッセージに変換する。</td></tr>
+</table>
+<p>などの正規表現インターフェースがある。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>C++11では正規表現をサポートしているが、それ以前のC++などではlibcのC言語の正規表現も使用できる。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/regex.3.html">Man page of REGEX</a></li>
+<li><a href="https://qiita.com/thaladabar/items/91b1a66b1ead90b26102">Cでの正規表現 - Qiita</a></li>
+</ul>
+<p><a href="regex.html">正規表現</a>も参照のこと。</p>
+
+<h1>サンプルコード</h1>
+<p><a href="http://i.loveruby.net/stdlinux2/">ふつうのLinuxプログラミング 第2版 サポートサイト</a>より、サンプルコードが<a href="https://github.com/aamine/stdlinux2-source">GitHub</a>でMITライセンスに基づいて公開されているので、ここに掲載させていただきます。著作権者は青木峰郎氏です。</p>
+<h2>grepコマンドサンプル</h2>
+<p>コード全文は以下のリンク先をご覧ください。</p>
+<ul>
+<li><a href="https://github.com/aamine/stdlinux2-source/blob/master/grep.c">https://github.com/aamine/stdlinux2-source/blob/master/grep.c</a></li>
+</ul>
+<p>このコードで重要なのは以下の部分です。</p>
+<blockquote class="inyou1">
+<pre class="prettyprint">
+static void
+do_grep(regex_t *pat, FILE *src)
+{
+    char buf[4096];
+
+    while (fgets(buf, sizeof buf, src)) {
+        if (regexec(pat, buf, 0, NULL, 0) == 0) {
+            fputs(buf, stdout);
+        }
+    }
+}
+</pre>
+</blockquote>
+<p>ここだけを見ると、bufという変数がバッファであることが分かります。バッファは4096とサイズが決め打ちですが、これはfgets()とfputs()を繰り返すために決め打ちでも構わないのです。</p>
+<p>このコードでは、grepコマンドの実装であるため、fgets()やfputs()を使って一行ずつ文字列を読み出してbufに格納し、書き出しを行っていますが、catコマンドの実装などにおいては、システムコールのread()/write()やstdioのfread()/fwrite()など、固定長バイトでの読み書きを行うこともあります。この際にも、こうした一時バッファの固定文字列に一時的にデータを格納する、という手法は良く使われます。</p>
+<p>このようにすることで、巨大なメモリ領域を確保しなくても全文字列を書き出せるため、使用メモリの削減にもなります。仕組みは違いますが同じ目的に使えるものとして、Pythonのyield returnがあります。Pythonではyield returnを使うことで一行ごとにデータを読み、一行分のメモリだけでデータを書き出すことができます。</p>
+<p>またregcomp()とregexec()はC言語での正規表現のために使います。</p>
+<div class="edit_date">
+<p>2024.08.28編集</p>
+</div>
+
+<h2>MIT License</h2>
+<p>上記サンプルコードは以下のライセンス条項に基づきます。</p>
+<blockquote class="inyou1">
+<pre>
+The MIT License
+
+Copyright (c) 2017 Minero Aoki
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</pre>
+</blockquote>
+<ul>
+<li><a href="https://github.com/aamine/stdlinux2-source/blob/master/LICENSES">https://github.com/aamine/stdlinux2-source/blob/master/LICENSES</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.28編集</p>
+</div>
+
+<h1>参考情報</h1>
+<h2>man stdio(3)</h2>
+<p>FreeBSD man stdio(3)は参考になります。</p>
+<ul>
+<li><a href="https://www.freebsd.org/cgi/man.cgi?query=stdio&sektion=3&apropos=0&manpath=FreeBSD+13.0-RELEASE+and+Ports">stdio(3) - FreeBSD Manual Pages</a></li>
+</ul>
+<p>また、Linuxのstdioに関するmanpagesの一覧は以下にあります。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man3/stdio.3.html">man stdio</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>C言語の入出力API</h2>
+<p><a href="../prog_lang/c_io.html">C言語（入出力）</a>も参照のこと。</p>
+
+<h2>ソケット</h2>
+<p><a href="linux_kernel_socket.html">Linuxカーネル（ソケット）</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

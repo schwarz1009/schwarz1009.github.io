@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>awk - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>awk</h1>
+<p>awkに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="grep_find_sed_awk.html">grep, find, sed, awk</a></li>
+<ul>
+<li><a href="grep.html">grep</a></li>
+<li><a href="find.html">find</a></li>
+<li><a href="sed.html">sed</a></li>
+<li><b>awk</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>awk</h1>
+<h2>awk</h2>
+<p>awkは昔からあるUNIXのスクリプト言語で、空白やタブで区切られたテキストに対してスクリプト処理をかけることができる。</p>
+<p>特に、特定のカラムを表示させたい時は、awkを使うと便利です。</p>
+<pre>
+awk '{ print $3 }'
+</pre>
+<p>とすれば、空白やタブで区切られた3列目のカラムだけを出力できます。</p>
+<p>計算や比較演算もできるため、フィルターで使う際に簡単なスクリプト処理（たとえば3列目のファイルサイズの数値が3MB以上のものだけを出力するなど）もできます。</p>
+<pre>
+awk '$3 &gt;= 3 { print }'
+</pre>
+<ul>
+<li><a href="https://hydrocul.github.io/wiki/commands/awk.html">awk コマンド - hydroculのメモ</a></li>
+<li><a href="http://qiita.com/b4b4r07/items/45d34a434f05aa896d69">実用 awk ワンライナー - Qiita</a></li>
+</ul>
+
+<h2>awkの文法</h2>
+<p>awkでは、</p>
+<pre>
+条件式 { コマンド処理 }
+</pre>
+<p>という書式でスクリプトを与える。条件式がその行にマッチした場合、コマンド処理（たとえばprint）が実行される。</p>
+<p>一行の全体は$0、行の中の空白で区切られたひとつひとつの部分（フィールド）は$1や$2などとし、条件式は検索文字列や正規表現とのマッチ、あるいは&gt;=などの比較演算を行える。</p>
+<p>printは、与えられた文字列や値などを表示するawkの内部コマンド。print $1とすれば1番目のフィールドを、print $0（あるいは単にprint）とすれば与えられた文字列全体を表示する。</p>
+<p>たとえば、正規表現のマッチをする場合は、</p>
+<pre class="prettyprint">
+/ho*ge/ { print }
+</pre>
+<p>となる。あるいは、3番目のフィールドだけに正規表現をマッチさせる場合は、</p>
+<pre class="prettyprint">
+$3 ~ /ho*ge/ { print }
+</pre>
+<p>となる。またコマンド処理（アクション）の中にはprintのような内部コマンドだけでなく、if文やfor文やwhile文、演算子や変数や配列なども使える。</p>
+<p>以下は参考文献。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+<li><a href="https://www.tohoho-web.com/ex/awk.html">とほほのAWK入門 - とほほのWWW入門</a></li>
+<li><a href="https://qiita.com/yamazon/items/563af1b485ff413d381f">awkコマンドの基本 #Bash - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.04.20</p>
+<p>2024.05.22編集</p>
+</div>
+
+<h2>awk応用例</h2>
+<p>応用例として、2列目に数字のデータがある時にそれを&lt;p&gt;～&lt;/p&gt;を付加して出力したいなら、</p>
+<pre class="prettyprint">
+$2 ~ /^[0-9]+$/ { print "&lt;p&gt;" $2 "&lt;/p&gt;" }
+</pre>
+<p>のようになる。</p>
+<div class="edit_date">
+<p>2024.05.22</p>
+</div>
+
+<h2>区切り文字を変更する</h2>
+<p>awkで区切り文字を空白文字から別の文字に変更したい場合は、awkを実行する際にオプション-Fを指定するか、スクリプトの中で最初に実行されるBEGIN {}の中でビルトイン変数FSを指定します。</p>
+<ul>
+<li><a href="https://linux.just4fun.biz/?%E9%80%86%E5%BC%95%E3%81%8D%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/awk%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E5%8C%BA%E5%88%87%E3%82%8A%E6%96%87%E5%AD%97%E3%82%92%E3%82%AB%E3%83%B3%E3%83%9E%E3%81%AB%E5%A4%89%E6%9B%B4">逆引きシェルスクリプト/awkコマンドの区切り文字をカンマに変更 - Linuxと過ごす</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+<li><a href="https://www.tohoho-web.com/ex/awk.html">とほほのAWK入門 - とほほのWWW入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.05.22</p>
+</div>
+
+<h2>awkの実例</h2>
+<p>以下はawkの実例として参考になるページ。</p>
+<ul>
+<li><a href="https://www.tldp.org/LDP/Bash-Beginners-Guide/html/sect_06_02.html">6.2. The print program - Chapter 6. The GNU awk programming language - Bash Guide for Beginners</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1706/02/news017.html">【 awk 】コマンド（基本編）――テキストの加工とパターン処理を行う - @IT</a></li>
+</ul>
+
+<h2>英語のawkチュートリアル</h2>
+<p>以下の英語のawkのチュートリアルは、awkの基本機能を知る上でとても参考になります。</p>
+<ul>
+<li><a href="https://bytexd.com/awk-command-examples-tutorial/">AWK Command Examples for Beginners / AWK Linux Tutorial</a></li>
+</ul>
+
+<h2>awkの使いどころ</h2>
+<p>実際のところ、UNIXではgrep, sed, awkなどを使うことで、何でもかんでも一行で便利かつ効率的に操作することができます。</p>
+<p>後日注記：awkは、システム管理をする上で、形式的な自動処理をさせるためにとても活用できます。複雑になってくると、「このawkがやっていることは一体なんなのか」という感じになってきますが、Perlのような高度なプログラミング言語を使わなくても、awkだけでできることはたくさんあります。</p>
+<div class="edit_date">
+<p>2023.02.19編集</p>
+</div>
+
+<h2>シェルスクリプトやPerlを使おう</h2>
+<p>grep, sed, awkは、ワンライナーでも使えますが、シェルスクリプトにすると真価を発揮します。</p>
+<p>簡単なテキスト定型処理は、さまざまなUNIXコマンドとgrep, sed, awkを組み合わせて、シェルスクリプトにすると、UNIXでは自動的に人間の手間いらずで行うことができます。</p>
+<p>ただし、処理が複雑になってくると、それらだけでは対応が難しくなることもあります。そのような時はPerl（あるいは今で言えばPythonやRuby）を使いましょう。特に、Perlはawkを参考にしてデザインされた言語であり、「Perlはawkの発展形」であると言えます。</p>
+<p>後日注記：Perlはawkやシェルスクリプトの発展形であるため、サブルーチンの引数を$_[0]や$_[1]で表したり、正規表現へのマッチを「=~」で行うなど、awkととてもよく似ています。awkやシェルスクリプトを触ったことがあれば、Perlの文法表記の意味がよく分かります。</p>
+<p><a href="linux_bash_script.html">Bash（シェルスクリプト）</a>や<a href="../prog_lang/perl.html">Perl</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.05.22-23</p>
+</div>
+
+<h2>グルー言語としての利用</h2>
+<p>grep, sed, awkのようなUNIXのフィルター整形コマンドや、Perlのようなプログラミング言語は、UNIXのコマンドとコマンドを繋ぐ「グルー言語」としての利用がよくされます。</p>
+<p>グルーとは「のり」のことで、コマンドとコマンドを結合するための「接着剤」の役割を果たします。</p>
+<p>UNIXにおいて、コマンドの出力の情報を使って、別のコマンドの入力にパイプとして渡したい、ということはよくあります。</p>
+<p>特に、たとえばls -lのように、UNIXのコマンドは詳細な情報を出力してくれる便利なコマンドがあります。あるいは、プロセスが依存する共有ライブラリであれば、lddコマンドやldconfigコマンドもよく使います。そのような詳細なコマンドの情報に基づいて（情報はひとつだけではなく、ファイル名やファイスパスやプロセス名などのように複数である場合も多い）、目視と手作業でコマンドを入力するのではなく、自動的にその情報をそのまま与えてコマンドを実行できれば、楽ができます。</p>
+<p>ですが、そのようなコマンドの出力は、そのままパイプで別のコマンドに渡すことができるとは限りません。ls -lの情報はldd/ldconfigのような情報には、関係のない行や文字列もたくさん含まれていますし、その時必要な情報は特定のカラム（列）の中の情報であることが多く、そして別のコマンドに渡す際にはそのために形式を加工して整形しなければならない場合もあります。</p>
+<p>そのような時に、grep, sed, awkのようなフィルター整形コマンドや、Perlのようなグルー言語は、大いに活用できます。グルー言語をまるで接着剤のように、あるコマンドの出力を別のコマンドの入力として与える形に適した、相応しい形式に抽出・加工・変換する、ということができるのです。</p>
+<p>たとえば、ls -lで表示したディレクトリの中のファイル一覧の詳細情報から、grepで特定の行を選択し、awkで特定の列を選択して条件で絞り込み、sedでその形式を変換し、その文字列情報をxargsを用いることでそれぞれの行ごとに実際に処理を行うコマンド（たとえばmvやcp）に渡す、ということができます。</p>
+<p>より具体的に言えば、ls -lで詳細表示した出力内容から、*.htmlと*.jsと*.cssのファイル名だけをgrepで抽出し（grepは-eでOR検索ができる）、その中からawkでファイルサイズが一定サイズ以上のものだけを抽出した上でファイル名の列だけを取り出し（もし更新日時で最近更新されたものだけを抽出する場合はls -lでなくfindコマンドの-mtimeオプションを使うこともできる）、その上でそれをxargsを使ってcpコマンドでコピーし、一時的なディレクトリを意味するtmpディレクトリにすべてコピーすることで、「サイズの大きなファイルだけを確認するためにtmpディレクトリに移す」ということができます。</p>
+<p>これを総合すると、</p>
+<pre>
+ls -l | grep -e ".html" -e ".js" -e ".css" | awk '$5 &gt;= 100000 { print $9 }' | xargs -I {} cp {} ~/tmp
+</pre>
+<p>となります。xargsのところにある{}の部分にはコピー元ファイルの名前が入ります（xargsの-Iオプションで指定する）。以下は参考文献。</p>
+<ul>
+<li><a href="https://sunday-morning.app/posts/2021-05-07-awk-file-size-filter">awkコマンドでファイルサイズが大きいものを抽出する - Sunday morning</a></li>
+<li><a href="https://qiita.com/chihiro/items/6e1404c41e1236a9efe1">【Linux】lsコマンド #Linux - Qiita</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/1605/18/news015.html">「ls -l」コマンドの表示からファイルの属性を理解しよう：“応用力”をつけるためのLinux再入門（9）（1/4 ページ） - ＠IT</a></li>
+<li><a href="http://www.rsch.tuis.ac.jp/~ohmi/literacy/grep1.html">簡単なgrepの使い方 - 情報リテラシーI - 東京情報大学</a></li>
+<li><a href="https://hydrocul.github.io/wiki/commands/xargs.html">xargs コマンド | コマンドの使い方(Linux) | hydroculのメモ</a></li>
+<li><a href="https://devlights.hatenablog.com/entry/2020/12/01/193227">find と xargs を組み合わせてコマンド実行 - いろいろ備忘録日記</a></li>
+</ul>
+</pre>
+<p>また、このようなことをやっている記事はネット上にいくらでもあるので、参照してください。以下のリンク先はそのような例の掲載されているページや書籍です。</p>
+<ul>
+<li><a href="https://qiita.com/dongxinanbei/items/13528b9a0a9d78b5aa81">ls + awk + xargs + mvの複合コマンド #Linux - Qiita</a></li>
+<li><a href="https://qiita.com/Kuroi_Cc/items/69c3a99973b9ff2dc1ed">awkにハマってしまったかもしれない件 #CLI - Qiita</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1610/18/news008.html">【 sed 】コマンド（応用編）――正規表現を使って文字を置き換える - @IT</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.05.23</p>
+<p>2024.05.25編集</p>
+</div>
+
+<h2>簡易的なパーサーとしての利用</h2>
+<p>awkは、ある種の簡易的なパーサーとして使うこともできます。</p>
+<p>たとえば、awkの-Fオプションなどで区切り文字を「,」に変えることで、CSV用の簡易的なパーサーとして使うこともできます。区切り文字をビルトイン変数で変える場合は、入力用の区切り文字は「FS」で、出力用の区切り文字は「OFS」で変えられます。</p>
+<p>ですが、awkにも限界はあるので、本当にデータファイル（特にログファイルなど）を本格的に解析したい場合はPerlを使うことになります。awkの場合、パース自体は簡単でもその後の応用的な技術を作ることが難しいので、最初からPerlで解析したほうが楽です。Perlを使う場合、split()を使うことで区切り文字によって文字列をリストに分割でき、join()を使うことで連結できます。awkほど単純ではありませんが、このほうが柔軟かつ自由度は高いです。</p>
+<ul>
+<li><a href="https://www.tohoho-web.com/ex/awk.html">とほほのAWK入門 - とほほのWWW入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.05.23</p>
+</div>
+
+<h2>書籍</h2>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>アスペクト指向の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>アスペクト指向の世界観</h1>
+<p>アスペクト指向の世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>アスペクト指向</h1>
+<h2>アスペクト指向とは</h2>
+<p>アスペクト指向とは、複数のクラスを横断する「横断的関心事」と呼ばれる処理を、ひとつの「アスペクト」と呼ばれるモジュールに記述することのできるプログラミングパラダイム。</p>
+<p>従来のオブジェクト指向では、複数のクラスで同一の処理を行う場合、処理を「実行する場所」に書かなければならない。</p>
+<p>そのため、たとえば「全てのメソッドでログをとりたい（ロギング）」と言った場合に、それぞれのメソッドにロギングのコードを記述することが必要になる。</p>
+<p>これでは、「ロギングの処理を変えたい」といった時に、全てのコードの処理を書き換えなければならない。</p>
+<p>アスペクト指向では、そうした処理をアスペクトと呼ばれる外部のモジュールにまとめ、アスペクトの側で「このクラスとこのクラスのメソッドが実行される時」といったように「時」を指定してやることで、コードをまとめて編集しやすくする。</p>
+
+<h2>AspectJ</h2>
+<p>AspectJは、「ジョインポイント」と呼ばれる方式によるアスペクト指向言語で、Javaに対する拡張となっている。</p>
+<ul>
+<li><a href="http://netail.net/aosdwiki/index.php?%A5%A2%A5%B9%A5%DA%A5%AF%A5%C8%BB%D8%B8%FE%A5%D7%A5%ED%A5%B0%A5%E9%A5%DF%A5%F3%A5%B0">アスペクト指向プログラミング - アスペクト指向なWiki</a> (<a href="https://web.archive.org/web/20220723214243/http://netail.net/aosdwiki/index.php?%A5%A2%A5%B9%A5%DA%A5%AF%A5%C8%BB%D8%B8%FE%A5%D7%A5%ED%A5%B0%A5%E9%A5%DF%A5%F3%A5%B0">Webarchive</a>)</li>
+</ul>
+<p>以下は、上記のページの中のコードの解説。一部のキーワードは書き換えてあります。</p>
+<p>まず、</p>
+<pre class="prettyprint">
+aspect HogeAspect {}
+</pre>
+<p>でアスペクトの宣言を行う。そして、</p>
+<pre class="prettyprint">
+before() : execution(void HogeClass.*()) {}
+</pre>
+<p>このうち、「before() : 」は、「このイベントが発生する前に実行せよ」というキーワード。そして「execution(void HogeClass.*())」により、クラスHogeClassのメソッドが実行される時点のポイントカットを行う。ジョインポイント方式では、イベントの述語を捕らえることを「ポイントカット」と呼ぶ。最後に、</p>
+<pre class="prettyprint">
+hoge_logger.log()
+</pre>
+<p>で、ロギングの手続きを関連付ける。これを「アドバイス」と呼ぶ。</p>
+<p>また、AspectJは@をつかった注釈（アノテーション）を使うことでもっと綺麗で美しいアスペクトの書き方がある。</p>
+<pre class="prettyprint">
+@before("execution(public * fuga(..))")
+</pre>
+<p>以下のページが参考になる。</p>
+<ul>
+<li><a href="https://qiita.com/Kurowasi/items/70d8cb038ea59aa0faa1">時代が来るかも？アスペクト指向プログラミング, AspectJ言語とは何か - Qiita</a></li>
+<li><a href="https://camp.trainocate.co.jp/magazine/whats-aop-programming/">AOP（アスペクト指向プログラミング）とは？使い方をわかりやすく解説！ | プログラミングを学ぶならトレノキャンプ（TRAINOCAMP）</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.08編集</p>
+</div>
+
+<h2>Spring Framework</h2>
+<p>Spring Frameworkは、Javaの独自のアスペクト指向かつMVCに基づくフレームワークとして知られる。<a href="java_framework_spring.html">Spring Framework</a>を参照のこと。</p>
+
+<h2>AspectC++/AspectR</h2>
+<p>AspectC++はC++におけるアスペクト指向の拡張。</p>
+<p>AspectRはRubyにおけるアスペクト指向の拡張。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/AspectC%2B%2B">AspectC++ - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/AspectR">AspectR - Wikipedia</a></li>
+</ul>
+
+<h2>Pythonのデコレータ</h2>
+<p>Pythonでは、デコレータという機能を使うことで、処理の前後に行う処理を複数のメソッドに適用することができる。<a href="python_intro_others.html">Python入門（８．その他）</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

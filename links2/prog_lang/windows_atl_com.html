@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Windowsプログラミング関連の世界観（ATL/COM） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Windowsプログラミングの世界観（ATL/COM）</h1>
+<p>Windowsプログラミングに関する世界観（ATL/COM）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="windows_programming.html">Windows API</a></li>
+<li><a href="windows_programming2.html">Windows関連技術</a></li>
+<ul>
+<li><a href="windows_mfc.html">Visual C++/MFC</a></li>
+<li><b>ATL/COM</b></li>
+<li><a href="windows_activex.html">ActiveX</a></li>
+<li><a href="windows_gdi.html">GDI</a></li>
+<li><a href="windows_winsock.html">WinSock</a></li>
+</ul>
+</ul>
+<p><a href="dotnet.html">.NET</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>COMの概要</h1>
+<p>（以下の文章は、分散オブジェクトやCOMについて何も分かっていない、経験や知識のない自分の書いた文章であるため、一般的な良識と比較して間違ったことを教えています。注意してご覧ください。）</p>
+
+<h2>分散システムとCOM</h2>
+<p>UNIXでは、中央コンピュータと端末、あるいはXのようにクライアント・サーバモデルでの、ネットワーク分散環境を利用できる。たとえば、端末のXサーバから別のパソコンのXクライアントを実行できる。</p>
+<p>こうしたUNIXの分散システムとは全く別のやり方をしているのが、MicrosoftとWindowsが頑張っていたCOM。</p>
+<p>たとえば、たくさんのPCがあるとして、その中にアプリケーションを導入するのであれば、同じソフトウェアを全部のOSに入れることもできるが、ネットワークに繋がった別のコンポーネントを再利用して使いたい場合がある。</p>
+<p>そうした時に、それぞれのソフトウェアをコンポーネントに分割して、相互に通信し合って、決められたインターフェースで各PCが協調して動くようにする。また、遠隔地に離れたコンポーネントでも、サービスとしてそのコンポーネントを利用可能にする。</p>
+<p>この仕組みは先進的だったため、LinuxでもCOMに似たCORBAを利用してこの仕組みを模倣したGNOMEと呼ばれるデスクトップ環境があり、Linuxの標準となっている。MozillaでもXPCOMと呼ばれる同様の技術があるほか、Plan 9などの研究用の分散OSでは、ファイルシステムとネットワークプロトコルを統合し、分散PC環境で同じアプリケーションリソースを共有できるようにしている。</p>
+<p>ただし、COMはHTTPのサービスと比べて普及せず、MicrosoftはCOMよりもさらに先進的な.NET Frameworkを開発し、GNOMEでもMonoとしてこれを模倣したが、これも単なるJavaの亜種であると評価されている。ただし.NET FrameworkのクラスライブラリはJavaを模倣したためとても使いやすく、Windows開発者から人気で、唯一の欠点である「関数やクラスの内部の仕組みが分からず使うだけになってしまう」という点も、.NET Coreと呼ばれる.NET Frameworkのオープンソース化が進んでおり、MSの技術は着実に新しくなっている。きちんと競争しなければ、Linuxの未来や優位性もMSに奪われてしまうだろう。</p>
+<p>COMはコンポーネント技術だと見做されているところもあり、ActiveXのようにブラウザの中に別のソフトウェアをコンポーネントとして埋め込む（Flash Playerなど）ことができるが、分散システムとしての側面を見れば、「ネットワーク上に無数に散らばるコンポーネントとしてのオブジェクトが通信し合ってたくさんの操作を行う」という先進的なプラットフォームになり得た技術である。これはGNOMEでも同様で、ある意味GNOMEアプリケーションの中で別のGNOMEアプリケーションをコンポーネントとして使うために、CORBA/Bonoboが利用されている実態がある。</p>
+
+<h2>ある程度の機能のセットの再利用</h2>
+<p>COMについて言えば、「ある程度の機能のセットの再利用」であると言えます。</p>
+<p>たとえば、ActiveXで作られたFLASHなどは、Webブラウザの中にアニメーションを埋め込むことができますが、これはアニメーション表示機能だけをWebブラウザに組み込んでいます。</p>
+<p>ActiveXを用いたJScriptやVBScriptでは、ファイルの読み書き機能を使うことができます。</p>
+<p>ほかにも、DirectXなどもCOMを利用して作られています。</p>
+<p>このように、ある程度のまとまった機能をそれぞれのアプリケーションに提供し、コードを再利用して共有するために、コンポーネントをWindowsが提供する、これがCOMであると考えられます。</p>
+<p>後日注記：また、Microsoft社のWebブラウザであり、かつて標準的地位を持っていたIE（Internet Explorer）も、COMコンポーネントの集合体として開発されています。</p>
+<p><a href="windows_activex.html">ActiveX</a>も参照のこと。</p>
+
+<h2>COMを使ってコンポーネントを作る</h2>
+<p>Windowsにおいて、COMやActiveXを用いて、ソフトウェアコンポーネントを作ることができます。</p>
+<p>COMは特定のプログラミング言語に依存しません。ですが、プラットフォームにはWindowsが主に想定されます。ただし、プロトコルが公開されているため、MozillaによるXPCOMのようなクロスプラットフォーム実装もあります。</p>
+<p>しかしながら、COMの機能は今では.NET Frameworkに置き換えられたところも多いです。MicrosoftはCOMに代わって.NETを大きく推進しています。</p>
+
+<h2>ATL/WTL</h2>
+<p>ATLはCOMを利用するためのラッパーで、ActiveXを開発する際に良く用いられる。</p>
+<p>MFC/ATLと同等のものとして軽量なWTLが存在する。WTLはATLの拡張ライブラリで簡単にWindowsアプリケーションの開発ができる。</p>
+
+<h2>OLE</h2>
+<p>OLEは、Windowsにおける「複合ドキュメント」のスタイルで、のちにCOMを利用したコンポーネント通信・結合技術に進歩した。</p>
+<p>ActiveXやOLEはCOMを利用して成立している。</p>
+<p>後日注記：OLEはMS-Officeなどで使われている技術で、たとえばワードの文書の中でエクセルのデータを使ったり開いたりすることができる。これがCOMに進歩した。GNOMEのCORBAによるBonoboはこれをよく似た技術。</p>
+<p>詳しくは以下が参考になる。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/fjava/rensai2/objetry05/objetry05_2.html">＠IT：スキルアップのための分散オブジェクト入門　第5回 （2/2）</a></li>
+<li><a href="http://chokuto.ifdef.jp/urawaza/com/com.html">COMの基礎 - ちょくとのページ</a></li>
+</ul>
+
+<h2>DCOMと.NET</h2>
+<p>DCOMは分散ネットワークにおけるコンポーネントの通信技術で、Microsoftにより仕様が裁定された。</p>
+<p>ネットワーク上のコードとサービスの再利用のためのモデルとなるとされていたが、さまざまな問題から、HTTPとWebブラウザの組み合わせに敗北した。</p>
+<p>Microsoftの.NET Frameworkは、DCOMを進歩させたものである。</p>
+<p><a href="dotnet.html">.NET</a>も参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Distributed_Component_Object_Model">Distributed Component Object Model - Wikipedia</a></li>
+</ul>
+
+<h2>COMとGNOME</h2>
+<p>GNOMEのミゲル・デ・イカザなどは、分散コンピューティングへの対応が十分ではないUNIXをより進歩させるものだとして、GNOMEの分散コンポーネント通信技術にDCOMと同様の技術であるCORBAを採用し、.NETに対してMonoを開発した。</p>
+<p><a href="../linux/gnome.html">GNOME</a>や<a href="../network/corba.html">CORBA</a>を参照のこと。</p>
+
+<h2>XPCOM</h2>
+<p>XPCOMはMozillaによるクロスプラットフォームなCOM実装。<a href="../linux/mozilla.html">Mozilla</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>分散システム</h2>
+<p><a href="../network/corba.html">CORBA</a>や<a href="java_servlet_javabeans.html">JavaBeans</a>や<a href="../os/distributed_os.html">分散OS</a>や<a href="../unix/plan9.html">Plan 9</a>も参照のこと。</p>
+
+<h2>Windows関連技術</h2>
+<p><a href="windows_activex.html">ActiveX</a>や<a href="dotnet.html">.NET</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>COM</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/fjava/rensai2/objetry05/objetry05_2.html">＠IT：スキルアップのための分散オブジェクト入門　第5回 （2/2）</a></li>
+<li><a href="http://chokuto.ifdef.jp/urawaza/com/com.html">COMの基礎 - ちょくとのページ</a></li>
+</ul>
+
+<h2>COMの参考リンク集</h2>
+<p>詳しくは以下のようなサイトが参考になる。</p>
+<ul>
+<li><a href="https://www.keicode.com/winprimer/com-basics1-5-implementation.php">簡単な COM コンポーネントの実装方法 ～ 作ってわかる COM の基礎 - Web/DB プログラミング徹底解説</a></li>
+<li><a href="http://keicode.com/winprimer/index6.php">COM プログラミング入門 - Web/DB プログラミング徹底解説</a></li>
+</ul>
+
+<h2>COMプログラミング</h2>
+<p>COMを使用したプログラミング。</p>
+<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/cc465338.aspx">COM プログラミングの基本 (上) - MSDN</a></li>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/cc465327.aspx">COM プログラミングの基本 (中) - MSDN</a></li>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/cc465328.aspx">COM プログラミングの基本 (下) - MSDN</a></li>
+</ul>
+
+<h2>COMのインターフェース定義例</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/fjava/rensai2/objetry05/objetry05_2.html">＠IT：スキルアップのための分散オブジェクト入門　第5回 （2/2）</a></li>
+</ul>
+
+<h2>ATL/WTLでプログラミング</h2>
+<p>以下にサンプルコードがあります。</p>
+<ul>
+<li><a href="http://home.att.ne.jp/banana/akatsuki/doc/atlwtl/atlwtl02-01/index.html">ウィンドウ - The So-Software Studio</a></li>
+</ul>
+
+<h2>ATLのクラス一覧</h2>
+<p>以下はMSDN。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/cpp/atl/atl-class-overview?view=vs-2017">ATL クラスの概要</a></li>
+</ul>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

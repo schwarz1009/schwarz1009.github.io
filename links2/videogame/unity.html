@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Unity関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ゲームの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/videogame_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Unityの世界観</h1>
+<p>Unityに関する世界観です。<a href="games_devel.html">ゲーム開発</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>ゲーム開発</h1>
+<h2>ゲームエンジン</h2>
+<p>ゲームエンジンとは、ゲームを開発するために必要な機能を集めたエンジンのこと。Web開発で言えばフレームワークのようなもの。</p>
+<p>昔はBASICなどでゴリゴリとすべてのゲームに必要なコードを記述していたが、今のゲーム開発はゲームエンジン全盛期であり、たとえばテトリスのような落ちゲーなどを作るのであっても、自分ですべてを記述せず、Unityのようなゲームエンジンを使うことが多い。</p>
+<p>なぜUnityを使うのかは、安くて標準的だから。特に、利益の少ない小さな会社や個人向けにはUnity Personalは無料で使うことができる（大きな会社だとお金が必要）。</p>
+<p>Unityはほかのソフトウェア（3DCGデザインソフトや3Dグラフィックスの表示レイヤーなど）にも対応し、またネットや書籍での情報も多い。任天堂やSONYなどでもおそらく独自のゲームエンジンを作っているはずだが、Unityはクロスプラットフォームであり、任天堂やSONYなどのゲーム機やWindowsパソコンやスマホなど、一部のプラットフォームに限らず、さまざまな環境で動作する。</p>
+<p>Unityは画面からスクリーンを編集できるほか、C#を用いてゲームプログラミングが行える。言語がC#なのは内部でMonoを使っているからであり、Microsoftがごり押ししたわけではない。だが、MicrosoftもXboxなどを持つ巨大ゲーム企業のひとつであり、C#を学ぶことはゲーム開発者になるために必要な知識のひとつであるということは言える。ただし一般的には、ゲームにはパフォーマンスが必要であるため、C/C++を使うことが多い。ただし、Microsoft環境ならもちろんC#も使うことができる。AndroidならJavaを使うことも多い。</p>
+
+<h2>Unity</h2>
+<p>Unityはクロスプラットフォームのゲームエンジン。<a href="windows_directx.html">DirectX</a>や<a href="opengl.html">OpenGL</a>に対応しており、<a href="blender.html">Blender</a>や<a href="../art/photoshop.html">Photoshop</a>のファイル形式にも対応している。</p>
+<p>Ubuntu独自のユーザーインターフェースもUnityという名前だが、別物。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Unity_(%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3)">Unity (ゲームエンジン) - Wikipedia</a></li>
+<li><a href="https://qiita.com/kemmimilk/items/7950fb12ef925efa276d">今日からはじめるUnity - Qiita</a> - 内容が超詳しい。ありえないレベル。</li>
+</ul>
+
+<h2>Unity勉強中</h2>
+<p>最近（2018.11.29）、自分はUnityについて勉強中である。スクリプトはC#/monoで動いていて、コードはC#で書く必要がある。それから、無料版は大きく儲かっていない小さな企業でしか使うことができない。</p>
+<p>だが、Unityはダウンロードだけで簡単に使えるし、上のサイトのように詳しいサイトがたくさんある。C#は僕が昔twintail（2ch専用ブラウザ）の改造の時にお世話になった言語である。</p>
+<p>できることなら、今僕の言っている作業所で、Illustratorで仕事をやる合間に何かゲームでも作れたら良いなと思っている。</p>
+<p>Unityはブラウザやモバイルから家庭用ゲーム機まで幅広く対応している。とても優れたゲームエンジン（ゲームのための色んな機能を提供してくれるエンジン）で、エディタは自由に拡張することができる。アニメーションなどの分野でも使われているようである。</p>
+<p>できることなら、Unityでカードゲームを作りたい。UnityはポケモンGOなどでも使われており、最近とても流行っている。ゲーム業界のデファクトスタンダードになるのではないかと思う。</p>
+
+<h2>UnityではC#を使う</h2>
+<p>Unityでは、Microsoftによる.NET Frameworkの言語である、C#を使う。これは、オープンソースの.NET Frameworkとしておなじみのmonoを内部で使っているからである。</p>
+<p>C#はMicrosoftの公式サイトでASP.NETというWebプラットフォームに使われていたり、Windows.Formsなどでもおなじみで、.NET Coreなどのコードを見て分かる通りWindowsやMicrosoft製品の内部で使われていて、VB.NETよりもJavaに近い言語として知られている。Java VMとの比較から「MS版のJava」として知られている。monoはLinuxなどのUNIX向けのオープンソースな.NET Frameworkの実装。Unityではこのmonoをスクリプトを書く言語に採用している。</p>
+<p><a href="../prog_lang/mono.html">mono</a>や<a href="../prog_lang/dotnet.html">.NET</a>や<a href="../prog_lang/csharp.html">C#</a>も参照のこと。</p>
+
+<h2>面白い動画</h2>
+<p>僕の大好きなエンジニア経営者のセイト先生がYouTubeで面白い動画を投稿されたので参照してください。短い動画ですが、セイトさんがUnityをとても面白くゲームの開発に使っていて、ゲーム開発の「さわり」を知る上で参考になります。</p>
+<p>後日注記：実際のところ、こんなに短時間でゲームが作れるということは驚きました。Unityというゲームエンジンを使っているということ、Udemyという動画サイトを見た上での結果であるということは分かりますが、世の中のゲーム会社はあまりに適当にゲームを作っているのではないかと勘繰りたくなります（もちろん、ひとつのステージのほんの少しの部分しか作っていないということは分かりますが）。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Ans4op7nClA">検証！未経験でもUdemyの動画観れば1日でゲーム開発できるようになるか？ - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2022.11.29</p>
+<p>2022.12.01編集</p>
+</div>
+
+<h2>Unityでテトリスを作る記事へのリンク</h2>
+<p>以下はUnityでテトリス風落ちゲーを作る制作記録。</p>
+<ul>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame1/">Unityではじめてのテトリス風落ちゲー制作記 ~その1 ゲーム設計編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-puzzle-game2/">Unityではじめてのテトリス風落ちゲー制作記 ~その2 壁ブロック表示編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-puzzle-game3/">Unityではじめてのテトリス風落ちゲー制作記 ~その3 落下ブロック表示編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame4/">Unityではじめてのテトリス風落ちゲー制作記 ~その4 落下ブロック操作編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame5/">Unityではじめてのテトリス風落ちゲー制作記 ~その5 当たり判定編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame6/">Unityではじめてのテトリス風落ちゲー制作記 ~その6 ブロック配置編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame7/">Unityではじめてのテトリス風落ちゲー制作記 ~その7 ブロック消去編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame8/">Unityではじめてのテトリス風落ちゲー制作 ~その8 スコア加算編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame9/">Unityではじめてのテトリス風落ちゲー制作 ~その9 ゲームオーバー機能追加編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame10/">Unityではじめてのテトリス風落ちゲー制作 ~その10 タイトル画面追加編~ | CRAFT GoGo</a></li>
+<li><a href="https://craft-gogo.com/unity-first-puzzlegame11/">Unityではじめてのテトリス風落ちゲー制作 ~最終回 ベストスコアセーブ編~ | CRAFT GoGo</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
+
+<h2>Unityでは最新のC#の機能は使えない</h2>
+<p>残念なお知らせですが、Unityでは最新のC#の機能は使えません。これはUnityがMonoというランタイムエンジンを使っているためです。Monoは旧来の.NET技術であり、C#のバージョンが古く、UnityではC# 9.0というバージョンに固定されています。最新の.NETではC# 14なので、大分古いです。詳しくは以下の記事が参考になります。</p>
+<ul>
+<li><a href="https://zenn.dev/nuskey/articles/why-i-use-csharp">プログラミング言語オタクとして改めてC#を語りたい - Zenn</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.07</p>
+</div>
+
+<h1>その他のゲームエンジン</h1>
+<h2>Unreal Engine</h2>
+<p>Unreal EngineはEpic Gamesによるゲームエンジンで、Unityと並んで「大手のゲームエンジン」として知られる。Unityと同様、原則無料で利用できるが、UEを使って作ったゲームやコンテンツの収入が100万ドル以上になった場合、5%のロイヤリティを払わなければならない。</p>
+<p>Unreal Engineは、無料で利用できるからといって、チャチなものではなく、とても高度なゲームや3Dコンテンツを作ることができ、シミュレーションなどにも使える「本格的なゲームエンジン」であると知られている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Unreal_Engine">Unreal Engine - Wikipedia</a></li>
+</ul>
+
+<h2>Godot</h2>
+<p>Godotはオープンソースなゲームエンジン。完全に無料で利用でき、なんらかの条件でライセンス料やロイヤリティを支払う必要もない。2Dにも3Dにも使えるが、どちらかというと2Dゲームに向いている。</p>
+<ul>
+<li><a href="https://zenn.dev/folt_a/articles/f6dfa98880d83f">Godot Engineお役立ちリンク集 - Zenn</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>昔はBASIC、今はC#</h2>
+<p>昔のパソコン業界では、BASICでゲームを開発するのが常套手段でした。</p>
+<p>昔のホビーパソコンの時代では、BASICインタープリタあるいは機械語やC/C++などを使ってゲームを作っていた人が多かったと思います。</p>
+<p>その時代、インターネットなどはなく、「マイコンBASICマガジン」のような雑誌にBASICや機械語で書かれたプログラムを掲載して、多くのホビーエンジニアはそのような雑誌で知識をつけていました。</p>
+<p>そして、当時から、MicrosoftはBASICインタープリタの開発で有力なソフトウェア企業でした。</p>
+<p>その後に、MicrosoftはOS企業として、IBM PC/AT互換機のディスク管理OSであるMS-DOSを提供するようになり、その後にWindowsというデスクトップのGUIなOSを作るようになりました。</p>
+<p>さて、Windowsの時代ですが、Windowsでプログラムを書くためには、C/C++だけではなく、Visual BasicというBASICの改良言語でプログラムを書くことができます。</p>
+<p>このVisual Basic（バージョンを含めるとVB 6.0）という言語は、優れたフォームデザイナーがついてきたため、グラフィカルな開発がしやすく、「Visual」という名前がついているのに相応しい開発環境でした。</p>
+<p>このVB 6.0は、長らくWindows開発の主力として使われた言語であり、ゲームの開発も簡単にできます。以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEVisual-Basic6-0%E2%80%95%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E3%82%B9-%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E5%8C%97%E5%B1%B1-%E6%B4%8B%E5%B9%B8/dp/4774111147">はじめてのVisual Basic6.0―グラフィックス&ゲームプログラミング</a></li>
+</ul>
+<p>そして、時代はさらに新しくなります。MicrosoftはJavaと同等の仮想マシン（VM）上で動く環境である、.NET Frameworkという技術を開発します。この.NETはWindows Vista以降のバージョンではWindowsに最初から搭載されています。そして、この.NETで動く言語として、VB.NETとC#が提供されました。</p>
+<p>そして、この時代から、Microsoftの主力言語はC#になります。</p>
+<p>VB.NETがついてくるのであれば、いつまでもBASICを使えばいいような気がしますが、実際にはC#はJavaを模した上で改良した言語であり、Javaがエンタープライズ向けの言語であるのと同様、C#もエンタープライズ向けの言語となりました。そして、VB.NETで書くよりも、Javaを模したC#で書いたほうがモダンな書き方ができて、C/C++にも構文的に近いため、C#は新しいWindowsの標準となりました。</p>
+<p>ですが、問題は、C#は当初Windows向けの言語だったため、UNIX環境では動きませんでした（今では.NET Core以降の.NETがオープンソース化されており、UNIXでも動くようになっている）。そのためどうしたかというと、当時は.NET技術がJavaに対抗する上で標準規格として公開されたため、仕様を詳しく知ることができました。そのため、Linux向けのGUI環境GNOMEを開発したミゲル・デ・イカザという人物（Linux界隈では知らない人はいないような超有名ハッカー）が、UNIX環境でも動くMonoという.NETのオープンソース技術を開発したのです。</p>
+<p>そして、Unityは、このMonoというランタイムをゲームエンジンのための開発言語として採用しています。そのような経緯があって、今ではゲームはC#で書くのが普通になりました。すなわち、BASICがVisual Basicとなって、最終的にC#/VB.NETおよびMonoに至る歴史があったために、「昔はBASIC、今はC#」という流れができたのです。</p>
+<p>ですが、問題はいくつかあります。ひとつは、Monoの開発が停滞していることです。UnityのC#はバージョン9.0で固定されていますが、これはMonoを使っていることが一因です。最近のC#はバージョン14ですが、それに比べるとずいぶん古いです。Monoを使わず今の.NETを使えばいいのですが、ランタイムを変えることは困難であるため、C# 9.0よりも新しい機能は使えません。</p>
+<ul>
+<li><a href="https://zenn.dev/nuskey/articles/why-i-use-csharp">プログラミング言語オタクとして改めてC#を語りたい - Zenn</a></li>
+</ul>
+<p>ですが、問題はそれくらいです。C#は極めて新しいプログラミング言語であり、最新のIT業界で使われる多くの機能がありますし、Microsoftは新機能をどんどん付けていくので、たくさんの機能が使えます。プレステなどのコンシューマゲーム機では今でもC++を現役で使っていますが、C++に比べるとC#の環境は天国と地獄ぐらいの差があります。なので、「Unityは最高だ」と言う人は少なくありません。</p>
+<p>また、Unity自体にも問題はあります。ひとつは、Unityがゲームエンジンであることです。C#でゲームを開発しようとするとUnityを使うのが一般的ですが、これは「ゲームエンジンを用いたプログラミング」を意味しています。ゲームエンジンを使うことで、難しいゲームを簡単に作ることができますが、Unityのやり方でしか作ることができません。</p>
+<p>それに比べると、C++でゲームを作るのは自由度が高いです。あえてゲームエンジンを使わないことで、ゲームを作る難易度は上がりますが、C++の認める範囲内で言えば自由な開発が許されます。なので、C#でゲームを開発するのが簡単すぎて物足りない場合は、C++で開発することが重要になります。プレステなどのコンシューマゲーム機ではC#は使いません。C++で開発することが一般的です。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=8XJ885oIv8k">ゲームプログラマーになるにはC++は絶対必要？！ - YouTube</a></li>
+</ul>
+<p>UnityではなくC++でゲームを開発するためには、どうすればよいのでしょうか。ひとつの方法として、Windowsを使う場合、Microsoft Visual Studioを買う方法があります。Visual StudioにはVisual C++という開発環境がついてきます。ですが、僕はこれはお勧めしません。なぜなら、値段が高額なのに使い方が難しいからです。現に、僕はWindows XPの時代にVisual Studio .NETを学生価格で買ったことがありますが、使い方が分からずにどこかにしまい込んで、結局使わなくなってしまいました。</p>
+<p>もうひとつの方法は、オープンソース技術を使うことです。Linuxや*BSDのようなUNIX系のOSには、GCCあるいはLLVMといったコンパイラ基盤がついてきます。これらは無料で使えるので、もし使い方が分からなくなって放棄したとしても無駄になりません。手軽に使うという意味では、Linuxや*BSDでGCCなどを使うことはよい選択です。</p>
+<p>また、ほかにも利点があります。それは、オープンソース技術がたくさん使えるということです。GCC以外にも、PerlやPHPやPythonやRubyというほかの言語も無料で使えます。ほかにも、Webサーバーを立てたいと思った時にLinuxならApacheなどを使ってすぐに立てられます。Perl/CGIを使うことで、掲示板やチャットなど、ネットゲームにプラスして開発したいWebサービスが簡単に開発・公開できます。WebフレームワークとオープンソースのSQLデータベースを使うことで、FacebookのようなSNSも開発できます。ゲーム以外の開発も簡単だということが、Linuxを使う上で大きなメリットです。</p>
+<p>ただし、かつての僕の経験の話をすると、DelphiというBorlandが作っていた開発環境は素晴らしかったです。当時はDelphi 6のパーソナル版が無料でダウンロードできましたが、僕は製品版のDelphi 7を購入して使っていました。製品版のDelphiを買うと、コンポーネントが全機能使えるほか、オフィシャルコースウェアというマニュアル本がついてきます。これらの開発環境を使ってPascalでプログラミングをするのもいいと思います。そうしたところは、好きなように決めてやればいいでしょう。Delphiでゲームプログラミングを行うのは簡単です（以下の書籍を参照のこと）。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Delphi%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%83%B3%E3%82%B9-%E6%97%A5%E9%AB%98-%E5%BE%B9/dp/479731883X">Delphiゲームプログラミングのエッセンス</a></li>
+</ul>
+<p>今の時代、かつてのホビーパソコンよりも環境はよくなっています。雑誌の文化はなくなりましたが、Webでたくさんのネットゲームが遊べるようになった今の時代は、昔よりは恵まれていると思います。ただし、3DCGのゲームが増えたように、ゲーム開発の難易度は上がっているので、昔のように簡単にゲームは作れません。ですが、そのような難易度を極力下げるためのUnityのようなゲームエンジンだと思います。</p>
+<p>C#は、Unityで使われているからゲーム開発で使うだけではありません。C#はMicrosoft Windowsの主力言語です。以下のやねうらお氏の書籍は、Unityなどなかった時代に書かれた本ですが、既にC#がゲーム開発の分野で主力として使われていたことが分かります。C#はWindowsにおけるゲーム開発の中軸であり、GDI+やDirectXのようなWinwows技術が（C++と同様に）ネイティブサポートされています。C#はWindowsアプリケーションの開発にも使われているので、C#を学んだことは決して無駄にはならず、Unityを使うのをいずれやめたとしても、C#の知識はエンジニアとして大いに役に立ちます。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a></li>
+<li><a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B02%E3%80%90CD-ROM%E4%BB%98%E3%80%91-Game-developer-books-%E3%81%86%E3%82%89%E3%81%8A/dp/4798006033">Windowsプロフェッショナルゲームプログラミング2</a></li>
+</ul>
+<p>ゲーム開発とは、グラフィックスプログラミングです。グラフィックスプログラミングにおいて、Windowsでは、2DCGであればGDI+、3DCGやハードウェア処理であればDirectXを使います。これらはC++とC#どちらもサポートされていて、使い方がよく似ています。Unityを使わなくても、C#を使う上でこれらのAPIを学ぶことは重要です。なので、C#の勉強は、WindowsのC++を学ぶ上でも極めて役に立ちます。</p>
+<div class="edit_date">
+<p>2026.05.29</p>
+</div>
+
+<h2>ゲームエンジンの内部の仕組み</h2>
+<p>ゲームエンジンの内部の仕組みは、以下の動画が参考になる。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=mS6-FAjJZKo">意外と知らないゲームエンジン！ゲームエンジンが何なのか理解する - YouTube</a></li>
+</ul>
+<p>この動画によれば、ゲームはパラパラ漫画のような画面フレームごとの無限の繰り返しの中で、「入力チェック」「状態の更新処理」「画面への描画」という命令を繰り返し実行している。</p>
+<p>１．入力チェックの中でユーザーの入力（コントローラのボタンなど）を取得する。</p>
+<p>２．状態の更新において物理演算やキャラクターの動きの判定などゲームの処理（ゲームに必要なロジック）を行う。</p>
+<p>３．描画命令の中でゲームオブジェクト（メッシュとテクスチャ）を光の加減などを考慮して画面に表示する。</p>
+<p>このようなゲームにおいて必要な処理や機能を、ゲームエンジンがある程度の枠組みごと最初から用意してくれる。これがゲームエンジンの内部の仕組みです。</p>
+<p>ゲームエンジンでは、描画処理が最初から綺麗かつ多機能なので、簡単にゲームの描画をすることができ、自分でスクリプトやコンポーネントを追加した時は状態の更新処理の中に追加されるようになっている。だから、ゲームが作りやすいのです。</p>
+<div class="edit_date">
+<p>2026.05.30-31</p>
+<p>2026.06.01編集</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>ゲーム開発</h2>
+<ul class="defaultlist list7">
+<li>ゲーム
+<ul>
+<li>Unity
+<ul>
+<li>さまざまなゲームが簡単に作れるゲームエンジン</li>
+<li>ゲームを作るための言語としてMonoを採用しているため、C#を使ってゲームを開発する</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

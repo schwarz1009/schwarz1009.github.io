@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>データ処理の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>データ処理の世界観</h1>
+<p>データ処理に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>データ処理</h1>
+<h2>データ処理をしよう</h2>
+<p>データ処理をしましょう。</p>
+<p>プログラミングの基本は、データ処理をすることだと僕は思います。</p>
+<p>たとえば、正規表現でパターンマッチをして、文字をカウントしたりすることができます。</p>
+<p>あるいは、テキストをパースするパーサーを作って、ツリー構造のデータ構造に変換したり、そのデータを操作してさまざまなことが解析できたりします。</p>
+<p>データ処理について、かつてよりUNIXでは、動的スクリプト言語が使われていました。</p>
+<p>かつてはPerlがもっともデータ処理が得意な言語でしたが、今ではPythonやRubyがデータ処理によく使われます。</p>
+<p>Rubyの参考文献として、<a href="https://www.amazon.co.jp/Ruby-Way-%E7%AC%AC2%E7%89%88-Professional/dp/4798115339">Ruby Way 第2版</a>をおすすめします。Rubyによるデータ処理やデータ構造の操作のことが、一通りきちんと書かれています。Rubyの基本文法を学び終えて、「Rubyでさまざまなことがやってみたい」と思う方には参考になる書籍だと思います。</p>
+<p>また、データ処理とアルゴリズムは紙一重です。アルゴリズムを書くということは、多くの場合データ処理をするということです。</p>
+<p>ですが、基本的に、Perlのハッカーになることからデータ処理のマスターになることを目指してはいかかでしょうか。</p>
+<p>Perlがきちんと書ける人間は、データ処理をマスターすることにもっとも近いと思います。</p>
+<p>Perlの参考文献として、有名な結城浩さんの<a href="https://www.amazon.co.jp/Perl%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E5%85%A5%E9%96%80%E7%B7%A8-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797312211">Perl言語プログラミングレッスン 入門編</a>をおすすめします。Perlにおいて、特に正規表現による文字列処理を行うのであれば、この書籍がもっとも入門者向けだと思います。</p>
+<p>また、もうひとつ、Common Lispの参考文献として<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>をおすすめします。Lispはもっとも抽象度が高いとも言える言語であり、その抽象度の高さが「美しいアルゴリズムを書く」ということに良い効果をもたらします。</p>
+<p>これらの書籍を読めば、おそらくデータ処理のマスターになることができるでしょう。なんらかの文字列やデータを解析するパーサーを書くのであれば、オープンソースプロジェクトでみんなが使うような、優れたオープンソースのパーサーを作ることなどを目標にしてはいかかでしょうか。</p>
+<div class="edit_date">
+<p>2023.06.12</p>
+</div>
+
+<h2>２ちゃんねるブラウザやスクレイピングがおすすめ</h2>
+<p>データ処理を行うのであれば、２ちゃんねる専用ブラウザを書くことがおすすめです。</p>
+<p>２ちゃんねる専用ブラウザは、掲示板のあるサーバー上にあるdatファイルをダウンロードして、それを解析し、HTMLなどのビュー画面に変換して表示します。</p>
+<p>この「datファイルを処理して画面上に表示する」ということが、データ処理における良い初心者向けの入門になるのです。</p>
+<p>ですが、最近の５ちゃんねるでは、そのような２ちゃんねる専用ブラウザを簡単に作って配布することができなくなりました。</p>
+<p>もっと別の例として、スクレイピングがあります。スクレイピングは、インターネットにおけるWebページを自動的にダウンロードして、データを処理する技術です。</p>
+<p>昔であれば２ちゃんねる専用ブラウザで行えたことが、今ではスクレイピングで行えます。</p>
+<p>ただし、スクレイピングは禁止されているWebサービスもあるので、注意して行いましょう。</p>
+<p>２ちゃんねる専用ブラウザについては<a href="../services/2ch_browsers.html">２ちゃんねる専用ブラウザ</a>を、スクレイピングについては<a href="python_intro_advanced.html">Python入門（応用・モジュール）</a>を参照してください。</p>
+<div class="edit_date">
+<p>2023.06.12</p>
+</div>
+
+<h2>ファイル処理を恐れるな</h2>
+<p>僕は、プログラミングのコツは「ファイル処理を恐れないこと」だと思います。</p>
+<p>UNIXのコマンドラインツールは、多くが引数からファイル名を取得してファイルオープンしたり、標準入出力を操作したりしながら、ファイルに対して処理を行い、処理を行った上でファイルを保存します。</p>
+<p>このように、基本的なプログラムというのは、ファイルを処理することを中心に成り立っています。</p>
+<p>確かにファイルを処理する以外のプログラムもありますが、ほとんどのプログラムはなんらかのファイル処理をしています。２ちゃんねる専用ブラウザであっても、スレッドの過去ログの保管のために常にファイルをローカルに保存して読み書きします。</p>
+<p>なので、ファイル処理を恐れないことです。C言語やPerlのようなプログラミング言語で、ファイル処理を行うプログラムを書きましょう。それがプログラミングの技術向上に繋がります。</p>
+<div class="edit_date">
+<p>2023.06.30</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Perl</h2>
+<p><a href="perl.html">Perl</a>を参照のこと。</p>
+
+<h2>Ruby</h2>
+<p><a href="ruby.html">Ruby</a>を参照のこと。</p>
+
+<h2>Common Lisp</h2>
+<p><a href="common_lisp.html">Common Lisp入門</a>を参照のこと。</p>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

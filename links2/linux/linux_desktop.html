@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux デスクトップ環境・WM - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux デスクトップ環境・WM</h1>
+<p>Linuxやオープンソースのデスクトップ環境・ウィンドウマネージャに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ウィンドウマネージャ</h1>
+<h2>Linuxの自由について</h2>
+<p>Linuxは自由度が高い。ソースコードが公開されていて自由に変更できるというだけではなく、特にX11のようなGUIのカスタマイズが可能という意味で、設計そのものが自由である。GUIはあくまでオプションであり、カーネルと分離されていてユーザーランドで動く。また、WindowsやMacと異なり、標準のデスクトップ以外のGUI環境に変更することが簡単にできる。複数のGUI環境を切り替えるのも簡単である。</p>
+<ul>
+<li><a href="https://news.yahoo.co.jp/articles/ea069854c4885173e03ea480eb28a273f4b2a072">真に自由なLinuxが教えてくれる「Windowsに感じる不足感」の正体（TechTargetジャパン） - Yahoo!ニュース</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.21</p>
+</div>
+
+<h2>Linuxで使えるデスクトップ環境一覧</h2>
+<p>Linuxではとてもたくさんのデスクトップ環境やウィンドウマネージャを使うことができる。ユーザーが自分で選んで導入し、自分の環境をカスタマイズできる。軽量なウィンドウマネージャの場合、パッケージ管理システムから簡単にインストールできるが、巨大なものの場合は後で削除することが難しいので、特にKDE、GNOME、Xfceあたりはディストリビューションの導入時にインストールするのが無難。</p>
+<p>以下は一覧です。</p>
+<ul>
+<li><a href="https://wiki.debian.org/DesktopEnvironment">DesktopEnvironment - Debian Wiki</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Desktop_environment">Desktop environment - ArchWiki</a></li>
+<li><a href="https://sparkylinux.org/wiki/doku.php/sparky_desktops">sparky_desktops [Sparky Wiki]</a></li>
+<!--<li><a href="https://installlinux.jimdo.com/">Linux を入れよう: デスクトップ向け Linux 紹介サイト</a></li>-->
+</ul>
+<div class="edit_date">
+<p>2025.12.21編集</p>
+</div>
+
+<h2>ウィンドウマネージャを自作する</h2>
+<p>困難と冒険にチャレンジしたいのであれば、X11の仕組みを使うことで、ウィンドウマネージャは自分で開発することもできる。詳しくは<a href="linux_desktop_jisaku.html">Linux ウィンドウマネージャ自作</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.21編集</p>
+</div>
+
+<h1>GTK+ベース</h1>
+<h2>Budgie</h2>
+<p>最近はUbuntu Budgieと言うフレーバーも生まれて、波に乗るデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Budgie">Budgie - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Budgie+Linux&tbm=isch">Budgieのスクリーンショット</a></li>
+</ul>
+<p><a href="budgie.html">Budgie</a>も参照のこと。</p>
+
+<h2>Cinnamon</h2>
+<p>GNOME 3とは別の道を行くデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Cinnamon">Cinnamon - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Cinnamon+Linux&tbm=isch">Cinnamonのスクリーンショット</a></li>
+</ul>
+<p><a href="cinnamon.html">Cinnamon</a>も参照のこと。</p>
+
+<h2>GNOME Flashback</h2>
+<p>昔のGNOMEの再現。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME Flashback">GNOME Flashback - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=GNOME+Flashback+Linux&tbm=isch">GNOME Flashbackのスクリーンショット</a></li>
+</ul>
+<p><a href="gnome.html">GNOME</a>も参照のこと。</p>
+
+<h2>GNOME Shell</h2>
+<p>賢くなったGNOME 3のインターフェースですが、ユーザーからは「使い辛い」と不評です。</p>
+<p>インターフェースを単純な「アクティビティバー」に統合し、エクステンションで賢くすることが出来る。</p>
+<p>巨大プロジェクトだが、KDEと比べて「設計面」に力を入れている印象がある。アプリケーションは、機能がシンプルで単純だ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME Shell">GNOME Shell - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=GNOME+Shell+Linux&tbm=isch">GNOME Shellのスクリーンショット</a></li>
+</ul>
+<p><a href="gnome.html">GNOME</a>も参照のこと。</p>
+
+<h2>LXDE</h2>
+<p>軽いことを目指しているデスクトップ環境。</p>
+<p>公式・Wikipedia</p>
+<ul>
+<li><a href="http://lxde.org/">LXDE.org</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/LXDE">LXDE - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=LXDE+Linux&tbm=isch">LXDEのスクリーンショット</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://git.lxde.org/gitweb/">git</a></li>
+</ul>
+<p><a href="lxde.html">LXDE/LXQt</a>も参照のこと。</p>
+
+<h2>MATE</h2>
+<p>GNOME 2のフォーク。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/MATE">MATE - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=MATE+Linux&tbm=isch">MATEのスクリーンショット</a></li>
+</ul>
+<p><a href="mate.html">MATE</a>も参照のこと。</p>
+
+<h2>Pantheon</h2>
+<p>elementary OSで採用されている、Mac OS X風のDock（ドック）を持ったデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Pantheon">Pantheon - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Pantheon+Linux&tbm=isch">Pantheonのスクリーンショット</a></li>
+</ul>
+<p><a href="elementary_os.html">elementary OS</a>も参照のこと。</p>
+
+<h2>ROX</h2>
+<p>軽快だが癖の強いデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/ROX">ROX - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=ROX+Linux&tbm=isch">ROXのスクリーンショット</a></li>
+</ul>
+
+<h2>Sugar</h2>
+<p>OLPCと言う「世界中の子供たちにラップトップ・コンピュータを無料で与えよう」と言うプロジェクトの独自のデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Sugar">Sugar - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Sugar+Linux&tbm=isch">Sugarのスクリーンショット</a></li>
+</ul>
+
+<h2>Xfce</h2>
+<p>軽量でカスタマイズ性のあるデスクトップ環境。</p>
+<p>GNOMEやKDEのような大規模なプロジェクトは目指していないが、その代り「UNIXの考え方に準拠する」シンプルな設計を目指している。</p>
+<p>公式・Wikipedia</p>
+<ul>
+<li><a href="https://www.xfce.org/?lang=ja">Xfce.org</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Xfce">Xfce - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Xfce+Linux&tbm=isch">Xfceのスクリーンショット</a></li>
+</ul>
+<p><a href="xfce.html">Xfce</a>も参照のこと。</p>
+
+<h2>Zorin</h2>
+<p>Windows XP/7ユーザーのためのディストリビューション「Zorin OS」のデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Zorin">Zorin - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Zorin+Linux&tbm=isch">Zorinのスクリーンショット</a></li>
+</ul>
+
+<h1>Qtベース</h1>
+<h2>Deepin</h2>
+<p>中国発のLinux「Deepin」のデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Deepin">Deepin - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Deepin+Linux&tbm=isch">Deepinのスクリーンショット</a></li>
+</ul>
+
+<h2>KDE Plasma 5</h2>
+<p>KDEの最新のデスクトップ環境。最近は美しくなった上で、流行りのフラットな表示を行う。カスタマイズ性とアプリケーションの統合度が高い。</p>
+<p>巨大プロジェクトだが、GNOMEと比べて「機能面」に力を入れている印象がある。たくさんの高機能なアプリケーションを含む。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDE Plasma 5">KDE Plasma 5 - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=KDE+Plasma+5+Linux&tbm=isch">KDE Plasma 5のスクリーンショット</a></li>
+</ul>
+<p><a href="kde.html">KDE</a>も参照のこと。</p>
+
+<h2>Lumina</h2>
+<p>Qtをベースとした、TrueOS/PC-BSD向けのデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Lumina">Lumina - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Lumina+Linux&tbm=isch">Luminaのスクリーンショット</a></li>
+</ul>
+
+<h2>LXQt</h2>
+<p>LXDEが移行中の、Qtをベースとした軽量デスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/LXQt">LXQt - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=LXQt+Linux&tbm=isch">LXQtのスクリーンショット</a></li>
+</ul>
+<p><a href="lxde.html">LXDE/LXQt</a>も参照のこと。</p>
+
+<h2>Trinity</h2>
+<p>KDE 3のフォーク。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Trinity">Trinity - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Trinity+Linux&tbm=isch">Trinityのスクリーンショット</a></li>
+</ul>
+
+<h1>Motifベース</h1>
+<h2>CDE</h2>
+<p>昔の商用UNIXで使われていた統合デスクトップ環境。ツールキットにはMotifを使います。これを目指していたのが、初期のKDEです。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/CDE">CDE - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=CDE+Linux&tbm=isch">CDEのスクリーンショット</a></li>
+</ul>
+<p><a href="motif.html">Motif</a>を参照のこと。</p>
+
+<h1>その他のデスクトップ環境</h1>
+
+<h2>Enlightenment</h2>
+<p>ウィンドウマネージャとライブラリのスイート。本当に美しいデスクトップ環境を目指している。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Enlightenment">Enlightenment - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Enlightenment+Linux&tbm=isch">Enlightenmentのスクリーンショット</a></li>
+</ul>
+<p><a href="enlightenment.html">Enlightenment</a>も参照のこと。</p>
+
+<h2>Equinox/EDE</h2>
+<p>FLTKベースのデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/EDE">EDE - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Equinox/EDE+Linux&tbm=isch">Equinox/EDEのスクリーンショット</a></li>
+</ul>
+
+<h2>Etoile</h2>
+<p>GNUstepベースのデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Etoile">Etoile - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Etoile+Linux&tbm=isch">Etoileのスクリーンショット</a></li>
+</ul>
+<p><a href="../os/nextstep.html">NeXTSTEP</a>も参照のこと。</p>
+
+<h2>Moksha</h2>
+<p>Enlightenment 17のフォーク。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Moksha">Moksha - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Moksha+Linux&tbm=isch">Mokshaのスクリーンショット</a></li>
+</ul>
+<p><a href="enlightenment.html">Enlightenment</a>も参照のこと。</p>
+
+<h2>Papyros</h2>
+<p>Googleのマテリアルデザイン準拠のデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Papyros">Papyros - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Papyros+Linux&tbm=isch">Papyrosのスクリーンショット</a></li>
+</ul>
+
+<h2>Unity</h2>
+<p>Ubuntuの独自のデスクトップ環境。Mac OS Xのようなアプリケーション別メニューのトップバーでの表示と、Windows 7ライクなDockの組み合わせが特徴。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Unity_(%E3%83%A6%E3%83%BC%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9)">Unity (ユーザインタフェース) - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Unity+Linux&tbm=isch">Unityのスクリーンショット</a></li>
+</ul>
+<p><a href="ubuntu.html">Ubuntu</a>も参照のこと。</p>
+
+<h1>タイル型ウィンドウマネージャ</h1>
+<p><a href="tilingwm.html">タイル型WM</a>も参照のこと。</p>
+
+<h2>awesome</h2>
+<p>タイル型のウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/awesome">awesome - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=awesome+Linux&tbm=isch">awesomeのスクリーンショット</a></li>
+</ul>
+
+<h2>bspwm</h2>
+<p>タイル型のウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/bspwm">bspwm - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=bspwm+Linux&tbm=isch">bspwmのスクリーンショット</a></li>
+</ul>
+
+<h2>i3</h2>
+<p>タイル型のウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/i3">i3 - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=i3+Linux&tbm=isch">i3のスクリーンショット</a></li>
+</ul>
+<p><a href="i3.html">i3</a>も参照のこと。</p>
+
+<h2>Wmii</h2>
+<p>タイル型のウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Wmii">Wmii - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Wmii+Linux&tbm=isch">Wmiiのスクリーンショット</a></li>
+</ul>
+
+<h2>xmonad</h2>
+<p>タイル型のウィンドウマネージャ。Haskellで書かれている。設定や拡張もHaskell。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/xmonad">xmonad - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=xmonad+Linux&tbm=isch">xmonadのスクリーンショット</a></li>
+</ul>
+
+<h1>Blackbox派生</h1>
+<p><a href="openbox.html">Openbox (Blackbox, Fluxbox)</a>も参照のこと。</p>
+
+<h2>Blackbox</h2>
+<p>軽量なウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Blackbox">Blackbox - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Blackbox+Linux&tbm=isch">Blackboxのスクリーンショット</a></li>
+</ul>
+
+<h2>Fluxbox</h2>
+<p>軽量なウィンドウマネージャ。Blackboxの派生。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Fluxbox">Fluxbox - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Fluxbox+Linux&tbm=isch">Fluxboxのスクリーンショット</a></li>
+</ul>
+
+<h2>Openbox</h2>
+<p>軽量なウィンドウマネージャ。Blackboxの派生。LXDEのウィンドウマネージャとしても使われている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Openbox">Openbox - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Openbox+Linux&tbm=isch">Openboxのスクリーンショット</a></li>
+</ul>
+
+<h1>twmライク</h1>
+<h2>CTWM</h2>
+<p>twm風のウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/CTWM">CTWM - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=CTWM+Linux&tbm=isch">CTWMのスクリーンショット</a></li>
+</ul>
+<p><a href="fvwm.html">FVWM (twm亜種)</a>も参照のこと。</p>
+
+<h2>FVWM</h2>
+<p>伝統的なルック・フィールを持つウィンドウマネージャ。X11で古くから使われます。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FVWM">FVWM - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=FVWM+Linux&tbm=isch">FVWMのスクリーンショット</a></li>
+</ul>
+<p><a href="fvwm.html">FVWM (twm亜種)</a>も参照のこと。</p>
+
+<h2>twm</h2>
+<p>X11の標準ウィンドウマネージャ。何もない代わり高速。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/twm">twm - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=twm+Linux&tbm=isch">twmのスクリーンショット</a></li>
+</ul>
+<p><a href="linux_x11_admin.html">X11設定とプログラミング</a>を参照のこと。</p>
+
+<h2>vtwm</h2>
+<p>twm風ウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/vtwm">vtwm - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=vtwm+Linux&tbm=isch">vtwmのスクリーンショット</a></li>
+</ul>
+
+<h1>NeXTSTEPライク</h1>
+
+<h2>AfterStep</h2>
+<p>NeXTSTEP風のウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/AfterStep">AfterStep - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=AfterStep+Linux&tbm=isch">AfterStepのスクリーンショット</a></li>
+</ul>
+
+<h2>Window Maker</h2>
+<p>NeXTSTEPと全く同じ見た目を持つウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Window Maker">Window Maker - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Window+Maker+Linux&tbm=isch">Window Makerのスクリーンショット</a></li>
+</ul>
+<p><a href="windowmaker.html">Window Maker</a>を参照のこと。</p>
+
+<h1>Windowsライク</h1>
+
+<h2>IceWM</h2>
+<p>小さなウィンドウマネージャ。軽量で高速。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IceWM">IceWM - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=IceWM+Linux&tbm=isch">IceWMのスクリーンショット</a></li>
+</ul>
+<p><a href="jwm.html">JWM, IceWM</a>も参照のこと。</p>
+
+<h2>JWM</h2>
+<p>小さなウィンドウマネージャ。Windowsと良く似ている。Puppy Linuxで採用されている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/JWM">JWM - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=JWM+Linux&tbm=isch">JWMのスクリーンショット</a></li>
+</ul>
+<p><a href="jwm.html">JWM, IceWM</a>も参照のこと。</p>
+
+<h2>qvwm</h2>
+<p>Windows風のウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/qvwm">qvwm - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=qvwm+Linux&tbm=isch">qvwmのスクリーンショット</a></li>
+</ul>
+
+<h1>その他</h1>
+
+<h2>PekWM</h2>
+<p>軽量ウィンドウマネージャ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/PekWM">PekWM - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=PekWM+Linux&tbm=isch">PekWMのスクリーンショット</a></li>
+</ul>
+
+<h2>Sawfish</h2>
+<p>GNOME1のごろに使われていたウィンドウマネージャ。Lispで拡張出来ることで有名。</p>
+<ul>
+<li><a href="http://www.gnome.gr.jp/~ss/s/article/">sawfish 活用ガイド</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Sawfish+Linux&tbm=isch">Sawfishのスクリーンショット</a></li>
+</ul>
+
+<h1>開発終了</h1>
+<h2>GNOME 2</h2>
+<p>Bonobo/CORBAをベースとした、シンプルで使いやすいデスクトップ環境。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNOME">GNOME - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=GNOME+2+Linux&tbm=isch">GNOME 2のスクリーンショット</a></li>
+</ul>
+<h2>KDE 3</h2>
+<p>昔のKDE。子供っぽい代わり楽しいデスクトップ環境でしたが、実用的な面も。以前のバージョンでは、ツールキットQtがオープンソースでない時代もありました。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/KDE">KDE - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=KDE+3+Linux&tbm=isch">KDE 3のスクリーンショット</a></li>
+</ul>
+
+<h1>他OS</h1>
+<h2>NeXTSTEP</h2>
+<p>NeXT社が開発したOS。</p>
+<p>Appleの共同創設者のスティーブ・ジョブズは、Appleを追放されてNeXTと言う会社を立ち上げた。その頃に作られたオブジェクト指向のOSがNeXTSTEPである。</p>
+<p>また、Sunと共同でOPENSTEPも開発し、その実装としてGNUstepが生まれた。</p>
+<p>ジョブズはAppleへと戻ることになり、その時のNeXTSTEP/OPENSTEPの技術として、CocoaフレームワークなどをMac OS Xに持ち帰った。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/NeXTSTEP">NeXTSTEP - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=NeXTSTEP&tbm=isch">NeXTSTEPのスクリーンショット</a></li>
+</ul>
+<p><a href="../os/nextstep.html">NeXTSTEP</a>も参照のこと。</p>
+
+<h2>GNUstep</h2>
+<p>GNUによるOPENSTEPの実装。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/GNUstep">GNUstep - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=GNUstep+Linux&tbm=isch">GNUstepのスクリーンショット</a></li>
+</ul>
+<p><a href="../os/nextstep.html">NeXTSTEP</a>も参照のこと。</p>
+
+<h2>BeOS</h2>
+<p>「PowerPCの真価を発揮した」と言われたOS。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/BeOS">BeOS - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=BeOS&tbm=isch">BeOSのスクリーンショット</a></li>
+</ul>
+<p><a href="../os/beos.html">BeOS</a>も参照のこと。</p>
+
+<h2>Haiku</h2>
+<p>BeOSのオープンソースによる開発継続版。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Haiku">Haiku - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Haiku+OS&tbm=isch">Haikuのスクリーンショット</a></li>
+</ul>
+<p><a href="../os/beos.html">BeOS</a>も参照のこと。</p>
+
+<h2>Windows</h2>
+<p>言わずと知れたMicrosoft社のOS。昔はMS-DOSのオペレーション環境だった。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Windows">Windows - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Windows&tbm=isch">Windowsのスクリーンショット</a></li>
+</ul>
+<p><a href="../windows_pc/windows.html">Windows</a>も参照のこと。</p>
+
+<h2>ReactOS</h2>
+<p>Windows互換のOSを目指すプロジェクト。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/ReactOS">ReactOS - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=ReactOS&tbm=isch">ReactOSのスクリーンショット</a></li>
+</ul>
+
+<h2>Mac OS X</h2>
+<p>新しいUNIXベースのMac OS。グラフィック業界などで使われることが多いです。（僕の行っている作業所でもPhotoshopやIllustratorと一緒に良く触ります。）</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Mac OS X">Mac OS X - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Mac+OS+X&tbm=isch">Mac OS Xのスクリーンショット</a></li>
+</ul>
+<p><a href="../os/mac.html">Mac</a>も参照のこと。</p>
+
+<h2>Mac OS 9</h2>
+<p>昔のMac。先進的なオペレーティング環境として、マニアックなファンを多数集めました。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Mac OS 9">Mac OS 9 - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Mac+OS+9&tbm=isch">Mac OS 9のスクリーンショット</a></li>
+</ul>
+
+<h2>Solaris</h2>
+<p>Sunの正統派UNIX。Sunはビル・ジョイなどの天才プログラマが居ることで有名でしたが、既にオラクルに買収されました。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Solaris">Solaris - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Solaris&tbm=isch">Solarisのスクリーンショット</a></li>
+</ul>
+<p><a href="../unix/sun_solaris.html">Solaris</a>も参照のこと。</p>
+
+<h2>Plan 9</h2>
+<p>ベル研究所が開発する新しい分散OS。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Plan 9">Plan 9 - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Plan+9&tbm=isch">Plan 9のスクリーンショット</a></li>
+</ul>
+<p><a href="../unix/plan9.html">Plan 9</a>も参照のこと。</p>
+
+<h1>その他</h1>
+<h2>Ncurses</h2>
+<p>TUIの対話的インターフェース。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ncurses">Ncurses - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Ncurses&tbm=isch">Ncursesのスクリーンショット</a></li>
+</ul>
+<p><a href="ncurses.html">Ncurses</a>も参照のこと。</p>
+
+<h2>Bash</h2>
+<p>コマンドラインのシェル。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Bash">Bash - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Bash&tbm=isch">Bashのスクリーンショット</a></li>
+</ul>
+<p><a href="linux_bash.html">Bash</a>も参照のこと。</p>
+
+<h2>Java/Swing</h2>
+<p>Javaによる「一度書いてどこでも動く」ウィジェット・ツールキット。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Swing">Swing - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Java+Swing+Linux&tbm=isch">Java/Swingのスクリーンショット</a></li>
+</ul>
+<p><a href="../prog_lang/java_gui_swing.html">Swing</a>も参照のこと。</p>
+
+<h2>Wine</h2>
+<p>Linuxで動くWindows API互換環境。WindowsアプリケーションをLinuxで動かすことを目指しています。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Wine">Wine - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Wine+Linux&tbm=isch">Wineのスクリーンショット</a></li>
+</ul>
+<p><a href="../virt/wine.html">Wine</a>も参照のこと。</p>
+
+<h1>ケータイ向け</h1>
+<h2>Android</h2>
+<p>Googleによる、LinuxカーネルとJavaをベースとしたオープンソースの携帯OS。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Android">Android - Wikipedia</a></li>
+</ul>
+<p>スクリーンショット</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=Android&tbm=isch#tbm=isch&q=Android+%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88">Androidのスクリーンショット</a></li>
+</ul>
+<p><a href="../mobile/android.html">Android</a>も参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

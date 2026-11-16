@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux 日本語入力 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux 日本語入力</h1>
+<p>Linuxの日本語入力に関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>入力エンジン</h1>
+<h2>kinput2</h2>
+<p>kinput2+cannaの場合、.xinitrc（コマンドラインからstartxする場合）や.xsession（GUIのディスプレイマネージャからログインする場合）などにインプットエンジンの設定を記述する。</p>
+<pre>
+export XMODIFIERS=@im=kinput2
+kinput2 -canna &
+</pre>
+<ul>
+<li><a href="https://www.netlab.jp/ORCA/technical/input/install.html">インストール - kinput2・canna情報メニュー - 日医標準レセプトソフト - オープンソース・フロンティア - ネットワーク応用通信研究所</a></li>
+<li><a href="http://www.stex.phys.tohoku.ac.jp/~ohba/canna/node2.html">2 canna を使う最低限の設定と使い方 - cannaによる日本語入力</a></li>
+</ul>
+
+<h2>uim/IIIMF/SCIM</h2>
+<p>昔のLinuxは、kinput2+cannaやWnnを使うことが多かったが、その後、uim/IIIMF/SCIMなどの新しい次世代と呼ばれるフレームワークが生まれた。</p>
+<p>かな漢字変換エンジンも、cannaやWnnから新しいAnthyなどを採用するディストリビューションが増えた。</p>
+<ul>
+<li><a href="https://tkng.org/unixuser/200405/part4.html">最適な日本語入力環境を発掘せよ</a></li>
+</ul>
+
+<h2>iBus/Fcitx</h2>
+<p>最近のインプットメソッド（多言語入力エンジン）。Fedora/UbuntuなどのGNOMEなどで日本語入力を行う時は、iBusかFcitxのどちらかと、以下のかな漢字変換エンジンのどれかを組み合わせて使うのが一般的。</p>
+<p>現在のiBus/Fcitxの場合、パッケージマネージャからインストールすることで、簡単にインプットメソッドを導入出来る。iBusはGNOME 3と統合されているため、GNOMEなら簡単にインストールと設定を行うだけで日本語を入力できる。</p>
+
+<h1>かな漢字変換エンジン</h1>
+<h2>Wnn/FreeWnn、Canna、ATOK-Xなど</h2>
+<p>昔あったかな漢字変換エンジンとしては、ワークステーションでも連文節変換をということで開発されたWnnとFreeWnn(1987年)、おバカな変換をするCanna(1990年)、商用のATOK-Xなどがあった。</p>
+
+<h2>SKK</h2>
+<p>SKKはかな漢字変換エンジンのひとつ。形態素解析をあえて使っていない。</p>
+<p><a href="linux_japanese_input_skk.html">SKK</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>Anthy</h2>
+<p>かな漢字変換エンジン。コミュニティにより活発な開発がされていたが、現在では主要開発者による開発は終了している。</p>
+<p><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a>によれば、「機械学習を用いた識別モデル」「統計的方法の先駆者」とのこと。</p>
+
+<h2>Mozc</h2>
+<p>かな漢字変換エンジン。グーグルによる日本語入力システム「Google 日本語入力」のオープンソース版として登場。</p>
+<p>後日注記：Googleによる日本語エンジンだが、今では多くのディストリビューションで標準。</p>
+<p><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a>によれば、「形態素解析とコスト最小法を採用」とのこと。</p>
+
+<h2>libkkc</h2>
+<p>今どきのかな漢字変換エンジン。Fedoraで標準。</p>
+<p><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a>によれば、「N-gramを採用」「ビッグデータを大いに活かせる」とのこと。</p>
+
+<h1>GNOME/KDEの設定</h1>
+<h2>日本語入力 (GNOME/iBus)</h2>
+<p>GNOMEの日本語入力は特殊で、分かっていないと難しく感じるかもしれない。以下はGNOME3 & ibus-mozcの場合。（GNOMEはiBusが統合されているので、コントロールパネルから簡単に設定が可能。）</p>
+<ul>
+<li><a href="https://blog.goo.ne.jp/psyna_hone/e/b30dc3a44d1cc7173f50e9aada82d848">Ubuntu GNOMEの日本語入力環境設定 - Hone.のたま～に戯言</a></li>
+</ul>
+<p>GNOMEの日本語入力の詳細な設定方法。GNOMEではiBusを統合しているので、GUIの設定によって簡単にiBus-Mozcを設定できる。</p>
+<p>まず、パッケージ管理システムによってibus-mozcをインストールする。コマンドとパッケージ名はディストリビューションによって異なる。</p>
+<pre>
+# apt install ibus-mozc
+</pre>
+<p>次に、GNOMEの設定から「地域と言語」を開く（環境によっては設定の名前が異なる場合がある）。この中に「入力ソース」という設定項目があり、下のほうに「+」の記号のついたボタンがあるのでそれをクリック。最初の画面で「日本語」を選択し、次の画面で「日本語 (Mozc)」を設定して「追加」をクリックすると、Mozcの設定が追加される。これで、システムトレイのメニューから「日本語 (Mozc)」を選べるようになるので、まずそれを選択してMozcを有効にする。</p>
+<p>そして、「入力モード (A)」のメニューの中の「ひらがな」を選択することで日本語が入力できる。英語を入力したい時は「直接入力」を選択する。メニューからだけではなく、キーボードの「半角／全角」などの切り替えキーを押すことでも日本語入力ができる。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0520">第520回　Ubuntu 18.04 LTSの日本語入力 | gihyo.jp</a></li>
+<li><a href="https://note.kurodigi.com/fedora34-ibus-mozc/">Fedora 34の日本語入力環境をibus-mozcに切り替える | クロの思考ノート</a></li>
+<li><a href="https://www.iimc.kyoto-u.ac.jp/ja/services/education/faq/vdi/ubuntu_1">【Ubuntu】日本語入力はどうすればできますか | 京都大学情報環境機構</a></li>
+</ul>
+<p>注意すべきなのは、日本語入力と英字入力の切り替えキー。環境によって異なるが、「Super+space」になっていることが多い。このSuperはWindowsキーのこと。環境によっては、「半角／全角」がきく場合もあればきかない場合もある。Ctrl+spaceやShift+spaceになることもあるので注意してほしい。</p>
+<p>後日注記：最近はGNOME3における日本語入力も簡単になって、Ubuntuなどでは何も設定しなくても最初から使えるはず。そんなに気にすべきことはない。</p>
+<div class="edit_date">
+<p>2025.07.08編集</p>
+</div>
+
+<h2>日本語入力 (Fcitx)</h2>
+<p>Fcitxの場合は、fcitx-configtoolで設定する。以下の記事を参考にすると良いだろう。</p>
+<ul>
+<li><a href="https://note.kurodigi.com/fedora23-fcitx-mozc/">Fedora 23に日本語入力fcitx-mozcを導入する | クロの思考ノート</a></li>
+<li><a href="http://note.kurodigi.com/fedora21-fcitx-anthy/">Fedora 21に日本語入力fcitx-anthyを導入する - クロの思考ノート</a></li>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0520">第520回　Ubuntu 18.04 LTSの日本語入力 | gihyo.jp</a></li>
+</ul>
+<p>Fcitx 5はKDE Plasmaでは「KDEシステム設定」から設定の変更ができるなど、KDE環境と相性がいい。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0689">第689回　Ubuntu 21.10でFcitx 5を使用する | gihyo.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.08編集</p>
+</div>
+
+<h2>日本語入力 (uim)</h2>
+<p>uimは使えないので、Debianでuimなどが入っている場合は、ibusかfcitxに変えよう。uimでも使えると思うなら使っても良い。（僕の場合、入力の候補が思った場所に表示されないのが使えなかった。）</p>
+<p>後日注記：uimは必ずしも厄介者ではなく、さまざまな方式で開発されているLinuxのGUIアプリケーションでは汎用的に使える方である。Debianでuimが採用されているのはそのためで、KDE3派生のTrinityなどでも日本語入力ができる（昔のQtを使っているため。どこかで聞いた話であり、嘘かも）。</p>
+
+<h2>im-chooserの導入 (KDE)</h2>
+<p>KDEで日本語が入力できない場合は、im-chooserをインストールしよう。</p>
+<pre>
+# dnf install im-chooser
+</pre>
+<p>自分は最近の情勢を良く知らないので、im-chooserから別のパッケージにもしかしたら変わっているかもしれない。（GNOMEではiBusを統合したため、im-chooserのインストールは必要ない。）</p>
+
+<h1>その他の技術</h1>
+<h2>オープンソースかな漢字変換の変遷</h2>
+<p>オープンソースなかな漢字変換の変遷については、以下のPDFの資料が詳しい。</p>
+<ul>
+<li><a href="https://www.ospn.jp/osc2016-kyoto/pdf/OSC2016_Kyoto_openmanyo.pdf">京都発！ オープンソースなかな漢字変換の変遷</a></li>
+</ul>
+
+<h2>PRIME (予測入力システム)</h2>
+<p>昔からある予測入力システム。最近ではMozcを使うことでも予測入力が可能です。</p>
+
+<h2>AZIK (拡張ローマ字入力)</h2>
+<p>AZIKは一部で人気の拡張ローマ字入力方式。SKKと同様「普通のIMEを使って入力なんかしたくない」という曲がりものに向いている。</p>
+<ul>
+<li><a href="http://hp.vector.co.jp/authors/VA002116/azik/azikinfo.htm">AZIK総合解説書</a></li>
+<li><a href="https://dic.nicovideo.jp/a/azik">AZIKとは (エイズィックとは) [単語記事] - ニコニコ大百科</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.14</p>
+</div>
+
+<h2>用例表示</h2>
+<p>日本語入力において欠かせないのが用例表示。用例表示とは、言葉の意味を教えてくれる説明の表示です。Mozc（FcitxとIBus）には用例表示機能があります。ただし環境によっては表示されなかったり、上手く表示させるために設定や拡張機能の導入が必要となります。</p>
+<ul>
+<li><a href="https://wiki.ubuntulinux.jp/UbuntuTips/JapaneseEnvironment/Fcitx">UbuntuTips/JapaneseEnvironment/Fcitx - Ubuntu Japanese Wiki</a></li>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0297">第297回　Ubuntu 13.10でインプットメソッドFcitxを活用する | gihyo.jp</a></li>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0689">第689回　Ubuntu 21.10でFcitx 5を使用する | gihyo.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.08</p>
+</div>
+
+<h2>辞書登録</h2>
+<p>同じく欠かせないのが、辞書登録機能。ネットにはさまざまな辞書が提供されており、たとえば２ちゃんねるの顔文字・AA辞書などが活用できます（ただしLinuxで使えるとは限らない）。</p>
+<ul>
+<li><a href="https://kaosute.net/jisyo/">無料 顔文字辞書 ダウンロード - 顔文字ステーション</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.10</p>
+</div>
+
+<h2>コンソールでの日本語入力・表示</h2>
+<p><a href="linux_japanese_console.html">日本語入力・表示（コンソール・コマンドライン）</a>を参照のこと。</p>
+
+<h1>Linuxの日本語入力</h1>
+<h2>Linuxは日本語入力に大きな課題</h2>
+<p>僕がLinuxデスクトップを使っていて思うのは、「Linuxは日本語入力に大きな課題」があるということ。</p>
+<p>標準のGNOMEやGTKアプリケーションで入力できても、Atomなどでは入力できないこともあるし、そもそもきちんと動かなかったり、画面が点滅したり、入力候補が綺麗に表示されないこともある。</p>
+<p>「標準のgeditでは日本語が綺麗に表示されないからAtomを入れたら、そもそも日本語入力自体ができなかった」といった問題がある。</p>
+<p>欧米のLinuxユーザーにはどうでもいいことかもしれないが、日本人ユーザーにとってはLinuxデスクトップの日本語入力問題は大きな課題である。</p>
+
+<h2>意外とATOK使いは多い</h2>
+<p>ATOKは、一太郎や花子で知られるジャストシステムの開発する日本語変換のための商用のIMEです。</p>
+<p>このATOK、意外にも使用者は多いです。</p>
+<p>僕はATOKをあまり使ったことがないため、何がよいのかは分かりませんが、WindowsにおいてもLinuxにおいても、ATOKやATOK-Xはたまに使っている人をよく見かけます。</p>
+<p>ただし、これは昔の話かもしれません。なぜなら、昔のUNIXではCannaが標準的であり、Cannaはあまりにおバカな変換をすることで有名だったからです。</p>
+<p>Cannaを使うぐらいならATOKを買って使う、という人が多かったのだと思います。</p>
+<p>今のLinuxでは、AnthyやMozcがあるため、必ずしも変換はおバカではありません。特に、Googleの開発したMozcは、コミュニティ開発ではないかもしれませんが、WindowsのMS-IMEと遜色のない変換をします。多くの人はLinuxではMozcを使っていると思います。</p>
+<p>また、通はSKKやAZIKといった、普通の人には分からない、標準のIMEではない変換ソフトを使う人もいます。Linuxは日本語入力環境としては優しくないかもしれませんが、SKKなどの標準的でないIMEを使うのであれば、環境はいくらか整っているかもしれません。</p>
+<p><a href="../windows_pc/ichitaro_lotus123.html">一太郎・Lotus 1-2-3</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.08.16</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>日本語入力</h2>
+<ul class="defaultlist list7">
+<li>入出力と端末
+<ul>
+<li>日本語入力方式（日本語ワープロ）</li>
+</ul></li>
+<li>UNIXでの日本語入力
+<ul>
+<li>エンジン
+<ul>
+<li>Wnn, FreeWnn</li>
+<li>Canna</li>
+<li>Anthy</li>
+<li>Mozc</li>
+<li>kkc</li>
+<li>SKK</li>
+</ul></li>
+<li>インプットメソッド
+<ul>
+<li>kinput2</li>
+<li>uim</li>
+<li>IIIMF</li>
+<li>SCIM</li>
+<li>iBus</li>
+<li>fcitx</li>
+</ul></li>
+<li>文字コード</li>
+</ul></li>
+</ul>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

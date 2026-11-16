@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>UNIXの発明の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">UNIXの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/unix_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>UNIXの発明の世界観</h1>
+<p>UNIXの発明に関する世界観です。<a href="unix.html">UNIX</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>UNIXの発明</h1>
+<h2>ファイルという発想</h2>
+<p>UNIXは、たくさんのファイルをシステムやユーザーが整理整頓して管理するために、「ファイル」という発想をしました。</p>
+<p>UNIXでは、ファイルは単なるツリー構造のデータではありません。ハードウェアデバイスもファイルとして操作できますし、プログラムもデータファイルとして表されます。設定も、変化するシステムリソースもすべてファイルです。</p>
+<p>しかしながら、UNIXは単一ホストでの設計だったため、ネットワーク機能が追加されたりしていくと、すべてをシンプルなファイルで表現するという「UNIXの哲学」とは異なり、ネットワークや分散環境はどんどん複雑怪奇になっていきます。</p>
+<p>また、UNIXはコマンドラインのOSで、たくさんのユーザがログインして端末から利用することを念頭においていたため、GUIのX Window Systemは複雑で醜いものになっていきました。</p>
+<p>このため、ネットワークの分散環境においてもシンプルなファイルによって表現し、GUIやバージョン管理なども統一的にアクセスできる、<a href="plan9.html">Plan 9</a>がベル研のメンバーによって開発されています。</p>
+<p>しかしながら、UNIXの「ファイル」という発想は、Windowsなどにも受け継がれた「偉大な発想」だったと言えます。</p>
+
+<h2>たくさんの小さなプログラムを連携させて動作させる</h2>
+<p>UNIXの哲学として知られているのは、「ひとつのプログラムではなく、複数のプログラムの関係性によって、システムは力を発揮する」ということです。</p>
+<p>これは、むしろ当時のハードウェアの制約から生まれた考え方のようです。当時のミニコンやワークステーションはとても少ないメモリ領域と低速なCPUしか搭載しておらず、複雑な巨大プログラムを使うことは困難でした。そのため、小さなプログラムを連結させて、目的の仕事を行う、ということが考えられたようです。</p>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/UNIX">UNIX - Wikipedia</a></li>
+</ul>
+
+<h2>ネットワークに長けている</h2>
+<p>UNIXについて言えるのは、ネットワークに長けているということです。</p>
+<p>UNIXは、AT&Tが独占禁止法の制限下にあり、パブリックドメインで公開されて、ソースコードなどを自由かつ無償に誰でもアクセスできました。</p>
+<p>このことが、IBMの非公開の「中央集権型」ではなく、みんなで標準技術に基づいて（たとえばC/C++などの標準技術を用いて）利用される「オープン系」のアーキテクチャを生み出しました。</p>
+<p>このオープン系のアーキテクチャでは、安価なワークステーションコンピュータをネットワークでたくさん繋げて、緩い繋がりの中で、telnetやNFSを用いて外部のホストにアクセスしたり、冗長化やフェイルオーバのように「クラスタでたくさんのマシンが繋がってひとつの大きなシステムになる」というクラスタ環境を生み出したりします。</p>
+<p>また、UNIXはマルチユーザ・マルチタスクのOSであり、TCP/IPなどの機能も早くから取り入れられました。サーバー・クライアントのネットワークアーキテクチャでは、サーバがたくさんのプロセス・スレッドを作っても、安定して動く必要がありますが、UNIXはマルチタスクを早くから実現しており、このような安定システムを実現するのが容易でした。</p>
+<p>そんなこともあって、UNIXはネットワークと親和性が高く、たとえばBSD UNIXの系譜の末裔にあたる<a href="freebsd.html">FreeBSD</a>などでは、効率的なメモリ管理や高度なネットワーク機能をオリジナルで開発しており、「どんなにアクセスが集中してタスクが増えても安定して稼働する」と言われています。WindowsのTCP/IPスタックはBSDのものをベースにして書き直したものが使われています。</p>
+
+<h2>移植性が高い</h2>
+<p>また、UNIXは移植性が高いことで知られています。UNIXはC言語という高水準言語で書かれたはじめてのOSであり、ハードウェア依存の部分を除けばコンパイルし直すだけでコードが動作します。</p>
+<p>カーネル内部の低レベル処理は例外かもしませんが、UNIXはシステムコールやAPIが標準化されているため、ユーザーランドのプログラムは再コンパイルすればどのようなCPUアーキテクチャのものでも動作します。</p>
+<p>FreeBSDと同じBSD UNIXの末裔である<a href="netbsd.html">NetBSD</a>は、対応するCPUアーキテクチャが突出して多いことで知られています。また、公開されているコードは綺麗で整ったコードとなるように記述されており、OS技術を学ぶ上でもNetBSDは理想です。Linuxとは違いBSDライセンスを採用しており、学んだからといって自分のコードがGPLに汚染される可能性は低いですし、商用製品のベースとしても優れています。FreeBSD、NetBSDともに、商用製品のベースとして大きな実績があります。</p>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

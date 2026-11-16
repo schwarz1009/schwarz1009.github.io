@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Java関連の世界観C（各種言語） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_java_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Javaの世界観C（各種言語）</h1>
+<p>Javaによるプログラミングに関する世界観（C．各種言語）です。<a href="java.html">Javaの世界観１（言語）</a>も参照のこと。</p>
+<!--
+<p>書籍<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8A-Java%E8%A8%80%E8%AA%9E%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371250">Java言語プログラミングレッスン 第3版(上) Java言語を始めよう</a>と<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3-%E7%AC%AC3%E7%89%88-%E4%B8%8B-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%82%92%E5%A7%8B%E3%82%81%E3%82%88%E3%81%86-%E7%B5%90%E5%9F%8E/dp/4797371269">Java言語プログラミングレッスン 第3版(下) オブジェクト指向を始めよう</a>を参考にさせていただきました。</p>
+-->
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>Java仮想マシンで動く言語</h1>
+<h2>Java代替言語とは</h2>
+<p>Java代替言語とは、Javaと同様にJava仮想マシン（JavaVM）上で動くようにコンパイルされ、Javaのクラスライブラリをそのまま利用でき、言語的な要素だけを簡素化あるいは機能追加した、「Javaに代わる言語」のこと。</p>
+<p>Javaの優れたクラスライブラリをそのまま利用でき、Javaと同様のクロスプラットフォームでJITコンパイル型の高パフォーマンスな性能を持ちながら、「言語・文法的な部分」だけをすげかえた、いわば「Javaの変種」である。</p>
+<p>もともとは動的スクリプト言語のGroovyにはじまり、GroovyはJavaよりもスクリプト言語に近い文法で、Java代替言語を構築した。</p>
+<p>最近では、ScalaとKotlinが広く使われている。Scalaは大型のデータセンターから小型のシステムまで使える「スケーラブル」な言語として有名で、前はRailsで作られていたツイッターのシステムも今はScalaで動いている。またKotlinはロシア製の言語であり、Androidの公式開発言語として採用されている。</p>
+<p>Microsoftの.NET Frameworkのような位置づけにも近い。.NETでは.NET Frameworkのクラスライブラリを用いながら、C#, VB.NET, Managed C++, F#などの言語を使ってプログラミングを行うことができる。だが、Oracle公式ではなく、サードパーティが自由に作っていることなどが異なる。.NET FrameworkでもIronPythonやIronRubyなど「Python/Rubyを.NETで動かす」という試みがされているが、これに対してJavaではJythonやJRubyなど「Python/RubyをJavaで動かす」という試みがされている。Javaと.NETの永遠の「言語戦争」がここに表される。</p>
+<p>ただし、思ったほど.NETやJavaの代替言語は普及していない。.NETではC#かVBで記述するのが一般的であり、Javaも公式のJava言語を使うことが多い。これは実績や知名度がないなどの理由がある。ただし最先端のJava界ではKotlinが流行っており、「Kotlinを一度触るとJavaには戻れない」とまで言われている。KotlinはJavaでまだ正式に採用されていない最先端の機能を多数取り込み、JetBrains社（IntelliJ IDEAで有名）が作っていることもあって大流行している。</p>
+
+<h2>Java代替言語の利点</h2>
+<p>Java代替言語の利点としては、以下の2点があげられると思います。</p>
+<p>１．「一度書けばどこでも動く」のJava VMの恩恵にあずかれる。</p>
+<p>２．Javaのクラスライブラリの恩恵にあずかれる。</p>
+<p>上記に「思ったほど.NETやJavaの代替言語は普及していない」と書きましたが、これは古いです。KotlinがAndroid開発の標準となったように、今AltJava（特にKotlin）はめちゃめちゃ流行っています。Androidアプリを開発したいなら、Java/Kotlinか、あるいはAndroidだけではなくiOS向けにも提供できるFlutterを使いましょう。</p>
+
+<h2>Groovy</h2>
+<p>AltJavaのひとつ。スクリプト言語のような簡素な記述が可能。</p>
+<p><a href="java_langs_groovy.html">Groovy</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h2>Scala</h2>
+<p>AltJava言語のひとつ。関数型とオブジェクト指向の特徴を併せ持つ。</p>
+<p><a href="java_langs_scala.html">Scala</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h2>Kotlin</h2>
+<p>AltJava言語のひとつ。ロシア製。</p>
+<p><a href="java_langs_kotlin.html">Kotlin</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h2>Ceylon</h2>
+<p>Red HatによるJava仮想マシンとJavaScript実行環境上で動作するプログラミング言語。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ceylon">Ceylon - Wikipedia</a></li>
+</ul>
+<p><a href="../linux/redhat.html">Red Hat</a>も参照のこと。</p>
+
+<h2>IKVM.NET</h2>
+<p>Javaを.NET Framework上で動かすことの出来る仮想マシン。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IKVM.NET">IKVM.NET - Wikipedia</a></li>
+</ul>
+<p><a href="dotnet.html">.NET</a>も参照のこと。</p>
+
+<h2>Jython/JRuby</h2>
+<p>Jython/JRubyはJavaによって実装されたPythonとRubyの実装。Javaのクラスライブラリをそのまま使うことができる。.NET Frameworkにおける同様のものとしてIronPythonやIronRubyがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Jython">Jython - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/JRuby">JRuby - Wikipedia</a></li>
+</ul>
+<p><a href="python_tools.html">Pythonのツール</a>や<a href="ruby_tools.html">Rubyのツール</a>も参照のこと。</p>
+
+<h2>Clojure</h2>
+<p>Lisp系のJavaVM上で動く言語。</p>
+<p><a href="clojure.html">Clojure</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.29編集</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>AltJava</h2>
+<p>AltJavaとは「Java代替言語」のことで、JavaVMの上で動き、Javaのクラスライブラリを使用しながら、動的型付けなど独自の文法でプログラミングができる。</p>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

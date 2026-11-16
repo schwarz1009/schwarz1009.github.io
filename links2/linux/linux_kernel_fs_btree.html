@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>B-Treeファイルシステム - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>B-Treeファイルシステム</h1>
+<p>B-Treeファイルシステムの世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_kernel.html">Linux カーネル開発</a></li>
+<ul>
+<li><a href="linux_kernel_develop.html">開発</a></li>
+<li><a href="linux_kernel_proc.html">プロセス</a></li>
+<li><a href="linux_kernel_mm.html">メモリ管理</a></li>
+<ul>
+<li><a href="linux_kernel_mm_paging.html">ページング・メモリ断片化</a></li>
+</ul>
+<li><a href="linux_kernel_interrupt.html">割り込み</a></li>
+<li><a href="linux_kernel_signal.html">シグナル</a></li>
+<li><a href="linux_kernel_ipc.html">プロセス間通信</a></li>
+<li><a href="linux_kernel_io.html">IO・入出力</a></li>
+<li><a href="linux_kernel_fs.html">ファイルシステム</a></li>
+<ul>
+<li><a href="linux_kernel_fs_inode.html">i-node</a></li>
+<li><a href="linux_kernel_fs_read_write.html">ディスクの読み書き</a></li>
+<li><a href="linux_kernel_fs_ext2.html">ext2</a></li>
+<li><b>B-Treeファイルシステム</b></li>
+<li><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a></li>
+</ul>
+<li><a href="linux_kernel_device.html">デバイス</a></li>
+<li><a href="linux_kernel_socket.html">ソケット</a></li>
+<li><a href="linux_kernel_src.html">ソースコード・カーネルモジュール</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>B-Treeファイルシステム</h1>
+<h2>LinuxファイルシステムにおけるB-Tree（B木）</h2>
+<p>従来のファイルシステムは、伝統的にブロック型の構造をしており、信頼性などの面では「多くの試練に耐えてきた」と言えるが、ブロック型であるがゆえに速度や堅牢さの点で問題があった。</p>
+<p>これに対して、データベースの分野で培われたB-Tree（B木）というデータ構造を用いたインデックス技術により、より高速かつ堅固な新しいファイルシステムを実現したものとして、B-Treeファイルシステムがある。</p>
+<p>Linuxで利用できるB-Treeファイルシステムは、ReiserFS、JFS、XFSなどが有名。</p>
+<p>ブロック型ファイルシステムの検索パフォーマンスはO(N)であるのに対し、B-TreeファイルシステムはO(log N)と高速である。（オーダー記法については<a href="../prog_lang/algorithm_example.html">具体的なアルゴリズム</a>を参照のこと。）</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0306/24/news002_3.html">ブロックアルゴリズムとB-Treeアルゴリズム (3/3)：Linuxファイルシステム技術解説（2） - ＠IT</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.13編集</p>
+</div>
+
+<h2>B-Treeの仕組み</h2>
+<p>以下のリンク先が参考になる。とても数学的なので、理解するのは難しい。Linuxのファイルシステム以外でもデータベースなどの分野で使われている木構造である。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/B%E6%9C%A8">B木 - Wikipedia</a></li>
+<li><a href="https://qiita.com/kiyodori/items/f66a545a47dc59dd8839">B-treeインデックス入門 - Qiita</a></li>
+<li><a href="https://qiita.com/suzukito/items/908a3523f4b90dd77c6a">B-Treeインデックスの話 - Qiita</a></li>
+</ul>
+<p>詳しくは<a href="../db/db_index.html">データベースインデックス</a>のページを参照のこと。</p>
+
+<h2>ext2-4以外のファイルシステム</h2>
+<p>ext2, ext3, ext4以外にも、以下のようなファイルシステムがある。</p>
+<table class="some_tables">
+<tr><th class="min60">ファイルシステム</th><th>解説</th></tr>
+<tr><td>Btrfs</td><td>さまざまな機能があるがまだ未熟</td></tr>
+<tr><td>f2fs</td><td>フラッシュメモリ向け</td></tr>
+<tr><td>JFS</td><td>IBMの信頼できるファイルシステム</td></tr>
+<tr><td>ReiserFS</td><td>たくさんの小さなファイルがある場合向け</td></tr>
+<tr><td>XFS</td><td>堅牢でスケーラブル</td></tr>
+</table>
+<p>（詳しくは<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks/ja">ディスクの準備 - Gentoo Handbook</a>が参考になります。）</p>
+<p>長らくext2系列のファイルシステムが標準だったLinuxだが、XFSはRHEL 7で標準のファイルシステムになった。また、SUSE Linux Enterprise Server 12ではBtrfsが標準のファイルシステムに採用された。</p>
+<p>後日注記：現在ではFedoraもBtrfsを標準のファイルシステムとして採用している。今、Btrfsの勢いが増している。</p>
+<ul>
+<li><a href="https://qiita.com/sion_cojp/items/c8e015db39ddbf43012e">Linuxファイルシステムをまとめてみました - Qiita</a></li>
+<li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/xfs">linux.git - xfs</a></li>
+</ul>
+
+<h2>ReiserFSとXFS</h2>
+<p>ReiserFSはLinux向けのジャーナリングファイルシステムのひとつで、当時はジャーナリングをサポートしたファイルシステムとしては先駆的なものだったが、現在ではジャーナリングのサポートされたext3/4に比べて使用者が少ないため、Linuxカーネルから削除されようとしている。</p>
+<ul>
+<li><a href="https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0088">第88回　Linuxの成長過程をふりかえる［その6］：玩式草子─ソフトウェアとたわむれる日々｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/202203/01">2022年3月1日　古いコードはコストがかかる ―LKML，ReiserFSの削除について議論：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>これに対してXFSは、RHEL 7で標準とされるなど既に実績のある信頼できるファイルシステム。</p>
+<ul>
+<li><a href="http://www.intellilink.co.jp/article/column/oss-rh02.html">今から始めるRHEL 7 第2回 標準ファイルシステムとなったXFS | NTTデータ先端技術株式会社</a></li>
+</ul>
+
+<h2>Btrfs/ZFS</h2>
+<p>Btrfs/ZFSは次世代の堅牢かつ高機能なファイルシステム。</p>
+<p><a href="linux_kernel_btrfs.html">Btrfs/ZFS</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

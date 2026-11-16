@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ソースからのインストール - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux ソースからのインストール</h1>
+<p>Linuxのソースtarballからのアプリケーションのインストールに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+
+<h1>アプリケーションのインストールとソースtarball</h1>
+<h2>ソースtarballが必要となる場面</h2>
+<p>実際のところ、現代的なLinuxで、ソースtarballが必要になる場面はさほど多くありません。</p>
+<p>普通は、ディストリビューションで提供されているリポジトリのパッケージをインストールし、設定ファイルなどを編集すれば、それがもっとも上手く動きますし、アップデートや依存関係に手間をとることもありません。</p>
+<p>自分でソースtarballをビルドする場合は、そのようなディストリビューションのパッケージでは不備があった場合です。</p>
+<p>たとえば、あなたがコードを書けるエンジニアで、ディストリビューションのパッケージの提供する標準の機能では物足りなくなり、自分で機能を付け足したくなった場合には、ソースtarballをビルドしてインストールする必要性があります。</p>
+<p>ですが、これは成熟したパッケージではあまり多くありません。普通は、公式のソフトウェアプロジェクトの開発する標準の機能を使えば、通常の利用では事足ります。必要なのは機能を付け足すことではなく既にある機能の使い方を知ることであり、必要なのはソースコードよりもマニュアルです。</p>
+<p>ほかにも、バグや不具合を見つけたり、機能不足であることが分かった時、自分でコードを書く場合ではなくても、第三者が作ったパッチを当てたい場合などには、ソースtarballが必要になることがあります。</p>
+<p>たとえば、昔のMozillaでは日本語の太字フォントが表示できませんでした。しかしながら、幸いにも、日本語の太字フォントを表示させるようなパッチが、第三者によってインターネット上で配布されていました。</p>
+<p>このようなパッチを当てるために、ソースtarballが必要となることがあります。</p>
+<p>また、成熟したソフトウェアでなく、作られたばかりのソフトウェアで、バージョンも1.0に満たないようなソフトウェアの開発を支援したい場合などには、当たり前ですがソースコードが必要です。</p>
+<p>ですが、そのようにバリバリ開発を行いたい場合には、むしろgitを使ってgit cloneをしたほうがよい場合があります。そのほうが、GitHubなどのサービスを使ってプルリクエストを送ることができるからです。</p>
+<p>あなたがもし、とても高いスキルを持ったエンジニアであれば、僕が何かを教える必要はないかもしれません。そのような方は勝手に自分のやりたいようにソースtarballを使えばいいと思います。</p>
+<p>ここに挙げた以外でも、たとえばディストリビューションのパッケージのバージョンが古すぎて、特定の新しいバージョンのパッケージを先駆的に使いたい場合にもソースtarballのビルドは有効です。そのような場合にはバグや不具合の報告を行うことが多く、ソースコードがあれば報告がやりやすくなります。自らでバグを修正してパッチを作ればアップストリームで取り込んでくれるかもしれません。</p>
+<p>最新のバージョンでなくても、作るシステムの都合上特定のバージョンを導入したい場合、ディストリビューションのパッケージとして提供されていなければ、自分でソースtarballなどから導入できます。DockerやFlatpakなどを使う方法もあります。</p>
+<div class="edit_date">
+<p>2023.06.16</p>
+</div>
+
+<h2>ソースからのコンパイルによるインストール</h2>
+<p>ソースからのインストールには、GNU式のパッケージだと、基本的に./configureとmakeとmake installを実行する。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/045instsrc.html">ソースファイルで配布されているプログラムをインストールするには - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/886usepaco.html">ソースからインストールしたアプリを管理するには - @IT</a></li>
+<li><a href="http://www.linux-beginner.com/linux_kihon79.html">ソースファイルからのインストール - Linux初心者の基礎知識</a></li>
+</ul>
+
+<h2>パッチを当てる方法</h2>
+<p>パッチを当てるには、patchコマンドを使う。<a href="linux_filetools_diff.html">diffとpatch</a>を参照のこと。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/505patch.html">ソースコードにパッチを当てるには - @IT</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Patch">patch - Wikipedia</a></li>
+</ul>
+
+<h1>README</h1>
+<h2>まずはREADMEを読もう</h2>
+<p>ソフトウェアをソースからインストールする時は、まず、READMEやそれに類する文書（INSTALLなど）がtarball（*.tar.gz圧縮ファイル）の中に無いかを確認し、あったらそれを読みましょう。</p>
+<p>ソフトウェアをビルド・インストールするための方法がREADMEに書いてあることが多いためです。</p>
+<p>ちなみに、Autotoolsで作成されたGNUパッケージでは、以下のリンク先にあるようなファイルが含まれていることが多いです。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%BC%E3%83%89%E3%83%9F%E3%83%BC">リードミー - Wikipedia</a></li>
+</ul>
+<p>ちなみに、ソースコードなどのファイルはsrcディレクトリに入っていることが多い。ただしそうではなくアプリケーション名のディレクトリに入っている場合もあれば、分野ごとに分かれていたりする場合もあるし、ライブラリだけをlibxxxに入れていることもあったりする。</p>
+
+<h1>ソースからのソフトウェアのインストール</h1>
+<h2>/usr/localにインストールする場合</h2>
+<p>ソースコードの入ったtarballのインストールをする場合、Linuxでは慣習的にprefixを/usr/localに指定してインストールします。</p>
+<pre>
+$ ./configure --prefix=/usr/local
+$ make
+$ su -
+Password: (rootユーザーのパスワードを入力する)
+# make install
+</pre>
+<p>/usr/local/binがPATHに入っているかどうかを確認してください。</p>
+<pre>
+$ echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/home/assy/bin
+</pre>
+<p>入ってなかった時は、.bash_profileなどに記述をお願いします。</p>
+
+<h2>ホームディレクトリにインストールする場合</h2>
+<p>ホームディレクトリにインストールする場合は、以下のようにします。</p>
+<pre>
+$ ./configure --prefix=/home/assy/hoge
+$ make
+$ make install
+</pre>
+<p>これで、/home/assy/hogeにプログラムをインストールできます。実行する場合は、相対パスを用いて以下のようにするか、</p>
+<pre>
+$ cd /home/assy/hoge/bin
+$ ./hoge
+</pre>
+<p>あるいは、インストールしたディレクトリのbinディレクトリをPATHに追加します。</p>
+<p>以下が参考になるかもしれません。</p>
+<ul>
+<li><a href="https://qiita.com/kuchida1981/items/d028940ade41096490de">自分でソフトウェアをビルド・インストールするときに/usrや/usr/localへインストールしない - Qiita</a></li>
+</ul>
+
+<h2>/usr/localにサブディレクトリを作る場合</h2>
+<p>/usr/localにサブディレクトリを作って、/usr/local/mysqlなどにプログラムをインストールすることもできます。管理もしやすいし、あとで削除するかもしれないがシステムとして使いたいプログラムの場合は、これがお勧めです。</p>
+
+<h2>共有ライブラリの場合</h2>
+<p>共有ライブラリの場合、LD_LIBRARY_PATHかLD_LIBRARY_PATH_64にディレクトリを登録するか、/etc/ld.so.confにパスを記述します。記述したあとで、ldconfigコマンドを実行してキャッシュを更新してください。</p>
+<ul>
+<li><a href="https://www.dogrow.net/linux/blog6/">(6) ldconfigでライブラリパスを更新 - Linuxやってみる！</a></li>
+</ul>
+<p><a href="linux_lib.html">Linux共有ライブラリ</a>も参照のこと。</p>
+
+<h1>ソースからインストールしたソフトを管理する</h1>
+<h2>paco</h2>
+<p>pacoはソースからインストールしたソフトウェアを、パッケージ管理システムのように管理することのできるツール。</p>
+<p>基本的に、make installの代わりに、</p>
+<pre>
+# paco -lD "make install"
+</pre>
+<p>のように実行するだけで、パッケージ管理システムと同じようにインストールしたアプリケーションを管理できる。</p>
+<p>インストールしたパッケージ一覧は、</p>
+<pre>
+$ paco -a
+</pre>
+<p>で表示できる。</p>
+<p>アンインストールは、</p>
+<pre>
+# paco -r パッケージ名
+</pre>
+<p>で簡単にパッケージを削除できる。</p>
+<p>最近はporgという後継プロジェクトに替わったようである。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/886usepaco.html">ソースからインストールしたアプリを管理するには - @IT</a></li>
+<li><a href="https://qiita.com/pasela/items/eea4a9cbbd54ad118d09">pacoからporgへ - Qiita</a></li>
+<li><a href="https://qiita.com/pasela/items/9c6cd7b9e477ed0501c8">pacoでソースビルドをパッケージっぽく管理する - Qiita</a></li>
+</ul>
+
+<h1>開発に参加したい</h1>
+<h2>git cloneで最新を追いかける</h2>
+<p>最近は開発のためのソフトウェアが整っているため、GitHubのような最新のリポジトリからgit cloneすることで、ソフトウェアの最新版を追いかけることができます。</p>
+<p>追いかけるのも面白いでしょうが、バグや開発途上のコードがたくさんあるため、うかつにgit cloneしても動かないことがあります。</p>
+<p>初心者は、下のtarballを導入して、パッチを作る方法を学びましょう。</p>
+<p>Gitについては<a href="../prog_lang/git.html">Gitの世界観</a>に基本的な使い方をまとめています。</p>
+
+<h2>tarballを改造する</h2>
+<p>tarballを、まずソースからインストールしてみましょう。その上で、そのコードを改造し、目的とする機能を付け足すことができるか、挑戦してみてください。</p>
+<p>基本的に、makeコマンドを使ってプログラムをビルドしながら、さまざまなソースコードを改良します。テキストエディタにはEmacsやvimを使うこともできますし、Eclipseのような巨大開発環境を導入するのも手です。</p>
+<p>プログラミングをやりたいという人は、プログラム言語の基本を勉強しましょう。僕の書いている<a href="../prog_lang/programming_basic.html">プログラミング作法の世界観</a>が参考になるかもしれません。</p>
+
+<h2>diffでパッチを作る</h2>
+<p>開発が完了したら、diffでパッチを作りましょう。元のtarballの何も変更されていないディレクトリと、改造したコードがあるディレクトリをdiffで比較して、パッチを作ります。</p>
+<p>以下は通常のUNIXのパッチ、CVSによるパッチ、TortoiseSVNによるパッチ、gitによるパッチなどの作り方です。</p>
+<ul>
+<li><a href="https://qiita.com/astro_super_nova/items/e30dcaf4d106deebc63c">Linuxエンジニアらしいパッチのつくりかた - Qiita</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Creating_a_patch">パッチの作成 | MDN</a></li>
+<li><a href="https://tortoisesvn.net/docs/nightly/TortoiseSVN_ja/tsvn-dug-patch.html">パッチの作成及び適用 - TortoiseSVN</a></li>
+<li><a href="https://qiita.com/sea_mountain/items/7d9c812e68a26bd1a292">Git で変更を patch ファイルにする / patch コマンドで適用する - Qiita</a></li>
+</ul>
+
+<h2>MLにパッチを投稿する</h2>
+<p>パッチが出来たら、Linux Kernel Mailing Listのような公式のMLにパッチを投稿します。この時、さまざまな流儀や慣習があるので、それを破らないようにしましょう。</p>
+<ul>
+<li><a href="http://vger.kernel.org/lkml/">The linux-kernel mailing list FAQ</a></li>
+</ul>
+<p>Bugzillaのような開発システムを使っているプロジェクトの場合は、Bugzillaにパッチを投稿しても良いでしょう。Mozillaだけではなく、たとえばRed HatのBugzillaなどもあります。</p>
+<ul>
+<li><a href="https://bugzilla.mozilla.org/">bugzilla.mozilla.org</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Make</h2>
+<p><a href="make.html">Make</a>を参照のこと。</p>
+
+<h2>Autotools</h2>
+<p><a href="autotools.html">Autotools</a>を参照のこと。</p>
+
+<h2>diffとpatch</h2>
+<p>diffとpatchについては<a href="linux_filetools_diff.html">diffとpatch・テキスト処理</a>を参照のこと。</p>
+
+<h2>パッケージ管理</h2>
+<p><a href="linux_pkgmanagement.html">パッケージ管理</a>、<a href="redhat_rpm.html">RPM</a>、<a href="debian_deb.html">Deb/Dpkg</a>などを参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

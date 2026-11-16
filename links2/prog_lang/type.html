@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>型の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_skill_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>型の世界観</h1>
+<p>型に関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>型</h1>
+<h2>なぜデータに型が必要なのか</h2>
+<p>プログラミングにおいて、なぜ、データに「型」というものが必要なのでしょうか。</p>
+<p>それは、「型が異なる場合は、それぞれの型ごとに違う処理が必要になるから」です。</p>
+<p>たとえば、数値が0～100である場合、それぞれの数値ごとに処理を行うのは、if文やswitch文だけでできてしまいます。別々のコードは必要ありません。</p>
+<p>ですが、これが数値と文字列の混在であったとしたらどうでしょうか。この場合、まず数値なのか文字列なのかで、別々の処理が必要です。数値には数値向けのコードを書き、文字列には文字列向けのコードを書き、その上で数値向けのコードの中で0～100ごとの処理を行い、文字列向けのコードの中でそれぞれの文字に応じたコードを書く必要があります。</p>
+<p>このように、データの種類に応じて別々のコードを書くために、型というものが必要とされるのです。</p>
+<p>いわば、型とは、データそれ自体に対する「メタ情報」であると言えます。あるいは、データをやり取りするための共通の決まり事、すなわち「プロトコル」であるとも言えるでしょう。</p>
+<p>また、RubyやJavaScriptのような型のない言語では、プログラマがどの型を変数に入れるのかを自力で想定し、プログラマが判断を行います。これは「プログラマが賢ければ動くが、馬鹿だと壊れてしまう可能性がある」ということを意味します。想定外の型が入ってプログラムが壊れるよりも、最初から想定外の型は入ることができないようにしたほうが、プログラムの安全性は高くなります。だから、TypeScriptのような「型のあるJavaScript」が必要なのです。</p>
+<p>逆に、型のない言語のほうが優れているのは、「型という機械的なものを意識せず、ダックタイピングでプログラムが書ける」ということです。型ごとにわざわざ別の処理をするのではなく、どんな型であっても同じように動いてほしいとか、そういう「コードを簡素に書く手軽さ」のために、RubyやPythonには型が存在しません（実際にはこれらの言語にも型は存在するが、変数の宣言や関数受け渡しなどの際に明記しなくてもエラーが出ない）。C++のテンプレートなども、どんな型でも同じようにプログラムが動くという「ダックタイピング」を静的型付けのC++において実現するものであると言えます。</p>
+
+<h2>オブジェクトの型を指定する</h2>
+<p>オブジェクト指向言語においては、関数の引数として渡す変数の型に、オブジェクトの型を指定することがあります。</p>
+<p>これは、「必ずこのオブジェクト型の引数を与えてください」ということです。</p>
+<p>これは、単に数値や文字列などの基本型が、オブジェクトの型になったということだけを意味していません。クラスのメソッドからクラスを使うということは、「クラス設計」を意味しているからです。</p>
+<p>クラス設計とは、要するに「クラスから別のクラスの機能を使う」ということであり、クラスの連携手段と分割の方法を考えるということです。</p>
+<p>このような中で、「型」は単なるデータの種類だけではなく、機能と機能が繋がり合う「インターフェース」という意味合いを持ちます。</p>
+<p>オブジェクトの型を指定するということは、オブジェクトとオブジェクトが互いに連携し合うということです。これはクラスを使うだけではなく、クラスを自ら設計する場合には重要です。どのような型同士が連携し合うことで、プログラム全体の構造が決まるからです。</p>
+<p>後日注記：ある意味、「変数の型がメッセージを表している」ということが言えるかもしれません。オブジェクトを渡すということは、すなわちメッセージを与えるということであり、このオブジェクトの型が、メッセージの種類と性質を示しているのです。</p>
+
+<h1>関連ページ</h1>
+<h2>オブジェクト指向</h2>
+<p><a href="oop.html">オブジェクト指向</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

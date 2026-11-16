@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>FreeBSD関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">UNIXの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/unix_bsd_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>FreeBSDの世界観</h1>
+<p>FreeBSDに関する世界観です。<a href="bsd.html">BSD</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>FreeBSD</h1>
+<h2>性能・機能・安定の*BSD</h2>
+<p>FreeBSDは、*BSDの中では正統派で、性能や機能や安定性を重視した*BSDとして知られる。</p>
+<p>公式・Wikipedia</p>
+<ul>
+<li><a href="https://www.freebsd.org/ja/">FreeBSD.org</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/FreeBSD">FreeBSD - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/freebsd/freebsd">git</a></li>
+</ul>
+
+<h2>大学やサーバの標準</h2>
+<p>特に、昔の工業大学などでは、大学の研究室などのOSはFreeBSDが使われていることが多かった。Linuxなどと機能的に遜色が無く、フリーなライセンスである、そして伝統的に良く使われてきたBSDの子孫であるというFreeBSDの特徴は、大学でUNIXを教えたり計算業務を行ったりするなどの用途にうってつけである。</p>
+<p>また、BSDの「ネットワークに強いOS」という特徴は、Linuxなどが普及した今でも衰えていない。本当にハイエンドでたくさんの処理が必要なサーバーでは、LinuxよりもFreeBSDを使うこともある。たとえば、巨大掲示板２ちゃんねるのサーバーはFreeBSDで動いている。他にも、商用の組み込みシステムなどでは、BSDライセンスというソースコード公開の義務のないFreeBSDは良く用いられており、プレイステーションのOSにもFreeBSDが使われている。</p>
+<p>BSDは「世界と関係のない」日本のシステム管理者にも人気で、「Linuxと機能的に遜色がないのに、なぜ*BSDは普及しないのか」と良く論議に挙がる。その理由は多くの場合、Red Hatのような強力な企業のスポンサーが居ないからであるとされる。また、GNUのような声高にフリーを宣言する活動家の集団も居ない。だが本当に、FreeBSDのネットワークや低レベル機能（ストレージなど）は、今でもLinuxより品質が高いことがある。だがLinuxと敵対関係にあるわけではなく、最近Linux開発者にOpenBSDが好きな人間が多い（特にsystemdが嫌いなど）ように、両者は協力し、高品質でフリーなOSのさらなる品質改善に努めている。</p>
+<p>後日注記：特に、FreeBSDはUNIXシステムとしてとても完成されている。コマンドラインシェルもきちんとtcshが動き、コマンドプログラムやデーモンも一通りそろっていて、大学でTeXやgnuplotを教えるのにうってつけである。ネットワークシステムも構築しやすく、DuckDuckGoのようにIT企業のインフラにも多く導入されている。</p>
+
+<h2>Linuxと比べると、効率よりも安定している</h2>
+<p>LinuxとFreeBSDを比べると、まず挙がるのは、「安定性」です。</p>
+<p>FreeBSDは、Linuxのようにたくさんの機能をつめこみ、効率やスループレットを上げる、ということよりも、信頼性や安定性が高く、「本当に安定した正しい製品が必要な場合」に最適です。</p>
+<p>Linuxには、なんでもかんでも機能がある代わり、システム全体のサイズが巨大になり、安定性や信頼性が欠けています。こうした場合に、FreeBSDは良い選択肢となります。</p>
+<p>FreeBSDには、他のOSに未だ欠けている、先進的なネットワークやストレージの機能があります。ZFSも使えますし、WindowsのTCP/IPの通信機能のコードはFreeBSDを基にしています。よって、ネットワークやストレージで、商用製品並みの「正しい基盤ソフトウェア」が必要であれば、FreeBSDを採用すると良いでしょう。BSDライセンスを採用しているほか、最近はGCCからClang/LLVMに移行したため、商用製品としてコードを使いたい場合に、派生ソフトウェアにGPLを継承しなくても良い、というライセンスは、商用製品の一部として組み込む場合に優れています。</p>
+<p>その一方で、System V系のUNIXではなくBSD系のUNIXでは、BSD系ならではの独自仕様がシステム構築の課題となります。シェルにCシェル系のtcshを使い、Portsやrc.confによるシステム管理をしなければなりません。Dockerはjailsにする必要がありますし、デフォルトのviはVimではなくnviです。UNIXコマンドのオプションや機能も違います。こうした場合にどれくらい対応できるUNIXエンジニアが居るかどうか、が課題となるでしょう。</p>
+<p>後日注記：FreeBSDの強みとしてよく言われるのが、「たくさんのタスクを同時に効率的に処理できる」ということ。どんなにネットワーク負荷が高くなっても、FreeBSDは壊れない。きちんと安定して、多数のタスクをさばくことができる。</p>
+
+<h2>FreeBSDの特徴</h2>
+<p>FreeBSDの特徴は、以下のようなものがある。</p>
+<table class="some_tables">
+<tr><th class="min60">特徴</th><th>解説</th></tr>
+<tr><td>カーネルが堅牢</td><td>どれだけたくさんのタスクがあっても、不安定になることなく安定して動き続ける。<br>サーバOSとしてはLinuxの古くからの宿敵・ライバル。</td></tr>
+<tr><td>ZFS</td><td>Sunが開発したCDDLライセンスの信頼性の高いファイルシステムZFSを標準で採用。<br>Linuxではライセンスの問題から使うことができない。</td></tr>
+<tr><td>BSDライセンス</td><td>ライセンスにGPLではなくBSDライセンスを採用。<br>商用OSのベースとして使われることもある（たとえばプレイステーション3/4/VitaやmacOS/Darwin）。</td></tr>
+<tr><td>カーネル+ユーザーランド</td><td>FreeBSDでは、カーネルだけではなく、ユーザーランドのコマンドも同時に提供している。<br>アプリケーションのパッケージとしてはportsで対応。<br>きちんとOS一式すべてを提供しているため信頼性と利便性が高い。</td></tr>
+<tr><td>インストール時点では最小限の環境</td><td>Ubuntuなどのように、インストール後に何でも使える環境にはなっていない。<br>必要なソフトウェアを手動で自分自身で導入・設定・管理をする必要がある。<br>逆に「UNIXのシステムを学ぶ」という点では優れている。<br>ユーザー必読の高品質なハンドブックなどもドキュメント化されており、勉強になる。</td></tr>
+<tr><td>make worldできる</td><td>システム全体を完全にビルドし直すことができ、チューニングやカスタマイズが可能。</td></tr>
+<tr><td>BSD系のシステム</td><td>BSD系のシステムの特徴として、シェルがCシェルであること、rc.confを使ったinit処理を行うことなどがある。</td></tr>
+</table>
+<p>どちらかというと、Linuxがエンジニアやオタクだけではなく一般ユーザーまで大風呂敷を広げようとしているのに対し、「分かる人間だけに使ってほしい」という姿勢が見られる。一般ユーザー向けとしてはFuryBSD（PC-BSD・TrueOSに敬意を払うFreeBSDベースのデスクトップOS）、GhostBSD、MidnightBSDなどがあるが、むしろFreeBSDから自分の力でGUI環境を導入・設定した方が勉強になるだろう。</p>
+<p>また、LinuxがX.orgに代わるwaylandや、systemdなど、今までのUNIXの常識ややり方を積極的に変えようとするのに対し、*BSDの開発者はUNIX古来からの環境を守り続けているところがある。ただし、GCCに代わるClang/LLVMなどの採用は、「GNUのコンポーネントの排除」という点で、BSDをよりBSDらしくさせている（GPLでライセンスされたコンポーネントをできるだけ含めない）。</p>
+<p>またWindowsとの結びつきもあり、WindowsのWinsock2のベースはBSDのTCP/IPスタックをTurbo Pascalで書き直したものである。</p>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=FreeBSD">FreeBSD - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+</div>
+
+<h1>FreeBSDのシステム環境</h1>
+<h2>csh/tcsh</h2>
+<p>標準のシェルはBシェル系のBashではなく、Cシェル系のTcsh（あるいはcsh）である。これは、cshやviの作者であるビル・ジョイがBSDの設立と深く関わっているためである。</p>
+<p>LinuxやmacOSで標準的なbashではないため、シェルスクリプトの記法などに相違点がある。csh由来の「使ってはならない記法」なども存在する。だが、BSDは長らくcshを標準にしてきたため、大学やUNIXエンジニアには「え、Cシェル使ってないの？」と言ってLinuxを嫌う方も居る。</p>
+<p><a href="../linux/csh.html">Cシェル</a>や<a href="../linux/vi.html">vi</a>も参照のこと。</p>
+
+<h2>独自の起動・終了の設計</h2>
+<p>SysV initを採用せず、独自の起動の仕組みを採用している。</p>
+<p>rc.confを設定するBSDの起動処理の手法は、簡素で扱いやすい代わり、設定ファイルを書き間違えたり誤って消したりするとシステムが起動しなくなるという欠点を持っている。</p>
+<p><a href="../linux/linux_daemon.html">Linux initとデーモン</a>を参照のこと。</p>
+
+<h2>portsとmake world</h2>
+<p>portsというパッケージ管理システムを使って、簡単にアプリケーションをビルド・インストール出来る。また、設定に基づいて全システムをmake worldでコンパイル出来る。</p>
+<p>この仕組みは、LinuxではGentoo Linuxが良く似ている。</p>
+<p>FreeBSDでは、ソースベースのパッケージ管理システムであるportsを使う。これは、makeを上手く活用したパッケージ管理システムで、ユーザーはmakeコマンドを使って簡単にパッケージをその場でビルドし、インストールできる。また、パッケージは常に最新に同期される。Gentoo Linux創始者のダニエル・ロビンズは、Gentoo Linuxを作る際にこの仕組みをLinuxに持ち帰ってPortageというソースベースのパッケージ管理システムを作った。<a href="../linux/gentoo.html">Gentoo</a>も参照のこと。</p>
+<p>portsの設定は、Gentooと同様make.confに記載する。</p>
+
+<h2>jail</h2>
+<p>jailはOSレベルでの仮想化機構。Dockerのようなコンテナ型仮想化の始祖のようなもので、FreeBSDシステムを小さなサブのFreeBSDシステムにできる。</p>
+<p><a href="../virt/virt.html">仮想化</a>を参照のこと。</p>
+
+<h2>ZFS</h2>
+<p>Linuxではライセンス問題のおかげで使うことの出来ない、次世代のファイルシステムZFSを使うことが出来る。</p>
+<p><a href="../linux/linux_kernel_btrfs.html">Linux カーネル開発（Btrfs/ZFS）</a>も参照のこと。</p>
+
+<h1>派生OS</h1>
+<h2>TrueOS</h2>
+<p>TrueOSはFreeBSDベースの手っ取り早くマシンに導入できてすぐに使えるOS。以前は「PC-BSD」という名前だった。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TrueOS">TrueOS - Wikipedia</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>DuckDuckGoに使われている</h2>
+<p>僕が最近知って驚いたこととして、DuckDuckGoのシステムでは、FreeBSDとPerlとNginxが使われているそうです。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/DuckDuckGo">DuckDuckGo - Wikipedia</a></li>
+</ul>
+<p>DuckDuckGoはプライバシー侵害をしないことで有名な「オタクしか知らない検索エンジン」ですが、やはりそういうオタクの間では今でもFreeBSDとPerlが生きています。</p>
+<p>FreeBSDやPerlはまだ死んでいません。時代が変わったと言いますが、FreeBSDとPerlは今でも現役で生きているのです。</p>
+<p><a href="../services/duckduckgo.html">DuckDuckGo</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.11.10</p>
+</div>
+
+<h1>簡単な説明</h1>
+<h2>FreeBSD</h2>
+<p>スタンダードな*BSD。Linuxに比べて安定性が高く、「たくさんのタスクを抱えても、壊れることなく正常に動き続ける」という信頼性を大切にしている。</p>
+<p>Linuxと遜色のない機能を持っているにも関わらず、なぜか流行らない。マスコットのデーモン君（悪魔のデーモン）のせいだろうか。</p>
+
+<h2>Ports</h2>
+<p>ソースベースのパッケージ管理システム。</p>
+<p>システム全体をmake worldできる。</p>
+
+<h2>rc.conf</h2>
+<p>シンプルな起動システム。</p>
+<p>ひとつの設定ファイルでinitを行う。</p>
+
+<h2>jail</h2>
+<p>コンテナ型仮想化のDockerのオリジナル的存在。</p>
+<p>FreeBSDシステムを独立した小さな隔離システムに分割できる。</p>
+
+<h2>ZFS</h2>
+<p>Linuxでは一部のディストリビューションでしか使えないZFSをライセンス問題なしで使える。</p>
+
+<h2>その他</h2>
+<p>cshはビル・ジョイ由来のCライクな文法を持つシェル。</p>
+<p>viがvimではなくnviであったりなどの違いがあることもある。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

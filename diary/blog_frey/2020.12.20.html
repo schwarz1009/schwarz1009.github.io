@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"  href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<title>Windowsプログラミングの前提知識 - schwarz1009</title>
+
+</head>
+<body>
+<p><a href="index.html">トップページに戻る</a></p>
+<iframe src="menu_menu.html" class="iframe_menu"></iframe>
+<p>AUTHOR: schwarz1009<br>
+TITLE: Windowsプログラミングの前提知識<br>
+BASENAME: 2020/12/20/152943<br>
+STATUS: Publish<br>
+ALLOW COMMENTS: 1<br>
+CONVERT BREAKS: 0<br>
+DATE: 12/20/2020 15:29:43<br>
+CATEGORY: Windows<br>
+CATEGORY: プログラミング
+
+
+</p>
+<ul class="table-of-contents">
+    <li><a href="#ハンガリアン記法">ハンガリアン記法</a></li>
+    <li><a href="#関数の戻り値">関数の戻り値</a></li>
+    <li><a href="#メッセージループ">メッセージループ</a></li>
+    <li><a href="#MFC">MFC</a></li>
+    <li><a href="#デバイスコンテキスト">デバイスコンテキスト</a></li>
+    <li><a href="#リソースファイルとコントロール">リソースファイルとコントロール</a></li>
+    <li><a href="#NET">.NET</a></li>
+    <li><a href="#サーバーにもWindowsを使う">サーバーにもWindowsを使う</a></li>
+</ul>
+<div class="section">
+    <h3 id="ハンガリアン記法">ハンガリアン記法</h3>
+    <p>Windowsプログラミングでは、<br />
+ハンガリアン記法という統一されたルールで、<br />
+変数や構造体メンバの名前を付ける。<br />
+たとえば、ポインタには必ずlpが付く。<br />
+これが分からないと、構造体メンバの意味が分からない。<br />
+（詳しくはやねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」が参考になります。）</p>
+
+</div>
+<div class="section">
+    <h3 id="関数の戻り値">関数の戻り値</h3>
+    <p>素のC++では、関数に複数の値を渡すことはできるが、<br />
+複数の値を返すことはできない。<br />
+しかしながら、複数の値を実行結果として、<br />
+呼び出し元に返したい時もある。<br />
+このような時、構造体のポインタあるいは参照を渡して、<br />
+関数の中から構造体を操作することができる。<br />
+返り値はエラーチェックに使う。<br />
+Windowsでは、こうしたやり方で関数に変数を与える。<br />
+（詳しくはやねうらお氏の「<a href="https://www.amazon.co.jp/Windows%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%84%E3%81%AD-%E3%81%86%E3%82%89%E3%81%8A/dp/479800314X">Windowsプロフェッショナルゲームプログラミング</a>」が参考になります。）</p>
+
+</div>
+<div class="section">
+    <h3 id="メッセージループ">メッセージループ</h3>
+    <p>Windowsでは、コールバック関数とハンドルを多用し、<br />
+メッセージループでイベント駆動をする。<br />
+ここで使われるのが、Windowsメッセージ。<br />
+WM_という名前で定義されており、<br />
+イベントの発生に対してメッセージが送られ、<br />
+コールバック関数を実行する。<br />
+たとえば、「マウスがクリックされた時」とか、<br />
+「画面が再描画された時」などに、<br />
+場合や状況に応じてメッセージに応答する。<br />
+これを、メッセージループとか、イベントループと呼ぶ。<br />
+また、それぞれのウィンドウやアプリケーションインスタンスを識別するため、<br />
+ハンドルを使用してOSとやり取りを行う。</p>
+
+</div>
+<div class="section">
+    <h3 id="MFC">MFC</h3>
+    <p>MFCでは、メッセージマップによって、<br />
+Onから始まるメソッドにメッセージをマップする。<br />
+ドキュメントデータを表すドキュメントクラスと、<br />
+画面を表すビュークラスを継承する。<br />
+特に、データを保存するために、<br />
+オブジェクトをファイルに書き出すことのできる、<br />
+シリアライズを使用する。<br />
+ブラウザなどを作るのであれば、<br />
+Visual C++のAppWizardやClassWizardなどを使って、<br />
+スケルトンを作成したりメソッドを自動作成して関連づけながら、<br />
+ビュークラスを継承していけば、<br />
+IEコンポーネントを使った簡単なウェブブラウザを開発できる。</p>
+
+</div>
+<div class="section">
+    <h3 id="デバイスコンテキスト">デバイスコンテキスト</h3>
+    <p>Windowsでは、グラフィック操作などをする際に、<br />
+Windowsとデバイスの仲介役として、<br />
+デバイスコンテキストを使用する。<br />
+たとえばGDIなどの操作で、<br />
+ペンやブラシから線や円、四角形などの<br />
+グラフィックを描く時などに、<br />
+必要となる。</p>
+
+</div>
+<div class="section">
+    <h3 id="リソースファイルとコントロール">リソースファイルとコントロール</h3>
+    <p>GUIのインターフェイスは、<br />
+リソースファイルからデザインしたり、<br />
+メソッドからコントロールを作成したり操作したりできる。<br />
+メニューはリソースファイルで作るのが一般的だが、<br />
+ビュー画面などはさまざまな処理をするために、<br />
+動的にコントロールを操作する。</p>
+
+</div>
+<div class="section">
+    <h3 id="NET">.NET</h3>
+    <p>また、VBやC#などでは、<br />
+ポトペタ操作でデザインし、<br />
+プロパティを操作したり、<br />
+イベントハンドラを用いてイベントに応じてメソッドを実行したりして、<br />
+イベント駆動で開発ができる。<br />
+Windowsは既にこうした.NET言語で開発することが一般的だが、<br />
+Javaと同様、仮想マシンである.NET Frameworkが必要であり、<br />
+ネイティブなコンパイル言語を使う場合よりも<br />
+速度や効率のようなパフォーマンスは劣る。<br />
+しかしながら、優れたクラスライブラリを用いて、<br />
+とても簡単にアプリケーションが開発できると<br />
+エンジニアから評判である。<br />
+Windows開発だけでなく、<br />
+Unityなどのゲームエンジンにも、<br />
+C#が採用されており、<br />
+C++と並んでゲーム開発の標準言語になっている。</p>
+
+</div>
+<div class="section">
+    <h3 id="サーバーにもWindowsを使う">サーバーにもWindowsを使う</h3>
+    <p>最近は、サーバーにもWindowsを使う事例が増えた。<br />
+これは、NTカーネルが安定して動いていることや、<br />
+ActiveXやASP.NETなどのネットワーク技術が成熟し、<br />
+UNIXと同等に使えるものになったこと、<br />
+それから、契約や取引などの意味で、<br />
+マイクロソフトと合意する政治的な判断などが、<br />
+理由として挙げられる。<br />
+クライアントOSで圧倒的シェアを誇るWindowsだが、<br />
+サーバーでも勢力を着実に伸ばしており、<br />
+たとえばSQL ServerやWSLなどの努力は<br />
+サーバーOSでは選択肢一択のLinuxを<br />
+いずれ倒すことになるかもしれない。</p>
+
+</div>
+
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+

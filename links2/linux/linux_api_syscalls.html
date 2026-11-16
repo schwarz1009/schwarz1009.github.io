@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux システムコール・API１A（システムコール） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux システムコール・API（１A．システムコール）</h1>
+<p>Linuxのシステムコールとライブラリ関数・APIに関する世界観１A（システムコール）です。</p>
+<p><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考にさせていただきました。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="linux_api.html">システムコール・API（１．ファイル・入出力）</a></li>
+<ul>
+<li><b>１A．システムコール</b></li>
+<li><a href="linux_api_stdio.html">１B．stdio</a></li>
+<li><a href="linux_api2.html">２．プロセス・メモリ</a></li>
+</ul>
+<li><a href="libc.html">libc</a></li>
+</ul>
+<p>X11やGTK+/Qtなどについては<a href="linux_x11.html">Linux（X11周辺）</a>を参照のこと。また<a href="linux_kernel.html">Linuxカーネルの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>ストリーム処理（システムコール）</h1>
+<h2>入出力の基本</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>自分の書いたブログ「神々とともに生きる詩人」<a href="../../diary/blog_frey/2021.01.27.html">2021/01/27</a>より。</p>
+<p>入出力処理は、ストリームを通じて行われる。</p>
+<p>ストリームはバイト列のことで、バイト列としてあらわされるものは何でもストリーム。</p>
+<p>ストリームを使うためには、デバイスファイルを媒介に使う。</p>
+<p>キャラクタ型デバイスかブロック型デバイスかによって使い方は異なるが、キャラクタ型デバイスはバイト列の処理としてあらわされ、ランダムアクセスができない。</p>
+<p>ブロック型デバイスは、ファイルシステムにマウントして用い、ランダムアクセスができる。</p>
+<p>標準で標準入力、標準出力、標準エラー出力が、ストリームを識別するファイルディスクリプタとして、プロセスに与えられるが、open()/close()したファイルについてはそれぞれのストリームがファイルディスクリプタとして対応し、read()やwrite()から読み書きできる。</p>
+<p>しかしながら、システムコールはバイト固定長の入出力しかできず、バッファ管理を行わないため速度も遅い。</p>
+<p>これに対して、C言語のstdioライブラリでは、バッファ管理ができて高速であるほか、1文字単位や1行単位の入出力、フォーマット入出力もサポートしている。</p>
+<p>stdioを使う時は、fopen()とfclose()を使ってファイルをオープンし、fread()やfwrite()で固定長の操作ができる。</p>
+<p>注意点として、gets()は使ってはならない。</p>
+<p>バッファオーバーランの脆弱性を回避できないためである。</p>
+<p>通常、入力にはfgets()を使い、一文字単位の入出力にはgetchar()とputchar()、コンソールへの出力はputs()やprintf()、ファイルへの出力はfprintf()を使う。</p>
+<p>また、文字列をフォーマット変換のみしたい場合は、sprintf()を使えばよい。</p>
+<p>また、プログラミングの特性上、「一文字余計に読み込まなければトークンの終端か分からない」ということがある。</p>
+<p>この時、一文字元に戻すAPIとしてungetc()がある。</p>
+
+<h2>ストリームとは</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>UNIXにおけるプログラミングは、プロセスとファイルシステムが「ストリーム」をやりとりすることで行われる。</p>
+<p>ストリームは要するに、バイト列の流れ道のことであり、UNIXでは標準入力やファイルを表すのにストリームという概念を使う。読みだすことを「読む」、書き込むことを「書く」という。ファイルだけではなく、デバイスやプロセスについても同様。デバイスファイルはストリームの「とっかかり」になる。</p>
+<p>UNIXでは、バイト列のように見えるものであれば、なんでもストリームとして操作できる。そもそもが単純なバイト列の流れの操作が多かった、UNIXシステム由来の概念です。</p>
+<div class="edit_date">
+<p>2023.01.18編集</p>
+</div>
+
+<h2>システムコールとライブラリ関数</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>LinuxのC言語によるAPIの基本は、システムコールとライブラリ関数です。</p>
+<p>システムコールはLinuxカーネルによる機能で、ストリーム、ファイルシステム、ネットワーク、プロセス、メモリ管理などで、カーネルの機能を使う時に使用します。</p>
+<p>C言語のライブラリ関数は、主にglibcなどによる「標準Cライブラリ」です。</p>
+<p>システムコールとライブラリ関数では、似たような機能を提供する関数もあります。</p>
+<p>たとえば、システムコールのread(2), write(2), open(2), close(2)は、stdio版として、fopen(3), fclose(3), fgetc(3), fputc(3), getc(3), putc(3), getchar(3), putchar(3), ungetc(3), fgets(3), fputs(3), puts(3), printf(3), fprintf(3), scanf(3), fread(3), fwrite(3)などなど、さまざまなライブラリ関数があります。</p>
+<p>ここで、(2)や(3)は、システムコール(2)かライブラリ関数(3)かを表しています。</p>
+<p>システムコールは、バッファリングを行わないため、動作が遅いです。バッファリングだけの問題ではなく、ライブラリ関数よりもシステムコールの方がずっと遅いです。ライブラリ関数の方が普遍的なため、通常はライブラリ関数を優先して使いましょう。</p>
+
+<h2>四大システムコール</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<p>システムコールでは、ファイルの情報はファイルディスクリプタと呼ばれる整数値のデータを使って保持します。これはOSがストリームの識別のために使います。</p>
+<p>以下は四大システムコール。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>open(2)</td><td>ファイルを開く。ファイルに接続できるストリームを得る。</td>
+</tr>
+<tr>
+<td>close(2)</td><td>ファイルを閉じる。ストリームを終了させる。<br>使い終わったストリームはclose()で閉じないといけない。</td>
+</tr>
+<tr>
+<td>read(2)</td><td>ファイルを読み込む。ストリームからデータ（バイト列）を読む。</td>
+</tr>
+<tr>
+<td>write(2)</td><td>ファイルを書き込む。ストリームにデータ（バイト列）を書く。</td>
+</tr>
+</table>
+<p>ファイルと言うよりは、ストリームを読み書きします。ですので、標準入出力に読み書きすることも可能です。たとえばcatコマンドを作ったり出来ます。</p>
+<p>また、四大システムコールの美しさを保つために、それ以外の雑多な処理は全てioctl()で行う。</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>ioctl(2)</td><td>デバイスに特化した色んなことをやる。</td>
+</tr>
+</table>
+
+<h2>stdio</h2>
+<p>stdioはシステムコールの上位層のAPIで、バッファリングを行うためシステムコールよりも高速にファイルの読み書きなどを行える。</p>
+<p><a href="linux_api_stdio.html">Linuxシステムコール・API（stdio）</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.28編集</p>
+</div>
+
+<h2>ファイルシステム操作のシステムコール</h2>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a>を参考に執筆しました。）</p>
+<table class="some_tables">
+<tr>
+<th class="min60">API</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>opendir(3)</td><td>ディレクトリを開く。</td>
+</tr>
+<tr>
+<td>readdir(3)</td><td>ディレクトリから1つのエントリを読む。</td>
+</tr>
+<tr>
+<td>closedir(3)</td><td>ディレクトリを閉じる。</td>
+</tr>
+<tr>
+<td>mkdir(2)</td><td>ディレクトリを作る。</td>
+</tr>
+<tr>
+<td>umask(2)</td><td>パーミッションの設定のために値を変更する。</td>
+</tr>
+<tr>
+<td>rmdir(2)</td><td>ディレクトリを削除する。</td>
+</tr>
+<tr>
+<td>link(2)</td><td>ハードリンクを作る。</td>
+</tr>
+<tr>
+<td>symlink(2)</td><td>シンボリックリンクを作る。</td>
+</tr>
+<tr>
+<td>readlink(2)</td><td>シンボリックリンクの指し示すファイル名を知る。</td>
+</tr>
+<tr>
+<td>unlink(2)</td><td>ファイル名を消す（ファイルを削除する）。</td>
+</tr>
+<tr>
+<td>rename(2)</td><td>ファイルを移動する。</td>
+</tr>
+<tr>
+<td>stat(2)<br>lstat(2)</td><td>ファイルの付帯情報を知る。</td>
+</tr>
+<tr>
+<td>chmod(2)</td><td>ファイルの付帯情報を変える。</td>
+</tr>
+<tr>
+<td>chown(2)</td><td>ファイルのユーザーとグループを変える。</td>
+</tr>
+<tr>
+<td>utime(2)</td><td>ファイルのアクセス時間と更新時間を変更する。</td>
+</tr>
+</table>
+
+<h2>書籍</h2>
+<p>詳しくは以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+
+<h1>その他</h1>
+<h2>straceコマンド</h2>
+<p>straceコマンドを使うと、実際に動作中のプログラムが読んだシステムコールをその場で表示してくれます。</p>
+<pre>
+$ strace ./hoge &gt;/dev/null
+</pre>
+<p>後日注記：straceコマンドのトレース出力は標準エラー出力に出力されるが、hogeプログラムの出力は標準出力に出力される。なので、&gt;/dev/nullとすると、hogeプログラムの出力だけを表示せず、システムコールのトレース結果だけを表示できる。</p>
+<ul>
+<li><a href="https://qiita.com/t_ymgt/items/7f13c89b08b889da2146">Linuxでのstraceコマンドの使い方まとめ - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.05.17編集</p>
+</div>
+
+<h2>man-pages</h2>
+<p>Linuxのシステムコールのman-pagesは以下から一覧して閲覧できます。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/syscalls.2.html">man syscalls</a></li>
+</ul>
+
+<h1>リンク集</h1>
+<h2>Linux/UNIXプログラミング一般</h2>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a> - 昔買いました。読んでいません。と言いましたが、最近途中まで読みました。とても良い本なので、いつか最後まで読みたいです。特に、カーネルとプロセスとメモリの記述、仮想アドレス空間のような記述をもっと詳しく知りたいと思います。</li>
+</ul>
+
+<h2>システムコール</h2>
+<p>システムコールについて。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/index/indexfiles/systemcall.html">連載記事 「知ってトクするシステムコール」 - @IT</a></li>
+<li><a href="http://postd.cc/the-definitive-guide-to-linux-system-calls/">Linuxシステムコール徹底ガイド - POSTD</a></li>
+</ul>
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"  href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<title>IPアドレス用語 - schwarz1009</title>
+
+</head>
+<body>
+<p><a href="index.html">トップページに戻る</a></p>
+<iframe src="menu_menu.html" class="iframe_menu"></iframe>
+<p>AUTHOR: schwarz1009<br>
+TITLE: IPアドレス用語<br>
+BASENAME: 2020/06/21/210303<br>
+STATUS: Publish<br>
+ALLOW COMMENTS: 1<br>
+CONVERT BREAKS: 0<br>
+DATE: 06/21/2020 21:03:03<br>
+CATEGORY: ネットワーク
+
+</p>
+<ul class="table-of-contents">
+    <li><a href="#IPアドレス用語">IPアドレス用語</a></li>
+    <li><a href="#システムのIPアドレス">システムのIPアドレス</a></li>
+    <li><a href="#ネットマスク">ネットマスク</a></li>
+    <li><a href="#ブロードキャスト">ブロードキャスト</a></li>
+    <li><a href="#ゲートウェイ">ゲートウェイ</a></li>
+    <li><a href="#ネームサーバ">ネームサーバ</a></li>
+</ul>
+<div class="section">
+    <h3 id="IPアドレス用語">IPアドレス用語</h3>
+    <p>Linuxでネットワークの設定をする時にでてくるIPアドレス用語を説明する。<br />
+参考文献：<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking/ja">ネットワーク設定 - Gentoo AMD64 Handbook</a></p>
+
+</div>
+<div class="section">
+    <h3 id="システムのIPアドレス">システムのIPアドレス</h3>
+    <p>IPアドレスは、それぞれのネットワークでホストにつけられるアドレスのこと。<br />
+パケット通信において、パケットの送信元と受信先を表す。<br />
+たとえば、192.168.0.11となる。</p>
+
+</div>
+<div class="section">
+    <h3 id="ネットマスク">ネットマスク</h3>
+    <p>IPアドレスは、ネットワークの外部を表すネットワーク部と、内部を表すホスト部に分かれる。<br />
+ネットワーク部とホスト部を識別するために、ネットマスク（サブネットマスク）を設定する。<br />
+IPアドレスを1と0のビットにした時に、ネットワーク部は1、ホスト部は0となる。<br />
+たとえば、</p>
+
+<pre>11111111 11111111 11111111 00000000
+</pre><p>のようになる。この場合、ネットマスクは255.255.255.0となる。</p>
+
+</div>
+<div class="section">
+    <h3 id="ブロードキャスト">ブロードキャスト</h3>
+    <p>ネットマスクとは別に、ブロードキャストアドレスを設定することもできる。<br />
+ブロードキャストアドレスは、パケットをブロードキャストするためだけに存在する。<br />
+ブロードキャストとは1対1ではなく1対多の通信で、同じネットワーク内の全てのホストと通信を行う。<br />
+ネットワークと同じネットワーク部を持ち、ホスト部を1としたアドレスとなる。<br />
+たとえば、192.168.0.255となる。</p>
+
+</div>
+<div class="section">
+    <h3 id="ゲートウェイ">ゲートウェイ</h3>
+    <p>ゲートウェイとは、ネットワークにおいて、インターネット接続を共有するホストのこと。<br />
+たとえば、192.168.0.1となる。</p>
+
+</div>
+<div class="section">
+    <h3 id="ネームサーバ">ネームサーバ</h3>
+    <p>ネームサービスは、人間に理解しやすいホスト名（hogehoge.co.jpなど）をIPアドレスに変換するサーバのこと。<br />
+ゲートウェイがネームサービスを兼ねていることもあるが、そうでなければISPが提供するネームサーバを書く。<br />
+Linuxでは/etc/resolv.confにネームサーバを記述する。</p>
+
+</div>
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+

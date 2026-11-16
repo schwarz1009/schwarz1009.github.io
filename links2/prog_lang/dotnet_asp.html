@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>ASP.NET関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>ASP.NETの世界観</h1>
+<p>ASP.NETに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Webアプリケーション</h1>
+<h2>ASP.NET</h2>
+<p>Webアプリケーションの開発プラットフォーム。</p>
+<p>.NETでのWebプログラミング。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/subtop/features/dotnet/aspnet_index.html">連載　 プログラミングASP.NET - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/0204/09/news001.html">連載 プログラミングASP.NET　―ASP.NETによるWebアプリケーション実践開発講座― - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/channel/aspnet/aspnet.html">ASP.NET - @IT</a></li>
+</ul>
+
+<h2>概要とサンプルコード</h2>
+<p>ASP.NETでは、JSPと同様に、</p>
+<pre class="prettyprint">
+&lt;% ～ %&gt;
+</pre>
+<p>でC#などのコードを埋め込める。</p>
+<p>使うプログラミング言語は、</p>
+<pre class="prettyprint">
+&lt;%@ Page Language="C#" %&gt;
+</pre>
+<p>で指定する。この部分をページディレクティブと呼ぶ。</p>
+<p>また、入力フォームを配置するために、&lt;asp:TextBox runat="server" /&gt;のようなタグを多く使う。イベント駆動を行うために&lt;script runat="server"&gt;～&lt;/script&gt;タグも使用する。</p>
+<p>以下に詳しいサンプルコードがあります。</p>
+<ul>
+<li><a href="http://aspnet.keicode.com/aspnet/simplest-aspnet-page.php">最も単純な ASP.NET を書いてみよう！ - ASP.NET 入門</a></li>
+<li><a href="http://aspnet.keicode.com/aspnet/validate-input.php">「ユーザーの入力を受け付けるシンプルな方法」の入力検証 - ASP.NET 入門</a></li>
+<li><a href="http://aspnet.keicode.com/aspnet/aspnet-web-forms-event2.php">最も単純なイベント処理 - ASP.NET 入門</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.05編集</p>
+</div>
+
+<h1>フレームワーク</h1>
+<h2>Razor</h2>
+<p>RazorはMicrosoftによる軽量ビューエンジン。C#によるHTMLのテンプレートエンジンとして利用できる。</p>
+<p>後日注記：Razor構文では、変数などの値を表示するためには、単に@を付けるだけでいい。複数行に渡るコードを記述するには@{ ～ }とする。条件分岐は@ifや@switch、繰り返しは@forや@foreachや@whileで行える。関数は@functionsで定義し（たとえばHoge()のような関数を定義する）、実行は@Hoge()などとできる。このほか、コードを部分的に再利用するために、部分ビューやRazorコンポーネントを利用できる。</p>
+<ul>
+<li><a href="https://qiita.com/mukai3/items/1c4dcd7774e2fcec0078">Razorとは？初心者でもわかるASP.NETのビューエンジン入門 #C# - Qiita</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/fdotnet/rapidmaster/rapidmaster_03/rapidmaster_03.html">C# Razor構文 基礎文法 総まとめ - ＠IT</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.05</p>
+<p>2026.02.08編集</p>
+</div>
+
+<h2>Blazor</h2>
+<p>Blazorは、MicrosoftによるJavaScriptの代替としてC#とHTML/CSSを用いたフロントエンドフレームワーク。</p>
+<p>後日注記：Blazorでは、@pageでルーティング、@bindでデータのバインディング（UIと変数の関連付け）を行い、@codeでC#のコードを書ける。HTMLと同じファイルの中にC#のコードを書くことができる。</p>
+<ul>
+<li><a href="https://qiita.com/ochtum/items/ed7ab729f1d40cf79c13">【2025年最新】Blazorとは？初心者にもわかりやすく解説｜.NETで始める次世代Web開発 #C# - Qiita</a></li>
+<li><a href="https://zenn.dev/wogo_techblog/articles/a51dee31b0c90e">【続編】WindowsアプリUI開発はもうつらくない！ Blazor × Tailwind CSS完全版</a></li>
+<li><a href="https://tex2e.github.io/blog/dotnet/Blazor-DataBinding">[Blazor] 一方向と双方向データバインディング | 晴耕雨読</a></li>
+</ul>
+<p>後日注記：Razorはマークアップ言語のテンプレートエンジンであり、Blazorはブラウザで動くフロントエンドフレームワークである。また、Razorコンポーネントを利用してUIを実現するのがBlazorである。</p>
+<ul>
+<li><a href="https://blogs.jp.infragistics.com/entry/2022/08/02/BazorAndRazor">Blazor と Razor - その違いについて - インフラジスティックス・ジャパン株式会社Blog</a></li>
+</ul>
+<p>後日注記：残念ながら、ネットには「Blazorは設計失敗」だとする意見もあります。</p>
+<ul>
+<li><a href="https://qiita.com/ZiYuCai1984/items/d748cabcbab6cf817b82">なぜ私は Blazorの設計は失敗だったと思っているのか #C# - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.02.05</p>
+<p>2026.02.08編集</p>
+<p>2026.04.15編集</p>
+</div>
+
+<h2>その他のフレームワーク</h2>
+<p>その他のフレームワークとしては、イベント駆動によるASP.NET Web Formsなどがある。MVCではなく、Windows.Formsのやり方に近い。JavaServer Faces（JSF）とよく似ている。</p>
+<ul>
+<li><a href="https://techinfoofmicrosofttech.osscons.jp/index.php?ASP.NET%20Web%20Forms">ASP.NET Web Forms - マイクロソフト系技術情報 Wiki</a></li>
+</ul>
+<p>以前はASP.NET MVCというのもあったが、現在はASP.NET Coreとともに統合された。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/ASP.NET_MVC_Framework">ASP.NET MVC Framework - Wikipedia</a></li>
+</ul>
+<p>以下はASP.NET Web FormsとASP.NET MVCの比較記事。</p>
+<ul>
+<li><a href="https://techinfoofmicrosofttech.osscons.jp/index.php?ASP.NET%20Web%20Forms%20vs%20ASP.NET%20MVC">ASP.NET Web Forms vs ASP.NET MVC - マイクロソフト系技術情報 Wiki</a></li>
+<li><a href="https://codezine.jp/article/detail/4367">「ASP.NET Web Form」か「ASP.NET MVC」か？　.NETによるWebアプリ開発の今を徹底討論 (1/4)|CodeZine（コードジン）</a></li>
+</ul>
+<p>このほか、Microsoft系の技術は以下のWikiが参考になる。</p>
+<ul>
+<li><a href="https://techinfoofmicrosofttech.osscons.jp/index.php?FrontPage">FrontPage - マイクロソフト系技術情報 Wiki</a></li>
+</ul>
+<p>MVCのモデルに相当するEntity Frameworkについては<a href="orm.html">永続化とO/Rマッピング</a>を参照のこと。</p>
+<div class="edit_date">
+<p>2026.02.08</p>
+</div>
+
+<h1>AIによるサンプル</h1>
+<h2>Razor Pagesのサンプル</h2>
+<p>以下はGoogleのAIが書いたRazor Pagesのサンプル。</p>
+<p>ページモデル (Index.cshtml.cs)</p>
+<pre class="prettyprint">
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace MyApp.Pages
+{
+    public class IndexModel : PageModel
+    {
+        // 表示したい名前を保持するプロパティ
+        public string UserName { get; set; }
+
+        public void OnGet()
+        {
+            // サーバー側でデータをセットする (DBから取得する代わり)
+            UserName = "山田太郎";
+        }
+    }
+}
+</pre>
+<p>ビュー (Index.cshtml)</p>
+<pre class="prettyprint">
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "ホーム";
+}
+
+&lt;div class="text-center"&gt;
+    &lt;h1 class="display-4"&gt;こんにちは&lt;/h1&gt;
+    
+    &lt;!-- 名前をここに表示 --&gt;
+    &lt;p&gt;ユーザー名: &lt;strong&gt;@Model.UserName&lt;/strong&gt; さん&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<div class="edit_date">
+<p>2026.02.08</p>
+</div>
+
+<h1>ネットワーク</h1>
+<h2>ネットワーク・プログラミング</h2>
+<p>.NETでのネットワークプログラミング。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/fdotnet/special/networkprog/networkprog_01.html">.NETネットワーク・プログラミング入門 - @IT</a></li>
+</ul>
+
+<h2>ソケットプログラミング</h2>
+<p>.NETでのソケットプログラミングについては、<a href="vb_lib.html">VB（クラスライブラリ）</a>も参照のこと。</p>
+
+<h1>余談</h1>
+<h2>Windowsをサーバーに使う際に使う</h2>
+<p>ASP.NETは、Windowsをサーバーに使う際に使います。</p>
+<p>Windows Serverのように、Windowsをサーバーに使う場合、.NET FrameworkをベースにWebアプリケーションを開発するために、ASP.NETを使います。</p>
+<p>「Windowsをサーバーに使うだって、何を言っているの？」と思う人もいるかもしれませんが、実際のこの世界では、Windowsをサーバーに使うという人、すなわち「Windowsガチ勢」はIT業界にたくさんいます。</p>
+<p>そして、ASP.NETは決して遅れた環境ではなく、Javaのサーブレットと同じぐらい進んだ環境です。</p>
+<p>なので、ASP.NETは決して馬鹿な技術ではなく、多くの人が活用する大人気技術です。</p>
+<p>ASP.NETは、データベース技術であるADO.NETと一緒に使われることが多く、その際にはMicrosoft SQL Serverをデータベースに採用することが多いです。</p>
+<p><a href="dotnet_ado.html">ADO.NET</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2023.10.11</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

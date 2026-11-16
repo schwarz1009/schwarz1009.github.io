@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Red Hat１（Red Hat） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Red Hat１（Red Hat）</h1>
+<p>Red Hatに関する世界観１（Red Hat）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>Red Hat（１．Red Hat）</b></li>
+<ul>
+<li><a href="fedora.html">Fedora</a></li>
+<li><a href="redhat_dnf_yum.html">２．DNF/Yum</a></li>
+<li><a href="redhat_rpm.html">３．RPM</a></li>
+<li><a href="centos.html">CentOS</a></li>
+</ul>
+</ul>
+<p>メインフレームでのRHELについては<a href="../hardware/mainframe.html">メインフレーム</a>が参考になるかもしれないです。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Red Hat</h1>
+<h2>Red Hat/Fedoraの特徴</h2>
+<h3>長所</h3>
+<p>RHELの場合、会社が作っているディストリビューションなので、Debianと違いきちんと会社のサポートサービスが受けられる。企業サーバ向け。</p>
+<p>Linuxの事実上の標準構成。仕事で使うために勉強する場合、Red Hatが分かっていれば、どんな場合にも対応できる。</p>
+<p>Fedoraは最先端で、さまざまな技術を最速で取りいれる。このため、最新の技術を試すことが出来る。思い切ってRawhideにしても良いだろう。</p>
+<p>Fedoraは開発者・オタク向け。率先してLinuxの開発を行い、オープンソースを「開拓」していく人に向けられたディストリビューションだ。</p>
+<h3>短所</h3>
+<p>まず、RHELは無料ではない。金がかかる。</p>
+<p>そして、RHELはオープンソースなため、無料版を配布しようと思えばできる。そのために、CentOSというRHELクローンがある。だが、このビジネスモデルは明らかにおかしい。</p>
+<p>Fedoraは最近はきちんと動いているバージョンが多いが、昔は不安定で動くわけがないバージョンが多かった。いつ動かなくなるか分からない。メインマシンにすることは出来ないだろう。</p>
+
+<h2>個人の開発者が少なくなった今でも、Red HatはLinux Kernelへの貢献度で上位</h2>
+<p>Linuxカーネルは最近、無償のボランティアは8.2%（2017年）で、多くが個人ではなくもっぱら企業で開発されていますが、それでも、Red HatはLinuxカーネルへの貢献度で高い位置を保っています。</p>
+<ul>
+<li><a href="https://jp-redhat.com/openeye_online/openeye_technology/embedded-program-column/2114/">Linux Kernel Developmentへの貢献度の見方 | RED HAT OPENEYE -レッドハットの情報ポータル</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1710/30/news032.html">2017年版Linuxカーネル開発レポート公開――支援している企業トップ10とは？：過去12年の個人開発パッチ数第3位はTakashi Iwai氏の5089個 - ＠IT</a></li>
+</ul>
+<p>これを見ると、Red HatはIntelに次いで二位（2017年）。正確にはIntelの次にnone（無し）があり、その次である。</p>
+<p>Linuxカーネル開発のトップ企業は、Intel、Red Hat、Linaro、IBM、Samsung、SUSE、Google、AMD、Renesas Electronics、Mellanoxとなっている。Microsoftが一社で作っているWindowsとは違い、Linuxはカーネルすらオープンにさまざまな企業が開発している。</p>
+<p>また、最近は「MicrosoftがLinuxカーネルの統制権を得て乗っ取ろうとしている」などというアンチMS的な意見もあったりして、どうなるかは危ういが、Red Hatなどと協力している分野もあり、今後が予測できない。ただし、先に言ったようにLinuxカーネルはオープンな開発体制を取っており、仮にMicrosoftがLinuxカーネルに参入したとしても、他の会社と同じ道を歩むだけである、と楽観視する向きが大きい。</p>
+<ul>
+<li><a href="https://japan.zdnet.com/article/35143737/">トーバルズ氏が見るマイクロソフトとLinux - ZDNet Japan</a></li>
+</ul>
+
+<h2>GNUとLinuxの組み合わせは賢いからエンタープライズでも使える</h2>
+<p>なぜ、Red Hatがエンタープライズ向けにLinuxの商用サポートを売るのか。</p>
+<p>それは、GNUとLinuxの組み合わせが、本当に賢いからです。</p>
+<p>GNUとLinuxを組み合わせたGNU/Linuxシステムは、商用のUNIXシステムと比べても遜色がありません。Solarisのような商用のUNIXよりもパフォーマンスがよく、比類するほどに優れています。</p>
+<p>このようなGNU/Linuxを、インターネット上に集まったオタクがオープンソースの共同開発と遊びのためだけに使うのは、もったいありません。</p>
+<p>なので、Red HatはこのようなLinuxを商用のエンタープライズ向けに販売し、商用サポートでお金を取っています。これによって、エンタープライズ向けにLinuxという「オープンソースでありながらとても優れたUNIXライクなOS」が動くということの証明をしているのです。</p>
+
+<h1>Linuxと商売</h1>
+<h2>Linuxにはまだビジネスモデルが確立していない</h2>
+<p>実際のところ、Linuxで金を儲けるためのビジネスモデルはまだ確立していない。</p>
+<p>Linuxカーネルや多くのオープンソースソフトウェア（フリーソフトウェア）は、GPLの下でライセンスされている。GPLでは、フリーソフトウェア自体を販売することは制限されないが、フリーソフトウェアを提供するものにはソースコードを開示する義務があり、また、その開示したソースコードとフリーソフトウェアを自由にコピーしたり再配布したりする自由を禁止してはならない。</p>
+<p>よって、Linuxをもし販売したとしても、その販売したソフトウェアがすぐにコピーされてしまう。Microsoft Windowsのように、コピーを禁止して、Microsoft以外のものが配布してはならないようにすることはできない。</p>
+<p>だが、Red Hatはそんな中で、どうにかしてオープンソースのライセンスを採用したままで、ビジネスモデルを確立しようとしている。それを今から見ていこう。</p>
+
+<h2>Red Hatのビジネスモデル</h2>
+<p>そもそも、Linuxディストリビューションとは、インターネット上にあるフリーソフトウェアを寄せ集めて、「きちんと動くぐらい高品質に安定させたひとつのOS」を提供することである。</p>
+<p>Red Hatは、その取りまとめを企業が利益を得て行うことで、エンタープライズでも使用することができるぐらいの高品質なOSを、Linuxカーネルとオープンソースソフトウェアをベースに作り上げている。</p>
+<p>Red Hatの主力製品はRHEL（Red Hat Enterprise Linux）である。これは10万円ぐらいで購入することができる。</p>
+<p>RHELは企業の基幹システムなどで採用されることが多く、Linuxでお仕事をする時の事実上の標準になっている。また、スーパーコンピュータでLinuxクラスターを作る時にも採用されることが多い。ほかには、クラウド仮想サーバーのコンテナ向けのOSとしても良く採用される。Red Hatは、こうしたエンタープライズ向けの分野で、RHELを販売して儲けている。</p>
+<p>だが、そもそも、10万円も出してRHELを購入するメリットは何だろうか。</p>
+<p>Red Hatのビジネスモデルは、「長期のサポート」と「動作の保証」が重要な位置づけにある。</p>
+<p>ここで言うサポートとは、要するにセキュリティパッチやバグの修正である。Debian GNU/Linuxのようなコミュニティ向けの無料のディストリビューションでも、セキュリティパッチのサポートは受けられるが、RHELに比べてサポートされる期間が短い。Debianでは、最新の安定バージョンとその前のバージョンぐらいしか、サポートされていない。Red Hatはそれより長い間、商用のサポートが受けられる。</p>
+<p>長期のサポートを実現するためには、古いバージョンまでさかのぼってバグを直さなければならない。Red Hatはサブスクリプション形式（期間契約）での契約を結ぶことで、古いバージョンを使っているユーザーでも、常に最新のバージョンを利用することもできる。もちろん、サポート期間が続く間は、既存のシステムをできる限り変更なく保守し続けることができる。</p>
+<p>だが、先にも言ったように、LinuxはGPLでライセンスされている。Red Hatも例外ではなく、自由な再配布とコピーを許さなければならない。このため、Red HatはSRPM形式でソースパッケージを配布しており、これをリビルドしたCentOSというRHELクローンもある。</p>
+<p>CentOSとRHELの違いは、「動作の保証」である。CentOSは確かにRHELと製品の内容は同じだが、サポート契約を結んでいないため、動作に支障があっても文句は言えない。RHELを購入した場合は、Red Hatが動作を保証するため、Red Hatにはシステムに問題があった時は責任がある。</p>
+<p>Red Hatは、そうした「保守と責任」で儲けているのである。</p>
+<p>逆に言えば、Red Hatからの動作の保証がなくても、自社で責任を取れる場合には、CentOSを使って一向に構わない。Red Hatに金を払わず無料でCentOSを使うことに罪悪感を感じる必要はない。そもそも、無料のフリーソフトウェアを販売して儲けているRed Hatが悪い。</p>
+
+<h2>Fedoraという無料版もある</h2>
+<p>Red HatはRHELをエンタープライズ向けに販売している代わり、デスクトップユーザー向けのFedoraという無料版も提供しています。</p>
+<p>このFedoraは、旧Red Hat Linuxの後継版にあたるもので、これは「マニア向け」あるいは「Geek向け」（Geekとはオタクという意味）とされています。</p>
+<p>Fedoraは非常に短いスパンでリリースされて、最新のLinuxの開発情勢が反映されています。多くのソフトウェアが、動くかどうかにかかわらず最新バージョンです。Red Hatは、「使うだけではなく開発に貢献して欲しい」とし、Fedoraを上級者向けのディストリビューションだと位置づけています。</p>
+<p>FedoraはRed Hatだけではなく、コミュニティによって開発されています。このFedoraの成果が、RHELに反映されるようになっています。</p>
+<p>Red HatはFedoraだけではなく、Linuxカーネルなどとても多数のプロジェクトに開発者を参加させたり、あるいはスポンサーになったりしています。今のLinux業界は、Red Hatが牽引しています。そのため、Red Hatは自らのことを「オープンソースのリーダー企業」と宣言しています。</p>
+
+<h2>Googleのビジネスモデル</h2>
+<p>また、最近はGoogleがLinuxカーネルをベースにしたAndroidというオープンソースのモバイル向けのOSを作っている。</p>
+<p>モバイルはLinuxにとってとても重要な市場で、Linuxが稼働する台数としてはパソコンよりもモバイルや組み込みシステムの方がはるかに多いとされている。</p>
+<p>Googleは、カーネルやOSはオープンソースにしながら、自社のGoogleサービスの広告と、アプリを配布するGoogle Play Storeの利益で儲けている。</p>
+<p>まさにGoogleはオープンソースを変えた。オープンソースにしながら儲けられるビジネスモデルを作っているのは、Googleぐらいである。</p>
+<p>だが、Red HatがGoogleと同じことをやることはおそらくないだろう。なぜなら、Googleが儲けられるのは、サーバー側の運営システムを公開していないからに過ぎない。こうしたサーバー側でも公開を義務付ける「アフェロGPL」という新しいライセンスも考案されている。</p>
+
+<h2>UNIX/Linux屋の仕事</h2>
+<p>Red Hatは、中小企業のサーバーに良く使われている。UNIXやWindowsなどを含め、もっとも新しく、機能があり、安定性と信頼性が高いのはRed Hat。</p>
+<p>LinuxにはDockerなどの最新技術があるため、単なるWebサーバーだけではなく、クラウドにおける仮想コンテナOSとしても、Red Hatが使われることが多い。</p>
+<p>こうした分野で、高額なRed Hatの代替となるのはCentOS。コミュニティによるディストリビューションを使いたいならUbuntuやDebianも選択肢になる。また、本当に安定性が必要ならLinuxを使わず、FreeBSDやOpenBSDを使う場合もある。</p>
+<p>また、古くなったUNIXを使ったシステムやワークステーションは、そのままLinuxにリプレースされることが多い。</p>
+<p>最近のLinux屋の大きな仕事はこうした「UNIXからの移行」であり、コストを削減した上でOSやシステムを最新のものに変えることができる。</p>
+<p>また、Linuxは政府や軍のような「絶対に漏れてはならない機密情報の管理」や、あるいは通信インフラのような「絶対にストップしてはならないインフラ」に使われることもある。</p>
+<p>最近では、スパコンやメインフレームでもRed Hatが使われる。</p>
+<p>また、特殊な現場としてはアニメーションスタジオでもLinuxが使われている。アニメーションスタジオでは3DCGの複雑な合成や計算が必要であり、従来Macなどが使われていた分野で、新しいOSとしてLinuxが使われている。</p>
+
+<h2>コミュニティと企業の架け橋</h2>
+<p>また、Red Hatの独自のオープンソース企業としての特徴として、「コミュニティと企業との間の架け橋となる」というのが挙げられる。</p>
+<p>たとえば、GoogleとともにKubernetesを開発したり、Kubernetesを応用したOpenShiftを開発する。Googleのような一部の大企業だけではなく、IBMや日本企業などさまざまな企業と提携し、「オープン化への対応・対策」を行っている。コンサルタント企業のようなものでもあるが、実際の開発とコミュニティ・エコシステムの形成までを行う。</p>
+
+<h1>その他Red Hatについて</h1>
+<h2>いったいRed Hatは何をやっているの？</h2>
+<p>実際のところ、Red Hatが何をやっているのか良く分からない。僕もそうだった。</p>
+<p>それは、以下のページによく書かれている。</p>
+<ul>
+<li><a href="https://www.redhat.com/ja/about/open-source">オープンソースで優れたテクノロジーを創り出す - Red Hat</a></li>
+</ul>
+
+<h2>Red Hatを買収したIBMの狙いは</h2>
+<p>また、Red Hatを買収したIBMの狙いについては、以下が参考になる。</p>
+<ul>
+<li><a href="https://www.ibm.com/jp-ja/cloud/redhat?lnk=jphpv18f4&lnk2=learn">IBMとRed Hat - 日本 | IBM</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Fedora</h2>
+<p><a href="fedora.html">Fedora</a>を参照のこと。</p>
+<h2>DNF/Yum</h2>
+<p><a href="redhat_dnf_yum.html">Red Hat２（DNF/Yum）</a>を参照のこと。</p>
+<h2>RPM</h2>
+<p><a href="redhat_rpm.html">Red Hat３（RPM）</a>を参照のこと。</p>
+<h2>sysconfig</h2>
+<p><a href="linux_net_sysconfig.html">sysconfig</a>を参照のこと。</p>
+
+
+<h1>設定・管理</h1>
+<h2>Red Hat系設定ツール (system-config-*)</h2>
+<p>Red Hat系の設定ツール（system-config-*）は、debconfとは異なりパッケージ管理システムとは個別に配布されている。Pythonで書かれた単純なGUIツールが多い。</p>
+<p>後日注記：これらの設定ツールを使うことで、GUIで分かりやすいインターフェースから設定を変更できる。設定ファイルを直接編集しろと言われるよりも、ユーザーフレンドリーで分かりやすい。だが、設定した内容がシステムのどこに反映されるのかが分からないという欠点もある。初心者のシステム管理の学習を妨げる効果があるため、Arch LinuxなどではこのようなGUIの設定ツールは提供していない。</p>
+<p>後日注記：僕は最近RHELやFedoraを使っていないため、system-config-*という設定ツール群が今でも使われているのかは分からない。また、かつてのRed Hat系のLinuxも僕はあまり触ったことがないため、設定のGUIのフロントエンドがsystem-config-*という名前だったかも怪しい。何かしら間違いがあれば申し訳ない。</p>
+<div class="edit_date">
+<p>2023.08.17編集</p>
+</div>
+
+<h1>Red Hat関連ソフト</h1>
+<h2>libvirt</h2>
+<p>仮想化ソフト向けの共通化されたAPIを提供するライブラリ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Libvirt">libvirt - Wikipedia</a></li>
+</ul>
+<p><a href="../virt/virt.html">仮想化</a>を参照のこと。</p>
+
+<h2>Anaconda</h2>
+<p>FedoraやCentOSで使われているGUIインストーラー。</p>
+
+<h2>JBoss</h2>
+<p>高機能なオープンソースのJavaアプリケーションサーバ。オープンソース企業であるJBoss Inc.をRed Hatが買収した。オープンソース版については「WildFly」に名前が変更され、FedoraとRHELとの関係と似たものを模索している。</p>
+<p><a href="../prog_lang/java_servlet_appserver.html">Javaアプリケーションサーバ</a>を参照のこと。</p>
+
+<h2>Ansible</h2>
+<p>構成管理と呼ばれるソフトのひとつで、事前に記述された設定ファイルに基づいてサーバの管理や設定を自動化することができる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Ansible_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">Ansible (ソフトウェア) - Wikipedia</a></li>
+</ul>
+<p><a href="../network/cm.html">構成管理</a>を参照のこと。</p>
+
+<h2>Cygwin</h2>
+<p>GNUツールをWindowsに移植したもの。Red Hatが開発母体であるCygnus Solutionsを買収した。</p>
+<p>Cygwinはエミュレータではなく互換レイヤーであり、Cygwin1.dllを間に通すことでGNUツールの移植を実現している。Cygwin環境でコンパイルされたツールの動作にはCygwin1.dllが必要。</p>
+<p><a href="../virt/cygwin.html">Cygwin</a>を参照のこと。</p>
+
+<h2>Global File System</h2>
+<p>クラスタ用のファイルシステム。</p>
+<p><a href="../network/dfs.html">分散ファイルシステム</a>を参照のこと。</p>
+
+<h1>価格</h1>
+<h2>RHELの価格</h2>
+<p>RHELの価格はもっとも安いStandardサポートで108,600円、Premiumサポートで176,600円。けっこう高額だがOracleDBよりはマシである。</p>
+<ul>
+<li><a href="https://www.otsuka-shokai.co.jp/products/linux/redhat/pricing/">Red Hat Enterprise Linuxの価格 | 大塚商会</a></li>
+</ul>
+
+<h2>FedoraとCentOSは無料</h2>
+<p>Red Hatが高額だからといって不安になる必要はない。RHELのコミュニティ開発版であるFedoraは完全に無料。またRHELをどうしても使いたい場合はコミュニティによるCentOSと呼ばれるRHELクローンが利用できる。サポートは必要だがコストを抑えたい場合はRHEL互換のOracle Linuxが利用できる。</p>
+<p>CentOSでは企業サポートは受けられないが、コミュニティによるセキュリティアップデートは行われる（CentOSはRed Hatが提供するソースRPMをリビルドして提供している）。企業サーバーやエンタープライズシステムを構築する場合は多少高くてもRHELを購入しよう。</p>
+<p><a href="centos.html">CentOS</a>を参照のこと。</p>
+
+<h1>余談</h1>
+<h2>Red Hatが勝手にシステムの問題点を調べ上げて、勝手にバグを直す</h2>
+<p>僕は、Yum/DNFの未来形として、問題が起きた時にRed Hatの社員が勝手にシステムの問題点を調べ上げ、インターネット経由でその問題点を共有し、Red Hatがそのバグを直し、システムをアップデートする、という「Red Hat Implements」を実装すると良いと思う。</p>
+<p>Red Hatはインターネット経由で遠隔地から、システムの不具合とバグ情報を共有する。そして、インターネットで繋がった世界中のFedoraのバグを直す。バグが治ったら、それを共有し、またそのマシンに適用する。こうすることで、Fedoraを「バグを完全に根絶し、リアルタイムで世界中のシステムの不具合を直していく」。これは新しい開発とバグ修正の形になると思う。</p>
+
+<h2>IBMがRed Hat買収を発表</h2>
+<p>どうやら、IBMがRed Hatを買収したようです。フェイクニュースではありません。Linux界で最近一番の衝撃かもしれません。</p>
+<p>僕は、これは決して悪いことでもつまらないことでもないと考えています。</p>
+<p>大きく分けて、2つの良い点があります。</p>
+<p>まず、IBMによって、Linuxがさらに開発され、品質が高まるかもしれない。デスクトップLinuxも普及するかもしれないということです。</p>
+<p>たとえば、デスクトップ環境をIBMがオープンソースで作るかもしれません。そして、LibreOfficeも改良されるかもしれません。</p>
+<p>ただし、危険なのは、IBMによってLinuxがオープンソースでないものになることです。完全に独占ソフトウェアになるかもしれないのです。</p>
+<p>Oracleによる、Sunの買収によって、Java, OpenOffice.org, MySQLなどが権並悲惨になっています。これと同じ末路を辿る可能性はあるでしょう。</p>
+<p>もう一つの良い点は、RHELとFedora、そしてCentOSによる、今までのRed Hatのビジネスモデルが変わるかもしれない、ということです。</p>
+<p>たとえば、RHELを無料で提供し、セキュリティ修正のようなサポートもIBMがするようになるかもしれません。あるいは、Debianが中心となって新しいLinuxの秩序が生まれる可能性もあるでしょう。</p>
+<p>ただし、ネットでは冷ややかな意見が多いようです。そもそも約4兆円という大金を出す価値がRed Hatにあるのか、とかです。また、とても驚いている人がたくさん居ます。「その発想は無かった」という人も多いようです。</p>
+<p>Red Hatが終わったとしても、Linuxは終わりません。いつも通り、Linuxカーネルの開発者コミュニティで開発を行います。Linuxカーネルは5.0の大台に乗るようです。</p>
+<p>IBMは、良くこうした企業の買収劇を行います。Lotus 1-2-3のように、完全に失敗した買収だったことになって、Red Hatは消えるかもしれません。それに、IBMは全くオープンソースのことが分かっていないと思います。IBMがオープンソースを潰したいだけの買収だったのかもしれません。ですが、約340億ドルを出したIBMは大きな賭けに出ました。それは成功するでしょう。</p>
+<p>そして、今回の買収は、僕は「普通の買収ではない」と思います。それは、オープンソースとIBMの買収劇だからです。買収したのはIBMで、買収されたのはRed Hatです。これは最高の発想であるとともに、リスクの大きな賭けであり、そしてLinux陣営に対しては、決してポジティブなだけのことではなく、マイナスに作用することもあるでしょう。どうなるかはまだ分かりません。ですが、Linuxカーネルにとってつまらないだけの話ではないと思います。</p>
+<ul>
+<li><a href="https://www-03.ibm.com/press/jp/ja/pressrelease/54463.wss">IBM ニュースルーム - 2018-10-30 IBM、Red Hatを買収、クラウド業界を一変させ、世界1位のハイブリッドクラウド・プロバイダーに - Japan</a></li>
+</ul>
+
+<h2>Red Hatの社風</h2>
+<p>Red Hatの「オープンソースとオープンを大切にする社風」については、以下の記事が参考になる。特にGoogle発のKubernetesをRed Hatがともに開発し、顧客や外部の開発者とコミュニティを築き、Kubernetesを活用したOpenShiftを作り上げていくプロセスは、カッコいい。</p>
+<ul>
+<li><a href="https://business.nikkeibp.co.jp/atcl/report/16/122700258/010800003/?P=1">IBMが3兆7000億円で買ったレッドハットの真髄：日経ビジネスオンライン</a></li>
+</ul>
+
+<h2>企業のスポンサーが居ることは必ずしも悪くない</h2>
+<p>僕が思うに、Red Hatなどを企業の参加者だと言って悪く言う意見は多いですが、Red Hatのような企業のスポンサーがつくことは悪いことではありません。</p>
+<p>たとえば、Debianなどは、コミュニティのボランティアが開発やメンテを行い、サーバーやプロジェクトの運営資金などは寄付によって賄っています。</p>
+<p>これに対して、Red HatのFedoraやCanonicalのUbuntuは、バックに居る企業から潤沢な運営資金を手に入れることができます。</p>
+<p>Debianが必ずしも寄付だけに頼っているわけではありませんが、Wikipediaのように大っぴらに巨大な寄付集めの広告を載せるような、「完全に寄付によって成り立つ組織」よりは、金儲けでも会社の利益を使ってさまざまなことができるようにした方が、将来性や継続性があるということはあると思います。</p>
+
+<h2>LAMPスタックは十分商売に使える</h2>
+<p>最近のITインフラは、三階層型システムというのが主流で、Webサーバ、APサーバ、DBサーバによってシステムを構築します。</p>
+<p>システムの役割や機能が違っていても、アーキテクチャや構造は、どのシステムでも驚くほど似ており、多くのシステムが三階層型システムを採用しています。</p>
+<p>そして、この三階層型のシステムは、オープンソースのLAMPスタック（Linux+Apache+MySQL+Perl/PHP/Python）を使うことで、個人でも小さな会社でも、無料で作ることができます。</p>
+<p>サーバーにはスケールの問題があり、大きなサーバールームやデータセンターであればラックに何百台というサーバーマシンが置かれています。また、IBMのメインフレームも抜群の信頼性や性能を誇ります。</p>
+<p>ですが、今のIT業界では、LAMPがどんなにチープでも、十分使えるものになってきています。ビジネスの用途でも、LAMPが使えるようになりました。</p>
+<p>また、インフラの信頼性や拡張性の向上のために、最近では仮想化が使われるようになりました。これも、DockerやKubernetesをはじめとするLinuxの得意分野です。</p>
+<p>そのため、Linuxは仕事のシステム開発に十分使える「ビジネスインフラ」になりつつあります。Red Hatはこうした分野でLinuxを使うことで、低コストでも満足のいくシステムを構築して、商売しています。またRed Hatが行うだけではなく、RHELのような商用サポートのついたLinuxで、高可用性・高性能なサーバやシステムを構築することは、今のIT企業の標準的インフラプラットフォームになりつつあります。</p>
+<p>注記：Red Hatが実際どのような業務システムを構築しているか僕は知らないが、Linuxにおける企業システムではJavaやOracleが使われることも多いため、必ずしも三階層システムにPHPやMySQLを使うことはないだろう。多くの三階層システムにJavaが使われており、Linux+Apache+Java+Oracleというシステムで多くのシステムに対応できる。</p>
+
+<h2>Red Hatがソースコード公開を顧客向けに限定へ</h2>
+<p>Red HatがRHELのソースコードの公開を顧客向けに限定しようとしているとのこと。</p>
+<ul>
+<li><a href="https://gigazine.net/news/20230623-rhel/">Red HatがRHELソースコードの一般公開をやめて顧客限定に、自由ソフトウェアの原則を軸にしてきたLinux関係者たちから猛批判を受ける - GIGAZINE</a></li>
+<li><a href="https://gigazine.net/news/20230704-rhel-alma-linux/">「下流プロジェクトは無価値」とソースコードの一般公開を取りやめたRed Hatに対してAlmaLinuxの開発チームがこれまでの貢献を力説 - GIGAZINE</a></li>
+</ul>
+<p>僕は、「GPLを守るべきだ」とするコミュニティ側の意見も分かりますが、「やっぱりLinuxで商売をしていくのは難しいことがたくさんあるのだな」と感じます。</p>
+<p>オープンソースのライセンスには、BSDライセンスのようにパブリックドメインに近い寛容なライセンスと、コピーレフトを定めるGPLがあり、多くのソフトウェア（Linuxカーネル含む）がGPLでライセンスされているLinuxでは、GPLの条項を守って、ソースコードの公開と提供をしなければいけません。</p>
+<p>今回のRed Hatの動きは、そのソースコードの公開と提供を、金を払った顧客に限定するということであり、反発が来るのは必至だと思います。</p>
+<p>ただし、GPLで決められているのは、「バイナリを提供したユーザーにソースコードを公開しなければならない」ということであり、今回は顧客であるユーザーに対してはソースコードが提供されているため、GPL違反にはならないという見方もあるようです。</p>
+<p>一部ではフリーローダー向けに独自にRHEL互換のソースコードを公開する動きもあり、今後が注目されます。</p>
+<ul>
+<li><a href="https://gihyo.jp/article/2023/08/daily-linux-230815">フリーローダーを歓迎する ―CIQ、Oracle、SUSEがRed Hat対抗の新団体「OpenELA」を設立 | gihyo.jp</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.16</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>Red Hatカスタマーポータル</h2>
+<p>ArchWikiと同様に検索してかかることが多いのが、Red Hatカスタマーポータル。</p>
+<ul>
+<li><a href="https://access.redhat.com/">Red Hat カスタマーポータル</a> - 右上の地球アイコンから日本語を選べます。</li>
+</ul>
+
+<h2>Red Hat</h2>
+<p>Red Hat</p>
+<ul>
+<li><a href="https://access.redhat.com/">Red Hat Customer Portal</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

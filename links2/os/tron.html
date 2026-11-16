@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>TRON関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">OSの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/os_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>TRONの世界観</h1>
+<p>TRONに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>TRON</h1>
+<h2>TRONと組み込みOS</h2>
+<p>電子工学において、電子回路や電子機器などにICを使ってプログラマブルな制御を使う場合、なんらかのOSが必要となる場合があります。</p>
+<p>そのような組み込み用途において、普及しているのが日本産OSのTRONです。</p>
+<p>デスクトップのWindowsやサーバのLinuxなどよりも、組み込みは目立たない分野ですが、IT技術全体を見ると大きな領域であり、IoTのような先端技術においても重要な領域です。</p>
+<p>後日注記：TRONは公開された仕様書を持ち、それを自由に使って独自のOSを実装することができるが、そのOSをオープンソースにする必要はない。このため（特に日本の）企業から支持されているが、TRONの仕様はほかのOSの採用する標準的な規格とは大きく異なる独自の（悪く言えば逸脱した）もので、クセが強い。</p>
+<p>後日注記：また坂村健氏は互換性を重要視しない姿勢を打ち出しており（過去の資産の維持よりも効率やパフォーマンス重視）、互換性を何よりも重要視する（ユーザーランドの修正を極力起こさない）Linuxカーネルのリーナス・トーバルズとは真逆の姿勢を貫いている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TRON%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88">TRONプロジェクト - Wikipedia</a></li>
+<li><a href="https://qiita.com/ko1nksm/items/243865903ae48c2c2c29">懐かしの国産「トロンパソコン」発売機種一覧（1991～2005年） あなたは買った？　 #Tron - Qiita</a></li>
+</ul>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=gJnt8k5Zwq0">世界1位は日本製!?Windowsより普及しているOSがパソコンに使われない本当の理由 - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=qXCE3X62JMw">【Linuxの歴史】趣味から世界制覇へ！30年で「ITの支配者」になった衝撃の歴史【ゆっくり解説】 - YouTube</a> - コメント欄でTRONの議論が行われている。</li>
+</ul>
+<div class="edit_date">
+<p>2026.08.20-21編集</p>
+<p>2026.08.27編集</p>
+</div>
+
+<h2>TRON (BTRON, 超漢字)</h2>
+<p>TRONは坂村健による日本産のOS。Linuxほど知られていないが組み込み向けに普及している。デスクトップ向けのBTRON（超漢字）も人気。</p>
+<p>作者の坂村健は一風変わった人物で、ユビキタス（あらゆるモノにICが埋め込まれるようになり、コンピュータであることを意識せずに裏方としてコンピュータが働く）の時代の到来の提唱で有名。また、オープンソースやUnicodeへの対抗姿勢でも知られている。</p>
+<p>組み込み向けのITRONについては<a href="rtos.html">リアルタイムOS</a>も参照のこと。このほかサーバー・通信機器向けのCTRONなどがある。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TRON%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88">TRONプロジェクト - Wikipedia</a></li>
+</ul>
+<p><a href="../network/iot.html">IoT・ユビキタス</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2026.08.25編集</p>
+<p>2026.09.01編集</p>
+</div>
+
+<h2>T-Kernel/T-Engine</h2>
+<p>T-KernelはTRONプロジェクトの誇る、TRON系リアルタイムOSのカーネル。C言語とアセンブリ言語で書かれており、オープンソース（T-License 2.2）で公開されている。</p>
+<p>また、T-Kernelを用いた組み込み向けのミドルウェアプラットフォームとしてT-Engineがあり、日立のSuperH (SH)、MIPS、ARM、FPGAなどさまざまなCPUで動く。</p>
+<p>TRONのリアルタイム性能は「本物」であり、特に国産宇宙ロケットなど（イプシロン、はやぶさ2など）、さまざまな分野で広く使われている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/T-Kernel">T-Kernel - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/T-Engine">T-Engine - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.25</p>
+</div>
+
+<h2>TRONCHIP</h2>
+<p>TRONのためのCPUチップとしてTRONCHIPがあります。TRONCHIPのためのBTRONも開発されていました。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/TRONCHIP">TRONCHIP - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/BTRON">BTRON - Wikipedia</a></li>
+</ul>
+<p>以下の記事によると、TRONを搭載したトロンパソコンなるものも発売されていたそうです。ただし、この記事の図面にもあるように、TRONの仕様はあまりにもほかのOSの仕様と異なりすぎていて（たとえば、UNIXではデータをバイトストリームで扱うのに対し、TRONではTADレコードを用いる）、標準の地位を築けなかったことが分かります。</p>
+<ul>
+<li><a href="https://qiita.com/ko1nksm/items/243865903ae48c2c2c29">懐かしの国産「トロンパソコン」発売機種一覧（1991～2005年） あなたは買った？　 #Tron - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.25</p>
+</div>
+
+<h2>超漢字ウェブサーバ</h2>
+<p>以下は超漢字の別売りソフト「超漢字ウェブサーバ」の解説記事。HTMLへのリンクを超漢字のネットワーク型ファイルシステムで表現することで、リンク維持のための管理が要らなくなるのは素晴らしいと思います。また超漢字のシステムであるために日本語のごく稀に使われる漢字のような18万を超える文字を使うことができます。</p>
+<ul>
+<li><a href="https://www.chokanji.com/cksv/article.html">超漢字ウェブサーバ 詳細解説 - 超漢字ウェブサイト</a></li>
+</ul>
+<p>BTRONのネットワーク型ファイルシステムの根幹を成す実身/仮身モデルについては以下の記事が参考になります。UNIXやWindowsのようなディレクトリ型・階層型のファイルシステムとはまったく異なります。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/BTRON">BTRON - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.08.25</p>
+<p>2026.08.27編集</p>
+</div>
+
+<h2>痛快! コンピュータ学</h2>
+<p>以下は坂村健さんによるコンピュータ科学についての入門書。とても面白くためになるので、プログラマやシステムエンジニア志望の全ての人におすすめする。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E7%97%9B%E5%BF%AB-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E5%AD%A6-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E5%9D%82%E6%9D%91-%E5%81%A5/dp/4087474283">痛快! コンピュータ学 (集英社文庫)</a></li>
+</ul>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

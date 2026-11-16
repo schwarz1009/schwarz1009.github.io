@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux フォント - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux フォント</h1>
+<p>Linuxのフォントに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>フォント</h1>
+<h2>フォントの基本知識</h2>
+<p>フォントとは、文字を表示するための書体のこと。パソコンで文字を表示するためには、それがコンソールであれX11であれ、フォントをインストールしておかなければならない。</p>
+<p>同じ文字を表示するのであっても、フォントによって文字のデザインが異なる。また、日本語の文字を表示するためには、日本語のフォントをインストールする必要がある。</p>
+<p>等幅フォント（Monospaced Font）は、すべての文字の幅が同じフォントのこと。これに対してプロポーショナルフォント（Proportional Font）は、それぞれの文字によって幅が異なるフォントのこと。</p>
+<p>欧米のフォントには、セリフ体とサンセリフ体がある。セリフ体とは、文字に「セリフ」と呼ばれる飾りのついたフォントのこと。これに対してサンセリフ体は、セリフのないフォントのこと。</p>
+<p>日本語のフォントには、明朝体とゴシック体、あるいはそれ以外の特殊なフォント（飾りフォントなど）がある。大まかにいって、欧米のセリフ体が日本語の明朝体、サンセリフ体がゴシック体に相当する。</p>
+<p>また、同じフォントであっても、太さの異なる「ファミリー」が用意されていることがある。たとえばIllustratorなどのAdobe製品でよく使われる「小塚明朝」や「小塚ゴシック」の場合、細いほうから「EL」「L」「R」「M」「B」「H」などとなる（ELがもっとも細く、Hがもっとも太い）。</p>
+<p>また、文字のギザギザを滑らかにして、読みやすく綺麗に表示する技術としてアンチエイリアス処理がある。</p>
+<ul>
+<li><a href="https://www.adobe.com/jp/creativecloud/roc/blog/design/font-serif.html">セリフ体とサンセリフ体の違いは？セリフ体の定番フォント12選| Adobe</a></li>
+<li><a href="https://www.akibatec.net/wabunfont/library/adobe/kozuka.html">和文フォント大図鑑 [アドビ／総合書体]</a></li>
+<li><a href="https://blog.adobe.com/jp/publish/2023/04/06/cc-design-learn-typography-and-fonts-02">明朝・ゴシックetc…書体の種類とウェイト｜文字とフォントのことはじめ02</a></li>
+<li><a href="https://e-words.jp/w/%E3%82%A2%E3%83%B3%E3%83%81%E3%82%A8%E3%82%A4%E3%83%AA%E3%82%A2%E3%82%B9.html">アンチエイリアス（スムージング / アンチエイリアシング）とは？意味を分かりやすく解説 - IT用語辞典 e-Words</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.05</p>
+</div>
+
+<h2>Linuxでのフォントのインストール方法</h2>
+<p>新しいフォントのインストール方法は、Fontconfigの場合、/usr/share/fonts/や~/.local/share/fontsにTTFまたはOTFファイルを入れるだけ（~/.fonts/もあるが非推奨）。Fontconfigはこれらのディレクトリを再帰的に調べる。</p>
+<p>基本的に、以下のディレクトリにフォントを入れればいい。</p>
+<table class="some_tables">
+<tr><th class="min60">形式</th><th>パス</th></tr>
+<tr><td>TrueType</td><td>/usr/share/fonts/truetype/[フォント名]</td></tr>
+<tr><td>OpenType</td><td>/usr/share/fonts/opentype/[フォント名]</td></tr>
+</table>
+<p>そして、フォントキャッシュの更新をするために、fc-cacheコマンドを実行する。</p>
+<pre>
+fc-cache -f -v
+</pre>
+<p>最近のLinuxはFontconfigを使うが、旧来のXLFD（X Logical Font Description）を使っているアプリケーションもある。</p>
+<p>また、XorgはFontconfigとは違って/usr/share/fonts/以下のサブディレクトリを再帰的に調べないため、フルパスでフォントの場所を記述する必要がある。</p>
+<pre>
+Section "Files"
+    FontPath     "/usr/share/fonts/hogefonts/"
+EndSection
+</pre>
+<p>以下は参考文献。新しいフォント導入の詳しい方法が書いてあります。</p>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A">フォント設定 - ArchWiki</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">フォント - ArchWiki</a></li>
+<li><a href="http://www.uetyi.com/server-const/entry-327.html">Linuxでのシステムフォントの変更とフォントの追加 - Linuxで自宅サーバ構築（新森からの雑記）</a></li>
+<li><a href="http://www.nofuture.tv/diary/20121221.html">Wheezyのデフォルトのフォント設定がヘンな気がするので調べてみた - Days of Speed</a></li>
+</ul>
+<p>また、フォントを導入するには、パッケージ管理システムを使ってパッケージから自動でインストールする、という方法もアリ。</p>
+<pre>
+sudo apt install fonts-vlgothic
+</pre>
+<p>フォントのパッケージについては<a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">フォント - ArchWiki</a>が参考になる。たとえば中国語の文字を表示したいなら中国語のフォントパッケージを導入しよう。</p>
+<div class="edit_date">
+<p>2025.07.05編集</p>
+</div>
+
+<h2>システムの利用可能なフォントを探す</h2>
+<p>システムの利用可能なフォントはfc-matchあるいはfc-listコマンドで検索できる。フォント名の確認や、現在の設定状態の確認などに使える。</p>
+<ul>
+<li><a href="https://texwiki.texjp.org/?Fontconfig">Fontconfig - TeX Wiki</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/1812/13/news030.html">【 fc-match 】コマンド――フォントのマッチングと優先順位を確認する：Linux基本コマンドTips（265） - ＠IT</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/1812/07/news021.html">【 fc-list 】コマンド――X Window System環境で使用できるフォントを一覧表示する：Linux基本コマンドTips（264） - ＠IT</a></li>
+<li><a href="https://docs.oracle.com/cd/E26502_01/html/E29214/glmkf.html">fontconfig Library - International Language Environments Guide for Oracle Solaris 11.1</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.07編集</p>
+</div>
+
+<h2>システムのフォント設定</h2>
+<p>Linuxシステム（Fontconfig）では、基本的に/etc/fonts/conf.dでフォント設定を管理する。このディレクトリの中で、フォントの描画方法（アンチエイリアスなど）や優先順位（たとえば日本語フォントのヒットの順番）を管理し、X11やWaylandはこのファイルを参照する。XML形式で記述し、ラテンアルファベット文字は60-latin.confで、非ラテン文字は65-nonlatin.confで優先順位を設定する。</p>
+<p>ただし、このシステム設定を直接変えることはシステムの破壊のリスクがあるので推奨されない。設定を変えたい場合は、/etc/fonts/local.confで全体的に記述するか、~/.fonts.conf.dあるいは~/.fonts.confあるいは~/.config/fontconfig/fonts.conf（$XDG_CONFIG_HOME/fontconfig/fonts.conf）のような個人設定ファイルに記述する。また、設定のプリセットは/usr/share/fontconfig/conf.availに存在し、/etc/fonts/conf.dにリンクを作成することで、プリセットを簡単に有効にしたり無効にしたりできる。</p>
+<p>システムのフォント設定（たとえば「serif」「sans-serif」「Monospace」に割り当てられているフォントなど）は、/etc/fonts/conf.availの中で設定されている。この中の*.confファイルで実際のフォント設定が記述されており、/etc/fonts/conf.dより、この/etc/fonts/conf.availや/usr/share/fontconfig/conf.availへとシンボリックリンクが張られている。日本語のフォントの順番を変えたい時などは、この中の、たとえば65-nonlatin.confを~/.fonts.confにコピーして編集すればよい。また、たとえば、ビットマップフォントを無効にするには70-no-bitmaps.confへのリンクを作る。</p>
+<p>注意点として、/etc/fonts/fonts.confを直接編集してはならない。このファイルはFontconfigが更新した時に、すべての設定ファイルを寄せ集めて置き換えられる中心的な設定ファイル。なので、自分で設定を書く場合は、/etc/fonts/local.confあるいは/etc/fonts/conf.dのリンク、そしてユーザーの個人設定ファイル（.fonts.confなど）に記述する。</p>
+<p>後日注記：基本的にシステムのフォント設定はあまり変えるべきではなく、フォントをインストールしたら使いたいアプリケーションのほうでその都度フォントを選択すべき。ただし、ディストリビューションによってはシステムのフォントがたまにおかしな状態で標準設定されていることがあったり（たとえば日本語フォントのヒットする順番がおかしいなど）、Firefoxなどのアプリケーションの設定で「serif」「sans-serif」「Monospace」と設定される際のフォントを変えたい時があったりするので、その修正のためにシステムのフォント設定を変えることができる。</p>
+<p>以下のページを参考に執筆しました。</p>
+<ul>
+<li><a href="http://www.uetyi.com/server-const/entry-327.html">Linuxでのシステムフォントの変更とフォントの追加 - Linuxで自宅サーバ構築（新森からの雑記）</a></li>
+<li><a href="http://www.nofuture.tv/diary/20121221.html">Wheezyのデフォルトのフォント設定がヘンな気がするので調べてみた - Days of Speed</a></li>
+<li><a href="https://qiita.com/keith_campbell/items/3c3e2752dc44a58709b0">Linuxでアップデートしたら中華フォントになった件について（修正方法） #font - Qiita</a></li>
+<li><a href="https://docs.oracle.com/cd/E26924_01/html/E27144/glmkf.html">fontconfig ライブラリ - 国際化対応言語環境の利用ガイド - Oracle</a></li>
+<li><a href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A">フォント設定 - ArchWiki</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.07.05編集</p>
+<p>2025.07.07編集</p>
+</div>
+
+<h2>TrueTypeとOpenType</h2>
+<p>TrueTypeとOpenTypeは、拡大縮小しても輪郭がガタガタしないスケーラブルなフォントの規格。</p>
+<p>TrueTypeは旧式の規格で、普及しており、多くのプラットフォームやソフトウェアで使うことができる。</p>
+<p>OpenTypeは新しい規格で、より高機能で優れているとされている。収録文字数も多い。</p>
+<p>フォントの拡張子.ttfや.ttcや.otfは必ずしもTrueTypeとOpenTypeには対応しておらず、TrueTypeベースのOpenTypeフォントがttfまたはttc、PostScriptベースのOpenTypeフォントがotfとなる。</p>
+<p>また、一部の化石としてビットマップフォントと呼ばれるフォントもある。ビットマップのドットによってフォントを表現する。</p>
+<ul>
+<li><a href="https://fontnavi.jp/zakkuri/202-truetype_opentype.aspx">TrueTypeとOpenType - フォント専門サイト fontnavi</a></li>
+<li><a href="https://plife.studio/2017/08/10/font-otf-ttf-ttc/">フォントOpen Type、True Type、.otf .ttf .ttcって何？ – +Life Studio｜徳島で、あなたの会社の広報部署、代行します。</a></li>
+</ul>
+
+<h2>日本語フォントのファイルパス</h2>
+<p>また、日本語フォントのファイルパスは/usr/share/fonts/ja/TrueType/のように日本語を表す「ja」のサブディレクトリがあることがあるため、注意が必要。</p>
+<p>昔のXでは、/usr/X11R6/lib/X11/fonts/TrueTypeのような不思議な場所にインストールされることもあった。</p>
+
+<h2>MS-Wordとフォント</h2>
+<p>MS-Word環境におけるフォントについては、<a href="../windows_pc/msword.html">MS-Word</a>を参照のこと。</p>
+
+<h1>フリーフォント</h1>
+
+<h2>M+ FONTS</h2>
+<p>フリーフォント。M<sup>+</sup>は森下浩司氏によってデザインされており、とても美しくなおかつフリーソフトウェアである。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/M%2B_FONTS">M+ FONTS - Wikipedia</a></li>
+</ul>
+
+<h2>さざなみフォント</h2>
+<p>フリーフォント。CLWFKによる自動作成フォントとフリーなビットマップフォントの合成フォント。自動作成されたフォントであるため、多少品質が悪い。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%81%95%E3%81%96%E3%81%AA%E3%81%BF%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">さざなみフォント - Wikipedia</a></li>
+</ul>
+
+<h2>IPAフォント</h2>
+<p>フリーフォント。独立行政法人情報処理推進機構（IPA）によって配布されている。多くの書体に対応。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/IPA%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">IPAフォント - Wikipedia</a></li>
+</ul>
+
+<h2>VLゴシック</h2>
+<p>フリーフォント。M<sup>+</sup> OUTLINE FONTSとさざなみゴシックの合成フォント。多くのディストリビューションで標準的に採用されている。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/VL%E3%82%B4%E3%82%B7%E3%83%83%E3%82%AF">VLゴシック - Wikipedia</a></li>
+</ul>
+
+<h2>源ノ明朝 & 源ノ角ゴシック</h2>
+<p>Adobeによるオープンソースのフォント。Adobeがリリースしたこともあって品質が高い。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Source_Han_Serif">Source Han Serif - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Source_Han_Sans">Source Han Sans - Wikipedia</a></li>
+</ul>
+
+<h2>Mgen+</h2>
+<p>M<sup>+</sup> OUTLINE FONTSと源ノ角ゴシックの合成フォント。</p>
+<ul>
+<li><a href="http://jikasei.me/font/mgenplus/">Mgen+ (ムゲンプラス) </a></li>
+</ul>
+
+<h2>モナーフォント</h2>
+<p>２ちゃんねるによる、Linuxで顔文字やAAを見るために作られたフォント。IPAフォントを使ったIPAモナーフォントというものもある。</p>
+<p>２ちゃんねるのAAは「MS Pゴシック 12ポイント」で表示されるが、これはLinuxなどでは綺麗に表示させることが出来ない。これを解決するために、文字幅を合わせたモナーフォントが作られた。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%A2%E3%83%8A%E3%83%BC%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">モナーフォント - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/IPA%E3%83%A2%E3%83%8A%E3%83%BC%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">IPAモナーフォント - Wikipedia</a></li>
+</ul>
+
+<h2>フリーフォント一覧</h2>
+<p>以下はLinux向けに使えるフリーフォントの一覧。</p>
+<ul>
+<li><a href="http://note.kurodigi.com/free-font2019/">【2019年版】Linuxでも使えるフリーフォント集 - クロの思考ノート</a></li>
+</ul>
+<p>ネットでダウンロードできるフリーフォントはたくさんあるが、質にばらつきがあり、UIの表示に使うためにはたとえば対応していない漢字があったりする。</p>
+<p>よって、UIの表示はVLゴシックなどで行い、LibreOfficeなどでフォントを選択する時にフリーフォントを使用し、対応していない漢字があれば別のフォントを使用して文書を編集することをおすすめする。</p>
+
+<h1>商用フォント</h1>
+<h2>リコーフォント</h2>
+<p>リコーフォントはリコーという会社のフォント製品で、MSゴシックやMS明朝と同等のフォント（それらはリコーが作った）。商用版の日本語向けLinuxディストリビューションで採用実績がある。日本語の文字がかつてのWindowsと同じ見た目になるため、一部の人はLinuxにもリコーフォントを入れる人が多かった。</p>
+<ul>
+<li><a href="https://industry.ricoh.com/font">フォントトップ | 産業向け製品 | リコー</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.08.16</p>
+</div>
+
+<h1>Webフォント</h1>
+<h2>Webフォントとは</h2>
+<p>Webフォントとは、Webで使うことのできるサーバーでホスティングされたフォントのこと。</p>
+<p>Webで使えるフォントは二種類ある。ひとつは、システムで使うことのできるシステムフォントで、システムにインストールされているものから使う。もうひとつがWebフォントで、サーバーにフォントをアップロードし、そのフォントをWebサイトで使う。</p>
+<p>Webフォントを使うためには、Google Fontsのようなホスティングサービスを使う方法と、自分でフォントをアップロードする方法がある。</p>
+<p>注意点として、必ずしもWebフォントを使うのは無料ではない。Adobe Fontsなど、契約して使うサービスもある。モリサワのTypeSquareは無料プランには制限がある。また、サーバーのフォントをダウンロードして表示するため、システムフォントよりも表示に時間がかかるし、すべての日本語の字体が揃っているとは限らない。</p>
+<ul>
+<li><a href="https://tokoton.biz/blog/recommended-web-fonts-for-web-design/">WebデザインにおすすめのWebフォント14選 | トコトンブログ</a></li>
+<li><a href="https://ja.wix.com/blog/2023/02/what-is-web-font/">Webフォントとは？定番の日本語Webフォント23選 - wixblog-ja</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.15</p>
+</div>
+
+<h1>フォントエンジン</h1>
+
+<h2>FreeType</h2>
+<p>フォントエンジン。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/FreeType">FreeType - Wikipedia</a></li>
+</ul>
+
+<h2>Fontconfig</h2>
+<p>フォントの設定ライブラリ。</p>
+
+<h1>余談</h1>
+<h2>Windowsから取ってくるとライセンス違反</h2>
+<p>Windowsにフォントがあるのなら、Windowsからコピーして持って来れば良いことになるが、これはおおっぴらにやるとライセンス違反になる。公の企業などではしないこと。</p>
+
+<h1>関連ページ</h1>
+<h2>デザイン</h2>
+<p><a href="../art/design.html">デザイン（知識）</a>も参照のこと。</p>
+
+<h2>Illustrator</h2>
+<a href="../art/illustrator_text.html">Illustrator（文字・テキスト）</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>フォント</h2>
+<p>TrueTypeは古い規格、OpenTypeは新しい規格。</p>
+<p>Linuxには搭載フォントが少ない。</p>
+<p>インターネット上に多数のフリーフォントがある。</p>
+<p>LibreOfficeなどを使うのであればフリーフォントを入れよう。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

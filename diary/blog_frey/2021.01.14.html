@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"  href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<title>UNIXとネットワーク - schwarz1009</title>
+
+</head>
+<body>
+<p><a href="index.html">トップページに戻る</a></p>
+<iframe src="menu3_menu.html" class="iframe_menu"></iframe>
+<p>AUTHOR: schwarz1009<br>
+TITLE: UNIXとネットワーク<br>
+BASENAME: 2021/01/14/112807<br>
+STATUS: Publish<br>
+ALLOW COMMENTS: 1<br>
+CONVERT BREAKS: 0<br>
+DATE: 01/14/2021 11:28:07<br>
+CATEGORY: ネットワーク<br>
+CATEGORY: Linux<br>
+CATEGORY: おすすめ
+
+
+</p>
+<ul class="table-of-contents">
+    <li><a href="#UNIXとネットワーク">UNIXとネットワーク</a></li>
+    <li><a href="#コンパイラが重要">コンパイラが重要</a></li>
+    <li><a href="#デザインパターンは乱用に注意">デザインパターンは乱用に注意</a></li>
+</ul>
+<div class="section">
+    <h3 id="UNIXとネットワーク">UNIXとネットワーク</h3>
+    <p>UNIXでは、伝統的にネットワーク色が強い。<br />
+たとえば大学のワークステーションでは、<br />
+telnetによるネットワークに繋がった別ホストへの接続や、<br />
+NFSを使ったネットワーク上のファイルシステムのマウント、<br />
+NISによるネットワーク上のログイン情報の共通化などが、<br />
+DOSに比べて簡単にできる。<br />
+この時、MIPSやAlphaなど、CPUアーキテクチャが異なるホストでも、<br />
+基本的に構わない。<br />
+ただし、異なるアーキテクチャのバイナリは<br />
+別マシンでは当然ながら動かないことに注意。<br />
+LinuxのようなUNIX系のOSはこのように、<br />
+ネットワークでさまざまなマシンが繋がった時に、<br />
+真価を発揮する。</p>
+
+</div>
+<div class="section">
+    <h3 id="コンパイラが重要">コンパイラが重要</h3>
+    <p>Linuxについて言えるのは、<br />
+コンパイラが重要ということ。<br />
+システム全体をビルドするコンパイラが、<br />
+きちんと動かないと、何も動かない。<br />
+逆に、動かなくても最新のコンパイラを使うことで、<br />
+バグ潰しになる。<br />
+カーネルと同様、コンパイラが重要である。</p>
+
+</div>
+<div class="section">
+    <h3 id="デザインパターンは乱用に注意">デザインパターンは乱用に注意</h3>
+    <p>オブジェクト指向で設計するために、<br />
+頻出するパターンを教える、<br />
+GoFのデザインパターンですが、<br />
+乱用に注意しましょう。<br />
+あくまで、大規模なソフトウェアを設計する上で、<br />
+頻出するパターンを示したものであり、<br />
+必要ないのに「設計が美しくなる」と思って、<br />
+なんでもかんでもデザインパターンを使ったところで、<br />
+保守しやすいソフトウェアにはならないからです。<br />
+逆に、複雑で理解できないプログラムになってしまいます。<br />
+しかしながら、デザインパターンの用語が分からないと、<br />
+プログラマとの間で言葉が通じないことがあります。<br />
+そのためにも、用語として知っておくとよいでしょう。</p>
+
+</div>
+
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+

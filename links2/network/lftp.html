@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>lftp関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>lftp関連の世界観</h1>
+<p>lftpに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>lftp</h1>
+<h2>lftp</h2>
+<p>コマンドラインで使えるFTPクライアント。コマンドでFTP操作が可能。ミラーリング転送などの機能があります。</p>
+<p>lftpはコマンドをスクリプトのようにファイルに保存することもできるし、インタラクティブに使うこともできる。自動化できて便利だ。</p>
+<ul>
+<li><a href="http://hooktail.org/computer/index.php?lftp">lftp - [物理のかぎしっぽ]</a></li>
+<li><a href="https://qiita.com/akkykg/items/bea5f11587b75d3db2cc">LFTPでサーバ間でファイル転送をする - Qiita</a></li>
+<li><a href="http://fujisan.hatenablog.com/entry/2017/05/31/224844">lftpでファイル転送系をまとめる - sakemoto-san</a></li>
+</ul>
+
+<h2>lftpコマンド例</h2>
+<p>（<a href="http://fujisan.hatenablog.com/entry/2017/05/31/224844">lftpでファイル転送系をまとめる - sakemoto-san</a>などより編集して引用。）</p>
+<pre>
+$ lftp -u assy sftp://ftp.hogehoge.com
+Password: （パスワード入力）
+&gt; lcd ~/public_html/hogehoge
+&gt; cd /hogehoge
+# ローカルにミラーする（ダウンロード）
+&gt; mirror
+# リモートにミラーする（アップロード）
+&gt; mirror -R
+</pre>
+
+<h2>lftpのスクリプトファイル実行</h2>
+<p>スクリプトファイルを作ることで、簡単にミラーリングやバッチ処理が可能。</p>
+<p>以下のファイルをhogehoge_ftp_script.txtとして保存。</p>
+<pre>
+open assy:password@ftp.hogehoge.com
+lcd ~/public_html/hogehoge
+cd /hogehoge
+mirror -Rev
+</pre>
+<p>以下を実行。</p>
+<pre>
+$ lftp -f hogehoge_ftp_script.txt
+</pre>
+<p>mirrorのオプションは、-Rがアップロードをする（ダウンロードではない）、-eがローカルに無いファイルをミラー先で削除する、-vが詳細表示。</p>
+<p>パスワードは、ファイルに平文で書くよりも毎回入力した方が良いかもしれないので注意。</p>
+<p>cronとかに設定して、毎週一度（あるいは毎日一度）ftpサーバーにミラーリングするようにしても良い。<a href="../linux/linux_unix_cron.html">UNIXシステム管理（cron）</a>も参照のこと。</p>
+<p>上の例は以下のリンク先を参考に書きました。</p>
+<ul>
+<li><a href="https://obel.hatenablog.jp/entry/20170905/1504589684">lftp で -f オプションを使うとスクリプト実行ができる - 約束の地</a></li>
+<li><a href="http://hooktail.org/computer/index.php?lftp%A5%DF%A5%E9%A1%BC%A5%EA%A5%F3%A5%B0%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">lftpミラーリングスクリプト - [物理のかぎしっぽ]</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

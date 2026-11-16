@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux X11 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux X11（X Window System）</h1>
+<p>LinuxのX11に関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><b>X11 (X Window System)</b></li>
+<ul>
+<li><a href="linux_x11_basic.html">１．アーキテクチャ</a></li>
+<li><a href="linux_x11_advanced.html">２．ツールキットとデスクトップ環境</a></li>
+<li><a href="linux_x11_admin.html">X11設定とプログラミング</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Linuxデスクトップとは</h1>
+<h2>Linuxデスクトップがなぜ使われないか</h2>
+<p>Linuxデスクトップがなぜ使われないか。それは、「わざわざWindowsからOSをLinuxに変えるメリットや必要性がない」ということである。</p>
+<p>現状のLinuxデスクトップは、ただ「面白そうだから」使ってみようという人であふれており、そうした人々は少しLinuxを試した上で、「Windowsと何も変わらない」と思って、「わざわざLinuxを使う必要性がない」ということに気付いて、定住せずにまだWindowsの元居た古巣に戻ってしまう。</p>
+<p>そう、どうにかして、WindowsユーザーをLinuxに「移住」させるには、新しい家として「定住」するに足るメリットを示さなければならない。</p>
+<p>多くのアプリケーション、特にAdobe PhotoshopやIllustratorのような「使えるアプリケーション」は、Windowsにはあっても、Linuxにはない。あったとしても、知名度が無く、使えるような雰囲気がしないのである。ユーザーも少ない。多くの人がGNOME 3とKDE Plasma 5だけを試して、Windowsに戻る。</p>
+<p>だが、僕が思うに、Linuxデスクトップの使いやすさや品質は、年を経るごとに向上していると思う。GNOME 2はWindows XPの劣悪な模倣品だったが、GNOME 3はスマホの画面操作などを取り入れて「スマートなシェル」を提示した。また、KDE 4/Plasma 5も、Windowsっぽかったインターフェースを改め、Windowsよりも美しい統一感のあるデザイナブルなインターフェースになった。</p>
+<p>そして、最近では、Cinnamon, MATE, Budgie, Pantheon, Deepinのような新しいデスクトップ環境がどんどん生まれており、UbuntuやFedoraの公式フレーバー（最初からデスクトップ環境をカスタマイズして変えてある環境）にも採用されている。そのうち、これらのひとつが流行して、Linuxデスクトップが「きちんと使われて流行る日」は来るのではないかと僕は期待している。</p>
+<p>また、LibreOfficeを無料版のMS-Officeとして、「こちらの無料版のOfficeを使いましょう」と言っている人間は、何も分かっていない。パソコンを使う仕事で、MS-Officeの入っていないパソコンが事務用途で使えるわけがなく、どこでもMS-Officeはプリインストールで導入されている。要するに、「WindowsにMS-Officeが入っているのは当たり前」なのである。そのMS-Officeの入ったパソコンをLinuxのLibreOfficeに変えるということは、MS-Officeを失うことに等しい。Linuxデスクトップユーザーになることは、LibreOfficeを手に入れたメリットよりも、MS-Officeを失った不利益の方が大きい。だから、単純にLinuxデスクトップは使われないのである。どうにかして、MS-Officeを失った不利益よりも、LibreOfficeを手に入れたメリットの方を向上させれば、いつか使われるものになるだろう。</p>
+<p>要するに、今のLinuxは、「無料のものをあげましょう」と言っておいて、有料のすでにあるものを奪っていく行為に等しいのである。ここをどうにかして、有料のWindowsよりも優れたものを与えるようなOSにすれば、Linuxデスクトップは使われる日が来るだろう。</p>
+
+<h2>ツールキットとビューの面白さ</h2>
+<p>XやWindowsに言えることとして、「ツールキットやビューの面白さ」というのがある。</p>
+<p>たとえば、昔はファイル一覧を見るのも、コンソールでlsを実行するなど、テキストベースのビューで閲覧するのが普通だった。</p>
+<p>grepやsedを使ってフィルター処理を行い、bashなどにパイプで渡すなど、「コマンドとテキストで行うから便利な側面」というのも確かにある。</p>
+<p>だが、GTK/QtアプリケーションやWindowsアプリケーションは、リストビューやツリービューやアイコンなどの「専門のコントロール」すなわち「ツールキット」を用いてアプリケーションを構築する。ウィンドウにはタイトルバーがつき、大きさや重ね合わせを変えられる。</p>
+<p>これは、プログラミングを行う上でも面倒くさい仕組みで、GTKやQtのGUIフレームワークの仕様を覚えなければならず、多くの場合コマンド・テキストベースよりも複雑で理解し辛いプログラムになる。</p>
+<p>だが、Windowsの画期的な点とは、こうしたツールキットやビューの面白さにある。インタラクティブにマウスに反応し、さまざまな「細かい作業」のできるGUIツールキットを使ったアプリケーションは、使うのがとても面白いのである。</p>
+<p>こうした「ツールキットとビューの面白さ」は、LinuxやUNIXにはもともと無かったものだが、X11でGTKやQtを使うことで、これを存分に楽しむことができる。特に、GTKやQtはソースコードが公開されているため、「自分でツールキットを作る」というまた別の面白さが存在する。</p>
+
+<h2>僕が作りたいのはワークスペース環境</h2>
+<p>また、僕が作りたいのは、カーネルというよりも、ワークスペース環境である。</p>
+<p>アラン・ケイが考えて、AppleやMSが実装したような、GUIのワークスペース環境を、僕は作りたい。</p>
+<p>OSを作ることも必要だが、もっとも必要なのはウィンドウシステムやツールキットの知識だ。それがC/C++で作ることができるようになりたい。</p>
+<p>だから、必要なのはプログラミングとデザインのスキルである。</p>
+<p>僕がワークスペース環境に求めるものは二つ。</p>
+<p>まず、「ワンクリックでポチポチと切り替えられる」ということ。この点において、僕はGNOME 3の何度もクリックが必要なUIよりもWindowsのタスクバーやKDEやMATEの方を好む。</p>
+<p>もうひとつは、「画面の推移や表示の領域を最低限のサイズにする」ということ。この点においても、僕はGNOME 3の全画面ランチャーよりも、最低限のサイズで表示されるWindowsのスタートメニューを好む。</p>
+<p>なんだかんだ言って、Windows 95からXPまでの「昔のWindowsのUI」は使いやすかった。Vistaは不安定で、7ぐらいからUIが変わった。僕は、7のUIは最初は好きではなかったが、今ではもう慣れてしまった。</p>
+
+<h1>コンテンツ</h1>
+<h2>X11の基本</h2>
+<p><a href="linux_x11_basic.html">Linux X11（１．アーキテクチャ）</a>を参照のこと。</p>
+
+<h2>X11の応用</h2>
+<p><a href="linux_x11_advanced.html">Linux X11（２．ツールキットとデスクトップ環境）</a>を参照のこと。</p>
+
+<h2>X11設定とプログラミング</h2>
+<p><a href="linux_x11_admin.html">X11設定とプログラミング</a>を参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>アプリケーション開発</h2>
+<p><a href="../prog_lang/apps_develop.html">アプリケーション開発</a>に、ウィンドウシステムの開発に関連する内容があります。</p>
+
+<h2>GUI開発</h2>
+<p><a href="../prog_lang/gui_develop.html">GUI開発</a>も参照のこと。</p>
+
+<h1>簡単な説明</h1>
+<h2>X</h2>
+<ul class="defaultlist list7">
+<li>X
+<ul>
+<li>Xはクライアント・サーバーで動くため、たとえば複数のX端末からひとつの中央ワークステーションに接続したり、たくさんの分散コンピュータにひとつのモニターから接続したりできる</li>
+<li>イベントメッセージ</li>
+<li>Xプロトコル、ネットワーク透過</li>
+<li>Xサーバー・Xクライアント</li>
+<li>Xlib
+<ul>
+<li>Xプロトコルの詳細を知らなくても、Xlibを使うことでXアプリケーションが開発できる</li>
+<li>XlibではWindowsのメッセージループと同じイベントループでプログラムを記述する</li>
+</ul></li>
+<li>Motif
+<ul>
+<li>昔はMotifがXで標準的で、GIMPももともとはMotifで書かれていたが、Motifはフリーでなかった</li>
+</ul></li>
+<li>GTK
+<ul>
+<li>GNOMEや多くのLinuxアプリケーションで使われているウィジェットツールキット
+<ul>
+<li>Xlibには標準でボタンやメニューなどのウィジェットコントロールが用意されておらず、それぞれのツールキットが作ることになっている</li>
+<li>GTKはC言語でありながらオブジェクト指向とイベント駆動のシグナルハンドラに対応し、VBのように「main関数から実行されるのではなく、それぞれのシグナルに応じた関数が実行される」というモデルでプログラミングができる</li>
+<li>最初からC言語以外のさまざまな言語で使われることを考慮しており、言語バインディングが豊富で、RubyやC#などからGTKを使うこともできる</li>
+<li>GTKの著名なアプリケーションはお絵描き・フォトレタッチソフトのGIMPやInkscapeなど。</li>
+<li>そもそもGTKは「GIMP Toolkit」を意味し、GIMPの副産物として開発された。GTKの開発元はBSDと同じUCバークレー校。</li>
+</ul></li>
+<li>GLib, GDK, Cairo, ATK, Pango
+<ul>
+<li>GLibを使うことで、C言語でもオブジェクト指向プログラミングができる</li>
+<li>GDKはGTKの下位レベルレイヤーで、低レベルなグラフィックス描画処理を担当する</li>
+<li>Cairoはベクターグラフィックス処理を行うためのライブラリ</li>
+<li>ATKはアクセシビリティツールキットで、障害を持つ人などに対応する</li>
+<li>Pangoは英語以外の日本語などのたくさんのローカル言語に対応する</li>
+</ul></li>
+<li>Binとコンテナ</li>
+<li>ボックスとテーブル</li>
+<li>シグナルハンドラ</li>
+<li>オブジェクト指向ツールキット</li>
+<li>ウィジェット階層
+<ul>
+<li>カスタムウィジェットの作成</li>
+</ul></li>
+<li>言語バインディング
+<ul>
+<li>Gtkmm</li>
+<li>PyGObject</li>
+<li>Ruby/Gtk</li>
+<li>Gtk#</li>
+<li>ValaとGenie</li>
+</ul></li>
+<li>Glade</li>
+<li>pkg-config</li>
+</ul></li>
+<li>Qt
+<ul>
+<li>昔はKDEで使われていたQtがフリーでなく、Harmony（代替Qtを作るプロジェクト）やGTK/GNOMEを作る必要があった</li>
+<li>今はQtもフリーである</li>
+<li>C++で、美しい見た目を持ち、Windowsなどでも動くクロスプラットフォーム性が売り（一応GTKもWindowsで動くが、Qtほど美しくない）</li>
+<li>PyQt</li>
+<li>QtRuby</li>
+</ul></li>
+<li>ウィンドウマネージャ
+<ul>
+<li>Blackbox派生
+<ul>
+<li>Openboxなどが有名</li>
+</ul></li>
+<li>Window Maker
+<ul>
+<li>NeXTSTEP風のDock UIを持つ</li>
+</ul></li>
+<li>enlightenment
+<ul>
+<li>「ハッと息をのむほど美しい」という豪華なウィンドウマネージャ</li>
+<li>高度なライブラリを提供するなど、既にデスクトップ環境に近い</li>
+</ul></li>
+<li>twm派生
+<ul>
+<li>FVWMなどが有名</li>
+</ul></li>
+<li>タイル型
+<ul>
+<li>Linuxにはさまざまなタイル型ウィンドウマネージャがある</li>
+</ul></li>
+<li>Windows95風
+<ul>
+<li>JWMはXlibで書かれており、「羽のように軽い」</li>
+</ul></li>
+</ul></li>
+<li>デスクトップ環境など
+<ul>
+<li>GNOME
+<ul>
+<li>Linuxの事実上の標準デスクトップ環境</li>
+<li>GNOME 2まではシンプルかつ簡単なデスクトップ環境を目指しており、言ってしまえば「パソコン初心者向けのデスクトップ環境」だった
+<ul>
+<li>「ユーザーを馬鹿だとみなすGNOMEの姿勢は本質的に誤り」とリーナス・トーバルズからも批判された</li>
+</ul></li>
+<li>GNOME 3からはユーザーインターフェースを抜本的に一新し、GNOME-Shellと呼ばれる新しいGUIを採用、アクティビティバーから全ての操作を行うようにし、標準アプリケーションのメニューバーやタスクバーは大胆に削除した
+<ul>
+<li>デスクトップ環境はデフォルトで高度な機能を提供せず、拡張機能によって自分の好きなデスクトップにカスタマイズすることができる</li>
+<li>GNOME 3は当初は大不評だったが、今見ると「WindowsのパクリだったGNOME 2に比べて、独自性があっていい」というユーザーも</li>
+</ul></li>
+<li>CORBA
+<ul>
+<li>分散システム。ネットワーク上の複数のコンピュータにおいて、言語やプラットフォームをまたいでシステムを構築できる</li>
+<li>たとえば古いシステムを再利用して、プラットフォームが別の環境とネットワークで接続したり、コンポーネントとして再利用したりできる</li>
+<li>GNOMEではCORBAを使うことで、LinuxとWindowsが互いにメッセージをやり取りしたり、GNOMEアプリケーションを複数のホストから構築したり、さまざまなアプリケーションや言語でBonoboコンポーネントを使うことができる</li>
+</ul></li>
+<li>D-Bus
+<ul>
+<li>GNOME 3ではCORBAではなくD-Busが標準になった</li>
+<li>D-BusはLinuxカーネルやKDEでも使われているプロセス間通信の仕組みで、CORBAと同じようにインターフェース定義によってそれぞれのプロセスがネットワークで通信できる</li>
+</ul></li>
+<li>Gconf, dconf
+<ul>
+<li>Windowsのレジストリと同じ設定データベースシステム</li>
+</ul></li>
+<li>GnomeVfs, GVfs, GIO
+<ul>
+<li>ネットワーク上のたとえばFTPなどのストレージを、ローカルにあるものと同じように使用できる仮想ファイルシステム</li>
+</ul></li>
+<li>GNOMEアプリケーション</li>
+<li>MATE, Cinnamonなど
+<ul>
+<li>GNOME 3はメニューバーやタスクバーを廃止したが、これが不評であったためMATEがGNOME 2からforkし、GNOME 3とは別の道を行くCinnamonが開発されている</li>
+</ul></li>
+</ul></li>
+<li>KDE
+<ul>
+<li>KDE Frameworks</li>
+<li>Plasma
+<ul>
+<li>KDE 4以降ではKDEのデスクトップ環境のことをPlasmaと呼ぶ</li>
+<li>透明で美しいが、少し不安定で動かないこともある</li>
+</ul></li>
+<li>KDEアプリケーション</li>
+<li>CMake</li>
+</ul></li>
+<li>Xfce
+<ul>
+<li>シンプルで軽量。GNOMEやKDEよりもUNIXの本来の哲学に近い</li>
+<li>Xfce-GoodiesではWebKitを使用したMidoriと呼ばれるブラウザなど、軽量アプリケーションも開発している</li>
+</ul></li>
+<li>LXDE, LXQt
+<ul>
+<li>軽量だけを目指すデスクトップ環境。仮想環境でも優れたパフォーマンスを発揮する</li>
+</ul></li>
+<li>Budgie, Pantheon, Deepinなど
+<ul>
+<li>最近は新しいデスクトップがいろいろと開発されており、Budgie, Pantheon, DeepinなどはUbuntuやFedoraなどのフレーバー（デスクトップ環境だけを変えたバージョン）にも対応されるなど波に乗っている</li>
+</ul></li>
+</ul></li>
+<li>Wayland</li>
+</ul></li>
+</ul>
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

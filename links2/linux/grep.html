@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>grep - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>grep</h1>
+<p>grepに関する世界観です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="grep_find_sed_awk.html">grep, find, sed, awk</a></li>
+<ul>
+<li><b>grep</b></li>
+<li><a href="find.html">find</a></li>
+<li><a href="sed.html">sed</a></li>
+<li><a href="awk.html">awk</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>grep</h1>
+<h2>grep</h2>
+<p>grepはテキストファイルからキーワード（任意の文字列）を含む行、あるいは正規表現のパターンにマッチする行だけを抽出するコマンド。grep, sed, awkとして検索・置換の三人衆と知られている。</p>
+<ul>
+<li><a href="http://qiita.com/hirohiro77/items/771ffb64dddceabf69a3">grepでこういう時はどうする? - Qiita</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/GNU_grep/man1/grep.1.html">man grep</a></li>
+</ul>
+
+<h2>grepの例</h2>
+<p>grepはパイプを使ってストリームの中のパターンにマッチする行を抽出するために使うことができます。データベースで言えばフィルターのようなものです。</p>
+<pre>
+find /usr/src/linux | grep fs
+</pre>
+<p>こんなこともできる。</p>
+<pre>
+grep -rn "Linus" /usr/src/linux
+</pre>
+<p>-rオプションはディレクトリの中のすべてのファイルに対するサブディレクトリまで含めた再帰的な検索、-nオプションは行番号を表示。</p>
+<p>あるいは、findとxargsを組み合わせて、すべての*.cファイルから文字列を検索するには以下のようにする。</p>
+<pre>
+find /usr/src/linux -name "*.c" | xargs grep -l "Linus"
+</pre>
+<p>-lオプションはファイル名を表示。</p>
+<p>ちなみに、正規表現を使用しない場合はfgrepで高速検索ができる。またegrepは拡張正規表現を使う（grepの-Eオプションと同じ）。</p>
+<ul>
+<li><a href="https://eng-entrance.com/linux-command-grep">grepコマンドの詳細まとめました【Linuxコマンド集】 - エンジニアの入り口</a></li>
+<li><a href="https://qiita.com/yukibe/items/d250c18b177357340042">【Linux】特定の文字列を含むファイル名を表示する - Qiita</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.22編集</p>
+</div>
+
+<h2>AND検索とOR検索</h2>
+<p>grepでAND検索を行うには、複数のgrepをパイプで繋ぎ合わせればいい。</p>
+<p>たとえば、「A」と「B」と「C」が含まれる行を抽出するには、以下のようにする。</p>
+<pre>
+grep A hoge.txt | grep B | grep C
+</pre>
+<p>これに対して、OR検索を行うには、-eオプションを指定する。</p>
+<p>たとえば、「D」あるいは「E」が含まれる行を抽出するには、以下のようにする。</p>
+<pre>
+grep -e D -e E hoge.txt
+</pre>
+<p>詳しくは以下のページが参考になる。</p>
+<ul>
+<li><a href="https://ex1.m-yabe.com/archives/2826">grep でAND検索とOR検索をする方法 | ex1-lab</a></li>
+<li><a href="https://www.yoheim.net/blog.php?q=20160302">[シェル] Grepでand検索、or検索、not検索、正規表現、再帰的に検索、圧縮ファイル内検索、など行う - YoheiM .NET</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.22</p>
+</div>
+
+<h2>正規表現</h2>
+<p>grepやsedで使う正規表現については<a href="regex.html">正規表現</a>を参照のこと。</p>
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>curl - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>curl</h1>
+<p>curlに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>curl</h1>
+<h2>curl</h2>
+<p>curlはサーバとの間でデータを転送することのできるコマンド。生のHTTPリクエストができる。</p>
+<ul>
+<li><a href="https://qiita.com/yasuhiroki/items/a569d3371a66e365316f">curl コマンド 使い方メモ - Qiita</a> - <a href="https://ja.wikipedia.org/wiki/Jenkins">Jenkins</a>のAPIを使っているようである。</li>
+<li><a href="https://qiita.com/bunty/items/758425773b2239feb9a7">curlコマンドでapiを叩く #API - Qiita</a></li>
+<li><a href="https://girigiribauer.com/archives/20170721/">改めて curl の使い方まとめ - ばうあーろぐ</a></li>
+<li><a href="https://hydrocul.github.io/wiki/commands/curl.html">curl コマンド | コマンドの使い方(Linux) | hydroculのメモ</a></li>
+</ul>
+
+<h2>エンジニアにとって便利</h2>
+<p>curlを使うことで、コマンドからHTTPリクエストができる。これはエンジニアにとっては便利。</p>
+<p>Webブラウザではできない生のHTTPリクエストがコマンドから行える。</p>
+
+<h2>さまざまなオプション</h2>
+<p>curlを使う上では、さまざまなオプションをマスターしよう。</p>
+<p>GET（デフォルト）、HEAD（--headあるいは-I）、フォーム（-F）あるいはJSON（-Hと-d）からのPOST（-X POST）、ファイルのダウンロード（-oあるいは-O）、BASIC認証（-uあるいは--basicと--user）のほか、ファイル転送、メール、暗号化・証明書、その他さまざまなプロトコルと、とても自由自在。</p>
+<ul>
+<li><a href="https://girigiribauer.com/archives/20170721/">改めて curl の使い方まとめ - ばうあーろぐ</a></li>
+<li><a href="https://qiita.com/yasuhiroki/items/a569d3371a66e365316f">curl コマンド 使い方メモ - Qiita</a></li>
+<li><a href="https://qiita.com/youcune/items/45271a32dccb7498033f">curlコマンドでHTTPヘッダを扱うレシピ #curl - Qiita</a></li>
+<li><a href="https://www.amazon.co.jp/%EF%BC%BB%E6%94%B9%E8%A8%82%E7%AC%AC3%E7%89%88%EF%BC%BDLinux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E6%B2%93%E5%90%8D-%E4%BA%AE%E5%85%B8/dp/4774174041">［改訂第3版］Linuxコマンドポケットリファレンス</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.08.12</p>
+</div>
+
+<h2>curlでJSONのAPIを叩く</h2>
+<p>curlはAPI（多くの場合JSON）を操作するのに使います。また、ネットワークの確認やテストを行う上で、curlはとても便利なソフトウェアです。「curlを制するものはネットワークを制する」と言えます。</p>
+<p>Jenkinsなどとともに使い、jqコマンドで出力されたJSONデータをパースすることで、とても便利かつ効率的にAPIを叩いてJSONデータを操作する方法が以下にあります。</p>
+<ul>
+<li><a href="https://qiita.com/yasuhiroki/items/a569d3371a66e365316f">curl コマンド 使い方メモ - Qiita</a></li>
+<li><a href="https://qiita.com/buntafujikawa/items/758425773b2239feb9a7">curlコマンドでapiを叩く #API - Qiita</a></li>
+</ul>
+<p><a href="../prog_lang/json.html">JSON</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.08.12</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

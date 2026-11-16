@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>C関連の世界観６（プリプロセッサとインラインアセンブラ） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_c_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>C言語の世界観（６．プリプロセッサとインラインアセンブラ）</h1>
+<p>C言語によるプログラミングに関する世界観５（プリプロセッサとインラインアセンブラ）です。</p>
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="c.html">C言語（１．基本）</a></li>
+<ul>
+<li><a href="c_flow.html">２．制御フロー</a></li>
+<li><a href="c_data.html">３．データ構造</a></li>
+<li><a href="c_pointer.html">４．配列とポインタ</a></li>
+<li><a href="c_io.html">５．入出力</a></li>
+<li><b>６．プリプロセッサとインラインアセンブラ</b></li>
+</ul>
+<li><a href="c_comments.html">A．戯言</a></li>
+</ul>
+<p><a href="assembly.html">アセンブリ言語</a>や<a href="c.html">C</a>や<a href="cpp.html">C++</a>も参照のこと。</p>
+<p>ツール関係は<a href="c_cpp_tools.html">C/C++ツール</a>に移動しました。</p>
+<p>システムに依存する部分は<a href="../linux/linux_api.html">Linux（システムコール・API）</a>や<a href="windows_programming.html">Windowsプログラミング</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>プリプロセッサ</h1>
+<h2>プリプロセッサ</h2>
+<p>プリプロセッサは機械的に文字列の変換処理がされるマクロのことで、#defineや#ifdefのように「#」から始まる。これはコンパイル前にプリプロセッサによって処理されて純粋なC言語のソースコードに変換される。</p>
+<p>基本的に#define（定義）、#ifdef（定義されているかどうか）、#include（別ファイルを含む）を知っていれば良い。</p>
+<p>これらは、主にWindowsとLinux向けのコードを分けて書くことでクロスプラットフォームに対応したり、ある種の定数（変数展開せずマクロで使いたい場合など）のように使うことが多い。</p>
+<ul>
+<li><a href="http://itref.fc2web.com/c/preprocessor.html">C言語 プリプロセッサ - SE学院</a></li>
+</ul>
+<p><a href="../linux/linux_header.html">Linuxヘッダファイル</a>も参照のこと。</p>
+
+<h2>gccの定義積みマクロでWindowsとLinuxのコードを分ける</h2>
+<p>gccには、定義済みマクロと呼ばれるものがある。自分で#defineしなくても、勝手に#defineされる。</p>
+<p>たとえば、OS別にコードを分けるのであれば、#ifdef _WIN32 ～ #endifまたは#ifdef __linux__ ～ #endifとし、ヘッダファイルなどを#includeするようにすれば、Windows環境とLinux環境で、そのコードをビルド時に有効にすることができる。</p>
+<p>つまり、</p>
+<pre class="prettyprint">
+#ifdef _WIN32
+#include &lt;windows.h&gt;
+#endif
+
+int main(int argc, char *argv[]) {
+#ifdef _WIN32
+    /*Windows向けのコード*/
+#endif
+
+#ifdef __linux__
+    /*Linux向けのコード*/
+#endif
+}
+</pre>
+<p>これでよし。</p>
+<p>詳しくは以下のページが参考になる。</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/8666378/detect-windows-or-linux-in-c-c/33088568">Detect Windows or Linux in C, C++ - Stack Overflow</a></li>
+<li><a href="https://qiita.com/naohikowatanabe/items/a4e1a3f8080210257a42">gcc のプリプロセッサの定義済みマクロ(Predefined Macros)の確認方法 - Qiita</a></li>
+<li><a href="https://www.yokoweb.net/dokuwiki/programing/c-language/compiler-os-macro-define">C言語で定義済みマクロによるコンパイラ及びOS判定 [新石器Wiki]</a></li>
+</ul>
+<p><a href="portability.html">移植性</a>も参照のこと。</p>
+
+<h2>デバッグ時だけ処理を有効にする</h2>
+<p>printf()デバッグやトレースログを取りたい場合など、デバッグ時のみコードを有効にしたい場合は、</p>
+<pre class="prettyprint">
+#ifdef DEBUG
+    /*デバッグ時のみ処理する内容*/
+#endif
+</pre>
+<p>とした上で、gccに-Dオプションをつけてマクロを有効にしてビルドします。</p>
+<pre>
+$ gcc -DDEBUG -o hoge hoge.c
+</pre>
+<p>詳しくは以下のページが参考になります。</p>
+<ul>
+<li><a href="http://x68000.q-e-d.net/~68user/unix/pickup?gcc">gccコマンドの使い方: UNIX/Linuxの部屋</a></li>
+<li><a href="https://www.rapidtables.org/ja/code/linux/gcc/gcc-d.html">gcc-Dオプションフラグ - RapidTables</a></li>
+</ul>
+<p><a href="debug.html">デバッグ</a>も参照のこと。</p>
+
+<h2>マクロ的な置換</h2>
+<p>プリプロセッサを上手く使うことで、マクロ的な置換を行うこともできる。C++のテンプレートを使わなくても、マクロを使うことで、全ての型に汎用的な置換を簡単に実現できる。</p>
+<p>しかしながら、()の使い方に注意。(T * T)に対してx + 1を使うと、x + 1 * x + 1と置換されてしまい、1 * xが最初に演算されてしまう。注意して使おう。</p>
+<p>また、簡単な定数（たとえば円周率をPIとする）のにも使えるし、includeもよく使うが、ほかにはシステムごとに別の定義を行う（SYSVとBSDとMS-DOSで別の定義を使う）などといった用途に使うこともできる。</p>
+<p><a href="cpp_generics.html">C++（ジェネリック）</a>も参照のこと。</p>
+
+<h2>プロトタイプ宣言</h2>
+<p>C/C++ではヘッダファイルなどに関数のプロトタイプ宣言を行うが、この時プリプロセッサを使ったマクロを用いることで、ANSI C以前のK&R Cのプロトタイプ宣言のスタイルにも同時に対応させることができる。</p>
+<p>詳しくは<a href="https://www.amazon.co.jp/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E2%80%95%E8%A8%AD%E8%A8%88%E3%81%A8%E7%90%86%E8%AB%96%E3%81%8A%E3%82%88%E3%81%B3MINIX%E3%81%AB%E3%82%88%E3%82%8B%E5%AE%9F%E8%A3%85-S-%E3%82%BF%E3%83%8D%E3%83%B3%E3%83%90%E3%82%A6%E3%83%A0/dp/4894710471">オペレーティングシステム―設計と理論およびMINIXによる実装</a>（僕が読んだのは第二版）のMINIXソースコードに書かれているので参考にしてほしい。</p>
+<p>プリプロセッサは、このように、ヘッダファイルなどを「環境によって別々に読み込む」際などに使われることが多い。Windowsの場合とUNIXの場合に、別々のコードブロックやヘッダファイルを読み込むためによく使われる。</p>
+
+<h1>インラインアセンブラ</h1>
+<h2>GCCのインラインアセンブラ</h2>
+<p>GCCのインラインアセンブラは、</p>
+<pre>
+asm(実際の処理を記述するアセンブリテンプレート : 出力用オペランド : 入力用オペランド : 破壊されるワークレジスタのリスト);
+</pre>
+<p>となる。ここで、アセンブリテンプレート（文字列リテラルで書く）以外はオプション。オペランドはアセンブリ言語で使われるデータ、すなわちレジスタのことで、さまざまな制約をかけられる。なので、</p>
+<pre class="prettyprint">
+int add_asm (int x, int y) {
+    int result = 0;
+    asm ("movq x,%rax");
+    asm ("movq y,%rbx");
+    asm ("add %rbx,%rax");
+    asm ("movq %rax,result");
+    return result;
+}
+
+int main () {
+    int result = 0;
+    result = add_asm(100, 200);
+    printf("%d\n", result);
+}
+</pre>
+<p>のようにすればよい。GASの標準はAT&T構文なのでIntelとは右と左（ディスティネーションとソース）が逆になる。</p>
+<p>ams()は__asm__()と書くこともできる。むしろasm()だといろいろと問題があることがあるため通常は__asm__()を使う。</p>
+<p>また、上記の例では一行ごとにasm()を使っているが、以下のように繋げることもできる。</p>
+<pre class="prettyprint">
+__asm__ ("movq x,%rax\n\t"
+         "movq y,%rbx\n\t"
+         "add %rbx,%rax\n\t"
+         "movq %rax,result\n\t");
+</pre>
+<p>オペランド制約として、"r"を使うと、レジスタをC言語の変数の読み書きのために割り当てられる。また"m"を使うと、メモリに直接アクセスする。</p>
+<p>また、制約修飾子として無し（読み込み専用）、=（書き込み専用）、+（読み書き）、&（早期破壊オペランド）がある。</p>
+<pre class="prettyprint">
+__asm__ ("movq %0, %1" : "=r" (y) : "r" (x));
+</pre>
+<p>また、出力用・入力用オペランドとして書かれたレジスタ以外のレジスタの用途について、GCCはどのような用途で使われるかを知ることができない。レジスタの退避処理を行うために、ワークレジスタに破壊されるレジスタの一覧を書く必要がある。
+<p>そのほか、詳しくは以下が参考になる。以上の内容は以下を参考にして執筆した。</p>
+<ul>
+<li><a href="https://wocota.hatenadiary.org/entry/20090628/1246188338">GCCのインラインアセンブラの書き方 for x86 - OSのようなもの</a></li>
+</ul>
+<p><a href="assembly.html">アセンブリ言語</a>や<a href="../linux/gnu_toolchain.html">GNUツールチェイン</a>を参照のこと。</p>
+
+<h2>Visual C++の場合</h2>
+<p>Visual C++の場合は以下の記事が参考になる。</p>
+<ul>
+<li><a href="https://codezine.jp/article/detail/393">インラインアセンブラで学ぶアセンブリ言語 第1回 (1/3)：CodeZine（コードジン）</a></li>
+</ul>
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

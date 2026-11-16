@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Django関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index_web.html">Webプログラミングの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_ll_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Djangoの世界観</h1>
+<p>Djangoによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Django</h1>
+<h2>Django</h2>
+<p>Pythonによる、MVCのWebアプリケーションフレームワーク。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Django">Django - Wikipedia</a></li>
+<li><a href="https://docs.djangoproject.com/ja/2.2/">Django ドキュメント | Django</a> - チュートリアルをやれば一通り分かるかも。</li>
+</ul>
+
+<h2>Djangoの優れた点</h2>
+<p>Djangoの優れた点は、最初から多くのWebアプリケーションに必要な機能が数多く用意されていることです。</p>
+<p>たとえば、管理画面は最初から用意されていますし、ユーザー認証やRSSフィードなども使えます。パスワードなどは暗号化して保管されてハッシュ値によって比較され、さまざまなセキュリティ攻撃についても最初から対処されています。分散キャッシュのような機能もあり、高速なWebサイトが作成できます。</p>
+<p>Railsのような他のフレームワークに比べると、Pythonで書かれているため、Python言語を使うことができます。このため、人工知能や機械学習やデータ解析機能がほかのフレームワークよりも使いやすいです。Djangoは数多くの有名サイト（たとえばInstagram）で使われています。</p>
+<ul>
+<li><a href="https://udemy.benesse.co.jp/development/system/django.html">Django(ジャンゴ)とは？Pythonのフレームワークを活…｜Udemy メディア</a></li>
+</ul>
+
+<h2>DjangoとMVC</h2>
+<p>DjangoはMVCフレームワークのひとつだが、コントローラを「ビュー」と呼び、ビューを「テンプレート」と呼ぶ。詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/ja/3.0/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names">Django は MVC フレームワークのように思えるのですが、コントローラ (Controller) を「ビュー (view)」と呼び、ビュー (View) を「テンプレート (template)」と呼んでいます。なぜ標準的な呼び方をしないのですか？ - Django FAQ</a></li>
+</ul>
+
+<h2>Djangoの基本</h2>
+<p>まず、django-adminでプロジェクトを作成し、manage.pyでサーバーを起動して小さなスケルトンを作成する。</p>
+<p>Djangoではmanage.pyというスクリプトがプロジェクトごとに用意され、これを実行することでプロジェクトの管理を行う。</p>
+<p>ルーティングはhoge/urls.pyで行う（URLconf）。モデルはhoge/models.pyに、ビューはhoge/views.pyに、テンプレートはhoge/templates/hoge/index.htmlなどに記述する。</p>
+<p>Pythonを埋め込んだHTMLファイルでは、{% ～ %}で埋め込みコードを記述し、{{ }}で変数を展開し、ifに対してendif、forに対してendforでかっこを閉じる。</p>
+<p>後日注記：Djangoのモデルでは、models.Modelクラスを継承して作成します。</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/ja/3.0/intro/tutorial01/">はじめての Django アプリ作成、その 1 | Django ドキュメント</a></li>
+<li><a href="https://docs.djangoproject.com/ja/3.0/intro/tutorial03/">はじめての Django アプリ作成、その 3 | Django ドキュメント</a></li>
+<li><a href="https://docs.djangoproject.com/ja/3.0/">Django ドキュメント</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.08編集</p>
+</div>
+
+<h2>AIによるサンプル</h2>
+<p>以下はGoogleのAIが書いたサンプル。</p>
+<p>以下をターミナルで実行する。</p>
+<pre class="prettyprint">
+# プロジェクトの作成
+django-admin startproject myproject
+cd myproject
+
+# アプリケーションの作成
+python manage.py startapp helloapp
+</pre>
+<p>ビュー (helloapp/views.py)</p>
+<pre class="prettyprint">
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("&lt;h1&gt;こんにちは！Djangoの小さな画面です。&lt;/h1&gt;")
+</pre>
+<p>ルーティング (helloapp/urls.pyを新規作成)</p>
+<pre class="prettyprint">
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+]
+</pre>
+<p>ルーティング (myproject/urls.pyを編集)</p>
+<pre class="prettyprint">
+from django.contrib import admin
+from django.urls import path, include  # includeを追加
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('helloapp.urls')), # アプリのURLをトップに設定
+]
+</pre>
+<p>設定 (myproject/settings.py)</p>
+<pre class="prettyprint">
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    # ...
+    'helloapp', # アプリを追加
+]
+</pre>
+<p>以下をターミナルで実行する。</p>
+<pre class="prettyprint">
+python manage.py runserver
+</pre>
+<p>ブラウザでhttp://127.0.0.1にアクセスすると、「こんにちは！Djangoの小さな画面です。」と表示される。</p>
+<div class="edit_date">
+<p>2026.02.08</p>
+</div>
+
+<h2>AIによるサンプル２</h2>
+<p>以下はGoogleのAIが書いたサンプルその２。ビューとテンプレートを利用する。</p>
+<p>ビュー (views.py)</p>
+<pre class="prettyprint">
+# app/views.py
+from django.shortcuts import render
+
+def index(request):
+    # テンプレートに渡すデータ
+    context = {
+        'title': 'ホームページ',
+        'message': 'Djangoへようこそ！',
+        'items': ['りんご', 'バナナ', 'オレンジ']
+    }
+    # テンプレートファイル(index.html)にデータを渡して描画
+    return render(request, 'index.html', context)
+</pre>
+<p>テンプレート (index.html)</p>
+<pre class="prettyprint">
+&lt;!-- app/templates/index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;{{ title }}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;{{ message }}&lt;/h1&gt;
+    
+    &lt;h2&gt;フルーツリスト&lt;/h2&gt;
+    &lt;ul&gt;
+        {% for item in items %}
+            &lt;li&gt;{{ item }}&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>URL設定 (urls.py)</p>
+<pre class="prettyprint">
+# app/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+</pre>
+<div class="edit_date">
+<p>2026.02.19</p>
+</div>
+
+<h2>AIによるサンプル３</h2>
+<p>以下はGoogleのAIが書いたサンプルその３。モデルを利用する。</p>
+<pre class="prettyprint">
+from django.db import models
+from django.utils import timezone
+
+class Category(models.Model):
+    """カテゴリー情報を管理するモデル"""
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Post(models.Model):
+    """ブログ記事を管理するモデル"""
+    title = models.CharField('タイトル', max_length=200)
+    content = models.TextField('本文')
+    # 他のモデルとの紐付け（1対多の関係）
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='カテゴリー')
+    created_at = models.DateTimeField('作成日', default=timezone.now)
+    updated_at = models.DateTimeField('更新日', auto_now=True)
+    is_published = models.BooleanField('公開フラグ', default=False)
+
+    def __str__(self):
+        """管理画面などで表示される文字列を定義"""
+        return self.title
+</pre>
+<p>モデルを書き換えた後は、以下のコマンドを実行してデータベースに反映する。</p>
+<pre>
+python manage.py makemigrations
+python manage.py migrate
+</pre>
+<p>このようにすることで、データベースのテーブル構造を定義する。</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/ja/6.0/topics/db/models/">モデル | Django ドキュメント | Django</a></li>
+<li><a href="https://www.youtube.com/watch?v=LJCs3MVXTcw">Djangoでモデルクラスの基本と作り方を徹底解説 - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2026.03.08</p>
+</div>
+
+<h2>YouTubeの入門動画</h2>
+<p>以下はYouTubeの入門動画。</p>
+<ul>
+<li><a href="https://www.youtube.com/results?search_query=Django">Django - YouTube</a></li>
+<li><a href="https://www.youtube.com/watch?v=O037g3NOoXY">【Django入門】自作で簡単なブログを作ってDjangoの１歩を踏み出してみよう ~Djangoチュートリアル~ - YouTube</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.12.16</p>
+<p>2026.09.16編集</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>Webフレームワーク</h2>
+<p><a href="../network/web_framework.html">Webフレームワーク</a>を参照のこと。</p>
+
+<h2>Python</h2>
+<p><a href="python.html">Python</a>や<a href="python_tools.html">Pythonのツール</a>も参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Windowsプログラミング関連の世界観（WinSock） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_windowsprog_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Windowsプログラミング（WinSock）</h1>
+<p>Windowsプログラミングに関する世界観（WinSock）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="windows_programming.html">Windows API</a></li>
+<li><a href="windows_programming2.html">Windows関連技術</a></li>
+<ul>
+<li><a href="windows_mfc.html">Visual C++/MFC</a></li>
+<li><a href="windows_atl_com.html">ATL/COM</a></li>
+<li><a href="windows_activex.html">ActiveX</a></li>
+<li><a href="windows_gdi.html">GDI</a></li>
+<li><b>WinSock</b></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>WinSock</h1>
+<h2>WinSockとは</h2>
+<p>Windowsでソケット通信を行うためには、WinSockを使う。Windows 95から用意されている。</p>
+
+<h2>Windowsの通信確認コマンド</h2>
+<p>通信の確認コマンドには、Windowsには以下のようなコマンドがある。</p>
+<table class="some_tables">
+<tr><th class="min60">確認コマンド</th><th>確認対称</th></tr>
+<tr><td>ipconfig</td><td>TCP/IPの設定</td></tr>
+<tr><td>nslookup</td><td>DNSサーバでの名前解決</td></tr>
+<tr><td>ping</td><td>接続が可能であるかどうか</td></tr>
+<tr><td>tracert</td><td>ルータによる接続経路の表示</td></tr>
+</table>
+<p>これらを確認することで、コマンドでネットワーク接続が正しく動いているかどうかを確認できる。</p>
+<p>（<a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-Gene/dp/4798125261">おうちで学べるネットワークのきほん</a>を参考に執筆しました。）</p>
+
+<h2>WinSock2はBSDのコードが元になっている</h2>
+<p>BSDのBerkeleyソケットコードは、Windows 95でTurbo Pascalで書き直され、WinSock2のベースとなった。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Berkeley_Software_Distribution">Berkeley Software Distribution - Wikipedia</a></li>
+</ul>
+<p><a href="../unix/bsd.html">BSD</a>も参照のこと。</p>
+
+<h2>WinSock1とWinSock2の違い</h2>
+<p>Windows 3.1以降のWinSock 1は、Windows 95よりも新しい全バージョンのWindowsに搭載されている。</p>
+<p>これに対して、Windows 98ではWinSock 2を搭載。</p>
+<p>WinSock2では、TCP/UDPのほかにも多様なプロトコルに対応し、UNIX的だったAPIを改め、Win32APIのスタイルに統合した。</p>
+<p>（<a href="https://www.wdic.org/w/WDIC/Winsock">Winsock ‐ 通信用語の基礎知識</a>を参考に執筆しました。）</p>
+
+<h2>ソケットの接続と送受信</h2>
+<p>基本的にUNIXの場合と同様、ソケットをsocket()で作って、サーバーでbind()してlisten()してaccept()し、データをrecv()で受信、send()で送信します。</p>
+<p>（<a href="https://qiita.com/sanyamarseille/items/8a39d1a58e7e4ca2d050">Windows Socket 2の基礎 #C++ - Qiita</a>を参考に執筆しました。）</p>
+<p><a href="../linux/linux_kernel_socket.html">Linuxカーネル（ソケット）</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2025.12.13</p>
+</div>
+
+<h2>WinSock関連のリンク集</h2>
+<p>WinSock関連の参考になるサイト。</p>
+<ul>
+<li><a href="http://keicode.com/winprimer/index4.php">ネットワークプログラミング - Web/DB プログラミング徹底解説</a></li>
+</ul>
+
+<h2>参考ページ</h2>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.wdic.org/w/WDIC/Winsock">Winsock ‐ 通信用語の基礎知識</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Linuxネットワーク</h2>
+<p><a href="../linux/linux_net.html">Linuxネットワーク</a>も参照のこと。</p>
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

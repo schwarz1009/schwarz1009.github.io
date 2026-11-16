@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux デバイスファイル - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Linux デバイスファイル</h1>
+<p>Linuxのデバイスファイルに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>デバイスファイルとは</h1>
+<h2>デバイスファイルを通じてストリームを繋ぐ</h2>
+<p>Linuxでは、入出力を表現するために、システムに用意されている「デバイスファイル」（スペシャルファイルとも呼ばれる）から、バイト列の読み書きを行うための「ストリーム」をその場その場でつなぐ（生成）ことで行う。</p>
+<p>デバイスファイルは特別なファイルで、Linuxではudevのような仕組みを用いて、デバイスファイルを/devディレクトリに動的に作成する。このデバイスファイルは、ファイルやディレクトリを表すブロック型デバイスのファイルシステムであれば、特定のディレクトリに「マウント」した上で使用する。マウスやキーボードなどのキャラクタデバイスであっても、ストリームからバイト列を操作できる。</p>
+<p>デバイスファイルにプログラムが直接アクセスした場合、プログラムは対応するI/Oデバイスを用いて、デバイスを直接操作することになる。</p>
+
+<h2>udev</h2>
+<p>UNIXでは、デバイスファイル（スペシャルファイル）という特殊ファイルを用いて、マシンに繋がったハードウェアデバイスにアクセスする。</p>
+<p>この時、UNIXでは昔から、マシンに繋がったデバイスに対して、mknodコマンドを用いてデバイスファイルを手動で作成するという、昔ながらの単純なやり方で、ハードウェアデバイスとやり取りする。</p>
+<p>つまり、デバイスを使うためには、マシンに繋ぐだけではなく、手動でデバイスファイルを（アクセスするよりも事前に）作成しなければならない。</p>
+<p>だが、デバイスファイルの手動管理は、面倒で、手間を取るだけで意味がない。デバイスが利用可能な状態で繋がれていても、デバイスファイルの作成をし忘れたり、メジャー番号やマイナー番号の設定を間違えれば、使うことができない状況に陥る。</p>
+<p>デバイスがマシンに繋がれた段階で、自動的にデバイスファイルを作ってくれて、設定や管理も自動で行ってくれるような機構が備わっていると、便利である。</p>
+<p>Linux 2.4では、このような声に応えるために、「devfs」というカーネルレベルでのデバイスファイル自動作成機構を開発した。</p>
+<p>だが、devfsはホットプラグデバイスとの相性が悪かった。ホットプラグデバイスとは、USBメモリのように、日常で抜き差しを何度も行うようなデバイスのこと。devfsはカーネルレベルの機構だったため、ユーザーがホットプラグデバイスを抜き差しした時に、自動でデバイスファイルを管理することが難しかった。以前は/sbin/hotplugを自動実行することで、ホットプラグデバイスを管理していた。</p>
+<p>そのため、最近では、カーネルレベルではなく、ユーザーレベルでデバイスファイルを自動管理する、「udev」と呼ばれる仕組みが開発された。</p>
+<p>udevを用いた最近のLinuxでは、まず、Linuxカーネルがマシンに繋がれているデバイス情報に基づいて、/sysディレクトリに情報を反映する。また、デバイスが繋がれた段階で、udevdに通知を行う。そして、自動的にudevが「udevルール」を参照し、udevがユーザーレベルでデバイスファイルを自動作成する。</p>
+<p>udevルールは、デフォルトのルールが/usr/lib/udev/rules.dにあり、管理者が自分で設定するルールが/etc/udev/rules.dにある。</p>
+<p>udevは今のカーネル主要メンテナーのGreg KH（グレッグ・クロー＝ハートマン）によって開発された。</p>
+<p>詳しくは以下を参照のこと。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+<li><a href="https://w.atwiki.jp/funa_tk/pages/21.html">ホットプラグの混乱 - 組み込み Linux 開発の手引き - アットウィキ</a></li>
+<li><a href="http://linux-beginner.com/linux_kihon274.html">ホットプラグについて- Linux初心者の基礎知識</a></li>
+<li><a href="https://qiita.com/hana_shin/items/16c457eed20e8822cab8">udevルールの書き方 - Qiita</a></li>
+</ul>
+<p><a href="linux_fhs.html">Linuxファイルシステム階層</a>も参照のこと。</p>
+
+<h2>メジャー番号とマイナー番号</h2>
+<p>（<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>を参考に執筆しました。）</p>
+<p>デバイスファイルにはキャラクタ型・ブロック型の区別があるが、このほかに2つの属性がある。それがメジャー番号とマイナー番号。</p>
+<p>メジャー番号は、デバイスの大まかな種類を決める1～254までの番号。同じメジャー番号であれば、共通のファイル操作のための関数形態を持つ。</p>
+<p>マイナー番号は、同じメジャー番号の中で、それぞれの特有のデバイスを判別するための番号。</p>
+
+<h2>デバイスファイルの例</h2>
+<p>（<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a>を参考に執筆しました。）</p>
+<p>デバイスファイルの例として、</p>
+<table class="some_tables">
+<tr><th class="min60">型</th><th>デバイスファイル</th><tr>
+<tr><td>ブロック型</td><td>/dev/fd0（フロッピーディスク）<br>/dev/hda1（IDEハードディスク）<br>/dev/sda1（SCSIハードディスク）</td></tr>
+<tr><td>キャラクタ型</td><td>/dev/ttyp0（端末）<br>/dev/console（コンソール）<br>/dev/lp1（プリンタ）<br>/dev/null（NULLデバイス）</td></tr>
+</table>
+<p>などがある。</p>
+<ul>
+<li><a href="https://www.debian.org/releases/stable/i386/apcs04.ja.html">C.4. Linux におけるデバイス名 -  Debian GNU/Linux インストールガイド</a></li>
+<li><a href="https://docs.oracle.com/cd/E39368_01/admin/ol_about_devices.html">6.1 デバイス・ファイルについて - Oracle Linux 6 管理者ガイド</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.21編集</p>
+</div>
+
+<h2>デバイスファイルの作成</h2>
+<p>デバイスファイルを作成するシステムコールとしては、mknod(2)がある。mknod()を使うことで、C言語のプログラムからデバイスファイルを作成できる。</p>
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man2/mknod.2.html">man mknod(2)</a></li>
+<li><a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB-%E7%AC%AC2%E7%89%88-%E3%83%80%E3%83%8B%E3%82%A8%E3%83%AB%E3%83%BBP-%E3%83%9C%E3%83%99%E3%83%83%E3%83%88/dp/4873111331">詳解 Linuxカーネル 第2版</a></li>
+</ul>
+<p>また、デバイスファイルを作成するコマンドとしてmknodコマンドがある。</p>
+<p>mknodコマンドには、デバイスファイルのファイル名、タイプ（bはブロック型、cとuはキャラクタ型、pは名前付きパイプ）、メジャー番号、マイナー番号を指定する。</p>
+<p>ls -lを実行した時、パーミッションの一番左にある「b」はブロック型のデバイスファイル、「c」はキャラクタ型のデバイスファイル、「p」は名前付きパイプを意味する。</p>
+<ul>
+<li><a href="https://kcfran.com/2022/11/27/linux-command-mknod/">Linuxコマンド辞典 mknodコマンド（デバイス）  |  すなりんブログ</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/GNU_coreutils/man1/mknod.1.html">man mknod(1)</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.01.21-22編集</p>
+</div>
+
+<h2>端末のデバイスファイル</h2>
+<p>端末のデバイスファイルについては以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AELinux%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-Linux%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8B%E3%82%89%E5%AD%A6%E3%81%B9%E3%82%8Bgcc%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%8E%8B%E9%81%93-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797328355">ふつうのLinuxプログラミング Linuxの仕組みから学べるgccプログラミングの王道</a></li>
+</ul>
+<p><a href="linux_terminal.html">Linux 端末</a>も参照のこと。</p>
+
+<h2>デバイスドライバ</h2>
+<p>デバイスドライバについては、<a href="linux_kernel_device.html">Linuxカーネル（デバイス）</a>や<a href="linux_kernel_io.html">Linuxカーネル（IO・入出力）</a>を参照のこと。</p>
+
+<h1>systemd</h1>
+<h2>udevはsystemdに統合</h2>
+<p>最近のudevは、systemdに完全に統合されました。</p>
+<p>systemd-udevdの挙動については、以下のリンク先が参考になります。</p>
+<ul>
+<li><a href="https://hana-shin.hatenablog.com/entry/2022/04/28/223022">udevルールの書き方 - hana_shinのLinux技術ブログ</a></li>
+</ul>
+<p><a href="systemd.html">systemd</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Linux ブラウザの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_desktop_menu.html" class="sideiframe"></iframe>
+</div><h1>Linux ブラウザの世界観</h1>
+<p>Linux向けのブラウザの世界観。<a href="mozilla.html">Mozilla</a>や<a href="../windows_pc/browsers.html">Windows向けブラウザ</a>も参照のこと。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>Mozilla</h1>
+<p><a href="mozilla.html">Mozilla</a>も参照のこと。</p>
+
+<h2>Mozilla Firefox</h2>
+<p>MozillaによるWebブラウザ。</p>
+<p>LinuxのMozilla Firefoxでは、Syncを使うことで、同一のFirefoxアカウントにログインしておけば、ブックマークなどのデータを同期できる。これは、WindowsのFirefoxとブックマークなどを共有する上で非常に便利である。</p>
+<p><a href="mozilla_firefox.html">Mozilla Firefox</a>を参照のこと。</p>
+
+<h2>Gecko</h2>
+<p>Mozillaに搭載されているHTMLレンダリングエンジン。</p>
+
+<h2>Pale Moon</h2>
+<p>Firefoxをベースにした軽量なWebブラウザ。昔のFirefox風のUIを持ちながら、Goannaと呼ばれる昔のFirefoxのXUL/Geckoから派生したエンジンを使用する。軽量かつ効率的でスピーディ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Pale_Moon">Pale Moon - Wikipedia</a></li>
+<li><a href="https://www.palemoon.org/">The Pale Moon Project homepage</a></li>
+<li><a href="https://www.moonchildproductions.info/goanna.shtml">The Goanna layout engine</a></li>
+</ul>
+
+<h1>Google</h1>
+<h2>Google Chrome</h2>
+<p>GoogleによるクロスプラットフォームなWebブラウザ。</p>
+<p>Firefoxと同様に、Googleアカウントにログインすることでブックマークなどを同期し、WindowsのGoogle Chromeと共有できる。Googleアカウントは、GNOME 3のオンラインアカウントから設定することもでき、Nautilus（GNOMEのファイルマネージャ）からGoogle Driveにアクセスしたり、Evolution（GNOMEのメールクライアント）からGmailのメールデータにアクセスしたりすることもでき、とても便利である。</p>
+<p>反面、Firefoxアカウントと違い、Googleアカウントにログインするため、「本当にオープンソースであると言えるのか」という懸念もある（Googleはサーバー側のGmailやGoogle Driveなどのサービスのソースコードを公開していない）。だが、MongoDBの例にもあるように、オープンソースを強制しようとして行きすぎるのも、またオープンソースとは言えないところがある（MongoDBはWebサービスにおける公開を強制するライセンスを裁定した結果、オープンソースでないとして各種ディストリビューションから配布を取りやめされている）。</p>
+<p><a href="webkit.html">WebKit</a>も参照のこと。</p>
+
+<h2>Chromium</h2>
+<p>オープンソースのWebブラウザ。Google Chromeのベース。</p>
+
+<h2>WebKit/Blink</h2>
+<p>KHTMLをベースにした軽量なHTMLレンダリングエンジン。</p>
+<p><a href="webkit.html">WebKitの世界観</a>を参照のこと。</p>
+
+<h2>Linux向けのChromeアプリ</h2>
+<p>Linux向けのGoogle Chromeでは、Chromeアプリを使っている場合、Chromeをインストールしてログインした時に、自動的にChromeアプリもインストールされる。Google Keep（Evernoteのようなクラウドのメモアプリ）を僕は使っていたことがあって、LinuxのGNOMEにChromeを入れた時、Google Keepも一緒に入った経験がある。</p>
+<p>これは面白かった。クラウドで使えるような「スタンドアローンのWebアプリケーション」を、Googleによるアプリケーションとして簡単に導入出来る。LinuxとWindowsをどちらも使うのであれば、Google系のアプリケーションやサービスを使うことをおすすめする。</p>
+
+<h1>KHTML/QtWebKit/QtWebEngine</h1>
+<h2>Konqueror</h2>
+<p>KDEのブラウザ。KHTMLという軽量なKDE独自のエンジンを使っている。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Konqueror">Konqueror - Wikipedia</a></li>
+</ul>
+<p><a href="kde_apps.html">KDEアプリケーション</a>も参照のこと。</p>
+
+<h2>Falkon (QupZilla)</h2>
+<p>Qtによって開発されている、デスクトップ環境と密接に統合されることを目指したWebブラウザ。以前はQupZillaという名称だった。</p>
+<p>Qt WebEngineの中のChromiumエンジンを使用している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Falkon">Falkon - Wikipedia</a></li>
+</ul>
+
+<h2>Arora</h2>
+<p>QtWebKitを使用した、軽量なWebブラウザ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Arora">Arora - Wikipedia</a></li>
+</ul>
+
+<h2>rekonq</h2>
+<p>KDE向けのWebブラウザ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Rekonq">rekonq - Wikipedia</a></li>
+</ul>
+
+<h1>Opera系</h1>
+<h2>Vivaldi</h2>
+<p>Operaの創設者の1人が作っているWebブラウザ。現行のOperaと同じくエンジンにBlinkを使っている。</p>
+<ul>
+<li><a href="https://vivaldi.com/ja/download/">Vivaldi をダウンロード | Vivaldi ブラウザ</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/Vivaldi_(%E3%82%A6%E3%82%A7%E3%83%96%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6)">Vivaldi (ウェブブラウザ) - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2025.08.26編集</p>
+</div>
+
+<h2>Otter Browser</h2>
+<p>Opera 12.xの仕様を再現する、Qtを用いたWebブラウザ。</p>
+<p>Operaは以前はPrestoエンジンという独自のWebレンダリングエンジンを搭載していたが、最近になってChromiumベースとなり（WebKitを採用後にBlinkに変わった）、その上で出た新しいバージョンも今までのユーザーを困惑させる出来だった。</p>
+<p>Otter Browserは、この昔のOperaの使用感と精神を再現するために開発されている。Qtをベースに作られている。だが、Otterはバグが多く、QtWebEngineに不具合が多いため、Chromiumより不安定で重い。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Otter_Browser">Otter Browser - Wikipedia</a></li>
+</ul>
+
+
+<h1>GTK+</h1>
+<h2>Galeon</h2>
+<p>GTK+によるGeckoを用いたWebブラウザ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Galeon">Galeon - Wikipedia</a></li>
+</ul>
+<h2>Epiphany（Web）</h2>
+<p>GTK+によるWebKitを用いたWebブラウザ。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/Web_(%E3%82%A6%E3%82%A7%E3%83%96%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6)">Web (ウェブブラウザ) - Wikipedia</a></li>
+</ul>
+<p><a href="gnome_apps.html">GNOMEアプリケーション</a>も参照のこと。</p>
+<h2>風博士</h2>
+<p>GTK+によるLinux向けのWebブラウザ。</p>
+<p>29日の「肉の日リリース」が昔有名だった。最近は開発を停止している。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E9%A2%A8%E5%8D%9A%E5%A3%AB_(%E3%82%A6%E3%82%A7%E3%83%96%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6)">風博士 (ウェブブラウザ) - Wikipedia</a></li>
+</ul>
+
+<h2>Midori</h2>
+<p>Xfce Goodiesコンポーネントの1つである軽量なWebブラウザ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/midori">midori - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/eustasy/midori-browser.org">git</a></li>
+</ul>
+
+<h1>その他のLinux向けのWebブラウザ</h1>
+<h2>Dillo</h2>
+<p>極めて軽い、ソースのサイズが極めて小さいWebブラウザ。</p>
+<p>Wikipedia</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/dillo">dillo - Wikipedia</a></li>
+</ul>
+<p>ソースコード</p>
+<ul>
+<li><a href="https://github.com/armadillica/dillo">git</a></li>
+</ul>
+
+<h2>テキストブラウザ</h2>
+<p>Linuxでは、linksやlynxやw3mのようなテキストブラウザを使うことで、Xの無い環境でもある程度のHTMLの観覧ができる。特に日本人によるw3mはテーブルの表示や画像ファイルのインライン表示にも対応し、本格的である。</p>
+<p>コンソールでHTMLやWebページを表示させたい、という用途は意外と多い。たとえば、Linuxのインストールの時に、設定が上手くいかず、情報をネットに頼りたい時に、コンソール画面であればインストーラが実行されている途中でもAlt+F2でテキストブラウザからWebページの情報を表示できる。Gentoo Handbookによる「インストールバトル」がこれに当たる。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6">テキストブラウザ - Wikipedia</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/W3m">w3m - Wikipedia</a></li>
+</ul>
+
+<h2>便利なコマンド</h2>
+<p>単にネットからファイルをダウンロードしたい場合、URLが分かっていればwgetで簡単にダウンロードできる。</p>
+<p>特定のサイトにHTTPリクエストを送りたい場合は、curlなどを使う。</p>
+<p>また、ネットワークが繋がっているかどうかを実験したい、という時は、pingを使うことができる。</p>
+<p><a href="linux_net.html">Linuxネットワーク</a>や<a href="linux_net_etc.html">Linuxネットワーク（さまざまなコマンド）</a>を参照のこと。</p>
+
+<h1>RSSクライアント</h1>
+<h2>FeedReader</h2>
+<p>RSSクライアント。RSSフィードとはWebサイトやブログなどの「最新情報」のことで、RSSクライアントを使うことで、さまざまなサイトのRSSフィードから提供される最新情報をひとつのクライアントから閲覧できる。</p>
+<ul>
+<li><a href="https://linuxappdata.com/software/46/">FeedReader - Linux App Data</a></li>
+</ul>
+
+<h1>テキストブラウザ</h1>
+<h2>lynx</h2>
+<p>テキストブラウザの１つ。</p>
+
+<h2>w3m</h2>
+<p>テキストブラウザの１つ。表も表示できる。</p>
+
+
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

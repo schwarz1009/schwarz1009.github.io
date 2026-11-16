@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Red Hat２（DNF/Yum） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Red Hat２（DNF/Yum）</h1>
+<p>Red Hatに関する世界観２（DNF/Yum）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="redhat.html">Red Hat（１．Red Hat）</a></li>
+<ul>
+<li><a href="fedora.html">Fedora</a></li>
+<li><b>２．DNF/Yum</b></li>
+<li><a href="redhat_rpm.html">３．RPM</a></li>
+<li><a href="centos.html">CentOS</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+
+<h1>DNF/Yum</h1>
+<h2>DNF/Yum</h2>
+<p>Fedora/Red Hatのパッケージ管理システム。</p>
+<p>基本的に、インストールは、</p>
+<pre>
+dnf install [package]
+</pre>
+<p>削除は、</p>
+<pre>
+dnf remove [package]
+</pre>
+<p>アップデートは、</p>
+<pre>
+dnf update
+</pre>
+<p>パッケージの検索は、</p>
+<pre>
+dnf search [package]
+</pre>
+<p>でできる。</p>
+<p>また、インストール済みパッケージの一覧は、</p>
+<pre>
+dnf list installed
+</pre>
+<p>利用可能パッケージの一覧は、</p>
+<pre>
+dnf list available
+</pre>
+<p>で表示できる。またパッケージの情報は</p>
+<pre>
+dnf info [package]
+</pre>
+<p>で表示できる。</p>
+<p>インストール済みパッケージに含まれるファイルの一覧は</p>
+<pre>
+rpm -ql [package]
+</pre>
+<p>で表示できる。インストール済みパッケージの一覧は</p>
+<pre>
+rpm -qa
+</pre>
+でも表示できる。</p>
+<p>特に、処理の履歴を操作出来るdnf historyが使える。undoやredoが出来る。</p>
+<p>後日注記：互換性のないPython 2からPython 3へとアップデートするために、YumはDNFに置き換えられました。</p>
+<ul>
+<li><a href="https://blog.hifumi.info/2015/05/18/dnf-as-new-fedora-package-manager/">Yumに替わる新たなパッケージマネージャ・DNFの覚書 - blog: takahiro okumura</a></li>
+<li><a href="https://qiita.com/yunano/items/eedd3da40d67394881a2">yumからDNFへの移行 - Qiita</a></li>
+<li><a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/6/html/deployment_guide/sec-yum-transaction_history">6.2.6. トランザクション履歴の活用 - Red Hat</a> - yum historyについて</li>
+<li><a href="http://sig9.hatenablog.com/entry/2015/06/21/081407">Linux パッケージ管理コマンド比較（yum / dnf / apt 等） - らくがきちょう</a></li>
+</ul>
+
+<h2>設定ファイル</h2>
+<p>DNFのリポジトリの設定ファイルは、/etc/yum.repos.d/*.repoにある。これはYumから変わっていない。サードパーティーの新しいリポジトリを追加するには、/etc/yum.repos.d/に*.repoファイルを追加する。</p>
+<p>手動で*.repoファイルを用意しなくても、dnfコマンドでインストールする方法もある。たとえばCentOS 8でEPEL (Extra Packages for Enterprise Linux)を導入するには、</p>
+<pre>
+# dnf install epel-release
+</pre>
+<p>とする。これで/etc/yum.repos.d/epel.repoが追加される。</p>
+<p>Yumの設定ファイルは/etc/yum.confに、DNFの設定ファイルは/etc/dnf/dnf.confにある。</p>
+<p>（<a href="https://qiita.com/yunano/items/eedd3da40d67394881a2">yumからDNFへの移行 - Qiita</a>や<a href="https://w.atwiki.jp/sanosoft/pages/137.html">dnfのリポジトリの追加登録方法 【CentOS 8】 - sanosoft @ ウィキ - atwiki（アットウィキ）</a>を参考に執筆しました。）</p>
+
+<h2>-yオプション</h2>
+<p>Debianのaptと同様、DNFでも-yオプションを使うことで、対話的な質問に対してすべて自動でyesと答えてくれる。時間がかかる処理を行う際、四六時中モニターに張り付いていなくていいのでおすすめ。</p>
+<ul>
+<li><a href="https://www.server-world.info/command/html/dnf.html">dnf : Server World</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.09.10</p>
+</div>
+
+<h1>GUIフロントエンド</h1>
+
+<h2>Yum Extender</h2>
+<p>DNF/YumのGUIフロントエンド。</p>
+
+<h2>PackageKit</h2>
+<p>DNF/YumやAptのGUIフロントエンド。</p>
+
+<h1>差分アップデート</h1>
+<h2>zchunk</h2>
+<p>Fedora 30のDNFでは差分圧縮フォーマットのzchunkに対応した。zchunkでは、ファイルを複数の「チャンク」に分割し、コピーが必要なチャンクだけをコピーして、圧縮ファイルを構築できる。差分ダウンロードが可能なため、大幅な効率の改善が期待できる。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201812/26">2018年12月26日　Fedora，圧縮ファイルフォーマット「zchunk」を実装へ：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201904/03">2019年4月3日　Fedora 30がベータサイクルに，正式リリースは5月7日予定：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+
+<h1>旧来のツール</h1>
+<h2>up2date</h2>
+<p>up2dateは昔のRed Hat Linuxで使われていたシステム更新用のツール。システムを最新にアップデートすることができる。初期のFedora Coreではup2dateに代わるツールとしてPowerPC向けのYellow Dog Linuxで開発されていたYumを採用した。</p>
+<div class="edit_date">
+<p>2023.08.17</p>
+</div>
+
+<h1>リンク集</h1>
+<h2>DNF/Yum</h2>
+<p>Fedoraのパッケージ管理ツール。</p>
+<ul>
+<li><a href="http://dnf.baseurl.org/">DNF</a></li>
+<li><a href="https://docs.fedoraproject.org/ja-JP/index.html">Fedora に関する文書 - Fedora</a></li>
+<li><a href="https://docs.fedoraproject.org/en-US/Fedora/24/html/System_Administrators_Guide/part-Package_Management.html">Part II. Package Management - Fedora</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>統計の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">数学の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/math_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>統計の世界観</h1>
+<p>統計の世界観です。</p>
+<p>数学に詳しい父親の話を参考にしています。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>統計</h1>
+<h2>統計とは</h2>
+<p>統計とは、「ものごとについて変化を調査し、数値にしながら分析すること」です。</p>
+<p>たとえば、社会の変化や自然の観測に対して、期間ごとのデータの変化を調査します。人口の変化や分布、天気や気象のデータを調査することなどです。</p>
+<p>また、ただデータにするだけではなく、さまざまな属性や分類に応じてデータを調査します。たとえば、人口の男性と女性、年齢ごとの変化や分布などを、統計的に調査します。</p>
+<p>統計は、ある程度の長い時間に渡って、データを取り続ける作業であり、すぐに答えや発見があるものではありませんが、統計がなければ、そもそもこの世界でどんな現象が起きているのかを把握することはできません。統計はとても大切な学問領域です。</p>
+
+<h2>標準偏差</h2>
+<p>分布した集団の数値を考える上で、必ずひとつに集まる場所がある。その中央の地点あるいは平均の地点を50として、それよりもどれだけ高い値・低い値にあるかを捉えることができる。</p>
+<p>このような考え方を「標準偏差」と呼ぶ。</p>
+<p>統計の性質を考える数学である統計学では、標準偏差によって数値の分布を考える。</p>
+<p>標準偏差を取った値のことを「偏差値」と呼ぶ。</p>
+<p>標準偏差による偏差値は、共通の条件を持ったデータでなければ意味をなさない場合がある。たとえば、同じ高校生の試験結果についての偏差値を取ることは有用だが、これが10歳から80歳までの多くの年代における偏差値を取ると、値がバラバラになってしまい、意味をなさない。</p>
+
+<h2>母集団と標本</h2>
+<p>統計におけるデータの分布を考える際に、データの母集団の数が多すぎる場合など、母集団から直接情報を得るのは現実的でない場合がある。</p>
+<p>このような時は、「標本」という一部のサンプルを母集団から抽出して、そこから母集団の情報の分布を推定する。</p>
+<p>母集団と標本は異なるものであり、区別される。標本の抽出は、作為的に抽出する方法と、無作為的に抽出する方法がある。</p>
+<ul>
+<li><a href="https://bellcurve.jp/statistics/course/8003.html">16-1. 母集団と標本 | 統計学の時間 | 統計WEB</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%A8%99%E6%9C%AC_(%E7%B5%B1%E8%A8%88%E5%AD%A6)">標本 (統計学) - Wikipedia</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.17</p>
+</div>
+
+<h2>平均値と中央値</h2>
+<p>全体の真ん中ぐらいにある数値を求めるために、平均値を出すことでは適切でない場合がある。</p>
+<p>総和を総数で割る平均値は、ひとつの値がほかよりもはるかに高い値を持っていると、ほかのほとんどすべての値がとても低い値であったとしても、全体をそのひとつだけが引き上げてしまい、真ん中よりもはるかに高い値を出してしまうことがある。</p>
+<p>そのため、平均値ではなく、中央値と呼ばれる、単に中央に存在する値を出したほうが、みんなにとって真ん中の値を出すことができることがある。</p>
+<p>具体例を挙げると、社会における平均収入（たとえば年収）を求めた時、めちゃくちゃ儲けている超富裕層が何人かいるせいで、社会の平均収入はかなり上の値になってしまい、現実的な「みんなの普通の収入」からはかけ離れてしまいます。「自分は平均収入よりもこんなに下なのだ」という絶望感すら与えてしまいます。このような場合には、平均値よりも中央値が適していることがあります。</p>
+<div class="edit_date">
+<p>2024.09.29</p>
+</div>
+
+<h2>ローレンツ曲線とジニ係数</h2>
+<p>ローレンツ曲線は分布における偏りや集中の具合を示す曲線のこと。これを数値化したものをジニ係数と呼ぶ。</p>
+<p>経済学などにおいて、主に富（所得・貯蓄）の格差を示す際によく使われる。</p>
+<p>格差が少ない場合は、ローレンツ曲線は完全平等線という45度の直線に近くなり、ジニ係数は0に近くなる。格差が大きい場合は、ローレンツ曲線は完全平等線から離れ、ジニ係数は大きな数値になる。</p>
+<ul>
+<li><a href="https://bellcurve.jp/statistics/course/1664.html">2-4. ローレンツ曲線 | 統計学の時間 | 統計WEB</a></li>
+<li><a href="https://bellcurve.jp/statistics/course/3798.html">2-5. ジニ係数 | 統計学の時間 | 統計WEB</a></li>
+<li><a href="https://bellcurve.jp/statistics/glossary/721.html">ローレンツ曲線 | 統計用語集 | 統計WEB</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%83%AC%E3%83%B3%E3%83%84%E6%9B%B2%E7%B7%9A">ローレンツ曲線 - Wikipedia</a></li>
+</ul>
+<p><a href="../social/economy_politics2.html">ミクロ・マクロ経済学</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.10.17</p>
+</div>
+
+<h2>ビッグデータ</h2>
+<p>従来では、国や行政が公開された情報として統計調査を行うことが多かったが、現代で特にみられることとして、非公開の「ビッグデータ」から一部の大企業がデータを独占し、そのデータに基づいて、他の会社よりも優位に立って競争することが増加しつつある。</p>
+<p>特に、Google, Amazon, Facebook, Appleのような「GAFA」などの一部の企業が、突出して莫大なデータを独占しつつある。</p>
+<p>後日注記：これはとても恐ろしいことで、「GAFAしか真実のこの世界を知らない」という世界になってしまう。GAFA以外は全部、独占された非公開のデータから支配され、彼らに操られてしまうのである。</p>
+
+<h2>確率と確率分布</h2>
+<p>統計と確率は密接に関わりあっている。</p>
+<p>確率とは、それが必ず起きる場合を100%、絶対に起きない場合を0%、起きるか起きないかが半分半分の場合は50%とし、どれだけの「確からしさ」からそれがその時起きるかどうかを数学的な指針から「予測」すること。</p>
+<p>統計と確率によって、データとパーセントから未来における現象を「予測」することができる。</p>
+<p>後日注記：統計では、単なる確率の計算だけではなく、それぞれの起きる値と、その値が起きる確率の、対応付けをした分布を考える。これを「確率分布」と呼ぶ。確率分布には様々な具体的な分布がある。</p>
+<ul>
+<li><a href="https://bellcurve.jp/statistics/course/6596.html">11-1. 確率変数と確率分布 | 統計学の時間 | 統計WEB</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.10.17編集</p>
+</div>
+
+<h2>順列と組み合わせ</h2>
+<p>順列と組み合わせの違いは、順番を考慮するかしないか。</p>
+<p>順列は、順番を考慮する。n個からk個を取り出して順番に並べた順列の総数は、</p>
+<p>\[
+{}_n \mathrm{ P }_k = n(n - 1)(n - 2)(n - 3)\cdots(n - k + 1) = \frac{n!}{(n - k)!}
+\]</p>
+<p>組み合わせは、順番を考慮しない。n個からk個を取り出した組み合わせの総数は、</p>
+<p>\[
+{}_n \mathrm{ C }_k = \frac{{}_n \mathrm{ P }_k}{k!} = \frac{ n! }{ k! ( n - k )! }
+\]</p>
+<p>（<a href="https://www.amazon.co.jp/%E5%9B%B3%E8%A7%A3%E5%85%A5%E9%96%80%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8B%E9%AB%98%E6%A0%A1%E6%95%B0%E5%AD%A6%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%81%A8%E4%BB%95%E7%B5%84%E3%81%BF-%E5%B0%8F%E5%B3%B6-%E6%B7%B3%E5%AD%90/dp/4798008575">図解入門よくわかる高校数学の基本と仕組み</a>を参考にして執筆しました。）</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E8%B4%88%E7%89%A9%E2%80%95%E4%BA%BA%E9%A1%9E%E3%81%AE%E8%87%B3%E5%AE%9Dei%CF%80-1%E3%82%92%E5%AD%A6%E3%81%B6-%E5%90%89%E7%94%B0-%E6%AD%A6/dp/448601863X">オイラーの贈物</a></li>
+</ul>
+<div class="edit_date">
+<p>2024.07.21</p>
+</div>
+
+<h2>便利なのはエクセル</h2>
+<p>統計をやる上で、便利なのはエクセルです。</p>
+<p>MS-Officeのエクセルには、統計のための数値計算で用いる関数やデータベース用の機能が豊富に揃っていて、視覚的なグラフも簡単に使うことができます。</p>
+<p>さらに賢いことをやるためにはR言語やPythonなどのプログラミング言語や機械学習・データサイエンスのためのライブラリが必要になることもありますが、基本的なことはエクセルでできます。</p>
+<p><a href="../windows_pc/msexcel.html">MS-Excel</a>も参照のこと。</p>
+<div class="edit_date">
+<p>2024.09.29</p>
+</div>
+
+<h1>関連ページ</h1>
+<h2>R言語</h2>
+<p>R言語は、オープンソースな統計専用のプログラミング言語。<a href="../prog_lang/r_lang.html">R言語</a>を参照のこと。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E">R言語 - Wikipedia</a></li>
+</ul>
+
+<h2>熱力学・量子力学</h2>
+<p><a href="../natural/physics_thermodynamics.html">熱力学</a>や<a href="../natural/modern_physics_quantum.html">量子力学</a>を参照のこと。</p>
+
+<h2>データサイエンス</h2>
+<p><a href="../programs/ai.html">人工知能・AI・機械学習・データマイニング</a>を参照のこと。</p>
+
+<h2>対数関数</h2>
+<p>統計力学の計算では対数関数を多用する。<a href="exponential_function.html">指数対数</a>を参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

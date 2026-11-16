@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Snappy - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Snappy</h1>
+<p>Snappyに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>snap</h1>
+<h2>snapcraftいい感じ</h2>
+<p>最近、新しく導入したDebian 10で、必要があってsnapアプリケーションを入れたのだが、これが良い感じである。</p>
+<p>snapcraftを使うためには、まずaptでsnapdを入れる。</p>
+<pre>
+# apt install snapd
+</pre>
+<p>そして、snapコマンドでcoreを導入する。</p>
+<pre>
+# snap install core
+</pre>
+<p>あとは、snap installでパッケージ名を指定して導入すればよい。</p>
+<pre>
+# snap install パッケージ名
+</pre>
+<p>以下が参考になる。</p>
+<ul>
+<li><a href="https://snapcraft.io/docs/installing-snap-on-debian">Installing snap on Debian | Snapcraft documentation</a></li>
+<li><a href="https://snapcraft.io/docs/installing-snapd">Installing snapd | Snapcraft documentation</a></li>
+</ul>
+
+<h2>snapアプリケーションの起動と一覧</h2>
+<p>snapアプリケーションは、/snap/bin/に本来PATHにあるべきファイルがあるので（実際はシンボリックリンク）、以下のように実行する。</p>
+<pre>
+$ /snap/bin/appname
+</pre>
+<p>頻繁に使うのであれば、PATHに/snap/binを加えよう。</p>
+<p>現在導入されているsnapアプリケーションの一覧はsnap listで表示できる。</p>
+<pre>
+$ snap list
+</pre>
+<p>後日注記：GUIでアプリケーションを起動させることもできる。なので、毎回このようなコマンド入力をする必要は必ずしもない。</p>
+<div class="edit_date">
+<p>2023.01.17編集</p>
+</div>
+
+<h2>snapcraft</h2>
+<p>snapcraftは、Snappy向けのアプリケーションパッケージ配布サイト。</p>
+<ul>
+<li><a href="https://snapcraft.io/">Snapcraft - Snaps are universal Linux packages</a></li>
+</ul>
+
+<h2>いろいろと問題があって嫌われている</h2>
+<p>Snapパッケージは、強固なセキュリティやサンドボックス環境に起因するさまざまな問題があって嫌われています。以下のようなページが参考になります。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0714">第714回　Firefoxを含むsnapパッケージとの付き合い方：Ubuntu Weekly Recipe｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p>また、UbuntuはあくまでFlatpakではなくSnapを固持する方針であり、以下のような見解を示しています。</p>
+<ul>
+<li><a href="https://www.omgubuntu.co.uk/2022/04/ubuntu-wont-support-flatpak-anytime-soon">Ubuntu Founder Explains Why Distro Won&#039;t Support Flatpak - OMG! Ubuntu!</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Flatpak/AppImage</h2>
+<p><a href="flatpak.html">Flatpak/AppImage</a>も参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

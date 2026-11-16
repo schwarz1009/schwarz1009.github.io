@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>データベースインデックス関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">データベースの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/db_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>データベースインデックスの世界観</h1>
+<p>データベースインデックスに関する世界観です。<a href="rdbms.html">RDBMSの世界観</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>探索の基本</h1>
+<h2>完全一致と部分一致</h2>
+<p>データベースの探索性能を考える上で、「完全一致」と「部分一致」を区別することは重要です。</p>
+<p>完全一致とは、検索文字列とどこかにあるその値が完全に一致することであり、部分一致とは完全には一致せず、一部分だけが一致することです。</p>
+<p>完全一致（イコール検索）の場合、検索は一瞬でできます。なぜなら、その検索文字列から「ハッシュ値」を取って、そのハッシュ値をキーとする値にダイレクトにアクセスすればいいからです。</p>
+<p>たとえば、「りんご」という値を探すとして、リストの中に「りんご」というキーを持つデータがあった場合、「りんご」というID情報でアクセスすれば、ほかのデータをわざわざ検索しなくても、一瞬で目的地にたどり着けます。</p>
+<p>これは喩えるなら、WebサイトのURLが分かっているような場合だと言えます。URLさえ分かっていれば、何億というWebサイトがあるインターネットの中において、ほかのWebサイトの情報をわざわざ検索しなくても、一瞬でそのURLにたどり着けるのです。</p>
+<p>部分一致の場合は、こうは行きません。たとえば、「りんご」を探そうとしても、キーには「果物」という情報しかない場合があります。この場合、果物というキーを持つデータの中から、ひとつひとつ目的のキー（すなわち果物の中のどれかが目的地）を探す必要があります（範囲検索）。</p>
+
+<h2>二分探索木</h2>
+<p>ですが、このようにひとつひとつ探索をかける場合であっても、二分探索木を使うことで、できるだけ素早く値を見つけることができます。</p>
+<p>まず、あらかじめ、それぞれのキーの順序関係、すなわちアルファベット順に大きいあるいは小さいという関係を、ツリー構造として構築しておきます。</p>
+<p>ツリーは親要素の下に右と左の子要素を持ち、右に行けば今よりも大きい値、左に行けば今よりも小さい値があります。すなわち、「これより右には現在地より大きい値しかない」「これより左には現在地より小さい値しかない」という風にツリーは整えらえています。</p>
+<p>こうすることで、「こちらには値がある可能性はない」「値があるとしたらこちら」としてどちらに行くかを消め、行った先で「見つかった値からすると、こちらには値がある可能性はない」「あるとしたらこちら」と確認し、さらに探索を続けます。</p>
+<p>結果、りんごが見つかる場合もあれば、りんごとなる値はひとつも見つからない場合もあります。</p>
+<p>新しいキーを配置するためには、そのキーをどこに加えるべきかをまず探索によって探し出し、末端に辿り着いた状態で、親要素よりも大きければ右の子要素に、小さければ左の子要素とします。これにより、右にいけば必ず大きくなり、左にいけば必ず小さくなるよう、ツリーを常に探索可能な状態に維持しておきます。</p>
+<p>このように、ハッシュ値で探索を一瞬で終わらせる場合と、二分探索木やそれに類するツリー構造でひとつひとつ探していく場合があります。ハッシュ値のデータ構造をハッシュテーブルと言います。また、二分探索木の改良版として、データベースではB-Treeという構造が使われます。</p>
+
+<h1>B-Tree</h1>
+<h2>二分探索木の基本</h2>
+<p>既出の単語を検索する時に、すべて総当たりで検索するのは時間がかかる。</p>
+<p>このような時、二分木構造を用いた二分探索を行うことで、少ない手順で目的の単語に到達できる。</p>
+<p>二分探索木を用いた探索では、より小さいものを左、より大きいものを右の子要素とする二分木を使う。全ての単語をこの規則にしたがって並べることで、最短で単語を検索できる。</p>
+<p>AVL木は、木の高さが深くなりすぎないように、中心を回転させる平衡木のこと。</p>
+<p>（詳しくは「<a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EC-%E7%AC%AC2%E7%89%88-ANSI%E8%A6%8F%E6%A0%BC%E6%BA%96%E6%8B%A0-B-W-%E3%82%AB%E3%83%BC%E3%83%8B%E3%83%8F%E3%83%B3/dp/4320026926">プログラミング言語C（K&R）</a>」が参考になります。）</p>
+
+<h2>B-Treeの基本</h2>
+<p>B-Treeでは、木の高さが深くなりすぎないように平衡木が用いられている。</p>
+<p>B-Treeでは、基本的にルートノードから、親ノードと子ノードを結合するブランチノードを辿り、リーフノード（データ本体へのポインタを持つ）を探す。</p>
+<p>二分探索木と同様、探しているのよりも大きい値が見つかったかどうかで左と右のどちらの子ノードに進むかを振り分ける。探しているのより大きなポインタが見つかった場合は左の子ノードに、見つからなかった場合は右の子ノードに進む。これを繰り返してデータへと到達する（あるいはデータが存在しないことが分かる）。</p>
+<p>また、カラムを指定してインデックスを作ることができる。カラムはひとつだけのカラムあるいは複数のカラムを指定できる。</p>
+<p>詳しくは以下を参照してください。</p>
+<ul>
+<li><a href="https://qiita.com/kiyodori/items/f66a545a47dc59dd8839">B-treeインデックス入門 - Qiita</a></li>
+<li><a href="https://qiita.com/suzukito/items/908a3523f4b90dd77c6a">B-Treeインデックスの話 - Qiita</a></li>
+</ul>
+
+<h1>ハッシュテーブル</h2>
+<h2>ハッシュテーブル</h2>
+<p>自分の書いたブログ「未来のわたしの心より今のあなたへ」<a href="../../diary/blog_frey/2021.03.27.html">2021/03/27</a>より。</p>
+<p>ハッシュテーブルは、ハッシュ関数とハッシュ値によってキーと値の表で表されるデータ構造。</p>
+<p>値が固定長になるため、検索効率が高く、どんなに値が増えても効率が変わらない。</p>
+<p>内部の仕組みとしては、連結リストへのポインタを格納した配列を用いる。</p>
+<p>すなわち、配列の要素がそれぞれの連結リストへのポインタとなる。</p>
+<p>探索アルゴリズムにおいて、ハッシュテーブルはイコール検索に強いが、範囲検索は苦手。</p>
+<p>これに対して、B-Treeはイコール検索も範囲検索もバランスよくこなす万能型。</p>
+<p>（<a href="https://www.amazon.co.jp/%E7%B5%B5%E3%81%A7%E8%A6%8B%E3%81%A6%E3%82%8F%E3%81%8B%E3%82%8BIT%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-DB-SELECTION-%E5%B1%B1%E5%B4%8E-%E6%B3%B0%E5%8F%B2/dp/4798125733">絵で見てわかるITインフラの仕組み (DB SELECTION)</a>を参考に執筆しました。）</p>
+
+<h2>ハッシュテーブルの実現</h2>
+<p>ハッシュテーブルは、キーのハッシュ値を要素の添え字とする配列によって実現できる。</p>
+<p>（<a href="https://wa3.i-3-i.info/word11947.html">ハッシュテーブル (hash table)とは｜「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典</a>を参考に執筆しました。）</p>
+
+<h1>MySQL</h1>
+<h2>MySQLにおけるインデックス</h2>
+<p>MySQLでは、</p>
+<pre class="prettyprint lang-sql">
+CREATE INDEX インデックス名 ON テーブル名 (カラム名, ...);
+</pre>
+<p>でインデックスの作成、</p>
+<pre class="prettyprint lang-sql">
+DROP INDEX インデックス名 ON テーブル名;
+</pre>
+<p>でインデックスの削除を行えます。</p>
+<p>（詳しくは<a href="https://www.amazon.co.jp/3%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E5%AD%A6%E3%81%B6-MySQL%E5%85%A5%E9%96%80-%E4%BB%8A%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E3%82%93%E3%81%9F%E3%82%93%E3%83%97%E3%83%A9%E3%82%B9-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774140767">3ステップでしっかり学ぶ MySQL入門 (今すぐ使えるかんたんプラス)</a>が参考になります。）</p>
+
+<h1>関連ページ</h1>
+<h2>データ構造</h2>
+<p><a href="../prog_lang/data_structure.html">データ構造</a>や<a href="../prog_lang/data_structure_tree.html">ツリー</a>や<a href="../prog_lang/algorithm_example.html">具体的なアルゴリズム</a>を参照のこと。</p>
+
+<h2>LinuxのB-Treeファイルシステム</h2>
+<p><a href="../linux/linux_kernel_fs_btree.html">Linuxカーネル開発（B-Treeファイルシステム）</a>を参照のこと。</p>
+
+
+
+
+
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-sql.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

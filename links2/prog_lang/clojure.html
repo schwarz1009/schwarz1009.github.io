@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Clojure関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Clojureの世界観</h1>
+<p>Clojureによるプログラミングに関する世界観です。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Clojure</h1>
+<h2>イミュータブルとアイデンティティ</h2>
+<p>Clojureは、変数あるいはもっと言えば状態のとる値が不変（イミュータブル）です。不変とは、変えられないということです。</p>
+<p>Clojureでは、「アイデンティティ」という発想をします。これは、「世界は停止しているのではない」ということ、「値は変化することがない」ということの二つの前提から、「世界はそれ自体が変化しながら、ひとつひとつは変化しない値を、常に連続的に生み出している」ということです。</p>
+<p>これは、歴史のようなものだと考えれば分かりやすいかもしれません。世界は停止しているわけではなく、アイデンティティの「持っている状態」が刻々と変化しています。その中で、それぞれの時代はたとえば「鎌倉幕府の開かれた1192年」のような値を持っています。1192年が別の時代に「変更されることは決してない」のです。</p>
+<p>命令型プログラミングでは、メモリ上の変数を「変更」して問題を解決しますが、これは停止した世界が当たり前でのプログラミングを行っています。また、オブジェクト指向プログラミングでは、プログラムをデータを「変更」するものだとしており、それ以外のどんなこともできません。</p>
+<p>このような停止した世界が当たり前での「変更」に基づくプログラミングでは、特に並列処理を行う場合、エラーの本質的な原因となります。</p>
+<p>Clojureは、アイデンティティの現在の状態の値にアクセスしたり、新しい値を設定するために、「変更しない」というアプローチをとります。アイデンティティの値を変更するために、Clojureは現在のアイデンティティの状態に関連付けられている値を読み取り、純粋な関数によって古い値から新しい値を作り出し、その値をアイデンティティの新しい状態として設定するのです。</p>
+
+<h2>Lispと関数型言語は最高である</h2>
+<p>Clojureの特徴は、Lisp系の関数型言語であること。</p>
+<p>Common LispやSchemeのようなLisp系言語は、今まで素晴らしい標準的なLisp言語でしたが、標準化以降あまり変化がありません。</p>
+<p>しかしながら、Lisp系言語には多くの利点があります。そのひとつが、「データとしてのコード」です。</p>
+<p>Clojureでは、Lispと同様にS式を採用しながら、リスト以外にベクター、セット、マップを表せます。リストは'(1 2 3 4 5)、ベクターは[1 2 3 4 5]、セットは#{1 2 3 4 5}、マップは{:h 1, :o 2, :g 3, :e 4}と記述されます。</p>
+<p>Clojureは、新しいLisp系言語として、Lispと関数型言語を現代的にします。</p>
+
+<h2>Javaのライブラリは巨大な機能をもたらし、言語からプラットフォーム性を分離できる</h2>
+<p>また、ClojureはJava VM上で動くJVM系言語です。Javaの機能（たとえばSwing）をClojureから使うことができます。</p>
+<p>Javaのクラスライブラリは、巨大な機能をもたらしてくれるだけではなく、言語そのものからプラットフォーム性を分離できます。</p>
+<p>たとえば、RubyやPythonのようなプラットフォームと言語が結合されている言語では、WindowsとUNIXに対応させるだけでも大変な労力となります。</p>
+<p>同時に、ClojureはJVMを用いることで、既存のシステムが「顧客によって必要とされる場合」にも、顧客への要求に対応できます。「インフラがJavaであるかWindowsであるかUNIXであるかを決めるのはあくまで顧客」です。このような既存のベースに対して、Javaプラットフォームを採用することで、Clojureはビジネス的な開発の要請にも対応できます。</p>
+
+<h2>参考文献</h2>
+<p>以上の文章は以下の参考文献を元に記述しました。</p>
+<ul>
+<li><a href="https://japan-clojurians.github.io/clojure-site-ja/about/rationale">Clojure - 論理的根拠</a></li>
+<li><a href="https://japan-clojurians.github.io/clojure-site-ja/about/state">Clojure - 値と変更: Clojureのアイデンティティと状態に対するアプローチ</a></li>
+<li><a href="https://japan-clojurians.github.io/clojure-site-ja/guides/learn/syntax">Clojure - Clojureを学ぼう - シンタックス</a></li>
+</ul>
+
+<h1>余談</h1>
+<h2>Lispは古い、モジュールがないという意見をClojureが解決する</h2>
+<p>Lispについての否定的意見として、「Lispは古い」とか、「Pythonなどのメジャーな言語に比べてライブラリやモジュールが少ない」という意見があります。</p>
+<p>しかしながら、この意見はClojureが解決します。</p>
+<p>Clojureは新しいですし、Java VM上で動くため、Javaの豊富なライブラリモジュールを使うことができます。</p>
+<p>もし、マイナーかつ古いという理由でLispではなくPythonなどを使うのであれば、Clojureを検討してみてはいかがでしょうか。</p>
+
+<h2>カッコの種類を増やすことには反対</h2>
+<p>ただし、僕はClojureについて批判的な意見もあります。それはカッコの種類を増やすことです。</p>
+<p>カッコの種類を[]とか{}とかにしなくても、引数keyから値を返すget-hash-value的な関数を作るのではいけないのでしょうか。</p>
+<p>わざわざ()以外のカッコを増やす意味があるようには思えません。リテラルとしては便利かもしれませんが、()以外のカッコが増えることでコードが醜くなるでしょう。</p>
+<p>ただし、Lispにおいてこのようにカッコの種類を増やす動きは、Clojure以外にもあります。たとえばEgisonというLispの方言では、パターンマッチングを重視しながら、さまざまなデータ構造に対応するために[]など、()以外のカッコの種類を増やしています。<a href="newpl.html">新しい言語</a>を参照してください。</p>
+<p>ただし、新しい試みをすること自体はいいことだと思います。なんらかの素晴らしい結果に至るのであれば、それで構いません。</p>
+<p>注記：実際には、僕はClojureのことを何も知らずにこの文章を書いています。今ドキュメントを見た範囲では、むしろletによる変数の定義や束縛、defn（名前付き関数）やfn（無名関数）による関数の引数など、さまざまな状況や場合に応じて、()ではなく[]を使ったり、というやり方をするようです。単なるハッシュテーブルを表したいわけではなく、Lispという言語に記述的な「さまざまなカッコを区別する文法」をもたらすという上で、優れた方法なのかもしれません。また、get的な関数は普通にあるようです（ベクタについてはget関数でインデックスから取得できる模様）。</p>
+<ul>
+<li><a href="https://japan-clojurians.github.io/clojure-site-ja/guides/learn/functions">Clojure - Clojureを学ぼう - 関数</a></li>
+<li><a href="https://japan-clojurians.github.io/clojure-site-ja/guides/weird_characters">Clojure - Reading Clojure Characters</a></li>
+</ul>
+<p>注記：すみません、今<a href="https://www.amazon.co.jp/ANSI-Common-Lisp-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0/dp/4894714337">ANSI Common Lisp (スタンダードテキスト)</a>を読んでいたところ、むしろCommon Lispでも配列やベクタを表すために#を使ったり、:をつけてキーワードを表現したり（さまざまなデータ構造で使う）など、Clojureと同じように特別なデータ構造を表すために標準的ではない記述をするようです。Clojureはこうした記述をよりスマートに記述できるという利点があるのかもしれません。</p>
+
+<h1>関連ページ</h1>
+<h2>Lisp</h2>
+<p><a href="lisp.html">Lisp</a>も参照のこと。</p>
+
+<h2>AltJava</h2>
+<p><a href="java_langs.html">Java（各種言語）</a>を参照のこと。</p>
+
+<h2>関数型プログラミング</h2>
+<p><a href="functional_programming.html">関数型プログラミング</a>を参照のこと。</p>
+
+<h2>並列処理</h2>
+<p><a href="parallel.html">並列処理</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-lisp.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

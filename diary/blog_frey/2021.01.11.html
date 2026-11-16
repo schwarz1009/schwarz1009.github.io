@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"  href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<title>TypeScript - schwarz1009</title>
+
+</head>
+<body>
+<p><a href="index.html">トップページに戻る</a></p>
+<iframe src="menu3_menu.html" class="iframe_menu"></iframe>
+<p>AUTHOR: schwarz1009<br>
+TITLE: TypeScript<br>
+BASENAME: 2021/01/11/151247<br>
+STATUS: Publish<br>
+ALLOW COMMENTS: 1<br>
+CONVERT BREAKS: 0<br>
+DATE: 01/11/2021 15:12:47<br>
+CATEGORY: TypeScript
+
+
+</p>
+<ul class="table-of-contents">
+    <li><a href="#TypeScriptの型">TypeScriptの型</a></li>
+    <li><a href="#TypeScriptのクラス文">TypeScriptのクラス文</a></li>
+    <li><a href="#僕はプログラマに向いていない">僕はプログラマに向いていない</a></li>
+</ul>
+<div class="section">
+    <h3 id="TypeScriptの型">TypeScriptの型</h3>
+    <p>TypeScriptについて勉強した。<br />
+TypeScriptの型は、number, boolean, string, any, voidなどを使う。<br />
+これを、変数なら変数名の後に、<br />
+関数定義なら引数名やカッコの後ろに、<br />
+コロンをつけて記述する。<br />
+配列はnumber[]とする。<br />
+オブジェクトの場合、interfaceを記述し、<br />
+それぞれの要素に型名を記述し、<br />
+名前を付けてDataObjectなどとし、<br />
+変数名の後に、このDataObjectを付ける。<br />
+この時、?を付けることで、<br />
+あってもなくても構わない要素とすることができる。<br />
+nullを許容するにはstring | nullとする。<br />
+明示的にnullを許容しない限り、<br />
+nullは許容されないため、<br />
+nullチェックをする必要はない。<br />
+そして、TypeScriptはJavaScriptのスーパーセットであり、<br />
+JavaScriptモジュールを利用できるが、<br />
+JavaScriptモジュールは当然ながらJavaScriptで書かれているため、<br />
+型情報がない。<br />
+このようなモジュールのために、<br />
+型定義ファイル（型宣言ファイル）が利用できる。<br />
+これはC言語のヘッダファイルのようなもので、<br />
+関数などが型とともに記述されている。<br />
+TypeScriptでは、<br />
+npmでモジュールを導入する際に、<br />
+モジュールだけでなく、<br />
+型定義ファイルも追加的にインストールする。<br />
+TypeScriptで書かれたtsファイルは、<br />
+tscでjsにコンパイルする。<br />
+たとえば、npx tscを使う。<br />
+この際に型チェックが行われる。<br />
+また、VS-Codeでは、<br />
+コードを書いている際に、<br />
+型が間違っている時にその部分を教えてくれる。<br />
+以上は、以下の動画を見て、自分なりに書きました。</p>
+
+<ul class="some_lists">
+<li><a href="https://www.youtube.com/watch?v=FSTrSYwqhLg">TypeScript超入門 覚えることは9個だけ！ - YouTube</a></li>
+</ul>
+</div>
+<div class="section">
+    <h3 id="TypeScriptのクラス文">TypeScriptのクラス文</h3>
+    <p>TypeScriptでは、このほか、<br />
+列挙型、タプル型、ジェネリクス型、可変長引数、<br />
+などを利用できる。<br />
+また、TypeScriptでのオブジェクト指向では、<br />
+class文を用いて、<br />
+クラスベースのオブジェクト指向が可能。<br />
+クラスにはコンストラクタ、メソッド、プロパティがあり、<br />
+継承やオーバーライドも可能。<br />
+インスタンスをnewで生成でき、getやsetも使うことができる。<br />
+そして、インターフェースを使うことで、<br />
+メソッドやプロパティを必ず実装しなければならないように、<br />
+強制できる。<br />
+TypeScriptでは、インターフェースも型として扱われる。<br />
+以上は、以下の書籍を参考に執筆しました。</p>
+
+<ul class="some_lists">
+<li><a href="https://www.amazon.co.jp/JavaScript-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%85%A5%E9%96%80-%E6%8E%8C%E7%94%B0%E6%B4%A5%E8%80%B6%E4%B9%83/dp/4798047848">JavaScript フレームワーク入門</a></li>
+</ul>
+</div>
+<div class="section">
+    <h3 id="僕はプログラマに向いていない">僕はプログラマに向いていない</h3>
+    <p>僕は、プログラマに向いていないと思う。<br />
+僕は、いろんなことの賢い部分を知りたいだけだ。<br />
+実際のプログラマは、<br />
+仕様を決めたら、役割分担をして、<br />
+一日8時間コードを書かないといけない。<br />
+プログラミング言語を書くだけの仕事だ。</p>
+
+</div>
+
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+

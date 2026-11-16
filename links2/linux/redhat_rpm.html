@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Red Hat３（RPM） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Linuxの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/linux_distro_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Red Hat３（RPM）</h1>
+<p>Red Hatに関する世界観３（RPM）です。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="redhat.html">Red Hat（１．Red Hat）</a></li>
+<ul>
+<li><a href="fedora.html">Fedora</a></li>
+<li><a href="redhat_dnf_yum.html">２．DNF/Yum</a></li>
+<li><b>３．RPM</b></li>
+<li><a href="centos.html">CentOS</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>RPMを使うメリット</h1>
+<h2>RPMのメリット</h2>
+<p>RPMのようなパッケージ管理システムを使うメリットとして、以下のようなものがある。（使うメリットというか、RPM系のディストリビューションでは必ず使わざるを得ない。）</p>
+
+<h2>specファイルでインストール方法が一元化できる</h2>
+<p>specファイルというマクロ設定ファイルを書くことで、tarballごとに異なるソフトウェアのインストール方法やビルド方法を一本化できる。</p>
+<p>どんなパッケージでも同じrpmコマンドでインストールや更新・削除が可能。</p>
+
+<h2>バイナリで手間の短縮</h2>
+<p>ソースファイルではなく、ディストリビュータの用意したバイナリパッケージからインストールできる。</p>
+<p>一部GentooのPortageのようにソースベースのパッケージ管理システムはあるが、ほとんどのパッケージ管理システムがバイナリを主体としているため、面倒くさい作業・手間・時間の削減になる。</p>
+
+<h2>リビルドは簡単</h2>
+<p>バイナリのRPMパッケージをビルドするために、ソースパッケージ（SRPMのこと）をリビルドできる。specファイルを書き換える場合でも簡単にリビルドすることができる。</p>
+<p>また、SRPMを普通にインストールすればソースコードも閲覧できる。</p>
+
+<h2>依存関係のチェック</h2>
+<p>「このパッケージは入れたけど、依存する別のパッケージもインストールしなければいけない」といった依存関係の解決。</p>
+<p>Windowsのフリーソフトなどでは、たとえばAviUtlを入れる場合にもさまざまな別のソフトウェアをインストールしたりする必要があるが、RPMではそれらをチェックし、システムが壊れて動かないものになる危険性を減らすことができる。</p>
+<p>また、後述するDNFを用いることで、依存パッケージを事前に計算し、自動的にコマンド一発でインストールすることもできる。</p>
+
+<h2>リポジトリの利用</h2>
+<p>インターネットにあるリポジトリから、簡単にパッケージを最新版に更新できる。</p>
+<p>この時、RPMの上位ツールであるDNF（昔はYumだった）を用いる。</p>
+<p>DNFを用いることで、ディストリビューションのほとんどのパッケージ（ソースtarballなどのRPM外のパッケージを除く）を一度に更新チェック・アップデートできる。</p>
+<p>Windows Updateと同じだが、OSだけではなくリポジトリにあるパッケージであればなんでも最新版になる。</p>
+<p>しかしながら、最新版にする時には、システムが破壊されて動かなくならないかのチェックが必要。</p>
+<p>DebianやUbuntuやFedoraやRHELのようなポイントリリースのディストリビューションでは、パッケージに対して深刻なバグやセキュリティ関係のアップデートしかかからないので、この心配は少ない。</p>
+<p>Arch LinuxやGentooのようなローリングリリースのディストリビューションでは、パッケージが日々最新版にアップデートされるため危険性は高くなるが、わざわざバージョンをアップグレードしなくても日々最新版にアップデートされる。常に最新版であるため、OSの更新作業（Windows 7から10への更新作業のようなこと）が必要なく、いつでも先端の機能を追いかけられる。</p>
+<p>逆にRPMなどでは、パッケージが既に旧来のバージョンで、最新の機能が使えないことがあるが、これはFlatpakなどで個別にサンドボックス環境にパッケージをインストールすることで、自分の好きなソフトウェアだけ最新版を入れるようなことも最近はできる。</p>
+
+<h2>ディストリビューションの開発が簡単になる</h2>
+<p>ディストリビューションの開発が容易になる。</p>
+<p>パッケージはspecファイルを用意するだけでSRPMやRPMをビルドできるため、specファイルの内容だけを記述すればディストリビューションは開発できる。</p>
+<p>実際にはディストリビューションのシステムが正常に動くためのとりまとめとしての開発作業は必要だが、同じDebパッケージを使うDebianからUbuntuを分岐させるのは比較的簡単である。</p>
+<p>その代わり、パッケージメンテナンスという仕事が必要になる。パッケージが存在していない限り、そのパッケージをユーザーは使えないため、ディストリビューションのメンテナが膨大な労力を払ってパッケージを用意・バージョンアップするメンテナンスしなければならない。</p>
+<p>Debianなどでは、巨大なコミュニティによって、ボランティアがパッケージをメンテナンスしている。これに対してRed Hat系のディストリビューションでは、Red Hatの社員が資本力でパッケージをメンテナンスしている。その代わり、RHELは有料である。</p>
+
+<h2>ソースtarballも使おう</h2>
+<p>こういうメリットはあるが、実際のところRPMパッケージが必ずしも全ソフトウェアに用意されているわけではなく、ソースパッケージからビルドすることも必要。</p>
+<p>RPMパッケージがある場合、特に公式のディストリビュータのリポジトリにある場合は、普通はそれを使うのがベストだが、必要がなければソースtarballから解凍して手動ビルドをしても構わない。</p>
+
+
+<h1>RPM</h1>
+<h2>rpmパッケージのコマンド</h2>
+<p>パッケージファイル（.rpmファイル）をインストールするには以下のようにする。</p>
+<pre>
+rpm -ivh [パッケージファイル名]
+</pre>
+<p>更新するには以下のようにする。</p>
+<pre>
+rpm -Uvh [パッケージファイル名]
+</pre>
+<p>削除するには以下のようにする。</p>
+<pre>
+rpm -evh [パッケージ名]
+</pre>
+<p>また、インストール済みパッケージに含まれるファイルを表示するには以下のようにする。</p>
+<pre>
+rpm -ql [パッケージ名]
+</pre>
+<p>インストールされているパッケージの一覧を表示するには以下のようにする。</p>
+<pre>
+rpm -qa
+</pre>
+<p>「-v」は処理中のパッケージ名を、「-h」は進捗状況を表示するオプション。</p>
+<p>以下のページが参考になります。</p>
+<ul>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1609/13/news024.html">【 rpm 】コマンド（基礎編）――RPMパッケージをインストールする／アンインストールする：Linux基本コマンドTips（47） - ＠IT</a></li>
+</ul>
+
+<h2>RPMとspecファイル</h2>
+<p>RPMは、ソフトウェアごとにspecファイルと言うそれぞれのパッケージの分類、依存関係、ビルド・インストールするための手順、ファイルの一覧などを事前に書いておくことで、インストールやアンインストールを分かりやすく、手軽にする仕組みです。</p>
+<p>RPMのspecファイルはこんな感じになります：</p>
+<ul>
+<li><a href="https://www.ibm.com/developerworks/jp/linux/library/l-rpm1/">RPM を使ってソフトウェアをパッケージ化する: 第 1 回 パッケージのビルドと配布 - IBM developerWorks</a>（<a href="https://web.archive.org/web/20190507004535/https://www.ibm.com/developerworks/jp/linux/library/l-rpm1/">Webarchive</a>）</li>
+</ul>
+<p>Debパッケージの場合は以下を参照のこと：</p>
+<ul>
+<li><a href="http://blog.cybozu.io/entry/2016/05/16/111500">社内利用のための deb パッケージング入門 - Cybozu Inside Out | サイボウズエンジニアのブログ</a></li>
+</ul>
+
+<h2>specの各要素</h2>
+<table class="some_tables">
+<tr><th class="min60">要素</th><th>解説</th></tr>
+<tr><td>%define</td><td>マクロ宣言（何かの値や文字列を入れる変数のように使う）</td></tr>
+<tr><td>BuildRoot</td><td>ビルドのためのルートディレクトリ</td></tr>
+<tr><td>Summary</td><td>説明</td></tr>
+<tr><td>License</td><td>ライセンス</td></tr>
+<tr><td>Name</td><td>名前</td></tr>
+<tr><td>Version</td><td>バージョン番号</td></tr>
+<tr><td>Release</td><td>リリース番号</td></tr>
+<tr><td>Source</td><td>ソースtarball</td></tr>
+<tr><td>Prefix</td><td>インストール先のprefix</td></tr>
+<tr><td>Group</td><td>分類</td></tr>
+<tr><td>%description</td><td>説明</td></tr>
+<tr><td>%prep</td><td>ソースコードtarballの解凍などの準備を行う手順</td></tr>
+<tr><td>%setup -q</td><td>ソースコードを解凍するためのマクロ</td><tr>
+<tr><td>%build</td><td>ソースコードのビルドを行う手順</td></tr>
+<tr><td>%install</td><td>インストールの手順</td></tr>
+<tr><td>%files</td><td>インストールされるファイル一覧</td></tr>
+<tr><td>%defattr</td><td>RPMでのデフォルトのアクセス権、所有者、グループを指定</td></tr>
+<tr><td>%doc</td><td>ドキュメントファイルの一覧</td></tr>
+</table>
+<p>（<a href="https://www.ibm.com/developerworks/jp/linux/library/l-rpm1/">RPM を使ってソフトウェアをパッケージ化する: 第 1 回 パッケージのビルドと配布 - IBM developerWorks</a>（<a href="https://web.archive.org/web/20190507004535/https://www.ibm.com/developerworks/jp/linux/library/l-rpm1/">Webarchive</a>）を参考に執筆しました。）</p>
+
+<h2>SRPMからRPMをリビルド</h2>
+<p>RPMはSRPMから簡単にリビルド出来る。</p>
+<p>必要なのはrpmbuildコマンドの導入。</p>
+<p>まず、rpmbuildをインストールする。これはdnfから導入すればいい。</p>
+<pre>
+# dnf install rpm-build
+</pre>
+<p>直接ビルドする場合は、src.rpmに対してrpmbuildをそのまま実行すればいい（リビルドを表す--rebuildオプションを付ける）。</p>
+<pre>
+# rpmbuild --rebuild hoge-0.0.1-1.src.rpm
+</pre>
+<p>一度展開してspecファイルを修正する場合は、まずsrc.rpmをrpm -ivhコマンドでシステムにインストールし、/usr/src/redhat/SPECS/に展開されるspecファイルを編集し、specファイルに対してrpmbuildを実行する。</p>
+<pre>
+# rpm -ivh hoge-0.0.1-1.src.rpm
+# cd /usr/src/redhat/SPECS/
+# vi hoge-0.0.1-1.spec
+# rpmbuild -bb --clean hoge-0.0.1-1.spec
+</pre>
+<p>rpmbuildのオプションで、バイナリパッケージだけを出力する-bbオプションがある。また、--cleanは作業中に必要なビルドツリーの後始末を行う。</p>
+<ul>
+<li><a href="http://tetsuyai.hatenablog.com/entry/20120106/1325839318">SRPMを使ったパッケージのインストール - tetsuyai’s blog</a></li>
+</ul>
+<p>RPMでは、ソースパッケージは/usr/src/redhat/SRPMS/、specファイルは/usr/src/redhat/SPECS/、x86_64のバイナリパッケージは/usr/src/redhat/RPMS/x86_64/に出来ます。ディストリビューションを開発する時は、これらのディレクトリで作業する必要があります。</p>
+
+<h2>SRPMからファイルを取り出す</h2>
+<p>SRPMからtarballを取り出す場合、単にrpmコマンドでインストールすれば良い。</p>
+<pre>
+$ rpm -ivh hoge-0.0.1-1.src.rpm
+</pre>
+<p>最近のRed Hatでは、~/rpmbuild/SOURCES/にtarballが、~/rpmbuild/SPECS/にspecファイルがインストールされる。</p>
+<ul>
+<li><a href="http://nopipi.hatenablog.com/entry/2017/03/08/014540">SRPMインストール先を指定する方法 - のぴぴのメモ</a></li>
+</ul>
+
+<h2>バイナリRPMからファイルを取り出す</h2>
+<p>またバイナリRPMの場合、RPMはcpioという形式でアーカイブされているので、rpm2cpioコマンドでcpio形式に変換する。</p>
+<pre>
+$ rpm2cpio hoge-0.0.1-1.i386.rpm | cpio -id
+</pre>
+<p>作業ディレクトリに./usr/や./etc/などのディレクトリができ、その中にファイルが展開される。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/flinux/rensai/linuxtips/522rpmcpio.html">＠IT：RPMパッケージからファイルを取り出すには</a></li>
+</ul>
+
+<h2>/etc/rpmrc</h2>
+<p>/etc/rpmrcはRPMの設定ファイル。ディストリビューションやベンダーの名前（specに書くこともできる）、アーキテクチャ別のコンパイラの最適化オプションなどを設定できる。</p>
+<ul>
+<li><a href="https://linuxjf.osdn.jp/JFdocs/RPM-HOWTO-6.html">RPM HOWTO: RPM パッケージの作成</a></li>
+<li><a href="https://linuxjm.osdn.jp/html/rpm/man8/rpm.8.html">Manpage of RPM</a></li>
+</ul>
+<div class="edit_date">
+<p>2023.02.18編集</p>
+</div>
+
+<h1>余談</h1>
+<h2>Fedora 31ではRPMの圧縮アルゴリズムがxzからZstdに変更</h2>
+<p>Fedora 31では、RPMパッケージの圧縮アルゴリズムがxzからZstdに変更される。これにより高速化や負荷軽減が期待されている。</p>
+<ul>
+<li><a href="https://gihyo.jp/admin/clip/01/linux_dt/201905/31">2019年5月31日　Fedora，RPMパッケージの圧縮アルゴリズムをxzからZstdに変更へ：Linux Daily Topics｜gihyo.jp … 技術評論社</a></li>
+</ul>
+<p><a href="linux_filetools_archive.html">Linuxアーカイブ・同期・デバイス処理</a>も参照のこと。</p>
+
+<h1>関連ページ</h1>
+<h2>パッケージ管理</h2>
+<p><a href="linux_pkgmanagement.html">パッケージ管理</a>、<a href="redhat_dnf_yum.html">DNF/Yum</a>、<a href="debian_deb.html">Deb/Dpkg</a>などを参照のこと。</p>
+
+<h2>ソースからのインストール</h2>
+<p><a href="linux_src_install.html">ソースからのインストール</a>を参照のこと。</p>
+
+<h2>Make/Autotools</h2>
+<p><a href="make.html">Make</a>と<a href="autotools.html">Autotools</a>を参照のこと。</p>
+
+<h2>アーカイブ</h2>
+<p><a href="linux_filetools_archive.html">Linuxアーカイブ・同期・デバイス処理</a>を参照のこと。</p>
+
+<h1>リンク集</h1>
+<h2>RPMパッケージの作成・パッケージ管理システム</h2>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/RPM-HOWTO.html">RPM HOWTO</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/rpm/man8/rpm.8.html">Manpage of RPM</a></li>
+</ul>
+<p>SRPMを使う場合。</p>
+<ul>
+<li><a href="http://tetsuyai.hatenablog.com/entry/20120106/1325839318">SRPMを使ったパッケージのインストール - tetsuyai’s blog</a></li>
+</ul>
+
+
+<h2>RPM</h2>
+<p>Red Hat系Linuxのパッケージシステム。</p>
+<p>Red Hat系ディストリビューションの低レベルなパッケージ管理システム。</p>
+<ul>
+<li><a href="http://linuxjf.osdn.jp/JFdocs/RPM-HOWTO.html">RPM HOWTO</a></li>
+<li><a href="http://linuxjm.osdn.jp/html/rpm/man8/rpm.8.html">Manpage of RPM</a></li>
+<li><a href="https://docs.fedoraproject.org/en-US/Fedora/24/html/System_Administrators_Guide/ch-RPM.html">RPM - Fedora</a></li>
+</ul>
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

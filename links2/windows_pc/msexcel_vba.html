@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>MS-Excelの世界観２（VBA） - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/prettify.css" type="text/css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">Windows/PCの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/windows_pc_msoffice_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>MS-Excelの世界観２（VBA）</h1>
+<p>MS-Excelの世界観２（VBA）。</p>
+
+<h2>関連ページ</h2>
+<ul class="defaultlist list6 menu_list">
+<li><a href="msoffice.html">MS-Office</a></li>
+<ul>
+<li><a href="msword.html">MS-Word</a></li>
+<li><a href="msexcel.html">MS-Excel</a></li>
+<ul>
+<li><b>MS-Excel VBA</b></li>
+</ul>
+<li><a href="mspowerpoint.html">MS-PowerPoint</a></li>
+</ul>
+</ul>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>VBA</h1>
+<h2>VBAでプログラミング</h2>
+<p>特にExcelなどでは、VBAを使うことで簡単なマクロ処理や高度なプログラミングを行うことができる。</p>
+<ul>
+<li><a href="https://www.officepro.jp/excelvba/">Excel VBA入門 - OfficePro</a></li>
+</ul>
+
+<h2>VBAの注意点</h2>
+<p>VBAでは、Sub/Functionプロシージャを呼び出す時に、引数に括弧をつけて</p>
+<pre class="prettyprint lang-vb">
+c = check(x,y)
+</pre>
+<p>とすると、戻り値を返さないといけない。戻り値を受け取らない場合は括弧を外して</p>
+<pre class="prettyprint lang-vb">
+check x,y
+</pre>
+<p>と実行する。</p>
+<p>Subプロシージャは、戻り値を返すことができない。Functionプロシージャは戻り値を返すことができる。</p>
+<p>また、Functionプロシージャを作る場合、戻り値を返したい場合はプロシージャ名に代入する（VBAのみ。VB.NETの場合はReturn文を使う）。</p>
+<p>ポインタのように、引数から関数外の変数にアクセスしたい時は、引数宣言の時にByValではなくByRefを指定する。</p>
+<p>詳しい情報は以下が参考になります。</p>
+<ul>
+<li><a href="https://www.milkmemo.com/entry/vba_SubProcedure_FunctionProcedure_chigai">【VBA】Sub／Functionプロシージャの違いと使い方【Excelマクロ】 - Milkのメモ帳</a></li>
+</ul>
+
+<h2>VBAサンプルコード</h2>
+<p>自分で作ったコードです。与えられた値段からお札の枚数を数えます。</p>
+<pre class="prettyprint lang-vb">
+Sub calc()
+    Dim row
+    Dim col
+    Dim charge
+    Dim ichiman
+    Dim gosen
+    Dim sen
+    Dim gohyaku
+    Dim hyaku
+    Dim amari
+    Dim x
+    
+    row = 3
+    col = 3
+    
+    For i = 0 To 15
+        ichiman = 0
+        gosen = 0
+        sen = 0
+        gohyaku = 0
+        hyaku = 0
+        amari = 0
+        
+        charge = Cells(row, col + i).value
+        x = charge
+        
+        check x, 10000, ichiman
+        check x, 5000, gosen
+        check x, 1000, sen
+        check x, 500, gohyaku
+        check x, 100, hyaku
+        
+        amari = x
+        
+        Cells(row + 1, col + i).value = ichiman
+        Cells(row + 2, col + i).value = gosen
+        Cells(row + 3, col + i).value = sen
+        Cells(row + 4, col + i).value = gohyaku
+        Cells(row + 5, col + i).value = hyaku
+        Cells(row + 6, col + i).value = amari
+    Next i
+      
+    
+End Sub
+
+Sub check(ByRef nedan, ByVal value, ByRef count)
+
+    Do While nedan &gt;= value
+        count = count + 1
+        nedan = nedan - value
+    Loop
+  
+End Sub
+</pre>
+
+<h1>関連ページ</h1>
+<h2>Excel</h2>
+<p><a href="msexcel.html">MS-Excel</a>も参照のこと。</p>
+
+<h2>Visual Basic</h2>
+<p><a href="../prog_lang/vb.html">Visual Basic</a>も参照のこと。</p>
+
+<!--
+<h1></h1>
+<h2></h2>
+<ul>
+<li><a href=""></a></li>
+</ul>
+-->
+
+
+
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+<script type="text/javascript" src="../../js/prettify.js"></script>
+<script type="text/javascript" src="../../js/lang-vb.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

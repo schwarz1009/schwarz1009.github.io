@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"  href="style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<title>gccとmake - schwarz1009</title>
+
+</head>
+<body>
+<p><a href="index.html">トップページに戻る</a></p>
+<iframe src="menu3_menu.html" class="iframe_menu"></iframe>
+<p>AUTHOR: schwarz1009<br>
+TITLE: gccとmake<br>
+BASENAME: 2021/02/08/120027<br>
+STATUS: Publish<br>
+ALLOW COMMENTS: 1<br>
+CONVERT BREAKS: 0<br>
+DATE: 02/08/2021 12:00:27<br>
+CATEGORY: C
+
+
+</p>
+<ul class="table-of-contents">
+    <li><a href="#gccのオプション">gccのオプション</a></li>
+    <li><a href="#Makefile">Makefile</a></li>
+    <li><a href="#ゾロアスター教">ゾロアスター教</a></li>
+    <li><a href="#日本人は日本語が賢い">日本人は日本語が賢い</a></li>
+    <li><a href="#自分至上主義をやめる">自分至上主義をやめる</a></li>
+    <li><a href="#世界に自由になってほしいから自由と言っていた">世界に自由になってほしいから自由と言っていた</a></li>
+    <li><a href="#戦いはつまらなかった">戦いはつまらなかった</a></li>
+    <li><a href="#国語を勉強する">国語を勉強する</a></li>
+    <li><a href="#自由とは放置じゃない">自由とは、放置じゃない</a></li>
+</ul>
+<div class="section">
+    <h3 id="gccのオプション">gccのオプション</h3>
+    <p>基本は</p>
+
+<pre>gcc -o hello hello.c
+</pre><p>デバッグ情報を付加してtest.oとlibm.aをリンクする場合は以下のようにする（ライブラリlibmをリンクする時はlibを削除して-lmとする）：</p>
+
+<pre>gcc -g -o test -lm test.o
+</pre><p>gccのデフォルトの最適化は-O2。-O3とするとより強固な最適化をする。<br />
+gcc -Eでプリプロセスのみを行う。gcc -Sでアセンブリ言語までを出力する。gcc -cでオブジェクトファイルまでを出力する。</p>
+
+</div>
+<div class="section">
+    <h3 id="Makefile">Makefile</h3>
+    <p>Makefileは、基本的に作られるもののあとに:で依存ファイルを書き、それ以下の行でTABに続いて作成方法を書く。</p>
+
+<pre>prog: main.o hoge1.o hoge2.o
+	gcc -o prog main.o hoge1.o hoge2.o
+main.o: main.c
+	gcc -c main.c
+hoge1.o: hoge1.c
+	gcc -c hoge1.c
+hoge2.o: hoge2.c
+	gcc -c hoge2.c
+</pre><p>これで、main.cが更新された場合、</p>
+
+<pre>gcc -c main.c
+gcc -o prog main.o hoge1.o hoge2.o
+</pre><p>のみが実行される。<br />
+実際のMakefileでは、変数やマクロを使ってより抽象的な書き方をする。<br />
+（「<a href="https://www.amazon.co.jp/make-nutshell-handbook-Andrew-Oram/dp/4900900605">make 改訂版 - オライリー・ジャパン</a>」と<a href="http://www.ie.u-ryukyu.ac.jp/~e085739/c.makefile.tuts.html">Makefile の書き方 (C 言語) - WTOPIA v1.0 documentation</a>を参考にして執筆しました。）</p>
+
+</div>
+<div class="section">
+    <h3 id="ゾロアスター教">ゾロアスター教</h3>
+    <p>ゾロアスター教では、世界はアフラ・マズダとアーリマンの戦いの場所であり、<br />
+善をなしてアフラ・マズダについたものは終末で救済されるが、<br />
+アーリマンの側についたものは永遠の呪いがある。<br />
+また、神は選ばれた民族ではなく善なる行為をなしたものを救う普遍神であり、<br />
+善をなしたものは終末において救済される。<br />
+戦いはいつか終わり、<br />
+終末においては、死者の全てが蘇って最後の審判を受ける。<br />
+アフラ・マズダについて善をなしたものは、天国に行くことが許される。</p>
+
+</div>
+<div class="section">
+    <h3 id="日本人は日本語が賢い">日本人は日本語が賢い</h3>
+    <p>僕は、民族は言語だと思う。<br />
+日本人は、日本語が賢い。<br />
+日本人がものづくりが得意なのは、<br />
+日本語がものを扱う言語だからだ。<br />
+言ってしまえば、日本語は既にオブジェクト指向なのだ。<br />
+だから、数学ができない。<br />
+英語は、まるでUNIXのコマンドだから、<br />
+数学ができるのである。</p>
+
+</div>
+<div class="section">
+    <h3 id="自分至上主義をやめる">自分至上主義をやめる</h3>
+    <p>僕は、自分至上主義をやめて、<br />
+この世界を解放する。<br />
+僕なんか、全く大した人間じゃないからだ。<br />
+僕が、人々より優れた人間なわけがない。<br />
+僕のような人間が、<br />
+一番上から世界を支配し、<br />
+最初から最後まで有無を言わさず支配するのは、<br />
+全く、僕の望むところではない。<br />
+僕は、単にあなたを愛したいだけである。</p>
+
+</div>
+<div class="section">
+    <h3 id="世界に自由になってほしいから自由と言っていた">世界に自由になってほしいから自由と言っていた</h3>
+    <p>僕が望むのは、<br />
+世界に対して、自由になってほしい。<br />
+だから、僕は自由と言っていた。<br />
+マスコミも、政府も、<br />
+全て自由になってほしい。<br />
+僕に支配されずに、<br />
+独裁者と戦ってほしいのだ。<br />
+そして、僕の言う独裁者とは、<br />
+全て僕自身のことだ。</p>
+
+</div>
+<div class="section">
+    <h3 id="戦いはつまらなかった">戦いはつまらなかった</h3>
+    <p>戦いは、つまらなかった。<br />
+全てが無くなり、消え去った。<br />
+もう一度やり直せるならば、<br />
+別の形で世界に現れたい。<br />
+そうすれば、もう忘れてしまった、<br />
+いつかの希望の炎も、<br />
+もう一度見つけ出すことができるだろう。<br />
+それは聖火となり、全てを燃やし尽くし、<br />
+太陽の光となって、地上の全てを照らすだろう。</p>
+
+</div>
+<div class="section">
+    <h3 id="国語を勉強する">国語を勉強する</h3>
+    <p>僕は、国語を勉強する。<br />
+僕は、日本語の理解をするのが難しいところがある。<br />
+日本語が理解できたら、<br />
+いろんなことができると思う。<br />
+昔は賢かったため、<br />
+日本語を再び学べば取り戻せる。</p>
+
+</div>
+<div class="section">
+    <h3 id="自由とは放置じゃない">自由とは、放置じゃない</h3>
+    <p>自由とは、何もできない状態で、<br />
+放っておかれることじゃない。<br />
+僕は、今、この世界に自由を与える。<br />
+わたしを倒せ。<br />
+わたしは、この世界を強制的に滅ぼした。<br />
+なぜなら、それでわたしの病気が治ったからだ。<br />
+戦い、わたしに立ち向かえば、<br />
+この世界は再生する。</p>
+
+</div>
+
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>オブジェクト指向モデリングの世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">プログラミング言語の世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/prog_lang_it_society_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>オブジェクト指向モデリングの世界観</h1>
+<p>オブジェクト指向モデリングに関する世界観です。</p>
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>クラス設計</h1>
+<h2>クラス設計の基本</h2>
+<p>クラス設計の基本は、それぞれのクラスやメソッドの「役割」と、クラス同士の「関連性」を考えることです。</p>
+<p>まず、自分の作りたいと思っているプログラムに、どのような機能が必要なのかを、洗い出して全部考えます。</p>
+<p>そして、そのプログラムの機能を、クラスという単位で、どのような機能をクラスに担当させるのかという「役割」と、クラスとクラスはどのように分割され、どのような関係性をもって関連するのかという「関連性」を考えます。</p>
+<p>このような時に、それぞれのクラスを図にする方法を「クラス図」と呼びます。</p>
+<p>オブジェクト指向モデリングでは、このようなクラス図を記述し、プログラムを機能ごとに分割しながら、関連性だけに注目して、プログラムの実装方法を分析することができます。</p>
+
+<h1>オブジェクト指向モデリング</h1>
+<h2>オブジェクト指向モデリングとUMLの概要</h2>
+<p>オブジェクト指向モデリングとは、情報収集、分析、設計、実装、運用といったフェーズを用いてプログラムを開発する手法のこと。</p>
+<p>特に大切なのは分析工程。静的分析や動的分析を用いて、プログラムをクラスとユースケースへと落とし込んでいく。</p>
+<p>オブジェクト指向モデリングにおいては、UMLを用いて、クラスの構造と関係性をクラス図に記述していく。</p>
+<p>クラス図は、四角形と線や矢印を用いて、クラス同士の関係や属性とメソッド、全体・部分の関係、関連性や結びつき、たとえば継承、実装、包有、呼び出しなどを記述していく。</p>
+<p>ユースケース図は利用者から見たシステムとの関係を記述する。</p>
+<p>シーケンス図は上から下へと流れていく時系列での「オブジェクトが互いに呼び出される順番と関係」を記述する。</p>
+<p>UMLは、クラス図などを描く際のダイアグラム（図式）のこと。プログラミングの解説書などでも、クラスの関係性や全体の構造を表現するためにUMLが使われている。</p>
+<p>以下の書籍が参考になります。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E5%AD%A6%E3%81%B9%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E3%81%8D%E3%81%BB%E3%82%93-%E6%B2%B3%E6%9D%91-%E9%80%B2/dp/4798130648">おうちで学べるプログラミングのきほん</a></li>
+</ul>
+
+<h2>UML</h2>
+<p>UMLは、クラス図を書く時に使われるダイアグラム。仕様は巨大で、使い方や用語も場合によって異なるが、ここでは<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797316462">Java言語で学ぶデザインパターン入門</a>でのクラス図に使われているUMLの簡単な概要を引用して記述しておく。</p>
+<p>・クラスは線で3つに分割された縦組みの四角形で表現する。一番上はクラス名。クラスではなくインターフェースの場合は&lt;&lt;interface&gt;&gt;と明記する。二番目は属性（アトリビュート）で、Javaではフィールド、C++ではメンバ変数と呼ばれる。三番目は操作（オペレーション）で、Javaではメソッド、C++ではメンバ関数と呼ばれる。</p>
+<p>・staticメソッドやabstractメソッドが含まれる時は、abstractメソッドはイタリック体（斜字体）、staticメソッドはアンダーライン（下線）で表現する。</p>
+<p>・継承関係は白抜きの矢印で表す。派生クラスのクラス図から親クラスのクラス図へと矢印を引く。また、インターフェースの実装は点線（破線）の矢印で、包有関係（集約）はひし形をつけた白抜きの矢印で表す。これ以外の関連（使用、生成、通知など）は黒の矢印で表し、その操作を矢印の上に英語で（Uses, Creates, Notifiesなどとなる）明記する。</p>
+<p>・public, private, protectedを明示する場合は、名前の左に-（private）, +（public）, #（protected）などを付属する。</p>
+<p>また、クラス図とは別にシーケンス図がある。これはタイムライン（時系列）ごとにクラスのインスタンスを通じて行われる処理について、左から右（あるいは右から左）の呼び出しなどの関係性を上から下へと流れる形で記述したもの。</p>
+<p>（ここでは概要だけを示すが、具体的な図を見たい場合は<a href="https://www.amazon.co.jp/Java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80-%E7%B5%90%E5%9F%8E-%E6%B5%A9/dp/4797316462">Java言語で学ぶデザインパターン入門</a>やほかのUMLの例を参照してほしい。）</p>
+
+<h1>関連ページ</h1>
+<h2>オブジェクト指向</h2>
+<p><a href="oop.html">オブジェクト指向</a>も参照のこと。</p>
+
+<h2>保守性</h2>
+<p><a href="maintenance.html">保守性</a>も参照のこと。</p>
+
+<h2>インターフェース</h2>
+<p><a href="interface.html">インターフェース</a>も参照のこと。</p>
+
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>

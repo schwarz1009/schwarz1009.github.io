@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    <head>
+        <title>Samba関連の世界観 - from Assy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="Assy,アッシー,詩,小説,物語,歴史,政治,経済,コンピュータ,パソコン,Linux,エッセイ,散文,哲学">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+<div class="page">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/script_smartmenus.js"></script>
+<script type="text/javascript" src="../../js/links2.js"></script>
+
+<p><a href="index.html">ネットワークの世界観に戻る</a></p>
+<div class="sidebar">
+<iframe src="../../menus/network_fileserver_menu.html" class="sideiframe"></iframe>
+</div>
+<h1>Samba関連の世界観</h1>
+<p>Sambaに関する世界観です。<a href="file_server_windowsnetwork.html">Windowsネットワーク</a>も参照のこと。</p>
+
+<div id="toc"></div>
+<div class="page_links">
+
+<h1>Windowsネットワーク</h1>
+<h2>Samba</h2>
+<p>フリーソフトウェアによるWindowsネットワークの実装。</p>
+<p>Sambaは、たとえば会社のチームの複数のWindowsマシンでファイルを共有したい時などに、ファイル共有サーバーをWindowsではなくLinuxで作りたい時などに使える。</p>
+<p>必ずしもサーバーをLinuxにする必要はない。僕はWindowsマシンでファイル共有サーバーを使っていた経験があるが、Windowsでファイル共有を行うのはとても簡単で、ただフォルダを共有指定すれば、それだけでファイルサーバーになる。</p>
+<p>あるいは、Google Driveなどを使う、という手もありだろう。</p>
+<p>Sambaを使うと、逆にLinuxからWindowsネットワークに接続することもできる。また、GNOMEから接続することも可能だ。</p>
+<ul>
+<li><a href="https://thinkit.co.jp/free/compare/3/1/1.html">第１回：Sambaを導入する理由 - ThinkIT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1612/01/news183.html">Sambaの基本を知っておこう - @IT</a></li>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1612/01/news184.html">Sambaでファイルサーバーを構築しよう (1/3) - @IT</a></li>
+</ul>
+
+<h2>SambaでWindowsとLinuxのプリンタを共有する</h2>
+<p>以下のようなページが参考になる。</p>
+<ul>
+<li><a href="http://archive.linux.or.jp/JF/JFdocs/Debian-and-Windows-Shared-Printing/index.html">Debian と Windows 間でのプリンタ共有 mini-HOWTO</a></li>
+<li><a href="https://qiita.com/yyano/items/8cfc4a1d05f367d6e2de">SambaとCUPSと各種プリンター（Samba編） - Qiita</a></li>
+</ul>
+
+<h2>Active Directory</h2>
+<p>Active DirectoryはWindows Serverに備わっているMicrosoftが開発した機能で、ネットワーク上にある人的資源（社員や部署などの認証などの情報）やシステム的資源（ネットワーク機器）といったリソースに、「ディレクトリ」と呼ばれる一覧表からアクセスすることができる機能。</p>
+<p>ディレクトリが管理するのは、実際の現実にあるものではなく、一覧表であり、この一覧表をネットワーク上でディレクトリサーバーとして一元的に管理することができる。</p>
+<p>Sambaには、Windows Serverと同様に、LDAPやActive Directoryの機能が備わっている。</p>
+<ul>
+<li><a href="https://www.sbbit.jp/article/cont1/37798">Active Directory（アクティブディレクトリ）をゼロから解説、関連用語もまとめて紹介 ｜ビジネス+IT</a></li>
+</ul>
+
+<h1>関連ページ</h1>
+<h2>Windowsネットワーク</h2>
+<p><a href="file_server_windowsnetwork.html">Windowsネットワーク</a>を参照のこと。</p>
+
+<h2>LDAP</h2>
+<p><a href="ldap.html">LDAP</a>を参照のこと。</p>
+
+<h2>Linuxでプリンター</h2>
+<p><a href="../linux/linux_printer.html">Linux プリンター</a>を参照のこと。</p>
+
+</div></div> <!--page-->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../js/jquery.toc.js"></script>
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/scriptfortoc.js"></script>
+</body>
+</html>
