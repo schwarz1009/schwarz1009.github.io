@@ -35,10 +35,14 @@
 <h1>Wine</h1>
 <h2>Windows APIのUNIX実装</h2>
 <p>Wineは、LinuxでWindowsアプリケーションを動かすためのAPI。エミュレータではなく、Windows APIをUNIX APIの上で実装している。このため、WindowsアプリケーションをLinuxの上で実行できる。</p>
+<p>後日注記：Wineは「Linuxで動くWindowsのエミュレータ」とか「仮想化システムの一種」と説明されることもありますが、実際はWindowsのAPIを実装した互換レイヤーであり、エミュレータでも仮想化システムでもありません。そのため、WindowsがなくてもWindowsアプリケーションが動作します。同様のものに、WindowsでUNIX APIを実装し、GNUコマンドを動くようにしたCygwinがあります。</p>
 <ul>
 <li><a href="http://minto.tech/linux-wine/">Linux上でWindowsアプリケーションを動かす「wine」の基礎知識と特徴 | minto.tech</a></li>
 <li><a href="https://ja.wikipedia.org/wiki/Wine">Wine - Wikipedia</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.11.17編集</p>
+</div>
 
 <h2>導入方法</h2>
 <p>Wineをパッケージ管理システムでインストールした後、コマンドラインからwinecfgを実行すれば、Windowsのドライブと同等のフォルダが作られる。この中で、Windowsの実行ファイルを実行できる。ドライブが作られると、設定のための画面が表示され、Wineを設定できる。</p>
@@ -86,6 +90,10 @@
 
 <h2>ReactOS</h2>
 <p>Windows NT互換のオープンソースなOS。Wineとも協力している。</p>
+<p>後日注記：ReactOSはWindows NT互換のOS。Wineとやっていることがよく似ているが、カーネルやシステムまで独自に自分で実装しているところが違う。</p>
+<div class="edit_date">
+<p>2026.11.17編集</p>
+</div>
 
 <h2>WinBoat</h2>
 <p>WinBoatはWineのようにAPIの移植版ではなく、仮想化技術を使ってLinuxでWindowsアプリケーションを動かす技術。コンテナでWindowsを実行するためにDockerを利用する。</p>
