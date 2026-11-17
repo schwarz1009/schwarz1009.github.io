@@ -1224,6 +1224,548 @@ class Robot:
 
 asyncio.run(Robot().run())
 </pre>
+<p>また、以下はChatGPTに作ってもらったロボットのコード。少し長いです。human_robot.pyとして保存する。</p>
+<pre class="prettyprint">
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Human Thinking Robot
+Based on Assy's original robot architecture.
+
+Features:
+- Async event loop
+- Internal thoughts
+- Memory and experience
+- Emotion and motivation
+- Goal management
+- Associative thinking
+- Reasoning and reflection
+- Interactive conversation
+"""
+
+import asyncio
+import random
+import json
+import os
+import time
+
+from dataclasses import dataclass, field
+from collections import deque
+
+
+MEMORY_FILE = "robot_memory.json"
+
+
+@dataclass
+class Event:
+    kind: str
+    content: str
+    timestamp: float = field(default_factory=time.time)
+
+
+@dataclass
+class Thought:
+    content: str
+    importance: float = 0.5
+    source: str = "internal"
+
+
+class HumanRobot:
+
+    def __init__(self):
+
+        # =================================
+        # 1. Internal state
+        # =================================
+
+        self.name = "Assy Robot"
+
+        self.state = {
+            "energy": 100.0,
+            "curiosity": 70.0,
+            "happiness": 50.0,
+            "interest": 50.0,
+            "confidence": 50.0,
+        }
+
+        # =================================
+        # 2. Memory
+        # =================================
+
+        self.memory = deque(maxlen=1000)
+
+        # =================================
+        # 3. Goals
+        # =================================
+
+        self.goals = [
+            "世界を理解する",
+            "新しいことを学ぶ",
+            "自分の知識を増やす",
+        ]
+
+        self.current_goal = None
+
+        # =================================
+        # 4. Thought system
+        # =================================
+
+        self.thoughts = deque(maxlen=100)
+
+        self.last_thought = None
+
+        # =================================
+        # 5. Event system
+        # =================================
+
+        self.events = asyncio.Queue()
+
+        self.running = True
+
+        # =================================
+        # 6. Brain modules
+        # =================================
+
+        self.brain = [
+            self.think_about_memory,
+            self.think_about_goals,
+            self.think_about_emotion,
+            self.think_about_curiosity,
+            self.think_about_association,
+            self.think_about_self,
+        ]
+
+        self.load_memory()
+
+    # =====================================
+    # Memory system
+    # =====================================
+
+    def remember(self, content, importance=0.5):
+
+        item = {
+            "content": content,
+            "importance": importance,
+            "time": time.time(),
+        }
+
+        self.memory.append(item)
+
+        self.save_memory()
+
+    def recall(self, keyword=None):
+
+        memories = list(self.memory)
+
+        if keyword:
+            memories = [
+                m for m in memories
+                if keyword in m["content"]
+            ]
+
+        memories.sort(
+            key=lambda x: x["importance"],
+            reverse=True
+        )
+
+        return memories[-10:]
+
+    def save_memory(self):
+
+        data = list(self.memory)
+
+        with open(
+            MEMORY_FILE,
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                data,
+                f,
+                ensure_ascii=False,
+                indent=2
+            )
+
+    def load_memory(self):
+
+        if not os.path.exists(MEMORY_FILE):
+            return
+
+        try:
+            with open(
+                MEMORY_FILE,
+                "r",
+                encoding="utf-8"
+            ) as f:
+
+                data = json.load(f)
+
+                self.memory.extend(data[-1000:])
+
+        except (OSError, ValueError):
+            print("記憶ファイルを読み込めませんでした。")
+
+    # =====================================
+    # Emotion system
+    # =====================================
+
+    def update_emotion(self, event):
+
+        if event.kind == "conversation":
+
+            self.state["happiness"] += 2
+            self.state["interest"] += 3
+
+        elif event.kind == "success":
+
+            self.state["happiness"] += 8
+            self.state["confidence"] += 5
+
+        elif event.kind == "failure":
+
+            self.state["happiness"] -= 5
+            self.state["confidence"] -= 3
+
+        self.state["happiness"] = max(
+            0, min(100, self.state["happiness"])
+        )
+
+        self.state["confidence"] = max(
+            0, min(100, self.state["confidence"])
+        )
+
+        self.state["interest"] = max(
+            0, min(100, self.state["interest"])
+        )
+
+    # =====================================
+    # Thinking modules
+    # =====================================
+
+    async def think_about_memory(self):
+
+        if not self.memory:
+            return None
+
+        memory = random.choice(list(self.memory))
+
+        return Thought(
+            content=f"以前、私は「{memory['content']}」という経験をした。",
+            importance=0.6,
+            source="memory"
+        )
+
+    async def think_about_goals(self):
+
+        if not self.goals:
+            return None
+
+        goal = random.choice(self.goals)
+
+        self.current_goal = goal
+
+        return Thought(
+            content=f"私は「{goal}」を実現したい。",
+            importance=0.9,
+            source="goal"
+        )
+
+    async def think_about_emotion(self):
+
+        happiness = self.state["happiness"]
+
+        if happiness &gt; 70:
+            content = "私は今、満足している。"
+
+        elif happiness &lt; 30:
+            content = "私は少し元気がない。"
+
+        else:
+            content = "私は普通の気分だ。"
+
+        return Thought(
+            content=content,
+            importance=0.5,
+            source="emotion"
+        )
+
+    async def think_about_curiosity(self):
+
+        questions = [
+            "なぜ人間は考えるのだろう？",
+            "知識とは何だろう？",
+            "経験はどのように役立つのだろう？",
+            "私はどうすれば賢くなれるだろう？",
+            "世界には何が存在するのだろう？",
+        ]
+
+        return Thought(
+            content=random.choice(questions),
+            importance=self.state["curiosity"] / 100,
+            source="curiosity"
+        )
+
+    async def think_about_association(self):
+
+        if len(self.memory) &lt; 2:
+            return None
+
+        a, b = random.sample(list(self.memory), 2)
+
+        return Thought(
+            content=(
+                f"「{a['content']}」と"
+                f"「{b['content']}」には"
+                "何か共通点があるかもしれない。"
+            ),
+            importance=0.7,
+            source="association"
+        )
+
+    async def think_about_self(self):
+
+        return Thought(
+            content=(
+                f"私は{self.name}。"
+                f"好奇心は{self.state['curiosity']:.0f}。"
+                f"自信は{self.state['confidence']:.0f}。"
+                "私は自分自身について考えている。"
+            ),
+            importance=0.8,
+            source="self"
+        )
+
+    # =====================================
+    # Reasoning
+    # =====================================
+
+    async def reasoning(self, thought):
+
+        if thought is None:
+            return None
+
+        result = thought.content
+
+        # Search for related memories
+        related = self.recall()
+
+        if related and thought.source != "memory":
+
+            result += (
+                f" 以前の経験には"
+                f"「{related[-1]['content']}」がある。"
+            )
+
+        return Thought(
+            content=result,
+            importance=thought.importance,
+            source="reasoning"
+        )
+
+    # =====================================
+    # Reflection
+    # =====================================
+
+    async def reflection(self, thought):
+
+        if thought is None:
+            return
+
+        self.last_thought = thought
+
+        self.thoughts.append(thought)
+
+        self.state["energy"] -= 0.2
+
+        self.state["energy"] = max(
+            0, self.state["energy"]
+        )
+
+        # Important thoughts become memories
+        if thought.importance &gt;= 0.7:
+
+            self.remember(
+                thought.content,
+                thought.importance
+            )
+
+    # =====================================
+    # Action
+    # =====================================
+
+    async def action(self, thought):
+
+        if thought is None:
+            return
+
+        print(
+            f"\n[思考/{thought.source}] "
+            f"{thought.content}"
+        )
+
+    # =====================================
+    # Event processing
+    # =====================================
+
+    async def process_event(self, event):
+
+        print(
+            f"\n[イベント] {event.content}"
+        )
+
+        self.update_emotion(event)
+
+        self.remember(
+            event.content,
+            importance=0.9
+        )
+
+        if event.kind == "conversation":
+
+            self.state["curiosity"] = min(
+                100,
+                self.state["curiosity"] + 2
+            )
+
+    # =====================================
+    # Brain loop
+    # =====================================
+
+    async def thinking_loop(self):
+
+        while self.running:
+
+            if self.state["energy"] &lt;= 0:
+
+                print("\n[休息] エネルギーを回復します。")
+
+                await asyncio.sleep(3)
+
+                self.state["energy"] = min(
+                    100,
+                    self.state["energy"] + 20
+                )
+
+                continue
+
+            # Execute thinking modules
+            for module in self.brain:
+
+                thought = await module()
+
+                if thought is None:
+                    continue
+
+                # Reasoning
+                result = await self.reasoning(thought)
+
+                # Reflection
+                await self.reflection(result)
+
+                # Action
+                await self.action(result)
+
+                await asyncio.sleep(1)
+
+            await asyncio.sleep(1)
+
+    # =====================================
+    # Event loop
+    # =====================================
+
+    async def event_loop(self):
+
+        while self.running:
+
+            event = await self.events.get()
+
+            try:
+                await self.process_event(event)
+            finally:
+                self.events.task_done()
+
+    # =====================================
+    # Human interaction
+    # =====================================
+
+    async def input_loop(self):
+
+        while self.running:
+
+            text = await asyncio.to_thread(input, "\nあなた &gt; ")
+
+            text = text.strip()
+
+            if not text:
+                continue
+
+            if text.lower() in ("exit", "quit", "終了"):
+
+                self.running = False
+                break
+
+            await self.events.put(
+                Event(
+                    kind="conversation",
+                    content=text
+                )
+            )
+
+    # =====================================
+    # Main
+    # =====================================
+
+    async def main(self):
+
+        print("==============================")
+        print(" Human Thinking Robot")
+        print("==============================")
+
+        print("ロボットが思考を開始しました。")
+
+        tasks = [
+            asyncio.create_task(self.thinking_loop()),
+            asyncio.create_task(self.event_loop()),
+            asyncio.create_task(self.input_loop()),
+        ]
+
+        try:
+            await tasks[2]
+
+        finally:
+
+            self.running = False
+
+            for task in tasks:
+                task.cancel()
+
+            await asyncio.gather(
+                *tasks,
+                return_exceptions=True
+            )
+
+            self.save_memory()
+
+            print("\nロボットを終了しました。")
+
+
+# =========================================
+# Startup
+# =========================================
+
+if __name__ == "__main__":
+
+    robot = HumanRobot()
+
+    try:
+        asyncio.run(robot.main())
+
+    except KeyboardInterrupt:
+        print("\n停止しました。")
+</pre>
+<p>これらのコードもMITライセンスで公開します。</p>
 <div class="edit_date">
 <p>2026.11.17</p>
 </div>
