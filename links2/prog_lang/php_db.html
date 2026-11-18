@@ -76,7 +76,7 @@ $dbh = new PDO('mysql:dbname=bbs_db;host=localhost', $db_user, $db_password);
 <p>（<a href="https://blog.codecamp.jp/programming-php-pdo-mysql-1">【モダンなPHP】PHPでPDOを使ってMySQLに接続する方法！ | CodeCampus</a>、<a href="https://qiita.com/mitsuru793/items/45b2452284e321c7a5a9">PDOを使ったPHPでのデータベース基本操作 - Qiita</a>を参考に執筆しました。）</p>
 
 <h2>SQLの利用</h2>
-<p>データベースサーバーとやり取りするプログラムが、「いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)」にあります。</p>
+<p>データベースサーバーとやり取りするプログラムが、「<a href="https://www.amazon.co.jp/%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84PHP%E3%81%AE%E6%95%99%E6%9C%AC-%E4%BA%BA%E6%B0%97%E8%AC%9B%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E5%AE%9F%E8%B7%B5Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%80%8C%E3%81%84%E3%81%A1%E3%81%B0%E3%82%93%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E6%95%99%E6%9C%AC%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9F%8F%E5%B2%A1-%E7%A7%80%E7%94%B7/dp/4844337580">いちばんやさしいPHPの教本 人気講師が教える実践Webプログラミング (「いちばんやさしい教本」シリーズ)</a>」にあります。</p>
 <p>基本的に以下のように接続すれば良い。</p>
 <pre class="prettyprint">
 $dbh = new PDO('mysql:dbname=bbs_db;host=localhost;charset=utf8', $db_user, $db_password);

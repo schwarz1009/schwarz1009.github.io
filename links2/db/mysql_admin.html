@@ -103,10 +103,21 @@ default-character-set=utf8
 
 <h2>ダンプをとる</h2>
 <p>ダンプは、mysqldumpコマンドでダンプファイルを作成し、復元はダンプファイルをmysqlコマンドで復元する。</p>
+<p>ダンプ：</p>
+<pre>
+mysqldump -u bbs_user -p bbs_db &gt; bbs_dump.sql
+</pre>
+<p>復元：</p>
+<pre>
+mysql -u bbs_user -p bbs_db &lt; bbs_dump.sql
+</pre>
 <p>詳しくは以下が参考になる。</p>
 <ul>
 <li><a href="https://kiyotakakubo.hatenablog.com/entry/20090131/1233420834">MySQLのdump(ダンプ)でデータをバックアップ/復元：MySQLの基礎知識 - 久保清隆のブログ</a></li>
 </ul>
+<div class="edit_date">
+<p>2026.11.18編集</p>
+</div>
 
 <h1>MySQLストレージエンジンとロック</h1>
 <h2>InnoDBとMyISAM</h2>
