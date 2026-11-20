@@ -110,14 +110,21 @@ class Hoge:
 <p>かつてのPythonでは、GILという排他制御の方法を行っていた。<p>
 <p>GILありの状態においては、ひとつのプロセスで実行されるバイトコードでは、ひとつのスレッドしか使えないようにロックされる。</p>
 <p>しかしながら、マルチスレッドにおいては、GILありの状態ではほかの言語のようにマルチスレッドで並列処理ができない。そのため、最近のPythonではGILがなしになった。</p>
+<p>後日注記：Pythonのthreadingはマルチスレッド処理を行えるが、GILの制限があるため真の並列処理ではない。multiprocessingはプロセスを独立させることができるため、真の並列処理が実現できる。</p>
 <ul>
 <li><a href="https://qiita.com/yusuke_hrsm/items/6addffa5d8056ffe67f9">pythonにおける並列処理と並行処理 #Python - Qiita</a></li>
 <li><a href="https://qiita.com/yusuke_hrsm/items/ded8c7c67bd704e91cf5">GILがなくなったPythonを使ってみる #並列処理 - Qiita</a></li>
 <li><a href="https://buildersbox.corp-sansan.com/entry/2025/12/23/120000">PythonのGILとはなんだったのか - Sansan Tech Blog</a></li>
+<li><a href="https://docs.python.org/ja/3/library/concurrency.html">並行実行 — Python 3.15.2 ドキュメント</a></li>
+<li><a href="https://zenn.dev/hoshinagi1219/articles/b78878cd618713">【python】雑に始める並列処理（multiprocessing） - Zenn</a></li>
 </ul>
 <div class="edit_date">
 <p>2026.03.04</p>
+<p>2026.11.20編集</p>
 </div>
+
+<h2>async/await</h2>
+<p>asyncioを用いたasync/awaitについては<a href="parallel.html">並列処理</a>を参照のこと。</p>
 
 <h1>その他</h1>
 <h2>eval, exec, compile, breakpoint関数</h2>
