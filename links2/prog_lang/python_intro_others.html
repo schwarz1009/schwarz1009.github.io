@@ -110,7 +110,7 @@ class Hoge:
 <p>かつてのPythonでは、GILという排他制御の方法を行っていた。<p>
 <p>GILありの状態においては、ひとつのプロセスで実行されるバイトコードでは、ひとつのスレッドしか使えないようにロックされる。</p>
 <p>しかしながら、マルチスレッドにおいては、GILありの状態ではほかの言語のようにマルチスレッドで並列処理ができない。そのため、最近のPythonではGILがなしになった。</p>
-<p>後日注記：Pythonのthreading.Threadはマルチスレッド処理を行えるが、GILの制限があるため真の並列処理ではない。multiprocessing.Processはプロセスを独立させることができるため、真の並列処理が実現できる。このほか、async/awaitで非同期関数を実行できるasyncioというライブラリが存在する。</p>
+<p>後日注記：Pythonのthreading.Threadはマルチスレッド処理を行えるが、GILの制限があるため真の並列処理ではない。multiprocessing.Processはプロセスを独立させることができるため、真の並列処理が実現できる。このほか、C#のようにasync/await構文で非同期関数を実行できるasyncioというライブラリが存在する。</p>
 <ul>
 <li><a href="https://qiita.com/yusuke_hrsm/items/6addffa5d8056ffe67f9">pythonにおける並列処理と並行処理 #Python - Qiita</a></li>
 <li><a href="https://qiita.com/yusuke_hrsm/items/ded8c7c67bd704e91cf5">GILがなくなったPythonを使ってみる #並列処理 - Qiita</a></li>
