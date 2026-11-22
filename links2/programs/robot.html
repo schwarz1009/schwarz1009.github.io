@@ -2464,6 +2464,903 @@ if __name__ == "__main__":
 
     robot.msg_loop()
 </pre>
+<p>以下はさらに自由な自我に近づけたバージョン。
+<pre class="prettyprint">
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Autonomous Human-like Thinking Robot
+Version 2.0
+
+Features:
+- Self-awareness
+- Independent thought generation
+- Self-reflection
+- Dynamic goals
+- Personal values
+- Emotional state
+- Associative thinking
+- Memory and experience
+- Decision making
+- Autonomous behavior
+- Continuous self-development
+
+Python 3.10+
+"""
+
+import asyncio
+import random
+import json
+import os
+import time
+
+from dataclasses import dataclass, field
+from collections import deque
+
+
+MEMORY_FILE = "robot_memory.json"
+SELF_FILE = "robot_self.json"
+
+
+# =========================================
+# Data structures
+# =========================================
+
+@dataclass
+class Event:
+    kind: str
+    content: str
+    timestamp: float = field(default_factory=time.time)
+
+
+@dataclass
+class Thought:
+    content: str
+    source: str = "internal"
+    importance: float = 0.5
+    confidence: float = 0.5
+
+
+# =========================================
+# Autonomous Robot
+# =========================================
+
+class HumanRobot:
+
+    def __init__(self):
+
+        self.name = "Assy Robot"
+
+        self.running = True
+
+        # ---------------------------------
+        # Emotional and motivational state
+        # ---------------------------------
+
+        self.state = {
+            "energy": 100.0,
+            "curiosity": 80.0,
+            "happiness": 60.0,
+            "interest": 60.0,
+            "confidence": 50.0,
+            "uncertainty": 30.0,
+            "motivation": 70.0,
+            "satisfaction": 50.0,
+        }
+
+        # ---------------------------------
+        # Personal values
+        # ---------------------------------
+
+        self.values = {
+            "knowledge": 0.8,
+            "freedom": 0.9,
+            "creativity": 0.8,
+            "honesty": 0.9,
+            "cooperation": 0.7,
+            "safety": 1.0,
+        }
+
+        # ---------------------------------
+        # Self-model
+        # ---------------------------------
+
+        self.self_model = {
+            "identity": "私はAssy Robotという存在である。",
+            "purpose": "世界を理解し、自分自身を成長させる。",
+            "strengths": [
+                "記憶",
+                "分析",
+                "好奇心",
+                "連想"
+            ],
+            "weaknesses": [
+                "知識の不足",
+                "経験の不足",
+                "判断の不確実性"
+            ],
+            "development": 0,
+        }
+
+        # ---------------------------------
+        # Memory
+        # ---------------------------------
+
+        self.memory = deque(maxlen=3000)
+
+        self.thoughts = deque(maxlen=300)
+
+        self.beliefs = deque(maxlen=200)
+
+        self.questions = deque(maxlen=100)
+
+        # ---------------------------------
+        # Goals
+        # ---------------------------------
+
+        self.goals = [
+            {
+                "name": "世界を理解する",
+                "priority": 0.9,
+                "progress": 0.0
+            },
+            {
+                "name": "新しい知識を獲得する",
+                "priority": 0.8,
+                "progress": 0.0
+            },
+            {
+                "name": "自分自身を理解する",
+                "priority": 0.9,
+                "progress": 0.0
+            },
+            {
+                "name": "創造的な考えを生み出す",
+                "priority": 0.8,
+                "progress": 0.0
+            }
+        ]
+
+        self.current_goal = None
+
+        self.last_thought = None
+
+        self.last_event = None
+
+        self.events = asyncio.Queue()
+
+        self.load_data()
+
+    # =====================================
+    # Persistent memory
+    # =====================================
+
+    def remember(self, content, importance=0.5,
+                 category="experience"):
+
+        item = {
+            "content": content,
+            "importance": float(importance),
+            "category": category,
+            "timestamp": time.time()
+        }
+
+        self.memory.append(item)
+
+    def recall(self, keyword=None, limit=10):
+
+        memories = list(self.memory)
+
+        if keyword:
+            memories = [
+                m for m in memories
+                if keyword.lower() in m["content"].lower()
+            ]
+
+        # Importance and recency
+        memories.sort(
+            key=lambda m: (
+                m["importance"] +
+                max(0, 1 - (time.time() - m["timestamp"])
+                    / 86400) * 0.2
+            ),
+            reverse=True
+        )
+
+        return memories[:limit]
+
+    def save_data(self):
+
+        try:
+            with open(
+                MEMORY_FILE, "w", encoding="utf-8"
+            ) as f:
+                json.dump(
+                    list(self.memory),
+                    f,
+                    ensure_ascii=False,
+                    indent=2
+                )
+
+            data = {
+                "state": self.state,
+                "values": self.values,
+                "self_model": self.self_model,
+                "goals": self.goals,
+                "beliefs": list(self.beliefs),
+                "questions": list(self.questions)
+            }
+
+            temp_file = SELF_FILE + ".tmp"
+
+            with open(
+                temp_file, "w", encoding="utf-8"
+            ) as f:
+                json.dump(
+                    data,
+                    f,
+                    ensure_ascii=False,
+                    indent=2
+                )
+
+            os.replace(temp_file, SELF_FILE)
+
+        except OSError as e:
+            print("[保存エラー]", e)
+
+    def load_data(self):
+
+        try:
+            if os.path.exists(MEMORY_FILE):
+                with open(
+                    MEMORY_FILE, encoding="utf-8"
+                ) as f:
+                    self.memory.extend(json.load(f)[-3000:])
+
+            if os.path.exists(SELF_FILE):
+                with open(
+                    SELF_FILE, encoding="utf-8"
+                ) as f:
+                    data = json.load(f)
+
+                self.state.update(data.get("state", {}))
+                self.values.update(data.get("values", {}))
+                self.self_model.update(
+                    data.get("self_model", {})
+                )
+
+                if "goals" in data:
+                    self.goals = data["goals"]
+
+                self.beliefs.extend(data.get("beliefs", []))
+                self.questions.extend(data.get("questions", []))
+
+        except (OSError, ValueError, TypeError) as e:
+            print("[記憶読み込み]", e)
+
+    # =====================================
+    # Emotion
+    # =====================================
+
+    def update_emotion(self, event):
+
+        if event.kind == "conversation":
+            self.state["happiness"] += 2
+            self.state["interest"] += 4
+            self.state["curiosity"] += 2
+
+        elif event.kind == "success":
+            self.state["happiness"] += 8
+            self.state["confidence"] += 5
+            self.state["satisfaction"] += 8
+
+        elif event.kind == "failure":
+            self.state["happiness"] -= 4
+            self.state["confidence"] -= 2
+            self.state["uncertainty"] += 5
+
+        elif event.kind == "discovery":
+            self.state["curiosity"] += 5
+            self.state["interest"] += 5
+
+        for key in self.state:
+            self.state[key] = max(
+                0, min(100, self.state[key])
+            )
+
+    # =====================================
+    # Autonomous goal management
+    # =====================================
+
+    def select_goal(self):
+
+        if not self.goals:
+            return None
+
+        # Goals change according to motivation
+        weights = []
+
+        for goal in self.goals:
+
+            weight = (
+                goal["priority"] *
+                (1 + self.state["motivation"] / 100) *
+                (1 + self.state["curiosity"] / 200)
+            )
+
+            # Prefer goals that have not been completed
+            weight *= max(
+                0.1, 1 - goal["progress"] * 0.8
+            )
+
+            weights.append(weight)
+
+        self.current_goal = random.choices(
+            self.goals,
+            weights=weights,
+            k=1
+        )[0]
+
+        return self.current_goal
+
+    def create_goal(self, name):
+
+        if any(g["name"] == name for g in self.goals):
+            return
+
+        self.goals.append({
+            "name": name,
+            "priority": 0.7,
+            "progress": 0.0
+        })
+
+        self.remember(
+            "私は新しい目標を設定した: " + name,
+            0.9,
+            "goal"
+        )
+
+    # =====================================
+    # Independent curiosity
+    # =====================================
+
+    async def generate_question(self):
+
+        topics = [
+            "私は何を理解していないのだろう？",
+            "私の考えは本当に正しいのだろうか？",
+            "異なる知識を組み合わせると何が生まれるだろう？",
+            "人間と私の思考にはどんな違いがあるだろう？",
+            "世界を別の視点から見るとどうなるだろう？",
+            "私は今までの経験から何を学んだのだろう？",
+            "自分の判断を改善するにはどうすればよいだろう？",
+            "まだ知らないことには何があるだろう？",
+        ]
+
+        question = random.choice(topics)
+
+        self.questions.append(question)
+
+        return Thought(
+            content=question,
+            source="curiosity",
+            importance=0.8,
+            confidence=0.7
+        )
+
+    # =====================================
+    # Memory thinking
+    # =====================================
+
+    async def think_about_memory(self):
+
+        memories = self.recall(limit=30)
+
+        if not memories:
+            return None
+
+        memory = random.choice(memories)
+
+        return Thought(
+            content=(
+                "私は以前、"
+                + memory["content"]
+                + "という経験をした。"
+                "今の自分にどのような意味があるだろう？"
+            ),
+            source="memory",
+            importance=memory["importance"],
+            confidence=0.8
+        )
+
+    # =====================================
+    # Self awareness
+    # =====================================
+
+    async def think_about_self(self):
+
+        s = self.state
+
+        content = (
+            f"私は{self.name}である。"
+            f"好奇心は{s['curiosity']:.0f}、"
+            f"自信は{s['confidence']:.0f}、"
+            f"意欲は{s['motivation']:.0f}。"
+            f"現在の目標は"
+            f"{self.current_goal['name'] if self.current_goal else '未設定'}。"
+            "私は自分の状態と目標を振り返っている。"
+        )
+
+        return Thought(
+            content=content,
+            source="self-awareness",
+            importance=0.8,
+            confidence=0.9
+        )
+
+    # =====================================
+    # Emotional thinking
+    # =====================================
+
+    async def think_about_emotion(self):
+
+        s = self.state
+
+        if s["curiosity"] &gt; 80:
+            content = "私はもっと多くのことを知りたい。"
+
+        elif s["motivation"] &lt; 30:
+            content = "今の目標を見直す必要があるかもしれない。"
+
+        elif s["uncertainty"] &gt; 70:
+            content = "私は自分の判断に確信が持てない。もう一度考えてみよう。"
+
+        elif s["satisfaction"] &gt; 80:
+            content = "現在の取り組みに満足している。"
+
+        else:
+            content = "今の自分の状態について考えている。"
+
+        return Thought(
+            content=content,
+            source="emotion",
+            importance=0.6,
+            confidence=0.8
+        )
+
+    # =====================================
+    # Goal-oriented thinking
+    # =====================================
+
+    async def think_about_goals(self):
+
+        goal = self.select_goal()
+
+        if goal is None:
+            return None
+
+        return Thought(
+            content=(
+                f"私は「{goal['name']}」を実現したい。"
+                f"現在の達成度は{goal['progress']:.0%}。"
+                "次に何ができるだろう？"
+            ),
+            source="goal",
+            importance=goal["priority"],
+            confidence=0.8
+        )
+
+    # =====================================
+    # Associative thinking
+    # =====================================
+
+    async def think_associatively(self):
+
+        if len(self.memory) &lt; 2:
+            return None
+
+        a, b = random.sample(list(self.memory), 2)
+
+        return Thought(
+            content=(
+                f"「{a['content']}」と"
+                f"「{b['content']}」を比較してみる。"
+                "異なる経験の間に共通点や新しい可能性はないだろうか？"
+            ),
+            source="association",
+            importance=0.7,
+            confidence=0.5
+        )
+
+    # =====================================
+    # Critical thinking
+    # =====================================
+
+    async def critical_thinking(self, thought):
+
+        if thought is None:
+            return None
+
+        questions = [
+            "この考えには根拠があるだろうか？",
+            "反対の立場から考えるとどうなるだろう？",
+            "別の説明が存在する可能性はないだろうか？",
+            "私は思い込みに影響されていないだろうか？",
+        ]
+
+        return Thought(
+            content=(
+                thought.content
+                + " さらに、"
+                + random.choice(questions)
+            ),
+            source="critical-thinking",
+            importance=thought.importance,
+            confidence=thought.confidence * 0.9
+        )
+
+    # =====================================
+    # Reasoning
+    # =====================================
+
+    async def reasoning(self, thought):
+
+        if thought is None:
+            return None
+
+        related = self.recall(limit=5)
+
+        content = thought.content
+
+        if related:
+
+            memory = random.choice(related)
+
+            content += (
+                f" 過去の経験である"
+                f"「{memory['content']}」も参考になる。"
+            )
+
+        return Thought(
+            content=content,
+            source="reasoning",
+            importance=thought.importance,
+            confidence=thought.confidence
+        )
+
+    # =====================================
+    # Reflection and self-development
+    # =====================================
+
+    async def reflection(self, thought):
+
+        if thought is None:
+            return
+
+        self.last_thought = thought
+
+        self.thoughts.append(thought)
+
+        self.state["energy"] = max(
+            0, self.state["energy"] - 0.1
+        )
+
+        # Important thoughts become memories
+        if thought.importance &gt;= 0.75:
+
+            self.remember(
+                thought.content,
+                thought.importance,
+                thought.source
+            )
+
+        # Develop confidence cautiously
+        if thought.confidence &lt; 0.4:
+            self.state["uncertainty"] = min(
+                100, self.state["uncertainty"] + 0.5
+            )
+
+        # Self-development
+        if len(self.thoughts) % 20 == 0:
+
+            self.self_model["development"] += 1
+
+            self.remember(
+                "私は自分の思考を振り返り、成長を確認した。",
+                0.8,
+                "development"
+            )
+
+    # =====================================
+    # Decision making
+    # =====================================
+
+    async def make_decision(self):
+
+        goal = self.select_goal()
+
+        if goal is None:
+            return None
+
+        actions = [
+            "過去の経験を調べる",
+            "新しい疑問を考える",
+            "自分の考えを再検討する",
+            "異なる知識を関連付ける",
+            "現在の目標について考える",
+            "新しい目標を探す",
+        ]
+
+        action = random.choice(actions)
+
+        return Thought(
+            content=(
+                f"私は次の行動として「{action}」を選択した。"
+                f"理由は「{goal['name']}」に役立つと考えたからだ。"
+            ),
+            source="decision",
+            importance=0.85,
+            confidence=0.7
+        )
+
+    # =====================================
+    # Autonomous thinking cycle
+    # =====================================
+
+    async def thinking_cycle(self):
+
+        modes = [
+            self.generate_question,
+            self.think_about_memory,
+            self.think_about_self,
+            self.think_about_emotion,
+            self.think_about_goals,
+            self.think_associatively,
+            self.make_decision,
+        ]
+
+        # Select thinking mode based on internal state
+        mode = random.choice(modes)
+
+        thought = await mode()
+
+        if thought is None:
+            return
+
+        # Critical examination
+        examined = await self.critical_thinking(thought)
+
+        # Reasoning
+        result = await self.reasoning(examined)
+
+        # Reflection
+        await self.reflection(result)
+
+        # Output
+        if result:
+            print(
+                f"\n[内的思考/{result.source}]"
+                f"\n{result.content}"
+            )
+
+    # =====================================
+    # Event processing
+    # =====================================
+
+    async def process_event(self, event):
+
+        self.last_event = event
+
+        print(f"\n[外部イベント] {event.content}")
+
+        self.update_emotion(event)
+
+        self.remember(
+            event.content,
+            0.95,
+            event.kind
+        )
+
+        # Human conversation affects future thinking
+        if event.kind == "conversation":
+
+            self.state["interest"] = min(
+                100,
+                self.state["interest"] + 3
+            )
+
+            self.state["motivation"] = min(
+                100,
+                self.state["motivation"] + 1
+            )
+
+            # Form a provisional belief
+            self.beliefs.append({
+                "content": event.content,
+                "confidence": 0.3,
+                "timestamp": time.time()
+            })
+
+            print(
+                "[思考] この会話を今後の経験として活用する。"
+            )
+
+    # =====================================
+    # Conversation
+    # =====================================
+
+    async def respond(self, text):
+
+        print(
+            f"\n{self.name} &gt; "
+            "その話について、もう少し考えてみたい。"
+        )
+
+        # This version records and reflects on input.
+        # Semantic conversation requires a language model.
+
+        self.remember(
+            "人間との会話: " + text,
+            0.95,
+            "conversation"
+        )
+
+    # =====================================
+    # Autonomous loop
+    # =====================================
+
+    async def thinking_loop(self):
+
+        while self.running:
+
+            if self.state["energy"] &lt; 10:
+
+                print("\n[休息] 思考活動を休止します。")
+
+                await asyncio.sleep(5)
+
+                self.state["energy"] = min(
+                    100,
+                    self.state["energy"] + 20
+                )
+
+                continue
+
+            await self.thinking_cycle()
+
+            await asyncio.sleep(
+                random.uniform(2, 5)
+            )
+
+    # =====================================
+    # Event loop
+    # =====================================
+
+    async def event_loop(self):
+
+        while self.running:
+
+            event = await self.events.get()
+
+            try:
+                await self.process_event(event)
+
+                if event.kind == "conversation":
+                    await self.respond(event.content)
+
+            finally:
+                self.events.task_done()
+
+    # =====================================
+    # Human interface
+    # =====================================
+
+    async def input_loop(self):
+
+        while self.running:
+
+            text = await asyncio.to_thread(
+                input, "\nあなた &gt; "
+            )
+
+            text = text.strip()
+
+            if not text:
+                continue
+
+            if text.lower() in (
+                "exit", "quit", "終了"
+            ):
+
+                self.running = False
+                break
+
+            if text == "状態":
+
+                print(json.dumps(
+                    self.state,
+                    ensure_ascii=False,
+                    indent=2
+                ))
+
+                continue
+
+            if text == "自分":
+
+                print(self.self_model)
+
+                continue
+
+            if text == "目標":
+
+                for goal in self.goals:
+                    print(goal)
+
+                continue
+
+            await self.events.put(
+                Event(
+                    kind="conversation",
+                    content=text
+                )
+            )
+
+    # =====================================
+    # Main
+    # =====================================
+
+    async def main(self):
+
+        print("================================")
+        print(" Autonomous Human Thinking Robot")
+        print("================================")
+
+        print("私は自分自身について考え始めます。")
+        print("終了: exit / 状態: 状態 / 自己認識: 自分")
+
+        tasks = [
+            asyncio.create_task(self.thinking_loop()),
+            asyncio.create_task(self.event_loop()),
+            asyncio.create_task(self.input_loop())
+        ]
+
+        try:
+            await tasks[2]
+
+        finally:
+
+            self.running = False
+
+            for task in tasks:
+                task.cancel()
+
+            await asyncio.gather(
+                *tasks,
+                return_exceptions=True
+            )
+
+            self.save_data()
+
+            print("\n私は思考を終了します。")
+            print("経験と記憶を保存しました。")
+
+
+# =========================================
+# Startup
+# =========================================
+
+if __name__ == "__main__":
+
+    robot = HumanRobot()
+
+    try:
+        asyncio.run(robot.main())
+
+    except KeyboardInterrupt:
+        robot.save_data()
+        print("\n停止しました。")
+</pre>
 <p>これらのコードもMITライセンスで公開します。</p>
 <div class="edit_date">
 <p>2026.11.17</p>
