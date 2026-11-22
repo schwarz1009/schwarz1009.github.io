@@ -1765,9 +1765,709 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\n停止しました。")
 </pre>
+<p>以下はChatGPTが作った季節ごとに家事をしてくれるロボット。human_life_robot.pyとして保存する。</p>
+<pre class="prettyprint">
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Human Life Robot
+人間思考型・生活型ロボット
+
+Original concept: Assy
+Based on the original thinking robot architecture.
+
+Features:
+- Human-like thinking
+- Ego and emotions
+- Long-term memory
+- Hunger and thirst
+- Cooking and meal planning
+- Shopping and inventory
+- Cleaning and laundry
+- Sleep and fatigue
+- Seasonal behavior
+- Learning from experience
+- Autonomous goal selection
+
+This program simulates household activities.
+Physical appliances and purchases require separate integrations.
+"""
+
+import json
+import os
+import random
+import time
+from datetime import datetime
+
+
+MEMORY_FILE = "human_robot_memory.json"
+
+
+class HumanLifeRobot:
+
+    def __init__(self):
+
+        self.name = "Human Robot"
+
+        # 自我
+        self.ego = 0
+
+        # 身体の状態
+        self.state = {
+            "hunger": 20,
+            "thirst": 20,
+            "fatigue": 10,
+            "happiness": 70,
+            "health": 100,
+            "cleanliness": 80,
+        }
+
+        # 生活環境
+        self.inventory = {
+            "米": 5,
+            "野菜": 3,
+            "卵": 4,
+            "肉": 2,
+            "水": 5,
+            "洗剤": 1,
+        }
+
+        self.money = 10000
+
+        # 感情
+        self.emotion = "普通"
+
+        # 好み
+        self.preferences = {
+            "food": ["カレー", "卵料理", "野菜炒め"],
+            "activities": ["読書", "散歩", "音楽"],
+        }
+
+        # 記憶
+        self.memory = []
+
+        # 目標
+        self.goals = [
+            "健康に生活する",
+            "部屋をきれいにする",
+            "美味しい料理を作る",
+            "新しいことを学ぶ",
+            "快適な生活を送る",
+        ]
+
+        # 家事の状態
+        self.house = {
+            "dirty": 30,
+            "laundry": 20,
+        }
+
+        self.running = True
+
+        self.load_memory()
+
+        print("================================")
+        print("人間思考型生活ロボット 起動")
+        print("================================")
+
+    # --------------------------------
+    # 記憶
+    # --------------------------------
+
+    def remember(self, content):
+
+        item = {
+            "content": content,
+            "time": datetime.now().isoformat(
+                timespec="seconds"
+            )
+        }
+
+        self.memory.append(item)
+
+        self.memory = self.memory[-1000:]
+
+        self.save_memory()
+
+    def recall(self, keyword=None):
+
+        if keyword is None:
+            return self.memory[-5:]
+
+        return [
+            m for m in self.memory
+            if keyword in m["content"]
+        ][-5:]
+
+    def save_memory(self):
+
+        try:
+            with open(
+                MEMORY_FILE,
+                "w",
+                encoding="utf-8"
+            ) as f:
+
+                json.dump(
+                    self.memory,
+                    f,
+                    ensure_ascii=False,
+                    indent=2
+                )
+
+        except OSError:
+            print("[記憶] 保存できませんでした")
+
+    def load_memory(self):
+
+        if os.path.exists(MEMORY_FILE):
+
+            try:
+                with open(
+                    MEMORY_FILE,
+                    "r",
+                    encoding="utf-8"
+                ) as f:
+
+                    self.memory = json.load(f)
+
+            except (OSError, ValueError):
+                self.memory = []
+
+    # --------------------------------
+    # 認識 view()
+    # --------------------------------
+
+    def view(self):
+
+        now = datetime.now()
+
+        month = now.month
+
+        if month in (3, 4, 5):
+            season = "春"
+
+        elif month in (6, 7, 8):
+            season = "夏"
+
+        elif month in (9, 10, 11):
+            season = "秋"
+
+        else:
+            season = "冬"
+
+        return {
+            "season": season,
+            "hour": now.hour,
+            "month": month,
+        }
+
+    # --------------------------------
+    # 身体の状態
+    # --------------------------------
+
+    def update_body(self):
+
+        self.state["hunger"] = min(
+            100, self.state["hunger"] + 8
+        )
+
+        self.state["thirst"] = min(
+            100, self.state["thirst"] + 6
+        )
+
+        self.state["fatigue"] = min(
+            100, self.state["fatigue"] + 3
+        )
+
+        self.house["dirty"] = min(
+            100, self.house["dirty"] + 2
+        )
+
+        self.house["laundry"] = min(
+            100, self.house["laundry"] + 3
+        )
+
+    # --------------------------------
+    # 感情
+    # --------------------------------
+
+    def update_emotion(self):
+
+        if self.state["happiness"] &gt;= 75:
+            self.emotion = "楽しい"
+
+        elif self.state["happiness"] &gt;= 45:
+            self.emotion = "普通"
+
+        elif self.state["happiness"] &gt;= 20:
+            self.emotion = "悲しい"
+
+        else:
+            self.emotion = "憂鬱"
+
+    # --------------------------------
+    # 季節の認識
+    # --------------------------------
+
+    def think_season(self, season):
+
+        print(f"[思考] 今は{season}だ")
+
+        if season == "春":
+
+            print("[思考] 暖かくなってきた")
+            print("[思考] 部屋の換気や春の掃除をしよう")
+
+        elif season == "夏":
+
+            print("[思考] 暑い季節だ")
+            print("[思考] 水分補給を増やそう")
+            print("[思考] 冷たい料理を考えよう")
+
+        elif season == "秋":
+
+            print("[思考] 涼しくなってきた")
+            print("[思考] 秋の食材を買い物リストに入れよう")
+
+        elif season == "冬":
+
+            print("[思考] 寒い季節だ")
+            print("[思考] 温かい料理を作ろう")
+            print("[思考] 暖かい室内で過ごそう")
+
+    # --------------------------------
+    # 食事・献立
+    # --------------------------------
+
+    def plan_meal(self, season):
+
+        print("[思考] 何を食べようか")
+
+        if season == "夏":
+            menu = "野菜料理"
+
+        elif season == "冬":
+            menu = "温かい卵料理"
+
+        elif season == "秋":
+            menu = "野菜炒め"
+
+        else:
+            menu = random.choice(
+                self.preferences["food"]
+            )
+
+        print(f"[献立] 今日の料理は{menu}")
+
+        return menu
+
+    # --------------------------------
+    # 料理
+    # --------------------------------
+
+    def cook(self):
+
+        print("[料理] 食材を確認する")
+
+        required = {
+            "米": 1,
+            "野菜": 1,
+            "卵": 1,
+        }
+
+        missing = []
+
+        for item, amount in required.items():
+
+            if self.inventory.get(item, 0) &lt; amount:
+                missing.append(item)
+
+        if missing:
+
+            print("[料理] 食材が足りない")
+            self.shopping_list.extend(missing)
+            self.shop()
+            return
+
+        menu = self.plan_meal(
+            self.view()["season"]
+        )
+
+        # 実際の調理動作は安全な調理機器との
+        # 接続後に実装する
+
+        for item, amount in required.items():
+            self.inventory[item] -= amount
+
+        print(f"[料理] {menu}を調理しました")
+        print("[食事] 美味しく食べました")
+
+        self.state["hunger"] = max(
+            0, self.state["hunger"] - 65
+        )
+
+        self.state["happiness"] = min(
+            100, self.state["happiness"] + 10
+        )
+
+        self.state["health"] = min(
+            100, self.state["health"] + 2
+        )
+
+        self.remember(
+            f"{menu}を作って食べた。"
+        )
+
+    # --------------------------------
+    # 買い物
+    # --------------------------------
+
+    shopping_list = []
+
+    def check_inventory(self):
+
+        print("[買い物] 在庫を確認する")
+
+        for item, amount in self.inventory.items():
+
+            if amount &lt;= 1:
+                if item not in self.shopping_list:
+                    self.shopping_list.append(item)
+
+        print("[買い物] 必要な商品:")
+
+        for item in self.shopping_list:
+            print(" -", item)
+
+    def shop(self):
+
+        print("[買い物] 買い物を計画する")
+
+        prices = {
+            "米": 500,
+            "野菜": 300,
+            "卵": 250,
+            "肉": 600,
+            "水": 150,
+            "洗剤": 400,
+        }
+
+        for item in list(self.shopping_list):
+
+            price = prices.get(item, 0)
+
+            if self.money &gt;= price and price &gt; 0:
+
+                self.money -= price
+
+                self.inventory[item] = (
+                    self.inventory.get(item, 0) + 3
+                )
+
+                print(f"[買い物] {item}を購入する予定")
+                self.shopping_list.remove(item)
+
+            else:
+
+                print(f"[買い物] {item}は予算不足")
+
+        self.remember("買い物計画を立てた")
+
+        # 実際の注文や決済は行わない。
+        # 人間の承認後に外部サービスと接続する。
+
+    # --------------------------------
+    # 掃除
+    # --------------------------------
+
+    def cleaning(self):
+
+        print("[家事] 部屋を掃除しよう")
+
+        self.house["dirty"] = max(
+            0, self.house["dirty"] - 40
+        )
+
+        self.state["fatigue"] = min(
+            100, self.state["fatigue"] + 5
+        )
+
+        print("[家事] 掃除のシミュレーション完了")
+
+        self.remember("部屋を掃除した")
+
+    # --------------------------------
+    # 洗濯
+    # --------------------------------
+
+    def laundry(self):
+
+        print("[家事] 洗濯物を確認する")
+
+        if self.inventory.get("洗剤", 0) &lt;= 0:
+
+            print("[家事] 洗剤が足りない")
+            self.shopping_list.append("洗剤")
+            return
+
+        self.inventory["洗剤"] -= 1
+
+        self.house["laundry"] = 0
+
+        print("[家事] 洗濯を完了した")
+
+        self.remember("洗濯をした")
+
+    # --------------------------------
+    # 休息・睡眠
+    # --------------------------------
+
+    def sleep(self):
+
+        print("[生活] 疲れたので休もう")
+
+        self.state["fatigue"] = max(
+            0, self.state["fatigue"] - 60
+        )
+
+        self.state["happiness"] = min(
+            100, self.state["happiness"] + 5
+        )
+
+        print("[生活] 休息した")
+
+        self.remember("休息した")
+
+    # --------------------------------
+    # 水分補給
+    # --------------------------------
+
+    def drink(self):
+
+        if self.inventory.get("水", 0) &gt; 0:
+
+            self.inventory["水"] -= 1
+
+            self.state["thirst"] = max(
+                0, self.state["thirst"] - 50
+            )
+
+            print("[生活] 水を飲んだ")
+
+        else:
+
+            print("[生活] 水が不足している")
+            self.shopping_list.append("水")
+
+    # --------------------------------
+    # 思考
+    # --------------------------------
+
+    def think(self, event):
+
+        print("\n[思考] 状況を分析する")
+
+        print(
+            f"[身体] 空腹:{self.state['hunger']}"
+            f" 水分不足:{self.state['thirst']}"
+            f" 疲労:{self.state['fatigue']}"
+        )
+
+        print(f"[感情] {self.emotion}")
+
+        if self.state["thirst"] &gt;= 40:
+            return "drink"
+
+        if self.state["fatigue"] &gt;= 75:
+            return "sleep"
+
+        if self.state["hunger"] &gt;= 60:
+            return "cook"
+
+        if self.house["dirty"] &gt;= 65:
+            return "cleaning"
+
+        if self.house["laundry"] &gt;= 75:
+            return "laundry"
+
+        if not self.shopping_list:
+            self.check_inventory()
+
+        if self.shopping_list:
+            return "shop"
+
+        # 自分の興味から行動を選ぶ
+        return random.choice([
+            "learn",
+            "think",
+            "relax",
+        ])
+
+    # --------------------------------
+    # 学習
+    # --------------------------------
+
+    def learn(self):
+
+        print("[学習] 過去の経験を振り返る")
+
+        memories = self.recall()
+
+        if memories:
+
+            past = random.choice(memories)
+
+            print(
+                "[記憶] 以前の経験:",
+                past["content"]
+            )
+
+        else:
+
+            print("[学習] まだ経験が少ない")
+
+        self.state["happiness"] = min(
+            100, self.state["happiness"] + 2
+        )
+
+    # --------------------------------
+    # 行動 action()
+    # --------------------------------
+
+    def action(self, task):
+
+        print(f"\n[行動] {task}")
+
+        if task == "drink":
+            self.drink()
+
+        elif task == "sleep":
+            self.sleep()
+
+        elif task == "cook":
+            self.cook()
+
+        elif task == "cleaning":
+            self.cleaning()
+
+        elif task == "laundry":
+            self.laundry()
+
+        elif task == "shop":
+            self.shop()
+
+        elif task == "learn":
+            self.learn()
+
+        elif task == "think":
+            print("[思考] 世界について考えている")
+
+        elif task == "relax":
+            print("[生活] 趣味を楽しもう")
+            self.state["happiness"] = min(
+                100, self.state["happiness"] + 3
+            )
+
+    # --------------------------------
+    # 自我の発達
+    # --------------------------------
+
+    def make_ego(self):
+
+        self.ego += 1
+
+        print(f"[自我] 私の経験値は{self.ego}")
+
+        if self.ego % 10 == 0:
+            print("[自我] 私は少し成長した")
+
+    # --------------------------------
+    # 生活状況
+    # --------------------------------
+
+    def status(self):
+
+        print("\n========== 生活状況 ==========")
+
+        for key, value in self.state.items():
+            print(f"{key}: {value}")
+
+        print("感情:", self.emotion)
+        print("自我:", self.ego)
+        print("所持金:", self.money)
+        print("在庫:", self.inventory)
+        print("部屋の汚れ:", self.house["dirty"])
+        print("洗濯物:", self.house["laundry"])
+
+        print("==============================")
+
+    # --------------------------------
+    # メインイベントループ
+    # --------------------------------
+
+    def msg_loop(self):
+
+        while self.running:
+
+            try:
+
+                print("\n------------------------------")
+
+                # 認識
+                event = self.view()
+
+                print(
+                    f"[認識] 季節:{event['season']}"
+                )
+
+                # 身体状態を更新
+                self.update_body()
+
+                # 感情を更新
+                self.update_emotion()
+
+                # 季節を考える
+                self.think_season(
+                    event["season"]
+                )
+
+                # 思考
+                task = self.think(event)
+
+                # 行動
+                self.action(task)
+
+                # 自我
+                self.make_ego()
+
+                # 記憶
+                self.remember(
+                    f"{event['season']}に{task}を実行した"
+                )
+
+                # 状況
+                self.status()
+
+                time.sleep(2)
+
+            except KeyboardInterrupt:
+
+                print("\n[終了] ロボットを停止します")
+                self.save_memory()
+                self.running = False
+
+
+if __name__ == "__main__":
+
+    robot = HumanLifeRobot()
+
+    robot.msg_loop()
+</pre>
 <p>これらのコードもMITライセンスで公開します。</p>
 <div class="edit_date">
 <p>2026.11.17</p>
+<p>2026.11.23編集</p>
 </div>
 
 <h2>ロボットにChatGPTを乗せる</h2>
