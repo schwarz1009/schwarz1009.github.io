@@ -27,7 +27,11 @@ div_page_diary[0].insertAdjacentHTML('beforebegin', '\
  <a href="list/2013.10.html">2013-10</a> -\
  <a href="list/2013.11.html">2013-11</a> -\
  <a href="list/2013.12.html">2013-12</a></p>\
-<p>2014: <a href="list/2014.05.html">2014-05</a> -\
+<p>2014: <a href="list/2014.01.html">2014-01</a> -\
+ <a href="list/2014.02.html">2014-02</a> -\
+ <a href="list/2014.03.html">2014-03</a> -\
+ <a href="list/2014.04.html">2014-04</a> -\
+ <a href="list/2014.05.html">2014-05</a> -\
  <a href="list/2014.06.html">2014-06</a> -\
  <a href="list/2014.07.html">2014-07</a> -\
  <a href="list/2014.08.html">2014-08</a> -\
